@@ -1,6 +1,6 @@
 # Reception customization — 2.5D hub roadmap
 
-Status: design direction, **not implemented gameplay**. GitHub is the source of truth.
+Status: **Phase 1 partly playable** as of 2026-11-08. GitHub is the source of truth. Implemented: Reception Studio, four free wall colors, four themed paid wallpapers, five purchasable decorations, live reception wall/decor placement, preview-before-purchase, same existing coin balance, persistent owned collection and recent reception purchase history. Dog yard/kennel is visibly Coming Soon, not playable. More sophisticated avatars, furniture placement, a full earnings ledger and 3D mode are **not implemented**.
 
 ## Core vision
 Build a welcoming, stylized isometric/2.5D clinic reception that becomes the primary avatar, companion-pet, décor, and clinic-upgrade hub. Preserve the existing readable 2D learning rooms; no need to replace the game with a full 3D engine.
@@ -51,8 +51,8 @@ Current state already stores `coins` and `upgrades` in local browser state `vpq-
 - Add tests for migration, balance underflow, repeated purchase, duplicate equip, persistence and responsive previews.
 
 ## Phasing
-- **Phase 1:** basic wall/background color picker with persistent save; simple reception zones; accessible edit interface.
-- **Phase 2:** coin-wallet UI, item preview and permanent owned-items collection; selectable wallpaper patterns, rug/furniture choices, cat nook and playpen upgrades.
+- **Phase 1 (partly implemented):** four starter wall colors, persistent theme selection and previewable reception décor shop with clear ownership states. Further accessibility and device testing pending.
+- **Phase 2 (partly implemented):** wallet UI, recent purchases, catalog previews, permanent owned-items collection, four themed wallpapers and cat/kids corner icons. Full earnings ledger, real furniture arrangement, more holiday variety and richer visual previews pending.
 - **Phase 3:** modular avatar wardrobe while retaining current portraits, dog yard/kennel first playable learning station, and custom room layouts/seasonal bundles.
 - **Phase 4:** optional rotating/zoomable pseudo-3D visuals, advanced character customization, dog-yard interactions and expanded case-building integration.
 
@@ -62,3 +62,9 @@ Current state already stores `coins` and `upgrades` in local browser state `vpq-
 - Avoid pet-dangerous real-world design suggestions (toxic plants, loose cords, exposed cleaning products).
 - Inclusive, optional themes year round; no assumption of religion or identity.
 - Preserve responsive performance on common Windows browsers and smaller screens.
+
+## Implementation verification (2026-11-08)
+- `reception-customization.js` is the isolated scene/collection module.
+- Saves use the existing `vpq-v2-clinic-state` object; preexisting `coins`, `upgrades`, portraits and XP are not reset.
+- Mock interaction test verified: preview, single 50-coin purchase, no double charge, wallpaper equip, décor placement and scene rendering.
+- JavaScript static syntax tests passed; live browser visual and keyboard testing remain to be done.
