@@ -385,6 +385,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="drug-clinical-reference.js"></script>
 <script src="reception-customization.js?v=20261108-2"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
+<script src="ngf-toxicology-bridge.js?v=20261108-3"></script>
 <script>
 /* Vet Pharm Quest 2D — original learning material based on the user's course guides.
    Educational simulations only; state/federal reporting and labels require live verification. */
@@ -2558,6 +2559,16 @@ document.head.appendChild(vpqToxStyle);
  document.head.appendChild(css);
 })();
 
+const vpqNGFandTox=window.VPQ_NGFToxBridge({
+ D,escapeHtml,showModal,
+ getDrugCard:()=>drugCardHTML,
+ setDrugCard:fn=>{drugCardHTML=fn},
+ getPharmacy:()=>openPharmacy,
+ setPharmacy:fn=>{openPharmacy=fn},
+ modalBody:$('modalBody'),
+ openPharmacy:id=>openPharmacy(id),
+ toxCourse:()=>vpqToxPreviewMenu()
+});
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
