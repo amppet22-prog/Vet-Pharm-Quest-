@@ -28,6 +28,28 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
   const decorations=has('decor-pumpkin')?'<text x="824" y="404" font-size="31">🎃</text>':'';
   const holiday=has('decor-holiday')?'<text x="881" y="85" font-size="25">✨</text>':'';
   const rainbow=has('decor-rainbow')?'<text x="105" y="129" font-size="28">🌈</text>':'';
+
+  // Sofas are rendered as actual cushioned furniture, with a single equipped style.
+  const sofa=placed.includes('seat-sofa-sage')?['#8cbda8','#679a8e','#c2e4d4']:placed.includes('seat-sofa-blue')?['#83b2d8','#5f90bc','#b4d7eb']:['#b8a2d7','#8f7bb7','#e4d5ee'];
+  const couch='<g transform="translate(794 336)">'+
+    '<ellipse cx="92" cy="109" rx="102" ry="15" fill="#65596b" opacity=".24"/>'+
+    '<path d="M15 4Q15 -10 32 -10H165Q183 -10 183 9V79H15Z" fill="'+sofa[1]+'" stroke="#6b6486" stroke-width="6"/>'+
+    '<path d="M24 15Q24 4 39 4H94V80H24Z" fill="'+sofa[0]+'" stroke="#84779b" stroke-width="3"/>'+
+    '<path d="M101 4H158Q173 4 173 17V80H101Z" fill="'+sofa[0]+'" stroke="#84779b" stroke-width="3"/>'+
+    '<path d="M18 67Q18 52 37 52H156Q175 52 175 67V104H18Z" fill="'+sofa[0]+'" stroke="#79708a" stroke-width="6"/>'+
+    '<path d="M99 57V100" stroke="#8b80a0" stroke-width="4"/>'+
+    '<path d="M18 59Q0 45 1 64V100Q4 112 24 108L30 78Z" fill="'+sofa[1]+'" stroke="#6b6486" stroke-width="5"/>'+
+    '<path d="M175 59Q193 45 192 66V101Q187 112 170 108L166 78Z" fill="'+sofa[1]+'" stroke="#6b6486" stroke-width="5"/>'+
+    '<path d="M28 107V120M160 107V120" stroke="#8e7b6d" stroke-width="10"/>'+
+    '<path d="M39 34q13 -10 26 0v14H39Z M127 34q12 -10 24 0v14H127Z" fill="'+sofa[2]+'" opacity=".88"/></g>';
+  const plant=has('decor-planter')?'<g transform="translate(943 268)"><path d="M-4 50h47l-9 48H7Z" fill="#c9a98e" stroke="#997d73" stroke-width="5"/><path d="M19 50V-16M19 20Q-21 -12 -29 13M19 3Q45 -27 66 -7M19 32Q49 10 69 26" fill="none" stroke="#609a78" stroke-width="8"/><ellipse cx="-24" cy="8" rx="18" ry="9" fill="#8ac09b"/><ellipse cx="57" cy="-8" rx="21" ry="10" fill="#83b995"/><ellipse cx="58" cy="24" rx="19" ry="10" fill="#77ad8d"/></g>':'';
+  const plantPair=has('decor-plant-pair')?'<g><g transform="translate(722 302)"><path d="M0 22h49l-8 47H8Z" fill="#d8b396"/><path d="M24 25V-34M24 -3Q-3 -22 -22 -12M24 -23Q45 -49 65 -32" fill="none" stroke="#649b72" stroke-width="9"/><ellipse cx="-19" cy="-13" rx="17" ry="9" fill="#84bb94"/><ellipse cx="64" cy="-32" rx="18" ry="10" fill="#89c39c"/></g><g transform="translate(946 389) scale(.65)"><path d="M0 22h49l-8 47H8Z" fill="#e1c3ab"/><path d="M24 25V-34M24 -3Q-3 -22 -22 -12M24 -23Q45 -49 65 -32" fill="none" stroke="#649b72" stroke-width="9"/><ellipse cx="-19" cy="-13" rx="17" ry="9" fill="#84bb94"/><ellipse cx="64" cy="-32" rx="18" ry="10" fill="#89c39c"/></g></g>':'';
+  const catTree=has('decor-cat-tree')?'<g transform="translate(848 244)"><path d="M25 50v108M88 39v115" stroke="#bda18e" stroke-width="17"/><path d="M7 54h113v12H7Z" fill="#ceb7a0"/><path d="M18 103h95v15H18Z" fill="#d6bca8"/><rect x="22" y="121" width="82" height="48" rx="16" fill="#dfc8bb" stroke="#a98d83" stroke-width="5"/><circle cx="63" cy="142" r="18" fill="#876b6c"/><path d="M6 43Q22 28 45 39L61 45V56H6ZM67 23Q91 5 112 28v16H67Z" fill="#ddc8b0" stroke="#ae9587" stroke-width="4"/><text x="77" y="16" font-size="23">🐈</text></g>':'';
+  const catCarrier=has('decor-carrier')?'<g transform="translate(683 408)"><path d="M4 13h95l14 54H0Z" fill="#ded4e8" stroke="#8f89ad" stroke-width="5"/><path d="M28 14Q29 -7 52 -7Q76 -7 80 14" stroke="#8e88ad" stroke-width="7" fill="none"/><rect x="22" y="28" width="69" height="31" rx="6" fill="#68778b"/><path d="M33 31V57M47 30V59M62 30V59M76 30V59" stroke="#dce6e9" stroke-width="4"/><circle cx="9" cy="70" r="7" fill="#7e7393"/><circle cx="102" cy="70" r="7" fill="#7e7393"/><text x="58" y="50" text-anchor="middle" font-size="19">🐱</text></g>':'';
+  const dogCarrier=has('decor-dog-carrier')?'<g transform="translate(702 438)"><rect width="100" height="43" rx="8" fill="#b7d1d0" stroke="#6d9193" stroke-width="5"/><path d="M8 4V37M28 4V37M48 4V37M68 4V37M88 4V37" stroke="#72989d" stroke-width="4"/><path d="M23 1Q50 -26 77 1" fill="none" stroke="#78989c" stroke-width="6"/><text x="51" y="31" text-anchor="middle" font-size="23">🐶</text></g>':'';
+  const gallery=has('decor-pet-art')?'<g><g transform="translate(95 98)"><rect width="55" height="58" rx="4" fill="#fff6e7" stroke="#b49d94" stroke-width="5"/><text x="28" y="40" text-anchor="middle" font-size="31">🐶</text></g><g transform="translate(160 98)"><rect width="55" height="58" rx="4" fill="#fff6e7" stroke="#b49d94" stroke-width="5"/><text x="28" y="40" text-anchor="middle" font-size="31">🐱</text></g></g>':'';
+  const pawArt=has('decor-paw-art')?'<g opacity=".62" font-size="29"><text x="636" y="91">🐾</text><text x="615" y="126">🐾</text><text x="645" y="165">🐾</text></g>':'';
+
   return '<svg class="vpqShadowboxArt" viewBox="0 0 1000 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-label="Perspective veterinary reception with front desk and a short hallway to the exam room, pharmacy and study lounge" role="img">'+
    '<defs><linearGradient id="vpqShadowFloor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="'+c[3]+'"/><stop offset="1" stop-color="#c5b1ad"/></linearGradient><linearGradient id="vpqShadowHall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7e8a9e"/><stop offset="1" stop-color="#d7cbd6"/></linearGradient><filter id="vpqShadowAmbient" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="10"/></filter></defs>'+
    // ceiling, thick sidewalls, back wall; shadowbox edges
@@ -67,7 +89,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<path d="M284 312q13-18 26 0v6h-26Z" fill="#e4b164"/><circle cx="297" cy="298" r="5" fill="#e4b164"/><rect x="270" y="317" width="56" height="6" rx="3" fill="#a78868"/></g>'+
    // wall notice and patient chairs, corners
    '<g transform="translate(86 138)"><rect width="128" height="97" rx="10" fill="#fff9ee" stroke="'+c[4]+'" stroke-width="6"/><text x="64" y="23" text-anchor="middle" font-size="14" font-weight="800" font-family="sans-serif" fill="#5d667a">WELCOME</text><text x="64" y="52" text-anchor="middle" font-size="29">🐾</text><text x="64" y="73" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#687990">Your clinic</text></g>'+
-   '<g transform="translate(802 338)"><ellipse cx="70" cy="70" rx="78" ry="13" fill="#8b8197" opacity=".25"/><path d="M0 0l70 -18l76 32l-70 20Z" fill="#ccb6d9"/><path d="M0 0v46l76 35V34Z" fill="#977eab"/><path d="M76 34l70 -20v46L76 81Z" fill="#bfa5c7"/><path d="M0 -64l70 -20l76 35l-70 19Z" fill="#a2c9ce"/><path d="M0 -64V0l76 34v-64Z" fill="#759da9"/></g>'+
+   couch+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
    '<text x="509" y="34" text-anchor="middle" font-size="20" font-weight="800" font-family="sans-serif" fill="#57667d">VET PHARM QUEST • RECEPTION</text>'+
    '</svg>';
@@ -92,9 +114,10 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    ['patients','Patient queue · new patient cases','queue'],
    ['clinical','Enter clinical hall and examination room','vpqGoExam'],
    ['pharmacy','Enter pharmacy and drug shelves','vpqGoPharmacy'],
-   ['study','Enter student study lounge','vpqGoStudy']
+   ['study','Enter student study lounge','vpqGoStudy'],
+   ['studio','Customize waiting room · Reception Studio','receptionStudio']
   ];
-  node.innerHTML=hotspots.map(([id,label,name])=>'<button type="button" class="vpqShadowHotspot vpqShadow-'+id+'" data-shadowaction="'+name+'" aria-label="'+label+'" title="'+label+'"><span>'+({front:'🛎️ Desk',patients:'📋 Patients',clinical:'Clinical Hall',pharmacy:'Pharmacy',study:'Study Lounge'}[id])+'</span></button>').join('');
+  node.innerHTML=hotspots.map(([id,label,name])=>'<button type="button" class="vpqShadowHotspot vpqShadow-'+id+'" data-shadowaction="'+name+'" aria-label="'+label+'" title="'+label+'"><span>'+({front:'🛎️ Desk',patients:'📋 Patients',clinical:'Clinical Hall',pharmacy:'Pharmacy',study:'Study Lounge',studio:'🎨 Decorate'}[id])+'</span></button>').join('');
   node.addEventListener('click',ev=>{const button=ev.target.closest('[data-shadowaction]');if(button)action(button.dataset.shadowaction)});
   stage.appendChild(node);
  }
@@ -111,6 +134,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
  '.vpqShadow-patients{left:80%;top:66%;width:15%;height:19%}.vpqShadow-patients span{bottom:15%;transform:translate(-50%,0)}'+
  '.vpqShadow-clinical{left:24%;top:22%;width:15%;height:42%}.vpqShadow-pharmacy{left:67%;top:22%;width:15%;height:42%}.vpqShadow-study{left:47%;top:26%;width:12%;height:34%}'+
  '.vpqShadow-clinical span,.vpqShadow-pharmacy span,.vpqShadow-study span{bottom:7%;transform:translate(-50%,0)}'+
+ '.vpqShadow-studio{right:1%;top:3%;width:16%;height:9%;border-radius:12px;background:#fff8edbb}.vpqShadow-studio span{bottom:0;transform:translate(-50%,0);font-size:11px}'+
  '@media(max-width:600px){.vpqShadowHotspot span{font-size:9px;padding:3px 5px}.vpqShadow-front span,.vpqShadow-patients span{bottom:15%}}';
  document.head.appendChild(css);
  // Add to every subsequent render, not the old 2D fallback.
