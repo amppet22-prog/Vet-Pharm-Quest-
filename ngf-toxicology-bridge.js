@@ -48,6 +48,7 @@ const originalGroupNames={
 for(const item of toxCards){item.group=originalGroupNames[item.id]||'Other toxicants'}
 const knownToxIds=new Set(toxCards.map(x=>x.id));
 for(const x of toxExtension?.cards||[])if(!knownToxIds.has(x.id)){toxCards.push(x);knownToxIds.add(x.id)}
+for(const x of window.VPQ_TOX_LECTURE_SUPPLEMENTS||[])if(!knownToxIds.has(x.id)){toxCards.push(x);knownToxIds.add(x.id)}
 const toxCategories=[...new Set(toxCards.map(c=>c.group))].sort();
 let chosenToxCategory='all';
 
@@ -65,7 +66,7 @@ function toxIndex(query='',cat=chosenToxCategory){
  '<p id="vpqToxCount" class="small">'+visible+' of '+toxCards.length+' toxicants</p>'+
  '<div class="vpqToxReferenceGrid">'+match.map(x=>'<button '+((x.name+' '+x.species+' '+x.group+' '+x.mechanism+' '+x.signature+' '+(x.overlaps||'')).toLowerCase().includes(query.toLowerCase())?'':'style="display:none" ')+'data-vpqtoxref="'+esc(x.id)+'" data-toxgroup="'+esc(x.group)+'" data-toxterms="'+esc((x.name+' '+x.species+' '+x.group+' '+x.mechanism+' '+x.signature+' '+(x.overlaps||'')).toLowerCase())+'"><b>'+esc(x.name)+'</b><small>'+esc(x.group)+'</small><small>'+esc(x.species)+'</small></button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-vpqtoxcourse="1">📚 Course lecture outline</button><button data-vpqngf-pharm="1">💊 Drug shelves</button></div>'+
- '<p class="tiny">Original CVM 732 course reference cards plus '+(toxExtension?.cards.length||0)+' additional mechanism-based review cards. The specific product, plant, species, treatment and diagnostic decisions require professional source checking.</p>');
+ '<p class="tiny">This is an expanding lecture-linked teaching reference. Coverage does not mean every lecture has been audited against its original slides; clinical patient, product and species facts must be source-checked.</p>');
 }
 function toxDetail(id){
  const x=toxCards.find(v=>v.id===id);if(!x)return toxIndex();
@@ -75,7 +76,9 @@ function toxDetail(id){
  '<div class="vpqToxDetailHeading"><b>Mechanism group:</b> '+esc(x.group)+'</div>'+
  '<div class="vpqToxReferenceGrid">'+fields.map(([label,txt])=>'<section><h3>'+esc(label)+'</h3><p>'+esc(txt)+'</p></section>').join('')+'</div>'+
  '<p class="tiny">Educational toxicology reference only. For an actual suspected poisoning, contact a veterinarian or animal poison control service immediately. Do not administer a home antidote or induce emesis based on a study card.</p>'+
- '<div class="buttonrow"><button data-vpqtoxindex="1">← Toxicant catalog</button><button data-vpqtoxcourse="1">📚 Lecture outline</button></div>');
+ '<div class="buttonrow"><button data-vpqtoxindex="1">← Toxicant catalog</button>'+ 
+ (function(){const units=window.VPQ_TOX_LECTURE_LINKS||{};return Object.entries(units).filter(([k,v])=>v.ids.includes(id)).map(([k])=>'<button data-vpqtoxlecture="'+esc(k)+'">📚 '+esc((window.VPQ_ToxicologyPreview?.topics||[]).find(x=>x.id===k)?.lectures||k)+'</button>').join('')})()+
+ '</div>');
 }
 const previousCard=getDrugCard();
 setDrugCard(function(d){
@@ -165,6 +168,7 @@ if(d.vpqngfDrug!==undefined)return api.openPharmacy(d.vpqngfDrug);
 if(d.vpqtoxindex!==undefined)return toxIndex();
 if(d.vpqtoxref!==undefined)return toxDetail(d.vpqtoxref);
 if(d.vpqtoxcourse!==undefined)return api.toxCourse();
+if(d.vpqtoxlecture!==undefined)return api.toxCourse(d.vpqtoxlecture);
 if(d.vpqtoxmatchopen!==undefined)return toxMatchStart();
 if(d.vpqtoxmatchanswer!==undefined)return toxMatchAnswer(d.vpqtoxmatchanswer);
 if(d.vpqtoxmatchnext!==undefined){if(toxMatchRound)toxMatchRound.idx++;return toxMatchShow();}
