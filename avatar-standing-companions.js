@@ -62,30 +62,34 @@ function svg(p,kind='standing'){
 }
 const style=document.createElement('style');
 style.textContent='.vpq-standing-art{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}.vpq-game-avatar .vpq-standing-art{position:absolute;left:0;bottom:0;width:100%;height:100%;filter:drop-shadow(0 3px 2px #28374d33)}.vpq-avatar-matched-stand{width:75px;height:114px;position:absolute;inset:0;overflow:visible}.vpq-matched-creator{display:flex;gap:8px;align-items:flex-end;justify-content:center;max-width:100%;min-height:224px}.vpq-matched-frame,.vpq-matched-body{display:flex;align-items:center;flex-direction:column;gap:5px;min-width:0}.vpq-matched-frame{width:46%;max-width:152px}.vpq-matched-body{width:48%;max-width:142px}.vpq-matched-frame .vpq-roster-art,.vpq-matched-frame .vpq-standing-alex{width:100%!important;height:178px!important;object-fit:cover;border:4px ridge #d3b8a1;border-radius:12px;box-shadow:0 3px 6px #4e405238}.vpq-matched-frame .vpq-character-portrait:not(.vpq-roster-art){width:145px;height:178px;max-width:100%;border:4px ridge #d3b8a1;border-radius:12px}.vpq-matched-body .vpq-standing-art{height:198px;width:123px;max-width:100%}.vpq-matched-creator small{font-size:11px;font-weight:800;color:#675978}.vpq-matched-pet{max-width:100%;display:flex;justify-content:center}.vpq-matched-viewer{display:flex;align-items:flex-end;justify-content:center;gap:14px}.vpq-matched-viewer .vpq-character-portrait{width:135px;height:190px;max-width:100%}.vpq-matched-viewer .vpq-standing-art{width:133px;height:205px}.vpq-matched-roster-note{font-size:12px;color:#655b76;background:#f7f0fc;padding:8px 10px;border-radius:10px;margin-top:7px}@media(max-width:560px){.vpq-matched-frame .vpq-roster-art,.vpq-matched-frame .vpq-standing-alex{height:144px!important}.vpq-matched-body .vpq-standing-art{height:166px}.vpq-matched-creator{min-height:175px}}';
+style.textContent+='.vpq-alexandria-original{object-fit:contain;object-position:center bottom;display:block;width:100%;height:100%;pointer-events:none}.vpq-game-avatar .vpq-alexandria-walk{width:100%;height:100%;object-fit:contain;object-position:center bottom;mix-blend-mode:multiply}.vpq-matched-body .vpq-alexandria-preview,.vpq-matched-body .vpq-alexandria-viewer{width:132px;height:198px;max-width:100%;object-fit:contain}.vpq-original-portrait{object-position:center top!important}';
 document.head.appendChild(style);
+function alexandriaStanding(kind){
+ return '<img class="vpq-alexandria-original vpq-alexandria-'+kind+'" src="assets/alexandria-standing-v3.webp" alt="Alexandria original full-body veterinarian artwork" draggable="false">';
+}
 function renderWalking(p){
  const av=document.getElementById('avatarSprite');if(!av)return;
  av.classList.add('vpq-portrait-walk');
  av.classList.remove('vpq-storybook-walk');
  av.style.background='none';
  const holder=av.querySelector('.vpq-game-avatar')||(()=>{const el=document.createElement('div');el.className='vpq-game-avatar';av.appendChild(el);return el})();
- holder.innerHTML=svg(p,'walk');
+ holder.innerHTML=p.portraitId==='roster-28'?alexandriaStanding('walk'):svg(p,'walk');
 }
 function creator(){
  const form=document.getElementById('avatarForm'),stage=document.getElementById('vpqPreviewStage');if(!form||!stage)return;
  const values=Object.fromEntries(new FormData(form).entries());
  const p={...values,beard:values.beard==='true',cap:values.cap==='true'};
- const portrait=p.portraitId==='roster-28'?'<img class="vpq-character-portrait vpq-standing-alex" src="assets/alexandria-storybook-portrait.webp" alt="Alexandria and companion storybook portrait">':stage.querySelector('.vpq-character-portrait,.vpq-storybook-portrait')?.outerHTML||'';
+ const portrait=p.portraitId==='roster-28'?'<img class="vpq-character-portrait vpq-standing-alex vpq-original-portrait" src="assets/alexandria-standing-v3.webp" alt="Alexandria original portrait">':stage.querySelector('.vpq-character-portrait,.vpq-storybook-portrait')?.outerHTML||'';
  const pet=stage.querySelector('.vpq-preview-pet')?.outerHTML||'';
- stage.innerHTML='<div class="vpq-matched-creator"><div class="vpq-matched-frame"><small>🖼️ Portrait</small>'+portrait+'</div><div class="vpq-matched-body"><small>🚶 In-game character</small>'+svg(p,'preview')+'</div></div><div class="vpq-matched-pet">'+pet+'</div>';
+ stage.innerHTML='<div class="vpq-matched-creator"><div class="vpq-matched-frame"><small>🖼️ Portrait</small>'+portrait+'</div><div class="vpq-matched-body"><small>🚶 In-game character</small>'+(p.portraitId==='roster-28'?alexandriaStanding('preview'):svg(p,'preview'))+'</div></div><div class="vpq-matched-pet">'+pet+'</div>';
  const note=stage.parentNode.querySelector('.vpq-matched-roster-note');
- if(note)note.textContent='Your portrait stays in a picture frame; the matching standing illustration appears in every clinic room. Skin, hairstyle, body shape and outfit remain editable in Classic.';
+ if(note)note.textContent='Alexandria uses her original full-body artwork. Other portrait-gallery standing characters are placeholders awaiting approved matching illustrations; Classic remains fully editable.';
 }
 function viewer(p){
  const root=document.getElementById('modalBody')?.querySelector('.vpq-avatar-showcase');if(!root)return;
- const portrait=p.portraitId==='roster-28'?'<img class="vpq-character-portrait vpq-standing-alex" src="assets/alexandria-storybook-portrait.webp" alt="Alexandria and companion storybook portrait">':root.querySelector('.vpq-character-portrait,.vpq-storybook-portrait')?.outerHTML||'';
+ const portrait=p.portraitId==='roster-28'?'<img class="vpq-character-portrait vpq-standing-alex vpq-original-portrait" src="assets/alexandria-standing-v3.webp" alt="Alexandria original portrait">':root.querySelector('.vpq-character-portrait,.vpq-storybook-portrait')?.outerHTML||'';
  const pet=root.querySelector('.vpq-preview-pet')?.outerHTML||'';
- root.innerHTML='<div class="vpq-matched-viewer"><div class="vpq-matched-frame"><small>🖼️ Selected portrait</small>'+portrait+'</div><div class="vpq-matched-body"><small>🚶 Walking avatar</small>'+svg(p,'viewer')+'</div></div>'+pet;
+ root.innerHTML='<div class="vpq-matched-viewer"><div class="vpq-matched-frame"><small>🖼️ Selected portrait</small>'+portrait+'</div><div class="vpq-matched-body"><small>🚶 Walking avatar</small>'+(p.portraitId==='roster-28'?alexandriaStanding('viewer'):svg(p,'viewer'))+'</div></div>'+pet;
 }
 return {svg,look,renderWalking,creator,viewer};
 };
