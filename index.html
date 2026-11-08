@@ -2569,6 +2569,23 @@ const vpqNGFandTox=window.VPQ_NGFToxBridge({
  openPharmacy:id=>openPharmacy(id),
  toxCourse:()=>vpqToxPreviewMenu()
 });
+
+// Cross-link the same course from Study Lounge -> Pharmacy, without activating a Toxicology exam bank.
+const vpqToxMenuWithReference=vpqToxPreviewMenu;
+vpqToxPreviewMenu=function(...args){
+ vpqToxMenuWithReference(...args);
+ const area=$('modalBody');
+ if(area&&!area.querySelector('[data-vpqtoxindex]'))area.insertAdjacentHTML('beforeend',
+ '<div class="vpqPharmCrosslinks"><b>Need the clinical exposure reference?</b><p>The Study Lounge teaches the mechanisms; Pharmacy lists toxicants by species, exposure, signature and clinical concern.</p><button data-vpqtoxindex="1">☣️ Open Pharmacy Toxicant Reference</button></div>');
+};
+const vpqLearningLabNGFBridge=vpqLearningHub;
+vpqLearningHub=function(...args){
+ vpqLearningLabNGFBridge(...args);
+ const area=$('modalBody');
+ if(area&&!area.querySelector('[data-vpqngf-guide]'))area.insertAdjacentHTML('beforeend',
+ '<div class="vpqPharmCrosslinks"><b>🧠 Pharmacology · Additional pain pathways</b><p>Learn how NGF amplifies osteoarthritis pain and compare Librela with Solensia and NSAIDs.</p><div class="buttonrow"><button data-vpqngf-guide="1">Anti-NGF mechanism lesson</button><button data-vpqtoxindex="1">Toxicology reference</button></div></div>');
+};
+
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
