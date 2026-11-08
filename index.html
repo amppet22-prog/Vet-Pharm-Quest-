@@ -284,6 +284,14 @@
 .vpq-workflow-list{counter-reset:vpqstep;margin:12px 0;padding:0;list-style:none}
 .vpq-workflow-list li{counter-increment:vpqstep;padding:10px 12px 10px 45px;background:#fcf8ff;border:1px solid #e7daee;border-radius:10px;margin:7px 0;position:relative;font-size:13px}
 .vpq-workflow-list li:before{content:counter(vpqstep);position:absolute;left:10px;top:9px;width:24px;height:24px;border-radius:50%;background:#8064a1;color:white;text-align:center;line-height:24px;font-weight:800}
+
+/* VPQ DIAGNOSTIC QUALITY AND PHARM DECISIONS v3.9 */
+.vpq-protocol-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:9px;margin:12px 0}
+.vpq-decision-card{background:#fffaf6;border:2px solid #e7d4e2;border-radius:14px;padding:14px;margin:10px 0}
+.vpq-decision-card h3{margin:0 0 9px;color:#624a7d}
+.vpq-decision-card .choice{text-align:left;display:block;width:100%;margin:7px 0}
+.vpq-decision-rationale{padding:12px;margin:12px 0;border-radius:11px;background:#f6effb;border-left:4px solid #8162a4;font-size:13px}
+.vpq-decision-meta{font-size:11px;color:#735b7e;margin-top:9px}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -338,7 +346,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.8</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.9</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -1579,6 +1587,87 @@ $('modalBody').addEventListener('click',e=>{
  if(b.dataset.vpqprotocols)return vpqProtocolDirectory38();
  if(b.dataset.vpqcharts)return vpqChartDirectory38();
  if(b.dataset.vpqqueue)return vpqPatientQueue38();
+});
+
+
+// VPQ DIAGNOSTIC QUALITY AND PHARM DECISIONS v3.9
+// Extra external background is labeled separately from user's Pharm 1 SPACED lecture structure.
+const vpqMoreProtocols39=[
+ {id:'sample-quality',name:'Diagnostic Quality — Can I trust this sample?',summary:'Spot preanalytic artifacts before making clinical decisions.',steps:[
+ 'Confirm correct animal, patient identifiers, collection time, sample type, anticoagulant, and laboratory method.',
+ 'Check if the sample was properly collected, labeled, filled, mixed, stored, transported, and analyzed within method-specific limits.',
+ 'Inspect for hemolysis, lipemia, clots, air bubbles, excess anticoagulant, contamination, and delayed separation.',
+ 'Ask whether the result is biologically plausible and agrees with exam findings and other data; consider species-related effects.',
+ 'Distinguish a real patient abnormality from a preanalytic, analytic, or postanalytic error. Repeat a compromised sample rather than inventing corrections.',
+ 'When critically ill, obtain a reliable repeat promptly without withholding necessary stabilization while quality is clarified.'
+ ]},
+ {id:'bloodgas-quality',name:'Blood Gas Reliability — Air, Time & Sampling',summary:'How poor handling changes oxygen, carbon dioxide, pH, and lactate interpretation.',steps:[
+ 'Identify arterial versus venous blood; do not interpret venous pO₂ as arterial oxygenation.',
+ 'Use an appropriate heparinized collection device with correct fill and gentle mixing; avoid heparin dilution and clots.',
+ 'Expel air bubbles promptly, seal the sample, and follow analyzer-specific transport and timing instructions.',
+ 'Air exposure drives gases toward room-air partial pressures: pCO₂ typically decreases, pH tends to rise, and pO₂ shifts toward the ambient-air value (often increases in unsupplemented venous blood).',
+ 'Delayed analysis permits cellular metabolism: oxygen may fall, carbon dioxide and lactate may rise, and pH may decline; handling-dependent effects vary.',
+ 'If handling could change clinical interpretation, recollect and analyze promptly; avoid treating an artifact as the patient’s disorder.'
+ ]},
+ {id:'drug-decision',name:'Pharmacology — Is this the right drug?',summary:'Stepwise indication, PK/PD, species safety, contraindications, and follow-up.',steps:[
+ 'Define the patient problem, clinical goal, and strength of evidence for drug treatment. For suspected infection, first ask if antimicrobial therapy is indicated.',
+ 'Choose the drug class from the mechanism and target: where must it act, and what physiology or organism does it change?',
+ 'For antibiotic selection, use Dr. Carlson’s SPACED: Spectrum, PK/PD, Adverse effects, Compliance, Environment, Diagnostics.',
+ 'For anti-inflammatories, decide whether blocking COX or inflammatory signaling could remove protective compensation, especially in hypoperfused patients.',
+ 'Check species, age, pregnancy or lactation status, renal/hepatic disease, interacting drugs, legal restrictions and formulation; do not rely on memory for doses or withdrawal intervals.',
+ 'Choose what to monitor and when to reassess. If the patient does not improve, revisit diagnosis, drug exposure, source control and adverse effects.'
+ ]},
+ {id:'result-to-action',name:'Abnormal Result — Artifact or True Disease?',summary:'Learn to distinguish a bad specimen from a sick patient.',steps:[
+ 'Confirm result, units, specimen type, reference interval and sampling method.',
+ 'Evaluate sample quality and known interferences before diagnosing disease from an isolated abnormal value.',
+ 'Compare the result with the examination, prior measurements, related analytes and expected physiology.',
+ 'If potentially compromised, repeat the test using appropriate collection and handling before changing a nonurgent treatment plan.',
+ 'For life-threatening clinical signs, stabilize and verify in parallel rather than delaying care.',
+ 'Record your interpretation, uncertainty, corrective action and when to recheck.'
+ ]}
+];
+vpqProtocolData38.push(...vpqMoreProtocols39);
+const vpqProtocolScenarios39=[
+ {id:'gas-air',kind:'Diagnostic Quality',title:'Blood Gas: Air Bubble',case:'An uncapped venous blood gas syringe contains a large air bubble before analysis. Which conclusion is best?',options:['Accept the pO₂ as a reliable measure of arterial oxygenation','Consider pO₂ and pCO₂ unreliable and recollect correctly','Assume the animal has a primary respiratory alkalosis','Use the sample but multiply pCO₂ by two'],answer:1,why:'Atmospheric air equilibrates with blood: pCO₂ generally drops, pH tends to rise, and pO₂ moves toward ambient air. Venous pO₂ does not measure arterial oxygenation. Recollect and analyze a sealed, properly handled sample.',source:'Veterinary Clinical Pathology / blood gas sample handling',ref:'https://todaysveterinarypractice.com/clinical-pathology/the-practitioners-acid-base-primer-obtaining-interpreting-blood-gases/'},
+ {id:'gas-delay',kind:'Diagnostic Quality',title:'Blood Gas: Delayed Analysis',case:'A whole-blood gas sample sits for a prolonged period before analysis. What artifact can result from continued cellular metabolism?',options:['pO₂ increases and lactate always falls','pCO₂ falls solely because leukocytes stop working','pO₂ may decrease, pCO₂/lactate may increase, and pH may fall','The measured acid–base data never change after sampling'],answer:2,why:'Living cells keep consuming oxygen and metabolizing glucose after collection. Delays can change gases, pH and lactate; the amount and direction of error also depend on specimen and storage conditions.',source:'Veterinary blood gas sample handling (external clinical review)',ref:'https://todaysveterinarypractice.com/clinical-pathology/the-practitioners-acid-base-primer-obtaining-interpreting-blood-gases/'},
+ {id:'gas-oxygen',kind:'Diagnostic Quality',title:'Arterial Versus Venous Oxygen',case:'A peripheral venous blood gas shows a low pO₂. The student concludes the patient is severely hypoxemic. What is missing?',options:['Confirmation of arterial oxygenation by an appropriate method','A higher venous pO₂ reference range','A beta-lactam antibiotic','Evidence of glucocorticoid toxicity'],answer:0,why:'Venous oxygen tension reflects tissue oxygen extraction and perfusion as well as delivery. Arterial oxygenation requires an appropriate arterial gas or other validated oxygenation assessment.',source:'Blood gas interpretation background (external clinical review)',ref:'https://todaysveterinarypractice.com/clinical-pathology/the-practitioners-acid-base-primer-obtaining-interpreting-blood-gases/'},
+ {id:'gas-heparin',kind:'Diagnostic Quality',title:'Blood Gas: Excess Liquid Heparin',case:'A tiny blood gas sample is collected into a syringe containing excessive liquid heparin. Which concern is most appropriate?',options:['The anticoagulant cannot affect any measured analyte','Dilution and altered acid–base/electrolyte results','Guaranteed true renal failure','False bacterial culture growth'],answer:1,why:'An excessive liquid-heparin-to-blood ratio can dilute sample components and alter certain results. Use the appropriate collection device and fill volume.',source:'Veterinary blood gas collection background',ref:'https://www.cliniciansbrief.com/article/arterial-blood-sampling-guide'},
+ {id:'pharm-why',kind:'Pharmacology Decisions',title:'NSAID in Shock',case:'A dehydrated hypotensive dog has pain. Why is an NSAID potentially risky before perfusion is restored?',options:['NSAIDs make all vessels dilate too strongly','Renal prostaglandins can help preserve blood flow during hypoperfusion','NSAIDs inhibit bacterial DNA gyrase','NSAIDs always cause Addisonian crisis'],answer:1,why:'Prostaglandin-mediated renal vasodilation can be compensatory when perfusion is poor. COX inhibition may remove this protection and aggravate kidney injury. Stabilize and reassess analgesic choices.',source:'Pharm 1 · Lectures 6–7; mechanism reviewed clinically',ref:''},
+ {id:'pharm-abx',kind:'Pharmacology Decisions',title:'Antibiotic Decision: SPACED',case:'A dog has a culture-confirmed bacterial infection in a poorly perfused abscess. Which question does the SPACED framework highlight?',options:['Only whether the drug is sold as a chewable','Whether spectrum and tissue exposure are appropriate, with source control','Whether antibiotics always beat drainage','Whether every drug needs a double dose'],answer:1,why:'Correct spectrum is not enough if tissue delivery is poor or an abscess needs drainage. Apply Spectrum, PK/PD, Adverse effects, Compliance, Environment and Diagnostics.',source:'Pharm 1 · Lecture 2 · SPACED selection framework',ref:''},
+ {id:'pharm-bug',kind:'Pharmacology Decisions',title:'Aminoglycoside and Anaerobes',case:'A severe anaerobic infection is suspected. Why would gentamicin alone be a poor choice?',options:['Anaerobes cannot take up aminoglycosides efficiently through oxygen-dependent processes','Gentamicin is a steroid','Gentamicin has no interaction with renal tissue','All anaerobes have no bacterial ribosomes'],answer:0,why:'Oxygen-dependent aminoglycoside uptake limits effectiveness against anaerobes. The drug also has important nephrotoxic potential, particularly in compromised patients.',source:'Pharm 1 · Lecture 4 · Aminoglycosides',ref:''},
+ {id:'pharm-cats',kind:'Pharmacology Decisions',title:'Doxycycline in a Cat',case:'A cat is prescribed oral doxycycline. Which counseling point addresses a species-specific risk?',options:['Always give dry tablets without food or fluid','Help tablets pass into the stomach to reduce esophageal injury','Avoid all medication because cats have no liver','Use the same formulation and amount as for a horse'],answer:1,why:'Doxycycline can injure feline esophageal mucosa if a solid dosage form lodges there. Follow the veterinarian’s administration instructions and appropriate formulation guidance.',source:'Pharm 1 · Lecture 4 · Tetracyclines',ref:''}
+];
+function vpqDecisionQuiz39(kind){
+ const scenarios=vpqProtocolScenarios39.filter(q=>q.kind===kind);
+ showModal('🧠 '+kind+' — Practice Decisions',
+ '<p class="small">Pick the best decision, then review the explanation. No score penalties; these mini-scenarios reinforce process and source quality.</p><div class="vpq-protocol-tools">'+scenarios.map(q=>'<button class="vpq-navigation-choice" data-vpqscenario="'+q.id+'"><b>'+escapeHtml(q.title)+'</b><p>'+escapeHtml(q.case).slice(0,135)+'…</p></button>').join('')+'</div><div class="buttonrow"><button data-vpqprotocols="1">← All protocols</button></div>');
+}
+function vpqScenario39(id,choice){
+ const q=vpqProtocolScenarios39.find(x=>x.id===id);if(!q)return;
+ const evaluated=Number.isInteger(choice);
+ showModal('🧠 '+q.title,'<div class="vpq-decision-card"><p>'+escapeHtml(q.case)+'</p>'+
+ q.options.map((option,i)=>'<button type="button" class="choice '+(evaluated?(i===q.answer?'right':i===choice?'wrong':''):'')+'" data-vpqscenarioanswer="'+escapeHtml(q.id)+'" data-vpqchoice="'+i+'" '+(evaluated?'disabled':'')+'>'+String.fromCharCode(65+i)+'. '+escapeHtml(option)+'</button>').join('')+
+ (evaluated?'<div class="vpq-decision-rationale"><b>'+(choice===q.answer?'✅ Correct decision':'💡 Learning moment')+'</b><p>'+escapeHtml(q.why)+'</p></div>':'')+
+ '<p class="vpq-decision-meta"><b>Source:</b> '+escapeHtml(q.source)+(q.ref?' · <a href="'+escapeHtml(q.ref)+'" target="_blank" rel="noopener noreferrer">Clinical reference ↗</a>':'')+'</p></div>'+
+ '<div class="buttonrow"><button type="button" data-vpqdecisionquiz="'+escapeHtml(q.kind)+'">← All '+escapeHtml(q.kind)+' scenarios</button><button type="button" data-vpqprotocols="1">📚 All protocols</button></div>');
+}
+const vpqPreviousProtocolDirectory39=vpqProtocolDirectory38;
+vpqProtocolDirectory38=function(id){
+ vpqPreviousProtocolDirectory39(id);
+ const holder=$('modalBody');if(!holder)return;
+ if(!id){
+  holder.insertAdjacentHTML('afterbegin','<div class="vpq-protocol-tools"><button type="button" class="vpq-navigation-choice" data-vpqdecisionquiz="Diagnostic Quality"><b>🧪 Test the Test</b><p>Is this blood gas or lab result trustworthy?</p></button><button type="button" class="vpq-navigation-choice" data-vpqdecisionquiz="Pharmacology Decisions"><b>💊 Choose the Drug</b><p>Make indication, PK/PD, safety and monitoring decisions.</p></button></div>');
+ }else if(['bloodgas-quality','sample-quality','result-to-action'].includes(id)){
+  holder.insertAdjacentHTML('beforeend','<div class="buttonrow"><button type="button" data-vpqdecisionquiz="Diagnostic Quality">🧪 Practice diagnostic errors</button></div>');
+ }else if(['drug-decision','pharm'].includes(id)){
+  holder.insertAdjacentHTML('beforeend','<div class="buttonrow"><button type="button" data-vpqdecisionquiz="Pharmacology Decisions">💊 Practice medication decisions</button></div>');
+ }
+};
+$('modalBody').addEventListener('click',e=>{
+ const btn=e.target.closest('button');if(!btn)return;
+ if(btn.dataset.vpqdecisionquiz)return vpqDecisionQuiz39(btn.dataset.vpqdecisionquiz);
+ if(btn.dataset.vpqscenario)return vpqScenario39(btn.dataset.vpqscenario);
+ if(btn.dataset.vpqscenarioanswer!==undefined)return vpqScenario39(btn.dataset.vpqscenarioanswer,Number(btn.dataset.vpqchoice));
 });
 
 updateAvatar();updateHUD();renderRoom();loop();
