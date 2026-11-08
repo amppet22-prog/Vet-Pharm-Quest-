@@ -1380,10 +1380,11 @@ const vpqDrugGroups36=[
  ['Antibiotics','DNA / RNA inhibitors','Nitroimidazoles',['metronidazole','ronidazole']],
  ['Antibiotics','Folate inhibitors','Sulfonamides and potentiators',['sulfadimethoxine','sulfasalazine','trimethoprim','sulfadiazine']],
  ['Antibiotics','Membrane-active agents','Polymyxins and ionophores',['polymyxin','monensin','lasalocid']],
- ['Anti-inflammatories','NSAIDs','Traditional & nonselective',['flunixin','ketoprofen','aspirin','acetaminophen']],
- ['Anti-inflammatories','NSAIDs','COX-selective',['carprofen','meloxicam','robenacoxib','firocoxib','deracoxib','etodolac','piroxicam','phenylbutazone']],
- ['Anti-inflammatories','NSAIDs','Other inflammatory pain targets',['dipyrone','tepoxalin']],
- ['Pain & inflammation','Piprants (non-COX NSAIDs)','PGE₂ EP4 receptor antagonists',['grapiprant']],
+ ['Pain & inflammation','COX-inhibiting NSAIDs','Nonselective / traditional',['flunixin','ketoprofen','aspirin','phenylbutazone','piroxicam']],
+ ['Pain & inflammation','COX-inhibiting NSAIDs','COX-2 preferential / selective',['carprofen','meloxicam','robenacoxib','firocoxib','deracoxib','etodolac']],
+ ['Pain & inflammation','Other analgesic / anti-inflammatory drugs','Non-NSAID analgesics',['acetaminophen','dipyrone']],
+ ['Pain & inflammation','Other analgesic / anti-inflammatory drugs','COX / LOX inhibitors',['tepoxalin']],
+ ['Pain & inflammation','Piprants (EP4-targeting NSAIDs)','PGE₂ EP4 receptor antagonists',['grapiprant']],
  ['Pain & inflammation','Monoclonal antibodies','Anti-NGF biologics',['bedinvetmab','frunevetmab','librela','solensia']],
  ['Anti-inflammatories','Antihistamines','H1 receptor antagonists',['diphenhydramine','cetirizine','chlorpheniramine','loratadine','tripelennamine']],
  ['Anti-inflammatories','Antihistamines','H2 receptor antagonists',['famotidine','ranitidine']],
@@ -1395,11 +1396,12 @@ function vpqDrugCategory36(d){
  const look=[d.id,d.name].join(' ').toLowerCase();
  for(const [branch,family,group,names] of vpqDrugGroups36){if(names.some(n=>look.includes(n)))return {branch,family,group}};
  const cl=String(d.class||'').toLowerCase(),lecture=String(d.lecture||'');
+ if(d.id==='acetaminophen'||/acetaminophen/.test(cl))return {branch:'Pain & inflammation',family:'Other analgesic / anti-inflammatory drugs',group:'Non-NSAID analgesics'};
  if(/anti.?ngf|monoclonal antibody/.test(cl))return {branch:'Pain & inflammation',family:'Monoclonal antibodies',group:'Anti-NGF biologics'};
  if(/piprant|ep4 receptor antagonist/.test(cl))return {branch:'Pain & inflammation',family:'Piprants (non-COX NSAIDs)',group:'PGE₂ EP4 receptor antagonists'};
  if(/anti.?hist|h1|h2/.test(cl))return {branch:'Anti-inflammatories',family:'Antihistamines',group:'Other antihistamines'};
  if(/steroid|corticoid|glucocorticoid/.test(cl))return {branch:'Anti-inflammatories',family:'Corticosteroids',group:'Other corticosteroids'};
- if(/nsaid|cox|prostaglandin/.test(cl))return {branch:'Anti-inflammatories',family:'NSAIDs',group:'Other NSAIDs'};
+ if(/nsaid|cox|prostaglandin/.test(cl))return {branch:'Pain & inflammation',family:'COX-inhibiting NSAIDs',group:'Other COX-inhibiting NSAIDs'};
  if(/anti.adrenal|trilostane/.test(cl))return {branch:'Endocrine & adrenal',family:'Anti-adrenal drugs',group:'Other anti-adrenal drugs'};
  return {branch:lecture.includes('Lecture 9')?'Endocrine & adrenal':'Antibiotics',family:'Additional drug classes',group:'Unclassified'};
 }
