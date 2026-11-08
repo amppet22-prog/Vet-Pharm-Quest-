@@ -382,6 +382,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <footer>Vet Pharm Quest • v2.5 Clinic Guide, Companion Update & Physiology Hub • Offline study prototype • Original educational questions based on course review materials • No backend or shared accounts</footer>
 <script src="curriculum.js"></script>
 <script src="drug-stewardship.js"></script>
+<script src="antibiotic-pkpd-lesson.js?v=20261108-first"></script>
 <script src="drug-clinical-reference.js?v=20261108-piprant2"></script>
 <script src="reception-customization.js?v=20261108-2"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
@@ -2647,6 +2648,28 @@ showStudyMenu=function(...args){vpqPharmNewStudyMenu(...args);const body=$('moda
 const vpqPharmNewLearningHub=vpqLearningHub;
 vpqLearningHub=function(...args){vpqPharmNewLearningHub(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Lectures 10–13</b><p>New lecture material is available in the Study Desk; this curriculum is separate from the Exam 1 Professor Guide.</p><button data-vpqnewpharm-menu="1">Browse new lecture lessons</button></div>')};
 const vpqPharmNewStyle=document.createElement('style');vpqPharmNewStyle.textContent='.vpqNewPharmBanner{padding:14px;margin:14px 0;border:1px solid #b7cbed;background:#eff7ff;border-radius:12px}.vpqNewPharmBanner p{margin:6px 0;font-size:13px}.vpqNewPharmCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}.vpqNewPharmCards button{background:white;border-radius:12px;padding:14px;text-align:left;border:1px solid #c8d4e5}.vpqNewPharmCards b,.vpqNewPharmCards small,.vpqNewPharmCards em{display:block}.vpqNewPharmCards small{font-size:12px;margin:8px 0}.vpqNewPharmCards em{font-size:11px;font-style:normal;color:#487c99}.vpqNewPharmConcept{padding:12px 14px;margin:9px 0;border-radius:11px;border:1px solid #d2dce9;background:#fff}.vpqNewPharmConcept h3{margin:0 0 6px;font-size:15px}.vpqNewPharmConcept p{font-size:13px;line-height:1.5}';document.head.appendChild(vpqPharmNewStyle);
+
+
+/* Veterinary antibiotics + Lecture 1–2 PK/PD reference, reachable from Pharmacy. */
+(function(){
+ const original=openPharmacy;
+ openPharmacy=function(...args){
+   original(...args);
+   const body=$('modalBody');
+   if(body&&!body.querySelector('[data-vpqabxopen]')){
+     body.insertAdjacentHTML('afterbegin','<section class="vpqAbxBanner"><b>🧫 Antibiotic Selection &amp; PK/PD Learning Center</b><p>Compare 1st–3rd generation cephalosporins, MIC, AUC, Cmax, fT&gt;MIC, resistance, clinical decisions and worked examples from Lecture 1–2 principles.</p><button type="button" data-vpqabxopen="1">Open antibiotic &amp; PK/PD guide</button></section>');
+   }
+ };
+ $('modalBody').addEventListener('click',function(e){
+   const b=e.target.closest('[data-vpqabxopen]');
+   if(!b)return;
+   e.preventDefault();e.stopImmediatePropagation();
+   window.VPQ_ABX_LESSON_OPEN(showModal,escapeHtml);
+ },true);
+ const css=document.createElement('style');
+ css.textContent='.vpqAbxBanner{background:#ecf8fc;border:1px solid #a3cbdf;padding:13px;border-radius:13px;margin:0 0 15px}.vpqAbxBanner p{font-size:13px;margin:7px 0}.vpqAbxGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0 20px}.vpqAbxCard{background:#fff;border:1px solid #c7dbe4;border-radius:12px;padding:13px;line-height:1.5}.vpqAbxCard h3{font-size:15px;margin:0 0 9px}.vpqAbxCard p{font-size:13px;margin:7px 0}.vpqAbxExample{padding:12px;margin:8px 0;background:#f6faff;border:1px solid #b6cedd;border-radius:10px}.vpqAbxExample summary{cursor:pointer;font-weight:700}.vpqAbxExample p{font-size:13px;line-height:1.6}';
+ document.head.appendChild(css);
+})();
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
