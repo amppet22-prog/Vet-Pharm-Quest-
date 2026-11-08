@@ -1,0 +1,32 @@
+name: Report an educational content error
+description: Suggest a correction to a question, drug card, patient case, or One Health entry.
+title: "[Content correction] "
+labels: []
+body:
+  - type: input
+    id: content_id
+    attributes:
+      label: Question, case, drug, or entry name / ID
+      placeholder: "Example: Roxy - superficial pyoderma; step 2"
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is incorrect, unclear, or outdated?
+      description: Include why you think it needs correction.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested correction
+    validations:
+      required: false
+  - type: input
+    id: source
+    attributes:
+      label: Supporting source
+      placeholder: Lecture, page, eClinPath, Merck link, official guidance...
+    validations:
+      required: false
