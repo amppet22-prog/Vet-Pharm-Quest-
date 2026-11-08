@@ -40,7 +40,7 @@ function gallery(filter){
 }
 function open(id){
  const x=lookup(id);if(!x||!api)return;
- if(!current){previous={title:document.getElementById('modalTitle')?.textContent||'Clinic',html:api.body.innerHTML};}
+ if(!api.body.querySelector?.('.vpqVPViewer')){previous={title:document.getElementById('modalTitle')?.textContent||'Clinic',html:api.body.innerHTML};}
  current=id;step=0;render();
 }
 function render(){
