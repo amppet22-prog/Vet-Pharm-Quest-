@@ -516,7 +516,7 @@ const ROOMS={
  reception:{name:'Reception & Waiting Room',color:'#fff0df',banner:'WELCOME TO YOUR CLINIC',decor:[['🪟','9%','15%'],['🖼️','75%','18%'],['🪴','88%','56%']],props:[{x:22,emoji:'🛎️',label:'Front Desk',action:'welcome',bubble:'First shift'},{x:50,emoji:'🪑',label:'Patient Queue',action:'queue',bubble:'New patients'},{x:79,emoji:'🚪',label:'Clinical Hall',action:'map',bubble:'Choose room'}]},
  exam:{name:'Examination Room',color:'#fff3e8',banner:'EXAM ROOM • PATIENT ROUNDS',decor:[['🩻','9%','15%'],['🖼️','80%','18%'],['🧼','85%','57%']],props:[{x:22,emoji:'📋',label:'Medical Chart',action:'medicalCharts',bubble:'Review history'},{x:52,emoji:'🩺',label:'Exam Table',action:'patients',bubble:'Treat a case'},{x:81,emoji:'📚',label:'Protocols',action:'protocols',bubble:'Clinical steps'}]},
  pharmacy:{name:'Pharmacy & Medication Library',color:'#eaf7ed',banner:'PHARMACY • DRUG REFERENCE',decor:[['🌿','8%','17%'],['🪟','78%','15%']],props:[{x:24,emoji:'💊',label:'Drug Shelves',action:'pharmacy',bubble:'Search drugs'},{x:52,emoji:'🧪',label:'Mechanism Lab',action:'study',bubble:'Learn why'},{x:81,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Test yourself'}]},
- treatment:{name:'Treatment Ward',color:'#f0eafa',banner:'TREATMENT • CLINICAL DECISIONS',decor:[['🩹','11%','17%'],['🫀','82%','17%']],props:[{x:23,emoji:'🐴',label:'Hospitalized Patient',action:'inpatientWard',bubble:'Follow up'},{x:52,emoji:'💉',label:'Treatment Cart',action:'inpatientWard',bubble:'Adjust care'},{x:81,emoji:'📈',label:'Monitoring',action:'inpatientWard',bubble:'Reassess'}]},
+ treatment:{name:'Treatment Ward',color:'#f0eafa',banner:'TREATMENT • CLINICAL DECISIONS',decor:[['🩹','11%','17%'],['🫀','82%','17%']],props:[{x:23,emoji:'🐴',label:'Hospitalized Patient',action:'hospitalFollowup',bubble:'Follow up'},{x:52,emoji:'💉',label:'Treatment Cart',action:'hospitalAdjust',bubble:'Adjust care'},{x:81,emoji:'📈',label:'Monitoring',action:'hospitalMonitor',bubble:'Watch trends'}]},
  isolation:{name:'One Health & Isolation',color:'#e6f8f1',banner:'ONE HEALTH • PROTECT THE COMMUNITY',decor:[['🧤','11%','17%'],['☣️','83%','16%'],['🧴','90%','57%']],props:[{x:23,emoji:'🐮',label:'Isolation Patient',action:'onehealth',bubble:'Zoonosis case'},{x:52,emoji:'📚',label:'Disease Library',action:'ohLibrary',bubble:'38 disease cards'},{x:81,emoji:'🛡️',label:'Public Health Desk',action:'ohHub',bubble:'Roles & reporting'}]},
  study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'📖',label:'Guided Learning',action:'learningHub',bubble:'Select & start'},{x:52,emoji:'🏆',label:'Mastery Tracker',action:'masteryTracker',bubble:'Test yourself'},{x:81,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Short practice'}]}
 };
@@ -2005,6 +2005,191 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  const styleNode=document.createElement('style');
  styleNode.textContent='.vpqStatusBar{padding:11px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#f0faf7;border:1px solid #b4d5c8;border-radius:12px;margin-bottom:14px}.vpqStatusBar small{color:#426b66}.vpqStatusPanel{border:2px solid #b3d7cd;background:#f8fffd;border-radius:15px;padding:13px;margin:15px 0}.vpqStatusTitle{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:16px}.vpqStatusTitle span{font-size:11px;padding:4px 7px;background:#e4f4ed;border-radius:9px}.vpqStatusSection{padding:9px 0;border-top:1px solid #cee5dd}.vpqStatusSection p{margin:5px 0;font-size:13px;line-height:1.6}.vpqStatusSources{line-height:1.8;font-size:12px}.vpqStatusSources a{color:#176e65;text-decoration:underline}.vpqStatusFilters{display:flex;gap:12px;flex-wrap:wrap}.vpqStatusFilters label{min-width:190px;flex:1}.vpqStatusFilters select,.vpqStatusFilters input{display:block;padding:9px;width:100%;border:1px solid #b4d1c6;border-radius:8px}.vpqStatusList{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;max-height:50vh;overflow:auto;padding:10px 0}.vpqStatusList button{text-align:left;background:#fff;border:1px solid #bed6ca;border-radius:12px;padding:11px}.vpqStatusList button b,.vpqStatusList button small{display:block}.vpqStatusList button small{font-size:11px;color:#50716e;margin-top:4px}';
  document.head.appendChild(styleNode);
+})();
+
+
+/* VPQ 3.12 — functional saved lecture selection & staged inpatient patient loop.
+   Capture-phase controls deliberately avoid collision with older modal handlers. */
+(function(){
+ const curriculum=window.VPQCurriculum;
+ if(!curriculum)return;
+ const menuState={pending:null,notice:''};
+ const valid=new Set(curriculum.courses.map(x=>x[0]));
+ function selected(){return curriculum.getLectures().filter(x=>valid.has(x))}
+ function pending(){return Array.isArray(menuState.pending)?menuState.pending:selected()}
+ function setPending(vals){menuState.pending=[...new Set(vals.filter(x=>valid.has(x)))];renderCount()}
+ function renderCount(){
+  const count=$('vpqLFCount'),message=$('vpqLFStatus');if(count)count.textContent=pending().length+' lecture groups selected';
+  if(message){const dirty=JSON.stringify(pending())!==JSON.stringify(selected());message.textContent=dirty?'● Unsaved changes — press Save Selection':'✓ Saved — your selected lectures will be used in Learning, Mastery and compatible games';message.style.color=dirty?'#8a5a0a':'#206454'}
+  const btn=$('vpqLFSave');if(btn)btn.disabled=pending().length===0;
+ }
+ function saveSelection(){
+  if(!pending().length){const msg=$('vpqLFStatus');if(msg){msg.textContent='Select at least one lecture before saving.';msg.style.color='#9e2929'}return false}
+  master27.selected=curriculum.setLectures(pending());save27();menuState.notice='Selection saved.';
+  renderCount();return true;
+ }
+ function showLearning(){
+  const cur=pending(),list=curriculum.courses.map(([lec,code,desc])=>{
+    const q=dataStudy().filter(x=>x.lecture===lec).length;
+    const cards=window.VPQCurriculum.concepts.filter(x=>x[0]===lec).length+dataDrugs().filter(x=>x.lecture===lec).length;
+    return '<div class="vpqLFrow"><label><input type="checkbox" data-vpqLFCheck="'+escapeHtml(lec)+'" '+(cur.includes(lec)?'checked':'')+'><span><b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(desc)+' · '+cards+' cards · '+q+' questions</small></span></label><button data-vpqLFSingle="'+escapeHtml(lec)+'" data-vpqLFSingleMode="learn">Learn</button><button data-vpqLFSingle="'+escapeHtml(lec)+'" data-vpqLFSingleMode="quiz">Test</button></div>';
+  }).join('');
+  showModal('📖 Learning Lab · Select → Save → Start',
+   '<p>Choose your lectures, <b>Save Selection</b>, then start. <b>Learn</b> and <b>Test</b> alongside each lecture also start that specific lecture immediately.</p>'+
+   '<div class="infobox"><div class="vpqLFhead"><b>Choose Pharmacology lectures</b><span id="vpqLFCount"></span></div><div class="vpqLFlist">'+list+'</div><p id="vpqLFStatus" role="status" aria-live="polite"></p><div class="buttonrow"><button id="vpqLFSave" data-vpqLFSave="1">💾 Save Selection</button><button data-vpqLFAll="1">Select all</button><button data-vpqLFClear="1">Clear selections</button></div></div>'+
+   '<div class="vpqLFsteps"><h3>Start studying</h3><p><b>Guided Learning</b> teaches the physiological mechanisms and clinical WHY; <b>Learn + Apply</b> mixes cards with exam questions.</p><div class="buttonrow"><button data-vpqLFLaunch="learn">📖 Start Learning</button><button data-vpqLFLaunch="mixed">🩺 Start Learn + Apply</button><button data-vpqLFMastery="1">🏆 Mastery / Exam Testing</button></div></div>'+
+   '<h3>Targeted games</h3><div class="vpq-gamegrid">'+[
+     ['match','🧩 Drug Match','Learn class, name and target'],
+     ['battle','🦠 Bug Battles','Reinforce antibiotic resistance and coverage'],
+     ['cases','🩺 Patient Rounds','Apply mechanisms in a patient'],
+     ['guide','📚 Professor Guide','Course-style recall questions']
+   ].map(([id,name,desc])=>'<button data-vpqLFGame="'+id+'"><b>'+name+'</b><small>'+desc+'</small></button>').join('')+'</div>'+
+   '<p class="tiny">Questions are finite and course alignment is still under audit. A saved lecture focus is shared with the Arcade. Some specialized games have narrower banks.</p>');
+  renderCount();
+ }
+ function masteryScreen(){
+  const p=curriculum.getProgress(),chosen=selected();
+  const rows=curriculum.courses.filter(x=>chosen.includes(x[0])).map(([lec,code,name])=>{
+    const recent=p.recent.filter(x=>x.lecture===lec),correct=recent.filter(x=>x.correct).length;
+    return '<div class="vpqLFrow"><span><b>'+escapeHtml(lec)+'</b><small>'+recent.length+' recent attempts · '+(recent.length?Math.round(100*correct/recent.length)+'% correct':'Not assessed')+'</small></span><button data-vpqLFSingle="'+escapeHtml(lec)+'" data-vpqLFSingleMode="quiz">Test</button></div>';
+  }).join('');
+  showModal('🏆 Mastery · Independent Testing',
+   '<p>Learning teaches you. Mastery tests you <b>without hints</b>, tracks missed concepts, and provides focused review. These are different stages of the same lecture curriculum.</p>'+
+   '<div class="vpq-sharedstats"><div><b>'+p.attempts+'</b><small>Recorded attempts</small></div><div><b>'+p.correct+'</b><small>Correct</small></div><div><b>'+Object.keys(p.weak).length+'</b><small>Flagged for review</small></div><div><b>'+chosen.length+'</b><small>Active lectures</small></div></div>'+
+   '<div class="vpqLFlist">'+(rows||'<p>Choose lectures in Learning Lab first.</p>')+'</div>'+
+   '<div class="buttonrow"><button data-vpqLFLaunch="quiz">🧠 Test selected lectures</button><button data-vpqLFLaunch="missed">🔁 Review flagged teaching cards</button><button data-vpqLFGame="review">📒 Arcade missed questions</button><button data-vpqLFHome="1">← Learning Lab</button></div>');
+ }
+ function launch(mode,one){
+  let chosen=one?[one]:pending();
+  if(!chosen.length){showModal('Select a lecture','<p>Choose at least one lecture before studying.</p><button data-vpqLFHome="1">← Select lectures</button>');return}
+  setPending(chosen);saveSelection();
+  master27.selected=selected();
+  try{launch27(mode)}catch(e){showModal('Learning activity could not open','<p>'+escapeHtml(e.message||String(e))+'</p><p>Selection is saved; this error is visible so the activity can be corrected.</p><button data-vpqLFHome="1">Back to lectures</button>')}
+ }
+ function launchGame(mode){
+  if(!selected().length){showLearning();return}
+  try{vpqOpenGame(mode)}catch(e){showModal('Could not open the game','<p>'+escapeHtml(e.message||String(e))+'</p><button data-vpqLFHome="1">Back to Learning Lab</button>')}
+ }
+ // Capture phase prevents existing overlapping menu callbacks from intercepting these controls.
+ $('modalBody').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqLF'));
+  if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
+  try{
+   if(d.vpqLFHome!==undefined){menuState.pending=null;showLearning();return}
+   if(d.vpqLFSave!==undefined){saveSelection();return}
+   if(d.vpqLFAll!==undefined){setPending(curriculum.courses.map(x=>x[0]));showLearning();return}
+   if(d.vpqLFClear!==undefined){setPending([]);showLearning();return}
+   if(d.vpqLFSingle!==undefined){launch(d.vpqLFSingleMode==='quiz'?'quiz':'learn',d.vpqLFSingle);return}
+   if(d.vpqLFLaunch!==undefined){launch(d.vpqLFLaunch);return}
+   if(d.vpqLFMastery!==undefined){if(pending().length)saveSelection();masteryScreen();return}
+   if(d.vpqLFGame!==undefined){if(pending().length)saveSelection();launchGame(d.vpqLFGame);return}
+  }catch(error){showModal('Learning Lab error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqLFHome="1">Back to Learning Lab</button>')}
+ },true);
+ $('modalBody').addEventListener('change',e=>{
+  const element=e.target;if(!element.matches('[data-vpqLFCheck]'))return;
+  e.stopImmediatePropagation();
+  const picked=[...$('modalBody').querySelectorAll('[data-vpqLFCheck]:checked')].map(x=>x.dataset.vpqLFCheck);
+  setPending(picked);
+ },true);
+ // Replace route functions rather than layering another menu inside the prior menu.
+ vpqLearningHub=function(){menuState.pending=null;showLearning()};
+ vpqGMastery=function(){masteryScreen()};
+ const formerDoAction=doAction;
+ doAction=function(action){
+  if(['study','learningHub','pharmArcade','pharmExamCenter'].includes(action))return vpqLearningHub();
+  if(action==='masteryTracker')return masteryScreen();
+  if(action==='hospitalFollowup')return followup();
+  if(action==='hospitalAdjust')return adjust();
+  if(action==='hospitalMonitor')return monitor();
+  return formerDoAction(action)
+ };
+ // Patient state is independent of the lecture selection. A new finding is required before a change in treatment.
+ const hospitalData=[
+  {id:'postop-dog',name:'🐕 Postoperative dog — kidney risk',desc:'A dog recovering from surgery is receiving analgesia. An NSAID is recorded on the medication sheet.',
+   baseline:'Initial pain score 5/10, creatinine 1.1 mg/dL, normal perfusion.',
+   follow:'At the next check: mucous membranes tacky, CRT mildly prolonged, reduced appetite and urine output; creatinine now 2.1 mg/dL. Pain 6/10.',
+   reassess:'The trend is concerning for reduced perfusion/acute kidney injury. Assess volume status, urine output, serial renal values, blood pressure and pain. NSAID-related loss of prostaglandin support may worsen renal perfusion.',
+   choices:['Continue the NSAID unchanged and ignore creatinine','Escalate for veterinary reassessment, address perfusion, reconsider NSAID and preserve appropriate analgesia','Combine another NSAID for better pain relief'],
+   answer:1,why:'A rising creatinine with dehydration demands reassessment and a safer individualized analgesia plan. Stopping all pain control is not the solution.',
+   response:'After the revised plan and reassessment, perfusion improves and urine output increases; creatinine is reassessed serially rather than presumed normal.',
+   monitor:'Trend urine output, pain scores, blood pressure, hydration, creatinine and GI signs.'},
+  {id:'colic-horse',name:'🐎 Hospitalized horse — recurrent colic',desc:'A horse admitted for abdominal pain initially improved after analgesia.',
+   baseline:'Pain improved and heart rate was 44/min during the initial stable assessment.',
+   follow:'Four hours later: recurrent pawing and flank watching, heart rate 64/min, tacky mucous membranes and increasing discomfort.',
+   reassess:'Returning pain with worsening cardiovascular signs can reflect progression. Repeat a complete clinical examination and escalate concern rather than mask signs with reflex analgesia.',
+   choices:['Repeat analgesia automatically without reassessing','Urgently notify the veterinarian, reassess perfusion and abdominal findings, and revise the diagnostic/treatment plan','Discharge because the first dose initially worked'],
+   answer:1,why:'Analgesia can hide deterioration. Renewed pain and altered perfusion make re-examination and escalation the priority.',
+   response:'The team repeats assessment and changes the medical/surgical decision plan based on new findings rather than assuming the original diagnosis remains correct.',
+   monitor:'Trend HR, pain behavior, perfusion, GI findings, lactate if indicated, and responsiveness to the revised plan.'},
+  {id:'cat-allodynia',name:'🐈 Hospitalized cat — altered pain signaling',desc:'A cat remains painful after the visible inflammatory component improves.',
+   baseline:'Tissue inflammation and swelling have decreased; pain remains disproportionate to touch.',
+   follow:'Gentle contact now triggers marked discomfort despite reduced swelling. This is consistent with allodynia.',
+   reassess:'Allodynia suggests altered somatosensory processing. Review neurologic findings, exclude new injury, and reassess whether neuropathic pain contributes.',
+   choices:['Escalate NSAID alone because all pain is inflammatory','Reassess the pain phenotype, underlying cause and multimodal analgesia targets','Do nothing because reduced swelling proves there is no pain'],
+   answer:1,why:'Different pain generators respond to different targets. Persistent allodynia requires mechanistic reassessment.',
+   response:'A tailored plan is chosen and the team follows comfort and function rather than relying solely on physical swelling.',
+   monitor:'Serial pain assessment, touch tolerance, appetite, mobility, sedation and treatment adverse effects.'}
+ ];
+ const storeKey='vpq-inpatient-care-v2';
+ let record={patient:hospitalData[0].id,observed:false,adjusted:false,answer:null};
+ try{const x=JSON.parse(localStorage.getItem(storeKey)||'{}');if(hospitalData.some(p=>p.id===x.patient))record={...record,...x}}catch(e){}
+ function saveRecord(){try{localStorage.setItem(storeKey,JSON.stringify(record))}catch(e){}}
+ function patient(){return hospitalData.find(p=>p.id===record.patient)||hospitalData[0]}
+ function intro(stage){
+  const p=patient();
+  return '<div class="vpqWardHead"><b>'+escapeHtml(p.name)+'</b><p>'+escapeHtml(p.desc)+'</p><p class="tiny"><b>Admission:</b> '+escapeHtml(p.baseline)+'</p></div>'+
+   '<div class="buttonrow"><button data-vpqWardHome="1">Patient chart</button><button data-vpqWardFollow="1">🔎 Follow Up</button><button data-vpqWardAdjust="1">💉 Adjust Care</button><button data-vpqWardMonitor="1">📈 Monitoring</button></div>';
+ }
+ function caseMenu(){
+  showModal('🏥 Inpatient Care · Patient chart',
+   '<p>Three stations now have different jobs: <b>Follow Up</b> gathers new findings, <b>Adjust Care</b> changes the plan in response, and <b>Monitoring</b> evaluates the patient afterward.</p>'+
+   '<h3>Select a hospitalized patient</h3>'+hospitalData.map(p=>'<button class="full" data-vpqWardPick="'+p.id+'">'+escapeHtml(p.name)+'</button>').join('')+
+   intro('chart')+'<p class="tiny">This teaching simulation models decisions, not actual prescriptions or drug doses.</p>');
+ }
+ function followup(){
+  const p=patient();showModal('🔎 Follow Up · Reassess the patient',intro()+
+    '<p><b>Purpose:</b> Compare the patient now with admission. A new examination, observation or lab trend may change the differential diagnosis.</p>'+
+    '<div class="infobox"><b>Admission baseline</b><p>'+escapeHtml(p.baseline)+'</p></div>'+
+    (record.observed?'<div class="infobox"><b>New findings</b><p>'+escapeHtml(p.follow)+'</p><b>Interpretation</b><p>'+escapeHtml(p.reassess)+'</p></div><button data-vpqWardAdjust="1">Continue to Adjust Care →</button>':
+    '<button data-vpqWardObserve="1">🔍 Perform follow-up examination & review trend</button>'));
+ }
+ function adjust(){
+  const p=patient();
+  if(!record.observed){showModal('💉 Adjust Care · Assessment required',intro()+'<p>You cannot safely adjust an inpatient plan without reviewing the new patient findings. <b>Follow Up</b> first.</p><button data-vpqWardFollow="1">Go to Follow Up →</button>');return}
+  const answered=record.answer!==null;
+  showModal('💉 Adjust Care · Change the plan',intro()+
+   '<div class="infobox"><b>New findings to act on</b><p>'+escapeHtml(p.follow)+'</p></div><h3>What is the safest next clinical decision?</h3>'+
+   p.choices.map((choice,i)=>'<button class="choice '+(answered?(i===p.answer?'right':i===record.answer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqWardChoice="'+i+'">'+escapeHtml(choice)+'</button>').join('')+
+   (answered?'<div class="response '+(record.answer===p.answer?'':'bad')+'"><b>'+(record.answer===p.answer?'Appropriate decision':'Reconsider the decision')+'</b><p>'+escapeHtml(p.why)+'</p></div>'+
+   (record.adjusted?'<button data-vpqWardMonitor="1">📈 Review response in Monitoring →</button>':'<button data-vpqWardRetry="1">Try care decision again</button>'):''));
+ }
+ function monitor(){
+  const p=patient();
+  if(!record.observed)return showModal('📈 Monitoring · Need a baseline reassessment',intro()+'<p>First review the new patient status in Follow Up.</p><button data-vpqWardFollow="1">Follow Up →</button>');
+  if(!record.adjusted)return showModal('📈 Monitoring · Treatment not adjusted yet',intro()+'<p>You have identified changes but not yet made an appropriate treatment decision.</p><button data-vpqWardAdjust="1">Adjust Care →</button>');
+  showModal('📈 Monitoring · Response after intervention',intro()+
+   '<div class="infobox"><b>Post-intervention observation</b><p>'+escapeHtml(p.response)+'</p><b>Follow-up measurements</b><p>'+escapeHtml(p.monitor)+'</p></div>'+
+   '<p><b>Clinical reasoning:</b> Document whether the trend truly supports improvement, deterioration, or an uncertain response. Recheck the diagnosis and treatment if the patient changes again.</p>'+
+   '<div class="buttonrow"><button data-vpqWardReset="1">↻ New follow-up shift</button><button data-vpqWardHome="1">Choose another patient</button></div>');
+ }
+ $('modalBody').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqWard'));
+  if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
+  try{
+   if(d.vpqWardHome!==undefined)return caseMenu();
+   if(d.vpqWardPick!==undefined){record={patient:d.vpqWardPick,observed:false,adjusted:false,answer:null};saveRecord();return followup()}
+   if(d.vpqWardFollow!==undefined)return followup();
+   if(d.vpqWardAdjust!==undefined)return adjust();
+   if(d.vpqWardMonitor!==undefined)return monitor();
+   if(d.vpqWardObserve!==undefined){record.observed=true;saveRecord();return followup()}
+   if(d.vpqWardChoice!==undefined){record.answer=Number(d.vpqWardChoice);record.adjusted=record.answer===patient().answer;saveRecord();return adjust()}
+   if(d.vpqWardRetry!==undefined){record.answer=null;saveRecord();return adjust()}
+   if(d.vpqWardReset!==undefined){record.observed=false;record.adjusted=false;record.answer=null;saveRecord();return followup()}
+  }catch(error){showModal('Treatment Ward error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqWardHome="1">Back to patients</button>')}
+ },true);
+ const css=document.createElement('style');css.textContent='.vpqLFhead{display:flex;align-items:center;justify-content:space-between;gap:9px}.vpqLFlist{display:grid;gap:8px;margin:12px 0}.vpqLFrow{background:white;border:1px solid #d6c9e6;border-radius:12px;padding:9px;display:flex;gap:9px;align-items:center}.vpqLFrow label{display:flex;align-items:center;flex:1;gap:10px}.vpqLFrow label span b,.vpqLFrow label span small{display:block}.vpqLFrow small{font-size:11px;color:#73648d}.vpqLFrow button{border:1px solid #c6b4df;background:#f1e9ff;border-radius:9px;padding:8px 12px;font-weight:700}.vpqLFsteps{padding:13px;background:#f9f6ff;border:1px solid #d7c8e7;border-radius:13px;margin:14px 0}.vpqLFsteps h3{margin:0}.vpqWardHead{border:1px solid #c5dbe3;background:#f3faff;padding:12px;border-radius:12px;margin:10px 0}@media(max-width:550px){.vpqLFrow{flex-wrap:wrap}.vpqLFrow label{min-width:100%}}';document.head.appendChild(css);
 })();
 
 updateAvatar();updateHUD();renderRoom();loop();
