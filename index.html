@@ -222,6 +222,24 @@
 .vpq-games-callout{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px;border:2px solid #c9b1e2;background:linear-gradient(115deg,#f8edff,#fff6e8);border-radius:15px;margin:9px 0}
 .vpq-games-callout strong{font-size:14px;color:#604278}.vpq-games-callout p{font-size:12px;margin:4px 0;color:#6e6275}
 .vpq-games-callout button{background:#73539b;color:white;border-color:#6a508e;font-size:13px}
+
+/* VPQ ILLUSTRATED ROSTER 3.5 */
+.vpq-roster-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;max-height:470px;overflow:auto;scrollbar-width:thin;padding:6px}
+.vpq-roster-option{display:flex;flex-direction:column;align-items:center;gap:5px;padding:7px 5px;background:#fffaf4;color:#5d4c64;border:2px solid #ead8d5;border-radius:14px;cursor:pointer;min-width:0}
+.vpq-roster-option.chosen{border-color:#8e62b2;background:#f3eaff;box-shadow:0 0 0 2px #dec7f5}
+.vpq-roster-option .vpq-roster-art{width:113px;height:135px;flex:none;max-width:100%;border-radius:9px}
+.vpq-roster-option strong{font-size:11px;text-align:center;line-height:1.2}
+.vpq-roster-art{display:block;flex:none;width:170px;height:203px;background-image:url("assets/vpq-illustrated-avatar-roster.webp");background-size:800% 400%;background-repeat:no-repeat;image-rendering:auto;border-radius:10px;box-shadow:0 3px 6px #4a39552c}
+.vpq-roster-art.vpq-character-portrait{width:170px;height:203px;align-self:center;max-height:none;filter:drop-shadow(0 4px 2px #4a395533)}
+.vpq-story-stage .vpq-roster-art{margin-bottom:17px;align-self:end}
+.vpq-avatar-showcase .vpq-roster-art{width:170px;height:203px;align-self:end;margin-bottom:16px}
+.vpq-game-avatar .vpq-roster-art{width:75px;height:90px;border-radius:7px;box-shadow:none;position:absolute;bottom:0}
+.vpq-portrait-help{font-size:12px;color:#6d647d;background:#f9f0ff;padding:10px;border-radius:11px;margin-bottom:10px}
+.vpq-roster-picks{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:9px 0}
+.vpq-roster-picks button{font-size:12px;padding:8px 11px;border-radius:11px}
+.vpq-roster-note{font-size:11px;color:#745b7e;line-height:1.45}
+@media(max-width:600px){.vpq-roster-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-height:390px}.vpq-roster-option .vpq-roster-art{width:105px;height:125px}}
+
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -276,7 +294,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.4</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.5</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -1179,6 +1197,74 @@ showStudyMenu=function(){
 };
 $('pharmArcadeBtn').onclick=()=>vpqOpenPharmArcade();
 $('modalBody').addEventListener('click',e=>{if(e.target.closest('[data-vpqopenarcade]'))vpqOpenPharmArcade()});
+
+
+// VPQ ILLUSTRATED ROSTER 3.5
+const vpqPortraitNames35=[
+ 'Veterinarian 01','Veterinarian 02','Veterinarian 03','Veterinarian 04','Veterinarian 05','Veterinarian 06',
+ 'Veterinarian 07','Veterinarian 08','Veterinarian 09','Veterinarian 10','Veterinarian 11','Veterinarian 12',
+ 'Veterinarian 13','Veterinarian 14','Veterinarian 15','Veterinarian 16','Veterinarian 17','Veterinarian 18','Veterinarian 19','Veterinarian 20',
+ 'Veterinarian 21','Veterinarian 22','Veterinarian 23','Veterinarian 24','Veterinarian 25','Veterinarian 26','Veterinarian 27','Veterinarian 28',
+ 'Alexandria · special','Gary · special','Illustrated special'
+];
+state.portraitId=state.portraitId||'roster-0';
+const vpqOldEditorValues35=vpqEditorValues;
+vpqEditorValues=function(form){
+ const o=vpqOldEditorValues35(form);
+ o.portraitId=String(new FormData(form).get('portraitId')||state.portraitId||'roster-0').slice(0,30);
+ return o;
+};
+const vpqOldVectorVet35=vpqVectorVet;
+function vpqRosterPortrait35(id){
+ const num=Number(String(id).replace('roster-',''));
+ if(!Number.isInteger(num)||num<0||num>30)return '';
+ const col=num%8,row=Math.floor(num/8);
+ return '<span class="vpq-character-portrait vpq-roster-art" role="img" aria-label="'+escapeHtml(vpqPortraitNames35[num]||'Illustrated veterinarian')+'" style="background-position:'+(col*100/7).toFixed(4)+'% '+(row*100/3).toFixed(4)+'%"></span>';
+}
+vpqVectorVet=function(p){
+ return p.portraitId&&p.portraitId!=='classic'&&/^roster-(?:[0-9]|[12][0-9]|30)$/.test(p.portraitId)?vpqRosterPortrait35(p.portraitId):vpqOldVectorVet35(p);
+};
+function vpqHighlightRoster35(){
+ const f=$('avatarForm');if(!f)return;
+ const chosen=f.elements.portraitId?.value;
+ f.querySelectorAll('[data-vpqportrait]').forEach(el=>el.classList.toggle('chosen',el.dataset.vpqportrait===chosen));
+}
+const vpqOldStoryPreview35=vpqRenderStoryPreview;
+vpqRenderStoryPreview=function(){vpqOldStoryPreview35();vpqHighlightRoster35()};
+vpqRefreshPreview=vpqRenderStoryPreview;
+const vpqOldOpen35=openAvatar;
+openAvatar=function(){
+ vpqOldOpen35();
+ const f=$('avatarForm');if(!f)return;
+ const section=document.createElement('div');
+ section.className='vpq-section';
+ section.dataset.vpqsection='portraits';
+ section.innerHTML='<h3>🎨 Choose an illustrated veterinarian</h3>'+
+ '<p class="vpq-portrait-help">Pick a ready-made storybook character, or keep using the Classic Creator. Everyone can choose any portrait; names and pronouns are entirely yours.</p>'+
+ '<div class="vpq-roster-picks"><button type="button" data-vpqportrait="classic">✏️ Classic customizable avatar</button><button type="button" data-vpqportrait="roster-28">🌷 Alexandria</button><button type="button" data-vpqportrait="roster-29">🧢 Gary</button></div>'+
+ '<div class="vpq-roster-grid">'+vpqPortraitNames35.map((name,i)=>{
+  const id='roster-'+i,col=i%8,row=Math.floor(i/8);
+  return '<button type="button" class="vpq-roster-option" data-vpqportrait="'+id+'"><span class="vpq-roster-art" role="img" aria-label="'+escapeHtml(name)+'" style="background-position:'+(col*100/7).toFixed(4)+'% '+(row*100/3).toFixed(4)+'%"></span><strong>'+escapeHtml(name)+'</strong></button>';
+ }).join('')+'</div><p class="vpq-roster-note">Illustrated portraits use fixed artwork for clarity. For freely adjustable skin tone, hairstyle, clothing and body shape, choose Classic customizable avatar. All animal companions and name/pronoun options work with either type.</p>';
+ const hidden=document.createElement('input');hidden.type='hidden';hidden.name='portraitId';hidden.value=state.portraitId||'roster-0';f.appendChild(hidden);
+ const tabs=f.querySelector('.vpq-tab-bar');const button=document.createElement('button');button.type='button';button.dataset.vpqtab='portraits';button.textContent='🎨 Characters';tabs.insertBefore(button,tabs.firstChild);
+ const original=f.querySelector('[data-vpqsection="pet"]');original.parentElement.insertBefore(section,original);
+ vpqActivateStoryTab('portraits');
+ vpqRenderStoryPreview();
+};
+$('modalBody').addEventListener('click',e=>{
+ const b=e.target.closest('[data-vpqportrait]');if(!b)return;
+ const f=$('avatarForm');if(!f)return;
+ f.elements.portraitId.value=b.dataset.vpqportrait;
+ if(f.elements.avatarPreset)f.elements.avatarPreset.value=b.dataset.vpqportrait==='roster-28'?'alexandria':b.dataset.vpqportrait==='roster-29'?'gary':'custom';
+ vpqRenderStoryPreview();
+});
+const vpqOldPreset35=vpqApplyPreset;
+vpqApplyPreset=function(kind){
+ vpqOldPreset35(kind);
+ const f=$('avatarForm');
+ if(f?.elements.portraitId){f.elements.portraitId.value=kind==='alexandria'?'roster-28':kind==='gary'?'roster-29':'classic';vpqRenderStoryPreview()}
+};
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
