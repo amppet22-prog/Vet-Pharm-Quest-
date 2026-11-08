@@ -109,3 +109,16 @@ Current state already stores `coins` and `upgrades` in local browser state `vpq-
 - Keep existing cute portraits/headshots in menus, but replace rectangular image-backed walking characters with appropriately framed transparent-background, **full-body standing/walking** images or layered silhouettes. No image should appear as a framed square when walking.
 - Add a larger-built male body preset and more diverse feminine skin tones and appearances. Support consistent body sizes/skin tones across walking sprite and character preview, and retain current presets and saves.
 - Do not stretch a headshot into a walking body; test at each stage size, facing direction, pet overlap, and responsive widths. Maintain original scene movement and save migration. Existing images are not to be replaced until matching standing assets are ready.
+
+
+## Clinic zoning decision — Study Lounge owns the Arcade
+
+- **Student Study Lounge:** one physical home for the playable Learning Games/Arcade (Drug Match, Bug Battles, Exam Boss, Professor Guide, other learning games). Study Desk and Mastery tools stay here too.
+- **Pharmacy:** medication shelves, drug details, antimicrobial selection and PK/PD reference. Replaced the Pharmacy games station with **Toxicology Reference** (currently preview/index; do not imply full toxicology guide complete). Removed the Pharmacy's game callout/button.
+- **Mechanism & Physiology Lab:** teaching displays and structured mechanism explanations only. Its game buttons are replaced with **Visit Study Lounge** navigation, rather than launching the Arcade in the lab.
+- **Treatment Ward / Exam:** clinical cases, patient diagnostics and monitoring. Planned future clinical pathology diagnostic stations and appropriate diagnostic imaging/x-ray workflow belong in clinical spaces, not the arcade.
+- **Future specialist references:** Nutrition learning/reference and the expanded Toxicology master guide should be distinct thematic resources or rooms, integrated with clinical cases when applicable. Neither is marked fully playable by this change.
+- Existing Arcade question banks, games, lecture selections, rewards and old saves remain intact. Direct legacy arcade URLs remain technically accessible, but in-world entry is through the Study Lounge.
+
+### Testing before calling zoning fully verified
+Check that Pharmacy now shows Drug Shelves, Mechanism Lab Door and Toxicology Reference; the latter must explicitly be a preview. Confirm Mechanism Lab's lesson button goes to Student Study Lounge rather than directly opening a game. Confirm the Study Lounge arcade cabinet still opens all games, and treatment/clinical rooms remain accessible. Static JavaScript checks passed, but live browser checks are pending.
