@@ -56,13 +56,14 @@ showModal('🧠 Nerve Growth Factor · Anti-NGF Therapy','<div class="infobox"><
 }
 function toxIndex(query='',cat=chosenToxCategory){
  chosenToxCategory=toxCategories.includes(cat)?cat:'all';
- const match=toxCards.filter(x=>(chosenToxCategory==='all'||x.group===chosenToxCategory)&&(x.name+' '+x.species+' '+x.group+' '+x.mechanism+' '+x.signature+' '+(x.overlaps||'')).toLowerCase().includes(query.toLowerCase()));
+ const match=toxCards.filter(x=>chosenToxCategory==='all'||x.group===chosenToxCategory);
+ const visible=match.filter(x=>(x.name+' '+x.species+' '+x.group+' '+x.mechanism+' '+x.signature+' '+(x.overlaps||'')).toLowerCase().includes(query.toLowerCase())).length;
  const options='<option value="all">All mechanisms ('+toxCards.length+')</option>'+toxCategories.map(g=>'<option value="'+esc(g)+'" '+(chosenToxCategory===g?'selected':'')+'>'+esc(g)+'</option>').join('');
  showModal('☣️ Veterinary Toxicant Reference',
  '<div class="vpqToxIntro"><strong>Target → WHY → species → signs → useful tests</strong><p>Grouped by primary mechanism, but some toxicants injure multiple systems. The overlap note identifies important cross-links. This is a study guide, not a poisoning treatment algorithm or a complete verified exam bank.</p></div>'+
  '<div class="vpqToxControls"><label>Search toxicants<input class="input" id="vpqToxSearch" value="'+esc(query)+'" placeholder="Toxin, species or mechanism"></label><label>Mechanism group<select class="input" id="vpqToxCategory">'+options+'</select></label></div>'+
- '<p id="vpqToxCount" class="small">'+match.length+' of '+toxCards.length+' toxicants</p>'+
- '<div class="vpqToxReferenceGrid">'+match.map(x=>'<button data-vpqtoxref="'+esc(x.id)+'" data-toxgroup="'+esc(x.group)+'" data-toxterms="'+esc((x.name+' '+x.species+' '+x.group+' '+x.mechanism+' '+x.signature+' '+(x.overlaps||'')).toLowerCase())+'"><b>'+esc(x.name)+'</b><small>'+esc(x.group)+'</small><small>'+esc(x.species)+'</small></button>').join('')+'</div>'+
+ '<p id="vpqToxCount" class="small">'+visible+' of '+toxCards.length+' toxicants</p>'+
+ '<div class="vpqToxReferenceGrid">'+match.map(x=>'<button '+((x.name+' '+x.species+' '+x.group+' '+x.mechanism+' '+x.signature+' '+(x.overlaps||'')).toLowerCase().includes(query.toLowerCase())?'':'style="display:none" ')+'data-vpqtoxref="'+esc(x.id)+'" data-toxgroup="'+esc(x.group)+'" data-toxterms="'+esc((x.name+' '+x.species+' '+x.group+' '+x.mechanism+' '+x.signature+' '+(x.overlaps||'')).toLowerCase())+'"><b>'+esc(x.name)+'</b><small>'+esc(x.group)+'</small><small>'+esc(x.species)+'</small></button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-vpqtoxcourse="1">📚 Course lecture outline</button><button data-vpqngf-pharm="1">💊 Drug shelves</button></div>'+
  '<p class="tiny">Original CVM 732 course reference cards plus '+(toxExtension?.cards.length||0)+' additional mechanism-based review cards. The specific product, plant, species, treatment and diagnostic decisions require professional source checking.</p>');
 }
