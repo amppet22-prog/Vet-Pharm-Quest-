@@ -165,3 +165,12 @@ Check that Pharmacy now shows Drug Shelves, Mechanism Lab Door and Toxicology Re
 - New optional preset buttons: larger-built masculine, deeper-tone feminine, warm-tone feminine, plus editable Classic; pronouns and all attributes remain independently customizable.
 - Save format, portrait IDs, companions, game movement, XP and coins remain unchanged; simple walking bob added. JS source and main-game syntax passed. Browser testing needed for size, facing/mirror, preview layout, restored old saves.
 - Future Clinical Pathology scope: compact clinical diagnostics, without duplicating comprehensive external resources; planned microscope slide deck for blood-smear cell identification, morphology and species differences.
+
+
+## Full-body illustrated avatar roster installed (2026-11-08)
+
+- Imported `assets/vpq-standing-art-22.webp` containing 22 miniature standing-illustration sprites from the approved full-body character lineups; includes additional hairstyles, body builds, a blonde male, red-haired male, and fuller-built veterinarian.
+- The avatar creator now has an **Illustrated Standing Characters** collection with 22 additional unnamed selectable options, labeled Illustration 01–22 only. These choices have `portraitId=standing-0..standing-21` and use the same save field, independent custom name and pronoun fields, and existing companion-pet workflow.
+- `avatar-illustrated-choices.js` renders cropped cells from one efficient 6×4 sprite sheet in the chooser, the paired selection preview, the avatar viewer, and clinic walker. Its interface is installed in `index.html` without replacing any existing rooms, game content, player coins, or lecture selections.
+- **Only named presets remain Alexandria (`roster-28`) and Gary (`roster-29`).** Alexandria's exact original clipboard-holding art is preserved in `assets/alexandria-standing-v3.webp` and remains her walker image. The Classic Creator and all 31 previous portrait IDs remain selectable.
+- Asset transfer and retrieval validated by the GitHub blob SHA; JS syntax checks passed for the game and art module. Remaining work: browser visual review (especially small sprite transparency, scale, and framing), save/reload after choosing `standing-*`, matching additional original portraits to dedicated art, and higher-fidelity individual standing cutouts for each character. The 22 game sprites are downscaled crops of group art, not individually commissioned new large transparent originals.
