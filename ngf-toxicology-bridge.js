@@ -89,6 +89,66 @@ prevention:'Before injection review health/skin exam, jumping/mobility history, 
 monitor:'Pruritus/skin lesions, appetite/weight, jumping, gait, activity, urination/thirst and neurologic function.'};
 return html+'<div class="vpqNGFClinical"><h3>🩺 Anti-NGF: clinical selection & safety</h3>'+[['Target and therapeutic difference',ngf.difference],['Postapproval concerns',specific.adverse],['Reducing risk / what to do',specific.prevention],['Monitor',specific.monitor]].map(([k,v])=>'<p><b>'+esc(k)+':</b> '+esc(v)+'</p>').join('')+'<button data-vpqngf-guide="1">Learn NGF physiology and comparison</button><p class="tiny">Reviewed against FDA updates through October 2026. Incidence and causal attribution for reported events may be uncertain.</p></div>';
 });
+
+/* Student Study Lounge starter practice, not lecture-filtered or graded.
+   Mechanism matching draws only from the expanded veterinary toxicology reference. */
+const mechanismMatches=[
+ ['tox-acetaminophen','Reactive metabolite depletes glutathione, causing oxidative injury'],
+ ['tox-lily','Feline acute tubular injury from true lily/daylily exposure'],
+ ['tox-bromethalin','Mitochondrial energy failure and cerebral edema'],
+ ['tox-anticoag','Vitamin K epoxide reductase inhibition'],
+ ['tox-permethrin','Voltage-gated sodium-channel dysfunction'],
+ ['tox-ethylene-glycol','Alcohol dehydrogenase produces toxic acidic metabolites'],
+ ['tox-xylitol','Excess insulin release in dogs with hypoglycemia'],
+ ['tox-op','Acetylcholinesterase inhibition and cholinergic excess'],
+ ['tox-chocolate','Adenosine receptor antagonism and cardiac/CNS stimulation'],
+ ['tox-botulinum','Presynaptic acetylcholine release blockade'],
+ ['tox-tetanus','Loss of inhibitory GABA/glycine neurotransmission'],
+ ['tox-cyanide','Mitochondrial cytochrome c oxidase inhibition'],
+ ['tox-nitrate','Hemoglobin oxidation to methemoglobin'],
+ ['tox-allium','Oxidative erythrocyte injury and hemolysis'],
+ ['tox-cholecalciferol','Hypercalcemia and hyperphosphatemia with soft-tissue mineralization'],
+ ['tox-co','Carboxyhemoglobin limits oxygen delivery'],
+ ['tox-aflatoxin','Hepatic bioactivation to reactive metabolites'],
+ ['tox-fescue','Ergot alkaloids suppress prolactin in pregnant mares']
+];
+let toxMatchRound=null;
+function toxShuffle(xs){return xs.slice().sort(()=>Math.random()-.5)}
+function toxMatchStart(){
+ const items=toxShuffle(mechanismMatches).slice(0,10);
+ toxMatchRound={items,idx:0,correct:0,answered:false};
+ toxMatchShow();
+}
+function toxMatchShow(){
+ const t=toxMatchRound;if(!t)return toxMatchStart();
+ if(t.idx>=t.items.length){
+  return showModal('☣️ Toxicant–Mechanism Match · Complete',
+   '<p><b>'+t.correct+' / '+t.items.length+' correct.</b> This is ungraded study practice and does not change your existing game progress.</p>'+
+   '<div class="buttonrow"><button data-vpqtoxmatchopen="1">↻ Try another set</button><button data-vpqtoxindex="1">☣️ Review Toxicant Reference</button></div>');
+ }
+ t.answered=false;
+ const [id,correct]=t.items[t.idx],item=toxCards.find(x=>x.id===id);
+ if(!item){t.idx++;return toxMatchShow()}
+ const wrong=toxShuffle(mechanismMatches.filter(x=>x[0]!==id&&x[1]!==correct)).slice(0,3);
+ const options=toxShuffle([[id,correct],...wrong]);
+ showModal('☣️ Toxicant → Mechanism · '+(t.idx+1)+' / '+t.items.length,
+  '<p class="small">Study Lounge starter · no grades or XP · independent of lecture selection</p>'+
+  '<h3>Which mechanism best explains '+esc(item.name)+'?</h3>'+
+  '<div class="vpqToxMatchAnswers">'+options.map((x,i)=>'<button data-vpqtoxmatchanswer="'+esc(x[0])+'">'+esc(x[1])+'</button>').join('')+'</div>'+
+  '<p class="tiny">After you answer, review the mechanism, species and clinical clues. Do not use this practice round to guide poisoning treatment.</p>');
+}
+function toxMatchAnswer(chosen){
+ const t=toxMatchRound;if(!t||t.answered||t.idx>=t.items.length)return;
+ t.answered=true;
+ const [id,correct]=t.items[t.idx],item=toxCards.find(x=>x.id===id);
+ const yes=chosen===id;if(yes)t.correct++;
+ showModal('☣️ '+(yes?'Correct mechanism!':'Review this mechanism'),
+  '<p><b>'+esc(item?.name)+'</b> · '+(yes?'✓ Correct':'✗ Different target')+'</p>'+
+  '<div class="infobox"><b>Mechanism:</b><p>'+esc(correct)+'</p><p><b>WHY:</b> '+esc(item?.mechanism||'')+'</p></div>'+
+  '<div class="infobox"><b>Clinical clue:</b><p>'+esc(item?.signature||'')+'</p><p><b>Do not confuse:</b> '+esc(item?.distinction||'')+'</p></div>'+
+  '<p class="small">Score: '+t.correct+' correct after '+(t.idx+1)+' questions.</p>'+
+  '<div class="buttonrow"><button data-vpqtoxmatchnext="1">'+(t.idx===t.items.length-1?'See results':'Next toxicant →')+'</button><button data-vpqtoxindex="1">Reference</button></div>');
+}
 const prevPharmacy=getPharmacy();
 setPharmacy(function(...args){
 prevPharmacy(...args);
@@ -104,6 +164,9 @@ if(d.vpqngfDrug!==undefined)return api.openPharmacy(d.vpqngfDrug);
 if(d.vpqtoxindex!==undefined)return toxIndex();
 if(d.vpqtoxref!==undefined)return toxDetail(d.vpqtoxref);
 if(d.vpqtoxcourse!==undefined)return api.toxCourse();
+if(d.vpqtoxmatchopen!==undefined)return toxMatchStart();
+if(d.vpqtoxmatchanswer!==undefined)return toxMatchAnswer(d.vpqtoxmatchanswer);
+if(d.vpqtoxmatchnext!==undefined){if(toxMatchRound)toxMatchRound.idx++;return toxMatchShow();}
 });
 modalBody.addEventListener('input',ev=>{
  if(ev.target.id!=='vpqToxSearch')return;
@@ -113,6 +176,6 @@ modalBody.addEventListener('input',ev=>{
  const label=modalBody.querySelector('#vpqToxCount');if(label)label.textContent=count+' of '+toxCards.length+' toxicants';
 });
 modalBody.addEventListener('change',ev=>{if(ev.target.id==='vpqToxCategory')return toxIndex(modalBody.querySelector('#vpqToxSearch')?.value||'',ev.target.value)});
-const style=document.createElement('style');style.textContent='.vpqToxIntro{background:#fdf2ea;border:1px solid #ecc7b3;border-radius:12px;padding:12px}.vpqToxIntro p{font-size:12px;margin:5px 0}.vpqToxControls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin:12px 0}.vpqToxControls label{font-size:12px;font-weight:800}.vpqToxDetailHeading{padding:9px;background:#fff4e8;border-radius:9px}.vpqPharmCrosslinks{background:#f0f8ff;border:1px solid #adcce7;border-radius:12px;padding:12px;margin-bottom:12px}.vpqPharmCrosslinks p{font-size:12px;margin:4px}.vpqNGFClinical{margin:14px 0;padding:15px;background:#f7f1ff;border:2px solid #d5bfea;border-radius:14px;font-size:13px;line-height:1.6}.vpqNGFClinical h3{margin:0 0 8px}.vpqToxReferenceGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px;margin:12px 0}.vpqToxReferenceGrid button,.vpqToxReferenceGrid section{padding:12px;border:1px solid #c6d6e8;border-radius:10px;background:#fff;text-align:left}.vpqToxReferenceGrid b,.vpqToxReferenceGrid small{display:block}.vpqToxReferenceGrid small{font-size:12px;margin-top:5px}.vpqToxReferenceGrid h3{margin:0 0 6px;font-size:14px}.vpqToxReferenceGrid p{font-size:13px;margin:0}';document.head.appendChild(style);
-return {cards,questions,toxCards,ngfGuide,toxIndex,toxDetail};
+const style=document.createElement('style');style.textContent='.vpqToxMatchAnswers{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin:14px 0}.vpqToxMatchAnswers button{text-align:left;line-height:1.5;background:#f6fbff;border:2px solid #b9d4e1;border-radius:10px;padding:14px}.vpqToxIntro{background:#fdf2ea;border:1px solid #ecc7b3;border-radius:12px;padding:12px}.vpqToxIntro p{font-size:12px;margin:5px 0}.vpqToxControls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin:12px 0}.vpqToxControls label{font-size:12px;font-weight:800}.vpqToxDetailHeading{padding:9px;background:#fff4e8;border-radius:9px}.vpqPharmCrosslinks{background:#f0f8ff;border:1px solid #adcce7;border-radius:12px;padding:12px;margin-bottom:12px}.vpqPharmCrosslinks p{font-size:12px;margin:4px}.vpqNGFClinical{margin:14px 0;padding:15px;background:#f7f1ff;border:2px solid #d5bfea;border-radius:14px;font-size:13px;line-height:1.6}.vpqNGFClinical h3{margin:0 0 8px}.vpqToxReferenceGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px;margin:12px 0}.vpqToxReferenceGrid button,.vpqToxReferenceGrid section{padding:12px;border:1px solid #c6d6e8;border-radius:10px;background:#fff;text-align:left}.vpqToxReferenceGrid b,.vpqToxReferenceGrid small{display:block}.vpqToxReferenceGrid small{font-size:12px;margin-top:5px}.vpqToxReferenceGrid h3{margin:0 0 6px;font-size:14px}.vpqToxReferenceGrid p{font-size:13px;margin:0}';document.head.appendChild(style);
+return {cards,questions,toxCards,ngfGuide,toxIndex,toxDetail,toxMatchStart};
 };
