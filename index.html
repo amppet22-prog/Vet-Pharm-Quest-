@@ -137,6 +137,57 @@
 .vpq-base-note{font-size:11px;color:#6b5a74;margin:7px 0 0}
 .vpq-maker .vpq-extra-field{min-width:0}
 
+
+/* VPQ STORYBOOK AVATAR MAKER 3.2 */
+.modal:has(.vpq-story-maker){width:min(1120px,99vw);border:3px solid #c8a7cc;background:#fff9f2}
+.modal:has(.vpq-story-maker) .modalhead{background:linear-gradient(90deg,#6a4e79,#936c94);color:white}
+.modal:has(.vpq-story-maker) #modalBody{padding:12px 14px 16px;background:linear-gradient(135deg,#fff1d9,#f9eff8 50%,#fff8ec)}
+.vpq-story-maker{display:grid;grid-template-columns:minmax(210px,37%) minmax(0,1fr);gap:15px;align-items:start}
+.vpq-story-maker button{transition:transform .1s,background .1s}
+.vpq-story-maker button:hover{transform:translateY(-1px)}
+.vpq-story-preview{position:sticky;top:0;background:linear-gradient(140deg,#f9e9ed,#efe4fb 55%,#ffeed7);border:2px solid #cbaaca;border-radius:20px;padding:12px;text-align:center;overflow:hidden;box-shadow:0 5px 14px #68516f18}
+.vpq-story-preview h3{color:#684473;margin:3px;font-size:17px}
+.vpq-story-stage{height:310px;max-height:45vh;min-height:240px;border:2px solid #e1c8d7;border-radius:17px;display:flex;align-items:flex-end;justify-content:center;gap:0;background:radial-gradient(circle at 30% 35%,#ffffffa8,transparent 50%),linear-gradient(180deg,#fae8ef 0%,#f5eeff 74%,#e1c8a7 75%);overflow:hidden;position:relative}
+.vpq-story-stage:before{content:'🌿';position:absolute;left:4px;top:8px;font-size:29px;opacity:.7}
+.vpq-story-stage:after{content:'✦';position:absolute;right:14px;top:15px;font-size:24px;color:#c5a260}
+.vpq-character-portrait{display:block;width:200px;height:277px;max-height:97%;flex:0 1 72%;filter:drop-shadow(0 6px 3px #57476129)}
+.vpq-story-stage .vpq-preview-pet{width:115px;height:120px;margin-left:-22px;z-index:2;flex:0 1 37%}
+.vpq-story-stage .vpq-pet-art{width:100%;height:112px;max-width:130px}
+.vpq-story-caption{font-size:12px;color:#635371;padding:7px 0 3px;line-height:1.35}
+.vpq-story-actions{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.vpq-story-actions button{font-size:11px;padding:7px 9px;background:#fff9ff;border:2px solid #e4cede;color:#6b5078}
+.vpq-story-right{background:#fff9f5;border:2px solid #e1c9d5;border-radius:20px;padding:12px;min-width:0}
+.vpq-tab-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.vpq-tab-bar button{font-size:12px;padding:8px 11px;background:#fff;border:2px solid #e8d5d7;color:#69546d;border-radius:12px}
+.vpq-tab-bar button.chosen{background:#73517d;color:white;border-color:#73517d}
+.vpq-section{display:none}
+.vpq-section.chosen{display:block}
+.vpq-section h3{font-size:16px;color:#67466c;margin:2px 0 10px}
+.vpq-section p.tiny{color:#7b6880}
+.vpq-story-maker .twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.vpq-story-maker .field{font-size:12px;color:#574d67}
+.vpq-story-maker .input{min-width:0;width:100%;border-color:#e2d2df;background:#fff}
+.vpq-story-maker .vpq-base-panel{grid-column:1/-1;background:#fbf0eb}
+.vpq-story-maker .vpq-pet-picker{margin:5px 0;background:#fdf8f1;border:0;padding:0}
+.vpq-story-maker .vpq-pet-choice{min-height:126px}
+.vpq-story-maker .vpq-pet-options{grid-template-columns:repeat(auto-fit,minmax(105px,1fr))}
+.vpq-story-maker .vpq-pet-tabs button{font-size:11px}
+.vpq-presets{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.vpq-presets button{padding:8px 12px;background:#fff;border:2px solid #d9c6df;border-radius:12px;color:#614877;font-size:12px}
+.vpq-presets button.chosen{background:#f1e2ff;border-color:#80619d}
+.vpq-story-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:13px;border-top:1px solid #ead9e6;padding-top:12px}
+.vpq-story-footer button{background:#705080;color:#fff;border:2px solid #5d3e68}
+.vpq-story-footer button.secondary{background:#fff;color:#634c6e;border-color:#dbc6dd}
+.vpq-story-help{font-size:11px;color:#76667f;margin:4px 0 12px}
+.vpq-portrait-walk{background:none!important;border:0!important;border-radius:0!important;width:69px!important;height:116px!important;bottom:17%!important;box-shadow:none!important;overflow:visible}
+.vpq-portrait-walk > :not(.vpq-game-avatar){display:none!important}
+.vpq-game-avatar{display:block;width:75px;height:114px;position:absolute;bottom:0;left:-2px;filter:drop-shadow(0 3px 2px #33436a50)}
+.vpq-avatar-showcase{display:flex;align-items:end;justify-content:center;gap:0;max-width:510px;margin:0 auto 9px;border-radius:18px;background:linear-gradient(#faecf8 0%,#f7edff 74%,#ead7b8 75%);border:2px solid #e3cddd;min-height:260px;overflow:hidden}
+.vpq-avatar-showcase .vpq-character-portrait{width:220px;height:280px;flex:0 1 60%}
+.vpq-avatar-showcase .vpq-pet-art{width:128px;height:135px}
+.vpq-avatar-showcase .vpq-preview-pet{height:135px;margin-left:-15px;flex:0 1 33%}
+@media(max-width:720px){.vpq-story-maker{grid-template-columns:1fr}.vpq-story-preview{position:relative}.vpq-story-stage{height:230px;max-height:none}.vpq-character-portrait{height:235px}.vpq-story-maker .twocol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.vpq-story-maker .twocol{grid-template-columns:1fr}.vpq-tab-bar button{font-size:11px;padding:7px 8px}.vpq-story-maker .vpq-pet-options{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -191,7 +242,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.1</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.2</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-portrait.png" alt="Mera Munchasurus, hospital mascot portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus</strong><small>Hospital Mascot · Chief of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -875,6 +926,195 @@ $('modalBody').addEventListener('click',e=>{
 });
 const vpqPreviousUpdate31=updateAvatar;
 updateAvatar=function(){vpqPreviousUpdate31();$('avatarSprite').dataset.base=state.avatarBase||'androgynous'};
+
+
+// VPQ STORYBOOK AVATAR MAKER 3.2 — illustrated layered SVG veterinarian and full creator.
+const vpqSafeColor=(value,fallback)=>/^#[0-9a-fA-F]{6}$/.test(value||'')?value:fallback;
+const vpqAvatarHairList=[['classic','Classic'],['short','Short crop'],['long','Long flowing'],['wave','Wavy'],['curly','Curly'],['coils','Natural coils'],['braids','Braids'],['locs','Locs'],['pony','Ponytail'],['bun','High bun'],['halfup','Half-up'],['fluffy','Fluffy']];
+const vpqExtras=[['none','No jacket'],['coat','White lab coat'],['jacket','Cozy jacket'],['hoodie','Paw-print hoodie']];
+state.eyeColor=state.eyeColor||'#6d493c';
+state.freckles=state.freckles||'none';
+state.glasses=state.glasses||'none';
+state.outerwear=state.outerwear|| (state.whiteCoat?'coat':'none');
+state.beard=state.beard||false;
+state.cap=state.cap||false;
+state.avatarPreset=state.avatarPreset||'custom';
+function vpqVectorVet(p){
+ const skin=vpqSafeColor(p.skin,'#b77957'),hair=vpqSafeColor(p.hair,'#4e302c'),scrubs=vpqSafeColor(p.scrubs,'#6b7eab'),eye=vpqSafeColor(p.eyeColor,'#6d493c');
+ const base=p.avatarBase||'androgynous',h=p.hairStyle||'classic',coat=p.outerwear|| (p.whiteCoat?'coat':'none'),expr=p.expression||'•ᴗ•',beard=p.beard===true||p.beard==='true',cap=p.cap===true||p.cap==='true';
+ const faceW=base==='masculine'?64:base==='feminine'?57:61,faceX=120-faceW/2;
+ const facePath='M '+faceX+' 84 Q '+(faceX-9)+' 104 '+(faceX+3)+' 136 Q 120 '+(base==='masculine'?169:161)+' '+(240-faceX-3)+' 136 Q '+(249-faceX)+' 102 '+(240-faceX)+' 84 Q 120 68 '+faceX+' 84 Z';
+ const long=['long','wave','pony','braids','locs','halfup'].includes(h);
+ const curls=['curly','coils','fluffy'].includes(h);
+ const behind=long?'<path d="M80 92 Q49 136 65 230 Q77 246 91 221 Q85 178 100 136 M161 91 Q183 138 173 233 Q157 245 145 219 L146 130" fill="'+hair+'" stroke="#4e3438" stroke-width="3"/>':'';
+ const bun=h==='bun'?'<ellipse cx="119" cy="53" rx="25" ry="23" fill="'+hair+'" stroke="#503638" stroke-width="4"/>':'';
+ const pony=h==='pony'?'<path d="M158 91 Q199 128 178 189 Q160 202 152 174 Q169 133 142 108" fill="'+hair+'" stroke="#4f3538" stroke-width="3"/>':'';
+ let topHair='<path d="M77 108 Q64 79 85 59 Q113 32 147 60 Q175 80 164 106 Q151 83 135 75 Q109 107 81 99Z" fill="'+hair+'" stroke="#493239" stroke-width="4"/>';
+ if(h==='short')topHair='<path d="M81 100 Q76 66 113 59 Q153 56 162 99 Q135 82 113 88 Q96 91 81 100Z" fill="'+hair+'" stroke="#493239" stroke-width="4"/>';
+ if(curls)topHair='<g fill="'+hair+'" stroke="#4e3539" stroke-width="2">'+Array.from({length:12},(_,i)=>{const x=77+(i%6)*16,y=66+Math.floor(i/6)*15;return '<circle cx="'+x+'" cy="'+y+'" r="'+(h==='coils'?13:15)+'"/>'}).join('')+'</g>';
+ if(h==='braids'||h==='locs')topHair+='<g fill="'+hair+'" stroke="#4f3539" stroke-width="2">'+Array.from({length:7},(_,i)=>'<ellipse cx="'+(76+i*14)+'" cy="'+(h==='braids'?183+(i%2)*13:192+(i%2)*9)+'" rx="7" ry="'+(h==='braids'?37:48)+'" />').join('')+'</g>';
+ if(h==='wave'||h==='long'||h==='halfup')topHair+='<path d="M84 74 Q99 52 121 63 Q139 45 158 74 Q141 65 126 83 Q102 70 84 94" fill="'+hair+'" stroke="#4f3539" stroke-width="2"/>';
+ if(h==='fluffy')topHair='<g fill="'+hair+'" stroke="#493239" stroke-width="3"><circle cx="90" cy="80" r="21"/><circle cx="113" cy="64" r="24"/><circle cx="143" cy="71" r="23"/><circle cx="157" cy="94" r="17"/></g>';
+ const mouth=expr==='•_•'?'<path d="M112 143 L129 143" stroke="#6c373b" stroke-width="2.8" stroke-linecap="round"/>':expr==='-ᴗ-'?'<path d="M109 143 Q120 149 132 142" stroke="#873d43" stroke-width="3" stroke-linecap="round" fill="none"/>':expr==='◕ᴗ◕'?'<path d="M105 141 Q120 163 137 139 Q120 147 105 141" fill="#973f52" stroke="#692e3c" stroke-width="1.5"/>':'<path d="M106 141 Q120 157 135 140" stroke="#823e43" stroke-width="3.5" stroke-linecap="round" fill="none"/>';
+ const closed=expr==='-ᴗ-';
+ const eyes=closed?'<path d="M93 123 Q102 130 111 123 M128 123 Q138 130 147 123" fill="none" stroke="#52343a" stroke-width="3"/>':
+ '<ellipse cx="103" cy="123" rx="5.2" ry="6.5" fill="white"/><ellipse cx="138" cy="123" rx="5.2" ry="6.5" fill="white"/><circle cx="103" cy="124" r="4" fill="'+eye+'"/><circle cx="138" cy="124" r="4" fill="'+eye+'"/><circle cx="104" cy="122" r="1.5" fill="white"/><circle cx="139" cy="122" r="1.5" fill="white"/>';
+ const freckles=p.freckles&&p.freckles!=='none'?'<g fill="#9b624f" opacity=".65">'+[93,99,105,136,142,148].map((x,i)=>'<circle cx="'+x+'" cy="'+(133+(i%3)*2)+'" r="'+(p.freckles==='full'?2:1.25)+'"/>').join('')+'</g>':'';
+ const glasses=p.glasses&&p.glasses!=='none'?'<g fill="none" stroke="'+(p.glasses==='gold'?'#bb945b':'#493d40')+'" stroke-width="2.4"><rect x="90" y="115" width="25" height="20" rx="'+(p.glasses==='round'?10:5)+'"/><rect x="127" y="115" width="25" height="20" rx="'+(p.glasses==='round'?10:5)+'"/><path d="M115 119 Q121 116 127 119 M90 120 L80 117 M152 120 L161 117"/></g>':'';
+ const beardPath=beard?'<path d="M90 135 Q92 157 112 165 Q120 174 130 165 Q149 157 151 135 Q145 151 133 156 Q118 162 104 155Z" fill="'+hair+'" opacity=".9"/><path d="M109 140 Q120 132 131 140" stroke="'+hair+'" stroke-width="4" fill="none" stroke-linecap="round"/>':'';
+ const capPath=cap?'<path d="M80 86 Q76 47 120 48 Q163 49 162 89 L83 91Z" fill="#3d3e46" stroke="#242937" stroke-width="4"/><path d="M72 88 Q132 76 177 89 Q166 103 96 99Z" fill="#464852" stroke="#252a31" stroke-width="3"/><path d="M104 70 L138 70" stroke="#b4a9a1" stroke-width="3"/><text x="121" y="66" font-size="8" text-anchor="middle" fill="#ebddd2">OFF DUTY</text>':'';
+ const color=coat==='hoodie'?'#a595b4':coat==='jacket'?'#c6a48b':coat==='coat'?'#fcfcfa':scrubs;
+ const outer=coat!=='none'?'<path d="M65 180 Q87 163 101 173 L119 197 L139 173 Q160 166 176 182 L192 273 L157 280 L143 219 L126 244 L120 248 L111 244 L96 220 L83 280 L49 273Z" fill="'+color+'" stroke="#876d71" stroke-width="3"/><path d="M100 174 L115 231 L90 210 L79 181 M139 173 L124 231 L151 210 L163 181" fill="'+(coat==='coat'?'#eef1f2':'#ded2d7')+'" stroke="#957f81" stroke-width="2"/>':'';
+ const motif=({paws:'🐾',hearts:'♥',stars:'★',rainbow:'🌈',unicorn:'🦄',surgery:'✚'})[p.scrubStyle]||'✚';
+ const acc=p.avatarAccessory||'';
+ const stethoscope=acc==='🩺'?'<path d="M99 190 Q96 238 121 233 Q141 230 141 199" fill="none" stroke="#555564" stroke-width="5"/><circle cx="120" cy="233" r="9" fill="#707987" stroke="#464953" stroke-width="3"/>':'';
+ return '<svg class="vpq-character-portrait" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" role="img" aria-label="Customizable illustrated veterinarian"><defs><linearGradient id="vpqScrubG" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="'+scrubs+'"/><stop offset="1" stop-color="'+scrubs+'"/></linearGradient><linearGradient id="vpqFaceG" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="'+skin+'"/><stop offset="1" stop-color="'+skin+'"/></linearGradient></defs>'+
+ '<ellipse cx="120" cy="292" rx="70" ry="6" fill="#59475b25"/><path d="M97 254 L92 292 L117 292 L122 250 M139 254 L143 292 L168 292 L155 250" fill="#5c5470" stroke="#50465a" stroke-width="3"/>'+
+ '<path d="M65 184 Q84 170 105 170 L135 170 Q154 171 175 184 L191 277 Q120 295 49 277 Z" fill="url(#vpqScrubG)" stroke="#554c6c" stroke-width="4"/>'+
+ '<path d="M103 170 L120 199 L137 170" fill="none" stroke="#f7efe7" stroke-width="5"/><path d="M57 205 Q41 228 49 259 M181 204 Q194 232 187 264" fill="none" stroke="'+skin+'" stroke-width="16" stroke-linecap="round"/>'+
+ behind+ '<path d="M108 150 L107 180 Q120 194 134 179 L133 150" fill="'+skin+'"/>'+
+ '<path d="'+facePath+'" fill="url(#vpqFaceG)" stroke="#965e4a" stroke-width="3"/>'+
+ '<ellipse cx="'+(faceX+2)+'" cy="126" rx="8" ry="12" fill="'+skin+'" stroke="#965e4a" stroke-width="2"/><ellipse cx="'+(238-faceX)+'" cy="126" rx="8" ry="12" fill="'+skin+'" stroke="#965e4a" stroke-width="2"/>'+
+ bun+pony+topHair+
+ '<path d="M93 112 Q103 106 111 112 M129 112 Q138 106 148 112" fill="none" stroke="'+hair+'" stroke-width="3.5" stroke-linecap="round"/>'+
+ eyes+'<path d="M119 126 Q114 139 122 139" fill="none" stroke="#995e50" stroke-width="2"/>'+
+ freckles+beardPath+mouth+glasses+outer+stethoscope+
+ '<text x="125" y="217" text-anchor="middle" font-size="18" fill="'+(coat==='none'?'#ffffff':'#836180')+'">'+(coat==='none'?motif:'')+'</text>'+
+ (acc==='🎀'?'<text x="154" y="86" font-size="25">🎀</text>':acc==='👑'?'<text x="104" y="56" font-size="28">👑</text>':'')+
+ capPath+
+ '<path d="M70 199 Q95 207 108 194" fill="none" stroke="#ffffff66" stroke-width="3"/><circle cx="184" cy="208" r="4" fill="#ffe8ec"/>'+
+ '</svg>';
+}
+const vpqOldPerson32=vpqPersonPreview;
+vpqPersonPreview=function(p){return vpqVectorVet(p)};
+const vpqOldValues32=vpqEditorValues;
+vpqEditorValues=function(form){
+ const p=vpqOldValues32(form),fd=new FormData(form);
+ p.eyeColor=String(fd.get('eyeColor')||state.eyeColor||'#6d493c');
+ p.freckles=String(fd.get('freckles')||'none');
+ p.glasses=String(fd.get('glasses')||'none');
+ p.outerwear=String(fd.get('outerwear')||'none');
+ p.beard=fd.get('beard')==='true';
+ p.cap=fd.get('cap')==='true';
+ p.avatarPreset=String(fd.get('avatarPreset')||'custom');
+ p.avatarArtStyle='illustrated';
+ return p;
+};
+function vpqMakeLabel(label,name,input){
+ return '<label class="field">'+label+input.replace(' name=', ' name=')+'</label>';
+}
+let vpqCurrentCreatorTab='pet';
+function vpqRenderStoryPreview(){
+ const form=$('avatarForm');if(!form)return;
+ const p=vpqEditorValues(form),out=$('vpqPreviewStage');
+ if(out)out.innerHTML=vpqPersonPreview(p)+'<div class="vpq-preview-pet">'+vpqPetIllustration(p)+'</div>';
+ const caption=$('vpqPreviewCaption');if(caption)caption.textContent=(p.name||'Student Vet')+' & '+(p.petName||'Companion');
+ const previewBase=$('vpqBaseList');if(previewBase)previewBase.querySelectorAll('[data-avatarbase]').forEach(el=>el.classList.toggle('chosen',el.dataset.avatarbase===p.avatarBase));
+ const chosen=$('vpqPresetList');if(chosen)chosen.querySelectorAll('[data-vpqpreset]').forEach(el=>el.classList.toggle('chosen',el.dataset.vpqpreset===p.avatarPreset));
+ vpqUpdatePetGallery();
+}
+vpqRefreshPreview=vpqRenderStoryPreview;
+const vpqStoryTabs=[['pet','🐾 Companion'],['vet','🧑‍⚕️ Your Vet'],['outfits','👕 Outfits'],['extras','✨ Extras']];
+function vpqActivateStoryTab(tab){
+ vpqCurrentCreatorTab=tab;
+ $('modalBody').querySelectorAll('.vpq-tab-bar [data-vpqtab]').forEach(b=>b.classList.toggle('chosen',b.dataset.vpqtab===tab));
+ $('modalBody').querySelectorAll('.vpq-section').forEach(el=>el.classList.toggle('chosen',el.dataset.vpqsection===tab));
+}
+function vpqApplyPreset(kind){
+ const f=$('avatarForm');if(!f)return;
+ const values=kind==='gary'?{avatarBase:'masculine',skin:'#d7a482',hair:'#876649',hairStyle:'short',scrubs:'#397c83',eyeColor:'#6b8273',beard:'true',cap:'true',outerwear:'none',expression:'•ᴗ•'}:
+ kind==='alexandria'?{avatarBase:'feminine',skin:'#b77957',hair:'#342128',hairStyle:'long',scrubs:'#735f99',eyeColor:'#4e3931',beard:'false',cap:'false',outerwear:'coat',expression:'◕ᴗ◕'}:{avatarBase:'androgynous',skin:'#b77957',hair:'#5b3e38',hairStyle:'classic',scrubs:'#67a5d9',eyeColor:'#6d493c',beard:'false',cap:'false',outerwear:'none',expression:'•ᴗ•'};
+ for(const [k,value] of Object.entries(values))if(f.elements[k])f.elements[k].value=value;
+ if(f.elements.avatarPreset)f.elements.avatarPreset.value=kind;
+ vpqRenderStoryPreview();
+}
+openAvatar=function(){
+ const current=state;
+ const allowedScrubs=vpqScrubStyles.filter(([id])=>!['rainbow','unicorn'].includes(id)||state.upgrades.includes(id==='rainbow'?'scrubs-rainbow':'scrubs-unicorn'));
+ const accessories=[['','None'],['🎀','Bow'],['⭐','Star'],['🩺','Stethoscope']].concat(state.upgrades.includes('extra-crown')?[['👑','Crown']]:[]);
+ const outfitAccessories=[['','None'],['🩺','Stethoscope']].concat(state.upgrades.includes('extra-bow')?[['🎀','Hair bow']]:[]).concat(state.upgrades.includes('extra-crown')?[['👑','Crown']]:[]);
+ const pronounOptions=[['','Not specified'],['she/her','She / her'],['he/him','He / him'],['they/them','They / them'],['she/they','She / they'],['he/they','He / they']];
+ const opt=(arr,value)=>vpqOptions(arr,value||'');
+ const field=(caption,inner)=>'<label class="field">'+caption+inner+'</label>';
+ const select=(name,arr,value)=>'<select class="input" name="'+name+'">'+opt(arr,value)+'</select>';
+ const color=(name,value,fallback)=>'<input class="input" type="color" name="'+name+'" value="'+escapeHtml(vpqSafeColor(value,fallback))+'">';
+ const choice=(name,value,max=28)=>'<input class="input" name="'+name+'" maxlength="'+max+'" value="'+escapeHtml(value||'')+'" '+(name==='name'||name==='petName'?'required':'')+'>';
+ const vetSection='<h3>🌸 Create your veterinarian</h3><div class="vpq-presets" id="vpqPresetList"><button type="button" data-vpqpreset="custom">✨ Original</button><button type="button" data-vpqpreset="alexandria">🌷 Alexandria-inspired</button><button type="button" data-vpqpreset="gary">🧢 Gary-inspired</button></div>'+
+ '<div class="vpq-base-panel" id="vpqBaseList"><h3>Choose a starting appearance</h3><div class="vpq-base-buttons">'+vpqBaseOptions.map(([id,label])=>'<button type="button" data-avatarbase="'+id+'"><span class="vpq-base-head '+id+'" style="--skin:'+escapeHtml(vpqSafeColor(current.skin,'#b77957'))+';--hair:'+escapeHtml(vpqSafeColor(current.hair,'#5b3e38'))+'"></span>'+label+'</button>').join('')+'</div><p class="vpq-base-note">Every hairstyle, skin tone and outfit is available to everyone. Pronouns are separate.</p></div>'+
+ '<div class="twocol">'+
+ field('Doctor name',choice('name',current.name))+field('Pronouns (optional)',select('pronouns',pronounOptions,current.pronouns))+
+ field('Skin tone',color('skin',current.skin,'#b77957'))+field('Eye color',color('eyeColor',current.eyeColor,'#6d493c'))+
+ field('Hairstyle',select('hairStyle',vpqAvatarHairList,current.hairStyle))+field('Hair color',color('hair',current.hair,'#5b3e38'))+
+ field('Expression',select('expression',[['•ᴗ•','Happy'],['•‿•','Warm'],['◕ᴗ◕','Big smile'],['-ᴗ-','Calm'],['•_•','Focused']],current.expression))+
+ field('Freckles',select('freckles',[['none','None'],['light','Light'],['full','Freckles']],current.freckles))+
+ '</div><p class="tiny">The three bases are visual starting shapes, not restrictions on identity or customization.</p>';
+ const outfitSection='<h3>👕 Outfits & clinic gear</h3><div class="twocol">'+
+ field('Scrub color',color('scrubs',current.scrubs,'#67a5d9'))+
+ field('Scrub pattern',select('scrubStyle',allowedScrubs,current.scrubStyle))+
+ field('Jackets & layers',select('outerwear',vpqExtras,current.outerwear))+
+ field('Accessory',select('avatarAccessory',outfitAccessories,current.avatarAccessory))+
+ '</div><p class="tiny">Reward outfits unlock additional patterns. Every appearance base can wear everything.</p>';
+ const extrasSection='<h3>✨ Make it yours</h3><div class="twocol">'+
+ field('Glasses',select('glasses',[['none','None'],['round','Round glasses'],['square','Square glasses'],['gold','Gold frames']],current.glasses))+
+ field('Facial hair',select('beard',[['false','None'],['true','Beard']],String(!!current.beard)))+
+ field('Hat',select('cap',[['false','No hat'],['true','Baseball cap']],String(!!current.cap)))+
+ field('Pet accessory',select('petAccessory',accessories,current.petAccessory))+
+ '</div><p class="tiny">Facial hair, hats, glasses, and accessories are available to all character bases.</p>';
+ const petSection='<h3>🐾 Choose your companion</h3><div class="vpq-pet-picker" id="vpqPetGallery"></div><div class="twocol">'+
+ field('Companion name',choice('petName',current.petName))+
+ field('Coat color (for future variants)',color('petCoat',current.petCoat,'#f5d59a'))+
+ '</div>';
+ // Hidden fields preserve the same save format and support species/breed gallery handlers.
+ const hidden='<input type="hidden" name="pet" value="'+escapeHtml(current.pet||'🐕')+'">'+
+ '<input type="hidden" name="petBreed" value="'+escapeHtml(current.petBreed||'husky-shepherd')+'">'+
+ '<input type="hidden" name="catLook" value="'+escapeHtml(current.catLook||'tabby')+'">'+
+ '<input type="hidden" name="avatarBase" value="'+escapeHtml(current.avatarBase||'androgynous')+'">'+
+ '<input type="hidden" name="avatarPreset" value="'+escapeHtml(current.avatarPreset||'custom')+'">'+
+ '<input type="hidden" name="avatarArtStyle" value="illustrated">'+
+ '<input type="hidden" name="whiteCoat" value="'+(current.outerwear==='coat'?'true':'false')+'">';
+ const html='<div class="vpq-story-maker"><section class="vpq-story-preview"><h3>✨ Live Preview</h3><div class="vpq-story-stage" id="vpqPreviewStage"></div><div class="vpq-story-caption" id="vpqPreviewCaption"></div><div class="vpq-story-actions"><button type="button" id="vpqStoryRandom">🎲 Surprise me!</button><button type="button" id="vpqStoryReset">↺ Reset preview</button></div><p class="tiny">Preview changes are not saved until you choose Save.</p></section>'+
+ '<div class="vpq-story-right"><form id="avatarForm">'+hidden+
+ '<nav class="vpq-tab-bar" aria-label="Character customizer tabs">'+vpqStoryTabs.map(([id,label])=>'<button type="button" data-vpqtab="'+id+'">'+label+'</button>').join('')+'</nav>'+
+ '<div class="vpq-section" data-vpqsection="pet">'+petSection+'</div>'+
+ '<div class="vpq-section" data-vpqsection="vet">'+vetSection+'</div>'+
+ '<div class="vpq-section" data-vpqsection="outfits">'+outfitSection+'</div>'+
+ '<div class="vpq-section" data-vpqsection="extras">'+extrasSection+'</div>'+
+ '<footer class="vpq-story-footer"><span class="tiny">Your progress and existing unlocks stay safe.</span><span><button type="button" class="secondary" id="vpqStoryCancel">Cancel</button> <button type="submit">💜 Save My Look</button></span></footer>'+
+ '</form></div></div>';
+ showModal('🎨 Create Your Veterinarian & Companion',html);
+ vpqActivateStoryTab(vpqCurrentCreatorTab||'pet');
+ vpqRenderStoryPreview();
+};
+const vpqPreviousAvatarUpdater32=updateAvatar;
+updateAvatar=function(){
+ vpqPreviousAvatarUpdater32();
+ const av=$('avatarSprite');
+ av.classList.remove('vpq-storybook-walk');
+ av.classList.add('vpq-portrait-walk');
+ av.style.background='none';
+ const existing=av.querySelector('.vpq-game-avatar');
+ if(existing)existing.remove();
+ const art=document.createElement('div');art.className='vpq-game-avatar';art.innerHTML=vpqVectorVet(state);av.appendChild(art);
+};
+vpqViewMyAvatar=function(){
+ showModal('🏥 My Hospital Doctor & Companion','<div class="vpq-avatar-showcase">'+vpqVectorVet(state)+'<div class="vpq-preview-pet">'+vpqPetIllustration(state)+'</div></div><h3 style="text-align:center">'+escapeHtml(state.name||'Student Vet')+' & '+escapeHtml(state.petName||'Companion')+'</h3><p class="small" style="text-align:center">Level '+(Math.floor(state.xp/LEVEL_THRESH)+1)+' · '+state.xp+' XP · '+state.coins+' coins · '+escapeHtml(state.pronouns||'')+'</p><div class="buttonrow"><button type="button" id="vpqEditFromViewer">🎨 Customize</button><button type="button" id="vpqViewerClose">Back to hospital</button></div>');
+};
+$('avatarBtn').onclick=()=>openAvatar();
+$('vpqViewAvatarBtn').onclick=()=>vpqViewMyAvatar();
+$('modalBody').addEventListener('click',e=>{
+ const tab=e.target.closest('[data-vpqtab]');if(tab){vpqActivateStoryTab(tab.dataset.vpqtab);return}
+ const preset=e.target.closest('[data-vpqpreset]');if(preset){vpqApplyPreset(preset.dataset.vpqpreset);return}
+ const reset=e.target.closest('#vpqStoryReset');if(reset){openAvatar();return}
+ const random=e.target.closest('#vpqStoryRandom');if(random){
+  const form=$('avatarForm');if(!form)return;
+  const picks={avatarBase:['feminine','masculine','androgynous'],hairStyle:vpqAvatarHairList.map(x=>x[0]),scrubStyle:['classic','paws','hearts','stars','surgery'],expression:['•ᴗ•','◕ᴗ◕','•‿•','-ᴗ-'],outerwear:['none','coat','jacket','hoodie']};
+  for(const [key,opts] of Object.entries(picks))if(form.elements[key])form.elements[key].value=opts[Math.floor(Math.random()*opts.length)];
+  form.elements.avatarPreset.value='custom';vpqRenderStoryPreview();return
+ }
+ if(e.target.closest('#vpqStoryCancel')){closeModal();return}
+});
+$('modalBody').addEventListener('input',e=>{if(e.target.closest('#avatarForm'))vpqRenderStoryPreview()});
+$('modalBody').addEventListener('change',e=>{if(e.target.closest('#avatarForm'))vpqRenderStoryPreview()});
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
