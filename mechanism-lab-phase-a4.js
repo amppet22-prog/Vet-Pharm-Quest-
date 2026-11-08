@@ -11,12 +11,46 @@ const concepts=[
  {id:'amino',title:'Aminoglycosides and the 30S ribosome',concept:'Aminoglycosides bind the bacterial 30S subunit, disrupting translation and causing misreading of mRNA. Bacterial uptake requires oxygen-dependent energy processes.',why:'Protein synthesis is essential to bacterial survival; oxygen-dependent entry helps explain poor activity against obligate anaerobes.',example:'Peak-to-MIC exposure can be relevant to killing, while renal tubular accumulation and ototoxicity constrain safe use.'},
  {id:'nsaid',title:'COX inhibition and prostaglandins',concept:'NSAIDs inhibit cyclooxygenase pathways, lowering production of prostanoids that contribute to pain, inflammation and fever.',why:'Prostaglandins also help protect the gastrointestinal mucosa and support renal blood flow in vulnerable perfusion states; blocking them can remove useful compensation.',example:'Dehydration, hypovolemia and concurrent medications can increase the risk of NSAID-related injury.'}
 ];
-function lesson(id){
- const x=concepts.find(t=>t.id===id);if(!x)return menu();
- showModal('🔬 '+x.title,'<div class="infobox"><b>Mechanism</b><p>'+x.concept+'</p></div><div class="infobox"><b>WHY the body or organism responds this way</b><p>'+x.why+'</p></div><div class="infobox"><b>Clinical application and caution</b><p>'+x.example+'</p></div><div class="buttonrow"><button type="button" data-vpqmechmenu="1">← All mechanism lessons</button><button type="button" data-vpqmechlounge="1">📚 Visit Study Lounge</button></div><p class="tiny">Educational review; specific drug, species, dose, infection, and contraindications require individual assessment.</p>');
+const atlas=window.VPQ_MECH_ATLAS;
+const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let currentSection='antibiotics',currentCard='';
+function findSection(id){return atlas?.sections?.find(x=>x.id===id)}
+function header(){
+ return '<div class="vpqAtlasNotice"><b>Target → mechanism → WHY → clinical consequence</b><p>Short veterinary review cards, not treatment instructions. Use species, culture, labels, and the actual patient context before selecting a medication.</p></div>';
 }
 function menu(){
- showModal('🔬 Mechanism Lab · Understand the WHY','<p>This room teaches how drugs affect cells and organs, why intended effects happen, and how those same pathways lead to adverse effects. Pharmacy remains the drug-card reference.</p><div class="vpqMechLessonGrid">'+concepts.map(x=>'<button type="button" data-vpqmechlesson="'+x.id+'"><b>'+x.title+'</b><small>'+x.why+'</small></button>').join('')+'</div><div class="buttonrow"><button type="button" data-vpqmechlounge="1">📚 Continue in Study Lounge</button><button type="button" data-vpqmechpharmacy="1">💊 Pharmacy Reference</button></div>');
+ const sections=atlas?.sections||[];
+ showModal('🔬 Mechanism Lab · Learning Atlas',header()+
+ '<div class="vpqMechLessonGrid">'+sections.map(x=>'<button type="button" data-vpqmechsection="'+safe(x.id)+'"><b>'+safe(x.icon)+' '+safe(x.title)+'</b><small>'+safe(x.subtitle)+'</small><small>'+x.cards.length+' focused teaching cards</small></button>').join('')+'</div>'+
+ '<p class="tiny">The Lab explains mechanisms. The Student Study Lounge contains arcade games and quizzes; Pharmacy contains the drug reference.</p>'+
+ '<div class="buttonrow"><button type="button" data-vpqmechlounge="1">📚 Go to Study Lounge</button><button type="button" data-vpqmechpharmacy="1">💊 Return to Pharmacy</button></div>');
+}
+function section(id){
+ const x=findSection(id);if(!x)return menu();
+ currentSection=x.id;currentCard='';
+ showModal(x.icon+' '+x.title,header()+'<p>'+safe(x.intro)+'</p>'+
+ '<div class="vpqAtlasCards">'+x.cards.map((c,i)=>'<button type="button" data-vpqmechcard="'+safe(c.id)+'"><span class="vpqAtlasCardNumber">'+(i+1)+' / '+x.cards.length+'</span><b>'+safe(c.title)+'</b><small>'+safe(c.tag)+'</small></button>').join('')+'</div>'+
+ '<div class="buttonrow"><button type="button" data-vpqmechmenu="1">← All Lab boards</button><button type="button" data-vpqmechlounge="1">📚 Study Lounge</button></div>');
+}
+function lesson(id){
+ const x=(atlas?.sections||[]).find(t=>t.cards.some(c=>c.id===id));
+ if(!x)return menu();
+ const i=x.cards.findIndex(c=>c.id===id),c=x.cards[i];
+ currentSection=x.id;currentCard=c.id;
+ showModal(x.icon+' '+c.title,'<p class="tiny">'+safe(x.title)+' · Card '+(i+1)+' / '+x.cards.length+' · '+safe(c.tag)+'</p>'+
+ '<div class="vpqAtlasDetail"><h3>1. What does it target or do?</h3><p>'+safe(c.mechanism)+'</p></div>'+
+ '<div class="vpqAtlasDetail"><h3>2. WHY is that pathway important?</h3><p>'+safe(c.why)+'</p></div>'+
+ '<div class="vpqAtlasDetail"><h3>3. Clinical application</h3><p>'+safe(c.clinical)+'</p></div>'+
+ '<div class="vpqAtlasDetail vpqAtlasCaution"><h3>⚠️ Do not confuse / caution</h3><p>'+safe(c.warning)+'</p></div>'+
+ '<div class="buttonrow"><button type="button" data-vpqmechprev="1" '+(i===0?'disabled':'')+'>← Previous</button><button type="button" data-vpqmechnext="1" '+(i===x.cards.length-1?'disabled':'')+'>Next →</button></div>'+
+ '<div class="buttonrow"><button type="button" data-vpqmechback="1">← '+safe(x.title)+'</button><button type="button" data-vpqmechmenu="1">All Lab boards</button></div>'+
+ '<p class="tiny">Sources and course cross-checks: '+(atlas.references||[]).map(r=>'<a href="'+safe(r.url)+'" target="_blank" rel="noopener noreferrer">'+safe(r.label)+'</a>').join(' · ')+'.</p>');
+}
+function stepCard(delta){
+ const x=findSection(currentSection);if(!x)return menu();
+ const i=x.cards.findIndex(c=>c.id===currentCard);
+ if(i<0)return section(currentSection);
+ const next=x.cards[i+delta];if(next)lesson(next.id);
 }
 function drawing(){
  return '<svg class="vpqMechanismArt" viewBox="0 0 1000 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dimensional mechanism teaching lab with receptor board, antibiotic pathway diagrams and workbench">'+
@@ -32,21 +66,28 @@ function drawing(){
 }
 art.roomArt=function(k){return k==='mechanism'?drawing():previousArt(k)};
 rooms.mechanism={name:'Mechanism & Physiology Lab',color:'#e6f5f4',banner:'MECHANISM LAB',decor:[],props:[
- {x:23,emoji:'🧬',label:'Receptor Board',action:'vpqMechReceptor',bubble:'Targets & signals'},
- {x:52,emoji:'🔬',label:'Mechanism Lessons',action:'vpqMechMenu',bubble:'WHY it works'},
- {x:81,emoji:'🦠',label:'Antibiotic Targets',action:'vpqMechAntibiotics',bubble:'Bacteria & drugs'}
+ {x:22,emoji:'🧬',label:'Receptor Board',action:'vpqMechReceptor',bubble:'Signals & drug actions'},
+ {x:45,emoji:'🔬',label:'Why Lab',action:'vpqMechMenu',bubble:'Explore atlas'},
+ {x:68,emoji:'☣️',label:'Drug & Toxin Targets',action:'vpqMechToxins',bubble:'Toxic mechanisms'},
+ {x:84,emoji:'🦠',label:'Antibiotic Targets',action:'vpqMechAntibiotics',bubble:'Classes & generations'}
 ]};
 rooms.pharmacy.props[1]={x:52,emoji:'🔬',label:'Mechanism Lab Door',action:'vpqMechEnter',bubble:'Enter lab'};
 const route=(action)=>{
  if(action==='vpqMechEnter')return changeRoom('mechanism');
  if(action==='vpqMechMenu')return menu();
- if(action==='vpqMechReceptor')return lesson('receptor');
- if(action==='vpqMechAntibiotics')return lesson('beta');
+ if(action==='vpqMechReceptor')return section('receptors');
+ if(action==='vpqMechAntibiotics')return section('antibiotics');
+ if(action==='vpqMechToxins')return section('toxins');
  return doAction(action);
 };
 document.getElementById('modalBody').addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
  if(b.dataset.vpqmechlesson)return lesson(b.dataset.vpqmechlesson);
+ if(b.dataset.vpqmechsection)return section(b.dataset.vpqmechsection);
+ if(b.dataset.vpqmechcard)return lesson(b.dataset.vpqmechcard);
+ if(b.dataset.vpqmechback!==undefined)return section(currentSection);
+ if(b.dataset.vpqmechprev!==undefined)return stepCard(-1);
+ if(b.dataset.vpqmechnext!==undefined)return stepCard(1);
  if(b.dataset.vpqmechmenu!==undefined)return menu();
  if(b.dataset.vpqmechlounge!==undefined)return changeRoom('study');
  if(b.dataset.vpqmechpharmacy!==undefined)return changeRoom('pharmacy');
@@ -55,7 +96,7 @@ function refresh(){
  stage.querySelector('#vpqMechanismHotspots')?.remove();
  if(stage.dataset.room!=='mechanism')return;
  const n=document.createElement('div');n.id='vpqMechanismHotspots';
- n.innerHTML='<button class="vpqMechHot vpqMechReceptor" data-vpqmechgo="vpqMechReceptor" aria-label="Receptor and signaling lesson"><span>🧬 Receptors</span></button><button class="vpqMechHot vpqMechPath" data-vpqmechgo="vpqMechMenu" aria-label="Browse mechanism and physiology lessons"><span>🔬 Why Lab</span></button><button class="vpqMechHot vpqMechBacteria" data-vpqmechgo="vpqMechAntibiotics" aria-label="Antibiotic targets lesson"><span>🦠 Antibiotics</span></button><button class="vpqMechExit" data-vpqmechgo="vpqMechBack">← Pharmacy</button>';
+ n.innerHTML='<button class="vpqMechHot vpqMechReceptor" data-vpqmechgo="vpqMechReceptor" aria-label="Receptor and signaling lesson"><span>🧬 Receptors</span></button><button class="vpqMechHot vpqMechPath" data-vpqmechgo="vpqMechMenu" aria-label="Browse all mechanism and physiology teaching boards"><span>🔬 Why Lab</span></button><button class="vpqMechHot vpqMechTox" data-vpqmechgo="vpqMechToxins" aria-label="Open drug and toxicant mechanism cards"><span>☣️ Toxin Targets</span></button><button class="vpqMechHot vpqMechBacteria" data-vpqmechgo="vpqMechAntibiotics" aria-label="Antibiotic targets lesson"><span>🦠 Antibiotics</span></button><button class="vpqMechExit" data-vpqmechgo="vpqMechBack">← Pharmacy</button>';
  n.addEventListener('click',e=>{let b=e.target.closest('[data-vpqmechgo]');if(!b)return;if(b.dataset.vpqmechgo==='vpqMechBack')return changeRoom('pharmacy');return route(b.dataset.vpqmechgo)});
  stage.appendChild(n);
 }
