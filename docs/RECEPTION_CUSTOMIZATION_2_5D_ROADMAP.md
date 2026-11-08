@@ -122,3 +122,10 @@ Current state already stores `coins` and `upgrades` in local browser state `vpq-
 
 ### Testing before calling zoning fully verified
 Check that Pharmacy now shows Drug Shelves, Mechanism Lab Door and Toxicology Reference; the latter must explicitly be a preview. Confirm Mechanism Lab's lesson button goes to Student Study Lounge rather than directly opening a game. Confirm the Study Lounge arcade cabinet still opens all games, and treatment/clinical rooms remain accessible. Static JavaScript checks passed, but live browser checks are pending.
+
+
+## Examination Room — Traditional veterinary clinic shell (2026-11-08)
+
+- Added `exam-room-traditional.js` and loaded it from `index.html`. Exam room imagery now depicts cabinetry, sink, clinical wall equipment, medical chart area, and stainless examination table, with a stylized small dog by default. The in-room patient switch changes the drawing to a cat and back; this is cosmetic and does not alter the actual patient case selected.
+- Clickable/keyboard-accessible hotspots retain **Patient Charts**, **Examine Patient** (existing clinical case menu), and **Protocols**. A Reception exit remains available. A/D/arrow and E station controls retain their original actions.
+- This is a responsive 2.5D scene, not a physically modeled 3D treatment room. No clinical workflow, course data, progress, savings, or case content changed. Source script and inline game syntax checks passed; live browser checks still needed for layout/overlap, patient switch, responsive labels, and clinical station activation.
