@@ -382,7 +382,9 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <footer>Vet Pharm Quest • v2.5 Clinic Guide, Companion Update & Physiology Hub • Offline study prototype • Original educational questions based on course review materials • No backend or shared accounts</footer>
 <script src="curriculum.js"></script>
 <script src="drug-stewardship.js"></script>
-<script src="antibiotic-pkpd-lesson.js?v=20261108-first"></script>
+<script src="visual-pathway-data.js?v=20261108-pathways1"></script>
+<script src="visual-pathway-atlas.js?v=20261108-pathways2"></script>
+<script src="antibiotic-pkpd-lesson.js?v=20261108-visual1"></script>
 <script src="drug-clinical-reference.js?v=20261108-piprant2"></script>
 <script src="reception-customization.js?v=20261108-furniture4"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
@@ -392,17 +394,17 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
 <script src="toxicology-lecture-links.js?v=20261108-toxcrosswalk1"></script>
 <script src="toxicology-mechanism-panels.js?v=20261108-toxmechanisms1"></script>
-<script src="toxicology-lecture-ui.js?v=20261108-toxlesson2"></script>
+<script src="toxicology-lecture-ui.js?v=20261108-visual1"></script>
 <script src="toxicology-practice-bank.js?v=20261108-toxpractice1"></script>
 <script src="toxicology-study-game.js?v=20261108-toxstudy1"></script>
 <script src="mechanism-lab-atlas.js?v=20261108-toxlink2"></script>
-<script src="mechanism-lab-phase-a4.js?v=20261108-A4c"></script>
+<script src="mechanism-lab-phase-a4.js?v=20261108-visual1"></script>
 <script src="exam-room-traditional.js?v=20261108-examA2"></script>
 <script src="pharmacy-nutrition-room.js?v=20261108-pharm-nutrition1"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
-<script src="ngf-toxicology-bridge.js?v=20261108-tox-catalog6"></script>
+<script src="ngf-toxicology-bridge.js?v=20261108-visual1"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
 <script>
 /* Vet Pharm Quest 2D — original learning material based on the user's course guides.
@@ -2770,6 +2772,8 @@ openAvatar=function(...args){
 };
 $('avatarBtn').onclick=()=>openAvatar();
 
+/* Interactive pathway art shares the existing modal, without changing course progress or saves. */
+window.VPQ_VISUAL_PATHWAYS.init({body:$('modalBody'),showModal});
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
