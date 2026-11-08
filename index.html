@@ -389,6 +389,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="reception-shadowbox-phase-a.js?v=20261108-phaseA1"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="mechanism-lab-phase-a4.js?v=20261108-A4b"></script>
+<script src="exam-room-traditional.js?v=20261108-examA1"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-tox-clues"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
@@ -2494,6 +2495,8 @@ const vpqPhaseAShadowbox=window.VPQ_SHADOWBOX_RECEPTION({
 // Phase A.3 replaces Study Lounge scenery while keeping its original learning actions.
 const vpqPhaseAStudyLounge=window.VPQ_STUDY_LOUNGE_A3({rooms:ROOMS,doAction:a=>doAction(a),changeRoom});
 const vpqPhaseAMechanism=window.VPQ_MECHANISM_LAB_A4({rooms:ROOMS,showModal,changeRoom,doAction:a=>doAction(a)});
+// Traditional exam-room scenery retains the existing patient charts, cases, and protocol actions.
+const vpqTraditionalExam=window.VPQ_EXAM_ROOM_A5({rooms:ROOMS,doAction:a=>doAction(a),changeRoom});
 const vpqMechanismPriorAction=doAction;
 doAction=function(a){
  if(['vpqMechEnter','vpqMechMenu','vpqMechReceptor','vpqMechAntibiotics'].includes(a))return vpqPhaseAMechanism.route(a);
