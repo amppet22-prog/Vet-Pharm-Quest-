@@ -2131,63 +2131,135 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    response:'A tailored plan is chosen and the team follows comfort and function rather than relying solely on physical swelling.',
    monitor:'Serial pain assessment, touch tolerance, appetite, mobility, sedation and treatment adverse effects.'}
  ];
- const storeKey='vpq-inpatient-care-v2';
- let record={patient:hospitalData[0].id,observed:false,adjusted:false,answer:null};
- try{const x=JSON.parse(localStorage.getItem(storeKey)||'{}');if(hospitalData.some(p=>p.id===x.patient))record={...record,...x}}catch(e){}
- function saveRecord(){try{localStorage.setItem(storeKey,JSON.stringify(record))}catch(e){}}
- function patient(){return hospitalData.find(p=>p.id===record.patient)||hospitalData[0]}
- function intro(stage){
-  const p=patient();
-  return '<div class="vpqWardHead"><b>'+escapeHtml(p.name)+'</b><p>'+escapeHtml(p.desc)+'</p><p class="tiny"><b>Admission:</b> '+escapeHtml(p.baseline)+'</p></div>'+
-   '<div class="buttonrow"><button data-vpqwardhome="1">Patient chart</button><button data-vpqwardfollow="1">🔎 Follow Up</button><button data-vpqwardadjust="1">💉 Adjust Care</button><button data-vpqwardmonitor="1">📈 Monitoring</button></div>';
+ const storeKey='vpq-inpatient-care-v3';
+ const initial=()=>({examined:false,careAnswer:null,careComplete:false,monitorAnswer:null,monitorComplete:false,shift:1});
+ const progress={};
+ for(const p of hospitalData)progress[p.id]=initial();
+ let currentPatient=hospitalData[0].id,hasPatient=false,wardMode='chart';
+ try{
+  const saved=JSON.parse(localStorage.getItem(storeKey)||'{}');
+  if(saved&&typeof saved==='object'){
+   if(hospitalData.some(p=>p.id===saved.currentPatient)){currentPatient=saved.currentPatient;hasPatient=Boolean(saved.hasPatient)}
+   for(const p of hospitalData)if(saved.progress?.[p.id]&&typeof saved.progress[p.id]==='object'){
+     const old=saved.progress[p.id];progress[p.id]={...initial(),examined:old.examined===true,careAnswer:Number.isInteger(old.careAnswer)?old.careAnswer:null,careComplete:old.careComplete===true,monitorAnswer:Number.isInteger(old.monitorAnswer)?old.monitorAnswer:null,monitorComplete:old.monitorComplete===true,shift:Math.max(1,Number(old.shift)||1)};
+   }
+  }
+ }catch(e){}
+ // A safe migration preserves patient selection, without mixing unverified earlier treatment decisions.
+ if(!hasPatient){try{const old=JSON.parse(localStorage.getItem('vpq-inpatient-care-v2')||'null');if(hospitalData.some(p=>p.id===old?.patient)){currentPatient=old.patient}}catch(e){}}
+ function savePatient(){try{localStorage.setItem(storeKey,JSON.stringify({currentPatient,hasPatient,progress}))}catch(e){}}
+ function patient(){return hospitalData.find(p=>p.id===currentPatient)||hospitalData[0]}
+ function stateOf(){return progress[currentPatient]}
+ function phase(){const a=stateOf();return a.monitorComplete?'completed':a.careComplete?'monitor':a.examined?'adjust':'follow'}
+ function nextLabel(){return {follow:'Follow Up',adjust:'Adjust Care',monitor:'Watch Trends',completed:'Shift Complete'}[phase()]}
+ function safeButton(action,label,secondary=false){return '<button type="button" class="'+(secondary?'secondary':'')+'" data-vpqward'+action+'="1">'+label+'</button>'}
+ function patientHeading(){
+  const p=patient(),a=stateOf();
+  return '<div class="vpqWardHead"><b>'+escapeHtml(p.name)+'</b><p>'+escapeHtml(p.desc)+'</p><p class="tiny"><b>Admission baseline:</b> '+escapeHtml(p.baseline)+'</p>'+
+    '<p class="tiny"><b>Shift '+a.shift+' · Next step: '+nextLabel()+'</b></p></div>';
+ }
+ function navigation(){
+  if(!hasPatient)return '';
+  const a=stateOf();
+  return '<div class="buttonrow">'+safeButton('home','🗂️ Patient Chart',true)+safeButton('follow','1 · Follow Up',a.examined)+safeButton('adjust','2 · Adjust Care',!a.examined)+safeButton('monitor','3 · Watch Trends',!a.careComplete)+'</div>';
+ }
+ function frame(heading,introduction,content){
+  showModal(heading,patientHeading()+navigation()+'<p class="tiny">'+introduction+'</p>'+content);
  }
  function caseMenu(){
-  showModal('🏥 Inpatient Care · Patient chart',
-   '<p>Three stations now have different jobs: <b>Follow Up</b> gathers new findings, <b>Adjust Care</b> changes the plan in response, and <b>Monitoring</b> evaluates the patient afterward.</p>'+
-   '<h3>Select a hospitalized patient</h3>'+hospitalData.map(p=>'<button class="full" data-vpqwardpick="'+p.id+'">'+escapeHtml(p.name)+'</button>').join('')+
-   intro('chart')+'<p class="tiny">This teaching simulation models decisions, not actual prescriptions or drug doses.</p>');
+  wardMode='chart';savePatient();
+  const list=hospitalData.map(p=>{
+   const a=progress[p.id],next=a.monitorComplete?'Shift complete':a.careComplete?'Watch trends':a.examined?'Adjust care':'Follow up';
+   return '<button type="button" class="full" data-vpqwardpick="'+escapeHtml(p.id)+'" style="text-align:left"><b>'+escapeHtml(p.name)+'</b><span class="tiny" style="display:block">Shift '+a.shift+' · Next: '+next+'</span></button>';
+  }).join('');
+  showModal('🏥 Treatment Ward · Patient Handoff',
+   '<p>One hospitalized patient progresses through <b>Follow Up → Adjust Care → Watch Trends → Handoff</b>. Each station opens a different stage of the same chart. Choose a patient to begin or resume.</p>'+
+   '<div class="vpqWardFlow"><span>1. Assess</span><span>2. Intervene</span><span>3. Recheck</span><span>4. Handoff</span></div>'+
+   '<h3>Hospitalized patients</h3>'+list+
+   (hasPatient?'<div class="infobox"><b>Current patient:</b> '+escapeHtml(patient().name)+' · '+nextLabel()+'</div>'+
+   safeButton('continue','▶ Resume this patient'):'')+
+   '<p class="tiny">This is an educational case simulation, not a dosage or prescribing system. Patient progress is saved in this browser.</p>');
+ }
+ function selectPatient(id){if(!hospitalData.some(p=>p.id===id))return;currentPatient=id;hasPatient=true;savePatient();continueCase()}
+ function continueCase(){
+  const p=phase();
+  if(p==='follow')return followup();
+  if(p==='adjust')return adjust();
+  if(p==='monitor')return monitor();
+  return handoff();
  }
  function followup(){
-  const p=patient();showModal('🔎 Follow Up · Reassess the patient',intro()+
-    '<p><b>Purpose:</b> Compare the patient now with admission. A new examination, observation or lab trend may change the differential diagnosis.</p>'+
-    '<div class="infobox"><b>Admission baseline</b><p>'+escapeHtml(p.baseline)+'</p></div>'+
-    (record.observed?'<div class="infobox"><b>New findings</b><p>'+escapeHtml(p.follow)+'</p><b>Interpretation</b><p>'+escapeHtml(p.reassess)+'</p></div><button data-vpqwardadjust="1">Continue to Adjust Care →</button>':
-    '<button data-vpqwardobserve="1">🔍 Perform follow-up examination & review trend</button>'));
+  if(!hasPatient)return caseMenu();
+  wardMode='follow';
+  const p=patient(),a=stateOf();
+  frame('🔎 Follow Up · Gather new findings','STAGE 1/3 · Reassess before choosing treatment.',
+    '<div class="infobox"><b>Baseline</b><p>'+escapeHtml(p.baseline)+'</p></div>'+
+    (a.examined?'<div class="infobox"><b>New examination and trends</b><p>'+escapeHtml(p.follow)+'</p><b>Interpretation</b><p>'+escapeHtml(p.reassess)+'</p></div>'+
+     safeButton('adjust','Continue → Adjust Care'):
+    '<p><b>What has changed since admission?</b> Examine the patient and review repeat observations/labs to find out.</p>'+safeButton('observe','🔍 Perform follow-up examination')));
  }
  function adjust(){
-  const p=patient();
-  if(!record.observed){showModal('💉 Adjust Care · Assessment required',intro()+'<p>You cannot safely adjust an inpatient plan without reviewing the new patient findings. <b>Follow Up</b> first.</p><button data-vpqwardfollow="1">Go to Follow Up →</button>');return}
-  const answered=record.answer!==null;
-  showModal('💉 Adjust Care · Change the plan',intro()+
-   '<div class="infobox"><b>New findings to act on</b><p>'+escapeHtml(p.follow)+'</p></div><h3>What is the safest next clinical decision?</h3>'+
-   p.choices.map((choice,i)=>'<button class="choice '+(answered?(i===p.answer?'right':i===record.answer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardchoice="'+i+'">'+escapeHtml(choice)+'</button>').join('')+
-   (answered?'<div class="response '+(record.answer===p.answer?'':'bad')+'"><b>'+(record.answer===p.answer?'Appropriate decision':'Reconsider the decision')+'</b><p>'+escapeHtml(p.why)+'</p></div>'+
-   (record.adjusted?'<button data-vpqwardmonitor="1">📈 Review response in Monitoring →</button>':'<button data-vpqwardretry="1">Try care decision again</button>'):''));
+  if(!hasPatient)return caseMenu();
+  wardMode='adjust';
+  const a=stateOf(),p=patient();
+  if(!a.examined)return frame('💉 Adjust Care · First assess the patient','STAGE 2/3 · A care change must follow an assessment.',
+   '<p>The patient has no documented follow-up findings this shift. Avoid selecting or escalating medication blindly.</p>'+safeButton('follow','← Go to Follow Up'));
+  const answered=a.careAnswer!==null;
+  const choices=p.choices.map((choice,i)=>'<button type="button" class="choice '+(answered?(i===p.answer?'right':i===a.careAnswer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardchoice="'+i+'">'+escapeHtml(choice)+'</button>').join('');
+  frame('💉 Adjust Care · Respond to the findings','STAGE 2/3 · Use the new clinical information to justify a treatment decision.',
+    '<div class="infobox"><b>Follow-up findings</b><p>'+escapeHtml(p.follow)+'</p></div>'+
+    '<h3>What is the safest next action?</h3>'+choices+
+    (answered?'<div class="response '+(a.careComplete?'':'bad')+'"><b>'+(a.careComplete?'Appropriate response':'Reconsider your plan')+'</b><p>'+escapeHtml(p.why)+'</p></div>'+
+    (a.careComplete?safeButton('monitor','Continue → Watch Trends'):safeButton('retry','↻ Reconsider the decision')):''));
  }
  function monitor(){
-  const p=patient();
-  if(!record.observed)return showModal('📈 Monitoring · Need a baseline reassessment',intro()+'<p>First review the new patient status in Follow Up.</p><button data-vpqwardfollow="1">Follow Up →</button>');
-  if(!record.adjusted)return showModal('📈 Monitoring · Treatment not adjusted yet',intro()+'<p>You have identified changes but not yet made an appropriate treatment decision.</p><button data-vpqwardadjust="1">Adjust Care →</button>');
-  showModal('📈 Monitoring · Response after intervention',intro()+
-   '<div class="infobox"><b>Post-intervention observation</b><p>'+escapeHtml(p.response)+'</p><b>Follow-up measurements</b><p>'+escapeHtml(p.monitor)+'</p></div>'+
-   '<p><b>Clinical reasoning:</b> Document whether the trend truly supports improvement, deterioration, or an uncertain response. Recheck the diagnosis and treatment if the patient changes again.</p>'+
-   '<div class="buttonrow"><button data-vpqwardreset="1">↻ New follow-up shift</button><button data-vpqwardhome="1">Choose another patient</button></div>');
+  if(!hasPatient)return caseMenu();
+  wardMode='monitor';
+  const a=stateOf(),p=patient();
+  if(!a.examined)return frame('📈 Watch Trends · Need a reassessment','STAGE 3/3 · Monitoring needs a baseline and a decision.',
+    '<p>No new patient findings have been collected this shift.</p>'+safeButton('follow','← Go to Follow Up'));
+  if(!a.careComplete)return frame('📈 Watch Trends · Care decision needed','STAGE 3/3 · Recheck the response after appropriate care.',
+    '<p>You have obtained new findings, but you have not completed an appropriate treatment decision.</p>'+safeButton('adjust','← Go to Adjust Care'));
+  const choices=['Discharge or stop monitoring as soon as the first observation improves','Monitor serial signs and laboratory trends, reassessing if clinical response differs from expectations','Ignore symptoms and only record which medication was chosen'];
+  frame('📈 Watch Trends · Check the response','STAGE 3/3 · Monitoring tests the effect of the adjusted plan.',
+    '<div class="infobox"><b>After the intervention</b><p>'+escapeHtml(p.response)+'</p>'+
+    '<b>Trends requiring follow-up</b><p>'+escapeHtml(p.monitor)+'</p></div>'+
+    '<h3>What is the most defensible monitoring plan?</h3>'+
+    choices.map((v,i)=>'<button type="button" class="choice '+(a.monitorAnswer!==null?(i===1?'right':i===a.monitorAnswer?'wrong':''):'')+'" '+(a.monitorAnswer!==null?'disabled':'')+' data-vpqwardmonitoranswer="'+i+'">'+escapeHtml(v)+'</button>').join('')+
+    (a.monitorAnswer!==null?'<div class="response '+(a.monitorComplete?'':'bad')+'"><p>'+(a.monitorComplete?'Correct: trends must be reassessed, not assumed stable.':'That approach could miss deterioration or delayed toxicity. Compare serial findings before discharge or another medication change.')+'</p></div>'+
+     (a.monitorComplete?safeButton('handoff','📋 Complete shift handoff →'):safeButton('monitorretry','↻ Try monitoring decision again')):''));
+ }
+ function handoff(){
+  if(!hasPatient)return caseMenu();
+  const a=stateOf(),p=patient();
+  if(!a.monitorComplete)return continueCase();
+  wardMode='handoff';
+  frame('✅ Shift Handoff · '+p.name,'ALL 3 STAGES COMPLETE · Summarize the rationale and plan for the next team.',
+    '<div class="infobox"><b>Assessment</b><p>'+escapeHtml(p.reassess)+'</p>'+
+    '<b>Treatment decision</b><p>'+escapeHtml(p.why)+'</p>'+
+    '<b>Ongoing monitoring</b><p>'+escapeHtml(p.monitor)+'</p></div>'+
+    '<p>This shift is complete. Start a new shift to reassess the patient with the same case teaching content, or choose a different patient.</p>'+
+    '<div class="buttonrow">'+safeButton('newshift','↻ Start another shift')+safeButton('home','Choose another patient',true)+'</div>');
  }
  $('modalBody').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqward'));
-  if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
+  const d=b.dataset;if(!Object.keys(d).some(k=>k.startsWith('vpqward')))return;
+  e.preventDefault();e.stopImmediatePropagation();
   try{
    if(d.vpqwardhome!==undefined)return caseMenu();
-   if(d.vpqwardpick!==undefined){record={patient:d.vpqwardpick,observed:false,adjusted:false,answer:null};saveRecord();return followup()}
+   if(d.vpqwardpick!==undefined)return selectPatient(d.vpqwardpick);
+   if(d.vpqwardcontinue!==undefined)return continueCase();
    if(d.vpqwardfollow!==undefined)return followup();
    if(d.vpqwardadjust!==undefined)return adjust();
    if(d.vpqwardmonitor!==undefined)return monitor();
-   if(d.vpqwardobserve!==undefined){record.observed=true;saveRecord();return followup()}
-   if(d.vpqwardchoice!==undefined){record.answer=Number(d.vpqwardchoice);record.adjusted=record.answer===patient().answer;saveRecord();return adjust()}
-   if(d.vpqwardretry!==undefined){record.answer=null;saveRecord();return adjust()}
-   if(d.vpqwardreset!==undefined){record.observed=false;record.adjusted=false;record.answer=null;saveRecord();return followup()}
-  }catch(error){showModal('Treatment Ward error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqwardhome="1">Back to patients</button>')}
+   if(d.vpqwardobserve!==undefined){stateOf().examined=true;savePatient();return followup()}
+   if(d.vpqwardchoice!==undefined){const a=stateOf();if(a.careAnswer!==null)return;a.careAnswer=Number(d.vpqwardchoice);a.careComplete=a.careAnswer===patient().answer;savePatient();return adjust()}
+   if(d.vpqwardretry!==undefined){stateOf().careAnswer=null;savePatient();return adjust()}
+   if(d.vpqwardmonitoranswer!==undefined){const a=stateOf();if(a.monitorAnswer!==null)return;a.monitorAnswer=Number(d.vpqwardmonitoranswer);a.monitorComplete=a.monitorAnswer===1;savePatient();return monitor()}
+   if(d.vpqwardmonitorretry!==undefined){stateOf().monitorAnswer=null;savePatient();return monitor()}
+   if(d.vpqwardhandoff!==undefined)return handoff();
+   if(d.vpqwardnewshift!==undefined){const a=stateOf(),shift=a.shift+1;progress[currentPatient]={...initial(),shift};savePatient();return followup()}
+  }catch(error){showModal('Treatment Ward error','<p>'+escapeHtml(error.message||String(error))+'</p>'+safeButton('home','Back to patients'))}
  },true);
  const css=document.createElement('style');css.textContent='.vpqLFhead{display:flex;align-items:center;justify-content:space-between;gap:9px}.vpqLFlist{display:grid;gap:8px;margin:12px 0}.vpqLFrow{background:white;border:1px solid #d6c9e6;border-radius:12px;padding:9px;display:flex;gap:9px;align-items:center}.vpqLFrow label{display:flex;align-items:center;flex:1;gap:10px}.vpqLFrow label span b,.vpqLFrow label span small{display:block}.vpqLFrow small{font-size:11px;color:#73648d}.vpqLFrow button{border:1px solid #c6b4df;background:#f1e9ff;border-radius:9px;padding:8px 12px;font-weight:700}.vpqLFsteps{padding:13px;background:#f9f6ff;border:1px solid #d7c8e7;border-radius:13px;margin:14px 0}.vpqLFsteps h3{margin:0}.vpqWardHead{border:1px solid #c5dbe3;background:#f3faff;padding:12px;border-radius:12px;margin:10px 0}@media(max-width:550px){.vpqLFrow{flex-wrap:wrap}.vpqLFrow label{min-width:100%}}';document.head.appendChild(css);
 })();
