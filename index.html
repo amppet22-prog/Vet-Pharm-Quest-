@@ -388,7 +388,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
 <script src="reception-shadowbox-phase-a.js?v=20261108-phaseA1"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
-<script src="mechanism-lab-phase-a4.js?v=20261108-A4b"></script>
+<script src="mechanism-lab-atlas.js?v=20261108-labatlas1"></script>
+<script src="mechanism-lab-phase-a4.js?v=20261108-A4c"></script>
 <script src="exam-room-traditional.js?v=20261108-examA1"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-tox-clues"></script>
@@ -2499,7 +2500,7 @@ const vpqPhaseAMechanism=window.VPQ_MECHANISM_LAB_A4({rooms:ROOMS,showModal,chan
 const vpqTraditionalExam=window.VPQ_EXAM_ROOM_A5({rooms:ROOMS,doAction:a=>doAction(a),changeRoom});
 const vpqMechanismPriorAction=doAction;
 doAction=function(a){
- if(['vpqMechEnter','vpqMechMenu','vpqMechReceptor','vpqMechAntibiotics'].includes(a))return vpqPhaseAMechanism.route(a);
+ if(['vpqMechEnter','vpqMechMenu','vpqMechReceptor','vpqMechAntibiotics','vpqMechToxins'].includes(a))return vpqPhaseAMechanism.route(a);
  return vpqMechanismPriorAction(a);
 };
 const vpqPreMechanismRender=renderRoom;
