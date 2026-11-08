@@ -18,11 +18,43 @@ Build a welcoming, stylized isometric/2.5D clinic reception that becomes the pri
 - Events: Halloween, Pride/community, and inclusive opt-in festive collections (e.g. Christmas, Hanukkah, Diwali, Lunar New Year) without forcing any theme.
 - Players can disable holiday content or mix individual items independently of events.
 
+## Avatar customization — preserve original character charm
+The current illustrated veterinarian portraits and companion pets are existing working assets and should remain supported. The current character selection is not a true mix-and-match avatar builder. Start with current portraits as base presets, then build a modular appearance system (hair, skin tones, eyes, clothing/scrub colors, accessories, pet appearance) with a **preview-before-save** interface. Keep customization reversible and preserve old saved portraits. Do not replace the present art until a compatible modular system is proven.
+
+## Coin bank, earned rewards, store and permanent collection
+Current state already stores `coins` and `upgrades` in local browser state `vpq-v2-clinic-state`; study/case rewards already award coins, and the upgrade shop deducts them. **A proper inventory, purchase preview, equipped-item tracking and acquisition archive do not yet exist.**
+
+- Add a visible wallet/coin bank: balance, earned/spent lifetime counters, recent transactions, no real money.
+- Distinguish **locked**, **available**, **owned**, and **equipped/placed** items.
+- Every store card shows an item preview (on character, pet or room) before confirming a coin purchase; include a clear purchase confirmation.
+- Create a permanent **My Collection** archive of items bought, won, unlocked through learning, or granted at start. Track acquisition method and date; owned cosmetics remain reusable without repeat purchase.
+- Collection categories: avatar wardrobe, companion-pet accessories, reception wallpaper/furniture, seasonal items, cat corner, children's corner, dog kennel/yard, clinic accomplishments.
+- Equip/place, unequip/store, mix-and-match, search/filter and preview without spending.
+- Preserve old player coins, XP, upgrades and character settings using safe migration. Never silently reset or duplicate purchases.
+- Keep reward progression educational and non-compulsive: no loot boxes, paid currencies, artificial scarcity or gambling mechanics.
+- Optional cosmetic achievements tie rewards to pharmacology, One Health, pathology, clinical skills and eventually OSCE.
+
+## Dog play kennel / outdoor yard — 2.5D to optional 3D
+- A new indoor kennel and fenced outdoor yard, visually connected to the hospital and customizable with flooring, fencing, play equipment, shade, benches, toys and enrichment.
+- Start with a performant isometric/2.5D area; deeper camera movement or 3D geometry only if performance/accessibility justify it.
+- Build clinical learning stations into the environment: canine behavior and body-language assessment, intake triage, vaccination/parasite prevention, kennel cough/infection-control, enrichment plans, and isolation protocols.
+- Cases should teach **why** a clinical decision is made and include an answer/reveal reasoning step. Unlock cosmetic tools through completed learning, not clinical success gates that punish mistakes.
+- Pet welfare design: separate reactive or infectious animals; avoid unsafe unsupervised group housing, exposed hazards, loose cords and physically unrealistic kennel capacity.
+- A dog's play yard is not the same as isolation housing: clean zoning and traffic flow must reflect veterinary infection prevention.
+
+## Recommended software architecture
+- Existing saved coins are the authoritative opening balance, not a second unrelated currency.
+- Introduce a versioned catalog of persistent item IDs and a versioned inventory/transaction ledger separate from transient UI previews.
+- Centralize `canPurchase`, `purchase`, `owns`, `equip`, and `place` operations so purchases are atomic and cannot charge twice.
+- Migrate current `state.upgrades` to existing ownership records exactly once; do not overwrite original saves.
+- Each item includes type, compatible room/character, rarity only if meaningful, unlock criteria, preview image/source, price, theme and accessibility metadata.
+- Add tests for migration, balance underflow, repeated purchase, duplicate equip, persistence and responsive previews.
+
 ## Phasing
 - **Phase 1:** basic wall/background color picker with persistent save; simple reception zones; accessible edit interface.
-- **Phase 2:** selectable wallpaper patterns, rug/furniture choices, cat nook and playpen upgrades; unlocks with clinic coins.
-- **Phase 3:** modular decor inventory, custom room layouts, seasonal theme bundles and re-colorable objects.
-- **Phase 4:** optional rotating/zoomable pseudo-3D visuals, deeper character customization and pet interactions.
+- **Phase 2:** coin-wallet UI, item preview and permanent owned-items collection; selectable wallpaper patterns, rug/furniture choices, cat nook and playpen upgrades.
+- **Phase 3:** modular avatar wardrobe while retaining current portraits, dog yard/kennel first playable learning station, and custom room layouts/seasonal bundles.
+- **Phase 4:** optional rotating/zoomable pseudo-3D visuals, advanced character customization, dog-yard interactions and expanded case-building integration.
 
 ## Non-negotiables
 - Readable type and high-contrast UI, reduced motion option, keyboard accessibility.
