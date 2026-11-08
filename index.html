@@ -260,6 +260,17 @@
 .vpq-qcard textarea{min-height:62px;resize:vertical}
 .vpq-pharm-note{font-size:11px;padding:9px;background:#fff7e7;border-radius:10px;color:#73553b;margin:8px 0}
 @media(max-width:740px){.vpq-pharm-guide{grid-template-columns:1fr}.vpq-drug-tree{max-height:225px}}
+
+/* VPQ STANDING ALEXANDRIA v3.7 */
+.vpq-roster-option{overflow:hidden}
+.vpq-roster-option .vpq-roster-art{width:100%;height:auto;aspect-ratio:1/1.18;background-size:800% 400%;background-color:#f5e9de;background-clip:padding-box;box-shadow:none;border:1px solid #e5d4d4}
+.vpq-roster-option strong{min-height:2.3em;display:flex;align-items:center;justify-content:center}
+.vpq-roster-grid{grid-template-columns:repeat(auto-fit,minmax(125px,1fr));align-items:stretch}
+.vpq-standing-alex{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom;mix-blend-mode:normal}
+.vpq-roster-option .vpq-standing-alex{height:140px;width:100%;background:#fff9f3;border-radius:8px}
+.vpq-story-stage .vpq-standing-alex{width:195px;height:100%;object-fit:contain;object-position:center bottom;max-height:100%}
+.vpq-avatar-showcase .vpq-standing-alex{width:195px;height:260px}
+.vpq-game-avatar .vpq-standing-alex{width:76px;height:110px}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -314,7 +325,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.6</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.7</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -1451,6 +1462,23 @@ $('modalBody').addEventListener('input',e=>{
  if(e.target.id==='vpqBankSearch36'){vpqBankText36=e.target.value;vpqRefreshBank36()}
 });
 $('modalBody').addEventListener('submit',e=>{if(e.target.id!=='vpqQuestionForm36')return;e.preventDefault();e.stopImmediatePropagation();vpqSaveQuestion36(e.target)},true);
+
+
+// VPQ STANDING ALEXANDRIA v3.7
+const vpqPreviousRoster37=vpqRosterPortrait35;
+vpqRosterPortrait35=function(id){
+ if(id==='roster-28')return '<img class="vpq-character-portrait vpq-standing-alex" src="assets/alexandria-standing-v3.webp" alt="Alexandria standing in teal scrubs and white coat, with auburn-tipped hair" loading="eager">';
+ return vpqPreviousRoster37(id);
+};
+const vpqPreviousOpen37=openAvatar;
+openAvatar=function(){
+ vpqPreviousOpen37();
+ const f=$('avatarForm');if(!f)return;
+ const pick=f.querySelector('[data-vpqportrait="roster-28"] .vpq-roster-art');
+ if(pick)pick.outerHTML='<img class="vpq-standing-alex" src="assets/alexandria-standing-v3.webp" alt="Alexandria avatar">';
+ const gallery=f.querySelector('.vpq-roster-grid');
+ if(gallery){const note=document.createElement('p');note.className='vpq-roster-note';note.textContent='Gallery portraits come from two concept sheets. The standalone Alexandria avatar is full-length and sharper; the remaining portraits are previews until individual standing artwork is prepared.';gallery.after(note)}
+};
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
