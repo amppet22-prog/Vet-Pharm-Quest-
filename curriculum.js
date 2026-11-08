@@ -79,5 +79,17 @@ function getLectures(){try{const saved=JSON.parse(localStorage.getItem(key)||'nu
 function setLectures(lectures){const v=[...new Set((lectures||[]).filter(x=>allowed.has(x)))];try{localStorage.setItem(key,JSON.stringify(v))}catch(e){}return v}
 function toArcade(lecture){return courses.find(x=>x[0]===lecture)?.[1]||null}
 function fromArcade(value){return courses.find(x=>x[1]===String(value))?.[0]||null}
-window.VPQCurriculum=Object.freeze({concepts,courses,getLectures,setLectures,toArcade,fromArcade,key,version:'3.0'});
+const progressKey='vpq-shared-learning-progress-v1';
+function getProgress(){try{const p=JSON.parse(localStorage.getItem(progressKey)||'{}');return {attempts:Number(p.attempts)||0,correct:Number(p.correct)||0,bySource:p.bySource&&typeof p.bySource==='object'?p.bySource:{},recent:Array.isArray(p.recent)?p.recent:[],weak:p.weak&&typeof p.weak==='object'?p.weak:{}}}catch(e){return {attempts:0,correct:0,bySource:{},recent:[],weak:{}}}}
+function recordAttempt({source='unknown',id='',lecture='',correct=false,kind='question'}={}){
+ if(!id)return;
+ const p=getProgress(),k=source+':'+id;
+ p.attempts++;if(correct)p.correct++;
+ p.bySource[source]=(p.bySource[source]||0)+1;
+ if(correct)delete p.weak[k];else p.weak[k]={source,id,lecture,kind};
+ p.recent.unshift({source,id,lecture,correct:!!correct,kind,t:Date.now()});
+ p.recent=p.recent.slice(0,200);
+ try{localStorage.setItem(progressKey,JSON.stringify(p))}catch(e){}
+}
+window.VPQCurriculum=Object.freeze({concepts,courses,getLectures,setLectures,toArcade,fromArcade,key,progressKey,getProgress,recordAttempt,version:'3.1'});
 })();
