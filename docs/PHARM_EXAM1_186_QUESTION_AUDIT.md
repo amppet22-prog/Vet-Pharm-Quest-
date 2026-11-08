@@ -1,8 +1,24 @@
 # Exam 1 pharmacology instructor-question audit — 186-item source ledger
 
-**Status: source inventory complete; objective-level medical/pedagogical validation pending.** Each source prompt below is grounded in the answered Dr. Carlson Exam 1 question booklet. Automated matching is a screening aid, not proof the learning objective is fully tested.
+**Status (2026-11-08): all 186 source prompts and worked answers are now imported into `pharm-carlson-186.js` and accessible in the lecture-filtered Professor Guide in Pharm Arcade.** Answer presence and structural counts have been checked. Independent medical/pedagogical verification and new multiple-choice/clinical-case coverage are **still pending**. The comparison ledger below describes the earlier 45-question MCQ bank and therefore does not reflect the newly integrated reveal-answer bank; a lexical match is not a verification.
 
-## Source counts and word-overlap screen
+## Integrated full-answer coverage
+
+| Lecture | Original guide prompts now included with worked answers |
+| --- | ---: |
+| Lecture 1 | 23 |
+| Lecture 2 | 12 |
+| Lecture 3 | 27 |
+| Lecture 4 | 42 |
+| Lecture 5 | 25 |
+| Lectures 6–7 | 32 |
+| Lecture 8 | 8 |
+| Lecture 9 | 17 |
+| **Total** | **186** |
+
+The full-answer bank supports selecting lecture groups, 12-prompt unseen-priority rounds, a full sequential review of selected prompts, previous/next navigation, answer reveal, and self-rated understood/needs-review history. The legacy 45-question Professor Guide multiple-choice drill remains available separately. Do not treat a self-rating or a booklet answer as an independently verified medical answer.
+
+## Historical source counts and word-overlap screen
 
 | Lecture | Original prompts | Related wording | Possible connection | Weak/no word match |
 |---|---:|---:|---:|---:|
