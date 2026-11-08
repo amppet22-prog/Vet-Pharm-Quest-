@@ -1846,8 +1846,8 @@ $('modalBody').addEventListener('change',e=>{let v=e.target;if(!v.matches('[data
 $('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
  if(d.vpq27menu)return masteryMenu27();if(d.vpq27old)return previousStudyMenu27();if(d.vpq27start)return launch27(d.vpq27start);
  if(d.vpq27reveal){master27.shown=true;return renderMaster27()}
- if(d.vpq27rate){const x=master27.queue[master27.step];master27.seen=[x.id,...master27.seen.filter(v=>v!==x.id)].slice(0,500);master27.missed=d.vpq27rate==='miss'?[x.id,...master27.missed.filter(v=>v!==x.id)]:master27.missed.filter(v=>v!==x.id);save27();return nextMaster27()}
- if(d.vpq27answer!==undefined){const x=master27.queue[master27.step];if(master27.answer!==null)return;master27.answer=Number(d.vpq27answer);master27.seen=[x.id,...master27.seen.filter(v=>v!==x.id)].slice(0,500);master27.missed=master27.answer===x.item.answer?master27.missed.filter(v=>v!==x.id):[x.id,...master27.missed.filter(v=>v!==x.id)];save27();return renderMaster27()}
+ if(d.vpq27rate){const x=master27.queue[master27.step];master27.seen=[x.id,...master27.seen.filter(v=>v!==x.id)].slice(0,500);master27.missed=d.vpq27rate==='miss'?[x.id,...master27.missed.filter(v=>v!==x.id)]:master27.missed.filter(v=>v!==x.id);save27();shared.recordAttempt({source:'mastery',id:x.id,lecture:x.item.lecture,correct:d.vpq27rate==='know',kind:'flashcard'});return nextMaster27()}
+ if(d.vpq27answer!==undefined){const x=master27.queue[master27.step];if(master27.answer!==null)return;master27.answer=Number(d.vpq27answer);master27.seen=[x.id,...master27.seen.filter(v=>v!==x.id)].slice(0,500);master27.missed=master27.answer===x.item.answer?master27.missed.filter(v=>v!==x.id):[x.id,...master27.missed.filter(v=>v!==x.id)];save27();shared.recordAttempt({source:'mastery',id:x.id,lecture:x.item.lecture,correct:master27.answer===x.item.answer,kind:'quiz'});return renderMaster27()}
  if(d.vpq27next)return nextMaster27();if(d.vpq27wardmenu)return wardMenu27();
  if(d.vpq27wardcase!==undefined){wardCase27=Number(d.vpq27wardcase);wardStep27=0;wardAnswer27=null;return wardRender27()}
  if(d.vpq27wardanswer!==undefined){if(wardAnswer27!==null)return;wardAnswer27=Number(d.vpq27wardanswer);return wardRender27()}
@@ -1883,7 +1883,7 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
  ['review','🔁','Missed Concepts','Revisit questions missed in the Arcade until corrected.','Remediation']
  ];
  function vpqHubStats(){let p={attempts:0,missed:[]};try{p=JSON.parse(localStorage.getItem('vet-pharm-quest-v1')||'{}')}catch(e){}
-   return {attempts:Number(p.attempts)||0,missed:Array.isArray(p.missed)?p.missed.length:0,mainWeak:master27.missed.length,mainSeen:master27.seen.length};
+   const g=shared.getProgress();return {attempts:Number(p.attempts)||0,missed:Array.isArray(p.missed)?p.missed.length:0,mainWeak:master27.missed.length,mainSeen:master27.seen.length,combined:g.attempts,combinedCorrect:g.correct,combinedWeak:Object.keys(g.weak).length};
  }
  function vpqLearningHub(){
    const selected=shared.getLectures(),stats=vpqHubStats();
@@ -1891,9 +1891,10 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
      '<p>Choose <b>what to learn</b> once, then choose <b>how to practice</b>. Each activity has a distinct learning goal; you do not need to play every game.</p>'+
      '<div class="infobox"><b>📚 Active lecture focus</b><div class="vpq-sharedgrid">'+shared.courses.map(x=>'<label><input data-vpqSharedLecture="'+escapeHtml(x[0])+'" type="checkbox" '+(selected.includes(x[0])?'checked':'')+'> '+escapeHtml(x[0])+' · '+escapeHtml(x[2])+'</label>').join('')+'</div><p class="tiny">Selected: '+selected.length+' lecture groups. Specialized antibiotic games may not use non-antimicrobial lectures.</p></div>'+
      '<div class="vpq-sharedstats"><div><b>'+stats.mainSeen+'</b><small>Mastery concepts encountered</small></div><div><b>'+stats.mainWeak+'</b><small>Mastery items flagged</small></div><div><b>'+stats.attempts+'</b><small>Arcade answers</small></div><div><b>'+stats.missed+'</b><small>Arcade missed items</small></div></div>'+
+     '<p class="tiny"><b>Cross-game record:</b> '+stats.combined+' recent tracked answers, '+stats.combinedCorrect+' correct, '+stats.combinedWeak+' currently flagged across integrated game modes. Legacy attempts are preserved in their original saves; cross-game tracking begins with this update.</p>'+ 
      '<div class="vpq-gamegrid"><button data-vpqSharedLearn="1"><strong>📖 Teach Me / Learn + Apply</strong><small>First understand the physiology, drug targets and clinical consequences.</small></button>'+
      modes.map(x=>'<button data-vpqSharedGame="'+x[0]+'"><span> '+x[1]+' </span><strong>'+x[2]+'</strong><small>'+x[3]+'</small><em>'+x[4]+'</em></button>').join('')+'</div>'+
-     '<p class="tiny">Shared: lecture selection and a central teaching-card library. The Arcade still has its own question bank and locally stored performance; these are displayed here together without incorrectly merging scores. More content consolidation is planned.</p>');
+     '<p class="tiny">Shared: lecture selection, a central teaching-card library, and a cross-game attempt ledger. Existing mode-specific saves and question banks remain intact; scores are not falsely consolidated. Full question-bank consolidation and cross-game remediation are still future work.</p>');
  }
  function vpqOpenGame(mode){
    const item=modes.find(x=>x[0]===mode);if(!item)return vpqLearningHub();
