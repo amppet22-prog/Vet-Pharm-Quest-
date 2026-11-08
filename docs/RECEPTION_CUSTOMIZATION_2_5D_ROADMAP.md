@@ -95,3 +95,17 @@ Current state already stores `coins` and `upgrades` in local browser state `vpq-
 - Clickable/keyboard-focusable in-room hotspots open the existing **Study Desk** (lecture and exam focus selector), **Mastery Tracker**, and **Learning Games**. A clearly labeled Return to Reception button is present. Original walking controls and E-near-station actions remain routed through the same functions.
 - **Unchanged:** existing questions, exams, learning progress, student avatar, existing saves, coins and progression. Other rooms are untouched. The mechanism lab redesign belongs to Phase A.4.
 - **Verification:** JavaScript syntax of new module and inline main game script passed. Live browser checks still needed for visual collisions, mouse/touch hotspot targeting, door navigation, E interactions, Study Desk, Mastery Tracker, Games and smaller screens.
+
+
+## Phase A.4 — Mechanism Lab (2026-11-08)
+
+- Implemented `mechanism-lab-phase-a4.js` as a dedicated room accessed via the Pharmacy's Mechanism Lab doorway (not the generic Study Hub). Separate room navigation is exposed through the existing clinic directory and room tabs.
+- Visuals: dimensional science lab, receptor/signaling display, antibiotic target diagrams, lab bench, pathway monitor, and clickable/keyboard-accessible stations.
+- Four starter explanation lessons cover agonists/antagonists, beta-lactam cell-wall action, aminoglycoside 30S activity, and NSAID/COX physiology, each separating mechanism, biological WHY, and clinical cautions. Game Arcade and Pharmacy remain cross-links, not duplicated content.
+- Existing movement, avatar assets, saves, rewards, quizzes and drug library are untouched. JavaScript syntax checks passed; live browser inspection and end-to-end navigation testing are still required.
+
+## Next planned visual repair — Avatar full-body character art
+
+- Keep existing cute portraits/headshots in menus, but replace rectangular image-backed walking characters with appropriately framed transparent-background, **full-body standing/walking** images or layered silhouettes. No image should appear as a framed square when walking.
+- Add a larger-built male body preset and more diverse feminine skin tones and appearances. Support consistent body sizes/skin tones across walking sprite and character preview, and retain current presets and saves.
+- Do not stretch a headshot into a walking body; test at each stage size, facing direction, pet overlap, and responsive widths. Maintain original scene movement and save migration. Existing images are not to be replaced until matching standing assets are ready.
