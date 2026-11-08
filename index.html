@@ -386,6 +386,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="reception-customization.js?v=20261108-2"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-tox-clues"></script>
+<script src="pharm-next-lectures.js?v=20261108-course2"></script>
 <script>
 /* Vet Pharm Quest 2D — original learning material based on the user's course guides.
    Educational simulations only; state/federal reporting and labels require live verification. */
@@ -566,7 +567,7 @@ function openPharmacy(id=selectedDrug){selectedDrug=id;const drugs=dataDrugs(),d
 function drugCardHTML(d){return `<div class="pills"><span class="pill">${escapeHtml(d.lecture)}</span><span class="pill">${escapeHtml(d.class)}</span></div><h2>${escapeHtml(d.name)}</h2><p class="small"><b>Common brand examples:</b> ${escapeHtml(d.brand)}</p><div class="tabs">${[['moa','Mechanism'],['uses','Uses & routes'],['effects','Side effects'],['why','Why / cautions']].map(([id,label])=>`<button data-drugtab="${id}" class="${drugTab===id?'active':''}">${label}</button>`).join('')}</div>${drugTab==='moa'?`<div class="infobox"><h3>How it works</h3>${escapeHtml(d.moa)}</div>`:drugTab==='uses'?`<div class="infobox"><h3>Clinical use</h3>${escapeHtml(d.uses)}<h3>Administration routes</h3>${escapeHtml(d.route)}</div>`:drugTab==='effects'?`<div class="infobox warning"><h3>Known adverse effects</h3>${escapeHtml(d.effects)}</div>`:`<div class="infobox"><h3>Physiology behind it</h3>${escapeHtml(d.why)}<h3>Species / safety</h3>${escapeHtml(d.species)}</div>`}<p class="tiny">Educational source: ${escapeHtml(d.lecture)} + clinical cautions where indicated.</p>`}
 function filterDrugs(v){const list=$('drugList');if(!list)return;const q=v.toLowerCase().trim();list.innerHTML=dataDrugs().filter(x=>[x.name,x.brand,x.class,x.moa,x.uses,x.effects].join(' ').toLowerCase().includes(q)).map(x=>`<button class="${x.id===selectedDrug?'active':''}" data-drug="${x.id}">${escapeHtml(x.name)}</button>`).join('')||'<p class="tiny">No matching drug. Try a broader term.</p>'}
 let studySession=state.studySession&&Array.isArray(state.studySession.ids)?state.studySession:null;
-const FOCUSES=['All lectures','Lecture 1','Lecture 2','Lecture 3','Lecture 4','Lecture 5','Lectures 6–7','Lecture 8','Lecture 9','One Health','One Health · Exam 1','One Health · Exam 2','One Health · Exam 3','One Health · Exam 4','One Health · Host roles','One Health · Reporting'];
+const FOCUSES=['All lectures','Lecture 1','Lecture 2','Lecture 3','Lecture 4','Lecture 5','Lectures 6–7','Lecture 8','Lecture 9','Lecture 10','Lecture 11','Lecture 12','Lecture 13','One Health','One Health · Exam 1','One Health · Exam 2','One Health · Exam 3','One Health · Exam 4','One Health · Host roles','One Health · Reporting'];
 function studyPool(focus){return dataStudy().filter(q=>focus==='All lectures'?!q.lecture.startsWith('One Health'):focus==='One Health'?q.lecture.startsWith('One Health'):q.lecture===focus)}
 function shuffled(a){const copy=a.slice();for(let i=copy.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]]}return copy}
 function openStudy(ohOnly=false){if(ohOnly)state.focus='One Health';if(!FOCUSES.includes(state.focus))state.focus='All lectures';showStudyMenu()}
@@ -725,7 +726,7 @@ const oldRoomRender26=renderRoom;
 renderRoom=function(){oldRoomRender26();if(activeRoom==='imaging'||activeRoom==='necropsy'){const t=$('roomTitle');t.textContent=ROOMS[activeRoom].name;$('roomHint').textContent='Planned image-based cases • Coming soon!';$('mission').textContent='📷 Uploadable study images planned';}};
 const oldPharmHTML26=drugCardHTML;
 let vpqPharmFocus26='All lectures';
-openPharmacy=function(id=selectedDrug){const ds=dataDrugs(),d=ds.find(x=>x.id===id)||ds[0];selectedDrug=d.id;const allFocus=['All lectures','Lecture 3','Lecture 4','Lecture 5','Lectures 6–7','Lecture 8','Lecture 9'];showModal('💊 Pharmacy — Lecture-Aligned Drug Encyclopedia','<p class="small">More drug examples from the Exam 1 guide. Choose a lecture and search by drug, class or adverse effect. Every entry shows mechanisms, routes, adverse effects, species concerns and provenance.</p><label class="field">Lecture focus<select class="input" id="vpqPharmFocus">'+allFocus.map(x=>'<option value="'+x+'" '+(vpqPharmFocus26===x?'selected':'')+'>'+x+'</option>').join('')+'</select></label><label class="field">Search drugs<input class="input" id="drugSearch" placeholder="Name, class, target or side effect…"></label><p class="tiny" id="vpqPharmCount">'+ds.length+' total drug cards • Lecture 1–2 primarily teach principles rather than named drugs</p><div class="twocol"><div class="druglist" id="drugList"></div><div id="drugDetail">'+drugCardHTML(d)+'</div></div><div class="buttonrow"><button data-modalaction="editor">✏️ Correct a drug card</button><button data-modalaction="study">Practice pharmacology</button></div>');vpqRefreshPharm26();};
+openPharmacy=function(id=selectedDrug){const ds=dataDrugs(),d=ds.find(x=>x.id===id)||ds[0];selectedDrug=d.id;const allFocus=['All lectures','Lecture 3','Lecture 4','Lecture 5','Lectures 6–7','Lecture 8','Lecture 9','Lecture 10','Lecture 11','Lecture 12','Lecture 13'];showModal('💊 Pharmacy — Lecture-Aligned Drug Encyclopedia','<p class="small">More drug examples from the Exam 1 guide. Choose a lecture and search by drug, class or adverse effect. Every entry shows mechanisms, routes, adverse effects, species concerns and provenance.</p><label class="field">Lecture focus<select class="input" id="vpqPharmFocus">'+allFocus.map(x=>'<option value="'+x+'" '+(vpqPharmFocus26===x?'selected':'')+'>'+x+'</option>').join('')+'</select></label><label class="field">Search drugs<input class="input" id="drugSearch" placeholder="Name, class, target or side effect…"></label><p class="tiny" id="vpqPharmCount">'+ds.length+' total drug cards • Lecture 1–2 primarily teach principles rather than named drugs</p><div class="twocol"><div class="druglist" id="drugList"></div><div id="drugDetail">'+drugCardHTML(d)+'</div></div><div class="buttonrow"><button data-modalaction="editor">✏️ Correct a drug card</button><button data-modalaction="study">Practice pharmacology</button></div>');vpqRefreshPharm26();};
 function vpqRefreshPharm26(){const target=$('drugList');if(!target)return;const term=($('drugSearch')?.value||'').trim().toLowerCase();const ds=dataDrugs().filter(x=>(vpqPharmFocus26==='All lectures'||x.lecture===vpqPharmFocus26)&&[x.name,x.brand,x.class,x.moa,x.uses,x.effects,x.species].join(' ').toLowerCase().includes(term));target.innerHTML=ds.map(x=>'<button data-drug="'+escapeHtml(x.id)+'" class="'+(x.id===selectedDrug?'active':'')+'">'+escapeHtml(x.name)+'</button>').join('')||'<p class="tiny">No drugs match these filters.</p>';const count=$('vpqPharmCount');if(count)count.textContent=ds.length+' matching cards · '+dataDrugs().length+' total';}
 filterDrugs=function(){vpqRefreshPharm26()};
 $('modalBody').addEventListener('change',e=>{if(e.target.id==='vpqPharmFocus'){vpqPharmFocus26=e.target.value;vpqRefreshPharm26()}});
@@ -1390,7 +1391,17 @@ const vpqDrugGroups36=[
  ['Anti-inflammatories','Antihistamines','H2 receptor antagonists',['famotidine','ranitidine']],
  ['Anti-inflammatories','Corticosteroids','Glucocorticoids',['prednisolone','prednisone','dexamethasone','methylprednisolone','triamcinolone','betamethasone','budesonide','mometasone']],
  ['Anti-inflammatories','Corticosteroids','Mineralocorticoids',['fludrocortisone','desoxycorticosterone','docp']],
- ['Endocrine & adrenal','Anti-adrenal drugs','Steroidogenesis and adrenal control',['trilostane','mitotane','ketoconazole','selegiline','pergolide']]
+ ['Endocrine & adrenal','Anti-adrenal drugs','Steroidogenesis and adrenal control',['trilostane','mitotane','ketoconazole','selegiline','pergolide']],
+ ['Endocrine & metabolic','Insulin therapies','Short and intermediate insulin',['insulin-regular','insulin-lente','insulin-nph']],
+ ['Endocrine & metabolic','Insulin therapies','Long/basal insulin',['insulin-pzi','insulin-glargine','insulin-detemir']],
+ ['Endocrine & metabolic','Feline diabetes drugs','SGLT2 inhibitors',['bexagliflozin','velagliflozin']],
+ ['Endocrine & metabolic','Thyroid therapies','Hormone replacement',['levothyroxine']],
+ ['Endocrine & metabolic','Thyroid therapies','Antithyroid drugs',['methimazole','carbimazole']],
+ ['Endocrine & metabolic','Parathyroid and calcium','Active vitamin D',['calcitriol']],
+ ['Autonomic nervous system','Adrenergic drugs','Bladder and sphincter',['phenylpropanolamine','prazosin','tamsulosin']],
+ ['Autonomic nervous system','Antimuscarinic drugs','Bladder and eye',['oxybutynin','tropicamide','atropine-ophthalmic']],
+ ['Autonomic nervous system','Muscarinic agonists','Bladder and eye',['bethanechol','pilocarpine-ophthalmic']],
+ ['Autonomic nervous system','Adrenergic drugs','Ophthalmic alpha-1 agonists',['phenylephrine-ophthalmic']]
 ];
 function vpqDrugCategory36(d){
  const look=[d.id,d.name].join(' ').toLowerCase();
@@ -2592,6 +2603,44 @@ vpqLearningHub=function(...args){
  if(area&&!area.querySelector('[data-vpqngf-guide]'))area.insertAdjacentHTML('beforeend',
  '<div class="vpqPharmCrosslinks"><b>🧠 Pharmacology · Additional pain pathways</b><p>Learn how NGF amplifies osteoarthritis pain and compare Librela with Solensia and NSAIDs.</p><div class="buttonrow"><button data-vpqngf-guide="1">Anti-NGF mechanism lesson</button><button data-vpqtoxindex="1">Toxicology reference</button></div></div>');
 };
+
+
+/* New Pharmacology lecture importer and reference lessons. No changes to Exam 1 cards. */
+const vpqPharmNext=window.VPQ_PHARM_NEXT;
+if(vpqPharmNext){
+ const existingDrugIds=new Set(D.drugs.map(x=>x.id));
+ const existingQuestionIds=new Set(D.study.map(x=>x.id));
+ for(const d of vpqPharmNext.drugs)if(!existingDrugIds.has(d.id))D.drugs.push(d);
+ for(const q of vpqPharmNext.questions)if(!existingQuestionIds.has(q.id))D.study.push(q);
+}
+function vpqPharmNextLesson(id){
+ const l=vpqPharmNext?.lectures?.find(x=>x.id===id);if(!l)return vpqPharmNextMenu();
+ showModal('📖 '+escapeHtml(l.id)+' · '+escapeHtml(l.title),
+ '<p><b>'+escapeHtml(l.summary)+'</b></p><div class="infobox"><b>WHY this physiology matters</b><p>'+escapeHtml(l.why)+'</p></div>'+
+ l.concepts.map(x=>'<div class="vpqNewPharmConcept"><h3>'+escapeHtml(x[0])+'</h3><p>'+escapeHtml(x[1])+'</p></div>').join('')+
+ '<div class="infobox"><b>Additional instructor context</b><p>'+escapeHtml(l.recording)+'</p></div>'+
+ '<p class="tiny">Sources: '+l.sources.map(x=>escapeHtml(x)).join(' · ')+'. '+escapeHtml(l.status)+'. These are learning notes, not prescribing protocols.</p>'+
+ '<div class="buttonrow"><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpqnewpharm-menu="1">← All new lectures</button></div>');
+}
+function vpqPharmNextMenu(){
+ const data=vpqPharmNext;
+ showModal('📚 Pharmacology · Lectures 10–13',
+ '<p>New curriculum modules from your lecture slides and instructor recordings. The earlier Exam 1 (Lectures 1–9, 186 Professor Guide prompts) remains unchanged. This new material is being expanded and checked.</p>'+
+ '<div class="vpqNewPharmCards">'+(data?.lectures||[]).map(x=>'<button data-vpqnewpharm-lesson="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.id)+' · '+escapeHtml(x.title)+'</b><small>'+escapeHtml(x.focus||x.summary)+'</small><em>'+data.questions.filter(q=>q.lecture===x.id).length+' initial questions · browse lesson</em></button>').join('')+'</div>'+
+ '<p class="tiny">Each lecture has an overview, mechanism-first explanations, clinical connections and a small first-round question set. This is a foundation, not a fully audited exam question bank.</p>');
+}
+$('modalBody').addEventListener('click',ev=>{
+ const b=ev.target.closest('button');if(!b)return;
+ const d=b.dataset;
+ if(d.vpqnewpharmMenu!==undefined)return vpqPharmNextMenu();
+ if(d.vpqnewpharmLesson!==undefined)return vpqPharmNextLesson(d.vpqnewpharmLesson);
+ if(d.vpqnewpharmStudy!==undefined){state.focus=d.vpqnewpharmStudy;studySession=null;return showStudyMenu()}
+});
+const vpqPharmNewStudyMenu=showStudyMenu;
+showStudyMenu=function(...args){vpqPharmNewStudyMenu(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 New Pharmacology · Lectures 10–13</b><p>Diabetes, thyroid/parathyroid and autonomic drugs. Open a lesson, or select Lecture 10–13 in the dropdown above to practice.</p><button data-vpqnewpharm-menu="1">Browse new lecture lessons</button></div>')};
+const vpqPharmNewLearningHub=vpqLearningHub;
+vpqLearningHub=function(...args){vpqPharmNewLearningHub(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Lectures 10–13</b><p>New lecture material is available in the Study Desk; this curriculum is separate from the Exam 1 Professor Guide.</p><button data-vpqnewpharm-menu="1">Browse new lecture lessons</button></div>')};
+const vpqPharmNewStyle=document.createElement('style');vpqPharmNewStyle.textContent='.vpqNewPharmBanner{padding:14px;margin:14px 0;border:1px solid #b7cbed;background:#eff7ff;border-radius:12px}.vpqNewPharmBanner p{margin:6px 0;font-size:13px}.vpqNewPharmCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}.vpqNewPharmCards button{background:white;border-radius:12px;padding:14px;text-align:left;border:1px solid #c8d4e5}.vpqNewPharmCards b,.vpqNewPharmCards small,.vpqNewPharmCards em{display:block}.vpqNewPharmCards small{font-size:12px;margin:8px 0}.vpqNewPharmCards em{font-size:11px;font-style:normal;color:#487c99}.vpqNewPharmConcept{padding:12px 14px;margin:9px 0;border-radius:11px;border:1px solid #d2dce9;background:#fff}.vpqNewPharmConcept h3{margin:0 0 6px;font-size:15px}.vpqNewPharmConcept p{font-size:13px;line-height:1.5}';document.head.appendChild(vpqPharmNewStyle);
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
