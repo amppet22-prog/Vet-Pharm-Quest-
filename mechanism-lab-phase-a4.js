@@ -29,6 +29,7 @@ function section(id){
  const x=findSection(id);if(!x)return menu();
  currentSection=x.id;currentCard='';
  showModal(x.icon+' '+x.title,header()+'<p>'+safe(x.intro)+'</p>'+
+ (x.id==='toxins'?'<div class="buttonrow"><button type="button" data-vpqvp-gallery="Toxicology">🎨 Illustrated Toxicant Pathways</button></div>':x.id==='antibiotics'?'<div class="buttonrow"><button type="button" data-vpqvp-gallery="Antibiotics">📈 Antibiotic & PK/PD diagrams</button></div>':'')+
  '<div class="vpqAtlasCards">'+x.cards.map((c,i)=>'<button type="button" data-vpqmechcard="'+safe(c.id)+'"><span class="vpqAtlasCardNumber">'+(i+1)+' / '+x.cards.length+'</span><b>'+safe(c.title)+'</b><small>'+safe(c.tag)+'</small></button>').join('')+'</div>'+
  '<div class="buttonrow"><button type="button" data-vpqmechmenu="1">← All Lab boards</button><button type="button" data-vpqmechlounge="1">📚 Study Lounge</button></div>');
 }
@@ -38,6 +39,7 @@ function lesson(id){
  const i=x.cards.findIndex(c=>c.id===id),c=x.cards[i];
  currentSection=x.id;currentCard=c.id;
  showModal(x.icon+' '+c.title,'<p class="tiny">'+safe(x.title)+' · Card '+(i+1)+' / '+x.cards.length+' · '+safe(c.tag)+'</p>'+
+ '<div class="vpqVPInLab">'+(window.VPQ_VISUAL_PATHWAYS?.preview(({ 'abx-gens':'abx-gens','abx-pkpd':'abx-pkpd','abx-classes':'abx-wall','rec-cox':'pain-cox','tox-ach':'tox-op','tox-rodent':'tox-anticoag','tox-cyanide':'tox-cyanide' })[c.id])||'')+'</div>'+
  '<div class="vpqAtlasDetail"><h3>1. What does it target or do?</h3><p>'+safe(c.mechanism)+'</p></div>'+
  '<div class="vpqAtlasDetail"><h3>2. WHY is that pathway important?</h3><p>'+safe(c.why)+'</p></div>'+
  '<div class="vpqAtlasDetail"><h3>3. Clinical application</h3><p>'+safe(c.clinical)+'</p></div>'+
