@@ -75,7 +75,7 @@ function creator(){
  const form=document.getElementById('avatarForm'),stage=document.getElementById('vpqPreviewStage');if(!form||!stage)return;
  const values=Object.fromEntries(new FormData(form).entries());
  const p={...values,beard:values.beard==='true',cap:values.cap==='true'};
- const portrait=stage.querySelector('.vpq-character-portrait,.vpq-storybook-portrait')?.outerHTML||'';
+ const portrait=p.portraitId==='roster-28'?'<img class="vpq-character-portrait vpq-standing-alex" src="assets/alexandria-storybook-portrait.webp" alt="Alexandria and companion storybook portrait">':stage.querySelector('.vpq-character-portrait,.vpq-storybook-portrait')?.outerHTML||'';
  const pet=stage.querySelector('.vpq-preview-pet')?.outerHTML||'';
  stage.innerHTML='<div class="vpq-matched-creator"><div class="vpq-matched-frame"><small>🖼️ Portrait</small>'+portrait+'</div><div class="vpq-matched-body"><small>🚶 In-game character</small>'+svg(p,'preview')+'</div></div><div class="vpq-matched-pet">'+pet+'</div>';
  const note=stage.parentNode.querySelector('.vpq-matched-roster-note');
@@ -83,7 +83,7 @@ function creator(){
 }
 function viewer(p){
  const root=document.getElementById('modalBody')?.querySelector('.vpq-avatar-showcase');if(!root)return;
- const portrait=root.querySelector('.vpq-character-portrait,.vpq-storybook-portrait')?.outerHTML||'';
+ const portrait=p.portraitId==='roster-28'?'<img class="vpq-character-portrait vpq-standing-alex" src="assets/alexandria-storybook-portrait.webp" alt="Alexandria and companion storybook portrait">':root.querySelector('.vpq-character-portrait,.vpq-storybook-portrait')?.outerHTML||'';
  const pet=root.querySelector('.vpq-preview-pet')?.outerHTML||'';
  root.innerHTML='<div class="vpq-matched-viewer"><div class="vpq-matched-frame"><small>🖼️ Selected portrait</small>'+portrait+'</div><div class="vpq-matched-body"><small>🚶 Walking avatar</small>'+svg(p,'viewer')+'</div></div>'+pet;
 }
