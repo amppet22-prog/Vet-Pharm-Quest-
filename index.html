@@ -314,7 +314,7 @@ for(const [k,v] of Object.entries({scrubStyle:'classic',whiteCoat:false,expressi
   if(state[k]===undefined) state[k]=v;
 }
 ROOMS.treatment.props[2].action='physiology';ROOMS.treatment.props[2].label='Monitoring & Physiology';ROOMS.treatment.props[2].bubble='Why it happens';
-ROOMS.reception.props.push({x:64,emoji:'🗺️',label:'Clinic Guide',action:'guide',bubble:'What does each room do?'});
+// Clinic Guide stays in the sidebar; avoid crowding reception stations.
 ROOMS.exam.props[2].label='Protocols & Patients';ROOMS.exam.props[2].bubble='Signs + workups';
 const extraCases=[
  {id:'pharm-pyoderma',track:'Pharmacology',emoji:'🐶',name:'Roxy — superficial pyoderma',species:'Dog',location:'exam',intro:'Roxy has papules, epidermal collarettes and pruritus. You want to practice stewardship instead of automatically reaching for antibiotics.',clues:'Canine papules, pustules, epidermal collarettes, pruritus and a history consistent with superficial pyoderma.',protocol:'Signalment + lesion description → cytology → treat underlying cause → decide whether topical care alone may be enough vs systemic antibiotics.',steps:[
