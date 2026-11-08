@@ -240,6 +240,26 @@
 .vpq-roster-note{font-size:11px;color:#745b7e;line-height:1.45}
 @media(max-width:600px){.vpq-roster-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-height:390px}.vpq-roster-option .vpq-roster-art{width:105px;height:125px}}
 
+
+/* VPQ PHARM TAXONOMY AND QUESTION STUDIO v3.6 */
+.vpq-pharm-guide{display:grid;grid-template-columns:minmax(210px,.85fr) minmax(270px,1.6fr);gap:12px}
+.vpq-pharm-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:8px;margin:12px 0}
+.vpq-drug-tree{max-height:430px;overflow-y:auto;border:2px solid #e7dfed;border-radius:14px;padding:8px;background:#f9f6ff}
+.vpq-tree-group{margin:7px 0 10px}.vpq-tree-group h4{margin:5px 0;font-size:12px;color:#5f497d}
+.vpq-tree-group h5{margin:4px 0 5px;font-size:11px;color:#866ea0}
+.vpq-drug-tree button{display:block;width:100%;text-align:left;border:1px solid #ece5ed;margin:3px 0;background:white;padding:7px 8px;font-size:12px}
+.vpq-drug-tree button.active{background:#e7d5fc;border-color:#9765b9}
+.vpq-question-toolbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin:12px 0}
+.vpq-question-list{max-height:430px;overflow:auto;border:1px solid #e4d9e8;border-radius:14px;padding:8px;background:#faf6fc}
+.vpq-question-line{display:flex;gap:8px;justify-content:space-between;align-items:start;border-bottom:1px solid #ebdfec;padding:9px 5px}
+.vpq-question-line strong{font-size:12px}.vpq-question-line small{display:block;font-size:10px;color:#776987}
+.vpq-question-line button{font-size:11px;padding:6px 8px;white-space:nowrap}
+.vpq-qcard{border:2px solid #e5d4e9;border-radius:15px;padding:13px;margin:10px 0;background:#fffdfa}
+.vpq-qcard label{display:block;margin:8px 0;font-size:12px}
+.vpq-qcard input,.vpq-qcard textarea,.vpq-qcard select{width:100%;padding:8px;border:1px solid #dacadd;border-radius:9px;background:white}
+.vpq-qcard textarea{min-height:62px;resize:vertical}
+.vpq-pharm-note{font-size:11px;padding:9px;background:#fff7e7;border-radius:10px;color:#73553b;margin:8px 0}
+@media(max-width:740px){.vpq-pharm-guide{grid-template-columns:1fr}.vpq-drug-tree{max-height:225px}}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -294,7 +314,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.5</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.6</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -1265,6 +1285,172 @@ vpqApplyPreset=function(kind){
  const f=$('avatarForm');
  if(f?.elements.portraitId){f.elements.portraitId.value=kind==='alexandria'?'roster-28':kind==='gary'?'roster-29':'classic';vpqRenderStoryPreview()}
 };
+
+
+// VPQ PHARM TAXONOMY AND QUESTION STUDIO v3.6
+// Clinical content uses the user's lecture-aligned guides; group labels don't verify individual drug claims.
+const vpqDrugGroups36=[
+ ['Antibiotics','Cell-wall inhibitors','Penicillins',['amoxclav','penicillin','ampicillin','amoxicillin','cloxacillin','ticarcillin','hetacillin']],
+ ['Antibiotics','Cell-wall inhibitors','Cephalosporins',['cephalexin','cefovecin','ceftiofur','cefazolin','cefapirin','cefpodoxime','cefiderocol']],
+ ['Antibiotics','Cell-wall inhibitors','Carbapenems & monobactams',['imipenem','meropenem','aztreonam']],
+ ['Antibiotics','Cell-wall inhibitors','Glycopeptides & bacitracin',['vancomycin','bacitracin']],
+ ['Antibiotics','Ribosomal inhibitors','Tetracyclines (30S)',['doxycycline','oxytetracycline','tetracycline','minocycline']],
+ ['Antibiotics','Ribosomal inhibitors','Aminoglycosides (30S)',['gentamicin','amikacin','neomycin','streptomycin']],
+ ['Antibiotics','Ribosomal inhibitors','Macrolides (50S)',['tulathromycin','clarithromycin','azithromycin','tylosin','tilmicosin','tildipirosin','gamithromycin']],
+ ['Antibiotics','Ribosomal inhibitors','Phenicols (50S)',['florfenicol','chloramphenicol']],
+ ['Antibiotics','Ribosomal inhibitors','Lincosamides (50S)',['clindamycin','pirlimycin','lincomycin']],
+ ['Antibiotics','Ribosomal inhibitors','Other 50S inhibitors',['tiamulin','virginiamycin']],
+ ['Antibiotics','DNA / RNA inhibitors','Fluoroquinolones',['enrofloxacin','pradofloxacin','difloxacin','marbofloxacin','orbifloxacin','danofloxacin']],
+ ['Antibiotics','DNA / RNA inhibitors','Rifamycins',['rifampin','rifampicin']],
+ ['Antibiotics','DNA / RNA inhibitors','Nitroimidazoles',['metronidazole','ronidazole']],
+ ['Antibiotics','Folate inhibitors','Sulfonamides and potentiators',['sulfadimethoxine','sulfasalazine','trimethoprim','sulfadiazine']],
+ ['Antibiotics','Membrane-active agents','Polymyxins and ionophores',['polymyxin','monensin','lasalocid']],
+ ['Anti-inflammatories','NSAIDs','Traditional & nonselective',['flunixin','ketoprofen','aspirin','acetaminophen']],
+ ['Anti-inflammatories','NSAIDs','COX-selective',['carprofen','meloxicam','robenacoxib','firocoxib','deracoxib','etodolac','piroxicam','phenylbutazone']],
+ ['Anti-inflammatories','NSAIDs','Other inflammatory pain targets',['grapiprant','dipyrone','tepoxalin']],
+ ['Anti-inflammatories','Antihistamines','H1 receptor antagonists',['diphenhydramine','cetirizine','chlorpheniramine','loratadine','tripelennamine']],
+ ['Anti-inflammatories','Antihistamines','H2 receptor antagonists',['famotidine','ranitidine']],
+ ['Anti-inflammatories','Corticosteroids','Glucocorticoids',['prednisolone','prednisone','dexamethasone','methylprednisolone','triamcinolone','betamethasone','budesonide','mometasone']],
+ ['Anti-inflammatories','Corticosteroids','Mineralocorticoids',['fludrocortisone','desoxycorticosterone','docp']],
+ ['Endocrine & adrenal','Anti-adrenal drugs','Steroidogenesis and adrenal control',['trilostane','mitotane','ketoconazole','selegiline','pergolide']]
+];
+function vpqDrugCategory36(d){
+ const look=[d.id,d.name].join(' ').toLowerCase();
+ for(const [branch,family,group,names] of vpqDrugGroups36){if(names.some(n=>look.includes(n)))return {branch,family,group}};
+ const cl=String(d.class||'').toLowerCase(),lecture=String(d.lecture||'');
+ if(/anti.?hist|h1|h2/.test(cl))return {branch:'Anti-inflammatories',family:'Antihistamines',group:'Other antihistamines'};
+ if(/steroid|corticoid|glucocorticoid/.test(cl))return {branch:'Anti-inflammatories',family:'Corticosteroids',group:'Other corticosteroids'};
+ if(/nsaid|cox|prostaglandin/.test(cl))return {branch:'Anti-inflammatories',family:'NSAIDs',group:'Other NSAIDs'};
+ if(/anti.adrenal|trilostane/.test(cl))return {branch:'Endocrine & adrenal',family:'Anti-adrenal drugs',group:'Other anti-adrenal drugs'};
+ return {branch:lecture.includes('Lecture 9')?'Endocrine & adrenal':'Antibiotics',family:'Additional drug classes',group:'Unclassified'};
+}
+let vpqBranch36='All',vpqFamily36='All',vpqLecture36='All lectures',vpqDrugSearch36='';
+function vpqPharmRender36(){
+ const holder=$('vpqPharmLayout36');if(!holder)return;
+ const all=dataDrugs(),cats=all.map(d=>({...d,...vpqDrugCategory36(d)}));
+ const branches=['All',...new Set(cats.map(d=>d.branch))];
+ const families=['All',...new Set(cats.filter(x=>vpqBranch36==='All'||x.branch===vpqBranch36).map(x=>x.family))];
+ const filters=cats.filter(d=>(vpqBranch36==='All'||d.branch===vpqBranch36)&&(vpqFamily36==='All'||d.family===vpqFamily36)&&(vpqLecture36==='All lectures'||String(d.lecture||'').includes(vpqLecture36))&&[d.name,d.brand,d.class,d.uses,d.effects,d.group,d.family].join(' ').toLowerCase().includes(vpqDrugSearch36));
+ const options=(items,current)=>items.map(x=>'<option '+(x===current?'selected':'')+' value="'+escapeHtml(x)+'">'+escapeHtml(x)+'</option>').join('');
+ const grouped={};for(const d of filters){(grouped[d.branch]??={});(grouped[d.branch][d.family]??={});(grouped[d.branch][d.family][d.group]??=[]).push(d)}
+ const tree=Object.entries(grouped).map(([b,fs])=>'<div class="vpq-tree-group"><h4>📁 '+escapeHtml(b)+'</h4>'+Object.entries(fs).map(([f,gs])=>'<h5>▸ '+escapeHtml(f)+'</h5>'+Object.entries(gs).map(([g,entries])=>'<div class="vpq-tree-group"><b class="tiny">'+escapeHtml(g)+'</b>'+entries.map(d=>'<button data-drug="'+escapeHtml(d.id)+'" class="'+(d.id===selectedDrug?'active':'')+'">'+escapeHtml(d.name)+'</button>').join('')+'</div>').join('')).join('')+'</div>').join('')||'<p class="small">No drugs match your selection.</p>';
+ const current=all.find(d=>d.id===selectedDrug)||filters[0]||all[0];
+ const card=current?drugCardHTML(current):'<p>No drugs loaded.</p>';
+ holder.innerHTML='<p class="vpq-pharm-note">📚 Pharm 1 · Exam 1 · Lectures 1–9. Groups follow your High-Yield Master Chart. Lecture-specific notes are educational, not verified dosing or current food-animal prescribing instructions.</p><div class="vpq-pharm-filters">'+
+ '<label class="field">Branch<select class="input" id="vpqDrugBranch36">'+options(branches,vpqBranch36)+'</select></label>'+
+ '<label class="field">Drug family<select class="input" id="vpqDrugFamily36">'+options(families,vpqFamily36)+'</select></label>'+
+ '<label class="field">Lecture<select class="input" id="vpqDrugLecture36">'+options(['All lectures','Lecture 3','Lecture 4','Lecture 5','Lectures 6–7','Lecture 8','Lecture 9'],vpqLecture36)+'</select></label>'+
+ '<label class="field">Search<input class="input" id="vpqDrugSearch36" placeholder="Drug, species, class, adverse effect" value="'+escapeHtml(vpqDrugSearch36)+'"></label></div>'+
+ '<div class="vpq-pharm-guide"><div><p class="tiny">'+filters.length+' matching cards / '+all.length+' in the library</p><div class="vpq-drug-tree" id="drugList">'+tree+'</div></div><div id="drugDetail">'+card+'</div></div>'+
+ '<div class="buttonrow"><button type="button" data-vpqopenarcade="1">🎮 Play Pharm Arcade</button><button type="button" data-vpqpharmstudy="1">📚 Pharm 1 quiz</button><button type="button" data-vpqbank="1">📝 Question Bank Studio</button><button type="button" data-vpqeditdrug="1">✏️ Edit selected drug</button></div>';
+}
+openPharmacy=function(id=selectedDrug){if(id)selectedDrug=id;showModal('💊 Pharmacy · Pharm 1 Drug Families','<div id="vpqPharmLayout36"></div>');vpqPharmRender36()};
+const vpqOriginalDrugCard36=drugCardHTML;
+drugCardHTML=function(d){
+ if(!d)return '<p>No selected drug.</p>';
+ const cat=vpqDrugCategory36(d);
+ return '<p class="tiny">📁 '+escapeHtml(cat.branch)+' → '+escapeHtml(cat.family)+' → '+escapeHtml(cat.group)+'</p>'+vpqOriginalDrugCard36(d)+
+ '<div class="vpq-pharm-note"><b>Provenance:</b> '+escapeHtml(d.source||'Pharm 1 course review · lecture-linked, not independently verified')+
+ (d.reviewStatus?' · '+escapeHtml(d.reviewStatus):'')+'. <b>Correction or verification needed?</b> Edit the card and record a source. Product labels, species restrictions, dose and withdrawal times require up-to-date confirmation.</div>';
+};
+// Separate course-specific choices from stored historical lecture IDs, retaining prior saved sessions.
+const vpqOriginalStudyMenu36=showStudyMenu;
+showStudyMenu=function(){
+ vpqOriginalStudyMenu36();
+ const area=$('modalBody'),field=$('studyFocus');if(!area||!field)return;
+ for(const op of field.options){if(op.value==='All lectures')op.textContent='Pharm 1 · Exam 1 · All lectures ('+studyPool(op.value).length+')';else if(/^Lecture/.test(op.value))op.textContent='Pharm 1 · Exam 1 · '+op.value+' ('+studyPool(op.value).length+')';}
+ area.insertAdjacentHTML('beforeend','<div class="vpq-pharm-note"><b>Question styles:</b> Instructor recall (slide/study-guide facts), clinical application, and NAVLE-style case reasoning. These tags help you filter and edit; they do not represent official NAVLE questions.</div><div class="buttonrow"><button type="button" data-vpqbank="1">📝 Review complete question bank</button></div>');
+};
+const vpqQuestionStyle36=q=>q.style||(/case|patient|foal|horse|dog|cat|cow|rabbit|clinical|toxicity|dehydrat|hypotens/i.test(q.q||'')?'Clinical application':'Instructor-style recall');
+function vpqQuestionCourse36(q){return String(q.lecture||'').startsWith('One Health')?'One Health':'Pharm 1'}
+function vpqBankItems36(){
+ const base=dataStudy();const added=Object.values(vpqOwnQuestions36||{});
+ return [...base,...added];
+}
+let vpqOwnQuestions36=(()=>{
+ try{const x=JSON.parse(localStorage.getItem('vpq-pharm-owner-questions')||'{}');return x&&typeof x==='object'&&!Array.isArray(x)?x:{}}catch{return {}}
+})();
+const vpqOriginalDataStudy36=dataStudy;
+dataStudy=function(){return [...vpqOriginalDataStudy36(),...Object.values(vpqOwnQuestions36)]};
+let vpqBankText36='',vpqBankCourse36='Pharm 1',vpqBankLecture36='All',vpqBankStyle36='All';
+function vpqBankStudio36(){
+ const all=dataStudy();
+ showModal('📝 Ultimate Question Bank · Local Authoring Studio',
+ '<p class="vpq-pharm-note"><b>Creator workspace:</b> Search and edit all questions, including One Health. New and corrected questions save only in this browser until exported and published. This is <b>not</b> a password-protected private admin page; do not include exam secrets or personal information.</p>'+
+ '<div class="vpq-question-toolbar"><label class="field">Course<select class="input" id="vpqBankCourse36"><option>Pharm 1</option><option>One Health</option><option>All courses</option></select></label>'+
+ '<label class="field">Lecture<select class="input" id="vpqBankLecture36"></select></label>'+
+ '<label class="field">Question type<select class="input" id="vpqBankStyle36"><option>All</option><option>Instructor-style recall</option><option>Clinical application</option><option>NAVLE-style vignette</option></select></label>'+
+ '<label class="field">Search<input class="input" id="vpqBankSearch36" placeholder="Topic, question, id, source" value="'+escapeHtml(vpqBankText36)+'"></label></div>'+
+ '<div class="row"><button type="button" data-vpqnewquestion="1">➕ Add a Pharm 1 question</button><button type="button" data-vpqexportquestions="1">⬇ Export all questions JSON</button><button type="button" data-vpqexportedits="1">⬇ Export corrections JSON</button></div>'+
+ '<p class="tiny" id="vpqBankCount36"></p><div class="vpq-question-list" id="vpqBankList36"></div>');
+ const c=$('vpqBankCourse36');c.value=vpqBankCourse36;const st=$('vpqBankStyle36');st.value=vpqBankStyle36;vpqRefreshBank36();
+}
+function vpqRefreshBank36(){
+ const list=$('vpqBankList36');if(!list)return;
+ const all=dataStudy(),co=$('vpqBankCourse36').value;
+ const lectures=['All',...new Set(all.filter(q=>co==='All courses'||vpqQuestionCourse36(q)===co).map(q=>q.lecture||'Unspecified'))];
+ const lectureEl=$('vpqBankLecture36');lectureEl.innerHTML=lectures.map(l=>'<option value="'+escapeHtml(l)+'">'+escapeHtml(l)+'</option>').join('');
+ if(lectures.includes(vpqBankLecture36))lectureEl.value=vpqBankLecture36;else{vpqBankLecture36='All';lectureEl.value='All'}
+ const style=$('vpqBankStyle36').value,term=vpqBankText36.toLowerCase();
+ const matches=all.filter(q=>(co==='All courses'||vpqQuestionCourse36(q)===co)&&(vpqBankLecture36==='All'||q.lecture===vpqBankLecture36)&&(style==='All'||vpqQuestionStyle36(q)===style)&&[q.q,q.id,q.lecture,q.topic,q.source].join(' ').toLowerCase().includes(term));
+ $('vpqBankCount36').textContent=matches.length+' visible / '+all.length+' total. Click Edit to modify an answer, rationale, source, lecture, or difficulty.';
+ list.innerHTML=matches.map(q=>'<div class="vpq-question-line"><div><strong>'+escapeHtml(q.q)+'</strong><small>'+escapeHtml(vpqQuestionCourse36(q)+' · '+(q.lecture||'')+' · '+vpqQuestionStyle36(q)+' · '+q.id)+'</small></div><button data-vpqeditq="'+escapeHtml(q.id)+'">Edit</button></div>').join('')||'<p class="tiny">No matching questions.</p>';
+}
+function vpqEditQuestion36(id){
+ const old=dataStudy().find(q=>q.id===id)||null;
+ const fresh=!old;
+ const q=old||{id:'local-'+Date.now(),lecture:'Lecture 1',topic:'New question',q:'',options:['','','',''],answer:0,why:'',source:'My own notes',style:'Instructor-style recall',difficulty:'Core',reviewStatus:'draft'};
+ const opt=(arr,value)=>arr.map(a=>'<option value="'+escapeHtml(a)+'" '+(a===value?'selected':'')+'>'+escapeHtml(a)+'</option>').join('');
+ showModal(fresh?'➕ New question':'✏️ Review & Edit Question','<p class="vpq-pharm-note">Edits are local until you export and integrate them into GitHub. Record where each answer came from, and flag uncertain clinical claims.</p>'+
+ '<form id="vpqQuestionForm36" class="vpq-qcard"><input type="hidden" name="id" value="'+escapeHtml(q.id)+'">'+
+ '<label>Question<textarea name="q" required>'+escapeHtml(q.q)+'</textarea></label>'+
+ '<div class="twocol"><label>Lecture<select name="lecture">'+opt(['Lecture 1','Lecture 2','Lecture 3','Lecture 4','Lecture 5','Lectures 6–7','Lecture 8','Lecture 9'],q.lecture)+'</select></label>'+
+ '<label>Style<select name="style">'+opt(['Instructor-style recall','Clinical application','NAVLE-style vignette'],vpqQuestionStyle36(q))+'</select></label></div>'+
+ '<div class="twocol"><label>Topic<input name="topic" value="'+escapeHtml(q.topic||'')+'"></label><label>Difficulty<select name="difficulty">'+opt(['Core','Intermediate','Challenge'],q.difficulty||'Core')+'</select></label></div>'+
+ q.options.slice(0,4).map((a,i)=>'<label>Answer option '+(i+1)+'<input name="opt'+i+'" value="'+escapeHtml(a)+'" required></label>').join('')+
+ '<label>Correct answer<select name="answer">'+[0,1,2,3].map(i=>'<option value="'+i+'" '+(q.answer===i?'selected':'')+'>'+String(i+1)+'</option>').join('')+'</select></label>'+
+ '<label>Explanation: why is this right?<textarea name="why" required>'+escapeHtml(q.why||'')+'</textarea></label>'+
+ '<label>Source/lecture and slide reference<input name="source" value="'+escapeHtml(q.source||'')+'"></label>'+
+ '<label>Review status<select name="reviewStatus">'+opt(['draft','course-based','cross-verified','needs review'],q.reviewStatus||'draft')+'</select></label>'+
+ '<div class="buttonrow"><button type="submit">💾 Save question locally</button><button type="button" data-vpqbank="1">← Back to bank</button></div></form>');
+ const form=$('vpqQuestionForm36');form.dataset.newQuestion=fresh?'1':'0';
+}
+function vpqSaveQuestion36(form){
+ const fd=new FormData(form);
+ const q={id:String(fd.get('id')),lecture:String(fd.get('lecture')),topic:String(fd.get('topic')).trim(),style:String(fd.get('style')),difficulty:String(fd.get('difficulty')),q:String(fd.get('q')).trim(),options:[0,1,2,3].map(i=>String(fd.get('opt'+i)).trim()),answer:Number(fd.get('answer')),why:String(fd.get('why')).trim(),source:String(fd.get('source')).trim(),reviewStatus:String(fd.get('reviewStatus'))};
+ if(!q.q||q.options.some(x=>!x)||!q.why||q.answer<0||q.answer>3){alert('Fill in the question, four choices, and rationale.');return}
+ const isOwned=form.dataset.newQuestion==='1'||!!vpqOwnQuestions36[q.id];
+ if(isOwned){vpqOwnQuestions36[q.id]=q;localStorage.setItem('vpq-pharm-owner-questions',JSON.stringify(vpqOwnQuestions36))}
+ else {edits.study[q.id]=q;persist()}
+ vpqBankStudio36();
+}
+function vpqDownloadQuestionBank36(){
+ downloadFile('Vet_Pharm_Quest_Ultimate_Question_Bank.json',{course:'Pharm 1 and One Health',exported:new Date().toISOString(),questions:dataStudy(),note:'Contains course-aligned review questions and user-authored edits. Not independently verified for clinical dosing.'});
+}
+$('modalBody').addEventListener('click',e=>{
+ const btn=e.target.closest('button');if(!btn)return;
+ if(btn.dataset.vpqbank)vpqBankStudio36();
+ else if(btn.dataset.vpqnewquestion)vpqEditQuestion36('');
+ else if(btn.dataset.vpqeditq)vpqEditQuestion36(btn.dataset.vpqeditq);
+ else if(btn.dataset.vpqexportquestions)vpqDownloadQuestionBank36();
+ else if(btn.dataset.vpqexportedits)downloadJSON();
+ else if(btn.dataset.vpqpharmstudy){state.focus='All lectures';openStudy();}
+ else if(btn.dataset.vpqeditdrug)openEditor('drugs',selectedDrug);
+});
+$('modalBody').addEventListener('change',e=>{
+ const id=e.target.id;
+ if(id==='vpqDrugBranch36'){vpqBranch36=e.target.value;vpqFamily36='All';vpqPharmRender36()}
+ else if(id==='vpqDrugFamily36'){vpqFamily36=e.target.value;vpqPharmRender36()}
+ else if(id==='vpqDrugLecture36'){vpqLecture36=e.target.value;vpqPharmRender36()}
+ else if(id==='vpqBankCourse36'){vpqBankCourse36=e.target.value;vpqBankLecture36='All';vpqRefreshBank36()}
+ else if(id==='vpqBankLecture36'){vpqBankLecture36=e.target.value;vpqRefreshBank36()}
+ else if(id==='vpqBankStyle36'){vpqBankStyle36=e.target.value;vpqRefreshBank36()}
+});
+$('modalBody').addEventListener('input',e=>{
+ if(e.target.id==='vpqDrugSearch36'){vpqDrugSearch36=e.target.value;vpqPharmRender36();const el=$('vpqDrugSearch36');el?.focus();el?.setSelectionRange(el.value.length,el.value.length)}
+ if(e.target.id==='vpqBankSearch36'){vpqBankText36=e.target.value;vpqRefreshBank36()}
+});
+$('modalBody').addEventListener('submit',e=>{if(e.target.id!=='vpqQuestionForm36')return;e.preventDefault();e.stopImmediatePropagation();vpqSaveQuestion36(e.target)},true);
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
