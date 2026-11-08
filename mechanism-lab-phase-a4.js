@@ -30,6 +30,7 @@ function section(id){
  currentSection=x.id;currentCard='';
  showModal(x.icon+' '+x.title,header()+'<p>'+safe(x.intro)+'</p>'+
  (x.id==='toxins'?'<div class="buttonrow"><button type="button" data-vpqvp-gallery="Toxicology">🎨 Illustrated Toxicant Pathways</button></div>':x.id==='antibiotics'?'<div class="buttonrow"><button type="button" data-vpqvp-gallery="Antibiotics">📈 Antibiotic & PK/PD diagrams</button></div>':'')+
+ '<div class="vpqMechCompare"><h3>⚖️ Choose two topics to compare</h3><p class="tiny">Select two mechanisms to compare targets and clinical relevance without scrolling through every card.</p><div class="vpqMechCompareSelect"><label>First topic<select class="input" id="vpqMechCompareA">'+x.cards.map((c,i)=>'<option value="'+safe(c.id)+'" '+(i===0?'selected':'')+'>'+safe(c.title)+'</option>').join('')+'</select></label><label>Second topic<select class="input" id="vpqMechCompareB">'+x.cards.map((c,i)=>'<option value="'+safe(c.id)+'" '+(i===1?'selected':'')+'>'+safe(c.title)+'</option>').join('')+'</select></label></div><div id="vpqMechComparison"></div></div>'+
  '<div class="vpqAtlasCards">'+x.cards.map((c,i)=>'<button type="button" data-vpqmechcard="'+safe(c.id)+'"><span class="vpqAtlasCardNumber">'+(i+1)+' / '+x.cards.length+'</span><b>'+safe(c.title)+'</b><small>'+safe(c.tag)+'</small></button>').join('')+'</div>'+
  '<div class="buttonrow"><button type="button" data-vpqmechmenu="1">← All Lab boards</button><button type="button" data-vpqmechlounge="1">📚 Study Lounge</button></div>');
 }
@@ -41,9 +42,9 @@ function lesson(id){
  showModal(x.icon+' '+c.title,'<p class="tiny">'+safe(x.title)+' · Card '+(i+1)+' / '+x.cards.length+' · '+safe(c.tag)+'</p>'+
  '<div class="vpqVPInLab">'+(window.VPQ_VISUAL_PATHWAYS?.preview(({ 'abx-gens':'abx-gens','abx-pkpd':'abx-pkpd','abx-classes':'abx-wall','rec-cox':'pain-cox','tox-ach':'tox-op','tox-rodent':'tox-anticoag','tox-cyanide':'tox-cyanide' })[c.id])||'')+'</div>'+
  '<div class="vpqAtlasDetail"><h3>1. What does it target or do?</h3><p>'+safe(c.mechanism)+'</p></div>'+
- '<div class="vpqAtlasDetail"><h3>2. WHY is that pathway important?</h3><p>'+safe(c.why)+'</p></div>'+
- '<div class="vpqAtlasDetail"><h3>3. Clinical application</h3><p>'+safe(c.clinical)+'</p></div>'+
- '<div class="vpqAtlasDetail vpqAtlasCaution"><h3>⚠️ Do not confuse / caution</h3><p>'+safe(c.warning)+'</p></div>'+
+ '<details class="vpqAtlasDetail vpqMechExplain"><summary>🧠 WHY is that pathway important?</summary><p>'+safe(c.why)+'</p></details>'+
+ '<details class="vpqAtlasDetail vpqMechExplain"><summary>🩺 Clinical-use question: when does this matter?</summary><p>'+safe(c.clinical)+'</p></details>'+
+ '<details class="vpqAtlasDetail vpqAtlasCaution vpqMechExplain"><summary>⚠️ Do NOT confuse — reveal comparison</summary><p>'+safe(c.warning)+'</p></details>'+
  '<div class="buttonrow"><button type="button" data-vpqmechprev="1" '+(i===0?'disabled':'')+'>← Previous</button><button type="button" data-vpqmechnext="1" '+(i===x.cards.length-1?'disabled':'')+'>Next →</button></div>'+
  '<div class="buttonrow"><button type="button" data-vpqmechback="1">← '+safe(x.title)+'</button><button type="button" data-vpqmechmenu="1">All Lab boards</button></div>'+
  '<p class="tiny">Sources and course cross-checks: '+(atlas.references||[]).map(r=>'<a href="'+safe(r.url)+'" target="_blank" rel="noopener noreferrer">'+safe(r.label)+'</a>').join(' · ')+'.</p>');
@@ -82,6 +83,20 @@ const route=(action)=>{
  if(action==='vpqMechToxins')return section('toxins');
  return doAction(action);
 };
+function updateComparison(){
+ const root=document.getElementById('modalBody'),a=root?.querySelector('#vpqMechCompareA'),b=root?.querySelector('#vpqMechCompareB'),out=root?.querySelector('#vpqMechComparison');
+ if(!a||!b||!out)return;
+ const x=findSection(currentSection);if(!x)return;
+ const c=x.cards.find(v=>v.id===a.value),d=x.cards.find(v=>v.id===b.value);
+ if(!c||!d)return;
+ if(c.id===d.id){out.innerHTML='<p class="tiny">Select two different mechanisms for a useful comparison.</p>';return}
+ out.innerHTML='<div class="vpqMechCompareGrid">'+[c,d].map(v=>'<section><h4>'+safe(v.title)+'</h4><p><b>Target:</b> '+safe(v.mechanism)+'</p><details><summary>🧠 WHY and clinical use</summary><p>'+safe(v.why)+'</p><p>'+safe(v.clinical)+'</p></details><details><summary>⚠️ What not to confuse</summary><p>'+safe(v.warning)+'</p></details></section>').join('')+'</div>';
+}
+const vpqMechModalRoot=document.getElementById('modalBody');
+vpqMechModalRoot.addEventListener('change',e=>{if(e.target.id==='vpqMechCompareA'||e.target.id==='vpqMechCompareB')updateComparison()});
+const vpqMechComparisonWatcher=new MutationObserver(()=>{const out=vpqMechModalRoot.querySelector('#vpqMechComparison');if(out&&!out.dataset.ready){out.dataset.ready='1';updateComparison()}});
+vpqMechComparisonWatcher.observe(vpqMechModalRoot,{childList:true,subtree:false});
+
 document.getElementById('modalBody').addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
  if(b.dataset.vpqmechlesson)return lesson(b.dataset.vpqmechlesson);
@@ -104,6 +119,7 @@ function refresh(){
 }
 const style=document.createElement('style');
 style.textContent='.vpqMechanismArt{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.stage[data-room="mechanism"] .prop,.stage[data-room="mechanism"] .roomdecor{display:none!important}#vpqMechanismHotspots{position:absolute;inset:0;z-index:5;pointer-events:none}.vpqMechHot,.vpqMechExit{position:absolute;pointer-events:auto;border:2px solid #758ba666;border-radius:13px;background:#ffffff12;box-shadow:none;transform:none!important}.vpqMechHot:hover,.vpqMechHot:focus-visible,.vpqMechExit:hover,.vpqMechExit:focus-visible{background:#fff0a540;border:3px solid #ecc76d;outline:2px solid white}.vpqMechHot span{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);white-space:nowrap;border:2px solid #7798a7;border-radius:12px;padding:5px 8px;background:#fffef5;color:#315972;font-weight:900;font-size:12px}.vpqMechReceptor{left:9%;top:17%;width:32%;height:45%}.vpqMechBacteria{left:58%;top:17%;width:32%;height:45%}.vpqMechPath{left:39%;top:63%;width:27%;height:24%}.vpqMechExit{top:9%;right:2%;padding:6px 10px;background:#ffffffed;font-size:12px;color:#315972}.vpqMechLessonGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:9px;margin:15px 0}.vpqMechLessonGrid button{padding:13px;text-align:left;background:#f6fcff}.vpqMechLessonGrid b,.vpqMechLessonGrid small{display:block}.vpqMechLessonGrid small{margin-top:7px;line-height:1.4;font-size:12px;font-weight:400}@media(max-width:560px){.vpqMechHot span{font-size:10px;padding:3px 5px}.vpqMechExit{font-size:10px}}';
+style.textContent+='.vpqMechCompare{background:#f1f6fc;border:2px solid #b8cce2;border-radius:14px;padding:13px;margin:12px 0}.vpqMechCompare>h3{font-size:15px;margin:0 0 7px}.vpqMechCompareSelect{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.vpqMechCompareSelect label{font-weight:800;font-size:12px}.vpqMechCompareSelect select{width:100%;margin-top:5px}.vpqMechCompareGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.vpqMechCompareGrid section{padding:11px;border:1px solid #bad1e2;border-radius:12px;background:#fff}.vpqMechCompareGrid h4{font-size:14px;color:#476c8f;margin:0 0 8px}.vpqMechCompareGrid p{font-size:12px;line-height:1.55}.vpqMechCompareGrid details,.vpqMechExplain{padding:9px;border-radius:9px;border:1px solid #d2c8e5;background:#fcfaff;margin:9px 0}.vpqMechCompareGrid summary,.vpqMechExplain summary{cursor:pointer;font-weight:800;color:#5b548b}.vpqMechExplain p{font-size:13px;line-height:1.55}@media(max-width:600px){.vpqMechCompareSelect,.vpqMechCompareGrid{grid-template-columns:1fr}}';
 document.head.appendChild(style);
 const observer=new MutationObserver(()=>{if((stage.dataset.room==='mechanism')!==!!stage.querySelector('#vpqMechanismHotspots'))refresh()});
 observer.observe(stage,{childList:true,attributes:true,attributeFilter:['data-room']});refresh();
