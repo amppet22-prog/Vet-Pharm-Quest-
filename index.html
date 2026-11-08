@@ -396,7 +396,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
-<script src="ngf-toxicology-bridge.js?v=20261108-tox-catalog2"></script>
+<script src="ngf-toxicology-bridge.js?v=20261108-tox-catalog3"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
 <script>
 /* Vet Pharm Quest 2D — original learning material based on the user's course guides.
@@ -2530,10 +2530,10 @@ $('vpqToxDashboardBtn').addEventListener('click',()=>vpqToxPreviewMenu());
 function vpqToxPreviewMenu(){
  const data=window.VPQ_ToxicologyPreview;
  const topics=data?.topics||[];
- showModal('☣️ Toxicology · Coming Soon',
- '<p><b>Course reference preview — '+topics.length+' topic groups indexed.</b> This is not yet an active exam focus or playable question bank. The existing Pharmacology and One Health study selections are unchanged.</p>'+
- '<div class="infobox"><b>New-content import test</b><p>Each upcoming course has topic IDs, lecture mapping, a mechanism summary, key review concepts, a source list and a coverage status. The detailed lectures, fact checks, NAVLE cases and question banks can be added later.</p></div>'+
- '<div class="vpqToxTopics">'+topics.map(x=>'<button type="button" data-vpqtox-topic="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.lectures)+' · '+escapeHtml(x.title)+'</b><small>Reference preview · not yet playable</small></button>').join('')+'</div>'+
+ showModal('☣️ Toxicology · Course Outline & Reference',
+ '<p><b>'+topics.length+' lecture groups indexed.</b> The Pharmacy Caution Book now contains a mechanism-grouped toxicant catalog; the Study Lounge contains a standalone toxicant-mechanism matching round. The complete course exam bank and lecture-selection integration remain in development.</p>'+
+ '<div class="infobox"><b>Course map</b><p>Each lecture group is mapped to mechanism summaries and review concepts. Individual lecture details, course-specific exam questions and source checks remain ongoing.</p></div><div class="buttonrow"><button data-vpqtoxindex="1">☣️ Browse Toxicant Reference</button></div>'+
+ '<div class="vpqToxTopics">'+topics.map(x=>'<button type="button" data-vpqtox-topic="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.lectures)+' · '+escapeHtml(x.title)+'</b><small>Lecture overview · clinical cards available separately</small></button>').join('')+'</div>'+
  '<p class="tiny">Indexed from: '+data.sources.map(x=>escapeHtml(x)).join(' · ')+'. Some full lectures and chat materials still require individual extraction/verification before publication.</p>');
 }
 function vpqToxPreviewCard(id){
@@ -2542,7 +2542,7 @@ function vpqToxPreviewCard(id){
  showModal('☣️ '+x.title+' · Preview',
  '<div class="infobox"><b>'+escapeHtml(x.lectures)+'</b><p>'+escapeHtml(x.summary)+'</p></div>'+
  '<h3>Course concepts to build on</h3><p>'+escapeHtml(x.review)+'</p>'+
- '<p class="tiny">Status: '+escapeHtml(x.status)+'. Educational summary only: not a poison-control or treatment protocol.</p>'+
+ '<p class="tiny">Status: '+escapeHtml(x.status)+'. This is educational review, not an emergency treatment protocol.</p><button data-vpqtoxindex="1">☣️ Browse toxicant mechanisms</button>'+
  '<button data-vpqtox-back="1">← Toxicology preview</button>');
 }
 const vpqLearningHubBeforeTox=vpqLearningHub;
@@ -2550,14 +2550,14 @@ vpqLearningHub=function(...args){
  vpqLearningHubBeforeTox(...args);
  const body=$('modalBody');
  if(body&&!body.querySelector('[data-vpqtox-open]'))body.insertAdjacentHTML('beforeend',
- '<div class="vpqToxBanner"><b>☣️ Toxicology — Coming Soon</b><p>Lecture topics have been indexed as a first test of adding a new course. Not part of your current exam/lecture focus.</p><button data-vpqtox-open="1">Preview Toxicology curriculum</button></div>');
+ '<div class="vpqToxBanner"><b>☣️ Toxicology · Mechanism Practice</b><p>Match a toxicant to its target and review why the clinical signs occur. This is independent starter practice; the full lecture-filtered Toxicology exam bank is still planned.</p><div class="buttonrow"><button data-vpqtoxmatchopen="1">🧪 Toxicant → Mechanism Match</button><button data-vpqtox-open="1">📚 Course Outline</button><button data-vpqtoxindex="1">☣️ Reference</button></div></div>');
 };
 const vpqShowLearningDeskBeforeTox=showStudyMenu;
 showStudyMenu=function(...args){
  vpqShowLearningDeskBeforeTox(...args);
  const body=$('modalBody');
  if(body&&!body.querySelector('[data-vpqtox-open]'))body.insertAdjacentHTML('beforeend',
- '<div class="vpqToxBanner"><b>☣️ Toxicology · Coming Soon</b><p>View archived lecture topics without adding them to active study rounds.</p><button data-vpqtox-open="1">Browse preview</button></div>');
+ '<div class="vpqToxBanner"><b>☣️ Toxicology Course Outline</b><p>View the lecture map and mechanism reference. Standalone matching practice is in the Study Lounge arcade.</p><button data-vpqtox-open="1">Browse lecture overview</button></div>');
 };
 $('modalBody').addEventListener('click',event=>{
  const b=event.target.closest('button');if(!b)return;
