@@ -21,7 +21,7 @@ const inline=x=>esc(x).replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
 function answerHTML(value){
  const s=String(value||'').trim();if(!s)return '<p>Answer not entered.</p>';
  let parts=s.replace(/\s+(?=\*\*(?:\d+\.|Additional clinical|Clinical cautions|Species differences|Monitoring))/gi,'\n').split(/\n+/);
- if(parts.length===1&&s.length>110)parts=s.split(/;\s+(?=[A-Z][\w/-]{2,25}(?:\s+[\w/-]{2,25}){0,4}:)/);
+ if(parts.length===1&&s.length>110)parts=s.split(/(?:;\s+|\.\s+)(?=[A-Z][\w/-]{2,25}(?:\s+[\w/-]{2,25}){0,4}:)/);
  if(parts.length===1&&s.length>300)parts=s.split(/(?<=[.!?])\s+(?=[A-Z])/);
  return parts.filter(Boolean).map(p=>{
   let content=inline(p.trim());
@@ -108,29 +108,30 @@ function importCards(file){
  };
  reader.readAsText(file);
 }
+// Preserve the legacy MCQ helpers; this version uses distinct pg2- event names.
 const previous=vpqGuideStart37;
 vpqGuideStart37=function(){home()};
 screen.addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;const d=b.dataset;
- if(d.pg2Old!==undefined){
+ if(d.pg2old!==undefined){
   const items=vpqGuideBankFiltered310();
   if(!items.length){setTab('examcenter');return}
   vpqGuideIds37=sample(items,Math.min(12,items.length)).map(x=>x.id);
   vpqGuideIndex37=0;vpqGuideScore37=0;return vpqGuideQuestion37();
  }
- if(d.pg2Home!==undefined||d.pg2Cancel!==undefined)return home();
- if(d.pg2Start!==undefined)return begin(d.pg2Start);
- if(d.pg2Reveal!==undefined){revealed=true;const id=queue[position];if(!progress.seen.includes(id))progress.seen.push(id);saveProgress();return showQuestion()}
- if(d.pg2Rating!==undefined){progress.ratings[queue[position]]=d.pg2Rating;saveProgress();return showQuestion()}
- if(d.pg2Prev!==undefined){if(position>0)position--;revealed=false;return showQuestion()}
- if(d.pg2Next!==undefined){if(position+1>=queue.length)return home();position++;revealed=false;return showQuestion()}
- if(d.pg2Edit!==undefined)return edit(d.pg2Edit);
- if(d.pg2New!==undefined)return edit(null);
- if(d.pg2Browse!==undefined)return browse();
- if(d.pg2Reset!==undefined){delete personal.overrides[d.pg2Reset];save();return home('Original source card restored.')}
- if(d.pg2Delete!==undefined){personal.added=personal.added.filter(x=>x.id!==d.pg2Delete);save();return home('Personal card deleted.')}
- if(d.pg2Export!==undefined)return exportCards();
- if(d.pg2Import!==undefined)return document.getElementById('pg2File')?.click();
+ if(d.pg2home!==undefined||d.pg2cancel!==undefined)return home();
+ if(d.pg2start!==undefined)return begin(d.pg2start);
+ if(d.pg2reveal!==undefined){revealed=true;const id=queue[position];if(!progress.seen.includes(id))progress.seen.push(id);saveProgress();return showQuestion()}
+ if(d.pg2rating!==undefined){progress.ratings[queue[position]]=d.pg2rating;saveProgress();return showQuestion()}
+ if(d.pg2prev!==undefined){if(position>0)position--;revealed=false;return showQuestion()}
+ if(d.pg2next!==undefined){if(position+1>=queue.length)return home();position++;revealed=false;return showQuestion()}
+ if(d.pg2edit!==undefined)return edit(d.pg2edit);
+ if(d.pg2new!==undefined)return edit(null);
+ if(d.pg2browse!==undefined)return browse();
+ if(d.pg2reset!==undefined){delete personal.overrides[d.pg2reset];save();return home('Original source card restored.')}
+ if(d.pg2delete!==undefined){personal.added=personal.added.filter(x=>x.id!==d.pg2delete);save();return home('Personal card deleted.')}
+ if(d.pg2export!==undefined)return exportCards();
+ if(d.pg2import!==undefined)return document.getElementById('pg2File')?.click();
 });
 screen.addEventListener('change',e=>{
  if(e.target.dataset.pg2group!==undefined){const g=e.target.dataset.pg2group;e.target.checked?chosen.add(g):chosen.delete(g);return home()}
