@@ -393,6 +393,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="toxicology-lecture-links.js?v=20261108-toxcrosswalk1"></script>
 <script src="toxicology-mechanism-panels.js?v=20261108-toxmechanisms1"></script>
 <script src="toxicology-lecture-ui.js?v=20261108-toxlesson2"></script>
+<script src="toxicology-practice-bank.js?v=20261108-toxpractice1"></script>
+<script src="toxicology-study-game.js?v=20261108-toxstudy1"></script>
 <script src="mechanism-lab-atlas.js?v=20261108-toxlink2"></script>
 <script src="mechanism-lab-phase-a4.js?v=20261108-A4c"></script>
 <script src="exam-room-traditional.js?v=20261108-examA2"></script>
@@ -400,7 +402,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
-<script src="ngf-toxicology-bridge.js?v=20261108-tox-catalog5"></script>
+<script src="ngf-toxicology-bridge.js?v=20261108-tox-catalog6"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
 <script>
 /* Vet Pharm Quest 2D — original learning material based on the user's course guides.
@@ -2539,14 +2541,14 @@ vpqLearningHub=function(...args){
  vpqLearningHubBeforeTox(...args);
  const body=$('modalBody');
  if(body&&!body.querySelector('[data-vpqtox-open]'))body.insertAdjacentHTML('beforeend',
- '<div class="vpqToxBanner"><b>☣️ Toxicology · Mechanism Practice</b><p>Match a toxicant to its target and review why the clinical signs occur. This is independent starter practice; the full lecture-filtered Toxicology exam bank is still planned.</p><div class="buttonrow"><button data-vpqtoxmatchopen="1">🧪 Toxicant → Mechanism Match</button><button data-vpqtox-open="1">📚 Course Outline</button><button data-vpqtoxindex="1">☣️ Reference</button></div></div>');
+ '<div class="vpqToxBanner"><b>☣️ Toxicology · Mechanism Practice</b><p>Select one or more Toxicology lecture groups, then practice clinical recognition or mechanism targets. This starter bank is ungraded; the comprehensive exam bank is still expanding.</p><div class="buttonrow"><button data-vpqtoxmatchopen="1">🧪 Toxicant → Mechanism Match</button><button data-vpqtox-open="1">📚 Course Outline</button><button data-vpqtoxindex="1">☣️ Reference</button></div></div>');
 };
 const vpqShowLearningDeskBeforeTox=showStudyMenu;
 showStudyMenu=function(...args){
  vpqShowLearningDeskBeforeTox(...args);
  const body=$('modalBody');
  if(body&&!body.querySelector('[data-vpqtox-open]'))body.insertAdjacentHTML('beforeend',
- '<div class="vpqToxBanner"><b>☣️ Toxicology Course Outline</b><p>View the lecture map and mechanism reference. Standalone matching practice is in the Study Lounge arcade.</p><button data-vpqtox-open="1">Browse lecture overview</button></div>');
+ '<div class="vpqToxBanner"><b>☣️ Toxicology Course Outline</b><p>View the lecture map and mechanism reference. Lecture-selectable matching and clinical practice are in the Study Lounge arcade.</p><button data-vpqtox-open="1">Browse lecture overview</button></div>');
 };
 $('modalBody').addEventListener('click',event=>{
  const b=event.target.closest('button');if(!b)return;
