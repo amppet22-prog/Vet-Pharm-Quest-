@@ -2282,6 +2282,81 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  const css=document.createElement('style');css.textContent='.vpqLFhead{display:flex;align-items:center;justify-content:space-between;gap:9px}.vpqLFlist{display:grid;gap:8px;margin:12px 0}.vpqLFrow{background:white;border:1px solid #d6c9e6;border-radius:12px;padding:9px;display:flex;gap:9px;align-items:center}.vpqLFrow label{display:flex;align-items:center;flex:1;gap:10px}.vpqLFrow label span b,.vpqLFrow label span small{display:block}.vpqLFrow small{font-size:11px;color:#73648d}.vpqLFrow button{border:1px solid #c6b4df;background:#f1e9ff;border-radius:9px;padding:8px 12px;font-weight:700}.vpqLFsteps{padding:13px;background:#f9f6ff;border:1px solid #d7c8e7;border-radius:13px;margin:14px 0}.vpqLFsteps h3{margin:0}.vpqWardHead{border:1px solid #c5dbe3;background:#f3faff;padding:12px;border-radius:12px;margin:10px 0}@media(max-width:550px){.vpqLFrow{flex-wrap:wrap}.vpqLFrow label{min-width:100%}}';document.head.appendChild(css);
 })();
 
+
+/* VPQ One Health Vet School Exam Center: data-driven Exam 1–4 routing, question review, and select-all practice. */
+(function(){
+ 'use strict';
+ const groups=['Exam 1','Exam 2','Exam 3','Exam 4','Host roles','Reporting'];
+ const OH=window.VPQ_OH;
+ const state={group:'Exam 1',mode:'single',order:[],step:0,score:0,chosen:[],checked:false,answered:0,seen:new Set()};
+ const qFor=group=>(OH.study||[]).filter(q=>q.lecture==='One Health · '+group&&Array.isArray(q.options)&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length);
+ const randomize=a=>{const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
+ const esc=v=>escapeHtml(String(v??''));
+ const selectAllItems=()=>typeof vpqOHChallenge40!=='undefined'?vpqOHChallenge40:[];
+ const matchingAll=()=>selectAllItems().filter(q=>state.group==='Exam 4'?q.group==='Integrated':q.group===state.group);
+ const num=()=>state.mode==='multi'?matchingAll().length:qFor(state.group).length;
+ function renderHome(){
+  const choices=groups.map(g=>'<button type="button" data-vpqohcenterexam="'+esc(g)+'" class="'+(state.group===g?'active':'')+'"><b>'+esc(g)+'</b><small>'+qFor(g).length+' questions</small></button>').join('');
+  showModal('🎓 Vet School Exam Center · One Health',
+   '<p>Choose a <b>specific One Health exam</b> and practice only its assigned question bank. Each new round reshuffles the question order and answer positions; explanations appear after checking.</p>'+
+   '<div class="vpqOHCenterGrid">'+choices+'</div>'+
+   '<div class="infobox"><b>'+esc(state.group)+'</b> · '+qFor(state.group).length+' single-best-answer questions available. You can revisit missed explanations after each answer.</div>'+
+   '<div class="buttonrow"><button type="button" data-vpqohcentermode="single">📝 Start '+esc(state.group)+' question round</button>'+
+   (matchingAll().length?'<button type="button" data-vpqohcentermode="multi">✅ Select all that apply ('+matchingAll().length+')</button>':'')+
+   '<button type="button" data-vpqohcenterold="1">📚 Disease encyclopedia</button></div>'+
+   '<p class="tiny">Exam 1: 52 · Exam 2: 19 · Exam 3: 65 · Exam 4: 67 · Host roles: 14 · Reporting: 50. These are practice questions based on course materials, not an official instructor exam. Select-all challenges are additional questions where available; no artificial multi-answer questions are invented.</p>');
+ }
+ function buildQueue(mode){
+   state.mode=mode;state.step=0;state.score=0;state.answered=0;state.checked=false;state.chosen=[];
+   const pool=mode==='multi'?matchingAll():qFor(state.group);
+   state.order=randomize(pool.map((q,i)=>({q,id:q.id||'select-all-'+i,options:randomize(q.options.map((label,index)=>({label,index})))})));
+   renderQuestion();
+ }
+ function renderQuestion(){
+   if(state.step>=state.order.length)return showModal('🏁 One Health · Round complete',
+     '<h3>'+state.score+' / '+state.answered+' correct</h3><p>Return to select another exam, or repeat the same bank in a newly shuffled order.</p><div class="buttonrow"><button data-vpqohcenteragain="1">🔁 Another round</button><button data-vpqohcenterhome="1">Choose an exam</button></div>');
+   const item=state.order[state.step],q=item.q,multi=state.mode==='multi';
+   const correct=multi?new Set(q.correct):new Set([q.answer]);
+   const isCorrect=state.checked&&(state.chosen.length===correct.size&&state.chosen.every(i=>correct.has(i)));
+   const answers=item.options.map((o,i)=>{
+     const chosen=state.chosen.includes(o.index),valid=correct.has(o.index);
+     return '<label class="vpqOHCenterAnswer '+(state.checked?(valid?'good':chosen?'bad':''):'')+'"><input type="'+(multi?'checkbox':'radio')+'" name="vpqohcenteranswer" data-vpqohcenterchoice="'+o.index+'" '+(chosen?'checked':'')+' '+(state.checked?'disabled':'')+'><span><b>'+String.fromCharCode(65+i)+'.</b> '+esc(o.label)+'</span></label>';
+   }).join('');
+   showModal('🎓 One Health · '+esc(state.group),
+     '<p><b>Question '+(state.step+1)+' / '+state.order.length+'</b> · '+(multi?'Select ALL correct answers':'Choose ONE best answer')+' · '+state.score+' correct so far</p>'+
+     '<div class="vpqOHCenterQuestion"><h3>'+esc(q.q||q.question)+'</h3>'+answers+'</div>'+
+     (state.checked?'<div class="infobox"><b>'+(isCorrect?'✅ Correct':'❌ Review this distinction')+'</b><p>'+esc(q.why||'Review the original study materials for this item.')+'</p><p class="tiny">Correct answer'+(correct.size>1?'s':'')+': '+item.options.filter(o=>correct.has(o.index)).map(o=>esc(o.label)).join('; ')+'</p></div>':'')+
+     '<div class="buttonrow">'+(state.checked?'<button data-vpqohcenternext="1">Next →</button>':'<button data-vpqohcentercheck="1">Check answer</button>')+
+     '<button data-vpqohcenterhome="1">← Exam selection</button></div>');
+ }
+ // Route through existing learning lab without changing pharmacology lecture settings or saves.
+ const previousHub=vpqLearningHub;
+ vpqLearningHub=function(){previousHub();const area=document.getElementById('modalBody');if(area&&!area.querySelector('[data-vpqohcenteropen]'))area.insertAdjacentHTML('afterbegin','<div class="vpqOHCenterBanner"><b>🦠 One Health · Exams 1–4</b><p>Separate exam selections, host roles, reporting, and shuffled question rounds.</p><button type="button" data-vpqohcenteropen="1">Open One Health Exam Center</button></div>')};
+ const previousOHHub=openOHHub;
+ openOHHub=function(...args){previousOHHub(...args);document.getElementById('modalBody')?.insertAdjacentHTML('afterbegin','<div class="vpqOHCenterBanner"><b>🎓 One Health Vet School Exam Center</b><p>Choose Exam 1, 2, 3, or 4 and use the full existing bank.</p><button type="button" data-vpqohcenteropen="1">Select Exam 1–4</button></div>')};
+ document.getElementById('modalBody').addEventListener('click',function(event){
+   const target=event.target.closest('button');
+   if(!target)return;const d=target.dataset;
+   if(!Object.keys(d).some(k=>k.startsWith('vpqohcenter')))return;
+   event.preventDefault();event.stopImmediatePropagation();
+   if(d.vpqohcenteropen!==undefined||d.vpqohcenterhome!==undefined)return renderHome();
+   if(d.vpqohcenterexam!==undefined){state.group=d.vpqohcenterexam;return renderHome()}
+   if(d.vpqohcentermode!==undefined)return buildQueue(d.vpqohcentermode);
+   if(d.vpqohcenteragain!==undefined)return buildQueue(state.mode);
+   if(d.vpqohcenterold!==undefined)return openOHLibrary();
+   if(d.vpqohcentercheck!==undefined){if(!state.chosen.length)return;state.checked=true;state.answered++;const q=state.order[state.step].q;const correct=new Set(state.mode==='multi'?q.correct:[q.answer]);if(state.chosen.length===correct.size&&state.chosen.every(v=>correct.has(v)))state.score++;return renderQuestion()}
+   if(d.vpqohcenternext!==undefined){state.step++;state.checked=false;state.chosen=[];return renderQuestion()}
+ },true);
+ document.getElementById('modalBody').addEventListener('change',function(event){
+   const el=event.target;if(!el.matches('[data-vpqohcenterchoice]')||state.checked)return;
+   const value=Number(el.dataset.vpqohcenterchoice);
+   if(state.mode==='multi')state.chosen=el.checked?[...state.chosen.filter(v=>v!==value),value]:state.chosen.filter(v=>v!==value);
+   else state.chosen=[value];
+ },true);
+ const style=document.createElement('style');
+ style.textContent='.vpqOHCenterBanner{background:#f0fcf7;border:1px solid #a6d5be;padding:12px;border-radius:12px;margin-bottom:12px}.vpqOHCenterBanner p{margin:5px 0;font-size:12px}.vpqOHCenterGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin:14px 0}.vpqOHCenterGrid button{text-align:left;background:white;border:1px solid #b1cbbf;border-radius:11px;padding:13px}.vpqOHCenterGrid button.active{background:#dff8eb;border:2px solid #39795f}.vpqOHCenterGrid b,.vpqOHCenterGrid small{display:block}.vpqOHCenterGrid small{font-size:12px;margin-top:5px}.vpqOHCenterQuestion{background:white;padding:15px;border:1px solid #d4e5d9;border-radius:14px;margin:12px 0}.vpqOHCenterAnswer{display:flex;align-items:flex-start;gap:10px;padding:12px;margin:8px 0;border:1px solid #dedee4;border-radius:9px;cursor:pointer}.vpqOHCenterAnswer.good{background:#e5f7e8;border-color:#70b280}.vpqOHCenterAnswer.bad{background:#ffeaea;border-color:#cf8585}.vpqOHCenterAnswer input{flex:none;margin-top:4px}.vpqOHCenterAnswer span{line-height:1.5}';
+ document.head.appendChild(style);
+})();
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
