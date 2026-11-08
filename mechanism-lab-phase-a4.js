@@ -13,10 +13,10 @@ const concepts=[
 ];
 function lesson(id){
  const x=concepts.find(t=>t.id===id);if(!x)return menu();
- showModal('🔬 '+x.title,'<div class="infobox"><b>Mechanism</b><p>'+x.concept+'</p></div><div class="infobox"><b>WHY the body or organism responds this way</b><p>'+x.why+'</p></div><div class="infobox"><b>Clinical application and caution</b><p>'+x.example+'</p></div><div class="buttonrow"><button type="button" data-vpqmechmenu="1">← All mechanism lessons</button><button type="button" data-vpqmechpractice="1">Practice in Learning Games</button></div><p class="tiny">Educational review; specific drug, species, dose, infection, and contraindications require individual assessment.</p>');
+ showModal('🔬 '+x.title,'<div class="infobox"><b>Mechanism</b><p>'+x.concept+'</p></div><div class="infobox"><b>WHY the body or organism responds this way</b><p>'+x.why+'</p></div><div class="infobox"><b>Clinical application and caution</b><p>'+x.example+'</p></div><div class="buttonrow"><button type="button" data-vpqmechmenu="1">← All mechanism lessons</button><button type="button" data-vpqmechlounge="1">📚 Visit Study Lounge</button></div><p class="tiny">Educational review; specific drug, species, dose, infection, and contraindications require individual assessment.</p>');
 }
 function menu(){
- showModal('🔬 Mechanism Lab · Understand the WHY','<p>This room teaches how drugs affect cells and organs, why intended effects happen, and how those same pathways lead to adverse effects. Pharmacy remains the drug-card reference.</p><div class="vpqMechLessonGrid">'+concepts.map(x=>'<button type="button" data-vpqmechlesson="'+x.id+'"><b>'+x.title+'</b><small>'+x.why+'</small></button>').join('')+'</div><div class="buttonrow"><button type="button" data-vpqmechpractice="1">🎮 Apply in Learning Games</button><button type="button" data-vpqmechpharmacy="1">💊 Pharmacy Reference</button></div>');
+ showModal('🔬 Mechanism Lab · Understand the WHY','<p>This room teaches how drugs affect cells and organs, why intended effects happen, and how those same pathways lead to adverse effects. Pharmacy remains the drug-card reference.</p><div class="vpqMechLessonGrid">'+concepts.map(x=>'<button type="button" data-vpqmechlesson="'+x.id+'"><b>'+x.title+'</b><small>'+x.why+'</small></button>').join('')+'</div><div class="buttonrow"><button type="button" data-vpqmechlounge="1">📚 Continue in Study Lounge</button><button type="button" data-vpqmechpharmacy="1">💊 Pharmacy Reference</button></div>');
 }
 function drawing(){
  return '<svg class="vpqMechanismArt" viewBox="0 0 1000 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dimensional mechanism teaching lab with receptor board, antibiotic pathway diagrams and workbench">'+
@@ -48,7 +48,7 @@ document.getElementById('modalBody').addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
  if(b.dataset.vpqmechlesson)return lesson(b.dataset.vpqmechlesson);
  if(b.dataset.vpqmechmenu!==undefined)return menu();
- if(b.dataset.vpqmechpractice!==undefined)return doAction('learningHub');
+ if(b.dataset.vpqmechlounge!==undefined)return changeRoom('study');
  if(b.dataset.vpqmechpharmacy!==undefined)return changeRoom('pharmacy');
 });
 function refresh(){
