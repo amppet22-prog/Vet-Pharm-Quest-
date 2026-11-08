@@ -22,16 +22,16 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 }
 art.roomArt=function(k){return k==='study'?lounge():previous(k)};
 const p=rooms.study.props;
-p[0].x=50;p[0].label='Study Desk';p[0].action='study';
+p[0].x=50;p[0].label='Study Desk · Learn & Review';p[0].action='study';
 p[1].x=30;p[1].label='Mastery Tracker';
-p[2].x=78;p[2].label='Learning Games';
+p[2].x=78;p[2].label='Game Arcade · Practice';
 function refresh(){
  stage.querySelector('#vpqLoungeHotspots')?.remove();
  if(stage.dataset.room!=='study')return;
  const node=document.createElement('div');node.id='vpqLoungeHotspots';
- node.innerHTML='<button type="button" class="vpqLoungeHot vpqLoungeDesk" data-vpqstudyaction="study" aria-label="Open study desk and lecture learning"><span>📖 Study Desk</span></button>'+
- '<button type="button" class="vpqLoungeHot vpqLoungeMastery" data-vpqstudyaction="masteryTracker" aria-label="Open mastery tracker"><span>🏆 Mastery</span></button>'+
- '<button type="button" class="vpqLoungeHot vpqLoungeGames" data-vpqstudyaction="learningHub" aria-label="Open learning games"><span>🎮 Games</span></button>'+
+ node.innerHTML='<button type="button" class="vpqLoungeHot vpqLoungeDesk" data-vpqstudyaction="study" aria-label="Study Desk: choose a lecture and start structured review"><span><b>📖 Study Desk</b><small>Learn &amp; review</small></span></button>'+
+ '<button type="button" class="vpqLoungeHot vpqLoungeMastery" data-vpqstudyaction="masteryTracker" aria-label="Mastery Tracker: revisit weak concepts"><span><b>🏆 Mastery</b><small>Review progress</small></span></button>'+
+ '<button type="button" class="vpqLoungeHot vpqLoungeGames" data-vpqstudyaction="learningHub" aria-label="Game Arcade: choose Drug Match, Bug Battles or Exam Boss"><span><b>🎮 Game Arcade</b><small>Practice &amp; challenge</small></span></button>'+
  '<button type="button" class="vpqLoungeExit" data-vpqstudyreturn="1" aria-label="Return to reception">← Reception</button>';
  node.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.vpqstudyreturn!==undefined)changeRoom('reception');else if(b.dataset.vpqstudyaction)doAction(b.dataset.vpqstudyaction)});
  stage.appendChild(node);
@@ -40,9 +40,9 @@ const css=document.createElement('style');
 css.textContent='.vpqStudyLoungeArt{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}'+
 '.stage[data-room="study"] .roomdecor,.stage[data-room="study"] .prop{display:none!important}'+
 '#vpqLoungeHotspots{position:absolute;inset:0;z-index:5;pointer-events:none}'+
-'.vpqLoungeHot,.vpqLoungeExit{pointer-events:auto;position:absolute;border:2px solid transparent;background:transparent;box-shadow:none;transform:none!important}'+
-'.vpqLoungeHot:hover,.vpqLoungeHot:focus-visible,.vpqLoungeExit:hover,.vpqLoungeExit:focus-visible{border:2px solid #fac86f;background:#fff7d026;outline:2px solid #fff}'+
-'.vpqLoungeHot span{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fffaf0ed;border:1px solid #b6abbf;color:#53476d;border-radius:14px;padding:4px 9px;font-size:11px;font-weight:900}'+
+'.vpqLoungeHot,.vpqLoungeExit{pointer-events:auto;position:absolute;border:3px solid #c4b6d455;background:#ffffff0a;border-radius:16px;box-shadow:none;transform:none!important}'+
+'.vpqLoungeHot:hover,.vpqLoungeHot:focus-visible,.vpqLoungeExit:hover,.vpqLoungeExit:focus-visible{border:3px solid #f2b94e;background:#fff1b047;outline:2px solid #fff;box-shadow:0 0 0 3px #ffe1a469}'+
+'.vpqLoungeHot span{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);white-space:normal;min-width:115px;max-width:160px;text-align:center;background:#fffdf5;border:2px solid #687698;color:#303c64;border-radius:13px;padding:6px 8px;font-size:12px;font-weight:900;box-shadow:0 4px 0 #68769830}'+'.vpqLoungeHot b,.vpqLoungeHot small{display:block}.vpqLoungeHot small{font-size:10px;font-weight:700;line-height:1.25;margin-top:2px}'+
 '.vpqLoungeDesk{left:36%;top:53%;width:30%;height:33%}.vpqLoungeMastery{left:29%;top:15%;width:39%;height:36%}.vpqLoungeGames{left:75%;top:52%;width:19%;height:35%}'+
 '.vpqLoungeExit{top:8%;right:2%;padding:6px 10px;border-radius:15px;background:#fffaf0ed;color:#584d70;font-size:11px;font-weight:800}'+
 '@media(max-width:600px){.vpqLoungeHot span{font-size:9px;padding:3px 5px}.vpqLoungeExit{font-size:9px;padding:5px}}';
