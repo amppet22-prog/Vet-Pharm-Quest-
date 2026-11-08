@@ -188,6 +188,31 @@
 .vpq-avatar-showcase .vpq-preview-pet{height:135px;margin-left:-15px;flex:0 1 33%}
 @media(max-width:720px){.vpq-story-maker{grid-template-columns:1fr}.vpq-story-preview{position:relative}.vpq-story-stage{height:230px;max-height:none}.vpq-character-portrait{height:235px}.vpq-story-maker .twocol{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:430px){.vpq-story-maker .twocol{grid-template-columns:1fr}.vpq-tab-bar button{font-size:11px;padding:7px 8px}.vpq-story-maker .vpq-pet-options{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Warm storybook creator refinements v3.3 */
+.modal:has(.vpq-story-maker){width:min(1200px,calc(100vw - 16px));border-radius:25px;box-shadow:0 25px 80px #4f2b5966}
+.modal:has(.vpq-story-maker) #modalBody{background:linear-gradient(135deg,#fff2e0 0%,#fff5ee 42%,#f4eafa 100%);padding:14px}
+.vpq-story-maker{grid-template-columns:minmax(240px,34%) minmax(0,1fr);gap:16px}
+.vpq-story-preview{background:linear-gradient(155deg,#f9e6e7,#fff1e4 45%,#e9dcef);border:2px solid #d4adc5;box-shadow:0 8px 20px #7456701d}
+.vpq-story-right{background:#fffbf7;border:2px solid #ddbfca;box-shadow:0 6px 16px #7b637118}
+.vpq-story-stage{height:360px;max-height:50vh;background:radial-gradient(circle at 24% 19%,#fff8e8,transparent 36%),linear-gradient(180deg,#f4e4ef 0%,#fbeee8 73%,#d9b990 74%)}
+.vpq-story-stage .vpq-character-portrait{width:225px;height:320px}
+.vpq-story-stage .vpq-preview-pet{min-width:112px;height:133px}
+.vpq-story-stage .vpq-pet-art{height:123px;max-width:135px}
+.vpq-pet-picker .vpq-pet-options{grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:9px}
+.vpq-pet-picker .vpq-pet-choice{min-height:146px;padding:10px 5px;background:linear-gradient(#fffaf5,#fff0e7);border:2px solid #e9d7ce;box-shadow:0 2px 2px #7156680d}
+.vpq-pet-picker .vpq-pet-choice.chosen{background:#f1e5ff;border-color:#a77bc5}
+.vpq-pet-choice .vpq-pet-art{width:100%;max-width:125px;height:106px;background-repeat:no-repeat;image-rendering:auto}
+.vpq-story-maker .vpq-tab-bar{gap:7px}
+.vpq-story-maker .vpq-tab-bar button{border-radius:15px;padding:9px 12px;font-weight:900}
+.vpq-story-maker .vpq-section h3{color:#644675}
+.vpq-story-maker .vpq-pet-tabs{margin-bottom:12px}
+.vpq-story-maker .vpq-pet-tabs button{border:2px solid #e7d2d5;border-radius:20px;padding:7px 12px}
+.vpq-story-maker .vpq-pet-tabs button.chosen{background:#705080;color:white;border-color:#705080}
+.vpq-story-maker .vpq-base-buttons button{min-height:88px}
+.vpq-story-maker .vpq-presets button{background:#fff7f4;border-radius:12px}
+@media(max-width:720px){.vpq-story-maker{grid-template-columns:1fr}.vpq-story-stage{height:270px;max-height:none}.vpq-story-stage .vpq-character-portrait{height:245px;width:185px}.vpq-story-stage .vpq-preview-pet{height:115px}}
+
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -242,14 +267,14 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.2</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.3</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-portrait.png" alt="Mera Munchasurus, hospital mascot portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus</strong><small>Hospital Mascot · Chief of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
 <div class="controls"><button id="leftBtn" aria-label="Walk left">◀ Walk</button><button id="interactBtn">✦ Interact (E)</button><button id="rightBtn" aria-label="Walk right">Walk ▶</button></div></div>
 <div class="roomnav" id="roomnav" aria-label="Clinic rooms"></div><div class="notice">🎓 Practice simulator only. Medicine, product labels, antimicrobial stewardship and reporting rules need case-specific verification. Wrong answers are learning opportunities—not patient care instructions.</div></section>
 <aside class="side"><div class="card"><h2>🗺️ Clinic dashboard</h2><p id="playerName" class="small">Student veterinarian</p><div class="meter"><div id="xpMeter"></div></div><p class="tiny" id="levelNote"></p><div class="statgrid"><div><b id="caseCount">0</b><small>Cases complete</small></div><div><b id="studyCount">0</b><small>Study answers</small></div><div><b id="roomCount">4</b><small>Rooms open</small></div><div><b id="accuracy">—</b><small>Accuracy</small></div></div></div>
-<div class="card"><h2>📋 Your shift</h2><p class="small">Approach the patient in the exam room or visit the isolation unit for One Health cases.</p><button class="full accent" id="goExam">🩺 Start patient rounds</button><button class="full" id="goIsol">🛡️ One Health cases</button><button class="full" id="ohLibraryBtn">📚 One Health encyclopedia</button><button class="full" id="goStudy">📚 Study desk</button><button class="full" id="openGuide">🗺️ Clinic guide</button></div>
+<div class="card"><h2>📋 Your shift</h2><p class="small">Approach the patient in the exam room or visit the isolation unit for One Health cases.</p><button class="full accent" id="goExam">🩺 Start patient rounds</button><button class="full" id="goIsol">🛡️ One Health cases</button><button class="full" id="ohLibraryBtn">📚 One Health encyclopedia</button><button class="full" id="goStudy">📚 Study desk</button><button class="full accent" id="pharmArcadeBtn">🦠 Pharm Arcade · Bug Battles & Drug Match</button><button class="full" id="openGuide">🗺️ Clinic guide</button></div>
 <div class="card"><h2>🔧 Upgrade your clinic</h2><p class="tiny">Earn clinic coins by completing learning challenges. Cosmetic upgrades are optional.</p><div id="upgradeList"></div></div>
 <div class="card"><h2>✏️ In-game corrections</h2><p class="small">Change a question or drug note without editing JavaScript. Export edits to share.</p><button class="full" id="editorBtn">Open editor</button></div></aside></main>
 <div class="modalwrap hidden" id="modalWrap" role="dialog" aria-modal="true" aria-label="Game interaction"><div class="modal"><div class="modalhead"><h2 id="modalTitle">Clinic</h2><button id="closeModal" class="close" aria-label="Close">✕</button></div><div id="modalBody"></div></div></div>
@@ -467,7 +492,7 @@ function buyUpgrade(id){const u=upgrades.find(x=>x.id===id);if(!u||state.upgrade
 $('scene').addEventListener('click',e=>{const p=e.target.closest('[data-prop]');if(p)doAction(ROOMS[activeRoom].props[Number(p.dataset.prop)].action)});
 $('roomnav').addEventListener('click',e=>{const b=e.target.closest('[data-room]');if(b)changeRoom(b.dataset.room)});
 $('upgradeList').addEventListener('click',e=>{const b=e.target.closest('[data-upgrade]');if(b)buyUpgrade(b.dataset.upgrade)});
-$('ohLibraryBtn').onclick=()=>openOHLibrary();$('goExam').onclick=()=>changeRoom('exam');$('goIsol').onclick=()=>changeRoom('isolation');$('goStudy').onclick=()=>changeRoom('study');$('editorBtn').onclick=()=>openEditor();$('saveBtn').onclick=openSavePanel;$('avatarBtn').onclick=openAvatar;$('helpBtn').onclick=openHelp;$('closeModal').onclick=closeModal;$('modalWrap').addEventListener('click',e=>{if(e.target===$('modalWrap'))closeModal()});
+$('ohLibraryBtn').onclick=()=>openOHLibrary();$('goExam').onclick=()=>changeRoom('exam');$('goIsol').onclick=()=>changeRoom('isolation');$('goStudy').onclick=()=>changeRoom('study');$('pharmArcadeBtn').onclick=()=>{window.location.href='pharm-arcade.html'};$('editorBtn').onclick=()=>openEditor();$('saveBtn').onclick=openSavePanel;$('avatarBtn').onclick=openAvatar;$('helpBtn').onclick=openHelp;$('closeModal').onclick=closeModal;$('modalWrap').addEventListener('click',e=>{if(e.target===$('modalWrap'))closeModal()});
 function beginHold(dir){if(modalVisible)return;hold=dir;$('stage').focus({preventScroll:true})}function stopHold(){hold=0;$('avatarSprite').classList.remove('walking')}
 for(const [id,dir] of [['leftBtn',-1],['rightBtn',1]]){const el=$(id);el.addEventListener('pointerdown',e=>{e.preventDefault();beginHold(dir);el.setPointerCapture(e.pointerId)});['pointerup','pointercancel','lostpointercapture'].forEach(t=>el.addEventListener(t,stopHold))}
 $('interactBtn').onclick=interact;
