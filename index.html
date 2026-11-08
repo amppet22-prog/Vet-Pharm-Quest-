@@ -2076,14 +2076,14 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqlf'));
   if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
   try{
-   if(d.vpqLFHome!==undefined){menuState.pending=null;showLearning();return}
-   if(d.vpqLFSave!==undefined){saveSelection();return}
-   if(d.vpqLFAll!==undefined){setPending(curriculum.courses.map(x=>x[0]));showLearning();return}
-   if(d.vpqLFClear!==undefined){setPending([]);showLearning();return}
-   if(d.vpqLFSingle!==undefined){launch(d.vpqLFSingleMode==='quiz'?'quiz':'learn',d.vpqLFSingle);return}
-   if(d.vpqLFLaunch!==undefined){launch(d.vpqLFLaunch);return}
-   if(d.vpqLFMastery!==undefined){if(pending().length)saveSelection();masteryScreen();return}
-   if(d.vpqLFGame!==undefined){if(pending().length)saveSelection();launchGame(d.vpqLFGame);return}
+   if(d.vpqlfhome!==undefined){menuState.pending=null;showLearning();return}
+   if(d.vpqlfsave!==undefined){saveSelection();return}
+   if(d.vpqlfall!==undefined){setPending(curriculum.courses.map(x=>x[0]));showLearning();return}
+   if(d.vpqlfclear!==undefined){setPending([]);showLearning();return}
+   if(d.vpqlfsingle!==undefined){launch(d.vpqlfsinglemode==='quiz'?'quiz':'learn',d.vpqlfsingle);return}
+   if(d.vpqlflaunch!==undefined){launch(d.vpqlflaunch);return}
+   if(d.vpqlfmastery!==undefined){if(pending().length)saveSelection();masteryScreen();return}
+   if(d.vpqlfgame!==undefined){if(pending().length)saveSelection();launchGame(d.vpqlfgame);return}
   }catch(error){showModal('Learning Lab error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqlfhome="1">Back to Learning Lab</button>')}
  },true);
  $('modalBody').addEventListener('change',e=>{
@@ -2178,15 +2178,15 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqward'));
   if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
   try{
-   if(d.vpqWardHome!==undefined)return caseMenu();
-   if(d.vpqWardPick!==undefined){record={patient:d.vpqWardPick,observed:false,adjusted:false,answer:null};saveRecord();return followup()}
-   if(d.vpqWardFollow!==undefined)return followup();
-   if(d.vpqWardAdjust!==undefined)return adjust();
-   if(d.vpqWardMonitor!==undefined)return monitor();
-   if(d.vpqWardObserve!==undefined){record.observed=true;saveRecord();return followup()}
-   if(d.vpqWardChoice!==undefined){record.answer=Number(d.vpqWardChoice);record.adjusted=record.answer===patient().answer;saveRecord();return adjust()}
-   if(d.vpqWardRetry!==undefined){record.answer=null;saveRecord();return adjust()}
-   if(d.vpqWardReset!==undefined){record.observed=false;record.adjusted=false;record.answer=null;saveRecord();return followup()}
+   if(d.vpqwardhome!==undefined)return caseMenu();
+   if(d.vpqwardpick!==undefined){record={patient:d.vpqwardpick,observed:false,adjusted:false,answer:null};saveRecord();return followup()}
+   if(d.vpqwardfollow!==undefined)return followup();
+   if(d.vpqwardadjust!==undefined)return adjust();
+   if(d.vpqwardmonitor!==undefined)return monitor();
+   if(d.vpqwardobserve!==undefined){record.observed=true;saveRecord();return followup()}
+   if(d.vpqwardchoice!==undefined){record.answer=Number(d.vpqwardchoice);record.adjusted=record.answer===patient().answer;saveRecord();return adjust()}
+   if(d.vpqwardretry!==undefined){record.answer=null;saveRecord();return adjust()}
+   if(d.vpqwardreset!==undefined){record.observed=false;record.adjusted=false;record.answer=null;saveRecord();return followup()}
   }catch(error){showModal('Treatment Ward error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqwardhome="1">Back to patients</button>')}
  },true);
  const css=document.createElement('style');css.textContent='.vpqLFhead{display:flex;align-items:center;justify-content:space-between;gap:9px}.vpqLFlist{display:grid;gap:8px;margin:12px 0}.vpqLFrow{background:white;border:1px solid #d6c9e6;border-radius:12px;padding:9px;display:flex;gap:9px;align-items:center}.vpqLFrow label{display:flex;align-items:center;flex:1;gap:10px}.vpqLFrow label span b,.vpqLFrow label span small{display:block}.vpqLFrow small{font-size:11px;color:#73648d}.vpqLFrow button{border:1px solid #c6b4df;background:#f1e9ff;border-radius:9px;padding:8px 12px;font-weight:700}.vpqLFsteps{padding:13px;background:#f9f6ff;border:1px solid #d7c8e7;border-radius:13px;margin:14px 0}.vpqLFsteps h3{margin:0}.vpqWardHead{border:1px solid #c5dbe3;background:#f3faff;padding:12px;border-radius:12px;margin:10px 0}@media(max-width:550px){.vpqLFrow{flex-wrap:wrap}.vpqLFrow label{min-width:100%}}';document.head.appendChild(css);
