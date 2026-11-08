@@ -81,6 +81,21 @@
 .stage[data-theme="night"] .clinicArt{filter:hue-rotate(155deg) brightness(.74)}
 .vpq-reward-decor{position:absolute;pointer-events:none;z-index:2;font-size:29px;top:22%;right:11%}
 @media(max-width:700px){.vpq-maker{grid-template-columns:1fr}.vpq-maker-preview{position:relative}.vpq-preview-stage{height:167px}}
+
+/* VPQ PET GALLERY & AVATAR VIEW 2.8 */
+.vpq-pet-picker{grid-column:1/-1;background:#f7faff;border:2px solid #d8e3f4;border-radius:16px;padding:11px;margin:7px 0 12px}
+.vpq-pet-picker h3{font-size:14px;margin:2px 0 7px;color:#536a8c}
+.vpq-pet-tabs{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0 10px}
+.vpq-pet-tabs button{font-size:12px;padding:6px 9px;border:2px solid #e3e8f5;background:white;border-radius:12px}
+.vpq-pet-tabs button.chosen,.vpq-pet-choice.chosen{border-color:#7385db;background:#e8e9ff;color:#4c5184}
+.vpq-pet-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:9px}
+.vpq-pet-choice{padding:7px 4px 9px;min-height:113px;background:#fff;border:2px solid #e1e7f0;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;color:#42516d}
+.vpq-pet-choice .vpq-pet-svg{width:92px;height:72px}
+.vpq-pet-choice span{font-size:11px;line-height:1.2;font-weight:750;text-align:center}
+.vpq-viewer-stage{display:flex;align-items:flex-end;justify-content:space-evenly;border:2px solid #d7dbf0;border-radius:18px;background:linear-gradient(#f3fbff 0%,#fcefff 72%,#ead5b4 72%);min-height:235px;max-width:460px;margin:auto;padding:18px}
+.vpq-viewer-stage .vpq-avatar-mini{transform:scale(1.24);transform-origin:center bottom}
+.vpq-viewer-stage .vpq-pet-svg{width:136px;height:125px}
+.vpq-pet-svg{max-width:none}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -135,7 +150,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v2.5</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v2.8</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-portrait.png" alt="Mera Munchasurus, hospital mascot portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus</strong><small>Hospital Mascot · Chief of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -646,6 +661,72 @@ $('modalBody').addEventListener('change',e=>{if(e.target.closest('#avatarForm'))
 $('modalBody').addEventListener('submit',e=>{if(e.target.id!=='avatarForm')return;e.preventDefault();e.stopImmediatePropagation();const form=e.target;if(!form.reportValidity())return;Object.assign(state,vpqEditorValues(form));persist();updateAvatar();updateHUD();closeModal()},true);
 $('modalBody').addEventListener('click',e=>{if(e.target.closest('#vpqCancelAvatar'))closeModal()});
 $('upgradeList').addEventListener('click',e=>{const c=e.target.closest('[data-rewardcat]');if(c){vpqRewardCategory=c.dataset.rewardcat;renderUpgrades()}const eq=e.target.closest('[data-rewardequip]');if(eq){const theme=eq.dataset.rewardequip;if(theme==='default'||state.upgrades.some(id=>{const u=upgrades.find(v=>v.id===id);return u&&u.theme===theme})){state.activeTheme=theme;persist();renderRoom();renderUpgrades()}}});
+
+
+// VPQ PET GALLERY & AVATAR VIEW 2.8
+// The original Customize button captured the old function when registered. Rebind after replacement.
+$('avatarBtn').onclick=function(){openAvatar()};
+function vpqSafeHex(c,fallback){return /^#[\da-f]{6}$/i.test(c||'')?c:fallback}
+vpqPetIllustration=function(p){
+ const spec=p.pet||'🐕',breed=p.petBreed||'husky-shepherd',look=p.catLook||'tabby',coat=vpqSafeHex(p.petCoat,'#cd995f'),name=escapeHtml(p.petName||'Companion');
+ const cat=spec==='🐈',dog=spec==='🐕',grey=breed==='greyhound',corgi=breed==='corgi',dach=breed==='dachshund',shep=breed==='german-shepherd',mera=breed==='husky-shepherd',husky=breed==='husky',collie=breed==='border-collie';
+ const black=cat?(look==='black'||look==='tuxedo'):mera||shep||collie;
+ const base=cat?(look==='black'||look==='tuxedo'?'#353d44':look==='orange'?'#df934d':look==='calico'?'#e6c7a1':coat):mera?'#9a6a45':shep?'#b98c4d':husky?'#a8afb7':collie?'#343f44':corgi?'#ca8d45':dach?'#af764d':grey?'#b9bac6':coat;
+ const dark='#41404a',cream='#f5ead5';
+ const start='<svg class="vpq-pet-svg" viewBox="0 0 120 95" role="img" aria-label="'+name+' cartoon companion"><ellipse cx="60" cy="89" rx="42" ry="4" fill="#47577233"/>';
+ const end='<text x="86" y="27" font-size="17">'+escapeHtml(p.petAccessory||'')+'</text></svg>';
+ if(!cat&&!dog){
+  if(spec==='🐇')return start+'<ellipse cx="72" cy="64" rx="30" ry="21" fill="'+base+'"/><ellipse cx="40" cy="48" rx="24" ry="23" fill="'+base+'"/><ellipse cx="28" cy="19" rx="9" ry="25" transform="rotate(-12 28 19)" fill="'+base+'"/><ellipse cx="46" cy="19" rx="8" ry="26" transform="rotate(10 46 19)" fill="'+base+'"/><circle cx="32" cy="47" r="3.2" fill="'+dark+'"/><ellipse cx="16" cy="59" rx="6" ry="4" fill="#de9ca4"/><circle cx="100" cy="62" r="9" fill="#fff4ea"/>'+end;
+  if(spec==='🐴')return start+'<path d="M34 62 L49 26 L68 28 L82 64 L88 85 L36 85Z" fill="'+base+'" stroke="#795c4c" stroke-width="2"/><path d="M42 29 L41 6 L53 20 L68 20 L76 5 L77 31" fill="'+base+'" stroke="#795c4c" stroke-width="2"/><path d="M43 18 L57 14 L61 34" stroke="'+dark+'" stroke-width="9"/><ellipse cx="57" cy="53" rx="22" ry="24" fill="'+base+'"/><ellipse cx="57" cy="68" rx="15" ry="12" fill="#d2ae9a"/><circle cx="45" cy="48" r="3" fill="'+dark+'"/><circle cx="69" cy="48" r="3" fill="'+dark+'"/>'+end;
+  if(spec==='🐮')return start+'<ellipse cx="65" cy="65" rx="32" ry="22" fill="#fff8f2" stroke="#6a646a" stroke-width="2"/><ellipse cx="45" cy="30" rx="13" ry="9" fill="#ead0b9"/><ellipse cx="87" cy="30" rx="13" ry="9" fill="#ead0b9"/><path d="M35 36 L30 11 L45 23 M85 36 L91 11 L78 23" fill="#d2bc93"/><ellipse cx="65" cy="50" rx="27" ry="28" fill="#fff8f2"/><path d="M48 32 Q63 20 72 35 L63 46 L48 44Z" fill="#333d43"/><ellipse cx="64" cy="67" rx="20" ry="13" fill="#e9adb2"/><circle cx="57" cy="65" r="3" fill="#a5757c"/><circle cx="73" cy="65" r="3" fill="#a5757c"/><circle cx="53" cy="50" r="3" fill="#30353b"/><circle cx="78" cy="50" r="3" fill="#30353b"/>'+end;
+  if(spec==='🦎')return start+'<path d="M81 57 Q121 42 113 70 Q107 84 94 72" stroke="'+base+'" stroke-width="13" fill="none" stroke-linecap="round"/><ellipse cx="60" cy="60" rx="36" ry="16" fill="'+base+'"/><path d="M38 66 L27 82 M74 66 L85 82 M38 51 L25 42 M75 51 L88 42" stroke="'+base+'" stroke-width="10" stroke-linecap="round"/><ellipse cx="26" cy="53" rx="17" ry="17" fill="'+base+'"/><circle cx="20" cy="49" r="3.5" fill="'+dark+'"/><path d="M15 59 L28 63" stroke="'+dark+'" stroke-width="2"/>'+end;
+  if(spec==='🐍')return start+'<path d="M89 78 C117 40 43 36 40 68 C38 86 87 87 84 61 C81 44 51 45 56 64" stroke="'+base+'" stroke-width="18" fill="none" stroke-linecap="round"/><ellipse cx="37" cy="56" rx="20" ry="13" fill="'+base+'"/><circle cx="31" cy="53" r="3" fill="'+dark+'"/><path d="M19 61 L6 69 L2 65 M6 69 L4 74" stroke="#d96382" stroke-width="2" fill="none"/>'+end;
+  return start+'<text x="61" y="72" font-size="60" text-anchor="middle">'+escapeHtml(spec)+'</text>'+end;
+ }
+ const low=corgi||dach,slender=grey,long=grey||dach,neck=grey?'<path d="M41 74 L44 27 L57 30 L55 75" fill="'+base+'"/>':'';
+ const bodyCx=long?71:73,bodyRy=grey?12:low?15:20,bodyRx=dach?38:grey?25:low?34:29,bodyCy=low?65:62;
+ const legs=grey?'<path d="M57 66 L51 88 M84 65 L90 88" stroke="'+base+'" stroke-width="6" stroke-linecap="round"/>':low?'<path d="M53 72 L53 84 M87 72 L87 84" stroke="'+base+'" stroke-width="9" stroke-linecap="round"/>':'<path d="M55 70 L53 86 M86 70 L87 86" stroke="'+base+'" stroke-width="10" stroke-linecap="round"/>';
+ const tail=cat?'<path d="M93 66 Q119 55 110 25" stroke="'+base+'" stroke-width="8" stroke-linecap="round" fill="none"/>':husky||mera?'<path d="M91 62 Q117 44 99 29" stroke="'+cream+'" stroke-width="11" stroke-linecap="round" fill="none"/>':collie?'<path d="M93 62 Q112 46 106 35" stroke="'+cream+'" stroke-width="10" fill="none" stroke-linecap="round"/>':'<path d="M94 59 Q114 51 106 35" stroke="'+base+'" stroke-width="8" fill="none" stroke-linecap="round"/>';
+ const headCx=grey?41:dach?40:43,headCy=grey?38:42,headRx=grey?17:cat?21:23,headRy=grey?21:cat?22:24;
+ const floppy=(dach||grey||breed==='mixed')&&!cat;
+ const ears=floppy?'<ellipse cx="27" cy="37" rx="9" ry="20" transform="rotate(-18 27 37)" fill="'+base+'" stroke="#775745" stroke-width="2"/><ellipse cx="56" cy="37" rx="9" ry="19" transform="rotate(22 56 37)" fill="'+base+'" stroke="#775745" stroke-width="2"/>':'<path d="M25 40 L22 7 L42 28 L57 23 L69 7 L68 40" fill="'+base+'" stroke="#795742" stroke-width="2"/>';
+ const saddle=mera||shep?'<path d="M55 47 Q78 38 99 56 L99 69 L73 61 L58 68Z" fill="#292f34"/>':'';
+ const mask=mera?'<path d="M25 30 Q43 17 62 32 L55 49 L47 40 L38 48 L30 46Z" fill="#292d30"/>':husky?'<path d="M25 28 Q43 19 61 30 L55 47 L47 39 L40 47 L30 45Z" fill="#5c6572"/>':collie?'<path d="M26 23 Q43 17 60 27 L56 58 L33 58Z" fill="#262d34"/><path d="M42 25 L48 25 L46 58 L41 58" fill="'+cream+'"/>':cat&&look==='calico'?'<path d="M28 25 Q43 17 50 30 L43 41 L30 41Z" fill="#e48c4b"/><path d="M53 29 L64 26 L62 44 L53 43Z" fill="#30343a"/>':cat&&look==='tuxedo'?'<path d="M28 25 Q42 18 60 28 L61 53 L51 53 L44 45 L35 53 L26 52Z" fill="#30343a"/>':cat&&look==='tabby'?'<path d="M33 23 L38 36 M44 24 L44 35 M54 24 L50 36" stroke="#8c624c" stroke-width="4"/>':'';
+ const chest=collie||husky||mera||cat&&look==='tuxedo'?'<path d="M51 58 Q65 58 69 78 L56 78 Z" fill="'+cream+'"/>':'';
+ const eyes=husky||mera?'#75b6ee':'#42312f';
+ const eyeX=grey?35:37,otherX=grey?48:53,eyeY=grey?36:40;
+ const muzzle=grey?'<ellipse cx="41" cy="55" rx="11" ry="13" fill="'+cream+'"/>':'<ellipse cx="44" cy="58" rx="15" ry="10" fill="'+cream+'"/>';
+ const eyelets='<circle cx="'+eyeX+'" cy="'+eyeY+'" r="3.9" fill="'+eyes+'"/><circle cx="'+otherX+'" cy="'+eyeY+'" r="3.9" fill="'+eyes+'"/><circle cx="'+eyeX+'" cy="'+(eyeY-1)+'" r="1.3" fill="white"/><circle cx="'+otherX+'" cy="'+(eyeY-1)+'" r="1.3" fill="white"/>';
+ const nose='<ellipse cx="44" cy="56" rx="5" ry="3.6" fill="#2c292b"/><path d="M44 61 Q49 66 54 62" stroke="#6f4c48" stroke-width="1.7" fill="none"/>';
+ return start+tail+neck+legs+'<ellipse cx="'+bodyCx+'" cy="'+bodyCy+'" rx="'+bodyRx+'" ry="'+bodyRy+'" fill="'+base+'" stroke="#745448" stroke-width="2"/>'+saddle+ears+'<ellipse cx="'+headCx+'" cy="'+headCy+'" rx="'+headRx+'" ry="'+headRy+'" fill="'+base+'" stroke="#745448" stroke-width="2"/>'+mask+chest+muzzle+eyelets+nose+end;
+};
+function vpqUpdatePetGallery(){
+ const holder=$('vpqPetGallery'),form=$('avatarForm');if(!holder||!form)return;
+ const p=vpqEditorValues(form);
+ const isDog=p.pet==='🐕',isCat=p.pet==='🐈';
+ const choices=isDog?vpqBreeds:isCat?vpqCatLooks:[];
+ const cards=choices.length?choices.map(([key,label])=>{
+   const info={...p,...(isDog?{petBreed:key}:{catLook:key})};
+   const selected=isDog?p.petBreed===key:p.catLook===key;
+   return '<button type="button" class="vpq-pet-choice '+(selected?'chosen':'')+'" data-vpqchoose="'+escapeHtml(key)+'">'+vpqPetIllustration(info)+'<span>'+escapeHtml(label)+'</span></button>';
+ }).join(''):'<p class="small">Your '+escapeHtml((vpqPetSpecies.find(x=>x[0]===p.pet)||[])[1]||'companion')+' is ready! You can change its color and accessories below.</p>';
+ holder.innerHTML='<h3>🐾 Choose your companion</h3><div class="vpq-pet-tabs">'+vpqPetSpecies.map(([key,label])=>'<button type="button" data-vpqspec="'+escapeHtml(key)+'" class="'+(p.pet===key?'chosen':'')+'">'+escapeHtml(key)+' '+escapeHtml(label)+'</button>').join('')+'</div><div class="vpq-pet-options">'+cards+'</div>';
+}
+const vpqOriginalAvatarOpen28=openAvatar;
+openAvatar=function(){vpqOriginalAvatarOpen28();const form=$('avatarForm');if(!form)return;const gallery=document.createElement('div');gallery.className='vpq-pet-picker';gallery.id='vpqPetGallery';const grid=form.querySelector('.twocol');if(grid)grid.insertBefore(gallery,grid.firstChild);vpqUpdatePetGallery();vpqRefreshPreview();};
+const vpqOldPreview28=vpqRefreshPreview;
+vpqRefreshPreview=function(){vpqOldPreview28();vpqUpdatePetGallery()};
+function vpqViewMyAvatar(){
+ showModal('👀 My Hospital Doctor & Companion','<div class="vpq-viewer-stage">'+vpqPersonPreview(state)+'<div class="vpq-preview-pet">'+vpqPetIllustration(state)+'</div></div><h3 style="text-align:center">Dr. '+escapeHtml(state.name||'Student Vet')+' & '+escapeHtml(state.petName||'Companion')+'</h3><p class="small" style="text-align:center">Level '+(Math.floor(state.xp/LEVEL_THRESH)+1)+' · '+state.xp+' XP · '+state.coins+' 🪙</p><div class="buttonrow"><button type="button" id="vpqEditFromViewer">✨ Customize</button><button type="button" id="vpqViewerClose">Back to clinic</button></div>');
+}
+$('vpqViewAvatarBtn').onclick=vpqViewMyAvatar;
+$('modalBody').addEventListener('click',e=>{
+ const sp=e.target.closest('[data-vpqspec]'),ch=e.target.closest('[data-vpqchoose]');
+ if(sp){const f=$('avatarForm');if(!f)return;f.elements.pet.value=sp.dataset.vpqspec;vpqRefreshPreview();return}
+ if(ch){const f=$('avatarForm');if(!f)return;if(f.elements.pet.value==='🐕')f.elements.petBreed.value=ch.dataset.vpqchoose;else if(f.elements.pet.value==='🐈')f.elements.catLook.value=ch.dataset.vpqchoose;vpqRefreshPreview();return}
+ if(e.target.closest('#vpqEditFromViewer')){openAvatar();return}
+ if(e.target.closest('#vpqViewerClose')){closeModal();return}
+});
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
