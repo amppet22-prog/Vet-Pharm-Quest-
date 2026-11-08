@@ -1730,11 +1730,27 @@ for(const d of window.VPQ_OH.diseases){
  if(extra)Object.assign(d,extra);
  else{d.coreFactSheet=false;d.sourceGuide='Supplemental practice-exam topic; NOT an assigned core fact sheet in the two audited guides';d.examTrap=d.pearl||'See supplied course notes';}
 }
+
+// Classification is derived from assigned source/exam, not the first 32 legacy IDs.
+// Exams 2, 3 and 4 have assigned fact sheets; Exam 1 cards are core lecture topics.
+function vpqOHLabel41(d){
+ const tags=Array.isArray(d.examTags)?d.examTags:[];
+ const fact=tags.some(t=>['Exam 2','Exam 3','Exam 4'].includes(t));
+ return fact?'CORE FACT SHEET · '+tags.filter(t=>['Exam 2','Exam 3','Exam 4'].includes(t)).join(' + '):tags.includes('Exam 1')?'EXAM 1 · COURSE TOPIC':'REFERENCE TOPIC · ASSIGNMENT NOT VERIFIED';
+}
+for(const d of window.VPQ_OH.diseases){
+ d.coreFactSheet=(Array.isArray(d.examTags)&&d.examTags.some(t=>['Exam 2','Exam 3','Exam 4'].includes(t)));
+ if(!vpqOHCoreDetail40[d.id] && d.coreFactSheet) {
+   d.sourceGuide=d.source||'Assigned course fact sheet';
+   d.examTrap=d.highYield||d.pearl||'Review the assigned fact sheet';
+ }
+ if(!d.coreFactSheet)d.sourceGuide=d.source||'One Health Exam 1 course materials';
+}
 const vpqOriginalOpenOHCard40=openOHCard;
 function vpqOHField40(name,value){return '<div class="vpq-oh-fact"><strong>'+escapeHtml(name)+'</strong><p>'+escapeHtml(value||'Not yet transcribed from assigned source; verify the uploaded guide before treating this as an exam fact.')+'</p></div>'}
 openOHCard=function(id){
  const d=window.VPQ_OH.diseases.find(x=>x.id===id);if(!d)return;
- const kind=d.coreFactSheet?'CORE FACT SHEET':'SUPPLEMENTAL TOPIC';
+ const kind=vpqOHLabel41(d);
  const headings=[
  ['Etiologic agent',d.agent],['Subtypes / strain distinctions',d.subtypes],['Hosts and host roles',d.hostRoles||d.hosts],
  ['Transmission',d.transmission],['Clinical findings',d.signs],['Diagnostic tests',d.diagnostics],
@@ -1751,18 +1767,18 @@ openOHLibrary=function(query=''){
  ohQuery=query;
  const ds=window.VPQ_OH.diseases.filter(d=>([d.name,d.agent,d.hosts,d.source,d.subtypes,d.examTrap].join(' ')).toLowerCase().includes(query.toLowerCase()));
  showModal('📚 One Health III · Exam Fact Sheets',
- '<p class="vpq-oh-audit-note"><b>Audited coverage:</b> 32 core disease fact-sheet topics (19 integrated + 13 Exam 3 topics; Campylobacter is cross-referenced in both) and 6 supplementary practice-exam topics. The study-guide information has been expanded; not every original course fact-sheet line is reproduced here.</p>'+
- '<div class="vpq-oh-tools"><button data-vpqohpractice="1">🧠 Exam Prep / Select All</button><button data-vpqohcore="1">📚 Core fact sheets</button><button data-vpqohsupp="1">🧩 Supplemental only</button></div>'+
- '<input class="input" id="ohSearch" placeholder="Search name, strain, agent, host, exam trap..." value="'+escapeHtml(query)+'"><div id="ohResults" class="oh-cards">'+ds.map(d=>'<button class="quest" data-ohcard="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><p class="tiny">'+escapeHtml(d.agent)+'</p><span class="vpq-oh-tier">'+(d.coreFactSheet?'Core fact sheet':'Supplemental')+'</span></button>').join('')+'</div><button data-oh="hub">← Public Health Office</button>');
+ '<p class="vpq-oh-audit-note"><b>Course classification:</b> All 19 Exam 2 fact sheets, the assigned Exam 3 fact sheets, and the 19 Exam 4 integrated-guide diseases are core study materials. Exam 1 has six core lecture/topic references rather than a disease fact-sheet set. A disease can be assigned to multiple exams. Classification reflects assignment, NOT completion of clinical fact checking.</p>'+
+ '<div class="vpq-oh-tools"><button data-vpqohpractice="1">🧠 Exam Prep / Select All</button><button data-vpqohcore="1">📚 Assigned fact sheets</button><button data-vpqohsupp="1">📖 Exam 1 lecture topics</button></div>'+
+ '<input class="input" id="ohSearch" placeholder="Search name, strain, agent, host, exam trap..." value="'+escapeHtml(query)+'"><div id="ohResults" class="oh-cards">'+ds.map(d=>'<button class="quest" data-ohcard="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><p class="tiny">'+escapeHtml(d.agent)+'</p><span class="vpq-oh-tier">'+vpqOHLabel41(d)+'</span></button>').join('')+'</div><button data-oh="hub">← Public Health Office</button>');
 };
 renderOHResults=function(v){
  ohQuery=v;const el=$('ohResults');if(!el)return;
  el.innerHTML=window.VPQ_OH.diseases.filter(d=>[d.name,d.agent,d.hosts,d.source,d.subtypes,d.examTrap].join(' ').toLowerCase().includes(v.toLowerCase())).map(d=>
- '<button class="quest" data-ohcard="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><p class="tiny">'+escapeHtml(d.agent)+'</p><span class="vpq-oh-tier">'+(d.coreFactSheet?'Core fact sheet':'Supplemental')+'</span></button>').join('')||'<p class="small">No matching cards.</p>';
+ '<button class="quest" data-ohcard="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><p class="tiny">'+escapeHtml(d.agent)+'</p><span class="vpq-oh-tier">'+vpqOHLabel41(d)+'</span></button>').join('')||'<p class="small">No matching cards.</p>';
 };
 $('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
- if(b.dataset.vpqohcore){openOHLibrary();const grid=$('ohResults');grid.querySelectorAll('[data-ohcard]').forEach(x=>{if(Number(x.dataset.ohcard.slice(2))>32)x.style.display='none'});return}
- if(b.dataset.vpqohsupp){openOHLibrary();const grid=$('ohResults');grid.querySelectorAll('[data-ohcard]').forEach(x=>{if(Number(x.dataset.ohcard.slice(2))<=32)x.style.display='none'});return}
+ if(b.dataset.vpqohcore){openOHLibrary();const grid=$('ohResults');grid.querySelectorAll('[data-ohcard]').forEach(x=>{if(!window.VPQ_OH.diseases.find(d=>d.id===x.dataset.ohcard)?.coreFactSheet)x.style.display='none'});return}
+ if(b.dataset.vpqohsupp){openOHLibrary();const grid=$('ohResults');grid.querySelectorAll('[data-ohcard]').forEach(x=>{if(window.VPQ_OH.diseases.find(d=>d.id===x.dataset.ohcard)?.coreFactSheet)x.style.display='none'});return}
 });
 
 
@@ -2355,6 +2371,43 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  },true);
  const style=document.createElement('style');
  style.textContent='.vpqOHCenterBanner{background:#f0fcf7;border:1px solid #a6d5be;padding:12px;border-radius:12px;margin-bottom:12px}.vpqOHCenterBanner p{margin:5px 0;font-size:12px}.vpqOHCenterGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin:14px 0}.vpqOHCenterGrid button{text-align:left;background:white;border:1px solid #b1cbbf;border-radius:11px;padding:13px}.vpqOHCenterGrid button.active{background:#dff8eb;border:2px solid #39795f}.vpqOHCenterGrid b,.vpqOHCenterGrid small{display:block}.vpqOHCenterGrid small{font-size:12px;margin-top:5px}.vpqOHCenterQuestion{background:white;padding:15px;border:1px solid #d4e5d9;border-radius:14px;margin:12px 0}.vpqOHCenterAnswer{display:flex;align-items:flex-start;gap:10px;padding:12px;margin:8px 0;border:1px solid #dedee4;border-radius:9px;cursor:pointer}.vpqOHCenterAnswer.good{background:#e5f7e8;border-color:#70b280}.vpqOHCenterAnswer.bad{background:#ffeaea;border-color:#cf8585}.vpqOHCenterAnswer input{flex:none;margin-top:4px}.vpqOHCenterAnswer span{line-height:1.5}';
+ document.head.appendChild(style);
+})();
+
+/* Learning Desk clarity: the focus dropdown is the primary study selector;
+   larger alternative game links move below it as secondary paths. */
+(function(){
+ 'use strict';
+ const previousStudyMenu=showStudyMenu;
+ showStudyMenu=function(...args){
+   previousStudyMenu(...args);
+   const body=document.getElementById('modalBody');
+   const selector=document.getElementById('studyFocus');
+   if(!body||!selector)return;
+   const label=selector.closest('label');
+   if(!label)return;
+   label.classList.add('vpqStudyPrimary');
+   const first=label.firstChild;
+   if(first&&first.nodeType===3)first.textContent='STEP 1 — SELECT YOUR LECTURE OR ONE HEALTH EXAM';
+   const help=document.createElement('p');
+   help.className='vpqStudyHelp';
+   help.textContent='Click the dropdown below to choose Pharmacology lectures or One Health Exam 1, 2, 3, or 4. Then click Start fresh round. The large Exam Center and Pharm Arcade buttons are OPTIONAL different game modes.';
+   label.parentNode.insertBefore(help,label);
+   const actions=body.querySelector('.buttonrow');
+   if(actions&&actions.querySelector('[data-studycmd="new"]')){
+     const b=actions.querySelector('[data-studycmd="new"]');b.textContent='STEP 2 — Start questions for selected lecture / exam';b.classList.add('vpqStudyStart');
+   }
+   const extra=[...body.querySelectorAll('.vpq-games-callout')];
+   if(extra.length){
+      const aside=document.createElement('section');
+      aside.className='vpqStudyOptional';
+      aside.innerHTML='<h3>Optional — switch to a different game mode</h3><p>These are not how you choose a lecture or exam for the Study Desk above.</p>';
+      extra.forEach(x=>aside.appendChild(x));
+      body.appendChild(aside);
+   }
+ };
+ const style=document.createElement('style');
+ style.textContent='.vpqStudyPrimary{display:block!important;border:3px solid #348169!important;background:#e8f8ef!important;border-radius:15px!important;padding:16px!important;margin:12px 0!important;font-weight:800!important}.vpqStudyPrimary select{display:block!important;width:100%!important;min-height:49px!important;border:2px solid #276b54!important;margin-top:9px!important;background:white!important;font-size:15px!important;font-weight:700!important;cursor:pointer!important}.vpqStudyHelp{font-size:14px;line-height:1.5;background:#f5fbf8;border-left:4px solid #348169;padding:10px 12px;margin:12px 0}.vpqStudyStart{background:#236c53!important;color:#fff!important;font-weight:800!important;padding:12px 16px!important}.vpqStudyOptional{margin-top:25px;padding:15px;border:1px dashed #a3a7b4;border-radius:13px;background:#f7f7fa}.vpqStudyOptional h3{margin:0 0 6px;font-size:14px}.vpqStudyOptional p{font-size:12px;margin:4px 0 10px}.vpqStudyOptional .vpq-games-callout{margin-top:10px;opacity:.89}';
  document.head.appendChild(style);
 })();
 updateAvatar();updateHUD();renderRoom();loop();
