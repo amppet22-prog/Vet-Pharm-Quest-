@@ -17,6 +17,7 @@
 .vpq-exam-actions strong{display:block;font-size:15px}.vpq-exam-actions small{display:block;margin-top:5px;color:#726780}
 .vpq-exam-tip{padding:10px 12px;background:#f3eff9;border-radius:11px;color:#655773;font-size:12px;margin:8px 0}
 </style></head><body><div style="background:linear-gradient(90deg,#ece1fa,#fceee8);padding:11px 16px;text-align:center;font-weight:800;border-bottom:2px solid #d7bfe2"><a href="index.html" style="color:#574477;text-decoration:underline">🏥 Back to Alexandria’s Teaching Hospital</a><span style="font-size:11px;display:block;margin-top:3px;color:#6f6880">Classic Pharm Arcade · 100 lecture-based questions · progress stays saved separately in this browser</span></div><header><nav><div class="logo">🐾 Vet Pharm Quest</div><span class="tag">EXAM 1 • LECTURES 1–9</span><div class="grow"></div><div class="pill">⭐ <span id="xpTop">0</span> XP</div><div class="pill">🏅 Level <span id="levelTop">1</span></div><button class="topbtn smallbtn" id="resetBtn">Reset progress</button></nav></header><main class="wrap"><div class="hero"><div><div style="font-weight:900;opacity:.9">WELCOME TO YOUR TRAINING CLINIC</div><h1>Become a Pharm Champion! 🩺</h1><p>Learn the mechanism. Choose the treatment. Protect the patient. Every answer teaches the physiology behind your decision.</p><div class="barbg"><div class="barfill" id="heroBar" style="width:0%"></div></div><div style="font-size:12px;margin-top:5px" id="nextLevel">0 / 150 XP until Level 2</div></div><div class="mascot">👩‍⚕️🐶</div></div><div class="tabs" id="tabs"><button data-tab="home" class="active">🏥 Clinic Hub</button><button data-tab="cases">🩺 Patient Rounds</button><button data-tab="battle">⚔️ Bug Battles</button><button data-tab="match">🧩 Drug Match</button><button data-tab="boss">🏆 Exam Boss</button><button data-tab="review">📒 Missed Concepts</button></div><div class="layout"><section class="panel" id="screen"></section><aside class="side"><div class="panel"><h3>📊 Your Progress</h3><div class="scorebox"><div class="stat"><span class="muted micro">Correct</span><b id="hits">0</b></div><div class="stat"><span class="muted micro">Accuracy</span><b id="accuracy">—</b></div><div class="stat"><span class="muted micro">Cases healed</span><b id="patients">0</b></div><div class="stat"><span class="muted micro">Bugs defeated</span><b id="defeated">0</b></div></div><p class="muted micro" id="attempts"></p></div><div class="panel"><h3>📚 Focus Area</h3><label for="filter">Choose lectures</label><select id="filter" class="select" style="width:100%;margin-top:7px"><option value="all">All Exam 1 lectures</option><option value="1">Lecture 1 · Foundations</option><option value="2">Lecture 2 · Drug selection</option><option value="3">Lecture 3 · Cell wall</option><option value="4">Lecture 4 · Ribosomes</option><option value="5">Lecture 5 · Misc. antibiotics</option><option value="6">Lectures 6–7 · NSAIDs</option><option value="8">Lecture 8 · Antihistamines</option><option value="9">Lecture 9 · Corticosteroids</option></select><p class="muted micro">This filters Patient Rounds and Exam Boss. Battles focus on antimicrobials.</p></div><div class="panel"><h3>💡 Your Clinician Mindset</h3><div class="note">Always ask: <b>target → physiology → patient → risk → monitoring.</b> Exam expectations and real-world prescribing rules may differ.</div></div></aside></div><div class="footer">Vet Pharm Quest · Offline learning prototype · Educational simulation only, not a prescribing or dosage tool.</div></main><script src="curriculum.js"></script>
+<script src="bug-library.js"></script>
 <script>
 'use strict';
 const BANK=[
@@ -244,6 +245,211 @@ if(vpqArcadeModes.includes(vpqArcadeRequested)){
  if(selectedTab==='guide'){vpqGuideStart37();}
  else render();
 }
+
+
+/* VPQ Arcade 4.0 — Purposeful matching, shared lecture focus, One Health Bug Battles and professor source disclosure. */
+const vpqArcadeFocus40=()=>[...vpqExamLectures310].map(String);
+const vpqShuffle40=a=>{const copy=[...a];for(let i=copy.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]]}return copy};
+const vpqMatchBank40=[
+ ['1','EC50','Drug concentration producing half-maximal effect','Potency metric; does not equal Emax'],
+ ['1','Emax','Maximum achievable pharmacologic response','Efficacy rather than potency'],
+ ['1','Volume of distribution','Apparent distribution of drug relative to plasma concentration','High value often means greater tissue distribution'],
+ ['1','Competitive antagonist','Competes at agonist binding site','Surmountable by sufficient agonist in many cases'],
+ ['1','First-pass effect','Presystemic metabolism after oral absorption','Can reduce oral bioavailability'],
+ ['2','MIC','Lowest tested concentration that inhibits visible growth','Needs breakpoint and achievable exposure to guide therapy'],
+ ['2','Time above MIC','Beta-lactam PK/PD priority','Time-dependent bacterial killing'],
+ ['2','Peak-to-MIC','Aminoglycoside PK/PD priority','Concentration-dependent bacterial killing'],
+ ['2','AUC-to-MIC','Fluoroquinolone PK/PD priority','Exposure relative to bacterial susceptibility'],
+ ['2','Source control','Drain/debride an infected focus where indicated','Drugs alone may fail in an inaccessible abscess'],
+ ['3','Amoxicillin','Beta-lactam PBPs and cell-wall cross-linking','Bacterial beta-lactamases can inactivate susceptible drugs'],
+ ['3','Clavulanate','Beta-lactamase inhibitor (selected enzymes)','Protects susceptible partner beta-lactams'],
+ ['3','Cephalexin','First-generation cephalosporin; PBPs','Common veterinary susceptible skin-infection agent'],
+ ['3','Ceftiofur','Veterinary third-generation cephalosporin; PBPs','Food animal label and extra-label limits'],
+ ['3','Cefovecin','Long-acting third-generation cephalosporin; PBPs','Long exposure; not a universal convenient substitute'],
+ ['3','Vancomycin','Glycopeptide D-Ala-D-Ala binding','Human reserve relevance; food-animal extra-label prohibition'],
+ ['4','Doxycycline','Tetracycline binds 30S, blocks aminoacyl-tRNA','Cat esophagitis when dry-pilled'],
+ ['4','Chlortetracycline','Older tetracycline; 30S protein synthesis inhibitor','Specific food-animal feed uses under VFD'],
+ ['4','Oxytetracycline','Tetracycline binds 30S','Some empirical livestock indications limited by resistance'],
+ ['4','Tigecycline','Glycylcycline acting at 30S','Human labeled reserve; not routine veterinary therapy'],
+ ['4','Gentamicin','Aminoglycoside; 30S mistranslation','Poor anaerobic activity; kidney and ear risk'],
+ ['4','Amikacin','Aminoglycoside; 30S mistranslation','Selected serious susceptible infections; monitor kidneys'],
+ ['4','Clindamycin','Lincosamide; 50S protein synthesis inhibition','Hindgut fermenter dysbiosis risk'],
+ ['4','Azithromycin','Macrolide; 50S translation inhibition','Foal use differs from adult horse safety'],
+ ['4','Tilmicosin','Macrolide; 50S inhibition','Potentially fatal accidental human injection'],
+ ['4','Chloramphenicol','Phenicols; 50S peptidyl transferase inhibition','Prohibited in food-producing animals in US'],
+ ['4','Florfenicol','Veterinary phenicol; 50S inhibition','Unlike chloramphenicol, has specific labeled food-animal uses'],
+ ['4','Tylosin','Veterinary macrolide; 50S inhibition','Some food-animal feed uses require VFD'],
+ ['5','Enrofloxacin','Fluoroquinolone; DNA gyrase/topoisomerase','Feline retinal toxicity and food-animal extra-label limits'],
+ ['5','Metronidazole','Anaerobic activation leads to DNA damage','Neurotoxicity risk at excessive exposure'],
+ ['5','Trimethoprim','Dihydrofolate reductase inhibition','Often paired with a sulfonamide for sequential folate blockade'],
+ ['5','Sulfonamide','Dihydropteroate synthase inhibition','Competes with PABA in bacterial folate synthesis'],
+ ['5','Rifampin','DNA-dependent RNA polymerase inhibitor','Resistance develops rapidly with monotherapy'],
+ ['5','Monensin','Ionophore perturbs ion gradients','Severe toxicity in horses'],
+ ['6','Carprofen','Cyclooxygenase inhibition reduces prostaglandins','Dehydration increases NSAID renal risk'],
+ ['6','Meloxicam','COX-preferential NSAID reduces prostaglandin production','US feline repeat-dose warning'],
+ ['6','Robenacoxib','COX-2 selective NSAID','Renal and GI risks remain despite COX-2 preference'],
+ ['6','Grapiprant','Prostaglandin E2 EP4 receptor antagonist','Blocks downstream pain signaling rather than COX'],
+ ['6','Flunixin','NSAID COX inhibition','Equine visceral pain; can mask worsening abdominal disease'],
+ ['6','Firocoxib','COX-2 selective veterinary NSAID','Still requires patient and species safety review'],
+ ['8','Diphenhydramine','First-generation H1 inverse agonist','Sedation; not the primary treatment for anaphylaxis'],
+ ['8','Famotidine','Histamine H2 receptor antagonist','Reduces histamine-stimulated gastric acid secretion'],
+ ['8','Cetirizine','Second-generation H1 inverse agonist','Generally less central sedation than first-generation agents'],
+ ['8','Epinephrine','Alpha and beta adrenergic agonist','First-line medication in anaphylaxis'],
+ ['9','Prednisolone','Glucocorticoid receptor agonist','HPA suppression and infection risk with prolonged exposure'],
+ ['9','Dexamethasone','Potent glucocorticoid receptor agonist','High glucocorticoid potency and limited mineralocorticoid effect'],
+ ['9','Trilostane','Inhibits adrenal 3β-hydroxysteroid dehydrogenase','Can cause adrenal insufficiency if over-suppressed'],
+ ['9','Mitotane','Adrenocorticolytic agent','Can cause life-threatening hypoadrenocorticism'],
+ ['9','Pergolide','Dopamine agonist','Equine pituitary pars intermedia dysfunction therapy']
+].map(([lecture,drug,mechanism,clinical],i)=>({id:'match40-'+i,lecture,drug,mechanism,clinical}));
+let vpqMatchMode40='mechanism',vpqMatchInfo40={},vpqMatchRecent40=[];
+try{vpqMatchRecent40=JSON.parse(localStorage.getItem('vpq-match-recent-v1')||'[]')||[]}catch(e){}
+function vpqMatchPool40(){return vpqMatchBank40.filter(x=>vpqArcadeFocus40().includes(x.lecture))}
+function vpqMatchInit40(){
+ const pool=vpqMatchPool40(),key=vpqMatchMode40;
+ if(pool.length<3){
+   matchDeck=[];round=null;
+   $('screen').innerHTML='<h2>🧩 Drug Match · No matching cards yet</h2><p>Your selected lecture set contains '+pool.length+' available '+(vpqMatchMode40==='clinical'?'clinical caution':'mechanism')+' pairs. Choose more pharmacology lectures in the Learning Lab.</p><button class="btn" id="vpqMatchToExam">Lecture selection</button>';
+   $('vpqMatchToExam').onclick=()=>setTab('examcenter');return;
+ }
+ const candidates=pool.filter(x=>!vpqMatchRecent40.includes(x.id));
+ const eligible=vpqShuffle40([...candidates,...vpqShuffle40(pool.filter(x=>vpqMatchRecent40.includes(x.id)))]);
+ const picks=[],seen=new Set();
+ for(const x of eligible){const answer=x[key];if(seen.has(answer))continue;seen.add(answer);picks.push(x);if(picks.length===Math.min(6,pool.length))break}
+ if(picks.length<3){$('screen').innerHTML='<h2>Not enough distinct cards</h2><p>Choose other lectures to create a meaningful round.</p>';return}
+ vpqMatchRecent40=[...picks.map(x=>x.id),...vpqMatchRecent40.filter(id=>!picks.some(x=>x.id===id))].slice(0,Math.max(12,pool.length-3));
+ try{localStorage.setItem('vpq-match-recent-v1',JSON.stringify(vpqMatchRecent40))}catch(e){}
+ matched=new Set();selection=null;vpqMatchInfo40=Object.fromEntries(picks.map((x,i)=>[i,x]));
+ const deck=[];picks.forEach((x,i)=>{deck.push({id:i,side:0,text:x.drug},{id:i,side:1,text:x[key]})});
+ matchDeck=vpqShuffle40(deck);vpqMatchRender40();
+}
+function vpqMatchRender40(message=''){
+ round=null;
+ if(!matchDeck.length)return vpqMatchInit40();
+ const total=Object.keys(vpqMatchInfo40).length;
+ $('screen').innerHTML='<div class="section-title"><h2>🧩 '+(vpqMatchMode40==='clinical'?'Clinical Caution Match':'Drug & Mechanism Match')+'</h2><span class="chip">'+matched.size+'/'+total+' pairs</span></div>'+
+ '<p class="muted">Your <b>saved pharmacology lectures</b> control the question pool. Match each drug to '+(vpqMatchMode40==='clinical'?'a unique safety/clinical clue.':'its molecular target or pharmacologic mechanism.')+' Different drug sets rotate across rounds.</p>'+
+ '<div class="little"><button class="btn smallbtn" id="vpqMatchModeMechanism">⚙️ Drug target</button><button class="btn smallbtn" id="vpqMatchModeClinical">⚕️ Clinical caution</button><button class="btn smallbtn" id="vpqMatchNew">New drug set ↻</button></div>'+
+ '<div class="meter" style="margin:12px 0"><div style="width:'+(matched.size/total*100)+'%"></div></div>'+
+ '<div class="match-board">'+matchDeck.map((x,i)=>'<button class="tile '+(matched.has(x.id)?'matched':'')+' '+(selection===i?'selected':'')+'" data-vpqmatchtile="'+i+'" '+(matched.has(x.id)?'disabled':'')+'>'+safe(x.text)+'</button>').join('')+'</div>'+
+ '<div class="feedback '+(message.startsWith('✓')?'good':'')+'" style="margin-top:12px">'+(message||'Choose a drug and its corresponding mechanism or clinical clue.')+'</div>'+
+ (matched.size===total?'<p class="note">✓ Completed this set. Start a new set to encounter new drugs and contexts.</p>':'');
+ $('vpqMatchModeMechanism').onclick=()=>{vpqMatchMode40='mechanism';vpqMatchInit40()};
+ $('vpqMatchModeClinical').onclick=()=>{vpqMatchMode40='clinical';vpqMatchInit40()};
+ $('vpqMatchNew').onclick=vpqMatchInit40;
+ document.querySelectorAll('[data-vpqmatchtile]').forEach(b=>b.onclick=()=>{
+  const i=Number(b.dataset.vpqmatchtile),t=matchDeck[i];if(matched.has(t.id))return;
+  if(selection===null){selection=i;b.classList.add('selected');return}
+  if(i===selection){selection=null;vpqMatchRender40();return}
+  const first=matchDeck[selection];selection=null;
+  if(first.id===t.id&&first.side!==t.side){
+   matched.add(t.id);save.xp+=12;persist();stats();
+   const d=vpqMatchInfo40[t.id];
+   vpqMatchRender40('✓ '+safe(d.drug)+' — '+safe(d.mechanism)+'. Clinical pearl: '+safe(d.clinical)+' · +12 XP.');
+  }else vpqMatchRender40('Not yet. Match the particular agent to its mechanism or clinically distinctive caution, not simply another drug in the same class.');
+ });
+}
+startMatch=vpqMatchInit40;
+renderMatch=vpqMatchRender40;
+const vpqOriginalSetTab40=setTab;
+setTab=function(t){
+ if(t==='cases')t='home';
+ if(t==='match')matchDeck=[];
+ if(t==='battle'){battleStep=0;round=null}
+ if(t==='boss'){bossIds=[];bossDone=false}
+ return vpqOriginalSetTab40(t);
+};
+const vpqBugSourceKey40='vpq-bugbattle-sources-v1';
+let vpqBugSources40={pharm:true,onehealth:false};
+try{vpqBugSources40={...vpqBugSources40,...JSON.parse(localStorage.getItem(vpqBugSourceKey40)||'{}')}}catch(e){}
+function vpqBugSave40(){try{localStorage.setItem(vpqBugSourceKey40,JSON.stringify(vpqBugSources40))}catch(e){}}
+const vpqOHBank40=window.VPQ_BUG_BANK||{organisms:[],questions:[]};
+const vpqEnemyProfiles40=[
+ {id:'pseudomonas',name:'Pseudomonas fortress',emoji:'🦠',desc:'Gram-negative barriers, susceptibility, selected aminoglycosides and fluoroquinolones',regex:/pseudomon|aminoglyco|gram.negative|gyrase|fluoroquinolone|efflux|resistan/i,lectures:['2','3','4','5']},
+ {id:'anaerobe',name:'Anaerobe shadow',emoji:'👾',desc:'Oxygen-dependent aminoglycoside uptake versus anaerobic drugs',regex:/anaerob|oxygen|metronidazole|nitroimidazole|uptake/i,lectures:['2','4','5']},
+ {id:'resistance',name:'Resistance chimera',emoji:'🐉',desc:'Efflux, enzymatic inactivation, target changes and antimicrobial stewardship',regex:/resistan|efflux|beta.lactamase|mecA|modify|breakpoint|susceptib|stewardship/i,lectures:['2','3','4','5']},
+ {id:'ribosome',name:'Ribosome rogue',emoji:'🧬',desc:'30S versus 50S inhibition, toxicity and organism uptake',regex:/ribosom|tetracyclin|macrolide|lincosamide|aminoglycoside|50s|30s|protein synthesis/i,lectures:['4']},
+ {id:'cellwall',name:'Cell-wall citadel',emoji:'🧱',desc:'PBPs, cell-wall mechanisms and cephalosporin stewardship',regex:/cell.wall|cephalo|penicillin|beta.lactam|peptidoglycan|PBP|glycopeptide/i,lectures:['3']},
+ {id:'selection',name:'Stewardship sentinel',emoji:'🧫',desc:'Culture, diagnostics, PK/PD, human versus veterinary drug use',regex:/antibiotic|culture|MIC|PK.PD|time.above|empiri|resistan|source control|clinical/i,lectures:['2','3','4','5']}
+];
+let vpqCurrentBug40=null,vpqBugDeck40=[],vpqBugHits40=0,vpqBugShields40=3,vpqBugIndex40=0;
+function vpqBugEnemies40(){
+ let foes=[];
+ if(vpqBugSources40.pharm){
+  for(const p of vpqEnemyProfiles40){
+   const source=BANK.filter(q=>p.lectures.includes(String(q.l))&&vpqArcadeFocus40().includes(String(q.l))&&vpqExamTopicsSelected310.has('antibiotics')&&p.regex.test(q.k+' '+q.q+' '+q.why));
+   if(source.length>=2)foes.push({...p,questions:source});
+  }
+ }
+ if(vpqBugSources40.onehealth){
+  for(const org of vpqOHBank40.organisms){
+   const qs=vpqOHBank40.questions.filter(q=>q.organismId===org.id);
+   if(qs.length>=2)foes.push({id:org.id,name:org.name,emoji:'🧫',desc:org.agent+' · One Health ecology, hosts and transmission',source:'One Health',questions:qs});
+  }
+ }
+ return foes;
+}
+function vpqBattleMenu40(){
+ round=null;const enemies=vpqBugEnemies40();
+ $('screen').innerHTML='<h2>🦠 Bug Battles · Infectious Disease Arena</h2><p class="muted"><b>Purpose:</b> Identify the organism, drug mechanism, resistance or transmission pattern. Each battle has changing questions, not three permanently fixed attacks.</p>'+
+ '<div class="vpq-exam-panel"><b>Choose study source</b><p class="muted micro">Pharmacology uses your saved lecture selection. One Health adds its own bacterial disease questions regardless of which Pharm lectures you are studying.</p>'+
+ '<label><input type="checkbox" data-vpqbugsource="pharm" '+(vpqBugSources40.pharm?'checked':'')+'> Pharmacology antimicrobial lectures</label>　<label><input type="checkbox" data-vpqbugsource="onehealth" '+(vpqBugSources40.onehealth?'checked':'')+'> One Health bacteria</label></div>'+
+ '<p class="note">'+enemies.length+' playable adversaries match your selected subjects. '+(enemies.length?'Select a challenge below.':'Choose an antimicrobial lecture in the Learning Lab or enable One Health bacteria above.')+'</p>'+
+ '<div class="cards">'+enemies.map(x=>'<button class="mode" data-vpqbugenemy="'+safe(x.id)+'"><span class="big">'+x.emoji+'</span><strong>'+safe(x.name)+'</strong><small>'+safe(x.desc)+'</small><small>'+x.questions.length+' available questions · '+(x.source||'Pharmacology')+'</small></button>').join('')+'</div>';
+ document.querySelectorAll('[data-vpqbugsource]').forEach(el=>el.onchange=()=>{vpqBugSources40[el.dataset.vpqbugsource]=el.checked;vpqBugSave40();vpqBattleMenu40()});
+ document.querySelectorAll('[data-vpqbugenemy]').forEach(el=>el.onclick=()=>vpqStartBug40(el.dataset.vpqbugenemy));
+}
+function vpqStartBug40(id){
+ const enemy=vpqBugEnemies40().find(x=>x.id===id);if(!enemy)return vpqBattleMenu40();
+ vpqCurrentBug40=enemy;vpqBugIndex40=0;vpqBugHits40=0;vpqBugShields40=3;
+ const recent=new Set(save.history.slice(0,18).map(q=>q.id));
+ const unseen=vpqShuffle40(enemy.questions.filter(q=>!recent.has(q.id)));
+ const repeats=vpqShuffle40(enemy.questions.filter(q=>recent.has(q.id)));
+ vpqBugDeck40=[...unseen,...repeats].slice(0,Math.min(5,enemy.questions.length));
+ vpqBugQuestion40();
+}
+function vpqBugQuestion40(){
+ const enemy=vpqCurrentBug40;
+ if(!enemy)return vpqBattleMenu40();
+ if(vpqBugIndex40>=vpqBugDeck40.length){
+  const victory=vpqBugHits40>=Math.ceil(vpqBugDeck40.length*.7);
+  if(victory){save.battles++;save.xp+=35}persist();stats();round=null;
+  $('screen').innerHTML='<h2>'+(victory?'🏆 Challenge contained!':'📚 More study needed')+'</h2><div class="summary"><b>'+vpqBugHits40+' / '+vpqBugDeck40.length+' correct</b><p>Shields remaining: '+vpqBugShields40+'</p><p>'+safe(enemy.desc)+'</p></div>'+
+   '<p>Next: review each incorrect explanation and consider why the organism, host and drug context changes the decision. Questions are drawn from the selected source bank.</p>'+
+   '<button class="btn primary" id="vpqBugAgain40">Fight another challenge</button><button class="btn" id="vpqBugRepeat40">Retry this organism</button>';
+  $('vpqBugAgain40').onclick=vpqBattleMenu40;$('vpqBugRepeat40').onclick=()=>vpqStartBug40(enemy.id);return;
+ }
+ const q=vpqBugDeck40[vpqBugIndex40];
+ buildQuestion(q,{label:'Next infection-control decision',fn:ok=>{
+  if(ok)vpqBugHits40++;else vpqBugShields40=Math.max(0,vpqBugShields40-1);
+  vpqBugIndex40++;vpqBugQuestion40();
+ }},'<div class="section-title"><h2>'+enemy.emoji+' '+safe(enemy.name)+'</h2><span class="chip">Challenge '+(vpqBugIndex40+1)+'/'+vpqBugDeck40.length+'</span></div>'+
+ '<p class="muted">'+safe(enemy.desc)+'</p><div class="enemy"><div class="sprite">'+enemy.emoji+'</div><div style="flex:1"><b>Understanding challenge</b><div class="health"><div style="width:'+Math.max(0,100-vpqBugHits40/vpqBugDeck40.length*100)+'%"></div></div><small>Correct: '+vpqBugHits40+' · Shields: '+vpqBugShields40+'</small></div></div><p class="micro muted">Question source: '+safe(q.source||'Pharmacology · original question')+'</p>');
+}
+battle=vpqBattleMenu40;
+battleQuestion=vpqBugQuestion40;
+// Remove duplicate clinical-case mode from Arcade navigation; clinical cases are available in the main hospital Exam Room.
+document.querySelectorAll('#tabs [data-tab="cases"]').forEach(el=>el.remove());
+const vpqOldHome40=home;
+home=function(){
+ vpqOldHome40();
+ document.querySelectorAll('[data-go="cases"]').forEach(el=>el.remove());
+ const screen=$('screen');
+ const note=document.createElement('p');note.className='note';
+ note.innerHTML='<b>🩺 Patient Rounds have moved.</b> Open the <a href="index.html">main Teaching Hospital</a> → Examination Room to manage patients. The Arcade now focuses on Drug Match, Bug Battles, the Professor Guide, exams and missed concepts.';
+ screen.appendChild(note);
+};
+// Instructor-guide source and selected-lecture disclosure: 45 original paraphrased questions are *not* all 186 prompts.
+const vpqOldGuide40=vpqGuideQuestion37;
+vpqGuideQuestion37=function(){
+ vpqOldGuide40();
+ const screen=$('screen');
+ if(!screen)return;
+ const banner=document.createElement('div');banner.className='note';
+ banner.innerHTML='<b>📚 Source and filter:</b> 45 instructor-study-guide-aligned <em>paraphrases</em> based on uploaded Dr. Carlson review materials; not the complete 186 original instructor prompts. Your saved Pharm lectures and selected Exam Center topics determine which questions appear. No duplicate “bonus” questions are invented when a topic runs out.';
+ screen.prepend(banner);
+};
+const vpqOldRender40=render;
+render=function(){if(tab==='cases')tab='home';return vpqOldRender40()};
 
 render();
 
