@@ -381,6 +381,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <div class="modalwrap hidden" id="modalWrap" role="dialog" aria-modal="true" aria-label="Game interaction"><div class="modal"><div class="modalhead"><h2 id="modalTitle">Clinic</h2><button id="closeModal" class="close" aria-label="Close">✕</button></div><div id="modalBody"></div></div></div>
 <footer>Vet Pharm Quest • v2.5 Clinic Guide, Companion Update & Physiology Hub • Offline study prototype • Original educational questions based on course review materials • No backend or shared accounts</footer>
 <script src="curriculum.js"></script>
+<script src="drug-stewardship.js"></script>
 <script>
 /* Vet Pharm Quest 2D — original learning material based on the user's course guides.
    Educational simulations only; state/federal reporting and labels require live verification. */
@@ -1958,6 +1959,53 @@ $('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');i
  }
 });
 const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist{display:grid;gap:8px;margin-top:12px}.vpqGlecture{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #d6cbe8;border-radius:12px;padding:10px}.vpqGlecture label{display:flex;align-items:center;gap:9px;flex:1;cursor:pointer}.vpqGlecture label small,.vpqGlecture span small{display:block;font-size:12px;color:#705f85}.vpqGactions{display:flex;gap:6px}.vpqGlecture button{padding:8px 12px;background:#eee5fb;border:1px solid #ceb9e9;border-radius:10px;font-weight:bold}.vpqGroute{margin:12px 0;padding:12px;background:#f8f3ff;border-radius:13px}@media(max-width:560px){.vpqGlecture{flex-wrap:wrap}.vpqGactions{margin-left:auto}}';document.head.appendChild(vpqGstyle);
+
+
+/* Clinical Use & Stewardship — source-linked drug glossary; operates on existing Pharmacy entries. */
+(function(){
+ const reg=window.VPQDrugStewardship;
+ if(!reg)return;
+ const extra=[
+ {id:'tigecycline',name:'Tigecycline',brand:'Tygacil (human)',class:'Glycylcycline • 30S',route:'Human intravenous product; no routine approved veterinary product identified.',uses:'Human reserve antimicrobial for selected complicated bacterial infections; not routine veterinary first-line.',moa:'Blocks bacterial 30S aminoacyl-tRNA docking; avoids some classic tetracycline resistance mechanisms.',effects:'Human boxed warning: higher all-cause mortality relative to comparators; other adverse effects and drug interactions.',why:'Not routinely selected in veterinary patients because of human-medicine priority, risk and limited veterinary labeling.',lecture:'Lecture 4',species:'Do not confuse a human-use reserve drug with a blanket extra-label prohibition in all non-food species.',source:'Tygacil human label + Dr. Carlson lecture',reviewStatus:'Stewardship reviewed'},
+ {id:'vancomycin',name:'Vancomycin',brand:'Human formulations; generic',class:'Glycopeptide • cell-wall synthesis inhibitor',route:'IV for systemic infection; oral formulation primarily acts in GI lumen.',uses:'Human serious Gram-positive infections; exceptional specialist consideration in nonfood patients only.',moa:'Binds D-Ala-D-Ala bacterial peptidoglycan precursor termini.',effects:'Renal injury and infusion reactions.',why:'Human antibiotic importance, resistance concerns and safety constrain use.',lecture:'Lecture 3',species:'Extra-label use of glycopeptides prohibited in food-producing animals in U.S.',source:'FDA 21 CFR 530.41 + Dr. Carlson lecture',reviewStatus:'Stewardship reviewed'},
+ {id:'virginiamycin',name:'Virginiamycin',brand:'Product-dependent veterinary feed formulations',class:'Streptogramin • 50S',route:'Specific FDA-labeled medicated feed uses with VFD.',uses:'Selected labeled feed indications; not a routine systemic small-animal drug.',moa:'Streptogramin inhibition of bacterial 50S translation.',effects:'Selection of resistance relevant to human streptogramin agents is a One Health concern.',why:'Historical European growth-promotion restrictions and current U.S. VFD regulation are different.',lecture:'Lecture 4',species:'U.S. FDA VFD list includes virginiamycin. Follow individual feed label.',source:'FDA VFD list + Dr. Carlson lecture',reviewStatus:'Stewardship reviewed'}
+ ];
+ extra.forEach(d=>{if(!D.drugs.some(x=>x.id===d.id))D.drugs.push(d)});
+ function sourceHTML(p){return (p.refs||[]).map(id=>reg.refs[id]).filter(Boolean).map(v=>'<a target="_blank" rel="noopener noreferrer" href="'+escapeHtml(v.url)+'">'+escapeHtml(v.name)+'</a>').join(' · ')}
+ function details(d,compact=false){
+  const p=reg.lookup(d);
+  if(!p)return '<div class="vpqStatusPanel"><b>🧭 Clinical-use & human/vet audit: pending</b><p>This drug has not yet had an individual stewardship and regulation review. This does not imply first-line, legal for every species, or unrestricted use.</p><button data-vpqStatusList="1">Browse clinical-use glossary</button></div>';
+  const sections=[['🐾 Veterinary uses',p.vet],['🧑‍⚕️ Human-medicine role',p.human],['Why it is used, reserved, or avoided',p.why],['U.S. regulatory distinctions',p.regulatory],['Professor notes versus current guidance',p.lectureNote],['Exam differentiation',p.exam],['Test yourself',p.question]];
+  return '<div class="vpqStatusPanel"><div class="vpqStatusTitle"><b>🧭 Clinical Use & Stewardship</b><span>'+escapeHtml(p.status)+'</span></div><p><b>'+escapeHtml(p.category)+'</b> · verified source check '+escapeHtml(reg.reviewedAt)+'</p>'+sections.map(x=>'<div class="vpqStatusSection"><b>'+x[0]+'</b><p>'+escapeHtml(x[1])+'</p></div>').join('')+'<div class="vpqStatusSources"><b>References: </b>'+sourceHTML(p)+'</div><p class="tiny">U.S.-focused educational summary; product, patient, date and jurisdiction must be checked for real-world clinical decisions.</p>'+(compact?'<button data-vpqStatusList="1">← Glossary</button><button data-vpqStatusOpen="'+escapeHtml(d.id)+'">Open medication entry</button>':'<button data-vpqStatusList="1">Browse clinical-use glossary</button>')+'</div>';
+ }
+ const prior=drugCardHTML;
+ drugCardHTML=function(d){return prior(d)+details(d)};
+ const originalPharmacy=openPharmacy;
+ openPharmacy=function(...args){originalPharmacy(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqStatusList]'))body.insertAdjacentHTML('afterbegin','<div class="vpqStatusBar"><button data-vpqStatusList="1">🧭 Human vs Vet Use & Stewardship</button><small>Reserve drugs · VFD · legal restrictions · resistance · species safety</small></div>')};
+ function listView(category='all',term=''){
+  const db=dataDrugs();
+  const cats=[['all','All drugs'],['audited','Audited'],['pending','Needs audit'],['reserve','Human priority / selective use'],['restricted','Legal restrictions'],['rule','VFD/feed'],['outofavor','Resistance / less preferred'],['hazard','Safety/route issues']];
+  const filter=d=>(category==='all'||(category==='audited'?!!reg.lookup(d):category==='pending'?!reg.lookup(d):reg.lookup(d)?.theme===category));
+  const matching=db.filter(d=>filter(d)&&[d.name,d.class,d.lecture,reg.lookup(d)?.status,reg.lookup(d)?.vet,reg.lookup(d)?.human].join(' ').toLowerCase().includes(term.toLowerCase()));
+  showModal('🧭 Drug Clinical-Use Glossary','<p>Understand <b>the reason</b> a drug is chosen or avoided: clinical status is not a simple “approved/banned” switch. Read veterinary use, human medicine, label restrictions, resistance and lecturer emphasis side by side.</p>'+
+   '<div class="infobox"><b>'+db.length+' pharmacy entries</b> · '+db.filter(x=>reg.lookup(x)).length+' individual status reviews · '+db.filter(x=>!reg.lookup(x)).length+' awaiting review</div>'+
+   '<div class="vpqStatusFilters"><label>Status <select id="vpqStatusFilter">'+cats.map(([v,t])=>'<option '+(v===category?'selected':'')+' value="'+v+'">'+t+'</option>').join('')+'</select></label><label>Search <input id="vpqStatusSearch" value="'+escapeHtml(term)+'" placeholder="e.g., chlortetracycline, human, restricted"></label></div>'+
+   '<div class="vpqStatusList">'+matching.map(d=>'<button data-vpqStatusDrug="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(reg.lookup(d)?.status||'Individual audit pending')+'</small></button>').join('')+'</div>'+
+   '<div class="buttonrow"><button data-modalaction="pharmacy">← Pharmacy</button><button data-vpqStatusCompare="1">Compare chlortetracycline / tigecycline</button></div>');
+ }
+ function profile(id){const d=dataDrugs().find(x=>x.id===id);if(!d)return listView();showModal('🧭 '+escapeHtml(d.name)+' · Clinical-use notes',details(d,true))}
+ $('modalBody').addEventListener('click',e=>{const el=e.target.closest('button');if(!el)return;
+  if(el.dataset.vpqStatusList!==undefined){listView();return}
+  if(el.dataset.vpqStatusDrug!==undefined){profile(el.dataset.vpqStatusDrug);return}
+  if(el.dataset.vpqStatusOpen!==undefined){openPharmacy(el.dataset.vpqStatusOpen);return}
+  if(el.dataset.vpqStatusCompare!==undefined){const c=dataDrugs().find(x=>x.id==='chlortetracycline'),t=dataDrugs().find(x=>x.id==='tigecycline');showModal('⚖️ Chlortetracycline vs tigecycline',details(c)+details(t));return}
+ });
+ $('modalBody').addEventListener('change',e=>{if(e.target.id==='vpqStatusFilter')listView(e.target.value,$('vpqStatusSearch')?.value||'')});
+ $('modalBody').addEventListener('input',e=>{if(e.target.id!=='vpqStatusSearch')return;const category=$('vpqStatusFilter')?.value||'all',term=e.target.value,filtered=dataDrugs().filter(d=>(category==='all'||(category==='audited'?!!reg.lookup(d):category==='pending'?!reg.lookup(d):reg.lookup(d)?.theme===category))&&[d.name,d.class,d.lecture,reg.lookup(d)?.status,reg.lookup(d)?.vet,reg.lookup(d)?.human].join(' ').toLowerCase().includes(term.toLowerCase()));const area=$('modalBody').querySelector('.vpqStatusList');if(area)area.innerHTML=filtered.map(d=>'<button data-vpqStatusDrug="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(reg.lookup(d)?.status||'Audit pending')+'</small></button>').join('')});
+ const styleNode=document.createElement('style');
+ styleNode.textContent='.vpqStatusBar{padding:11px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#f0faf7;border:1px solid #b4d5c8;border-radius:12px;margin-bottom:14px}.vpqStatusBar small{color:#426b66}.vpqStatusPanel{border:2px solid #b3d7cd;background:#f8fffd;border-radius:15px;padding:13px;margin:15px 0}.vpqStatusTitle{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:16px}.vpqStatusTitle span{font-size:11px;padding:4px 7px;background:#e4f4ed;border-radius:9px}.vpqStatusSection{padding:9px 0;border-top:1px solid #cee5dd}.vpqStatusSection p{margin:5px 0;font-size:13px;line-height:1.6}.vpqStatusSources{line-height:1.8;font-size:12px}.vpqStatusSources a{color:#176e65;text-decoration:underline}.vpqStatusFilters{display:flex;gap:12px;flex-wrap:wrap}.vpqStatusFilters label{min-width:190px;flex:1}.vpqStatusFilters select,.vpqStatusFilters input{display:block;padding:9px;width:100%;border:1px solid #b4d1c6;border-radius:8px}.vpqStatusList{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;max-height:50vh;overflow:auto;padding:10px 0}.vpqStatusList button{text-align:left;background:#fff;border:1px solid #bed6ca;border-radius:12px;padding:11px}.vpqStatusList button b,.vpqStatusList button small{display:block}.vpqStatusList button small{font-size:11px;color:#50716e;margin-top:4px}';
+ document.head.appendChild(styleNode);
+})();
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
