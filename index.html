@@ -1266,7 +1266,7 @@ const vpqPreviousPharmacy34=openPharmacy;
 openPharmacy=function(...args){
  vpqPreviousPharmacy34(...args);
  const top=$('modalBody');
- if(top)top.insertAdjacentHTML('afterbegin','<div class="vpq-games-callout"><div><strong>🦠 Practice what you learn!</strong><p>Play Bug Battles, Drug Match, Exam Boss or clinical Patient Rounds.</p></div><button type="button" data-vpqopenarcade="1">🎮 Play Pharm Arcade</button></div>');
+ if(top)top.insertAdjacentHTML('afterbegin','<div class="vpq-games-callout"><div><strong>🦠 Practice what you learn!</strong><p>Play Bug Battles, Drug Match, Professor Guide or Exam Boss. Clinical patients are in the Examination Room.</p></div><button type="button" data-vpqopenarcade="1">🎮 Play Pharm Arcade</button></div>');
 };
 const vpqPreviousStudyMenu34=showStudyMenu;
 showStudyMenu=function(){
@@ -1886,7 +1886,6 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
  ['exam-center','🎓','Exam Center','Combine selected lectures and topics; take professor-style or mixed exam questions.','Apply'],
  ['battle','🦠','Bug Battles','Use bacterial mechanisms, resistance and antimicrobial targets to solve challenges.','Antimicrobials'],
  ['match','🧩','Drug Match','Build speed at matching drugs, classes and targets.','Recognition'],
- ['cases','🩺','Patient Rounds','Practice staged clinical decisions and learn what happens after treatment.','Application'],
  ['boss','🏆','Exam Boss','Test recall and decision-making under exam-like conditions.','Assessment'],
  ['guide','📚','Professor Guide','Practice a finite set of instructor-guide-aligned concepts.','Study-guide review'],
  ['review','🔁','Missed Concepts','Revisit questions missed in the Arcade until corrected.','Remediation']
@@ -2049,7 +2048,6 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    '<h3>Targeted games</h3><div class="vpq-gamegrid">'+[
      ['match','🧩 Drug Match','Learn class, name and target'],
      ['battle','🦠 Bug Battles','Reinforce antibiotic resistance and coverage'],
-     ['cases','🩺 Patient Rounds','Apply mechanisms in a patient'],
      ['guide','📚 Professor Guide','Course-style recall questions']
    ].map(([id,name,desc])=>'<button data-vpqlfgame="'+id+'"><b>'+name+'</b><small>'+desc+'</small></button>').join('')+'</div>'+
    '<p class="tiny">Questions are finite and course alignment is still under audit. A saved lecture focus is shared with the Arcade. Some specialized games have narrower banks.</p>');
