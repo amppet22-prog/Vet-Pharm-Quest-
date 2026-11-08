@@ -22,6 +22,7 @@
 .vpq-source-note{margin:20px 0 4px;padding:12px 14px;border-top:3px solid #97b1dc;border-radius:12px;background:#f7f9ff;color:#35445b;font-size:13px;line-height:1.5}.vpq-source-note>div{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}.vpq-source-note p{margin:6px 0}.vpq-source-note a{color:#2b5c9c;text-decoration:underline;overflow-wrap:anywhere}.vpq-source-kind{color:#64748b;font-size:11px}.vpq-source-note .tiny{font-size:11px;color:#6d7585}
 
 .vpq-newroom-background{position:absolute;inset:0;background:linear-gradient(180deg,#f0faff,#e4edf9 68%,#c9d4e5 69%,#b7c9d6);pointer-events:none}.stage[data-room="necropsy"] .vpq-newroom-background{background:linear-gradient(180deg,#f4fff3,#dceade 67%,#c4d6c8 68%,#b2c6b6)}.vpq-newroom-sign{position:absolute;top:14%;left:20%;right:20%;text-align:center;border:5px solid #fff;padding:14px;background:#ffffffc9;border-radius:16px;font-weight:900;color:#536c86;letter-spacing:.03em}.vpq-soon-mark{position:absolute;top:52%;left:25%;right:25%;text-align:center;padding:12px;background:#ffe9bd;border:3px dashed #dbad69;border-radius:22px;color:#77543d;font-size:23px;font-weight:900}.stage[data-room="imaging"] .prop,.stage[data-room="necropsy"] .prop{background:linear-gradient(180deg,#fff,#e6f0fb);border:2px solid #9bb8cd}.stage[data-room="necropsy"] .prop{background:linear-gradient(180deg,#fff,#e8f6ec)}
+.vpq-case-image{margin:8px auto 16px;max-width:700px}.vpq-case-image img{display:block;width:100%;max-height:410px;object-fit:contain;border:2px solid #d5e4ef;border-radius:14px;background:#0f172a}.vpq-case-image figcaption{text-align:center;font-size:12px;color:#64748b;padding:6px}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -419,6 +420,22 @@ const oldRoomnav=document.getElementById('roomnav');
 if(oldRoomnav)oldRoomnav.setAttribute('aria-label','Clinic rooms including future departments');
 const PHOTO_CASE_SCHEMA_EXAMPLE={id:'imaging-example',track:'Diagnostic Imaging',image:{src:'assets/imaging/example.jpg',alt:'Right lateral thoracic radiograph',credit:'Rights-cleared educational image'},steps:[{q:'Describe the abnormalities seen.',options:['…','…'],answer:0,why:'Describe location, pattern and likely pathophysiology.'}]};
 // IMAGE_CASE_SCHEMA_EXAMPLE describes future content format. No file uploads/diagnostic image processing are implemented.
+
+
+// VPQ IMAGE-READY CASES v1 — displays licensed uploaded assets referenced by future study packs.
+function vpqImagePanel(entry){
+ if(!entry||!entry.image||typeof entry.image.src!=='string')return '';
+ const src=entry.image.src.trim();
+ // Local relative assets only. Avoid arbitrary protocols and external hotlinks.
+ if(!/^assets\/[a-zA-Z0-9_./-]+\.(png|jpg|jpeg|webp)$/i.test(src)||src.includes('..'))return '';
+ const alt=escapeHtml(entry.image.alt||'Clinical educational image');
+ const credit=escapeHtml(entry.image.credit||'Source/permission not yet recorded');
+ return '<figure class="vpq-case-image"><img src="'+escapeHtml(src)+'" alt="'+alt+'" loading="lazy" onerror="this.closest(\'figure\').style.display=\'none\'"><figcaption>'+credit+'</figcaption></figure>';
+}
+const vpqBeforeImageStudy=renderStudy;
+renderStudy=function(){vpqBeforeImageStudy();const q=studySession&&dataStudy().find(x=>x.id===studySession.ids[studySession.idx]);if(q){const panel=vpqImagePanel(q);if(panel)$('modalBody').insertAdjacentHTML('afterbegin',panel)}};
+const vpqBeforeImageCase=renderCase;
+renderCase=function(){vpqBeforeImageCase();if(!caseSession)return;const c=dataCases().find(x=>x.id===caseSession.id);if(!c)return;const image=(c.steps[caseSession.step]||{}).image||c.image;const panel=vpqImagePanel({image});if(panel)$('modalBody').insertAdjacentHTML('afterbegin',panel)};
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
