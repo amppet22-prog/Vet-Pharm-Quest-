@@ -2498,6 +2498,66 @@ const vpqToxStyle=document.createElement('style');
 vpqToxStyle.textContent='.vpqToxBanner{margin-top:16px;background:#f2f3fa;border:1px dashed #aca6c4;border-radius:12px;padding:12px}.vpqToxBanner p{margin:6px 0 10px;font-size:12px}.vpqToxTopics{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.vpqToxTopics button{text-align:left;background:white;border-radius:10px;padding:11px}.vpqToxTopics b,.vpqToxTopics small{display:block}.vpqToxTopics small{font-size:11px;color:#586b7e;margin-top:5px}';
 document.head.appendChild(vpqToxStyle);
 
+
+/* Up-to-date in-game onboarding: quick-start versus full clinic directory. */
+(function(){
+ 'use strict';
+ const quick=[
+ ['🎮 Move and interact','Use A/D or ←/→ to walk; press E beside a station, or click/tap any labeled station. The top navigation and dashboard also provide direct shortcuts.'],
+ ['📚 Choose what to study','Open the Learning Lab or Study Desk. Select a Pharmacology lecture or One Health Exam 1, 2, 3 or 4 from the dropdown, then start a round. Exam Center and Pharm Arcade are separate optional test modes.'],
+ ['🩺 Practice clinical reasoning','Visit Examination Room for patient rounds, Pharmacy for drug reference/coverage and side-effect prevention, or One Health for disease cards and host/reporting practice. Read the answer explanations.'],
+ ['🎨 Decorate and collect','Click Reception Studio in the header or dashboard. Choose a free wall color, preview paid themes, buy decorations with earned clinic coins, and reuse owned items from My Collection. The coin bank tracks new reception purchases.'],
+ ['🧑‍⚕️ Customize your character','Use Customize / View My Avatar. The current cute portraits remain available; modular outfits, more detailed character art and a 3D-style kennel are future expansions.'],
+ ['☣️ Upcoming subjects','Toxicology is visible as a Coming Soon preview with 11 topic groups, not an active question bank. Kennel and dog play yard are also previews, not playable environments.'],
+ ['💾 Protect your save','Coins, questions and cosmetic ownership live in this browser. Use Save / Reset to export your save before switching devices or clearing browser data. No shared cloud account is active.']
+ ];
+ const directory=[
+ ['🏠 Reception & customization','Start in reception, visit the front desk and patient queue, or open Reception Studio. Four starter wall colors are free; optional wallpaper, cat nook, kids corner and seasonal decorations use clinic coins. Purchased designs remain owned; full 3D customization is still planned.','reception'],
+ ['🩺 Exam Room','Choose a case and work through assessment, diagnosis and treatment decisions with reasoning. Cases are learning exercises, not patient-care protocols.','exam'],
+ ['💊 Pharmacy / Drug Shelves','Search 66 drug reference entries and review MOA, indications, antimicrobial spectrum/target, species cautions, adverse effects, mitigation and monitoring. Individual clinical accuracy review is ongoing.','pharmacy'],
+ ['❤️ Treatment / Monitoring','Review physiology and what the body is trying to do, then consider therapeutic effects and trade-offs.','treatment'],
+ ['🛡️ One Health / Isolation','Browse core disease fact sheets and launch separate Exam 1–4, Host Roles and Reporting question banks. Reporting status is jurisdiction-dependent.','isolation'],
+ ['📚 Study Lounge / Learning Lab','Choose course focus in the dropdown. Professor Guide holds the 186 worked Pharmacology study prompts, with lecture filters and answer reveal; the 45-question MCQ practice remains separately available.','study'],
+ ['☣️ Toxicology · Coming Soon','Eleven indexed groups across CVM 732 Lectures 1–20 can be previewed in Learning Lab or from the dashboard. Detailed toxin cards, validated clinical cases and exam banks are not yet released.',null],
+ ['🐕 Dog Kennel & Play Yard · Coming Soon','Future 2.5D/3D-style dog area, enrichment and behavior cases, and infection-control learning. The current reception station only shows a concept preview.',null],
+ ['🩻 Imaging & Necropsy · Coming Soon','Rooms exist as placeholders for future radiograph, gross pathology and histology learning activities. Do not expect working image cases yet.',null]
+ ];
+ const h=x=>escapeHtml(String(x));
+ function openQuick(){
+  showModal('🎮 How to Play · Quick Start',
+    '<div class="infobox"><h3>Welcome to Vet Pharm Quest!</h3><p>Learn veterinary medicine, see patients, earn coins and decorate your own clinic. Study material is always accessible without buying cosmetic upgrades.</p></div>'+
+    '<div class="vpqGuideCards">'+quick.map(([title,body])=>'<section><h3>'+h(title)+'</h3><p>'+h(body)+'</p></section>').join('')+'</div>'+
+    '<div class="buttonrow"><button data-vpqguide="clinic">🗺️ Complete clinic guide</button><button data-vpqguide="studio">🎨 Try Reception Studio</button><button data-vpqguide="tox">☣️ Preview Toxicology</button></div>'+
+    '<p class="tiny">Your progress is stored locally. Educational simulator only: verify drug directions and clinical decisions using authoritative current sources.</p>');
+ }
+ function openDirectory(){
+  showModal('🗺️ Clinic Guide · Departments & Features',
+    '<p>Use the room navigation to walk between departments, or select one here. <b>Available</b> features are separate from <b>Coming Soon</b> previews.</p>'+
+    '<div class="vpqGuideCards">'+directory.map(([title,body,room])=>'<section><h3>'+h(title)+'</h3><p>'+h(body)+'</p>'+(room?'<button data-vpqguide-room="'+h(room)+'">Go to '+h(room==='isolation'?'One Health':room)+'</button>':'<small>Preview / planned feature</small>')+'</section>').join('')+'</div>'+
+    '<div class="buttonrow"><button data-vpqguide="quick">🎮 How to play</button><button data-vpqguide="studio">🎨 Reception Studio</button><button data-vpqguide="tox">☣️ Toxicology preview</button></div>'+
+    '<p class="tiny">GitHub Pages is the current game site. Saves remain in your browser unless you export and restore them.</p>');
+ }
+ // Override public functions used by the header, help and existing guide links.
+ openHowToPlay=openQuick;
+ openHelp=openQuick;
+ openClinicGuide=openDirectory;
+ $('openGuide').onclick=openDirectory;
+ $('helpBtn').onclick=openQuick;
+ // The original top welcome button holds an older function reference.
+ $('vpqHowToPlayTop').addEventListener('click',e=>{e.stopImmediatePropagation();openQuick()},true);
+ $('modalBody').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.vpqguide==='clinic')return openDirectory();
+  if(b.dataset.vpqguide==='quick')return openQuick();
+  if(b.dataset.vpqguide==='studio')return doAction('receptionStudio');
+  if(b.dataset.vpqguide==='tox')return vpqToxPreviewMenu();
+  if(b.dataset.vpqguideRoom){closeModal();changeRoom(b.dataset.vpqguideRoom)}
+ });
+ const css=document.createElement('style');
+ css.textContent='.vpqGuideCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:11px;margin:15px 0}.vpqGuideCards section{background:#fff;border:1px solid #cbdbee;border-radius:14px;padding:14px;line-height:1.55}.vpqGuideCards h3{font-size:15px;margin:0 0 7px}.vpqGuideCards p{font-size:13px;margin:0 0 12px}.vpqGuideCards small{font-size:11px;color:#646f85}.vpqGuideCards button{font-size:12px;padding:8px 11px}';
+ document.head.appendChild(css);
+})();
+
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
