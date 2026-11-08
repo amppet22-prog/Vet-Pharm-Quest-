@@ -1,0 +1,34 @@
+/* Lecture-linked toxicology chapters. */
+window.VPQ_TOX_LECTURE_UI=(function(){
+'use strict';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const old=[
+['tox-acetaminophen','Acetaminophen','Cats especially'],['tox-lily','True lilies','Cats'],['tox-grape','Grapes / raisins','Dogs'],['tox-bromethalin','Bromethalin','Dogs / cats'],['tox-anticoag','Anticoagulant rodenticide','Dogs / cats'],['tox-permethrin','Permethrin','Cats'],['tox-ionophore','Ionophore','Horses'],['tox-ethylene-glycol','Ethylene glycol','Dogs / cats'],['tox-sago','Sago palm','Dogs'],['tox-xylitol','Xylitol','Dogs']
+].map(x=>({id:x[0],name:x[1],species:x[2],group:'Existing clinical card'}));
+const cards=()=>[...old,...(window.VPQ_TOX_EXPANSION?.cards||[]),...(window.VPQ_TOX_LECTURE_SUPPLEMENTS||[])];
+const topics=()=>window.VPQ_ToxicologyPreview?.topics||[];
+const links=()=>window.VPQ_TOX_LECTURE_LINKS||{};
+function menu(showModal){
+ const t=topics(),l=links();
+ showModal('☣️ Toxicology · Lecture & Toxicant Atlas',
+ '<div class="vpqTLHero"><b>Start with the target. Then recognize the patient.</b><p>Each lecture opens a mechanism pathway, physiology, clinical patterns, comparisons and the toxicant cards linked to it.</p><div class="buttonrow"><button data-vpqtoxindex="1">☣️ '+cards().length+' toxicant cards</button><button data-vpqtoxmatchopen="1">🧩 Toxicant–Mechanism Match</button></div></div>'+
+ '<div class="vpqTLMenu">'+t.map((x,i)=>{const u=l[x.id]||{};return '<button data-vpqtox-topic="'+esc(x.id)+'" class="vpqTLChapter vpqTL-'+esc(u.accent||'teal')+'"><span class="vpqTLNo">'+(i+1)+'</span><b>'+esc(x.title)+'</b><small>'+esc(x.lectures)+'</small><em>'+((u.ids||[]).length)+' linked toxicants →</em></button>'}).join('')+'</div>'+
+ '<p class="tiny">Lecture crosswalks are study summaries from the course outline. Exact slide-by-slide coverage and a lecture-filtered exam bank are not yet fully audited.</p>');
+}
+function card(id,showModal){
+ const list=topics(),x=list.find(t=>t.id===id),u=links()[id];if(!x||!u)return menu(showModal);
+ const all=cards(),items=u.ids.map(k=>all.find(c=>c.id===k)).filter(Boolean),i=list.indexOf(x);
+ showModal('☣️ '+x.title+' · '+x.lectures,
+ '<div class="vpqTLHeader vpqTL-'+esc(u.accent||'teal')+'"><small>'+esc(x.lectures)+' · TARGET & PHYSIOLOGY</small><h3>'+esc(u.target)+'</h3><p>'+esc(x.summary)+'</p></div>'+
+ '<div class="vpqTLFlow"><b>CAUSE → EFFECT PATHWAY</b><p>'+esc(u.pathway)+'</p></div>'+
+ '<div class="vpqTLThree"><section><h3>🧠 WHY this happens</h3><p>'+esc(u.why)+'</p></section><section><h3>🩺 Clinical pattern</h3><p>'+esc(u.signs)+'</p></section><section><h3>⚖️ Differentiate</h3><p>'+esc(u.compare)+'</p></section></div>'+
+ '<h3 class="vpqTLHeading">☣️ Specific toxicants <small>('+items.length+' linked)</small></h3>'+
+ '<div class="vpqTLItems">'+items.map(v=>'<button data-vpqtoxlinked="'+esc(v.id)+'"><b>'+esc(v.name)+'</b><small>'+esc(v.group||'Mechanism reference')+'</small><span>'+esc(v.species||'Species varies')+'</span><em>Open clinical card →</em></button>').join('')+'</div>'+
+ '<div class="vpqTLGap"><b>🔎 Still needs lecture verification</b><p>'+esc(u.missing)+'</p><small>This is not proof every toxicant from the original lecture has been imported.</small></div>'+
+ '<div class="buttonrow vpqTLNav">'+(i>0?'<button data-vpqtox-topic="'+esc(list[i-1].id)+'">← Previous</button>':'')+'<button data-vpqtox-back="1">All lectures</button>'+(i<list.length-1?'<button data-vpqtox-topic="'+esc(list[i+1].id)+'">Next →</button>':'')+'<button data-vpqtoxindex="1">Toxicant catalog</button></div>');
+}
+const style=document.createElement('style');
+style.textContent='.vpqTLHero{background:linear-gradient(120deg,#e5f6f0,#f2e9fc);border:1px solid #bdd5cf;border-radius:15px;padding:15px;margin:8px 0 14px}.vpqTLHero b{font-size:16px;color:#35576c}.vpqTLHero p{font-size:13px;line-height:1.55}.vpqTLMenu,.vpqTLThree,.vpqTLItems{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.vpqTLChapter{background:var(--tb);border:2px solid var(--tc);color:var(--ti);border-radius:15px;padding:14px;text-align:left;min-height:135px}.vpqTLChapter b,.vpqTLChapter small,.vpqTLChapter em{display:block}.vpqTLChapter b{font-size:15px;margin:12px 0 4px}.vpqTLChapter small,.vpqTLChapter em{font-size:11px}.vpqTLChapter em{font-style:normal;font-weight:800;margin-top:10px}.vpqTLNo{float:right;font-size:22px;font-weight:900;opacity:.35}.vpqTL-teal{--tb:#e4f7f0;--tc:#87bcae;--ti:#225f54}.vpqTL-violet{--tb:#f0e8fc;--tc:#baa4db;--ti:#613e87}.vpqTL-purple{--tb:#edeaff;--tc:#b1a4d9;--ti:#594583}.vpqTL-red{--tb:#ffe7e9;--tc:#dc9eab;--ti:#913e53}.vpqTL-rose{--tb:#ffecf2;--tc:#e4adbf;--ti:#87475c}.vpqTL-amber{--tb:#fff2dc;--tc:#dfbf8d;--ti:#856127}.vpqTL-blue{--tb:#e5f0ff;--tc:#9bbfe0;--ti:#356490}.vpqTL-pink{--tb:#ffebf3;--tc:#dda8c5;--ti:#925474}.vpqTL-green{--tb:#e9f6ec;--tc:#a4ceb1;--ti:#3d784e}.vpqTLHeader{background:var(--tb);border:2px solid var(--tc);border-radius:15px;padding:17px;color:var(--ti);margin:7px 0 14px}.vpqTLHeader h3{font-size:18px;margin:9px 0}.vpqTLHeader small{font-size:11px;font-weight:800}.vpqTLHeader p{font-size:13px;line-height:1.6}.vpqTLFlow{border-left:6px solid #789ab9;background:#eef5fc;padding:13px;border-radius:10px}.vpqTLFlow b{font-size:11px;color:#466785}.vpqTLFlow p{font-size:14px;line-height:1.6;margin:6px 0 0}.vpqTLThree{margin:12px 0}.vpqTLThree section{padding:13px;border:1px solid #add5c1;border-radius:12px;background:#eaf7ee}.vpqTLThree section:nth-child(2){background:#eaf2fc;border-color:#b3cae3}.vpqTLThree section:nth-child(3){background:#fff2e4;border-color:#e2c6a3}.vpqTLThree h3{font-size:14px;margin:0 0 7px}.vpqTLThree p{font-size:13px;line-height:1.55;margin:0}.vpqTLHeading{font-size:16px;margin:19px 0 9px}.vpqTLHeading small{font-size:12px;color:#6a7b84}.vpqTLItems button{text-align:left;border:2px solid #c3d4dd;background:#fff;border-radius:12px;padding:12px;min-height:108px}.vpqTLItems b,.vpqTLItems small,.vpqTLItems span,.vpqTLItems em{display:block}.vpqTLItems b{font-size:13px;color:#38596b}.vpqTLItems small{font-size:11px;color:#8a55a0;margin-top:4px}.vpqTLItems span{font-size:11px;color:#647888;margin-top:5px}.vpqTLItems em{font-size:11px;font-style:normal;color:#49817b;font-weight:800;margin-top:8px}.vpqTLItems button:hover,.vpqTLChapter:hover,.vpqTLItems button:focus-visible,.vpqTLChapter:focus-visible{outline:3px solid #bc9fd5;outline-offset:2px}.vpqTLGap{background:#fff8e9;border:1px dashed #dbbb80;padding:13px;border-radius:12px;margin:17px 0}.vpqTLGap b{color:#896a37}.vpqTLGap p{font-size:13px;margin:6px 0}.vpqTLGap small{font-size:11px}.vpqTLNav{flex-wrap:wrap}@media(max-width:600px){.vpqTLMenu,.vpqTLThree,.vpqTLItems{grid-template-columns:1fr}.vpqTLChapter{min-height:120px}}';
+document.head.appendChild(style);
+return {menu,card,cards};
+})();
