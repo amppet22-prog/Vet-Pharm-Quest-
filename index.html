@@ -271,6 +271,19 @@
 .vpq-story-stage .vpq-standing-alex{width:195px;height:100%;object-fit:contain;object-position:center bottom;max-height:100%}
 .vpq-avatar-showcase .vpq-standing-alex{width:195px;height:260px}
 .vpq-game-avatar .vpq-standing-alex{width:76px;height:110px}
+
+/* VPQ PATIENT CHART PROTOCOL SEPARATION v3.8 */
+.vpq-patient-card{padding:14px;border:2px solid #e6dae9;border-radius:15px;background:#fffdfa;margin:10px 0}
+.vpq-patient-card h3{margin:0 0 6px;color:#604b7c}
+.vpq-patient-card .vpq-chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px}
+.vpq-chart-field{border:1px solid #e7dfe8;background:#f9f5fd;border-radius:10px;padding:9px;font-size:12px}
+.vpq-chart-field b{display:block;color:#6e5385;margin-bottom:4px}
+.vpq-navigation-choice{padding:12px;border:2px solid #e8dcea;border-radius:13px;background:#fff9fc;text-align:left;cursor:pointer}
+.vpq-navigation-choice b{display:block;margin-bottom:4px}
+.vpq-navigation-choice p{font-size:12px;color:#77667d;margin:0}
+.vpq-workflow-list{counter-reset:vpqstep;margin:12px 0;padding:0;list-style:none}
+.vpq-workflow-list li{counter-increment:vpqstep;padding:10px 12px 10px 45px;background:#fcf8ff;border:1px solid #e7daee;border-radius:10px;margin:7px 0;position:relative;font-size:13px}
+.vpq-workflow-list li:before{content:counter(vpqstep);position:absolute;left:10px;top:9px;width:24px;height:24px;border-radius:50%;background:#8064a1;color:white;text-align:center;line-height:24px;font-weight:800}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -325,7 +338,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.7</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.8</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -469,7 +482,7 @@ const $=id=>document.getElementById(id), D=window.VPQ_DATA;
 D.cases.push(...window.VPQ_OH.cases);D.study.push(...window.VPQ_OH.study);
 const ROOMS={
  reception:{name:'Reception & Waiting Room',color:'#fff0df',banner:'WELCOME TO YOUR CLINIC',decor:[['🪟','9%','15%'],['🖼️','75%','18%'],['🪴','88%','56%']],props:[{x:22,emoji:'🛎️',label:'Front Desk',action:'welcome',bubble:'First shift'},{x:50,emoji:'🪑',label:'Patient Queue',action:'queue',bubble:'New patients'},{x:79,emoji:'🚪',label:'Clinical Hall',action:'map',bubble:'Choose room'}]},
- exam:{name:'Examination Room',color:'#fff3e8',banner:'EXAM ROOM • PATIENT ROUNDS',decor:[['🩻','9%','15%'],['🖼️','80%','18%'],['🧼','85%','57%']],props:[{x:22,emoji:'🐶',label:'Patient & Chart',action:'patients',bubble:'Treat a case'},{x:52,emoji:'🩺',label:'Exam Table',action:'patients',bubble:'Case decisions'},{x:81,emoji:'📋',label:'Clinical Notes',action:'casesList',bubble:'Choose patient'}]},
+ exam:{name:'Examination Room',color:'#fff3e8',banner:'EXAM ROOM • PATIENT ROUNDS',decor:[['🩻','9%','15%'],['🖼️','80%','18%'],['🧼','85%','57%']],props:[{x:22,emoji:'📋',label:'Medical Chart',action:'medicalCharts',bubble:'Review history'},{x:52,emoji:'🩺',label:'Exam Table',action:'patients',bubble:'Treat a case'},{x:81,emoji:'📚',label:'Protocols',action:'protocols',bubble:'Clinical steps'}]},
  pharmacy:{name:'Pharmacy & Medication Library',color:'#eaf7ed',banner:'PHARMACY • DRUG REFERENCE',decor:[['🌿','8%','17%'],['🪟','78%','15%']],props:[{x:24,emoji:'💊',label:'Drug Shelves',action:'pharmacy',bubble:'Search drugs'},{x:52,emoji:'🧪',label:'Mechanism Lab',action:'study',bubble:'Learn why'},{x:81,emoji:'🦠',label:'Pharm Arcade',action:'pharmArcade',bubble:'Play Bug Battles'}]},
  treatment:{name:'Treatment Ward',color:'#f0eafa',banner:'TREATMENT • CLINICAL DECISIONS',decor:[['🩹','11%','17%'],['🫀','82%','17%']],props:[{x:23,emoji:'🐴',label:'Hospitalized Patient',action:'patients',bubble:'Treat now'},{x:52,emoji:'💉',label:'Treatment Cart',action:'pharmacy',bubble:'Medications'},{x:81,emoji:'📈',label:'Monitoring',action:'study',bubble:'Physiology'}]},
  isolation:{name:'One Health & Isolation',color:'#e6f8f1',banner:'ONE HEALTH • PROTECT THE COMMUNITY',decor:[['🧤','11%','17%'],['☣️','83%','16%'],['🧴','90%','57%']],props:[{x:23,emoji:'🐮',label:'Isolation Patient',action:'onehealth',bubble:'Zoonosis case'},{x:52,emoji:'📚',label:'Disease Library',action:'ohLibrary',bubble:'38 disease cards'},{x:81,emoji:'🛡️',label:'Public Health Desk',action:'ohHub',bubble:'Roles & reporting'}]},
@@ -1479,6 +1492,94 @@ openAvatar=function(){
  const gallery=f.querySelector('.vpq-roster-grid');
  if(gallery){const note=document.createElement('p');note.className='vpq-roster-note';note.textContent='Gallery portraits come from two concept sheets. The standalone Alexandria avatar is full-length and sharper; the remaining portraits are previews until individual standing artwork is prepared.';gallery.after(note)}
 };
+
+
+// VPQ PATIENT CHART PROTOCOL SEPARATION v3.8
+// The chart displays only actually supplied case information; missing vitals and findings stay missing.
+let vpqSelectedPatient38=null;
+function vpqPatientRecords38(track='Pharmacology'){
+ const cases=dataCases().filter(c=>!track||c.track===track);
+ return cases.map(c=>'<button type="button" class="vpq-navigation-choice" data-vpqchart="'+escapeHtml(c.id)+'"><b>'+escapeHtml((c.emoji||'🐾')+' '+c.name)+'</b><p>'+escapeHtml(c.species||'Species not specified')+' · '+escapeHtml(c.track||'Clinical case')+' · '+(state.completed.includes(c.id)?'Completed — reopen chart':'Awaiting review')+'</p></button>').join('')||'<p class="small">No chart records in this section yet.</p>';
+}
+function vpqChartDirectory38(){
+ showModal('📋 Medical Charts — Patient Files','<p class="small">Select a patient to review the supplied history and case information before making decisions. Clinical charts are separate from the interactive case rounds.</p><div class="twocol">'+vpqPatientRecords38('Pharmacology')+'</div><div class="buttonrow"><button type="button" data-vpqqueue="1">🐾 Patient Queue</button><button type="button" data-vpqprotocols="1">📚 Clinical Protocols</button></div>');
+}
+function vpqPatientChart38(id){
+ const c=dataCases().find(x=>x.id===id);if(!c)return vpqChartDirectory38();
+ vpqSelectedPatient38=id;
+ const value=(v)=>v?escapeHtml(String(v)):'Not documented in this learning case';
+ const history=c.intro||'';
+ const objective=c.findings||c.vitals||c.physicalExam||'';
+ const status=state.completed.includes(c.id)?'Round completed (replay available)':'Not yet completed';
+ const parts='<div class="vpq-chart-grid">'+
+ '<div class="vpq-chart-field"><b>Patient / species</b>'+value(c.name)+' · '+value(c.species)+'</div>'+
+ '<div class="vpq-chart-field"><b>Study track</b>'+value(c.track)+'</div>'+
+ '<div class="vpq-chart-field"><b>Signalment</b>'+value(c.signalment)+'</div>'+
+ '<div class="vpq-chart-field"><b>Visit status</b>'+status+'</div></div>';
+ showModal((c.emoji||'🐾')+' Medical Chart — '+c.name,
+ '<div class="vpq-patient-card"><h3>📋 Patient record</h3>'+parts+
+ '<h3>History / presenting concern</h3><p>'+value(history)+'</p>'+
+ '<h3>Examination & diagnostic findings</h3><p>'+value(objective)+'</p>'+
+ '<p class="vpq-pharm-note"><b>Documentation note:</b> The original case bank usually supplies a narrative rather than complete medical records. Unprovided temperatures, laboratory values, diagnoses and treatments are intentionally not invented.</p>'+
+ '</div><div class="buttonrow"><button type="button" data-vpqstartpatient="'+escapeHtml(c.id)+'">🩺 Start Patient Round</button><button type="button" data-vpqprotocols="1">📚 Review Protocols</button><button type="button" data-vpqcharts="1">← All Charts</button></div>');
+}
+function vpqPatientQueue38(){
+ showModal('🐾 Patient Queue — Choose Your Next Patient','<p class="small">Choose a patient to review their chart or proceed to the exam table. One Health cases remain in their own isolation area.</p><div class="twocol">'+dataCases().filter(x=>x.track==='Pharmacology').map(c=>'<div class="vpq-patient-card"><h3>'+escapeHtml((c.emoji||'🐾')+' '+c.name)+'</h3><p class="small">'+escapeHtml(c.species||'')+' · '+(state.completed.includes(c.id)?'✓ Completed':'Waiting')+'</p><div class="buttonrow"><button type="button" data-vpqchart="'+escapeHtml(c.id)+'">📋 Read chart</button><button type="button" data-vpqstartpatient="'+escapeHtml(c.id)+'">🩺 Examine</button></div></div>').join('')+'</div>');
+}
+const vpqProtocolData38=[
+ {id:'history',name:'Initial patient assessment',summary:'Use the chart to organize the presenting problem before choosing medication.',steps:[
+ 'Identify species, signalment, presenting complaint, and the available history; mark missing information rather than guessing.',
+ 'Assess whether immediate stabilization is needed; an unstable patient may require triage before a full workup.',
+ 'Build a problem list from the evidence supplied in the case.',
+ 'Use the species, differential diagnoses, and clinical context to determine what additional evidence is needed.',
+ 'Choose a treatment or medication only after considering the indication, patient-specific risks, and monitoring needs.'
+ ]},
+ {id:'pharm',name:'Medication selection (SPACED)',summary:'Dr. Carlson’s antibiotic-selection framework, adapted as a pharmacology learning checklist.',steps:[
+ 'Spectrum: Is bacterial therapy indicated? What organisms are plausible, and does the chosen drug target them?',
+ 'PK / PD: Will the drug reach the affected tissue at a useful exposure relative to MIC?',
+ 'Adverse effects: Which species, organ systems, ages, or comorbidities create special risk?',
+ 'Compliance: Can treatment be administered correctly, and are regulatory requirements satisfied?',
+ 'Environment: Does the infection site, tissue perfusion, abscess, or barrier alter expected success?',
+ 'Diagnostics: Use appropriate diagnostic evidence, culture and susceptibility when indicated, and reassess response.'
+ ]},
+ {id:'monitor',name:'Treatment monitoring and reassessment',summary:'Connect the drug mechanism to clinical response, adverse effects, and next actions.',steps:[
+ 'Record the baseline problem and the intended therapeutic endpoint.',
+ 'Choose appropriate clinical and diagnostic monitoring based on patient status and medication class.',
+ 'Look for adverse effects or unexpected deterioration; reassess exposure, resistance, source control and diagnosis.',
+ 'Communicate the plan and reassessment triggers clearly in the chart.',
+ 'Revisit the mechanism: what was the body trying to compensate for, and could treatment remove a protective response?'
+ ]},
+ {id:'onehealth',name:'One Health reporting and isolation',summary:'Use the dedicated One Health area for disease-specific reporting and host distinctions.',steps:[
+ 'Identify the species, likely transmission route, and zoonotic or herd-level concerns.',
+ 'Determine whether isolation, PPE, and environmental controls are appropriate.',
+ 'Confirm animal vs human, veterinarian vs laboratory, and reportable-disease responsibilities using the current jurisdiction.',
+ 'Refer to the One Health disease library for case-specific host, diagnostic and reporting details.'
+ ]}
+];
+function vpqProtocolDirectory38(id){
+ const proto=vpqProtocolData38.find(p=>p.id===id);
+ if(!proto){
+ showModal('📚 Clinical Protocols — Learning Checklists','<p class="small">Protocols are general educational workflows. They are not hospital standing orders, prescriptions, or validated emergency treatment instructions.</p><div class="twocol">'+vpqProtocolData38.map(p=>'<button type="button" class="vpq-navigation-choice" data-vpqprotocol="'+p.id+'"><b>📚 '+escapeHtml(p.name)+'</b><p>'+escapeHtml(p.summary)+'</p></button>').join('')+'</div><div class="buttonrow"><button type="button" data-vpqcharts="1">📋 Medical Charts</button><button type="button" data-vpqqueue="1">🐾 Patient Queue</button></div>');
+ return;
+ }
+ showModal('📚 '+proto.name,'<p class="small">'+escapeHtml(proto.summary)+'</p><ol class="vpq-workflow-list">'+proto.steps.map(step=>'<li>'+escapeHtml(step)+'</li>').join('')+'</ol><p class="vpq-pharm-note">Educational study workflow; verify medications, emergencies, species restrictions and reporting requirements against current trusted references and course instructions.</p><div class="buttonrow"><button type="button" data-vpqprotocols="1">← All protocols</button><button type="button" data-vpqcharts="1">📋 Medical charts</button><button type="button" data-vpqpharmstudy="1">📚 Pharm 1 Study Desk</button></div>');
+}
+const vpqOldDoAction38=doAction;
+doAction=function(action){
+ if(action==='medicalCharts')return vpqChartDirectory38();
+ if(action==='protocols')return vpqProtocolDirectory38();
+ if(action==='queue')return vpqPatientQueue38();
+ return vpqOldDoAction38(action);
+};
+$('modalBody').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.vpqchart)return vpqPatientChart38(b.dataset.vpqchart);
+ if(b.dataset.vpqstartpatient)return startCase(b.dataset.vpqstartpatient);
+ if(b.dataset.vpqprotocol)return vpqProtocolDirectory38(b.dataset.vpqprotocol);
+ if(b.dataset.vpqprotocols)return vpqProtocolDirectory38();
+ if(b.dataset.vpqcharts)return vpqChartDirectory38();
+ if(b.dataset.vpqqueue)return vpqPatientQueue38();
+});
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
