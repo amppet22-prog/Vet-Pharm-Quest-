@@ -7,6 +7,8 @@ window.VPQ_ILLUSTRATED_CHOICES=function(api){
  const {gallery,getForm,getState,modalBody}=api;
  const atlas='assets/vpq-standing-art-22.webp';
  const total=22,columns=6,rows=4;
+ // Lead with the most complete individual cutouts: purple-streaked woman, braided man, blonde man, red-haired man and fuller-built man.
+ const galleryOrder=[17,18,19,20,21,8,9,10,11,12,13,14,15,16,0,1,2,3,4,5,6,7];
  const isArt=id=>/^standing-(?:[0-9]|1[0-9]|2[01])$/.test(id||'');
  const idx=id=>Number(String(id||'').slice(9));
  const image=(id,kind='tile')=>{
@@ -46,7 +48,7 @@ window.VPQ_ILLUSTRATED_CHOICES=function(api){
    wrap.innerHTML='<h3>🚶 Illustrated Standing Characters</h3>'+
     '<p class="tiny">More full-body veterinarian choices, including varied body builds, hairstyles, the blonde and red-haired options. These characters have no assigned names: choose your name and pronouns separately. Alexandria and Gary remain the named presets; Classic customization is still available.</p>'+
     '<div class="vpq-art-select-grid">'+Array.from({length:total},(_,i)=>{
-       const id='standing-'+i;
+       const id='standing-'+galleryOrder[i];
        return '<button type="button" class="vpq-art-select-btn" data-vpqportrait="'+id+'" aria-label="Choose illustrated veterinarian '+(i+1)+'">'+image(id,'tile')+'<span>Illustrated '+String(i+1).padStart(2,'0')+'</span></button>';
     }).join('')+'</div>';
    portraitSection.appendChild(wrap);
