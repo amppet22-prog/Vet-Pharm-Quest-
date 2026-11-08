@@ -389,6 +389,9 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="reception-shadowbox-phase-a.js?v=20261108-decor2"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
+<script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
+<script src="toxicology-lecture-links.js?v=20261108-toxcrosswalk1"></script>
+<script src="toxicology-lecture-ui.js?v=20261108-toxlesson1"></script>
 <script src="mechanism-lab-atlas.js?v=20261108-toxlink2"></script>
 <script src="mechanism-lab-phase-a4.js?v=20261108-A4c"></script>
 <script src="exam-room-traditional.js?v=20261108-examA2"></script>
@@ -396,7 +399,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
-<script src="ngf-toxicology-bridge.js?v=20261108-tox-catalog4"></script>
+<script src="ngf-toxicology-bridge.js?v=20261108-tox-catalog5"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
 <script>
 /* Vet Pharm Quest 2D — original learning material based on the user's course guides.
@@ -2527,24 +2530,8 @@ $('vpqReceptionQuickBtn').addEventListener('click',()=>doAction('receptionStudio
 $('vpqStudioDashboardBtn').addEventListener('click',()=>doAction('receptionStudio'));
 $('vpqToxDashboardBtn').addEventListener('click',()=>vpqToxPreviewMenu());
 // Show Toxicology as archived-course preview, not active in Exam Center or selected Pharm lectures.
-function vpqToxPreviewMenu(){
- const data=window.VPQ_ToxicologyPreview;
- const topics=data?.topics||[];
- showModal('☣️ Toxicology · Course Outline & Reference',
- '<p><b>'+topics.length+' lecture groups indexed.</b> The Pharmacy Caution Book now contains a mechanism-grouped toxicant catalog; the Study Lounge contains a standalone toxicant-mechanism matching round. The complete course exam bank and lecture-selection integration remain in development.</p>'+
- '<div class="infobox"><b>Course map</b><p>Each lecture group is mapped to mechanism summaries and review concepts. Individual lecture details, course-specific exam questions and source checks remain ongoing.</p></div><div class="buttonrow"><button data-vpqtoxindex="1">☣️ Browse Toxicant Reference</button></div>'+
- '<div class="vpqToxTopics">'+topics.map(x=>'<button type="button" data-vpqtox-topic="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.lectures)+' · '+escapeHtml(x.title)+'</b><small>Lecture overview · clinical cards available separately</small></button>').join('')+'</div>'+
- '<p class="tiny">Indexed from: '+data.sources.map(x=>escapeHtml(x)).join(' · ')+'. Some full lectures and chat materials still require individual extraction/verification before publication.</p>');
-}
-function vpqToxPreviewCard(id){
- const data=window.VPQ_ToxicologyPreview;
- const x=data?.topics?.find(t=>t.id===id);if(!x)return vpqToxPreviewMenu();
- showModal('☣️ '+x.title+' · Preview',
- '<div class="infobox"><b>'+escapeHtml(x.lectures)+'</b><p>'+escapeHtml(x.summary)+'</p></div>'+
- '<h3>Course concepts to build on</h3><p>'+escapeHtml(x.review)+'</p>'+
- '<p class="tiny">Status: '+escapeHtml(x.status)+'. This is educational review, not an emergency treatment protocol.</p><button data-vpqtoxindex="1">☣️ Browse toxicant mechanisms</button>'+
- '<button data-vpqtox-back="1">← Toxicology preview</button>');
-}
+function vpqToxPreviewMenu(){return window.VPQ_TOX_LECTURE_UI.menu(showModal)}
+function vpqToxPreviewCard(id){return window.VPQ_TOX_LECTURE_UI.card(id,showModal)}
 const vpqLearningHubBeforeTox=vpqLearningHub;
 vpqLearningHub=function(...args){
  vpqLearningHubBeforeTox(...args);
@@ -2563,6 +2550,7 @@ $('modalBody').addEventListener('click',event=>{
  const b=event.target.closest('button');if(!b)return;
  if(b.dataset.vpqtoxOpen!==undefined)return vpqToxPreviewMenu();
  if(b.dataset.vpqtoxTopic!==undefined)return vpqToxPreviewCard(b.dataset.vpqtoxTopic);
+ if(b.dataset.vpqtoxlinked!==undefined)return vpqNGFandTox.toxDetail(b.dataset.vpqtoxlinked);
  if(b.dataset.vpqtoxBack!==undefined)return vpqToxPreviewMenu();
 });
 const vpqToxStyle=document.createElement('style');
@@ -2638,7 +2626,7 @@ const vpqNGFandTox=window.VPQ_NGFToxBridge({
  setPharmacy:fn=>{openPharmacy=fn},
  modalBody:$('modalBody'),
  openPharmacy:id=>openPharmacy(id),
- toxCourse:()=>vpqToxPreviewMenu()
+ toxCourse:id=>id?vpqToxPreviewCard(id):vpqToxPreviewMenu()
 });
 
 // Cross-link the same course from Study Lounge -> Pharmacy, without activating a Toxicology exam bank.
