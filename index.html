@@ -25,14 +25,14 @@
 .vpq-case-image{margin:8px auto 16px;max-width:700px}.vpq-case-image img{display:block;width:100%;max-height:410px;object-fit:contain;border:2px solid #d5e4ef;border-radius:14px;background:#0f172a}.vpq-case-image figcaption{text-align:center;font-size:12px;color:#64748b;padding:6px}
 
 /* VPQ WELCOME MUNCHASAURUS v1 */
-.vpq-welcome-section{max-width:1450px;margin:14px auto 8px;padding:19px 22px;display:grid;grid-template-columns:minmax(0,1fr) 180px;align-items:center;gap:17px;border:3px solid #d8caee;border-radius:23px;background:linear-gradient(125deg,#fbf0ff 0%,#eff9ff 62%,#fff2d5 100%);box-shadow:0 8px 22px #425f8642}
+.vpq-welcome-section{max-width:1450px;margin:14px auto 8px;padding:19px 22px;display:grid;grid-template-columns:minmax(0,1fr) 210px;align-items:center;gap:17px;border:3px solid #d8caee;border-radius:23px;background:linear-gradient(125deg,#fbf0ff 0%,#eff9ff 62%,#fff2d5 100%);box-shadow:0 8px 22px #425f8642}
 .vpq-welcome-copy h1{font-family:inherit;font-size:clamp(22px,3vw,34px);line-height:1.18;margin:6px 0 8px;color:#584e8c}
 .vpq-welcome-copy p{font-size:14px;line-height:1.5;color:#47577a;margin:4px 0 12px;max-width:660px}
 .vpq-welcome-kicker{font-weight:900;letter-spacing:.08em;font-size:10px;color:#795ca0}
 .vpq-welcome-small{display:block;font-size:11px;color:#687593;margin-top:10px}
 .vpq-howtoplay{padding:10px 17px;border-radius:12px;background:#615eb0;color:#fff;border:2px solid #454385;font-size:13px;font-weight:900;cursor:pointer}
 .vpq-mera-portrait{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:5px ridge #c8a063;border-radius:17px;padding:8px;background:#fef0d2;min-height:174px;text-align:center}
-.vpq-mera-portrait img{display:block;width:110px;height:112px;object-fit:cover;object-position:center 26%;border-radius:12px;border:2px solid #b88f59}
+.vpq-mera-portrait img{display:block;width:170px;height:128px;max-width:100%;object-fit:cover;object-position:center;border-radius:12px;border:2px solid #b88f59}
 .vpq-mera-placeholder{align-items:center;justify-content:center;width:110px;height:102px;background:linear-gradient(135deg,#ceeaf0,#fcefd6);font-size:37px;border-radius:12px}
 .vpq-mera-portrait strong{font-size:13px;color:#65503d}.vpq-mera-portrait small{font-size:10px;color:#896c4b}
 @media(max-width:650px){.vpq-welcome-section{grid-template-columns:1fr;padding:16px}.vpq-mera-portrait{flex-direction:row;flex-wrap:wrap;justify-content:start;min-height:0}.vpq-mera-portrait img,.vpq-mera-placeholder{width:65px;height:65px}.vpq-welcome-copy h1{font-size:24px}}
@@ -277,7 +277,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.4</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
-<section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-portrait.png" alt="Mera Munchasurus, hospital mascot portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus</strong><small>Hospital Mascot · Chief of Snacks &amp; Encouragement</small></div></section>
+<section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
 <div class="controls"><button id="leftBtn" aria-label="Walk left">◀ Walk</button><button id="interactBtn">✦ Interact (E)</button><button id="rightBtn" aria-label="Walk right">Walk ▶</button></div></div>
@@ -973,10 +973,13 @@ state.outerwear=state.outerwear|| (state.whiteCoat?'coat':'none');
 state.beard=state.beard||false;
 state.cap=state.cap||false;
 state.avatarPreset=state.avatarPreset||'custom';
+state.bodyShape=state.bodyShape||'balanced';
 function vpqVectorVet(p){
  const skin=vpqSafeColor(p.skin,'#b77957'),hair=vpqSafeColor(p.hair,'#4e302c'),scrubs=vpqSafeColor(p.scrubs,'#6b7eab'),eye=vpqSafeColor(p.eyeColor,'#6d493c');
  const base=p.avatarBase||'androgynous',h=p.hairStyle||'classic',coat=p.outerwear|| (p.whiteCoat?'coat':'none'),expr=p.expression||'•ᴗ•',beard=p.beard===true||p.beard==='true',cap=p.cap===true||p.cap==='true';
  const faceW=base==='masculine'?64:base==='feminine'?57:61,faceX=120-faceW/2;
+ const bodyScale=({petite:.83,slim:.91,balanced:1,broad:1.12,curvy:1.17,full:1.26})[p.bodyShape]||1;
+ const bodyTransform='translate(120 0) scale('+bodyScale+' 1) translate(-120 0)';
  const facePath='M '+faceX+' 84 Q '+(faceX-9)+' 104 '+(faceX+3)+' 136 Q 120 '+(base==='masculine'?169:161)+' '+(240-faceX-3)+' 136 Q '+(249-faceX)+' 102 '+(240-faceX)+' 84 Q 120 68 '+faceX+' 84 Z';
  const long=['long','wave','pony','braids','locs','halfup'].includes(h);
  const curls=['curly','coils','fluffy'].includes(h);
@@ -1003,16 +1006,16 @@ function vpqVectorVet(p){
  const acc=p.avatarAccessory||'';
  const stethoscope=acc==='🩺'?'<path d="M99 190 Q96 238 121 233 Q141 230 141 199" fill="none" stroke="#555564" stroke-width="5"/><circle cx="120" cy="233" r="9" fill="#707987" stroke="#464953" stroke-width="3"/>':'';
  return '<svg class="vpq-character-portrait" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300" role="img" aria-label="Customizable illustrated veterinarian"><defs><linearGradient id="vpqScrubG" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="'+scrubs+'"/><stop offset="1" stop-color="'+scrubs+'"/></linearGradient><linearGradient id="vpqFaceG" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="'+skin+'"/><stop offset="1" stop-color="'+skin+'"/></linearGradient></defs>'+
- '<ellipse cx="120" cy="292" rx="70" ry="6" fill="#59475b25"/><path d="M97 254 L92 292 L117 292 L122 250 M139 254 L143 292 L168 292 L155 250" fill="#5c5470" stroke="#50465a" stroke-width="3"/>'+
+ '<ellipse cx="120" cy="292" rx="70" ry="6" fill="#59475b25"/><g transform="'+bodyTransform+'"><path d="M91 252 L91 291 L115 291 L117 252 M124 252 L127 291 L150 291 L152 252" fill="#5c5470" stroke="#50465a" stroke-width="3"/>'+
  '<path d="M65 184 Q84 170 105 170 L135 170 Q154 171 175 184 L191 277 Q120 295 49 277 Z" fill="url(#vpqScrubG)" stroke="#554c6c" stroke-width="4"/>'+
- '<path d="M103 170 L120 199 L137 170" fill="none" stroke="#f7efe7" stroke-width="5"/><path d="M57 205 Q41 228 49 259 M181 204 Q194 232 187 264" fill="none" stroke="'+skin+'" stroke-width="16" stroke-linecap="round"/>'+
+ '<path d="M103 170 L120 199 L137 170" fill="none" stroke="#f7efe7" stroke-width="5"/><path d="M57 205 Q41 228 49 259 M181 204 Q194 232 187 264" fill="none" stroke="'+skin+'" stroke-width="16" stroke-linecap="round"/></g>'+
  behind+ '<path d="M108 150 L107 180 Q120 194 134 179 L133 150" fill="'+skin+'"/>'+
  '<path d="'+facePath+'" fill="url(#vpqFaceG)" stroke="#965e4a" stroke-width="3"/>'+
  '<ellipse cx="'+(faceX+2)+'" cy="126" rx="8" ry="12" fill="'+skin+'" stroke="#965e4a" stroke-width="2"/><ellipse cx="'+(238-faceX)+'" cy="126" rx="8" ry="12" fill="'+skin+'" stroke="#965e4a" stroke-width="2"/>'+
  bun+pony+topHair+
  '<path d="M93 112 Q103 106 111 112 M129 112 Q138 106 148 112" fill="none" stroke="'+hair+'" stroke-width="3.5" stroke-linecap="round"/>'+
  eyes+'<path d="M119 126 Q114 139 122 139" fill="none" stroke="#995e50" stroke-width="2"/>'+
- freckles+beardPath+mouth+glasses+outer+stethoscope+
+ freckles+beardPath+mouth+glasses+'<g transform="'+bodyTransform+'">'+outer+'</g>'+stethoscope+
  '<text x="125" y="217" text-anchor="middle" font-size="18" fill="'+(coat==='none'?'#ffffff':'#836180')+'">'+(coat==='none'?motif:'')+'</text>'+
  (acc==='🎀'?'<text x="154" y="86" font-size="25">🎀</text>':acc==='👑'?'<text x="104" y="56" font-size="28">👑</text>':'')+
  capPath+
@@ -1031,6 +1034,7 @@ vpqEditorValues=function(form){
  p.beard=fd.get('beard')==='true';
  p.cap=fd.get('cap')==='true';
  p.avatarPreset=String(fd.get('avatarPreset')||'custom');
+ p.bodyShape=String(fd.get('bodyShape')||state.bodyShape||'balanced');
  p.avatarArtStyle='illustrated';
  return p;
 };
@@ -1078,6 +1082,7 @@ openAvatar=function(){
  '<div class="twocol">'+
  field('Doctor name',choice('name',current.name))+field('Pronouns (optional)',select('pronouns',pronounOptions,current.pronouns))+
  field('Skin tone',color('skin',current.skin,'#b77957'))+field('Eye color',color('eyeColor',current.eyeColor,'#6d493c'))+
+ field('Body shape',select('bodyShape',[['petite','Petite'],['slim','Slender'],['balanced','Medium'],['broad','Broad-shouldered'],['curvy','Curvy'],['full','Fuller-bodied']],current.bodyShape||'balanced'))+
  field('Hairstyle',select('hairStyle',vpqAvatarHairList,current.hairStyle))+field('Hair color',color('hair',current.hair,'#5b3e38'))+
  field('Expression',select('expression',[['•ᴗ•','Happy'],['•‿•','Warm'],['◕ᴗ◕','Big smile'],['-ᴗ-','Calm'],['•_•','Focused']],current.expression))+
  field('Freckles',select('freckles',[['none','None'],['light','Light'],['full','Freckles']],current.freckles))+
