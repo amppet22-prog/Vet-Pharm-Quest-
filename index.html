@@ -392,6 +392,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="mechanism-lab-phase-a4.js?v=20261108-A4c"></script>
 <script src="exam-room-traditional.js?v=20261108-examA2"></script>
 <script src="pharmacy-nutrition-room.js?v=20261108-pharm-nutrition1"></script>
+<script src="avatar-standing-companions.js?v=20261108-standing1"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-tox-clues"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
@@ -2713,6 +2714,50 @@ const vpqPharmNewStyle=document.createElement('style');vpqPharmNewStyle.textCont
  css.textContent='.vpqAbxBanner{background:#ecf8fc;border:1px solid #a3cbdf;padding:13px;border-radius:13px;margin:0 0 15px}.vpqAbxBanner p{font-size:13px;margin:7px 0}.vpqAbxGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:10px 0 20px}.vpqAbxCard{background:#fff;border:1px solid #c7dbe4;border-radius:12px;padding:13px;line-height:1.5}.vpqAbxCard h3{font-size:15px;margin:0 0 9px}.vpqAbxCard p{font-size:13px;margin:7px 0}.vpqAbxExample{padding:12px;margin:8px 0;background:#f6faff;border:1px solid #b6cedd;border-radius:10px}.vpqAbxExample summary{cursor:pointer;font-weight:700}.vpqAbxExample p{font-size:13px;line-height:1.6}';
  document.head.appendChild(css);
 })();
+
+/* AVATAR PAIRING: selected framed portrait vs full-body clinic sprite. */
+const vpqStandingGallery=window.VPQ_STANDING_AVATARS();
+const vpqPriorStandingUpdate=updateAvatar;
+updateAvatar=function(...args){vpqPriorStandingUpdate(...args);vpqStandingGallery.renderWalking(state)};
+const vpqPriorStandingPreview=vpqRenderStoryPreview;
+vpqRenderStoryPreview=function(...args){vpqPriorStandingPreview(...args);vpqStandingGallery.creator()};
+vpqRefreshPreview=vpqRenderStoryPreview;
+const vpqPriorStandingOpen=openAvatar;
+openAvatar=function(...args){
+ vpqPriorStandingOpen(...args);
+ const form=$('avatarForm'),section=form?.querySelector('[data-vpqsection="vet"]');
+ if(section){
+  const presets=document.createElement('div');
+  presets.className='vpqStandingPresets';
+  presets.innerHTML='<p class="tiny"><b>Try a body and skin-tone starting point.</b> Every combination remains customizable. The framed picture is your portrait; the separate full-body illustration is the walking character.</p>'+
+   '<button type="button" data-vpqstandpreset="larger-male">🧑‍⚕️ Larger-built male</button>'+
+   '<button type="button" data-vpqstandpreset="deeper-female">👩🏽‍⚕️ Deep-tone feminine</button>'+
+   '<button type="button" data-vpqstandpreset="warm-female">👩🏾‍⚕️ Warm-tone feminine</button>'+
+   '<button type="button" data-vpqstandpreset="neutral">✨ Classic customizable</button>';
+  section.insertBefore(presets,section.firstChild);
+ }
+ vpqStandingGallery.creator();
+};
+const vpqPriorStandingViewer=vpqViewMyAvatar;
+vpqViewMyAvatar=function(...args){vpqPriorStandingViewer(...args);vpqStandingGallery.viewer(state)};
+$('avatarBtn').onclick=()=>openAvatar();
+$('vpqViewAvatarBtn').onclick=()=>vpqViewMyAvatar();
+$('modalBody').addEventListener('click',e=>{
+ const b=e.target.closest('[data-vpqstandpreset]');if(!b)return;
+ const f=$('avatarForm');if(!f)return;
+ const kind=b.dataset.vpqstandpreset;
+ const values=kind==='larger-male'?{avatarBase:'masculine',bodyShape:'full',skin:'#a16b52',hair:'#2e2328',hairStyle:'short',scrubs:'#568d91',outerwear:'coat',beard:'true'}:
+ kind==='deeper-female'?{avatarBase:'feminine',bodyShape:'curvy',skin:'#784b35',hair:'#222129',hairStyle:'coils',scrubs:'#836b9d',outerwear:'none',beard:'false'}:
+ kind==='warm-female'?{avatarBase:'feminine',bodyShape:'balanced',skin:'#b7774d',hair:'#3b292a',hairStyle:'braids',scrubs:'#628eb2',outerwear:'coat',beard:'false'}:
+ {avatarBase:'androgynous',bodyShape:'balanced',skin:'#d5a07e',hair:'#463238',hairStyle:'classic',scrubs:'#74a9a9',outerwear:'none',beard:'false'};
+ for(const [k,v] of Object.entries(values))if(f.elements[k])f.elements[k].value=v;
+ if(f.elements.portraitId)f.elements.portraitId.value='classic';
+ if(f.elements.avatarPreset)f.elements.avatarPreset.value='custom';
+ vpqRenderStoryPreview();
+});
+const vpqStandingStyle=document.createElement('style');
+vpqStandingStyle.textContent='.vpqStandingPresets{padding:8px 10px;background:#f8f1ff;border-radius:13px;margin:9px 0 13px}.vpqStandingPresets button{margin:3px 4px 3px 0;font-size:12px;padding:7px 9px}.vpq-story-stage:has(.vpq-matched-creator){display:flex;align-items:center;justify-content:center;flex-direction:column;min-height:300px;height:auto;overflow:visible}.vpq-story-stage .vpq-matched-creator{width:100%}.vpq-story-stage .vpq-matched-pet .vpq-preview-pet{height:65px;width:80px;position:relative;bottom:auto;right:auto}.avatarSprite.vpq-portrait-walk{border:0!important;background:transparent!important;box-shadow:none!important}.vpq-game-avatar:has(.vpq-standing-art){overflow:visible}.vpq-roster-option .vpq-roster-art{border:3px solid #e0c6b8;border-radius:10px}';
+document.head.appendChild(vpqStandingStyle);
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
