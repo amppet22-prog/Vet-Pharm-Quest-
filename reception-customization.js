@@ -15,15 +15,29 @@ const catalog=[
 {id:'decor-kids',name:'Kids reading and play corner',type:'decor',price:45,icon:'🧸',detail:'Visible caregiver-supervised corner with books, easy-clean toys and seating.'},
 {id:'decor-pumpkin',name:'Pumpkin display',type:'decor',price:20,icon:'🎃',detail:'Seasonal reception decoration.'},
 {id:'decor-rainbow',name:'Pride/community board',type:'decor',price:20,icon:'🌈',detail:'Optional year-round inclusive community decoration.'},
-{id:'decor-holiday',name:'Winter lights',type:'decor',price:25,icon:'✨',detail:'Non-denominational winter lights; more inclusive holiday collections are planned.'}
+{id:'decor-holiday',name:'Winter lights',type:'decor',price:25,icon:'✨',detail:'Non-denominational winter lights; more inclusive holiday collections are planned.'},
+{id:'seat-sofa-lavender',name:'Lavender waiting-room sofa',type:'furniture',price:0,icon:'🛋️',detail:'Free cushioned three-seat sofa with arms, backrest and legs. Included in the waiting room.'},
+{id:'seat-sofa-sage',name:'Sage green sofa',type:'furniture',price:45,icon:'🛋️',detail:'Sage upholstered waiting-room sofa. Replaces the current sofa; owned styles can be switched freely.'},
+{id:'seat-sofa-blue',name:'Blue cloud sofa',type:'furniture',price:50,icon:'🛋️',detail:'Soft blue waiting-room sofa. Replaces the current sofa; owned styles can be switched freely.'},
+{id:'decor-planter',name:'Floor plant & planter',type:'decor',price:25,icon:'🪴',detail:'A tall clinic-safe corner plant display beside the waiting-room seating.'},
+{id:'decor-plant-pair',name:'Two leafy plants',type:'decor',price:35,icon:'🌿',detail:'Two leafy plants to soften the reception waiting area.'},
+{id:'decor-cat-tree',name:'Cat tree with hideout',type:'decor',price:65,icon:'🐈',detail:'Climbing platforms, scratching posts and a cozy hiding cubby for the cat waiting corner.'},
+{id:'decor-carrier',name:'Cat carrier',type:'decor',price:20,icon:'🐈',detail:'A secure waiting-room cat carrier, placed near the cat-friendly corner.'},
+{id:'decor-dog-carrier',name:'Dog travel crate',type:'decor',price:30,icon:'🐕',detail:'A sturdy travel crate for a waiting-room dog vignette.'},
+{id:'decor-pet-art',name:'Framed pet portraits',type:'decor',price:30,icon:'🖼️',detail:'A little gallery of cheerful framed dog and cat art on the clinic walls.'},
+{id:'decor-paw-art',name:'Paw-print mural',type:'decor',price:20,icon:'🐾',detail:'Small painted paw-print wall art, safely above the furniture.'}
 ];
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
+const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
 if(!state.receptionCollection||typeof state.receptionCollection!=='object')state.receptionCollection={owned:[],equippedWall:'paint-peach',placed:[],transactions:[]};
 const bag=state.receptionCollection;
 bag.owned=Array.isArray(bag.owned)?bag.owned:[];
 bag.placed=Array.isArray(bag.placed)?bag.placed:[];
 bag.transactions=Array.isArray(bag.transactions)?bag.transactions:[];
 bag.owned=[...new Set([...free,...bag.owned.filter(x=>catalog.some(c=>c.id===x))])];
+// Existing saves inherit the free sofa; sofa style is a single-selection furniture slot.
+if(!bag.placed.some(id=>sofaIds.includes(id)))bag.placed.push('seat-sofa-lavender');
+if(bag.placed.filter(id=>sofaIds.includes(id)).length>1){const last=bag.placed.filter(id=>sofaIds.includes(id)).slice(-1)[0];bag.placed=bag.placed.filter(id=>!sofaIds.includes(id)||id===last)}
 if(!bag.owned.includes(bag.equippedWall))bag.equippedWall='paint-peach';
 bag.placed=bag.placed.filter(x=>bag.owned.includes(x));
 const first=s=>escapeHtml(String(s??''));
@@ -36,23 +50,25 @@ const owned=bag.owned.includes(id),active=equipped(id),able=state.coins>=item.pr
 const scene='<div class="vpqRPreview" style="background:'+first(item.color||'#f5e9da')+'"><div class="vpqRPreviewIcons">'+first(item.icon)+' <span>🛎️ 🐕</span> 🪑</div><small>Conceptual room/item preview • game art uses the selected theme</small></div>';
 showModal('🎨 Preview · '+first(item.name),'<p>'+first(item.detail||'Choose a color or theme for your waiting room.')+'</p>'+scene+
 '<p><b>'+ (owned?'Already owned':item.price+' 🪙')+'</b> · Current coin balance: '+state.coins+'</p>'+
-'<div class="buttonrow">'+(owned?'<button data-vpqr-equip="'+item.id+'">'+(active?(item.type==='wall'?'Currently equipped':'Remove from room'):(item.type==='wall'?'Apply wallpaper':'Place in reception'))+'</button>': '<button data-vpqr-buy="'+item.id+'" '+(!able?'disabled':'')+'>Confirm purchase · '+item.price+' 🪙</button>')+
+'<div class="buttonrow">'+(owned?'<button data-vpqr-equip="'+item.id+'">'+(active?(item.type==='wall'?'Currently equipped':item.type==='furniture'?'Current sofa':'Remove from room'):(item.type==='wall'?'Apply wallpaper':item.type==='furniture'?'Use this sofa':'Place in reception'))+'</button>': '<button data-vpqr-buy="'+item.id+'" '+(!able?'disabled':'')+'>Confirm purchase · '+item.price+' 🪙</button>')+
 '<button data-vpqr-menu="1">← Shop / Collection</button></div>'+
 (!owned&&!able?'<p class="small">Not enough earned coins yet. Play learning rounds to earn more; no real-money purchases.</p>':''));
 }
 function wallet(){showModal('🪙 Clinic Coin Bank','<div class="infobox"><h2>'+state.coins+' 🪙 available</h2><p>Coins earned in the existing game remain your balance. Purchases here use the same wallet; no premium currency.</p></div>'+
 '<h3>Recent reception purchases</h3>'+(bag.transactions.length?bag.transactions.slice(0,15).map(x=>'<p>−'+x.price+' coins · '+first(find(x.id)?.name||x.id)+' <small>'+first(x.date.slice(0,10))+'</small></p>').join(''):'<p>No reception purchases yet. Historical coin earnings before this feature were not tracked separately.</p>')+
 '<div class="buttonrow"><button data-vpqr-menu="1">🎨 Shop and collection</button><button data-vpqr-yard="1">🐕 Kennel & play yard preview</button></div>')}
-function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor');
+function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='furniture'&&x.type==='furniture');
 showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned <button data-vpqr-wallet="1">Open coin bank</button></div>'+
 '<p>Preview before you spend. Everything you own stays in your collection, and you can change decorations without buying them again. The original avatar portraits are preserved.</p>'+
-'<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
+'<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
 '<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'"><span class="vpqRIcon">'+first(x.icon)+'</span><b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
 '<div class="vpqRPend"><b>🐕 Kennel & 3D-style play yard — Coming Soon</b><p>Future fenced yard, dog behavior cases, enrichment, intake and safe isolation workflows. This is a preview only; no kennel has been purchased or built.</p><button data-vpqr-yard="1">See planned expansion</button></div>');
 }
 function yard(){showModal('🐕 Kennel & Play Yard · Coming Soon','<h3>Planned veterinary learning expansion</h3><p>A 2.5D dog play yard with fenced areas, individual kennel runs, enrichment upgrades and clinical learning stations for canine behavior, triage, parasite control and infection prevention.</p><p><b>Not yet playable:</b> no kennels, dog housing, purchases or clinical cases are enabled in this preview.</p><button data-vpqr-menu="1">← Reception Studio</button>')}
 function apply(id){const x=find(id);if(!x||!bag.owned.includes(id))return;
-if(x.type==='wall')bag.equippedWall=id;else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag.placed.push(id);
+if(x.type==='wall')bag.equippedWall=id;
+else if(x.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
+else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag.placed.push(id);
 persistLocal();preview(id);
 }
 function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.price<=0||state.coins<item.price)return;
