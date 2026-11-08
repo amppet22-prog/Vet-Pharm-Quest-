@@ -612,7 +612,7 @@ DEFAULT.scrubStyle='classic';DEFAULT.whiteCoat=false;DEFAULT.expression='•ᴗ�
 for(const [k,v] of Object.entries({scrubStyle:'classic',whiteCoat:false,expression:'•ᴗ•',hairStyle:'classic'})){
   if(state[k]===undefined) state[k]=v;
 }
-ROOMS.treatment.props[2].action='physiology';ROOMS.treatment.props[2].label='Monitoring & Physiology';ROOMS.treatment.props[2].bubble='Why it happens';
+// Monitoring remains an independent inpatient-care station; physiology reference is available elsewhere.
 // Clinic Guide stays in the sidebar; avoid crowding reception stations.
 ROOMS.exam.props[2].label='Protocols & Patients';ROOMS.exam.props[2].bubble='Signs + workups';
 const extraCases=[
@@ -2099,7 +2099,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  doAction=function(action){
   if(['study','learningHub','pharmArcade','pharmExamCenter'].includes(action))return vpqLearningHub();
   if(action==='masteryTracker')return masteryScreen();
-  if(action==='hospitalFollowup')return followup();
+  if(action==='hospitalFollowup'||action==='inpatientWard')return caseMenu();
   if(action==='hospitalAdjust')return adjust();
   if(action==='hospitalMonitor')return monitor();
   return formerDoAction(action)
