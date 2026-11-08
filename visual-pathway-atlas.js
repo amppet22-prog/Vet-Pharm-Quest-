@@ -63,6 +63,7 @@ function init(config){
  api.body.addEventListener('click',event=>{
  const b=event.target.closest('button');if(!b)return;
  const d=b.dataset;
+ if(d.vpqvpGallery!==undefined){previous=null;current=null;return api.showModal('🧬 Illustrated Pathway Atlas',gallery(d.vpqvpGallery==='all'?'':d.vpqvpGallery))}
  if(d.vpqvpOpen!==undefined)return open(d.vpqvpOpen);
  if(d.vpqvpStep!==undefined&&current){step=Math.max(0,Math.min(3,Number(d.vpqvpStep)));return render()}
  if(d.vpqvpPrev!==undefined&&current){step=Math.max(0,step-1);return render()}
