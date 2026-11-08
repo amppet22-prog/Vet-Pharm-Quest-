@@ -1812,7 +1812,7 @@ const allLectures27=['Lecture 1','Lecture 2','Lecture 3','Lecture 4','Lecture 5'
 function cards27(){const a=concept27.filter(c=>master27.selected.includes(c[0])).map(c=>({id:'concept:'+c[1],lecture:c[0],topic:c[1],front:c[2],back:c[3],why:c[4],apply:c[5]}));return a.concat(dataDrugs().filter(d=>master27.selected.includes(d.lecture)).map(d=>({id:'drug:'+d.id,lecture:d.lecture,topic:d.class,front:'Describe '+d.name+': mechanism and uses.',back:(d.moa||'')+' '+(d.uses||''),why:d.why||'Connect target to effect.',apply:'What changes your decision to use this drug? '+(d.species||'')})))}
 function questions27(){return dataStudy().filter(q=>master27.selected.includes(q.lecture)&&q.options&&q.options.length>1)}
 const previousStudyMenu27=showStudyMenu,previousOpenStudy27=openStudy,previousDoAction27=doAction;
-function masteryMenu27(){showModal('📖 Guided Learning Studio',`<p>Guided Learning explains the physiology, mechanism, WHY and clinical consequences. Choose one or multiple lectures, then start a session. Mastery separately tests your understanding.</p><div class="infobox"><b>Lecture selection</b><div class="vpq27grid">${allLectures27.map(l=>`<label><input type="checkbox" data-vpq27lecture="${escapeHtml(l)}" ${master27.selected.includes(l)?'checked':''}> ${escapeHtml(l)}</label>`).join('')}</div></div><p>${cards27().length} flashcards · ${questions27().length} existing exam questions · ${master27.missed.length} weak items marked</p><div class="buttonrow"><button data-vpq27start="learn">📖 Start guided cards</button><button data-vpq27start="mixed">🩺 Start Learn + Apply</button><button data-vpqGMastery="1">🏆 Mastery Tracker</button><button data-vpqGHub="1">← Learning Lab</button></div><p class="tiny">Rotation prioritizes unseen material and resurfaces missed items. The bank is finite; questions are not invented. Detailed mechanistic cards currently emphasize Foundations and Lectures 6–7. Other selected lectures use existing drug cards and questions.</p><button data-vpq27old="1">Original Study Desk / One Health</button>`)}
+function masteryMenu27(){showModal('📖 Guided Learning Studio',`<p>Guided Learning explains the physiology, mechanism, WHY and clinical consequences. Choose one or multiple lectures, then start a session. Mastery separately tests your understanding.</p><div class="infobox"><b>Lecture selection</b><div class="vpq27grid">${allLectures27.map(l=>`<label><input type="checkbox" data-vpq27lecture="${escapeHtml(l)}" ${master27.selected.includes(l)?'checked':''}> ${escapeHtml(l)}</label>`).join('')}</div></div><p>${cards27().length} flashcards · ${questions27().length} existing exam questions · ${master27.missed.length} weak items marked</p><div class="buttonrow"><button data-vpq27start="learn">📖 Start guided cards</button><button data-vpq27start="mixed">🩺 Start Learn + Apply</button><button data-vpqgmastery="1">🏆 Mastery Tracker</button><button data-vpqghub="1">← Learning Lab</button></div><p class="tiny">Rotation prioritizes unseen material and resurfaces missed items. The bank is finite; questions are not invented. Detailed mechanistic cards currently emphasize Foundations and Lectures 6–7. Other selected lectures use existing drug cards and questions.</p><button data-vpq27old="1">Original Study Desk / One Health</button>`)}
 showStudyMenu=function(){if(state.focus&&state.focus.startsWith('One Health'))return previousStudyMenu27();masteryMenu27()};
 openStudy=function(ohOnly=false){if(ohOnly)return previousOpenStudy27(true);state.focus='All lectures';masteryMenu27()};
 
@@ -1867,7 +1867,7 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
    master27.selected=shared.getLectures();
    oldMasteryMenu();
    const area=$('modalBody');
-   if(area)area.insertAdjacentHTML('beforeend','<div class="vpq-sharedlink"><b>🎮 Practice the same lectures in the clinic games</b><p class="tiny">The Arcade uses your selected lectures for Exam Boss, Professor Guide and supported clinical questions. Bug Battles and Drug Match have specialized content limits.</p><button data-vpqSharedHub="1">Open Learning Games</button></div>');
+   if(area)area.insertAdjacentHTML('beforeend','<div class="vpq-sharedlink"><b>🎮 Practice the same lectures in the clinic games</b><p class="tiny">The Arcade uses your selected lectures for Exam Boss, Professor Guide and supported clinical questions. Bug Battles and Drug Match have specialized content limits.</p><button data-vpqsharedhub="1">Open Learning Games</button></div>');
  };
  const oldHubAction=doAction;
  doAction=function(a){if(a==='learningHub'||a==='pharmArcade'||a==='pharmExamCenter')return vpqLearningHub();return oldHubAction(a)};
@@ -1890,29 +1890,29 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
    const selected=shared.getLectures(),stats=vpqHubStats();
    showModal('🎮 Learning Lab · One Clinic, Different Skills',
      '<p>Choose <b>what to learn</b> once, then choose <b>how to practice</b>. Each activity has a distinct learning goal; you do not need to play every game.</p>'+
-     '<div class="infobox"><b>📚 Active lecture focus</b><div class="vpq-sharedgrid">'+shared.courses.map(x=>'<label><input data-vpqSharedLecture="'+escapeHtml(x[0])+'" type="checkbox" '+(selected.includes(x[0])?'checked':'')+'> '+escapeHtml(x[0])+' · '+escapeHtml(x[2])+'</label>').join('')+'</div><p class="tiny">Selected: '+selected.length+' lecture groups. Specialized antibiotic games may not use non-antimicrobial lectures.</p></div>'+
+     '<div class="infobox"><b>📚 Active lecture focus</b><div class="vpq-sharedgrid">'+shared.courses.map(x=>'<label><input data-vpqsharedlecture="'+escapeHtml(x[0])+'" type="checkbox" '+(selected.includes(x[0])?'checked':'')+'> '+escapeHtml(x[0])+' · '+escapeHtml(x[2])+'</label>').join('')+'</div><p class="tiny">Selected: '+selected.length+' lecture groups. Specialized antibiotic games may not use non-antimicrobial lectures.</p></div>'+
      '<div class="vpq-sharedstats"><div><b>'+stats.mainSeen+'</b><small>Mastery concepts encountered</small></div><div><b>'+stats.mainWeak+'</b><small>Mastery items flagged</small></div><div><b>'+stats.attempts+'</b><small>Arcade answers</small></div><div><b>'+stats.missed+'</b><small>Arcade missed items</small></div></div>'+
      '<p class="tiny"><b>Cross-game record:</b> '+stats.combined+' recent tracked answers, '+stats.combinedCorrect+' correct, '+stats.combinedWeak+' currently flagged across integrated game modes. Legacy attempts are preserved in their original saves; cross-game tracking begins with this update.</p>'+ 
-     '<div class="vpq-gamegrid"><button data-vpqSharedLearn="1"><strong>📖 Teach Me / Learn + Apply</strong><small>First understand the physiology, drug targets and clinical consequences.</small></button>'+
-     modes.map(x=>'<button data-vpqSharedGame="'+x[0]+'"><span> '+x[1]+' </span><strong>'+x[2]+'</strong><small>'+x[3]+'</small><em>'+x[4]+'</em></button>').join('')+'</div>'+
+     '<div class="vpq-gamegrid"><button data-vpqsharedlearn="1"><strong>📖 Teach Me / Learn + Apply</strong><small>First understand the physiology, drug targets and clinical consequences.</small></button>'+
+     modes.map(x=>'<button data-vpqsharedgame="'+x[0]+'"><span> '+x[1]+' </span><strong>'+x[2]+'</strong><small>'+x[3]+'</small><em>'+x[4]+'</em></button>').join('')+'</div>'+
      '<p class="tiny">Shared: lecture selection, a central teaching-card library, and a cross-game attempt ledger. Existing mode-specific saves and question banks remain intact; scores are not falsely consolidated. Full question-bank consolidation and cross-game remediation are still future work.</p>');
  }
  function vpqOpenGame(mode){
    const item=modes.find(x=>x[0]===mode);if(!item)return vpqLearningHub();
    shared.setLectures(shared.getLectures());
    const src='pharm-arcade.html?embedded=1#'+encodeURIComponent(mode);
-   showModal('🎮 '+item[2],'<div class="vpq-sharedheader"><b>'+item[1]+' '+item[2]+'</b><span>'+item[4]+'</span></div><p>'+item[3]+'</p><div class="buttonrow"><button data-vpqSharedHub="1">← All Learning Games</button><button data-vpqSharedLearn="1">📖 Teach Me</button></div><div class="vpq-sharedframe"><iframe src="'+src+'" title="Vet Pharm Quest — '+item[2]+'" loading="eager" allow="fullscreen"></iframe></div><p class="tiny">Exam/guide selections follow the shared focus. For specialized games, the playable content depends on the drug or organism bank.</p>');
+   showModal('🎮 '+item[2],'<div class="vpq-sharedheader"><b>'+item[1]+' '+item[2]+'</b><span>'+item[4]+'</span></div><p>'+item[3]+'</p><div class="buttonrow"><button data-vpqsharedhub="1">← All Learning Games</button><button data-vpqsharedlearn="1">📖 Teach Me</button></div><div class="vpq-sharedframe"><iframe src="'+src+'" title="Vet Pharm Quest — '+item[2]+'" loading="eager" allow="fullscreen"></iframe></div><p class="tiny">Exam/guide selections follow the shared focus. For specialized games, the playable content depends on the drug or organism bank.</p>');
  }
  $('modalBody').addEventListener('click',e=>{
    const b=e.target.closest('button');if(!b)return;
-   if(b.dataset.vpqSharedHub!==undefined)return vpqLearningHub();
-   if(b.dataset.vpqSharedGame)return vpqOpenGame(b.dataset.vpqSharedGame);
-   if(b.dataset.vpqSharedLearn!==undefined)return masteryMenu27();
+   if(b.dataset.vpqsharedhub!==undefined)return vpqLearningHub();
+   if(b.dataset.vpqsharedgame)return vpqOpenGame(b.dataset.vpqsharedgame);
+   if(b.dataset.vpqsharedlearn!==undefined)return masteryMenu27();
  });
  $('modalBody').addEventListener('change',e=>{
    const el=e.target;
-   if(el.matches('[data-vpqSharedLecture]')){
-     const chosen=[...$('modalBody').querySelectorAll('[data-vpqSharedLecture]:checked')].map(x=>x.dataset.vpqSharedLecture);
+   if(el.matches('[data-vpqsharedlecture]')){
+     const chosen=[...$('modalBody').querySelectorAll('[data-vpqsharedlecture]:checked')].map(x=>x.dataset.vpqsharedlecture);
      master27.selected=shared.setLectures(chosen);save27();const count=$('vpqGCount');if(count)count.textContent=chosen.length+' selected';
      return;
    }
@@ -1931,31 +1931,31 @@ const vpqGOrigAction=doAction;
 doAction=function(action){if(action==='masteryTracker')return vpqGMastery();return vpqGOrigAction(action)};
 vpqLearningHub=function(){
  const selected=shared.getLectures(),st=vpqHubStats();
- const choices=shared.courses.map(([lec,num,title])=>'<div class="vpqGlecture"><label><input type="checkbox" data-vpqSharedLecture="'+escapeHtml(lec)+'" '+(selected.includes(lec)?'checked':'')+'> <b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(title)+'</small></label><div class="vpqGactions"><button data-vpqGlecture="'+escapeHtml(lec)+'" data-vpqGmode="learn">Learn</button><button data-vpqGlecture="'+escapeHtml(lec)+'" data-vpqGmode="quiz">Test</button></div></div>').join('');
+ const choices=shared.courses.map(([lec,num,title])=>'<div class="vpqGlecture"><label><input type="checkbox" data-vpqsharedlecture="'+escapeHtml(lec)+'" '+(selected.includes(lec)?'checked':'')+'> <b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(title)+'</small></label><div class="vpqGactions"><button data-vpqglecture="'+escapeHtml(lec)+'" data-vpqgmode="learn">Learn</button><button data-vpqglecture="'+escapeHtml(lec)+'" data-vpqgmode="quiz">Test</button></div></div>').join('');
  showModal('📖 Learning Lab · Choose a lecture','<p><b>Choose a lecture and press Learn or Test.</b> These buttons start that lecture immediately. To mix lectures, check more than one box and use the buttons below.</p><div class="infobox"><b>Lecture selection</b> · <span id="vpqGCount">'+selected.length+' selected</span><div class="vpqGlist">'+choices+'</div></div>'+
- '<div class="vpqGroute"><h3>Guided learning</h3><p>Learn the normal physiology, channels/receptors, drug mechanisms, WHY and clinical effects. Then test yourself under Mastery.</p><div class="buttonrow"><button data-vpqGtrain="learn">📖 Teach selected lectures</button><button data-vpqGtrain="mixed">🩺 Learn + Apply</button><button data-vpqGMastery="1">🏆 Open Mastery</button></div></div>'+
- '<h3>Games — each practices a specific skill</h3><div class="vpq-gamegrid">'+modes.map(x=>'<button data-vpqSharedGame="'+x[0]+'"><span>'+x[1]+'</span><strong>'+x[2]+'</strong><small>'+x[3]+'</small><em>'+x[4]+'</em></button>').join('')+'</div>'+
+ '<div class="vpqGroute"><h3>Guided learning</h3><p>Learn the normal physiology, channels/receptors, drug mechanisms, WHY and clinical effects. Then test yourself under Mastery.</p><div class="buttonrow"><button data-vpqgtrain="learn">📖 Teach selected lectures</button><button data-vpqgtrain="mixed">🩺 Learn + Apply</button><button data-vpqgmastery="1">🏆 Open Mastery</button></div></div>'+
+ '<h3>Games — each practices a specific skill</h3><div class="vpq-gamegrid">'+modes.map(x=>'<button data-vpqsharedgame="'+x[0]+'"><span>'+x[1]+'</span><strong>'+x[2]+'</strong><small>'+x[3]+'</small><em>'+x[4]+'</em></button>').join('')+'</div>'+
  '<p class="tiny">'+st.mainSeen+' cards encountered · '+st.mainWeak+' weak teaching concepts · '+st.combined+' tracked attempts. Lecture choice also sets your Pharm Arcade focus; specialty games may support only some lectures.</p><button data-modalaction="editor">✏️ Content Editor</button>');
 };
 function vpqGMastery(){
  const chosen=shared.getLectures(),p=shared.getProgress();
  const rows=shared.courses.filter(x=>chosen.includes(x[0])).map(([lec,number,title])=>{
    const recent=p.recent.filter(x=>x.lecture===lec),right=recent.filter(x=>x.correct).length,flags=Object.values(p.weak).filter(x=>x.lecture===lec).length;
-   return '<div class="vpqGlecture"><span><b>'+escapeHtml(lec)+'</b><small>'+recent.length+' attempts · '+(recent.length?Math.round(100*right/recent.length)+'% correct':'Not yet tested')+' · '+flags+' flagged</small></span><button data-vpqGlecture="'+escapeHtml(lec)+'" data-vpqGmode="quiz">Test</button></div>';
+   return '<div class="vpqGlecture"><span><b>'+escapeHtml(lec)+'</b><small>'+recent.length+' attempts · '+(recent.length?Math.round(100*right/recent.length)+'% correct':'Not yet tested')+' · '+flags+' flagged</small></span><button data-vpqglecture="'+escapeHtml(lec)+'" data-vpqgmode="quiz">Test</button></div>';
  }).join('');
- showModal('🏆 Mastery · Prove what you know','<p><b>Mastery is assessment and remediation.</b> Unlike Learning, it tests answers without hints, identifies weak concepts, and sends you back to review.</p><div class="vpq-sharedstats"><div><b>'+p.attempts+'</b><small>Attempts</small></div><div><b>'+p.correct+'</b><small>Correct</small></div><div><b>'+Object.keys(p.weak).length+'</b><small>Flagged</small></div><div><b>'+chosen.length+'</b><small>Lectures</small></div></div><h3>Selected lecture performance</h3><div class="vpqGlist">'+(rows||'<p>Select lectures in Learning Lab first.</p>')+'</div><div class="buttonrow"><button data-vpqGtrain="quiz">🎓 Exam challenge</button><button data-vpqGtrain="missed">🔁 Weak teaching concepts</button><button data-vpqSharedGame="review">📒 Arcade missed questions</button></div><p class="tiny">New progress tracking does not retroactively include every older session. These metrics reflect practice, not official exam certification.</p><button data-vpqGHub="1">← Learning Lab</button>');
+ showModal('🏆 Mastery · Prove what you know','<p><b>Mastery is assessment and remediation.</b> Unlike Learning, it tests answers without hints, identifies weak concepts, and sends you back to review.</p><div class="vpq-sharedstats"><div><b>'+p.attempts+'</b><small>Attempts</small></div><div><b>'+p.correct+'</b><small>Correct</small></div><div><b>'+Object.keys(p.weak).length+'</b><small>Flagged</small></div><div><b>'+chosen.length+'</b><small>Lectures</small></div></div><h3>Selected lecture performance</h3><div class="vpqGlist">'+(rows||'<p>Select lectures in Learning Lab first.</p>')+'</div><div class="buttonrow"><button data-vpqgtrain="quiz">🎓 Exam challenge</button><button data-vpqgtrain="missed">🔁 Weak teaching concepts</button><button data-vpqsharedgame="review">📒 Arcade missed questions</button></div><p class="tiny">New progress tracking does not retroactively include every older session. These metrics reflect practice, not official exam certification.</p><button data-vpqghub="1">← Learning Lab</button>');
 }
 $('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
- if(b.dataset.vpqGHub!==undefined){vpqLearningHub();return}
- if(b.dataset.vpqGMastery!==undefined){vpqGMastery();return}
- if(b.dataset.vpqGlecture!==undefined){
-   const lec=b.dataset.vpqGlecture;if(!shared.courses.some(x=>x[0]===lec))return;
-   master27.selected=shared.setLectures([lec]);save27();launch27(b.dataset.vpqGmode==='quiz'?'quiz':'learn');return
+ if(b.dataset.vpqghub!==undefined){vpqLearningHub();return}
+ if(b.dataset.vpqgmastery!==undefined){vpqGMastery();return}
+ if(b.dataset.vpqglecture!==undefined){
+   const lec=b.dataset.vpqglecture;if(!shared.courses.some(x=>x[0]===lec))return;
+   master27.selected=shared.setLectures([lec]);save27();launch27(b.dataset.vpqgmode==='quiz'?'quiz':'learn');return
  }
- if(b.dataset.vpqGtrain!==undefined){
+ if(b.dataset.vpqgtrain!==undefined){
    master27.selected=shared.getLectures();
    if(!master27.selected.length){alert('Select at least one lecture first.');return}
-   save27();launch27(b.dataset.vpqGtrain);return
+   save27();launch27(b.dataset.vpqgtrain);return
  }
 });
 const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist{display:grid;gap:8px;margin-top:12px}.vpqGlecture{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #d6cbe8;border-radius:12px;padding:10px}.vpqGlecture label{display:flex;align-items:center;gap:9px;flex:1;cursor:pointer}.vpqGlecture label small,.vpqGlecture span small{display:block;font-size:12px;color:#705f85}.vpqGactions{display:flex;gap:6px}.vpqGlecture button{padding:8px 12px;background:#eee5fb;border:1px solid #ceb9e9;border-radius:10px;font-weight:bold}.vpqGroute{margin:12px 0;padding:12px;background:#f8f3ff;border-radius:13px}@media(max-width:560px){.vpqGlecture{flex-wrap:wrap}.vpqGactions{margin-left:auto}}';document.head.appendChild(vpqGstyle);
@@ -1974,14 +1974,14 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function sourceHTML(p){return (p.refs||[]).map(id=>reg.refs[id]).filter(Boolean).map(v=>'<a target="_blank" rel="noopener noreferrer" href="'+escapeHtml(v.url)+'">'+escapeHtml(v.name)+'</a>').join(' · ')}
  function details(d,compact=false){
   const p=reg.lookup(d);
-  if(!p)return '<div class="vpqStatusPanel"><b>🧭 Clinical-use & human/vet audit: pending</b><p>This drug has not yet had an individual stewardship and regulation review. This does not imply first-line, legal for every species, or unrestricted use.</p><button data-vpqStatusList="1">Browse clinical-use glossary</button></div>';
+  if(!p)return '<div class="vpqStatusPanel"><b>🧭 Clinical-use & human/vet audit: pending</b><p>This drug has not yet had an individual stewardship and regulation review. This does not imply first-line, legal for every species, or unrestricted use.</p><button data-vpqstatuslist="1">Browse clinical-use glossary</button></div>';
   const sections=[['🐾 Veterinary uses',p.vet],['🧑‍⚕️ Human-medicine role',p.human],['Why it is used, reserved, or avoided',p.why],['U.S. regulatory distinctions',p.regulatory],['Professor notes versus current guidance',p.lectureNote],['Exam differentiation',p.exam],['Test yourself',p.question]];
-  return '<div class="vpqStatusPanel"><div class="vpqStatusTitle"><b>🧭 Clinical Use & Stewardship</b><span>'+escapeHtml(p.status)+'</span></div><p><b>'+escapeHtml(p.category)+'</b> · verified source check '+escapeHtml(reg.reviewedAt)+'</p>'+sections.map(x=>'<div class="vpqStatusSection"><b>'+x[0]+'</b><p>'+escapeHtml(x[1])+'</p></div>').join('')+'<div class="vpqStatusSources"><b>References: </b>'+sourceHTML(p)+'</div><p class="tiny">U.S.-focused educational summary; product, patient, date and jurisdiction must be checked for real-world clinical decisions.</p>'+(compact?'<button data-vpqStatusList="1">← Glossary</button><button data-vpqStatusOpen="'+escapeHtml(d.id)+'">Open medication entry</button>':'<button data-vpqStatusList="1">Browse clinical-use glossary</button>')+'</div>';
+  return '<div class="vpqStatusPanel"><div class="vpqStatusTitle"><b>🧭 Clinical Use & Stewardship</b><span>'+escapeHtml(p.status)+'</span></div><p><b>'+escapeHtml(p.category)+'</b> · verified source check '+escapeHtml(reg.reviewedAt)+'</p>'+sections.map(x=>'<div class="vpqStatusSection"><b>'+x[0]+'</b><p>'+escapeHtml(x[1])+'</p></div>').join('')+'<div class="vpqStatusSources"><b>References: </b>'+sourceHTML(p)+'</div><p class="tiny">U.S.-focused educational summary; product, patient, date and jurisdiction must be checked for real-world clinical decisions.</p>'+(compact?'<button data-vpqstatuslist="1">← Glossary</button><button data-vpqstatusopen="'+escapeHtml(d.id)+'">Open medication entry</button>':'<button data-vpqstatuslist="1">Browse clinical-use glossary</button>')+'</div>';
  }
  const prior=drugCardHTML;
  drugCardHTML=function(d){return prior(d)+details(d)};
  const originalPharmacy=openPharmacy;
- openPharmacy=function(...args){originalPharmacy(...args);const body=$('modalBody');if(body&&!body.querySelector('.vpqStatusBar'))body.insertAdjacentHTML('afterbegin','<div class="vpqStatusBar"><button data-vpqStatusList="1">🧭 Human vs Vet Use & Stewardship</button><small>Reserve drugs · VFD · legal restrictions · resistance · species safety</small></div>')};
+ openPharmacy=function(...args){originalPharmacy(...args);const body=$('modalBody');if(body&&!body.querySelector('.vpqStatusBar'))body.insertAdjacentHTML('afterbegin','<div class="vpqStatusBar"><button data-vpqstatuslist="1">🧭 Human vs Vet Use & Stewardship</button><small>Reserve drugs · VFD · legal restrictions · resistance · species safety</small></div>')};
  function listView(category='all',term=''){
   const db=dataDrugs();
   const cats=[['all','All drugs'],['audited','Audited'],['pending','Needs audit'],['reserve','Human priority / selective use'],['restricted','Legal restrictions'],['rule','VFD/feed'],['outofavor','Resistance / less preferred'],['hazard','Safety/route issues']];
@@ -1990,18 +1990,18 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   showModal('🧭 Drug Clinical-Use Glossary','<p>Understand <b>the reason</b> a drug is chosen or avoided: clinical status is not a simple “approved/banned” switch. Read veterinary use, human medicine, label restrictions, resistance and lecturer emphasis side by side.</p>'+
    '<div class="infobox"><b>'+db.length+' pharmacy entries</b> · '+db.filter(x=>reg.lookup(x)).length+' individual status reviews · '+db.filter(x=>!reg.lookup(x)).length+' awaiting review</div>'+
    '<div class="vpqStatusFilters"><label>Status <select id="vpqStatusFilter">'+cats.map(([v,t])=>'<option '+(v===category?'selected':'')+' value="'+v+'">'+t+'</option>').join('')+'</select></label><label>Search <input id="vpqStatusSearch" value="'+escapeHtml(term)+'" placeholder="e.g., chlortetracycline, human, restricted"></label></div>'+
-   '<div class="vpqStatusList">'+matching.map(d=>'<button data-vpqStatusDrug="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(reg.lookup(d)?.status||'Individual audit pending')+'</small></button>').join('')+'</div>'+
-   '<div class="buttonrow"><button data-modalaction="pharmacy">← Pharmacy</button><button data-vpqStatusCompare="1">Compare chlortetracycline / tigecycline</button></div>');
+   '<div class="vpqStatusList">'+matching.map(d=>'<button data-vpqstatusdrug="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(reg.lookup(d)?.status||'Individual audit pending')+'</small></button>').join('')+'</div>'+
+   '<div class="buttonrow"><button data-modalaction="pharmacy">← Pharmacy</button><button data-vpqstatuscompare="1">Compare chlortetracycline / tigecycline</button></div>');
  }
  function profile(id){const d=dataDrugs().find(x=>x.id===id);if(!d)return listView();showModal('🧭 '+escapeHtml(d.name)+' · Clinical-use notes',details(d,true))}
  $('modalBody').addEventListener('click',e=>{const el=e.target.closest('button');if(!el)return;
-  if(el.dataset.vpqStatusList!==undefined){listView();return}
-  if(el.dataset.vpqStatusDrug!==undefined){profile(el.dataset.vpqStatusDrug);return}
-  if(el.dataset.vpqStatusOpen!==undefined){openPharmacy(el.dataset.vpqStatusOpen);return}
-  if(el.dataset.vpqStatusCompare!==undefined){const c=dataDrugs().find(x=>x.id==='chlortetracycline'),t=dataDrugs().find(x=>x.id==='tigecycline');showModal('⚖️ Chlortetracycline vs tigecycline',details(c)+details(t));return}
+  if(el.dataset.vpqstatuslist!==undefined){listView();return}
+  if(el.dataset.vpqstatusdrug!==undefined){profile(el.dataset.vpqstatusdrug);return}
+  if(el.dataset.vpqstatusopen!==undefined){openPharmacy(el.dataset.vpqstatusopen);return}
+  if(el.dataset.vpqstatuscompare!==undefined){const c=dataDrugs().find(x=>x.id==='chlortetracycline'),t=dataDrugs().find(x=>x.id==='tigecycline');showModal('⚖️ Chlortetracycline vs tigecycline',details(c)+details(t));return}
  });
  $('modalBody').addEventListener('change',e=>{if(e.target.id==='vpqStatusFilter')listView(e.target.value,$('vpqStatusSearch')?.value||'')});
- $('modalBody').addEventListener('input',e=>{if(e.target.id!=='vpqStatusSearch')return;const category=$('vpqStatusFilter')?.value||'all',term=e.target.value,filtered=dataDrugs().filter(d=>(category==='all'||(category==='audited'?!!reg.lookup(d):category==='pending'?!reg.lookup(d):reg.lookup(d)?.theme===category))&&[d.name,d.class,d.lecture,reg.lookup(d)?.status,reg.lookup(d)?.vet,reg.lookup(d)?.human].join(' ').toLowerCase().includes(term.toLowerCase()));const area=$('modalBody').querySelector('.vpqStatusList');if(area)area.innerHTML=filtered.map(d=>'<button data-vpqStatusDrug="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(reg.lookup(d)?.status||'Audit pending')+'</small></button>').join('')});
+ $('modalBody').addEventListener('input',e=>{if(e.target.id!=='vpqStatusSearch')return;const category=$('vpqStatusFilter')?.value||'all',term=e.target.value,filtered=dataDrugs().filter(d=>(category==='all'||(category==='audited'?!!reg.lookup(d):category==='pending'?!reg.lookup(d):reg.lookup(d)?.theme===category))&&[d.name,d.class,d.lecture,reg.lookup(d)?.status,reg.lookup(d)?.vet,reg.lookup(d)?.human].join(' ').toLowerCase().includes(term.toLowerCase()));const area=$('modalBody').querySelector('.vpqStatusList');if(area)area.innerHTML=filtered.map(d=>'<button data-vpqstatusdrug="'+escapeHtml(d.id)+'"><b>'+escapeHtml(d.name)+'</b><small>'+escapeHtml(reg.lookup(d)?.status||'Audit pending')+'</small></button>').join('')});
  const styleNode=document.createElement('style');
  styleNode.textContent='.vpqStatusBar{padding:11px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#f0faf7;border:1px solid #b4d5c8;border-radius:12px;margin-bottom:14px}.vpqStatusBar small{color:#426b66}.vpqStatusPanel{border:2px solid #b3d7cd;background:#f8fffd;border-radius:15px;padding:13px;margin:15px 0}.vpqStatusTitle{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:16px}.vpqStatusTitle span{font-size:11px;padding:4px 7px;background:#e4f4ed;border-radius:9px}.vpqStatusSection{padding:9px 0;border-top:1px solid #cee5dd}.vpqStatusSection p{margin:5px 0;font-size:13px;line-height:1.6}.vpqStatusSources{line-height:1.8;font-size:12px}.vpqStatusSources a{color:#176e65;text-decoration:underline}.vpqStatusFilters{display:flex;gap:12px;flex-wrap:wrap}.vpqStatusFilters label{min-width:190px;flex:1}.vpqStatusFilters select,.vpqStatusFilters input{display:block;padding:9px;width:100%;border:1px solid #b4d1c6;border-radius:8px}.vpqStatusList{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;max-height:50vh;overflow:auto;padding:10px 0}.vpqStatusList button{text-align:left;background:#fff;border:1px solid #bed6ca;border-radius:12px;padding:11px}.vpqStatusList button b,.vpqStatusList button small{display:block}.vpqStatusList button small{font-size:11px;color:#50716e;margin-top:4px}';
  document.head.appendChild(styleNode);
@@ -2032,18 +2032,18 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   const cur=pending(),list=curriculum.courses.map(([lec,code,desc])=>{
     const q=dataStudy().filter(x=>x.lecture===lec).length;
     const cards=window.VPQCurriculum.concepts.filter(x=>x[0]===lec).length+dataDrugs().filter(x=>x.lecture===lec).length;
-    return '<div class="vpqLFrow"><label><input type="checkbox" data-vpqLFCheck="'+escapeHtml(lec)+'" '+(cur.includes(lec)?'checked':'')+'><span><b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(desc)+' · '+cards+' cards · '+q+' questions</small></span></label><button data-vpqLFSingle="'+escapeHtml(lec)+'" data-vpqLFSingleMode="learn">Learn</button><button data-vpqLFSingle="'+escapeHtml(lec)+'" data-vpqLFSingleMode="quiz">Test</button></div>';
+    return '<div class="vpqLFrow"><label><input type="checkbox" data-vpqlfcheck="'+escapeHtml(lec)+'" '+(cur.includes(lec)?'checked':'')+'><span><b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(desc)+' · '+cards+' cards · '+q+' questions</small></span></label><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="learn">Learn</button><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="quiz">Test</button></div>';
   }).join('');
   showModal('📖 Learning Lab · Select → Save → Start',
    '<p>Choose your lectures, <b>Save Selection</b>, then start. <b>Learn</b> and <b>Test</b> alongside each lecture also start that specific lecture immediately.</p>'+
-   '<div class="infobox"><div class="vpqLFhead"><b>Choose Pharmacology lectures</b><span id="vpqLFCount"></span></div><div class="vpqLFlist">'+list+'</div><p id="vpqLFStatus" role="status" aria-live="polite"></p><div class="buttonrow"><button id="vpqLFSave" data-vpqLFSave="1">💾 Save Selection</button><button data-vpqLFAll="1">Select all</button><button data-vpqLFClear="1">Clear selections</button></div></div>'+
-   '<div class="vpqLFsteps"><h3>Start studying</h3><p><b>Guided Learning</b> teaches the physiological mechanisms and clinical WHY; <b>Learn + Apply</b> mixes cards with exam questions.</p><div class="buttonrow"><button data-vpqLFLaunch="learn">📖 Start Learning</button><button data-vpqLFLaunch="mixed">🩺 Start Learn + Apply</button><button data-vpqLFMastery="1">🏆 Mastery / Exam Testing</button></div></div>'+
+   '<div class="infobox"><div class="vpqLFhead"><b>Choose Pharmacology lectures</b><span id="vpqLFCount"></span></div><div class="vpqLFlist">'+list+'</div><p id="vpqLFStatus" role="status" aria-live="polite"></p><div class="buttonrow"><button id="vpqLFSave" data-vpqlfsave="1">💾 Save Selection</button><button data-vpqlfall="1">Select all</button><button data-vpqlfclear="1">Clear selections</button></div></div>'+
+   '<div class="vpqLFsteps"><h3>Start studying</h3><p><b>Guided Learning</b> teaches the physiological mechanisms and clinical WHY; <b>Learn + Apply</b> mixes cards with exam questions.</p><div class="buttonrow"><button data-vpqlflaunch="learn">📖 Start Learning</button><button data-vpqlflaunch="mixed">🩺 Start Learn + Apply</button><button data-vpqlfmastery="1">🏆 Mastery / Exam Testing</button></div></div>'+
    '<h3>Targeted games</h3><div class="vpq-gamegrid">'+[
      ['match','🧩 Drug Match','Learn class, name and target'],
      ['battle','🦠 Bug Battles','Reinforce antibiotic resistance and coverage'],
      ['cases','🩺 Patient Rounds','Apply mechanisms in a patient'],
      ['guide','📚 Professor Guide','Course-style recall questions']
-   ].map(([id,name,desc])=>'<button data-vpqLFGame="'+id+'"><b>'+name+'</b><small>'+desc+'</small></button>').join('')+'</div>'+
+   ].map(([id,name,desc])=>'<button data-vpqlfgame="'+id+'"><b>'+name+'</b><small>'+desc+'</small></button>').join('')+'</div>'+
    '<p class="tiny">Questions are finite and course alignment is still under audit. A saved lecture focus is shared with the Arcade. Some specialized games have narrower banks.</p>');
   renderCount();
  }
@@ -2051,29 +2051,29 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   const p=curriculum.getProgress(),chosen=selected();
   const rows=curriculum.courses.filter(x=>chosen.includes(x[0])).map(([lec,code,name])=>{
     const recent=p.recent.filter(x=>x.lecture===lec),correct=recent.filter(x=>x.correct).length;
-    return '<div class="vpqLFrow"><span><b>'+escapeHtml(lec)+'</b><small>'+recent.length+' recent attempts · '+(recent.length?Math.round(100*correct/recent.length)+'% correct':'Not assessed')+'</small></span><button data-vpqLFSingle="'+escapeHtml(lec)+'" data-vpqLFSingleMode="quiz">Test</button></div>';
+    return '<div class="vpqLFrow"><span><b>'+escapeHtml(lec)+'</b><small>'+recent.length+' recent attempts · '+(recent.length?Math.round(100*correct/recent.length)+'% correct':'Not assessed')+'</small></span><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="quiz">Test</button></div>';
   }).join('');
   showModal('🏆 Mastery · Independent Testing',
    '<p>Learning teaches you. Mastery tests you <b>without hints</b>, tracks missed concepts, and provides focused review. These are different stages of the same lecture curriculum.</p>'+
    '<div class="vpq-sharedstats"><div><b>'+p.attempts+'</b><small>Recorded attempts</small></div><div><b>'+p.correct+'</b><small>Correct</small></div><div><b>'+Object.keys(p.weak).length+'</b><small>Flagged for review</small></div><div><b>'+chosen.length+'</b><small>Active lectures</small></div></div>'+
    '<div class="vpqLFlist">'+(rows||'<p>Choose lectures in Learning Lab first.</p>')+'</div>'+
-   '<div class="buttonrow"><button data-vpqLFLaunch="quiz">🧠 Test selected lectures</button><button data-vpqLFLaunch="missed">🔁 Review flagged teaching cards</button><button data-vpqLFGame="review">📒 Arcade missed questions</button><button data-vpqLFHome="1">← Learning Lab</button></div>');
+   '<div class="buttonrow"><button data-vpqlflaunch="quiz">🧠 Test selected lectures</button><button data-vpqlflaunch="missed">🔁 Review flagged teaching cards</button><button data-vpqlfgame="review">📒 Arcade missed questions</button><button data-vpqlfhome="1">← Learning Lab</button></div>');
  }
  function launch(mode,one){
   let chosen=one?[one]:pending();
-  if(!chosen.length){showModal('Select a lecture','<p>Choose at least one lecture before studying.</p><button data-vpqLFHome="1">← Select lectures</button>');return}
+  if(!chosen.length){showModal('Select a lecture','<p>Choose at least one lecture before studying.</p><button data-vpqlfhome="1">← Select lectures</button>');return}
   setPending(chosen);saveSelection();
   master27.selected=selected();
-  try{launch27(mode)}catch(e){showModal('Learning activity could not open','<p>'+escapeHtml(e.message||String(e))+'</p><p>Selection is saved; this error is visible so the activity can be corrected.</p><button data-vpqLFHome="1">Back to lectures</button>')}
+  try{launch27(mode)}catch(e){showModal('Learning activity could not open','<p>'+escapeHtml(e.message||String(e))+'</p><p>Selection is saved; this error is visible so the activity can be corrected.</p><button data-vpqlfhome="1">Back to lectures</button>')}
  }
  function launchGame(mode){
   if(!selected().length){showLearning();return}
-  try{vpqOpenGame(mode)}catch(e){showModal('Could not open the game','<p>'+escapeHtml(e.message||String(e))+'</p><button data-vpqLFHome="1">Back to Learning Lab</button>')}
+  try{vpqOpenGame(mode)}catch(e){showModal('Could not open the game','<p>'+escapeHtml(e.message||String(e))+'</p><button data-vpqlfhome="1">Back to Learning Lab</button>')}
  }
  // Capture phase prevents existing overlapping menu callbacks from intercepting these controls.
  $('modalBody').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqLF'));
+  const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqlf'));
   if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
   try{
    if(d.vpqLFHome!==undefined){menuState.pending=null;showLearning();return}
@@ -2084,12 +2084,12 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    if(d.vpqLFLaunch!==undefined){launch(d.vpqLFLaunch);return}
    if(d.vpqLFMastery!==undefined){if(pending().length)saveSelection();masteryScreen();return}
    if(d.vpqLFGame!==undefined){if(pending().length)saveSelection();launchGame(d.vpqLFGame);return}
-  }catch(error){showModal('Learning Lab error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqLFHome="1">Back to Learning Lab</button>')}
+  }catch(error){showModal('Learning Lab error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqlfhome="1">Back to Learning Lab</button>')}
  },true);
  $('modalBody').addEventListener('change',e=>{
-  const element=e.target;if(!element.matches('[data-vpqLFCheck]'))return;
+  const element=e.target;if(!element.matches('[data-vpqlfcheck]'))return;
   e.stopImmediatePropagation();
-  const picked=[...$('modalBody').querySelectorAll('[data-vpqLFCheck]:checked')].map(x=>x.dataset.vpqLFCheck);
+  const picked=[...$('modalBody').querySelectorAll('[data-vpqlfcheck]:checked')].map(x=>x.dataset.vpqlfcheck);
   setPending(picked);
  },true);
  // Replace route functions rather than layering another menu inside the prior menu.
@@ -2139,43 +2139,43 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function intro(stage){
   const p=patient();
   return '<div class="vpqWardHead"><b>'+escapeHtml(p.name)+'</b><p>'+escapeHtml(p.desc)+'</p><p class="tiny"><b>Admission:</b> '+escapeHtml(p.baseline)+'</p></div>'+
-   '<div class="buttonrow"><button data-vpqWardHome="1">Patient chart</button><button data-vpqWardFollow="1">🔎 Follow Up</button><button data-vpqWardAdjust="1">💉 Adjust Care</button><button data-vpqWardMonitor="1">📈 Monitoring</button></div>';
+   '<div class="buttonrow"><button data-vpqwardhome="1">Patient chart</button><button data-vpqwardfollow="1">🔎 Follow Up</button><button data-vpqwardadjust="1">💉 Adjust Care</button><button data-vpqwardmonitor="1">📈 Monitoring</button></div>';
  }
  function caseMenu(){
   showModal('🏥 Inpatient Care · Patient chart',
    '<p>Three stations now have different jobs: <b>Follow Up</b> gathers new findings, <b>Adjust Care</b> changes the plan in response, and <b>Monitoring</b> evaluates the patient afterward.</p>'+
-   '<h3>Select a hospitalized patient</h3>'+hospitalData.map(p=>'<button class="full" data-vpqWardPick="'+p.id+'">'+escapeHtml(p.name)+'</button>').join('')+
+   '<h3>Select a hospitalized patient</h3>'+hospitalData.map(p=>'<button class="full" data-vpqwardpick="'+p.id+'">'+escapeHtml(p.name)+'</button>').join('')+
    intro('chart')+'<p class="tiny">This teaching simulation models decisions, not actual prescriptions or drug doses.</p>');
  }
  function followup(){
   const p=patient();showModal('🔎 Follow Up · Reassess the patient',intro()+
     '<p><b>Purpose:</b> Compare the patient now with admission. A new examination, observation or lab trend may change the differential diagnosis.</p>'+
     '<div class="infobox"><b>Admission baseline</b><p>'+escapeHtml(p.baseline)+'</p></div>'+
-    (record.observed?'<div class="infobox"><b>New findings</b><p>'+escapeHtml(p.follow)+'</p><b>Interpretation</b><p>'+escapeHtml(p.reassess)+'</p></div><button data-vpqWardAdjust="1">Continue to Adjust Care →</button>':
-    '<button data-vpqWardObserve="1">🔍 Perform follow-up examination & review trend</button>'));
+    (record.observed?'<div class="infobox"><b>New findings</b><p>'+escapeHtml(p.follow)+'</p><b>Interpretation</b><p>'+escapeHtml(p.reassess)+'</p></div><button data-vpqwardadjust="1">Continue to Adjust Care →</button>':
+    '<button data-vpqwardobserve="1">🔍 Perform follow-up examination & review trend</button>'));
  }
  function adjust(){
   const p=patient();
-  if(!record.observed){showModal('💉 Adjust Care · Assessment required',intro()+'<p>You cannot safely adjust an inpatient plan without reviewing the new patient findings. <b>Follow Up</b> first.</p><button data-vpqWardFollow="1">Go to Follow Up →</button>');return}
+  if(!record.observed){showModal('💉 Adjust Care · Assessment required',intro()+'<p>You cannot safely adjust an inpatient plan without reviewing the new patient findings. <b>Follow Up</b> first.</p><button data-vpqwardfollow="1">Go to Follow Up →</button>');return}
   const answered=record.answer!==null;
   showModal('💉 Adjust Care · Change the plan',intro()+
    '<div class="infobox"><b>New findings to act on</b><p>'+escapeHtml(p.follow)+'</p></div><h3>What is the safest next clinical decision?</h3>'+
-   p.choices.map((choice,i)=>'<button class="choice '+(answered?(i===p.answer?'right':i===record.answer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqWardChoice="'+i+'">'+escapeHtml(choice)+'</button>').join('')+
+   p.choices.map((choice,i)=>'<button class="choice '+(answered?(i===p.answer?'right':i===record.answer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardchoice="'+i+'">'+escapeHtml(choice)+'</button>').join('')+
    (answered?'<div class="response '+(record.answer===p.answer?'':'bad')+'"><b>'+(record.answer===p.answer?'Appropriate decision':'Reconsider the decision')+'</b><p>'+escapeHtml(p.why)+'</p></div>'+
-   (record.adjusted?'<button data-vpqWardMonitor="1">📈 Review response in Monitoring →</button>':'<button data-vpqWardRetry="1">Try care decision again</button>'):''));
+   (record.adjusted?'<button data-vpqwardmonitor="1">📈 Review response in Monitoring →</button>':'<button data-vpqwardretry="1">Try care decision again</button>'):''));
  }
  function monitor(){
   const p=patient();
-  if(!record.observed)return showModal('📈 Monitoring · Need a baseline reassessment',intro()+'<p>First review the new patient status in Follow Up.</p><button data-vpqWardFollow="1">Follow Up →</button>');
-  if(!record.adjusted)return showModal('📈 Monitoring · Treatment not adjusted yet',intro()+'<p>You have identified changes but not yet made an appropriate treatment decision.</p><button data-vpqWardAdjust="1">Adjust Care →</button>');
+  if(!record.observed)return showModal('📈 Monitoring · Need a baseline reassessment',intro()+'<p>First review the new patient status in Follow Up.</p><button data-vpqwardfollow="1">Follow Up →</button>');
+  if(!record.adjusted)return showModal('📈 Monitoring · Treatment not adjusted yet',intro()+'<p>You have identified changes but not yet made an appropriate treatment decision.</p><button data-vpqwardadjust="1">Adjust Care →</button>');
   showModal('📈 Monitoring · Response after intervention',intro()+
    '<div class="infobox"><b>Post-intervention observation</b><p>'+escapeHtml(p.response)+'</p><b>Follow-up measurements</b><p>'+escapeHtml(p.monitor)+'</p></div>'+
    '<p><b>Clinical reasoning:</b> Document whether the trend truly supports improvement, deterioration, or an uncertain response. Recheck the diagnosis and treatment if the patient changes again.</p>'+
-   '<div class="buttonrow"><button data-vpqWardReset="1">↻ New follow-up shift</button><button data-vpqWardHome="1">Choose another patient</button></div>');
+   '<div class="buttonrow"><button data-vpqwardreset="1">↻ New follow-up shift</button><button data-vpqwardhome="1">Choose another patient</button></div>');
  }
  $('modalBody').addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
-  const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqWard'));
+  const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqward'));
   if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
   try{
    if(d.vpqWardHome!==undefined)return caseMenu();
@@ -2187,7 +2187,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    if(d.vpqWardChoice!==undefined){record.answer=Number(d.vpqWardChoice);record.adjusted=record.answer===patient().answer;saveRecord();return adjust()}
    if(d.vpqWardRetry!==undefined){record.answer=null;saveRecord();return adjust()}
    if(d.vpqWardReset!==undefined){record.observed=false;record.adjusted=false;record.answer=null;saveRecord();return followup()}
-  }catch(error){showModal('Treatment Ward error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqWardHome="1">Back to patients</button>')}
+  }catch(error){showModal('Treatment Ward error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqwardhome="1">Back to patients</button>')}
  },true);
  const css=document.createElement('style');css.textContent='.vpqLFhead{display:flex;align-items:center;justify-content:space-between;gap:9px}.vpqLFlist{display:grid;gap:8px;margin:12px 0}.vpqLFrow{background:white;border:1px solid #d6c9e6;border-radius:12px;padding:9px;display:flex;gap:9px;align-items:center}.vpqLFrow label{display:flex;align-items:center;flex:1;gap:10px}.vpqLFrow label span b,.vpqLFrow label span small{display:block}.vpqLFrow small{font-size:11px;color:#73648d}.vpqLFrow button{border:1px solid #c6b4df;background:#f1e9ff;border-radius:9px;padding:8px 12px;font-weight:700}.vpqLFsteps{padding:13px;background:#f9f6ff;border:1px solid #d7c8e7;border-radius:13px;margin:14px 0}.vpqLFsteps h3{margin:0}.vpqWardHead{border:1px solid #c5dbe3;background:#f3faff;padding:12px;border-radius:12px;margin:10px 0}@media(max-width:550px){.vpqLFrow{flex-wrap:wrap}.vpqLFrow label{min-width:100%}}';document.head.appendChild(css);
 })();
