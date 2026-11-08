@@ -392,7 +392,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="mechanism-lab-phase-a4.js?v=20261108-A4c"></script>
 <script src="exam-room-traditional.js?v=20261108-examA2"></script>
 <script src="pharmacy-nutrition-room.js?v=20261108-pharm-nutrition1"></script>
-<script src="avatar-standing-companions.js?v=20261108-standing1"></script>
+<script src="avatar-standing-companions.js?v=20261108-standing2"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-tox-clues"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
@@ -1570,7 +1570,7 @@ openAvatar=function(){
  const pick=f.querySelector('[data-vpqportrait="roster-28"] .vpq-roster-art');
  if(pick)pick.outerHTML='<img class="vpq-standing-alex" src="assets/alexandria-standing-v3.webp" alt="Alexandria avatar">';
  const gallery=f.querySelector('.vpq-roster-grid');
- if(gallery){const note=document.createElement('p');note.className='vpq-roster-note';note.textContent='Gallery portraits come from two concept sheets. The standalone Alexandria avatar is full-length and sharper; the remaining portraits are previews until individual standing artwork is prepared.';gallery.after(note)}
+ if(gallery){const note=document.createElement('p');note.className='vpq-roster-note';note.textContent='Gallery portraits remain your framed profile art. Every selection now has a separate full-body illustrated clinic avatar. These first standing companions are stylized versions and can be refined to resemble the portraits more closely.';gallery.after(note)}
 };
 
 
@@ -2756,7 +2756,7 @@ $('modalBody').addEventListener('click',e=>{
  vpqRenderStoryPreview();
 });
 const vpqStandingStyle=document.createElement('style');
-vpqStandingStyle.textContent='.vpqStandingPresets{padding:8px 10px;background:#f8f1ff;border-radius:13px;margin:9px 0 13px}.vpqStandingPresets button{margin:3px 4px 3px 0;font-size:12px;padding:7px 9px}.vpq-story-stage:has(.vpq-matched-creator){display:flex;align-items:center;justify-content:center;flex-direction:column;min-height:300px;height:auto;overflow:visible}.vpq-story-stage .vpq-matched-creator{width:100%}.vpq-story-stage .vpq-matched-pet .vpq-preview-pet{height:65px;width:80px;position:relative;bottom:auto;right:auto}.avatarSprite.vpq-portrait-walk{border:0!important;background:transparent!important;box-shadow:none!important}.vpq-game-avatar:has(.vpq-standing-art){overflow:visible}.vpq-roster-option .vpq-roster-art{border:3px solid #e0c6b8;border-radius:10px}';
+vpqStandingStyle.textContent='.vpqStandingPresets{padding:8px 10px;background:#f8f1ff;border-radius:13px;margin:9px 0 13px}.vpqStandingPresets button{margin:3px 4px 3px 0;font-size:12px;padding:7px 9px}.vpq-story-stage:has(.vpq-matched-creator){display:flex;align-items:center;justify-content:center;flex-direction:column;min-height:300px;height:auto;overflow:visible}.vpq-story-stage .vpq-matched-creator{width:100%}.vpq-story-stage .vpq-matched-pet .vpq-preview-pet{height:65px;width:80px;position:relative;bottom:auto;right:auto}.avatarSprite.vpq-portrait-walk{border:0!important;background:transparent!important;box-shadow:none!important}.vpq-game-avatar:has(.vpq-standing-art){overflow:visible}.vpq-roster-option .vpq-roster-art{border:3px solid #e0c6b8;border-radius:10px}.avatarSprite.walking .vpq-standing-art{animation:vpqClinicWalkBob .25s ease-in-out infinite alternate;transform-origin:center bottom}@keyframes vpqClinicWalkBob{from{transform:translateY(0) rotate(-1deg)}to{transform:translateY(-3px) rotate(1deg)}}';
 document.head.appendChild(vpqStandingStyle);
 
 updateAvatar();updateHUD();renderRoom();loop();
