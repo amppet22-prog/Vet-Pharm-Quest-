@@ -386,6 +386,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="drug-clinical-reference.js?v=20261108-piprant2"></script>
 <script src="reception-customization.js?v=20261108-2"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
+<script src="reception-shadowbox-phase-a.js?v=20261108-phaseA1"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-tox-clues"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
@@ -2476,6 +2477,17 @@ const vpqReceptionV1=window.VPQReceptionCreate({
 });
 // Reception-only perspective scene. Old 2D rendering and station interaction remain available.
 const vpqReceptionHallV1=window.VPQReceptionHall25D({state,persist,renderRoom});
+// Phase A: environmental doors keep the original room system and controls.
+const vpqPhaseAAction=doAction;
+doAction=function(a){
+ if(a==='vpqGoExam')return changeRoom('exam');
+ if(a==='vpqGoPharmacy')return changeRoom('pharmacy');
+ if(a==='vpqGoStudy')return changeRoom('study');
+ return vpqPhaseAAction(a);
+};
+const vpqPhaseAShadowbox=window.VPQ_SHADOWBOX_RECEPTION({
+ state,rooms:ROOMS,changeRoom,doAction:a=>doAction(a),persist,renderRoom
+});
 // Keep the features visible without requiring the player to find a walkable station.
 $('vpqReceptionQuickBtn').addEventListener('click',()=>doAction('receptionStudio'));
 $('vpqStudioDashboardBtn').addEventListener('click',()=>doAction('receptionStudio'));
