@@ -119,6 +119,7 @@ const mechanismMatches=[
 let toxMatchRound=null;
 function toxShuffle(xs){return xs.slice().sort(()=>Math.random()-.5)}
 function toxMatchStart(){
+ if(window.VPQ_TOX_STUDY_GAME_INSTANCE)return window.VPQ_TOX_STUDY_GAME_INSTANCE.open();
  const items=toxShuffle(mechanismMatches).slice(0,10);
  toxMatchRound={items,idx:0,correct:0,answered:false};
  toxMatchShow();
@@ -182,5 +183,6 @@ modalBody.addEventListener('input',ev=>{
 });
 modalBody.addEventListener('change',ev=>{if(ev.target.id==='vpqToxCategory')return toxIndex(modalBody.querySelector('#vpqToxSearch')?.value||'',ev.target.value)});
 const style=document.createElement('style');style.textContent='.vpqToxMatchAnswers{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin:14px 0}.vpqToxMatchAnswers button{text-align:left;line-height:1.5;background:#f6fbff;border:2px solid #b9d4e1;border-radius:10px;padding:14px}.vpqToxIntro{background:#fdf2ea;border:1px solid #ecc7b3;border-radius:12px;padding:12px}.vpqToxIntro p{font-size:12px;margin:5px 0}.vpqToxControls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin:12px 0}.vpqToxControls label{font-size:12px;font-weight:800}.vpqToxDetailHeading{padding:9px;background:#fff4e8;border-radius:9px}.vpqPharmCrosslinks{background:#f0f8ff;border:1px solid #adcce7;border-radius:12px;padding:12px;margin-bottom:12px}.vpqPharmCrosslinks p{font-size:12px;margin:4px}.vpqNGFClinical{margin:14px 0;padding:15px;background:#f7f1ff;border:2px solid #d5bfea;border-radius:14px;font-size:13px;line-height:1.6}.vpqNGFClinical h3{margin:0 0 8px}.vpqToxReferenceGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px;margin:12px 0}.vpqToxReferenceGrid button,.vpqToxReferenceGrid section{padding:12px;border:1px solid #c6d6e8;border-radius:10px;background:#fff;text-align:left}.vpqToxReferenceGrid b,.vpqToxReferenceGrid small{display:block}.vpqToxReferenceGrid small{font-size:12px;margin-top:5px}.vpqToxReferenceGrid h3{margin:0 0 6px;font-size:14px}.vpqToxReferenceGrid p{font-size:13px;margin:0}';document.head.appendChild(style);
+window.VPQ_TOX_STUDY_GAME_INSTANCE=window.VPQ_TOX_STUDY_GAME?.init({showModal,modalBody,openLecture:api.toxCourse,openCatalog:toxIndex})||null;
 return {cards,questions,toxCards,ngfGuide,toxIndex,toxDetail,toxMatchStart};
 };
