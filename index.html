@@ -1420,23 +1420,26 @@ let vpqBranch36='All',vpqFamily36='All',vpqLecture36='All lectures',vpqDrugSearc
 function vpqPharmRender36(){
  const holder=$('vpqPharmLayout36');if(!holder)return;
  const all=dataDrugs(),cats=all.map(d=>({...d,...vpqDrugCategory36(d)}));
+ // Derive lecture choices from the actual editable shelf records, including imported courses.
+ const lectureLabels=[...new Set(all.flatMap(d=>String(d.lecture||'').split(/\s*[;,]\s*/).map(x=>x.trim()).filter(x=>/^Lecture(?:s)?\s+\d/.test(x))))].sort((a,b)=>{const na=Number((a.match(/\d+/)||[])[0]||999),nb=Number((b.match(/\d+/)||[])[0]||999);return na-nb||a.localeCompare(b)});
+ const lectures=['All lectures',...lectureLabels];
  const branches=['All',...new Set(cats.map(d=>d.branch))];
  const families=['All',...new Set(cats.filter(x=>vpqBranch36==='All'||x.branch===vpqBranch36).map(x=>x.family))];
- const filters=cats.filter(d=>(vpqBranch36==='All'||d.branch===vpqBranch36)&&(vpqFamily36==='All'||d.family===vpqFamily36)&&(vpqLecture36==='All lectures'||String(d.lecture||'').includes(vpqLecture36))&&[d.name,d.brand,d.class,d.uses,d.effects,d.group,d.family].join(' ').toLowerCase().includes(vpqDrugSearch36));
+ const filters=cats.filter(d=>(vpqBranch36==='All'||d.branch===vpqBranch36)&&(vpqFamily36==='All'||d.family===vpqFamily36)&&(vpqLecture36==='All lectures'||String(d.lecture||'').split(/\s*[;,]\s*/).includes(vpqLecture36))&&[d.name,d.brand,d.class,d.uses,d.effects,d.group,d.family].join(' ').toLowerCase().includes(vpqDrugSearch36));
  const options=(items,current)=>items.map(x=>'<option '+(x===current?'selected':'')+' value="'+escapeHtml(x)+'">'+escapeHtml(x)+'</option>').join('');
  const grouped={};for(const d of filters){(grouped[d.branch]??={});(grouped[d.branch][d.family]??={});(grouped[d.branch][d.family][d.group]??=[]).push(d)}
  const tree=Object.entries(grouped).map(([b,fs])=>'<div class="vpq-tree-group"><h4>📁 '+escapeHtml(b)+'</h4>'+Object.entries(fs).map(([f,gs])=>'<h5>▸ '+escapeHtml(f)+'</h5>'+Object.entries(gs).map(([g,entries])=>'<div class="vpq-tree-group"><b class="tiny">'+escapeHtml(g)+'</b>'+entries.map(d=>'<button data-drug="'+escapeHtml(d.id)+'" class="'+(d.id===selectedDrug?'active':'')+'">'+escapeHtml(d.name)+'</button>').join('')+'</div>').join('')).join('')+'</div>').join('')||'<p class="small">No drugs match your selection.</p>';
- const current=all.find(d=>d.id===selectedDrug)||filters[0]||all[0];
+ const current=filters.find(d=>d.id===selectedDrug)||filters[0]||null;
  const card=current?drugCardHTML(current):'<p>No drugs loaded.</p>';
- holder.innerHTML='<p class="vpq-pharm-note">📚 Pharm 1 · Exam 1 · Lectures 1–9. Groups follow your High-Yield Master Chart. Lecture-specific notes are educational, not verified dosing or current food-animal prescribing instructions.</p><div class="vpq-pharm-filters">'+
+ holder.innerHTML='<p class="vpq-pharm-note">📚 Pharmacology drug library · Exam 1 and newly imported lectures. Filter by lecture or drug family; future imported lecture labels appear automatically. Lecture-specific notes are educational, not independently verified dosing or current food-animal prescribing instructions.</p><div class="vpq-pharm-filters">'+
  '<label class="field">Branch<select class="input" id="vpqDrugBranch36">'+options(branches,vpqBranch36)+'</select></label>'+
  '<label class="field">Drug family<select class="input" id="vpqDrugFamily36">'+options(families,vpqFamily36)+'</select></label>'+
- '<label class="field">Lecture<select class="input" id="vpqDrugLecture36">'+options(['All lectures','Lecture 3','Lecture 4','Lecture 5','Lectures 6–7','Lecture 8','Lecture 9'],vpqLecture36)+'</select></label>'+
+ '<label class="field">Lecture<select class="input" id="vpqDrugLecture36">'+options(lectures,vpqLecture36)+'</select></label>'+
  '<label class="field">Search<input class="input" id="vpqDrugSearch36" placeholder="Drug, species, class, adverse effect" value="'+escapeHtml(vpqDrugSearch36)+'"></label></div>'+
  '<div class="vpq-pharm-guide"><div><p class="tiny">'+filters.length+' matching cards / '+all.length+' in the library</p><div class="vpq-drug-tree" id="drugList">'+tree+'</div></div><div id="drugDetail">'+card+'</div></div>'+
  '<div class="buttonrow"><button type="button" data-vpqopenarcade="1">🎮 Play Pharm Arcade</button><button type="button" data-vpqpharmstudy="1">📚 Pharm 1 quiz</button><button type="button" data-vpqbank="1">📝 Question Bank Studio</button><button type="button" data-vpqeditdrug="1">✏️ Edit selected drug</button></div>';
 }
-openPharmacy=function(id=selectedDrug){if(id)selectedDrug=id;showModal('💊 Pharmacy · Pharm 1 Drug Families','<div id="vpqPharmLayout36"></div>');vpqPharmRender36()};
+openPharmacy=function(id=selectedDrug){if(id)selectedDrug=id;showModal('💊 Pharmacy · Drug Families & Lectures','<div id="vpqPharmLayout36"></div>');vpqPharmRender36()};
 const vpqOriginalDrugCard36=drugCardHTML;
 drugCardHTML=function(d){
  if(!d)return '<p>No selected drug.</p>';
