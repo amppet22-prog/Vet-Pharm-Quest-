@@ -63,6 +63,16 @@ Current state already stores `coins` and `upgrades` in local browser state `vpq-
 - Inclusive, optional themes year round; no assumption of religion or identity.
 - Preserve responsive performance on common Windows browsers and smaller screens.
 
+## First playable 2.5D reception hall (2026-11-08)
+
+**Now implemented:** `reception-hall-25d.js` is loaded by `index.html` after the original reception customization module. The reception scene can switch between a perspective/isometric-inspired **2.5D hall** and **Classic 2D** using a button directly beneath the stage controls.
+
+- The hall draws a perspective ceiling, left/right/back walls, converging floor grout lines, layered front desk, seating, window and a cat nook / kids' corner. Purchased cat and kids' decorations and theme wallpapers appear when owned and placed.
+- Uses the same receptionCollection save and wallpapers. A new `state.receptionView` string persists the selected view; existing inventory, coins, XP, room navigation, avatar portraits and interaction controls are unchanged.
+- **Not true 3D:** this is a dimensional vector scene in the existing browser renderer. The avatar still moves left/right along the original gameplay axis; free movement, 3D avatar models, object dragging, collision and the dog yard are not built yet.
+- The Classic toggle preserves the existing 2D art and is the fallback if the new style isn't preferred.
+- Static JavaScript syntax and simulated toggle/scene/save/ownership tests passed. Live device/browser visual QA still remains.
+
 ## Implementation verification (2026-11-08)
 - `reception-customization.js` is the isolated scene/collection module.
 - Saves use the existing `vpq-v2-clinic-state` object; preexisting `coins`, `upgrades`, portraits and XP are not reset.
