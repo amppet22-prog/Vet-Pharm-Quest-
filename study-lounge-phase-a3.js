@@ -16,7 +16,28 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<ellipse cx="507" cy="421" rx="256" ry="32" fill="#59465a" opacity=".23" filter="url(#vpqSLShade)"/>'+
 '<g><path d="M274 340L345 296H655L735 340L660 373H350Z" fill="#e6bc92" stroke="#a87d65" stroke-width="7"/><path d="M350 373H660V427H350Z" fill="#bf8e73" stroke="#94716a" stroke-width="6"/><path d="M274 340L350 373V427L274 386Z" fill="#a67b69" stroke="#94716a" stroke-width="5"/><path d="M660 373L735 340V385L660 427Z" fill="#ad806c" stroke="#94716a" stroke-width="5"/><path d="M303 417V474M702 413V472" stroke="#87685d" stroke-width="14"/>'+
 '<rect x="433" y="261" width="140" height="73" rx="8" fill="#536d83"/><rect x="441" y="269" width="124" height="54" rx="4" fill="#c9e7ee"/><text x="503" y="292" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="800" fill="#52758d">STUDY DESK</text><text x="503" y="311" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#52758d">Learn • Practice</text><path d="M412 332h184l13 13H399Z" fill="#849bad"/><path d="M345 323l69 -17l23 16l-69 13Z" fill="#fff9ef" stroke="#c3aca2" stroke-width="3"/><rect x="620" y="316" width="29" height="24" rx="4" fill="#f2c1d3"/><path d="M650 319q18 -6 13 10q-4 10 -13 3" stroke="#c595a7" stroke-width="5" fill="none"/></g>'+
-'<g transform="translate(755 265)"><rect x="4" y="4" width="172" height="101" rx="11" fill="#f9eddd" stroke="#bda398" stroke-width="6"/><path d="M0 107H181V166H0Z" fill="#c9aca6" stroke="#a28281" stroke-width="6"/><rect x="14" y="18" width="87" height="72" rx="9" fill="#748b9c"/><rect x="25" y="28" width="65" height="36" rx="4" fill="#d8e4e4"/><rect x="43" y="65" width="28" height="21" rx="6" fill="#f7f0e0"/><path d="M72 72q16 -7 14 7q-4 9 -14 3" stroke="#f7f0e0" stroke-width="4" fill="none"/><circle cx="120" cy="39" r="6" fill="#7fbd9d"/><text x="143" y="86" font-size="30">🍎</text><text x="90" y="133" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#6f5b6d">COFFEE + SNACKS</text></g>'+
+'<g transform="translate(258 230) scale(.53)"><rect x="4" y="4" width="172" height="101" rx="11" fill="#f9eddd" stroke="#bda398" stroke-width="6"/><path d="M0 107H181V166H0Z" fill="#c9aca6" stroke="#a28281" stroke-width="6"/><rect x="14" y="18" width="87" height="72" rx="9" fill="#748b9c"/><rect x="25" y="28" width="65" height="36" rx="4" fill="#d8e4e4"/><rect x="43" y="65" width="28" height="21" rx="6" fill="#f7f0e0"/><path d="M72 72q16 -7 14 7q-4 9 -14 3" stroke="#f7f0e0" stroke-width="4" fill="none"/><circle cx="120" cy="39" r="6" fill="#7fbd9d"/><text x="143" y="86" font-size="30">🍎</text><text x="90" y="133" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="14" fill="#6f5b6d">COFFEE + SNACKS</text></g>'+
+'<g transform="translate(771 228)">'+
+'<ellipse cx="88" cy="235" rx="92" ry="18" fill="#443d69" opacity=".23"/>'+
+'<path d="M17 23L49 4H159L175 25V208L156 229H16Z" fill="#56478d" stroke="#352f65" stroke-width="7"/>'+
+'<path d="M17 23H147L159 4H49Z" fill="#a58cdd" stroke="#514589" stroke-width="5"/>'+
+'<path d="M147 23L175 25V208L156 229L147 207Z" fill="#372e63"/>'+
+'<path d="M18 22H147V207H18Z" fill="#9870cf" stroke="#443278" stroke-width="5"/>'+
+'<rect x="28" y="34" width="107" height="39" rx="7" fill="#f7da81" stroke="#fee9b8" stroke-width="4"/>'+
+'<text x="81" y="50" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="900" fill="#3b376f">VET PHARM</text>'+
+'<text x="81" y="66" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="900" fill="#3b376f">ARCADE</text>'+
+'<rect x="28" y="81" width="107" height="74" rx="8" fill="#302d5d" stroke="#b3dbdf" stroke-width="5"/>'+
+'<rect x="37" y="91" width="89" height="55" rx="6" fill="#75c7d4"/>'+
+'<path d="M45 135Q61 105 84 118T119 101V140H45Z" fill="#3f91b4"/>'+
+'<text x="83" y="110" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="900" fill="#fff8b2">PLAY!</text>'+
+'<text x="83" y="131" text-anchor="middle" font-size="18">🐾</text>'+
+'<path d="M17 161H146L154 182H12Z" fill="#e7b3dc" stroke="#7954a2" stroke-width="5"/>'+
+'<circle cx="52" cy="172" r="7" fill="#403566"/><path d="M52 167v-14" stroke="#35305c" stroke-width="6"/><circle cx="52" cy="149" r="7" fill="#f5d576"/>'+
+'<circle cx="93" cy="170" r="7" fill="#78d0c3"/><circle cx="116" cy="170" r="7" fill="#ffd17d"/>'+
+'<path d="M26 184H139V207H26Z" fill="#6d599f"/>'+
+'<text x="82" y="199" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="800" fill="#faf4ff">DRUG MATCH • BUG BATTLES</text>'+
+'<rect x="27" y="209" width="25" height="15" rx="3" fill="#352e65"/><rect x="114" y="209" width="25" height="15" rx="3" fill="#352e65"/>'+
+'</g>'+ 
 '<ellipse cx="163" cy="433" rx="109" ry="25" fill="#dcbcd9"/><path d="M92 350q-8 -55 26 -68h106q32 19 20 67l-13 56H104Z" fill="#b5a5d1" stroke="#8c80b2" stroke-width="8"/><rect x="98" y="355" width="137" height="56" rx="20" fill="#d8c9ed" stroke="#9f91c2" stroke-width="7"/><path d="M118 413v24M215 413v24" stroke="#8b739e" stroke-width="11"/>'+
 '<text x="117" y="94" font-family="sans-serif" font-size="14" font-weight="800" fill="#736589">STUDENT LOUNGE</text></svg>';
 }
@@ -31,7 +52,7 @@ function refresh(){
  const node=document.createElement('div');node.id='vpqLoungeHotspots';
  node.innerHTML='<button type="button" class="vpqLoungeHot vpqLoungeDesk" data-vpqstudyaction="study" aria-label="Study Desk: choose a lecture and start structured review"><span><b>📖 Study Desk</b><small>Learn &amp; review</small></span></button>'+
  '<button type="button" class="vpqLoungeHot vpqLoungeMastery" data-vpqstudyaction="masteryTracker" aria-label="Mastery Tracker: revisit weak concepts"><span><b>🏆 Mastery</b><small>Review progress</small></span></button>'+
- '<button type="button" class="vpqLoungeHot vpqLoungeGames" data-vpqstudyaction="learningHub" aria-label="Game Arcade: choose Drug Match, Bug Battles or Exam Boss"><span><b>🎮 Game Arcade</b><small>Practice &amp; challenge</small></span></button>'+
+ '<button type="button" class="vpqLoungeHot vpqLoungeGames" data-vpqstudyaction="learningHub" aria-label="Play the arcade cabinet: Drug Match, Bug Battles and Exam Boss"><span><b>🕹️ Play Arcade</b><small>Games &amp; challenges</small></span></button>'+
  '<button type="button" class="vpqLoungeExit" data-vpqstudyreturn="1" aria-label="Return to reception">← Reception</button>';
  node.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.vpqstudyreturn!==undefined)changeRoom('reception');else if(b.dataset.vpqstudyaction)doAction(b.dataset.vpqstudyaction)});
  stage.appendChild(node);
