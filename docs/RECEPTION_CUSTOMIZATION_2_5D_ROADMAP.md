@@ -87,3 +87,11 @@ Current state already stores `coins` and `upgrades` in local browser state `vpq-
 - **Classic 2D remains a fallback**; existing study/case/drug/game modules are not moved. The Study Lounge already exists as a working study destination. No new study content or Mechanism Lab interior is claimed here.
 - No full 3D, WASD depth movement, collision system, dog yard, or clinical corridor subrooms yet. Hallway doors are direct transitions, not a separate walkable hallway level.
 - **Verification:** GitHub files and script reference confirmed. Live browser visual/interaction QA remains required; test scenery, mobile labels, door clicks, keyboard E, Classic toggle, saves, and Reception Studio.
+
+
+## Phase A.3 — Student Study Lounge (2026-11-08)
+
+- **Implemented** `study-lounge-phase-a3.js`, loaded by `index.html`. The existing Study Lounge room now has dimensional perspective scenery: bookshelves, whiteboard study goals, an actual study table with screen and notes, coffee maker/snack counter, window, comfortable seating, shadowed furniture and floor depth.
+- Clickable/keyboard-focusable in-room hotspots open the existing **Study Desk** (lecture and exam focus selector), **Mastery Tracker**, and **Learning Games**. A clearly labeled Return to Reception button is present. Original walking controls and E-near-station actions remain routed through the same functions.
+- **Unchanged:** existing questions, exams, learning progress, student avatar, existing saves, coins and progression. Other rooms are untouched. The mechanism lab redesign belongs to Phase A.4.
+- **Verification:** JavaScript syntax of new module and inline main game script passed. Live browser checks still needed for visual collisions, mouse/touch hotspot targeting, door navigation, E interactions, Study Desk, Mastery Tracker, Games and smaller screens.
