@@ -45,7 +45,10 @@ window.VPQ_ABX_LESSON_OPEN=function(showModal,escapeHtml){
  const sources=d.sources.map(([name,url])=>'<li><a href="'+url+'" target="_blank" rel="noopener noreferrer">'+esc(name)+'</a></li>').join('');
  showModal('🧫 '+d.title,'<p>Lecture 1–2 concepts meet clinical antimicrobial selection. <b>Cephalosporin generations are NOT first-, second- or third-line prescribing tiers.</b></p>'+
  '<div class="infobox"><b>Core question:</b> Does this patient actually need an antibiotic, and can the selected drug achieve safe, effective exposure at the infection site against the likely or cultured organism?</div>'+
+ '<h3>🎨 Antibiotic generations · Illustrated comparison</h3>'+(window.VPQ_VISUAL_PATHWAYS?.preview('abx-gens')||'')+
+ '<h3>🦠 Beta-lactam cell-wall target</h3>'+(window.VPQ_VISUAL_PATHWAYS?.preview('abx-wall')||'')+
  '<h3>Cephalosporin generations · Compare, don’t memorize rank</h3><div class="vpqAbxGrid">'+generation+'</div>'+
+ '<h3>📈 PK/PD · How drug exposure relates to MIC</h3>'+(window.VPQ_VISUAL_PATHWAYS?.preview('abx-pkpd')||'')+
  '<h3>Lecture 1–2 · Why the pharmacology works</h3><div class="vpqAbxGrid">'+fundamental+'</div>'+
  '<h3>Practice the interpretation</h3><p class="tiny">Reveal the calculation and reasoning. These numerical examples are hypothetical and not dosing instructions.</p>'+worked+
  '<h3>Reference reading</h3><ul>'+sources+'</ul><p class="tiny">Educational overview; verify local course notes, clinical breakpoints, approved species indications and current veterinary regulations before real prescribing.</p>');
