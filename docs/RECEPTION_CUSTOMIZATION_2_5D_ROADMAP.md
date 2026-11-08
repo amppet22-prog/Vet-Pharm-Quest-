@@ -129,3 +129,11 @@ Check that Pharmacy now shows Drug Shelves, Mechanism Lab Door and Toxicology Re
 - Added `exam-room-traditional.js` and loaded it from `index.html`. Exam room imagery now depicts cabinetry, sink, clinical wall equipment, medical chart area, and stainless examination table, with a stylized small dog by default. The in-room patient switch changes the drawing to a cat and back; this is cosmetic and does not alter the actual patient case selected.
 - Clickable/keyboard-accessible hotspots retain **Patient Charts**, **Examine Patient** (existing clinical case menu), and **Protocols**. A Reception exit remains available. A/D/arrow and E station controls retain their original actions.
 - This is a responsive 2.5D scene, not a physically modeled 3D treatment room. No clinical workflow, course data, progress, savings, or case content changed. Source script and inline game syntax checks passed; live browser checks still needed for layout/overlap, patient switch, responsive labels, and clinical station activation.
+
+
+## Exam Room v2 — Wall-mounted exam table revision (2026-11-08)
+
+- Reworked `exam-room-traditional.js` to use a left-wall cabinet/sink worktop and a **right-wall mounted, folding-style stainless exam table**. The floor center is more open and the table no longer reads like a freestanding treatment/procedure table.
+- Kept the goofy cartoon dog/cat on the table, pet toggle, and the existing case/chart/protocol logic. Added small examination-room furnishings (wall shelf, cute art, client chair, clinical stool, SOAP clipboard, exam protocol board).
+- Relocated interaction targets to **clipboard** for Patient Charts, **table and patient** for Examine Patient, and **protocol wall chart** for Clinical Protocols. E-key nearest-station positions were updated along the x-axis.
+- The new room is intentionally stylized, not photorealistic. JavaScript module and main game script syntax passed; visual QA in the browser remains pending, especially animal/table alignment and mobile labels.
