@@ -22,14 +22,14 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 }
 art.roomArt=function(k){return k==='study'?lounge():previous(k)};
 const p=rooms.study.props;
-p[0].x=50;p[0].label='Study Desk';
+p[0].x=50;p[0].label='Study Desk';p[0].action='study';
 p[1].x=30;p[1].label='Mastery Tracker';
 p[2].x=78;p[2].label='Learning Games';
 function refresh(){
  stage.querySelector('#vpqLoungeHotspots')?.remove();
  if(stage.dataset.room!=='study')return;
  const node=document.createElement('div');node.id='vpqLoungeHotspots';
- node.innerHTML='<button type="button" class="vpqLoungeHot vpqLoungeDesk" data-vpqstudyaction="learningHub" aria-label="Open study desk and lecture learning"><span>📖 Study Desk</span></button>'+
+ node.innerHTML='<button type="button" class="vpqLoungeHot vpqLoungeDesk" data-vpqstudyaction="study" aria-label="Open study desk and lecture learning"><span>📖 Study Desk</span></button>'+
  '<button type="button" class="vpqLoungeHot vpqLoungeMastery" data-vpqstudyaction="masteryTracker" aria-label="Open mastery tracker"><span>🏆 Mastery</span></button>'+
  '<button type="button" class="vpqLoungeHot vpqLoungeGames" data-vpqstudyaction="learningHub" aria-label="Open learning games"><span>🎮 Games</span></button>'+
  '<button type="button" class="vpqLoungeExit" data-vpqstudyreturn="1" aria-label="Return to reception">← Reception</button>';
