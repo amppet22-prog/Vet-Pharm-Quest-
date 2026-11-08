@@ -384,6 +384,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="drug-stewardship.js"></script>
 <script src="drug-clinical-reference.js?v=20261108-piprant2"></script>
 <script src="reception-customization.js?v=20261108-2"></script>
+<script src="reception-hall-25d.js?v=20261108-firsthall"></script>
 <script src="toxicology-preview-data.js?v=20261108-2"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-tox-clues"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
@@ -2472,6 +2473,8 @@ const vpqReceptionV1=window.VPQReceptionCreate({
  state,persist,updateHUD,renderRoom,showModal,escapeHtml,ROOMS,
  getAction:()=>doAction,setAction:handler=>{doAction=handler}
 });
+// Reception-only perspective scene. Old 2D rendering and station interaction remain available.
+const vpqReceptionHallV1=window.VPQReceptionHall25D({state,persist,renderRoom});
 // Keep the features visible without requiring the player to find a walkable station.
 $('vpqReceptionQuickBtn').addEventListener('click',()=>doAction('receptionStudio'));
 $('vpqStudioDashboardBtn').addEventListener('click',()=>doAction('receptionStudio'));
