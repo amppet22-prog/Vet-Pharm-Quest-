@@ -517,7 +517,7 @@ const ROOMS={
  pharmacy:{name:'Pharmacy & Medication Library',color:'#eaf7ed',banner:'PHARMACY • DRUG REFERENCE',decor:[['🌿','8%','17%'],['🪟','78%','15%']],props:[{x:24,emoji:'💊',label:'Drug Shelves',action:'pharmacy',bubble:'Search drugs'},{x:52,emoji:'🧪',label:'Mechanism Lab',action:'study',bubble:'Learn why'},{x:81,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Test yourself'}]},
  treatment:{name:'Treatment Ward',color:'#f0eafa',banner:'TREATMENT • CLINICAL DECISIONS',decor:[['🩹','11%','17%'],['🫀','82%','17%']],props:[{x:23,emoji:'🐴',label:'Hospitalized Patient',action:'inpatientWard',bubble:'Follow up'},{x:52,emoji:'💉',label:'Treatment Cart',action:'inpatientWard',bubble:'Adjust care'},{x:81,emoji:'📈',label:'Monitoring',action:'inpatientWard',bubble:'Reassess'}]},
  isolation:{name:'One Health & Isolation',color:'#e6f8f1',banner:'ONE HEALTH • PROTECT THE COMMUNITY',decor:[['🧤','11%','17%'],['☣️','83%','16%'],['🧴','90%','57%']],props:[{x:23,emoji:'🐮',label:'Isolation Patient',action:'onehealth',bubble:'Zoonosis case'},{x:52,emoji:'📚',label:'Disease Library',action:'ohLibrary',bubble:'38 disease cards'},{x:81,emoji:'🛡️',label:'Public Health Desk',action:'ohHub',bubble:'Roles & reporting'}]},
- study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'🎓',label:'Mastery & Exams',action:'learningHub',bubble:'Choose lectures'},{x:52,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Pick a skill'},{x:81,emoji:'✏️',label:'Content Editor',action:'editor',bubble:'Fix a mistake'}]}
+ study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'📖',label:'Guided Learning',action:'learningHub',bubble:'Select & start'},{x:52,emoji:'🏆',label:'Mastery Tracker',action:'masteryTracker',bubble:'Test yourself'},{x:81,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Short practice'}]}
 };
 const LEVEL_THRESH=130;const DEFAULT={name:'Student Vet',skin:'#b77957',hair:'#5b3e38',scrubs:'#67a5d9',pet:'🐕',petName:'Buddy',petCoat:'#f5d59a',petAccessory:'🎀',xp:0,coins:0,attempts:0,correct:0,completed:[],studyCorrect:0,upgrades:[],room:'reception',focus:'All lectures',questionHistory:{},studySession:null};
 const KEY='vpq-v2-clinic-state',EDITS_KEY='vpq-v2-content-edits';
@@ -1811,7 +1811,7 @@ const allLectures27=['Lecture 1','Lecture 2','Lecture 3','Lecture 4','Lecture 5'
 function cards27(){const a=concept27.filter(c=>master27.selected.includes(c[0])).map(c=>({id:'concept:'+c[1],lecture:c[0],topic:c[1],front:c[2],back:c[3],why:c[4],apply:c[5]}));return a.concat(dataDrugs().filter(d=>master27.selected.includes(d.lecture)).map(d=>({id:'drug:'+d.id,lecture:d.lecture,topic:d.class,front:'Describe '+d.name+': mechanism and uses.',back:(d.moa||'')+' '+(d.uses||''),why:d.why||'Connect target to effect.',apply:'What changes your decision to use this drug? '+(d.species||'')})))}
 function questions27(){return dataStudy().filter(q=>master27.selected.includes(q.lecture)&&q.options&&q.options.length>1)}
 const previousStudyMenu27=showStudyMenu,previousOpenStudy27=openStudy,previousDoAction27=doAction;
-function masteryMenu27(){showModal('🎓 Pharmacology Mastery Studio',`<p>Select multiple lectures to change the teaching cards and question pool. Learn physiology, explain WHY, then make clinical decisions.</p><div class="infobox"><b>Lecture selection</b><div class="vpq27grid">${allLectures27.map(l=>`<label><input type="checkbox" data-vpq27lecture="${escapeHtml(l)}" ${master27.selected.includes(l)?'checked':''}> ${escapeHtml(l)}</label>`).join('')}</div></div><p>${cards27().length} flashcards · ${questions27().length} existing exam questions · ${master27.missed.length} weak items marked</p><div class="buttonrow"><button data-vpq27start="learn">📖 Teach me</button><button data-vpq27start="mixed">🧠 Learn + Apply</button><button data-vpq27start="quiz">🎓 Exam practice</button><button data-vpq27start="missed">🔁 Weak concepts</button></div><p class="tiny">Rotation prioritizes unseen material and resurfaces missed items. The bank is finite; questions are not invented. Detailed mechanistic cards currently emphasize Foundations and Lectures 6–7. Other selected lectures use existing drug cards and questions.</p><button data-vpq27old="1">Original Study Desk / One Health</button>`)}
+function masteryMenu27(){showModal('📖 Guided Learning Studio',`<p>Guided Learning explains the physiology, mechanism, WHY and clinical consequences. Choose one or multiple lectures, then start a session. Mastery separately tests your understanding.</p><div class="infobox"><b>Lecture selection</b><div class="vpq27grid">${allLectures27.map(l=>`<label><input type="checkbox" data-vpq27lecture="${escapeHtml(l)}" ${master27.selected.includes(l)?'checked':''}> ${escapeHtml(l)}</label>`).join('')}</div></div><p>${cards27().length} flashcards · ${questions27().length} existing exam questions · ${master27.missed.length} weak items marked</p><div class="buttonrow"><button data-vpq27start="learn">📖 Start guided cards</button><button data-vpq27start="mixed">🩺 Start Learn + Apply</button><button data-vpqGMastery="1">🏆 Mastery Tracker</button><button data-vpqGHub="1">← Learning Lab</button></div><p class="tiny">Rotation prioritizes unseen material and resurfaces missed items. The bank is finite; questions are not invented. Detailed mechanistic cards currently emphasize Foundations and Lectures 6–7. Other selected lectures use existing drug cards and questions.</p><button data-vpq27old="1">Original Study Desk / One Health</button>`)}
 showStudyMenu=function(){if(state.focus&&state.focus.startsWith('One Health'))return previousStudyMenu27();masteryMenu27()};
 openStudy=function(ohOnly=false){if(ohOnly)return previousOpenStudy27(true);state.focus='All lectures';masteryMenu27()};
 
@@ -1912,7 +1912,7 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
    const el=e.target;
    if(el.matches('[data-vpqSharedLecture]')){
      const chosen=[...$('modalBody').querySelectorAll('[data-vpqSharedLecture]:checked')].map(x=>x.dataset.vpqSharedLecture);
-     master27.selected=shared.setLectures(chosen);save27();vpqLearningHub();
+     master27.selected=shared.setLectures(chosen);save27();const count=$('vpqGCount');if(count)count.textContent=chosen.length+' selected';
      return;
    }
    if(el.matches('[data-vpq27lecture]')){
@@ -1923,6 +1923,41 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
  const style=document.createElement('style');
  style.textContent='.vpq-gamegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:12px 0}.vpq-gamegrid button{background:#fff;border:2px solid #d8d0ef;border-radius:14px;padding:13px;text-align:left;min-height:116px}.vpq-gamegrid strong,.vpq-gamegrid small,.vpq-gamegrid em{display:block}.vpq-gamegrid small{font-size:12px;color:#596581;margin-top:5px;line-height:1.4}.vpq-gamegrid em{font-size:11px;color:#7250a5;font-style:normal;margin-top:8px}.vpq-sharedgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:7px;margin-top:10px}.vpq-sharedgrid label{padding:8px;background:#fff;border:1px solid #d9d3eb;border-radius:10px}.vpq-sharedstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.vpq-sharedstats>div{background:#f8f4ff;border-radius:10px;padding:10px;text-align:center}.vpq-sharedstats b,.vpq-sharedstats small{display:block}.vpq-sharedstats b{font-size:21px}.vpq-sharedstats small{font-size:10px}.vpq-sharedlink{background:#f7f2ff;padding:12px;border-radius:12px;margin-top:15px}.vpq-sharedframe iframe{width:100%;min-height:650px;border:1px solid #ded5f1;border-radius:14px;background:white}.vpq-sharedheader{display:flex;justify-content:space-between;align-items:center}@media(max-width:700px){.vpq-sharedstats{grid-template-columns:repeat(2,minmax(0,1fr))}.vpq-sharedframe iframe{min-height:760px}}';
  document.head.appendChild(style);
+
+
+/* VPQ FIX 2026-11-08: single functional lecture launcher and distinct Mastery dashboard. */
+const vpqGOrigAction=doAction;
+doAction=function(action){if(action==='masteryTracker')return vpqGMastery();return vpqGOrigAction(action)};
+vpqLearningHub=function(){
+ const selected=shared.getLectures(),st=vpqHubStats();
+ const choices=shared.courses.map(([lec,num,title])=>'<div class="vpqGlecture"><label><input type="checkbox" data-vpqSharedLecture="'+escapeHtml(lec)+'" '+(selected.includes(lec)?'checked':'')+'> <b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(title)+'</small></label><div class="vpqGactions"><button data-vpqGlecture="'+escapeHtml(lec)+'" data-vpqGmode="learn">Learn</button><button data-vpqGlecture="'+escapeHtml(lec)+'" data-vpqGmode="quiz">Test</button></div></div>').join('');
+ showModal('📖 Learning Lab · Choose a lecture','<p><b>Choose a lecture and press Learn or Test.</b> These buttons start that lecture immediately. To mix lectures, check more than one box and use the buttons below.</p><div class="infobox"><b>Lecture selection</b> · <span id="vpqGCount">'+selected.length+' selected</span><div class="vpqGlist">'+choices+'</div></div>'+
+ '<div class="vpqGroute"><h3>Guided learning</h3><p>Learn the normal physiology, channels/receptors, drug mechanisms, WHY and clinical effects. Then test yourself under Mastery.</p><div class="buttonrow"><button data-vpqGtrain="learn">📖 Teach selected lectures</button><button data-vpqGtrain="mixed">🩺 Learn + Apply</button><button data-vpqGMastery="1">🏆 Open Mastery</button></div></div>'+
+ '<h3>Games — each practices a specific skill</h3><div class="vpq-gamegrid">'+modes.map(x=>'<button data-vpqSharedGame="'+x[0]+'"><span>'+x[1]+'</span><strong>'+x[2]+'</strong><small>'+x[3]+'</small><em>'+x[4]+'</em></button>').join('')+'</div>'+
+ '<p class="tiny">'+st.mainSeen+' cards encountered · '+st.mainWeak+' weak teaching concepts · '+st.combined+' tracked attempts. Lecture choice also sets your Pharm Arcade focus; specialty games may support only some lectures.</p><button data-modalaction="editor">✏️ Content Editor</button>');
+};
+function vpqGMastery(){
+ const chosen=shared.getLectures(),p=shared.getProgress();
+ const rows=shared.courses.filter(x=>chosen.includes(x[0])).map(([lec,number,title])=>{
+   const recent=p.recent.filter(x=>x.lecture===lec),right=recent.filter(x=>x.correct).length,flags=Object.values(p.weak).filter(x=>x.lecture===lec).length;
+   return '<div class="vpqGlecture"><span><b>'+escapeHtml(lec)+'</b><small>'+recent.length+' attempts · '+(recent.length?Math.round(100*right/recent.length)+'% correct':'Not yet tested')+' · '+flags+' flagged</small></span><button data-vpqGlecture="'+escapeHtml(lec)+'" data-vpqGmode="quiz">Test</button></div>';
+ }).join('');
+ showModal('🏆 Mastery · Prove what you know','<p><b>Mastery is assessment and remediation.</b> Unlike Learning, it tests answers without hints, identifies weak concepts, and sends you back to review.</p><div class="vpq-sharedstats"><div><b>'+p.attempts+'</b><small>Attempts</small></div><div><b>'+p.correct+'</b><small>Correct</small></div><div><b>'+Object.keys(p.weak).length+'</b><small>Flagged</small></div><div><b>'+chosen.length+'</b><small>Lectures</small></div></div><h3>Selected lecture performance</h3><div class="vpqGlist">'+(rows||'<p>Select lectures in Learning Lab first.</p>')+'</div><div class="buttonrow"><button data-vpqGtrain="quiz">🎓 Exam challenge</button><button data-vpqGtrain="missed">🔁 Weak teaching concepts</button><button data-vpqSharedGame="review">📒 Arcade missed questions</button></div><p class="tiny">New progress tracking does not retroactively include every older session. These metrics reflect practice, not official exam certification.</p><button data-vpqGHub="1">← Learning Lab</button>');
+}
+$('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.vpqGHub!==undefined){vpqLearningHub();return}
+ if(b.dataset.vpqGMastery!==undefined){vpqGMastery();return}
+ if(b.dataset.vpqGlecture!==undefined){
+   const lec=b.dataset.vpqGlecture;if(!shared.courses.some(x=>x[0]===lec))return;
+   master27.selected=shared.setLectures([lec]);save27();launch27(b.dataset.vpqGmode==='quiz'?'quiz':'learn');return
+ }
+ if(b.dataset.vpqGtrain!==undefined){
+   master27.selected=shared.getLectures();
+   if(!master27.selected.length){alert('Select at least one lecture first.');return}
+   save27();launch27(b.dataset.vpqGtrain);return
+ }
+});
+const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist{display:grid;gap:8px;margin-top:12px}.vpqGlecture{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid #d6cbe8;border-radius:12px;padding:10px}.vpqGlecture label{display:flex;align-items:center;gap:9px;flex:1;cursor:pointer}.vpqGlecture label small,.vpqGlecture span small{display:block;font-size:12px;color:#705f85}.vpqGactions{display:flex;gap:6px}.vpqGlecture button{padding:8px 12px;background:#eee5fb;border:1px solid #ceb9e9;border-radius:10px;font-weight:bold}.vpqGroute{margin:12px 0;padding:12px;background:#f8f3ff;border-radius:13px}@media(max-width:560px){.vpqGlecture{flex-wrap:wrap}.vpqGactions{margin-left:auto}}';document.head.appendChild(vpqGstyle);
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
