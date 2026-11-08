@@ -52,5 +52,6 @@ if(d.c186prev!==undefined){if(step>0)step--;shown=false;return question()}
 if(d.c186next!==undefined){if(step<queue.length-1){step++;shown=false;return question()}return menu()}
 });
 screen.addEventListener('change',event=>{const e=event.target;if(e.dataset.c186lecture===undefined)return;e.checked?chosen.add(e.dataset.c186lecture):chosen.delete(e.dataset.c186lecture);menu()});
+try{if(typeof tab!=='undefined'&&tab==='guide')menu()}catch(e){}
 const style=document.createElement('style');style.textContent='.vpq186-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}.vpq186-grid label{display:flex;gap:10px;padding:11px;border:1px solid #ccdaed;border-radius:11px;background:#fff;cursor:pointer}.vpq186-grid b,.vpq186-grid small{display:block}.vpq186-grid small{font-size:12px;color:#63758c}.vpq186-actions{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.vpq186-question{background:#fff;padding:18px;border:2px solid #bca7e1;border-radius:16px;margin:15px 0}.vpq186-question h2{font-size:clamp(19px,2.4vw,25px);line-height:1.45}.vpq186-answer{background:#effaf2;border:2px solid #a3d4b6;padding:17px;border-radius:15px;line-height:1.6}';document.head.appendChild(style);
 })();
