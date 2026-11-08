@@ -72,7 +72,10 @@ else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag
 persistLocal();preview(id);
 }
 function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.price<=0||state.coins<item.price)return;
-state.coins-=item.price;bag.owned.push(id);appendTransaction(item);preview(id);
+state.coins-=item.price;bag.owned.push(id);
+if(item.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
+else if(item.type==='decor'&&!bag.placed.includes(id))bag.placed.push(id);
+appendTransaction(item);preview(id);
 }
 const prevAction=api.getAction();
 api.setAction(function(action){if(action==='receptionStudio')return menu();if(action==='receptionYard')return yard();if(action==='receptionBank')return wallet();return prevAction(action)});
