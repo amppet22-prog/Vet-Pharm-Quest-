@@ -36,6 +36,51 @@
 .vpq-mera-placeholder{align-items:center;justify-content:center;width:110px;height:102px;background:linear-gradient(135deg,#ceeaf0,#fcefd6);font-size:37px;border-radius:12px}
 .vpq-mera-portrait strong{font-size:13px;color:#65503d}.vpq-mera-portrait small{font-size:10px;color:#896c4b}
 @media(max-width:650px){.vpq-welcome-section{grid-template-columns:1fr;padding:16px}.vpq-mera-portrait{flex-direction:row;flex-wrap:wrap;justify-content:start;min-height:0}.vpq-mera-portrait img,.vpq-mera-placeholder{width:65px;height:65px}.vpq-welcome-copy h1{font-size:24px}}
+
+/* VPQ_AVATAR_PETS_REWARDS_27 */
+.vpq-maker{display:grid;grid-template-columns:minmax(170px,.8fr) minmax(270px,1.3fr);gap:17px;align-items:start}
+.vpq-maker-preview{position:sticky;top:0;background:linear-gradient(155deg,#f0faff,#fceefa 58%,#fff0d4);padding:16px 10px;border-radius:19px;border:2px solid #d6cde9;text-align:center}
+.vpq-maker-preview strong{display:block;font-size:14px;color:#614f83}
+.vpq-preview-stage{display:flex;align-items:flex-end;justify-content:space-around;height:204px;background:linear-gradient(#f7fdff 0 70%,#e7d2b4 70%);border:2px solid #d8dced;border-radius:13px;margin:9px 0;padding:7px;overflow:hidden}
+.vpq-avatar-mini{position:relative;height:157px;width:70px;flex:0 0 70px;--skin:#edb987;--hair:#5b3e38;--scrubs:#67a5d9}
+.vpq-avatar-mini .headface{position:absolute;left:11px;top:11px;width:46px;height:46px;box-sizing:border-box;background:var(--skin);border-radius:45% 45% 48% 48%;border:3px solid #77594f;display:flex;justify-content:center;align-items:center;padding:8px 0 0;color:#463a3a;font-size:16px}
+.vpq-avatar-mini .hair{position:absolute;left:7px;top:1px;width:55px;height:23px;background:var(--hair);z-index:2;border-radius:55% 55% 20% 20%}
+.vpq-avatar-mini .bodycoat{position:absolute;left:8px;top:59px;width:55px;height:60px;box-sizing:border-box;background:var(--scrubs);border:3px solid #506d8c;border-radius:13px 13px 7px 7px;color:white;text-align:center;padding:12px 0;font-size:19px}
+.vpq-avatar-mini .legs{position:absolute;bottom:2px;left:17px;display:flex;gap:8px}
+.vpq-avatar-mini .legs i{width:13px;height:36px;background:#425474;border:2px solid #354563;border-radius:4px 4px 7px 7px}
+.vpq-avatar-mini .bodycoat.whitecoat,.avatarSprite .bodycoat.whitecoat{box-shadow:inset 0 0 0 5px #ffffffee!important;color:#4f6386!important}
+.vpq-avatar-mini .hair.h-air-braids,.avatarSprite .hair.h-air-braids{box-shadow:-8px 20px 0 -5px var(--hair),8px 20px 0 -5px var(--hair)}
+.vpq-avatar-mini .hair.h-air-locs,.avatarSprite .hair.h-air-locs{box-shadow:-10px 19px 0 -6px var(--hair),0 29px 0 -7px var(--hair),10px 19px 0 -6px var(--hair)}
+.vpq-avatar-mini .hair.h-air-coils,.avatarSprite .hair.h-air-coils{height:28px;border-radius:55%;box-shadow:-8px 6px 0 -4px var(--hair),8px 6px 0 -4px var(--hair),0 -5px 0 -3px var(--hair)}
+.vpq-avatar-mini .hair.h-air-bun,.avatarSprite .hair.h-air-bun{box-shadow:0 -13px 0 -5px var(--hair)}
+.vpq-avatar-mini .hair.h-air-pony,.avatarSprite .hair.h-air-pony{box-shadow:17px 21px 0 -7px var(--hair)}
+.vpq-avatar-mini .hair.h-air-curly,.avatarSprite .hair.h-air-curly{height:29px;border-radius:48%;box-shadow:-7px 4px 0 -4px var(--hair),7px 4px 0 -4px var(--hair)}
+.vpq-avatar-mini .hair.h-air-long,.avatarSprite .hair.h-air-long{box-shadow:-8px 24px 0 -4px var(--hair),8px 24px 0 -4px var(--hair)}
+.vpq-avatar-mini .hair.h-air-short,.avatarSprite .hair.h-air-short{height:14px}
+.vpq-avatar-mini .hair.h-air-wave,.avatarSprite .hair.h-air-wave{box-shadow:-7px 17px 0 -5px var(--hair),7px 20px 0 -5px var(--hair)}
+.vpq-avatar-mini .hair.h-air-halfup,.avatarSprite .hair.h-air-halfup{box-shadow:0 -10px 0 -4px var(--hair),-7px 18px 0 -6px var(--hair),7px 18px 0 -6px var(--hair)}
+.vpq-avatar-mini .avatar-extra,.avatarSprite .avatar-extra{position:absolute;top:4px;right:-3px;font-size:16px;z-index:5}
+.vpq-maker .twocol{grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:11px}
+.vpq-preview-pet{width:105px;height:93px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:center}
+.vpq-pet-svg{width:105px;height:92px;display:block;overflow:visible;filter:drop-shadow(1px 4px 2px #30445755)}
+.petSprite .vpq-pet-svg{width:67px;height:62px;max-width:none}
+.petSprite.vpq-custom-pet{background:none!important;box-shadow:none!important;border:0!important;filter:none;min-width:68px}
+.vpq-preview-label{font-size:11px;color:#655a7d;margin:6px 0 0}
+.vpq-reward-toolbar{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0 9px}
+.vpq-reward-toolbar button{padding:5px 7px;font-size:10px;border-radius:100px}
+.vpq-reward-toolbar button.is-active{background:#5f63ad;color:white}
+.vpq-reward-scroll{max-height:345px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.vpq-reward-item{display:flex;align-items:center;gap:9px;padding:10px 4px;border-bottom:1px solid #ebedf4}
+.vpq-reward-icon{font-size:26px;width:34px;text-align:center;flex-shrink:0}
+.vpq-reward-copy{flex:1;min-width:0}.vpq-reward-copy strong{display:block;font-size:12px}.vpq-reward-copy small{display:block;font-size:10px;color:#6a7488;line-height:1.35}
+.vpq-reward-item button{font-size:10px;padding:6px 8px;flex-shrink:0}
+.vpq-reward-count{font-size:11px;color:#67758c;margin:5px 0}
+.stage[data-theme="lavender"] .clinicArt{filter:hue-rotate(32deg) saturate(1.04)}
+.stage[data-theme="sunny"] .clinicArt{filter:brightness(1.08) saturate(1.26)}
+.stage[data-theme="forest"] .clinicArt{filter:hue-rotate(75deg) saturate(.92)}
+.stage[data-theme="night"] .clinicArt{filter:hue-rotate(155deg) brightness(.74)}
+.vpq-reward-decor{position:absolute;pointer-events:none;z-index:2;font-size:29px;top:22%;right:11%}
+@media(max-width:700px){.vpq-maker{grid-template-columns:1fr}.vpq-maker-preview{position:relative}.vpq-preview-stage{height:167px}}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -460,6 +505,147 @@ function openHowToPlay(){
 const vpqOriginalHelp=openHelp;
 openHelp=function(){openHowToPlay()};
 document.getElementById('vpqHowToPlayTop').addEventListener('click',openHowToPlay);
+
+
+// VPQ_AVATAR_PETS_REWARDS_27 — custom illustrated companions, live creator, cosmetic catalog.
+const vpqBreeds=[['husky-shepherd','Husky × German Shepherd (Mera mix)'],['german-shepherd','German Shepherd'],['corgi','Corgi'],['dachshund','Dachshund'],['greyhound','Greyhound'],['border-collie','Border Collie'],['husky','Husky'],['mixed','Mixed breed']];
+const vpqCatLooks=[['tabby','Tabby'],['black','Black'],['orange','Orange'],['tuxedo','Tuxedo'],['calico','Calico'],['longhair','Longhair']];
+const vpqHairstyles=[['classic','Classic'],['short','Short crop'],['long','Long straight'],['wave','Wavy'],['curly','Curly'],['coils','Coils'],['braids','Braids'],['locs','Locs'],['pony','Ponytail'],['bun','Bun'],['halfup','Half-up'],['fluffy','Fluffy']];
+const vpqPetSpecies=[['🐕','Dog'],['🐈','Cat'],['🐴','Horse'],['🐮','Cow'],['🦎','Bearded dragon'],['🐍','Snake'],['🐇','Rabbit']];
+const vpqScrubStyles=[['classic','Classic'],['paws','Paw prints'],['hearts','Hearts'],['stars','Stars'],['surgery','Surgery scrubs'],['rainbow','🌈 Rainbow scrubs (reward)'],['unicorn','🦄 Unicorn scrubs (reward)']];
+const vpqCosmetics=[
+{id:'theme-lavender',label:'🌸 Lavender clinic',price:30,category:'Backgrounds',desc:'Soft purple hospital scenery',theme:'lavender'},
+{id:'theme-sunny',label:'☀️ Sunny clinic',price:40,category:'Backgrounds',desc:'Extra bright and cheerful',theme:'sunny'},
+{id:'theme-forest',label:'🌿 Woodland clinic',price:70,category:'Backgrounds',desc:'Fresh forest color palette',theme:'forest'},
+{id:'theme-night',label:'🌙 Night shift',price:95,category:'Backgrounds',desc:'Cozy blue evening clinic',theme:'night'},
+{id:'poster-paws',label:'🐾 Pawprint poster',price:25,category:'Decor',desc:'A framed clinic print',deco:'🐾'},
+{id:'poster-xray',label:'🩻 Funny X-ray',price:45,category:'Decor',desc:'A very questionable radiograph',deco:'🩻'},
+{id:'poster-dog',label:'🐶 Staff pet photos',price:40,category:'Decor',desc:'Wall of good girls and boys',deco:'🖼️'},
+{id:'cat-tree',label:'🐈 Waiting-room cat tree',price:55,category:'Decor',desc:'Reception decoration',deco:'🐈'},
+{id:'aquarium',label:'🐠 Fish tank',price:80,category:'Decor',desc:'Calming office aquarium',deco:'🐠'},
+{id:'plushies',label:'🧸 Plushie shelf',price:45,category:'Decor',desc:'Tiny plush clinic mascots',deco:'🧸'},
+{id:'scrubs-rainbow',label:'🌈 Rainbow scrub set',price:65,category:'Outfits',desc:'Unlocks rainbow style in Customize',style:'rainbow'},
+{id:'scrubs-unicorn',label:'🦄 Unicorn scrub set',price:90,category:'Outfits',desc:'Unlocks unicorn style in Customize',style:'unicorn'},
+{id:'extra-bow',label:'🎀 Hair bow',price:30,category:'Accessories',desc:'Unlocks a bow for your veterinarian',accessory:'🎀'},
+{id:'extra-crown',label:'👑 Tiny crown',price:90,category:'Accessories',desc:'A tiny royal accessory',accessory:'👑'},
+{id:'extra-stetho',label:'🩺 Colorful stethoscope',price:55,category:'Accessories',desc:'Wear your favorite instrument',accessory:'🩺'}
+];
+for(const reward of vpqCosmetics)if(!upgrades.some(u=>u.id===reward.id))upgrades.push(reward);
+for(const u of upgrades)if(!u.category)u.category='Decor';
+state.petBreed=state.petBreed||'husky-shepherd';
+state.catLook=state.catLook||'tabby';
+state.avatarAccessory=state.avatarAccessory||'';
+state.activeTheme=state.activeTheme||'default';
+let vpqRewardCategory='All';
+function vpqOptions(items,selected){return items.map(x=>'<option value="'+escapeHtml(x[0])+'" '+(x[0]===selected?'selected':'')+'>'+escapeHtml(x[1])+'</option>').join('')}
+function vpqPetIllustration(p){
+ const species=p.pet||'🐕',breed=p.petBreed||'husky-shepherd',coat=/^#[\da-f]{6}$/i.test(p.petCoat||'')?p.petCoat:'#dfbd88',catLook=p.catLook||'tabby';
+ if(species!=='🐕'&&species!=='🐈'){const emoji=({'🐴':'🐴','🐮':'🐮','🦎':'🦎','🐍':'🐍','🐇':'🐇'})[species]||'🐾';return '<svg class="vpq-pet-svg" viewBox="0 0 110 90" role="img" aria-label="Companion"><ellipse cx="55" cy="82" rx="33" ry="5" fill="#7a8a9940"/><text x="55" y="69" font-size="60" text-anchor="middle">'+emoji+'</text></svg>'}
+ const dog=species==='🐕',husky=dog&&['husky','husky-shepherd'].includes(breed),shepherd=dog&&['german-shepherd','husky-shepherd'].includes(breed),corgi=breed==='corgi',dach=breed==='dachshund',grey=breed==='greyhound',collie=breed==='border-collie';
+ const body=dog?(husky?'#aeb9c3':shepherd?'#a57954':collie?'#33383e':grey?'#b8c2c8':corgi?'#c78244':dach?'#a66b43':coat):catLook==='black'?'#34323f':catLook==='orange'?'#dd9651':catLook==='tuxedo'?'#343440':catLook==='calico'?'#e1bc93':coat;
+ const muzzle=husky?'#f7f0e3':collie||catLook==='tuxedo'?'#f5f5ee':'#f3d7ae',border='#684c44';
+ const headX=dog&&grey?36:33,headY=dog&&grey?25:24;
+ const ears=dog&&['dachshund','mixed'].includes(breed)?'<ellipse cx="28" cy="28" rx="8" ry="18" transform="rotate(-20 28 28)" fill="'+body+'" stroke="'+border+'" stroke-width="2"/><ellipse cx="69" cy="28" rx="8" ry="18" transform="rotate(20 69 28)" fill="'+body+'" stroke="'+border+'" stroke-width="2"/>':'<path d="M27 35 L24 6 L44 24 L57 22 L73 7 L74 37Z" fill="'+body+'" stroke="'+border+'" stroke-width="2"/>';
+ const torsoX=dach?62:60,torsoRx=dach?35:grey?21:corgi?29:28,torsoY=grey?62:65,torsoRy=grey?13:corgi||dach?13:16;
+ const legs=dog&&grey?'<path d="M51 66 L45 84 M74 67 L81 84" stroke="'+body+'" stroke-width="6" stroke-linecap="round"/>':dog&&corgi||dach?'<path d="M41 72 L41 82 M69 73 L69 82" stroke="'+body+'" stroke-width="8" stroke-linecap="round"/>':'<path d="M44 68 L42 84 M73 70 L73 84" stroke="'+body+'" stroke-width="8" stroke-linecap="round"/>';
+ const tail=husky?'<path d="M81 61 Q104 35 90 23" stroke="#f4ead7" stroke-width="9" fill="none" stroke-linecap="round"/>':'<path d="M83 62 Q101 47 91 37" stroke="'+body+'" stroke-width="7" fill="none" stroke-linecap="round"/>';
+ let markings='';
+ if(dog&&shepherd)markings='<path d="M40 26 Q51 19 63 28 L70 46 Q57 31 40 44 Z" fill="#252a2c"/><path d="M46 54 Q60 62 70 72 L50 75" fill="#252a2c"/>';
+ if(dog&&husky)markings+='<path d="M32 31 Q49 16 67 32 L62 44 Q48 31 37 45 Z" fill="#292f34"/>';
+ if(dog&&collie)markings='<path d="M48 31 L54 49 L46 56 L38 37Z" fill="#f7f0e3"/><path d="M51 58 L68 75 L49 75Z" fill="#f7f0e3"/>';
+ if(!dog&&catLook==='tabby')markings='<path d="M41 24 L45 36 M50 23 L51 35 M59 25 L57 35" stroke="#82593d" stroke-width="3"/>';
+ if(!dog&&catLook==='calico')markings='<ellipse cx="60" cy="33" rx="12" ry="9" fill="#34383c"/><ellipse cx="36" cy="44" rx="10" ry="12" fill="#d9894f"/>';
+ if(!dog&&catLook==='tuxedo')markings='<path d="M47 48 L57 55 L51 64 L39 57Z" fill="#f5f5f0"/>';
+ if(!dog&&catLook==='longhair')markings='<path d="M19 45 L13 54 L24 58 L16 64 L33 63" fill="'+body+'"/>';
+ const eyeColor=husky?'#6ea3cf':'#3c4245',accessory=(p.petAccessory||'')===''?'':p.petAccessory;
+ return '<svg class="vpq-pet-svg" viewBox="0 0 110 92" role="img" aria-label="'+escapeHtml((p.petName||'Companion')+' '+(dog?breed:catLook))+'">'+
+ '<ellipse cx="56" cy="86" rx="37" ry="4" fill="#39465a33"/>'+tail+legs+
+ '<ellipse cx="'+torsoX+'" cy="'+torsoY+'" rx="'+torsoRx+'" ry="'+torsoRy+'" fill="'+body+'" stroke="'+border+'" stroke-width="2"/>'+
+ ears+'<ellipse cx="49" cy="39" rx="'+(grey?20:25)+'" ry="25" fill="'+body+'" stroke="'+border+'" stroke-width="2"/>'+markings+
+ '<ellipse cx="49" cy="52" rx="16" ry="11" fill="'+muzzle+'"/><circle cx="40" cy="41" r="4.2" fill="'+eyeColor+'"/><circle cx="58" cy="41" r="4.2" fill="'+eyeColor+'"/><circle cx="41" cy="40" r="1.4" fill="white"/><circle cx="59" cy="40" r="1.4" fill="white"/><ellipse cx="49" cy="51" rx="5" ry="3.5" fill="#343034"/><path d="M49 55 Q49 61 54 59" fill="none" stroke="#63443e" stroke-width="1.7"/><text x="74" y="24" font-size="20">'+escapeHtml(accessory)+'</text></svg>';
+}
+function vpqPersonPreview(p){
+ const safeColor=v=>/^#[\da-f]{6}$/i.test(v||'')?v:'#8ea9da';
+ const hair=p.hairStyle||'classic',accessory=p.avatarAccessory||'';
+ const style=p.scrubStyle||'classic';
+ const motif=style==='paws'?'🐾':style==='hearts'?'♥':style==='stars'?'★':style==='surgery'?'✚':style==='rainbow'?'🌈':style==='unicorn'?'🦄':'✚';
+ return '<div class="vpq-avatar-mini" style="--skin:'+safeColor(p.skin)+';--hair:'+safeColor(p.hair)+';--scrubs:'+safeColor(p.scrubs)+'"><div class="hair h-air-'+escapeHtml(hair)+'"></div><div class="headface">'+escapeHtml(p.expression||'•ᴗ•')+'</div><div class="bodycoat '+(p.whiteCoat?'whitecoat':'')+'">'+motif+'</div><div class="legs"><i></i><i></i></div><span class="avatar-extra">'+escapeHtml(accessory)+'</span></div>';
+}
+function vpqEditorValues(form){
+ const fd=new FormData(form),p={};for(const k of ['name','petName','pet','petCoat','petAccessory','skin','hair','scrubs','scrubStyle','expression','hairStyle','petBreed','catLook','avatarAccessory'])p[k]=String(fd.get(k)||'').slice(0,40);
+ p.whiteCoat=fd.get('whiteCoat')==='true';
+ return p;
+}
+function vpqRefreshPreview(){
+ const form=$('avatarForm');if(!form)return;
+ const p=vpqEditorValues(form);
+ const dogBox=$('vpqBreedField'),catBox=$('vpqCatField');
+ if(dogBox)dogBox.style.display=p.pet==='🐕'?'':'none';
+ if(catBox)catBox.style.display=p.pet==='🐈'?'':'none';
+ const preview=$('vpqPreviewStage');
+ if(preview)preview.innerHTML=vpqPersonPreview(p)+'<div class="vpq-preview-pet">'+vpqPetIllustration(p)+'</div>';
+ const caption=$('vpqPreviewCaption');
+ if(caption)caption.textContent=(p.name||'Your vet')+' & '+(p.petName||'companion')+(p.pet==='🐕'?' • '+(vpqBreeds.find(x=>x[0]===p.petBreed)||[])[1]:p.pet==='🐈'?' • '+(vpqCatLooks.find(x=>x[0]===p.catLook)||[])[1]:'');
+}
+openAvatar=function(){
+ const scrubs=vpqScrubStyles.filter(x=>!['rainbow','unicorn'].includes(x[0])||state.upgrades.includes(x[0]==='rainbow'?'scrubs-rainbow':'scrubs-unicorn'));
+ const accessories=[['','None'],['🎀','Bow'],['🩺','Stethoscope'],['⭐','Star']].concat(state.upgrades.includes('extra-crown')?[['👑','Crown']]:[]);
+ const vetAccessories=[['','None']].concat(state.upgrades.includes('extra-bow')?[['🎀','Hair bow']]:[]).concat(state.upgrades.includes('extra-crown')?[['👑','Crown']]:[]).concat(state.upgrades.includes('extra-stetho')?[['🩺','Stethoscope']]:[]);
+ showModal('🧑‍⚕️ Make Your Doctor & Companion','<div class="vpq-maker"><section class="vpq-maker-preview"><strong>✨ Live Preview</strong><div id="vpqPreviewStage" class="vpq-preview-stage"></div><div id="vpqPreviewCaption" class="vpq-preview-label"></div><p class="tiny">Changes stay in preview until you save.</p></section>'+
+ '<form id="avatarForm"><div class="twocol">'+
+ '<label class="field">Vet name<input class="input" name="name" maxlength="28" required value="'+escapeHtml(state.name)+'"></label>'+
+ '<label class="field">Companion name<input class="input" name="petName" maxlength="28" required value="'+escapeHtml(state.petName)+'"></label>'+
+ '<label class="field">Pet species<select class="input" name="pet">'+vpqOptions(vpqPetSpecies,state.pet)+'</select></label>'+
+ '<label class="field" id="vpqBreedField">Dog breed<select class="input" name="petBreed">'+vpqOptions(vpqBreeds,state.petBreed)+'</select></label>'+
+ '<label class="field" id="vpqCatField">Cat appearance<select class="input" name="catLook">'+vpqOptions(vpqCatLooks,state.catLook)+'</select></label>'+
+ '<label class="field">Companion color<input class="input" type="color" name="petCoat" value="'+escapeHtml(state.petCoat)+'"></label>'+
+ '<label class="field">Companion accessory<select class="input" name="petAccessory">'+vpqOptions(accessories,state.petAccessory)+'</select></label>'+
+ '<label class="field">Hair style<select class="input" name="hairStyle">'+vpqOptions(vpqHairstyles,state.hairStyle)+'</select></label>'+
+ '<label class="field">Hair color<input class="input" type="color" name="hair" value="'+escapeHtml(state.hair)+'"></label>'+
+ '<label class="field">Skin tone<input class="input" type="color" name="skin" value="'+escapeHtml(state.skin)+'"></label>'+
+ '<label class="field">Scrub color<input class="input" type="color" name="scrubs" value="'+escapeHtml(state.scrubs)+'"></label>'+
+ '<label class="field">Scrub style<select class="input" name="scrubStyle">'+vpqOptions(scrubs,state.scrubStyle)+'</select></label>'+
+ '<label class="field">White coat<select class="input" name="whiteCoat">'+vpqOptions([['false','Scrubs only'],['true','With white coat']],String(!!state.whiteCoat))+'</select></label>'+
+ '<label class="field">Face expression<select class="input" name="expression">'+vpqOptions([['•ᴗ•','Happy'],['•‿•','Warm'],['◕ᴗ◕','Sparkly'],['-ᴗ-','Calm'],['•_•','Focused']],state.expression)+'</select></label>'+
+ '<label class="field">Accessory<select class="input" name="avatarAccessory">'+vpqOptions(vetAccessories,state.avatarAccessory)+'</select></label>'+
+ '</div><div class="buttonrow"><button type="submit">💾 Save my doctor & pet</button><button type="button" id="vpqCancelAvatar">Cancel</button></div>'+
+ '<p class="tiny">These are original lightweight cartoon sprites. More detailed animated costumes can come later. Your saved doctor will stay yours in this browser.</p></form></div>');
+ vpqRefreshPreview();
+};
+updateAvatar=function(){
+ const av=$('avatarSprite'),face=av.querySelector('.headface'),hair=av.querySelector('.hair'),scrub=av.querySelector('.bodycoat'),pet=$('petSprite');
+ const safeColor=v=>/^#[\da-f]{6}$/i.test(v||'')?v:'#8ea9da';
+ av.style.setProperty('--skin',safeColor(state.skin));av.style.setProperty('--hair',safeColor(state.hair));av.style.setProperty('--scrubs',safeColor(state.scrubs));
+ document.documentElement.style.setProperty('--skin',safeColor(state.skin));document.documentElement.style.setProperty('--hair',safeColor(state.hair));document.documentElement.style.setProperty('--scrubs',safeColor(state.scrubs));
+ hair.className='hair h-air-'+(state.hairStyle||'classic');face.textContent=state.expression||'•ᴗ•';
+ const icon={paws:'🐾',hearts:'♥',stars:'★',surgery:'✚',rainbow:'🌈',unicorn:'🦄'}[state.scrubStyle]||'✚';
+ scrub.className='bodycoat'+(state.whiteCoat?' whitecoat':'');scrub.textContent=icon;
+ let extra=av.querySelector('.avatar-extra');if(!extra){extra=document.createElement('span');extra.className='avatar-extra';av.appendChild(extra)}extra.textContent=state.avatarAccessory||'';
+ pet.innerHTML=vpqPetIllustration(state);pet.classList.add('vpq-custom-pet');pet.style.background='none';pet.style.boxShadow='none';pet.title=(state.petName||'Pet')+' · '+(state.petBreed||state.catLook||'');
+};
+renderUpgrades=function(){
+ const root=$('upgradeList');if(!root)return;
+ const categories=['All','Backgrounds','Decor','Outfits','Accessories'];
+ const visible=upgrades.filter(x=>vpqRewardCategory==='All'||x.category===vpqRewardCategory);
+ const owned=upgrades.filter(x=>state.upgrades.includes(x.id)).length;
+ root.innerHTML='<div class="vpq-reward-count">🎁 '+owned+'/'+upgrades.length+' rewards collected · '+state.coins+' coins</div>'+
+ '<div class="vpq-reward-toolbar">'+categories.map(x=>'<button type="button" data-rewardcat="'+x+'" class="'+(x===vpqRewardCategory?'is-active':'')+'">'+x+'</button>').join('')+'</div>'+
+ '<div class="vpq-reward-scroll">'+visible.map(u=>{
+  const owned=state.upgrades.includes(u.id);
+  const canBuy=state.coins>=u.price;
+  const active=u.theme&&state.activeTheme===u.theme;
+  const action=owned?(u.theme?'<button data-rewardequip="'+u.theme+'">'+(active?'Equipped':'Equip')+'</button>':'<button disabled>Owned ✓</button>'):'<button data-upgrade="'+u.id+'" '+(canBuy?'':'disabled')+'>'+(canBuy?'Unlock':'🔒')+' '+u.price+' 🪙</button>';
+  return '<div class="vpq-reward-item"><div class="vpq-reward-icon">'+(u.label.match(/^\S+/)||['🎁'])[0]+'</div><div class="vpq-reward-copy"><strong>'+escapeHtml(u.label)+'</strong><small>'+escapeHtml(u.desc)+(owned?' · Unlocked!':'')+'</small></div>'+action+'</div>';
+ }).join('')+'</div>'+
+ (state.activeTheme!=='default'?'<button type="button" data-rewardequip="default" style="margin-top:7px">Use original background</button>':'');
+};
+const vpqPreviousRoomRender=renderRoom;
+renderRoom=function(){vpqPreviousRoomRender();const stage=$('stage');stage.dataset.theme=state.activeTheme||'default';for(const old of document.querySelectorAll('.vpq-reward-decor'))old.remove();const built=upgrades.filter(u=>u.deco&&state.upgrades.includes(u.id)).slice(0,3);for(const [i,u] of built.entries()){const item=document.createElement('span');item.className='vpq-reward-decor';item.style.top=(12+i*18)+'%';item.style.right=(4+i*9)+'%';item.textContent=u.deco;$('scene').appendChild(item)}};
+$('modalBody').addEventListener('input',e=>{if(e.target.closest('#avatarForm'))vpqRefreshPreview()});
+$('modalBody').addEventListener('change',e=>{if(e.target.closest('#avatarForm'))vpqRefreshPreview()});
+$('modalBody').addEventListener('submit',e=>{if(e.target.id!=='avatarForm')return;e.preventDefault();e.stopImmediatePropagation();const form=e.target;if(!form.reportValidity())return;Object.assign(state,vpqEditorValues(form));persist();updateAvatar();updateHUD();closeModal()},true);
+$('modalBody').addEventListener('click',e=>{if(e.target.closest('#vpqCancelAvatar'))closeModal()});
+$('upgradeList').addEventListener('click',e=>{const c=e.target.closest('[data-rewardcat]');if(c){vpqRewardCategory=c.dataset.rewardcat;renderUpgrades()}const eq=e.target.closest('[data-rewardequip]');if(eq){const theme=eq.dataset.rewardequip;if(theme==='default'||state.upgrades.some(id=>{const u=upgrades.find(v=>v.id===id);return u&&u.theme===theme})){state.activeTheme=theme;persist();renderRoom();renderUpgrades()}}});
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
