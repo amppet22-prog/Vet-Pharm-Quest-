@@ -155,3 +155,13 @@ Check that Pharmacy now shows Drug Shelves, Mechanism Lab Door and Toxicology Re
 - **New decor:** one large planter, paired plants, cat climbing tree with cubby, cat carrier, dog travel crate, framed animal artwork and paw-print mural. Purchases auto-place, and owned decor can be toggled from My Collection without additional payment. Existing coins, wall themes, pets, quests and avatar saves are unaffected.
 - **Access:** header's Reception Studio remains; 2.5D waiting-room scene now has a visible `🎨 Decorate` hotspot, without removing desk/patient/room doors. The Classic 2D fallback remains, with owned wall/decor settings; detailed dimensional furniture is a 2.5D scene feature.
 - **QA performed:** JS syntax passed for both updated files and the game, matching store/scene references checked. Live browser visual QA pending for sofa proportions, crowded waiting area, overlapping plants/cat tree/carriers, touch interactions, purchasing and reloading saves.
+
+
+## Avatar art separation — framed portrait + standing game sprite (2026-11-08)
+
+- New avatar-standing-companions.js supplies transparent, full-body SVG standing counterparts for all 31 roster IDs (0–30) and Classic customizable avatars. Roster portraits stay as framed selections; the game walker no longer reuses the 8x4 portrait-sheet crop as a body.
+- Creator and avatar viewer show the framed portrait beside the separately rendered full-body walking character, while preserving the companion pet preview. Original portrait resources stay in the repository.
+- New standing companions have varied skin/hair/outfit/body silhouette and are stylized counterpart illustrations, **not exact pixel-identical portrait replicas**. A future art pass can refine likeness per character. Classic standing art follows actual saved skin, hair, scrubs and shape fields.
+- New optional preset buttons: larger-built masculine, deeper-tone feminine, warm-tone feminine, plus editable Classic; pronouns and all attributes remain independently customizable.
+- Save format, portrait IDs, companions, game movement, XP and coins remain unchanged; simple walking bob added. JS source and main-game syntax passed. Browser testing needed for size, facing/mirror, preview layout, restored old saves.
+- Future Clinical Pathology scope: compact clinical diagnostics, without duplicating comprehensive external resources; planned microscope slide deck for blood-smear cell identification, morphology and species differences.
