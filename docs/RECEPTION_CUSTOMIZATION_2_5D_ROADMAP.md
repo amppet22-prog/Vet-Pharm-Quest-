@@ -137,3 +137,12 @@ Check that Pharmacy now shows Drug Shelves, Mechanism Lab Door and Toxicology Re
 - Kept the goofy cartoon dog/cat on the table, pet toggle, and the existing case/chart/protocol logic. Added small examination-room furnishings (wall shelf, cute art, client chair, clinical stool, SOAP clipboard, exam protocol board).
 - Relocated interaction targets to **clipboard** for Patient Charts, **table and patient** for Examine Patient, and **protocol wall chart** for Clinical Protocols. E-key nearest-station positions were updated along the x-axis.
 - The new room is intentionally stylized, not photorealistic. JavaScript module and main game script syntax passed; visual QA in the browser remains pending, especially animal/table alignment and mobile labels.
+
+
+## Pharmacy & Pet Nutrition — dimensional room build (2026-11-08)
+
+- Implemented `pharmacy-nutrition-room.js` and loaded it through `index.html`. New 2.5D Pharmacy interior includes **clickable medicine shelves**, a **pet-food display** with stylized dog and cat food bags, a prominent **toxicology caution book**, a **Mechanism Lab door**, and a cute **turtle assistant** in a terrarium. Four distinct scene hotspots, paired with A/D/E nearest-station interactions.
+- Medicine cabinets route into the existing lecture-aligned drug library; caution book routes into the existing explicitly preview-stage toxicology reference; lab door enters the existing Mechanism Lab. No old reference content or games are deleted.
+- Nutrition bags open a new **Pet Nutrition Corner** with five introductory, mechanism-first reference cards: body condition vs muscle condition, reading pet-food adequacy/calorie labels, individualized energy needs, species nutrition differences, and therapeutic-diet assessment. These are educational starting points rather than a completed nutrition curriculum or diet prescriptions.
+- Artwork is decorative only; no named brand endorsements, purchase system, pet feeding mechanics, or turtle interaction added. Existing saves, games, drug banks and clinical cases remain unchanged.
+- **QA:** static JS syntax and expected route/source checks passed. Browser visual and interaction testing remains pending, especially hotspot labels at mobile sizes and the clinic avatar overlay.
