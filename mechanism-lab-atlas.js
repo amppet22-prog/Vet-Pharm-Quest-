@@ -36,3 +36,24 @@ window.VPQ_MECH_ATLAS={
   {label:'Merck Veterinary Manual — Organophosphate toxicosis',url:'https://www.merckvetmanual.com/toxicology/insecticide-and-acaricide-organic-toxicity/organophosphate-toxicosis-in-animals'}
  ]
 };
+
+/* Cross-link selected additional toxicant mechanisms to the Lab.
+   Pharmacy contains the full species/diagnostics reference, not arcade games. */
+(function(){
+ const atlas=window.VPQ_MECH_ATLAS,expand=window.VPQ_TOX_EXPANSION;
+ const section=atlas?.sections.find(x=>x.id==='toxins');
+ if(!section||!expand)return;
+ const focus=['tox-op','tox-chocolate','tox-botulinum','tox-tetanus','tox-cyanide','tox-nitrate','tox-allium','tox-cholecalciferol','tox-aflatoxin','tox-macadamia'];
+ const existing=new Set(section.cards.map(x=>x.id));
+ for(const id of focus){
+  const x=expand.cards.find(c=>c.id===id);
+  if(!x||existing.has(id))continue;
+  section.cards.push({
+   id:x.id,title:x.name,tag:x.group,
+   mechanism:x.mechanism,
+   why:'Biological pathway disrupted: '+x.signature+' This mechanism explains the clinical pattern, but overlapping pathways and patient factors may modify signs.',
+   clinical:'Species: '+x.species+'. Useful diagnostic orientation: '+x.tests,
+   warning:x.distinction
+  });
+ }
+})();
