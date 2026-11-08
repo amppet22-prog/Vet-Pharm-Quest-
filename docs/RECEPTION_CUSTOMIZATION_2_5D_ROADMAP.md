@@ -78,3 +78,12 @@ Current state already stores `coins` and `upgrades` in local browser state `vpq-
 - Saves use the existing `vpq-v2-clinic-state` object; preexisting `coins`, `upgrades`, portraits and XP are not reset.
 - Mock interaction test verified: preview, single 50-coin purchase, no double charge, wallpaper equip, décor placement and scene rendering.
 - JavaScript static syntax tests passed; live browser visual and keyboard testing remain to be done.
+
+
+## Phase A.1–A.2 — Reception shadow-box and shallow hallway (2026-11-08)
+
+- **Committed:** \`reception-shadowbox-phase-a.js\` builds a perspective reception with a dimensional check-in desk, recessed short hallway, clinical/examination doorway, pharmacy doorway, and study-lounge door at the end of the hall. Existing cat and children's décor ownership remains readable.
+- In 2.5D reception mode only, previous floating station cards are hidden; accessible HTML hit targets on scenery open the existing rooms or front-desk/patient tools. Keyboard A/D/arrows + E use five spatial nearest-station targets. Existing quick access to Reception Studio remains available outside the room.
+- **Classic 2D remains a fallback**; existing study/case/drug/game modules are not moved. The Study Lounge already exists as a working study destination. No new study content or Mechanism Lab interior is claimed here.
+- No full 3D, WASD depth movement, collision system, dog yard, or clinical corridor subrooms yet. Hallway doors are direct transitions, not a separate walkable hallway level.
+- **Verification:** GitHub files and script reference confirmed. Live browser visual/interaction QA remains required; test scenery, mobile labels, door clicks, keyboard E, Classic toggle, saves, and Reception Studio.
