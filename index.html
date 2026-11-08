@@ -2382,6 +2382,29 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  showStudyMenu=function(...args){
    previousStudyMenu(...args);
    const body=document.getElementById('modalBody');
+   const focus=document.getElementById('studyFocus');
+   if(focus){
+     const optionLabels={
+      'One Health':'One Health III · Mixed exams 1–4 + host roles/reporting',
+      'One Health · Exam 1':'One Health III · EXAM 1 — 52 questions',
+      'One Health · Exam 2':'One Health III · EXAM 2 — 19 questions',
+      'One Health · Exam 3':'One Health III · EXAM 3 — 65 questions',
+      'One Health · Exam 4':'One Health III · EXAM 4 — 67 questions',
+      'One Health · Host roles':'One Health III · Host roles — 14 questions',
+      'One Health · Reporting':'One Health III · Reporting — 50 questions'
+     };
+     const pharm=document.createElement('optgroup');
+     pharm.label='PHARMACOLOGY — Select lecture(s) / Exam 1';
+     const oh=document.createElement('optgroup');
+     oh.label='ONE HEALTH III — Select YOUR exam';
+     for(const option of [...focus.options]){
+       const group=option.value.startsWith('One Health')?oh:pharm;
+       if(optionLabels[option.value])option.textContent=optionLabels[option.value];
+       group.appendChild(option);
+     }
+     focus.appendChild(pharm);focus.appendChild(oh);
+     focus.value=state.focus;
+   }
    const selector=document.getElementById('studyFocus');
    if(!body||!selector)return;
    const label=selector.closest('label');
@@ -2391,7 +2414,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    if(first&&first.nodeType===3)first.textContent='STEP 1 — SELECT YOUR LECTURE OR ONE HEALTH EXAM';
    const help=document.createElement('p');
    help.className='vpqStudyHelp';
-   help.textContent='Click the dropdown below to choose Pharmacology lectures or One Health Exam 1, 2, 3, or 4. Then click Start fresh round. The large Exam Center and Pharm Arcade buttons are OPTIONAL different game modes.';
+   help.textContent='For ONE HEALTH, expand the ONE HEALTH III group in the dropdown and choose Exam 1, Exam 2, Exam 3, or Exam 4. Mixed Exams combines all One Health banks. Then click Start fresh round. Exam Center and Pharm Arcade are optional separate modes.';
    label.parentNode.insertBefore(help,label);
    const actions=body.querySelector('.buttonrow');
    if(actions&&actions.querySelector('[data-studycmd="new"]')){
