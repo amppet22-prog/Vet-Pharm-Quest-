@@ -146,3 +146,12 @@ Check that Pharmacy now shows Drug Shelves, Mechanism Lab Door and Toxicology Re
 - Nutrition bags open a new **Pet Nutrition Corner** with five introductory, mechanism-first reference cards: body condition vs muscle condition, reading pet-food adequacy/calorie labels, individualized energy needs, species nutrition differences, and therapeutic-diet assessment. These are educational starting points rather than a completed nutrition curriculum or diet prescriptions.
 - Artwork is decorative only; no named brand endorsements, purchase system, pet feeding mechanics, or turtle interaction added. Existing saves, games, drug banks and clinical cases remain unchanged.
 - **QA:** static JS syntax and expected route/source checks passed. Browser visual and interaction testing remains pending, especially hotspot labels at mobile sizes and the clinic avatar overlay.
+
+
+## Reception Studio — furnishing and waiting-area purchase upgrades (2026-11-08)
+
+- **Linked to the actual room:** `reception-customization.js` controls the saved `state.receptionCollection` catalog/owned/equipped/placed arrays; `reception-shadowbox-phase-a.js` reads that same state when rendering. Existing paint and legacy decoration purchases remain supported.
+- **Sofa upgrades:** Free lavender sofa is added to existing saves; sage and blue couch styles are purchasable. A couch is drawn as a three-dimensional upholstered sofa with back, cushions, arms, and legs, rather than a single geometric chair block. Sofas use an exclusive style slot; purchasing or equipping a style replaces the prior sofa instead of stacking models.
+- **New decor:** one large planter, paired plants, cat climbing tree with cubby, cat carrier, dog travel crate, framed animal artwork and paw-print mural. Purchases auto-place, and owned decor can be toggled from My Collection without additional payment. Existing coins, wall themes, pets, quests and avatar saves are unaffected.
+- **Access:** header's Reception Studio remains; 2.5D waiting-room scene now has a visible `🎨 Decorate` hotspot, without removing desk/patient/room doors. The Classic 2D fallback remains, with owned wall/decor settings; detailed dimensional furniture is a 2.5D scene feature.
+- **QA performed:** JS syntax passed for both updated files and the game, matching store/scene references checked. Live browser visual QA pending for sofa proportions, crowded waiting area, overlapping plants/cat tree/carriers, touch interactions, purchasing and reloading saves.
