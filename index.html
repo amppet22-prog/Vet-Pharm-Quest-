@@ -108,6 +108,15 @@
 .vpq-maker-preview{background:linear-gradient(135deg,#f7e8f6,#f9f0da 70%);border-color:#d3b7d8}
 .vpq-pet-picker{background:#fcf6ee;border-color:#d6bddb}
 
+
+/* VPQ STORYBOOK VET PRESET 3.0 */
+.vpq-storybook-portrait{display:block;width:115px;height:153px;object-fit:cover;border-radius:18px;border:3px solid #dbc9b9;box-shadow:0 5px 13px #5e4b6240}
+.vpq-preview-stage .vpq-storybook-portrait{width:108px;height:155px}
+.vpq-viewer-stage .vpq-storybook-portrait{width:145px;height:186px;transform:none}
+.avatarSprite.vpq-storybook-walk{width:73px;height:99px;background:url("assets/alexandria-storybook-portrait.webp") center center/cover no-repeat;border:3px solid #f2dce4;border-radius:19px;box-shadow:0 5px 5px #33436a40;bottom:18%}
+.avatarSprite.vpq-storybook-walk>.hair,.avatarSprite.vpq-storybook-walk>.headface,.avatarSprite.vpq-storybook-walk>.bodycoat,.avatarSprite.vpq-storybook-walk>.legs,.avatarSprite.vpq-storybook-walk>.avatar-extra{display:none}
+.vpq-style-note{grid-column:1/-1;font-size:11px;color:#765a89;background:#faf1ff;padding:10px;border-radius:10px}
+
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -162,7 +171,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v2.9</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-portrait.png" alt="Mera Munchasurus, hospital mascot portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus</strong><small>Hospital Mascot · Chief of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -762,6 +771,45 @@ vpqPetIllustration=function(p){
 };
 const vpqOldPreview29=vpqRefreshPreview;
 vpqRefreshPreview=function(){vpqOldPreview29();const old=$('vpqCoatHelp');if(old)old.remove();const coat=document.querySelector('#avatarForm input[name="petCoat"]');if(coat){const note=document.createElement('span');note.id='vpqCoatHelp';note.className='tiny';note.textContent='Illustrated pet portraits use their original colors; custom coat recoloring will be added later.';coat.parentElement.appendChild(note)}};
+
+
+// VPQ STORYBOOK VET PRESET 3.0
+state.avatarArtStyle=state.avatarArtStyle||'classic';
+const vpqPreviousEditorValues30=vpqEditorValues;
+vpqEditorValues=function(form){const val=vpqPreviousEditorValues30(form);val.avatarArtStyle=String(new FormData(form).get('avatarArtStyle')||state.avatarArtStyle||'classic');return val};
+const vpqPreviousPersonPreview30=vpqPersonPreview;
+vpqPersonPreview=function(p){
+ if(p.avatarArtStyle==='alexandria')return '<img class="vpq-storybook-portrait" src="assets/alexandria-storybook-portrait.webp" alt="Illustrated Alexandria and Mera, in scrubs and veterinary white coat">';
+ return vpqPreviousPersonPreview30(p);
+};
+const vpqPreviousAvatarOpen30=openAvatar;
+openAvatar=function(){
+ vpqPreviousAvatarOpen30();
+ const form=$('avatarForm');if(!form)return;
+ const choices=document.createElement('label');choices.className='field';
+ choices.innerHTML='Veterinarian art style <select name="avatarArtStyle" class="input"><option value="classic">My fully customizable veterinarian</option><option value="alexandria">Illustrated Alexandria & Mera portrait</option></select>';
+ const grid=form.querySelector('.twocol');
+ if(grid)grid.insertBefore(choices,grid.firstChild);
+ form.elements.avatarArtStyle.value=state.avatarArtStyle;
+ const desc=document.createElement('p');desc.className='vpq-style-note';
+ desc.textContent='The storybook portrait is a fixed illustrated preset based on Alexandria and Mera. Hair, skin and scrub color controls change the customizable version; future illustrated presets can be added for other doctors.';
+ if(grid)grid.insertBefore(desc,choices.nextSibling);
+ vpqRefreshPreview();
+};
+const vpqPreviousAvatarRender30=updateAvatar;
+updateAvatar=function(){
+ vpqPreviousAvatarRender30();
+ $('avatarSprite').classList.toggle('vpq-storybook-walk',state.avatarArtStyle==='alexandria');
+};
+const vpqPreviousAvatarViewer30=vpqViewMyAvatar;
+vpqViewMyAvatar=function(){
+ vpqPreviousAvatarViewer30();
+ if(state.avatarArtStyle==='alexandria'){
+  const h=$('modalBody').querySelector('h3');
+  if(h)h.insertAdjacentHTML('afterend','<p class="tiny" style="text-align:center">Illustrated Alexandria & Mera portrait · storybook preset</p>');
+ }
+};
+$('vpqViewAvatarBtn').onclick=vpqViewMyAvatar;
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
