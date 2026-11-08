@@ -199,6 +199,13 @@ home=function(){
 };
 if(location.hash==='#exam-center'){tab='examcenter';document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));}
 
+/* Make iframe mode a native-feeling classroom inside the teaching hospital. */
+if(new URLSearchParams(location.search).get('embedded')==='1'){
+ document.body.classList.add('vpq-embedded-arcade');
+ const css=document.createElement('style');
+ css.textContent='body.vpq-embedded-arcade{background:#fcfaff}body.vpq-embedded-arcade>div:first-child,body.vpq-embedded-arcade>header,body.vpq-embedded-arcade .hero,body.vpq-embedded-arcade .footer{display:none!important}body.vpq-embedded-arcade .wrap{max-width:100%;padding:8px 10px}body.vpq-embedded-arcade .layout{grid-template-columns:minmax(0,1fr) 215px}body.vpq-embedded-arcade .tabs{overflow-x:auto;flex-wrap:nowrap}body.vpq-embedded-arcade .tabs button{white-space:nowrap}body.vpq-embedded-arcade .panel{box-shadow:none}@media(max-width:760px){body.vpq-embedded-arcade .layout{grid-template-columns:1fr}}';
+ document.head.appendChild(css);
+}
 /* Shared learning experience: lectures, outcomes and direct clinic game routing */
 const vpqSharedArcade=window.VPQCurriculum;
 if(vpqSharedArcade){
