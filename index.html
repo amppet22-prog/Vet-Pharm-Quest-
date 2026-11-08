@@ -18,6 +18,8 @@
 #avatarSprite .headface.focused{letter-spacing:-1px}#avatarSprite .headface.sparkly{font-size:14px}#avatarSprite .headface.sleepy{font-size:14px}
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
+
+.vpq-source-note{margin:20px 0 4px;padding:12px 14px;border-top:3px solid #97b1dc;border-radius:12px;background:#f7f9ff;color:#35445b;font-size:13px;line-height:1.5}.vpq-source-note>div{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}.vpq-source-note p{margin:6px 0}.vpq-source-note a{color:#2b5c9c;text-decoration:underline;overflow-wrap:anywhere}.vpq-source-kind{color:#64748b;font-size:11px}.vpq-source-note .tiny{font-size:11px;color:#6d7585}
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -366,6 +368,29 @@ const oldSubmitListener = $('modalBody').onsubmit; // placeholder
 $('modalBody').addEventListener('submit',e=>{if(e.target.id==='avatarForm'){e.preventDefault(); applyAvatarForm(true);}});
 $('openGuide').onclick=openClinicGuide;
 // ===== end v2.5 patch =====
+
+
+// VPQ SOURCE FOOTER v1 — source provenance is separate from independent verification.
+function vpqSourceFooter(entry,kind){
+  const x=entry||{};
+  const course=x.lecture||x.source||x.tag||x.track||'Course-based educational material';
+  const status=x.reviewStatus==='verified' && Array.isArray(x.references) && x.references.some(r=>r&&r.url&&r.checkedOn)
+    ? 'Cross-checked against linked reference(s)'
+    : x.reviewStatus==='under-review' ? 'Flagged for editorial review' : 'Independent verification not recorded';
+  const refs=Array.isArray(x.references)?x.references.filter(r=>r&&typeof r.url==='string'&&/^https:\/\/[^ "'<>]+$/i.test(r.url)).slice(0,5):[];
+  const links=refs.map(r=>'<a href="'+escapeHtml(r.url)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(r.title||r.url)+'</a>'+ (r.checkedOn?' (checked '+escapeHtml(r.checkedOn)+')':'')).join(' · ');
+  return '<section class="vpq-source-note" aria-label="Study material sources"><div><b>📚 Sources & review</b><span class="vpq-source-kind">'+escapeHtml(kind)+'</span></div><p><strong>Course/source:</strong> '+escapeHtml(course)+'</p><p><strong>Review status:</strong> '+escapeHtml(status)+'</p>'+ (links?'<p><strong>External references:</strong> '+links+'</p>':'<p class="tiny">No linked external verification source has been recorded for this entry.</p>')+'<p class="tiny">Course materials and clinical guidance may differ. Report a discrepancy for editorial review; do not treat this footer as medical validation.</p></section>';
+}
+const vpqOldStudyRender=renderStudy;
+renderStudy=function(){vpqOldStudyRender();if(!studySession)return;const q=dataStudy().find(x=>x.id===studySession.ids[studySession.idx]);if(q && !$('modalWrap').classList.contains('hidden'))$('modalBody').insertAdjacentHTML('beforeend',vpqSourceFooter(q,'Study question'))};
+const vpqOldCaseRender=renderCase;
+renderCase=function(){vpqOldCaseRender();const c=caseSession&&dataCases().find(x=>x.id===caseSession.id);if(c && !$('modalWrap').classList.contains('hidden')){const step=c.steps[caseSession.step]||{};$('modalBody').insertAdjacentHTML('beforeend',vpqSourceFooter({...c,...step,lecture:step.lecture||c.lecture||c.source||step.tag||c.track,references:step.references||c.references,reviewStatus:step.reviewStatus||c.reviewStatus},'Patient case'))}};
+const vpqOldDrugCardHTML=drugCardHTML;
+drugCardHTML=function(d){return vpqOldDrugCardHTML(d)+vpqSourceFooter(d,'Drug reference')};
+const vpqOldOHCard=openOHCard;
+openOHCard=function(id){vpqOldOHCard(id);const d=window.VPQ_OH.diseases.find(x=>x.id===id);if(d)$('modalBody').insertAdjacentHTML('beforeend',vpqSourceFooter(d,'One Health disease card'))};
+const vpqOldPhysCard=openPhysiologyCard;
+openPhysiologyCard=function(id){vpqOldPhysCard(id);const p=physiologyCards.find(x=>x.id===id);if(p)$('modalBody').insertAdjacentHTML('beforeend',vpqSourceFooter({...p,source:'Physiology learning notes; external source not recorded'},'Physiology explainer'))};
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
