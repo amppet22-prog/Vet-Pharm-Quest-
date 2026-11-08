@@ -117,6 +117,26 @@
 .avatarSprite.vpq-storybook-walk>.hair,.avatarSprite.vpq-storybook-walk>.headface,.avatarSprite.vpq-storybook-walk>.bodycoat,.avatarSprite.vpq-storybook-walk>.legs,.avatarSprite.vpq-storybook-walk>.avatar-extra{display:none}
 .vpq-style-note{grid-column:1/-1;font-size:11px;color:#765a89;background:#faf1ff;padding:10px;border-radius:10px}
 
+
+/* VPQ INCLUSIVE AVATAR BASES v3.1 */
+.vpq-base-panel{grid-column:1/-1;background:#faf1fa;border:2px solid #e4d3eb;padding:11px;border-radius:16px}
+.vpq-base-panel h3{margin:0 0 7px;font-size:15px;color:#5e4a79}
+.vpq-base-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.vpq-base-buttons button{background:white;padding:9px 4px;border-radius:12px;border:2px solid #e7dce9;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px}
+.vpq-base-buttons button.chosen{border-color:#9570bf;background:#f0e6ff}
+.vpq-base-head{width:37px;height:43px;border:3px solid #80584a;background:var(--skin,#b77957);border-radius:46% 46% 50% 50%;position:relative}
+.vpq-base-head:before{content:'';position:absolute;left:-4px;right:-4px;top:-5px;height:15px;border-radius:50% 50% 12% 12%;background:var(--hair,#513b32)}
+.vpq-base-head:after{content:'•ᴗ•';position:absolute;inset:9px 0 0;text-align:center;font-size:12px;color:#40302c}
+.vpq-base-head.masculine{width:41px;border-radius:38% 38% 43% 43%}
+.vpq-base-head.androgynous{border-radius:43% 43% 47% 47%}
+.vpq-avatar-mini[data-base="feminine"] .headface{border-radius:46% 46% 56% 56%!important}
+.vpq-avatar-mini[data-base="masculine"] .headface{border-radius:35% 35% 44% 44%!important;width:50px;left:10px}
+.vpq-avatar-mini[data-base="androgynous"] .headface{border-radius:45% 45% 47% 47%!important}
+.avatarSprite[data-base="feminine"] .headface{border-radius:46% 46% 56% 56%}
+.avatarSprite[data-base="masculine"] .headface{border-radius:36% 36% 44% 44%}
+.vpq-base-note{font-size:11px;color:#6b5a74;margin:7px 0 0}
+.vpq-maker .vpq-extra-field{min-width:0}
+
 </style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
@@ -171,7 +191,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
 </style></head><body>
-<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
+<header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v3.1</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · One Health · Patient Rounds · More departments coming soon</span></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-portrait.png" alt="Mera Munchasurus, hospital mascot portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus</strong><small>Hospital Mascot · Chief of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
@@ -321,7 +341,7 @@ const ROOMS={
  isolation:{name:'One Health & Isolation',color:'#e6f8f1',banner:'ONE HEALTH • PROTECT THE COMMUNITY',decor:[['🧤','11%','17%'],['☣️','83%','16%'],['🧴','90%','57%']],props:[{x:23,emoji:'🐮',label:'Isolation Patient',action:'onehealth',bubble:'Zoonosis case'},{x:52,emoji:'📚',label:'Disease Library',action:'ohLibrary',bubble:'38 disease cards'},{x:81,emoji:'🛡️',label:'Public Health Desk',action:'ohHub',bubble:'Roles & reporting'}]},
  study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'💻',label:'Quiz Computer',action:'study',bubble:'Recall quiz'},{x:52,emoji:'📒',label:'Pharm Notebook',action:'pharmacy',bubble:'Drug cards'},{x:81,emoji:'✏️',label:'Content Editor',action:'editor',bubble:'Fix a mistake'}]}
 };
-const LEVEL_THRESH=130;const DEFAULT={name:'Student Vet',skin:'#edb987',hair:'#5b3e38',scrubs:'#67a5d9',pet:'🐕',petName:'Buddy',petCoat:'#f5d59a',petAccessory:'🎀',xp:0,coins:0,attempts:0,correct:0,completed:[],studyCorrect:0,upgrades:[],room:'reception',focus:'All lectures',questionHistory:{},studySession:null};
+const LEVEL_THRESH=130;const DEFAULT={name:'Student Vet',skin:'#b77957',hair:'#5b3e38',scrubs:'#67a5d9',pet:'🐕',petName:'Buddy',petCoat:'#f5d59a',petAccessory:'🎀',xp:0,coins:0,attempts:0,correct:0,completed:[],studyCorrect:0,upgrades:[],room:'reception',focus:'All lectures',questionHistory:{},studySession:null};
 const KEY='vpq-v2-clinic-state',EDITS_KEY='vpq-v2-content-edits';
 function safeRead(k,fallback){try{return JSON.parse(localStorage.getItem(k))||fallback}catch{return fallback}}
 let state={...DEFAULT,...safeRead(KEY,{})}, edits=safeRead(EDITS_KEY,{cases:{},drugs:{},study:{}});
@@ -810,6 +830,51 @@ vpqViewMyAvatar=function(){
  }
 };
 $('vpqViewAvatarBtn').onclick=vpqViewMyAvatar;
+
+
+// VPQ INCLUSIVE AVATAR BASES v3.1
+state.avatarBase=state.avatarBase||'androgynous';
+state.pronouns=state.pronouns||'';
+const vpqBaseOptions=[['feminine','Feminine'],['masculine','Masculine'],['androgynous','Androgynous']];
+const vpqPreviousValues31=vpqEditorValues;
+vpqEditorValues=function(form){
+ const result=vpqPreviousValues31(form),data=new FormData(form);
+ result.avatarBase=String(data.get('avatarBase')||state.avatarBase||'androgynous');
+ result.pronouns=String(data.get('pronouns')||'').slice(0,30);
+ return result;
+};
+const vpqPreviousPerson31=vpqPersonPreview;
+vpqPersonPreview=function(p){
+ const html=vpqPreviousPerson31(p);
+ if(p.avatarArtStyle==='alexandria')return html;
+ return html.replace('class="vpq-avatar-mini"','class="vpq-avatar-mini" data-base="'+escapeHtml(p.avatarBase||'androgynous')+'"');
+};
+const vpqPreviousOpen31=openAvatar;
+openAvatar=function(){
+ vpqPreviousOpen31();
+ const form=$('avatarForm');if(!form)return;
+ const grid=form.querySelector('.twocol');if(!grid)return;
+ const panel=document.createElement('section');panel.className='vpq-base-panel';
+ panel.innerHTML='<h3>🧑‍⚕️ Choose an appearance base</h3><div class="vpq-base-buttons">'+
+ vpqBaseOptions.map(([id,label])=>'<button type="button" data-avatarbase="'+id+'" class="'+(state.avatarBase===id?'chosen':'')+'"><span class="vpq-base-head '+id+'" style="--skin:'+escapeHtml(state.skin)+';--hair:'+escapeHtml(state.hair)+'"></span>'+label+'</button>').join('')+
+ '</div><input type="hidden" name="avatarBase" value="'+escapeHtml(state.avatarBase)+'"><p class="vpq-base-note">These are starting looks only. Everyone can use every hairstyle, skin color, outfit and accessory.</p>';
+ grid.insertBefore(panel,grid.firstChild);
+ const pronouns=document.createElement('label');pronouns.className='field vpq-extra-field';pronouns.textContent='Pronouns (optional)';
+ const sel=document.createElement('select');sel.name='pronouns';sel.className='input';
+ const options=[['','Not specified'],['she/her','She / her'],['he/him','He / him'],['they/them','They / them'],['she/they','She / they'],['he/they','He / they']];
+ for(const [value,label] of options){const opt=document.createElement('option');opt.value=value;opt.textContent=label;opt.selected=value===state.pronouns;sel.appendChild(opt)}
+ pronouns.appendChild(sel);grid.insertBefore(pronouns,panel.nextSibling);
+ vpqRefreshPreview();
+};
+$('modalBody').addEventListener('click',e=>{
+ const b=e.target.closest('[data-avatarbase]');if(!b)return;
+ const form=$('avatarForm');if(!form)return;
+ form.elements.avatarBase.value=b.dataset.avatarbase;
+ form.querySelectorAll('[data-avatarbase]').forEach(el=>el.classList.toggle('chosen',el===b));
+ vpqRefreshPreview();
+});
+const vpqPreviousUpdate31=updateAvatar;
+updateAvatar=function(){vpqPreviousUpdate31();$('avatarSprite').dataset.base=state.avatarBase||'androgynous'};
 
 updateAvatar();updateHUD();renderRoom();loop();
 })();
