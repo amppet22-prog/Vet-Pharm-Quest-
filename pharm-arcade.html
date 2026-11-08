@@ -223,7 +223,7 @@ if(vpqSharedArcade){
  const vpqOriginalRecord=record;
  record=function(q,idx){
    const correct=vpqOriginalRecord(q,idx);
-   vpqSharedArcade.recordAttempt({source:'arcade',id:q.id,lecture:vpqSharedArcade.fromArcade(q.l)||'Unknown',correct,kind:tab});
+   vpqSharedArcade.recordAttempt({source:q.l==='onehealth'?'onehealth-bugbattle':'arcade',id:q.id,lecture:q.l==='onehealth'?'One Health · Bacteriology':vpqSharedArcade.fromArcade(q.l)||'Unknown',correct,kind:tab});
    return correct;
  };
  const topNote=document.querySelector('body > div');
@@ -463,15 +463,6 @@ review=function(){
  '<div class="buttonrow"><button class="btn" id="vpqReviewExam40">📚 Exam Center / lecture focus</button></div>';
  document.querySelectorAll('[data-vpqreviewitem]').forEach(b=>b.onclick=()=>reviewQuestion(pick(b.dataset.vpqreviewitem)));
  $('vpqReviewExam40').onclick=()=>setTab('examcenter');
-};
-const vpqRecordOld40=record;
-record=function(q,index){
- const result=vpqRecordOld40(q,index);
- // Shared activity stores human-readable One Health provenance rather than Unknown.
- if(q?.l==='onehealth'&&vpqSharedArcade){
-   vpqSharedArcade.recordAttempt({source:'onehealth-bugbattle',id:q.id,lecture:'One Health · Bacteriology',correct:result,kind:'bugbattle'});
- }
- return result;
 };
 
 
