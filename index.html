@@ -1981,7 +1981,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  const prior=drugCardHTML;
  drugCardHTML=function(d){return prior(d)+details(d)};
  const originalPharmacy=openPharmacy;
- openPharmacy=function(...args){originalPharmacy(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqStatusList]'))body.insertAdjacentHTML('afterbegin','<div class="vpqStatusBar"><button data-vpqStatusList="1">🧭 Human vs Vet Use & Stewardship</button><small>Reserve drugs · VFD · legal restrictions · resistance · species safety</small></div>')};
+ openPharmacy=function(...args){originalPharmacy(...args);const body=$('modalBody');if(body&&!body.querySelector('.vpqStatusBar'))body.insertAdjacentHTML('afterbegin','<div class="vpqStatusBar"><button data-vpqStatusList="1">🧭 Human vs Vet Use & Stewardship</button><small>Reserve drugs · VFD · legal restrictions · resistance · species safety</small></div>')};
  function listView(category='all',term=''){
   const db=dataDrugs();
   const cats=[['all','All drugs'],['audited','Audited'],['pending','Needs audit'],['reserve','Human priority / selective use'],['restricted','Legal restrictions'],['rule','VFD/feed'],['outofavor','Resistance / less preferred'],['hazard','Safety/route issues']];
