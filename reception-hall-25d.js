@@ -59,10 +59,10 @@ function svg(){
 }
 art.roomArt=function(key){if(key==='reception'&&state.receptionView==='isometric')return svg();return originalArt(key)};
 function sync(){
- stage.dataset.receptionView=state.room==='reception'?state.receptionView:'other';
+ stage.dataset.receptionView=stage.dataset.room==='reception'?state.receptionView:'other';
  toggle.textContent=state.receptionView==='isometric'?'🏠 Reception view: 2.5D ✓':'🏠 Reception view: Classic 2D';
  toggle.setAttribute('aria-pressed',state.receptionView==='isometric'?'true':'false');
- toggle.hidden=state.room!=='reception';
+ toggle.hidden=stage.dataset.room!=='reception';
 }
 const toggle=document.createElement('button');
 toggle.id='vpqReceptionView25';toggle.type='button';toggle.className='vpqReceptionView25';
