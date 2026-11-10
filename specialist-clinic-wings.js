@@ -115,6 +115,14 @@ function scene(key){
    '<text x="386" y="228" font-size="19" text-anchor="middle" fill="#f6cfdd">♥ 112</text>'+
    rect(523,230,230,103,'#ebdef4','#b7a0cc')+
    '<rect x="535" y="252" width="206" height="31" rx="12" fill="#c6b4db"/>'+
+   // Friendly monitored cat in the recovery bay.
+   '<ellipse cx="650" cy="250" rx="68" ry="17" fill="#dfc6e7"/>'+
+   '<ellipse cx="642" cy="241" rx="46" ry="19" fill="#c1b4df" stroke="#998abf" stroke-width="3"/>'+
+   '<circle cx="601" cy="227" r="20" fill="#d9c3e9" stroke="#a38cbf" stroke-width="3"/>'+
+   '<path d="M586 215l-8 -17 19 11 12 -15 10 21" fill="#c4a4d4" stroke="#a38cbf" stroke-width="2"/>'+
+   '<path d="M590 227q5 6 10 0M607 227q5 6 10 0" fill="none" stroke="#69566f" stroke-width="2"/>'+
+   '<path d="M600 233l6 0 -3 4z" fill="#df93b2"/>'+
+   '<path d="M671 241q30 -29 35 -1" stroke="#b9a3d3" stroke-width="10" fill="none"/>'+
    '<path d="M558 332v36M720 332v36" stroke="#9c9cbd" stroke-width="10"/>'+
    '<path d="M580 243v-36h29" stroke="#9db3ce" stroke-width="9" fill="none"/>'+
    rect(785,194,159,141,'#f4e8f9','#b8add4')+
