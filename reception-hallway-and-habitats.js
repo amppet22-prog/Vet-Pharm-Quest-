@@ -58,7 +58,7 @@ function near(room,x){
  return best;
 }
 function interact(room,x){const b=near(room,x);if(!b)return false;route(b.action);return true}
-const mapRooms=[['🏠 Reception','reception'],['🚪 Clinical Hall','hallway'],['🩺 Exam','exam'],['❤️ Treatment','treatment'],['💊 Pharmacy','pharmacy'],['🔬 Advanced Lab','clinpath'],['🩻 Imaging','imaging'],['🛡️ One Health','isolation'],['📚 Study','study'],['🐈 Cat Corner','catcorner'],['🐕 Dog Yard','yardview'],['🧬 Mechanism Lab','mechanism'],['🧫 Necropsy & Pathology','necropsy'],['🩺 Surgery & Anesthesia','surgery']];
+const mapRooms=[['🏠 Reception','reception'],['🚪 Clinical Hall','hallway'],['🩺 Exam','exam'],['❤️ Treatment','treatment'],['💊 Pharmacy','pharmacy'],['🔬 Advanced Lab','clinpath'],['🩻 Imaging','imaging'],['🛡️ One Health','isolation'],['📚 Study','study'],['🐈 Cat Corner','catcorner'],['🐕 Dog Yard','yardview'],['🧬 Mechanism Lab','mechanism'],['🧫 Necropsy & Pathology','necropsy'],['🩺 Surgery & Anesthesia','surgery'],['💉 Clinical Skills · Injection & Blood Draw','skills']];
 function map(){
  const mapCells=[
   {x:31,y:38,w:145,h:120,bg:'#d8efd7',e:'🐕',name:'DOG YARD'},
