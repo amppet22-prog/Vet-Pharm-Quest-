@@ -41,6 +41,12 @@ Updated: November 9, 2026
 - **Sources:** course lectures, uploaded textbooks and study guides can inform original explanations and questions. Reusing the actual images/text in a published game requires respecting the specific permission/license and audience, even if private and noncommercial. Preserve author/source attribution and keep answer-revealing source titles concealed until the quiz answer.
 - **Validation:** before publishing changes, syntax-check scripts, inspect module load order and modal delegated event handlers, test navigation, fresh/migrated saves, purchases and stage art. Browser-based interaction QA is separately required.
 
+## Advanced Clinical Pathology distinction — implemented initial build
+- Treatment: routine CBC, basic chemistry, blood morphology and common sample collection. Advanced Lab: **PT/aPTT and primary/secondary hemostasis**, **blood gas and acid–base analysis**, **urinalysis sediment/renal reasoning**, and referral-level integrated cases.
+- 18 new mechanism-based advanced lab questions (6 each) and 3 three-step referral patient cases registered in the **existing shared Clinical Pathology patient list**, preserving the same case completion and rewards. Advanced referrals are badged on that list.
+- Clinical Skills equine injection practice now shows a more detailed original companion-style horse illustration with the existing numbered selection hotspots, not an unlabeled generic silhouette. This is a stylized teaching depiction, not a procedure map or literal reuse of an existing horse image file.
+- Browser visual and behavior QA remain pending after static syntax checks.
+
 ## Next focused milestones
 1. QA active Imaging Suite and the new Clinical Pathology room with existing saves.
 2. Improve station navigation and add imaging projection-selection/positioning diagrams using original artwork.
