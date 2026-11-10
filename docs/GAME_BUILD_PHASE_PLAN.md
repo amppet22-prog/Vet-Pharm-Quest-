@@ -14,6 +14,7 @@ Updated: November 9, 2026
 - Back-to-previous-room navigation
 - **Treatment Ward diagnostic counter (implemented):** in-room CBC and chemistry analyzers, microscope link, 12 original mechanism-based questions, shared XP ledger and links to Clinical Pathology cases and infectious microscopy. The existing hospital patient, monitoring and treatment cart remain.
 - **Cornell eClinPath hematology sources (linked):** Hematology Atlas and RBC Quick Guide are directly accessible from the Blood Smear Lab, with separate source/credit links; species and lesion quiz answers do not display identifying sources before answering.
+- **Microscope Detective (implemented):** 4 credited real photomicrographs with 3-stage identification → physiology/meaning → diagnostic next-step questions (12 total photo stages), species selector, zoom, hidden diagnostic headings/source until answer, and 8 introductory text-based cytology pattern lessons. Launched from Treatment and Clinical Pathology stations; shared first-mastery rewards. Real aspirate images remain a later milestone.
 
 ## Build order / dependencies
 
@@ -40,6 +41,6 @@ Updated: November 9, 2026
 ## Next focused milestones
 1. QA active Imaging Suite and the new Clinical Pathology room with existing saves.
 2. Improve station navigation and add imaging projection-selection/positioning diagrams using original artwork.
-3. Build actual blood and aspirate cytology identification lessons (cell shape, population pattern, artifacts, what to do next).
+3. Expand the verified real-image bank (especially equine/ruminant) and introduce **actual aspirate cytology images** with lesion-site metadata, population pattern, interpretive rationale and next-step choices. A preliminary text-based cytology track is now playable.
 4. Reconcile purchased vs placed decor and create a universal clinic collection interface.
 5. Begin appropriately licensed real-image imaging and cytology case cards with hidden diagnostic clues.
