@@ -401,7 +401,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="mechanism-lab-phase-a4.js?v=20261108-whycompare2"></script>
 <script src="exam-room-traditional.js?v=20261108-examA2"></script>
 <script src="pharmacy-nutrition-room.js?v=20261108-pharm-nutrition1"></script>
-<script src="walkable-clinic-rooms-25d.js?v=20261110-cute2"></script>
+<script src="walkable-clinic-rooms-25d.js?v=20261110-objectglow3"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
@@ -561,7 +561,7 @@ const ROOMS={
  reception:{name:'Reception & Waiting Room',color:'#fff0df',banner:'WELCOME TO YOUR CLINIC',decor:[['🪟','9%','15%'],['🖼️','75%','18%'],['🪴','88%','56%']],props:[{x:22,emoji:'🛎️',label:'Front Desk',action:'welcome',bubble:'First shift'},{x:50,emoji:'🪑',label:'Patient Queue',action:'queue',bubble:'New patients'},{x:79,emoji:'🚪',label:'Clinical Hall',action:'map',bubble:'Choose room'}]},
  exam:{name:'Examination Room',color:'#fff3e8',banner:'EXAM ROOM • PATIENT ROUNDS',decor:[['🩻','9%','15%'],['🖼️','80%','18%'],['🧼','85%','57%']],props:[{x:22,emoji:'📋',label:'Medical Chart',action:'medicalCharts',bubble:'Review history'},{x:52,emoji:'🩺',label:'Exam Table',action:'patients',bubble:'Treat a case'},{x:81,emoji:'📚',label:'Protocols',action:'protocols',bubble:'Clinical steps'}]},
  pharmacy:{name:'Pharmacy & Medication Library',color:'#eaf7ed',banner:'PHARMACY • DRUG REFERENCE',decor:[['🌿','8%','17%'],['🪟','78%','15%']],props:[{x:24,emoji:'💊',label:'Drug Shelves',action:'pharmacy',bubble:'Search drugs'},{x:52,emoji:'🧪',label:'Mechanism Lab',action:'study',bubble:'Learn why'},{x:81,emoji:'☣️',label:'Toxicology Reference',action:'vpqToxPreview',bubble:'Toxicant guide'}]},
- treatment:{name:'Treatment Ward',color:'#f0eafa',banner:'TREATMENT • PATIENT CARE & IN-HOUSE LAB',decor:[['🩹','8%','17%'],['🫀','83%','16%'],['🧪','73%','38%']],props:[{x:12,emoji:'🐴',label:'Hospital Patient',action:'hospitalFollowup',bubble:'Patient rounds'},{x:30,emoji:'💉',label:'Treatment Cart',action:'hospitalAdjust',bubble:'Adjust care'},{x:48,emoji:'📈',label:'Monitoring',action:'hospitalMonitor',bubble:'Vitals & trends'},{x:68,emoji:'🩸',label:'CBC & Chemistry',action:'treatmentDiagnostics',bubble:'In-house analyzers'},{x:88,emoji:'🔬',label:'Microscope Counter',action:'microscopeDetective',bubble:'Photo detective'}]},
+ treatment:{name:'Treatment Ward',color:'#f0eafa',banner:'TREATMENT • PATIENT CARE & IN-HOUSE LAB',decor:[['🩹','8%','17%'],['🫀','83%','16%'],['🧪','73%','38%']],props:[{x:18,emoji:'🐴',label:'Hospital Patient',action:'hospitalFollowup',bubble:'Patient rounds'},{x:33,emoji:'💉',label:'Treatment Cart',action:'hospitalAdjust',bubble:'Adjust care'},{x:65,emoji:'📈',label:'Monitoring',action:'hospitalMonitor',bubble:'Vitals & trends'},{x:80,emoji:'🩸',label:'CBC & Chemistry',action:'treatmentDiagnostics',bubble:'In-house analyzers'},{x:92,emoji:'🔬',label:'Microscope Counter',action:'microscopeDetective',bubble:'Photo detective'}]},
  isolation:{name:'One Health & Isolation',color:'#e6f8f1',banner:'ONE HEALTH • PROTECT THE COMMUNITY',decor:[['🧤','11%','17%'],['☣️','83%','16%'],['🧴','90%','57%']],props:[{x:23,emoji:'🐮',label:'Isolation Patient',action:'onehealth',bubble:'Zoonosis case'},{x:52,emoji:'📚',label:'Disease Library',action:'ohLibrary',bubble:'38 disease cards'},{x:81,emoji:'🛡️',label:'Public Health Desk',action:'ohHub',bubble:'Roles & reporting'}]},
  study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'📖',label:'Guided Learning',action:'learningHub',bubble:'Select & start'},{x:52,emoji:'🏆',label:'Mastery Tracker',action:'masteryTracker',bubble:'Test yourself'},{x:81,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Short practice'}]}
 };
@@ -2832,7 +2832,12 @@ window.VPQ_IMAGING_SUITE.init({body:$('modalBody'),showModal,awardQuestion:maste
 window.VPQ_PATHOGEN_ATLAS.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_PARASITOLOGY_LAB.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_VIRAL_JOURNEYS.init({body:$('modalBody'),showModal});
-const vpqWalkableClinicArt=window.VPQ_WALKABLE_CLINIC_ART({doAction:a=>doAction(a)});
+const vpqWalkableClinicArt=window.VPQ_WALKABLE_CLINIC_ART({doAction:a=>doAction(a),rooms:ROOMS});
+// Use the SAME station activation for walking up with E and clicking an illustrated object.
+const vpq25PriorPosition=updatePosition;
+updatePosition=function(){vpq25PriorPosition();if(activeRoom==='treatment'||activeRoom==='imaging'){const near=vpqWalkableClinicArt.updateNearby(activeRoom,avatarX);if(near)$('interactToast').textContent='Press E: '+near.label;}};
+const vpq25PriorInteract=interact;
+interact=function(){if((activeRoom==='treatment'||activeRoom==='imaging')&&vpqWalkableClinicArt.interactNearest(activeRoom,avatarX))return;return vpq25PriorInteract();};
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
