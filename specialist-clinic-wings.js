@@ -50,38 +50,21 @@ function scene(key){
  '<g filter="url(#vpqSpecShadow)">'+rect(321,92,359,54,'#fffdfd','#a8b9d6')+
  '<text x="500" y="127" font-family="Arial,sans-serif" font-weight="900" font-size="24" fill="#607b90" text-anchor="middle">'+label+'</text></g>';
  if(cp){
-   // Advanced diagnostics equipment: clotting analyzer, blood-gas console, urine bench, referral case monitor.
-   s+='<g filter="url(#vpqSpecShadow)">'+
-   rect(93,206,166,120,'#fff1f9','#c9aacd')+
-   rect(108,221,131,60,'#354c69','#9ec2da')+
-   '<path d="M122 253h25l6 -13 8 24 10 -17 9 7h44" fill="none" stroke="#7ce6bb" stroke-width="5"/>'+
-   [120,160,200].map(x=>'<rect x="'+x+'" y="291" width="18" height="19" rx="4" fill="#e2a4be"/>').join('')+
-   rect(319,202,209,124,'#e5effd','#a2b5d3')+
-   rect(337,218,133,68,'#384e6a','#93b3d2')+
-   '<text x="401" y="247" font-family="Arial" font-size="16" text-anchor="middle" font-weight="900" fill="#a6f0db">pH 7.28</text>'+
-   '<text x="401" y="269" font-family="Arial" font-size="13" text-anchor="middle" fill="#e7f7fe">pCO₂ / HCO₃</text>'+
-   [480,505].map(x=>'<circle cx="'+x+'" cy="249" r="9" fill="#93c5e0"/>').join('')+
-   rect(580,202,174,124,'#f8effc','#c4abcb')+
-   rect(593,215,144,58,'#c3ddeb','#8eaecb')+
-   '<circle cx="633" cy="242" r="17" fill="#d9a9b7"/><circle cx="676" cy="244" r="17" fill="#eecba5"/>'+
-   [610,646,682,716].map(x=>'<rect x="'+x+'" y="284" width="16" height="24" rx="4" fill="#b38cbf"/>').join('')+
-   rect(785,205,155,124,'#eef0fd','#a3add3')+
-   rect(797,218,132,82,'#344d6a','#8faaca')+
-   '<path d="M807 255h18l8 -15 13 26 15 -26 8 15h51" stroke="#92e5c8" stroke-width="4" fill="none"/>'+
-   '<text x="861" y="290" font-size="13" font-weight="900" text-anchor="middle" fill="#fff">CASE BOARD</text>'+
-   '<rect x="85" y="329" width="853" height="16" rx="6" fill="#cbb5d8"/></g>'+
-   '<g font-family="Arial,sans-serif" font-size="16" font-weight="900" text-anchor="middle">'+
-   '<text x="177" y="186" fill="#a56a8f">HEMOSTASIS</text>'+
-   '<text x="420" y="186" fill="#648eae">BLOOD GAS</text>'+
-   '<text x="667" y="186" fill="#996fa1">URINE SEDIMENT</text>'+
-   '<text x="856" y="186" fill="#677fa7">REFERRAL CASES</text></g>'+
-   '<path d="M93 166q8 -10 16 0l-8 12zM720 158q8 -10 16 0l-8 12z" fill="#e9afc9"/>'+
-   // The fifth station restores microscopy and in-depth laboratory investigations.
-   '<g><rect x="776" y="196" width="178" height="146" rx="16" fill="#f2e8fa" stroke="#b598ca" stroke-width="6"/>'+
-   '<circle cx="858" cy="250" r="30" fill="#fff" stroke="#a9a1d2" stroke-width="5"/>'+
-   '<path d="M849 251v-30l-11 -12M849 227l16 -14M828 276h59" stroke="#718eb1" stroke-width="8" fill="none"/>'+
-   '<rect x="795" y="302" width="144" height="20" rx="9" fill="#b7a1cc"/>'+
-   '<text x="864" y="337" font-size="13" font-family="Arial" text-anchor="middle" fill="#796095" font-weight="900">MICROSCOPY</text></g>';
+   const stations=[
+    {x:79,label:'HEMOSTASIS',c:'#f8e4f2',edge:'#c99ac4',screen:'PT / aPTT',symbol:'🩸'},
+    {x:264,label:'BLOOD GAS',c:'#e6f5fa',edge:'#9ac9db',screen:'pH / CO₂',symbol:'🫧'},
+    {x:448,label:'URINE SEDIMENT',c:'#f6eafa',edge:'#c9a9da',screen:'SEDIMENT',symbol:'🧫'},
+    {x:632,label:'CASE BOARD',c:'#eaf0fa',edge:'#a1b6da',screen:'CASE FILE',symbol:'🐾'},
+    {x:816,label:'MICROSCOPY',c:'#e8f8f5',edge:'#9dc9ba',screen:'SMEAR',symbol:'🔬'}
+   ];
+   s+='<g filter="url(#vpqSpecShadow)">'+stations.map(v=>
+     rect(v.x,196,145,134,v.c,v.edge)+
+     rect(v.x+13,211,119,71,'#405671',v.edge)+
+     '<text x="'+(v.x+73)+'" y="241" text-anchor="middle" font-family="Arial" font-size="17" font-weight="900" fill="#d6f4fa">'+v.screen+'</text>'+
+     '<path d="M'+(v.x+28)+' 263h21l8 -15 12 26 12 -18h29" fill="none" stroke="#92e4be" stroke-width="4"/>'+
+     '<text x="'+(v.x+72)+'" y="313" text-anchor="middle" font-family="Arial" font-size="12" font-weight="900" fill="#6e6688">'+v.label+'</text>'
+   ).join('')+'</g><path d="M65 338h868" stroke="#c4b2cf" stroke-width="14"/>'+
+   '<g><circle cx="151" cy="181" r="7" fill="#ebafd3"/><circle cx="854" cy="181" r="7" fill="#b6ddcd"/><path d="M152 155l5 10 11 2 -8 8 2 11 -10-5 -10 5 3-11 -8-8 10-2z" fill="#f9d7a3"/></g>';
  }else if(iso){
    s+='<g filter="url(#vpqSpecShadow)">'+rect(95,193,230,145,'#e0f7f2','#8cbab0')+
    '<rect x="115" y="300" width="184" height="23" rx="10" fill="#a8d1c5"/>'+
@@ -110,15 +93,46 @@ function scene(key){
    '<rect x="622" y="275" width="22" height="29" rx="5" fill="#d5eaf6" stroke="#9bbccc" stroke-width="3"/>'+
    '<rect x="651" y="278" width="16" height="28" rx="4" fill="#f0dde8" stroke="#c8adc2" stroke-width="3"/>'+
    '<text x="646" y="331" text-anchor="middle" font-size="12" font-family="Arial" font-weight="900" fill="#4e8987">CLEAN</text></g>';
+ }else if(key==='surgery'){
+   s+='<g filter="url(#vpqSpecShadow)">'+
+   rect(74,191,177,148,'#fff2f5','#d5adc5')+
+   '<rect x="93" y="214" width="137" height="90" rx="9" fill="#fff" stroke="#b5c4d8" stroke-width="4"/>'+
+   '<text x="161" y="241" text-anchor="middle" font-family="Arial" font-size="16" fill="#9a7aaa" font-weight="900">STERILE FIELD</text>'+
+   '<text x="160" y="286" font-size="43" text-anchor="middle">🧽</text>'+
+   rect(286,177,196,162,'#e4f1fa','#a4bbd6')+
+   rect(303,198,165,96,'#405975','#93b4ca')+
+   '<path d="M317 254h27l9 -19 12 32 14 -23 13 13h62" fill="none" stroke="#84edc1" stroke-width="6"/>'+
+   '<text x="386" y="228" font-size="19" text-anchor="middle" fill="#f6cfdd">♥ 112</text>'+
+   rect(523,230,230,103,'#ebdef4','#b7a0cc')+
+   '<rect x="535" y="252" width="206" height="31" rx="12" fill="#c6b4db"/>'+
+   '<path d="M558 332v36M720 332v36" stroke="#9c9cbd" stroke-width="10"/>'+
+   '<path d="M580 243v-36h29" stroke="#9db3ce" stroke-width="9" fill="none"/>'+
+   rect(785,194,159,141,'#f4e8f9','#b8add4')+
+   rect(799,210,130,92,'#435b7d','#99b6cf')+
+   '<text x="862" y="263" font-size="21" text-anchor="middle" fill="#fff">CASE FILES</text>'+
+   '</g><g font-size="14" font-family="Arial" font-weight="900" text-anchor="middle" fill="#786b9a">'+
+   '<text x="165" y="175">PREP & ASEPSIS</text><text x="389" y="165">ANESTHESIA</text>'+
+   '<text x="639" y="208">RECOVERY</text><text x="864" y="177">PATIENT BOARD</text></g>'+
+   '<g><rect x="68" y="116" width="170" height="46" rx="12" fill="#fff7cf" stroke="#e8c379" stroke-width="4"/>'+
+   '<text x="153" y="144" text-anchor="middle" font-size="16" font-family="Arial" fill="#9e7440" font-weight="900">HAND HYGIENE</text></g>';
  }else{
    s+='<g filter="url(#vpqSpecShadow)">'+
-   rect(126,224,283,104,'#e7eff1','#a2b6bb')+
-   '<rect x="143" y="246" width="240" height="40" rx="18" fill="#c1dadd"/>'+
-   '<path d="M160 318v66M375 318v66" stroke="#869ca7" stroke-width="12"/>'+
-   rect(604,197,253,137,'#e9ecfb','#a9aacb')+
-   '<rect x="621" y="211" width="220" height="105" rx="8" fill="#344b64"/>'+
-   '<circle cx="700" cy="265" r="34" fill="#abb9ce"/><circle cx="700" cy="265" r="17" fill="#415870"/>'+
-   '<circle cx="787" cy="265" r="30" fill="#bdc9d6"/><circle cx="787" cy="265" r="15" fill="#4f657c"/></g>';
+   rect(85,211,213,119,'#e8f1ed','#a2bdb2')+
+   '<rect x="102" y="248" width="180" height="39" rx="14" fill="#c1dad8"/>'+
+   '<path d="M122 320v35M265 320v35" stroke="#8eada9" stroke-width="9"/>'+
+   rect(334,200,173,131,'#e8eefa','#a5bbd4')+
+   rect(349,216,143,82,'#405972','#92b8cd')+
+   '<circle cx="412" cy="257" r="30" fill="#b6cadd"/><circle cx="412" cy="257" r="16" fill="#445971"/>'+
+   rect(545,198,176,136,'#fff0dc','#d1b58f')+
+   '<rect x="560" y="215" width="145" height="79" rx="8" fill="#fbfaf7"/>'+
+   '<text x="632" y="246" text-anchor="middle" font-size="18" font-family="Arial" font-weight="900" fill="#a87b47">☣ BIOHAZARD</text>'+
+   '<text x="632" y="276" text-anchor="middle" font-size="12" fill="#ac8155">GLOVES · GOWN</text>'+
+   rect(762,208,167,126,'#efeaf9','#b8a7d1')+
+   rect(774,221,142,76,'#405670','#a0bed3')+
+   '<text x="845" y="257" text-anchor="middle" font-family="Arial" font-size="16" fill="#fff">CASE BOARD</text>'+
+   '</g><g text-anchor="middle" font-family="Arial" font-size="15" fill="#756987" font-weight="900">'+
+   '<text x="188" y="187">GROSS EXAM</text><text x="417" y="185">HISTOLOGY</text>'+
+   '<text x="634" y="182">BIOSECURITY</text><text x="848" y="188">PATIENTS</text></g>';
  }
  return s+'</svg>';
 }
