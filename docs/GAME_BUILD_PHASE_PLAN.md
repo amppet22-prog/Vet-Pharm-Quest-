@@ -12,6 +12,8 @@ Updated: November 9, 2026
 - **Diagnostic Imaging Suite** (new): walkable X-ray table, ultrasound machine, CT workstation and report desk. First activity set has 13 conceptual technique/imaging questions, original labeled schematic visuals and shared question rewards. No real patient scans in these stations yet.
 - Reception-only item catalog/placing support; not yet a universal cross-room inventory-placement system
 - Back-to-previous-room navigation
+- **Treatment Ward diagnostic counter (implemented):** in-room CBC and chemistry analyzers, microscope link, 12 original mechanism-based questions, shared XP ledger and links to Clinical Pathology cases and infectious microscopy. The existing hospital patient, monitoring and treatment cart remain.
+- **Cornell eClinPath hematology sources (linked):** Hematology Atlas and RBC Quick Guide are directly accessible from the Blood Smear Lab, with separate source/credit links; species and lesion quiz answers do not display identifying sources before answering.
 
 ## Build order / dependencies
 
