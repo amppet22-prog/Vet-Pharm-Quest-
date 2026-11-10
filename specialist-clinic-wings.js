@@ -8,10 +8,10 @@ const stage=document.getElementById('stage');if(!stage||!window.VPQ_SCENERY)retu
 const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const data={
  clinpath:[
-  {x:7,y:40,w:18,h:35,walk:17,label:'🔬 Blood microscope',action:'microscopeDetective'},
-  {x:31,y:40,w:21,h:35,walk:43,label:'🧪 Lab analyzer',action:'clinpath'},
-  {x:58,y:40,w:18,h:35,walk:68,label:'🐾 Patient results',action:'clinpathCases'},
-  {x:79,y:40,w:18,h:35,walk:87,label:'🩸 Sample workflow',action:'diagnosticSkills'}
+  {x:7,y:40,w:18,h:35,walk:17,label:'🩸 Coagulation',action:'advancedCoag'},
+  {x:31,y:40,w:21,h:35,walk:43,label:'🫧 Blood Gas',action:'advancedGas'},
+  {x:58,y:40,w:18,h:35,walk:68,label:'🧫 Urinalysis',action:'advancedUrine'},
+  {x:79,y:40,w:18,h:35,walk:87,label:'🐾 Advanced Cases',action:'advancedCases'}
  ],
  isolation:[
   {x:9,y:37,w:22,h:39,walk:23,label:'🐶 Isolation patient',action:'onehealth'},
@@ -40,20 +40,32 @@ function scene(key){
  '<g filter="url(#vpqSpecShadow)">'+rect(321,92,359,54,'#fffdfd','#a8b9d6')+
  '<text x="500" y="127" font-family="Arial,sans-serif" font-weight="900" font-size="24" fill="#607b90" text-anchor="middle">'+label+'</text></g>';
  if(cp){
+   // Advanced diagnostics equipment: clotting analyzer, blood-gas console, urine bench, referral case monitor.
    s+='<g filter="url(#vpqSpecShadow)">'+
-   rect(95,211,152,106,'#dce6f5','#8a9dbb')+
-   '<path d="M151 287V251l-12 -11M151 262l17 -20" stroke="#718ba9" stroke-width="12" fill="none"/>'+
-   '<circle cx="161" cy="241" r="19" fill="#e7f2fc" stroke="#7b9cbb" stroke-width="6"/>'+
-   '<path d="M120 298h92" stroke="#718ba9" stroke-width="12"/>'+
-   rect(324,202,202,115,'#eaf1ff','#a3b8d1')+rect(342,219,110,66,'#435e79','#8db6cc')+
-   '<path d="M360 261h67" stroke="#8be4bf" stroke-width="6"/>'+
-   [461,485,508].map(x=>'<rect x="'+x+'" y="265" width="13" height="22" rx="3" fill="#ca8eac"/>').join('')+
-   rect(571,214,173,101,'#eef3fb','#a7aec6')+rect(584,227,144,68,'#4a617d','#9caec7')+
-   '<path d="M598 274h25l9 -19 13 28 13 -40 11 31h42" stroke="#8ce1be" stroke-width="4" fill="none"/>'+
-   rect(790,213,136,106,'#f5edf9','#c5a6d1')+
-   '<path d="M812 276h91M818 243h67" stroke="#c98cb9" stroke-width="7"/>'+
-   [832,859,886].map(x=>'<rect x="'+x+'" y="256" width="17" height="18" rx="4" fill="#89bfcb"/>').join('')+
-   '<rect x="86" y="333" width="839" height="15" rx="7" fill="#b5d0df"/></g>';
+   rect(93,206,166,120,'#fff1f9','#c9aacd')+
+   rect(108,221,131,60,'#354c69','#9ec2da')+
+   '<path d="M122 253h25l6 -13 8 24 10 -17 9 7h44" fill="none" stroke="#7ce6bb" stroke-width="5"/>'+
+   [120,160,200].map(x=>'<rect x="'+x+'" y="291" width="18" height="19" rx="4" fill="#e2a4be"/>').join('')+
+   rect(319,202,209,124,'#e5effd','#a2b5d3')+
+   rect(337,218,133,68,'#384e6a','#93b3d2')+
+   '<text x="401" y="247" font-family="Arial" font-size="16" text-anchor="middle" font-weight="900" fill="#a6f0db">pH 7.28</text>'+
+   '<text x="401" y="269" font-family="Arial" font-size="13" text-anchor="middle" fill="#e7f7fe">pCO₂ / HCO₃</text>'+
+   [480,505].map(x=>'<circle cx="'+x+'" cy="249" r="9" fill="#93c5e0"/>').join('')+
+   rect(580,202,174,124,'#f8effc','#c4abcb')+
+   rect(593,215,144,58,'#c3ddeb','#8eaecb')+
+   '<circle cx="633" cy="242" r="17" fill="#d9a9b7"/><circle cx="676" cy="244" r="17" fill="#eecba5"/>'+
+   [610,646,682,716].map(x=>'<rect x="'+x+'" y="284" width="16" height="24" rx="4" fill="#b38cbf"/>').join('')+
+   rect(785,205,155,124,'#eef0fd','#a3add3')+
+   rect(797,218,132,82,'#344d6a','#8faaca')+
+   '<path d="M807 255h18l8 -15 13 26 15 -26 8 15h51" stroke="#92e5c8" stroke-width="4" fill="none"/>'+
+   '<text x="861" y="290" font-size="13" font-weight="900" text-anchor="middle" fill="#fff">CASE BOARD</text>'+
+   '<rect x="85" y="329" width="853" height="16" rx="6" fill="#cbb5d8"/></g>'+
+   '<g font-family="Arial,sans-serif" font-size="16" font-weight="900" text-anchor="middle">'+
+   '<text x="177" y="186" fill="#a56a8f">HEMOSTASIS</text>'+
+   '<text x="420" y="186" fill="#648eae">BLOOD GAS</text>'+
+   '<text x="667" y="186" fill="#996fa1">URINE SEDIMENT</text>'+
+   '<text x="856" y="186" fill="#677fa7">REFERRAL CASES</text></g>'+
+   '<path d="M93 166q8 -10 16 0l-8 12zM720 158q8 -10 16 0l-8 12z" fill="#e9afc9"/>';
  }else if(iso){
    s+='<g filter="url(#vpqSpecShadow)">'+rect(95,193,230,145,'#e0f7f2','#8cbab0')+
    '<rect x="115" y="300" width="184" height="23" rx="10" fill="#a8d1c5"/>'+
