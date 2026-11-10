@@ -64,7 +64,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<path d="M451 143L475 104H572L593 143V308H451Z" fill="#c6b9ca" stroke="#f9e7d4" stroke-width="5"/>'+
    '<path d="M475 104L451 143V308L475 263Z M572 104L593 143V308L572 263Z" fill="#9487a0"/>'+
    '<path d="M475 263L451 308H593L572 263Z" fill="#e8d4c1"/>'+
-   '<path d="M487 137H562V265H487Z" fill="#8eaca9" stroke="#597b80" stroke-width="6"/>'+
+   '<path d="M487 137H562V265H487Z" fill="#d7c9df" stroke="#597b80" stroke-width="6"/>'+ '<path d="M500 260L512 144H538L550 260" fill="#ede6ef" stroke="#a6a0bd" stroke-width="3"/>'+ '<path d="M500 260L487 283H562L550 260Z" fill="#d5bfcf"/>'+ '<path d="M512 144h26M508 174h35M503 211h44" stroke="#a6a0bd" stroke-width="4"/>'+
    '<rect x="497" y="161" width="56" height="45" rx="5" fill="#e5f6f6"/>'+
    '<text x="525" y="178" text-anchor="middle" font-size="13" font-family="sans-serif" font-weight="800" fill="#315b69">CLINIC</text>'+
    '<text x="525" y="193" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#315b69">HALL</text>'+
@@ -87,8 +87,23 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<rect x="169" y="267" width="82" height="58" rx="7" fill="#536d82"/><rect x="176" y="273" width="69" height="43" fill="#bde9ed"/><path d="M204 325v13h16v-13" stroke="#627e92" stroke-width="7"/>'+
    '<rect x="103" y="301" width="51" height="22" rx="5" fill="#fdf5e3" stroke="#cebdb0" stroke-width="3"/><path d="M117 302h24" stroke="#89b3a0" stroke-width="4"/>'+
    '<path d="M284 312q13-18 26 0v6h-26Z" fill="#e4b164"/><circle cx="297" cy="298" r="5" fill="#e4b164"/><rect x="270" y="317" width="56" height="6" rx="3" fill="#a78868"/></g>'+
+   // Rear glass window: the dog-yard view remains part of the reception scene.
+   '<g><rect x="84" y="113" width="137" height="127" rx="12" fill="#cfe8f1" stroke="#af92bd" stroke-width="7"/>'+
+   '<rect x="94" y="123" width="117" height="105" rx="7" fill="#d5f1fa"/>'+
+   '<path d="M94 194q50 -26 117 0v34H94Z" fill="#a3d3a4"/>'+
+   '<path d="M98 177h109M151 123v104" stroke="#fffaf5" stroke-width="4"/>'+
+   '<g transform="translate(114 165) scale(.6)">'+
+   '<ellipse cx="57" cy="53" rx="48" ry="26" fill="#d9a478" stroke="#ae785c" stroke-width="4"/>'+
+   '<circle cx="17" cy="39" r="26" fill="#e6b18a"/>'+
+   '<path d="M-1 21l-10 -20 21 15M31 22l17 -16 -4 28" fill="#a8705b"/>'+
+   '<ellipse cx="0" cy="46" rx="19" ry="12" fill="#faebd7"/>'+
+   '<circle cx="-10" cy="43" r="5" fill="#51434a"/><circle cx="18" cy="35" r="4" fill="#3d3441"/>'+
+   '<path d="M83 50q24 -20 27 2" stroke="#b57d61" stroke-width="9" fill="none"/>'+
+   '<path d="M32 73v13M73 74v12" stroke="#af7e60" stroke-width="9"/></g>'+
+   '<rect x="96" y="230" width="117" height="24" rx="9" fill="#fffaf4" stroke="#bdabc8" stroke-width="3"/>'+
+   '<text x="154" y="247" text-anchor="middle" font-size="13" font-weight="900" font-family="Arial" fill="#6b608b">DOG PLAY YARD</text></g>'+
    // wall notice and patient chairs, corners
-   '<g transform="translate(86 138)"><rect width="128" height="97" rx="10" fill="#fff9ee" stroke="'+c[4]+'" stroke-width="6"/><text x="64" y="23" text-anchor="middle" font-size="14" font-weight="800" font-family="sans-serif" fill="#5d667a">WELCOME</text><text x="64" y="52" text-anchor="middle" font-size="29">🐾</text><text x="64" y="73" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#687990">Your clinic</text></g>'+
+   '<g transform="translate(841 98)"><rect width="86" height="48" rx="12" fill="#fff9ee" stroke="'+c[4]+'" stroke-width="5"/><text x="43" y="21" text-anchor="middle" font-size="13" font-weight="900" font-family="Arial" fill="#5d667a">WELCOME</text><text x="43" y="39" text-anchor="middle" font-size="16">🐾</text></g>'+
    couch+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
    '<text x="509" y="34" text-anchor="middle" font-size="20" font-weight="800" font-family="sans-serif" fill="#57667d">VET PHARM QUEST • RECEPTION</text>'+
