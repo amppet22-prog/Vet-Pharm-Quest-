@@ -402,6 +402,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="exam-room-traditional.js?v=20261108-examA2"></script>
 <script src="pharmacy-nutrition-room.js?v=20261108-pharm-nutrition1"></script>
 <script src="walkable-clinic-rooms-25d.js?v=20261110-objectglow3"></script>
+<script src="clinic-approach-interactions.js?v=20261110-allrooms1"></script>
+<script src="specialist-clinic-wings.js?v=20261110-wings1"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
@@ -565,7 +567,7 @@ const ROOMS={
  isolation:{name:'One Health & Isolation',color:'#e6f8f1',banner:'ONE HEALTH • PROTECT THE COMMUNITY',decor:[['🧤','11%','17%'],['☣️','83%','16%'],['🧴','90%','57%']],props:[{x:23,emoji:'🐮',label:'Isolation Patient',action:'onehealth',bubble:'Zoonosis case'},{x:52,emoji:'📚',label:'Disease Library',action:'ohLibrary',bubble:'38 disease cards'},{x:81,emoji:'🛡️',label:'Public Health Desk',action:'ohHub',bubble:'Roles & reporting'}]},
  study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'📖',label:'Guided Learning',action:'learningHub',bubble:'Select & start'},{x:52,emoji:'🏆',label:'Mastery Tracker',action:'masteryTracker',bubble:'Test yourself'},{x:81,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Short practice'}]}
 };
-ROOMS.clinpath={name:'Clinical Pathology Laboratory',color:'#e8f4fc',banner:'CLINICAL PATHOLOGY • BLOOD & CYTOLOGY',decor:[['🔬','10%','14%'],['🩸','77%','16%'],['📊','84%','52%']],props:[{x:17,emoji:'🔬',label:'Blood Smear Bench',action:'microscopeDetective',bubble:'Photo & cytology games'},{x:43,emoji:'🧪',label:'Clinical Path Lab',action:'clinpath',bubble:'Interpret results'},{x:68,emoji:'🐾',label:'Patient Consults',action:'clinpathCases',bubble:'Why & differential'},{x:87,emoji:'🩸',label:'Sample Workflow',action:'diagnosticSkills',bubble:'Artifacts'}]};
+ROOMS.clinpath={name:'Advanced Clinical Pathology Lab · Treatment Extension',color:'#e8f4fc',banner:'CLINICAL PATHOLOGY • BLOOD & CYTOLOGY',decor:[['🔬','10%','14%'],['🩸','77%','16%'],['📊','84%','52%']],props:[{x:17,emoji:'🔬',label:'Blood Smear Bench',action:'microscopeDetective',bubble:'Photo & cytology games'},{x:43,emoji:'🧪',label:'Clinical Path Lab',action:'clinpath',bubble:'Interpret results'},{x:68,emoji:'🐾',label:'Patient Consults',action:'clinpathCases',bubble:'Why & differential'},{x:87,emoji:'🩸',label:'Sample Workflow',action:'diagnosticSkills',bubble:'Artifacts'}]};
 const LEVEL_THRESH=130;const DEFAULT={name:'Student Vet',skin:'#b77957',hair:'#5b3e38',scrubs:'#67a5d9',pet:'🐕',petName:'Buddy',petCoat:'#f5d59a',petAccessory:'🎀',xp:0,coins:0,attempts:0,correct:0,completed:[],studyCorrect:0,upgrades:[],room:'reception',focus:'All lectures',questionHistory:{},studySession:null};
 const KEY='vpq-v2-clinic-state',EDITS_KEY='vpq-v2-content-edits';
 function safeRead(k,fallback){try{return JSON.parse(localStorage.getItem(k))||fallback}catch{return fallback}}
@@ -2833,11 +2835,26 @@ window.VPQ_PATHOGEN_ATLAS.init({body:$('modalBody'),showModal,openCases,awardQue
 window.VPQ_PARASITOLOGY_LAB.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_VIRAL_JOURNEYS.init({body:$('modalBody'),showModal});
 const vpqWalkableClinicArt=window.VPQ_WALKABLE_CLINIC_ART({doAction:a=>doAction(a),rooms:ROOMS});
+const vpqApproachOtherRooms=window.VPQ_ROOM_INTERACTIONS({rooms:ROOMS});
+const vpqSpecialistWings=window.VPQ_SPECIALIST_ROOMS({doAction:a=>doAction(a),rooms:ROOMS});
 // Use the SAME station activation for walking up with E and clicking an illustrated object.
 const vpq25PriorPosition=updatePosition;
-updatePosition=function(){vpq25PriorPosition();if(activeRoom==='treatment'||activeRoom==='imaging'){const near=vpqWalkableClinicArt.updateNearby(activeRoom,avatarX);if(near)$('interactToast').textContent='Press E: '+near.label;}};
+updatePosition=function(){
+ vpq25PriorPosition();
+ const near=(activeRoom==='treatment'||activeRoom==='imaging')
+   ?vpqWalkableClinicArt.updateNearby(activeRoom,avatarX)
+   :(['clinpath','isolation','necropsy'].includes(activeRoom)
+      ?vpqSpecialistWings.updateNearby(activeRoom,avatarX)
+      :vpqApproachOtherRooms.updateNearby(activeRoom,avatarX));
+ if(near)$('interactToast').textContent='Press E: '+near.label;
+};
 const vpq25PriorInteract=interact;
-interact=function(){if((activeRoom==='treatment'||activeRoom==='imaging')&&vpqWalkableClinicArt.interactNearest(activeRoom,avatarX))return;return vpq25PriorInteract();};
+interact=function(){
+ if((activeRoom==='treatment'||activeRoom==='imaging')&&vpqWalkableClinicArt.interactNearest(activeRoom,avatarX))return;
+ if(['clinpath','isolation','necropsy'].includes(activeRoom)&&vpqSpecialistWings.interactNearest(activeRoom,avatarX))return;
+ if(vpqApproachOtherRooms.interactNearest(activeRoom,avatarX))return;
+ return vpq25PriorInteract();
+};
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
