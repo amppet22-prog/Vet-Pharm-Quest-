@@ -79,7 +79,21 @@ function scene(key){
    rect(711,195,210,144,'#e9f5f6','#a1bfc9')+
    '<rect x="743" y="216" width="149" height="83" rx="6" fill="#385b73"/>'+
    '<path d="M763 259h29l12 -23 14 36 12 -27 12 14h33" stroke="#85d9bb" stroke-width="5" fill="none"/>'+
-   '<text x="817" y="323" text-anchor="middle" fill="#587b8b" font-size="15" font-weight="900">PUBLIC HEALTH</text></g>';
+   '<text x="817" y="323" text-anchor="middle" fill="#587b8b" font-size="15" font-weight="900">PUBLIC HEALTH</text></g>'+
+   // Infection-control environment: visible risk sign, PPE storage, handwashing and cleaning cart.
+   '<g font-family="Arial,sans-serif" font-weight="900">'+
+   '<rect x="109" y="111" width="171" height="52" rx="12" fill="#fff2cc" stroke="#e6b56a" stroke-width="4"/>'+
+   '<text x="194" y="134" text-anchor="middle" font-size="16" fill="#936b2e">☣ BIOHAZARD</text>'+
+   '<text x="194" y="152" text-anchor="middle" font-size="12" fill="#936b2e">CHECK ISOLATION PPE</text>'+
+   '<rect x="715" y="104" width="194" height="59" rx="12" fill="#e0f5f4" stroke="#8fbdc4" stroke-width="4"/>'+
+   '<text x="810" y="128" text-anchor="middle" font-size="15" fill="#467c82">🧤 GLOVES · 🥼 GOWN</text>'+
+   '<text x="810" y="148" text-anchor="middle" font-size="13" fill="#467c82">MASK · HAND HYGIENE</text></g>'+
+   '<g><rect x="324" y="272" width="56" height="77" rx="9" fill="#bad4e0" stroke="#8bb1be" stroke-width="4"/>'+
+   '<path d="M345 268h23M355 267v-15M349 285h15" fill="none" stroke="#709daa" stroke-width="7"/>'+
+   '<rect x="608" y="290" width="76" height="61" rx="9" fill="#b6d6d1" stroke="#82ada8" stroke-width="4"/>'+
+   '<rect x="622" y="275" width="22" height="29" rx="5" fill="#d5eaf6" stroke="#9bbccc" stroke-width="3"/>'+
+   '<rect x="651" y="278" width="16" height="28" rx="4" fill="#f0dde8" stroke="#c8adc2" stroke-width="3"/>'+
+   '<text x="646" y="331" text-anchor="middle" font-size="12" font-family="Arial" font-weight="900" fill="#4e8987">CLEAN</text></g>';
  }else{
    s+='<g filter="url(#vpqSpecShadow)">'+
    rect(126,224,283,104,'#e7eff1','#a2b6bb')+
