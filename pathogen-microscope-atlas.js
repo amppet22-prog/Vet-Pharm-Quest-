@@ -26,6 +26,7 @@ const entries=[
 ];
 entries.push(...(window.VPQ_LIVESTOCK_PARASITES?.entries||[]));
 entries.push(...(window.VPQ_MICROPHOTO_ENTRIES||[]));
+entries.push(...(window.VPQ_PARASITE_LECTURE_SUPPLEMENT?.entries||[]));
 const img=[
 {id:'egg-hook',title:'Thin-shelled hookworm-type egg',kind:'Fecal egg',answer:'Hookworm-type ovum (group only)',options:['Hookworm-type ovum (group only)','Trichuris vulpis egg','Toxocara-type ascarid egg','Strongyloides L1 larva'],why:'Oval thin shell and morula support a hookworm-type egg; many hookworm species cannot be reliably separated from eggs alone. The displayed CDC photo comes from a human-hookworm reference and is a GROUP-LEVEL morphology example, not proof of A. caninum.',src:'https://www.cdc.gov/dpdx/hookworm/images/1/Hookworm_egg_wtmt.jpg',url:'https://www.cdc.gov/dpdx/hookworm/',credit:'CDC DPDx · Hookworm egg (human hookworm reference image)',ties:['anc-can','anc-tub','anc-bra','unc-steno']},
 {id:'egg-toxo',title:'Pitted round ascarid egg',kind:'Fecal egg',answer:'Toxocara spp. egg',options:['Toxocara spp. egg','Toxascaris leonina smooth egg','Trichuris egg with two polar plugs','Strongyle-type egg'],why:'The thick, textured/pitted shell indicates Toxocara spp. This CDC photograph is most consistent with T. cati by size; species differentiation requires measurement and host context.',src:'https://www.cdc.gov/dpdx/toxocariasis/images/1/Toxocara_egg_wtmt.jpg',url:'https://www.cdc.gov/dpdx/toxocariasis/',credit:'CDC DPDx · Toxocara egg; courtesy NJ State Public Health Laboratory',ties:['tox-can','tox-cati']},
@@ -42,6 +43,7 @@ const extraQuestions=[
 {id:'refugia',lecture:'CVM 713 · Lecture 10',kind:'Treatment stewardship',q:'Why might selective deworming based on appropriate fecal egg count monitoring help slow equine strongyle resistance?',options:['Preserves refugia that have not been selected by drug exposure','Kills every worm on every pasture at all times','Eliminates all need for pasture management','Means a negative fecal count rules out all larval disease'],answer:0,why:'Refugia provide susceptible parasite genotypes that can dilute resistant survivors. Management remains essential; encysted/migrating burdens are not counted by fecal eggs.',ties:['cyath','str-vul']}
 ];
 extraQuestions.push(...(window.VPQ_LIVESTOCK_PARASITES?.questions||[]));
+extraQuestions.push(...(window.VPQ_PARASITE_LECTURE_SUPPLEMENT?.questions||[]));
 const cases=[
 {id:'para-case-hook',track:'Parasitology',lecture:'CVM 713 · Lecture 2',emoji:'🐶',name:'Poppy — hemorrhagic puppy',species:'Dog',location:'exam',intro:'A 6-month-old puppy has pale mucous membranes, black tarry stool, and a low packed cell volume. Fecal flotation finds thin-shelled morulated ova around 60 × 40 μm.',steps:[
 {q:'Which group best fits the fecal and clinical findings?',options:['Hookworms, especially canine Ancylostoma in context','Trichuris alone in the cecum','Toxocara alone causing isolated constipation','Feline lungworm'],answer:0,why:'Thin-shelled strongyle-type eggs plus marked intestinal blood loss strongly suggest hookworms; a species-level ID needs clinical context and/or confirmatory diagnostics.',tag:'Parasitology · Lecture 2'},
@@ -57,6 +59,7 @@ const cases=[
 {q:'What preventive action is relevant in multi-cat settings?',options:['Prompt cleaning of vomitus and assessment of affected animals','Increase communal vomiting exposure','Treat every cat with antibiotics without diagnosis','Assume zoonotic transmission from every gastric parasite'],answer:0,why:'Transmission can involve ingestion of infected vomitus, supporting environmental cleaning and targeted veterinary assessment.',tag:'Infection control'}]}
 ];
 cases.push(...(window.VPQ_LIVESTOCK_PARASITES?.cases||[]));
+cases.push(...(window.VPQ_PARASITE_LECTURE_SUPPLEMENT?.cases||[]));
 let api,game=null,filters={species:'All',lecture:'All'};
 const h=x=>String(x??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const shuffle=a=>{let x=a.slice();for(let i=x.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[x[j],x[i]]=[x[i],x[j]]}return x};
