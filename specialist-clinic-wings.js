@@ -25,6 +25,11 @@ const data={
   {x:52,y:40,w:20,h:39,walk:63,label:'☣️ Biosecurity',action:'necroBio'},
   {x:76,y:40,w:21,h:39,walk:87,label:'🐾 Patient Cases',action:'necroCases'}
  ],
+ skills:[
+  {x:7,y:39,w:26,h:41,walk:19,label:'💉 Injection Practice',action:'injectionPractice'},
+  {x:36,y:39,w:27,h:41,walk:50,label:'🩸 Blood Draw',action:'venipuncturePractice'},
+  {x:70,y:39,w:24,h:41,walk:82,label:'🧪 Sample Handling',action:'diagnosticSkills'}
+ ],
  surgery:[
   {x:5,y:40,w:22,h:39,walk:16,label:'🧽 Sterile Prep',action:'surgPrep'},
   {x:28,y:40,w:21,h:39,walk:39,label:'💗 Anesthesia',action:'surgMonitor'},
@@ -38,7 +43,7 @@ function scene(key){
  const iso=key==='isolation',cp=key==='clinpath';
  const bg=iso?'#d6eee6':cp?'#dceff8':'#edf1e5';
  const wall=iso?'#effaf7':cp?'#f5faff':'#f7faef';
- const label=iso?'ONE HEALTH & ISOLATION':cp?'ADVANCED PATHOLOGY & MICROSCOPY':key==='surgery'?'SURGERY & ANESTHESIA':'NECROPSY & DIAGNOSTIC PATHOLOGY';
+ const label=iso?'ONE HEALTH & ISOLATION':cp?'ADVANCED PATHOLOGY & MICROSCOPY':key==='surgery'?'SURGERY & ANESTHESIA':key==='skills'?'CLINICAL SKILLS & PROCEDURES':'NECROPSY & DIAGNOSTIC PATHOLOGY';
  let s='<svg class="vpqSpecArt" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="'+label+' veterinary teaching room">'+
  '<defs><filter id="vpqSpecShadow"><feDropShadow dx="2" dy="5" stdDeviation="5" flood-opacity=".2" flood-color="#5c7394"/></filter></defs>'+
  '<rect width="1000" height="500" fill="'+bg+'"/><polygon points="0,0 1000,0 934,70 66,70" fill="#fffcf7"/>'+
@@ -103,6 +108,27 @@ function scene(key){
    '<rect x="622" y="275" width="22" height="29" rx="5" fill="#d5eaf6" stroke="#9bbccc" stroke-width="3"/>'+
    '<rect x="651" y="278" width="16" height="28" rx="4" fill="#f0dde8" stroke="#c8adc2" stroke-width="3"/>'+
    '<text x="646" y="331" text-anchor="middle" font-size="12" font-family="Arial" font-weight="900" fill="#4e8987">CLEAN</text></g>';
+ }else if(key==='skills'){
+   // Three identifiable work areas: syringe training, venous collection, specimen tubes.
+   s+='<g filter="url(#vpqSpecShadow)">'+
+   rect(100,183,246,166,'#fce6f0','#ce9ab7')+
+   '<rect x="117" y="198" width="212" height="128" rx="13" fill="#fff7fd" stroke="#d5a7c2" stroke-width="4"/>'+
+   '<path d="M167 239l80 61" stroke="#8daed4" stroke-width="16" stroke-linecap="round"/>'+
+   '<path d="M182 224l-28 28M244 288l25 18M256 299l26 11" stroke="#6594ba" stroke-width="8" stroke-linecap="round"/>'+
+   '<rect x="240" y="201" width="27" height="50" rx="5" fill="#f6d4e1" stroke="#c19ab6" stroke-width="5"/>'+
+   '<text x="226" y="338" text-anchor="middle" font-family="Arial" font-size="17" font-weight="900" fill="#9c6285">INJECTION PRACTICE</text>'+
+   rect(382,183,258,166,'#e2f1fb','#9abfda')+
+   '<rect x="399" y="198" width="224" height="128" rx="12" fill="#f8fcff" stroke="#b1ccde" stroke-width="4"/>'+
+   '<path d="M422 244h105M443 222v47M499 222v47" stroke="#88a9c5" stroke-width="8"/>'+
+   [451,489,527].map((x,i)=>'<rect x="'+x+'" y="268" width="22" height="46" rx="5" fill="'+(i===0?'#e8adce':i===1?'#b2a8e1':'#b4e0dc')+'" stroke="#779bb3" stroke-width="4"/>').join('')+
+   '<path d="M541 246l39 -23" stroke="#739dbb" stroke-width="11" stroke-linecap="round"/>'+
+   '<text x="512" y="338" text-anchor="middle" font-family="Arial" font-size="17" font-weight="900" fill="#5f89b3">BLOOD DRAW · TUBES</text>'+
+   rect(683,186,225,161,'#e2f3e9','#99c9b0')+
+   '<rect x="703" y="199" width="186" height="126" rx="9" fill="#f9fff9" stroke="#a4d4bc" stroke-width="3"/>'+
+   '<rect x="716" y="225" width="157" height="24" rx="8" fill="#bcdbcd"/>'+
+   [738,781,824].map((x,i)=>'<rect x="'+x+'" y="250" width="22" height="54" rx="5" fill="'+['#bca5de','#e7a7c3','#e2c892'][i]+'" stroke="#7fabb1" stroke-width="4"/>').join('')+
+   '<text x="795" y="338" text-anchor="middle" font-family="Arial" font-size="17" font-weight="900" fill="#588875">SAMPLE HANDLING</text>'+
+   '</g><text x="500" y="162" text-anchor="middle" font-family="Arial" font-weight="900" font-size="16" fill="#8d7298">CHOOSE A SPECIES · LEARN THE REASON · PRACTICE SAFELY</text>';
  }else if(key==='surgery'){
    s+='<g filter="url(#vpqSpecShadow)">'+
    rect(74,191,177,148,'#fff2f5','#d5adc5')+
@@ -157,7 +183,7 @@ function scene(key){
 window.VPQ_SCENERY.roomArt=k=>data[k]?scene(k):previous(k);
 const style=document.createElement('style');
 style.textContent='.vpqSpecArt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}'+
-'.stage[data-room="clinpath"] .prop,.stage[data-room="isolation"] .prop,.stage[data-room="necropsy"] .prop,.stage[data-room="clinpath"] .roomdecor,.stage[data-room="isolation"] .roomdecor,.stage[data-room="necropsy"] .roomdecor,.stage[data-room="clinpath"] .roomBanner,.stage[data-room="isolation"] .roomBanner,.stage[data-room="necropsy"] .roomBanner{display:none!important}'+
+'.stage[data-room="skills"] .prop,.stage[data-room="skills"] .roomdecor,.stage[data-room="skills"] .roomBanner,.stage[data-room="clinpath"] .prop,.stage[data-room="isolation"] .prop,.stage[data-room="necropsy"] .prop,.stage[data-room="clinpath"] .roomdecor,.stage[data-room="isolation"] .roomdecor,.stage[data-room="necropsy"] .roomdecor,.stage[data-room="clinpath"] .roomBanner,.stage[data-room="isolation"] .roomBanner,.stage[data-room="necropsy"] .roomBanner{display:none!important}'+
 '#vpqSpecHits{position:absolute;inset:0;z-index:5;pointer-events:none}'+
 '.vpqSpecHit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:16px;box-shadow:none;transform:none!important;padding:0}'+
 '.vpqSpecHit:hover,.vpqSpecHit:focus-visible,.vpqSpecHit.vpqSpecNear{background:#fff2c52b;border:3px solid #ffcb65;outline:2px solid #fff5cc;box-shadow:0 0 20px #ffc8738e}'+
