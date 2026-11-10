@@ -68,9 +68,19 @@ function scene(key){
  }else if(iso){
    s+='<g filter="url(#vpqSpecShadow)">'+rect(95,193,230,145,'#e0f7f2','#8cbab0')+
    '<rect x="115" y="300" width="184" height="23" rx="10" fill="#a8d1c5"/>'+
-   '<ellipse cx="211" cy="286" rx="65" ry="26" fill="#d6a87e"/><circle cx="158" cy="265" r="29" fill="#e1b68b"/>'+
-   '<path d="M141 242l-11 -26 24 15M174 244l18 -21 1 34" fill="#a87959"/>'+
-   '<ellipse cx="144" cy="278" rx="18" ry="11" fill="#fff2df"/><circle cx="149" cy="263" r="4" fill="#3f4752"/>'+
+   // A friendly spaniel-style isolation patient, fully inside the kennel illustration.
+   '<path d="M261 279q28 -32 36 -1" stroke="#b68464" stroke-width="12" stroke-linecap="round" fill="none"/>'+
+   '<path d="M177 293v29M242 294v28" stroke="#b78669" stroke-width="13" stroke-linecap="round"/>'+
+   '<ellipse cx="222" cy="286" rx="58" ry="29" fill="#dfae83" stroke="#b98869" stroke-width="4"/>'+
+   '<path d="M191 269q22 -16 47 4l13 31h-65z" fill="#f5ddc4"/>'+
+   '<circle cx="162" cy="267" r="32" fill="#e8b88c" stroke="#be8f70" stroke-width="3"/>'+
+   '<path d="M141 251q-20 -15 -21 4q-3 19 11 25l19 -13" fill="#aa785e" stroke="#966c59" stroke-width="3"/>'+
+   '<path d="M178 252q18 -17 17 7q0 12 -17 15" fill="#aa785e" stroke="#966c59" stroke-width="3"/>'+
+   '<ellipse cx="143" cy="281" rx="24" ry="14" fill="#fff3df"/>'+
+   '<ellipse cx="128" cy="278" rx="7" ry="5" fill="#58454b"/>'+
+   '<circle cx="163" cy="264" r="5" fill="#44373f"/><circle cx="165" cy="262" r="1.6" fill="#fff"/>'+
+   '<path d="M135 291q14 10 23 -3" stroke="#bd8677" stroke-width="2" fill="none"/>'+
+   '<ellipse cx="175" cy="315" rx="14" ry="7" fill="#f4d4b3"/><ellipse cx="246" cy="315" rx="14" ry="7" fill="#f4d4b3"/>'+
    rect(399,186,205,154,'#f8fefa','#a0c7b5')+
    '<path d="M415 219h170M415 251h170M415 282h170" stroke="#b4d8cb" stroke-width="6"/>'+
    '<text x="502" y="214" text-anchor="middle" font-size="16" font-weight="900" fill="#568b77">DISEASE LIBRARY</text>'+
