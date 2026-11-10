@@ -66,6 +66,12 @@ Updated: November 9, 2026
 - **Floor map artwork:** the live in-game map is an enhanced pastel, illustrated SVG with corridor and clickable departments (including Surgery). The separately generated **painted hospital concept map is not yet imported as a runtime binary asset**; preserve it as visual art direction.
 - **Verification:** 7 current JavaScript files and the inline game scripts parse successfully; static checks confirm station action wiring, room restoration, case registry, and navigation. Real browser visual/interaction testing still pending.
 
+## Clinical Skills access fix — implemented
+- **Dedicated walkable Clinical Skills wing:** three equipment-based interactive stations for Injection Practice, Blood Draw/Venipuncture and Sample Handling. Each has original pastel 2.5D equipment art, labelled object-sized hit regions, proximity glow and E-key interaction.
+- **Two entrances:** a recognizable Clinical Skills door from the Treatment Ward and a clearly labelled entrance from the Examination Room. The wing also appears in the illustrated hospital floor-plan navigation and standard room buttons.
+- **Direct access to existing species content:** injection station opens injection-route/species exercises; venipuncture station goes directly to species selection and illustrated collection-site questions; sample rack opens tube choices, artifacts, and integrated interpretation. The underlying questions and progress logic are reused, not duplicated.
+- **Preservation and caveat:** same stable game save and reward systems; static JavaScript checks pass for connected modules. Browser playthrough, exact hotspot alignment on small screens, and animal art refinement remain to do.
+
 ## Next focused milestones
 1. QA active Imaging Suite and the new Clinical Pathology room with existing saves.
 2. Improve station navigation and add imaging projection-selection/positioning diagrams using original artwork.
