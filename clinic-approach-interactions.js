@@ -13,7 +13,7 @@ const configs={
   {selector:'#vpqShadowHotspots [data-shadowaction="queue"]',x:87,label:'📋 Patient Queue'},
   {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoExam"]',x:31,label:'🚪 Exam Hall'},
   {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoPharmacy"]',x:75,label:'💊 Pharmacy'},
-  {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoStudy"]',x:53,label:'📚 Study Lounge'},
+  {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoHallway"]',x:53,label:'🚪 Clinic Hallway'},
   {selector:'#vpqShadowHotspots [data-shadowaction="receptionStudio"]',x:96,label:'🎨 Reception Studio',max:7}
  ],
  exam:[
