@@ -404,6 +404,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="walkable-clinic-rooms-25d.js?v=20261110-objectglow3"></script>
 <script src="clinic-approach-interactions.js?v=20261110-allrooms1"></script>
 <script src="specialist-clinic-wings.js?v=20261110-advanced2"></script>
+<script src="reception-hallway-and-habitats.js?v=20261110-receptionwing1"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
@@ -2840,11 +2841,13 @@ window.VPQ_VIRAL_JOURNEYS.init({body:$('modalBody'),showModal});
 const vpqWalkableClinicArt=window.VPQ_WALKABLE_CLINIC_ART({doAction:a=>doAction(a),rooms:ROOMS});
 const vpqApproachOtherRooms=window.VPQ_ROOM_INTERACTIONS({rooms:ROOMS});
 const vpqSpecialistWings=window.VPQ_SPECIALIST_ROOMS({doAction:a=>doAction(a),rooms:ROOMS});
+const vpqReceptionWings=window.VPQ_RECEPTION_WINGS({state,rooms:ROOMS,showModal,changeRoom,persist,updateHUD,renderRoom,closeModal,modalBody:$('modalBody')});
 // Use the SAME station activation for walking up with E and clicking an illustrated object.
 const vpq25PriorPosition=updatePosition;
 updatePosition=function(){
  vpq25PriorPosition();
- const near=(activeRoom==='treatment'||activeRoom==='imaging')
+ const near=(['hallway','catcorner','yardview'].includes(activeRoom))?vpqReceptionWings.near(activeRoom,avatarX):
+ (activeRoom==='treatment'||activeRoom==='imaging')
    ?vpqWalkableClinicArt.updateNearby(activeRoom,avatarX)
    :(['clinpath','isolation','necropsy'].includes(activeRoom)
       ?vpqSpecialistWings.updateNearby(activeRoom,avatarX)
@@ -2853,11 +2856,14 @@ updatePosition=function(){
 };
 const vpq25PriorInteract=interact;
 interact=function(){
+ if(['hallway','catcorner','yardview'].includes(activeRoom)&&vpqReceptionWings.interact(activeRoom,avatarX))return;
  if((activeRoom==='treatment'||activeRoom==='imaging')&&vpqWalkableClinicArt.interactNearest(activeRoom,avatarX))return;
  if(['clinpath','isolation','necropsy'].includes(activeRoom)&&vpqSpecialistWings.interactNearest(activeRoom,avatarX))return;
  if(vpqApproachOtherRooms.interactNearest(activeRoom,avatarX))return;
  return vpq25PriorInteract();
 };
+const vpqWingOriginalAction=doAction;
+doAction=function(a){if(vpqReceptionWings.route(a))return;return vpqWingOriginalAction(a)};
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
