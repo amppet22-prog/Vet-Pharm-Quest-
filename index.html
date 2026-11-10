@@ -388,7 +388,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="drug-clinical-reference.js?v=20261108-piprant2"></script>
 <script src="reception-customization.js?v=20261108-furniture4"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
-<script src="reception-shadowbox-phase-a.js?v=20261110-hallwindow3"></script>
+<script src="reception-shadowbox-phase-a.js?v=20261110-hallfas4"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
@@ -404,7 +404,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="walkable-clinic-rooms-25d.js?v=20261110-skillsdoor2"></script>
 <script src="clinic-approach-interactions.js?v=20261110-hallentry2"></script>
 <script src="specialist-clinic-wings.js?v=20261110-skills1"></script>
-<script src="reception-hallway-and-habitats.js?v=20261110-skillsMap5"></script>
+<script src="reception-hallway-and-habitats.js?v=20261110-faswing6"></script>
+<script src="fas-patient-rounds.js?v=20261110-fas1"></script>
 <script src="clinic-image-backgrounds.js?v=20261110-stationoverlays4"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
@@ -2855,6 +2856,7 @@ window.VPQ_VIRAL_JOURNEYS.init({body:$('modalBody'),showModal});
 const vpqWalkableClinicArt=window.VPQ_WALKABLE_CLINIC_ART({doAction:a=>doAction(a),rooms:ROOMS});
 const vpqApproachOtherRooms=window.VPQ_ROOM_INTERACTIONS({rooms:ROOMS});
 const vpqSpecialistWings=window.VPQ_SPECIALIST_ROOMS({doAction:a=>doAction(a),rooms:ROOMS});
+window.VPQ_FAS_LAB.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
 const vpqReceptionWings=window.VPQ_RECEPTION_WINGS({state,rooms:ROOMS,showModal,changeRoom,persist,updateHUD,renderRoom,closeModal,modalBody:$('modalBody')});
 const vpqImageBackgrounds=window.VPQ_IMAGE_BACKGROUNDS({state});
 // Use the SAME station activation for walking up with E and clicking an illustrated object.
