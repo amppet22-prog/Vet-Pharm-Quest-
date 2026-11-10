@@ -10,6 +10,8 @@ const assets={
  hallway:'assets/rooms/clinical-hallway.svg',
  surgery:'assets/rooms/surgery-suite.svg',
  necropsy:'assets/rooms/necropsy-floor.svg',
+ clinpath:'assets/rooms/advanced-clinpath.svg',
+ isolation:'assets/rooms/isolation-one-health.svg',
  catcorner:'assets/rooms/cat-corner.svg',
  yardview:'assets/rooms/dog-play-yard.svg'
 };
@@ -35,7 +37,7 @@ function habitatDecor(room){
 window.VPQ_SCENERY.roomArt=function(room){
  const file=assets[room];
  if(!file)return original(room);
- return '<img class="vpqClinicBgImg" src="'+file+'?v=20261110-cute-images2" alt="Illustrated veterinary '+room+' environment with interactive equipment" draggable="false">'+habitatDecor(room);
+ return '<img class="vpqClinicBgImg" src="'+file+'?v=20261110-cute-images3" alt="Illustrated veterinary '+room+' environment with interactive equipment" draggable="false">'+habitatDecor(room);
 };
 return Object.freeze({assets});
 };
