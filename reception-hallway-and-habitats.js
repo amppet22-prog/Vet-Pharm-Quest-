@@ -5,8 +5,8 @@ const {state,rooms}=api,stage=document.getElementById('stage'),prior=window.VPQ_
 const destinations={vpqGoHallway:'hallway',vpqGoCat:'catcorner',vpqGoYard:'yardview',vpqWingLobby:'reception',vpqWingExam:'exam',vpqWingTreatment:'treatment',vpqWingSurgery:'surgery',vpqWingIsolation:'isolation',vpqWingClinpath:'clinpath',vpqWingImaging:'imaging'};
 const slots={
 hallway:[['🩺 Exam','vpqWingExam',10],['❤️ Treatment','vpqWingTreatment',27],['🩺 Surgery','vpqWingSurgery',44],['🛡️ Isolation','vpqWingIsolation',61],['🔬 Advanced','vpqWingClinpath',78],['🩻 Imaging','vpqWingImaging',93]],
-catcorner:[['🌳 Cat tree & toys','vpqCatShop',26],['🐈 Meet cats','vpqCatView',62],['🚪 Reception','vpqWingLobby',91]],
-yardview:[['🐕 Dog play yard','vpqYardView',27],['🎾 Yard upgrades','vpqYardShop',63],['🚪 Reception','vpqWingLobby',91]]
+catcorner:[['🌳 Cat tree & toys','vpqCatShop',16],['🐈 FAS Score Lab','vpqCatFAS',40],['🐈 Meet cats','vpqCatView',64],['🚪 Reception','vpqWingLobby',90]],
+yardview:[['🐕 FAS Score Lab','vpqDogFAS',17],['🐕 Dog play yard','vpqYardView',41],['🎾 Yard upgrades','vpqYardShop',65],['🚪 Reception','vpqWingLobby',90]]
 };
 for(const [room,arr] of Object.entries(slots))rooms[room]={name:room==='hallway'?'Reception · Clinical Hallway':room==='catcorner'?'Reception Cat Corner':'Dog Kennel & Play Yard Window',color:'#f4eefa',banner:'EXTENDED HOSPITAL',decor:[],props:arr.map(([label,action,x])=>({x,label,action,emoji:label.slice(0,2),bubble:'Interact'}))};
 const choices={
@@ -111,6 +111,8 @@ function buy(id){
 function route(cmd){
  if(destinations[cmd]){api.changeRoom(destinations[cmd]);return true}
  if(cmd==='vpqBlueprint'){map();return true}
+ if(cmd==='vpqDogFAS'){window.VPQ_FAS_LAB?.home('dog');return true}
+ if(cmd==='vpqCatFAS'){window.VPQ_FAS_LAB?.home('cat');return true}
  if(cmd==='vpqCatShop'){shop('catcorner');return true}
  if(cmd==='vpqYardShop'){shop('yardview');return true}
  if(cmd==='vpqCatView'){api.showModal('🐈 Quiet Cat Corner','<p>Explore vertical space, resting shelves, hiding spots and enrichment. Use the Cat Enrichment station to place or store purchased decorations.</p>');return true}
