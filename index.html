@@ -401,6 +401,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="mechanism-lab-phase-a4.js?v=20261108-whycompare2"></script>
 <script src="exam-room-traditional.js?v=20261108-examA2"></script>
 <script src="pharmacy-nutrition-room.js?v=20261108-pharm-nutrition1"></script>
+<script src="walkable-clinic-rooms-25d.js?v=20261110-walk25d1"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
@@ -2831,6 +2832,7 @@ window.VPQ_IMAGING_SUITE.init({body:$('modalBody'),showModal,awardQuestion:maste
 window.VPQ_PATHOGEN_ATLAS.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_PARASITOLOGY_LAB.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_VIRAL_JOURNEYS.init({body:$('modalBody'),showModal});
+const vpqWalkableClinicArt=window.VPQ_WALKABLE_CLINIC_ART({doAction:a=>doAction(a)});
 updateAvatar();updateHUD();renderRoom();loop();
 })();
 
