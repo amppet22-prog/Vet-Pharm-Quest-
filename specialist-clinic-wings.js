@@ -8,10 +8,11 @@ const stage=document.getElementById('stage');if(!stage||!window.VPQ_SCENERY)retu
 const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const data={
  clinpath:[
-  {x:7,y:40,w:18,h:35,walk:17,label:'🩸 Coagulation',action:'advancedCoag'},
-  {x:31,y:40,w:21,h:35,walk:43,label:'🫧 Blood Gas',action:'advancedGas'},
-  {x:58,y:40,w:18,h:35,walk:68,label:'🧫 Urinalysis',action:'advancedUrine'},
-  {x:79,y:40,w:18,h:35,walk:87,label:'🐾 Advanced Cases',action:'advancedCases'}
+  {x:3,y:42,w:17,h:34,walk:12,label:'🩸 Coagulation',action:'advancedCoag'},
+  {x:21,y:42,w:17,h:34,walk:29,label:'🫧 Blood Gas',action:'advancedGas'},
+  {x:39,y:42,w:17,h:34,walk:48,label:'🧫 Urinalysis',action:'advancedUrine'},
+  {x:57,y:42,w:18,h:34,walk:66,label:'🐾 Referral Cases',action:'advancedCases'},
+  {x:77,y:42,w:20,h:34,walk:87,label:'🔬 Microscopy & Lab',action:'classicLabHub'}
  ],
  isolation:[
   {x:9,y:37,w:22,h:39,walk:23,label:'🐶 Isolation patient',action:'onehealth'},
@@ -19,16 +20,25 @@ const data={
   {x:69,y:36,w:24,h:38,walk:81,label:'🛡️ Public health',action:'ohHub'}
  ],
  necropsy:[
-  {x:12,y:38,w:30,h:39,walk:24,label:'🔬 Gross pathology preview',action:'necropsySoon'},
-  {x:57,y:38,w:30,h:39,walk:68,label:'🧫 Histology preview',action:'necropsySoon'}
+  {x:5,y:40,w:22,h:39,walk:16,label:'🔎 Gross Lesions',action:'necroGross'},
+  {x:28,y:40,w:21,h:39,walk:39,label:'🔬 Histology',action:'necroHisto'},
+  {x:52,y:40,w:20,h:39,walk:63,label:'☣️ Biosecurity',action:'necroBio'},
+  {x:76,y:40,w:21,h:39,walk:87,label:'🐾 Patient Cases',action:'necroCases'}
+ ],
+ surgery:[
+  {x:5,y:40,w:22,h:39,walk:16,label:'🧽 Sterile Prep',action:'surgPrep'},
+  {x:28,y:40,w:21,h:39,walk:39,label:'💗 Anesthesia',action:'surgMonitor'},
+  {x:52,y:40,w:20,h:39,walk:63,label:'🛏️ Recovery',action:'surgRecovery'},
+  {x:76,y:40,w:21,h:39,walk:87,label:'🐾 Patient Cases',action:'surgCases'}
  ]
+
 };
 const rect=(x,y,w,h,fill,stroke='#a4b7c9')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="13" fill="'+fill+'" stroke="'+stroke+'" stroke-width="5"/>';
 function scene(key){
  const iso=key==='isolation',cp=key==='clinpath';
  const bg=iso?'#d6eee6':cp?'#dceff8':'#edf1e5';
  const wall=iso?'#effaf7':cp?'#f5faff':'#f7faef';
- const label=iso?'ONE HEALTH & ISOLATION':cp?'CLINICAL PATHOLOGY':'NECROPSY · PREVIEW';
+ const label=iso?'ONE HEALTH & ISOLATION':cp?'ADVANCED PATHOLOGY & MICROSCOPY':key==='surgery'?'SURGERY & ANESTHESIA':'NECROPSY & DIAGNOSTIC PATHOLOGY';
  let s='<svg class="vpqSpecArt" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="'+label+' veterinary teaching room">'+
  '<defs><filter id="vpqSpecShadow"><feDropShadow dx="2" dy="5" stdDeviation="5" flood-opacity=".2" flood-color="#5c7394"/></filter></defs>'+
  '<rect width="1000" height="500" fill="'+bg+'"/><polygon points="0,0 1000,0 934,70 66,70" fill="#fffcf7"/>'+
@@ -65,7 +75,13 @@ function scene(key){
    '<text x="420" y="186" fill="#648eae">BLOOD GAS</text>'+
    '<text x="667" y="186" fill="#996fa1">URINE SEDIMENT</text>'+
    '<text x="856" y="186" fill="#677fa7">REFERRAL CASES</text></g>'+
-   '<path d="M93 166q8 -10 16 0l-8 12zM720 158q8 -10 16 0l-8 12z" fill="#e9afc9"/>';
+   '<path d="M93 166q8 -10 16 0l-8 12zM720 158q8 -10 16 0l-8 12z" fill="#e9afc9"/>'+
+   // The fifth station restores microscopy and in-depth laboratory investigations.
+   '<g><rect x="776" y="196" width="178" height="146" rx="16" fill="#f2e8fa" stroke="#b598ca" stroke-width="6"/>'+
+   '<circle cx="858" cy="250" r="30" fill="#fff" stroke="#a9a1d2" stroke-width="5"/>'+
+   '<path d="M849 251v-30l-11 -12M849 227l16 -14M828 276h59" stroke="#718eb1" stroke-width="8" fill="none"/>'+
+   '<rect x="795" y="302" width="144" height="20" rx="9" fill="#b7a1cc"/>'+
+   '<text x="864" y="337" font-size="13" font-family="Arial" text-anchor="middle" fill="#796095" font-weight="900">MICROSCOPY</text></g>';
  }else if(iso){
    s+='<g filter="url(#vpqSpecShadow)">'+rect(95,193,230,145,'#e0f7f2','#8cbab0')+
    '<rect x="115" y="300" width="184" height="23" rx="10" fill="#a8d1c5"/>'+
