@@ -66,8 +66,8 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<path d="M475 263L451 308H593L572 263Z" fill="#e8d4c1"/>'+
    '<path d="M487 137H562V265H487Z" fill="#8eaca9" stroke="#597b80" stroke-width="6"/>'+
    '<rect x="497" y="161" width="56" height="45" rx="5" fill="#e5f6f6"/>'+
-   '<text x="525" y="178" text-anchor="middle" font-size="13" font-family="sans-serif" font-weight="800" fill="#315b69">STUDY</text>'+
-   '<text x="525" y="193" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#315b69">LOUNGE</text>'+
+   '<text x="525" y="178" text-anchor="middle" font-size="13" font-family="sans-serif" font-weight="800" fill="#315b69">CLINIC</text>'+
+   '<text x="525" y="193" text-anchor="middle" font-size="12" font-family="sans-serif" fill="#315b69">HALL</text>'+
    '<circle cx="551" cy="224" r="5" fill="#e6bd67"/>'+
    // floor trapezoid + grout projecting toward viewer
    '<path d="M68 320H932L1000 500H0Z" fill="url(#vpqShadowFloor)"/>'+
@@ -114,10 +114,10 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    ['patients','Patient queue · new patient cases','queue'],
    ['clinical','Enter clinical hall and examination room','vpqGoExam'],
    ['pharmacy','Enter pharmacy and drug shelves','vpqGoPharmacy'],
-   ['study','Enter student study lounge','vpqGoStudy'],
+   ['study','Enter clinical hallway and clinic departments','vpqGoHallway'],
    ['studio','Customize waiting room · Reception Studio','receptionStudio']
   ];
-  node.innerHTML=hotspots.map(([id,label,name])=>'<button type="button" class="vpqShadowHotspot vpqShadow-'+id+'" data-shadowaction="'+name+'" aria-label="'+label+'" title="'+label+'"><span>'+({front:'🛎️ Desk',patients:'📋 Patients',clinical:'Clinical Hall',pharmacy:'Pharmacy',study:'Study Lounge',studio:'🎨 Decorate'}[id])+'</span></button>').join('');
+  node.innerHTML=hotspots.map(([id,label,name])=>'<button type="button" class="vpqShadowHotspot vpqShadow-'+id+'" data-shadowaction="'+name+'" aria-label="'+label+'" title="'+label+'"><span>'+({front:'🛎️ Desk',patients:'📋 Patients',clinical:'Clinical Hall',pharmacy:'Pharmacy',study:'Clinic Hallway',studio:'🎨 Decorate'}[id])+'</span></button>').join('');
   node.addEventListener('click',ev=>{const button=ev.target.closest('[data-shadowaction]');if(button)action(button.dataset.shadowaction)});
   stage.appendChild(node);
  }
