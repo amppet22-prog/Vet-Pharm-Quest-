@@ -47,6 +47,16 @@ Updated: November 9, 2026
 - Clinical Skills equine injection practice now shows a more detailed original companion-style horse illustration with the existing numbered selection hotspots, not an unlabeled generic silhouette. This is a stylized teaching depiction, not a procedure map or literal reuse of an existing horse image file.
 - Browser visual and behavior QA remain pending after static syntax checks.
 
+## Reception and clinic-world expansion — first playable iteration
+- **Reception fixes:** removed the default planter that covered the waiting-room couch; the rear Reception doorway now enters the Clinic Hallway using click or E-key interaction.
+- **New connected annexes:** walkable Clinic Hallway (Exam, Treatment, One Health, Advanced Lab and Imaging doors), Reception Cat Corner and Dog Kennel & Play Yard Window. Existing Study Lounge/Pharmacy and other rooms remain accessible via the persistent room navigation and illustrated blueprint.
+- **Illustrated building blueprint:** accessible from Reception and a persistent "Illustrated Floor Plan" button in every room. Includes a simplified top-down floor illustration and working room-navigation buttons. Concept artwork supplied in conversation is visual direction, not yet an imported pixel-perfect room asset.
+- **Interchangeable purchases, phase 1:** separate habitat collection in the existing game save key, six optional cat/yard purchases, one-time coin deduction, illustrated shop previews, designated placement spots, plus place/store controls. No learning activity depends on buying an item. Free movement and true drag/drop decorating are later milestones.
+- **Clinical skills species visuals:** original cute dog, cat, horse, cow and bird SVG scenes now appear in **both venous-site and injection-site** exercises, replacing the prior generic silhouettes. Positions are illustrative study prompts, not a procedural reference.
+- **One Health & Isolation:** added biohazard signage, visibly designated PPE, hand-hygiene and cleaning-storage equipment in the scene.
+- **Patient-example principle:** every working educational station should eventually link to one or more species-specific patient examples. The common patient list remains the source of truth; some stations are already connected, but a complete station-by-station audit and missing-case expansion are **not yet done**.
+- **QA:** static parsing and presence checks performed; live click/movement interactions, render fidelity, small-screen layout, and save migration still require a real browser playthrough.
+
 ## Next focused milestones
 1. QA active Imaging Suite and the new Clinical Pathology room with existing saves.
 2. Improve station navigation and add imaging projection-selection/positioning diagrams using original artwork.
