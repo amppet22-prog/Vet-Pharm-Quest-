@@ -79,8 +79,19 @@ function treatment(){
  // Patient kennel with vertical metal bars and sleepy dog
  s+='<g filter="url(#trt25-shadow)">'+round(92,167,185,192,'#e2eafa','#a4a7cb')+
  '<rect x="106" y="303" width="157" height="41" rx="8" fill="#b9b3e5"/>'+
- '<ellipse cx="179" cy="294" rx="51" ry="22" fill="#ce9d75"/><circle cx="132" cy="274" r="27" fill="#deab7c"/>'+
- '<path d="M114 252l-3 -29 25 22M140 250l19 -24 3 39" fill="#987358"/><circle cx="119" cy="271" r="4" fill="#394458"/>'+
+ '<rect x="107" y="310" width="154" height="26" rx="13" fill="#e8c9ea" stroke="#bca4ce" stroke-width="3"/>'+
+ // A distinctly canine patient, resting on the cushion: paws, curled tail, floppy ear, happy muzzle.
+ '<path d="M212 284q34 -40 49 -3" stroke="#bb8055" stroke-width="13" fill="none" stroke-linecap="round"/>'+
+ '<ellipse cx="189" cy="286" rx="62" ry="31" fill="#d8a06e" stroke="#a77561" stroke-width="4"/>'+
+ '<path d="M153 267q27 -15 57 2l12 36h-65z" fill="#f3d5b7"/>'+
+ '<ellipse cx="153" cy="308" rx="18" ry="9" fill="#f3d5b7"/><ellipse cx="211" cy="308" rx="20" ry="9" fill="#f3d5b7"/>'+
+ '<circle cx="133" cy="264" r="32" fill="#e2ac79" stroke="#b98161" stroke-width="4"/>'+
+ '<path d="M107 248q-24 1 -13 35l21 -7" fill="#9c694f" stroke="#885f53" stroke-width="3"/>'+
+ '<path d="M151 245q17 -8 12 22l-15 -2" fill="#9c694f" stroke="#885f53" stroke-width="3"/>'+
+ '<ellipse cx="111" cy="282" rx="22" ry="14" fill="#fff0df"/><ellipse cx="102" cy="278" rx="8" ry="6" fill="#544d56"/>'+
+ '<circle cx="130" cy="258" r="4.7" fill="#3e4253"/><circle cx="132" cy="256" r="1.6" fill="#fff"/>'+
+ '<path d="M126 287q10 8 20 -1" fill="none" stroke="#865b57" stroke-width="3"/>'+
+ '<path d="M133 237q10 -9 21 1" fill="none" stroke="#f6e5cd" stroke-width="5" stroke-linecap="round"/>'+
  [120,148,176,204,232,260].map(x=>'<path d="M'+x+' 174V351" stroke="#a8b3ce" stroke-width="4"/>').join('')+
  '<path d="M99 219H270M99 266H270M99 311H270" stroke="#a8b3ce" stroke-width="4"/></g>';
  // Overhead exam lamp, treatment table and IV
@@ -135,8 +146,8 @@ const styles=document.createElement('style');
 styles.textContent='.vpqWalkArt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}'+
 '.stage[data-room="imaging"] .prop,.stage[data-room="treatment"] .prop,.stage[data-room="imaging"] .roomdecor,.stage[data-room="treatment"] .roomdecor,.stage[data-room="imaging"] .roomBanner,.stage[data-room="treatment"] .roomBanner{display:none!important}'+
 '.vpq25Hotspots{position:absolute;inset:0;z-index:5;pointer-events:none}.vpq25Hit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:15px;box-shadow:none;transform:none!important;padding:0}'+
-'.vpq25Hit:hover,.vpq25Hit:focus-visible{background:#fff1cf30;border:3px solid #ffcc61;box-shadow:0 0 18px #ffeab2aa;outline:none}'+
-'.vpq25Hit span{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);padding:9px 10px;border:3px solid #a98cd5;background:linear-gradient(#fff,#f9e9fa);color:#514779;border-radius:16px;font-size:clamp(11px,1.3vw,15px);font-weight:1000;white-space:nowrap;box-shadow:0 4px 0 #9473ac55,0 7px 15px #53678733}'+
+'.vpq25Hit:hover,.vpq25Hit:focus-visible,.vpq25Hit.vpq25Near{background:linear-gradient(180deg,#fffbd017,#fff3a539);border:3px solid #ffc85c;box-shadow:0 0 0 5px #fff1b65c,0 0 24px #ffc96eaa;outline:none}'+
+'.vpq25Hit span{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);padding:9px 10px;border:3px solid #a98cd5;background:linear-gradient(#fff,#f9e9fa);color:#514779;border-radius:16px;font-size:clamp(11px,1.3vw,15px);font-weight:1000;white-space:nowrap;box-shadow:0 4px 0 #9473ac55,0 7px 15px #53678733}.vpq25Hit.vpq25Near span{background:linear-gradient(#fff8d8,#ffe8a5);border-color:#e4aa43;color:#714e2e;box-shadow:0 5px 0 #c78e3c60,0 0 15px #ffe89fb0}.vpq25Hit.vpq25Near:after{content:"E · INTERACT";position:absolute;top:2%;left:50%;transform:translateX(-50%);border-radius:13px;border:2px solid #e4ad53;background:#fff9de;color:#765321;font-size:11px;font-weight:900;padding:5px 9px;white-space:nowrap;box-shadow:0 3px 12px #d8b05955;pointer-events:none}'+
 '@media(max-width:620px){.vpq25Hit span{font-size:10px;padding:5px 4px;white-space:normal;min-width:80%;line-height:1.1}}';
 document.head.appendChild(styles);
 function refresh(){
@@ -150,8 +161,36 @@ function refresh(){
  div.addEventListener('click',event=>{const b=event.target.closest('[data-vpq25act]');if(b)api.doAction(b.dataset.vpq25act)});
  stage.appendChild(div);
 }
+function nearest(room,x){
+ const stations=spec[room],roomData=api.rooms?.[room];
+ if(!stations||!roomData?.props)return null;
+ let result=null;
+ for(const p of roomData.props){
+  const candidate=stations.find(z=>z.action===p.action);
+  if(!candidate)continue;
+  const distance=Math.abs(p.x-x);
+  if(!result||distance<result.distance)result={station:candidate,distance};
+ }
+ return result&&result.distance<17?result.station:null;
+}
+function updateNearby(room,x){
+ const active=nearest(room,x);
+ const hits=stage.querySelectorAll('#vpq25Hotspots [data-vpq25act]');
+ hits.forEach(b=>{
+  const match=!!active&&b.dataset.vpq25act===active.action;
+  b.classList.toggle('vpq25Near',match);
+  b.setAttribute('aria-current',match?'true':'false');
+ });
+ return active;
+}
+function interactNearest(room,x){
+ const active=updateNearby(room,x);
+ if(!active)return false;
+ api.doAction(active.action);
+ return true;
+}
 const observer=new MutationObserver(()=>{const room=stage.dataset.room,present=stage.querySelector('#vpq25Hotspots');if((!!spec[room])!==!!present||(present&&present.dataset.room!==room))refresh()});
 observer.observe(stage,{attributes:true,attributeFilter:['data-room'],childList:true});
 refresh();
-return {refresh,imaging,treatment};
+return {refresh,imaging,treatment,updateNearby,interactNearest};
 };
