@@ -72,6 +72,14 @@ Updated: November 9, 2026
 - **Direct access to existing species content:** injection station opens injection-route/species exercises; venipuncture station goes directly to species selection and illustrated collection-site questions; sample rack opens tube choices, artifacts, and integrated interpretation. The underlying questions and progress logic are reused, not duplicated.
 - **Preservation and caveat:** same stable game save and reward systems; static JavaScript checks pass for connected modules. Browser playthrough, exact hotspot alignment on small screens, and animal art refinement remain to do.
 
+## Multi-room image-background upgrade — implemented first art pass
+- **Hybrid architecture built:** independent image files are rendered using `<img>` behind the original room-specific transparent object hotspots and near-station/E interaction. The game logic, rewards and save keys are not replaced by a screenshot. Source of truth remains GitHub.
+- **8 standalone illustrated clinic images:** Clinical Skills, Clinical Hallway, Surgery, Necropsy, Advanced Clinical Pathology, One Health Isolation, Cat Corner and Dog Play Yard (`assets/rooms/`). All are original pastel SVG image files. These are actual runtime image assets, **not** the previously generated high-detail painted concept PNG; import of approved final PNG/WebP backgrounds remains a separate future art task.
+- **5 standalone animal images:** new horse, dog, cat, cattle and bird image files in `assets/animals/`; existing clinical injection and venipuncture numbered clickable question markers remain overlaid separately.
+- **Existing habitat purchases preserved:** displayed cat tree, shelves, extra cats, toys, yard toys and agility objects are re-rendered above new room images from `state.receptionHabitats.placed`. Storage removes the overlay while maintaining ownership, so upgrades remain interchangeable.
+- **Cross-room static checks:** all 13 created image paths resolve in the repository; script parsing passes; Clinical Skills, Surgery, Necropsy and habitat hotspots still have their existing dedicated listeners. Real browser playthrough remains a blocking QA item for exact hotspot alignment and visual fidelity, especially mobile.
+- **Next passes:** unify art further in the high-traffic Reception/Treatment/Imaging/Exam/Pharmacy rooms; import polished backgrounds if a supported binary asset upload path becomes available; verify click + E on each station at multiple widths; link species-specific patients and exam lecture sources across stations; improve animal anatomy and label placement.
+
 ## Next focused milestones
 1. QA active Imaging Suite and the new Clinical Pathology room with existing saves.
 2. Improve station navigation and add imaging projection-selection/positioning diagrams using original artwork.
