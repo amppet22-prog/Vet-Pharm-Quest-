@@ -388,7 +388,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="drug-clinical-reference.js?v=20261108-piprant2"></script>
 <script src="reception-customization.js?v=20261108-furniture4"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
-<script src="reception-shadowbox-phase-a.js?v=20261110-hallentry2"></script>
+<script src="reception-shadowbox-phase-a.js?v=20261110-hallwindow3"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
@@ -404,7 +404,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="walkable-clinic-rooms-25d.js?v=20261110-objectglow3"></script>
 <script src="clinic-approach-interactions.js?v=20261110-hallentry2"></script>
 <script src="specialist-clinic-wings.js?v=20261110-suites2"></script>
-<script src="reception-hallway-and-habitats.js?v=20261110-receptionwing2"></script>
+<script src="reception-hallway-and-habitats.js?v=20261110-hospitalmap3"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
@@ -576,6 +576,8 @@ ROOMS.clinpath={name:'Advanced Clinical Pathology · Referral Lab',color:'#e8f4f
 for(const [key,name] of [['hallway','Clinical Hallway · East Wing'],['catcorner','Reception Cat Corner'],['yardview','Dog Kennel & Play Yard Window']]){
  ROOMS[key]={name,color:'#f4eafa',banner:'RECEPTION ANNEX',decor:[],props:[{x:50,emoji:'🚪',label:'Reception',action:'vpqWingLobby',bubble:'Return to lobby'}]};
 }
+// Register Surgery before loading a previously saved active room. A later block fills in the full suite layout.
+ROOMS.surgery={name:'Surgery & Anesthesia Suite',color:'#f6ebf4',banner:'SURGERY',decor:[],props:[{x:50,emoji:'🩺',label:'Surgery',action:'surgPrep',bubble:'Surgical practice'}]};
 const LEVEL_THRESH=130;const DEFAULT={name:'Student Vet',skin:'#b77957',hair:'#5b3e38',scrubs:'#67a5d9',pet:'🐕',petName:'Buddy',petCoat:'#f5d59a',petAccessory:'🎀',xp:0,coins:0,attempts:0,correct:0,completed:[],studyCorrect:0,upgrades:[],room:'reception',focus:'All lectures',questionHistory:{},studySession:null};
 const KEY='vpq-v2-clinic-state',EDITS_KEY='vpq-v2-content-edits';
 function safeRead(k,fallback){try{return JSON.parse(localStorage.getItem(k))||fallback}catch{return fallback}}
