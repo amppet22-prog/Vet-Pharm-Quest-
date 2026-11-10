@@ -2,9 +2,9 @@
 window.VPQ_RECEPTION_WINGS=function(api){
 'use strict';
 const {state,rooms}=api,stage=document.getElementById('stage'),prior=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
-const destinations={vpqGoHallway:'hallway',vpqGoCat:'catcorner',vpqGoYard:'yardview',vpqWingLobby:'reception',vpqWingExam:'exam',vpqWingTreatment:'treatment',vpqWingIsolation:'isolation',vpqWingClinpath:'clinpath',vpqWingImaging:'imaging'};
+const destinations={vpqGoHallway:'hallway',vpqGoCat:'catcorner',vpqGoYard:'yardview',vpqWingLobby:'reception',vpqWingExam:'exam',vpqWingTreatment:'treatment',vpqWingSurgery:'surgery',vpqWingIsolation:'isolation',vpqWingClinpath:'clinpath',vpqWingImaging:'imaging'};
 const slots={
-hallway:[['🩺 Exam','vpqWingExam',14],['❤️ Treatment','vpqWingTreatment',34],['🛡️ Isolation','vpqWingIsolation',54],['🔬 Advanced Lab','vpqWingClinpath',74],['🩻 Imaging','vpqWingImaging',91]],
+hallway:[['🩺 Exam','vpqWingExam',10],['❤️ Treatment','vpqWingTreatment',27],['🩺 Surgery','vpqWingSurgery',44],['🛡️ Isolation','vpqWingIsolation',61],['🔬 Advanced','vpqWingClinpath',78],['🩻 Imaging','vpqWingImaging',93]],
 catcorner:[['🌳 Cat tree & toys','vpqCatShop',26],['🐈 Meet cats','vpqCatView',62],['🚪 Reception','vpqWingLobby',91]],
 yardview:[['🐕 Dog play yard','vpqYardView',27],['🎾 Yard upgrades','vpqYardShop',63],['🚪 Reception','vpqWingLobby',91]]
 };
@@ -22,7 +22,7 @@ const dog=(x,y)=>'<g transform="translate('+x+' '+y+')"><ellipse cx="38" cy="39"
 const cat=(x,y,color)=>'<g transform="translate('+x+' '+y+')"><ellipse cx="30" cy="52" rx="29" ry="26" fill="'+color+'"/><path d="M7 33L0 9l23 14 25 -14 11 28" fill="'+color+'" stroke="#9986ac" stroke-width="3"/><circle cx="29" cy="28" r="24" fill="'+color+'"/><circle cx="21" cy="27" r="4" fill="#484351"/><circle cx="39" cy="27" r="4" fill="#484351"/><path d="M24 38h10l-5 6z" fill="#d998b2"/><path d="M59 50q27 -17 20 -39" stroke="'+color+'" stroke-width="8" fill="none"/></g>';
 function scene(room){
 let s=frame(room==='hallway'?'CLINIC HALLWAY':room==='catcorner'?'CAT CORNER':'DOG PLAY YARD');
-if(room==='hallway'){const colors=['#f5dde8','#fbe2e6','#d9efe5','#dfeafb','#eadff8'];slots.hallway.forEach(([name,action],i)=>{const x=44+i*188;s+='<rect x="'+x+'" y="188" width="168" height="181" rx="16" fill="'+colors[i]+'" stroke="#b0a3c8" stroke-width="6"/><rect x="'+(x+13)+'" y="202" width="142" height="149" rx="11" fill="#fff" stroke="#c6b2d1" stroke-width="3"/><text x="'+(x+84)+'" y="280" text-anchor="middle" font-size="52">'+name.slice(0,2)+'</text><text x="'+(x+84)+'" y="312" text-anchor="middle" font-size="14" font-weight="900" fill="#726489">'+name.slice(name.indexOf(' ')+1)+'</text>'});}
+if(room==='hallway'){const colors=['#f5dde8','#fbe2e6','#d9efe5','#dfeafb','#eadff8'];slots.hallway.forEach(([name,action],i)=>{const x=25+i*159;s+='<rect x="'+x+'" y="188" width="145" height="181" rx="16" fill="'+colors[i]+'" stroke="#b0a3c8" stroke-width="6"/><rect x="'+(x+13)+'" y="202" width="119" height="149" rx="11" fill="#fff" stroke="#c6b2d1" stroke-width="3"/><text x="'+(x+72)+'" y="280" text-anchor="middle" font-size="52">'+name.slice(0,2)+'</text><text x="'+(x+84)+'" y="312" text-anchor="middle" font-size="14" font-weight="900" fill="#726489">'+name.slice(name.indexOf(' ')+1)+'</text>'});}
 if(room==='catcorner'){s+='<rect x="90" y="291" width="816" height="26" rx="12" fill="#dfb7d9"/><rect x="90" y="317" width="816" height="79" rx="12" fill="#f6e0ef"/>'+cat(222,219,'#e9bfa4')+cat(673,233,'#b4a9db')+'<path d="M120 207h190M780 209h110" stroke="#d3a2cf" stroke-width="13"/>';const placed=state.receptionHabitats?.placed||[];if(placed.includes('cat-tree'))s+='<rect x="430" y="224" width="25" height="94" fill="#b99b89"/><rect x="385" y="213" width="120" height="16" rx="8" fill="#c89fc7"/>'+cat(405,157,'#c6b3d7');if(placed.includes('cat-wall'))s+='<path d="M722 187h86M804 151h95" stroke="#bd95bd" stroke-width="14"/>';if(placed.includes('cat-toys'))s+='<text x="330" y="386" font-size="43">🧶</text><text x="550" y="385" font-size="43">🪶</text>';if(placed.includes('cat-extra'))s+=cat(305,284,'#e7bda4')+cat(782,276,'#b7b8db');}
 if(room==='yardview'){s+='<rect x="92" y="175" width="816" height="188" rx="18" fill="#d6f4f1" stroke="#a4c5c4" stroke-width="7"/><path d="M100 305q250 -67 426 0q211 -66 379 0v55H100Z" fill="#b9dea5"/>'+[130,230,330,430,530,630,730,830].map(x=>'<path d="M'+x+' 180v180" stroke="#fff" stroke-width="5"/>').join('')+'<path d="M100 251h810M100 320h810" stroke="#fff" stroke-width="5"/>'+dog(237,247)+dog(620,244);const placed=state.receptionHabitats?.placed||[];if(placed.includes('yard-toys'))s+='<text x="461" y="343" font-size="43">🎾</text>';if(placed.includes('yard-agility'))s+='<path d="M438 283h131M449 283v58M562 283v58" stroke="#e8b27d" stroke-width="12"/>';}
 return s+'</svg>';
@@ -40,7 +40,7 @@ function refresh(){
  if(existing?.dataset.room===room && (room!=='reception'||stage.dataset.receptionView!=='isometric'||extras))return;
  existing?.remove();extras?.remove();
  const div=document.createElement('div');div.id='vpqWingHits';div.dataset.room=room;
- if(slots[room])div.innerHTML=slots[room].map(([label,action,x])=>'<button type="button" class="vpqWingHit" data-vpqwingaction="'+action+'" style="left:'+(x-9)+'%;top:36%;width:18%;height:43%" aria-label="'+label+'"><span>'+label+'</span></button>').join('');
+ if(slots[room])div.innerHTML=slots[room].map(([label,action,x])=>'<button type="button" class="vpqWingHit" data-vpqwingaction="'+action+'" style="left:'+(x-8)+'%;top:36%;width:16%;height:43%" aria-label="'+label+'"><span>'+label+'</span></button>').join('');
  div.addEventListener('click',e=>{const b=e.target.closest('[data-vpqwingaction]');if(b)route(b.dataset.vpqwingaction)});
  stage.appendChild(div);
  if(room==='reception'&&stage.dataset.receptionView==='isometric'){
@@ -57,23 +57,33 @@ function near(room,x){
  return best;
 }
 function interact(room,x){const b=near(room,x);if(!b)return false;route(b.action);return true}
-const mapRooms=[['🏠 Reception','reception'],['🚪 Clinical Hall','hallway'],['🩺 Exam','exam'],['❤️ Treatment','treatment'],['💊 Pharmacy','pharmacy'],['🔬 Advanced Lab','clinpath'],['🩻 Imaging','imaging'],['🛡️ One Health','isolation'],['📚 Study','study'],['🐈 Cat Corner','catcorner'],['🐕 Dog Yard','yardview'],['🧬 Mechanism Lab','mechanism'],['🧫 Necropsy Preview','necropsy']];
+const mapRooms=[['🏠 Reception','reception'],['🚪 Clinical Hall','hallway'],['🩺 Exam','exam'],['❤️ Treatment','treatment'],['💊 Pharmacy','pharmacy'],['🔬 Advanced Lab','clinpath'],['🩻 Imaging','imaging'],['🛡️ One Health','isolation'],['📚 Study','study'],['🐈 Cat Corner','catcorner'],['🐕 Dog Yard','yardview'],['🧬 Mechanism Lab','mechanism'],['🧫 Necropsy & Pathology','necropsy'],['🩺 Surgery & Anesthesia','surgery']];
 function map(){
- const blueprint='<svg viewBox="0 0 900 420" role="img" aria-label="Illustrated top-down clinic blueprint with reception, hallway, examination, treatment, pharmacy, advanced lab, imaging, isolation, cat corner and dog yard" style="display:block;width:100%;max-height:420px;background:#f3edfa;border:3px solid #c7b7dd;border-radius:20px">'+
- '<rect x="34" y="30" width="833" height="358" rx="22" fill="#fffdfb" stroke="#9a87b9" stroke-width="7"/>'+
- '<path d="M182 170h560v83H182z" fill="#e8e0f1" stroke="#baa5d5" stroke-width="4"/>'+
- '<g font-family="Arial,sans-serif" font-size="17" font-weight="900" fill="#63577a" text-anchor="middle">'+
- '<rect x="52" y="188" width="157" height="166" rx="16" fill="#f5dfe9" stroke="#c5a5bc" stroke-width="5"/><text x="130" y="239">🏠 RECEPTION</text><text x="130" y="267">LOBBY</text>'+
- '<rect x="51" y="50" width="165" height="109" rx="12" fill="#e2f2da" stroke="#a9c6a5" stroke-width="4"/><text x="133" y="99">🐕 DOG YARD</text>'+
- '<rect x="242" y="50" width="154" height="109" rx="12" fill="#fae1f3" stroke="#cda4c5" stroke-width="4"/><text x="319" y="98">🐈 CAT CORNER</text>'+
- '<rect x="422" y="50" width="143" height="109" rx="12" fill="#e5f1f8" stroke="#a2c4d7" stroke-width="4"/><text x="494" y="98">📚 STUDY</text>'+
- '<rect x="592" y="50" width="257" height="109" rx="12" fill="#e6e4fb" stroke="#b4a9d4" stroke-width="4"/><text x="720" y="99">💊 PHARMACY</text>'+
- '<rect x="245" y="264" width="137" height="104" rx="12" fill="#e7f7fb" stroke="#a0c8d2" stroke-width="4"/><text x="314" y="321">🩺 EXAM</text>'+
- '<rect x="396" y="264" width="137" height="104" rx="12" fill="#fce5e8" stroke="#d7acb8" stroke-width="4"/><text x="465" y="321">❤️ TREATMENT</text>'+
- '<rect x="545" y="264" width="137" height="104" rx="12" fill="#dcf2e5" stroke="#9dbdac" stroke-width="4"/><text x="614" y="321">🛡️ ONE HEALTH</text>'+
- '<rect x="694" y="264" width="156" height="104" rx="12" fill="#e6ebfa" stroke="#a6b3d6" stroke-width="4"/><text x="770" y="310">🔬 ADVANCED</text><text x="770" y="333">LAB</text>'+
- '<text x="465" y="220" fill="#8575a5" font-size="23">🚪 CLINIC HALLWAY</text>'+
- '</g></svg>';
+ const mapCells=[
+  {x:31,y:38,w:145,h:120,bg:'#d8efd7',e:'🐕',name:'DOG YARD'},
+  {x:190,y:38,w:145,h:120,bg:'#f5dff0',e:'🐈',name:'CAT CORNER'},
+  {x:350,y:38,w:145,h:120,bg:'#f7e9c8',e:'📚',name:'STUDY'},
+  {x:510,y:38,w:160,h:120,bg:'#e7e1f5',e:'💊',name:'PHARMACY'},
+  {x:685,y:38,w:172,h:120,bg:'#e2f0f8',e:'🩻',name:'IMAGING'},
+  {x:31,y:238,w:162,h:140,bg:'#f4dfe8',e:'🏠',name:'RECEPTION'},
+  {x:209,y:238,w:122,h:140,bg:'#e0eff9',e:'🩺',name:'EXAM'},
+  {x:347,y:238,w:122,h:140,bg:'#f8e0e5',e:'❤️',name:'TREATMENT'},
+  {x:485,y:238,w:122,h:140,bg:'#f5ddeb',e:'🩺',name:'SURGERY'},
+  {x:623,y:238,w:122,h:140,bg:'#dff1e7',e:'🛡️',name:'ONE HEALTH'},
+  {x:760,y:238,w:109,h:140,bg:'#e7e1f7',e:'🔬',name:'ADV LAB'}
+ ];
+ const blueprint='<svg viewBox="0 0 900 410" role="img" aria-label="Cute illustrated bird-eye view of veterinary hospital rooms branching from the connected reception hallway" style="display:block;width:100%;max-height:440px;background:#e8f2e6;border:3px solid #bda7d3;border-radius:20px">'+
+ '<defs><pattern id="vpqBlueprintTiles" width="23" height="23" patternUnits="userSpaceOnUse"><path d="M23 0H0V23" fill="none" stroke="#e5ddf3" stroke-width="2"/></pattern></defs>'+
+ '<rect x="12" y="13" width="875" height="384" rx="22" fill="#fff9fd" stroke="#bbafd0" stroke-width="6"/>'+
+ '<path d="M123 188H853" stroke="#c6accd" stroke-width="43" stroke-linecap="round"/>'+
+ '<path d="M123 188H853" stroke="#efdef4" stroke-width="34" stroke-linecap="round"/>'+
+ '<text x="485" y="194" text-anchor="middle" font-family="Arial" font-size="17" font-weight="900" fill="#7b6297">CONTINUOUS CLINIC HALLWAY</text>'+
+ mapCells.map(v=>'<g><rect x="'+v.x+'" y="'+v.y+'" width="'+v.w+'" height="'+v.h+'" rx="13" fill="'+v.bg+'" stroke="#b59fc2" stroke-width="4"/>'+
+ '<rect x="'+(v.x+8)+'" y="'+(v.y+10)+'" width="'+(v.w-16)+'" height="'+(v.h-29)+'" rx="9" fill="url(#vpqBlueprintTiles)" opacity=".65"/>'+
+ '<text x="'+(v.x+v.w/2)+'" y="'+(v.y+v.h/2+3)+'" text-anchor="middle" font-size="34">'+v.e+'</text>'+
+ '<text x="'+(v.x+v.w/2)+'" y="'+(v.y+v.h-11)+'" text-anchor="middle" font-family="Arial" font-size="12" font-weight="900" fill="#65547e">'+v.name+'</text></g>').join('')+
+ '<path d="M74 29q18 -18 36 0M803 389q24 -14 48 0" stroke="#a7c5aa" stroke-width="8" fill="none"/>'+
+ '<text x="26" y="398" font-size="23">🐾</text><text x="840" y="32" font-size="23">🐾</text></svg>';
  api.showModal('🗺️ Vet Pharm Quest · Building Blueprint','<p>Illustrated navigation plan (not to scale). Choose any room below to enter it. Imaging, Mechanism Lab and Necropsy can also be reached from the buttons.</p>'+blueprint+'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:8px">'+mapRooms.filter(([n,k])=>rooms[k]).map(([n,k])=>'<button data-vpqwingmap="'+k+'" style="border:2px solid #cfb6dd;background:#f9f1fd;border-radius:14px;padding:14px;text-align:left;font-weight:900">'+n+'</button>').join('')+'</div>');
 }
 function inventory(){if(!state.receptionHabitats)state.receptionHabitats={owned:[],placed:[]};const v=state.receptionHabitats;if(!Array.isArray(v.owned))v.owned=[];if(!Array.isArray(v.placed))v.placed=[];return v}
