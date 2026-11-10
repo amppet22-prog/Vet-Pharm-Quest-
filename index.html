@@ -571,6 +571,10 @@ const ROOMS={
  study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'📖',label:'Guided Learning',action:'learningHub',bubble:'Select & start'},{x:52,emoji:'🏆',label:'Mastery Tracker',action:'masteryTracker',bubble:'Test yourself'},{x:81,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Short practice'}]}
 };
 ROOMS.clinpath={name:'Advanced Clinical Pathology · Referral Lab',color:'#e8f4fc',banner:'SPECIALIZED DIAGNOSTICS • HEMOSTASIS · BLOOD GAS · URINE',decor:[],props:[{x:17,emoji:'🩸',label:'Coagulation Analyzer',action:'advancedCoag',bubble:'PT / aPTT / DIC'},{x:43,emoji:'🫧',label:'Blood Gas Analyzer',action:'advancedGas',bubble:'Acid-base & oxygenation'},{x:68,emoji:'🧫',label:'Urinalysis Workbench',action:'advancedUrine',bubble:'Sediment & renal'},{x:87,emoji:'🐾',label:'Advanced Case Board',action:'advancedCases',bubble:'Complex patients'}]};
+// Register reception annex room keys before restoring the saved active room.
+for(const [key,name] of [['hallway','Clinical Hallway · East Wing'],['catcorner','Reception Cat Corner'],['yardview','Dog Kennel & Play Yard Window']]){
+ ROOMS[key]={name,color:'#f4eafa',banner:'RECEPTION ANNEX',decor:[],props:[{x:50,emoji:'🚪',label:'Reception',action:'vpqWingLobby',bubble:'Return to lobby'}]};
+}
 const LEVEL_THRESH=130;const DEFAULT={name:'Student Vet',skin:'#b77957',hair:'#5b3e38',scrubs:'#67a5d9',pet:'🐕',petName:'Buddy',petCoat:'#f5d59a',petAccessory:'🎀',xp:0,coins:0,attempts:0,correct:0,completed:[],studyCorrect:0,upgrades:[],room:'reception',focus:'All lectures',questionHistory:{},studySession:null};
 const KEY='vpq-v2-clinic-state',EDITS_KEY='vpq-v2-content-edits';
 function safeRead(k,fallback){try{return JSON.parse(localStorage.getItem(k))||fallback}catch{return fallback}}
