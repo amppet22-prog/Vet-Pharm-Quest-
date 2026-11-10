@@ -57,6 +57,15 @@ Updated: November 9, 2026
 - **Patient-example principle:** every working educational station should eventually link to one or more species-specific patient examples. The common patient list remains the source of truth; some stations are already connected, but a complete station-by-station audit and missing-case expansion are **not yet done**.
 - **QA:** static parsing and presence checks performed; live click/movement interactions, render fidelity, small-screen layout, and save migration still require a real browser playthrough.
 
+## Surgery / Necropsy / restored advanced lab — first interactive build
+- **New walkable Surgery & Anesthesia Suite:** original pastel 2.5D equipment art, click/E glow stations for surgical preparation, anesthesia, recovery and a shared patient case board. 12 original mechanism- and safety-focused questions, 2 three-step patient cases.
+- **Activated Necropsy & Diagnostic Pathology Floor:** original 2.5D gross examination table, histology viewer, biosecurity/PPE and case-board objects; 12 original gross/histology/biosecurity reasoning questions and 2 three-step patient cases. This is an educational first phase, **not** a complete photo-histology atlas or procedural simulator.
+- **Advanced Clinical Pathology restored and expanded:** five visible stations — coagulation, blood gas, urine, referral cases **plus restored microscopy & classic lab**. Original smear/cytology/interpretation/specimen-workflow/patient tools remain available through one bench.
+- **Unified patient case tracking:** 4 new surgery/necropsy clinical cases are added to the existing common hospital case list, using its completion/reward logic, not separate progress data.
+- **Reception/Hallway:** rear lobby doorway visibly recedes into the clinic corridor; hallway is labeled a Reception extension, offers a return to lobby control and six clinical department doors. The waiting room has a dog-yard glass window with a more recognizable dog. One Health isolation dog was redrawn with floppy ears and visible canine anatomy.
+- **Floor map artwork:** the live in-game map is an enhanced pastel, illustrated SVG with corridor and clickable departments (including Surgery). The separately generated **painted hospital concept map is not yet imported as a runtime binary asset**; preserve it as visual art direction.
+- **Verification:** 7 current JavaScript files and the inline game scripts parse successfully; static checks confirm station action wiring, room restoration, case registry, and navigation. Real browser visual/interaction testing still pending.
+
 ## Next focused milestones
 1. QA active Imaging Suite and the new Clinical Pathology room with existing saves.
 2. Improve station navigation and add imaging projection-selection/positioning diagrams using original artwork.
