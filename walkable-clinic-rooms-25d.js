@@ -10,16 +10,16 @@ if(!stage||!window.VPQ_SCENERY)return null;
 const prior=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const spec={
  imaging:[
-  {x:10,y:40,w:22,h:49,label:'X-ray Table',action:'imagingXray'},
-  {x:33,y:39,w:21,h:50,label:'Ultrasound',action:'imagingUltrasound'},
-  {x:56,y:39,w:21,h:50,label:'CT Workstation',action:'imagingCT'},
-  {x:80,y:39,w:18,h:50,label:'Reading Desk',action:'radiologyDesk'}],
+  {x:10,y:40,w:22,h:49,label:'🩻 X-ray Table',action:'imagingXray'},
+  {x:33,y:39,w:21,h:50,label:'📡 Ultrasound',action:'imagingUltrasound'},
+  {x:56,y:39,w:21,h:50,label:'💻 CT Station',action:'imagingCT'},
+  {x:80,y:39,w:18,h:50,label:'📋 Read Images',action:'radiologyDesk'}],
  treatment:[
-  {x:3,y:39,w:18,h:48,label:'Patient',action:'hospitalFollowup'},
-  {x:22,y:39,w:17,h:48,label:'Treatment Cart',action:'hospitalAdjust'},
-  {x:40,y:39,w:18,h:48,label:'Monitoring',action:'hospitalMonitor'},
-  {x:59,y:39,w:19,h:48,label:'CBC & Chemistry',action:'treatmentDiagnostics'},
-  {x:79,y:39,w:19,h:48,label:'Microscope',action:'microscopeDetective'}]
+  {x:3,y:39,w:18,h:48,label:'🐾 Patient',action:'hospitalFollowup'},
+  {x:22,y:39,w:17,h:48,label:'💉 Treatment',action:'hospitalAdjust'},
+  {x:40,y:39,w:18,h:48,label:'💗 Monitor',action:'hospitalMonitor'},
+  {x:59,y:39,w:19,h:48,label:'🩸 CBC + Chem',action:'treatmentDiagnostics'},
+  {x:79,y:39,w:19,h:48,label:'🔬 Microscope',action:'microscopeDetective'}]
 };
 const round=(x,y,w,h,fill,stroke='#aaa9ce')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="12" fill="'+fill+'" stroke="'+stroke+'" stroke-width="5"/>';
 function base(type){
@@ -122,10 +122,10 @@ window.VPQ_SCENERY.roomArt=k=>k==='imaging'?imaging():k==='treatment'?treatment(
 const styles=document.createElement('style');
 styles.textContent='.vpqWalkArt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}'+
 '.stage[data-room="imaging"] .prop,.stage[data-room="treatment"] .prop,.stage[data-room="imaging"] .roomdecor,.stage[data-room="treatment"] .roomdecor,.stage[data-room="imaging"] .roomBanner,.stage[data-room="treatment"] .roomBanner{display:none!important}'+
-'.vpq25Hotspots{position:absolute;inset:0;z-index:5;pointer-events:none}.vpq25Hit{position:absolute;pointer-events:auto;background:linear-gradient(180deg,#ffffff08,#eef0ff15);border:2px solid transparent;border-radius:15px;box-shadow:none;transform:none!important;padding:0}'+
-'.vpq25Hit:hover,.vpq25Hit:focus-visible{background:#fff5d029;border:3px solid #ffda78;box-shadow:0 0 18px #ffeab2aa;outline:none}'+
-'.vpq25Hit span{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);padding:5px 9px;border:2px solid #b7a9d8;background:#fffafd;color:#5a5d87;border-radius:17px;font-size:11px;font-weight:900;white-space:nowrap;box-shadow:0 4px 7px #53678722}'+
-'@media(max-width:620px){.vpq25Hit span{font-size:9px;padding:3px 4px;white-space:normal;min-width:80%;line-height:1.1}}';
+'.vpq25Hotspots{position:absolute;inset:0;z-index:5;pointer-events:none}.vpq25Hit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:15px;box-shadow:none;transform:none!important;padding:0}'+
+'.vpq25Hit:hover,.vpq25Hit:focus-visible{background:#fff1cf30;border:3px solid #ffcc61;box-shadow:0 0 18px #ffeab2aa;outline:none}'+
+'.vpq25Hit span{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);padding:9px 10px;border:3px solid #a98cd5;background:linear-gradient(#fff,#f9e9fa);color:#514779;border-radius:16px;font-size:clamp(11px,1.3vw,15px);font-weight:1000;white-space:nowrap;box-shadow:0 4px 0 #9473ac55,0 7px 15px #53678733}'+
+'@media(max-width:620px){.vpq25Hit span{font-size:10px;padding:5px 4px;white-space:normal;min-width:80%;line-height:1.1}}';
 document.head.appendChild(styles);
 function refresh(){
  const old=stage.querySelector('#vpq25Hotspots');
