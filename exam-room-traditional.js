@@ -53,6 +53,7 @@ function refresh(){
  '<button type="button" class="vpqExamHot vpqExamPatient" data-vpqexamaction="patients" aria-label="Examine patient and start patient cases"><span>🩺 Examine Patient</span></button>'+
  '<button type="button" class="vpqExamHot vpqExamProtocol" data-vpqexamaction="protocols" aria-label="Open clinical protocols"><span>📖 Protocols</span></button>'+
  '<button type="button" class="vpqExamAnimalSwitch" data-vpqexamanimal="1" aria-label="Switch illustrated patient between dog and cat">🐾 Patient: '+(examAnimal==='dog'?'Dog':'Cat')+' · Switch</button>'+
+ '<button type="button" class="vpqExamSkills" data-vpqexamaction="skillsWing" aria-label="Walk into Clinical Skills for injection and blood draw">💉 🩸 Clinical Skills · Injection / Blood Draw</button>'+ 
  '<button type="button" class="vpqExamExit" data-vpqexamreturn="1">← Reception</button>';
  el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.vpqexamanimal!==undefined){examAnimal=examAnimal==='dog'?'cat':'dog';const scene=document.getElementById('scene');if(scene){const svg=scene.querySelector('.vpqExamRoomArt');if(svg)svg.outerHTML=drawing()}const toggle=el.querySelector('[data-vpqexamanimal]');if(toggle)toggle.textContent='🐾 Patient: '+(examAnimal==='dog'?'Dog':'Cat')+' · Switch';return;}if(b.dataset.vpqexamreturn!==undefined)return changeRoom('reception');if(b.dataset.vpqexamaction)return doAction(b.dataset.vpqexamaction)});
  stage.appendChild(el);
@@ -65,6 +66,7 @@ const style=document.createElement('style');style.textContent=
 '.vpqExamHot:hover,.vpqExamHot:focus-visible,.vpqExamAnimalSwitch:hover,.vpqExamAnimalSwitch:focus-visible,.vpqExamExit:hover,.vpqExamExit:focus-visible{border:3px solid #f1c66d;outline:2px solid #fff;background:#fff6ba48}'+
 '.vpqExamHot span{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fffdf5;color:#355a70;border:2px solid #83acb5;border-radius:14px;padding:5px 9px;font-size:12px;font-weight:900;box-shadow:0 3px 0 #708c962e}.vpqExamCharts span{bottom:-16%}.vpqExamProtocol span{bottom:-8%}'+
 '.vpqExamCharts{left:29%;top:50%;width:13%;height:24%}.vpqExamPatient{left:59%;top:42%;width:33%;height:39%}.vpqExamProtocol{left:51%;top:20%;width:14%;height:33%}'+
+'.vpqExamSkills{pointer-events:auto;position:absolute;left:3%;top:8%;background:#fff4fadd;border:3px solid #b79bda;border-radius:14px;color:#745588;padding:9px 12px;font-size:13px;font-weight:900;box-shadow:0 5px 0 #bfa8d455;cursor:pointer;z-index:3}.vpqExamSkills:hover,.vpqExamSkills:focus-visible{background:#fff1bd;border-color:#eab65c;outline:2px solid #fff9dd}'+
 '.vpqExamAnimalSwitch{bottom:3%;right:2%;background:#f4fffcf0;color:#365e66;font-size:11px;padding:6px 9px;z-index:2}.vpqExamExit{top:8%;right:2%;background:#fffdf5ed;color:#365e66;font-size:11px;padding:6px 9px}'+
 '@media(max-width:600px){.vpqExamHot span{font-size:10px;padding:3px 5px}.vpqExamAnimalSwitch{font-size:9px}.vpqExamExit{font-size:10px}}';
 document.head.appendChild(style);
