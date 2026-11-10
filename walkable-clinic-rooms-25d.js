@@ -19,6 +19,7 @@ const spec={
  treatment:[
   {x:9,y:33,w:18,h:41,label:'🐶 Patient',action:'hospitalFollowup'},
   {x:28,y:54,w:10,h:26,label:'💉 Cart',action:'hospitalAdjust'},
+  {x:37,y:29,w:13,h:23,label:'💉 Skills Wing',action:'skillsWing'},
   {x:59,y:35,w:14,h:29,label:'💗 Monitor',action:'hospitalMonitor'},
   {x:73,y:52,w:15,h:19,label:'🩸 CBC + Chem',action:'treatmentDiagnostics'},
   {x:88,y:49,w:9,h:22,label:'🔬 Microscope',action:'microscopeDetective'}]
@@ -78,7 +79,15 @@ function imaging(){
 }
 function treatment(){
  let s=base('treatment');
- // Patient kennel with vertical metal bars and sleepy dog
+ // Distinct, walkable skills doorway behind the treatment cart.
+ s+='<g filter="url(#trt25-shadow)">'+round(350,151,150,123,'#e2f0fa','#9bafcf')+
+ '<rect x="363" y="177" width="124" height="82" rx="9" fill="#f9ecf7" stroke="#b8a0ca" stroke-width="4"/>'+
+ '<path d="M424 180v78" stroke="#bfa8d3" stroke-width="5"/>'+
+ '<circle cx="413" cy="229" r="5" fill="#c6a6d1"/><circle cx="437" cy="229" r="5" fill="#c6a6d1"/>'+
+ '<rect x="355" y="155" width="142" height="29" rx="12" fill="#fff5fc" stroke="#b79aca" stroke-width="3"/>'+
+ '<text x="426" y="175" font-family="Arial" text-anchor="middle" font-size="15" fill="#8e6297" font-weight="900">CLINICAL SKILLS</text>'+
+ '<text x="395" y="219" font-size="25" text-anchor="middle">💉</text><text x="461" y="219" font-size="25" text-anchor="middle">🩸</text></g>';
+  // Patient kennel with vertical metal bars and sleepy dog
  s+='<g filter="url(#trt25-shadow)">'+round(92,167,185,192,'#e2eafa','#a4a7cb')+
  '<rect x="106" y="303" width="157" height="41" rx="8" fill="#b9b3e5"/>'+
  '<rect x="107" y="310" width="154" height="26" rx="13" fill="#e8c9ea" stroke="#bca4ce" stroke-width="3"/>'+
