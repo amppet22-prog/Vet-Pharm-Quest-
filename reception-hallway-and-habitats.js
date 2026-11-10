@@ -59,7 +59,22 @@ function near(room,x){
 function interact(room,x){const b=near(room,x);if(!b)return false;route(b.action);return true}
 const mapRooms=[['🏠 Reception','reception'],['🚪 Clinical Hall','hallway'],['🩺 Exam','exam'],['❤️ Treatment','treatment'],['💊 Pharmacy','pharmacy'],['🔬 Advanced Lab','clinpath'],['🩻 Imaging','imaging'],['🛡️ One Health','isolation'],['📚 Study','study'],['🐈 Cat Corner','catcorner'],['🐕 Dog Yard','yardview'],['🧬 Mechanism Lab','mechanism'],['🧫 Necropsy Preview','necropsy']];
 function map(){
- api.showModal('🗺️ Vet Pharm Quest · Building Blueprint','<p>Explore from the lobby into the clinical hallway, or visit the cat corner and dog-yard window. Select any room to enter it.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:8px">'+mapRooms.filter(([n,k])=>rooms[k]).map(([n,k])=>'<button data-vpqwingmap="'+k+'" style="border:2px solid #cfb6dd;background:#f9f1fd;border-radius:14px;padding:14px;text-align:left;font-weight:900">'+n+'</button>').join('')+'</div>');
+ const blueprint='<svg viewBox="0 0 900 420" role="img" aria-label="Illustrated top-down clinic blueprint with reception, hallway, examination, treatment, pharmacy, advanced lab, imaging, isolation, cat corner and dog yard" style="display:block;width:100%;max-height:420px;background:#f3edfa;border:3px solid #c7b7dd;border-radius:20px">'+
+ '<rect x="34" y="30" width="833" height="358" rx="22" fill="#fffdfb" stroke="#9a87b9" stroke-width="7"/>'+
+ '<path d="M182 170h560v83H182z" fill="#e8e0f1" stroke="#baa5d5" stroke-width="4"/>'+
+ '<g font-family="Arial,sans-serif" font-size="17" font-weight="900" fill="#63577a" text-anchor="middle">'+
+ '<rect x="52" y="188" width="157" height="166" rx="16" fill="#f5dfe9" stroke="#c5a5bc" stroke-width="5"/><text x="130" y="239">🏠 RECEPTION</text><text x="130" y="267">LOBBY</text>'+
+ '<rect x="51" y="50" width="165" height="109" rx="12" fill="#e2f2da" stroke="#a9c6a5" stroke-width="4"/><text x="133" y="99">🐕 DOG YARD</text>'+
+ '<rect x="242" y="50" width="154" height="109" rx="12" fill="#fae1f3" stroke="#cda4c5" stroke-width="4"/><text x="319" y="98">🐈 CAT CORNER</text>'+
+ '<rect x="422" y="50" width="143" height="109" rx="12" fill="#e5f1f8" stroke="#a2c4d7" stroke-width="4"/><text x="494" y="98">📚 STUDY</text>'+
+ '<rect x="592" y="50" width="257" height="109" rx="12" fill="#e6e4fb" stroke="#b4a9d4" stroke-width="4"/><text x="720" y="99">💊 PHARMACY</text>'+
+ '<rect x="245" y="264" width="137" height="104" rx="12" fill="#e7f7fb" stroke="#a0c8d2" stroke-width="4"/><text x="314" y="321">🩺 EXAM</text>'+
+ '<rect x="396" y="264" width="137" height="104" rx="12" fill="#fce5e8" stroke="#d7acb8" stroke-width="4"/><text x="465" y="321">❤️ TREATMENT</text>'+
+ '<rect x="545" y="264" width="137" height="104" rx="12" fill="#dcf2e5" stroke="#9dbdac" stroke-width="4"/><text x="614" y="321">🛡️ ONE HEALTH</text>'+
+ '<rect x="694" y="264" width="156" height="104" rx="12" fill="#e6ebfa" stroke="#a6b3d6" stroke-width="4"/><text x="770" y="310">🔬 ADVANCED</text><text x="770" y="333">LAB</text>'+
+ '<text x="465" y="220" fill="#8575a5" font-size="23">🚪 CLINIC HALLWAY</text>'+
+ '</g></svg>';
+ api.showModal('🗺️ Vet Pharm Quest · Building Blueprint','<p>Illustrated navigation plan (not to scale). Choose any room below to enter it. Imaging, Mechanism Lab and Necropsy can also be reached from the buttons.</p>'+blueprint+'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:8px">'+mapRooms.filter(([n,k])=>rooms[k]).map(([n,k])=>'<button data-vpqwingmap="'+k+'" style="border:2px solid #cfb6dd;background:#f9f1fd;border-radius:14px;padding:14px;text-align:left;font-weight:900">'+n+'</button>').join('')+'</div>');
 }
 function inventory(){if(!state.receptionHabitats)state.receptionHabitats={owned:[],placed:[]};const v=state.receptionHabitats;if(!Array.isArray(v.owned))v.owned=[];if(!Array.isArray(v.placed))v.placed=[];return v}
 function shop(room){
