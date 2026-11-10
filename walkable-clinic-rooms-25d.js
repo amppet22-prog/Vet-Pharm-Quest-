@@ -116,6 +116,18 @@ function treatment(){
  '<circle cx="902" cy="262" r="11" fill="#ddeafa" stroke="#8aa5c9" stroke-width="6"/>'+
  '<path d="M908 278l-20 35" stroke="#8898bd" stroke-width="8"/>'+
  [761,783,808].map((x,i)=>'<rect x="'+x+'" y="257" width="13" height="10" rx="3" fill="'+(i%2?'#d793b6':'#a58dd3')+'"/>').join('')+'</g>';
+ s+='<g font-family="Arial,sans-serif" font-weight="900">'+
+ '<rect x="96" y="106" width="163" height="39" rx="18" fill="#fff5fc" stroke="#dda7d6" stroke-width="4"/>'+
+ '<text x="177" y="132" font-size="17" fill="#935c8d" text-anchor="middle">PATIENT CARE</text>'+
+ '<rect x="751" y="106" width="162" height="39" rx="18" fill="#f2faff" stroke="#99c4d3" stroke-width="4"/>'+
+ '<text x="832" y="132" font-size="17" fill="#547a91" text-anchor="middle">IN-HOUSE LAB</text>'+
+ '</g>'+
+ '<g><circle cx="950" cy="122" r="18" fill="#ffecf3" stroke="#d899b8" stroke-width="4"/>'+
+ '<path d="M940 122h20M950 112v20" stroke="#e56e98" stroke-width="6" stroke-linecap="round"/>'+
+ '<path d="M300 157l5 10 11 1-8 8 2 11-10-5-10 5 2-11-8-8 11-1z" fill="#ffd49b" stroke="#e7a772" stroke-width="2"/>'+
+ '<path d="M725 154l5 10 11 1-8 8 2 11-10-5-10 5 2-11-8-8 11-1z" fill="#ffd49b" stroke="#e7a772" stroke-width="2"/>'+
+ '<circle cx="305" cy="129" r="4" fill="#ffffff"/><circle cx="312" cy="118" r="4" fill="#ffffff"/><circle cx="320" cy="128" r="4" fill="#ffffff"/>'+
+ '</g>';
  return s+'</svg>';
 }
 window.VPQ_SCENERY.roomArt=k=>k==='imaging'?imaging():k==='treatment'?treatment():prior(k);
