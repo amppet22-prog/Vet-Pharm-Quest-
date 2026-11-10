@@ -32,3 +32,18 @@ Implemented November 2026 in `pathogen-microscope-atlas.js` and wired into One H
 - Expand photographic egg/larva set with individually license-verified images and pair each with morphology labels, scale and correct ID specificity.
 - Import and validate more organism entries from the bacteriology/mycology, virology and parasitology spreadsheets. Maintain per-organism provenance.
 - Connect species and lecture filters across the course selection UI; add advanced case simulations including MIC interpretation and imaging.
+
+## New source-linked microscope images — November 10, 2026
+The `microscopy-photo-expansion.js` file provides six more source-grounded specimen images, each with species-level certainty, diagnostic morphology, links to the source and contextual clinical test reasoning. Images are loaded from original CDC pages rather than bundled into the repository:
+1. *Giardia duodenalis* cyst (iodine mount): https://www.cdc.gov/dpdx/giardiasis/images/1/Giardia_cyst_wtmt.jpg — https://www.cdc.gov/dpdx/giardiasis/
+2. *Giardia duodenalis* cyst (DIC): https://www.cdc.gov/dpdx/giardiasis/images/2/Giardia_cyst_dic.jpg — same original page.
+3. *Trichuris trichiura* egg (human reference): https://www.cdc.gov/dpdx/trichuriasis/images/1/Trichuris_trichiura_egg1.jpg — https://www.cdc.gov/dpdx/trichuriasis/ . **Use ONLY as morphology comparison** with canine or swine whipworms, NOT a picture of *T. vulpis* or *T. suis*.
+4. *Toxocara* larva in tissue (H&E): https://www.cdc.gov/dpdx/toxocariasis/images/4/Toxocara_larvae_he.jpg — https://www.cdc.gov/dpdx/toxocariasis/ . **Human tissue example, not a veterinary fecal sample.**
+5. *Fasciola hepatica* egg (wet mount 400×): https://www.cdc.gov/dpdx/fascioliasis/images/1/F_hepatica_egg_wtmt_HB1.jpg — https://www.cdc.gov/dpdx/fascioliasis/ . Confirmed identification in CDC's original egg image captions, useful for sheep/goat/cattle dossiers.
+6. *Ascaris lumbricoides* fertilized egg (human reference): https://www.cdc.gov/dpdx/ascariasis/images/2/Ascaris_egg_fert_embryo.jpg — https://www.cdc.gov/dpdx/ascariasis/ . **Comparison** with swine *Ascaris suum*, not an identified pig sample.
+
+**Use limitations:** Copyright or third-party courtesy attribution still need to be respected on a per-image basis. The game hotlinks to original CDC-hosted images and includes source-page links/fallbacks; it does not redistribute image binaries in GitHub. Linking does not establish rights for future commercial use, scraping, or rehosting.
+
+**Source distinction:** The new `Giardia duodenalis` profile is supplemental reference-based content, not a representation that all protozoa were included in uploaded Lecture 43. Lectures remain primary for course emphasis; CDC DPDx supplies specific photo provenance and lab morphology.
+
+**Coverage limitations:** This is a 10-photo starter gallery, not a comprehensive microscopic atlas. Additional sheep/goat/cattle/swine/avian parasite images still require individually validated specimen identities. eClinPath blood smear images remain linked externally until photo handling, attribution and license compatibility are resolved.
