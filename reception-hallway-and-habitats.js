@@ -8,7 +8,7 @@ hallway:[['🩺 Exam','vpqWingExam',10],['❤️ Treatment','vpqWingTreatment',2
 catcorner:[['🌳 Cat tree & toys','vpqCatShop',26],['🐈 Meet cats','vpqCatView',62],['🚪 Reception','vpqWingLobby',91]],
 yardview:[['🐕 Dog play yard','vpqYardView',27],['🎾 Yard upgrades','vpqYardShop',63],['🚪 Reception','vpqWingLobby',91]]
 };
-for(const [room,arr] of Object.entries(slots))rooms[room]={name:room==='hallway'?'Clinical Hallway · East Wing':room==='catcorner'?'Reception Cat Corner':'Dog Kennel & Play Yard Window',color:'#f4eefa',banner:'EXTENDED HOSPITAL',decor:[],props:arr.map(([label,action,x])=>({x,label,action,emoji:label.slice(0,2),bubble:'Interact'}))};
+for(const [room,arr] of Object.entries(slots))rooms[room]={name:room==='hallway'?'Reception · Clinical Hallway':room==='catcorner'?'Reception Cat Corner':'Dog Kennel & Play Yard Window',color:'#f4eefa',banner:'EXTENDED HOSPITAL',decor:[],props:arr.map(([label,action,x])=>({x,label,action,emoji:label.slice(0,2),bubble:'Interact'}))};
 const choices={
 'cat-tree':['Cat climbing tree',40,'catcorner','🌳'],
 'cat-wall':['Wall climbing shelves',50,'catcorner','🪜'],
@@ -41,6 +41,7 @@ function refresh(){
  existing?.remove();extras?.remove();
  const div=document.createElement('div');div.id='vpqWingHits';div.dataset.room=room;
  if(slots[room])div.innerHTML=slots[room].map(([label,action,x])=>'<button type="button" class="vpqWingHit" data-vpqwingaction="'+action+'" style="left:'+(x-8)+'%;top:36%;width:16%;height:43%" aria-label="'+label+'"><span>'+label+'</span></button>').join('');
+ if(room==='hallway')div.innerHTML+='<button type="button" class="vpqReceptionExtra" data-vpqwingaction="vpqWingLobby" style="left:2%;top:4%;z-index:8">← Reception Lobby</button>';
  div.addEventListener('click',e=>{const b=e.target.closest('[data-vpqwingaction]');if(b)route(b.dataset.vpqwingaction)});
  stage.appendChild(div);
  if(room==='reception'&&stage.dataset.receptionView==='isometric'){
