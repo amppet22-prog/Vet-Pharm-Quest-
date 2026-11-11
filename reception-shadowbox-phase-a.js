@@ -132,6 +132,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    // Illustrated dog play-yard vignette: original SVG asset scaled into the room window.
    '<g aria-label="Dog play yard picture window"><rect x="83" y="108" width="145" height="151" rx="16" fill="#f6e8fc" stroke="#aa8bbd" stroke-width="7"/>'+
    '<image href="assets/reception/dog-play-yard-cute.svg" x="92" y="118" width="127" height="115" preserveAspectRatio="xMidYMid slice" pointer-events="none"/>'+
+   '<image href="https://upload.wikimedia.org/wikipedia/commons/a/ad/Lily_the_Golden_Retriever_in_the_grass.jpg" x="92" y="118" width="127" height="115" preserveAspectRatio="xMidYMid slice" pointer-events="none"/>'+
    '<path d="M92 118H219V233H92Z" fill="none" stroke="#fffaf3" stroke-width="4"/>'+
    '<rect x="89" y="231" width="134" height="26" rx="12" fill="#fff8eb" stroke="#bb9ec9" stroke-width="3"/>'+
    '<text x="156" y="249" text-anchor="middle" font-size="13" font-weight="900" font-family="Arial,sans-serif" fill="#60537b">DOG PLAY YARD</text></g>'+
@@ -140,7 +141,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    couch+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
    window.VPQ_RECEPTION_MODULAR_ASSETS.render(state,'isometric','nonrug')+
-   '<path d="M330 42Q500 58 669 42" fill="none" stroke="#f0b2d0" stroke-width="7"/><path d="M330 46Q500 64 669 46" fill="none" stroke="#a4c7e8" stroke-width="4"/>'+ '<text x="509" y="34" text-anchor="middle" font-size="20" font-weight="800" font-family="sans-serif" fill="#57667d">VET PHARM QUEST • RECEPTION</text>'+
+   '<g aria-label="Large pet-themed reception banner"><rect x="286" y="6" width="435" height="62" rx="18" fill="#fff6fb" stroke="#9b81b8" stroke-width="4"/><path d="M302 61Q500 83 706 61" fill="none" stroke="#ec8bb9" stroke-width="6"/><path d="M302 66Q500 91 706 66" fill="none" stroke="#f1be6f" stroke-width="4"/><path d="M302 71Q500 99 706 71" fill="none" stroke="#86caaa" stroke-width="4"/><text x="310" y="47" font-size="27">🐾</text><text x="679" y="47" font-size="27">🐾</text><text x="507" y="32" text-anchor="middle" font-size="23" font-weight="900" font-family="sans-serif" fill="#405a80">VET PHARM QUEST</text><text x="507" y="51" text-anchor="middle" font-size="15" font-weight="900" font-family="sans-serif" fill="#9b6e9b">RECEPTION • PET PARADISE</text></g>'+
    '</svg>';
  }
  sceneArt.roomArt=function(key){return key==='reception'&&state.receptionView==='isometric'?drawing():previousArt(key)};
