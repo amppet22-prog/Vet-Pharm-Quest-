@@ -386,9 +386,9 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="visual-pathway-atlas.js?v=20261108-pathways3"></script>
 <script src="antibiotic-pkpd-lesson.js?v=20261108-whycompare2"></script>
 <script src="drug-clinical-reference.js?v=20261108-piprant2"></script>
-<script src="reception-customization.js?v=20261108-furniture4"></script>
+<script src="reception-customization.js?v=20261110-testcoins500"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
-<script src="reception-shadowbox-phase-a.js?v=20261110-hallwindow3"></script>
+<script src="reception-shadowbox-phase-a.js?v=20261110-hallfas4"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
@@ -404,24 +404,32 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="walkable-clinic-rooms-25d.js?v=20261110-skillsdoor2"></script>
 <script src="clinic-approach-interactions.js?v=20261110-hallentry2"></script>
 <script src="specialist-clinic-wings.js?v=20261110-skills1"></script>
-<script src="reception-hallway-and-habitats.js?v=20261110-skillsMap5"></script>
-<script src="clinic-image-backgrounds.js?v=20261110-images3"></script>
+<script src="reception-hallway-and-habitats.js?v=20261110-faswing6"></script>
+<script src="fas-patient-rounds.js?v=20261110-fas1"></script>
+<script src="clinic-image-backgrounds.js?v=20261110-stationoverlays4"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
 <script src="navle-pharm-expansion.js?v=20261109-navle1"></script>
-<script src="clinical-pathology-lab.js?v=20261110-reward1"></script>
+<script src="clinical-pathology-lab.js?v=20261110-uavisual2"></script>
+<script src="clinpath-predict-trends.js?v=20261110-trends1"></script>
+<script src="clinpath-connect-the-clues.js?v=20261110-clues1"></script>
+<script src="clinpath-smear-to-patient.js?v=20261110-smearbridge1"></script>
+<script src="clinpath-whole-patient-rounds.js?v=20261110-wholepatient1"></script>
+<script src="clinpath-marrow-foundations.js?v=20261110-marrow1"></script>
+<script src="clinpath-diagnostic-test-bench.js?v=20261110-testbench1"></script>
+<script src="clinpath-urinalysis-visual-bench.js?v=20261110-uavisual1"></script>
 <script src="blood-smear-photo-expansion.js?v=20261110-smearphotos1"></script>
-<script src="blood-smear-lab.js?v=20261110-reward1"></script>
+<script src="blood-smear-lab.js?v=20261110-marrow2"></script>
 <script src="microscope-detective.js?v=20261109-detective1"></script>
 <script src="skills-animal-illustrations.js?v=20261110-allanimals1"></script>
 <script src="diagnostic-skills-workflow.js?v=20261110-actual-animal-images3"></script>
 <script src="radiology-reading-desk.js?v=20261110-reward1"></script>
 <script src="diagnostic-imaging-suite.js?v=20261109-imagingphase1"></script>
-<script src="treatment-diagnostics.js?v=20261109-cbchem1"></script>
-<script src="advanced-clinpath-stations.js?v=20261110-advanced1"></script>
+<script src="treatment-diagnostics.js?v=20261110-testbench2"></script>
+<script src="advanced-clinpath-stations.js?v=20261110-uavisual2"></script>
 <script src="surgery-necropsy-learning.js?v=20261110-newwings1"></script>
 <script src="livestock-avian-parasites.js?v=20261110-livestock1"></script>
 <script src="microscopy-photo-expansion.js?v=20261110-microphotos2"></script>
@@ -2840,6 +2848,13 @@ $('avatarBtn').onclick=()=>openAvatar();
 /* Interactive pathway art shares the existing modal, without changing course progress or saves. */
 window.VPQ_VISUAL_PATHWAYS.init({body:$('modalBody'),showModal});
 window.VPQ_CLINICAL_PRACTICE.init({body:$('modalBody'),showModal,dataDrugs});
+window.VPQ_TREND_LAB.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
+window.VPQ_CLINICAL_DECISIONS.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
+window.VPQ_SMEAR_TO_PATIENT.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
+window.VPQ_WHOLE_PATIENT_ROUNDS.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
+window.VPQ_MARROW_FOUNDATIONS.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
+window.VPQ_DIAGNOSTIC_TEST_BENCH.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
+window.VPQ_URINE_VISUAL_BENCH.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
 window.VPQ_CLINPATH_LAB.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_ADVANCED_LAB.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_SURGERY_NECROPSY.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
@@ -2855,6 +2870,7 @@ window.VPQ_VIRAL_JOURNEYS.init({body:$('modalBody'),showModal});
 const vpqWalkableClinicArt=window.VPQ_WALKABLE_CLINIC_ART({doAction:a=>doAction(a),rooms:ROOMS});
 const vpqApproachOtherRooms=window.VPQ_ROOM_INTERACTIONS({rooms:ROOMS});
 const vpqSpecialistWings=window.VPQ_SPECIALIST_ROOMS({doAction:a=>doAction(a),rooms:ROOMS});
+window.VPQ_FAS_LAB.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion});
 const vpqReceptionWings=window.VPQ_RECEPTION_WINGS({state,rooms:ROOMS,showModal,changeRoom,persist,updateHUD,renderRoom,closeModal,modalBody:$('modalBody')});
 const vpqImageBackgrounds=window.VPQ_IMAGE_BACKGROUNDS({state});
 // Use the SAME station activation for walking up with E and clicking an illustrated object.
