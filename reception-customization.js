@@ -3,6 +3,16 @@ window.VPQReceptionCreate=function(api){
 'use strict';
 const {state,persist,updateHUD,renderRoom,showModal,escapeHtml,ROOMS}=api;
 const catalog=[
+{id:"decor-cat-blanket",name:"Blanket-wrapped comfort cat",type:'decor',price:28,icon:"🐈",detail:"A calm, illustrated kitty tucked inside a soft pastel blanket."},
+{id:"decor-cat-carrier-cozy",name:"Cozy covered cat carrier",type:'decor',price:38,icon:"🐱",detail:"An alternative carrier with a breathable privacy cover for the feline waiting nook."},
+{id:"decor-armchair",name:"Cozy reading armchair",type:'decor',price:45,icon:"🪑",detail:"A plush visitor chair to make the waiting room homier."},
+{id:"decor-side-table",name:"Round tea side table",type:'decor',price:28,icon:"☕",detail:"Little round table with a veterinary magazine and plant."},
+{id:"decor-bookcase",name:"Clinic bookshelf",type:'decor',price:55,icon:"📚",detail:"Curved wooden bookshelf filled with veterinary books and small decor."},
+{id:"decor-scifi-testtubes",name:"Glowing test-tube rack",type:'decor',price:45,icon:"🧪",detail:"Colorful fantasy laboratory test tubes in an enclosed display."},
+{id:"decor-scifi-alien",name:"Friendly alien visitor",type:'decor',price:55,icon:"👽",detail:"A smiling teal alien friend visiting the teaching hospital."},
+{id:"decor-scifi-ufo",name:"Mini UFO specimen dome",type:'decor',price:60,icon:"🛸",detail:"Floating UFO model with glowing science beams and a glass dome."},
+{id:"decor-scifi-planter",name:"Alien crystal planter",type:'decor',price:42,icon:"🪴",detail:"Bioluminescent fantasy crystals and cosmic leaves."},
+{id:"decor-scifi-console",name:"Space lab holo-console",type:'decor',price:65,icon:"🧬",detail:"A softly glowing futuristic veterinary diagnostic console."},
 {id:'paint-peach',name:'Peach clinic',type:'wall',price:0,color:'#fef2e7',pattern:'solid',icon:'🍑'},
 {id:'paint-mint',name:'Soft mint',type:'wall',price:0,color:'#dcf5ea',pattern:'solid',icon:'🌿'},
 {id:'paint-blue',name:'Sky blue',type:'wall',price:0,color:'#e0f1ff',pattern:'solid',icon:'🩵'},
