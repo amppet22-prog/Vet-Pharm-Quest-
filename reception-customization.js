@@ -54,6 +54,10 @@ if(!bag.owned.includes(bag.equippedWall))bag.equippedWall='paint-peach';
 bag.placed=bag.placed.filter(x=>bag.owned.includes(x));
 const first=s=>escapeHtml(String(s??''));
 const itemArt={
+ 'wall-floral':'assets/reception/theme-wall-spring.svg',
+ 'wall-halloween':'assets/reception/theme-wall-halloween.svg',
+ 'wall-pride':'assets/reception/theme-wall-pride.svg',
+ 'wall-winter':'assets/reception/theme-wall-winter.svg',
  'decor-planter':'assets/reception/decor-planter.svg',
  'decor-pumpkin':'assets/reception/decor-pumpkin.svg',
  'decor-cat-tree':'assets/reception/decor-cat-tree.svg'
@@ -122,7 +126,8 @@ const wall=find(bag.equippedWall)||catalog[0];
 const motifs={solid:'',floral:'🌸',halloween:'🎃',pride:'🌈',winter:'❄️'};
 const m=motifs[wall.pattern];
 const pattern=m?'<g opacity=".2" font-size="45" aria-hidden="true"><text x="100" y="120">'+m+'</text><text x="360" y="225">'+m+'</text><text x="690" y="115">'+m+'</text><text x="890" y="245">'+m+'</text></g>':'';
-art=art.replace(/<rect width="1000" height="385" fill="[^"]+"\/>/,'<rect width="1000" height="385" fill="'+wall.color+'"/>'+pattern);
+const wallpaperSvg=wall.type==='wall'&&itemArt[wall.id]?'<image href="'+itemArt[wall.id]+'" x="0" y="0" width="1000" height="385" preserveAspectRatio="none"/>':'';
+art=art.replace(/<rect width="1000" height="385" fill="[^"]+"\/>/,'<rect width="1000" height="385" fill="'+wall.color+'"/>'+wallpaperSvg);
 const decorSlots={
  'decor-cat':[85,325,49],'decor-kids':[906,339,44],'decor-pumpkin':[822,381,33],
  'decor-rainbow':[116,113,38],'decor-holiday':[899,110,38],
