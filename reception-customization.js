@@ -58,13 +58,13 @@ function wallet(){showModal('🪙 Clinic Coin Bank','<div class="infobox"><h2>'+
 '<h3>Recent reception purchases</h3>'+(bag.transactions.length?bag.transactions.slice(0,15).map(x=>'<p>−'+x.price+' coins · '+first(find(x.id)?.name||x.id)+' <small>'+first(x.date.slice(0,10))+'</small></p>').join(''):'<p>No reception purchases yet. Historical coin earnings before this feature were not tracked separately.</p>')+
 '<div class="buttonrow"><button data-vpqr-menu="1">🎨 Shop and collection</button><button data-vpqr-yard="1">🐕 Kennel & play yard preview</button></div>')}
 function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='furniture'&&x.type==='furniture');
-showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned <button data-vpqr-wallet="1">Open coin bank</button></div>'+
+showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned · '+bag.placed.length+' placed <button data-vpqr-wallet="1">Open coin bank</button></div>'+
 '<p>Choose Sofas, Decor or Wallpapers. Purchased sofas and decorations are placed in the waiting room automatically; wallpapers are applied after purchase. Open My collection to remove decorations or change owned sofa styles at no extra cost. All choices are saved in this browser.</p>'+
 '<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
 '<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'"><span class="vpqRIcon">'+first(x.icon)+'</span><b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
-'<div class="vpqRPend"><b>🐕 Kennel & 3D-style play yard — Coming Soon</b><p>Future fenced yard, dog behavior cases, enrichment, intake and safe isolation workflows. This is a preview only; no kennel has been purchased or built.</p><button data-vpqr-yard="1">See planned expansion</button></div>');
+'<div class="vpqRPend"><b>🐕 Kennel & Cat Corner</b><p>Visit the existing dog play-yard view and quiet cat corner to use their own decoration slots and FAS learning stations. Yard and cat accessories are tracked separately from Reception Studio purchases.</p><button data-vpqr-yard="1">Learn about annex upgrades</button></div>');
 }
-function yard(){showModal('🐕 Kennel & Play Yard · Coming Soon','<h3>Planned veterinary learning expansion</h3><p>A 2.5D dog play yard with fenced areas, individual kennel runs, enrichment upgrades and clinical learning stations for canine behavior, triage, parasite control and infection prevention.</p><p><b>Not yet playable:</b> no kennels, dog housing, purchases or clinical cases are enabled in this preview.</p><button data-vpqr-menu="1">← Reception Studio</button>')}
+function yard(){showModal('🐕 Kennel & Cat Corner · Room upgrades','<h3>Two existing annex spaces</h3><p><b>Dog Yard:</b> FAS rounds, fenced scenery and play-yard cosmetic purchases. <b>Quiet Cat Corner:</b> feline FAS rounds, climbing shelves and cat enrichment cosmetics.</p><p>Use the illustrated hallway/room map to reach these spaces. Your reception sofa, wallpapers and decorations remain a separate collection.</p><button data-vpqr-menu="1">← Reception Studio</button>')}
 function apply(id){const x=find(id);if(!x||!bag.owned.includes(id))return;
 if(x.type==='wall')bag.equippedWall=id;
 else if(x.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
@@ -73,7 +73,8 @@ persistLocal();preview(id);
 }
 function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.price<=0||state.coins<item.price)return;
 state.coins-=item.price;bag.owned.push(id);
-if(item.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
+if(item.type==='wall')bag.equippedWall=id;
+else if(item.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
 else if(item.type==='decor'&&!bag.placed.includes(id))bag.placed.push(id);
 appendTransaction(item);preview(id);
 }
