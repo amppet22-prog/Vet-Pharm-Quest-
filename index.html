@@ -386,10 +386,11 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="visual-pathway-atlas.js?v=20261108-pathways3"></script>
 <script src="antibiotic-pkpd-lesson.js?v=20261108-whycompare2"></script>
 <script src="drug-clinical-reference.js?v=20261108-piprant2"></script>
-<script src="reception-customization.js?v=20261110-artpreview3"></script>
+<script src="reception-customization.js?v=20261111-rugsplants1"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
 <script src="reception-shadowbox-phase-a.js?v=20261110-artlayers2"></script>
-<script src="reception-image-layers.js?v=20261110-artlayers1"></script>
+<script src="reception-image-layers.js?v=20261111-cozypositions1"></script>
+<script src="reception-cozy-layout.js?v=20261111-cozy1"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
@@ -2572,6 +2573,8 @@ doAction=function(a){
 const vpqPhaseAShadowbox=window.VPQ_SHADOWBOX_RECEPTION({
  state,rooms:ROOMS,changeRoom,doAction:a=>doAction(a),persist,renderRoom
 });
+// The illustrated scene changes; original hallway, avatar and room actions remain.
+const vpqCozyReception=window.VPQ_COZY_RECEPTION_LAYOUT({state});
 // Phase A.3 replaces Study Lounge scenery while keeping its original learning actions.
 const vpqPhaseAStudyLounge=window.VPQ_STUDY_LOUNGE_A3({rooms:ROOMS,doAction:a=>doAction(a),changeRoom});
 const vpqPhaseAMechanism=window.VPQ_MECHANISM_LAB_A4({rooms:ROOMS,showModal,changeRoom,doAction:a=>doAction(a)});
