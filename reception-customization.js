@@ -28,10 +28,10 @@ const catalog=[
 {id:'decor-paw-art',name:'Paw-print mural',type:'decor',price:20,icon:'🐾',detail:'Small painted paw-print wall art, safely above the furniture.'}
 ];
 const wallpaperArt={
- 'wall-halloween':'assets/reception/theme-wall-halloween.svg',
- 'wall-winter':'assets/reception/theme-wall-winter.svg',
- 'wall-pride':'assets/reception/theme-wall-pride.svg',
- 'wall-floral':'assets/reception/theme-wall-spring.svg'
+ 'wall-halloween':'assets/reception/wallpaper-halloween-approved.webp',
+ 'wall-winter':'assets/reception/wallpaper-winter-approved.webp',
+ 'wall-pride':'assets/reception/wallpaper-pride-approved.webp',
+ 'wall-floral':'assets/reception/wallpaper-spring-approved.webp'
 };
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
