@@ -25,7 +25,23 @@ const catalog=[
 {id:'decor-carrier',name:'Cat carrier',type:'decor',price:20,icon:'🐈',detail:'A secure waiting-room cat carrier, placed near the cat-friendly corner.'},
 {id:'decor-dog-carrier',name:'Dog travel crate',type:'decor',price:30,icon:'🐕',detail:'A sturdy travel crate for a waiting-room dog vignette.'},
 {id:'decor-pet-art',name:'Framed pet portraits',type:'decor',price:30,icon:'🖼️',detail:'A little gallery of cheerful framed dog and cat art on the clinic walls.'},
-{id:'decor-paw-art',name:'Paw-print mural',type:'decor',price:20,icon:'🐾',detail:'Small painted paw-print wall art, safely above the furniture.'}
+{id:'decor-paw-art',name:'Paw-print mural',type:'decor',price:20,icon:'🐾',detail:'Small painted paw-print wall art, safely above the furniture.'},
+{id:'rug-halloween',name:'Pumpkin Patch rug',type:'rug',price:35,icon:'🎃',detail:'Replaceable floor rug for the reception waiting area; Pumpkin Patch collection.'},
+{id:'desk-halloween',name:'Pumpkin Patch counter display',type:'deskAccent',price:25,icon:'🎃',detail:'Decorative counter display that sits beside check-in; Pumpkin Patch collection.'},
+{id:'hanging-halloween',name:'Pumpkin Patch hanging greenery',type:'hanging',price:30,icon:'🎃',detail:'Hanging garland and planter in the top corner; Pumpkin Patch collection.'},
+{id:'cataccent-halloween',name:'Pumpkin Patch cat nook',type:'catAccent',price:35,icon:'🎃',detail:'Cozy seasonal cat-corner bed and accessories; Pumpkin Patch collection.'},
+{id:'rug-winter',name:'Winter Glow rug',type:'rug',price:35,icon:'❄️',detail:'Replaceable floor rug for the reception waiting area; Winter Glow collection.'},
+{id:'desk-winter',name:'Winter Glow counter display',type:'deskAccent',price:25,icon:'❄️',detail:'Decorative counter display that sits beside check-in; Winter Glow collection.'},
+{id:'hanging-winter',name:'Winter Glow hanging greenery',type:'hanging',price:30,icon:'❄️',detail:'Hanging garland and planter in the top corner; Winter Glow collection.'},
+{id:'cataccent-winter',name:'Winter Glow cat nook',type:'catAccent',price:35,icon:'❄️',detail:'Cozy seasonal cat-corner bed and accessories; Winter Glow collection.'},
+{id:'rug-pride',name:'Rainbow Joy rug',type:'rug',price:35,icon:'🌈',detail:'Replaceable floor rug for the reception waiting area; Rainbow Joy collection.'},
+{id:'desk-pride',name:'Rainbow Joy counter display',type:'deskAccent',price:25,icon:'🌈',detail:'Decorative counter display that sits beside check-in; Rainbow Joy collection.'},
+{id:'hanging-pride',name:'Rainbow Joy hanging greenery',type:'hanging',price:30,icon:'🌈',detail:'Hanging garland and planter in the top corner; Rainbow Joy collection.'},
+{id:'cataccent-pride',name:'Rainbow Joy cat nook',type:'catAccent',price:35,icon:'🌈',detail:'Cozy seasonal cat-corner bed and accessories; Rainbow Joy collection.'},
+{id:'rug-spring',name:'Flower Garden rug',type:'rug',price:35,icon:'🌸',detail:'Replaceable floor rug for the reception waiting area; Flower Garden collection.'},
+{id:'desk-spring',name:'Flower Garden counter display',type:'deskAccent',price:25,icon:'🌸',detail:'Decorative counter display that sits beside check-in; Flower Garden collection.'},
+{id:'hanging-spring',name:'Flower Garden hanging greenery',type:'hanging',price:30,icon:'🌸',detail:'Hanging garland and planter in the top corner; Flower Garden collection.'},
+{id:'cataccent-spring',name:'Flower Garden cat nook',type:'catAccent',price:35,icon:'🌸',detail:'Cozy seasonal cat-corner bed and accessories; Flower Garden collection.'}
 ];
 const wallpaperArt={
  'wall-halloween':'assets/reception/wallpaper-halloween-approved.webp',
@@ -33,8 +49,12 @@ const wallpaperArt={
  'wall-pride':'assets/reception/wallpaper-pride-approved.webp',
  'wall-floral':'assets/reception/wallpaper-spring-approved.webp'
 };
+const modularArt=window.VPQ_RECEPTION_MODULAR_ASSETS;
+const itemArt={...modularArt.manifest};
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
+const singleSlotTypes=new Set(['furniture','rug','deskAccent','hanging','catAccent']);
+const exclusiveIds=type=>catalog.filter(x=>x.type===type).map(x=>x.id);
 if(!state.receptionCollection||typeof state.receptionCollection!=='object')state.receptionCollection={owned:[],equippedWall:'paint-peach',placed:[],transactions:[]};
 const bag=state.receptionCollection;
 bag.owned=Array.isArray(bag.owned)?bag.owned:[];
@@ -46,6 +66,7 @@ if(!bag.placed.some(id=>sofaIds.includes(id)))bag.placed.push('seat-sofa-lavende
 if(bag.placed.filter(id=>sofaIds.includes(id)).length>1){const last=bag.placed.filter(id=>sofaIds.includes(id)).slice(-1)[0];bag.placed=bag.placed.filter(id=>!sofaIds.includes(id)||id===last)}
 if(!bag.owned.includes(bag.equippedWall))bag.equippedWall='paint-peach';
 bag.placed=bag.placed.filter(x=>bag.owned.includes(x));
+for(const type of singleSlotTypes){const ids=exclusiveIds(type),chosen=bag.placed.filter(x=>ids.includes(x));if(chosen.length>1){const latest=chosen[chosen.length-1];bag.placed=bag.placed.filter(x=>!ids.includes(x)||x===latest)}}
 const first=s=>escapeHtml(String(s??''));
 const find=id=>catalog.find(x=>x.id===id);
 const equipped=id=>find(id)?.type==='wall'?bag.equippedWall===id:bag.placed.includes(id);
@@ -53,10 +74,11 @@ function persistLocal(){persist();updateHUD();if(state.room==='reception')render
 function appendTransaction(item){bag.transactions.unshift({id:item.id,price:item.price,kind:'purchase',date:new Date().toISOString()});bag.transactions=bag.transactions.slice(0,100);persistLocal()}
 function preview(id){const item=find(id);if(!item)return;
 const owned=bag.owned.includes(id),active=equipped(id),able=state.coins>=item.price;
-const scene=wallpaperArt[id]?'<div class="vpqRPreview" style="background:#fff7f5"><img src="'+wallpaperArt[id]+'" alt="'+first(item.name)+' pattern" style="width:100%;max-height:215px;object-fit:cover;border-radius:9px"><small>Actual wallpaper pattern · will appear behind the reception furniture and doors</small></div>':'<div class="vpqRPreview" style="background:'+first(item.color||'#f5e9da')+'"><div class="vpqRPreviewIcons">'+first(item.icon)+' <span>🛎️ 🐕</span> 🪑</div><small>Conceptual room/item preview</small></div>';
+const asset=itemArt[id]?.src;
+const scene=asset?'<div class="vpqRPreview" style="background:#fff8fc"><img src="'+asset+'" alt="'+first(item.name)+'" style="height:170px;width:95%;object-fit:contain"><small>Exact purchasable artwork · appears in reception when placed</small></div>':wallpaperArt[id]?'<div class="vpqRPreview" style="background:#fff7f5"><img src="'+wallpaperArt[id]+'" alt="'+first(item.name)+' pattern" style="width:100%;max-height:215px;object-fit:cover;border-radius:9px"><small>Actual wallpaper pattern · will appear behind the reception furniture and doors</small></div>':'<div class="vpqRPreview" style="background:'+first(item.color||'#f5e9da')+'"><div class="vpqRPreviewIcons">'+first(item.icon)+' <span>🛎️ 🐕</span> 🪑</div><small>Conceptual room/item preview</small></div>';
 showModal('🎨 Preview · '+first(item.name),'<p>'+first(item.detail||'Choose a color or theme for your waiting room.')+'</p>'+scene+
 '<p><b>'+ (owned?'Already owned':item.price+' 🪙')+'</b> · Current coin balance: '+state.coins+'</p>'+
-'<div class="buttonrow">'+(owned?'<button data-vpqr-equip="'+item.id+'">'+(active?(item.type==='wall'?'Currently equipped':item.type==='furniture'?'Current sofa':'Remove from room'):(item.type==='wall'?'Apply wallpaper':item.type==='furniture'?'Use this sofa':'Place in reception'))+'</button>': '<button data-vpqr-buy="'+item.id+'" '+(!able?'disabled':'')+'>Confirm purchase · '+item.price+' 🪙</button>')+
+'<div class="buttonrow">'+(owned?'<button data-vpqr-equip="'+item.id+'">'+(active?(item.type==='wall'?'Currently equipped':item.type==='furniture'?'Current sofa':singleSlotTypes.has(item.type)?'Remove from room':'Remove from room'):(item.type==='wall'?'Apply wallpaper':item.type==='furniture'?'Use this sofa':singleSlotTypes.has(item.type)?'Place / swap in reception':'Place in reception'))+'</button>': '<button data-vpqr-buy="'+item.id+'" '+(!able?'disabled':'')+'>Confirm purchase · '+item.price+' 🪙</button>')+
 '<button data-vpqr-menu="1">← Shop / Collection</button></div>'+
 (!owned&&!able?'<p class="small">Not enough earned coins yet. Play learning rounds to earn more; no real-money purchases.</p>':''));
 }
@@ -73,24 +95,25 @@ function claimTestCoins(){
 function wallet(){showModal('🪙 Clinic Coin Bank','<div class="infobox"><h2>'+state.coins+' 🪙 available</h2><p>Coins earned in the existing game remain your balance. Purchases here use the same wallet; no premium currency.</p></div>'+
 '<p><b>🧪 Testing bonus:</b> '+(state.receptionTestCoins500Claimed?'✓ Your one-time 500-coin bonus was claimed':'You can add 500 coins once to test decorations')+'</p>'+(state.receptionTestCoins500Claimed?'':'<button data-vpqr-testcoins="1">🪙 Claim 500 Test Coins</button>')+'<h3>Recent purchases / testing bonuses</h3>'+(bag.transactions.length?bag.transactions.slice(0,15).map(x=>'<p>'+(x.kind==='test-grant'?'+500 coins · 🧪 Test bonus':'−'+x.price+' coins · '+first(find(x.id)?.name||x.id))+' <small>'+first(x.date.slice(0,10))+'</small></p>').join(''):'<p>No reception purchases yet. Historical coin earnings before this feature were not tracked separately.</p>')+
 '<div class="buttonrow"><button data-vpqr-menu="1">🎨 Shop and collection</button><button data-vpqr-yard="1">🐕 Kennel & play yard preview</button></div>')}
-function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='furniture'&&x.type==='furniture');
+function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='furniture'&&x.type==='furniture'||filter==='rugs'&&x.type==='rug'||filter==='seasonal'&&['deskAccent','hanging','catAccent'].includes(x.type));
 showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned <button data-vpqr-wallet="1">Open coin bank</button></div>'+
-'<p>Choose Sofas, Decor or Wallpapers. Purchased sofas and decorations are placed in the waiting room automatically; wallpapers are applied after purchase. Open My collection to remove decorations or change owned sofa styles at no extra cost. All choices are saved in this browser.</p>'+
-'<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
-'<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'">'+(wallpaperArt[x.id]?'<img src="'+wallpaperArt[x.id]+'" alt="" style="height:78px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px">':'<span class="vpqRIcon">'+first(x.icon)+'</span>')+'<b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
+'<p>Choose Sofas, Decor, Rugs, Seasonal Accessories or Wallpapers. Purchased sofas and decorations are placed in the waiting room automatically; wallpapers are applied after purchase. Open My collection to remove decorations or change owned sofa styles at no extra cost. All choices are saved in this browser.</p>'+
+'<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="rugs">Rugs</button><button data-vpqr-filter="seasonal">Seasonal extras</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
+'<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'">'+(itemArt[x.id]?.src?'<img src="'+itemArt[x.id].src+'" alt="" style="height:85px;width:100%;object-fit:contain;border-radius:8px;margin-bottom:6px">':wallpaperArt[x.id]?'<img src="'+wallpaperArt[x.id]+'" alt="" style="height:78px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px">':'<span class="vpqRIcon">'+first(x.icon)+'</span>')+'<b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
 '<div class="vpqRPend"><b>🐕 Kennel & 3D-style play yard — Coming Soon</b><p>Future fenced yard, dog behavior cases, enrichment, intake and safe isolation workflows. This is a preview only; no kennel has been purchased or built.</p><button data-vpqr-yard="1">See planned expansion</button></div>');
 }
 function yard(){showModal('🐕 Kennel & Play Yard · Coming Soon','<h3>Planned veterinary learning expansion</h3><p>A 2.5D dog play yard with fenced areas, individual kennel runs, enrichment upgrades and clinical learning stations for canine behavior, triage, parasite control and infection prevention.</p><p><b>Not yet playable:</b> no kennels, dog housing, purchases or clinical cases are enabled in this preview.</p><button data-vpqr-menu="1">← Reception Studio</button>')}
 function apply(id){const x=find(id);if(!x||!bag.owned.includes(id))return;
 if(x.type==='wall')bag.equippedWall=id;
-else if(x.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
+else if(singleSlotTypes.has(x.type)&&x.type!=='furniture'&&bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);
+else if(singleSlotTypes.has(x.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(x.type).includes(v)),id];
 else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag.placed.push(id);
 persistLocal();preview(id);
 }
 function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.price<=0||state.coins<item.price)return;
 state.coins-=item.price;bag.owned.push(id);
 if(item.type==='wall')bag.equippedWall=id;
-else if(item.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
+else if(singleSlotTypes.has(item.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(item.type).includes(v)),id];
 else if(item.type==='decor'&&!bag.placed.includes(id))bag.placed.push(id);
 appendTransaction(item);preview(id);
 }
@@ -111,8 +134,8 @@ const pattern=m?'<g opacity=".2" font-size="45" aria-hidden="true"><text x="100"
 const actualWallpaper=wallpaperArt[wall.id]?'<image href="'+wallpaperArt[wall.id]+'" x="0" y="0" width="1000" height="385" preserveAspectRatio="none"/>':pattern;
 art=art.replace(/<rect width="1000" height="385" fill="[^"]+"\/>/,'<rect width="1000" height="385" fill="'+wall.color+'"/>'+actualWallpaper);
 const coords=[[8,35],[25,35],[43,35],[62,35],[78,35]];
-const decoration=bag.placed.filter(id=>find(id)?.type==='decor').slice(0,5).map((id,i)=>{const item=find(id),point=coords[i];return item?'<text x="'+(point[0]*10)+'" y="'+(point[1]*10)+'" font-size="52">'+item.icon+'</text>':''}).join('');
-art=art.replace('</svg>',decoration+'</svg>');return art;
+const decoration=bag.placed.filter(id=>find(id)?.type==='decor'&&!modularArt.manifest[id]).slice(0,5).map((id,i)=>{const item=find(id),point=coords[i];return item?'<text x="'+(point[0]*10)+'" y="'+(point[1]*10)+'" font-size="52">'+item.icon+'</text>':''}).join('');
+art=art.replace('</svg>',modularArt.render(state,'classic','all')+decoration+'</svg>');return art;
 };
 document.getElementById('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
 if(d.vpqrMenu!==undefined)return menu();
