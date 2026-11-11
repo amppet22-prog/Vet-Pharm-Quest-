@@ -12,42 +12,42 @@ for(const theme of ['halloween','winter','pride','spring']){
   manifest[id]={
    src:'assets/reception/season-'+theme+'-'+viewKind+'.svg',
    kind,
-   classic:kind==='rug'?[480,380,325,110]:kind==='desk'?[88,311,176,135]:kind==='hanging'?[48,18,230,117]:[825,285,150,154],
-   isometric:kind==='rug'?[445,388,330,105]:kind==='desk'?[117,291,179,137]:kind==='hanging'?[73,39,228,111]:[821,312,149,150]
+   classic:kind==='rug'?[579,386,285,86]:kind==='desk'?[88,311,176,135]:kind==='hanging'?[48,18,230,117]:[875,314,99,103],
+   isometric:kind==='rug'?[594,405,295,85]:kind==='desk'?[93,269,95,66]:kind==='hanging'?[74,51,113,75]:[897,321,87,92]
   };
  }
 }
 Object.assign(manifest,{
- 'decor-carrier':{src:'assets/reception/decor-carrier.svg',kind:'decor',classic:[680,350,136,116],isometric:[659,390,122,102]},
- 'decor-cat-blanket':{src:'assets/reception/decor-cat-blanket.svg',kind:'decor',classic:[784,359,115,96],isometric:[778,394,108,90]},
- 'decor-cat-carrier-cozy':{src:'assets/reception/decor-cat-carrier-cozy.svg',kind:'decor',classic:[680,350,136,116],isometric:[659,390,122,102]},
- 'decor-armchair':{src:'assets/reception/decor-armchair.svg',kind:'decor',classic:[617,333,121,132],isometric:[599,355,112,122]},
- 'decor-side-table':{src:'assets/reception/decor-side-table.svg',kind:'decor',classic:[558,404,90,75],isometric:[544,421,88,72]},
- 'decor-bookcase':{src:'assets/reception/decor-bookcase.svg',kind:'decor',classic:[81,185,123,204],isometric:[87,173,109,193]},
- 'decor-scifi-testtubes':{src:'assets/reception/decor-scifi-testtubes.svg',kind:'decor',classic:[330,301,114,130],isometric:[360,320,110,122]},
- 'decor-scifi-alien':{src:'assets/reception/decor-scifi-alien.svg',kind:'decor',classic:[731,308,108,138],isometric:[744,321,103,128]},
- 'decor-scifi-ufo':{src:'assets/reception/decor-scifi-ufo.svg',kind:'decor',classic:[420,64,126,110],isometric:[440,82,123,108]},
- 'decor-scifi-planter':{src:'assets/reception/decor-scifi-planter.svg',kind:'decor',classic:[899,281,94,140],isometric:[902,284,89,136]},
- 'decor-scifi-console':{src:'assets/reception/decor-scifi-console.svg',kind:'decor',classic:[276,293,137,148],isometric:[286,315,130,137]},
- 'decor-planter':{src:'assets/reception/decor-planter.svg',kind:'decor',classic:[900,280,91,145],isometric:[919,263,80,145]},
- 'decor-pumpkin':{src:'assets/reception/decor-pumpkin.svg',kind:'decor',classic:[373,355,92,89],isometric:[798,369,81,80]},
- 'decor-cat-tree':{src:'assets/reception/decor-cat-tree.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]},
- 'decor-cat-tree-cloud':{src:'assets/reception/decor-cat-tree-cloud.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]},
- 'decor-toy-bin':{src:'assets/reception/decor-toy-bin.svg',kind:'decor',classic:[743,398,110,91],isometric:[759,414,98,79]},
- 'decor-magazines':{src:'assets/reception/decor-magazines.svg',kind:'decor',classic:[342,316,105,70],isometric:[364,308,94,58]},
- 'decor-treat-display':{src:'assets/reception/decor-treat-display.svg',kind:'decor',classic:[934,189,62,168],isometric:[936,205,61,163]},
- 'decor-paw-art':{src:'assets/reception/decor-paw-mural-deluxe.svg',kind:'mural',classic:[699,91,125,91],isometric:[824,85,107,80]},
- 'decor-cat-tree-castle':{src:'assets/reception/decor-cat-tree-castle.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]},
- 'decor-cat-tree-forest':{src:'assets/reception/decor-cat-tree-forest.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]},
- 'decor-cat-tree-moon':{src:'assets/reception/decor-cat-tree-moon.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]}
+ 'decor-carrier':{src:'assets/reception/decor-carrier.svg',kind:'decor',classic:[680,350,136,116],isometric:[431,414,89,77]},
+ 'decor-cat-blanket':{src:'assets/reception/decor-cat-blanket.svg',kind:'decor',classic:[784,359,115,96],isometric:[899,419,79,71]},
+ 'decor-cat-carrier-cozy':{src:'assets/reception/decor-cat-carrier-cozy.svg',kind:'decor',classic:[680,350,136,116],isometric:[431,414,89,77]},
+ 'decor-armchair':{src:'assets/reception/decor-armchair.svg',kind:'decor',classic:[617,333,121,132],isometric:[633,364,91,92]},
+ 'decor-side-table':{src:'assets/reception/decor-side-table.svg',kind:'decor',classic:[558,404,90,75],isometric:[720,412,52,53]},
+ 'decor-bookcase':{src:'assets/reception/decor-bookcase.svg',kind:'decor',classic:[81,185,123,204],isometric:[848,220,65,114]},
+ 'decor-scifi-testtubes':{src:'assets/reception/decor-scifi-testtubes.svg',kind:'decor',classic:[330,301,114,130],isometric:[826,286,55,58]},
+ 'decor-scifi-alien':{src:'assets/reception/decor-scifi-alien.svg',kind:'decor',classic:[731,308,108,138],isometric:[908,302,57,81]},
+ 'decor-scifi-ufo':{src:'assets/reception/decor-scifi-ufo.svg',kind:'decor',classic:[420,64,126,110],isometric:[800,54,79,68]},
+ 'decor-scifi-planter':{src:'assets/reception/decor-scifi-planter.svg',kind:'decor',classic:[899,281,94,140],isometric:[950,318,45,83]},
+ 'decor-scifi-console':{src:'assets/reception/decor-scifi-console.svg',kind:'decor',classic:[276,293,137,148],isometric:[822,281,61,69]},
+ 'decor-planter':{src:'assets/reception/decor-planter.svg',kind:'decor',classic:[900,280,91,145],isometric:[949,322,42,90]},
+ 'decor-pumpkin':{src:'assets/reception/decor-pumpkin.svg',kind:'decor',classic:[373,355,92,89],isometric:[909,403,44,43]},
+ 'decor-cat-tree':{src:'assets/reception/decor-cat-tree.svg',kind:'decor',classic:[800,216,145,171],isometric:[901,229,89,114]},
+ 'decor-cat-tree-cloud':{src:'assets/reception/decor-cat-tree-cloud.svg',kind:'decor',classic:[800,216,145,171],isometric:[901,229,89,114]},
+ 'decor-toy-bin':{src:'assets/reception/decor-toy-bin.svg',kind:'decor',classic:[743,398,110,91],isometric:[526,440,61,49]},
+ 'decor-magazines':{src:'assets/reception/decor-magazines.svg',kind:'decor',classic:[342,316,105,70],isometric:[311,292,60,36]},
+ 'decor-treat-display':{src:'assets/reception/decor-treat-display.svg',kind:'decor',classic:[934,189,62,168],isometric:[948,234,42,96]},
+ 'decor-paw-art':{src:'assets/reception/decor-paw-mural-deluxe.svg',kind:'mural',classic:[699,91,125,91],isometric:[821,72,76,62]},
+ 'decor-cat-tree-castle':{src:'assets/reception/decor-cat-tree-castle.svg',kind:'decor',classic:[800,216,145,171],isometric:[901,229,89,114]},
+ 'decor-cat-tree-forest':{src:'assets/reception/decor-cat-tree-forest.svg',kind:'decor',classic:[800,216,145,171],isometric:[901,229,89,114]},
+ 'decor-cat-tree-moon':{src:'assets/reception/decor-cat-tree-moon.svg',kind:'decor',classic:[800,216,145,171],isometric:[901,229,89,114]}
 });
 for(const theme of ['christmas','hanukkah','kwanzaa','snow','valentines','stpatricks','midnight','unicorn','boho','coffee','scifi']){
  manifest['display-'+theme]={src:'assets/reception/display-'+theme+'.svg',kind:'themeDisplay',
-   classic:[351,305,115,135],isometric:[366,311,111,134]};
+   classic:[351,305,115,135],isometric:[877,280,65,78]};
 }
 for(const plant of ['monstera','fern','orchid','pothos','succulent','lavender']){
  manifest['plant-'+plant]={src:'assets/reception/plant-'+plant+'.svg',kind:'plantFloor',
-   classic:[900,287,89,146],isometric:[904,290,84,151]};
+   classic:[900,287,89,146],isometric:[948,319,45,93]};
 }
 function render(state,mode,part='all'){
  const placed=state?.receptionCollection?.placed;
