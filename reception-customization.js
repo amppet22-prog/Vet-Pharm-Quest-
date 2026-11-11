@@ -110,6 +110,7 @@ const itemArt={...modularArt.manifest};
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
 const singleSlotTypes=new Set(['furniture','rug','deskAccent','hanging','catAccent','themeDisplay','plantFloor']);
+const catCarrierIds=['decor-carrier','decor-cat-carrier-cozy'];
 const catTreeIds=['decor-cat-tree','decor-cat-tree-cloud','decor-cat-tree-castle','decor-cat-tree-forest','decor-cat-tree-moon'];
 const floorPlantIds=['decor-planter',...catalog.filter(x=>x.type==='plantFloor').map(x=>x.id)];
 const exclusiveIds=type=>catalog.filter(x=>x.type===type).map(x=>x.id);
@@ -127,6 +128,7 @@ bag.placed=bag.placed.filter(x=>bag.owned.includes(x));
 {const existing=bag.placed.filter(x=>floorPlantIds.includes(x));if(existing.length>1){const last=existing[existing.length-1];bag.placed=bag.placed.filter(x=>!floorPlantIds.includes(x)||x===last)}}
 for(const type of singleSlotTypes){const ids=exclusiveIds(type),chosen=bag.placed.filter(x=>ids.includes(x));if(chosen.length>1){const latest=chosen[chosen.length-1];bag.placed=bag.placed.filter(x=>!ids.includes(x)||x===latest)}}
 {const trees=bag.placed.filter(id=>catTreeIds.includes(id));if(trees.length>1){const latest=trees[trees.length-1];bag.placed=bag.placed.filter(id=>!catTreeIds.includes(id)||id===latest)}}
+{const carriers=bag.placed.filter(id=>catCarrierIds.includes(id));if(carriers.length>1){const latest=carriers[carriers.length-1];bag.placed=bag.placed.filter(id=>!catCarrierIds.includes(id)||id===latest)}}
 const first=s=>escapeHtml(String(s??''));
 const find=id=>catalog.find(x=>x.id===id);
 const equipped=id=>find(id)?.type==='wall'?bag.equippedWall===id:bag.placed.includes(id);
@@ -168,6 +170,7 @@ if(x.type==='wall')bag.equippedWall=id;
 else if(singleSlotTypes.has(x.type)&&x.type!=='furniture'&&bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);
 else if(floorPlantIds.includes(id))bag.placed=bag.placed.includes(id)?bag.placed.filter(v=>v!==id):[...bag.placed.filter(v=>!floorPlantIds.includes(v)),id];
 else if(singleSlotTypes.has(x.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(x.type).includes(v)),id];
+else if(catCarrierIds.includes(id))bag.placed=bag.placed.includes(id)?bag.placed.filter(v=>v!==id):[...bag.placed.filter(v=>!catCarrierIds.includes(v)),id];
 else if(catTreeIds.includes(id))bag.placed=bag.placed.includes(id)?bag.placed.filter(v=>v!==id):[...bag.placed.filter(v=>!catTreeIds.includes(v)),id];
 else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag.placed.push(id);
 persistLocal();preview(id);
@@ -177,6 +180,7 @@ state.coins-=item.price;bag.owned.push(id);
 if(item.type==='wall')bag.equippedWall=id;
 else if(floorPlantIds.includes(id))bag.placed=[...bag.placed.filter(v=>!floorPlantIds.includes(v)),id];
 else if(singleSlotTypes.has(item.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(item.type).includes(v)),id];
+else if(catCarrierIds.includes(id))bag.placed=[...bag.placed.filter(v=>!catCarrierIds.includes(v)),id];
 else if(catTreeIds.includes(id))bag.placed=[...bag.placed.filter(v=>!catTreeIds.includes(v)),id];
 else if(item.type==='decor'&&!bag.placed.includes(id))bag.placed.push(id);
 appendTransaction(item);preview(id);
