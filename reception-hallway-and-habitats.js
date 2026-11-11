@@ -3,6 +3,7 @@ window.VPQ_RECEPTION_WINGS=function(api){
 'use strict';
 const {state,rooms}=api,stage=document.getElementById('stage'),prior=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const catBehavior=window.VPQ_MEET_CATS?.({state,showModal:api.showModal,persist:api.persist,updateHUD:api.updateHUD,modalBody:api.modalBody});
+const catEnrichment=window.VPQ_CAT_ENRICHMENT?.({state,showModal:api.showModal,persist:api.persist,updateHUD:api.updateHUD,modalBody:api.modalBody,behavior:catBehavior});
 const destinations={vpqGoHallway:'hallway',vpqGoCat:'catcorner',vpqGoYard:'yardview',vpqWingLobby:'reception',vpqWingExam:'exam',vpqWingTreatment:'treatment',vpqWingSurgery:'surgery',vpqWingIsolation:'isolation',vpqWingClinpath:'clinpath',vpqWingImaging:'imaging'};
 const slots={
 hallway:[['🩺 Exam','vpqWingExam',10],['❤️ Treatment','vpqWingTreatment',27],['🩺 Surgery','vpqWingSurgery',44],['🛡️ Isolation','vpqWingIsolation',61],['🔬 Advanced','vpqWingClinpath',78],['🩻 Imaging','vpqWingImaging',93]],
@@ -134,7 +135,7 @@ function route(cmd){
  if(cmd==='vpqBlueprint'){map();return true}
  if(cmd==='vpqCatRest'){api.showModal('🛏️ Hide & Rest','<p>Cozy hiding space, soft bedding and low-stress feline care. Customize resting places with your owned cat beds and seasonal nook items.</p><button data-vpqcatstudio="1">🎨 Decorate this area</button>');return true}
  if(cmd==='vpqCatClimb'){api.showModal('🌳 Climb & Perch','<p>Cats benefit from elevated perches, scratching opportunities and multiple escape routes. Swap your owned climbing tower or use previous cat upgrades.</p><button data-vpqcatstudio="1">🎨 Cat Lounge Studio</button><button data-vpqcatlegacy="1">🌳 Earlier upgrades</button>');return true}
- if(cmd==='vpqCatPlay'){api.showModal('🧶 Window & Play','<p>Enrichment with toys, puzzle play and window watching. Decorate with a sunshine window, enrichment basket, and companion cat.</p><button data-vpqcatstudio="1">🎨 Cat Lounge Studio</button>');return true}
+ if(cmd==='vpqCatPlay'){if(catEnrichment)return catEnrichment.menu();return true}
  if(cmd==='vpqCatLounge'){api.doAction?.('catLounge');return true}
  if(cmd==='vpqCatShop'){shop('catcorner');return true}
  if(cmd==='vpqYardShop'){shop('yardview');return true}
