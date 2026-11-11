@@ -41,13 +41,18 @@ if(bag.placed.filter(id=>sofaIds.includes(id)).length>1){const last=bag.placed.f
 if(!bag.owned.includes(bag.equippedWall))bag.equippedWall='paint-peach';
 bag.placed=bag.placed.filter(x=>bag.owned.includes(x));
 const first=s=>escapeHtml(String(s??''));
+const itemArt={
+ 'decor-planter':'assets/reception/decor-planter.svg',
+ 'decor-pumpkin':'assets/reception/decor-pumpkin.svg',
+ 'decor-cat-tree':'assets/reception/decor-cat-tree.svg'
+};
 const find=id=>catalog.find(x=>x.id===id);
 const equipped=id=>find(id)?.type==='wall'?bag.equippedWall===id:bag.placed.includes(id);
 function persistLocal(){persist();updateHUD();if(state.room==='reception')renderRoom()}
 function appendTransaction(item){bag.transactions.unshift({id:item.id,price:item.price,kind:'purchase',date:new Date().toISOString()});bag.transactions=bag.transactions.slice(0,100);persistLocal()}
 function preview(id){const item=find(id);if(!item)return;
 const owned=bag.owned.includes(id),active=equipped(id),able=state.coins>=item.price;
-const scene='<div class="vpqRPreview" style="background:'+first(item.color||'#f5e9da')+'"><div class="vpqRPreviewIcons">'+first(item.icon)+' <span>🛎️ 🐕</span> 🪑</div><small>Conceptual room/item preview • game art uses the selected theme</small></div>';
+const scene=itemArt[id]?'<div class="vpqRPreview" style="background:#faf3f9"><img src="'+itemArt[id]+'" alt="'+first(item.name)+'" style="height:160px;max-width:95%;object-fit:contain"><small>Actual room decoration artwork · transparent asset</small></div>':'<div class="vpqRPreview" style="background:'+first(item.color||'#f5e9da')+'"><div class="vpqRPreviewIcons">'+first(item.icon)+' <span>🛎️ 🐕</span> 🪑</div><small>Conceptual room/item preview · artwork update needed</small></div>';
 showModal('🎨 Preview · '+first(item.name),'<p>'+first(item.detail||'Choose a color or theme for your waiting room.')+'</p>'+scene+
 '<p><b>'+ (owned?'Already owned':item.price+' 🪙')+'</b> · Current coin balance: '+state.coins+'</p>'+
 '<div class="buttonrow">'+(owned?'<button data-vpqr-equip="'+item.id+'">'+(active?(item.type==='wall'?'Currently equipped':item.type==='furniture'?'Current sofa':'Remove from room'):(item.type==='wall'?'Apply wallpaper':item.type==='furniture'?'Use this sofa':'Place in reception'))+'</button>': '<button data-vpqr-buy="'+item.id+'" '+(!able?'disabled':'')+'>Confirm purchase · '+item.price+' 🪙</button>')+
@@ -70,7 +75,7 @@ function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filt
 showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned · '+bag.placed.length+' placed <button data-vpqr-wallet="1">🪙 Coin Bank / Testing Bonus</button></div>'+
 '<p>Choose Sofas, Decor or Wallpapers. Purchased sofas and decorations are placed in the waiting room automatically; wallpapers are applied after purchase. Open My collection to remove decorations or change owned sofa styles at no extra cost. All choices are saved in this browser.</p>'+
 '<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
-'<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'"><span class="vpqRIcon">'+first(x.icon)+'</span><b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
+'<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'">'+(itemArt[x.id]?'<img src="'+itemArt[x.id]+'" alt="" style="height:85px;width:100%;object-fit:contain;background:#fdf8fc;border-radius:9px">':'<span class="vpqRIcon">'+first(x.icon)+'</span>')+'<b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
 '<div class="vpqRPend"><b>🐕 Kennel & Cat Corner</b><p>Visit the existing dog play-yard view and quiet cat corner to use their own decoration slots and FAS learning stations. Yard and cat accessories are tracked separately from Reception Studio purchases.</p><button data-vpqr-yard="1">Learn about annex upgrades</button></div>');
 }
 function yard(){showModal('🐕 Kennel & Cat Corner · Room upgrades','<h3>Two existing annex spaces</h3><p><b>Dog Yard:</b> FAS rounds, fenced scenery and play-yard cosmetic purchases. <b>Quiet Cat Corner:</b> feline FAS rounds, climbing shelves and cat enrichment cosmetics.</p><p>Use the illustrated hallway/room map to reach these spaces. Your reception sofa, wallpapers and decorations remain a separate collection.</p><button data-vpqr-menu="1">← Reception Studio</button>')}
