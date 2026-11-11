@@ -18,6 +18,20 @@ for(const theme of ['halloween','winter','pride','spring']){
  }
 }
 Object.assign(manifest,{
+ 'rug-celestial':{src:'assets/reception/rug-celestial.svg',kind:'rug',classic:[570,380,315,102],isometric:[588,390,322,105]},
+ 'rug-paws':{src:'assets/reception/rug-paws.svg',kind:'rug',classic:[570,380,315,102],isometric:[588,390,322,105]},
+ 'rug-forest':{src:'assets/reception/rug-forest.svg',kind:'rug',classic:[570,380,315,102],isometric:[588,390,322,105]},
+ 'rug-coffee':{src:'assets/reception/rug-coffee.svg',kind:'rug',classic:[570,380,315,102],isometric:[588,390,322,105]},
+ 'seat-sofa-rose':{src:'assets/reception/seat-sofa-rose.svg',kind:'sofa',classic:[740,316,235,145],isometric:[718,335,202,126]},
+ 'seat-sofa-midnight':{src:'assets/reception/seat-sofa-midnight.svg',kind:'sofa',classic:[740,316,235,145],isometric:[718,335,202,126]},
+ 'seat-sofa-linen':{src:'assets/reception/seat-sofa-linen.svg',kind:'sofa',classic:[740,316,235,145],isometric:[718,335,202,126]},
+ 'cat-companion-tabby':{src:'assets/reception/cat-companion-tabby.svg',kind:'catLounge',classic:[868,324,69,76],isometric:[876,342,68,74]},
+ 'cat-companion-tuxedo':{src:'assets/reception/cat-companion-tuxedo.svg',kind:'catLounge',classic:[868,324,69,76],isometric:[876,342,68,74]},
+ 'cat-companion-calico':{src:'assets/reception/cat-companion-calico.svg',kind:'catLounge',classic:[868,324,69,76],isometric:[876,342,68,74]},
+ 'cat-companion-gray':{src:'assets/reception/cat-companion-gray.svg',kind:'catLounge',classic:[868,324,69,76],isometric:[876,342,68,74]},
+ 'cat-room-scratcher':{src:'assets/reception/cat-room-scratcher.svg',kind:'catLounge',classic:[830,268,70,120],isometric:[826,260,70,120]},
+ 'cat-room-window':{src:'assets/reception/cat-room-window.svg',kind:'catLounge',classic:[855,140,90,100],isometric:[852,140,90,100]},
+ 'cat-room-toy':{src:'assets/reception/cat-room-toy.svg',kind:'catLounge',classic:[902,390,70,65],isometric:[910,394,70,65]},
  'decor-paw-floor-lamp':{src:'assets/reception/decor-paw-floor-lamp.svg',kind:'floorLamp',classic:[562,236,85,165],isometric:[670,302,79,145]},
  'decor-pet-table-lamp':{src:'assets/reception/decor-pet-table-lamp.svg',kind:'tableLamp',classic:[565,364,56,76],isometric:[692,384,49,65]},
  'decor-paw-ottoman':{src:'assets/reception/decor-paw-ottoman.svg',kind:'ottoman',classic:[854,414,110,77],isometric:[883,429,94,65]},
@@ -61,7 +75,7 @@ for(const plant of ['monstera','fern','orchid','pothos','succulent','lavender'])
 function render(state,mode,part='all'){
  const placed=state?.receptionCollection?.placed;
  if(!Array.isArray(placed))return '';
- const items=Object.keys(manifest).filter(id=>placed.includes(id)&&
+ const items=Object.keys(manifest).filter(id=>placed.includes(id)&&manifest[id].kind!=='catLounge'&&manifest[id].kind!=='sofa'&&
   (part==='all'||(part==='rug'?manifest[id].kind==='rug':manifest[id].kind!=='rug')));
  return items.sort((a,b)=>(manifest[a].kind==='tableTop'?1:0)-(manifest[b].kind==='tableTop'?1:0)).map(id=>{
   const item=manifest[id],p=item[mode]||item.classic;
