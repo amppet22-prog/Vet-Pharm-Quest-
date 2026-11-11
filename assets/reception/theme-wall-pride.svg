@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" width="1000" height="340">
+ <defs><pattern id="pat" width="134" height="105" patternUnits="userSpaceOnUse"><g opacity=".52" transform="translate(20 19) scale(.65)"><g opacity=".88"><path d="M0 3Q17-10 34 3V10Q17-3 0 10Z" fill="#e99aa6"/><path d="M0 10Q17-3 34 10V17Q17 4 0 17Z" fill="#f2c990"/><path d="M0 17Q17 4 34 17V24Q17 11 0 24Z" fill="#8bc5ab"/><path d="M0 24Q17 11 34 24V31Q17 18 0 31Z" fill="#a596c9"/></g></g><g opacity=".42" transform="translate(90 69) scale(.42)"><g opacity=".88"><path d="M0 3Q17-10 34 3V10Q17-3 0 10Z" fill="#e99aa6"/><path d="M0 10Q17-3 34 10V17Q17 4 0 17Z" fill="#f2c990"/><path d="M0 17Q17 4 34 17V24Q17 11 0 24Z" fill="#8bc5ab"/><path d="M0 24Q17 11 34 24V31Q17 18 0 31Z" fill="#a596c9"/></g></g><circle cx="92" cy="20" r="3" fill="#a38bba" opacity=".5"/></pattern></defs>
+ <rect width="1000" height="340" fill="#f7e9f7"/>
+ <rect width="1000" height="340" fill="url(#pat)"/>
+ <path d="M0 0H1000V60H0Z" fill="#f5c7d7" opacity=".28"/>
+ <path d="M0 100H1000M0 337H1000" stroke="#a38bba" stroke-width="5" opacity=".28"/>
+ <path d="M0 66H1000" stroke="#eaa1b8" stroke-width="7"/><path d="M0 74H1000" stroke="#f1c89e" stroke-width="7"/><path d="M0 82H1000" stroke="#9fd0b7" stroke-width="7"/><path d="M0 90H1000" stroke="#ae9cd5" stroke-width="7"/><g><path d="M80 312q-18-26-36 0" stroke="#b89fc5" stroke-width="5" fill="none"/><text x="380" y="322" font-size="26">💜</text><text x="798" y="313" font-size="24">🌈</text></g>
+ </svg>
