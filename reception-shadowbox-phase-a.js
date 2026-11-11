@@ -81,6 +81,9 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
     '<path d="M175 59Q193 45 192 66V101Q187 112 170 108L166 78Z" fill="'+sofa[1]+'" stroke="#6b6486" stroke-width="5"/>'+
     '<path d="M28 107V120M160 107V120" stroke="#8e7b6d" stroke-width="10"/>'+
     '<path d="M39 34q13 -10 26 0v14H39Z M127 34q12 -10 24 0v14H127Z" fill="'+sofa[2]+'" opacity=".88"/></g>';
+  const sofaArt=window.VPQ_RECEPTION_MODULAR_ASSETS.manifest;
+  const upgradedSofa=['seat-sofa-rose','seat-sofa-midnight','seat-sofa-linen'].find(id=>placed.includes(id));
+  const sofaVisual=upgradedSofa?'<image href="'+sofaArt[upgradedSofa].src+'" x="718" y="335" width="202" height="126" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>':couch;
   const plant='';
   const plantPair=has('decor-plant-pair')?'<g><g transform="translate(642 328) scale(.78)"><path d="M0 22h49l-8 47H8Z" fill="#d8b396"/><path d="M24 25V-34M24 -3Q-3 -22 -22 -12M24 -23Q45 -49 65 -32" fill="none" stroke="#649b72" stroke-width="9"/><ellipse cx="-19" cy="-13" rx="17" ry="9" fill="#84bb94"/><ellipse cx="64" cy="-32" rx="18" ry="10" fill="#89c39c"/></g><g transform="translate(956 383) scale(.55)"><path d="M0 22h49l-8 47H8Z" fill="#e1c3ab"/><path d="M24 25V-34M24 -3Q-3 -22 -22 -12M24 -23Q45 -49 65 -32" fill="none" stroke="#649b72" stroke-width="9"/><ellipse cx="-19" cy="-13" rx="17" ry="9" fill="#84bb94"/><ellipse cx="64" cy="-32" rx="18" ry="10" fill="#89c39c"/></g></g>':'';
   const catTree='';
@@ -138,7 +141,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<text x="156" y="249" text-anchor="middle" font-size="13" font-weight="900" font-family="Arial,sans-serif" fill="#60537b">DOG PLAY YARD</text></g>'+
    // wall notice and patient chairs, corners
    '<g transform="translate(841 98)"><rect width="86" height="48" rx="12" fill="#fff9ee" stroke="'+c[4]+'" stroke-width="5"/><text x="43" y="21" text-anchor="middle" font-size="13" font-weight="900" font-family="Arial" fill="#5d667a">WELCOME</text><text x="43" y="39" text-anchor="middle" font-size="16">🐾</text></g>'+
-   couch+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
+   sofaVisual+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
    window.VPQ_RECEPTION_MODULAR_ASSETS.render(state,'isometric','nonrug')+
    '<g aria-label="Large pet-themed reception banner"><rect x="286" y="6" width="435" height="62" rx="18" fill="#fff6fb" stroke="#9b81b8" stroke-width="4"/><path d="M302 61Q500 83 706 61" fill="none" stroke="#ec8bb9" stroke-width="6"/><path d="M302 66Q500 91 706 66" fill="none" stroke="#f1be6f" stroke-width="4"/><path d="M302 71Q500 99 706 71" fill="none" stroke="#86caaa" stroke-width="4"/><text x="310" y="47" font-size="27">🐾</text><text x="679" y="47" font-size="27">🐾</text><text x="507" y="32" text-anchor="middle" font-size="23" font-weight="900" font-family="sans-serif" fill="#405a80">VET PHARM QUEST</text><text x="507" y="51" text-anchor="middle" font-size="15" font-weight="900" font-family="sans-serif" fill="#9b6e9b">RECEPTION • PET PARADISE</text></g>'+
