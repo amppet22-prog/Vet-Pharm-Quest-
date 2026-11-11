@@ -30,18 +30,15 @@ function state(){if(!api.state.pharmVisual||typeof api.state.pharmVisual!=='obje
 const subjects=[...new Set(cases.map(c=>c.lecture))];
 function chosen(){
  const selected=window.VPQCurriculum?.getLectures?.();
- // Avoid guessing the curriculum API return type; use the game's active focus as a hint.
- const focus=String(api.state.focus||'').toLowerCase();
- if(!focus||focus.includes('all'))return cases;
- const numeric=focus.match(/(?:lecture|lectures)\s*(\d+)(?:\s*[-–]\s*(\d+))?/i);
- if(!numeric)return cases;
- const first=Number(numeric[1]),last=Number(numeric[2]||numeric[1]);
- const scoped=cases.filter(c=>{const m=c.lecture.match(/\d+/g)||[];return m.some(n=>Number(n)>=first&&Number(n)<=last)});
- return scoped.length?scoped:cases;
+ if(!Array.isArray(selected))return cases;
+ const allowed=selected.filter(x=>typeof x==='string');
+ // An empty selection must not silently expose questions from every lecture.
+ return cases.filter(c=>allowed.includes(c.lecture));
 }
+
 function menu(){
  const p=state(),visible=chosen();
- api.showModal('💊 Clinical Pharmacology · Visual Rounds','<p><b>Clinical reasoning, mechanisms, and image interpretation.</b> These are original teaching diagrams, not clinical photographs. Cases are organized using the Exam 1 Lectures 1–9 topics.</p><p>Mastered: <b>'+p.mastered.length+' / '+cases.length+'</b> · First correct mastery: +15 EXP and +3 coins. Questions can be replayed freely.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px">'+visible.map(c=>'<button data-pharmcase="'+c.id+'" style="white-space:normal;text-align:left;padding:12px;background:#f8fcff;border:2px solid #c8dde9;border-radius:15px"><b>'+esc(c.lecture)+' · '+esc(c.name)+'</b><small style="display:block;margin:7px 0">'+esc(c.species)+' • '+esc(c.subject)+'</small><span style="color:#597b8a">'+(p.mastered.includes(c.id)?'✓ Mastered':'▶ Start case')+'</span></button>').join('')+'</div><p style="font-size:12px">Lecture-filter note: The full collection remains available when no specific lecture focus is selected.</p>');
+ api.showModal('💊 Clinical Pharmacology · Visual Rounds','<p><b>Clinical reasoning, mechanisms, and image interpretation.</b> These are original teaching diagrams, not clinical photographs. Cases are organized using the Exam 1 Lectures 1–9 topics.</p><p>Mastered: <b>'+p.mastered.length+' / '+cases.length+'</b> · First correct mastery: +15 EXP and +3 coins. Questions can be replayed freely.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px">'+visible.map(c=>'<button data-pharmcase="'+c.id+'" style="white-space:normal;text-align:left;padding:12px;background:#f8fcff;border:2px solid #c8dde9;border-radius:15px"><b>'+esc(c.lecture)+' · '+esc(c.name)+'</b><small style="display:block;margin:7px 0">'+esc(c.species)+' • '+esc(c.subject)+'</small><span style="color:#597b8a">'+(p.mastered.includes(c.id)?'✓ Mastered':'▶ Start case')+'</span></button>').join('')+'</div><p style="font-size:12px">Lecture filter uses your shared Exam 1 lecture selections in the game.</p>');
 }
 function question(id){
  const c=cases.find(x=>x.id===id);if(!c)return menu();state().current=c.id;
