@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 210" role="img" aria-label="Cheerful sunny veterinary dog play yard with two happy dogs, flowers, fenced grass, agility tunnel and toys">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#a9e6ff"/><stop offset="1" stop-color="#e8fcff"/></linearGradient>
+ <linearGradient id="lawn" x2="0" y2="1"><stop stop-color="#b7e9a2"/><stop offset="1" stop-color="#76c58c"/></linearGradient>
+</defs>
+<rect width="240" height="210" rx="18" fill="url(#sky)"/>
+<circle cx="201" cy="31" r="20" fill="#ffe59a"/>
+<g fill="#fff" opacity=".94"><ellipse cx="45" cy="40" rx="23" ry="9"/><circle cx="37" cy="32" r="12"/><circle cx="57" cy="35" r="10"/><ellipse cx="151" cy="26" rx="23" ry="8"/><circle cx="141" cy="20" r="11"/></g>
+<path d="M0 118Q61 88 118 115T240 107V210H0Z" fill="#a8d9ac"/>
+<path d="M0 145Q70 127 135 147T240 133V210H0Z" fill="url(#lawn)"/>
+<g stroke="#fffaf1" stroke-width="4" stroke-linecap="round"><path d="M4 124H236M4 139H236"/><path d="M14 106V152M35 104V153M56 102V152M77 107V152M98 110V155M119 114V158M140 110V156M161 108V154M182 105V151M203 103V150M225 105V152"/></g>
+<g transform="translate(179 67)"><path d="M16 64V19" stroke="#986d53" stroke-width="8" stroke-linecap="round"/><circle cx="16" cy="13" r="34" fill="#85c990"/><circle cx="-7" cy="25" r="21" fill="#9dde9b"/><circle cx="37" cy="28" r="23" fill="#67bd87"/></g>
+<g transform="translate(14 131)"><path d="M2 27Q1 0 31 1Q61 0 61 28V50H2Z" fill="#b9a4ee" stroke="#7a77bc" stroke-width="4"/><path d="M12 47V27Q12 10 31 10Q49 10 49 27V47" fill="#6c65bd" stroke="#ded1ff" stroke-width="4"/><path d="M23 43q8-10 17 0" stroke="#f8cce6" stroke-width="4" fill="none"/></g>
+<g transform="translate(142 140)" stroke-linejoin="round"><path d="M0 28L24 0L52 28" fill="none" stroke="#b67b5d" stroke-width="9"/><path d="M9 29L24 9L42 29" fill="none" stroke="#ffe6b6" stroke-width="6"/></g>
+<g transform="translate(74 119)" stroke-linecap="round" stroke-linejoin="round">
+ <ellipse cx="54" cy="65" rx="48" ry="9" fill="#559f83" opacity=".24"/>
+ <path d="M78 43Q103 13 110 36" fill="none" stroke="#c68254" stroke-width="12"/>
+ <ellipse cx="56" cy="42" rx="39" ry="22" fill="#ecb778" stroke="#ad765f" stroke-width="3"/>
+ <path d="M42 46Q56 60 75 44" fill="#fff0d5"/>
+ <path d="M35 52l-2 13M69 52l2 12" stroke="#bd855f" stroke-width="9"/>
+ <circle cx="29" cy="29" r="26" fill="#f4c78f" stroke="#b87f65" stroke-width="3"/>
+ <path d="M11 14L3 -8L29 2M37 3L58 -9L53 22" fill="#bf875f" stroke="#a96d5c" stroke-width="3"/>
+ <path d="M6 34Q12 47 33 43" fill="#fff4df"/>
+ <circle cx="19" cy="26" r="3" fill="#4d4453"/><circle cx="40" cy="26" r="3" fill="#4d4453"/>
+ <ellipse cx="2" cy="35" rx="5" ry="4" fill="#413e4c"/>
+ <path d="M22 41Q28 47 34 41" fill="none" stroke="#9d6266" stroke-width="2.5"/>
+ <path d="M24 50l18-1" stroke="#9b83d3" stroke-width="6"/><circle cx="34" cy="51" r="4" fill="#ffeaa3"/>
+</g>
+<g transform="translate(184 139)" stroke-linecap="round">
+ <ellipse cx="28" cy="49" rx="29" ry="7" fill="#579a80" opacity=".2"/>
+ <ellipse cx="26" cy="33" rx="24" ry="14" fill="#f9f8ff" stroke="#6b6e86" stroke-width="3"/>
+ <path d="M11 17L6 2L23 10M33 9L48 0L46 22" fill="#373b58"/>
+ <circle cx="23" cy="18" r="19" fill="#fff" stroke="#67738a" stroke-width="3"/>
+ <path d="M14 2Q24 -1 28 28Q21 34 15 29Z" fill="#41445d"/>
+ <circle cx="15" cy="17" r="2.5" fill="#343b50"/><circle cx="31" cy="17" r="2.5" fill="#343b50"/>
+ <path d="M18 27q6 5 12 0" fill="none" stroke="#c9879c" stroke-width="2"/>
+ <path d="M44 31Q60 14 63 29" fill="none" stroke="#363c54" stroke-width="8"/>
+</g>
+<circle cx="155" cy="185" r="11" fill="#ffd48b" stroke="#e7948c" stroke-width="3"/><path d="M146 181l14 8M163 178l-14 13" stroke="#fff" stroke-width="3"/>
+<g fill="#fce6ef" stroke="#e695be" stroke-width="2"><circle cx="14" cy="193" r="5"/><circle cx="26" cy="178" r="5"/><circle cx="64" cy="191" r="5"/><circle cx="231" cy="195" r="5"/></g>
+<g fill="#fff2a8"><circle cx="14" cy="193" r="2"/><circle cx="26" cy="178" r="2"/><circle cx="64" cy="191" r="2"/><circle cx="231" cy="195" r="2"/></g>
+</svg>
