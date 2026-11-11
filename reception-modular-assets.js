@@ -24,8 +24,20 @@ Object.assign(manifest,{
  'decor-cat-tree-cloud':{src:'assets/reception/decor-cat-tree-cloud.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]},
  'decor-toy-bin':{src:'assets/reception/decor-toy-bin.svg',kind:'decor',classic:[743,398,110,91],isometric:[759,414,98,79]},
  'decor-magazines':{src:'assets/reception/decor-magazines.svg',kind:'decor',classic:[342,316,105,70],isometric:[364,308,94,58]},
- 'decor-treat-display':{src:'assets/reception/decor-treat-display.svg',kind:'decor',classic:[934,189,62,168],isometric:[936,205,61,163]}
+ 'decor-treat-display':{src:'assets/reception/decor-treat-display.svg',kind:'decor',classic:[934,189,62,168],isometric:[936,205,61,163]},
+ 'decor-paw-art':{src:'assets/reception/decor-paw-mural-deluxe.svg',kind:'mural',classic:[699,91,125,91],isometric:[824,85,107,80]},
+ 'decor-cat-tree-castle':{src:'assets/reception/decor-cat-tree-castle.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]},
+ 'decor-cat-tree-forest':{src:'assets/reception/decor-cat-tree-forest.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]},
+ 'decor-cat-tree-moon':{src:'assets/reception/decor-cat-tree-moon.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]}
 });
+for(const theme of ['christmas','hanukkah','kwanzaa','snow','valentines','stpatricks','midnight','unicorn','boho','coffee','scifi']){
+ manifest['display-'+theme]={src:'assets/reception/display-'+theme+'.svg',kind:'themeDisplay',
+   classic:[351,305,115,135],isometric:[366,311,111,134]};
+}
+for(const plant of ['monstera','fern','orchid','pothos','succulent','lavender']){
+ manifest['plant-'+plant]={src:'assets/reception/plant-'+plant+'.svg',kind:'plantFloor',
+   classic:[900,287,89,146],isometric:[904,290,84,151]};
+}
 function render(state,mode,part='all'){
  const placed=state?.receptionCollection?.placed;
  if(!Array.isArray(placed))return '';
