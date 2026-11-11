@@ -12,7 +12,8 @@ const assets={
  necropsy:'assets/rooms/necropsy-floor.svg',
  clinpath:'assets/rooms/advanced-clinpath.svg',
  isolation:'assets/rooms/isolation-one-health.svg',
- catcorner:'assets/rooms/cat-corner.svg',
+ // Cat Corner is rendered by the richer walkable scene in reception-hallway-and-habitats.js.
+ // Do not override it with the retired flat cat-corner image.
  yardview:'assets/rooms/dog-play-yard.svg'
 };
 const css=document.createElement('style');
