@@ -18,6 +18,14 @@ for(const theme of ['halloween','winter','pride','spring']){
  }
 }
 Object.assign(manifest,{
+ 'cat-hide-mushroom':{src:'assets/reception/cat-hide-mushroom.svg',kind:'catLounge',classic:[108,248,175,112],isometric:[108,248,175,112]},
+ 'cat-hide-cottage':{src:'assets/reception/cat-hide-cottage.svg',kind:'catLounge',classic:[108,248,175,112],isometric:[108,248,175,112]},
+ 'cat-hide-pumpkin':{src:'assets/reception/cat-hide-pumpkin.svg',kind:'catLounge',classic:[108,248,175,112],isometric:[108,248,175,112]},
+ 'cat-climb-cloudsteps':{src:'assets/reception/cat-climb-cloudsteps.svg',kind:'catLounge',classic:[352,290,100,78],isometric:[352,290,100,78]},
+ 'cat-climb-rainbowladder':{src:'assets/reception/cat-climb-rainbowladder.svg',kind:'catLounge',classic:[352,290,100,78],isometric:[352,290,100,78]},
+ 'cat-climb-flowerbridge':{src:'assets/reception/cat-climb-flowerbridge.svg',kind:'catLounge',classic:[566,177,152,93],isometric:[566,177,152,93]},
+ 'cat-climb-starbridge':{src:'assets/reception/cat-climb-starbridge.svg',kind:'catLounge',classic:[566,177,152,93],isometric:[566,177,152,93]},
+ 'cat-hide-leafpod':{src:'assets/reception/cat-hide-leafpod.svg',kind:'catLounge',classic:[307,174,121,96],isometric:[307,174,121,96]},
  'cat-enrich-stairs':{src:'assets/reception/cat-enrich-stairs.svg',kind:'catLounge',classic:[360,290,96,78],isometric:[360,290,96,78]},
  'cat-enrich-ramp':{src:'assets/reception/cat-enrich-ramp.svg',kind:'catLounge',classic:[360,290,96,78],isometric:[360,290,96,78]},
  'cat-enrich-bridge':{src:'assets/reception/cat-enrich-bridge.svg',kind:'catLounge',classic:[573,189,158,87],isometric:[573,189,158,87]},
