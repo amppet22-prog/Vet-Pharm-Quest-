@@ -113,7 +113,7 @@ function apply(id){const x=find(id);if(!x||!bag.owned.includes(id))return;
 if(x.type==='wall')bag.equippedWall=id;
 else if(singleSlotTypes.has(x.type)&&x.type!=='furniture'&&bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);
 else if(singleSlotTypes.has(x.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(x.type).includes(v)),id];
-else if(catTreeIds.includes(id))bag.placed=[...bag.placed.filter(v=>!catTreeIds.includes(v)),id];
+else if(catTreeIds.includes(id))bag.placed=bag.placed.includes(id)?bag.placed.filter(v=>v!==id):[...bag.placed.filter(v=>!catTreeIds.includes(v)),id];
 else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag.placed.push(id);
 persistLocal();preview(id);
 }
