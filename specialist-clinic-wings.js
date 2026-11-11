@@ -12,7 +12,7 @@ const data={
   {x:21,y:42,w:17,h:34,walk:29,label:'🫧 Blood Gas',action:'advancedGas'},
   {x:39,y:42,w:17,h:34,walk:48,label:'🧫 Urinalysis',action:'advancedUrine'},
   {x:57,y:42,w:18,h:34,walk:66,label:'🐾 Referral Cases',action:'advancedCases'},
-  {x:77,y:42,w:20,h:34,walk:87,label:'🔬 Microscopy & Lab',action:'classicLabHub'}
+  {x:77,y:42,w:20,h:34,walk:87,label:'📚 Learn First · Scope',action:'classicLabHub'}
  ],
  isolation:[
   {x:9,y:37,w:22,h:39,walk:23,label:'🐶 Isolation patient',action:'onehealth'},
