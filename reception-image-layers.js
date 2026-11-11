@@ -8,9 +8,9 @@ window.VPQ_RECEPTION_IMAGE_LAYERS=function(api){
 const stage=document.getElementById('stage');
 if(!stage)return null;
 const art={
- 'decor-planter':{src:'assets/reception/decor-planter.svg',slot:{classic:[84,46,13,41],isometric:[91,44,11,37]},label:'Leafy terracotta floor planter'},
- 'decor-pumpkin':{src:'assets/reception/decor-pumpkin.svg',slot:{classic:[74,70,10,21],isometric:[76,69,11,23]},label:'Smiling autumn pumpkin'},
- 'decor-cat-tree':{src:'assets/reception/decor-cat-tree.svg',slot:{classic:[10,42,18,49],isometric:[76,38,17,47]},label:'Pastel cat tree with cat and toys'}
+ 'decor-planter':{src:'assets/reception/decor-planter.svg',slot:{classic:[84,46,13,41],isometric:[93,52,8,35]},label:'Leafy terracotta floor planter'},
+ 'decor-pumpkin':{src:'assets/reception/decor-pumpkin.svg',slot:{classic:[74,70,10,21],isometric:[37,71,8,19]},label:'Smiling autumn pumpkin'},
+ 'decor-cat-tree':{src:'assets/reception/decor-cat-tree.svg',slot:{classic:[10,42,18,49],isometric:[83,21,16,46]},label:'Pastel cat tree with cat and toys'}
 };
 const style=document.createElement('style');
 style.textContent='#vpqReceptionImageLayers{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}'+
