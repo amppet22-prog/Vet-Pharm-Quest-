@@ -18,6 +18,12 @@ for(const theme of ['halloween','winter','pride','spring']){
  }
 }
 Object.assign(manifest,{
+ 'decor-paw-floor-lamp':{src:'assets/reception/decor-paw-floor-lamp.svg',kind:'floorLamp',classic:[562,236,85,165],isometric:[670,302,79,145]},
+ 'decor-pet-table-lamp':{src:'assets/reception/decor-pet-table-lamp.svg',kind:'tableLamp',classic:[565,364,56,76],isometric:[692,384,49,65]},
+ 'decor-paw-ottoman':{src:'assets/reception/decor-paw-ottoman.svg',kind:'ottoman',classic:[854,414,110,77],isometric:[883,429,94,65]},
+ 'decor-donut-dog-bed':{src:'assets/reception/decor-donut-dog-bed.svg',kind:'dogBed',classic:[498,417,134,75],isometric:[525,431,118,70]},
+ 'decor-moon-cat-bed':{src:'assets/reception/decor-moon-cat-bed.svg',kind:'catBed',classic:[837,387,123,105],isometric:[902,369,92,97]},
+ 'decor-coffee-tray':{src:'assets/reception/decor-coffee-tray.svg',kind:'tableTop',classic:[745,390,75,61],isometric:[771,406,75,60]},
  'decor-coffee-table':{src:'assets/reception/decor-coffee-table.svg',kind:'coffeeTable',classic:[716,403,150,85],isometric:[730,420,162,82]},
  'decor-coffee-table-cloud':{src:'assets/reception/decor-coffee-table-cloud.svg',kind:'coffeeTable',classic:[716,403,150,85],isometric:[730,420,162,82]},
  'decor-coffee-table-scifi':{src:'assets/reception/decor-coffee-table-scifi.svg',kind:'coffeeTable',classic:[716,403,150,85],isometric:[730,420,162,82]},
