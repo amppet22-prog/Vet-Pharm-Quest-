@@ -75,7 +75,7 @@ for(const plant of ['monstera','fern','orchid','pothos','succulent','lavender'])
 function render(state,mode,part='all'){
  const placed=state?.receptionCollection?.placed;
  if(!Array.isArray(placed))return '';
- const items=Object.keys(manifest).filter(id=>placed.includes(id)&&manifest[id].kind!=='catLounge'&&manifest[id].kind!=='sofa'&&
+ const items=Object.keys(manifest).filter(id=>placed.includes(id)&&manifest[id].kind!=='catLounge'&&(manifest[id].kind!=='sofa'||mode==='classic')&&
   (part==='all'||(part==='rug'?manifest[id].kind==='rug':manifest[id].kind!=='rug')));
  return items.sort((a,b)=>(manifest[a].kind==='tableTop'?1:0)-(manifest[b].kind==='tableTop'?1:0)).map(id=>{
   const item=manifest[id],p=item[mode]||item.classic;
