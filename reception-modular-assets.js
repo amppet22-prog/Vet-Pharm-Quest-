@@ -18,6 +18,9 @@ for(const theme of ['halloween','winter','pride','spring']){
  }
 }
 Object.assign(manifest,{
+ 'decor-coffee-table':{src:'assets/reception/decor-coffee-table.svg',kind:'coffeeTable',classic:[716,403,150,85],isometric:[730,420,162,82]},
+ 'decor-coffee-table-cloud':{src:'assets/reception/decor-coffee-table-cloud.svg',kind:'coffeeTable',classic:[716,403,150,85],isometric:[730,420,162,82]},
+ 'decor-coffee-table-scifi':{src:'assets/reception/decor-coffee-table-scifi.svg',kind:'coffeeTable',classic:[716,403,150,85],isometric:[730,420,162,82]},
  'decor-carrier':{src:'assets/reception/decor-carrier.svg',kind:'decor',classic:[680,350,136,116],isometric:[441,399,114,100]},
  'decor-cat-blanket':{src:'assets/reception/decor-cat-blanket.svg',kind:'decor',classic:[784,359,115,96],isometric:[893,414,102,82]},
  'decor-cat-carrier-cozy':{src:'assets/reception/decor-cat-carrier-cozy.svg',kind:'decor',classic:[680,350,136,116],isometric:[441,399,114,100]},
