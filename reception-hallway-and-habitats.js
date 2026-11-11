@@ -8,7 +8,7 @@ const destinations={vpqGoHallway:'hallway',vpqGoCat:'catcorner',vpqGoYard:'yardv
 const slots={
 hallway:[['🩺 Exam','vpqWingExam',10],['❤️ Treatment','vpqWingTreatment',27],['🩺 Surgery','vpqWingSurgery',44],['🛡️ Isolation','vpqWingIsolation',61],['🔬 Advanced','vpqWingClinpath',78],['🩻 Imaging','vpqWingImaging',93]],
 catcorner:[['🛏️ Rest & Hide','vpqCatRest',13],['🌳 Climb & Perch','vpqCatClimb',36],['🧶 Play & Enrich','vpqCatPlay',59],['🐈 Meet Cats','vpqCatView',78],['🚪 Reception','vpqWingLobby',94]],
-yardview:[['🐕 Dog play yard','vpqYardView',27],['🎾 Yard upgrades','vpqYardShop',63],['🚪 Reception','vpqWingLobby',91]]
+yardview:[['🌸 Sniff & Search','vpqDogSniff',18],['🦴 Move & Explore','vpqDogMove',43],['💧 Rest & Recover','vpqDogRest',68],['🚪 Reception','vpqWingLobby',92]]
 };
 for(const [room,arr] of Object.entries(slots))rooms[room]={name:room==='hallway'?'Reception · Clinical Hallway':room==='catcorner'?'Reception Cat Corner':'Dog Kennel & Play Yard Window',color:'#f4eefa',banner:'EXTENDED HOSPITAL',decor:[],props:arr.map(([label,action,x])=>({x,label,action,emoji:label.slice(0,2),bubble:'Interact'}))};
 const choices={
@@ -56,7 +56,13 @@ if(room==='catcorner'){
  if(old.includes('cat-extra'))s+='<image href="assets/reception/cat-character-pebble.svg" x="625" y="287" width="94" height="88" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
  if(old.includes('cat-toys'))s+='<text x="725" y="353" font-size="27">🪶</text>';
 }
-if(room==='yardview'){s+='<rect x="92" y="175" width="816" height="188" rx="18" fill="#d6f4f1" stroke="#a4c5c4" stroke-width="7"/><path d="M100 305q250 -67 426 0q211 -66 379 0v55H100Z" fill="#b9dea5"/>'+[130,230,330,430,530,630,730,830].map(x=>'<path d="M'+x+' 180v180" stroke="#fff" stroke-width="5"/>').join('')+'<path d="M100 251h810M100 320h810" stroke="#fff" stroke-width="5"/>'+dog(237,247)+dog(620,244);const placed=state.receptionHabitats?.placed||[];if(placed.includes('yard-toys'))s+='<text x="461" y="343" font-size="43">🎾</text>';if(placed.includes('yard-agility'))s+='<path d="M438 283h131M449 283v58M562 283v58" stroke="#e8b27d" stroke-width="12"/>';}
+if(room==='yardview'){
+ s='<svg class="vpqWingArt" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Cute walkable dog enrichment courtyard">'+
+ '<image href="assets/reception/dog-yard-enrichment.svg" x="0" y="0" width="1000" height="500" preserveAspectRatio="none"/>';
+ const placed=state.receptionHabitats?.placed||[];
+ if(placed.includes('yard-toys'))s+='<circle cx="439" cy="390" r="18" fill="#f5d49b" stroke="#c99f9f" stroke-width="5"/><path d="M429 379l18 20M447 379l-18 20" stroke="#fff" stroke-width="4"/>';
+ if(placed.includes('yard-agility'))s+='<path d="M467 352l72-72 70 72" stroke="#e8a9b9" stroke-width="15" stroke-linecap="round" fill="none"/><path d="M474 352h130" stroke="#b48bb3" stroke-width="14" stroke-linecap="round"/>';
+}
 return s+'</svg>';
 }
 window.VPQ_SCENERY.roomArt=k=>slots[k]?scene(k):prior(k);
@@ -140,6 +146,22 @@ function buy(id){
  else if(bag.placed.includes(id))bag.placed=bag.placed.filter(x=>x!==id);else bag.placed.push(id);
  api.persist();api.updateHUD();if(stage.dataset.room===c[2])api.renderRoom();shop(c[2]);
 }
+const dogPrompts={
+ sniff:{title:'🌸 Sniff & Search',intro:'A friendly dog is curious but quickly loses interest in repeated fetch. What enrichment offers a different natural behavior?',choices:['Scatter a few diet-appropriate treats in a safe sniffing area','Make the dog chase a ball until exhausted','Remove all opportunities to explore'],correct:0,why:'Olfactory exploration and foraging offer species-typical mental enrichment. Use appropriate food, secure fencing and supervision.'},
+ move:{title:'🦴 Move & Explore',intro:'A recovering senior dog has mild mobility limitations. Which equipment is the safest starting point?',choices:['Require high jumps across several obstacles','Choose low non-slip steps or a gentle supported ramp','Force a sprint through an agility tunnel'],correct:1,why:'Accessible low-impact options accommodate pain or weakness. Mobility activities must suit individual orthopedic and cardiovascular status; avoid forced high-impact exercise.'},
+ rest:{title:'💧 Rest & Recover',intro:'Two dogs are becoming tense, showing stiff bodies and prolonged staring. What is the best next step?',choices:['Keep them together until they sort it out','Encourage rough play with a high-value toy','Separate calmly, provide water and quiet resting areas'],correct:2,why:'Stiff posture and hard staring can precede conflict. Separate safely and allow decompression; never assume dogs must play together. Provide water, shade and individual choice.'}
+};
+function dogLesson(id){
+ const p=dogPrompts[id];if(!p)return;
+ api.showModal(p.title,'<p>'+p.intro+'</p><div style="display:grid;gap:9px">'+p.choices.map((v,i)=>'<button data-vpqdoganswer="'+id+':'+i+'" style="text-align:left;white-space:normal;padding:12px;background:#fff9fa;border:2px solid #dbc0db;border-radius:12px">'+String.fromCharCode(65+i)+'. '+v+'</button>').join('')+'</div><p class="tiny">Choose the best dog-specific enrichment or safety decision. First correct answer earns 15 EXP and 3 coins.</p>');
+}
+function dogResult(id,index){
+ const p=dogPrompts[id];if(!p)return;const correct=index===p.correct;
+ if(!state.dogYardMastery||typeof state.dogYardMastery!=='object')state.dogYardMastery={};
+ const earned=correct&&!state.dogYardMastery[id];
+ if(earned){state.dogYardMastery[id]=true;state.xp=(Number(state.xp)||0)+15;state.coins=(Number(state.coins)||0)+3;api.persist();api.updateHUD()}
+ api.showModal(correct?'🐾 Happy paws!':'🐕 Think about the dog\'s needs','<p><b>'+(correct?'Good choice!':'Better choice: '+p.choices[p.correct])+'</b></p><p>'+p.why+'</p><p>'+(earned?'Earned +15 EXP and +3 coins.':'No extra reward this time; replay anytime.')+'</p><button data-vpqdogretry="'+id+'">Try again</button><button data-vpqdogback="1">Back to Dog Yard</button>');
+}
 function route(cmd){
  if(destinations[cmd]){api.changeRoom(destinations[cmd]);return true}
  if(cmd==='vpqBlueprint'){map();return true}
@@ -150,11 +172,14 @@ function route(cmd){
  if(cmd==='vpqCatShop'){shop('catcorner');return true}
  if(cmd==='vpqYardShop'){shop('yardview');return true}
  if(cmd==='vpqCatView'){if(catBehavior)return catBehavior.menu();return true}
+ if(cmd==='vpqDogSniff')return dogLesson('sniff');
+ if(cmd==='vpqDogMove')return dogLesson('move');
+ if(cmd==='vpqDogRest')return dogLesson('rest');
  if(cmd==='vpqYardView'){api.showModal('🐕 Dog Play Yard','<p>See the play yard from the reception window. Dogs shown are part of the scenery, not unassigned patients. Safe play requires supervision, secure fencing and compatible groups.</p>');return true}
  return false;
 }
 const observer=new MutationObserver(()=>{const room=stage.dataset.room,el=stage.querySelector('#vpqWingHits'),extra=stage.querySelector('#vpqReceptionExtras');if(((!!slots[room]||room==='reception')!==!!el)||(el&&el.dataset.room!==room)||(room==='reception'&&stage.dataset.receptionView==='isometric'&&!extra))refresh()});
 observer.observe(stage,{childList:true,attributes:true,attributeFilter:['data-room','data-reception-view']});
-api.modalBody.addEventListener('click',e=>{if(e.target.closest('[data-vpqcatstudio]'))return route('vpqCatLounge');if(e.target.closest('[data-vpqcatlegacy]'))return route('vpqCatShop');const el=e.target.closest('[data-vpqwingmap],[data-vpqwingbuy]');if(!el)return;if(el.dataset.vpqwingmap){api.closeModal();api.changeRoom(el.dataset.vpqwingmap)}else if(el.dataset.vpqwingbuy)buy(el.dataset.vpqwingbuy)});
+api.modalBody.addEventListener('click',e=>{const dogAnswer=e.target.closest('[data-vpqdoganswer]');if(dogAnswer){const [id,n]=dogAnswer.dataset.vpqdoganswer.split(':');return dogResult(id,Number(n))}const dogRetry=e.target.closest('[data-vpqdogretry]');if(dogRetry)return dogLesson(dogRetry.dataset.vpqdogretry);if(e.target.closest('[data-vpqdogback]'))return api.closeModal();if(e.target.closest('[data-vpqcatstudio]'))return route('vpqCatLounge');if(e.target.closest('[data-vpqcatlegacy]'))return route('vpqCatShop');const el=e.target.closest('[data-vpqwingmap],[data-vpqwingbuy]');if(!el)return;if(el.dataset.vpqwingmap){api.closeModal();api.changeRoom(el.dataset.vpqwingmap)}else if(el.dataset.vpqwingbuy)buy(el.dataset.vpqwingbuy)});
 refresh();return {route,refresh,near,interact,map};
 };
