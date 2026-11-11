@@ -58,12 +58,12 @@ if(room==='catcorner'){
 }
 if(room==='yardview'){
  s='<svg class="vpqWingArt" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Cute walkable dog enrichment courtyard">'+
- '<image href="assets/reception/dog-yard-enrichment.svg" x="0" y="0" width="1000" height="500" preserveAspectRatio="none"/>';
- s+='<image href="assets/reception/dog-character-poppy.svg" x="289" y="288" width="94" height="91" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/dog-character-maple.svg" x="388" y="325" width="91" height="78" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/dog-character-ranger.svg" x="482" y="224" width="152" height="136" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/dog-character-mocha.svg" x="641" y="309" width="119" height="102" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/dog-character-sunny.svg" x="777" y="277" width="139" height="126" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ '<image href="assets/reception/dog-yard-enrichment.svg?v=20261111-yard-art24" x="0" y="0" width="1000" height="500" preserveAspectRatio="none"/>';
+ s+='<image href="assets/reception/dog-character-poppy.svg" x="316" y="242" width="88" height="82" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ s+='<image href="assets/reception/dog-character-maple.svg" x="389" y="277" width="88" height="77" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ s+='<image href="assets/reception/dog-character-ranger.svg" x="543" y="205" width="126" height="111" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ s+='<image href="assets/reception/dog-character-mocha.svg" x="685" y="273" width="96" height="83" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ s+='<image href="assets/reception/dog-character-sunny.svg" x="816" y="247" width="111" height="101" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
  const placed=state.receptionHabitats?.placed||[];
  if(placed.includes('yard-toys'))s+='<circle cx="439" cy="390" r="18" fill="#f5d49b" stroke="#c99f9f" stroke-width="5"/><path d="M429 379l18 20M447 379l-18 20" stroke="#fff" stroke-width="4"/>';
  if(placed.includes('yard-agility'))s+='<path d="M467 352l72-72 70 72" stroke="#e8a9b9" stroke-width="15" stroke-linecap="round" fill="none"/><path d="M474 352h130" stroke="#b48bb3" stroke-width="14" stroke-linecap="round"/>';
