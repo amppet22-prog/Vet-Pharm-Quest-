@@ -42,7 +42,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
   const has=id=>placed.includes(id);
   const flora=has('decor-cat')?'<g transform="translate(24 282)"><rect x="10" y="42" width="98" height="65" rx="13" fill="#e2bfd1" stroke="#947e9e" stroke-width="5"/><text x="59" y="88" font-size="37" text-anchor="middle">🐈</text><path d="M-3 110h127" stroke="#a98ea8" stroke-width="12"/></g>':'<g transform="translate(34 318)"><rect width="96" height="36" rx="16" fill="#d8c8d9"/><text x="48" y="28" font-size="26" text-anchor="middle">🐾</text></g>';
   const kids=has('decor-kids')?'<g transform="translate(829 310)"><rect width="116" height="63" rx="15" fill="#f5debb" stroke="#d6b7a7" stroke-width="5"/><text x="57" y="44" font-size="36" text-anchor="middle">🧸</text></g>':'<g transform="translate(865 331)"><rect x="0" y="18" width="64" height="38" rx="11" fill="#f4dfdf" stroke="#c5a5c0" stroke-width="4"/><text x="32" y="43" text-anchor="middle" font-size="24">🐾</text></g>';
-  const decorations=has('decor-pumpkin')?'<text x="824" y="404" font-size="31">🎃</text>':'';
+  const decorations='';
   const holiday=has('decor-holiday')?'<text x="881" y="85" font-size="25">✨</text>':'';
   const rainbow=has('decor-rainbow')?'<text x="105" y="129" font-size="28">🌈</text>':'';
 
@@ -59,9 +59,9 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
     '<path d="M175 59Q193 45 192 66V101Q187 112 170 108L166 78Z" fill="'+sofa[1]+'" stroke="#6b6486" stroke-width="5"/>'+
     '<path d="M28 107V120M160 107V120" stroke="#8e7b6d" stroke-width="10"/>'+
     '<path d="M39 34q13 -10 26 0v14H39Z M127 34q12 -10 24 0v14H127Z" fill="'+sofa[2]+'" opacity=".88"/></g>';
-  const plant=has('decor-planter')?'<g transform="translate(943 268)"><path d="M-4 50h47l-9 48H7Z" fill="#c9a98e" stroke="#997d73" stroke-width="5"/><path d="M19 50V-16M19 20Q-21 -12 -29 13M19 3Q45 -27 66 -7M19 32Q49 10 69 26" fill="none" stroke="#609a78" stroke-width="8"/><ellipse cx="-24" cy="8" rx="18" ry="9" fill="#8ac09b"/><ellipse cx="57" cy="-8" rx="21" ry="10" fill="#83b995"/><ellipse cx="58" cy="24" rx="19" ry="10" fill="#77ad8d"/></g>':'';
+  const plant='';
   const plantPair=has('decor-plant-pair')?'<g><g transform="translate(722 302)"><path d="M0 22h49l-8 47H8Z" fill="#d8b396"/><path d="M24 25V-34M24 -3Q-3 -22 -22 -12M24 -23Q45 -49 65 -32" fill="none" stroke="#649b72" stroke-width="9"/><ellipse cx="-19" cy="-13" rx="17" ry="9" fill="#84bb94"/><ellipse cx="64" cy="-32" rx="18" ry="10" fill="#89c39c"/></g><g transform="translate(946 389) scale(.65)"><path d="M0 22h49l-8 47H8Z" fill="#e1c3ab"/><path d="M24 25V-34M24 -3Q-3 -22 -22 -12M24 -23Q45 -49 65 -32" fill="none" stroke="#649b72" stroke-width="9"/><ellipse cx="-19" cy="-13" rx="17" ry="9" fill="#84bb94"/><ellipse cx="64" cy="-32" rx="18" ry="10" fill="#89c39c"/></g></g>':'';
-  const catTree=has('decor-cat-tree')?'<g transform="translate(848 244)"><path d="M25 50v108M88 39v115" stroke="#bda18e" stroke-width="17"/><path d="M7 54h113v12H7Z" fill="#ceb7a0"/><path d="M18 103h95v15H18Z" fill="#d6bca8"/><rect x="22" y="121" width="82" height="48" rx="16" fill="#dfc8bb" stroke="#a98d83" stroke-width="5"/><circle cx="63" cy="142" r="18" fill="#876b6c"/><path d="M6 43Q22 28 45 39L61 45V56H6ZM67 23Q91 5 112 28v16H67Z" fill="#ddc8b0" stroke="#ae9587" stroke-width="4"/><text x="77" y="16" font-size="23">🐈</text></g>':'';
+  const catTree='';
   const catCarrier=has('decor-carrier')?'<g transform="translate(683 408)"><path d="M4 13h95l14 54H0Z" fill="#ded4e8" stroke="#8f89ad" stroke-width="5"/><path d="M28 14Q29 -7 52 -7Q76 -7 80 14" stroke="#8e88ad" stroke-width="7" fill="none"/><rect x="22" y="28" width="69" height="31" rx="6" fill="#68778b"/><path d="M33 31V57M47 30V59M62 30V59M76 30V59" stroke="#dce6e9" stroke-width="4"/><circle cx="9" cy="70" r="7" fill="#7e7393"/><circle cx="102" cy="70" r="7" fill="#7e7393"/><text x="58" y="50" text-anchor="middle" font-size="19">🐱</text></g>':'';
   const dogCarrier=has('decor-dog-carrier')?'<g transform="translate(702 438)"><rect width="100" height="43" rx="8" fill="#b7d1d0" stroke="#6d9193" stroke-width="5"/><path d="M8 4V37M28 4V37M48 4V37M68 4V37M88 4V37" stroke="#72989d" stroke-width="4"/><path d="M23 1Q50 -26 77 1" fill="none" stroke="#78989c" stroke-width="6"/><text x="51" y="31" text-anchor="middle" font-size="23">🐶</text></g>':'';
   const gallery=has('decor-pet-art')?'<g><g transform="translate(95 98)"><rect width="55" height="58" rx="4" fill="#fff6e7" stroke="#b49d94" stroke-width="5"/><text x="28" y="40" text-anchor="middle" font-size="31">🐶</text></g><g transform="translate(160 98)"><rect width="55" height="58" rx="4" fill="#fff6e7" stroke="#b49d94" stroke-width="5"/><text x="28" y="40" text-anchor="middle" font-size="31">🐱</text></g></g>':'';
@@ -91,6 +91,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    // floor trapezoid + grout projecting toward viewer
    '<path d="M68 320H932L1000 500H0Z" fill="url(#vpqShadowFloor)"/>'+
    '<path d="M68 320L0 500M932 320L1000 500 M224 320L178 500 M377 320L362 500M525 320V500 M673 320L693 500M824 320L872 500 M44 425H957 M59 360H942" fill="none" stroke="#fff7ef" stroke-width="3" opacity=".65"/>'+
+   window.VPQ_RECEPTION_MODULAR_ASSETS.render(state,'isometric','rug')+
    '<ellipse cx="494" cy="344" rx="240" ry="26" fill="#695e6d" opacity=".19" filter="url(#vpqShadowAmbient)"/>'+
    // clinical hall doorway (left), pharmacy doorway (right)
    '<g><rect x="243" y="109" width="151" height="208" rx="8" fill="#668c9d" stroke="#567989" stroke-width="12"/><rect x="260" y="124" width="119" height="180" fill="#cbe4e7"/><path d="M263 125L380 125L367 155H275Z" fill="#effbfa" opacity=".75"/><rect x="266" y="149" width="107" height="47" rx="8" fill="#fffaf1" stroke="#a4c4ce" stroke-width="3"/><text x="320" y="169" text-anchor="middle" font-size="16" font-weight="800" font-family="sans-serif" fill="#35596f">CLINICAL</text><text x="320" y="186" text-anchor="middle" font-size="14" font-weight="700" font-family="sans-serif" fill="#35596f">HALL</text><rect x="275" y="223" width="89" height="62" rx="7" fill="#e6f2f1"/><text x="319" y="263" text-anchor="middle" font-size="31">🩺</text></g>'+
@@ -125,6 +126,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<g transform="translate(841 98)"><rect width="86" height="48" rx="12" fill="#fff9ee" stroke="'+c[4]+'" stroke-width="5"/><text x="43" y="21" text-anchor="middle" font-size="13" font-weight="900" font-family="Arial" fill="#5d667a">WELCOME</text><text x="43" y="39" text-anchor="middle" font-size="16">🐾</text></g>'+
    couch+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
+   window.VPQ_RECEPTION_MODULAR_ASSETS.render(state,'isometric','nonrug')+
    '<text x="509" y="34" text-anchor="middle" font-size="20" font-weight="800" font-family="sans-serif" fill="#57667d">VET PHARM QUEST • RECEPTION</text>'+
    '</svg>';
  }
