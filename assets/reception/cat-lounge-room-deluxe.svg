@@ -58,4 +58,98 @@
 <ellipse cx="504" cy="444" rx="161" ry="22" fill="none" stroke="#fff9f1" stroke-width="5" stroke-dasharray="12 7"/>
 <g fill="#b492c9" opacity=".78"><ellipse cx="502" cy="447" rx="18" ry="11"/><circle cx="479" cy="436" r="7"/><circle cx="494" cy="432" r="7"/><circle cx="510" cy="432" r="7"/><circle cx="526" cy="436" r="7"/></g>
 <g font-family="Arial,sans-serif" font-size="15" font-weight="900" fill="#86638d" text-anchor="middle"><text x="207" y="389">HIDE + REST</text><text x="495" y="393">CLIMB + PERCH</text><text x="812" y="392">WINDOW + PLAY</text></g>
+
+<!-- EXTRA COZY DETAILS: all room furnishings are built-in, not dependent on shopping -->
+<g aria-label="Cat lounge extra cozy furniture and decorations" stroke-linecap="round" stroke-linejoin="round">
+<!-- left window drapery, cushions and kitty plush on bed -->
+<path d="M96 148Q121 133 152 149L148 222Q122 212 103 231Z" fill="#e2b5d8" stroke="#bd8daf" stroke-width="4"/>
+<path d="M98 153q24-19 48-2" fill="none" stroke="#fff2f8" stroke-width="4"/>
+<path d="M273 153Q300 133 325 153L319 227Q289 212 280 224Z" fill="#e2b5d8" stroke="#bd8daf" stroke-width="4"/>
+<path d="M281 153q23-16 39 1" stroke="#fff6f9" fill="none" stroke-width="4"/>
+<path d="M142 302q-8-18 10-29q22-12 35 5l-11 34Z" fill="#f9dce4" stroke="#cd9abc" stroke-width="3"/>
+<path d="M244 304q5-22 23-26q16 0 26 18l-14 24Z" fill="#f9dce4" stroke="#cd9abc" stroke-width="3"/>
+<path d="M172 281l10 4m70-4-8 4" stroke="#fffaf7" stroke-width="4"/>
+<g transform="translate(183 275)">
+<ellipse cx="26" cy="32" rx="35" ry="22" fill="#f3be9c" stroke="#b98984" stroke-width="3"/>
+<path d="M0 13L-3 -5L16 5M32 4L49 -6L49 15" fill="#efb98d" stroke="#b98984" stroke-width="3"/>
+<circle cx="24" cy="14" r="22" fill="#f4c69f"/>
+<path d="M13 14q4 4 9 0m10 0q4 4 9 0" fill="none" stroke="#765f75" stroke-width="2.5"/>
+<path d="M24 24l4 2 4-2" fill="none" stroke="#c38a92" stroke-width="2"/>
+<path d="M49 29q22-14 23 0" fill="none" stroke="#d89e84" stroke-width="7"/>
+</g>
+<!-- cat-print framed art and warm wall lighting -->
+<g transform="translate(103 126)">
+<rect width="72" height="63" rx="9" fill="#fff9ee" stroke="#be9ec7" stroke-width="5"/>
+<ellipse cx="36" cy="37" rx="14" ry="11" fill="#b69ad2"/>
+<g fill="#b69ad2"><circle cx="18" cy="22" r="6"/><circle cx="29" cy="16" r="6"/><circle cx="43" cy="16" r="6"/><circle cx="54" cy="22" r="6"/></g>
+</g>
+<g transform="translate(835 82)">
+<path d="M28 5V30" stroke="#ad8daa" stroke-width="5"/>
+<path d="M7 30H49L59 53H-2Z" fill="#fae2b9" stroke="#b18cba" stroke-width="4"/>
+<ellipse cx="28" cy="55" rx="36" ry="7" fill="#ffdd97" opacity=".5"/>
+</g>
+<!-- secondary wall cat silhouette picture -->
+<g transform="translate(662 141)">
+<rect width="68" height="69" rx="9" fill="#fffaf3" stroke="#bda0cc" stroke-width="5"/>
+<path d="M21 48v-20l9-10 9 10 9-10 9 10v20q-12 12-36 0" fill="#d6b6ce"/>
+<circle cx="33" cy="37" r="2.5" fill="#715f8d"/><circle cx="46" cy="37" r="2.5" fill="#715f8d"/>
+<path d="M33 44q7 5 13 0" fill="none" stroke="#866e9d" stroke-width="2"/>
+</g>
+<!-- Potted mint-toned plants in fixed wall baskets -->
+<g transform="translate(327 218)">
+<path d="M0 39h45l-7 32H7Z" fill="#e9c5bb" stroke="#bc9bb8" stroke-width="4"/>
+<path d="M23 40Q10 4-7 0M23 40Q25-3 43-15M23 37Q51 9 64 17" fill="none" stroke="#719c87" stroke-width="6"/>
+<ellipse cx="-5" cy="0" rx="17" ry="9" fill="#91c6a5" transform="rotate(22 -5 0)"/>
+<ellipse cx="43" cy="-12" rx="16" ry="9" fill="#9ccba3" transform="rotate(-27 43 -12)"/>
+<ellipse cx="59" cy="18" rx="17" ry="9" fill="#78b49b"/>
+</g>
+<!-- Decorative fabric hammock above rest zone -->
+<path d="M113 233Q212 261 306 233Q215 290 113 233Z" fill="#f5b6d1" opacity=".78" stroke="#d9a3c3" stroke-width="3"/>
+<!-- fluffier climbing posts: cushions, rope and kitty sleep platform -->
+<path d="M407 247q64 -14 132 0" fill="none" stroke="#f3d3e8" stroke-width="6"/>
+<path d="M463 193q63-9 140 1" fill="none" stroke="#e4d6ff" stroke-width="6"/>
+<path d="M437 156q61-10 117 2" fill="none" stroke="#f8e5ec" stroke-width="6"/>
+<ellipse cx="489" cy="145" rx="44" ry="11" fill="#f7dbe8"/>
+<g transform="translate(460 112)">
+<ellipse cx="30" cy="28" rx="32" ry="14" fill="#c4b0df"/>
+<path d="M0 19l-2-19 19 8M41 8L58 0l-4 18" fill="#b8abd8"/>
+<ellipse cx="29" cy="14" rx="28" ry="18" fill="#cec0e8"/>
+<path d="M16 12q4 5 8 0m9 0q4 5 8 0" stroke="#6d6088" stroke-width="2.5" fill="none"/>
+</g>
+<!-- little string of felt toys -->
+<path d="M544 193v43M559 193v57" stroke="#ad8abc" stroke-width="3"/>
+<path d="M536 244q8-14 17 0q-8 14-17 0" fill="#f6b9cb" stroke="#bc91b6" stroke-width="3"/>
+<circle cx="560" cy="258" r="11" fill="#f5d49d" stroke="#cc9aba" stroke-width="3"/>
+<path d="M553 254l14 9M568 254l-14 9" stroke="#fff8fa" stroke-width="2.5"/>
+<!-- right window cushions, comfy seat and cat watching sky -->
+<ellipse cx="823" cy="292" rx="78" ry="14" fill="#f7c4de"/>
+<path d="M769 272q25-12 43 6l-11 20-32-4Z" fill="#fbe8d8" stroke="#cda4b7" stroke-width="3"/>
+<path d="M843 274q24-15 43 4l-4 20-32-8Z" fill="#fbe8d8" stroke="#cda4b7" stroke-width="3"/>
+<g transform="translate(789 236)">
+<ellipse cx="38" cy="33" rx="35" ry="18" fill="#a8a8c9"/>
+<path d="M15 12l-5-19 19 9M51 2L69-7l-4 21" fill="#aaa5c9" stroke="#807a9c" stroke-width="3"/>
+<circle cx="39" cy="15" r="24" fill="#b7b1d6"/>
+<circle cx="31" cy="13" r="3" fill="#565270"/><circle cx="48" cy="13" r="3" fill="#565270"/>
+<path d="M35 24l4 3 4-3" fill="none" stroke="#947c9d" stroke-width="2"/>
+</g>
+<!-- Low wooden toy chest with handprinted paws -->
+<path d="M711 332h164l-14 42H724Z" fill="#dec6b8" stroke="#ac8ca9" stroke-width="5"/>
+<path d="M721 328h145v13H721Z" fill="#f0d9c8"/>
+<g fill="#a585bc"><ellipse cx="794" cy="356" rx="11" ry="8"/><circle cx="780" cy="348" r="4"/><circle cx="790" cy="345" r="4"/><circle cx="801" cy="345" r="4"/><circle cx="811" cy="348" r="4"/></g>
+<!-- felt toys on crate top -->
+<circle cx="741" cy="319" r="18" fill="#b4d6e3" stroke="#8fb2c8" stroke-width="4"/>
+<path d="M730 310l22 18m1-19-23 19" stroke="#fff7ea" stroke-width="3"/>
+<path d="M845 318l12-20 8 21" fill="#eab9d0" stroke="#ae8ca5" stroke-width="3"/>
+<!-- cute rabbit pillow / kitty blanket in corner -->
+<g transform="translate(887 311)">
+<ellipse cx="15" cy="19" rx="23" ry="15" fill="#f9e8da"/>
+<path d="M2 8l-5-19 13 11M18 0l14-13 1 21" fill="#ffe5d9"/>
+<circle cx="8" cy="16" r="2" fill="#9d839a"/><circle cx="22" cy="16" r="2" fill="#9d839a"/>
+</g>
+<!-- additional wall paw motifs, softly tucked into side walls -->
+<g fill="#ab8cbf" opacity=".63">
+<ellipse cx="45" cy="192" rx="13" ry="9"/><circle cx="28" cy="180" r="5"/><circle cx="39" cy="173" r="5"/><circle cx="51" cy="173" r="5"/><circle cx="63" cy="180" r="5"/>
+<ellipse cx="954" cy="204" rx="13" ry="9"/><circle cx="937" cy="193" r="5"/><circle cx="949" cy="185" r="5"/><circle cx="961" cy="185" r="5"/><circle cx="973" cy="193" r="5"/>
+</g>
+</g>
 </svg>
