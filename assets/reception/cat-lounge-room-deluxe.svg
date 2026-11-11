@@ -57,7 +57,7 @@
 <ellipse cx="504" cy="444" rx="187" ry="34" fill="#f1d9ec" stroke="#b890c5" stroke-width="6"/>
 <ellipse cx="504" cy="444" rx="161" ry="22" fill="none" stroke="#fff9f1" stroke-width="5" stroke-dasharray="12 7"/>
 <g fill="#b492c9" opacity=".78"><ellipse cx="502" cy="447" rx="18" ry="11"/><circle cx="479" cy="436" r="7"/><circle cx="494" cy="432" r="7"/><circle cx="510" cy="432" r="7"/><circle cx="526" cy="436" r="7"/></g>
-<g font-family="Arial,sans-serif" font-size="15" font-weight="900" fill="#86638d" text-anchor="middle"><text x="207" y="389">HIDE + REST</text><text x="495" y="393">CLIMB + PERCH</text><text x="812" y="392">WINDOW + PLAY</text></g>
+<!-- Area names appear only on interactive buttons, never underneath them. -->
 
 <!-- EXTRA COZY DETAILS: all room furnishings are built-in, not dependent on shopping -->
 <g aria-label="Cat lounge extra cozy furniture and decorations" stroke-linecap="round" stroke-linejoin="round">
@@ -110,7 +110,7 @@
 <path d="M463 193q63-9 140 1" fill="none" stroke="#e4d6ff" stroke-width="6"/>
 <path d="M437 156q61-10 117 2" fill="none" stroke="#f8e5ec" stroke-width="6"/>
 <ellipse cx="489" cy="145" rx="44" ry="11" fill="#f7dbe8"/>
-<g transform="translate(460 112)">
+<g transform="translate(535 157) scale(.85)">
 <ellipse cx="30" cy="28" rx="32" ry="14" fill="#c4b0df"/>
 <path d="M0 19l-2-19 19 8M41 8L58 0l-4 18" fill="#b8abd8"/>
 <ellipse cx="29" cy="14" rx="28" ry="18" fill="#cec0e8"/>
@@ -125,7 +125,7 @@
 <ellipse cx="823" cy="292" rx="78" ry="14" fill="#f7c4de"/>
 <path d="M769 272q25-12 43 6l-11 20-32-4Z" fill="#fbe8d8" stroke="#cda4b7" stroke-width="3"/>
 <path d="M843 274q24-15 43 4l-4 20-32-8Z" fill="#fbe8d8" stroke="#cda4b7" stroke-width="3"/>
-<g transform="translate(789 236)">
+<g transform="translate(824 216) scale(.83)">
 <ellipse cx="38" cy="33" rx="35" ry="18" fill="#a8a8c9"/>
 <path d="M15 12l-5-19 19 9M51 2L69-7l-4 21" fill="#aaa5c9" stroke="#807a9c" stroke-width="3"/>
 <circle cx="39" cy="15" r="24" fill="#b7b1d6"/>
@@ -152,4 +152,18 @@
 <ellipse cx="954" cy="204" rx="13" ry="9"/><circle cx="937" cy="193" r="5"/><circle cx="949" cy="185" r="5"/><circle cx="961" cy="185" r="5"/><circle cx="973" cy="193" r="5"/>
 </g>
 </g>
-</svg>
+<!-- Low-profile cozy shelf accents, separated from the walkable floor -->
+<g stroke-linecap="round" stroke-linejoin="round">
+ <rect x="321" y="154" width="36" height="12" rx="5" fill="#d9a9c7"/>
+ <path d="M338 157V141" stroke="#739e82" stroke-width="4"/>
+ <ellipse cx="331" cy="139" rx="11" ry="6" fill="#94c4a3"/><ellipse cx="348" cy="138" rx="10" ry="6" fill="#80b597"/>
+ <path d="M365 207h59" stroke="#c4a3cc" stroke-width="9"/>
+ <path d="M393 205l-13-20 13-15 13 15Z" fill="#f8e0ed" stroke="#b58bab" stroke-width="3"/>
+ <path d="M629 170h63" stroke="#c3a0cb" stroke-width="10"/>
+ <path d="M641 170v-23m38 23v-18" stroke="#bda1c7" stroke-width="3"/>
+ <path d="M629 143h25l-3 22h-19Z" fill="#f3cdb6"/>
+ <path d="M641 144v-23" stroke="#79ab91" stroke-width="4"/><ellipse cx="632" cy="123" rx="11" ry="7" fill="#88bca2"/><ellipse cx="649" cy="119" rx="12" ry="7" fill="#8ccaa4"/>
+ <path d="M673 140q8-12 17 0" stroke="#e6b5d4" stroke-width="7" fill="none"/>
+ <!-- gentle 3D shadows and woven rug-edge detailing -->
+ <path d="M327 452Q502 497 678 452" stroke="#d3a8cf" stroke-width="4" stroke-dasharray="4 8" fill="none" opacity=".7"/>
+</g></svg>
