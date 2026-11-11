@@ -4,7 +4,7 @@
  */
 window.VPQ_PATIENT_CASE_LIBRARY=(function(){
 'use strict';
-let api, page=0, filters={specialty:'All specialties',course:'All courses',species:'All species',status:'All patients',level:'All levels',query:''};
+let api, page=0, filters={specialty:'All specialties',course:'All courses',species:'All species',status:'All patients',level:'All levels',lectureScope:'Selected Pharmacology lectures',query:''};
 const specialtyNames=['All specialties','Parasitology','Infectious Disease & Isolation','Endocrinology','Gastrointestinal','Oncology','Toxicology','Cardiology','Orthopedics','Clinical Pathology','Surgery & Anesthesia','Pharmacology','Other Cases'];
 const courseNames=['All courses','Pharmacology','One Health','Clinical Pathology','Parasitology','Surgery','Necropsy','Other'];
 const e=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
@@ -31,12 +31,13 @@ function specialties(c){
 function course(c){return courseNames.includes(c.track)?c.track:'Other'}
 function species(c){return String(c.species||'Unspecified').trim()||'Unspecified'}
 function filterItems(items){
- const q=filters.query.trim().toLowerCase(),completed=api.getCompleted();
+ const q=filters.query.trim().toLowerCase(),completed=api.getCompleted(),selected=api.getSelectedLectures?.()||[];
  return items.filter(c=>(filters.specialty==='All specialties'||specialties(c).includes(filters.specialty))&&
  (filters.course==='All courses'||course(c)===filters.course)&&
  (filters.species==='All species'||species(c)===filters.species)&&
  (filters.status==='All patients'||(filters.status==='Completed'?completed.includes(c.id):!completed.includes(c.id)))&&
  (filters.level==='All levels'||(filters.level==='Advanced referral'?!!c.advanced:!c.advanced))&&
+ (filters.lectureScope==='All Pharmacology lectures'||course(c)!=='Pharmacology'||!c.lecture||selected.length===0||selected.includes(c.lecture))&&
  (!q||[c.name,c.intro,c.clues,c.protocol,c.track,c.lecture,c.species,...specialties(c)].join(' ').toLowerCase().includes(q)));
 }
 function opts(values,current){return values.map(v=>'<option value="'+e(v)+'" '+(current===v?'selected':'')+'>'+e(v)+'</option>').join('')}
@@ -50,13 +51,14 @@ function draw(){
  return '<button type="button" class="quest" data-case="'+e(c.id)+'" style="text-align:left;min-height:155px"><div style="font-size:28px">'+e(c.emoji||'🐾')+'</div><b>'+e(c.name||'Patient case')+'</b><p class="small">'+e(species(c))+' · '+e(course(c))+(c.lecture?' · '+e(c.lecture):'')+'</p><p>'+e(String(c.intro||'Review this patient case.').slice(0,145))+'</p><p class="small">'+e(categories.slice(0,3).join(' · '))+'</p><span class="badge">'+(finished?'✓ Completed':'Start patient')+'</span></button>'
  }).join('');
  api.showModal('🩺 Exam Room · Patient Case Library','<p>Choose a specialty, course or species. <b>All listed patients use the same underlying cases and rewards</b> as the rest of the clinic—nothing has been duplicated.</p>'+
- '<div class="infobox"><b>'+all.length+' available case records · '+count+' completed</b><p>Clinical specialty tags are suggested from existing case descriptions; some cases fit several specialties. The course field keeps the original exam grouping.</p></div>'+
+ '<div class="infobox"><b>'+all.length+' available case records · '+count+' completed</b><p>Clinical specialty tags are suggested from existing case descriptions; some cases fit several specialties. Course labels remain original. Pharmacology respects the selected lectures unless you explicitly choose all.</p></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:12px 0">'+
  '<label>Specialty<select class="input" data-vpqcasefilter="specialty">'+opts(specialtyNames,filters.specialty)+'</select></label>'+
  '<label>Course<select class="input" data-vpqcasefilter="course">'+opts(courseNames,filters.course)+'</select></label>'+
  '<label>Species<select class="input" data-vpqcasefilter="species">'+opts(sp,filters.species)+'</select></label>'+
  '<label>Progress<select class="input" data-vpqcasefilter="status">'+opts(['All patients','Not completed','Completed'],filters.status)+'</select></label>'+ 
- '<label>Complexity<select class="input" data-vpqcasefilter="level">'+opts(['All levels','Standard case','Advanced referral'],filters.level)+'</select></label></div>'+
+ '<label>Complexity<select class="input" data-vpqcasefilter="level">'+opts(['All levels','Standard case','Advanced referral'],filters.level)+'</select></label>'+ 
+ '<label>Pharmacology lecture scope<select class="input" data-vpqcasefilter="lectureScope">'+opts(['Selected Pharmacology lectures','All Pharmacology lectures'],filters.lectureScope)+'</select></label></div>'+
  '<label>Search names, signs, and topics<input id="vpqCaseLibQuery" class="input" type="search" placeholder="e.g. Addison, Giardia, neoplasia..." value="'+e(filters.query)+'"></label>'+
  '<div class="buttonrow"><button data-vpqcaselib="search">🔎 Search</button><button data-vpqcaselib="reset">Reset filters</button><button data-vpqcaselib="surprise" '+(!result.length?'disabled':'')+'>🎲 Surprise patient from '+result.length+' matches</button><button data-vpqcaselib="map">🗺️ Hospital map</button></div>'+
  '<h3>Patient records ('+result.length+' matches)</h3>'+
