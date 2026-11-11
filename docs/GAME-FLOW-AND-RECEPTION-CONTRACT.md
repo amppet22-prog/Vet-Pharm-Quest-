@@ -42,3 +42,28 @@ Every station has a distinct job: **teach**, **test**, **apply to a patient**, o
 
 ## Verified code versus open testing
 Source code includes a reception isometric drawing and hallway, separate cosmetic inventories, linked learning activities and the new UA visual module. **Not yet tested in a real browser:** camera switching, depth/occlusion, item rendering for every SKU, mobile navigation, event duplication, rewards, remote photos and saved state across sessions. Cross-device save/account backend is not implemented merely by using localStorage.
+
+## Reception implementation pass — 2026-11-10
+- Updated hallway illustration and hit targets to **eight** working destinations: Exam, Treatment, Surgery, Isolation, Clinical Pathology, Imaging, Study Lounge, Pharmacy.
+- Reception Studio purchases of wallpapers now immediately set the equipped wall; purchase ledger and coin logic are preserved.
+- Classic 2D reception uses **stable, named visual slots** for all 12 decor items instead of rendering only the first five placed items. Isometric drawing continues to read the same reception collection state and its own placement graphics.
+- Replaced stale "yard coming soon" shop copy with an explanation of the existing dog and cat annex learning/upgrades. Habitat inventory remains separate and labeled.
+- Static JavaScript parse checks passed for modified reception and hallway modules.
+- **Still unverified in a browser:** decor clipping, overlay collisions, click-to-walk proximity and actual render on all device sizes; please test buying, placing and reloading a plant/wallpaper in both views before declaring fixed.
+
+## Hospital room-purpose map for review
+| Location | Main job | Learning / play action | Boundaries to avoid duplication |
+| --- | --- | --- | --- |
+| Reception + clinic hall | Start shift, show avatar/pets, navigate, collect patient leads, cosmetic upgrades | Select perspective, door or blueprint, manage clinic coin collection | Do not duplicate clinical exam games at reception |
+| Study Lounge / Arcade | Select lecture/exam and choose study vs game | Exam center, short challenges and review | Does not own new clinical patient data |
+| Teaching Lagoon / Learning Lab | Explain mechanisms, physiology and normal-to-abnormal pathways | Interactive diagrams and knowledge checks | Link to patient cases rather than repeating them |
+| Exam Room | Patient encounter/history and diagnostic planning | Patient signalment, differential ranking, order testing | Source patient record should be reused downstream |
+| Treatment Ward | In-house CBC/chemistry, monitoring and care adjustments | Predict analytes, interpret panels, reassess | Specialist detailed microscopy remains in Clin Path Lab |
+| Clinical Pathology Lab | Blood smear, marrow, advanced hemostasis, blood gases and urine microscopy | Visual ID, diagnostic test bench, graph interpretation | One canonical microscopy/question pool shared with cases |
+| Diagnostic Imaging | Radiography, ultrasound/CT preview, projection/exposure practice | kVp/mAs, positioning, identify findings | Imaging is an ordered diagnostic procedure from a case |
+| Pharmacy & Mechanism Lab | Drug shelves, PK/PD, mechanisms, toxicology | Indications/contraindications/choice with explanation | No independent patient queues competing with Exam Room |
+| One Health / Isolation | Infection-control, species/host/transmission and reportability | Zoonoses and pathogen-ID challenges | Access from an infected patient's care plan |
+| Clinical Skills / OSCE | Collection, injection, restraint and procedure training | Specific species/landmark checks, sample artifacts | Skills feed diagnostic sample quality in patient rounds |
+| Surgery Suite | Procedure workflow and anesthesia/sterile practice | Surgery cases and learning checkpoints | Do not imply unsupported full surgical simulation |
+| Necropsy | Gross lesion and tissue interpretation | Necropsy / path correlation | Placeholder activities remain labeled until complete |
+| Reception Cat Corner + Dog Yard | Species-specific FAS and optional habitat upgrades | FAS scoring and enrichment choices | No extra duplicate clinic shops or patient exam flows |
