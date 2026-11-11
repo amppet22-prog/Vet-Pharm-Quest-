@@ -16,13 +16,35 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
  'wall-floral':['#fae6ef','#dcb6c8','#ba8ba4','#f6dce8','#bb92ac'],
  'wall-halloween':['#f9e0cb','#c9ac96','#9b817e','#ebd3c0','#a98771'],
  'wall-pride':['#f5eafe','#d5c4e9','#a897c8','#e9d9f4','#a191b5'],
- 'wall-winter':['#eaf5fb','#bbd8e8','#8cacc9','#dcecf4','#9db9ce']
+ 'wall-winter':['#eaf5fb','#bbd8e8','#8cacc9','#dcecf4','#9db9ce'],
+ 'wall-christmas':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-hanukkah':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-kwanzaa':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-snowglow':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-valentines':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-stpatricks':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-midnight':['#303553','#252C4A','#434E75','#313959','#8C8BB5'],
+ 'wall-unicorn':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-boho':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-coffee':['#F5E8EF','#E5DAEA','#C7B5CB','#E1D1D9','#AF96B6'],
+ 'wall-scifi':['#E5F5F7','#D2E5E8','#A0C5D2','#C1D5D9','#80AEC0']
  };
  const wallpaperArt={
   'wall-halloween':'assets/reception/wallpaper-halloween-approved.webp',
   'wall-winter':'assets/reception/wallpaper-winter-approved.webp',
   'wall-pride':'assets/reception/wallpaper-pride-approved.webp',
-  'wall-floral':'assets/reception/wallpaper-spring-approved.webp'
+  'wall-floral':'assets/reception/wallpaper-spring-approved.webp',
+  'wall-christmas':'assets/reception/wallpaper-christmas-theme.svg',
+  'wall-hanukkah':'assets/reception/wallpaper-hanukkah-theme.svg',
+  'wall-kwanzaa':'assets/reception/wallpaper-kwanzaa-theme.svg',
+  'wall-snowglow':'assets/reception/wallpaper-snowglow-theme.svg',
+  'wall-valentines':'assets/reception/wallpaper-valentines-theme.svg',
+  'wall-stpatricks':'assets/reception/wallpaper-stpatricks-theme.svg',
+  'wall-midnight':'assets/reception/wallpaper-midnight-theme.svg',
+  'wall-unicorn':'assets/reception/wallpaper-unicorn-theme.svg',
+  'wall-boho':'assets/reception/wallpaper-boho-theme.svg',
+  'wall-coffee':'assets/reception/wallpaper-coffee-theme.svg',
+  'wall-scifi':'assets/reception/wallpaper-scifi-theme.svg'
  };
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function drawing(){
@@ -65,7 +87,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
   const catCarrier=has('decor-carrier')?'<g transform="translate(683 408)"><path d="M4 13h95l14 54H0Z" fill="#ded4e8" stroke="#8f89ad" stroke-width="5"/><path d="M28 14Q29 -7 52 -7Q76 -7 80 14" stroke="#8e88ad" stroke-width="7" fill="none"/><rect x="22" y="28" width="69" height="31" rx="6" fill="#68778b"/><path d="M33 31V57M47 30V59M62 30V59M76 30V59" stroke="#dce6e9" stroke-width="4"/><circle cx="9" cy="70" r="7" fill="#7e7393"/><circle cx="102" cy="70" r="7" fill="#7e7393"/><text x="58" y="50" text-anchor="middle" font-size="19">🐱</text></g>':'';
   const dogCarrier=has('decor-dog-carrier')?'<g transform="translate(702 438)"><rect width="100" height="43" rx="8" fill="#b7d1d0" stroke="#6d9193" stroke-width="5"/><path d="M8 4V37M28 4V37M48 4V37M68 4V37M88 4V37" stroke="#72989d" stroke-width="4"/><path d="M23 1Q50 -26 77 1" fill="none" stroke="#78989c" stroke-width="6"/><text x="51" y="31" text-anchor="middle" font-size="23">🐶</text></g>':'';
   const gallery=has('decor-pet-art')?'<g><g transform="translate(95 98)"><rect width="55" height="58" rx="4" fill="#fff6e7" stroke="#b49d94" stroke-width="5"/><text x="28" y="40" text-anchor="middle" font-size="31">🐶</text></g><g transform="translate(160 98)"><rect width="55" height="58" rx="4" fill="#fff6e7" stroke="#b49d94" stroke-width="5"/><text x="28" y="40" text-anchor="middle" font-size="31">🐱</text></g></g>':'';
-  const pawArt=has('decor-paw-art')?'<g opacity=".62" font-size="29"><text x="636" y="91">🐾</text><text x="615" y="126">🐾</text><text x="645" y="165">🐾</text></g>':'';
+  const pawArt='';
 
   return '<svg class="vpqShadowboxArt" viewBox="0 0 1000 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-label="Perspective veterinary reception with front desk and a short hallway to the exam room, pharmacy and study lounge" role="img">'+
    '<defs><linearGradient id="vpqShadowFloor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="'+c[3]+'"/><stop offset="1" stop-color="#c5b1ad"/></linearGradient><linearGradient id="vpqShadowHall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7e8a9e"/><stop offset="1" stop-color="#d7cbd6"/></linearGradient><filter id="vpqShadowAmbient" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="10"/></filter><clipPath id="vpqWallLeftClip"><path d="M0 0L68 52V320L0 394Z"/></clipPath><clipPath id="vpqWallRightClip"><path d="M1000 0L932 52V320L1000 394Z"/></clipPath></defs>'+
