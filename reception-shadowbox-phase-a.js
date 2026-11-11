@@ -19,10 +19,10 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
  'wall-winter':['#eaf5fb','#bbd8e8','#8cacc9','#dcecf4','#9db9ce']
  };
  const wallpaperArt={
-  'wall-halloween':'assets/reception/theme-wall-halloween.svg',
-  'wall-winter':'assets/reception/theme-wall-winter.svg',
-  'wall-pride':'assets/reception/theme-wall-pride.svg',
-  'wall-floral':'assets/reception/theme-wall-spring.svg'
+  'wall-halloween':'assets/reception/wallpaper-halloween-approved.webp',
+  'wall-winter':'assets/reception/wallpaper-winter-approved.webp',
+  'wall-pride':'assets/reception/wallpaper-pride-approved.webp',
+  'wall-floral':'assets/reception/wallpaper-spring-approved.webp'
  };
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function drawing(){
