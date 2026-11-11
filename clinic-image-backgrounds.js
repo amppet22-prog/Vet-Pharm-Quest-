@@ -14,7 +14,8 @@ const assets={
  isolation:'assets/rooms/isolation-one-health.svg',
  // Cat Corner is rendered by the richer walkable scene in reception-hallway-and-habitats.js.
  // Do not override it with the retired flat cat-corner image.
- yardview:'assets/rooms/dog-play-yard.svg'
+ // The updated dog yard is drawn by the walkable reception wings module.
+ // Do not override it with the older static dog-play-yard image.
 };
 const css=document.createElement('style');
 css.textContent='.vpqClinicBgImg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none;user-select:none;z-index:0}.vpqClinicDecorOverlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}'+
