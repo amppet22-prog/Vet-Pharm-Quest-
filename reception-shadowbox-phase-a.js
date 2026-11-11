@@ -18,9 +18,16 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
  'wall-pride':['#f5eafe','#d5c4e9','#a897c8','#e9d9f4','#a191b5'],
  'wall-winter':['#eaf5fb','#bbd8e8','#8cacc9','#dcecf4','#9db9ce']
  };
+ const wallpaperArt={
+  'wall-halloween':'assets/reception/theme-wall-halloween.svg',
+  'wall-winter':'assets/reception/theme-wall-winter.svg',
+  'wall-pride':'assets/reception/theme-wall-pride.svg',
+  'wall-floral':'assets/reception/theme-wall-spring.svg'
+ };
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function drawing(){
   const bag=state.receptionCollection||{},c=palette[bag.equippedWall]||palette['paint-peach'];
+  const wallpaper=wallpaperArt[bag.equippedWall]?'<image href="'+wallpaperArt[bag.equippedWall]+'" x="68" y="52" width="864" height="268" preserveAspectRatio="none"/>':'';
   const placed=Array.isArray(bag.placed)?bag.placed:[];
   const has=id=>placed.includes(id);
   const flora=has('decor-cat')?'<g transform="translate(24 282)"><rect x="10" y="42" width="98" height="65" rx="13" fill="#e2bfd1" stroke="#947e9e" stroke-width="5"/><text x="59" y="88" font-size="37" text-anchor="middle">🐈</text><path d="M-3 110h127" stroke="#a98ea8" stroke-width="12"/></g>':'<g transform="translate(34 318)"><rect width="96" height="36" rx="16" fill="#d8c8d9"/><text x="48" y="28" font-size="26" text-anchor="middle">🐾</text></g>';
@@ -58,6 +65,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<polygon points="0,0 68,52 68,320 0,394" fill="'+c[2]+'"/>'+
    '<polygon points="932,52 1000,0 1000,394 932,320" fill="'+c[2]+'"/>'+
    '<rect x="68" y="52" width="864" height="268" fill="'+c[0]+'"/>'+
+   wallpaper+
    '<path d="M68 52H932M68 320H932" stroke="'+c[4]+'" stroke-width="10" opacity=".65"/>'+
    // main hall recedes to a tiny rear study entrance
    '<path d="M419 130L465 87H579L623 130V315H419Z" fill="url(#vpqShadowHall)" stroke="#79778c" stroke-width="12"/>'+
