@@ -30,6 +30,37 @@ const catalog=[
 {id:'decor-magazines',name:'Vet magazine collection',type:'decor',price:18,icon:'📚',detail:'Two illustrated veterinary reading magazines near the check-in desk.'},
 {id:'decor-treat-display',name:'Treat display cabinet',type:'decor',price:45,icon:'🦴',detail:'A glass-front-style display of cute treat jars for reception.'},
 {id:'decor-cat-tree-cloud',name:'Cloud cat climbing tower',type:'decor',price:70,icon:'🐈',detail:'Alternative fluffy cloud-style cat tree, which swaps with the original cat tree.'},
+{id:'decor-cat-tree-castle',name:'Halloween castle cat tower',type:'decor',price:130,icon:'🐈',detail:'Upgrade your cat climbing tower to a castle-inspired illustrated style. Only one tower appears at once.'},
+{id:'decor-cat-tree-forest',name:'Woodland forest cat tower',type:'decor',price:110,icon:'🐈',detail:'Upgrade your cat climbing tower to a forest-inspired illustrated style. Only one tower appears at once.'},
+{id:'decor-cat-tree-moon',name:'Midnight moon cat tower',type:'decor',price:125,icon:'🐈',detail:'Upgrade your cat climbing tower to a moon-inspired illustrated style. Only one tower appears at once.'},
+{id:'plant-monstera',name:'Monstera leaf planter',type:'plantFloor',price:36,icon:'🪴',detail:'Interchangeable illustrated indoor planter at the reception greenery station.'},
+{id:'plant-fern',name:'Feathery fern planter',type:'plantFloor',price:36,icon:'🪴',detail:'Interchangeable illustrated indoor planter at the reception greenery station.'},
+{id:'plant-orchid',name:'Pink orchid planter',type:'plantFloor',price:36,icon:'🪴',detail:'Interchangeable illustrated indoor planter at the reception greenery station.'},
+{id:'plant-pothos',name:'Trailing pothos planter',type:'plantFloor',price:36,icon:'🪴',detail:'Interchangeable illustrated indoor planter at the reception greenery station.'},
+{id:'plant-succulent',name:'Rosette succulent planter',type:'plantFloor',price:36,icon:'🪴',detail:'Interchangeable illustrated indoor planter at the reception greenery station.'},
+{id:'plant-lavender',name:'Lavender bloom planter',type:'plantFloor',price:36,icon:'🪴',detail:'Interchangeable illustrated indoor planter at the reception greenery station.'},
+{id:'display-christmas',name:'Christmas tree',type:'themeDisplay',price:39,icon:'🎄',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-hanukkah',name:'Hanukkah candle display',type:'themeDisplay',price:25,icon:'🕎',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-kwanzaa',name:'Kwanzaa kinara display',type:'themeDisplay',price:25,icon:'🕯️',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-snow',name:'Snow-globe corner',type:'themeDisplay',price:39,icon:'❄️',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-valentines',name:'Valentine hearts display',type:'themeDisplay',price:39,icon:'💗',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-stpatricks',name:'St. Patrick’s shamrock display',type:'themeDisplay',price:39,icon:'🍀',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-midnight',name:'Midnight moonlight',type:'themeDisplay',price:39,icon:'🌙',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-unicorn',name:'Unicorn dreams',type:'themeDisplay',price:39,icon:'🦄',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-boho',name:'Boho macramé display',type:'themeDisplay',price:39,icon:'🌾',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-coffee',name:'Cozy coffee corner',type:'themeDisplay',price:39,icon:'☕',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'display-scifi',name:'Medical sci-fi scanner',type:'themeDisplay',price:39,icon:'🩺',detail:'Independent thematic display. Swaps with other seasonal or fantasy displays, without changing your wallpaper.'},
+{id:'wall-christmas',name:'Christmas pine and ornaments wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'🎄',detail:'Illustrated Christmas pine and ornaments wallpaper applied to reception walls in both room views.'},
+{id:'wall-hanukkah',name:'Hanukkah blue and gold wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'🕎',detail:'Illustrated Hanukkah blue and gold wallpaper applied to reception walls in both room views.'},
+{id:'wall-kwanzaa',name:'Kwanzaa red black and green wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'🕯️',detail:'Illustrated Kwanzaa red black and green wallpaper applied to reception walls in both room views.'},
+{id:'wall-snowglow',name:'Snowy winter night wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'❄️',detail:'Illustrated Snowy winter night wallpaper applied to reception walls in both room views.'},
+{id:'wall-valentines',name:'Valentine hearts wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'💕',detail:'Illustrated Valentine hearts wallpaper applied to reception walls in both room views.'},
+{id:'wall-stpatricks',name:'St. Patrick’s clovers wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'🍀',detail:'Illustrated St. Patrick’s clovers wallpaper applied to reception walls in both room views.'},
+{id:'wall-midnight',name:'Midnight stars wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'🌙',detail:'Illustrated Midnight stars wallpaper applied to reception walls in both room views.'},
+{id:'wall-unicorn',name:'Unicorn rainbow magic wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'🦄',detail:'Illustrated Unicorn rainbow magic wallpaper applied to reception walls in both room views.'},
+{id:'wall-boho',name:'Boho botanical wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'🌿',detail:'Illustrated Boho botanical wallpaper applied to reception walls in both room views.'},
+{id:'wall-coffee',name:'Coffeehouse wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'☕',detail:'Illustrated Coffeehouse wallpaper applied to reception walls in both room views.'},
+{id:'wall-scifi',name:'Medical sci-fi lab wallpaper',type:'wall',price:48,color:'#eee6f0',pattern:'illustrated',icon:'🛸',detail:'Illustrated Medical sci-fi lab wallpaper applied to reception walls in both room views.'},
 {id:'rug-halloween',name:'Pumpkin Patch rug',type:'rug',price:35,icon:'🎃',detail:'Replaceable floor rug for the reception waiting area; Pumpkin Patch collection.'},
 {id:'desk-halloween',name:'Pumpkin Patch counter display',type:'deskAccent',price:25,icon:'🎃',detail:'Decorative counter display that sits beside check-in; Pumpkin Patch collection.'},
 {id:'hanging-halloween',name:'Pumpkin Patch hanging greenery',type:'hanging',price:30,icon:'🎃',detail:'Hanging garland and planter in the top corner; Pumpkin Patch collection.'},
@@ -51,14 +82,25 @@ const wallpaperArt={
  'wall-halloween':'assets/reception/wallpaper-halloween-approved.webp',
  'wall-winter':'assets/reception/wallpaper-winter-approved.webp',
  'wall-pride':'assets/reception/wallpaper-pride-approved.webp',
- 'wall-floral':'assets/reception/wallpaper-spring-approved.webp'
+ 'wall-floral':'assets/reception/wallpaper-spring-approved.webp',
+ 'wall-christmas':'assets/reception/wallpaper-christmas-theme.svg',
+ 'wall-hanukkah':'assets/reception/wallpaper-hanukkah-theme.svg',
+ 'wall-kwanzaa':'assets/reception/wallpaper-kwanzaa-theme.svg',
+ 'wall-snowglow':'assets/reception/wallpaper-snowglow-theme.svg',
+ 'wall-valentines':'assets/reception/wallpaper-valentines-theme.svg',
+ 'wall-stpatricks':'assets/reception/wallpaper-stpatricks-theme.svg',
+ 'wall-midnight':'assets/reception/wallpaper-midnight-theme.svg',
+ 'wall-unicorn':'assets/reception/wallpaper-unicorn-theme.svg',
+ 'wall-boho':'assets/reception/wallpaper-boho-theme.svg',
+ 'wall-coffee':'assets/reception/wallpaper-coffee-theme.svg',
+ 'wall-scifi':'assets/reception/wallpaper-scifi-theme.svg'
 };
 const modularArt=window.VPQ_RECEPTION_MODULAR_ASSETS;
 const itemArt={...modularArt.manifest};
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
-const singleSlotTypes=new Set(['furniture','rug','deskAccent','hanging','catAccent']);
-const catTreeIds=['decor-cat-tree','decor-cat-tree-cloud'];
+const singleSlotTypes=new Set(['furniture','rug','deskAccent','hanging','catAccent','themeDisplay','plantFloor']);
+const catTreeIds=['decor-cat-tree','decor-cat-tree-cloud','decor-cat-tree-castle','decor-cat-tree-forest','decor-cat-tree-moon'];
 const exclusiveIds=type=>catalog.filter(x=>x.type===type).map(x=>x.id);
 if(!state.receptionCollection||typeof state.receptionCollection!=='object')state.receptionCollection={owned:[],equippedWall:'paint-peach',placed:[],transactions:[]};
 const bag=state.receptionCollection;
@@ -101,11 +143,11 @@ function claimTestCoins(){
 function wallet(){showModal('🪙 Clinic Coin Bank','<div class="infobox"><h2>'+state.coins+' 🪙 available</h2><p>Coins earned in the existing game remain your balance. Purchases here use the same wallet; no premium currency.</p></div>'+
 '<p><b>🧪 Testing bonus:</b> '+(state.receptionTestCoins500Claimed?'✓ Your one-time 500-coin bonus was claimed':'You can add 500 coins once to test decorations')+'</p>'+(state.receptionTestCoins500Claimed?'':'<button data-vpqr-testcoins="1">🪙 Claim 500 Test Coins</button>')+'<h3>Recent purchases / testing bonuses</h3>'+(bag.transactions.length?bag.transactions.slice(0,15).map(x=>'<p>'+(x.kind==='test-grant'?'+500 coins · 🧪 Test bonus':'−'+x.price+' coins · '+first(find(x.id)?.name||x.id))+' <small>'+first(x.date.slice(0,10))+'</small></p>').join(''):'<p>No reception purchases yet. Historical coin earnings before this feature were not tracked separately.</p>')+
 '<div class="buttonrow"><button data-vpqr-menu="1">🎨 Shop and collection</button><button data-vpqr-yard="1">🐕 Kennel & play yard preview</button></div>')}
-function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='furniture'&&x.type==='furniture'||filter==='rugs'&&x.type==='rug'||filter==='seasonal'&&['deskAccent','hanging','catAccent'].includes(x.type));
+function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='furniture'&&x.type==='furniture'||filter==='rugs'&&x.type==='rug'||filter==='seasonal'&&['deskAccent','hanging','catAccent','themeDisplay'].includes(x.type)||filter==='trees'&&catTreeIds.includes(x.id)||filter==='plants'&&x.type==='plantFloor');
 showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned <button data-vpqr-wallet="1">Open coin bank</button></div>'+
 '<p>Choose Sofas, Decor, Rugs, Seasonal Accessories or Wallpapers. Purchased sofas and decorations are placed in the waiting room automatically; wallpapers are applied after purchase. Open My collection to remove decorations or change owned sofa styles at no extra cost. All choices are saved in this browser.</p>'+
-'<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="rugs">Rugs</button><button data-vpqr-filter="seasonal">Seasonal extras</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
-'<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'">'+(itemArt[x.id]?.src?'<img src="'+itemArt[x.id].src+'" alt="" style="height:85px;width:100%;object-fit:contain;border-radius:8px;margin-bottom:6px">':wallpaperArt[x.id]?'<img src="'+wallpaperArt[x.id]+'" alt="" style="height:78px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px">':'<span class="vpqRIcon">'+first(x.icon)+'</span>')+'<b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
+'<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="rugs">Rugs</button><button data-vpqr-filter="seasonal">Seasonal extras</button><button data-vpqr-filter="trees">Cat trees</button><button data-vpqr-filter="plants">Plants</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
+'<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'">'+(itemArt[x.id]?.src?'<img src="'+itemArt[x.id].src+'" alt="" style="height:85px;width:100%;object-fit:contain;border-radius:8px;margin-bottom:6px">':wallpaperArt[x.id]?'<img src="'+wallpaperArt[x.id]+'" alt="" style="height:78px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px">':'<span class="vpqRIcon">'+first(x.icon)+'</span>')+'<span class="vpqPricePill">'+(bag.owned.includes(x.id)?'✓ Owned':x.price===0?'Free':'🪙 '+x.price+' coins')+'</span><b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
 '<div class="vpqRPend"><b>🐕 Kennel & 3D-style play yard — Coming Soon</b><p>Future fenced yard, dog behavior cases, enrichment, intake and safe isolation workflows. This is a preview only; no kennel has been purchased or built.</p><button data-vpqr-yard="1">See planned expansion</button></div>');
 }
 function yard(){showModal('🐕 Kennel & Play Yard · Coming Soon','<h3>Planned veterinary learning expansion</h3><p>A 2.5D dog play yard with fenced areas, individual kennel runs, enrichment upgrades and clinical learning stations for canine behavior, triage, parasite control and infection prevention.</p><p><b>Not yet playable:</b> no kennels, dog housing, purchases or clinical cases are enabled in this preview.</p><button data-vpqr-menu="1">← Reception Studio</button>')}
@@ -155,7 +197,7 @@ if(d.vpqrPreview!==undefined)return preview(d.vpqrPreview);
 if(d.vpqrEquip!==undefined)return apply(d.vpqrEquip);
 if(d.vpqrBuy!==undefined)return buy(d.vpqrBuy);
 });
-const style=document.createElement('style');style.textContent='.vpqRFilters,.vpqRCatalog{display:grid;gap:9px}.vpqRFilters{grid-template-columns:repeat(5,minmax(0,1fr));margin:12px 0}.vpqRFilters button{font-size:12px;padding:8px 3px}.vpqRCatalog{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}.vpqRCatalog button{background:#fff;text-align:left;border-radius:12px;padding:12px}.vpqRCatalog b,.vpqRCatalog small,.vpqRCatalog em{display:block}.vpqRCatalog em{font-style:normal;font-size:11px;color:#447596}.vpqRIcon{font-size:35px;display:block}.vpqRPend{margin-top:17px;padding:14px;background:#f4effd;border-radius:12px}.vpqRPreview{min-height:175px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;border:6px solid white;outline:1px solid #c9cde4;border-radius:15px}.vpqRPreviewIcons{font-size:45px}.vpqRPreviewIcons span{font-size:32px}.vpqRPreview small{font-size:11px;background:#ffffffc4;padding:5px}.vpqRCatalog small{font-size:11px;margin:5px 0}@media(max-width:480px){.vpqRFilters{grid-template-columns:repeat(2,minmax(0,1fr))}}';document.head.appendChild(style);
+const style=document.createElement('style');style.textContent='.vpqRFilters,.vpqRCatalog{display:grid;gap:9px}.vpqRFilters{grid-template-columns:repeat(5,minmax(0,1fr));margin:12px 0}.vpqRFilters button{font-size:12px;padding:8px 3px}.vpqRCatalog{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}.vpqRCatalog button{background:#fff;text-align:left;border-radius:12px;padding:12px}.vpqRCatalog b,.vpqRCatalog small,.vpqRCatalog em{display:block}.vpqRCatalog em{font-style:normal;font-size:11px;color:#447596}.vpqPricePill{display:inline-block;margin:5px 0 7px;padding:4px 9px;border-radius:999px;background:linear-gradient(120deg,#fce8a9,#f9d7e7);border:1px solid #d0af9c;color:#76556c;font-size:11px;font-weight:900;box-shadow:0 2px 5px #8b77952d}.vpqRIcon{font-size:35px;display:block}.vpqRPend{margin-top:17px;padding:14px;background:#f4effd;border-radius:12px}.vpqRPreview{min-height:175px;display:flex;flex-direction:column;align-items:center;justify-content:space-around;border:6px solid white;outline:1px solid #c9cde4;border-radius:15px}.vpqRPreviewIcons{font-size:45px}.vpqRPreviewIcons span{font-size:32px}.vpqRPreview small{font-size:11px;background:#ffffffc4;padding:5px}.vpqRCatalog small{font-size:11px;margin:5px 0}@media(max-width:480px){.vpqRFilters{grid-template-columns:repeat(2,minmax(0,1fr))}}';document.head.appendChild(style);
 persist();
 return {catalog,menu,wallet,yard};
 };
