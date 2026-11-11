@@ -93,8 +93,17 @@ const motifs={solid:'',floral:'🌸',halloween:'🎃',pride:'🌈',winter:'❄�
 const m=motifs[wall.pattern];
 const pattern=m?'<g opacity=".2" font-size="45" aria-hidden="true"><text x="100" y="120">'+m+'</text><text x="360" y="225">'+m+'</text><text x="690" y="115">'+m+'</text><text x="890" y="245">'+m+'</text></g>':'';
 art=art.replace(/<rect width="1000" height="385" fill="[^"]+"\/>/,'<rect width="1000" height="385" fill="'+wall.color+'"/>'+pattern);
-const coords=[[8,35],[25,35],[43,35],[62,35],[78,35]];
-const decoration=bag.placed.filter(id=>find(id)?.type==='decor').slice(0,5).map((id,i)=>{const item=find(id),point=coords[i];return item?'<text x="'+(point[0]*10)+'" y="'+(point[1]*10)+'" font-size="52">'+item.icon+'</text>':''}).join('');
+const decorSlots={
+ 'decor-cat':[85,325,49],'decor-kids':[906,339,44],'decor-pumpkin':[822,381,33],
+ 'decor-rainbow':[116,113,38],'decor-holiday':[899,110,38],
+ 'decor-planter':[935,340,46],'decor-plant-pair':[744,348,41],
+ 'decor-cat-tree':[165,313,45],'decor-carrier':[293,400,39],
+ 'decor-dog-carrier':[670,403,39],'decor-pet-art':[220,123,36],
+ 'decor-paw-art':[776,138,37]
+};
+// Named placement slots keep every owned decoration visible in classic reception;
+// do not truncate to five items or relocate purchases based on unrelated additions.
+const decoration=bag.placed.filter(id=>find(id)?.type==='decor'&&decorSlots[id]).map(id=>{const item=find(id),point=decorSlots[id];return '<text x="'+point[0]+'" y="'+point[1]+'" font-size="'+point[2]+'" text-anchor="middle" aria-label="'+first(item.name)+'">'+first(item.icon)+'</text>'}).join('');
 art=art.replace('</svg>',decoration+'</svg>');return art;
 };
 document.getElementById('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
