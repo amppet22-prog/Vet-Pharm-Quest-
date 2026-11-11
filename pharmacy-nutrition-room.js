@@ -79,6 +79,7 @@ function refresh(){
  if(stage.dataset.room!=='pharmacy')return;
  const node=document.createElement('div');node.id='vpqPNHotspots';
  node.innerHTML='<button type="button" class="vpqPNHot vpqPNDrugs" data-vpqpnaction="pharmacy" aria-label="Open the medication cabinets and drug encyclopedia"><span>💊 Drug Shelves</span></button>'+
+ '<button type="button" class="vpqPNHot vpqPNRounds" data-vpqpnaction="vpqPharmVisualRounds" aria-label="Open clinical pharmacology visual cases and testing"><span>🩺 Clinical Rounds</span></button>'+ 
  '<button type="button" class="vpqPNHot vpqPNFood" data-vpqpnaction="vpqNutritionGuide" aria-label="Open the pet nutrition corner and reference cards"><span>🥣 Pet Nutrition</span></button>'+
  '<button type="button" class="vpqPNHot vpqPNTox" data-vpqpnaction="vpqToxPreview" aria-label="Open the toxicology caution book reference preview"><span>☣️ Caution Book</span></button>'+
  '<button type="button" class="vpqPNHot vpqPNLab" data-vpqpnaction="vpqMechEnter" aria-label="Enter the mechanism lab"><span>🔬 Lab</span></button>';
@@ -92,7 +93,8 @@ style.textContent='.vpqPharmNutritionArt{position:absolute;inset:0;width:100%;he
 '.vpqPNHot{position:absolute;pointer-events:auto;border:2px solid #87a9a955;border-radius:12px;box-shadow:none;transform:none!important;background:#ffffff0d}'+
 '.vpqPNHot:hover,.vpqPNHot:focus-visible{border:3px solid #f0bf68;background:#ffedbb40;outline:2px solid #ffffff}'+
 '.vpqPNHot span{position:absolute;bottom:3%;left:50%;transform:translate(-50%,0);white-space:nowrap;border:2px solid #7ea9a6;background:#fffdf5;color:#375f68;font-size:11px;font-weight:900;padding:5px 8px;border-radius:13px;box-shadow:0 3px 0 #567f8030}'+
-'.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:44%;top:23%;width:23%;height:49%}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
+'.vpqPNRounds{left:10%;top:68%;width:30%;height:20%;border:2px solid #e4aa91;background:#fff4da26}.vpqPNRounds span{bottom:6%;background:#fff5eb;border-color:#e4b6a8;color:#895568}'+
+ '.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:44%;top:23%;width:23%;height:49%}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
 '.vpqPNFoodCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin:12px 0}.vpqPNFoodCards button{display:block;text-align:left;background:#f6fcf7;border:2px solid #b9d7c8;border-radius:13px;padding:13px}.vpqPNFoodCards b,.vpqPNFoodCards small{display:block}.vpqPNFoodCards small{color:#617e75;font-size:12px;margin-top:6px}'+
 '@media(max-width:620px){.vpqPNHot span{font-size:9px;padding:3px 4px}.vpqPNLab span{right:0}.vpqPNTox span{bottom:12%}}';
 document.head.appendChild(style);
