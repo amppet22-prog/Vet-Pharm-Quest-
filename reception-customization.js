@@ -112,7 +112,7 @@ const decorSlots={
 };
 // Named placement slots keep every owned decoration visible in classic reception;
 // do not truncate to five items or relocate purchases based on unrelated additions.
-const decoration=bag.placed.filter(id=>find(id)?.type==='decor'&&decorSlots[id]).map(id=>{const item=find(id),point=decorSlots[id];return '<text x="'+point[0]+'" y="'+point[1]+'" font-size="'+point[2]+'" text-anchor="middle" aria-label="'+first(item.name)+'">'+first(item.icon)+'</text>'}).join('');
+const decoration=bag.placed.filter(id=>find(id)?.type==='decor'&&decorSlots[id]&&!['decor-planter','decor-pumpkin','decor-cat-tree'].includes(id)).map(id=>{const item=find(id),point=decorSlots[id];return '<text x="'+point[0]+'" y="'+point[1]+'" font-size="'+point[2]+'" text-anchor="middle" aria-label="'+first(item.name)+'">'+first(item.icon)+'</text>'}).join('');
 art=art.replace('</svg>',decoration+'</svg>');return art;
 };
 document.getElementById('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
