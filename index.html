@@ -2904,6 +2904,7 @@ window.VPQ_PATIENT_CASE_LIBRARY.init({
  body:$('modalBody'),showModal,
  getCases:()=>dataCases(),
  getCompleted:()=>state.completed,
+ getSelectedLectures:()=>window.VPQCurriculum?.getLectures?.()||[],
  openCase:id=>startCase(id),
  openMap:()=>doAction('map')
 });
