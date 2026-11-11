@@ -54,11 +54,20 @@ showModal('🎨 Preview · '+first(item.name),'<p>'+first(item.detail||'Choose a
 '<button data-vpqr-menu="1">← Shop / Collection</button></div>'+
 (!owned&&!able?'<p class="small">Not enough earned coins yet. Play learning rounds to earn more; no real-money purchases.</p>':''));
 }
+function claimTestCoins(){
+ // One grant per local save, kept distinct from first-mastery study rewards.
+ if(state.receptionTestCoins500Claimed)return wallet();
+ state.receptionTestCoins500Claimed=true;
+ state.coins=Math.max(0,Number(state.coins)||0)+500;
+ bag.transactions.unshift({id:'test-coins-500',price:-500,kind:'test-grant',date:new Date().toISOString()});
+ bag.transactions=bag.transactions.slice(0,100);
+ persistLocal();wallet();
+}
 function wallet(){showModal('🪙 Clinic Coin Bank','<div class="infobox"><h2>'+state.coins+' 🪙 available</h2><p>Coins earned in the existing game remain your balance. Purchases here use the same wallet; no premium currency.</p></div>'+
-'<h3>Recent reception purchases</h3>'+(bag.transactions.length?bag.transactions.slice(0,15).map(x=>'<p>−'+x.price+' coins · '+first(find(x.id)?.name||x.id)+' <small>'+first(x.date.slice(0,10))+'</small></p>').join(''):'<p>No reception purchases yet. Historical coin earnings before this feature were not tracked separately.</p>')+
+'<p><b>🧪 Decoration testing:</b> '+(state.receptionTestCoins500Claimed?'✓ 500 test coins already claimed in this browser save':'Claim a one-time 500-coin bonus to try reception, cat-corner and yard purchases')+'</p>'+(state.receptionTestCoins500Claimed?'':'<button data-vpqr-testcoins="1">🪙 Claim 500 test coins</button>')+'<h3>Recent reception purchases / testing grants</h3>'+(bag.transactions.length?bag.transactions.slice(0,15).map(x=>'<p>'+(x.kind==='test-grant'?'+500 coins · 🧪 Test grant':'−'+x.price+' coins · '+first(find(x.id)?.name||x.id))+' <small>'+first(x.date.slice(0,10))+'</small></p>').join(''):'<p>No reception purchases yet. Historical coin earnings before this feature were not tracked separately.</p>')+
 '<div class="buttonrow"><button data-vpqr-menu="1">🎨 Shop and collection</button><button data-vpqr-yard="1">🐕 Kennel & play yard preview</button></div>')}
 function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='furniture'&&x.type==='furniture');
-showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned · '+bag.placed.length+' placed <button data-vpqr-wallet="1">Open coin bank</button></div>'+
+showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned · '+bag.placed.length+' placed <button data-vpqr-wallet="1">🪙 Coin Bank / Testing Bonus</button></div>'+
 '<p>Choose Sofas, Decor or Wallpapers. Purchased sofas and decorations are placed in the waiting room automatically; wallpapers are applied after purchase. Open My collection to remove decorations or change owned sofa styles at no extra cost. All choices are saved in this browser.</p>'+
 '<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
 '<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'"><span class="vpqRIcon">'+first(x.icon)+'</span><b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
@@ -109,6 +118,7 @@ art=art.replace('</svg>',decoration+'</svg>');return art;
 document.getElementById('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
 if(d.vpqrMenu!==undefined)return menu();
 if(d.vpqrWallet!==undefined)return wallet();
+if(d.vpqrTestcoins!==undefined)return claimTestCoins();
 if(d.vpqrYard!==undefined)return yard();
 if(d.vpqrFilter!==undefined)return menu(d.vpqrFilter);
 if(d.vpqrPreview!==undefined)return preview(d.vpqrPreview);
