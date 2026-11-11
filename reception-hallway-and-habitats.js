@@ -5,7 +5,7 @@ const {state,rooms}=api,stage=document.getElementById('stage'),prior=window.VPQ_
 const destinations={vpqGoHallway:'hallway',vpqGoCat:'catcorner',vpqGoYard:'yardview',vpqWingLobby:'reception',vpqWingExam:'exam',vpqWingTreatment:'treatment',vpqWingSurgery:'surgery',vpqWingIsolation:'isolation',vpqWingClinpath:'clinpath',vpqWingImaging:'imaging'};
 const slots={
 hallway:[['🩺 Exam','vpqWingExam',10],['❤️ Treatment','vpqWingTreatment',27],['🩺 Surgery','vpqWingSurgery',44],['🛡️ Isolation','vpqWingIsolation',61],['🔬 Advanced','vpqWingClinpath',78],['🩻 Imaging','vpqWingImaging',93]],
-catcorner:[['🌳 Cat tree & toys','vpqCatShop',26],['🐈 Meet cats','vpqCatView',62],['🚪 Reception','vpqWingLobby',91]],
+catcorner:[['🎨 Decorate lounge','vpqCatLounge',18],['🌳 Cat tree & toys','vpqCatShop',43],['🐈 Meet cats','vpqCatView',68],['🚪 Reception','vpqWingLobby',92]],
 yardview:[['🐕 Dog play yard','vpqYardView',27],['🎾 Yard upgrades','vpqYardShop',63],['🚪 Reception','vpqWingLobby',91]]
 };
 for(const [room,arr] of Object.entries(slots))rooms[room]={name:room==='hallway'?'Reception · Clinical Hallway':room==='catcorner'?'Reception Cat Corner':'Dog Kennel & Play Yard Window',color:'#f4eefa',banner:'EXTENDED HOSPITAL',decor:[],props:arr.map(([label,action,x])=>({x,label,action,emoji:label.slice(0,2),bubble:'Interact'}))};
@@ -23,7 +23,40 @@ const cat=(x,y,color)=>'<g transform="translate('+x+' '+y+')"><ellipse cx="30" c
 function scene(room){
 let s=frame(room==='hallway'?'CLINIC HALLWAY':room==='catcorner'?'CAT CORNER':'DOG PLAY YARD');
 if(room==='hallway'){const colors=['#f5dde8','#fbe2e6','#d9efe5','#dfeafb','#eadff8'];slots.hallway.forEach(([name,action],i)=>{const x=25+i*159;s+='<rect x="'+x+'" y="188" width="145" height="181" rx="16" fill="'+colors[i]+'" stroke="#b0a3c8" stroke-width="6"/><rect x="'+(x+13)+'" y="202" width="119" height="149" rx="11" fill="#fff" stroke="#c6b2d1" stroke-width="3"/><text x="'+(x+72)+'" y="280" text-anchor="middle" font-size="52">'+name.slice(0,2)+'</text><text x="'+(x+84)+'" y="312" text-anchor="middle" font-size="14" font-weight="900" fill="#726489">'+name.slice(name.indexOf(' ')+1)+'</text>'});}
-if(room==='catcorner'){s+='<rect x="90" y="291" width="816" height="26" rx="12" fill="#dfb7d9"/><rect x="90" y="317" width="816" height="79" rx="12" fill="#f6e0ef"/>'+cat(222,219,'#e9bfa4')+cat(673,233,'#b4a9db')+'<path d="M120 207h190M780 209h110" stroke="#d3a2cf" stroke-width="13"/>';const placed=state.receptionHabitats?.placed||[];if(placed.includes('cat-tree'))s+='<rect x="430" y="224" width="25" height="94" fill="#b99b89"/><rect x="385" y="213" width="120" height="16" rx="8" fill="#c89fc7"/>'+cat(405,157,'#c6b3d7');if(placed.includes('cat-wall'))s+='<path d="M722 187h86M804 151h95" stroke="#bd95bd" stroke-width="14"/>';if(placed.includes('cat-toys'))s+='<text x="330" y="386" font-size="43">🧶</text><text x="550" y="385" font-size="43">🪶</text>';if(placed.includes('cat-extra'))s+=cat(305,284,'#e7bda4')+cat(782,276,'#b7b8db');}
+if(room==='catcorner'){
+ const old=state.receptionHabitats?.placed||[];
+ const placed=state.receptionCollection?.placed||[];
+ const art=window.VPQ_RECEPTION_MODULAR_ASSETS?.manifest||{};
+ const asset=(id,x,y,w,h)=>placed.includes(id)&&art[id]?'<image href="'+art[id].src+'" x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>':'';
+ const selected=(ids,x,y,w,h)=>ids.map(id=>asset(id,x,y,w,h)).join('');
+ // Quiet cats have dedicated hideouts and perches. Keep central walking and interaction lane clear.
+ s+='<rect x="100" y="281" width="800" height="12" rx="6" fill="#d7badc"/>'+
+    '<rect x="116" y="291" width="190" height="95" rx="20" fill="#efd6e9" stroke="#be9cc7" stroke-width="6"/>'+
+    '<rect x="126" y="314" width="170" height="57" rx="17" fill="#fff2f7"/>'+
+    '<rect x="701" y="298" width="175" height="85" rx="20" fill="#ead5e9" stroke="#bd9ac4" stroke-width="5"/>'+
+    '<ellipse cx="788" cy="349" rx="73" ry="20" fill="#f9e9f2"/>'+
+    '<rect x="369" y="276" width="17" height="99" rx="6" fill="#c9ab8d"/>'+
+    '<rect x="337" y="269" width="90" height="15" rx="6" fill="#c79fce"/>'+
+    '<path d="M149 205h126M728 211h116" stroke="#c69fc8" stroke-width="12" stroke-linecap="round"/>'+
+    '<g><rect x="376" y="164" width="256" height="51" rx="20" fill="#fffdf8" stroke="#b99ccd" stroke-width="5"/>'+
+    '<text x="504" y="195" text-anchor="middle" font-family="Arial" font-weight="900" font-size="25" fill="#8764a2">THE COZY CAT LOUNGE</text></g>'+
+    '<ellipse cx="492" cy="432" rx="205" ry="39" fill="#ead3eb" stroke="#ccaaca" stroke-width="6"/>'+
+    '<ellipse cx="492" cy="432" rx="180" ry="25" fill="none" stroke="#fff9ed" stroke-width="4" stroke-dasharray="9 6"/>';
+ // Optional cat-companion slot is intentionally one at a time; old cats remain in existing ownership.
+ s+=selected(['cat-room-window'],717,122,187,142);
+ s+=selected(['cat-room-scratcher'],593,220,112,172);
+ s+=selected(['cat-room-toy'],310,351,115,102);
+ s+=selected(['decor-moon-cat-bed'],141,311,163,107);
+ s+=selected(['cat-companion-tabby','cat-companion-tuxedo','cat-companion-calico','cat-companion-gray'],744,282,130,130);
+ s+=selected(['decor-cat-tree','decor-cat-tree-cloud','decor-cat-tree-castle','decor-cat-tree-forest','decor-cat-tree-moon'],440,215,153,166);
+ s+=selected(['cataccent-halloween','cataccent-winter','cataccent-pride','cataccent-spring'],161,340,117,97);
+ // Baseline friendly resident cat so the room is never empty.
+ s+=cat(173,237,'#e9bfa4');
+ if(old.includes('cat-tree'))s+='<rect x="386" y="292" width="24" height="86" fill="#b99b89"/><rect x="350" y="280" width="100" height="14" rx="7" fill="#c89fc7"/>'+cat(366,225,'#c6b3d7');
+ if(old.includes('cat-wall'))s+='<path d="M706 235h81M791 199h91" stroke="#bd95bd" stroke-width="13"/>';
+ if(old.includes('cat-toys'))s+='<text x="333" y="391" font-size="30">🧶</text><text x="562" y="389" font-size="30">🪶</text>';
+ if(old.includes('cat-extra'))s+=cat(514,324,'#e7bda4');
+}
 if(room==='yardview'){s+='<rect x="92" y="175" width="816" height="188" rx="18" fill="#d6f4f1" stroke="#a4c5c4" stroke-width="7"/><path d="M100 305q250 -67 426 0q211 -66 379 0v55H100Z" fill="#b9dea5"/>'+[130,230,330,430,530,630,730,830].map(x=>'<path d="M'+x+' 180v180" stroke="#fff" stroke-width="5"/>').join('')+'<path d="M100 251h810M100 320h810" stroke="#fff" stroke-width="5"/>'+dog(237,247)+dog(620,244);const placed=state.receptionHabitats?.placed||[];if(placed.includes('yard-toys'))s+='<text x="461" y="343" font-size="43">🎾</text>';if(placed.includes('yard-agility'))s+='<path d="M438 283h131M449 283v58M562 283v58" stroke="#e8b27d" stroke-width="12"/>';}
 return s+'</svg>';
 }
@@ -40,7 +73,7 @@ function refresh(){
  if(existing?.dataset.room===room && (room!=='reception'||stage.dataset.receptionView!=='isometric'||extras))return;
  existing?.remove();extras?.remove();
  const div=document.createElement('div');div.id='vpqWingHits';div.dataset.room=room;
- if(slots[room])div.innerHTML=slots[room].map(([label,action,x])=>'<button type="button" class="vpqWingHit" data-vpqwingaction="'+action+'" style="left:'+(x-8)+'%;top:36%;width:16%;height:43%" aria-label="'+label+'"><span>'+label+'</span></button>').join('');
+ if(slots[room])div.innerHTML=slots[room].map(([label,action,x])=>'<button type="button" class="vpqWingHit" data-vpqwingaction="'+action+'" style="left:'+(x-8)+'%;top:38%;width:15%;height:41%" aria-label="'+label+'"><span>'+label+'</span></button>').join('');
  if(room==='hallway')div.innerHTML+='<button type="button" class="vpqReceptionExtra" data-vpqwingaction="vpqWingLobby" style="left:2%;top:4%;z-index:8">← Reception Lobby</button>';
  div.addEventListener('click',e=>{const b=e.target.closest('[data-vpqwingaction]');if(b)route(b.dataset.vpqwingaction)});
  stage.appendChild(div);
@@ -111,6 +144,7 @@ function buy(id){
 function route(cmd){
  if(destinations[cmd]){api.changeRoom(destinations[cmd]);return true}
  if(cmd==='vpqBlueprint'){map();return true}
+ if(cmd==='vpqCatLounge'){api.doAction?.('catLounge');return true}
  if(cmd==='vpqCatShop'){shop('catcorner');return true}
  if(cmd==='vpqYardShop'){shop('yardview');return true}
  if(cmd==='vpqCatView'){api.showModal('🐈 Quiet Cat Corner','<p>Explore vertical space, resting shelves, hiding spots and enrichment. Use the Cat Enrichment station to place or store purchased decorations.</p>');return true}
