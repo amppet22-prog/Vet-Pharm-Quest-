@@ -67,3 +67,13 @@ Source code includes a reception isometric drawing and hallway, separate cosmeti
 | Surgery Suite | Procedure workflow and anesthesia/sterile practice | Surgery cases and learning checkpoints | Do not imply unsupported full surgical simulation |
 | Necropsy | Gross lesion and tissue interpretation | Necropsy / path correlation | Placeholder activities remain labeled until complete |
 | Reception Cat Corner + Dog Yard | Species-specific FAS and optional habitat upgrades | FAS scoring and enrichment choices | No extra duplicate clinic shops or patient exam flows |
+
+## Exam Room patient library — 2026-11-10
+- New source module: `exam-case-library.js`. Exam Room patient hotspot, reception queue and return-to-all-patients action now open **one case library** instead of the Pharmacology-only list.
+- Cases are read from the established `dataCases()` registry. IDs are deduplicated; only genuine staged case records with decisions are shown. A case remains owned by its original course/module, preserves the original question flow, answers, completion tracking and reward behavior.
+- Filters: clinical specialty (parasitology; infectious disease and isolation; endocrine; GI; oncology; toxicology; cardiology; orthopedics; clinical pathology; surgery/anesthesia; pharmacology), source course, species, progress, advanced referral, and keyword search. Cases may appear in more than one clinical specialty because the tags derive from case text; tags should receive editorial review.
+- Selected Pharmacology lectures remain active by default, with an explicit all-lectures override. This does **not** change the established lecture-selection state.
+- Surprise Patient draws only from the currently filtered set; paginated cards provide access to the full matched list without truncation.
+- No fabricated patients have been added to fill specialties that may currently be sparse. Empty topics visibly say no matching patient records are currently available.
+- Next phase: source-reviewed, explicit clinical specialty tags per patient; specialty-targeted new cases (oncology, orthopedics, toxicology, GI) only where existing source or reviewed original educational writing supports them; one active patient context that can follow between imaging, clinical pathology, pharmacology, isolation, skills and treatment departments. The library alone does not yet transfer patient state between rooms.
+- Check completed: JS syntax and simulated browserless smoke test using four dummy cases verified index, specialty tags, duplicate/invalid filtering, one-time completion display, lecture filtering, and pagination control. Real browser interactions and actual production case counts still need validation.
