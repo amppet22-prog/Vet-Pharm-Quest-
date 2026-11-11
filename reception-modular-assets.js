@@ -63,7 +63,7 @@ function render(state,mode,part='all'){
  if(!Array.isArray(placed))return '';
  const items=Object.keys(manifest).filter(id=>placed.includes(id)&&
   (part==='all'||(part==='rug'?manifest[id].kind==='rug':manifest[id].kind!=='rug')));
- return items.map(id=>{
+ return items.sort((a,b)=>(manifest[a].kind==='tableTop'?1:0)-(manifest[b].kind==='tableTop'?1:0)).map(id=>{
   const item=manifest[id],p=item[mode]||item.classic;
   return '<image href="'+item.src+'" x="'+p[0]+'" y="'+p[1]+'" width="'+p[2]+'" height="'+p[3]+'" preserveAspectRatio="xMidYMid meet" pointer-events="none" aria-hidden="true"/>';
  }).join('');
