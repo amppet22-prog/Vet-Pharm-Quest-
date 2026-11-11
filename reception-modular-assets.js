@@ -18,6 +18,17 @@ for(const theme of ['halloween','winter','pride','spring']){
  }
 }
 Object.assign(manifest,{
+ 'decor-carrier':{src:'assets/reception/decor-carrier.svg',kind:'decor',classic:[680,350,136,116],isometric:[659,390,122,102]},
+ 'decor-cat-blanket':{src:'assets/reception/decor-cat-blanket.svg',kind:'decor',classic:[784,359,115,96],isometric:[778,394,108,90]},
+ 'decor-cat-carrier-cozy':{src:'assets/reception/decor-cat-carrier-cozy.svg',kind:'decor',classic:[680,350,136,116],isometric:[659,390,122,102]},
+ 'decor-armchair':{src:'assets/reception/decor-armchair.svg',kind:'decor',classic:[617,333,121,132],isometric:[599,355,112,122]},
+ 'decor-side-table':{src:'assets/reception/decor-side-table.svg',kind:'decor',classic:[558,404,90,75],isometric:[544,421,88,72]},
+ 'decor-bookcase':{src:'assets/reception/decor-bookcase.svg',kind:'decor',classic:[81,185,123,204],isometric:[87,173,109,193]},
+ 'decor-scifi-testtubes':{src:'assets/reception/decor-scifi-testtubes.svg',kind:'decor',classic:[330,301,114,130],isometric:[360,320,110,122]},
+ 'decor-scifi-alien':{src:'assets/reception/decor-scifi-alien.svg',kind:'decor',classic:[731,308,108,138],isometric:[744,321,103,128]},
+ 'decor-scifi-ufo':{src:'assets/reception/decor-scifi-ufo.svg',kind:'decor',classic:[420,64,126,110],isometric:[440,82,123,108]},
+ 'decor-scifi-planter':{src:'assets/reception/decor-scifi-planter.svg',kind:'decor',classic:[899,281,94,140],isometric:[902,284,89,136]},
+ 'decor-scifi-console':{src:'assets/reception/decor-scifi-console.svg',kind:'decor',classic:[276,293,137,148],isometric:[286,315,130,137]},
  'decor-planter':{src:'assets/reception/decor-planter.svg',kind:'decor',classic:[900,280,91,145],isometric:[919,263,80,145]},
  'decor-pumpkin':{src:'assets/reception/decor-pumpkin.svg',kind:'decor',classic:[373,355,92,89],isometric:[798,369,81,80]},
  'decor-cat-tree':{src:'assets/reception/decor-cat-tree.svg',kind:'decor',classic:[800,216,145,171],isometric:[852,211,128,166]},
