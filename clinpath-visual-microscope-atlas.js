@@ -140,5 +140,5 @@ function init(context){
  if(d.cpvPair!==undefined)return pair(Number(d.cpvPair));
  });
 }
-return Object.freeze({init,menu,entries});
+return Object.freeze({init,menu,open:show,entries});
 })();
