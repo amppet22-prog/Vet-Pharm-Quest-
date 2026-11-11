@@ -27,7 +27,17 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  function drawing(){
   const bag=state.receptionCollection||{},c=palette[bag.equippedWall]||palette['paint-peach'];
-  const wallpaper=wallpaperArt[bag.equippedWall]?'<image href="'+wallpaperArt[bag.equippedWall]+'" x="68" y="52" width="864" height="268" preserveAspectRatio="none"/>':'';
+  // Use the SAME purchased pattern on the back and both perspective side walls.
+  // Each narrow side wall has its own cropped image so the pattern remains visible;
+  // clipping keeps wallpaper out of the floor, ceiling, and navigation hotspots.
+  const artSrc=wallpaperArt[bag.equippedWall];
+  const wallpaper=artSrc?'<image href="'+artSrc+'" x="68" y="52" width="864" height="268" preserveAspectRatio="none"/>':'';
+  const sideWallpaper=artSrc?'<g aria-hidden="true">'+
+    '<image href="'+artSrc+'" x="-37" y="0" width="270" height="400" preserveAspectRatio="none" clip-path="url(#vpqWallLeftClip)"/>'+
+    '<image href="'+artSrc+'" x="782" y="0" width="270" height="400" preserveAspectRatio="none" clip-path="url(#vpqWallRightClip)"/>'+
+    '<path d="M0 0L68 52V320L0 394Z" fill="#604a6a" opacity=".10"/>'+
+    '<path d="M1000 0L932 52V320L1000 394Z" fill="#604a6a" opacity=".10"/>'+
+    '</g>':'';
   const placed=Array.isArray(bag.placed)?bag.placed:[];
   const has=id=>placed.includes(id);
   const flora=has('decor-cat')?'<g transform="translate(24 282)"><rect x="10" y="42" width="98" height="65" rx="13" fill="#e2bfd1" stroke="#947e9e" stroke-width="5"/><text x="59" y="88" font-size="37" text-anchor="middle">🐈</text><path d="M-3 110h127" stroke="#a98ea8" stroke-width="12"/></g>':'<g transform="translate(34 318)"><rect width="96" height="36" rx="16" fill="#d8c8d9"/><text x="48" y="28" font-size="26" text-anchor="middle">🐾</text></g>';
@@ -58,12 +68,13 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
   const pawArt=has('decor-paw-art')?'<g opacity=".62" font-size="29"><text x="636" y="91">🐾</text><text x="615" y="126">🐾</text><text x="645" y="165">🐾</text></g>':'';
 
   return '<svg class="vpqShadowboxArt" viewBox="0 0 1000 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-label="Perspective veterinary reception with front desk and a short hallway to the exam room, pharmacy and study lounge" role="img">'+
-   '<defs><linearGradient id="vpqShadowFloor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="'+c[3]+'"/><stop offset="1" stop-color="#c5b1ad"/></linearGradient><linearGradient id="vpqShadowHall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7e8a9e"/><stop offset="1" stop-color="#d7cbd6"/></linearGradient><filter id="vpqShadowAmbient" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="10"/></filter></defs>'+
+   '<defs><linearGradient id="vpqShadowFloor" x1="0" y1="0" x2="0" y2="1"><stop stop-color="'+c[3]+'"/><stop offset="1" stop-color="#c5b1ad"/></linearGradient><linearGradient id="vpqShadowHall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#7e8a9e"/><stop offset="1" stop-color="#d7cbd6"/></linearGradient><filter id="vpqShadowAmbient" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="10"/></filter><clipPath id="vpqWallLeftClip"><path d="M0 0L68 52V320L0 394Z"/></clipPath><clipPath id="vpqWallRightClip"><path d="M1000 0L932 52V320L1000 394Z"/></clipPath></defs>'+
    // ceiling, thick sidewalls, back wall; shadowbox edges
    '<rect width="1000" height="500" fill="'+c[1]+'"/>'+
    '<polygon points="0,0 1000,0 932,52 68,52" fill="#fffdf7"/>'+
    '<polygon points="0,0 68,52 68,320 0,394" fill="'+c[2]+'"/>'+
    '<polygon points="932,52 1000,0 1000,394 932,320" fill="'+c[2]+'"/>'+
+   sideWallpaper+
    '<rect x="68" y="52" width="864" height="268" fill="'+c[0]+'"/>'+
    wallpaper+
    '<path d="M68 52H932M68 320H932" stroke="'+c[4]+'" stroke-width="10" opacity=".65"/>'+
