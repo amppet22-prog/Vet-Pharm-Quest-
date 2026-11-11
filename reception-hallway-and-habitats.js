@@ -2,6 +2,7 @@
 window.VPQ_RECEPTION_WINGS=function(api){
 'use strict';
 const {state,rooms}=api,stage=document.getElementById('stage'),prior=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
+const catBehavior=window.VPQ_MEET_CATS?.({state,showModal:api.showModal,persist:api.persist,updateHUD:api.updateHUD,modalBody:api.modalBody});
 const destinations={vpqGoHallway:'hallway',vpqGoCat:'catcorner',vpqGoYard:'yardview',vpqWingLobby:'reception',vpqWingExam:'exam',vpqWingTreatment:'treatment',vpqWingSurgery:'surgery',vpqWingIsolation:'isolation',vpqWingClinpath:'clinpath',vpqWingImaging:'imaging'};
 const slots={
 hallway:[['🩺 Exam','vpqWingExam',10],['❤️ Treatment','vpqWingTreatment',27],['🩺 Surgery','vpqWingSurgery',44],['🛡️ Isolation','vpqWingIsolation',61],['🔬 Advanced','vpqWingClinpath',78],['🩻 Imaging','vpqWingImaging',93]],
@@ -137,7 +138,7 @@ function route(cmd){
  if(cmd==='vpqCatLounge'){api.doAction?.('catLounge');return true}
  if(cmd==='vpqCatShop'){shop('catcorner');return true}
  if(cmd==='vpqYardShop'){shop('yardview');return true}
- if(cmd==='vpqCatView'){api.showModal('🐈 Quiet Cat Corner','<p>Explore vertical space, resting shelves, hiding spots and enrichment. Use the Cat Enrichment station to place or store purchased decorations.</p>');return true}
+ if(cmd==='vpqCatView'){if(catBehavior)return catBehavior.menu();return true}
  if(cmd==='vpqYardView'){api.showModal('🐕 Dog Play Yard','<p>See the play yard from the reception window. Dogs shown are part of the scenery, not unassigned patients. Safe play requires supervision, secure fencing and compatible groups.</p>');return true}
  return false;
 }
