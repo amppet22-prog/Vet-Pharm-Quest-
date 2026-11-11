@@ -3,6 +3,20 @@ window.VPQReceptionCreate=function(api){
 'use strict';
 const {state,persist,updateHUD,renderRoom,showModal,escapeHtml,ROOMS}=api;
 const catalog=[
+{id:"rug-celestial",name:"Celestial midnight rug",type:'rug',price:55,icon:"🌙",detail:"Moon and stars rug for the reception waiting area"},
+{id:"rug-paws",name:"Blush paw-print rug",type:'rug',price:40,icon:"🐾",detail:"Pastel paw-print rug for the reception waiting area"},
+{id:"rug-forest",name:"Boho forest rug",type:'rug',price:48,icon:"🌿",detail:"Soft green botanical waiting-room rug"},
+{id:"rug-coffee",name:"Cozy café rug",type:'rug',price:42,icon:"☕",detail:"Warm neutral coffeehouse waiting-room rug"},
+{id:"seat-sofa-rose",name:"Rose petal couch",type:'furniture',price:80,icon:"🛋️",detail:"Blush velvet couch with coordinating pillows"},
+{id:"seat-sofa-midnight",name:"Midnight starlight couch",type:'furniture',price:95,icon:"🌙",detail:"Deep blue moonlit couch with contrasting cushions"},
+{id:"seat-sofa-linen",name:"Boho linen couch",type:'furniture',price:75,icon:"🛋️",detail:"Cream and sage cozy sofa"},
+{id:"cat-companion-tabby",name:"Sunny tabby companion",type:'catCompanion',price:40,icon:"🐈",detail:"Friendly orange tabby companion for the cat lounge"},
+{id:"cat-companion-tuxedo",name:"Tuxedo companion",type:'catCompanion',price:45,icon:"🐈‍⬛",detail:"Black-and-white lounge companion"},
+{id:"cat-companion-calico",name:"Calico companion",type:'catCompanion',price:45,icon:"🐈",detail:"Calico cat for the lounge"},
+{id:"cat-companion-gray",name:"Silver gray companion",type:'catCompanion',price:45,icon:"🐈",detail:"Soft gray kitty for the lounge"},
+{id:"cat-room-scratcher",name:"Cat lounge scratching tower",type:'catRoomToy',price:35,icon:"🐾",detail:"Dedicated scratcher and dangling toy in the cat lounge"},
+{id:"cat-room-window",name:"Cat lounge sunshine window",type:'catRoomWindow',price:45,icon:"☀️",detail:"Calming window with trees and a low perch"},
+{id:"cat-room-toy",name:"Cat lounge enrichment basket",type:'catRoomBasket',price:30,icon:"🧶",detail:"Small basket of feline enrichment toys"},
 {id:'decor-paw-floor-lamp',name:'Pastel paw-print floor lamp',type:'floorLamp',price:38,icon:'💡',detail:'Tall lavender lamp with a warm paw-print shade beside the couch.'},
 {id:'decor-pet-table-lamp',name:'Pet-heart tabletop lamp',type:'tableLamp',price:28,icon:'💡',detail:'Small pink and lavender accent lamp with pet silhouettes.'},
 {id:'decor-paw-ottoman',name:'Quilted paw-print ottoman',type:'ottoman',price:40,icon:'🪑',detail:'Soft lilac footrest with blush paw-print cushion.'},
@@ -118,7 +132,7 @@ const modularArt=window.VPQ_RECEPTION_MODULAR_ASSETS;
 const itemArt={...modularArt.manifest};
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
-const singleSlotTypes=new Set(['floorLamp','tableLamp','ottoman','dogBed','catBed','tableTop','coffeeTable','furniture','rug','deskAccent','hanging','catAccent','themeDisplay','plantFloor']);
+const singleSlotTypes=new Set(['catCompanion','catRoomToy','catRoomWindow','catRoomBasket','floorLamp','tableLamp','ottoman','dogBed','catBed','tableTop','coffeeTable','furniture','rug','deskAccent','hanging','catAccent','themeDisplay','plantFloor']);
 const catCarrierIds=['decor-carrier','decor-cat-carrier-cozy'];
 const catTreeIds=['decor-cat-tree','decor-cat-tree-cloud','decor-cat-tree-castle','decor-cat-tree-forest','decor-cat-tree-moon'];
 const floorPlantIds=['decor-planter',...catalog.filter(x=>x.type==='plantFloor').map(x=>x.id)];
@@ -167,12 +181,21 @@ function claimTestCoins(){
 function wallet(){showModal('🪙 Clinic Coin Bank','<div class="infobox"><h2>'+state.coins+' 🪙 available</h2><p>Coins earned in the existing game remain your balance. Purchases here use the same wallet; no premium currency.</p></div>'+
 '<p><b>🧪 Testing bonus:</b> '+(state.receptionTestCoins500Claimed?'✓ Your one-time 500-coin bonus was claimed':'You can add 500 coins once to test decorations')+'</p>'+(state.receptionTestCoins500Claimed?'':'<button data-vpqr-testcoins="1">🪙 Claim 500 Test Coins</button>')+'<h3>Recent purchases / testing bonuses</h3>'+(bag.transactions.length?bag.transactions.slice(0,15).map(x=>'<p>'+(x.kind==='test-grant'?'+500 coins · 🧪 Test bonus':'−'+x.price+' coins · '+first(find(x.id)?.name||x.id))+' <small>'+first(x.date.slice(0,10))+'</small></p>').join(''):'<p>No reception purchases yet. Historical coin earnings before this feature were not tracked separately.</p>')+
 '<div class="buttonrow"><button data-vpqr-menu="1">🎨 Shop and collection</button><button data-vpqr-yard="1">🐕 Kennel & play yard preview</button></div>')}
-function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='scifi'&&(x.id.includes('scifi')||x.id==='wall-scifi')||filter==='cats'&&(x.id.includes('cat')||x.id==='decor-carrier')||filter==='furniture'&&['furniture','coffeeTable','floorLamp','tableLamp','ottoman'].includes(x.type)||filter==='pets'&&['dogBed','catBed'].includes(x.type)||filter==='accessories'&&['tableTop','tableLamp'].includes(x.type)||filter==='rugs'&&x.type==='rug'||filter==='seasonal'&&['deskAccent','hanging','catAccent','themeDisplay'].includes(x.type)||filter==='trees'&&catTreeIds.includes(x.id)||filter==='plants'&&x.type==='plantFloor');
+function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filter==='owned'&&bag.owned.includes(x.id)||filter==='wall'&&x.type==='wall'||filter==='decor'&&x.type==='decor'||filter==='scifi'&&(x.id.includes('scifi')||x.id==='wall-scifi')||filter==='cats'&&(x.id.includes('cat')||x.id==='decor-carrier')||filter==='catlounge'&&(['catCompanion','catRoomToy','catRoomWindow','catRoomBasket','catAccent','catBed'].includes(x.type)||catTreeIds.includes(x.id))||filter==='furniture'&&['furniture','coffeeTable','floorLamp','tableLamp','ottoman'].includes(x.type)||filter==='pets'&&['dogBed','catBed'].includes(x.type)||filter==='accessories'&&['tableTop','tableLamp'].includes(x.type)||filter==='rugs'&&x.type==='rug'||filter==='seasonal'&&['deskAccent','hanging','catAccent','themeDisplay'].includes(x.type)||filter==='trees'&&catTreeIds.includes(x.id)||filter==='plants'&&x.type==='plantFloor');
 showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned <button data-vpqr-wallet="1">Open coin bank</button></div>'+
 '<p>Choose Seating & Tables, Decor, Rugs, Science Fiction, Seasonal Accessories or Wallpapers. Purchased sofas and decorations are placed in the waiting room automatically; wallpapers are applied after purchase. Open My collection to remove decorations or change owned sofa styles at no extra cost. All choices are saved in this browser.</p>'+
-'<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Furniture & Lights</button><button data-vpqr-filter="pets">Pet beds</button><button data-vpqr-filter="accessories">Table decor</button><button data-vpqr-filter="cats">Cats & carriers</button><button data-vpqr-filter="scifi">Sci-fi lab</button><button data-vpqr-filter="rugs">Rugs</button><button data-vpqr-filter="seasonal">Seasonal extras</button><button data-vpqr-filter="trees">Cat trees</button><button data-vpqr-filter="plants">Plants</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
+'<p><button data-vpqr-catlounge="1">🐈 Open Cat Lounge Studio</button></p><div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Furniture & Lights</button><button data-vpqr-filter="pets">Pet beds</button><button data-vpqr-filter="accessories">Table decor</button><button data-vpqr-filter="cats">Cats & carriers</button><button data-vpqr-filter="catlounge">Cat Lounge</button><button data-vpqr-filter="scifi">Sci-fi lab</button><button data-vpqr-filter="rugs">Rugs</button><button data-vpqr-filter="seasonal">Seasonal extras</button><button data-vpqr-filter="trees">Cat trees</button><button data-vpqr-filter="plants">Plants</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
 '<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'">'+(itemArt[x.id]?.src?'<img src="'+itemArt[x.id].src+'" alt="" style="height:85px;width:100%;object-fit:contain;border-radius:8px;margin-bottom:6px">':wallpaperArt[x.id]?'<img src="'+wallpaperArt[x.id]+'" alt="" style="height:78px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px">':'<span class="vpqRIcon">'+first(x.icon)+'</span>')+'<span class="vpqPricePill">'+(bag.owned.includes(x.id)?'✓ Owned':x.price===0?'Free':'🪙 '+x.price+' coins')+'</span><b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
 '<div class="vpqRPend"><b>🐕 Kennel & 3D-style play yard — Coming Soon</b><p>Future fenced yard, dog behavior cases, enrichment, intake and safe isolation workflows. This is a preview only; no kennel has been purchased or built.</p><button data-vpqr-yard="1">See planned expansion</button></div>');
+}
+function catLounge(){
+ const ids=bag.placed.filter(id=>['catCompanion','catRoomToy','catRoomWindow','catRoomBasket','catAccent','catBed'].includes(find(id)?.type)||catTreeIds.includes(id));
+ const selected=ids.map(id=>itemArt[id]?.src).filter(Boolean);
+ const gallery=ids.map(id=>'<div style="display:flex;align-items:center;gap:8px;border:1px solid #e8d7ee;border-radius:12px;padding:5px;background:white"><img src="'+itemArt[id]?.src+'" alt="" style="height:65px;width:65px;object-fit:contain"><span><b>'+first(find(id)?.name||id)+'</b></span></div>').join('');
+ showModal('🐈 Cat Lounge Studio','<p>Build a calm, independently decorated feline retreat. Switch one companion, scratching tower, toy basket, sunshine window and bed using your existing clinic coins. Owned items remain reusable. The lounge has its own preview; the full walkable cat room is a later expansion.</p>'+
+ '<div style="position:relative;border-radius:18px;background:linear-gradient(160deg,#f4e7ff 0%,#fff3e9 60%,#e7f3e8 100%);padding:16px;border:4px solid #d2b3db;min-height:250px"><b style="color:#765b90">♡ THE COZY CAT LOUNGE ♡</b><div style="display:flex;flex-wrap:wrap;gap:12px;align-items:end;justify-content:center;min-height:165px">'+(selected.length?selected.map(src=>'<img src="'+src+'" alt="Equipped feline lounge decoration" style="width:115px;max-height:150px;object-fit:contain">').join(''):'<p>Equip a cat companion or lounge decoration to see it here.</p>')+'</div></div>'+
+ '<h3>Your placed cat-lounge items</h3>'+(gallery||'<p>No cat lounge accessories equipped yet.</p>')+
+ '<div class="buttonrow"><button data-vpqr-filter="catlounge">Shop cat lounge items</button><button data-vpqr-menu="1">← Reception shop</button></div>');
 }
 function yard(){showModal('🐕 Kennel & Play Yard · Coming Soon','<h3>Planned veterinary learning expansion</h3><p>A 2.5D dog play yard with fenced areas, individual kennel runs, enrichment upgrades and clinical learning stations for canine behavior, triage, parasite control and infection prevention.</p><p><b>Not yet playable:</b> no kennels, dog housing, purchases or clinical cases are enabled in this preview.</p><button data-vpqr-menu="1">← Reception Studio</button>')}
 function apply(id){const x=find(id);if(!x||!bag.owned.includes(id))return;
@@ -196,7 +219,7 @@ else if(item.type==='decor'&&!bag.placed.includes(id))bag.placed.push(id);
 appendTransaction(item);preview(id);
 }
 const prevAction=api.getAction();
-api.setAction(function(action){if(action==='receptionStudio')return menu();if(action==='receptionYard')return yard();if(action==='receptionBank')return wallet();return prevAction(action)});
+api.setAction(function(action){if(action==='receptionStudio')return menu();if(action==='catLounge')return catLounge();if(action==='receptionYard')return yard();if(action==='receptionBank')return wallet();return prevAction(action)});
 const props=ROOMS.reception.props;
 props[0].x=12;props[1].x=31;props[2].x=51;
 props.push({x:72,emoji:'🎨',label:'Reception Studio',bubble:'Decorate',action:'receptionStudio'});
@@ -217,6 +240,7 @@ art=art.replace('</svg>',modularArt.render(state,'classic','all')+decoration+'</
 };
 document.getElementById('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
 if(d.vpqrMenu!==undefined)return menu();
+if(d.vpqrCatlounge!==undefined)return catLounge();
 if(d.vpqrWallet!==undefined)return wallet();
 if(d.vpqrTestcoins!==undefined)return claimTestCoins();
 if(d.vpqrYard!==undefined)return yard();
