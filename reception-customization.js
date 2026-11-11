@@ -101,6 +101,7 @@ const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
 const singleSlotTypes=new Set(['furniture','rug','deskAccent','hanging','catAccent','themeDisplay','plantFloor']);
 const catTreeIds=['decor-cat-tree','decor-cat-tree-cloud','decor-cat-tree-castle','decor-cat-tree-forest','decor-cat-tree-moon'];
+const floorPlantIds=['decor-planter',...catalog.filter(x=>x.type==='plantFloor').map(x=>x.id)];
 const exclusiveIds=type=>catalog.filter(x=>x.type===type).map(x=>x.id);
 if(!state.receptionCollection||typeof state.receptionCollection!=='object')state.receptionCollection={owned:[],equippedWall:'paint-peach',placed:[],transactions:[]};
 const bag=state.receptionCollection;
@@ -113,6 +114,7 @@ if(!bag.placed.some(id=>sofaIds.includes(id)))bag.placed.push('seat-sofa-lavende
 if(bag.placed.filter(id=>sofaIds.includes(id)).length>1){const last=bag.placed.filter(id=>sofaIds.includes(id)).slice(-1)[0];bag.placed=bag.placed.filter(id=>!sofaIds.includes(id)||id===last)}
 if(!bag.owned.includes(bag.equippedWall))bag.equippedWall='paint-peach';
 bag.placed=bag.placed.filter(x=>bag.owned.includes(x));
+{const existing=bag.placed.filter(x=>floorPlantIds.includes(x));if(existing.length>1){const last=existing[existing.length-1];bag.placed=bag.placed.filter(x=>!floorPlantIds.includes(x)||x===last)}}
 for(const type of singleSlotTypes){const ids=exclusiveIds(type),chosen=bag.placed.filter(x=>ids.includes(x));if(chosen.length>1){const latest=chosen[chosen.length-1];bag.placed=bag.placed.filter(x=>!ids.includes(x)||x===latest)}}
 {const trees=bag.placed.filter(id=>catTreeIds.includes(id));if(trees.length>1){const latest=trees[trees.length-1];bag.placed=bag.placed.filter(id=>!catTreeIds.includes(id)||id===latest)}}
 const first=s=>escapeHtml(String(s??''));
@@ -154,6 +156,7 @@ function yard(){showModal('🐕 Kennel & Play Yard · Coming Soon','<h3>Planned 
 function apply(id){const x=find(id);if(!x||!bag.owned.includes(id))return;
 if(x.type==='wall')bag.equippedWall=id;
 else if(singleSlotTypes.has(x.type)&&x.type!=='furniture'&&bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);
+else if(floorPlantIds.includes(id))bag.placed=bag.placed.includes(id)?bag.placed.filter(v=>v!==id):[...bag.placed.filter(v=>!floorPlantIds.includes(v)),id];
 else if(singleSlotTypes.has(x.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(x.type).includes(v)),id];
 else if(catTreeIds.includes(id))bag.placed=bag.placed.includes(id)?bag.placed.filter(v=>v!==id):[...bag.placed.filter(v=>!catTreeIds.includes(v)),id];
 else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag.placed.push(id);
@@ -162,6 +165,7 @@ persistLocal();preview(id);
 function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.price<=0||state.coins<item.price)return;
 state.coins-=item.price;bag.owned.push(id);
 if(item.type==='wall')bag.equippedWall=id;
+else if(floorPlantIds.includes(id))bag.placed=[...bag.placed.filter(v=>!floorPlantIds.includes(v)),id];
 else if(singleSlotTypes.has(item.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(item.type).includes(v)),id];
 else if(catTreeIds.includes(id))bag.placed=[...bag.placed.filter(v=>!catTreeIds.includes(v)),id];
 else if(item.type==='decor'&&!bag.placed.includes(id))bag.placed.push(id);
