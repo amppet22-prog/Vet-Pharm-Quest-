@@ -47,12 +47,12 @@ function portrait(cat,pose='relaxed'){
 function pick(catId,qId){const cat=cats.find(x=>x.id===catId)||cats[0];const q=cat.qs.find(x=>x.id===qId)||cat.qs[0];return {cat,q,key:cat.id+':'+q.id}}
 function menu(){
  const r=record();
- api.showModal('🐈 Meet the Cats · Behavior Studio','<p>Meet five illustrated feline personalities. Read their whole body posture, choose a low-stress response, and discover <b>why</b> it helps.</p><p><b>Mastered:</b> '+r.mastered.length+' / 10 scenarios · Correct first-time answers earn 10 EXP and 2 clinic coins; each completed cat has a one-time 30 EXP / 6 coin bonus.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px">'+cats.map(c=>'<button data-cat-open="'+c.id+'" style="border:2px solid #d9bddc;border-radius:18px;background:#fff7fc;padding:12px;color:#6b547e">'+portrait(c)+'<strong style="display:block;font-size:16px">'+escape(c.name)+'</strong><small>'+escape(c.subtitle)+'</small><div style="font-weight:800;margin-top:5px">'+c.qs.filter(q=>r.mastered.includes(c.id+':'+q.id)).length+' / 2 mastered</div></button>').join('')+'</div><p style="font-size:12px">Behavior interpretation relies on context and multiple signals. No one tail or ear position diagnoses a cat\'s mood.</p>');
+ api.showModal('🐈 Meet the Cats · Behavior Studio','<p>Meet five illustrated feline personalities. Read their whole body posture, choose a low-stress response, and discover <b>why</b> it helps.</p><p><b>Mastered:</b> '+r.mastered.length+' / 10 scenarios · First mastery earns 10 EXP and 2 clinic coins; each completed cat has a one-time 30 EXP / 6 coin bonus.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px">'+cats.map(c=>'<button data-cat-open="'+c.id+'" style="border:2px solid #d9bddc;border-radius:18px;background:#fff7fc;padding:12px;color:#6b547e">'+portrait(c)+'<strong style="display:block;font-size:16px">'+escape(c.name)+'</strong><small>'+escape(c.subtitle)+'</small><div style="font-weight:800;margin-top:5px">'+c.qs.filter(q=>r.mastered.includes(c.id+':'+q.id)).length+' / 2 mastered</div></button>').join('')+'</div><p style="font-size:12px">Behavior interpretation relies on context and multiple signals. No one tail or ear position diagnoses a cat\'s mood.</p>');
 }
 function card(catId,qId){
  const {cat,q,key}=pick(catId,qId),r=record();r.current=key;
  const done=r.answered[key];const pose=q.signs.includes('Crouched')||q.signs.includes('flattening')?'fearful':'relaxed';
- api.showModal('🐾 '+cat.name+' · Behavior Challenge','<div style="display:flex;flex-wrap:wrap;gap:15px;align-items:center"><div style="border-radius:18px;background:#f8eafa;border:2px solid #d7b5da">'+portrait(cat,pose)+'</div><div style="flex:1;min-width:200px"><h3>'+escape(q.title)+'</h3><p>'+escape(q.signs)+'</p></div></div><h3>'+escape(q.prompt)+'</h3><div style="display:grid;gap:8px">'+q.options.map((option,i)=>'<button data-cat-answer="'+i+'" style="white-space:normal;text-align:left;padding:12px;border:2px solid #d5bfdc;border-radius:12px;background:#fff9fb">'+String.fromCharCode(65+i)+'. '+escape(option)+'</button>').join('')+'</div><p style="font-size:12px">'+(done?'Previously answered · You may replay for practice without duplicate rewards.':'First-time correct answers award EXP and clinic coins.')+'</p><button data-cat-menu="1">← All cats</button>');
+ api.showModal('🐾 '+cat.name+' · Behavior Challenge','<div style="display:flex;flex-wrap:wrap;gap:15px;align-items:center"><div style="border-radius:18px;background:#f8eafa;border:2px solid #d7b5da">'+portrait(cat,pose)+'</div><div style="flex:1;min-width:200px"><h3>'+escape(q.title)+'</h3><p>'+escape(q.signs)+'</p></div></div><h3>'+escape(q.prompt)+'</h3><div style="display:grid;gap:8px">'+q.options.map((option,i)=>({option,i})).sort((a,b)=>((a.i+q.id.length+cat.id.length)%3)-((b.i+q.id.length+cat.id.length)%3)).map(({option,i})=>'<button data-cat-answer="'+i+'" style="white-space:normal;text-align:left;padding:12px;border:2px solid #d5bfdc;border-radius:12px;background:#fff9fb">'+String.fromCharCode(65+i)+'. '+escape(option)+'</button>').join('')+'</div><p style="font-size:12px">'+(done?'Previously answered · You may replay for practice without duplicate rewards.':'First-time correct answers award EXP and clinic coins.')+'</p><button data-cat-menu="1">← All cats</button>');
 }
 function answer(index){
  const r=record();if(!r.current)return menu();
@@ -61,10 +61,17 @@ function answer(index){
  if(!already){
   r.answered[key]={correct,selected:index};
   api.state.attempts=(Number(api.state.attempts)||0)+1;
-  if(correct){api.state.correct=(Number(api.state.correct)||0)+1;earnedXp=10;earnedCoins=2;r.mastered.push(key)}
-  if(cat.qs.every(x=>r.answered[cat.id+':'+x.id]!==undefined)&&!r.answered[cat.id+':bonus']){
-   r.answered[cat.id+':bonus']=true;earnedXp+=30;earnedCoins+=6;bonus=true;
-  }
+  if(correct)api.state.correct=(Number(api.state.correct)||0)+1;
+ }
+ // First mastery can happen after a learning retry, but every scenario only pays once.
+ const newMastery=correct&&!r.mastered.includes(key);
+ if(newMastery){
+  r.mastered.push(key);earnedXp+=10;earnedCoins+=2;
+ }
+ if(cat.qs.every(x=>r.mastered.includes(cat.id+':'+x.id))&&!r.answered[cat.id+':bonus']){
+  r.answered[cat.id+':bonus']=true;earnedXp+=30;earnedCoins+=6;bonus=true;
+ }
+ if(!already||newMastery||bonus){
   api.state.xp=(Number(api.state.xp)||0)+earnedXp;
   api.state.coins=(Number(api.state.coins)||0)+earnedCoins;
   api.persist();api.updateHUD();
@@ -72,7 +79,7 @@ function answer(index){
  const next=cat.qs.find(x=>x.id!==q.id);
  api.showModal((correct?'🌟 Well done!':'🐾 Learning moment')+' · '+cat.name,
  '<p><b>'+ (correct?'Good clinical reasoning.':'The better choice is: '+escape(q.options[q.answer]))+'</b></p><p>'+escape(q.why)+'</p>'+
- (already?'<p>Replay complete — no additional coins or EXP.</p>':'<p><b>Earned:</b> +'+earnedXp+' EXP · +'+earnedCoins+' clinic coins'+(bonus?' · Completed '+escape(cat.name)+'\'s two scenarios!':'')+'</p>')+
+ (earnedXp||earnedCoins?'<p><b>Earned:</b> +'+earnedXp+' EXP · +'+earnedCoins+' clinic coins'+(bonus?' · Mastered both of '+escape(cat.name)+'\'s scenarios!':'')+'</p>':'<p>Practice completed; no extra reward this attempt.</p>')+
  '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cat-next="'+cat.id+':'+(next?next.id:q.id)+'">'+(next?'Try the other '+escape(cat.name)+' case':'Replay this case')+'</button><button data-cat-menu="1">🐈 All cats</button></div>');
 }
 api.modalBody.addEventListener('click',e=>{
