@@ -402,7 +402,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="mechanism-lab-phase-a4.js?v=20261108-whycompare2"></script>
 <script src="exam-room-traditional.js?v=20261110-skillsEntrance2"></script>
 <script src="exam-case-library.js?v=20261110-livecase1"></script>
-<script src="pharmacy-nutrition-room.js?v=20261108-pharm-nutrition1"></script>
+<script src="pharmacology-visual-rounds.js?v=20261111-visual-rounds1"></script>
+<script src="pharmacy-nutrition-room.js?v=20261111-visual-rounds1"></script>
 <script src="walkable-clinic-rooms-25d.js?v=20261110-skillsdoor2"></script>
 <script src="clinic-approach-interactions.js?v=20261110-hallentry2"></script>
 <script src="specialist-clinic-wings.js?v=20261110-skills1"></script>
@@ -2571,11 +2572,13 @@ const vpqPhaseAStudyLounge=window.VPQ_STUDY_LOUNGE_A3({rooms:ROOMS,doAction:a=>d
 const vpqPhaseAMechanism=window.VPQ_MECHANISM_LAB_A4({rooms:ROOMS,showModal,changeRoom,doAction:a=>doAction(a)});
 // Traditional exam-room scenery retains the existing patient charts, cases, and protocol actions.
 const vpqTraditionalExam=window.VPQ_EXAM_ROOM_A5({rooms:ROOMS,doAction:a=>doAction(a),changeRoom});
+const vpqPharmVisualRounds=window.VPQ_PHARM_VISUAL_ROUNDS({state,showModal,persist,updateHUD,modalBody:$('modalBody')});
 const vpqPharmacyNutritionRoom=window.VPQ_PHARMACY_NUTRITION_ROOM({
  rooms:ROOMS,showModal,doAction:a=>doAction(a),changeRoom
 });
 const vpqPharmacyNutritionPriorAction=doAction;
 doAction=function(a){
+ if(a==='vpqPharmVisualRounds')return vpqPharmVisualRounds.menu();
  if(a==='vpqNutritionGuide')return vpqPharmacyNutritionRoom.nutritionMenu();
  return vpqPharmacyNutritionPriorAction(a);
 };
