@@ -27,6 +27,12 @@ const catalog=[
 {id:'decor-pet-art',name:'Framed pet portraits',type:'decor',price:30,icon:'🖼️',detail:'A little gallery of cheerful framed dog and cat art on the clinic walls.'},
 {id:'decor-paw-art',name:'Paw-print mural',type:'decor',price:20,icon:'🐾',detail:'Small painted paw-print wall art, safely above the furniture.'}
 ];
+const wallpaperArt={
+ 'wall-halloween':'assets/reception/theme-wall-halloween.svg',
+ 'wall-winter':'assets/reception/theme-wall-winter.svg',
+ 'wall-pride':'assets/reception/theme-wall-pride.svg',
+ 'wall-floral':'assets/reception/theme-wall-spring.svg'
+};
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
 if(!state.receptionCollection||typeof state.receptionCollection!=='object')state.receptionCollection={owned:[],equippedWall:'paint-peach',placed:[],transactions:[]};
@@ -47,7 +53,7 @@ function persistLocal(){persist();updateHUD();if(state.room==='reception')render
 function appendTransaction(item){bag.transactions.unshift({id:item.id,price:item.price,kind:'purchase',date:new Date().toISOString()});bag.transactions=bag.transactions.slice(0,100);persistLocal()}
 function preview(id){const item=find(id);if(!item)return;
 const owned=bag.owned.includes(id),active=equipped(id),able=state.coins>=item.price;
-const scene='<div class="vpqRPreview" style="background:'+first(item.color||'#f5e9da')+'"><div class="vpqRPreviewIcons">'+first(item.icon)+' <span>🛎️ 🐕</span> 🪑</div><small>Conceptual room/item preview • game art uses the selected theme</small></div>';
+const scene=wallpaperArt[id]?'<div class="vpqRPreview" style="background:#fff7f5"><img src="'+wallpaperArt[id]+'" alt="'+first(item.name)+' pattern" style="width:100%;max-height:215px;object-fit:cover;border-radius:9px"><small>Actual wallpaper pattern · will appear behind the reception furniture and doors</small></div>':'<div class="vpqRPreview" style="background:'+first(item.color||'#f5e9da')+'"><div class="vpqRPreviewIcons">'+first(item.icon)+' <span>🛎️ 🐕</span> 🪑</div><small>Conceptual room/item preview</small></div>';
 showModal('🎨 Preview · '+first(item.name),'<p>'+first(item.detail||'Choose a color or theme for your waiting room.')+'</p>'+scene+
 '<p><b>'+ (owned?'Already owned':item.price+' 🪙')+'</b> · Current coin balance: '+state.coins+'</p>'+
 '<div class="buttonrow">'+(owned?'<button data-vpqr-equip="'+item.id+'">'+(active?(item.type==='wall'?'Currently equipped':item.type==='furniture'?'Current sofa':'Remove from room'):(item.type==='wall'?'Apply wallpaper':item.type==='furniture'?'Use this sofa':'Place in reception'))+'</button>': '<button data-vpqr-buy="'+item.id+'" '+(!able?'disabled':'')+'>Confirm purchase · '+item.price+' 🪙</button>')+
@@ -71,7 +77,7 @@ function menu(filter='all'){const visible=catalog.filter(x=>filter==='all'||filt
 showModal('🎨 Reception Studio · Shop & Collection','<div class="infobox"><b>🪙 '+state.coins+' clinic coins</b> · '+bag.owned.length+' / '+catalog.length+' items owned <button data-vpqr-wallet="1">Open coin bank</button></div>'+
 '<p>Choose Sofas, Decor or Wallpapers. Purchased sofas and decorations are placed in the waiting room automatically; wallpapers are applied after purchase. Open My collection to remove decorations or change owned sofa styles at no extra cost. All choices are saved in this browser.</p>'+
 '<div class="vpqRFilters"><button data-vpqr-filter="all">All items</button><button data-vpqr-filter="wall">Wallpapers</button><button data-vpqr-filter="furniture">Sofas</button><button data-vpqr-filter="decor">Decor</button><button data-vpqr-filter="owned">My collection</button></div>'+
-'<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'"><span class="vpqRIcon">'+first(x.icon)+'</span><b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
+'<div class="vpqRCatalog">'+visible.map(x=>'<button data-vpqr-preview="'+x.id+'">'+(wallpaperArt[x.id]?'<img src="'+wallpaperArt[x.id]+'" alt="" style="height:78px;width:100%;object-fit:cover;border-radius:8px;margin-bottom:6px">':'<span class="vpqRIcon">'+first(x.icon)+'</span>')+'<b>'+first(x.name)+'</b><small>'+(equipped(x.id)?'✓ In reception':bag.owned.includes(x.id)?'Owned · reusable':x.price+' 🪙')+'</small><em>Preview</em></button>').join('')+'</div>'+
 '<div class="vpqRPend"><b>🐕 Kennel & 3D-style play yard — Coming Soon</b><p>Future fenced yard, dog behavior cases, enrichment, intake and safe isolation workflows. This is a preview only; no kennel has been purchased or built.</p><button data-vpqr-yard="1">See planned expansion</button></div>');
 }
 function yard(){showModal('🐕 Kennel & Play Yard · Coming Soon','<h3>Planned veterinary learning expansion</h3><p>A 2.5D dog play yard with fenced areas, individual kennel runs, enrichment upgrades and clinical learning stations for canine behavior, triage, parasite control and infection prevention.</p><p><b>Not yet playable:</b> no kennels, dog housing, purchases or clinical cases are enabled in this preview.</p><button data-vpqr-menu="1">← Reception Studio</button>')}
@@ -83,7 +89,8 @@ persistLocal();preview(id);
 }
 function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.price<=0||state.coins<item.price)return;
 state.coins-=item.price;bag.owned.push(id);
-if(item.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
+if(item.type==='wall')bag.equippedWall=id;
+else if(item.type==='furniture')bag.placed=[...bag.placed.filter(v=>!sofaIds.includes(v)),id];
 else if(item.type==='decor'&&!bag.placed.includes(id))bag.placed.push(id);
 appendTransaction(item);preview(id);
 }
@@ -101,7 +108,8 @@ const wall=find(bag.equippedWall)||catalog[0];
 const motifs={solid:'',floral:'🌸',halloween:'🎃',pride:'🌈',winter:'❄️'};
 const m=motifs[wall.pattern];
 const pattern=m?'<g opacity=".2" font-size="45" aria-hidden="true"><text x="100" y="120">'+m+'</text><text x="360" y="225">'+m+'</text><text x="690" y="115">'+m+'</text><text x="890" y="245">'+m+'</text></g>':'';
-art=art.replace(/<rect width="1000" height="385" fill="[^"]+"\/>/,'<rect width="1000" height="385" fill="'+wall.color+'"/>'+pattern);
+const actualWallpaper=wallpaperArt[wall.id]?'<image href="'+wallpaperArt[wall.id]+'" x="0" y="0" width="1000" height="385" preserveAspectRatio="none"/>':pattern;
+art=art.replace(/<rect width="1000" height="385" fill="[^"]+"\/>/,'<rect width="1000" height="385" fill="'+wall.color+'"/>'+actualWallpaper);
 const coords=[[8,35],[25,35],[43,35],[62,35],[78,35]];
 const decoration=bag.placed.filter(id=>find(id)?.type==='decor').slice(0,5).map((id,i)=>{const item=find(id),point=coords[i];return item?'<text x="'+(point[0]*10)+'" y="'+(point[1]*10)+'" font-size="52">'+item.icon+'</text>':''}).join('');
 art=art.replace('</svg>',decoration+'</svg>');return art;
