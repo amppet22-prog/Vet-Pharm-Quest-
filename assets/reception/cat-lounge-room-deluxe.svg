@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-label="Cozy illustrated cat lounge with hiding nooks, climbing towers, sun window and toys">
+<defs>
+<linearGradient id="wall" x2="0" y2="1"><stop stop-color="#fff5fa"/><stop offset="1" stop-color="#f1ddec"/></linearGradient>
+<linearGradient id="floor" x2="0" y2="1"><stop stop-color="#ead8e7"/><stop offset="1" stop-color="#cbb2d6"/></linearGradient>
+<linearGradient id="glass" x2="0" y2="1"><stop stop-color="#c0ecfa"/><stop offset="1" stop-color="#f2fce9"/></linearGradient>
+</defs>
+<rect width="1000" height="500" fill="#f3e3f2"/>
+<polygon points="0,0 1000,0 935,67 65,67" fill="#fffaf8"/>
+<polygon points="0,0 65,67 65,344 0,410" fill="#d6bfdf"/>
+<polygon points="1000,0 935,67 935,344 1000,410" fill="#d6bfdf"/>
+<rect x="65" y="67" width="870" height="282" fill="url(#wall)"/>
+<path d="M65 349H935L1000 500H0Z" fill="url(#floor)"/>
+<path d="M65 349L0 500M935 349L1000 500M280 349L235 500M500 349V500M720 349L765 500M35 425H965M49 388H951" stroke="#fff9fc" stroke-width="3" fill="none" opacity=".8"/>
+<path d="M65 349H935" stroke="#bd9fca" stroke-width="12"/>
+<path d="M103 90Q499 148 899 90" stroke="#c595be" stroke-width="5" fill="none"/>
+<g fill="#f3bbd3"><circle cx="147" cy="102" r="9"/><circle cx="246" cy="117" r="9"/><circle cx="341" cy="123" r="9"/><circle cx="664" cy="123" r="9"/><circle cx="762" cy="117" r="9"/><circle cx="861" cy="101" r="9"/></g>
+<g fill="#fff2bb"><circle cx="194" cy="112" r="6"/><circle cx="286" cy="122" r="6"/><circle cx="715" cy="121" r="6"/><circle cx="807" cy="111" r="6"/></g>
+<rect x="358" y="75" width="285" height="65" rx="22" fill="#fffdf8" stroke="#ae91c4" stroke-width="6"/>
+<text x="501" y="103" text-anchor="middle" font-size="23" font-family="Arial,sans-serif" font-weight="900" fill="#806198">THE COZY CAT</text>
+<text x="501" y="126" text-anchor="middle" font-size="19" font-family="Arial,sans-serif" font-weight="900" fill="#ad7fa7">LOUNGE ♡</text>
+<!-- Rest area: alcove with soft cushion, no giant sofa -->
+<path d="M104 269Q104 206 170 205H262Q320 205 320 267V345H104Z" fill="#e1bfd6" stroke="#b38dad" stroke-width="7"/>
+<path d="M120 267Q120 220 180 220H246Q305 220 305 267V331H120Z" fill="#fff4ec"/>
+<path d="M137 291Q137 258 171 258H245Q284 258 284 291V334H137Z" fill="#bfa6d6" stroke="#9074b0" stroke-width="6"/>
+<ellipse cx="209" cy="319" rx="56" ry="17" fill="#f8cbde"/>
+<path d="M114 214Q106 193 129 182L153 203M306 214Q321 193 298 182L276 203" fill="#fce8f0" stroke="#ae8cbd" stroke-width="5"/>
+<path d="M108 345h205" stroke="#b78db4" stroke-width="13" stroke-linecap="round"/>
+<!-- center vertical playground -->
+<ellipse cx="500" cy="365" rx="115" ry="19" fill="#9c81b0" opacity=".18"/>
+<path d="M422 334H567L556 375H434Z" fill="#c5a7d8" stroke="#9279ad" stroke-width="6"/>
+<rect x="476" y="190" width="42" height="155" rx="12" fill="#d8bb92" stroke="#a68a75" stroke-width="5"/>
+<path d="M484 209v117M497 208v118M510 209v117" stroke="#f3e2bc" stroke-width="3" stroke-dasharray="7 6"/>
+<path d="M408 251H542" stroke="#c29bc9" stroke-width="17" stroke-linecap="round"/>
+<path d="M463 196H604" stroke="#c0a6e0" stroke-width="17" stroke-linecap="round"/>
+<path d="M436 158H557" stroke="#e2b4cf" stroke-width="20" stroke-linecap="round"/>
+<path d="M531 263v34" stroke="#9e85ae" stroke-width="3"/><circle cx="531" cy="309" r="13" fill="#f7c9da"/>
+<!-- right sunshine window -->
+<rect x="741" y="145" width="174" height="126" rx="20" fill="#effbfc" stroke="#a9c7cf" stroke-width="8"/>
+<rect x="756" y="159" width="143" height="95" rx="10" fill="url(#glass)"/>
+<circle cx="865" cy="184" r="15" fill="#ffeb9e"/>
+<path d="M756 225Q822 176 899 224V254H756Z" fill="#a5d6b0"/>
+<path d="M828 159v96M756 207h143" stroke="#fffdf7" stroke-width="5"/>
+<path d="M733 269H924" stroke="#c998c6" stroke-width="18" stroke-linecap="round"/>
+<rect x="760" y="270" width="143" height="16" rx="8" fill="#f7c6dd"/>
+<!-- tucked right play corner -->
+<path d="M711 317Q737 288 765 311Q791 288 812 312Q838 294 863 313Q895 294 916 325V360H711Z" fill="#e9d1e6" stroke="#b99ac6" stroke-width="6"/>
+<ellipse cx="811" cy="352" rx="80" ry="17" fill="#fbecf6"/>
+<circle cx="769" cy="345" r="17" fill="#8ec3de"/><path d="M760 338l17 14M777 338l-16 14" stroke="#fff4ed" stroke-width="3"/>
+<circle cx="855" cy="340" r="13" fill="#e8abc9"/><path d="M849 334l13 12" stroke="#fff4e8" stroke-width="3"/>
+<!-- small side plant, safely out of the route -->
+<path d="M646 279h66" stroke="#ba9bc7" stroke-width="13" stroke-linecap="round"/>
+<path d="M666 272h32l-6 29h-20Z" fill="#e6c3a5"/>
+<path d="M681 270v-43M681 246q-22-21-28-27M683 246q17-24 29-24" stroke="#83af92" stroke-width="6" fill="none"/>
+<ellipse cx="652" cy="220" rx="14" ry="8" fill="#99cba4"/><ellipse cx="714" cy="222" rx="15" ry="8" fill="#9acaa3"/>
+<!-- central walk zone -->
+<ellipse cx="504" cy="444" rx="206" ry="39" fill="#aa91c1" opacity=".19"/>
+<ellipse cx="504" cy="444" rx="187" ry="34" fill="#f1d9ec" stroke="#b890c5" stroke-width="6"/>
+<ellipse cx="504" cy="444" rx="161" ry="22" fill="none" stroke="#fff9f1" stroke-width="5" stroke-dasharray="12 7"/>
+<g fill="#b492c9" opacity=".78"><ellipse cx="502" cy="447" rx="18" ry="11"/><circle cx="479" cy="436" r="7"/><circle cx="494" cy="432" r="7"/><circle cx="510" cy="432" r="7"/><circle cx="526" cy="436" r="7"/></g>
+<g font-family="Arial,sans-serif" font-size="15" font-weight="900" fill="#86638d" text-anchor="middle"><text x="207" y="389">HIDE + REST</text><text x="495" y="393">CLIMB + PERCH</text><text x="812" y="392">WINDOW + PLAY</text></g>
+</svg>
