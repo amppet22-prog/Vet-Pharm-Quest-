@@ -26,6 +26,10 @@ const catalog=[
 {id:'decor-dog-carrier',name:'Dog travel crate',type:'decor',price:30,icon:'🐕',detail:'A sturdy travel crate for a waiting-room dog vignette.'},
 {id:'decor-pet-art',name:'Framed pet portraits',type:'decor',price:30,icon:'🖼️',detail:'A little gallery of cheerful framed dog and cat art on the clinic walls.'},
 {id:'decor-paw-art',name:'Paw-print mural',type:'decor',price:20,icon:'🐾',detail:'Small painted paw-print wall art, safely above the furniture.'},
+{id:'decor-toy-bin',name:'Dog toy basket',type:'decor',price:30,icon:'🦴',detail:'Pastel toy basket with balls, tug toys and a happy dog motif.'},
+{id:'decor-magazines',name:'Vet magazine collection',type:'decor',price:18,icon:'📚',detail:'Two illustrated veterinary reading magazines near the check-in desk.'},
+{id:'decor-treat-display',name:'Treat display cabinet',type:'decor',price:45,icon:'🦴',detail:'A glass-front-style display of cute treat jars for reception.'},
+{id:'decor-cat-tree-cloud',name:'Cloud cat climbing tower',type:'decor',price:70,icon:'🐈',detail:'Alternative fluffy cloud-style cat tree, which swaps with the original cat tree.'},
 {id:'rug-halloween',name:'Pumpkin Patch rug',type:'rug',price:35,icon:'🎃',detail:'Replaceable floor rug for the reception waiting area; Pumpkin Patch collection.'},
 {id:'desk-halloween',name:'Pumpkin Patch counter display',type:'deskAccent',price:25,icon:'🎃',detail:'Decorative counter display that sits beside check-in; Pumpkin Patch collection.'},
 {id:'hanging-halloween',name:'Pumpkin Patch hanging greenery',type:'hanging',price:30,icon:'🎃',detail:'Hanging garland and planter in the top corner; Pumpkin Patch collection.'},
@@ -54,6 +58,7 @@ const itemArt={...modularArt.manifest};
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
 const singleSlotTypes=new Set(['furniture','rug','deskAccent','hanging','catAccent']);
+const catTreeIds=['decor-cat-tree','decor-cat-tree-cloud'];
 const exclusiveIds=type=>catalog.filter(x=>x.type===type).map(x=>x.id);
 if(!state.receptionCollection||typeof state.receptionCollection!=='object')state.receptionCollection={owned:[],equippedWall:'paint-peach',placed:[],transactions:[]};
 const bag=state.receptionCollection;
@@ -67,6 +72,7 @@ if(bag.placed.filter(id=>sofaIds.includes(id)).length>1){const last=bag.placed.f
 if(!bag.owned.includes(bag.equippedWall))bag.equippedWall='paint-peach';
 bag.placed=bag.placed.filter(x=>bag.owned.includes(x));
 for(const type of singleSlotTypes){const ids=exclusiveIds(type),chosen=bag.placed.filter(x=>ids.includes(x));if(chosen.length>1){const latest=chosen[chosen.length-1];bag.placed=bag.placed.filter(x=>!ids.includes(x)||x===latest)}}
+{const trees=bag.placed.filter(id=>catTreeIds.includes(id));if(trees.length>1){const latest=trees[trees.length-1];bag.placed=bag.placed.filter(id=>!catTreeIds.includes(id)||id===latest)}}
 const first=s=>escapeHtml(String(s??''));
 const find=id=>catalog.find(x=>x.id===id);
 const equipped=id=>find(id)?.type==='wall'?bag.equippedWall===id:bag.placed.includes(id);
@@ -107,6 +113,7 @@ function apply(id){const x=find(id);if(!x||!bag.owned.includes(id))return;
 if(x.type==='wall')bag.equippedWall=id;
 else if(singleSlotTypes.has(x.type)&&x.type!=='furniture'&&bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);
 else if(singleSlotTypes.has(x.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(x.type).includes(v)),id];
+else if(catTreeIds.includes(id))bag.placed=[...bag.placed.filter(v=>!catTreeIds.includes(v)),id];
 else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag.placed.push(id);
 persistLocal();preview(id);
 }
@@ -114,6 +121,7 @@ function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.pric
 state.coins-=item.price;bag.owned.push(id);
 if(item.type==='wall')bag.equippedWall=id;
 else if(singleSlotTypes.has(item.type))bag.placed=[...bag.placed.filter(v=>!exclusiveIds(item.type).includes(v)),id];
+else if(catTreeIds.includes(id))bag.placed=[...bag.placed.filter(v=>!catTreeIds.includes(v)),id];
 else if(item.type==='decor'&&!bag.placed.includes(id))bag.placed.push(id);
 appendTransaction(item);preview(id);
 }
