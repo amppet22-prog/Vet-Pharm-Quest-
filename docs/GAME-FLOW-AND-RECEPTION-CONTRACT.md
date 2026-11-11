@@ -1,0 +1,44 @@
+# Vet Pharm Quest — coherent game loop and acceptance criteria
+**Status:** Design contract, not a claim of functionality.
+
+## Core principle
+Every station has a distinct job: **teach**, **test**, **apply to a patient**, or **customize the hospital**. A topic should have one canonical activity with linked pathways, not duplicated menus or idle buttons.
+
+## Player progression
+1. **Reception (optional isometric 2.5-D):** see mascot/pets, walk character, check in patients, customize room, access visible hallway door. A simple 2D mode stays available and retains equal functionality.
+2. **Hallway:** actual department navigation and blueprint, not a redundant learning module; back to reception is obvious.
+3. **Study Lounge:** select course/lecture, open games/study desk. Selection filters consistently apply downstream.
+4. **Teaching Lab:** mechanism-first explanations, species comparison, normal-to-abnormal graphics.
+5. **Microscopy and Clinical Pathology:** identify real labeled-source specimens (hide identity until answer) or explicitly labeled teaching schematics. Existing Microscope Detective covers blood smears, UA Visual Bench covers crystals, cells and casts.
+6. **Exam Room/Treatment Ward:** one patient, history → predict → CBC/chem/UA → order test → interpret → reassess. Link back to the education station instead of copying a minigame.
+7. **Pharmacy, One Health, Toxicology, Imaging, OSCE:** connect their learning and test questions to the same patient/course concept and species.
+8. **Cosmetic rewards:** first-time mastery XP/coins unlock art, plant and pet-friendly upgrades. Buy -> owned -> placed -> visible -> persisted -> removable, all verified.
+
+## Reception isometric mode acceptance criteria
+- Preserve original artwork, a clearly selectable **2D / 2.5D view**, and existing save values.
+- The clinical hallway is physically illustrated as a prominent arch/door *inside the reception image*; tapping/walking enters the actual hallway.
+- Character movement works by walking, keyboard and touch; decoration cannot cover a door or interaction.
+- Scene uses perspective ground plane and consistent layering of mascot, cat tree, plant pots, wall art, carriers, seating, kennel window and play-yard view.
+- Each SKU corresponds to an actual renderer slot in each view. Any item without a renderer must be labeled not yet placeable rather than charging coins invisibly.
+- Main Reception Studio, Cat Corner and Yard may use distinct placement inventories, but the Shop/Collection UI must distinguish which room the purchased item belongs to.
+- Purchases show immediate confirmation, new balance and item placement; test after reload and switching views.
+- Do not start a new independent 3D engine until the existing optional 2.5D implementation has passed browser tests.
+
+## Topic graphics
+- Hemostasis (primary and secondary) is a *covered course topic*, not necessarily a new room: vessel response -> platelet adhesion/activation -> aggregation -> coagulation thrombin burst -> fibrin stabilization. Tie these stages to the distinct PT, aPTT, platelet count and vWF laboratory questions.
+- Endocrine: consistent graph axes, correct units and timed curves, clear patient context, assay prerequisites and limitations.
+- Urinalysis: crystal/cell/cast visual identification -> clinical meaning -> sample collection/handling -> urine chemistry/USG and patient context -> imaging when stone confirmation is needed.
+- Blood smear: source-reviewed real images, morphology, CBC pattern, clinical implications.
+- One Health/pharmacology: patient management and lecture-selected study questions, not unrelated duplicative modules.
+
+## Acceptance tests before a claim of completion
+1. In 2.5D Reception, click/walk to hallway and enter Treatment; return and switch to 2D, and repeat.
+2. Earn first-mastered XP/coins, buy a plant, see it in collection and scene, reload, toggle views, store and re-place it without lost ownership.
+3. Open UA identification from the Advanced Lab, answer and reveal real atlas reference, continue and return.
+4. Navigate a connected smear -> CBC -> patient case without duplicate rewards for one answer.
+5. Open hemostasis topic, inspect primary/secondary pathway, interpret test selection, then return to the prior lecture/course choice.
+6. Keyboard, mobile and mouse interactions all work; no invisible hotspot covers unrelated objects.
+7. All image attributions visible at the right time and image failures have usable fallback text.
+
+## Verified code versus open testing
+Source code includes a reception isometric drawing and hallway, separate cosmetic inventories, linked learning activities and the new UA visual module. **Not yet tested in a real browser:** camera switching, depth/occlusion, item rendering for every SKU, mobile navigation, event duplication, rewards, remote photos and saved state across sessions. Cross-device save/account backend is not implemented merely by using localStorage.
