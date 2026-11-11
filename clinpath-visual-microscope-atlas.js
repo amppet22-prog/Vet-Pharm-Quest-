@@ -16,6 +16,16 @@ const links={
 let api=null,group='All',mode='Learn',current=null,quizAnswer=null;
 const safe=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const groups=['All','RBC','WBC','Platelets','Urine cells','Casts','Crystals','Artifacts'];
+const comparisons=[
+ ['acanthocyte','echinocyte','Uneven long spicules vs regularly spaced short projections','An echinocyte can be an artifact from drying or storage; acanthocytes have different irregular projections and can be clinically significant.'],
+ ['rouleaux','agglutination','Stacks of coins vs irregular grapelike clusters','Saline dispersion can help distinguish rouleaux from agglutination; always correlate with patient history.'],
+ ['spherocyte','echinocyte','Dense round cell vs many regular projections','Spherocytes reflect membrane loss, whereas echinocytes often arise from specimen artifact.'],
+ ['urinerbc','urinewbc','Small smooth disc vs larger granular cell','Look for granularity and compare sizes in the same field; dilute urine can lyse both.'],
+ ['transitional','renalcell','Variable urothelial shapes vs suspected uniform tubular cells','Wet preparations may not separate these reliably; cytologic preparation and other renal findings matter.'],
+ ['struvite','oxalatedi','Coffin-lid prism vs envelope square','Crystal shape and urine conditions help; crystalluria is not itself evidence of infection or a urolith.'],
+ ['hyaline','granular','Transparent matrix vs debris-filled tubular cylinder','Increased granular casts may reflect renal tubular injury, while limited hyaline casts may be nonspecific.'],
+ ['bacteria','stain','Tiny potential organisms vs irregular extracellular artifact','Do not identify organisms from debris alone; confirm with appropriate microscopy and culture when indicated.']
+];
 function draw(e){
  const bg='<svg viewBox="0 0 430 245" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Simplified unlabeled teaching diagram of a microscopic finding" style="width:100%;max-height:290px;background:#f5f4ff;border-radius:16px;border:2px solid #cbc4e1"><defs><radialGradient id="field"><stop stop-color="#fffdfa"/><stop offset="1" stop-color="#edf2fc"/></radialGradient></defs><rect width="430" height="245" rx="15" fill="url(#field)"/><circle cx="215" cy="121" r="108" fill="#fffafc" stroke="#d9cfe7" stroke-width="5"/>';
  const red=(x,y,r=22)=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#e7a1a7" stroke="#be778e" stroke-width="3"/><circle cx="'+x+'" cy="'+y+'" r="'+(r*.47)+'" fill="#f9d9d6"/>';
@@ -67,9 +77,20 @@ function menu(){
  if(!api)return;
  api.showModal('🔬 Clinical Pathology · Microscope Atlas',header()+'<p><b>'+entries.length+' structures</b> across RBCs, WBCs, platelets, urine cells, casts, crystals and artifacts. Learn the mechanism, compare lookalikes, then identify without labels.</p>'+
  '<div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0">'+groups.map(x=>'<button data-cpv-group="'+safe(x)+'" style="font-size:12px;padding:7px;background:'+(x===group?'#e4f3fa':'#fff')+'">'+safe(x)+'</button>').join('')+'</div>'+
- '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-mode="Learn">📖 Learn</button><button data-cpv-mode="Quiz">🎯 Quiz</button><button data-cpv-real="1">📸 Real Hematology Photos</button><button data-cpv-urine="1">🧫 Urinalysis Cases</button></div>'+
+ '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-mode="Learn">📖 Learn</button><button data-cpv-mode="Quiz">🎯 Quiz</button><button data-cpv-compare="1">⚖️ Don’t Confuse</button><button data-cpv-real="1">📸 Real Hematology Photos</button><button data-cpv-urine="1">🧫 Urinalysis Cases</button></div>'+
  '<p><b>Selected:</b> '+safe(group)+' · '+list().length+' findings. <b>Mode:</b> '+safe(mode)+'</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px">'+list().map((x,i)=>'<button data-cpv-open="'+x.id+'" style="text-align:left;background:#fcf7ff;border:2px solid #dccbe9;padding:12px;white-space:normal"><b>'+(mode==='Quiz'?'Unlabeled field '+(i+1):safe(x.name))+'</b><small style="display:block">'+safe(x.group)+' · '+safe(x.species)+'</small></button>').join('')+'</div>');
+}
+function compare(){
+ api.showModal('⚖️ Clinical Pathology · Don’t Confuse',
+ '<p>Look at both schematic fields, then compare the physical difference and clinical meaning.</p>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">'+comparisons.map((pair,i)=>'<button data-cpv-pair="'+i+'" style="text-align:left;background:#fcf8ff;padding:11px;border:2px solid #d6c7df;border-radius:12px"><strong>'+safe(entries.find(x=>x.id===pair[0]).name)+' vs '+safe(entries.find(x=>x.id===pair[1]).name)+'</strong><small style="display:block;margin-top:5px">'+safe(pair[2])+'</small></button>').join('')+'</div><button data-cpv-back="1">← Atlas</button>');
+}
+function pair(index){
+ const p=comparisons[index];if(!p)return compare();const a=entries.find(x=>x.id===p[0]),b=entries.find(x=>x.id===p[1]);
+ api.showModal('⚖️ '+a.name+' vs '+b.name,
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px"><div>'+draw(a)+'<b>'+safe(a.name)+'</b><p>'+safe(a.look)+'</p></div><div>'+draw(b)+'<b>'+safe(b.name)+'</b><p>'+safe(b.look)+'</p></div></div>'+
+ '<p><b>Most useful distinction:</b> '+safe(p[2])+'</p><p><b>Why it matters:</b> '+safe(p[3])+'</p><button data-cpv-compare="1">All comparisons</button><button data-cpv-back="1">Atlas</button>');
 }
 function optionsFor(e){
  const pool=entries.filter(x=>x.group===e.group&&x.id!==e.id);
@@ -102,7 +123,7 @@ function answer(id){
 function init(context){
  api=context;
  context.body.addEventListener('click',event=>{
- const b=event.target.closest('[data-cpv-group],[data-cpv-mode],[data-cpv-open],[data-cpv-answer],[data-cpv-back],[data-cpv-switch],[data-cpv-next],[data-cpv-retry],[data-cpv-real],[data-cpv-urine]');
+ const b=event.target.closest('[data-cpv-group],[data-cpv-mode],[data-cpv-open],[data-cpv-answer],[data-cpv-back],[data-cpv-switch],[data-cpv-next],[data-cpv-retry],[data-cpv-real],[data-cpv-urine],[data-cpv-compare],[data-cpv-pair]');
  if(!b)return;
  const d=b.dataset;
  if(d.cpvGroup!==undefined){group=d.cpvGroup;return menu()}
@@ -115,6 +136,8 @@ function init(context){
  if(d.cpvRetry!==undefined)return show(current);
  if(d.cpvReal!==undefined)return window.VPQ_MICROSCOPE_DETECTIVE?.home?.()||window.VPQ_BLOOD_SMEAR_LAB?.menu?.();
  if(d.cpvUrine!==undefined)return window.VPQ_ADVANCED_LAB?.start?.('urine');
+ if(d.cpvCompare!==undefined)return compare();
+ if(d.cpvPair!==undefined)return pair(Number(d.cpvPair));
  });
 }
 return Object.freeze({init,menu,entries});
