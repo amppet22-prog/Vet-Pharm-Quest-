@@ -40,10 +40,12 @@ if(room==='catcorner'){
  s+=choose(['cataccent-halloween','cataccent-winter','cataccent-pride','cataccent-spring'],156,285,132,71);
  s+=choose(['decor-cat-tree','decor-cat-tree-cloud','decor-cat-tree-castle','decor-cat-tree-forest','decor-cat-tree-moon'],426,173,147,192);
  s+=choose(['cat-companion-tabby','cat-companion-tuxedo','cat-companion-calico','cat-companion-gray'],657,287,93,91);
- // The illustrated resting kitty is already part of the room art; do not duplicate it.
- if(old.includes('cat-tree'))s+=cat(466,146,'#d3b1dd');
+ // Cheerful avatar-style residents occupy the furnishings without blocking the walkway.
+ s+='<image href="assets/reception/cat-character-mochi.svg" x="163" y="264" width="105" height="100" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ s+='<image href="assets/reception/cat-character-juniper.svg" x="454" y="155" width="99" height="88" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ if(old.includes('cat-tree'))s+='<image href="assets/reception/cat-character-luna.svg" x="368" y="221" width="92" height="89" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
  if(old.includes('cat-wall'))s+='<path d="M103 194h97M229 174h85" stroke="#bf98c6" stroke-width="13" stroke-linecap="round"/>';
- if(old.includes('cat-extra'))s+=cat(622,273,'#c6b4d9');
+ if(old.includes('cat-extra'))s+='<image href="assets/reception/cat-character-pebble.svg" x="625" y="287" width="94" height="88" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
  if(old.includes('cat-toys'))s+='<text x="725" y="353" font-size="27">🪶</text>';
 }
 if(room==='yardview'){s+='<rect x="92" y="175" width="816" height="188" rx="18" fill="#d6f4f1" stroke="#a4c5c4" stroke-width="7"/><path d="M100 305q250 -67 426 0q211 -66 379 0v55H100Z" fill="#b9dea5"/>'+[130,230,330,430,530,630,730,830].map(x=>'<path d="M'+x+' 180v180" stroke="#fff" stroke-width="5"/>').join('')+'<path d="M100 251h810M100 320h810" stroke="#fff" stroke-width="5"/>'+dog(237,247)+dog(620,244);const placed=state.receptionHabitats?.placed||[];if(placed.includes('yard-toys'))s+='<text x="461" y="343" font-size="43">🎾</text>';if(placed.includes('yard-agility'))s+='<path d="M438 283h131M449 283v58M562 283v58" stroke="#e8b27d" stroke-width="12"/>';}
