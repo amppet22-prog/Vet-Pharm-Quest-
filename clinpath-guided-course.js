@@ -84,7 +84,7 @@ function lectureDetail(number){
  }
  if(selected===2){
   const mod=window.VPQ_CLINPATH_EXAM2_LECTURES,lesson=mod?.data?.[number];
-  if(lesson)return lectureModal(number,'📖 Lecture '+number+' · '+esc(lesson.title),mod.render(number));
+  if(lesson)return lectureModal(number,'📖 Lecture '+number+' · '+esc(lesson.title),mod.render(number)+(window.VPQ_CLINPATH_LEUKOGRAM_DEEP?.render?.(number)||''));
   const cp19=window.VPQ_CLINPATH_CP19;
   if((number===19||number===19.5)&&cp19)return lectureModal(number,'🏥 Exam 2 · Hemostasis Cases',cp19.render());
  }
