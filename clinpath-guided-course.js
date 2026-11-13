@@ -79,7 +79,7 @@ function lectureDetail(number){
  }
  if(selected===1){
   const mod=window.VPQ_CLINPATH_LECTURE_DETAILS,lesson=mod?.lectureData?.[number];
-  if(lesson)return lectureModal(number,'📖 Lecture '+number+' · '+esc(lesson.title),mod.render(number));
+  if(lesson)return lectureModal(number,'📖 Lecture '+number+' · '+esc(lesson.title),mod.render(number)+(window.VPQ_CLINPATH_MARROW_THYROID_DEEP?.render?.(number)||''));
   return lectureModal(number,'📖 Lecture 1 · Course introduction','<p>The source-specific Lecture 1 deck has not yet been verified. Begin with patient history, CBC patterns, smear evaluation, interpretation and species-specific context. Continue to the verified Lectures 2–11.</p>',false);
  }
  if(selected===2){
@@ -96,7 +96,7 @@ function lectureDetail(number){
  if(selected===4){
   const a=window.VPQ_CLINPATH_EXAM4_LECTURES,b=window.VPQ_CLINPATH_EXAM4_EXTENDED;
   const lesson=a?.data?.[number]||b?.data?.[number];
-  if(lesson)return lectureModal(number,'📖 Lecture '+number+' · '+esc(lesson.title),(a?.data?.[number]?a:b).render(number));
+  if(lesson)return lectureModal(number,'📖 Lecture '+number+' · '+esc(lesson.title),(a?.data?.[number]?a:b).render(number)+(window.VPQ_CLINPATH_MARROW_THYROID_DEEP?.render?.(number)||''));
  }
  return lectureModal(number,'🗂️ Lecture '+number+' · Source alignment pending','<p>Its original lecture number or content has not yet been fully verified. Existing exam foundations remain available, but no unverified learning module is marked complete.</p>',false);
 }
