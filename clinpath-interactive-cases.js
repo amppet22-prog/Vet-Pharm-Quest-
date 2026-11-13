@@ -5,6 +5,7 @@ const cases=[{"id":"creamsicle","exam":3,"lecture":24,"title":"Creamsicle · cri
 cases.push(...(window.VPQ_CLINPATH_SIMULATED_FOLLOWUPS||[]));
 cases.push(...(window.VPQ_CLINPATH_RENAL_EXERCISES||[]));
 cases.push(...(window.VPQ_CLINPATH_EXAM_OBJECTIVE_CASES||[]));
+cases.push(...(window.VPQ_CLINPATH_MARROW_THYROID_CASES||[]));
 const photoFields={
 spherocyte:['https://eclinpath.com/wp-content/uploads/spherocyte.jpg','https://eclinpath.com/hematology/morphologic-features/red-blood-cells/quick-guide/','Cornell eClinPath RBC guide'],
 schistocyte:['https://vetclinpathimages.com/wp-content/uploads/2018/02/schizocytes-4-canine-4-microangiopathy-arrows.png','https://vetclinpathimages.com/2018/02/16/schizocytes/','University of Calgary schistocyte'],
