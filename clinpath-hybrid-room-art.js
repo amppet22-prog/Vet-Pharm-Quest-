@@ -6,11 +6,30 @@ const R=(x,y,w,h,fill,stroke='#b1b7d6',rx=10)=>'<rect x="'+x+'" y="'+y+'" width=
 const T=(x,y,t,size=14,color='#594773',anchor='middle')=>'<text x="'+x+'" y="'+y+'" text-anchor="'+anchor+'" font-family="Arial,sans-serif" font-weight="800" font-size="'+size+'" fill="'+color+'">'+t+'</text>';
 const P=(d,stroke='#7087a9',sw=4)=>'<path d="'+d+'" stroke="'+stroke+'" stroke-width="'+sw+'" fill="none" stroke-linecap="round" stroke-linejoin="round"/>';
 function tubes(x,y,n,cap='#6aa4da',scale=1){let s='';for(let i=0;i<n;i++){let xx=x+i*16*scale;s+='<g transform="translate('+xx+' '+y+') scale('+scale+')">'+R(0,0,12,45,'#f4faff','#9daccd',3)+R(0,0,12,8,cap,'#7c99c1',2)+R(2,28,8,13,'#d8a2bd','none',2)+'</g>'}return s+R(x-4,y+36*scale,n*16*scale+1,8,'#b6c4db','#9aabcb',3)}
-function scope(x,y,z=1){return '<g transform="translate('+x+' '+y+') scale('+z+')">'+
- R(4,80,80,12,'#9991b5','#6e729b',7)+P('M22 79Q10 56 32 41','#8b9fbb',9)+
- R(43,12,17,48,'#f8f6ff','#778bac',5)+R(53,3,30,12,'#47557e','#364467',4)+
- P('M59 20L74 36L48 57','#556b98',11)+R(32,57,60,8,'#b9c9dc','#758caa',4)+
- '<circle cx="48" cy="50" r="5" fill="#f1b3c8" stroke="#987ea9" stroke-width="2"/></g>'}
+function scope(x,y,z=1){
+ // Original, distinct compound light-microscope silhouette: inclined ocular,
+ // revolving objectives, broad stage, focus dials, curved arm and weighted base.
+ return '<g transform="translate('+x+' '+y+') scale('+z+')">'+
+ R(3,84,89,12,'#8895b6','#626f94',9)+
+ R(15,78,64,10,'#f0eef9','#8095b2',6)+
+ P('M22 78C3 58 13 31 40 26','#7f91b4',13)+
+ P('M24 73C15 59 24 42 35 38','#dce8f6',5)+
+ // Inclined optical tube and dark eyepiece
+ '<g transform="rotate(-24 60 23)">'+R(51,2,20,46,'#eceef8','#6e81a9',5)+R(48,-7,26,14,'#38476b','#34425e',4)+R(54,34,14,13,'#a9bed6','#738ba9',2)+'</g>'+
+ // revolving nosepiece and objective lenses
+ R(44,43,29,9,'#768db0','#576e9a',4)+
+ P('M53 52L48 66','#405477',6)+P('M65 52L65 64','#405477',5)+
+ R(44,62,10,5,'#e9c1dc','#9b8caf',2)+R(61,61,9,5,'#c1dce6','#789eae',2)+
+ // Clear stage and slide (separate from objective)
+ R(25,67,69,8,'#394d76','#3c4c6c',3)+R(43,65,34,3,'#e9f8fc','#9cbcd0',1)+
+ P('M34 67L34 74M83 67L83 74','#94aace',2)+
+ // Condenser, illumination and visible focus knobs
+ R(52,75,16,7,'#b8c4db','#778db4',3)+
+ '<circle cx="25" cy="48" r="9" fill="#d5deec" stroke="#758cae" stroke-width="3"/>'+
+ '<circle cx="25" cy="48" r="4" fill="#8b9bc0"/>'+
+ '<circle cx="33" cy="60" r="5" fill="#dfe8f5" stroke="#7f96b8" stroke-width="2"/>'+
+ R(33,79,37,5,'#d6e7f1','#839bb4',2)+'</g>';
+}
 function analyzer(x,y,w,h,lines){let s=R(x,y,w,h,'#fffdfd','#98a7c2',12)+R(x+9,y+10,w-18,Math.round(h*.56),'#3e5f83','#90aec6',5);
  lines.forEach((v,i)=>s+=T(x+w/2,y+29+i*16,v,Math.min(13,w/7),'#e4f8fa'));return s+R(x+14,y+h-18,28,7,'#b8dfdb','#9bb8d1',4)+R(x+w-27,y+h-21,11,9,'#e6b5d3','#c79ab9',4)}
 function frame(x,title,sub,fill,stroke){
@@ -33,9 +52,30 @@ function props(){
  // Credible, distinct instrument silhouettes, not branded copies
  s+=analyzer(38,238,89,88,['PT 12.4 s','aPTT 29 s'])+tubes(142,263,3,'#61a8e7',.86)+R(140,316,43,22,'#fffcfa','#c9b6c3',3)+T(161,330,'PT/aPTT',9);
  s+=analyzer(235,237,110,97,['pH 7.32','pCO₂ 52','HCO₃ 26'])+R(356,255,18,60,'#f6f9fd','#92b9d5',5)+P('M346 330L389 330','#8eabd3',7);
- s+=analyzer(431,236,72,96,['UA','SCAN'])+R(513,289,27,43,'#fff3ba','#beab91',7)+R(509,284,35,9,'#f1cb86','#cfb596',4)+
- R(545,258,40,73,'#f3ecfa','#a6a3cb',14)+'<ellipse cx="565" cy="263" rx="19" ry="9" fill="#d5c9df" stroke="#a19abd" stroke-width="2"/>'+
- '<circle cx="565" cy="273" r="11" fill="#8c98be"/>'+P('M510 338L549 350','#7395b3',8)+R(593,275,8,45,'#fff9e2','#b6adc2',2);
+ // Urinalysis: visually distinct analyzer, capped urine cup, DIP bottle and
+ // multicolor test strip, compact centrifuge and SG handheld refractometer.
+ s+=analyzer(429,237,70,93,['UA','SCAN'])+
+ R(504,285,28,43,'#fff6bd','#c4a88d',7)+R(502,281,32,10,'#f1d18d','#bd9f7e',4)+
+ '<path d="M508 300H528V323H508Z" fill="#f1cc69" opacity=".76"/>'+
+ // Dipstick bottle labeled DIP
+ R(536,257,22,64,'#fff8df','#b2a6be',5)+
+ R(535,251,24,10,'#9ab6d4','#8096bb',3)+
+ T(547,278,'DIP',10,'#87739d')+
+ R(539,284,16,24,'#fff','#ddcfc6',1)+
+ // Multicolored reagent pads on a separate dipstick
+ '<g transform="rotate(-19 552 303)">'+R(550,283,5,45,'#fffdf4','#9fa9b6',1)+
+ R(550,291,5,6,'#be8c9c','#a890a1',1)+R(550,299,5,6,'#9abeae','#91b7a2',1)+
+ R(550,307,5,6,'#dbb47d','#c9a274',1)+R(550,315,5,5,'#b2a4d4','#a5a0ca',1)+'</g>'+
+ // Small recognizable centrifuge with lid
+ R(565,278,24,49,'#e8e6f4','#a4a2c3',9)+
+ '<ellipse cx="577" cy="280" rx="12" ry="6" fill="#c9c8e1" stroke="#968fb7" stroke-width="2"/>'+
+ '<ellipse cx="577" cy="288" rx="8" ry="6" fill="#8c99bd"/>'+
+ '<circle cx="577" cy="288" r="3" fill="#f8e8d8"/>'+
+ // Handheld SG refractometer: eyepiece, grip, optical prism
+ '<g transform="rotate(16 520 327)">'+
+ R(496,324,49,11,'#6694b9','#4f739b',6)+R(497,325,14,9,'#43587b','#3d4b73',4)+
+ R(529,324,13,11,'#badbeb','#779ab9',3)+R(542,326,16,7,'#e4f3f4','#809bb6',2)+'</g>'+
+ T(520,344,'SG',9,'#756c96');
  s+=R(630,237,114,76,'#e3ebf9','#839bc0',8)+R(639,245,96,55,'#f7fbff','#b6c8e2',5)+
  T(684,262,'PATIENT',12,'#6581ae')+P('M648 281L667 272L677 284L693 269L725 275','#a4b3ce',3)+
  R(680,313,22,9,'#98b5d4','#809ab8',3)+R(653,320,74,8,'#cddbea','#a9bad1',3)+
@@ -50,14 +90,19 @@ function decor(){
  for(let i=0;i<12;i++)s+=R(44+i*13,107,10,29,['#dab4d8','#95bbdb','#ecc6d3','#dccb97'][i%4],'#fff',2);
  s+=R(54,72,142,34,'#fff0bb','#aa88b2',13)+T(125,86,'📖 LEARN FIRST',14,'#67477f')+
  T(125,99,'START HERE · STUDY',8.5,'#85669a');
- s+=R(782,88,166,50,'#f5ebf7','#c5b3d7',8)+T(865,106,'LAB STORAGE',12)+tubes(813,113,5,'#ae9bd2',.55);
+ // Clean background supply cupboard: no floating paw motifs or tiny props.
+ s+=R(799,87,148,57,'#f6f2fb','#b9abc9',8)+
+ R(807,94,132,17,'#e2d5eb','#b9accd',4)+
+ T(873,106,'SUPPLIES',11,'#706087')+
+ R(813,116,28,19,'#b9cce1','#8fa6c5',3)+
+ R(848,115,28,20,'#f1d6e2','#b9a4c6',3)+
+ R(883,112,15,25,'#d3c5e5','#ae9fc5',2)+
+ R(902,119,26,16,'#e8e9f7','#a8accb',3);
  s+=vines();
  // Center-back classroom sign, independent of clickable bench locations
  s+=R(363,95,271,44,'#fffafd','#c7b2d9',12)+T(498,114,'REFERRAL DIAGNOSTICS',16,'#796194')+
  T(498,131,'LEARN THE WHY · THEN PRACTICE THE CASE',11,'#70628c');
- // Cozy science props below benches, away from navigation dock
- s+=R(36,376,190,23,'#ebedf9','#a2b7d1',5)+tubes(48,352,4,'#bd9bd4',.7)+R(142,362,49,26,'#faf6fd','#bdacd7',4)+T(166,377,'SLIDES',9);
- s+=R(781,377,170,22,'#f0ecf8','#b7aacb',6)+R(820,358,58,24,'#f8e8dd','#c1adc7',4)+T(849,374,'FILES',10);
+ // Keep the space beneath benches visually clear for walking and navigation.
  return s;
 }
 function draw(){
