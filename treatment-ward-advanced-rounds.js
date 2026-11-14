@@ -8,6 +8,15 @@ const library={"postop-dog":{"title":"Postoperative dog · evolving AKI risk","r
 Object.assign(library,window.VPQ_WARD_EXPANSION?.advanced||{});
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let api=null,active=null,position=0;
+// Stable per-question display ordering; scoring/save use original answer indices.
+function choiceOrder(id,index){
+ const q=library[id].questions[index],seed=[...id+':'+index].reduce((n,c)=>(Math.imul(n,33)+c.charCodeAt(0))>>>0,5381);
+ const order=q.options.map((_,i)=>i);
+ // Seeded Fisher-Yates: no externally saved state; display order stays consistent on refresh.
+ let x=seed||1;
+ for(let i=order.length-1;i>0;i--){x^=x<<13;x^=x>>>17;x^=x<<5;const j=(x>>>0)%(i+1);[order[i],order[j]]=[order[j],order[i]]}
+ return order;
+}
 function rows(id){
  const x=library[id];if(!x)return '';
  return '<details class="vpqWardRefs" open><summary>🧪 Patient values & reference intervals (open chart)</summary><table style="width:100%;font-size:12px;border-collapse:collapse"><thead><tr><th>Analyte</th><th>Patient value</th><th>Reference / threshold</th><th>Interpretation</th></tr></thead><tbody>'+
@@ -33,7 +42,7 @@ function stageBlock(id,stage){
  const q=d.questions[n],a=progress(id)[n],answered=Number.isInteger(a),ok=answered&&a===q.a;
  return '<section class="vpqWardIntegrated" style="padding:12px;border:2px solid #9bbad3;border-radius:12px;margin:12px 0;background:#f8fbff">'+
  '<div class="vpq-case-question"><span class="vpq-case-question-label">REQUIRED CLINICAL REASONING · '+esc(stage.toUpperCase())+'</span><h3>'+esc(q.q)+'</h3></div>'+
- '<div style="display:grid;gap:8px">'+q.options.map((v,i)=>'<button type="button" class="choice '+(answered?(i===q.a?'right':i===a?'wrong':''):'')+'" data-vpqadvstageanswer="'+i+'" data-vpqadvstage="'+esc(stage)+'" data-vpqadvpatient="'+esc(id)+'" '+(answered?'disabled':'')+'>'+String.fromCharCode(65+i)+'. '+esc(v)+'</button>').join('')+'</div>'+
+ '<div style="display:grid;gap:8px">'+choiceOrder(id,n).map((original,i)=>'<button type="button" class="choice '+(answered?(original===q.a?'right':original===a?'wrong':''):'')+'" data-vpqadvstageanswer="'+original+'" data-vpqadvstage="'+esc(stage)+'" data-vpqadvpatient="'+esc(id)+'" '+(answered?'disabled':'')+'>'+String.fromCharCode(65+i)+'. '+esc(q.options[original])+'</button>').join('')+'</div>'+
  (answered?'<div class="response '+(ok?'':'bad')+'"><b>'+(ok?'✅ Mechanism mastered':'🔍 Review and reconsider')+'</b><p><b>Correct answer:</b> '+esc(q.options[q.a])+'</p><p><b>WHY:</b> '+esc(q.why)+'</p><p><b>Physiology:</b> '+esc(q.mechanism)+'</p></div>':'<p class="tiny">Answer to continue this stage. Patient values and reference intervals appear in the chart above.</p>')+
  (answered&&!ok?'<button type="button" data-vpqadvstageretry="1" data-vpqadvstage="'+esc(stage)+'" data-vpqadvpatient="'+esc(id)+'">↻ Try this mechanism again</button>':'')+'</section>';
 }
@@ -48,7 +57,7 @@ function render(){
  '<p class="tiny">'+esc(q.stage)+' · Question '+(position+1)+' / '+data.questions.length+' · '+count(active)+' mastered</p>'+
  '<section class="vpq-case-question"><span class="vpq-case-question-label">CLINICAL REASONING · '+esc(q.stage.toUpperCase())+'</span><h3>'+esc(q.q)+'</h3></section>'+
  rows(active)+
- '<div style="display:grid;gap:9px;margin:12px 0">'+q.options.map((option,i)=>'<button type="button" class="choice '+(answered?(i===q.a?'right':i===a?'wrong':''):'')+'" data-vpqadvanswer="'+i+'" '+(answered?'disabled':'')+'>'+String.fromCharCode(65+i)+'. '+esc(option)+'</button>').join('')+'</div>'+
+ '<div style="display:grid;gap:9px;margin:12px 0">'+choiceOrder(active,position).map((original,i)=>'<button type="button" class="choice '+(answered?(original===q.a?'right':original===a?'wrong':''):'')+'" data-vpqadvanswer="'+original+'" '+(answered?'disabled':'')+'>'+String.fromCharCode(65+i)+'. '+esc(q.options[original])+'</button>').join('')+'</div>'+
  (answered?'<section class="response '+(correct?'':'bad')+'"><b>'+(correct?'✅ Best supported interpretation':'🔍 Reconsider the mechanism')+'</b><p><strong>Correct answer:</strong> '+esc(q.options[q.a])+'</p><p><strong>WHY:</strong> '+esc(q.why)+'</p><p><strong>Physiology:</strong> '+esc(q.mechanism)+'</p></section>':'<p class="tiny">Interpret the data and choose a defensible mechanism and clinical action before revealing the explanation.</p>')+
  '<div class="buttonrow">'+(position>0?'<button data-vpqadvprev="1">← Previous</button>':'')+(answered&&!correct?'<button data-vpqadvretry="1">↻ Retry</button>':'')+(position<data.questions.length-1?'<button data-vpqadvnext="1">Next question →</button>':'')+'<button data-vpqadvback="1">🏥 Patient chart</button></div>'+
  '<p class="tiny">Practice cases only; not patient-specific prescribing guidance.</p>');
