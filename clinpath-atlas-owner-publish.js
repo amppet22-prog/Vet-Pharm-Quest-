@@ -56,8 +56,21 @@ function validated(draft){
   if((p.dataUrl||imageUrl)&&(!credit||credit==='Reference source to be provided'))throw Error('Photo '+(i+1)+' needs a credit and permission/license description. Add it in the editor first.');
   return {url:imageUrl,source,credit,dataUrl:p.dataUrl||'',fileName:p.fileName||''}
  });
+ const speciesAll=window.VPQ_ATLAS_EDITOR?.SPECIES||[];
+ const speciesTags=Array.isArray(draft.speciesTags)?[...new Set(draft.speciesTags)].filter(s=>speciesAll.includes(s)):window.VPQ_ATLAS_EDITOR?.fromLegacySpecies?.(draft.species||base.species)||[];
+ if(!speciesTags.length)throw Error('Choose at least one species to publish.');
+ const existing=window.VPQ_ATLAS_PUBLISHER?.get?.(draft.id);
+ const known=new Set(Array.isArray(existing?.speciesTags)?existing.speciesTags:window.VPQ_ATLAS_EDITOR?.fromLegacySpecies?.(base.species)||[]);
+ const speciesEvidence={};
+ for(const sp of speciesTags){
+  const evidence=draft.speciesEvidence?.[sp]||{};
+  const why=String(evidence.why||'').trim(),source=String(evidence.source||'').trim();
+  if(source&&!url(source))throw Error('Enter a valid HTTPS reference for '+sp+'.');
+  if(!known.has(sp)&&(!why||!url(source)))throw Error('You added '+sp+'. Explain why the finding applies to this species and provide a reference URL before publishing.');
+  speciesEvidence[sp]={why:why.slice(0,1500),source:url(source)};
+ }
  // Text-only corrections are valid: do not force a replacement photo when fixing species or explanations.
- return {id:draft.id,name:base.name,species:String(draft.species||base.species||'').slice(0,300),
+ return {id:draft.id,name:base.name,species:speciesTags.length===speciesAll.length?'All species':speciesTags.join(', '),speciesTags,speciesEvidence,
   note:String(draft.note||base.note||'').slice(0,5000),photos};
 }
 function form(draft){
@@ -101,7 +114,7 @@ async function publish(token,draft,progress){
   }
   photos.push({url:photoUrl,source:p.source,credit:p.credit});
  }
- manifest.findings[item.id]={name:item.name,species:item.species,note:item.note,photos:photos.length?photos:(manifest.findings[item.id]?.photos||[]),updated:new Date().toISOString(),approvedBy:OWNER};
+ manifest.findings[item.id]={name:item.name,species:item.species,speciesTags:item.speciesTags,speciesEvidence:item.speciesEvidence,note:item.note,photos:photos.length?photos:(manifest.findings[item.id]?.photos||[]),updated:new Date().toISOString(),approvedBy:OWNER};
  progress('Publishing reviewed atlas entry…');
  await put(MANIFEST,utf8encode(JSON.stringify(manifest,null,2)+'\n'),current?.sha,token,'Publish atlas entry: '+item.name+' (owner approved)');
  published=manifest;ready=true;
