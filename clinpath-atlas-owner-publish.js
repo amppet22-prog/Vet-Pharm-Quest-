@@ -93,7 +93,7 @@ async function publish(token,draft,progress){
    const old=await file(path,token);
    progress('Uploading photo '+(i+1)+'…');
    await put(path,p.dataUrl.split(',')[1],old?.sha,token,'Publish '+item.name+' photo '+(i+1)+' from atlas editor');
-   photoUrl='https://'+OWNER+'.github.io/'+REPO+'/'+path;
+   photoUrl='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+path;
   }
   photos.push({url:photoUrl,source:p.source,credit:p.credit});
  }
