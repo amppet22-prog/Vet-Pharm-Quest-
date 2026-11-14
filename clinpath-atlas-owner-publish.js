@@ -28,11 +28,18 @@ async function api(path,token,method,payload,allowMissing){
   ...(payload?{body:JSON.stringify(payload)}:{})});
  if(allowMissing&&response.status===404)return null;
  if(!response.ok){
-  if(response.status===401)throw Error('GitHub sign-in failed: token invalid or expired.');
-  if(response.status===403)throw Error('GitHub denied access. Grant Contents: Read and write for this repository.');
-  if(response.status===409)throw Error('The GitHub file changed while publishing. Please try again.');
-  if(response.status===404)throw Error('Repository or file not accessible with this token.');
-  throw Error('GitHub returned HTTP '+response.status+'. Please review permissions and retry.');
+  let details='';
+  try{const body=await response.json();if(typeof body?.message==='string')details=body.message.slice(0,220)}
+  catch{/* GitHub may respond with an empty body. */}
+  const stage=path==='user'?'checking the token owner':(method==='PUT'?'writing a file to the main branch':'reading repository contents');
+  const detail=details?' GitHub says: '+details+'.':'';
+  if(response.status===401)throw Error('GitHub rejected the credential while '+stage+' (401). Check expiration and use the complete token.'+detail);
+  if(response.status===403)throw Error('GitHub blocked '+stage+' (403). Check the token resource owner, selected repository, Contents: Read and write, token approval status, and any branch restrictions.'+detail);
+  if(response.status===409)throw Error('Repository changed while '+stage+' (409). Refresh the game and retry.'+detail);
+  if(response.status===404)throw Error('GitHub could not access '+stage+' (404). Check that the token includes '+OWNER+'/'+REPO+'.'+detail);
+  if(response.status===422)throw Error('GitHub rejected the requested file update (422). Verify branch rules and token permissions.'+detail);
+  if(response.status===429)throw Error('GitHub rate limit exceeded (429). Retry later.'+detail);
+  throw Error('GitHub API returned HTTP '+response.status+' while '+stage+'.'+detail);
  }
  return response.json();
 }
@@ -50,11 +57,14 @@ function validated(draft){
   if(p.dataUrl&&p.dataUrl.length>500000)throw Error('Photo '+(i+1)+' is too large. Compress it further before publishing.');
   const imageUrl=p.url?url(p.url):'';
   if(p.url&&!imageUrl)throw Error('Photo '+(i+1)+' must use a valid HTTPS URL.');
-  const source=url(p.source||'');
-  if((p.dataUrl||imageUrl)&&!source)throw Error('Photo '+(i+1)+' needs its original source page URL. Add this in the editor first.');
-  const credit=String(p.credit||'').trim();
-  if((p.dataUrl||imageUrl)&&(!credit||credit==='Reference source to be provided'))throw Error('Photo '+(i+1)+' needs a credit and permission/license description. Add it in the editor first.');
-  return {url:imageUrl,source,credit,dataUrl:p.dataUrl||'',fileName:p.fileName||''}
+  const originalPhoto=p.originalPhoto===true;
+  const source=p.source?url(p.source):'';
+  if(p.source&&!source)throw Error('Photo '+(i+1)+' source must be a valid HTTPS URL.');
+  if((p.dataUrl||imageUrl)&&!source&&!originalPhoto)throw Error('Photo '+(i+1)+': provide a source URL or check the box confirming you own the photo and authorize reuse.');
+  const suppliedCredit=String(p.credit||'').trim();
+  const credit=suppliedCredit||(originalPhoto?'Original photograph contributed by Vet Pharm Quest owner — reuse authorized':'');
+  if((p.dataUrl||imageUrl)&&(!credit||credit==='Reference source to be provided'))throw Error('Photo '+(i+1)+' needs a credit and permission/license description.');
+  return {url:imageUrl,source,credit,originalPhoto,dataUrl:p.dataUrl||'',fileName:p.fileName||''}
  });
  const speciesAll=window.VPQ_ATLAS_EDITOR?.SPECIES||[];
  const speciesTags=Array.isArray(draft.speciesTags)?[...new Set(draft.speciesTags)].filter(s=>speciesAll.includes(s)):window.VPQ_ATLAS_EDITOR?.fromLegacySpecies?.(draft.species||base.species)||[];
@@ -112,7 +122,7 @@ async function publish(token,draft,progress){
    await put(path,p.dataUrl.split(',')[1],old?.sha,token,'Publish '+item.name+' photo '+(i+1)+' from atlas editor');
    photoUrl='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+path;
   }
-  photos.push({url:photoUrl,source:p.source,credit:p.credit});
+  photos.push({url:photoUrl,source:p.source||'',credit:p.credit,originalPhoto:!!p.originalPhoto});
  }
  manifest.findings[item.id]={name:item.name,species:item.species,speciesTags:item.speciesTags,speciesEvidence:item.speciesEvidence,note:item.note,photos:photos.length?photos:(manifest.findings[item.id]?.photos||[]),updated:new Date().toISOString(),approvedBy:OWNER};
  progress('Publishing reviewed atlas entry…');
