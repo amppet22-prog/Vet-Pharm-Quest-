@@ -388,7 +388,34 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #avatarSprite .headface.focused{letter-spacing:-1px}#avatarSprite .headface.sparkly{font-size:14px}#avatarSprite .headface.sleepy{font-size:14px}
 #petSprite.species-large{font-size:56px;min-width:56px;min-height:52px}#petSprite.species-slim{font-size:50px;min-width:50px}
 .quickchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.quickchips span{background:#eef6ff;padding:6px 10px;border:1px solid #cfe1f3;border-radius:999px;font-size:12px;font-weight:700}
-.vpq-available-tox{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:#eaf7f3;border:2px solid #8bbbac;color:#275b51;border-radius:12px;padding:8px 10px;margin-top:10px;max-width:700px;font-size:12px}.vpq-available-tox strong{font-size:13px}.vpq-available-tox button{background:#5e9185;border:1px solid #3c7369;color:white;font-size:12px;border-radius:10px;padding:7px 10px;font-weight:800}.vpq-available-tox button:hover,.vpq-available-tox button:focus-visible{background:#44786c}@media(max-width:620px){.vpq-available-tox{align-items:flex-start;flex-direction:column}}</style></head><body>
+.vpq-available-tox{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:#eaf7f3;border:2px solid #8bbbac;color:#275b51;border-radius:12px;padding:8px 10px;margin-top:10px;max-width:700px;font-size:12px}.vpq-available-tox strong{font-size:13px}.vpq-available-tox button{background:#5e9185;border:1px solid #3c7369;color:white;font-size:12px;border-radius:10px;padding:7px 10px;font-weight:800}.vpq-available-tox button:hover,.vpq-available-tox button:focus-visible{background:#44786c}@media(max-width:620px){.vpq-available-tox{align-items:flex-start;flex-direction:column}}</style><style id="vpq-clinical-question-ux-20261114">
+/* Question-first case readability across legacy, ward and ClinPath modals */
+#modalBody .vpq-case-question, #modalBody .vpqP2PatientQuestion,
+#modalBody .vpqWardIntegrated .vpq-case-question {
+  border:3px solid #668fc6!important;border-left:8px solid #426fae!important;
+  border-radius:15px!important;background:#eef5ff!important;
+  padding:17px 20px!important;margin:14px 0 17px!important;
+  box-shadow:0 5px 14px rgba(53,98,151,.13)!important;
+}
+#modalBody .vpq-case-question h3,#modalBody .vpqP2PatientQuestion h3,
+#modalBody .vpqWardIntegrated .vpq-case-question h3 {
+ font-size:clamp(21px,2.8vw,28px)!important;line-height:1.32!important;
+ font-weight:900!important;color:#1e467a!important;margin:5px 0!important;
+}
+#modalBody .vpq-case-question-label{font-size:12px!important;font-weight:900!important;letter-spacing:.055em!important}
+#modalBody > h3:not(.vpq-no-question-style), #modalBody .vpq-patient-case > h3 {
+ font-size:clamp(21px,2.7vw,27px)!important;line-height:1.35!important;
+ color:#204b82!important;padding:13px 15px!important;
+ border-left:6px solid #5484bd!important;background:#edf5ff!important;border-radius:8px!important;
+}
+#modalBody button.choice,#modalBody .vpqP2Choice{font-size:15px!important;line-height:1.52!important;text-align:left!important;
+ padding:14px 16px!important;white-space:normal!important;min-height:48px}
+#modalBody .vpq-source-note{font-size:11px;opacity:.9}
+#modalBody .vpqWardRefs table{font-size:12px;line-height:1.35}
+@media(max-width:650px){#modalBody .vpq-case-question h3,#modalBody .vpqP2PatientQuestion h3{font-size:21px!important}
+ #modalBody button.choice{font-size:14px!important;padding:12px!important}}
+</style>
+</head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="saveBtn" class="mini">💾 Save / Reset</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
