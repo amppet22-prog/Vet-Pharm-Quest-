@@ -440,7 +440,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
 <script src="pharm-next-lectures.js?v=20261108-course2"></script>
 <script src="navle-pharm-expansion.js?v=20261109-navle1"></script>
-<script src="clinpath-reference-hub.js?v=20261114-navigation1"></script>
+<script src="clinpath-reference-hub.js?v=20261114-phaseC3-6a"></script>
 <script src="clinical-pathology-lab.js?v=20261110-reward1"></script>
 <script src="blood-smear-photo-expansion.js?v=20261110-smearphotos1"></script>
 <script src="clinpath-atlas-editor.js?v=20261114-publish1"></script>
@@ -473,9 +473,10 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="diagnostic-skills-workflow.js?v=20261110-actual-animal-images3"></script>
 <script src="radiology-reading-desk.js?v=20261110-reward1"></script>
 <script src="diagnostic-imaging-suite.js?v=20261109-imagingphase1"></script>
-<script src="clinpath-treatment-ward-rounds.js?v=20261114-casefocus1"></script>
+<script src="clinpath-treatment-ward-rounds.js?v=20261114-phaseC3-6a"></script>
+<script src="clinpath-diagnostic-rounds.js?v=20261114-phaseC3-6a"></script>
 <script src="treatment-diagnostics.js?v=20261113-guidedward2"></script>
-<script src="advanced-clinpath-stations.js?v=20261114-back1"></script>
+<script src="advanced-clinpath-stations.js?v=20261114-phaseC3-6a"></script>
 <script src="surgery-necropsy-learning.js?v=20261110-newwings1"></script>
 <script src="livestock-avian-parasites.js?v=20261110-livestock1"></script>
 <script src="microscopy-photo-expansion.js?v=20261110-microphotos2"></script>
@@ -2915,6 +2916,8 @@ window.VPQ_ATLAS_PUBLISHER.load();
 window.VPQ_BLOOD_SMEAR_LAB.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_CLINPATH_VISUAL_ATLAS.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_CLINPATH_GUIDED.init({body:$('modalBody'),showModal,openCases,state,persist,awardQuestion:masterQuestion});
+window.VPQ_CLINPATH_DIAGNOSTIC_ROUNDS.init({body:$('modalBody'),showModal,state,persist,awardQuestion:masterQuestion});
+window.VPQ_CLINPATH_WARD_ROUNDS.init({body:$('modalBody'),showModal,state,persist,awardQuestion:masterQuestion});
 window.VPQ_MICROSCOPE_DETECTIVE.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_TREATMENT_DIAGNOSTICS.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo,closeModal,changeRoom});
 window.VPQ_DIAGNOSTIC_SKILLS.init({body:$('modalBody'),showModal,awardQuestion:masterQuestion,studyRewardInfo});
