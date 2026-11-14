@@ -1,4 +1,39 @@
 {
   "version": 1,
-  "findings": {}
+  "findings": {
+    "rouleaux": {
+      "name": "Rouleaux formation",
+      "species": "Dog, Cat, Horse",
+      "speciesTags": [
+        "Dog",
+        "Cat",
+        "Horse"
+      ],
+      "speciesEvidence": {
+        "Dog": {
+          "why": "",
+          "source": ""
+        },
+        "Cat": {
+          "why": "Mild formation normal.",
+          "source": ""
+        },
+        "Horse": {
+          "why": "Normal physiologic finding",
+          "source": ""
+        }
+      },
+      "note": "Coin-stack RBCs, often physiologic in horses; distinguish from true agglutination.",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/atlas-photos/rouleaux-photo-1.jpg",
+          "source": "https://webpath.med.utah.edu/HEMEHTML/HEME007.html",
+          "credit": "WebPath Utah",
+          "originalPhoto": false
+        }
+      ],
+      "updated": "2026-11-14T02:21:23.675Z",
+      "approvedBy": "amppet22-prog"
+    }
+  }
 }
