@@ -62,10 +62,10 @@ function validated(draft){
 }
 function form(draft){
  const base=window.VPQ_ATLAS_EDITOR?.catalog?.().find(x=>x.id===draft.id);
- const filled=validated(draft);
+ const photoCount=(draft.photos||[]).filter(x=>x?.dataUrl||x?.url).length;
  const vault=window.VPQ_OWNER_KEY_VAULT;
  const saved=!!vault?.exists?.();
- return '<p><b>'+esc(base?.name||draft.id)+'</b> · '+filled.photos.filter(x=>x.dataUrl||x.url).length+' new photo(s). Text-only changes are supported.</p>'+
+ return '<p><b>'+esc(base?.name||draft.id)+'</b> · '+photoCount+' new photo(s). Text-only changes are supported.</p>'+
  '<p><b>Owner publishing</b> uses your GitHub permission to write to <b>'+OWNER+'/'+REPO+'</b>. You may enter a fine-grained token or unlock your locally encrypted token with a password you chose. Your password is not a GitHub password, and no secret is added to the public game.</p>'+
  (saved?'<p><b>🔒 Saved encrypted publishing key found on this browser.</b> Enter your password to unlock it, or enter a replacement token below.</p>':'<p><b>First setup:</b> Create a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained GitHub token</a> for this one repository with <b>Contents: Read and write</b>. Optionally choose a password (12+ characters) to encrypt and remember it on this browser.</p>')+
  '<label for="vpqPublishPassword">Your publishing password (optional when entering a fresh token)</label><input id="vpqPublishPassword" type="password" autocomplete="off" spellcheck="false" placeholder="'+(saved?'Unlock saved publishing key':'Create a password (12+ characters)')+'" style="width:100%;padding:10px;margin:5px 0 10px">'+
