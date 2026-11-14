@@ -101,7 +101,7 @@ function realPhoto(e,hideAnswer=false){
 function header(){return '<p style="font-size:12px;color:#536a83">Authentic photomicrographs appear first wherever an individual source image has been verified. Other findings retain the teaching diagram and direct source link. Photo quiz fields have no diagnostic answer printed onto the picture.</p>'}
 function menu(){
  if(!api)return;
- api.showModal('🔬 Clinical Pathology · Microscope Atlas',header()+'<p><b>'+entries.length+' structures</b> across RBCs, WBCs, platelets, urine cells, casts, crystals and artifacts. Learn the mechanism, compare lookalikes, then identify without labels.</p>'+
+ api.showModal('🔬 Clinical Pathology · Microscope Atlas',header()+'<p><b>Hybrid reference:</b> Open a structure to see authentic photos, morphological explanations, clinical meaning and expanded Cell Recognition teaching in one place. Specialized Blood Smear quizzes remain separate.</p><p><b>'+entries.length+' structures</b> across RBCs, WBCs, platelets, urine cells, casts, crystals and artifacts. Learn the mechanism, compare lookalikes, then identify without labels.</p>'+
  '<div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0">'+groups.map(x=>'<button data-cpv-group="'+safe(x)+'" style="font-size:12px;padding:7px;background:'+(x===group?'#e4f3fa':'#fff')+'">'+safe(x)+'</button>').join('')+'</div>'+
  '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-mode="Learn">📖 Learn</button><button data-cpv-mode="Quiz">🎯 Quiz</button><button data-cpv-compare="1">⚖️ Don’t Confuse</button><button data-cpv-real="1">📸 Real Hematology Photos</button><button data-cpv-urine="1">🧫 Urinalysis Cases</button><button data-cph-nav="cells">🩸 Cell Recognition Reference</button><button data-cph-nav="hub">🧭 Reference Map</button><button data-atlas-edit="plateletclump" data-atlas-from="visual">✏️ Edit Atlas · Save / Publish Now</button></div>'+
  (group==='Artifacts'?hemeGuide():'')+'<p><b>Selected:</b> '+safe(group)+' · '+list().length+' findings. <b>Mode:</b> '+safe(mode)+'</p>'+
@@ -126,12 +126,24 @@ function optionsFor(e){
  const shift=(e.id.length*3)%4;
  return opts.slice(shift).concat(opts.slice(0,shift));
 }
+/* Hybrid atlas: reuse the longer Cell Recognition explanations instead of duplicating content. */
+const recognitionAliases={spherocyte:'sphere',schistocyte:'schisto',acanthocyte:'acantho',echinocyte:'echino',heinz:'heinz',rouleaux:'rouleaux',band:'band',toxic:'toxicneut',plateletclump:'plateclump',reactive:'reactive'};
+function cellRecognitionDetails(entry){
+ const items=window.VPQ_BLOOD_SMEAR_LAB?.cells||[];
+ const exact=recognitionAliases[entry.id]||entry.id;
+ const cell=items.find(x=>x.id===exact);
+ if(!cell)return '';
+ return '<details style="margin:12px 0;border:1px solid #c9d9ea;border-radius:12px;padding:12px;background:#f4f8fd" open><summary style="font-weight:800;cursor:pointer">🩸 Detailed Cell Recognition Reference · '+safe(cell.name)+'</summary>'+
+ '<p><b>What to look for:</b> '+safe(cell.look)+'</p><p><b>Clinical meaning:</b> '+safe(cell.meaning)+'</p>'+
+ '<p><b>WHY the body does this:</b> '+safe(cell.why)+'</p><p><b>Species-specific teaching:</b> '+safe(cell.species)+'</p>'+
+ '<button data-cph-nav="cells">📚 Open the full Cell Recognition Reference</button></details>';
+}
 function show(id){
  const original=entries.find(x=>x.id===id);if(!original)return menu();const official=window.VPQ_ATLAS_PUBLISHER?.get?.(id);const e=official?{...original,clinical:official.note||original.clinical,species:official.species||original.species}:original;current=id;quizAnswer=null;
  const quiz=mode==='Quiz';
  api.showModal('🔬 '+(quiz?'Unknown microscopic field':e.name),header()+realPhoto(e,quiz)+
  (quiz?'<h3>Identify the illustrated finding</h3><div style="display:grid;gap:7px">'+optionsFor(e).map((o,i)=>'<button data-cpv-answer="'+safe(o.id)+'" style="text-align:left;padding:10px;background:#fffafc;border:2px solid #d7c7e3">'+String.fromCharCode(65+i)+'. '+safe(o.name)+'</button>').join('')+'</div>':
- '<p><b>Appearance:</b> '+safe(e.look)+'</p><p><b>WHY it looks that way:</b> '+safe(e.why)+'</p><p><b>Don’t confuse:</b> '+safe(e.confuse)+'</p><p><b>Clinical significance:</b> '+safe(e.clinical)+'</p><p><b>Species:</b> '+safe(e.species)+'</p>'+(e.group==='Artifacts'?hemeGuide():''))+
+ '<p><b>Appearance:</b> '+safe(e.look)+'</p><p><b>WHY it looks that way:</b> '+safe(e.why)+'</p><p><b>Don’t confuse:</b> '+safe(e.confuse)+'</p><p><b>Clinical significance:</b> '+safe(e.clinical)+'</p><p><b>Species:</b> '+safe(e.species)+'</p>'+cellRecognitionDetails(e)+(e.group==='Artifacts'?hemeGuide():''))+
  '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-back="1">← Atlas</button>'+(quiz?'':'<button data-atlas-edit="'+safe(e.id)+'" data-atlas-from="visual">✏️ Edit / Publish this finding</button>')+'<button data-cpv-switch="1">'+(quiz?'📖 Reveal & learn':'🎯 Test this image')+'</button>'+(quiz?'':'<a href="'+safe(links[e.group])+'" target="_blank" rel="noopener noreferrer">📸 Open real photo atlas (Cornell eClinPath)</a>')+'</div>');
 }
 function answer(id){
