@@ -29,6 +29,8 @@ function editing(id){
  current=id;
  const live=get(id),existing=originals().find(x=>x.id===id)||{},d=read()[id]||{},entry={...existing,...official(id),...d};
  if(!live&&!entry.name)return;
+ const basePhoto=window.VPQ_BLOOD_SMEAR_LAB?.realCellPhotos?.[id];
+ if(!entry.photos?.some(p=>p?.dataUrl||p?.url)&&basePhoto)entry.photos=[{url:basePhoto[0],source:basePhoto[1],credit:basePhoto[2],originalPhoto:false}];
  const tags=Array.isArray(entry.speciesTags)?entry.speciesTags:originalSpecies(entry.species);
  const evidence=entry.speciesEvidence||{};
  const opts=SPECIES.map(s=>'<label style="display:inline-flex;gap:5px;margin:3px;padding:6px;border:1px solid #b8c9db;border-radius:9px"><input type="checkbox" data-cell-species="'+esc(s)+'" '+(tags.includes(s)?'checked':'')+'>'+esc(s)+'</label>').join('');
