@@ -50,10 +50,10 @@ function validated(draft){
   if(p.dataUrl&&p.dataUrl.length>500000)throw Error('Photo '+(i+1)+' is too large. Compress it further before publishing.');
   const imageUrl=p.url?url(p.url):'';
   if(p.url&&!imageUrl)throw Error('Photo '+(i+1)+' must use a valid HTTPS URL.');
-  const source=p.source?url(p.source):url(base.source);
-  if(!source)throw Error('Photo '+(i+1)+' needs an original source URL.');
-  const credit=(p.credit||base.credit||'').trim();
-  if((p.dataUrl||imageUrl)&&(!credit||credit==='Reference source to be provided'))throw Error('Photo '+(i+1)+' needs a real credit/licensing description.');
+  const source=url(p.source||'');
+  if((p.dataUrl||imageUrl)&&!source)throw Error('Photo '+(i+1)+' needs its original source page URL. Add this in the editor first.');
+  const credit=String(p.credit||'').trim();
+  if((p.dataUrl||imageUrl)&&(!credit||credit==='Reference source to be provided'))throw Error('Photo '+(i+1)+' needs a credit and permission/license description. Add it in the editor first.');
   return {url:imageUrl,source,credit,dataUrl:p.dataUrl||'',fileName:p.fileName||''}
  });
  if(!photos.some(p=>p.url||p.dataUrl))throw Error('Add at least one photo URL or uploaded image.');
