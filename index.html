@@ -2394,23 +2394,23 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(!hasPatient)return caseMenu();
   wardMode='follow';
   const p=patient(),a=stateOf();
-  frame('🔎 Follow Up · Gather new findings','STAGE 1/3 · Reassess before choosing treatment.',
+  frame('🔎 Follow Up · Gather new findings','STAGE 1/4 · Reassess before choosing treatment.',
     '<div class="infobox"><b>Baseline</b><p>'+escapeHtml(p.baseline)+'</p></div>'+
     (a.examined?'<div class="infobox"><b>New examination and trends</b><p>'+escapeHtml(p.follow)+'</p><b>Interpretation</b><p>'+escapeHtml(p.reassess)+'</p></div>'+
      safeButton('adjust','Continue → Adjust Care'):
-    '<p><b>What has changed since admission?</b> Examine the patient and review repeat observations/labs to find out.</p>'+safeButton('observe','🔍 Perform follow-up examination')));
+    '<div class="vpq-case-question"><span class="vpq-case-question-label">ASSESSMENT QUESTION</span><h3>What has changed since admission?</h3></div><p>Examine the patient and review repeat observations and laboratory trends to find out.</p>'+safeButton('observe','🔍 Perform follow-up examination')));
  }
  function adjust(){
   if(!hasPatient)return caseMenu();
   wardMode='adjust';
   const a=stateOf(),p=patient();
-  if(!a.examined)return frame('💉 Adjust Care · First assess the patient','STAGE 2/3 · A care change must follow an assessment.',
+  if(!a.examined)return frame('💉 Adjust Care · First assess the patient','STAGE 2/4 · A care change must follow an assessment.',
    '<p>The patient has no documented follow-up findings this shift. Avoid selecting or escalating medication blindly.</p>'+safeButton('follow','← Go to Follow Up'));
   const answered=a.careAnswer!==null;
   const choices=p.choices.map((choice,i)=>'<button type="button" class="choice '+(answered?(i===p.answer?'right':i===a.careAnswer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardchoice="'+i+'">'+escapeHtml(choice)+'</button>').join('');
-  frame('💉 Adjust Care · Respond to the findings','STAGE 2/3 · Use the new clinical information to justify a treatment decision.',
+  frame('💉 Adjust Care · Respond to the findings','STAGE 2/4 · Use the new clinical information to justify a treatment decision.',
     '<div class="infobox"><b>Follow-up findings</b><p>'+escapeHtml(p.follow)+'</p></div>'+
-    '<h3>What is the safest next action?</h3>'+choices+
+    '<div class="vpq-case-question"><span class="vpq-case-question-label">TREATMENT DECISION</span><h3>What is the safest next action, and why?</h3></div>'+choices+
     (answered?'<div class="response '+(a.careComplete?'':'bad')+'"><b>'+(a.careComplete?'Appropriate response':'Reconsider your plan')+'</b><p>'+escapeHtml(p.why)+'</p></div>'+
     (a.careComplete?safeButton('monitor','Continue → Watch Trends'):safeButton('retry','↻ Reconsider the decision')):''));
  }
@@ -2418,15 +2418,15 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(!hasPatient)return caseMenu();
   wardMode='monitor';
   const a=stateOf(),p=patient();
-  if(!a.examined)return frame('📈 Watch Trends · Need a reassessment','STAGE 3/3 · Monitoring needs a baseline and a decision.',
+  if(!a.examined)return frame('📈 Watch Trends · Need a reassessment','STAGE 3/4 · Monitoring needs a baseline and a decision.',
     '<p>No new patient findings have been collected this shift.</p>'+safeButton('follow','← Go to Follow Up'));
-  if(!a.careComplete)return frame('📈 Watch Trends · Care decision needed','STAGE 3/3 · Recheck the response after appropriate care.',
+  if(!a.careComplete)return frame('📈 Watch Trends · Care decision needed','STAGE 3/4 · Recheck the response after appropriate care.',
     '<p>You have obtained new findings, but you have not completed an appropriate treatment decision.</p>'+safeButton('adjust','← Go to Adjust Care'));
   const choices=['Discharge or stop monitoring as soon as the first observation improves','Monitor serial signs and laboratory trends, reassessing if clinical response differs from expectations','Ignore symptoms and only record which medication was chosen'];
-  frame('📈 Watch Trends · Check the response','STAGE 3/3 · Monitoring tests the effect of the adjusted plan.',
+  frame('📈 Watch Trends · Check the response','STAGE 3/4 · Monitoring tests the effect of the adjusted plan.',
     '<div class="infobox"><b>After the intervention</b><p>'+escapeHtml(p.response)+'</p>'+
     '<b>Trends requiring follow-up</b><p>'+escapeHtml(p.monitor)+'</p></div>'+
-    '<h3>What is the most defensible monitoring plan?</h3>'+
+    '<div class="vpq-case-question"><span class="vpq-case-question-label">MONITORING DECISION</span><h3>What is the most defensible monitoring plan?</h3></div>'+
     choices.map((v,i)=>'<button type="button" class="choice '+(a.monitorAnswer!==null?(i===1?'right':i===a.monitorAnswer?'wrong':''):'')+'" '+(a.monitorAnswer!==null?'disabled':'')+' data-vpqwardmonitoranswer="'+i+'">'+escapeHtml(v)+'</button>').join('')+
     (a.monitorAnswer!==null?'<div class="response '+(a.monitorComplete?'':'bad')+'"><p>'+(a.monitorComplete?'Correct: trends must be reassessed, not assumed stable.':'That approach could miss deterioration or delayed toxicity. Compare serial findings before discharge or another medication change.')+'</p></div>'+
      (a.monitorComplete?safeButton('outpatient','🏡 Plan discharge / outpatient care →'):safeButton('monitorretry','↻ Try monitoring decision again')):''));
