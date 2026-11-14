@@ -2332,8 +2332,35 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    response:'A tailored plan is chosen and the team follows comfort and function rather than relying solely on physical swelling.',
    monitor:'Serial pain assessment, touch tolerance, appetite, mobility, sedation and treatment adverse effects.',outpatient:'If comfortably managed and eating, plan home multimodal pain management, environmental modifications, a recheck of comfort and function, and adverse-effect monitoring.',outpatientChoices:['If comfortable and stable, provide a patient-specific home plan and scheduled reassessment','Stop all analgesia as soon as swelling decreases','Discharge without documenting functional pain or medication side effects'],outpatientCorrect:0}
  ];
+ // Additional simulated post-intervention checkpoints. These extend—not replace—the existing cases and save key.
+ const wardCheckpoints={
+  'postop-dog':{
+   update:'Six hours after fluid/perfusion reassessment and analgesic-plan review: mucous membranes are less tacky and pain is 3/10, but urine output remains below the team\'s target and creatinine is 2.3 mg/dL (previously 2.1).',
+   question:'The dog looks brighter, yet renal markers have not recovered. What should happen before discharge?',
+   options:['Discharge because the pain score improved','Continue inpatient evaluation of perfusion, urine output and renal trends, while maintaining safe pain relief','Resume the original NSAID because hydration appears improved'],
+   answer:1,
+   why:'Better comfort and mucous membranes do not prove renal recovery. Persistent oliguria and a rising creatinine require reassessment and close monitoring before a discharge decision.',
+   caution:['A better pain score is not evidence that acute kidney injury has resolved.','Correct: the renal trajectory is still concerning.','Restarting an NSAID without reassessing renal perfusion could worsen kidney injury.']
+  },
+  'colic-horse':{
+   update:'Two hours after the revised initial plan: heart rate rises to 72/min, repeated flank watching continues, abdominal distension is increasing and a repeat lactate is higher than the prior value.',
+   question:'What does the next trend mean for this horse\'s care pathway?',
+   options:['Stable enough to discharge because analgesia was given','Assume the increased lactate is irrelevant if the horse is standing','Escalate urgently for repeat examination and possible surgical or referral assessment; do not mask deterioration'],
+   answer:2,
+   why:'Increasing pain, heart rate, distension and lactate suggest worsening disease or perfusion. Escalating diagnostic and surgical consideration is safer than assuming transient analgesia means resolution.',
+   caution:['Analgesia does not guarantee that intestinal compromise has resolved.','The new trend cannot be interpreted in isolation from repeated physical examination.','Correct: deterioration changes the disposition toward continued or advanced care.']
+  },
+  'cat-allodynia':{
+   update:'After multimodal pain-plan adjustment: the cat is eating, accepts gentle handling and the pain score improves from 6/10 to 2/10, but the cat is substantially more sedated and slow to walk.',
+   question:'Pain improved but function worsened. What is the next appropriate decision?',
+   options:['Reassess sedation, safety and drug effects before discharge; adjust the individualized plan as needed','Ignore sedation because the pain score is lower','Stop all pain medication permanently and send the cat home without reassessment'],
+   answer:0,
+   why:'Pain relief must be balanced against sedation, mobility and wellbeing. The goal is comfortable function—not simply a low pain score—and a veterinarian should reassess clinically important drug effects.',
+   caution:['Correct: assess the tradeoff between analgesia and adverse effects.','Heavy sedation can obscure pain scoring and creates functional safety concerns.','A sudden unreviewed cessation may leave the cat uncomfortable; the clinical plan needs reassessment.']
+  }
+ };
  const storeKey='vpq-inpatient-care-v3';
- const initial=()=>({examined:false,careAnswer:null,careComplete:false,monitorAnswer:null,monitorComplete:false,outpatientAnswer:null,outpatientComplete:false,shift:1});
+ const initial=()=>({examined:false,careAnswer:null,careComplete:false,monitorAnswer:null,monitorComplete:false,trendAnswer:null,trendComplete:false,outpatientAnswer:null,outpatientComplete:false,shift:1});
  const progress={};
  for(const p of hospitalData)progress[p.id]=initial();
  let currentPatient=hospitalData[0].id,hasPatient=false,wardMode='chart';
@@ -2342,7 +2369,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(saved&&typeof saved==='object'){
    if(hospitalData.some(p=>p.id===saved.currentPatient)){currentPatient=saved.currentPatient;hasPatient=Boolean(saved.hasPatient)}
    for(const p of hospitalData)if(saved.progress?.[p.id]&&typeof saved.progress[p.id]==='object'){
-     const old=saved.progress[p.id];progress[p.id]={...initial(),examined:old.examined===true,careAnswer:Number.isInteger(old.careAnswer)?old.careAnswer:null,careComplete:old.careComplete===true,monitorAnswer:Number.isInteger(old.monitorAnswer)?old.monitorAnswer:null,monitorComplete:old.monitorComplete===true,outpatientAnswer:Number.isInteger(old.outpatientAnswer)?old.outpatientAnswer:null,outpatientComplete:old.outpatientComplete===true,shift:Math.max(1,Number(old.shift)||1)};
+     const old=saved.progress[p.id];progress[p.id]={...initial(),examined:old.examined===true,careAnswer:Number.isInteger(old.careAnswer)?old.careAnswer:null,careComplete:old.careComplete===true,monitorAnswer:Number.isInteger(old.monitorAnswer)?old.monitorAnswer:null,monitorComplete:old.monitorComplete===true,trendAnswer:Number.isInteger(old.trendAnswer)?old.trendAnswer:null,trendComplete:old.trendComplete===true||(old.trendComplete===undefined&&old.monitorComplete===true),outpatientAnswer:Number.isInteger(old.outpatientAnswer)?old.outpatientAnswer:null,outpatientComplete:old.outpatientComplete===true,shift:Math.max(1,Number(old.shift)||1)};
    }
   }
  }catch(e){}
@@ -2351,7 +2378,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function savePatient(){try{localStorage.setItem(storeKey,JSON.stringify({currentPatient,hasPatient,progress}))}catch(e){}}
  function patient(){return hospitalData.find(p=>p.id===currentPatient)||hospitalData[0]}
  function stateOf(){return progress[currentPatient]}
- function phase(){const a=stateOf();return a.outpatientComplete?'completed':a.monitorComplete?'outpatient':a.careComplete?'monitor':a.examined?'adjust':'follow'}
+ function phase(){const a=stateOf();return a.outpatientComplete?'completed':a.trendComplete?'outpatient':a.careComplete?'monitor':a.examined?'adjust':'follow'}
  function nextLabel(){return {follow:'Assess',adjust:'Treat',monitor:'Monitor',outpatient:'Outpatient / Discharge',completed:'Case Complete'}[phase()]}
  function safeButton(action,label,secondary=false){return '<button type="button" class="'+(secondary?'secondary':'')+'" data-vpqward'+action+'="1">'+label+'</button>'}
  function patientHeading(){
@@ -2362,7 +2389,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function navigation(){
   if(!hasPatient)return '';
   const a=stateOf();
-  return '<div class="buttonrow">'+safeButton('home','🗂️ Patient Chart',true)+safeButton('follow','1 · Follow Up',a.examined)+safeButton('adjust','2 · Adjust Care',!a.examined)+safeButton('monitor','3 · Monitor',!a.careComplete)+safeButton('outpatient','4 · Outpatient',!a.monitorComplete)+'</div>';
+  return '<div class="buttonrow">'+safeButton('home','🗂️ Patient Chart',true)+safeButton('follow','1 · Follow Up',a.examined)+safeButton('adjust','2 · Adjust Care',!a.examined)+safeButton('monitor','3 · Monitor',!a.careComplete)+safeButton('outpatient','4 · Outpatient',!a.trendComplete)+'</div>';
  }
  function frame(heading,introduction,content){
   showModal(heading,patientHeading()+navigation()+'<p class="tiny">'+introduction+'</p>'+content);
@@ -2370,7 +2397,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function caseMenu(){
   wardMode='chart';savePatient();
   const list=hospitalData.map(p=>{
-   const a=progress[p.id],next=a.outpatientComplete?'Case complete':a.monitorComplete?'Outpatient / discharge':a.careComplete?'Monitor':a.examined?'Treat':'Assess';
+   const a=progress[p.id],next=a.outpatientComplete?'Case complete':a.trendComplete?'Outpatient / discharge':a.careComplete?'Monitor':a.examined?'Treat':'Assess';
    return '<button type="button" class="full" data-vpqwardpick="'+escapeHtml(p.id)+'" style="text-align:left"><b>'+escapeHtml(p.name)+'</b><span class="tiny" style="display:block">Shift '+a.shift+' · Next: '+next+'</span></button>';
   }).join('');
   showModal('🏥 Treatment Ward · Patient Handoff',
@@ -2435,7 +2462,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(!hasPatient)return caseMenu();
   wardMode='outpatient';
   const a=stateOf(),p=patient();
-  if(!a.monitorComplete)return frame('🏡 Outpatient Plan · Stabilize first','STAGE 4/4 · Use monitoring to decide disposition.','<p>Finish reassessment and monitoring before making a discharge decision.</p>'+safeButton('monitor','← Return to monitoring'));
+  if(!a.trendComplete)return frame('🏡 Outpatient Plan · Stabilize first','STAGE 4/4 · Use monitoring to decide disposition.','<p>Finish reassessment and monitoring before making a discharge decision.</p>'+safeButton('monitor','← Return to monitoring'));
   const answered=a.outpatientAnswer!==null;
   const choices=p.outpatientChoices.map((choice,i)=>'<button type="button" class="choice '+(answered?(i===p.outpatientCorrect?'right':i===a.outpatientAnswer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardoutpatientchoice="'+i+'">'+escapeHtml(choice)+'</button>').join('');
   frame('🏡 Outpatient Care · Decide disposition','STAGE 4/4 · Determine whether inpatient care, referral or discharge is appropriate.',
