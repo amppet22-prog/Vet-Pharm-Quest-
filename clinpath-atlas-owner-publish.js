@@ -13,7 +13,7 @@ const url=s=>{try{const u=new URL(String(s||''));return u.protocol==='https:'?u.
 const utf8encode=s=>{const bytes=new TextEncoder().encode(s);let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(binary)};
 const utf8decode=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,'')),x=>x.charCodeAt(0)));
 let published={version:1,findings:{}};
-let ready=false;
+let ready=false,pending=null;
 async function load(){
  try{
   const response=await fetch('./'+MANIFEST+'?v='+Date.now(),{cache:'no-store'});
@@ -63,7 +63,6 @@ function validated(draft){
 function form(draft){
  const base=window.VPQ_ATLAS_EDITOR?.catalog?.().find(x=>x.id===draft.id);
  const filled=validated(draft);
- window.VPQ_ATLAS_EDITOR?.showPublishDialog?.();
  return '<p><b>'+esc(base?.name||draft.id)+'</b> · '+filled.photos.filter(x=>x.dataUrl||x.url).length+' photo(s) ready.</p>'+
  '<p><b>Owner publishing:</b> Use a short-lived <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained GitHub token</a> for only <b>'+OWNER+'/'+REPO+'</b> with <b>Contents: Read and write</b>. Enter it below; the game never saves it.</p>'+
  '<p class="tiny">GitHub will verify the signed-in token belongs to <b>'+OWNER+'</b>. This updates the public repository; GitHub Pages deployment may take time. Do not paste tokens into chat, issues, source code or shared computers.</p>'+
@@ -74,7 +73,7 @@ function form(draft){
 function dialog(){
  const draft=window.VPQ_ATLAS_EDITOR?.collect?.();
  if(!draft)return;
- try{window.VPQ_ATLAS_EDITOR?.show?.('🚀 Publish Atlas Changes',form(draft))}
+ try{pending=draft;window.VPQ_ATLAS_EDITOR?.show?.('🚀 Publish Atlas Changes',form(draft))}
  catch(error){window.VPQ_ATLAS_EDITOR?.show?.('Publish requires review','<p>'+esc(error.message)+'</p><button data-atlas-edit="'+esc(draft.id)+'">← Back to editor</button>')}
 }
 async function publish(token,draft,progress){
@@ -112,12 +111,12 @@ function init(context){
    const tokenField=context.body.querySelector('#vpqPublishToken');
    const token=tokenField?.value.trim()||'';
    if(!token){context.body.querySelector('#vpqPublishResult').textContent='Enter a GitHub fine-grained token first.';return}
-   const draft=window.VPQ_ATLAS_EDITOR?.collect?.();
+   const draft=pending;
    // Never keep the token in the DOM once publishing begins.
    tokenField.value='';button.disabled=true;
    const progress=message=>{const el=context.body.querySelector('#vpqPublishResult');if(el)el.textContent=message};
    publish(token,draft,progress).then(item=>{
-    const all=window.VPQ_ATLAS_EDITOR?.read?.()||{};delete all[item.id];
+    pending=null;const all=window.VPQ_ATLAS_EDITOR?.read?.()||{};delete all[item.id];
     window.VPQ_ATLAS_EDITOR?.replaceDrafts?.(all);
     context.showModal('✅ Published to GitHub','<p><b>'+esc(item.name)+'</b> was committed to the official GitHub repository. Your browser draft has been cleared for this finding.</p><p>GitHub Pages may need a deployment cycle. <a href="https://github.com/'+OWNER+'/'+REPO+'/commits/main" target="_blank" rel="noopener noreferrer">View changes on GitHub</a>.</p><button data-cph-nav="atlas">🔬 Open Microscope Atlas</button>');
    }).catch(error=>{progress('Publish failed: '+error.message);button.disabled=false});
