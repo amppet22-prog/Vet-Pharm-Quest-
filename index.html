@@ -479,8 +479,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="diagnostic-imaging-suite.js?v=20261109-imagingphase1"></script>
 <script src="clinpath-treatment-ward-rounds.js?v=20261114-phaseC3-6a"></script>
 <script src="clinpath-diagnostic-rounds.js?v=20261114-phaseC3-6a"></script>
-<script src="treatment-ward-case-expansion.js?v=20261114-13patients1"></script>
-<script src="treatment-ward-advanced-rounds.js?v=20261114-13patients1"></script>
+<script src="treatment-ward-case-expansion.js?v=20261114-13patients3"></script>
+<script src="treatment-ward-advanced-rounds.js?v=20261114-13patients3"></script>
 <script src="treatment-diagnostics.js?v=20261114-treatment-journey1"></script>
 <script src="advanced-clinpath-stations.js?v=20261114-treatment-journey1"></script>
 <script src="surgery-necropsy-learning.js?v=20261110-newwings1"></script>
@@ -2396,7 +2396,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   return '<div class="vpqWardHead"><b>'+escapeHtml(p.name)+'</b><p>'+escapeHtml(p.desc)+'</p><p class="tiny"><b>Admission baseline:</b> '+escapeHtml(p.baseline)+'</p>'+
     '<p class="tiny"><b>Shift '+a.shift+' · Next step: '+nextLabel()+'</b></p></div>'+
     (window.VPQ_WARD_ADVANCED?.rows?.(p.id)||'')+
-    '<div class="buttonrow"><button type="button" data-vpqwardadvanced="1">🧠 Advanced clinical reasoning · '+(window.VPQ_WARD_ADVANCED?.count?.(p.id)||0)+'/'+(window.VPQ_WARD_ADVANCED?.library?.[p.id]?.questions?.length||0)</button></div>';
+    '<div class="buttonrow"><button type="button" data-vpqwardadvanced="1">🧠 Advanced clinical reasoning · '+(window.VPQ_WARD_ADVANCED?.count?.(p.id)||0)+'/'+(window.VPQ_WARD_ADVANCED?.library?.[p.id]?.questions?.length||0)+'</button></div>';
  }
  function navigation(){
   if(!hasPatient)return '';
@@ -2410,7 +2410,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   wardMode='chart';savePatient();
   const list=hospitalData.map(p=>{
    const a=progress[p.id],next=a.outpatientComplete?'Case complete':a.trendComplete?'Outpatient / discharge':a.careComplete?'Monitor':a.examined?'Treat':'Assess';
-   return '<button type="button" class="full" data-vpqwardpick="'+escapeHtml(p.id)+'" style="text-align:left"><b>'+escapeHtml(p.name)+'</b><span class="tiny" style="display:block">Shift '+a.shift+' · Next: '+next+' · Advanced reasoning '+(window.VPQ_WARD_ADVANCED?.count?.(p.id)||0)+'/'+(window.VPQ_WARD_ADVANCED?.library?.[p.id]?.questions?.length||0)</span></button>';
+   return '<button type="button" class="full" data-vpqwardpick="'+escapeHtml(p.id)+'" style="text-align:left"><b>'+escapeHtml(p.name)+'</b><span class="tiny" style="display:block">Shift '+a.shift+' · Next: '+next+' · Advanced reasoning '+(window.VPQ_WARD_ADVANCED?.count?.(p.id)||0)+'/'+(window.VPQ_WARD_ADVANCED?.library?.[p.id]?.questions?.length||0)+'</span></button>';
   }).join('');
   showModal('🏥 Treatment Ward · Patient Handoff',
    '<p>Practice the patient journey: <b>Assess → Treat → Monitor → Discharge or outpatient follow-up</b>. Lab findings remain in the chart, but standalone CBC, chemistry and microscope lessons belong in Clinical Pathology.</p>'+
