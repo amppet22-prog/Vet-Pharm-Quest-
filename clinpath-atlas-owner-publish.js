@@ -63,11 +63,15 @@ function validated(draft){
 function form(draft){
  const base=window.VPQ_ATLAS_EDITOR?.catalog?.().find(x=>x.id===draft.id);
  const filled=validated(draft);
- return '<p><b>'+esc(base?.name||draft.id)+'</b> · '+filled.photos.filter(x=>x.dataUrl||x.url).length+' new photo(s) selected. Text-only corrections are also supported.</p>'+
- '<p><b>Owner publishing:</b> Use a short-lived <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained GitHub token</a> for only <b>'+OWNER+'/'+REPO+'</b> with <b>Contents: Read and write</b>. Enter it below; the game never saves it.</p>'+
- '<p class="tiny">GitHub will verify the signed-in token belongs to <b>'+OWNER+'</b>. This updates the public repository; GitHub Pages deployment may take time. Do not paste tokens into chat, issues, source code or shared computers.</p>'+
- '<label for="vpqPublishToken">GitHub fine-grained access token</label><input id="vpqPublishToken" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" style="width:100%;padding:10px;margin:6px 0 12px">'+
- '<div class="buttonrow"><button data-atlas-publish-confirm="1">🚀 Publish Now</button><button data-atlas-edit="'+esc(draft.id)+'">← Back to draft</button></div>'+
+ const vault=window.VPQ_OWNER_KEY_VAULT;
+ const saved=!!vault?.exists?.();
+ return '<p><b>'+esc(base?.name||draft.id)+'</b> · '+filled.photos.filter(x=>x.dataUrl||x.url).length+' new photo(s). Text-only changes are supported.</p>'+
+ '<p><b>Owner publishing</b> uses your GitHub permission to write to <b>'+OWNER+'/'+REPO+'</b>. You may enter a fine-grained token or unlock your locally encrypted token with a password you chose. Your password is not a GitHub password, and no secret is added to the public game.</p>'+
+ (saved?'<p><b>🔒 Saved encrypted publishing key found on this browser.</b> Enter your password to unlock it, or enter a replacement token below.</p>':'<p><b>First setup:</b> Create a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained GitHub token</a> for this one repository with <b>Contents: Read and write</b>. Optionally choose a password (12+ characters) to encrypt and remember it on this browser.</p>')+
+ '<label for="vpqPublishPassword">Your publishing password (optional when entering a fresh token)</label><input id="vpqPublishPassword" type="password" autocomplete="off" spellcheck="false" placeholder="'+(saved?'Unlock saved publishing key':'Create a password (12+ characters)')+'" style="width:100%;padding:10px;margin:5px 0 10px">'+
+ '<label for="vpqPublishToken">GitHub fine-grained token '+(saved?'(only for replacing your saved key)':'(required for first setup)')+'</label><input id="vpqPublishToken" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" style="width:100%;padding:10px;margin:5px 0 10px">'+
+ '<div class="buttonrow"><button data-atlas-publish-confirm="1">🚀 Publish Now</button>'+(saved?'<button data-atlas-vault-clear="1">Forget saved publishing key</button>':'')+'<button data-atlas-edit="'+esc(draft.id)+'">← Back to draft</button></div>'+
+ '<p class="tiny">The token is encrypted before storage and decrypted only for a publish action. Anyone who knows your password and has access to this browser may publish as you. Use a strong password; GitHub tokens expire and can be revoked.</p>'+
  '<p class="tiny" id="vpqPublishResult" role="status" aria-live="polite"></p>';
 }
 function dialog(){
@@ -105,17 +109,38 @@ async function publish(token,draft,progress){
 }
 function init(context){
  context.body.addEventListener('click',event=>{
-  const button=event.target.closest('[data-atlas-publish-open],[data-atlas-publish-confirm]');if(!button)return;
+  const button=event.target.closest('[data-atlas-publish-open],[data-atlas-publish-confirm],[data-atlas-vault-clear]');if(!button)return;
   if(button.hasAttribute('data-atlas-publish-open'))return dialog();
+  if(button.hasAttribute('data-atlas-vault-clear')){
+   window.VPQ_OWNER_KEY_VAULT?.clear?.();
+   return window.VPQ_ATLAS_EDITOR?.show?.('Publishing key forgotten','<p>The encrypted key was cleared from this browser. Your GitHub token itself was not revoked. Enter it again when you next publish.</p><button data-atlas-edit="'+esc(pending?.id||'plateletclump')+'">Return to editor</button>');
+  }
   if(button.hasAttribute('data-atlas-publish-confirm')){
    const tokenField=context.body.querySelector('#vpqPublishToken');
-   const token=tokenField?.value.trim()||'';
-   if(!token){context.body.querySelector('#vpqPublishResult').textContent='Enter a GitHub fine-grained token first.';return}
+   const passwordField=context.body.querySelector('#vpqPublishPassword');
+   let enteredToken=tokenField?.value.trim()||'';
+   let passphrase=passwordField?.value||'';
+   if(tokenField)tokenField.value='';
+   if(passwordField)passwordField.value='';
+   const vault=window.VPQ_OWNER_KEY_VAULT;
    const draft=pending;
-   // Never keep the token in the DOM once publishing begins.
-   tokenField.value='';button.disabled=true;
+   button.disabled=true;
    const progress=message=>{const el=context.body.querySelector('#vpqPublishResult');if(el)el.textContent=message};
-   publish(token,draft,progress).then(item=>{
+   (async()=>{
+    let token=enteredToken;
+    if(!token){
+     if(!vault?.exists?.())throw Error('Enter a GitHub token for first setup, or save a publishing key first.');
+     if(!passphrase)throw Error('Enter your publishing password to unlock the saved key.');
+     progress('Unlocking encrypted publishing key…');
+     token=await vault.unlock(passphrase);
+    }
+    const result=await publish(token,draft,progress);
+    if(enteredToken&&passphrase&&vault?.available?.()){
+     try{await vault.store(enteredToken,passphrase)}
+     catch(err){progress('Published successfully; could not save encrypted key: '+err.message)}
+    }
+    return result;
+   })().then(item=>{
     pending=null;const all=window.VPQ_ATLAS_EDITOR?.read?.()||{};delete all[item.id];
     window.VPQ_ATLAS_EDITOR?.replaceDrafts?.(all);
     context.showModal('✅ Published to GitHub','<p><b>'+esc(item.name)+'</b> was committed to the official GitHub repository. Your browser draft has been cleared for this finding.</p><p>GitHub Pages may need a deployment cycle. <a href="https://github.com/'+OWNER+'/'+REPO+'/commits/main" target="_blank" rel="noopener noreferrer">View changes on GitHub</a>.</p><button data-cph-nav="atlas">🔬 Open Microscope Atlas</button>');
