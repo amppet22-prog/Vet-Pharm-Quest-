@@ -406,8 +406,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="pharmacy-nutrition-room.js?v=20261111-visual-rounds1"></script>
 <script src="walkable-clinic-rooms-25d.js?v=20261110-skillsdoor2"></script>
 <script src="clinic-approach-interactions.js?v=20261110-hallentry2"></script>
-<script src="clinpath-hybrid-room-art.js?v=20261114-phaseC1"></script>
-<script src="specialist-clinic-wings.js?v=20261114-phaseC1"></script>
+<script src="clinpath-hybrid-room-art.js?v=20261114-polish2"></script>
+<script src="specialist-clinic-wings.js?v=20261114-polish2"></script>
 <script src="feline-behavior-game.js?v=20261111-cuter-cats3"></script>
 <script src="feline-enrichment-game.js?v=20261111-play-enrich1"></script>
 <script src="reception-hallway-and-habitats.js?v=20261111-dog-layout24"></script>
@@ -2906,7 +2906,9 @@ updatePosition=function(){
    :(['clinpath','isolation','necropsy','surgery','skills'].includes(activeRoom)
       ?vpqSpecialistWings.updateNearby(activeRoom,avatarX)
       :vpqApproachOtherRooms.updateNearby(activeRoom,avatarX));
- if(near)$('interactToast').textContent='Press E: '+near.label;
+ if(near)$('interactToast').textContent=activeRoom==='clinpath'
+   ? 'E · '+({advancedCoag:'Coagulation',advancedGas:'Blood Gas',advancedUrine:'Urinalysis',advancedCases:'Cases',vpqClassicSmear:'Microscopy'}[near.action]||near.label)
+   : 'Press E: '+near.label;
 };
 const vpq25PriorInteract=interact;
 interact=function(){
