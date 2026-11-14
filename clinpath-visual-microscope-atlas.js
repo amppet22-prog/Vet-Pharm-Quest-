@@ -19,6 +19,10 @@ const links={
  Artifacts:'https://eclinpath.com/atlas/urinalysis/'
 };
 let api=null,group='All',speciesFilter='All',mode='Learn',current=null,quizAnswer=null;
+let patientReturn=false;
+function patientBack(){return patientReturn?'<button type="button" data-cpv-patient="1">↩ Return to patient case</button>':'';}
+function openFromCase(id){patientReturn=true;mode='Quiz';show(id);}
+
 const safe=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const groups=['All','RBC','WBC','Platelets','Urine cells','Casts','Crystals','Artifacts'];
 const comparisons=[
@@ -152,7 +156,7 @@ function show(id){
  api.showModal('🔬 '+(quiz?'Unknown microscopic field':e.name),header()+realPhoto(e,quiz)+
  (quiz?'<h3>Identify the illustrated finding</h3><div style="display:grid;gap:7px">'+optionsFor(e).map((o,i)=>'<button data-cpv-answer="'+safe(o.id)+'" style="text-align:left;padding:10px;background:#fffafc;border:2px solid #d7c7e3">'+String.fromCharCode(65+i)+'. '+safe(o.name)+'</button>').join('')+'</div>':
  '<p><b>Appearance:</b> '+safe(e.look)+'</p><p><b>WHY it looks that way:</b> '+safe(e.why)+'</p><p><b>Don’t confuse:</b> '+safe(e.confuse)+'</p><p><b>Clinical significance:</b> '+safe(e.clinical)+'</p><p><b>Species:</b> '+safe(e.species)+'</p>'+speciesEvidenceDetails(e.id)+cellRecognitionDetails(e)+(e.group==='Artifacts'?hemeGuide():''))+
- '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-back="1">← Atlas</button>'+(quiz?'':'<button data-atlas-edit="'+safe(e.id)+'" data-atlas-from="visual">✏️ Edit / Publish this finding</button>')+'<button data-cpv-switch="1">'+(quiz?'📖 Reveal & learn':'🎯 Test this image')+'</button>'+(quiz?'':'<a href="'+safe(links[e.group])+'" target="_blank" rel="noopener noreferrer">📸 Open real photo atlas (Cornell eClinPath)</a>')+'</div>');
+ '<div style="display:flex;gap:8px;flex-wrap:wrap">'+patientBack()+'<button data-cpv-back="1">← Atlas</button>'+(quiz?'':'<button data-atlas-edit="'+safe(e.id)+'" data-atlas-from="visual">✏️ Edit / Publish this finding</button>')+'<button data-cpv-switch="1">'+(quiz?'📖 Reveal & learn':'🎯 Test this image')+'</button>'+(quiz?'':'<a href="'+safe(links[e.group])+'" target="_blank" rel="noopener noreferrer">📸 Open real photo atlas (Cornell eClinPath)</a>')+'</div>');
 }
 function answer(id){
  if(!current||quizAnswer!==null)return;
@@ -164,14 +168,15 @@ function answer(id){
  realPhoto(e)+'<p><b>Correct answer: '+safe(e.name)+'</b></p><p><b>What to look for:</b> '+safe(e.look)+'</p><p><b>WHY:</b> '+safe(e.why)+'</p><p><b>Don’t confuse with:</b> '+safe(e.confuse)+'</p><p><b>Clinical reasoning:</b> '+safe(e.clinical)+'</p><p><b>Species:</b> '+safe(e.species)+'</p>'+
  (reward?.xp?'<p>First mastery: +'+reward.xp+' EXP and +'+(reward.coins||0)+' coins according to the shared reward system.</p>':'<p>Practice feedback saved to the shared learning tracker; repeat rewards are disabled.</p>')+
  '<p><a href="'+safe(links[e.group])+'" target="_blank" rel="noopener noreferrer">📸 Compare with genuine veterinary microscopy photos on Cornell eClinPath</a></p>'+
- '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-retry="1">↻ Retry</button>'+(next?'<button data-cpv-next="'+next.id+'">Next field →</button>':'')+'<button data-cpv-back="1">Atlas menu</button></div>');
+ '<div style="display:flex;gap:8px;flex-wrap:wrap">'+patientBack()+'<button data-cpv-retry="1">↻ Retry</button>'+(next?'<button data-cpv-next="'+next.id+'">Next field →</button>':'')+'<button data-cpv-back="1">Atlas menu</button></div>');
 }
 function init(context){
  api=context;
  context.body.addEventListener('click',event=>{
- const b=event.target.closest('[data-cpv-species],[data-cpv-group],[data-cpv-mode],[data-cpv-open],[data-cpv-answer],[data-cpv-back],[data-cpv-switch],[data-cpv-next],[data-cpv-retry],[data-cpv-real],[data-cpv-urine],[data-cpv-compare],[data-cpv-pair]');
+ const b=event.target.closest('[data-cpv-patient],[data-cpv-species],[data-cpv-group],[data-cpv-mode],[data-cpv-open],[data-cpv-answer],[data-cpv-back],[data-cpv-switch],[data-cpv-next],[data-cpv-retry],[data-cpv-real],[data-cpv-urine],[data-cpv-compare],[data-cpv-pair]');
  if(!b)return;
  const d=b.dataset;
+ if(d.cpvPatient!==undefined){patientReturn=false;return window.VPQ_CLINPATH_INTERACTIVE_CASES?.resume?.();}
  if(d.cpvSpecies!==undefined){speciesFilter=d.cpvSpecies;return menu()}
  if(d.cpvGroup!==undefined){group=d.cpvGroup;return menu()}
  if(d.cpvMode!==undefined){mode=d.cpvMode;return menu()}
@@ -187,5 +192,5 @@ function init(context){
  if(d.cpvPair!==undefined)return pair(Number(d.cpvPair));
  });
 }
-return Object.freeze({init,menu,open:show,entries});
+return Object.freeze({init,menu,open:show,openFromCase,entries});
 })();
