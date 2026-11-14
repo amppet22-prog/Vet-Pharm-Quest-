@@ -329,7 +329,7 @@ function vpqMatchInit40(){
  const pool=vpqMatchPool40(),key=vpqMatchMode40;
  if(pool.length<3){
    matchDeck=[];round=null;
-   $('screen').innerHTML='<h2>🧩 Drug Match · No matching cards yet</h2><p>Your selected lecture set contains '+pool.length+' available '+(vpqMatchMode40==='clinical'?'clinical caution':'mechanism')+' pairs. Choose more pharmacology lectures in the Learning Lab.</p><button class="btn" id="vpqMatchToExam">Lecture selection</button>';
+   $('screen').innerHTML='<h2>🧩 Drug Match · No matching cards yet</h2><p>Your selected lecture set contains '+pool.length+' available '+(vpqMatchMode40==='clinical'?'clinical indication':vpqMatchMode40==='className'?'drug class':'mechanism')+' pairs. Choose more pharmacology lectures in the Learning Lab.</p><button class="btn" id="vpqMatchToExam">Lecture selection</button>';
    $('vpqMatchToExam').onclick=()=>setTab('examcenter');return;
  }
  const candidates=pool.filter(x=>!vpqMatchRecent40.includes(x.id));
@@ -347,13 +347,14 @@ function vpqMatchRender40(message=''){
  round=null;
  if(!matchDeck.length)return vpqMatchInit40();
  const total=Object.keys(vpqMatchInfo40).length;
- $('screen').innerHTML='<div class="section-title"><h2>🧩 '+(vpqMatchMode40==='clinical'?'Clinical Use & Safety Match':'Drug Class & Mechanism Match')+'</h2><span class="chip">'+matched.size+'/'+total+' pairs</span></div>'+
- '<p class="muted">Your <b>saved pharmacology lectures</b> control the question pool. Match each drug to '+(vpqMatchMode40==='clinical'?'its specific indication, target patients and safety consideration.':'its molecular target or pharmacologic mechanism.')+' Different drug sets rotate across rounds.</p>'+
- '<div class="little"><button class="btn smallbtn" id="vpqMatchModeMechanism">⚙️ Drug target</button><button class="btn smallbtn" id="vpqMatchModeClinical">⚕️ Clinical caution</button><button class="btn smallbtn" id="vpqMatchNew">New drug set ↻</button></div>'+
+ $('screen').innerHTML='<div class="section-title"><h2>🧩 '+(vpqMatchMode40==='clinical'?'Clinical Use & Safety Match':vpqMatchMode40==='className'?'Drug Classification Match':'Drug & Mechanism Match')+'</h2><span class="chip">'+matched.size+'/'+total+' pairs</span></div>'+
+ '<p class="muted">Your <b>saved pharmacology lectures</b> control the question pool. Match each drug to '+(vpqMatchMode40==='clinical'?'its specific indication, target patients and safety consideration.':vpqMatchMode40==='className'?'its precise pharmacologic class or subclass.':'its molecular target or pharmacologic mechanism.')+' Different drug sets rotate across rounds.</p>'+
+ '<div class="little"><button class="btn smallbtn" id="vpqMatchModeClass">🏷️ Drug class</button><button class="btn smallbtn" id="vpqMatchModeMechanism">⚙️ Drug target</button><button class="btn smallbtn" id="vpqMatchModeClinical">⚕️ Clinical caution</button><button class="btn smallbtn" id="vpqMatchNew">New drug set ↻</button></div>'+
  '<div class="meter" style="margin:12px 0"><div style="width:'+(matched.size/total*100)+'%"></div></div>'+
  '<div class="match-board">'+matchDeck.map((x,i)=>'<button class="tile '+(matched.has(x.id)?'matched':'')+' '+(selection===i?'selected':'')+'" data-vpqmatchtile="'+i+'" '+(matched.has(x.id)?'disabled':'')+'>'+safe(x.text)+'</button>').join('')+'</div>'+
  '<div class="feedback '+(message.startsWith('✓')?'good':'')+'" style="margin-top:12px">'+(message||'Choose a drug and its corresponding mechanism or clinical clue.')+'</div>'+
  (matched.size===total?'<p class="note">✓ Completed this set. Start a new set to encounter new drugs and contexts.</p>':'');
+ $('vpqMatchModeClass').onclick=()=>{vpqMatchMode40='className';vpqMatchInit40()};
  $('vpqMatchModeMechanism').onclick=()=>{vpqMatchMode40='mechanism';vpqMatchInit40()};
  $('vpqMatchModeClinical').onclick=()=>{vpqMatchMode40='clinical';vpqMatchInit40()};
  $('vpqMatchNew').onclick=vpqMatchInit40;
