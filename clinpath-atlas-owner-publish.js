@@ -43,7 +43,7 @@ async function api(path,token,method,payload,allowMissing){
  }
  return response.json();
 }
-async function file(path,token){return api('repos/'+OWNER+'/'+REPO+'/contents/'+path+'?ref=main',token,'GET',null,true)}
+async function file(path,token,allowMissing=false){return api('repos/'+OWNER+'/'+REPO+'/contents/'+path+'?ref=main',token,'GET',null,allowMissing)}
 async function put(path,content,sha,token,message){
  return api('repos/'+OWNER+'/'+REPO+'/contents/'+path,token,'PUT',{message,content,branch:'main',...(sha?{sha}:{})});
 }
@@ -117,7 +117,7 @@ async function publish(token,draft,progress){
   let photoUrl=p.url;
   if(p.dataUrl){
    const path='atlas-photos/'+item.id+'-photo-'+(i+1)+'.jpg';
-   const old=await file(path,token);
+   const old=await file(path,token,true);
    progress('Uploading photo '+(i+1)+'…');
    await put(path,p.dataUrl.split(',')[1],old?.sha,token,'Publish '+item.name+' photo '+(i+1)+' from atlas editor');
    photoUrl='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+path;
