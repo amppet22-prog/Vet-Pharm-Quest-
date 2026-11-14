@@ -11,6 +11,17 @@ const saved=()=>{
  if(!api.state.pharmExam2Interactive||typeof api.state.pharmExam2Interactive!=='object')api.state.pharmExam2Interactive={mastered:[],attempts:{}};
  const a=api.state.pharmExam2Interactive;a.mastered ||= [];a.attempts ||= {};return a;
 };
+// Apply the shared Learning Lab lecture focus without mutating the saved selection.
+// If no Exam 2 lectures are selected, offer all stations as an explicit fallback.
+function selectedExam2Lectures(){
+ const selected=window.VPQCurriculum?.getLectures?.()||[];
+ return selected.map(x=>Number((String(x).match(/Lecture (\\d+)/)||[])[1])).filter(n=>n>=10&&n<=20);
+}
+function questionIndices(g){
+ const focus=selectedExam2Lectures();
+ return g.questions.map((q,i)=>({i,n:Number((q.source.match(/Lecture (\\d+)/)||[])[1])})).filter(x=>!focus.length||focus.includes(x.n)).map(x=>x.i);
+}
+function visibleGroups(){return groups.filter(g=>questionIndices(g).length);}
 const key=(g,i)=>'p2-path-'+g.id+'-'+i;
 // Stable per-question rotation + reversal prevents answer-position memorization.
 // Answer indices in the original bank remain authoritative; only display order changes.
@@ -27,28 +38,30 @@ function diagram(group,q,answered){
 }
 function menu(){
  groupId=null;lastAnswer=null;lastGain=false;
- const done=saved().mastered;
+ const done=saved().mastered,focus=selectedExam2Lectures(),available=visibleGroups();
  api.showModal('🔬 Pharmacology Exam 2 · Interactive Mechanisms',
  '<p><b>Trace the drug, not just its name.</b> Choose a station and answer questions to unlock the completed pathway. The hint never reveals the answer; mechanisms appear after your choice.</p>'+
- '<div class="vpqP2Stations">'+groups.map(g=>'<button data-vpq-p2-open="'+esc(g.id)+'"><b>'+g.icon+' '+esc(g.title)+'</b><small>'+esc(g.lecture)+' · '+g.questions.filter((q,i)=>done.includes(key(g,i))).length+'/'+g.questions.length+' mastered</small><span>'+esc(g.intro)+'</span></button>').join('')+'</div>'+
+ '<p class="tiny">'+(focus.length?'Showing selected Exam 2 lectures: '+focus.join(', ')+'. Change the selection in the Learning Lab.':'No Exam 2 lectures selected in the Learning Lab, so all Exam 2 stations are shown.')+'</p>'+
+ '<div class="vpqP2Stations">'+available.map(g=>{const ix=questionIndices(g);return '<button data-vpq-p2-open="'+esc(g.id)+'"><b>'+g.icon+' '+esc(g.title)+'</b><small>'+esc(g.lecture)+' · '+ix.filter(i=>done.includes(key(g,i))).length+'/'+ix.length+' selected questions mastered</small><span>'+esc(g.intro)+'</span></button>'}).join('')+'</div>'+
  '<details class="vpq-source-note"><summary>📚 Sources & review</summary><p>Adapted from your November 2026 Pharmacology Exam 2 Study Guide, Lectures 11, 13–20. All questions are original study checks. Your bracketed/➕ enrichment and disputed claims remain outside the core answer keys. Not prescribing protocols.</p></details>');
 }
 function open(id,i=0){
- if(!groups.some(g=>g.id===id))return menu();
- groupId=id;index=Math.max(0,Math.min(groups.find(g=>g.id===id).questions.length-1,i));lastAnswer=null;lastGain=false;render();
+ const g=groups.find(x=>x.id===id);if(!g)return menu();
+ const available=questionIndices(g);if(!available.length)return menu();
+ groupId=id;index=available.includes(i)?i:available[0];lastAnswer=null;lastGain=false;render();
 }
 function render(){
- const g=groups.find(x=>x.id===groupId);if(!g)return menu();const q=g.questions[index],answered=lastAnswer!==null,ok=lastAnswer===q.a,seen=saved().mastered.includes(key(g,index));
+ const g=groups.find(x=>x.id===groupId);if(!g)return menu();const available=questionIndices(g);if(!available.includes(index))return menu();const position=available.indexOf(index),q=g.questions[index],answered=lastAnswer!==null,ok=lastAnswer===q.a,seen=saved().mastered.includes(key(g,index));
  const answers=choiceOrder(g,index).map((original,i)=>'<button data-vpq-p2-answer="'+original+'" '+(answered?'disabled':'')+' class="vpqP2Choice '+(answered?(original===q.a?'correct':original===lastAnswer?'incorrect':''):'')+'">'+String.fromCharCode(65+i)+'. '+esc(q.options[original])+'</button>').join('');
  api.showModal(g.icon+' '+g.title,
- '<div class="vpqP2Head"><b>'+esc(g.lecture)+'</b><span>Question '+(index+1)+' / '+g.questions.length+' · '+(seen?'✓ Mastered':'Practice')+'</span></div>'+
- '<div class="vpqP2Progress"><span style="width:'+Math.round((index+1)/g.questions.length*100)+'%"></span></div>'+
+ '<div class="vpqP2Head"><b>'+esc(g.lecture)+'</b><span>Question '+(position+1)+' / '+available.length+' · '+(seen?'✓ Mastered':'Practice')+'</span></div>'+
+ '<div class="vpqP2Progress"><span style="width:'+Math.round((position+1)/available.length*100)+'%"></span></div>'+
  '<div class="vpqP2PatientQuestion"><span>CLINICAL QUESTION</span><h3>'+esc(q.q)+'</h3></div>'+
  diagram(g,q,answered)+
  '<details class="vpqP2Hint"><summary>❔ How should I think about this?</summary><p>'+esc(q.hint)+'</p></details>'+
  '<div class="vpqP2Options">'+answers+'</div>'+
  (answered?'<section class="vpqP2Why"><b>'+(ok?'✅ Correct':'💡 Review the correct mechanism')+'</b><p><strong>Best answer:</strong> '+esc(q.options[q.a])+'</p><p><strong>WHY:</strong> '+esc(q.why)+'</p><small>'+(lastGain?'🪙 +15 EXP and +3 coins earned!':'You can retry without duplicate rewards.')+'</small></section>':'<p class="tiny">Select a decision to reveal the complete pathway and physiological explanation.</p>')+
- '<div class="buttonrow"><button data-vpq-p2-visual="1">🎨 Explore this mechanism</button>'+(answered?'<button data-vpq-p2-retry="1">↻ Retry</button>':'')+(index>0?'<button data-vpq-p2-prev="1">← Previous</button>':'')+(answered&&index<g.questions.length-1?'<button data-vpq-p2-next="1">Next question →</button>':'')+'<button data-vpq-p2-home="1">All interactive stations</button></div>'+
+ '<div class="buttonrow"><button data-vpq-p2-visual="1">🎨 Explore this mechanism</button>'+(answered?'<button data-vpq-p2-retry="1">↻ Retry</button>':'')+(position>0?'<button data-vpq-p2-prev="1">← Previous</button>':'')+(answered&&position<available.length-1?'<button data-vpq-p2-next="1">Next question →</button>':'')+'<button data-vpq-p2-home="1">All interactive stations</button></div>'+
  '<details class="vpq-source-note"><summary>📚 Source & review</summary><p>'+esc(q.source)+'</p><p>Original educational simulation; no dosing recommendations.</p></details>');
 }
 function answer(n){
@@ -71,8 +84,8 @@ function init(context){
   if(d.vpqP2Visual!==undefined)return window.VPQ_PHARM_EXAM2_VISUAL_ANATOMY?.show?.(({nephron:'nephron',synapse:'synapse',receptors:'receptor',patients:'receptor'})[groupId]||'receptor');
   if(d.vpqP2Answer!==undefined)return answer(Number(d.vpqP2Answer));
   if(d.vpqP2Retry!==undefined){lastAnswer=null;lastGain=false;return render();}
-  if(d.vpqP2Prev!==undefined)return open(groupId,index-1);
-  if(d.vpqP2Next!==undefined)return open(groupId,index+1);
+  if(d.vpqP2Prev!==undefined){const ix=questionIndices(groups.find(x=>x.id===groupId));return open(groupId,ix[Math.max(0,ix.indexOf(index)-1)]);}
+  if(d.vpqP2Next!==undefined){const ix=questionIndices(groups.find(x=>x.id===groupId));return open(groupId,ix[Math.min(ix.length-1,ix.indexOf(index)+1)]);}
  });
  if(!document.getElementById('vpqP2PathStyle')){
   const el=document.createElement('style');el.id='vpqP2PathStyle';
