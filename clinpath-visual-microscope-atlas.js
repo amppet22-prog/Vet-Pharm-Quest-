@@ -132,7 +132,7 @@ function optionsFor(e){
 /* Hybrid atlas: reuse the longer Cell Recognition explanations instead of duplicating content. */
 const recognitionAliases={spherocyte:'sphere',schistocyte:'schisto',acanthocyte:'acantho',echinocyte:'echino',heinz:'heinz',rouleaux:'rouleaux',band:'band',toxic:'toxicneut',plateletclump:'plateclump',reactive:'reactive'};
 function cellRecognitionDetails(entry){
- const items=window.VPQ_BLOOD_SMEAR_LAB?.cells||[];
+ const items=window.VPQ_CONTENT_STUDIO?.records?.()||window.VPQ_BLOOD_SMEAR_LAB?.cells||[];
  const exact=recognitionAliases[entry.id]||entry.id;
  const cell=items.find(x=>x.id===exact);
  if(!cell)return '';
