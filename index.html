@@ -2833,14 +2833,15 @@ function vpqExam2ObjectiveLecture(lecture){
  const cards=vpqExam2ObjectiveCards.filter(x=>x.lecture===lecture);
  if(!cards.length)return vpqExam2ObjectiveMenu();
  const groups=[...new Set(cards.map(x=>x.section))];
- const warnings=cards.find(x=>x.note)?.note;
+ const flagged=cards.filter(x=>x.note).length;
  showModal('📋 '+escapeHtml(lecture)+' · Instructor Objectives',
  '<p class="vpq-case-meta">'+cards.length+' prompts · answer hidden until you open it</p>'+
- (warnings?'<details class="vpqNewPharmOptional"><summary>⚠ Source interpretation caution</summary><p>'+escapeHtml(warnings)+'</p></details>':'')+
+ (flagged?'<p class="tiny">⚠ '+flagged+' source answers need review. Open the caution beneath each affected card; uploaded answer wording is preserved for comparison.</p>':'')+
  groups.map(group=>'<h3 style="font-size:15px;margin:15px 0 8px">'+escapeHtml(group)+'</h3>'+
  cards.filter(x=>x.section===group).map(x=>'<section class="vpq-patient-case" style="padding:10px 12px;margin:9px 0;border:1px solid #d4e1ef;border-radius:11px">'+
  '<div class="vpq-case-question" style="margin-bottom:8px"><span class="vpq-case-question-label">SOURCE OBJECTIVE '+x.order+'</span><h3>'+escapeHtml(x.q)+'</h3></div>'+
- '<details style="padding:9px 12px;background:#f7fbfa;border:1px solid #c9ddcc;border-radius:9px"><summary style="font-weight:800;cursor:pointer">💡 Reveal answer from your study guide</summary><p>'+escapeHtml(x.answer)+'</p></details></section>').join('')).join('')+
+ '<details style="padding:9px 12px;background:#f7fbfa;border:1px solid #c9ddcc;border-radius:9px"><summary style="font-weight:800;cursor:pointer">💡 Reveal answer from your study guide</summary><p>'+escapeHtml(x.answer)+'</p></details>'+
+ (x.note?'<details class="vpqNewPharmOptional" style="margin-top:7px"><summary>⚠ Review this answer before clinical use</summary><p>'+escapeHtml(x.note)+'</p></details>':'')+'</section>').join('')).join('')+
  '<details class="vpq-source-note"><summary>📚 Source &amp; review</summary><div class="vpq-source-body">Uploaded Pharmacology Exam 2: Study Guide Answers and Practice Questions · Part 1 · Nov 14, 2026. This deck preserves guide wording, including notes and unsettled claims.</div></details>'+
  '<div class="buttonrow"><button data-vpqnewpharm-objectives="1">← All Exam 2 objectives</button><button data-vpqnewpharm-lesson="'+escapeHtml(lecture)+'">📖 Review lecture</button></div>');
 }
