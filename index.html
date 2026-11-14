@@ -2836,6 +2836,46 @@ function vpqExam2ObjectiveLecture(lecture){
  '<details class="vpq-source-note"><summary>📚 Source &amp; review</summary><div class="vpq-source-body">Uploaded Pharmacology Exam 2: Study Guide Answers and Practice Questions · Part 1 · Nov 14, 2026. This deck preserves guide wording, including notes and unsettled claims.</div></details>'+
  '<div class="buttonrow"><button data-vpqnewpharm-objectives="1">← All Exam 2 objectives</button><button data-vpqnewpharm-lesson="'+escapeHtml(lecture)+'">📖 Review lecture</button></div>');
 }
+function vpqPharmDrugMaster(lecture='Lecture 10'){
+ const all=vpqPharmNext?.drugs||[],lectures=vpqPharmNext?.lectures?.map(x=>x.id)||[],list=all.filter(x=>x.lecture===lecture);
+ showModal('💊 Exam 2 · Master Drug Comparison',
+ '<p class="vpq-case-presentation"><b>'+all.length+' drug and formulation entries</b> organized by lecture. “—” means not specified in the imported study note, not an absence of risk. Click a drug to compare its details.</p>'+
+ '<div class="buttonrow">'+lectures.map(id=>'<button data-vpqpharmdrug-lecture="'+escapeHtml(id)+'" style="'+(id===lecture?'font-weight:900;background:#dbeafe':'')+'">'+escapeHtml(id.replace('Lecture ','L'))+'</button>').join('')+'</div>'+
+ '<h3 style="font-size:16px;margin:14px 0">'+escapeHtml(lecture)+' · '+list.length+' entries</h3>'+
+ list.map(d=>'<details style="border:1px solid #d5e0eb;border-radius:10px;margin:7px 0;padding:10px 12px;background:#fff"><summary style="font-weight:800;cursor:pointer">'+escapeHtml(d.name)+' <span style="font-size:11px;font-weight:500;color:#63748e">'+escapeHtml(d.class||'')+'</span></summary><div style="background:#f5f9fd;border-radius:8px;padding:9px 12px;margin-top:9px">'+
+ [['Class',d.class],['Target / MOA',d.moa],['What it treats',d.uses],['Species differences',d.species],['Adverse effects',d.effects],['Contraindications / cautions',d.contraindications],['Route / formulation',d.route],['WHY / clinical distinction',d.why]].map(([label,value])=>'<p style="margin:7px 0;font-size:12px;line-height:1.45"><b>'+escapeHtml(label)+':</b> '+escapeHtml(value||'— Not specified in this entry')+'</p>').join('')+
+ '<p class="tiny">Source: '+escapeHtml(d.source||'Exam 2 guide')+' · '+escapeHtml(d.reviewStatus||'Review clinical label')+'</p></div></details>').join('')+
+ '<p class="tiny">Based on Pharmacology Exam 2 Study Guide, Master Drug Comparison (pp. 11–22); verify current regulatory status and clinical recommendations.</p>'+
+ '<div class="buttonrow"><button data-vpqnewpharm-lesson="'+escapeHtml(lecture)+'">📖 Lecture</button><button data-vpqnewpharm-menu="1">← Exam 2</button></div>');
+}
+function vpqPharmTreatsWhat(){
+ const rows=[
+ ['Diabetes: dog','NPH, porcine lente/Vetsulin','Insulin formulation and glucose monitoring'],
+ ['Diabetes: cat','Glargine, PZI, detemir','Species-specific insulin selection and monitoring'],
+ ['DKA','Regular insulin after fluids/electrolyte assessment','Insulin shifts potassium; stabilization matters'],
+ ['Feline hyperthyroidism','Methimazole, radioiodine, restricted-iodine diet, surgery','Inhibit synthesis versus remove abnormal tissue'],
+ ['CKD anemia','Molidustat, darbepoetin','HIF versus EPO pathway'],
+ ['Urinary sphincter incontinence','Phenylpropanolamine; selected oxybutynin use','Sphincter tone versus detrusor activity'],
+ ['Urethrospasm','Tamsulosin, prazosin','Alpha-1 antagonism'],
+ ['Feline hypertension','Amlodipine, telmisartan','Vascular calcium versus angiotensin II signaling'],
+ ['Congestive edema','Furosemide, torsemide, spironolactone adjunct','Nephron site, volume and potassium'],
+ ['Pulmonary hypertension','Sildenafil','PDE5 / cGMP'],
+ ['Bronchoconstriction','Terbutaline, albuterol, ipratropium; clenbuterol in horses','Beta-2 versus muscarinic signaling'],
+ ['Vomiting','Maropitant, metoclopramide, ondansetron','NK1, D2 and 5-HT3'],
+ ['GI hypomotility','Metoclopramide, cisapride; other selected prokinetics','Exclude obstruction'],
+ ['GI ulcers','Omeprazole, sucralfate, misoprostol','Acid suppression versus mucosal defense'],
+ ['Hepatic encephalopathy','Lactulose, selected rifaximin use','Less ammonia production or uptake'],
+ ['Copper-associated hepatopathy','D-penicillamine, zinc gluconate','Chelation versus uptake inhibition'],
+ ['Canine cognitive dysfunction','Selegiline','MAO-B and monoamine metabolism'],
+ ['Canine separation-related anxiety','Clomipramine, fluoxetine plus behavior plan','Monoamine reuptake and training'],
+ ['Seizures','Phenobarbital, levetiracetam, selected bromide use','GABA versus synaptic vesicle targets'],
+ ['Sedation / analgesia','Alpha-2 agonists, opioids and other selected agents','Sedation and analgesia are distinct']
+ ];
+ showModal('🩺 Exam 2 · What Treats What',
+ '<p>Condition-first study map adapted from Master Table A (pp. 2–7) of the uploaded guide. These are comparisons, not universal first-line prescribing algorithms.</p>'+
+ rows.map(([condition,meds,why])=>'<div style="padding:10px;margin:8px 0;border:1px solid #d5e0ec;border-radius:9px"><b>'+escapeHtml(condition)+'</b><p style="font-size:13px;margin:5px 0">'+escapeHtml(meds)+'</p><small>'+escapeHtml(why)+'</small></div>').join('')+
+ '<div class="buttonrow"><button data-vpqpharmdrug-lecture="Lecture 10">💊 Drug comparison</button><button data-vpqnewpharm-menu="1">← Exam 2</button></div>');
+}
 function vpqPharmNextLesson(id){
  const l=vpqPharmNext?.lectures?.find(x=>x.id===id);if(!l)return vpqPharmNextMenu();
  showModal('📖 '+escapeHtml(l.id)+' · '+escapeHtml(l.title),
@@ -2845,7 +2885,7 @@ function vpqPharmNextLesson(id){
  (l.reviewFlags?.length?'<details class="vpqNewPharmOptional"><summary>⚠ Confirm with instructor / clinical references ('+l.reviewFlags.length+')</summary>'+l.reviewFlags.map(x=>'<p>⚠ '+escapeHtml(x)+'</p>').join('')+'</details>':'')+
  '<details class="vpqNewPharmOptional"><summary>📚 Sources & review</summary><p>'+escapeHtml(l.recording)+'</p>'+l.sources.map(x=>'<p>'+escapeHtml(x)+'</p>').join('')+'<p>'+escapeHtml(l.status)+'</p></details>'+
  '<p class="tiny">Course study material, not a veterinary prescribing protocol. Supplementary and disputed points are separated above.</p>'+
- '<div class="buttonrow"><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpqnewpharm-menu="1">← All new lectures</button></div>');
+ '<div class="buttonrow"><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpqpharmdrug-lecture="'+escapeHtml(l.id)+'">💊 Compare drugs</button><button data-vpqnewpharm-menu="1">← All lectures</button></div>');
 }
 function vpqPharmNextMenu(){
  const data=vpqPharmNext;
@@ -2853,7 +2893,7 @@ function vpqPharmNextMenu(){
  '<p>Updated Exam 2 lecture materials from your PDFs: core study essentials, optional plus-note explanations, and question practice. Exam 1 remains unchanged.</p>'+
  '<div class="vpqNewPharmCards">'+(data?.lectures||[]).map(x=>'<button data-vpqnewpharm-lesson="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.id)+' · '+escapeHtml(x.title)+'</b><small>'+escapeHtml(x.focus||x.summary)+'</small><em>'+data.questions.filter(q=>q.lecture===x.id).length+' initial questions · browse lesson</em></button>').join('')+'</div>'+
  '<p><b>📋 Source-authored Exam 2 practice:</b> 96 questions from the uploaded answer/practice guide, including explanations. Select Lecture 10–20 in the Study Desk question filter. These are practice items, not Dr. Carlson\'s verbatim objective prompts.</p>'+
- '<div class="buttonrow"><button data-vpqnewpharm-objectives="1">📋 Review all 132 instructor study-guide objectives</button></div>'+ '<p class="tiny">Lecture overviews and new practice questions are available. This first import is not yet a complete slide-by-slide reconciliation of the 142-page guide.</p>');
+ '<div class="buttonrow"><button data-vpqnewpharm-objectives="1">📋 132 instructor objectives</button><button data-vpqpharmdrug-lecture="Lecture 10">💊 Master Drug Comparison</button><button data-vpqpharm-treats="1">🩺 What Treats What</button></div>'+ '<p class="tiny">Lecture overviews and new practice questions are available. This first import is not yet a complete slide-by-slide reconciliation of the 142-page guide.</p>');
 }
 $('modalBody').addEventListener('click',ev=>{
  const b=ev.target.closest('button');if(!b)return;
@@ -2861,6 +2901,8 @@ $('modalBody').addEventListener('click',ev=>{
  if(d.vpqnewpharmMenu!==undefined)return vpqPharmNextMenu();
  if(d.vpqnewpharmObjectives!==undefined)return vpqExam2ObjectiveMenu();
  if(d.vpqnewpharmObjlecture!==undefined)return vpqExam2ObjectiveLecture(d.vpqnewpharmObjlecture);
+ if(d.vpqpharmdrugLecture!==undefined)return vpqPharmDrugMaster(d.vpqpharmdrugLecture);
+ if(d.vpqpharmTreats!==undefined)return vpqPharmTreatsWhat();
  if(d.vpqnewpharmLesson!==undefined)return vpqPharmNextLesson(d.vpqnewpharmLesson);
  if(d.vpqnewpharmStudy!==undefined){state.focus=d.vpqnewpharmStudy;studySession=null;return showStudyMenu()}
 });
