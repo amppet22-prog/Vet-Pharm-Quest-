@@ -73,6 +73,51 @@
       ],
       "updated": "2026-11-14T04:58:57.917Z",
       "approvedBy": "amppet22-prog"
+    },
+    "cell-seg": {
+      "id": "seg",
+      "name": "Segmented neutrophil/ Mature Neutrophil",
+      "group": "White cells",
+      "look": "Mature lobulated nucleus connected by thin filaments, pale granular cytoplasm. They have condensed chromatin and 2-5 nuclear lobes separated by thin filaments.",
+      "meaning": "Mature innate polymorphonuclear cells or PMNs. The immune system's first responders to bacterial infection and inflammation. Assess its absolute count and any toxic changes or concurrent immature cells.",
+      "why": "Mature neutrophils circulate before migrating to inflammatory sites; morphology alone does not diagnose bacterial infection.",
+      "note": "",
+      "speciesTags": [
+        "Dog",
+        "Cat",
+        "Horse"
+      ],
+      "species": "Dog, Cat, Horse",
+      "speciesEvidence": {
+        "Dog": {
+          "why": "",
+          "source": ""
+        },
+        "Cat": {
+          "why": "",
+          "source": ""
+        },
+        "Horse": {
+          "why": "",
+          "source": ""
+        }
+      },
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/atlas-photos/cell-seg-1.jpg",
+          "source": "https://medlabbuddy.com/white-blood-cells/neutrophils/segs/",
+          "credit": "MedLabBuddy",
+          "originalPhoto": false
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/atlas-photos/cell-seg-2.jpg",
+          "source": "https://imagebank.hematology.org/image/60395/segmented-neutrophil",
+          "credit": "AHS",
+          "originalPhoto": false
+        }
+      ],
+      "updated": "2026-11-14T07:32:33.605Z",
+      "approvedBy": "amppet22-prog"
     }
   }
 }
