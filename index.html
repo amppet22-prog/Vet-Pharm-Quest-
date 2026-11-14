@@ -2441,6 +2441,18 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
     (answered?'<div class="response '+(a.careComplete?'':'bad')+'"><b>'+(a.careComplete?'Appropriate response':'Reconsider your plan')+'</b><p>'+escapeHtml(p.why)+'</p></div>'+
     (a.careComplete?safeButton('monitor','Continue → Watch Trends'):safeButton('retry','↻ Reconsider the decision')):''));
  }
+ function trendCheckpoint(){
+  if(!hasPatient)return caseMenu();
+  const a=stateOf(),p=patient(),c=wardCheckpoints[p.id];
+  if(!a.monitorComplete)return monitor();
+  const answered=a.trendAnswer!==null;
+  const choices=c.options.map((label,i)=>'<button type="button" class="choice '+(answered?(i===c.answer?'right':i===a.trendAnswer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardtrendchoice="'+i+'">'+escapeHtml(label)+'</button>').join('');
+  frame('📊 Serial Checkpoint · '+p.name,'STAGE 3/4 · New findings after the treatment and initial monitoring plan.',
+   '<div class="infobox"><b>New simulated patient findings</b><p>'+escapeHtml(c.update)+'</p></div>'+
+   '<div class="vpq-case-question"><span class="vpq-case-question-label">WHAT CHANGED AND WHY?</span><h3>'+escapeHtml(c.question)+'</h3></div>'+choices+
+   (answered?'<div class="response '+(a.trendComplete?'':'bad')+'"><b>'+(a.trendComplete?'✅ Appropriate interpretation':'⚠ Possible consequence')+'</b><p>'+escapeHtml(c.caution[a.trendAnswer])+'</p><p><b>Clinical WHY:</b> '+escapeHtml(c.why)+'</p></div>'+
+    (a.trendComplete?safeButton('outpatient','Continue → Disposition / discharge decision'):safeButton('trendretry','↻ Reinterpret the trend')):''));
+ }
  function monitor(){
   if(!hasPatient)return caseMenu();
   wardMode='monitor';
@@ -2449,6 +2461,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
     '<p>No new patient findings have been collected this shift.</p>'+safeButton('follow','← Go to Follow Up'));
   if(!a.careComplete)return frame('📈 Watch Trends · Care decision needed','STAGE 3/4 · Recheck the response after appropriate care.',
     '<p>You have obtained new findings, but you have not completed an appropriate treatment decision.</p>'+safeButton('adjust','← Go to Adjust Care'));
+  if(a.monitorComplete)return trendCheckpoint();
   const choices=['Discharge or stop monitoring as soon as the first observation improves','Monitor serial signs and laboratory trends, reassessing if clinical response differs from expectations','Ignore symptoms and only record which medication was chosen'];
   frame('📈 Watch Trends · Check the response','STAGE 3/4 · Monitoring tests the effect of the adjusted plan.',
     '<div class="infobox"><b>After the intervention</b><p>'+escapeHtml(p.response)+'</p>'+
@@ -2456,7 +2469,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
     '<div class="vpq-case-question"><span class="vpq-case-question-label">MONITORING DECISION</span><h3>What is the most defensible monitoring plan?</h3></div>'+
     choices.map((v,i)=>'<button type="button" class="choice '+(a.monitorAnswer!==null?(i===1?'right':i===a.monitorAnswer?'wrong':''):'')+'" '+(a.monitorAnswer!==null?'disabled':'')+' data-vpqwardmonitoranswer="'+i+'">'+escapeHtml(v)+'</button>').join('')+
     (a.monitorAnswer!==null?'<div class="response '+(a.monitorComplete?'':'bad')+'"><p>'+(a.monitorComplete?'Correct: trends must be reassessed, not assumed stable.':'That approach could miss deterioration or delayed toxicity. Compare serial findings before discharge or another medication change.')+'</p></div>'+
-     (a.monitorComplete?safeButton('outpatient','🏡 Plan discharge / outpatient care →'):safeButton('monitorretry','↻ Try monitoring decision again')):''));
+     (a.monitorComplete?safeButton('trend','📊 Recheck serial patient findings →'):safeButton('monitorretry','↻ Try monitoring decision again')):''));
  }
  function outpatient(){
   if(!hasPatient)return caseMenu();
@@ -2495,6 +2508,15 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    if(d.vpqwardadjust!==undefined)return adjust();
    if(d.vpqwardmonitor!==undefined)return monitor();
    if(d.vpqwardoutpatient!==undefined)return outpatient();
+   if(d.vpqwardtrend!==undefined)return trendCheckpoint();
+   if(d.vpqwardtrendchoice!==undefined){
+    const a=stateOf(),c=wardCheckpoints[patient().id];
+    if(!a.monitorComplete||a.trendAnswer!==null)return;
+    const n=Number(d.vpqwardtrendchoice);
+    if(!Number.isInteger(n)||n<0||n>=c.options.length)return;
+    a.trendAnswer=n;a.trendComplete=n===c.answer;savePatient();return trendCheckpoint();
+   }
+   if(d.vpqwardtrendretry!==undefined){const a=stateOf();if(a.trendComplete)return trendCheckpoint();a.trendAnswer=null;savePatient();return trendCheckpoint();}
    if(d.vpqwardobserve!==undefined){stateOf().examined=true;savePatient();return followup()}
    if(d.vpqwardchoice!==undefined){const a=stateOf();if(a.careAnswer!==null)return;a.careAnswer=Number(d.vpqwardchoice);a.careComplete=a.careAnswer===patient().answer;savePatient();return adjust()}
    if(d.vpqwardretry!==undefined){stateOf().careAnswer=null;savePatient();return adjust()}
