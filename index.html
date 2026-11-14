@@ -2296,7 +2296,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  doAction=function(action){
   if(['study','learningHub','pharmArcade','pharmExamCenter'].includes(action))return vpqLearningHub();
   if(action==='masteryTracker')return masteryScreen();
-  if(action==='hospitalFollowup'||action==='inpatientWard')return caseMenu();
+  if(action==='hospitalFollowup'||action==='inpatientWard'||action==='treatmentDiagnostics')return caseMenu();
   if(action==='hospitalAdjust')return adjust();
   if(action==='hospitalMonitor')return monitor();
   return formerDoAction(action)
@@ -2310,7 +2310,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    choices:['Continue the NSAID unchanged and ignore creatinine','Escalate for veterinary reassessment, address perfusion, reconsider NSAID and preserve appropriate analgesia','Combine another NSAID for better pain relief'],
    answer:1,why:'A rising creatinine with dehydration demands reassessment and a safer individualized analgesia plan. Stopping all pain control is not the solution.',
    response:'After the revised plan and reassessment, perfusion improves and urine output increases; creatinine is reassessed serially rather than presumed normal.',
-   monitor:'Trend urine output, pain scores, blood pressure, hydration, creatinine and GI signs.'},
+   monitor:'Trend urine output, pain scores, blood pressure, hydration, creatinine and GI signs.',outpatient:'Discharge only once perfusion, comfort, intake and renal trends are clinically acceptable. Give medication safety instructions, a renal recheck plan and return precautions.',outpatientChoices:['Send home immediately despite persistent oliguria and deteriorating renal values','Continue inpatient reassessment if unstable; discharge only with a documented renal/pain recheck and clear return precautions','Resume the same NSAID without reassessment because the patient seems brighter'],outpatientCorrect:1},
   {id:'colic-horse',name:'🐎 Hospitalized horse — recurrent colic',desc:'A horse admitted for abdominal pain initially improved after analgesia.',
    baseline:'Pain improved and heart rate was 44/min during the initial stable assessment.',
    follow:'Four hours later: recurrent pawing and flank watching, heart rate 64/min, tacky mucous membranes and increasing discomfort.',
@@ -2318,7 +2318,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    choices:['Repeat analgesia automatically without reassessing','Urgently notify the veterinarian, reassess perfusion and abdominal findings, and revise the diagnostic/treatment plan','Discharge because the first dose initially worked'],
    answer:1,why:'Analgesia can hide deterioration. Renewed pain and altered perfusion make re-examination and escalation the priority.',
    response:'The team repeats assessment and changes the medical/surgical decision plan based on new findings rather than assuming the original diagnosis remains correct.',
-   monitor:'Trend HR, pain behavior, perfusion, GI findings, lactate if indicated, and responsiveness to the revised plan.'},
+   monitor:'Trend HR, pain behavior, perfusion, GI findings, lactate if indicated, and responsiveness to the revised plan.',outpatient:'A horse with recurrent colic or deteriorating perfusion should not be routinely discharged. Reassess whether hospitalization, referral or surgery is indicated; if stabilized, provide owner monitoring and urgent-return instructions.',outpatientChoices:['Discharge whenever an analgesic temporarily reduces pain','Give a fixed repeat dose and send home without examination','Keep or refer the horse while concerning signs persist; discharge only after clinical stability and an explicit owner plan'],outpatientCorrect:2},
   {id:'cat-allodynia',name:'🐈 Hospitalized cat — altered pain signaling',desc:'A cat remains painful after the visible inflammatory component improves.',
    baseline:'Tissue inflammation and swelling have decreased; pain remains disproportionate to touch.',
    follow:'Gentle contact now triggers marked discomfort despite reduced swelling. This is consistent with allodynia.',
@@ -2326,10 +2326,10 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    choices:['Escalate NSAID alone because all pain is inflammatory','Reassess the pain phenotype, underlying cause and multimodal analgesia targets','Do nothing because reduced swelling proves there is no pain'],
    answer:1,why:'Different pain generators respond to different targets. Persistent allodynia requires mechanistic reassessment.',
    response:'A tailored plan is chosen and the team follows comfort and function rather than relying solely on physical swelling.',
-   monitor:'Serial pain assessment, touch tolerance, appetite, mobility, sedation and treatment adverse effects.'}
+   monitor:'Serial pain assessment, touch tolerance, appetite, mobility, sedation and treatment adverse effects.',outpatient:'If comfortably managed and eating, plan home multimodal pain management, environmental modifications, a recheck of comfort and function, and adverse-effect monitoring.',outpatientChoices:['If comfortable and stable, provide a patient-specific home plan and scheduled reassessment','Stop all analgesia as soon as swelling decreases','Discharge without documenting functional pain or medication side effects'],outpatientCorrect:0}
  ];
  const storeKey='vpq-inpatient-care-v3';
- const initial=()=>({examined:false,careAnswer:null,careComplete:false,monitorAnswer:null,monitorComplete:false,shift:1});
+ const initial=()=>({examined:false,careAnswer:null,careComplete:false,monitorAnswer:null,monitorComplete:false,outpatientAnswer:null,outpatientComplete:false,shift:1});
  const progress={};
  for(const p of hospitalData)progress[p.id]=initial();
  let currentPatient=hospitalData[0].id,hasPatient=false,wardMode='chart';
@@ -2338,7 +2338,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(saved&&typeof saved==='object'){
    if(hospitalData.some(p=>p.id===saved.currentPatient)){currentPatient=saved.currentPatient;hasPatient=Boolean(saved.hasPatient)}
    for(const p of hospitalData)if(saved.progress?.[p.id]&&typeof saved.progress[p.id]==='object'){
-     const old=saved.progress[p.id];progress[p.id]={...initial(),examined:old.examined===true,careAnswer:Number.isInteger(old.careAnswer)?old.careAnswer:null,careComplete:old.careComplete===true,monitorAnswer:Number.isInteger(old.monitorAnswer)?old.monitorAnswer:null,monitorComplete:old.monitorComplete===true,shift:Math.max(1,Number(old.shift)||1)};
+     const old=saved.progress[p.id];progress[p.id]={...initial(),examined:old.examined===true,careAnswer:Number.isInteger(old.careAnswer)?old.careAnswer:null,careComplete:old.careComplete===true,monitorAnswer:Number.isInteger(old.monitorAnswer)?old.monitorAnswer:null,monitorComplete:old.monitorComplete===true,outpatientAnswer:Number.isInteger(old.outpatientAnswer)?old.outpatientAnswer:null,outpatientComplete:old.outpatientComplete===true,shift:Math.max(1,Number(old.shift)||1)};
    }
   }
  }catch(e){}
@@ -2347,8 +2347,8 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function savePatient(){try{localStorage.setItem(storeKey,JSON.stringify({currentPatient,hasPatient,progress}))}catch(e){}}
  function patient(){return hospitalData.find(p=>p.id===currentPatient)||hospitalData[0]}
  function stateOf(){return progress[currentPatient]}
- function phase(){const a=stateOf();return a.monitorComplete?'completed':a.careComplete?'monitor':a.examined?'adjust':'follow'}
- function nextLabel(){return {follow:'Follow Up',adjust:'Adjust Care',monitor:'Watch Trends',completed:'Shift Complete'}[phase()]}
+ function phase(){const a=stateOf();return a.outpatientComplete?'completed':a.monitorComplete?'outpatient':a.careComplete?'monitor':a.examined?'adjust':'follow'}
+ function nextLabel(){return {follow:'Assess',adjust:'Treat',monitor:'Monitor',outpatient:'Outpatient / Discharge',completed:'Case Complete'}[phase()]}
  function safeButton(action,label,secondary=false){return '<button type="button" class="'+(secondary?'secondary':'')+'" data-vpqward'+action+'="1">'+label+'</button>'}
  function patientHeading(){
   const p=patient(),a=stateOf();
@@ -2358,7 +2358,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function navigation(){
   if(!hasPatient)return '';
   const a=stateOf();
-  return '<div class="buttonrow">'+safeButton('home','🗂️ Patient Chart',true)+safeButton('follow','1 · Follow Up',a.examined)+safeButton('adjust','2 · Adjust Care',!a.examined)+safeButton('monitor','3 · Watch Trends',!a.careComplete)+'</div>';
+  return '<div class="buttonrow">'+safeButton('home','🗂️ Patient Chart',true)+safeButton('follow','1 · Follow Up',a.examined)+safeButton('adjust','2 · Adjust Care',!a.examined)+safeButton('monitor','3 · Monitor',!a.careComplete)+safeButton('outpatient','4 · Outpatient',!a.monitorComplete)+'</div>';
  }
  function frame(heading,introduction,content){
   showModal(heading,patientHeading()+navigation()+'<p class="tiny">'+introduction+'</p>'+content);
@@ -2366,12 +2366,12 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function caseMenu(){
   wardMode='chart';savePatient();
   const list=hospitalData.map(p=>{
-   const a=progress[p.id],next=a.monitorComplete?'Shift complete':a.careComplete?'Watch trends':a.examined?'Adjust care':'Follow up';
+   const a=progress[p.id],next=a.outpatientComplete?'Case complete':a.monitorComplete?'Outpatient / discharge':a.careComplete?'Monitor':a.examined?'Treat':'Assess';
    return '<button type="button" class="full" data-vpqwardpick="'+escapeHtml(p.id)+'" style="text-align:left"><b>'+escapeHtml(p.name)+'</b><span class="tiny" style="display:block">Shift '+a.shift+' · Next: '+next+'</span></button>';
   }).join('');
   showModal('🏥 Treatment Ward · Patient Handoff',
-   '<p>One hospitalized patient progresses through <b>Follow Up → Adjust Care → Watch Trends → Handoff</b>. Each station opens a different stage of the same chart. Choose a patient to begin or resume.</p>'+
-   '<div class="vpqWardFlow"><span>1. Assess</span><span>2. Intervene</span><span>3. Recheck</span><span>4. Handoff</span></div>'+
+   '<p>Practice the patient journey: <b>Assess → Treat → Monitor → Discharge or outpatient follow-up</b>. Lab findings remain in the chart, but standalone CBC, chemistry and microscope lessons belong in Clinical Pathology.</p>'+
+   '<div class="vpqWardFlow"><span>1. Assess</span><span>2. Treat</span><span>3. Monitor</span><span>4. Outpatient</span></div>'+
    '<h3>Hospitalized patients</h3>'+list+
    (hasPatient?'<div class="infobox"><b>Current patient:</b> '+escapeHtml(patient().name)+' · '+nextLabel()+'</div>'+
    safeButton('continue','▶ Resume this patient'):'')+
@@ -2383,6 +2383,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(p==='follow')return followup();
   if(p==='adjust')return adjust();
   if(p==='monitor')return monitor();
+  if(p==='outpatient')return outpatient();
   return handoff();
  }
  function followup(){
@@ -2424,17 +2425,30 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
     '<h3>What is the most defensible monitoring plan?</h3>'+
     choices.map((v,i)=>'<button type="button" class="choice '+(a.monitorAnswer!==null?(i===1?'right':i===a.monitorAnswer?'wrong':''):'')+'" '+(a.monitorAnswer!==null?'disabled':'')+' data-vpqwardmonitoranswer="'+i+'">'+escapeHtml(v)+'</button>').join('')+
     (a.monitorAnswer!==null?'<div class="response '+(a.monitorComplete?'':'bad')+'"><p>'+(a.monitorComplete?'Correct: trends must be reassessed, not assumed stable.':'That approach could miss deterioration or delayed toxicity. Compare serial findings before discharge or another medication change.')+'</p></div>'+
-     (a.monitorComplete?safeButton('handoff','📋 Complete shift handoff →'):safeButton('monitorretry','↻ Try monitoring decision again')):''));
+     (a.monitorComplete?safeButton('outpatient','🏡 Plan discharge / outpatient care →'):safeButton('monitorretry','↻ Try monitoring decision again')):''));
+ }
+ function outpatient(){
+  if(!hasPatient)return caseMenu();
+  wardMode='outpatient';
+  const a=stateOf(),p=patient();
+  if(!a.monitorComplete)return frame('🏡 Outpatient Plan · Stabilize first','STAGE 4/4 · Use monitoring to decide disposition.','<p>Finish reassessment and monitoring before making a discharge decision.</p>'+safeButton('monitor','← Return to monitoring'));
+  const answered=a.outpatientAnswer!==null;
+  const choices=p.outpatientChoices.map((choice,i)=>'<button type="button" class="choice '+(answered?(i===p.outpatientCorrect?'right':i===a.outpatientAnswer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardoutpatientchoice="'+i+'">'+escapeHtml(choice)+'</button>').join('');
+  frame('🏡 Outpatient Care · Decide disposition','STAGE 4/4 · Determine whether inpatient care, referral or discharge is appropriate.',
+   '<div class="infobox"><b>Latest patient response</b><p>'+escapeHtml(p.response)+'</p><b>Important trends</b><p>'+escapeHtml(p.monitor)+'</p></div>'+
+   '<div class="vpq-case-question"><span class="vpq-case-question-label">OUTPATIENT DECISION</span><h3>What is the safest disposition and follow-up plan?</h3></div>'+choices+
+   (answered?'<div class="response '+(a.outpatientComplete?'':'bad')+'"><b>'+(a.outpatientComplete?'✅ Appropriate disposition':'💡 Reconsider discharge safety')+'</b><p>'+escapeHtml(p.outpatient)+'</p></div>'+
+   (a.outpatientComplete?safeButton('handoff','📋 Complete patient handoff →'):safeButton('outpatientretry','↻ Try disposition again')):''));
  }
  function handoff(){
   if(!hasPatient)return caseMenu();
   const a=stateOf(),p=patient();
-  if(!a.monitorComplete)return continueCase();
+  if(!a.outpatientComplete)return continueCase();
   wardMode='handoff';
-  frame('✅ Shift Handoff · '+p.name,'ALL 3 STAGES COMPLETE · Summarize the rationale and plan for the next team.',
+  frame('✅ Shift Handoff · '+p.name,'ALL 4 STAGES COMPLETE · Summarize the assessment, treatment, monitoring and outpatient plan.',
     '<div class="infobox"><b>Assessment</b><p>'+escapeHtml(p.reassess)+'</p>'+
     '<b>Treatment decision</b><p>'+escapeHtml(p.why)+'</p>'+
-    '<b>Ongoing monitoring</b><p>'+escapeHtml(p.monitor)+'</p></div>'+
+    '<b>Ongoing monitoring</b><p>'+escapeHtml(p.monitor)+'</p><b>Outpatient plan</b><p>'+escapeHtml(p.outpatient||'Arrange individualized recheck, written owner instructions and return precautions.')+'</p></div>'+
     '<p>This shift is complete. Start a new shift to reassess the patient with the same case teaching content, or choose a different patient.</p>'+
     '<div class="buttonrow">'+safeButton('newshift','↻ Start another shift')+safeButton('home','Choose another patient',true)+'</div>');
  }
@@ -2449,11 +2463,14 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    if(d.vpqwardfollow!==undefined)return followup();
    if(d.vpqwardadjust!==undefined)return adjust();
    if(d.vpqwardmonitor!==undefined)return monitor();
+   if(d.vpqwardoutpatient!==undefined)return outpatient();
    if(d.vpqwardobserve!==undefined){stateOf().examined=true;savePatient();return followup()}
    if(d.vpqwardchoice!==undefined){const a=stateOf();if(a.careAnswer!==null)return;a.careAnswer=Number(d.vpqwardchoice);a.careComplete=a.careAnswer===patient().answer;savePatient();return adjust()}
    if(d.vpqwardretry!==undefined){stateOf().careAnswer=null;savePatient();return adjust()}
    if(d.vpqwardmonitoranswer!==undefined){const a=stateOf();if(a.monitorAnswer!==null)return;a.monitorAnswer=Number(d.vpqwardmonitoranswer);a.monitorComplete=a.monitorAnswer===1;savePatient();return monitor()}
    if(d.vpqwardmonitorretry!==undefined){stateOf().monitorAnswer=null;savePatient();return monitor()}
+   if(d.vpqwardoutpatientchoice!==undefined){const a=stateOf();if(a.outpatientAnswer!==null)return;a.outpatientAnswer=Number(d.vpqwardoutpatientchoice);a.outpatientComplete=a.outpatientAnswer===patient().outpatientCorrect;savePatient();return outpatient()}
+   if(d.vpqwardoutpatientretry!==undefined){stateOf().outpatientAnswer=null;savePatient();return outpatient()}
    if(d.vpqwardhandoff!==undefined)return handoff();
    if(d.vpqwardnewshift!==undefined){const a=stateOf(),shift=a.shift+1;progress[currentPatient]={...initial(),shift};savePatient();return followup()}
   }catch(error){showModal('Treatment Ward error','<p>'+escapeHtml(error.message||String(error))+'</p>'+safeButton('home','Back to patients'))}
