@@ -15,11 +15,11 @@ const saved=()=>{
 // If no Exam 2 lectures are selected, offer all stations as an explicit fallback.
 function selectedExam2Lectures(){
  const selected=window.VPQCurriculum?.getLectures?.()||[];
- return selected.map(x=>Number((String(x).match(/Lecture (\\d+)/)||[])[1])).filter(n=>n>=10&&n<=20);
+ return selected.map(x=>Number((String(x).match(/Lecture (\d+)/)||[])[1])).filter(n=>n>=10&&n<=20);
 }
 function questionIndices(g){
  const focus=selectedExam2Lectures();
- return g.questions.map((q,i)=>({i,n:Number((q.source.match(/Lecture (\\d+)/)||[])[1])})).filter(x=>!focus.length||focus.includes(x.n)).map(x=>x.i);
+ return g.questions.map((q,i)=>({i,n:Number((q.source.match(/Lecture (\d+)/)||[])[1])})).filter(x=>!focus.length||focus.includes(x.n)).map(x=>x.i);
 }
 function visibleGroups(){return groups.filter(g=>questionIndices(g).length);}
 const key=(g,i)=>'p2-path-'+g.id+'-'+i;
