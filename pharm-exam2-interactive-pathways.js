@@ -43,6 +43,7 @@ function menu(){
  '<p><b>Trace the drug, not just its name.</b> Choose a station and answer questions to unlock the completed pathway. The hint never reveals the answer; mechanisms appear after your choice.</p>'+
  '<p class="tiny">'+(focus.length?'Showing selected Exam 2 lectures: '+focus.join(', ')+'. Change the selection in the Learning Lab.':'No Exam 2 lectures selected in the Learning Lab, so all Exam 2 stations are shown.')+'</p>'+
  '<div class="vpqP2Stations">'+available.map(g=>{const ix=questionIndices(g);return '<button data-vpq-p2-open="'+esc(g.id)+'"><b>'+g.icon+' '+esc(g.title)+'</b><small>'+esc(g.lecture)+' · '+ix.filter(i=>done.includes(key(g,i))).length+'/'+ix.length+' selected questions mastered</small><span>'+esc(g.intro)+'</span></button>'}).join('')+'</div>'+
+ (!available.length?'<p class="vpqP2Hint"><b>No mechanism questions match these lectures yet.</b> Select Lectures 11, 14–20 in the Learning Lab, or use the full Exam 2 study guide for other lectures. Your current selection and progress are unchanged.</p>':'')+
  '<details class="vpq-source-note"><summary>📚 Sources & review</summary><p>Adapted from your November 2026 Pharmacology Exam 2 Study Guide, Lectures 11, 13–20. All questions are original study checks. Your bracketed/➕ enrichment and disputed claims remain outside the core answer keys. Not prescribing protocols.</p></details>');
 }
 function open(id,i=0){
