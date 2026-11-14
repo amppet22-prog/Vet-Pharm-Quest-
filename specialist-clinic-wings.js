@@ -8,11 +8,11 @@ const stage=document.getElementById('stage');if(!stage||!window.VPQ_SCENERY)retu
 const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const data={
  clinpath:[
-  {x:3,y:42,w:17,h:34,walk:12,label:'🩸 Coagulation',action:'advancedCoag'},
-  {x:21,y:42,w:17,h:34,walk:29,label:'🫧 Blood Gas',action:'advancedGas'},
-  {x:39,y:42,w:17,h:34,walk:48,label:'🧫 Urinalysis',action:'advancedUrine'},
-  {x:57,y:42,w:18,h:34,walk:66,label:'🐾 Referral Cases',action:'advancedCases'},
-  {x:77,y:42,w:20,h:34,walk:87,label:'📚 Learn First · Scope',action:'classicLabHub'}
+  {x:3,y:42,w:17,h:34,walk:12,label:'🩸 Coagulation Bench',subtitle:'Questions + interpretation',hint:'Practice PT / aPTT interpretation questions',kind:'practice',action:'advancedCoag'},
+  {x:21,y:42,w:17,h:34,walk:29,label:'🫧 Blood Gas Station',subtitle:'Acid–base practice',hint:'Practice blood gas and acid–base interpretation',kind:'practice',action:'advancedGas'},
+  {x:39,y:42,w:17,h:34,walk:48,label:'🧫 Urinalysis Bench',subtitle:'UA questions + sediment',hint:'Choose urinalysis questions or visual sediment references',kind:'practice',action:'advancedUrine'},
+  {x:57,y:42,w:18,h:34,walk:66,label:'🐾 Referral Cases',subtitle:'Workup questions',hint:'Work through Clinical Pathology patient cases',kind:'practice',action:'advancedCases'},
+  {x:77,y:42,w:20,h:34,walk:87,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
  ],
  isolation:[
   {x:9,y:37,w:22,h:39,walk:23,label:'🐶 Isolation patient',action:'onehealth'},
@@ -43,7 +43,7 @@ function scene(key){
  const iso=key==='isolation',cp=key==='clinpath';
  const bg=iso?'#d6eee6':cp?'#dceff8':'#edf1e5';
  const wall=iso?'#effaf7':cp?'#f5faff':'#f7faef';
- const label=iso?'ONE HEALTH & ISOLATION':cp?'ADVANCED PATHOLOGY & MICROSCOPY':key==='surgery'?'SURGERY & ANESTHESIA':key==='skills'?'CLINICAL SKILLS & PROCEDURES':'NECROPSY & DIAGNOSTIC PATHOLOGY';
+ const label=iso?'ONE HEALTH & ISOLATION':cp?'ADVANCED CLINICAL PATHOLOGY':key==='surgery'?'SURGERY & ANESTHESIA':key==='skills'?'CLINICAL SKILLS & PROCEDURES':'NECROPSY & DIAGNOSTIC PATHOLOGY';
  let s='<svg class="vpqSpecArt" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="'+label+' veterinary teaching room">'+
  '<defs><filter id="vpqSpecShadow"><feDropShadow dx="2" dy="5" stdDeviation="5" flood-opacity=".2" flood-color="#5c7394"/></filter></defs>'+
  '<rect width="1000" height="500" fill="'+bg+'"/><polygon points="0,0 1000,0 934,70 66,70" fill="#fffcf7"/>'+
@@ -55,12 +55,13 @@ function scene(key){
  '<g filter="url(#vpqSpecShadow)">'+rect(321,92,359,54,'#fffdfd','#a8b9d6')+
  '<text x="500" y="127" font-family="Arial,sans-serif" font-weight="900" font-size="24" fill="#607b90" text-anchor="middle">'+label+'</text></g>';
  if(cp){
+   s+='<text x="500" y="174" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="15" fill="#68839a">REFERRAL DIAGNOSTICS · QUESTIONS &amp; INTERPRETATION</text>';
    const stations=[
-    {x:79,label:'HEMOSTASIS',c:'#f8e4f2',edge:'#c99ac4',screen:'PT / aPTT',symbol:'🩸'},
-    {x:264,label:'BLOOD GAS',c:'#e6f5fa',edge:'#9ac9db',screen:'pH / CO₂',symbol:'🫧'},
-    {x:448,label:'URINE SEDIMENT',c:'#f6eafa',edge:'#c9a9da',screen:'SEDIMENT',symbol:'🧫'},
-    {x:632,label:'CASE BOARD',c:'#eaf0fa',edge:'#a1b6da',screen:'CASE FILE',symbol:'🐾'},
-    {x:816,label:'MICROSCOPY',c:'#e8f8f5',edge:'#9dc9ba',screen:'SMEAR',symbol:'🔬'}
+    {x:79,label:'COAG QUESTIONS',c:'#f8e4f2',edge:'#c99ac4',screen:'PT / aPTT',symbol:'🩸'},
+    {x:264,label:'ACID–BASE QUIZ',c:'#e6f5fa',edge:'#9ac9db',screen:'pH / CO₂',symbol:'🫧'},
+    {x:448,label:'UA QUESTIONS',c:'#f6eafa',edge:'#c9a9da',screen:'SEDIMENT',symbol:'🧫'},
+    {x:632,label:'PATIENT CASES',c:'#eaf0fa',edge:'#a1b6da',screen:'CASE FILE',symbol:'🐾'},
+    {x:816,label:'IMAGE ID QUIZ',c:'#e8f8f5',edge:'#9dc9ba',screen:'SMEAR ID',symbol:'🔬'}
    ];
    s+='<g filter="url(#vpqSpecShadow)">'+stations.map(v=>
      rect(v.x,196,145,134,v.c,v.edge)+
@@ -187,9 +188,10 @@ style.textContent='.vpqSpecArt{position:absolute;inset:0;width:100%;height:100%;
 '#vpqSpecHits{position:absolute;inset:0;z-index:5;pointer-events:none}'+
 '.vpqSpecHit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:16px;box-shadow:none;transform:none!important;padding:0}'+
 '.vpqSpecHit:hover,.vpqSpecHit:focus-visible,.vpqSpecHit.vpqSpecNear{background:#fff2c52b;border:3px solid #ffcb65;outline:2px solid #fff5cc;box-shadow:0 0 20px #ffc8738e}'+
-'.vpqSpecHit span{position:absolute;bottom:-8%;left:50%;transform:translateX(-50%);font-size:clamp(11px,1.25vw,14px);font-weight:900;background:#fffdfb;color:#5b597b;border:3px solid #b7a8d7;border-radius:15px;padding:7px 9px;white-space:nowrap;box-shadow:0 4px 10px #60718d40}'+
+'.vpqSpecHit span{position:absolute;bottom:-14%;left:50%;transform:translateX(-50%);font-size:clamp(10px,1.10vw,13px);font-weight:900;background:#fffdfb;color:#5b597b;border:3px solid #b7a8d7;border-radius:13px;padding:5px 7px;white-space:normal;min-width:94%;line-height:1.25;box-shadow:0 4px 10px #60718d40}'+
+'.vpqSpecHit span small{display:block;font-size:10px;color:#66738c;font-weight:700;line-height:1.2;margin-top:3px}.vpqSpecHit[data-vpqspec-kind="practice"] span{border-color:#e0b583;background:#fff9ec}'+
 '.vpqSpecHit.vpqSpecNear span{background:#fff1c9;border-color:#e8b35b}'+
-'.vpqClinpathQuickLinks{position:absolute;left:10%;right:10%;bottom:2%;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;pointer-events:auto;z-index:12}.vpqClinpathQuickLinks button{border:2px solid #b5c6e8;border-radius:14px;background:#fdfbff;color:#324e76;font-size:clamp(11px,1.15vw,14px);font-weight:800;padding:7px 12px;box-shadow:0 3px 8px #40517144;cursor:pointer}.vpqClinpathQuickLinks button:hover,.vpqClinpathQuickLinks button:focus-visible{background:#e9f4ff;border-color:#76a9d4}'+
+'.vpqClinpathQuickLinks{position:absolute;left:9%;right:9%;bottom:1%;display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap;pointer-events:auto;z-index:12}.vpqClinpathQuickLinks .vpqQuickTitle{display:block;width:100%;font-weight:900;font-size:11px;color:#4c6289;text-align:center;letter-spacing:.6px;text-shadow:0 1px 0 #fff}.vpqClinpathQuickLinks button{border:2px solid #b5c6e8;border-radius:13px;background:#fdfbff;color:#324e76;font-size:clamp(10px,1.0vw,12px);font-weight:800;padding:5px 10px;box-shadow:0 3px 8px #40517144;cursor:pointer}.vpqClinpathQuickLinks button[data-vpq-type="practice"]{border-color:#e5bc81;background:#fff4df}.vpqClinpathQuickLinks button:hover,.vpqClinpathQuickLinks button:focus-visible{background:#e9f4ff;border-color:#76a9d4}'+
 '.vpqSpecHit.vpqSpecNear:after{content:"E · INTERACT";position:absolute;top:1%;left:50%;transform:translateX(-50%);font-size:11px;font-weight:900;color:#744d22;background:#fff8dd;border:2px solid #e9bf76;border-radius:12px;padding:4px 8px;white-space:nowrap}'+
 '@media(max-width:650px){.vpqSpecHit span{font-size:10px;padding:4px 5px;white-space:normal;min-width:80%}}';
 document.head.appendChild(style);
@@ -198,8 +200,8 @@ function refresh(){
  if(!data[room]){old?.remove();return}
  if(old?.dataset.room===room)return;
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
- div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" aria-label="'+p.label+'"><span>'+p.label+'</span></button>').join('')+
- (room==='clinpath'?'<div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology visual reference links"><button type="button" data-vpqspecact="vpqClinpathAtlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference">🩸 Cell Recognition</button><button type="button" data-vpqspecact="vpqClassicSmear">📸 Blood Smear Lab</button></div>':'');
+ div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" data-vpqspec-kind="'+(p.kind||'practice')+'" title="'+(p.hint||p.label)+'" aria-label="'+p.label+(p.subtitle?' — '+p.subtitle:'')+'"><span>'+p.label+(p.subtitle?'<small>'+p.subtitle+'</small>':'')+'</span></button>').join('')+
+ (room==='clinpath'?'<div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE · 🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Open Learn This First lecture study guide">📖 Learn First · Study Guide</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Open visual Microscope Atlas reference">🔬 Microscope Atlas · Reference</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Open cell identification and morphology reference">🩸 Cell Recognition · Reference</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Practice blood smear identification questions">🎯 Smear Quizzes · Practice</button></div>':'');
  div.addEventListener('click',e=>{const b=e.target.closest('[data-vpqspecact]');if(b)api.doAction(b.dataset.vpqspecact)});
  stage.appendChild(div);
 }
