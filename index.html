@@ -479,7 +479,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="diagnostic-imaging-suite.js?v=20261109-imagingphase1"></script>
 <script src="clinpath-treatment-ward-rounds.js?v=20261114-phaseC3-6a"></script>
 <script src="clinpath-diagnostic-rounds.js?v=20261114-phaseC3-6a"></script>
-<script src="treatment-ward-advanced-rounds.js?v=20261114-advanced15b"></script>
+<script src="treatment-ward-case-expansion.js?v=20261114-13patients1"></script>
+<script src="treatment-ward-advanced-rounds.js?v=20261114-13patients1"></script>
 <script src="treatment-diagnostics.js?v=20261114-treatment-journey1"></script>
 <script src="advanced-clinpath-stations.js?v=20261114-treatment-journey1"></script>
 <script src="surgery-necropsy-learning.js?v=20261110-newwings1"></script>
@@ -2334,6 +2335,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    monitor:'Serial pain assessment, touch tolerance, appetite, mobility, sedation and treatment adverse effects.',outpatient:'If comfortably managed and eating, plan home multimodal pain management, environmental modifications, a recheck of comfort and function, and adverse-effect monitoring.',outpatientChoices:['If comfortable and stable, provide a patient-specific home plan and scheduled reassessment','Stop all analgesia as soon as swelling decreases','Discharge without documenting functional pain or medication side effects'],outpatientCorrect:0}
  ];
  // Additional simulated post-intervention checkpoints. These extend—not replace—the existing cases and save key.
+ hospitalData.push(...(window.VPQ_WARD_EXPANSION?.cases||[]));
  const wardCheckpoints={
   'postop-dog':{
    update:'Six hours after fluid/perfusion reassessment and analgesic-plan review: mucous membranes are less tacky and pain is 3/10, but urine output remains below the team\'s target and creatinine is 2.3 mg/dL (previously 2.1).',
@@ -2360,6 +2362,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    caution:['Correct: assess the tradeoff between analgesia and adverse effects.','Heavy sedation can obscure pain scoring and creates functional safety concerns.','A sudden unreviewed cessation may leave the cat uncomfortable; the clinical plan needs reassessment.']
   }
  };
+ Object.assign(wardCheckpoints,window.VPQ_WARD_EXPANSION?.checkpoints||{});
  const incorrectCareConsequences={
   'postop-dog':['Continued NSAID exposure during suspected hypoperfusion could further compromise renal blood flow; pain and kidney status both require a revised plan.',null,'Adding a second NSAID raises GI and renal risk without addressing the perfusion problem.'],
   'colic-horse':['Another analgesic without a repeat examination could delay recognition of worsening intestinal disease.',null,'An earlier improvement does not make discharge safe when cardiovascular and pain signs are deteriorating.'],
@@ -2382,7 +2385,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  // A safe migration preserves patient selection, without mixing unverified earlier treatment decisions.
  if(!hasPatient){try{const old=JSON.parse(localStorage.getItem('vpq-inpatient-care-v2')||'null');if(hospitalData.some(p=>p.id===old?.patient)){currentPatient=old.patient}}catch(e){}}
  function savePatient(){try{localStorage.setItem(storeKey,JSON.stringify({currentPatient,hasPatient,progress}))}catch(e){}}
- window.VPQ_WARD_ADVANCED?.init?.({showModal,modalBody:$('modalBody'),stateOf:id=>progress[id],savePatient,back:()=>caseMenu()});
+ window.VPQ_WARD_ADVANCED?.init?.({showModal,modalBody:$('modalBody'),stateOf:id=>progress[id],savePatient,back:()=>caseMenu(),renderWardStage:()=>continueCase()});
  function patient(){return hospitalData.find(p=>p.id===currentPatient)||hospitalData[0]}
  function stateOf(){return progress[currentPatient]}
  function phase(){const a=stateOf();return a.outpatientComplete?'completed':a.trendComplete?'outpatient':a.careComplete?'monitor':a.examined?'adjust':'follow'}
@@ -2430,6 +2433,8 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(!hasPatient)return caseMenu();
   wardMode='follow';
   const p=patient(),a=stateOf();
+  if(!a.examined&&!window.VPQ_WARD_ADVANCED?.passed?.(p.id,'assess'))return frame('🔎 Assessment · Clinical reasoning required','STAGE 1/4 · Integrate case data before re-examining.',
+    window.VPQ_WARD_ADVANCED.stageBlock(p.id,'assess'));
   frame('🔎 Follow Up · Gather new findings','STAGE 1/4 · Reassess before choosing treatment.',
     '<div class="infobox"><b>Baseline</b><p>'+escapeHtml(p.baseline)+'</p></div>'+
     (a.examined?'<div class="infobox"><b>New examination and trends</b><p>'+escapeHtml(p.follow)+'</p><b>Interpretation</b><p>'+escapeHtml(p.reassess)+'</p></div>'+
@@ -2442,6 +2447,8 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   const a=stateOf(),p=patient();
   if(!a.examined)return frame('💉 Adjust Care · First assess the patient','STAGE 2/4 · A care change must follow an assessment.',
    '<p>The patient has no documented follow-up findings this shift. Avoid selecting or escalating medication blindly.</p>'+safeButton('follow','← Go to Follow Up'));
+  if(!window.VPQ_WARD_ADVANCED?.passed?.(p.id,'treat'))return frame('💉 Treatment · Mechanism decision required','STAGE 2/4 · Connect physiology and treatment before making a care choice.',
+    '<div class="infobox"><b>Reassessment</b><p>'+escapeHtml(p.follow)+'</p></div>'+window.VPQ_WARD_ADVANCED.stageBlock(p.id,'treat'));
   const answered=a.careAnswer!==null;
   const choices=p.choices.map((choice,i)=>'<button type="button" class="choice '+(answered?(i===p.answer?'right':i===a.careAnswer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardchoice="'+i+'">'+escapeHtml(choice)+'</button>').join('');
   frame('💉 Adjust Care · Respond to the findings','STAGE 2/4 · Use the new clinical information to justify a treatment decision.',
@@ -2470,6 +2477,8 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
     '<p>No new patient findings have been collected this shift.</p>'+safeButton('follow','← Go to Follow Up'));
   if(!a.careComplete)return frame('📈 Watch Trends · Care decision needed','STAGE 3/4 · Recheck the response after appropriate care.',
     '<p>You have obtained new findings, but you have not completed an appropriate treatment decision.</p>'+safeButton('adjust','← Go to Adjust Care'));
+  if(!a.monitorComplete&&!window.VPQ_WARD_ADVANCED?.passed?.(p.id,'monitor'))return frame('📈 Monitoring · Clinical pathology required','STAGE 3/4 · Interpret the laboratory mechanism and serial trends.',
+    '<div class="infobox"><b>Observed response</b><p>'+escapeHtml(p.response)+'</p></div>'+window.VPQ_WARD_ADVANCED.stageBlock(p.id,'monitor'));
   if(a.monitorComplete)return trendCheckpoint();
   const choices=['Discharge or stop monitoring as soon as the first observation improves','Monitor serial signs and laboratory trends, reassessing if clinical response differs from expectations','Ignore symptoms and only record which medication was chosen'];
   frame('📈 Watch Trends · Check the response','STAGE 3/4 · Monitoring tests the effect of the adjusted plan.',
@@ -2485,6 +2494,8 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   wardMode='outpatient';
   const a=stateOf(),p=patient();
   if(!a.trendComplete)return frame('🏡 Outpatient Plan · Stabilize first','STAGE 4/4 · Use monitoring to decide disposition.','<p>Finish reassessment and monitoring before making a discharge decision.</p>'+safeButton('monitor','← Return to monitoring'));
+  if(!a.outpatientComplete&&!window.VPQ_WARD_ADVANCED?.passed?.(p.id,'disposition'))return frame('🏡 Disposition · Clinical synthesis required','STAGE 4/4 · Integrate organ recovery and clinical pathology before discharge.',
+    '<div class="infobox"><b>Latest trend</b><p>'+escapeHtml(p.response)+'</p><p>'+escapeHtml(p.monitor)+'</p></div>'+window.VPQ_WARD_ADVANCED.stageBlock(p.id,'disposition'));
   const answered=a.outpatientAnswer!==null;
   const choices=p.outpatientChoices.map((choice,i)=>'<button type="button" class="choice '+(answered?(i===p.outpatientCorrect?'right':i===a.outpatientAnswer?'wrong':''):'')+'" '+(answered?'disabled':'')+' data-vpqwardoutpatientchoice="'+i+'">'+escapeHtml(choice)+'</button>').join('');
   frame('🏡 Outpatient Care · Decide disposition','STAGE 4/4 · Determine whether inpatient care, referral or discharge is appropriate.',
