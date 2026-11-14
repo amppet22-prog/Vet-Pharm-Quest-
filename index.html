@@ -2943,13 +2943,17 @@ function vpqExam2ObjectiveLecture(lecture){
  '<div class="buttonrow"><button data-vpqnewpharm-objectives="1">← All Exam 2 objectives</button><button data-vpqnewpharm-lesson="'+escapeHtml(lecture)+'">📖 Review lecture</button></div>');
 }
 function vpqPharmDrugMaster(lecture='Lecture 10'){
- const all=vpqPharmNext?.drugs||[],lectures=vpqPharmNext?.lectures?.map(x=>x.id)||[],list=all.filter(x=>x.lecture===lecture);
+ const all=vpqPharmNext?.drugs||[],lectures=vpqPharmNext?.lectures?.map(x=>x.id)||[],list=all.filter(x=>x.lecture===lecture)
+  .slice().sort((a,b)=>String(a.class||'Unclassified').localeCompare(String(b.class||'Unclassified'))||String(a.name).localeCompare(String(b.name)));
+ const classCounts=new Map();for(const d of list){const c=d.class||'Needs classification';classCounts.set(c,(classCounts.get(c)||0)+1)}
+ const classes=[...classCounts.keys()];
  showModal('💊 Exam 2 · Master Drug Comparison',
  '<p class="vpq-case-presentation"><b>'+all.length+' drug and formulation entries</b> organized by lecture. “—” means not specified in the imported study note, not an absence of risk. Click a drug to compare its details.</p>'+
  '<div class="buttonrow">'+lectures.map(id=>'<button data-vpqpharmdrug-lecture="'+escapeHtml(id)+'" style="'+(id===lecture?'font-weight:900;background:#dbeafe':'')+'">'+escapeHtml(id.replace('Lecture ','L'))+'</button>').join('')+'</div>'+
  '<h3 style="font-size:16px;margin:14px 0">'+escapeHtml(lecture)+' · '+list.length+' entries</h3>'+
- list.map(d=>'<details style="border:1px solid #d5e0eb;border-radius:10px;margin:7px 0;padding:10px 12px;background:#fff"><summary style="font-weight:800;cursor:pointer">'+escapeHtml(d.name)+' <span style="font-size:11px;font-weight:500;color:#63748e">'+escapeHtml(d.class||'')+'</span></summary><div style="background:#f5f9fd;border-radius:8px;padding:9px 12px;margin-top:9px">'+
- [['Class',d.class],['Target / MOA',d.moa],['What it treats',d.uses],['Species differences',d.species],['Adverse effects',d.effects],['Contraindications / cautions',d.contraindications],['Route / formulation',d.route],['WHY / clinical distinction',d.why]].map(([label,value])=>'<p style="margin:7px 0;font-size:12px;line-height:1.45"><b>'+escapeHtml(label)+':</b> '+escapeHtml(value||'— Not specified in this entry')+'</p>').join('')+
+ '<p class="tiny"><b>Drug classes in this lecture ('+classes.length+'):</b> '+classes.map(c=>escapeHtml(c)+' ('+classCounts.get(c)+')').join(' · ')+'</p>'+
+ list.map((d,i)=>(i===0||list[i-1].class!==d.class?'<h3 style="font-size:14px;color:#335a85;background:#edf4ff;padding:8px 10px;border-radius:8px;margin:14px 0 5px">'+escapeHtml(d.class||'Needs classification')+' · '+classCounts.get(d.class||'Needs classification')+'</h3>':'')+'<details style="border:1px solid #d5e0eb;border-radius:10px;margin:7px 0;padding:10px 12px;background:#fff"><summary style="font-weight:800;cursor:pointer">'+escapeHtml(d.name)+' <span style="font-size:11px;font-weight:500;color:#63748e">'+escapeHtml(d.class||'')+'</span></summary><div style="background:#f5f9fd;border-radius:8px;padding:9px 12px;margin-top:9px">'+
+ [['Class / subclass',d.class],['Molecular target & mechanism',d.moa],['Drug-specific clinical indications / targets',d.uses],['Species differences',d.species],['Adverse effects',d.effects],['Contraindications / cautions',d.contraindications],['Route / formulation',d.route],['WHY / clinical distinction',d.why]].map(([label,value])=>'<p style="margin:7px 0;font-size:12px;line-height:1.45"><b>'+escapeHtml(label)+':</b> '+escapeHtml(value||'— Not specified in this entry')+'</p>').join('')+
  '<p class="tiny">Source: '+escapeHtml(d.source||'Exam 2 guide')+' · '+escapeHtml(d.reviewStatus||'Review clinical label')+'</p></div></details>').join('')+
  '<p class="tiny">Based on Pharmacology Exam 2 Study Guide, Master Drug Comparison (pp. 11–22); verify current regulatory status and clinical recommendations.</p>'+
  '<div class="buttonrow"><button data-vpqnewpharm-lesson="'+escapeHtml(lecture)+'">📖 Lecture</button><button data-vpqnewpharm-menu="1">← Exam 2</button></div>');
