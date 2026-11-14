@@ -438,7 +438,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
-<script src="pharm-next-lectures.js?v=20261114-exam2-full1"></script>
+<script src="pharm-next-lectures.js?v=20261114-diabetes-deep1"></script>
 <script src="pharm-exam2-pdf-practice.js?v=20261114-exam2-pdf96a"></script>
 <script src="pharm-exam2-objective-cards.js?v=20261114-exam2-objectives132a"></script>
 <script src="navle-pharm-expansion.js?v=20261109-navle1"></script>
@@ -2881,6 +2881,8 @@ function vpqPharmNextLesson(id){
  showModal('📖 '+escapeHtml(l.id)+' · '+escapeHtml(l.title),
  '<p><b>'+escapeHtml(l.summary)+'</b></p><div class="infobox"><b>WHY this physiology matters</b><p>'+escapeHtml(l.why)+'</p></div>'+
  l.concepts.map(x=>'<div class="vpqNewPharmConcept"><h3>'+escapeHtml(x[0])+'</h3><p>'+escapeHtml(x[1])+'</p></div>').join('')+
+ (l.deepSections?.length?'<div style="margin:15px 0 8px"><h3 style="font-size:16px">📖 Detailed learning pathways · Study Guide 2</h3><p class="small">Learn the core concepts, then open the physiology explanations and clinical checkpoints.</p></div>'+
+ l.deepSections.map(x=>'<section class="vpqNewPharmConcept" style="margin:10px 0;border-left:4px solid #7398c4"><h3>'+escapeHtml(x.title)+'</h3><p>'+escapeHtml(x.what)+'</p><details class="vpqNewPharmOptional"><summary>❔ Why does the body or drug do this?</summary><p>'+escapeHtml(x.why)+'</p></details><details class="vpqNewPharmOptional"><summary>🧠 Test yourself · checkpoint</summary><p>'+escapeHtml(x.check)+'</p></details><small style="color:#64748b;font-size:10px">'+escapeHtml(x.source)+'</small></section>').join(''):'')+
  (l.enrichment?.length?'<details class="vpqNewPharmOptional"><summary>➕ Learn More · Behavior, physiology & deeper WHY ('+l.enrichment.length+')</summary>'+l.enrichment.map(x=>'<div class="vpqNewPharmConcept"><h3>'+escapeHtml(x[0])+'</h3><p>'+escapeHtml(x[1])+'</p></div>').join('')+'</details>':'')+
  (l.reviewFlags?.length?'<details class="vpqNewPharmOptional"><summary>⚠ Confirm with instructor / clinical references ('+l.reviewFlags.length+')</summary>'+l.reviewFlags.map(x=>'<p>⚠ '+escapeHtml(x)+'</p>').join('')+'</details>':'')+
  '<details class="vpqNewPharmOptional"><summary>📚 Sources & review</summary><p>'+escapeHtml(l.recording)+'</p>'+l.sources.map(x=>'<p>'+escapeHtml(x)+'</p>').join('')+'<p>'+escapeHtml(l.status)+'</p></details>'+
