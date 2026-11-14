@@ -314,8 +314,8 @@ const vpqExam2MatchCards=(window.VPQ_PHARM_NEXT?.drugs||[])
   lecture:String(Number(d.lecture.replace('Lecture ',''))),
   drug:d.name,
   mechanism:d.class+' — '+d.moa,
-  clinical:d.uses+' · '+(d.species||'Species/formulation dependent')+
-   (d.effects?' · Watch: '+d.effects:''),
+  clinical:'Use: '+d.uses+' · '+(d.species||'Species/formulation dependent'),
+  safety:d.effects||'',
   group:d.class,
   indication:d.uses,
   className:d.class,
@@ -372,7 +372,7 @@ function vpqMatchRender40(message=''){
    const firstMastery=!save.matchMastery40[masteryKey];
    if(firstMastery){save.matchMastery40[masteryKey]=true;save.xp+=12;}
    persist();stats();
-   vpqMatchRender40('✓ '+safe(d.drug)+' — '+safe(d.mechanism)+'. Clinical pearl: '+safe(d.clinical)+(firstMastery?' · First match +12 XP.':' · Previously mastered; practice only.'));
+   vpqMatchRender40('✓ '+safe(d.drug)+' — '+safe(d.mechanism)+'. Clinical pearl: '+safe(d.clinical)+(d.safety?' · Watch: '+safe(d.safety):'')+(firstMastery?' · First match +12 XP.':' · Previously mastered; practice only.'));
   }else vpqMatchRender40('Not yet. Match the particular agent to its mechanism or clinically distinctive caution, not simply another drug in the same class.');
  });
 }
