@@ -22,7 +22,7 @@ function menu(){
  const sections=atlas?.sections||[];
  showModal('🔬 Mechanism Lab · Learning Atlas',header()+
  '<div class="vpqMechLessonGrid">'+sections.map(x=>'<button type="button" data-vpqmechsection="'+safe(x.id)+'"><b>'+safe(x.icon)+' '+safe(x.title)+'</b><small>'+safe(x.subtitle)+'</small><small>'+x.cards.length+' focused teaching cards</small></button>').join('')+'</div>'+
- '<p class="tiny">The Lab explains mechanisms. The Student Study Lounge contains arcade games and quizzes; Pharmacy contains the drug reference.</p>'+ '<div class="buttonrow"><button type="button" data-vpqmech-exam2="1">⚡ Exam 2 · Interactive Drug Pathways</button></div>'+
+ '<p class="tiny">The Lab explains mechanisms. The Student Study Lounge contains arcade games and quizzes; Pharmacy contains the drug reference.</p>'+ '<div class="buttonrow"><button type="button" data-vpqmech-visual="1">🎨 Exam 2 · Visual Anatomy</button> <button type="button" data-vpqmech-exam2="1">⚡ Exam 2 · Interactive Drug Pathways</button></div>'+
  '<div class="buttonrow"><button type="button" data-vpqmechlounge="1">📚 Go to Study Lounge</button><button type="button" data-vpqmechpharmacy="1">💊 Return to Pharmacy</button></div>');
 }
 function section(id){
@@ -99,6 +99,7 @@ vpqMechComparisonWatcher.observe(vpqMechModalRoot,{childList:true,subtree:false}
 
 document.getElementById('modalBody').addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.vpqmechVisual!==undefined)return window.VPQ_PHARM_EXAM2_VISUAL_ANATOMY?.home?.();
  if(b.dataset.vpqmechExam2!==undefined)return window.VPQ_PHARM_EXAM2_INTERACTIVE?.menu?.();
  if(b.dataset.vpqmechlesson)return lesson(b.dataset.vpqmechlesson);
  if(b.dataset.vpqmechsection)return section(b.dataset.vpqmechsection);
