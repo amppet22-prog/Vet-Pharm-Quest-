@@ -8,13 +8,10 @@ const KEY='vpq-atlas-drafts-v1';
 function read(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch{return {}}}
 function problem(message){alert('Atlas photo: '+message)}
 function current(){
- const root=document.getElementById('modalBody');
- const chosen=root?.querySelector('[data-atlas-select]');
- if(!chosen)return null;
- const id=chosen.value,old=read()[id]||{};
- const val=key=>root.querySelector('[data-atlas-field="'+key+'"]')?.value.trim()||'';
- return {id,photos:[0,1].map(i=>({...old.photos?.[i],url:val('url'+i),source:val('source'+i),credit:val('credit'+i)})),species:val('species'),note:val('note'),updated:new Date().toISOString()};
+ try{return window.VPQ_ATLAS_EDITOR?.collect?.()||null}
+ catch(error){problem(error.message);return null}
 }
+
 function persist(draft){
  const all=read();all[draft.id]=draft;
  try{localStorage.setItem(KEY,JSON.stringify(all));return true}
