@@ -440,6 +440,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
 <script src="pharm-next-lectures.js?v=20261114-neuro-deep1"></script>
 <script src="pharm-exam2-interactive-pathways.js?v=20261114-p5-path1"></script>
+<script src="pharm-exam2-visual-anatomy.js?v=20261114-p52-v1"></script>
 <script src="pharm-exam2-pdf-practice.js?v=20261114-exam2-pdf96a"></script>
 <script src="pharm-exam2-objective-cards.js?v=20261114-exam2-objectives132a"></script>
 <script src="navle-pharm-expansion.js?v=20261109-navle1"></script>
@@ -2663,7 +2664,7 @@ doAction=function(a){
  return vpqPharmacyNutritionPriorAction(a);
 };
 const vpqExam2PriorAction=doAction;
-doAction=function(a){if(a==='vpqExam2Interactive')return vpqExam2Interactive?.menu();return vpqExam2PriorAction(a);};
+doAction=function(a){if(a==='vpqExam2Interactive')return vpqExam2Interactive?.menu();if(a==='vpqExam2Anatomy')return vpqExam2Anatomy?.home();return vpqExam2PriorAction(a);};
 const vpqMechanismPriorAction=doAction;
 doAction=function(a){
  if(['vpqMechEnter','vpqMechMenu','vpqMechReceptor','vpqMechAntibiotics','vpqMechToxins'].includes(a))return vpqPhaseAMechanism.route(a);
@@ -2809,6 +2810,8 @@ vpqLearningHub=function(...args){
 /* New Pharmacology lecture importer and reference lessons. No changes to Exam 1 cards. */
 const vpqPharmNext=window.VPQ_PHARM_NEXT;
 const vpqExam2Interactive=window.VPQ_PHARM_EXAM2_INTERACTIVE;
+const vpqExam2Anatomy=window.VPQ_PHARM_EXAM2_VISUAL_ANATOMY;
+vpqExam2Anatomy?.init({modalBody:$('modalBody'),showModal,openStudy:()=>vpqPharmNextMenu()});
 vpqExam2Interactive?.init({state,showModal,persist,updateHUD,modalBody:$('modalBody')});
 if(vpqPharmNext){
  const existingDrugIds=new Set(D.drugs.map(x=>x.id));
@@ -2892,7 +2895,7 @@ function vpqPharmNextLesson(id){
  (l.reviewFlags?.length?'<details class="vpqNewPharmOptional"><summary>⚠ Confirm with instructor / clinical references ('+l.reviewFlags.length+')</summary>'+l.reviewFlags.map(x=>'<p>⚠ '+escapeHtml(x)+'</p>').join('')+'</details>':'')+
  '<details class="vpqNewPharmOptional"><summary>📚 Sources & review</summary><p>'+escapeHtml(l.recording)+'</p>'+l.sources.map(x=>'<p>'+escapeHtml(x)+'</p>').join('')+'<p>'+escapeHtml(l.status)+'</p></details>'+
  '<p class="tiny">Course study material, not a veterinary prescribing protocol. Supplementary and disputed points are separated above.</p>'+
- '<div class="buttonrow"><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanisms</button><button data-vpqpharmdrug-lecture="'+escapeHtml(l.id)+'">💊 Compare drugs</button><button data-vpqnewpharm-menu="1">← All lectures</button></div>');
+ '<div class="buttonrow"><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpq-p2-visual="1">🎨 Visual Anatomy</button> <button data-vpq-p2-visual="1">🎨 Visual Anatomy</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanisms</button><button data-vpqpharmdrug-lecture="'+escapeHtml(l.id)+'">💊 Compare drugs</button><button data-vpqnewpharm-menu="1">← All lectures</button></div>');
 }
 function vpqPharmNextMenu(){
  const data=vpqPharmNext;
@@ -2900,13 +2903,14 @@ function vpqPharmNextMenu(){
  '<p>Updated Exam 2 lecture materials from your PDFs: core study essentials, optional plus-note explanations, and question practice. Exam 1 remains unchanged.</p>'+
  '<div class="vpqNewPharmCards">'+(data?.lectures||[]).map(x=>'<button data-vpqnewpharm-lesson="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.id)+' · '+escapeHtml(x.title)+'</b><small>'+escapeHtml(x.focus||x.summary)+'</small><em>'+data.questions.filter(q=>q.lecture===x.id).length+' initial questions · browse lesson</em></button>').join('')+'</div>'+
  '<p><b>📋 Source-authored Exam 2 practice:</b> 96 questions from the uploaded answer/practice guide, including explanations. Select Lecture 10–20 in the Study Desk question filter. These are practice items, not Dr. Carlson\'s verbatim objective prompts.</p>'+
- '<div class="buttonrow"><button data-vpq-p2-launch="1">🔬 Interactive Mechanism Stations</button><button data-vpqnewpharm-objectives="1">📋 132 instructor objectives</button><button data-vpqpharmdrug-lecture="Lecture 10">💊 Master Drug Comparison</button><button data-vpqpharm-treats="1">🩺 What Treats What</button></div>'+ '<p class="tiny">Lecture overviews and new practice questions are available. This first import is not yet a complete slide-by-slide reconciliation of the 142-page guide.</p>');
+ '<div class="buttonrow"><button data-vpq-p2-visual="1">🎨 Explore Nephron, Synapse & Receptors</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanism Stations</button><button data-vpqnewpharm-objectives="1">📋 132 instructor objectives</button><button data-vpqpharmdrug-lecture="Lecture 10">💊 Master Drug Comparison</button><button data-vpqpharm-treats="1">🩺 What Treats What</button></div>'+ '<p class="tiny">Lecture overviews and new practice questions are available. This first import is not yet a complete slide-by-slide reconciliation of the 142-page guide.</p>');
 }
 $('modalBody').addEventListener('click',ev=>{
  const b=ev.target.closest('button');if(!b)return;
  const d=b.dataset;
  if(d.vpqnewpharmMenu!==undefined)return vpqPharmNextMenu();
  if(d.vpqP2Launch!==undefined)return vpqExam2Interactive?.menu();
+ if(d.vpqP2Visual!==undefined)return vpqExam2Anatomy?.home();
  if(d.vpqnewpharmObjectives!==undefined)return vpqExam2ObjectiveMenu();
  if(d.vpqnewpharmObjlecture!==undefined)return vpqExam2ObjectiveLecture(d.vpqnewpharmObjlecture);
  if(d.vpqpharmdrugLecture!==undefined)return vpqPharmDrugMaster(d.vpqpharmdrugLecture);
