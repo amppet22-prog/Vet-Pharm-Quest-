@@ -39,7 +39,7 @@ function render(){
  '<details class="vpqP2Hint"><summary>❔ How should I think about this?</summary><p>'+esc(q.hint)+'</p></details>'+
  '<div class="vpqP2Options">'+answers+'</div>'+
  (answered?'<section class="vpqP2Why"><b>'+(ok?'✅ Correct':'💡 Review the correct mechanism')+'</b><p><strong>Best answer:</strong> '+esc(q.options[q.a])+'</p><p><strong>WHY:</strong> '+esc(q.why)+'</p><small>'+(lastGain?'🪙 +15 EXP and +3 coins earned!':'You can retry without duplicate rewards.')+'</small></section>':'<p class="tiny">Select a decision to reveal the complete pathway and physiological explanation.</p>')+
- '<div class="buttonrow">'+(answered?'<button data-vpq-p2-retry="1">↻ Retry</button>':'')+(index>0?'<button data-vpq-p2-prev="1">← Previous</button>':'')+(answered&&index<g.questions.length-1?'<button data-vpq-p2-next="1">Next question →</button>':'')+'<button data-vpq-p2-home="1">All interactive stations</button></div>'+
+ '<div class="buttonrow"><button data-vpq-p2-visual="1">🎨 Explore this mechanism</button>'+(answered?'<button data-vpq-p2-retry="1">↻ Retry</button>':'')+(index>0?'<button data-vpq-p2-prev="1">← Previous</button>':'')+(answered&&index<g.questions.length-1?'<button data-vpq-p2-next="1">Next question →</button>':'')+'<button data-vpq-p2-home="1">All interactive stations</button></div>'+
  '<details class="vpq-source-note"><summary>📚 Source & review</summary><p>'+esc(q.source)+'</p><p>Original educational simulation; no dosing recommendations.</p></details>');
 }
 function answer(n){
@@ -55,10 +55,11 @@ function answer(n){
 function init(context){
  if(api)return;api=context;
  context.modalBody.addEventListener('click',e=>{
-  const b=e.target.closest('button[data-vpq-p2-open],button[data-vpq-p2-answer],button[data-vpq-p2-retry],button[data-vpq-p2-prev],button[data-vpq-p2-next],button[data-vpq-p2-home]');
+  const b=e.target.closest('button[data-vpq-p2-open],button[data-vpq-p2-answer],button[data-vpq-p2-retry],button[data-vpq-p2-prev],button[data-vpq-p2-next],button[data-vpq-p2-home],button[data-vpq-p2-visual]');
   if(!b)return;const d=b.dataset;
   if(d.vpqP2Open!==undefined)return open(d.vpqP2Open);
   if(d.vpqP2Home!==undefined)return menu();
+  if(d.vpqP2Visual!==undefined)return window.VPQ_PHARM_EXAM2_VISUAL_ANATOMY?.show?.(({nephron:'nephron',synapse:'synapse',receptors:'receptor',patients:'receptor'})[groupId]||'receptor');
   if(d.vpqP2Answer!==undefined)return answer(Number(d.vpqP2Answer));
   if(d.vpqP2Retry!==undefined){lastAnswer=null;lastGain=false;return render();}
   if(d.vpqP2Prev!==undefined)return open(groupId,index-1);
