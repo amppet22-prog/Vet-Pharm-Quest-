@@ -326,10 +326,10 @@ let vpqMatchMode40='mechanism',vpqMatchInfo40={},vpqMatchRecent40=[];
 try{vpqMatchRecent40=JSON.parse(localStorage.getItem('vpq-match-recent-v1')||'[]')||[]}catch(e){}
 function vpqMatchPool40(){return vpqMatchBank40.filter(x=>vpqArcadeFocus40().includes(x.lecture))}
 function vpqMatchInit40(){
- const pool=vpqMatchPool40(),key=vpqMatchMode40;
+ const key=vpqMatchMode40,pool=vpqMatchPool40().filter(x=>typeof x[key]==='string'&&x[key].trim());
  if(pool.length<3){
    matchDeck=[];round=null;
-   $('screen').innerHTML='<h2>🧩 Drug Match · No matching cards yet</h2><p>Your selected lecture set contains '+pool.length+' available '+(vpqMatchMode40==='clinical'?'clinical indication':vpqMatchMode40==='className'?'drug class':'mechanism')+' pairs. Choose more pharmacology lectures in the Learning Lab.</p><button class="btn" id="vpqMatchToExam">Lecture selection</button>';
+   $('screen').innerHTML='<h2>🧩 Drug Match · No matching cards yet</h2><p>Your selected lecture set contains '+pool.length+' available '+(vpqMatchMode40==='clinical'?'clinical indication':vpqMatchMode40==='className'?'drug class':'mechanism')+' pairs. Choose more matching lecture content in the Learning Lab. The dedicated drug-class mode uses the classified Exam 2 shelves (Lectures 10–20); Exam 1 still supports mechanism and clinical clues.</p><button class="btn" id="vpqMatchToExam">Lecture selection</button>';
    $('vpqMatchToExam').onclick=()=>setTab('examcenter');return;
  }
  const candidates=pool.filter(x=>!vpqMatchRecent40.includes(x.id));
