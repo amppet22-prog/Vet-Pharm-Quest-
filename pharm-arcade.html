@@ -344,9 +344,15 @@ function vpqMatchRender40(message=''){
   if(i===selection){selection=null;vpqMatchRender40();return}
   const first=matchDeck[selection];selection=null;
   if(first.id===t.id&&first.side!==t.side){
-   matched.add(t.id);save.xp+=12;persist();stats();
+   matched.add(t.id);
    const d=vpqMatchInfo40[t.id];
-   vpqMatchRender40('✓ '+safe(d.drug)+' — '+safe(d.mechanism)+'. Clinical pearl: '+safe(d.clinical)+' · +12 XP.');
+   // Award study XP once per drug and match category, not on unlimited repeat boards.
+   if(!save.matchMastery40||typeof save.matchMastery40!=='object')save.matchMastery40={};
+   const masteryKey=vpqMatchMode40+':'+d.id;
+   const firstMastery=!save.matchMastery40[masteryKey];
+   if(firstMastery){save.matchMastery40[masteryKey]=true;save.xp+=12;}
+   persist();stats();
+   vpqMatchRender40('✓ '+safe(d.drug)+' — '+safe(d.mechanism)+'. Clinical pearl: '+safe(d.clinical)+(firstMastery?' · First match +12 XP.':' · Previously mastered; practice only.'));
   }else vpqMatchRender40('Not yet. Match the particular agent to its mechanism or clinically distinctive caution, not simply another drug in the same class.');
  });
 }
