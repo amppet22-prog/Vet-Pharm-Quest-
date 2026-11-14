@@ -10,7 +10,8 @@ const assets={
  hallway:'assets/rooms/clinical-hallway.svg',
  surgery:'assets/rooms/surgery-suite.svg',
  necropsy:'assets/rooms/necropsy-floor.svg',
- clinpath:'assets/rooms/advanced-clinpath.svg',
+ // The specialist room SVG controller owns 'clinpath'. Do not override its
+ // playable hybrid art with the older flat advanced-clinpath.svg image.
  isolation:'assets/rooms/isolation-one-health.svg',
  // Cat Corner is rendered by the richer walkable scene in reception-hallway-and-habitats.js.
  // Do not override it with the retired flat cat-corner image.
