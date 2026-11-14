@@ -189,6 +189,7 @@ style.textContent='.vpqSpecArt{position:absolute;inset:0;width:100%;height:100%;
 '.vpqSpecHit:hover,.vpqSpecHit:focus-visible,.vpqSpecHit.vpqSpecNear{background:#fff2c52b;border:3px solid #ffcb65;outline:2px solid #fff5cc;box-shadow:0 0 20px #ffc8738e}'+
 '.vpqSpecHit span{position:absolute;bottom:-8%;left:50%;transform:translateX(-50%);font-size:clamp(11px,1.25vw,14px);font-weight:900;background:#fffdfb;color:#5b597b;border:3px solid #b7a8d7;border-radius:15px;padding:7px 9px;white-space:nowrap;box-shadow:0 4px 10px #60718d40}'+
 '.vpqSpecHit.vpqSpecNear span{background:#fff1c9;border-color:#e8b35b}'+
+'.vpqClinpathQuickLinks{position:absolute;left:10%;right:10%;bottom:2%;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;pointer-events:auto;z-index:12}.vpqClinpathQuickLinks button{border:2px solid #b5c6e8;border-radius:14px;background:#fdfbff;color:#324e76;font-size:clamp(11px,1.15vw,14px);font-weight:800;padding:7px 12px;box-shadow:0 3px 8px #40517144;cursor:pointer}.vpqClinpathQuickLinks button:hover,.vpqClinpathQuickLinks button:focus-visible{background:#e9f4ff;border-color:#76a9d4}'+
 '.vpqSpecHit.vpqSpecNear:after{content:"E · INTERACT";position:absolute;top:1%;left:50%;transform:translateX(-50%);font-size:11px;font-weight:900;color:#744d22;background:#fff8dd;border:2px solid #e9bf76;border-radius:12px;padding:4px 8px;white-space:nowrap}'+
 '@media(max-width:650px){.vpqSpecHit span{font-size:10px;padding:4px 5px;white-space:normal;min-width:80%}}';
 document.head.appendChild(style);
@@ -197,7 +198,8 @@ function refresh(){
  if(!data[room]){old?.remove();return}
  if(old?.dataset.room===room)return;
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
- div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" aria-label="'+p.label+'"><span>'+p.label+'</span></button>').join('');
+ div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" aria-label="'+p.label+'"><span>'+p.label+'</span></button>').join('')+
+ (room==='clinpath'?'<div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology visual reference links"><button type="button" data-vpqspecact="vpqClinpathAtlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference">🩸 Cell Recognition</button><button type="button" data-vpqspecact="vpqClassicSmear">📸 Blood Smear Lab</button></div>':'');
  div.addEventListener('click',e=>{const b=e.target.closest('[data-vpqspecact]');if(b)api.doAction(b.dataset.vpqspecact)});
  stage.appendChild(div);
 }
