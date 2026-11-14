@@ -1,0 +1,41 @@
+/* Clinical Pathology Atlas — local draft editor and GitHub review requests.
+   Edits are browser-local. No GitHub credentials are stored in client code.
+   Submitted GitHub Issues are proposals, NOT automatic publications. */
+window.VPQ_ATLAS_EDITOR=(function(){
+'use strict';
+const KEY='vpq-atlas-drafts-v1', ISSUE_URL='https://github.com/amppet22-prog/Vet-Pharm-Quest-/issues/new';
+const examples=[
+  {id:'plateletclump',name:'Platelet clumping',species:'Cat',source:'https://eclinpath.com/atlas/hematology/feline-blood/',credit:'Cornell eClinPath',note:'Platelet clumps can produce falsely low automated platelet counts, especially in cats.'},
+  {id:'echinocyte',name:'Echinocytes',species:'Dog / cat / other',source:'https://eclinpath.com/wp-content/uploads/Echinocyte.jpg',credit:'Cornell eClinPath',note:'Numerous regularly spaced short spicules; frequently a preanalytical/storage change.'},
+  {id:'acanthocyte',name:'Acanthocytes',species:'Cat / dog',source:'https://eclinpath.com/hematology/morphologic-features/red-blood-cells/quick-guide/',credit:'Cornell eClinPath',note:'Irregularly sized and spaced projections; cats can have acanthocytes. Compare with echinocytes.'},
+  {id:'rouleaux',name:'Rouleaux formation',species:'Horse / cat / dog',source:'https://eclinpath.com/hematology/morphologic-features/red-blood-cells/quick-guide/',credit:'Cornell eClinPath',note:'Coin-stack RBCs, often physiologic in horses; distinguish from true agglutination.'}
+];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+const safeUrl=s=>{try{let u=new URL(String(s||'').trim());return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}};
+function read(){try{let d=JSON.parse(localStorage.getItem(KEY)||'{}');return d&&typeof d==='object'&&!Array.isArray(d)?d:{}}catch{return {}}}
+function write(data){try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch{return false}}
+let api=null,selected='plateletclump',returnTo='visual';
+function catalog(){
+ const merged=[...examples],existing=new Set(merged.map(x=>x.id));
+ for(const x of window.VPQ_CLINPATH_VISUAL_ATLAS?.entries||[]){if(existing.has(x.id))continue;
+ merged.push({id:x.id,name:x.name,species:x.species||'',source:'https://eclinpath.com/atlas/',credit:'Reference source to be provided',note:x.clinical||x.look||''});existing.add(x.id)}
+ return merged;
+}
+function editor(id,from){if(from)returnTo=from;selected=id||selected;const d=read()[selected]||{},base=catalog().find(x=>x.id===selected)||examples[0],slots=Array.isArray(d.photos)?d.photos:[];
+const opts=catalog().map(x=>'<option value="'+esc(x.id)+'" '+(x.id===selected?'selected':'')+'>'+esc(x.name)+'</option>').join('');
+const imgs=[0,1].map(i=>{const p=slots[i]||{},src=safeUrl(p.url);return '<fieldset style="border:1px solid #d5dfee;border-radius:12px;padding:10px;margin:8px 0"><legend>Photo '+(i+1)+'</legend><label>Image URL (direct https:// image link)</label><input data-atlas-field="url'+i+'" type="url" value="'+esc(p.url||'')+'" placeholder="https://..." style="width:100%;padding:8px"><label>Photo credit / permission or license details</label><input data-atlas-field="credit'+i+'" value="'+esc(p.credit||'')+'" style="width:100%;padding:8px"><label>Source page URL</label><input data-atlas-field="source'+i+'" type="url" value="'+esc(p.source||'')+'" style="width:100%;padding:8px">'+(src?'<img alt="Draft atlas photo preview" loading="lazy" src="'+esc(src)+'" style="display:block;max-width:100%;max-height:180px;margin-top:8px;object-fit:contain">':'')+'</fieldset>'}).join('');
+api.showModal('✏️ Atlas editor — personal draft','<p><b>Private draft:</b> Only this browser sees unsent edits. Other players do not see them. Submitting a request requires a GitHub sign-in; the public game stays unchanged until reviewed and a code change is merged.</p><label>Atlas finding</label><select data-atlas-select="1" style="width:100%;padding:9px">'+opts+'</select><p class="tiny">Reference: <a target="_blank" rel="noopener noreferrer" href="'+esc(base.source)+'">'+esc(base.credit)+'</a></p><label>Species</label><input data-atlas-field="species" value="'+esc(d.species??base.species)+'" style="width:100%;padding:8px"><label>Explanation or correction</label><textarea data-atlas-field="note" rows="4" style="width:100%">'+esc(d.note??base.note)+'</textarea>'+imgs+'<p class="tiny">Only add images you have permission to redistribute, or use links to the original source. This editor does not upload image files. For a photo from your device, attach it manually to the GitHub request and include permission details.</p><div class="buttonrow"><button data-atlas-save="1">💾 Save draft</button><button data-atlas-request="1">📨 Request to Publish</button><button data-atlas-close="1">Back to atlas</button></div>');
+}
+function collect(){const out={id:selected,updated:new Date().toISOString(),photos:[]},root=api.body;for(const name of ['species','note'])out[name]=root.querySelector('[data-atlas-field="'+name+'"]')?.value.trim()||'';
+for(let i=0;i<2;i++){const get=k=>root.querySelector('[data-atlas-field="'+k+i+'"]')?.value.trim()||'';const url=get('url'),source=get('source'),credit=get('credit');if(url&&!safeUrl(url))throw Error('Photo '+(i+1)+' needs a valid http(s) URL.');if(source&&!safeUrl(source))throw Error('Photo '+(i+1)+' needs a valid source page URL.');out.photos.push({url,source,credit})}return out}
+function save(){try{const draft=collect(),all=read();all[selected]=draft;if(!write(all))throw Error('Browser storage is full or disabled.');editor(selected);return draft}catch(err){api.showModal('Atlas draft issue','<p>'+esc(err.message)+'</p><button data-atlas-edit="'+esc(selected)+'">Return to editing</button>');return null}}
+function request(){const draft=save();if(!draft)return;
+const base=catalog().find(x=>x.id===selected),title='[Atlas photo request] '+base.name,body=['## Proposed Clinical Pathology atlas update','Finding: '+base.name,'Species: '+draft.species,'Explanation: '+draft.note,'','## Proposed photo slots',...draft.photos.flatMap((p,i)=>['Photo '+(i+1)+': '+(p.url||'(none / upload as attachment in GitHub)'), 'Source: '+(p.source||'(not supplied)'), 'Attribution / permission: '+(p.credit||'(not supplied)')]),'','## Reviewer checklist','- [ ] Species and morphology medically verified','- [ ] Copyright/permission and image attribution reviewed','- [ ] No answer labels visible in quiz mode','- [ ] No duplicate item ID; source URL reachable','- [ ] Publish using a reviewed GitHub change (issue submission alone does not deploy)'].join('\n');
+const url=ISSUE_URL+'?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body);
+api.showModal('📨 Publication request ready','<p>Your draft is saved in this browser. Click below to open GitHub, sign in, and select <b>Submit new issue</b>. This is sent to the repository Issues inbox for owner review, not published automatically.</p><p><a target="_blank" rel="noopener noreferrer" href="'+esc(url)+'">Open prefilled GitHub publication request ↗</a></p><p class="tiny">After approval, content and image permissions must be reviewed and the GitHub change merged before anyone else sees it.</p><button data-atlas-edit="'+esc(selected)+'">Back to draft</button>');
+}
+function init(ctx){if(api)return;api=ctx;ctx.body.addEventListener('click',ev=>{const b=ev.target.closest('[data-atlas-edit],[data-atlas-save],[data-atlas-request],[data-atlas-close]');if(!b)return;if(b.hasAttribute('data-atlas-edit'))return editor(b.dataset.atlasEdit||'plateletclump',b.dataset.atlasFrom||null);if(b.hasAttribute('data-atlas-save'))return save();if(b.hasAttribute('data-atlas-request'))return request();if(b.hasAttribute('data-atlas-close'))return returnTo==='smear'?window.VPQ_BLOOD_SMEAR_LAB?.menu():window.VPQ_CLINPATH_VISUAL_ATLAS?.menu()});
+ctx.body.addEventListener('change',ev=>{if(ev.target.matches('[data-atlas-select]'))editor(ev.target.value)});
+}
+return Object.freeze({init,editor,examples,read,catalog});
+})();
