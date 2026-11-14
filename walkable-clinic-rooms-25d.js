@@ -21,7 +21,6 @@ const spec={
   {x:28,y:54,w:10,h:26,label:'💉 Cart',action:'hospitalAdjust'},
   {x:37,y:29,w:13,h:23,label:'💉 Skills Wing',action:'skillsWing'},
   {x:59,y:35,w:14,h:29,label:'💗 Monitor',action:'hospitalMonitor'},
-  {x:73,y:52,w:15,h:19,label:'📋 Patient Chart',action:'hospitalFollowup'},
   {x:88,y:49,w:9,h:22,label:'🧪 Send to Lab',action:'clinpathLabReferral'}]
 };
 const round=(x,y,w,h,fill,stroke='#aaa9ce')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="12" fill="'+fill+'" stroke="'+stroke+'" stroke-width="5"/>';
