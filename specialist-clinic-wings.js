@@ -8,11 +8,11 @@ const stage=document.getElementById('stage');if(!stage||!window.VPQ_SCENERY)retu
 const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const data={
  clinpath:[
-  {x:3,y:42,w:17,h:34,walk:12,label:'🩸 Coagulation Bench',subtitle:'Questions + interpretation',hint:'Practice PT / aPTT interpretation questions',kind:'practice',action:'advancedCoag'},
-  {x:21,y:42,w:17,h:34,walk:29,label:'🫧 Blood Gas Station',subtitle:'Acid–base practice',hint:'Practice blood gas and acid–base interpretation',kind:'practice',action:'advancedGas'},
-  {x:39,y:42,w:17,h:34,walk:48,label:'🧫 Urinalysis Bench',subtitle:'UA questions + sediment',hint:'Choose urinalysis questions or visual sediment references',kind:'practice',action:'advancedUrine'},
-  {x:57,y:42,w:18,h:34,walk:66,label:'🐾 Referral Cases',subtitle:'Workup questions',hint:'Work through Clinical Pathology patient cases',kind:'practice',action:'advancedCases'},
-  {x:77,y:42,w:20,h:34,walk:87,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
+  {x:2.2,y:31,w:17.4,h:43,walk:12,label:'🩸 Coagulation Bench',subtitle:'Questions + interpretation',hint:'Practice PT / aPTT interpretation questions',kind:'practice',action:'advancedCoag'},
+  {x:22,y:31,w:17.4,h:43,walk:29,label:'🫧 Blood Gas Station',subtitle:'Acid–base practice',hint:'Practice blood gas and acid–base interpretation',kind:'practice',action:'advancedGas'},
+  {x:41.8,y:31,w:17.4,h:43,walk:48,label:'🧫 Urinalysis Bench',subtitle:'UA questions + sediment',hint:'Choose urinalysis questions or visual sediment references',kind:'practice',action:'advancedUrine'},
+  {x:61.5,y:31,w:17.4,h:43,walk:66,label:'🐾 Referral Cases',subtitle:'Workup questions',hint:'Work through Clinical Pathology patient cases',kind:'practice',action:'advancedCases'},
+  {x:81.1,y:31,w:17.4,h:43,walk:87,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
  ],
  isolation:[
   {x:9,y:37,w:22,h:39,walk:23,label:'🐶 Isolation patient',action:'onehealth'},
@@ -40,6 +40,7 @@ const data={
 };
 const rect=(x,y,w,h,fill,stroke='#a4b7c9')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="13" fill="'+fill+'" stroke="'+stroke+'" stroke-width="5"/>';
 function scene(key){
+ if(key==='clinpath'&&typeof window.VPQ_CLINPATH_HYBRID_SCENE==='function')return window.VPQ_CLINPATH_HYBRID_SCENE();
  const iso=key==='isolation',cp=key==='clinpath';
  const bg=iso?'#d6eee6':cp?'#dceff8':'#edf1e5';
  const wall=iso?'#effaf7':cp?'#f5faff':'#f7faef';
@@ -191,7 +192,8 @@ style.textContent='.vpqSpecArt{position:absolute;inset:0;width:100%;height:100%;
 '.vpqSpecHit span{position:absolute;bottom:-14%;left:50%;transform:translateX(-50%);font-size:clamp(10px,1.10vw,13px);font-weight:900;background:#fffdfb;color:#5b597b;border:3px solid #b7a8d7;border-radius:13px;padding:5px 7px;white-space:normal;min-width:94%;line-height:1.25;box-shadow:0 4px 10px #60718d40}'+
 '.vpqSpecHit span small{display:block;font-size:10px;color:#66738c;font-weight:700;line-height:1.2;margin-top:3px}.vpqSpecHit[data-vpqspec-kind="practice"] span{border-color:#e0b583;background:#fff9ec}'+
 '.vpqSpecHit.vpqSpecNear span{background:#fff1c9;border-color:#e8b35b}'+
-'.vpqClinpathQuickLinks{position:absolute;left:9%;right:9%;bottom:1%;display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap;pointer-events:auto;z-index:12}.vpqClinpathQuickLinks .vpqQuickTitle{display:block;width:100%;font-weight:900;font-size:11px;color:#4c6289;text-align:center;letter-spacing:.6px;text-shadow:0 1px 0 #fff}.vpqClinpathQuickLinks button{border:2px solid #b5c6e8;border-radius:13px;background:#fdfbff;color:#324e76;font-size:clamp(10px,1.0vw,12px);font-weight:800;padding:5px 10px;box-shadow:0 3px 8px #40517144;cursor:pointer}.vpqClinpathQuickLinks button[data-vpq-type="practice"]{border-color:#e5bc81;background:#fff4df}.vpqClinpathQuickLinks button:hover,.vpqClinpathQuickLinks button:focus-visible{background:#e9f4ff;border-color:#76a9d4}'+
+'.vpqClinpathQuickLinks{position:absolute;left:9%;right:9%;bottom:1%;height:14%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:17px minmax(0,1fr);gap:3px 6px;align-items:stretch;pointer-events:auto;z-index:12}.vpqClinpathQuickLinks .vpqQuickTitle{grid-column:1/-1;display:block;font-weight:900;font-size:clamp(9px,1vw,11px);color:#67528b;text-align:center;letter-spacing:.4px;text-shadow:0 1px 0 #fff;line-height:15px}.vpqClinpathQuickLinks button{border:2px solid #b5c6e8;border-radius:11px;background:#fdfbff;color:#324e76;font-size:clamp(9px,.98vw,12px);font-weight:800;padding:3px 5px;min-width:0;white-space:normal;line-height:1.12;box-shadow:0 2px 5px #40517133;cursor:pointer}.vpqClinpathQuickLinks button small{display:block;font-size:clamp(8px,.76vw,10px);font-weight:700;margin-top:1px;color:#67789a}.vpqClinpathQuickLinks button[data-vpq-type="practice"]{border-color:#e5bc81;background:#fff4df}.vpqClinpathQuickLinks button:hover,.vpqClinpathQuickLinks button:focus-visible{background:#e9f4ff;border-color:#76a9d4}'+
+'.stage[data-room="clinpath"] .vpqSpecHit span{display:none!important}.stage[data-room="clinpath"] .vpqSpecHit{border-radius:17px}.stage[data-room="clinpath"] .vpqSpecHit.vpqSpecNear:after{top:auto;bottom:5%;font-size:11px}.stage[data-room="clinpath"] .vpqSpecHit:hover{background:#fff6c82a}'+
 '.vpqSpecHit.vpqSpecNear:after{content:"E · INTERACT";position:absolute;top:1%;left:50%;transform:translateX(-50%);font-size:11px;font-weight:900;color:#744d22;background:#fff8dd;border:2px solid #e9bf76;border-radius:12px;padding:4px 8px;white-space:nowrap}'+
 '@media(max-width:650px){.vpqSpecHit span{font-size:10px;padding:4px 5px;white-space:normal;min-width:80%}}';
 document.head.appendChild(style);
@@ -201,7 +203,7 @@ function refresh(){
  if(old?.dataset.room===room)return;
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
  div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" data-vpqspec-kind="'+(p.kind||'practice')+'" title="'+(p.hint||p.label)+'" aria-label="'+p.label+(p.subtitle?' — '+p.subtitle:'')+'"><span>'+p.label+(p.subtitle?'<small>'+p.subtitle+'</small>':'')+'</span></button>').join('')+
- (room==='clinpath'?'<div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE · 🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Open Learn This First lecture study guide">📖 Learn First · Study Guide</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Open visual Microscope Atlas reference">🔬 Microscope Atlas · Reference</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Open cell identification and morphology reference">🩸 Cell Recognition · Reference</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Practice blood smear identification questions">🎯 Smear Quizzes · Practice</button></div>':'');
+ (room==='clinpath'?'<div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study reference shortcuts and smear questions"><div class="vpqQuickTitle">📚 REFERENCE &amp; STUDY SHORTCUTS · 🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Learn First: lecture-based study guide">📖 Learn First<small>Study guide</small></button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscopic morphology reference">🔬 Microscope Atlas<small>Visual reference</small></button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell morphology and species reference">🩸 Cell Recognition<small>Identification guide</small></button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Practice blood smear image identification">🎯 Smear Quizzes<small>Practice questions</small></button></div>':'');
  div.addEventListener('click',e=>{const b=e.target.closest('[data-vpqspecact]');if(b)api.doAction(b.dataset.vpqspecact)});
  stage.appendChild(div);
 }
