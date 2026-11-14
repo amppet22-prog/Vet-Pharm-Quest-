@@ -9,6 +9,7 @@ const route={
   smear:()=>window.VPQ_BLOOD_SMEAR_LAB?.menu?.(),
   cells:()=>window.VPQ_BLOOD_SMEAR_LAB?.reference?.(),
   advanced:()=>window.VPQ_ADVANCED_LAB?.home?.(),
+  rounds:()=>window.VPQ_CLINPATH_DIAGNOSTIC_ROUNDS?.home?.(),
   learn:()=>window.VPQ_CLINPATH_GUIDED?.home?.(),
   cases:()=>api?.openCases?.('Clinical Pathology'),
   editor:()=>window.VPQ_ATLAS_EDITOR?.editor?.('plateletclump','visual'),
@@ -24,6 +25,7 @@ function open(){
  tile('cells','🩸','Cell Recognition Reference','Full written descriptions, blood-cell significance and photographed examples where available')+
  tile('smear','📸','Blood Smear Lab','Image-identification quizzes, artifacts and smear-based patient decisions')+
  tile('advanced','🧪','Advanced Diagnostics','Coagulation, blood gas, urine sediment and complex diagnostic questions')+
+ tile('rounds','🏥','Full Diagnostic Rounds','Five stages per patient: specimen, instrument, artifact, interpretation and next action')+
  tile('cases','🐾','Patient Cases','Apply multiple tests to patients and explain why values change')+
  '</div><p style="font-size:12px;margin-top:12px"><b>Content editing:</b> <button type="button" data-cph-nav="editor">✏️ Edit Microscope Atlas</button> <button type="button" data-cph-nav="cells">🩸 Edit Cell Recognition</button> <button type="button" data-cph-nav="newcell">➕ Add New Cell</button>. Drafts save privately; owner publishing needs approved GitHub repository write access.</p>');
 }
