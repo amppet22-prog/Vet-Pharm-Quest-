@@ -479,6 +479,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="diagnostic-imaging-suite.js?v=20261109-imagingphase1"></script>
 <script src="clinpath-treatment-ward-rounds.js?v=20261114-phaseC3-6a"></script>
 <script src="clinpath-diagnostic-rounds.js?v=20261114-phaseC3-6a"></script>
+<script src="treatment-ward-advanced-rounds.js?v=20261114-advanced15a"></script>
 <script src="treatment-diagnostics.js?v=20261114-treatment-journey1"></script>
 <script src="advanced-clinpath-stations.js?v=20261114-treatment-journey1"></script>
 <script src="surgery-necropsy-learning.js?v=20261110-newwings1"></script>
@@ -2374,13 +2375,14 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(saved&&typeof saved==='object'){
    if(hospitalData.some(p=>p.id===saved.currentPatient)){currentPatient=saved.currentPatient;hasPatient=Boolean(saved.hasPatient)}
    for(const p of hospitalData)if(saved.progress?.[p.id]&&typeof saved.progress[p.id]==='object'){
-     const old=saved.progress[p.id];progress[p.id]={...initial(),examined:old.examined===true,careAnswer:Number.isInteger(old.careAnswer)?old.careAnswer:null,careComplete:old.careComplete===true,monitorAnswer:Number.isInteger(old.monitorAnswer)?old.monitorAnswer:null,monitorComplete:old.monitorComplete===true,trendAnswer:Number.isInteger(old.trendAnswer)?old.trendAnswer:null,trendComplete:old.trendComplete===true||(old.trendComplete===undefined&&old.monitorComplete===true),outpatientAnswer:Number.isInteger(old.outpatientAnswer)?old.outpatientAnswer:null,outpatientComplete:old.outpatientComplete===true,shift:Math.max(1,Number(old.shift)||1)};
+     const old=saved.progress[p.id];progress[p.id]={...initial(),examined:old.examined===true,careAnswer:Number.isInteger(old.careAnswer)?old.careAnswer:null,careComplete:old.careComplete===true,monitorAnswer:Number.isInteger(old.monitorAnswer)?old.monitorAnswer:null,monitorComplete:old.monitorComplete===true,trendAnswer:Number.isInteger(old.trendAnswer)?old.trendAnswer:null,trendComplete:old.trendComplete===true||(old.trendComplete===undefined&&old.monitorComplete===true),outpatientAnswer:Number.isInteger(old.outpatientAnswer)?old.outpatientAnswer:null,outpatientComplete:old.outpatientComplete===true,advancedAnswers:old.advancedAnswers&&typeof old.advancedAnswers==='object'&&!Array.isArray(old.advancedAnswers)?old.advancedAnswers:{},shift:Math.max(1,Number(old.shift)||1)};
    }
   }
  }catch(e){}
  // A safe migration preserves patient selection, without mixing unverified earlier treatment decisions.
  if(!hasPatient){try{const old=JSON.parse(localStorage.getItem('vpq-inpatient-care-v2')||'null');if(hospitalData.some(p=>p.id===old?.patient)){currentPatient=old.patient}}catch(e){}}
  function savePatient(){try{localStorage.setItem(storeKey,JSON.stringify({currentPatient,hasPatient,progress}))}catch(e){}}
+ window.VPQ_WARD_ADVANCED?.init?.({showModal,modalBody:$('modalBody'),stateOf:id=>progress[id],savePatient,back:()=>caseMenu()});
  function patient(){return hospitalData.find(p=>p.id===currentPatient)||hospitalData[0]}
  function stateOf(){return progress[currentPatient]}
  function phase(){const a=stateOf();return a.outpatientComplete?'completed':a.trendComplete?'outpatient':a.careComplete?'monitor':a.examined?'adjust':'follow'}
@@ -2389,7 +2391,9 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function patientHeading(){
   const p=patient(),a=stateOf();
   return '<div class="vpqWardHead"><b>'+escapeHtml(p.name)+'</b><p>'+escapeHtml(p.desc)+'</p><p class="tiny"><b>Admission baseline:</b> '+escapeHtml(p.baseline)+'</p>'+
-    '<p class="tiny"><b>Shift '+a.shift+' · Next step: '+nextLabel()+'</b></p></div>';
+    '<p class="tiny"><b>Shift '+a.shift+' · Next step: '+nextLabel()+'</b></p></div>'+
+    (window.VPQ_WARD_ADVANCED?.rows?.(p.id)||'')+
+    '<div class="buttonrow"><button type="button" data-vpqwardadvanced="1">🧠 Advanced clinical reasoning · '+(window.VPQ_WARD_ADVANCED?.count?.(p.id)||0)+'/5</button></div>';
  }
  function navigation(){
   if(!hasPatient)return '';
@@ -2403,7 +2407,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   wardMode='chart';savePatient();
   const list=hospitalData.map(p=>{
    const a=progress[p.id],next=a.outpatientComplete?'Case complete':a.trendComplete?'Outpatient / discharge':a.careComplete?'Monitor':a.examined?'Treat':'Assess';
-   return '<button type="button" class="full" data-vpqwardpick="'+escapeHtml(p.id)+'" style="text-align:left"><b>'+escapeHtml(p.name)+'</b><span class="tiny" style="display:block">Shift '+a.shift+' · Next: '+next+'</span></button>';
+   return '<button type="button" class="full" data-vpqwardpick="'+escapeHtml(p.id)+'" style="text-align:left"><b>'+escapeHtml(p.name)+'</b><span class="tiny" style="display:block">Shift '+a.shift+' · Next: '+next+' · Advanced reasoning '+(window.VPQ_WARD_ADVANCED?.count?.(p.id)||0)+'/5</span></button>';
   }).join('');
   showModal('🏥 Treatment Ward · Patient Handoff',
    '<p>Practice the patient journey: <b>Assess → Treat → Monitor → Discharge or outpatient follow-up</b>. Lab findings remain in the chart, but standalone CBC, chemistry and microscope lessons belong in Clinical Pathology.</p>'+
@@ -2506,6 +2510,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   const d=b.dataset;if(!Object.keys(d).some(k=>k.startsWith('vpqward')))return;
   e.preventDefault();e.stopImmediatePropagation();
   try{
+   if(d.vpqwardadvanced!==undefined)return window.VPQ_WARD_ADVANCED?.open?.(currentPatient);
    if(d.vpqwardhome!==undefined)return caseMenu();
    if(d.vpqwardpick!==undefined)return selectPatient(d.vpqwardpick);
    if(d.vpqwardcontinue!==undefined)return continueCase();
