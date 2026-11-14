@@ -11,7 +11,8 @@ const route={
   advanced:()=>window.VPQ_ADVANCED_LAB?.home?.(),
   learn:()=>window.VPQ_CLINPATH_GUIDED?.home?.(),
   cases:()=>api?.openCases?.('Clinical Pathology'),
-  editor:()=>window.VPQ_ATLAS_EDITOR?.editor?.('plateletclump','visual')
+  editor:()=>window.VPQ_ATLAS_EDITOR?.editor?.('plateletclump','visual'),
+  newcell:()=>window.VPQ_CONTENT_STUDIO?.addNew?.()
 };
 function open(){
  if(!api)return;
@@ -24,7 +25,7 @@ function open(){
  tile('smear','📸','Blood Smear Lab','Image-identification quizzes, artifacts and smear-based patient decisions')+
  tile('advanced','🧪','Advanced Diagnostics','Coagulation, blood gas, urine sediment and complex diagnostic questions')+
  tile('cases','🐾','Patient Cases','Apply multiple tests to patients and explain why values change')+
- '</div><p style="font-size:12px;margin-top:12px"><b>Adding pictures?</b> Use <button type="button" data-cph-nav="editor">✏️ Edit atlas photos</button> to save a private draft and submit a reviewed GitHub publication request.</p>');
+ '</div><p style="font-size:12px;margin-top:12px"><b>Content editing:</b> <button type="button" data-cph-nav="editor">✏️ Edit Microscope Atlas</button> <button type="button" data-cph-nav="cells">🩸 Edit Cell Recognition</button> <button type="button" data-cph-nav="newcell">➕ Add New Cell</button>. Drafts save privately; owner publishing needs approved GitHub repository write access.</p>');
 }
 function init(context){if(api)return;api=context;context.body.addEventListener('click',event=>{
  const control=event.target.closest('[data-cph-nav]');
