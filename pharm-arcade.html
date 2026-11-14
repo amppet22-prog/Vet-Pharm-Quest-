@@ -17,6 +17,7 @@
 .vpq-exam-actions strong{display:block;font-size:15px}.vpq-exam-actions small{display:block;margin-top:5px;color:#726780}
 .vpq-exam-tip{padding:10px 12px;background:#f3eff9;border-radius:11px;color:#655773;font-size:12px;margin:8px 0}
 </style></head><body><div style="background:linear-gradient(90deg,#ece1fa,#fceee8);padding:11px 16px;text-align:center;font-weight:800;border-bottom:2px solid #d7bfe2"><a href="index.html" style="color:#574477;text-decoration:underline">🏥 Back to Alexandria’s Teaching Hospital</a><span style="font-size:11px;display:block;margin-top:3px;color:#6f6880">Classic Pharm Arcade · 100 lecture-based questions · progress stays saved separately in this browser</span></div><header><nav><div class="logo">🐾 Vet Pharm Quest</div><span class="tag">EXAM 1 • LECTURES 1–9</span><div class="grow"></div><div class="pill">⭐ <span id="xpTop">0</span> XP</div><div class="pill">🏅 Level <span id="levelTop">1</span></div><button class="topbtn smallbtn" id="resetBtn">Reset progress</button></nav></header><main class="wrap"><div class="hero"><div><div style="font-weight:900;opacity:.9">WELCOME TO YOUR TRAINING CLINIC</div><h1>Become a Pharm Champion! 🩺</h1><p>Learn the mechanism. Choose the treatment. Protect the patient. Every answer teaches the physiology behind your decision.</p><div class="barbg"><div class="barfill" id="heroBar" style="width:0%"></div></div><div style="font-size:12px;margin-top:5px" id="nextLevel">0 / 150 XP until Level 2</div></div><div class="mascot">👩‍⚕️🐶</div></div><div class="tabs" id="tabs"><button data-tab="home" class="active">🏥 Clinic Hub</button><button data-tab="cases">🩺 Patient Rounds</button><button data-tab="battle">⚔️ Bug Battles</button><button data-tab="match">🧩 Drug Match</button><button data-tab="boss">🏆 Exam Boss</button><button data-tab="review">📒 Missed Concepts</button></div><div class="layout"><section class="panel" id="screen"></section><aside class="side"><div class="panel"><h3>📊 Your Progress</h3><div class="scorebox"><div class="stat"><span class="muted micro">Correct</span><b id="hits">0</b></div><div class="stat"><span class="muted micro">Accuracy</span><b id="accuracy">—</b></div><div class="stat"><span class="muted micro">Legacy Arcade cases</span><b id="patients">0</b></div><div class="stat"><span class="muted micro">Bugs defeated</span><b id="defeated">0</b></div></div><p class="muted micro" id="attempts"></p></div><div class="panel"><h3>📚 Focus Area</h3><label for="filter">Choose lectures</label><select id="filter" class="select" style="width:100%;margin-top:7px"><option value="all">All Exam 1 lectures</option><option value="1">Lecture 1 · Foundations</option><option value="2">Lecture 2 · Drug selection</option><option value="3">Lecture 3 · Cell wall</option><option value="4">Lecture 4 · Ribosomes</option><option value="5">Lecture 5 · Misc. antibiotics</option><option value="6">Lectures 6–7 · NSAIDs</option><option value="8">Lecture 8 · Antihistamines</option><option value="9">Lecture 9 · Corticosteroids</option></select><p class="muted micro">This filters Patient Rounds and Exam Boss. Battles focus on antimicrobials.</p></div><div class="panel"><h3>💡 Your Clinician Mindset</h3><div class="note">Always ask: <b>target → physiology → patient → risk → monitoring.</b> Exam expectations and real-world prescribing rules may differ.</div></div></aside></div><div class="footer">Vet Pharm Quest · Offline learning prototype · Educational simulation only, not a prescribing or dosage tool.</div></main><script src="curriculum.js"></script>
+<script src="pharm-next-lectures.js?v=20261114-exam2-match1"></script>
 <script src="one-health-data.js"></script>
 <script src="bug-library.js"></script>
 <script src="pharm-carlson-186.js?v=20261108-recall3"></script>
@@ -303,6 +304,24 @@ const vpqMatchBank40=[
  ['9','Mitotane','Adrenocorticolytic agent','Can cause life-threatening hypoadrenocorticism'],
  ['9','Pergolide','Dopamine agonist','Equine pituitary pars intermedia dysfunction therapy']
 ].map(([lecture,drug,mechanism,clinical],i)=>({id:'match40-'+i,lecture,drug,mechanism,clinical}));
+// Exam 2 matching shares the hospital's authoritative 175-entry lecture library.
+// Each match uses the actual imported drug class, mechanism and clinical indication.
+// Do not fabricate indication or resistance claims from the drug class.
+const vpqExam2MatchCards=(window.VPQ_PHARM_NEXT?.drugs||[])
+ .filter(d=>/^Lecture (?:1[0-9]|20)$/.test(d.lecture||'')&&d.name&&d.class&&d.moa&&d.uses)
+ .map(d=>({
+  id:'exam2-match-'+d.id,
+  lecture:String(Number(d.lecture.replace('Lecture ',''))),
+  drug:d.name,
+  mechanism:d.class+' — '+d.moa,
+  clinical:d.uses+' · '+(d.species||'Species/formulation dependent')+
+   (d.effects?' · Watch: '+d.effects:''),
+  group:d.class,
+  indication:d.uses,
+  className:d.class,
+  origin:'Exam 2 drug shelf'
+ }));
+vpqMatchBank40.push(...vpqExam2MatchCards);
 let vpqMatchMode40='mechanism',vpqMatchInfo40={},vpqMatchRecent40=[];
 try{vpqMatchRecent40=JSON.parse(localStorage.getItem('vpq-match-recent-v1')||'[]')||[]}catch(e){}
 function vpqMatchPool40(){return vpqMatchBank40.filter(x=>vpqArcadeFocus40().includes(x.lecture))}
@@ -328,8 +347,8 @@ function vpqMatchRender40(message=''){
  round=null;
  if(!matchDeck.length)return vpqMatchInit40();
  const total=Object.keys(vpqMatchInfo40).length;
- $('screen').innerHTML='<div class="section-title"><h2>🧩 '+(vpqMatchMode40==='clinical'?'Clinical Caution Match':'Drug & Mechanism Match')+'</h2><span class="chip">'+matched.size+'/'+total+' pairs</span></div>'+
- '<p class="muted">Your <b>saved pharmacology lectures</b> control the question pool. Match each drug to '+(vpqMatchMode40==='clinical'?'a unique safety/clinical clue.':'its molecular target or pharmacologic mechanism.')+' Different drug sets rotate across rounds.</p>'+
+ $('screen').innerHTML='<div class="section-title"><h2>🧩 '+(vpqMatchMode40==='clinical'?'Clinical Use & Safety Match':'Drug Class & Mechanism Match')+'</h2><span class="chip">'+matched.size+'/'+total+' pairs</span></div>'+
+ '<p class="muted">Your <b>saved pharmacology lectures</b> control the question pool. Match each drug to '+(vpqMatchMode40==='clinical'?'its specific indication, target patients and safety consideration.':'its molecular target or pharmacologic mechanism.')+' Different drug sets rotate across rounds.</p>'+
  '<div class="little"><button class="btn smallbtn" id="vpqMatchModeMechanism">⚙️ Drug target</button><button class="btn smallbtn" id="vpqMatchModeClinical">⚕️ Clinical caution</button><button class="btn smallbtn" id="vpqMatchNew">New drug set ↻</button></div>'+
  '<div class="meter" style="margin:12px 0"><div style="width:'+(matched.size/total*100)+'%"></div></div>'+
  '<div class="match-board">'+matchDeck.map((x,i)=>'<button class="tile '+(matched.has(x.id)?'matched':'')+' '+(selection===i?'selected':'')+'" data-vpqmatchtile="'+i+'" '+(matched.has(x.id)?'disabled':'')+'>'+safe(x.text)+'</button>').join('')+'</div>'+
