@@ -16,8 +16,9 @@ function saved(){
 }
 function record(id){
  const store=saved().byPatient;
- if(!store[id])store[id]={answers:{},complete:false};
+ if(!store[id])store[id]={answers:{},complete:false,cursor:0};
  store[id].answers ||= {};
+ if(!Number.isInteger(store[id].cursor))store[id].cursor=Math.min(4,Object.keys(store[id].answers).length);
  return store[id];
 }
 function persist(){api?.persist?.()}
@@ -33,8 +34,7 @@ function home(){
 function open(id){if(!patients.some(p=>p.id===id))return home();active=id;render()}
 function render(){
  const p=patients.find(x=>x.id===active);if(!p)return home();
- const r=record(p.id),idx=Math.min(p.steps.findIndex((x,i)=>r.answers[i]===undefined)===-1?5:p.steps.findIndex((x,i)=>r.answers[i]===undefined),5);
- const stepIndex=idx===5?4:idx,step=p.steps[stepIndex],chosen=r.answers[stepIndex],answered=chosen!==undefined,finished=idx===5;
+ const r=record(p.id),stepIndex=Math.max(0,Math.min(4,r.cursor)),step=p.steps[stepIndex],chosen=r.answers[stepIndex],answered=chosen!==undefined,finished=Boolean(r.complete);
  const progress='<p class="vpq-case-meta">Diagnostic round · '+(stepIndex+1)+' / 5'+(finished?' · Completed':'')+'</p><div style="height:7px;border-radius:8px;background:#dfe8f2;margin-bottom:12px"><div style="height:7px;border-radius:8px;background:#75aeb2;width:'+Math.round(Object.keys(r.answers).length/5*100)+'%"></div></div>';
  const buttons=step.choices.map((x,i)=>'<button class="choice '+(answered?(i===step.a?'right':i===chosen?'wrong':''):'')+'" data-cdr-answer="'+i+'" '+(answered?'disabled':'')+'>'+String.fromCharCode(65+i)+'. '+esc(x)+'</button>').join('');
  const body='<section class="vpq-patient-case">'+progress+'<div class="vpq-case-presentation"><b>Patient findings:</b> '+esc(p.patient)+'</div>'
@@ -43,15 +43,15 @@ function render(){
  +'<div class="vpq-case-choices">'+buttons+'</div>'
  +(answered?'<div class="response '+(chosen===step.a?'':'bad')+'"><b>'+(chosen===step.a?'✅ Appropriate decision':'💡 Review the reasoning')+'</b><p>'+esc(step.why)+'</p></div>':'<p class="vpq-case-reassurance">Choose the best step. Your answer and rationale will be saved.</p>')
  +(finished?'<p><b>✅ Diagnostic round complete.</b> You can revisit your steps or begin another patient.</p>':'')
- +'<div class="buttonrow">'+(answered&&idx<5?'<button data-cdr-next="1">Next checkpoint →</button>':'')+'<button data-cdr-list="1">All diagnostic rounds</button>'+(finished?'<button data-cdr-replay="1">↻ Replay for review</button>':'')+'</div>'
+ +'<div class="buttonrow">'+(answered&&!finished&&stepIndex<4?'<button data-cdr-next="1">Next checkpoint →</button>':'')+'<button data-cdr-list="1">All diagnostic rounds</button>'+(finished?'<button data-cdr-replay="1">↻ Replay for review</button>':'')+'</div>'
  +'<details class="vpq-source-note"><summary>📚 Sources &amp; review</summary><div class="vpq-source-body">Original teaching simulation. Clinical interpretation depends on species, test method, specimen handling and patient status.</div></details>'
  +'</section>';
  api.showModal('🏥 '+esc(p.title),body);
 }
 function answer(n){
  const p=patients.find(x=>x.id===active);if(!p)return;
- const r=record(p.id),idx=p.steps.findIndex((x,i)=>r.answers[i]===undefined);
- if(idx<0||!Number.isInteger(n)||n<0||n>=p.steps[idx].choices.length)return;
+ const r=record(p.id),idx=r.cursor;
+ if(idx<0||idx>=p.steps.length||r.answers[idx]!==undefined||!Number.isInteger(n)||n<0||n>=p.steps[idx].choices.length)return;
  r.answers[idx]=n;
  if(n===p.steps[idx].a)api.awardQuestion?.('clinpath-diagnostic-rounds',p.id+':'+idx,true);
  if(idx===p.steps.length-1)r.complete=true;
@@ -59,12 +59,11 @@ function answer(n){
 }
 function next(){
  const p=patients.find(x=>x.id===active);if(!p)return;
- const r=record(p.id);if(!Object.keys(r.answers).length)return;
- const idx=p.steps.findIndex((x,i)=>r.answers[i]===undefined);
- if(idx<0)return render();
- return render();
+ const r=record(p.id);if(r.answers[r.cursor]===undefined)return;
+ if(r.cursor<p.steps.length-1)r.cursor++;
+ persist();render();
 }
-function replay(){const p=patients.find(x=>x.id===active);if(!p)return;record(p.id).answers={};record(p.id).complete=false;persist();render()}
+function replay(){const p=patients.find(x=>x.id===active);if(!p)return;record(p.id).answers={};record(p.id).complete=false;record(p.id).cursor=0;persist();render()}
 function init(context){
  if(api)return;api=context;
  context.body.addEventListener('click',event=>{
