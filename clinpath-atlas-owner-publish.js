@@ -171,5 +171,42 @@ function init(context){
   }
  });
 }
-return Object.freeze({init,load,get,isLoaded:()=>ready,publish});
+async function publishCell(token,cell,progress=()=>{}){
+ if(!cell?.id||!/^[a-z0-9-]{2,65}$/.test(cell.id))throw Error('Invalid Cell Recognition ID.');
+ if(!cell.name?.trim()||!cell.look?.trim())throw Error('Add a finding name and a morphology description before publishing.');
+ if(!Array.isArray(cell.speciesTags)||!cell.speciesTags.length)throw Error('Select at least one species.');
+ const profile=await api('user',token);
+ if(profile?.login?.toLowerCase()!==OWNER.toLowerCase())throw Error('Only the repository owner may publish Cell Recognition content.');
+ progress('GitHub owner verified. Reading approved entries…');
+ const fileData=await file(MANIFEST,token);
+ const manifest=fileData?.content?JSON.parse(utf8decode(fileData.content)):{version:1,findings:{}};
+ if(!manifest.findings||typeof manifest.findings!=='object')throw Error('Published atlas data is malformed.');
+ const photos=[];
+ for(let i=0;i<Math.min(2,cell.photos?.length||0);i++){
+  const p=cell.photos[i];if(!p?.dataUrl&&!p?.url)continue;
+  const originalPhoto=p.originalPhoto===true;
+  if(p.url&&!url(p.url))throw Error('Photo '+(i+1)+' needs an HTTPS image URL.');
+  if(p.source&&!url(p.source))throw Error('Photo '+(i+1)+' source URL must use HTTPS.');
+  if(!originalPhoto&&!p.source)throw Error('Photo '+(i+1)+' needs an original source URL or confirmation that you own the image rights.');
+  if(!originalPhoto&&!p.credit?.trim())throw Error('Photo '+(i+1)+' requires source attribution.');
+  let photoUrl=url(p.url);
+  if(p.dataUrl){
+   if(!/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(p.dataUrl)||p.dataUrl.length>450000)throw Error('Photo '+(i+1)+' needs a compressed JPEG under 330 KB.');
+   const path='atlas-photos/cell-'+cell.id+'-'+(i+1)+'.jpg';
+   const existing=await file(path,token,true);
+   progress('Publishing photo '+(i+1)+'…');
+   await put(path,p.dataUrl.split(',')[1],existing?.sha,token,'Publish Cell Recognition photo: '+cell.name);
+   photoUrl='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+path;
+  }
+  photos.push({url:photoUrl,source:url(p.source),credit:p.credit?.trim()||(originalPhoto?'Original photograph contributed by Vet Pharm Quest owner — reuse authorized':''),originalPhoto});
+ }
+ const key='cell-'+cell.id,old=manifest.findings[key]||{};
+ const evidence={};for(const s of cell.speciesTags){const entry=cell.speciesEvidence?.[s]||{};if(entry.source&&!url(entry.source))throw Error('Invalid '+s+' source URL.');evidence[s]={why:String(entry.why||'').slice(0,2000),source:url(entry.source)}}
+ manifest.findings[key]={id:cell.id,name:String(cell.name).slice(0,150),group:String(cell.group||'Other').slice(0,100),look:String(cell.look).slice(0,5000),meaning:String(cell.meaning||'').slice(0,5000),why:String(cell.why||'').slice(0,5000),note:String(cell.note||'').slice(0,5000),speciesTags:[...cell.speciesTags],species:cell.speciesTags.join(', '),speciesEvidence:evidence,photos:photos.length?photos:(old.photos||[]),updated:new Date().toISOString(),approvedBy:OWNER};
+ progress('Committing Cell Recognition reference to GitHub…');
+ await put(MANIFEST,utf8encode(JSON.stringify(manifest,null,2)+'\n'),fileData?.sha,token,'Publish Cell Recognition reference: '+cell.name);
+ published=manifest;ready=true;return manifest.findings[key];
+}
+function all(){return published.findings||{}}
+return Object.freeze({init,load,get,all,isLoaded:()=>ready,publish,publishCell});
 })();
