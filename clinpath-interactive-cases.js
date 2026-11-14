@@ -26,6 +26,24 @@ const photoFields={
 spherocyte:['https://eclinpath.com/wp-content/uploads/spherocyte.jpg','https://eclinpath.com/hematology/morphologic-features/red-blood-cells/quick-guide/','Cornell eClinPath RBC guide'],
 schistocyte:['https://vetclinpathimages.com/wp-content/uploads/2018/02/schizocytes-4-canine-4-microangiopathy-arrows.png','https://vetclinpathimages.com/2018/02/16/schizocytes/','University of Calgary schistocyte'],
 granular:['https://eclinpath.com/wp-content/uploads/CAST-GRN-150x150.jpg','https://eclinpath.com/urinalysis/casts/','Cornell eClinPath urine casts']};
+/* Curated microscope links use existing atlas IDs. They do not alter answer keys or save schema. */
+const caseMicroscopy={
+ 'sim-rbc-morphology-compare':['spherocyte','schistocyte'],
+ 'sim-leukogram-trafficking':['band','toxicneut'],
+ 'sim-platelet-clumping':['plateletclump'],
+ 'sim-smear-artifact':['plateletclump'],
+ 'sim-urine-red-discoloration':['urinerbc'],
+ 'sim-bloodgas-handling':[],
+ 'sim-erythron-response':['polychromasia'],
+ 'sim-leukogram-absolute':['neutrophil'],
+ 'doberman-consumption':['schistocyte','plateletclump']
+};
+function specimenActions(c){
+ const known=window.VPQ_CLINPATH_VISUAL_ATLAS?.entries||[];
+ const ids=(caseMicroscopy[c.id]||[]).filter(id=>known.some(x=>x.id===id));
+ if(!ids.length)return '';
+ return '<section style="padding:10px 12px;margin:0 0 12px;border:1px solid #bcd8e6;background:#f4faff;border-radius:11px"><b>🔬 Microscope station</b><p style="font-size:12px;margin:6px 0">Inspect an unlabeled teaching field before making your clinical decision. Authentic photos display when available; otherwise the atlas provides a diagram and source link.</p><div class="buttonrow">'+ids.map((id,i)=>'<button type="button" data-cic-atlas="'+html(id)+'">🔬 Inspect field '+String.fromCharCode(65+i)+'</button>').join('')+'</div></section>';
+}
 const thinkingHints={
  'absolute':'Calculate absolute cell number from the total count and cell fraction; percentages alone can mislead.',
  'regenerat':'Connect oxygen delivery → kidney erythropoietin → marrow release, including the time lag.',
@@ -57,6 +75,7 @@ function render(){
  +(item.observation?'<div class="vpq-case-presentation"><strong>🔬 Specimen observation:</strong> '+html(item.observation)+'</div>':'')
  +(item.visit?'<p class="vpq-case-meta"><strong>Clinical visit:</strong> '+html(item.visit)+'</p>':'')
  +'<details class="vpq-case-hint" style="margin:0 0 12px;padding:9px 12px;border:1px solid #b9d7df;background:#f4fbff;border-radius:10px"><summary style="font-weight:800;cursor:pointer">❔ How should I reason through this? (no answer revealed)</summary><p>'+html(hintFor(item))+'</p></details>'
+ +specimenActions(c)
  +photoPanel(item,reveal)
  +'<div class="vpq-case-choices" role="group" aria-label="Select the best answer">'+buttons+'</div>'
  +(reveal?'<section class="response '+(correct?'':'bad')+'"><b>'+(correct?'✓ Correct reasoning':'💡 Review the mechanism')+'</b><p>'+html(item.why)+'</p><small>Concept: '+html(item.concept)+'</small></section><div class="buttonrow">'+(stage>0?'<button data-cic-prev="1">← Previous</button>':'')+'<button data-cic-next="1">'+(stage===c.steps.length-1?'✓ Finish case':'Next checkpoint →')+'</button></div>':'<p class="vpq-case-reassurance">Select an answer to reveal the rationale. Progress remains saved in your existing game state.</p>')
@@ -68,6 +87,7 @@ function start(id){const c=cases.find(x=>x.id===id);if(!c)return;active=id;stage
 function select(i){if(!active)return;const c=cases.find(x=>x.id===active);if(!c||chosen!==null)return;const key=stepKey(c,stage),s=state();if(s.answers[key])return;chosen=i;s.answers[key]={choice:i,correct:i===c.steps[stage].answer};save();render();}
 function next(){if(!active)return;const c=cases.find(x=>x.id===active);if(stage+1<c.steps.length){stage++;chosen=null;render();return;}state().finished[c.id]=true;save();active=null;render();}
 function prev(){if(stage>0){stage--;chosen=null;render();}}
-function init(context){api=context;context.body.addEventListener('click',ev=>{const el=ev.target.closest('[data-cic-open],[data-cic-choice],[data-cic-next],[data-cic-prev],[data-cic-index],[data-cic-back]');if(!el)return;const d=el.dataset;if(d.cicOpen!==undefined)return start(d.cicOpen);if(d.cicChoice!==undefined)return select(Number(d.cicChoice));if(d.cicNext!==undefined)return next();if(d.cicPrev!==undefined)return prev();if(d.cicIndex!==undefined){active=null;return render();}if(d.cicBack!==undefined)return window.VPQ_CLINPATH_GUIDED?.home?.();});}
+function resume(){if(active)render();else menu();}
+function init(context){api=context;context.body.addEventListener('click',ev=>{const el=ev.target.closest('[data-cic-atlas],[data-cic-open],[data-cic-choice],[data-cic-next],[data-cic-prev],[data-cic-index],[data-cic-back]');if(!el)return;const d=el.dataset;if(d.cicAtlas!==undefined)return window.VPQ_CLINPATH_VISUAL_ATLAS?.openFromCase?.(d.cicAtlas);if(d.cicOpen!==undefined)return start(d.cicOpen);if(d.cicChoice!==undefined)return select(Number(d.cicChoice));if(d.cicNext!==undefined)return next();if(d.cicPrev!==undefined)return prev();if(d.cicIndex!==undefined){active=null;return render();}if(d.cicBack!==undefined)return window.VPQ_CLINPATH_GUIDED?.home?.();});}
 function menu(exam){active=null;if(exam){const match=cases.filter(c=>c.exam===Number(exam));if(match.length===1)return start(match[0].id);}render();}
-return Object.freeze({init,menu,start,cases});})();
+return Object.freeze({init,menu,start,resume,cases});})();
