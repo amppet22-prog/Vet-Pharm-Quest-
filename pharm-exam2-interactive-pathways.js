@@ -12,6 +12,15 @@ const saved=()=>{
  const a=api.state.pharmExam2Interactive;a.mastered ||= [];a.attempts ||= {};return a;
 };
 const key=(g,i)=>'p2-path-'+g.id+'-'+i;
+// Stable per-question rotation + reversal prevents answer-position memorization.
+// Answer indices in the original bank remain authoritative; only display order changes.
+function choiceOrder(g,i){
+ const q=g.questions[i],seed=[...key(g,i)].reduce((sum,ch)=>((sum*31)+ch.charCodeAt(0))>>>0,7);
+ const a=q.options.map((_,n)=>n);
+ if(seed&1)a.reverse();
+ const shift=seed%a.length;
+ return a.slice(shift).concat(a.slice(0,shift));
+}
 function diagram(group,q,answered){
  const labels=group.stages,values=answered?q.steps:['① '+labels[0],'② '+labels[1],'③ '+labels[2],'④ '+labels[3]];
  return '<div class="vpqP2Path" role="img" aria-label="Four-stage pharmacology mechanism pathway">'+values.map((v,i)=>'<div class="vpqP2Node"><small>'+esc(labels[i])+'</small><b>'+esc(v)+'</b></div>'+(i<3?'<span class="vpqP2Arrow" aria-hidden="true">→</span>':'')).join('')+'</div>';
@@ -30,7 +39,7 @@ function open(id,i=0){
 }
 function render(){
  const g=groups.find(x=>x.id===groupId);if(!g)return menu();const q=g.questions[index],answered=lastAnswer!==null,ok=lastAnswer===q.a,seen=saved().mastered.includes(key(g,index));
- const answers=q.options.map((x,i)=>'<button data-vpq-p2-answer="'+i+'" '+(answered?'disabled':'')+' class="vpqP2Choice '+(answered?(i===q.a?'correct':i===lastAnswer?'incorrect':''):'')+'">'+String.fromCharCode(65+i)+'. '+esc(x)+'</button>').join('');
+ const answers=choiceOrder(g,index).map((original,i)=>'<button data-vpq-p2-answer="'+original+'" '+(answered?'disabled':'')+' class="vpqP2Choice '+(answered?(original===q.a?'correct':original===lastAnswer?'incorrect':''):'')+'">'+String.fromCharCode(65+i)+'. '+esc(q.options[original])+'</button>').join('');
  api.showModal(g.icon+' '+g.title,
  '<div class="vpqP2Head"><b>'+esc(g.lecture)+'</b><span>Question '+(index+1)+' / '+g.questions.length+' · '+(seen?'✓ Mastered':'Practice')+'</span></div>'+
  '<div class="vpqP2Progress"><span style="width:'+Math.round((index+1)/g.questions.length*100)+'%"></span></div>'+
