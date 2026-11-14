@@ -2359,6 +2359,11 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
    caution:['Correct: assess the tradeoff between analgesia and adverse effects.','Heavy sedation can obscure pain scoring and creates functional safety concerns.','A sudden unreviewed cessation may leave the cat uncomfortable; the clinical plan needs reassessment.']
   }
  };
+ const incorrectCareConsequences={
+  'postop-dog':['Continued NSAID exposure during suspected hypoperfusion could further compromise renal blood flow; pain and kidney status both require a revised plan.',null,'Adding a second NSAID raises GI and renal risk without addressing the perfusion problem.'],
+  'colic-horse':['Another analgesic without a repeat examination could delay recognition of worsening intestinal disease.',null,'An earlier improvement does not make discharge safe when cardiovascular and pain signs are deteriorating.'],
+  'cat-allodynia':['Increasing only an anti-inflammatory drug may miss a neuropathic pain component and compound adverse effects.',null,'Persistent allodynia is clinically meaningful even when visible inflammation has improved.']
+ };
  const storeKey='vpq-inpatient-care-v3';
  const initial=()=>({examined:false,careAnswer:null,careComplete:false,monitorAnswer:null,monitorComplete:false,trendAnswer:null,trendComplete:false,outpatientAnswer:null,outpatientComplete:false,shift:1});
  const progress={};
@@ -2438,7 +2443,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   frame('💉 Adjust Care · Respond to the findings','STAGE 2/4 · Use the new clinical information to justify a treatment decision.',
     '<div class="infobox"><b>Follow-up findings</b><p>'+escapeHtml(p.follow)+'</p></div>'+
     '<div class="vpq-case-question"><span class="vpq-case-question-label">TREATMENT DECISION</span><h3>What is the safest next action, and why?</h3></div>'+choices+
-    (answered?'<div class="response '+(a.careComplete?'':'bad')+'"><b>'+(a.careComplete?'Appropriate response':'Reconsider your plan')+'</b><p>'+escapeHtml(p.why)+'</p></div>'+
+    (answered?'<div class="response '+(a.careComplete?'':'bad')+'"><b>'+(a.careComplete?'✅ Appropriate response':'⚠ Clinical consequence')+'</b><p>'+escapeHtml(a.careComplete?p.why:(incorrectCareConsequences[p.id]?.[a.careAnswer]||p.why))+'</p>'+(a.careComplete?'':'<p><b>WHY reconsider?</b> '+escapeHtml(p.why)+'</p>')+'</div>'+
     (a.careComplete?safeButton('monitor','Continue → Watch Trends'):safeButton('retry','↻ Reconsider the decision')):''));
  }
  function trendCheckpoint(){
