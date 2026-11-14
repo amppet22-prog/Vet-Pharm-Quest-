@@ -401,7 +401,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <div class="card"><h2>✏️ In-game corrections</h2><p class="small">Change a question or drug note without editing JavaScript. Export edits to share.</p><button class="full" id="editorBtn">Open editor</button></div></aside></main>
 <div class="modalwrap hidden" id="modalWrap" role="dialog" aria-modal="true" aria-label="Game interaction"><div class="modal"><div class="modalhead"><h2 id="modalTitle">Clinic</h2><button id="closeModal" class="close" aria-label="Close">✕</button></div><div id="modalBody"></div></div></div>
 <footer>Vet Pharm Quest • v2.5 Clinic Guide, Companion Update & Physiology Hub • Offline study prototype • Original educational questions based on course review materials • No backend or shared accounts</footer>
-<script src="curriculum.js"></script>
+<script src="curriculum.js?v=20261114-exam2-focus1"></script>
 <script src="drug-stewardship.js"></script>
 <script src="visual-pathway-data.js?v=20261108-pathways1"></script>
 <script src="visual-pathway-atlas.js?v=20261108-pathways3"></script>
@@ -438,7 +438,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
-<script src="pharm-next-lectures.js?v=20261108-course2"></script>
+<script src="pharm-next-lectures.js?v=20261114-exam2-full1"></script>
 <script src="navle-pharm-expansion.js?v=20261109-navle1"></script>
 <script src="clinpath-reference-hub.js?v=20261114-phaseC3-6a"></script>
 <script src="clinical-pathology-lab.js?v=20261110-reward1"></script>
@@ -2814,16 +2814,18 @@ function vpqPharmNextLesson(id){
  showModal('📖 '+escapeHtml(l.id)+' · '+escapeHtml(l.title),
  '<p><b>'+escapeHtml(l.summary)+'</b></p><div class="infobox"><b>WHY this physiology matters</b><p>'+escapeHtml(l.why)+'</p></div>'+
  l.concepts.map(x=>'<div class="vpqNewPharmConcept"><h3>'+escapeHtml(x[0])+'</h3><p>'+escapeHtml(x[1])+'</p></div>').join('')+
- '<div class="infobox"><b>Additional instructor context</b><p>'+escapeHtml(l.recording)+'</p></div>'+
- '<p class="tiny">Sources: '+l.sources.map(x=>escapeHtml(x)).join(' · ')+'. '+escapeHtml(l.status)+'. These are learning notes, not prescribing protocols.</p>'+
+ (l.enrichment?.length?'<details class="vpqNewPharmOptional"><summary>➕ Learn More · Behavior, physiology & deeper WHY ('+l.enrichment.length+')</summary>'+l.enrichment.map(x=>'<div class="vpqNewPharmConcept"><h3>'+escapeHtml(x[0])+'</h3><p>'+escapeHtml(x[1])+'</p></div>').join('')+'</details>':'')+
+ (l.reviewFlags?.length?'<details class="vpqNewPharmOptional"><summary>⚠ Confirm with instructor / clinical references ('+l.reviewFlags.length+')</summary>'+l.reviewFlags.map(x=>'<p>⚠ '+escapeHtml(x)+'</p>').join('')+'</details>':'')+
+ '<details class="vpqNewPharmOptional"><summary>📚 Sources & review</summary><p>'+escapeHtml(l.recording)+'</p>'+l.sources.map(x=>'<p>'+escapeHtml(x)+'</p>').join('')+'<p>'+escapeHtml(l.status)+'</p></details>'+
+ '<p class="tiny">Course study material, not a veterinary prescribing protocol. Supplementary and disputed points are separated above.</p>'+
  '<div class="buttonrow"><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpqnewpharm-menu="1">← All new lectures</button></div>');
 }
 function vpqPharmNextMenu(){
  const data=vpqPharmNext;
- showModal('📚 Pharmacology · Lectures 10–13',
- '<p>New curriculum modules from your lecture slides and instructor recordings. The earlier Exam 1 (Lectures 1–9, 186 Professor Guide prompts) remains unchanged. This new material is being expanded and checked.</p>'+
+ showModal('📚 Pharmacology · Exam 2 · Lectures 10–20',
+ '<p>Updated Exam 2 lecture materials from your PDFs: core study essentials, optional plus-note explanations, and question practice. Exam 1 remains unchanged.</p>'+
  '<div class="vpqNewPharmCards">'+(data?.lectures||[]).map(x=>'<button data-vpqnewpharm-lesson="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.id)+' · '+escapeHtml(x.title)+'</b><small>'+escapeHtml(x.focus||x.summary)+'</small><em>'+data.questions.filter(q=>q.lecture===x.id).length+' initial questions · browse lesson</em></button>').join('')+'</div>'+
- '<p class="tiny">Each lecture has an overview, mechanism-first explanations, clinical connections and a small first-round question set. This is a foundation, not a fully audited exam question bank.</p>');
+ '<p class="tiny">Lecture overviews and new practice questions are available. This first import is not yet a complete slide-by-slide reconciliation of the 142-page guide.</p>');
 }
 $('modalBody').addEventListener('click',ev=>{
  const b=ev.target.closest('button');if(!b)return;
@@ -2833,9 +2835,9 @@ $('modalBody').addEventListener('click',ev=>{
  if(d.vpqnewpharmStudy!==undefined){state.focus=d.vpqnewpharmStudy;studySession=null;return showStudyMenu()}
 });
 const vpqPharmNewStudyMenu=showStudyMenu;
-showStudyMenu=function(...args){vpqPharmNewStudyMenu(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 New Pharmacology · Lectures 10–13</b><p>Diabetes, thyroid/parathyroid and autonomic drugs. Open a lesson, or select Lecture 10–13 in the dropdown above to practice.</p><button data-vpqnewpharm-menu="1">Browse new lecture lessons</button></div>')};
+showStudyMenu=function(...args){vpqPharmNewStudyMenu(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Exam 2 · Lectures 10–20</b><p>Diabetes, thyroid, autonomics, cardiovascular, respiratory, renal, GI and neuropharmacology. Use the lecture picker to focus Exam 2.</p><button data-vpqnewpharm-menu="1">Browse new lecture lessons</button></div>')};
 const vpqPharmNewLearningHub=vpqLearningHub;
-vpqLearningHub=function(...args){vpqPharmNewLearningHub(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Lectures 10–13</b><p>New lecture material is available in the Study Desk; this curriculum is separate from the Exam 1 Professor Guide.</p><button data-vpqnewpharm-menu="1">Browse new lecture lessons</button></div>')};
+vpqLearningHub=function(...args){vpqPharmNewLearningHub(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Exam 2 · Lectures 10–20</b><p>Exam 2 Lectures 10–20 are available with core lessons, optional deeper WHY material and question practice.</p><button data-vpqnewpharm-menu="1">Browse new lecture lessons</button></div>')};
 const vpqPharmNewStyle=document.createElement('style');vpqPharmNewStyle.textContent='.vpqNewPharmBanner{padding:14px;margin:14px 0;border:1px solid #b7cbed;background:#eff7ff;border-radius:12px}.vpqNewPharmBanner p{margin:6px 0;font-size:13px}.vpqNewPharmCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}.vpqNewPharmCards button{background:white;border-radius:12px;padding:14px;text-align:left;border:1px solid #c8d4e5}.vpqNewPharmCards b,.vpqNewPharmCards small,.vpqNewPharmCards em{display:block}.vpqNewPharmCards small{font-size:12px;margin:8px 0}.vpqNewPharmCards em{font-size:11px;font-style:normal;color:#487c99}.vpqNewPharmConcept{padding:12px 14px;margin:9px 0;border-radius:11px;border:1px solid #d2dce9;background:#fff}.vpqNewPharmConcept h3{margin:0 0 6px;font-size:15px}.vpqNewPharmConcept p{font-size:13px;line-height:1.5}';document.head.appendChild(vpqPharmNewStyle);
 
 
