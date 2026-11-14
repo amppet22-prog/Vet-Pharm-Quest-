@@ -29,13 +29,13 @@ granular:['https://eclinpath.com/wp-content/uploads/CAST-GRN-150x150.jpg','https
 /* Curated microscope links use existing atlas IDs. They do not alter answer keys or save schema. */
 const caseMicroscopy={
  'sim-rbc-morphology-compare':['spherocyte','schistocyte'],
- 'sim-leukogram-trafficking':['band','toxicneut'],
+ 'sim-leukogram-trafficking':['band','toxic'],
  'sim-platelet-clumping':['plateletclump'],
  'sim-smear-artifact':['plateletclump'],
  'sim-urine-red-discoloration':['urinerbc'],
  'sim-bloodgas-handling':[],
- 'sim-erythron-response':['polychromasia'],
- 'sim-leukogram-absolute':['neutrophil'],
+ 'sim-erythron-response':['polychrom'],
+ 'sim-leukogram-absolute':['band'],
  'doberman-consumption':['schistocyte','plateletclump']
 };
 function specimenActions(c){
