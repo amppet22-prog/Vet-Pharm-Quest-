@@ -1588,7 +1588,24 @@ function vpqDrugCategory36(d){
  if(/steroid|corticoid|glucocorticoid/.test(cl))return {branch:'Anti-inflammatories',family:'Corticosteroids',group:'Other corticosteroids'};
  if(/nsaid|cox|prostaglandin/.test(cl))return {branch:'Pain & inflammation',family:'COX-inhibiting NSAIDs',group:'Other COX-inhibiting NSAIDs'};
  if(/anti.adrenal|trilostane/.test(cl))return {branch:'Endocrine & adrenal',family:'Anti-adrenal drugs',group:'Other anti-adrenal drugs'};
- return {branch:lecture.includes('Lecture 9')?'Endocrine & adrenal':'Antibiotics',family:'Additional drug classes',group:'Unclassified'};
+ // Lecture-aware classification: never file a known non-antibiotic under Antibiotics / Unclassified.
+ const title=String(d.class||'').trim();
+ const mapping=[
+ [/insulin|sglt2|sulfonylurea|biguanide|glp-1|thyroid|thionamide|antithyroid|vitamin d|calcium replacement|oral calcium|erythropoiesis|hif-prolyl|glucogenic/i,'Endocrine & metabolic','Metabolic / endocrine therapeutics'],
+ [/alpha|beta|adrenerg|sympathomimetic|catecholamine|muscarinic|cholinesterase|acetylcholinesterase|dopamine agonist/i,'Autonomic nervous system','Autonomic and adrenergic agents'],
+ [/anticonvulsant|sv2a|bromide|barbiturate|benzodiazepine|gabapentinoid/i,'Neuropharmacology','Antiseizure / GABA-modulating agents'],
+ [/ssri|tricyclic|tca|serotonin|noradrenergic|mao-b/i,'Neuropharmacology','Behavior / monoamine agents'],
+ [/opioid|mu receptor|antitussive|nmda|anesthetic|tranquilizer|phenothiazine|butyrophenone|neuromuscular|neurosteroid/i,'Neuropharmacology','Anesthesia / analgesia / sedation'],
+ [/antiarrhythmic|ca2\\+ channel|calcium channel|diuretic|vasodilator|nitric oxide|ace inhibitor|at1 receptor|cardiac glycoside|inodilator|pde3|pde5|aldosterone|inotrope|vasopressor/i,'Cardiovascular & renal','Cardiovascular / renal agents'],
+ [/antimicrobial|antibiotic|sulfonamide|nitroimidazole|macrolide/i,'Antibiotics','Antimicrobial agents'],
+ [/prokinetic|laxative|antidiarrheal|gi adsorbent|adsorbent|mucosal|bile acid|antispasmodic|motilin|proton pump|h2 receptor|expectorant|mucolytic/i,'GI & respiratory','Gastrointestinal / respiratory agents'],
+ [/ophthalmic|miotic|lfa-1/i,'Ophthalmology','Ophthalmic agents'],
+ [/antineoplastic|alkylating|chelator|antidote|oxime|copper absorption/i,'Specialty & toxicology','Specialty therapeutics / antidotes']
+ ];
+ for(const [pattern,branch,family] of mapping)if(pattern.test(title))return {branch,family,group:title||'Class pending source verification'};
+ const lectureNo=Number((lecture.match(/\\d+/)||[])[0]||0);
+ const branch=lectureNo>=18?'Neuropharmacology':lectureNo>=14&&lectureNo<=16?'Autonomic / cardiovascular':lectureNo===17?'GI & respiratory':lectureNo>=10&&lectureNo<=13?'Endocrine & metabolic':lectureNo>=1&&lectureNo<=6?'Antibiotics':'Specialty therapeutics';
+ return {branch,family:'Lecture-specific drug classes',group:title||'Class pending source verification'};
 }
 let vpqBranch36='All',vpqFamily36='All',vpqLecture36='All lectures',vpqDrugSearch36='';
 function vpqPharmRender36(){
