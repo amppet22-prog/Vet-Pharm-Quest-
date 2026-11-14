@@ -420,10 +420,11 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="clinpath-reference-hub.js?v=20261114-navigation1"></script>
 <script src="clinical-pathology-lab.js?v=20261110-reward1"></script>
 <script src="blood-smear-photo-expansion.js?v=20261110-smearphotos1"></script>
-<script src="clinpath-atlas-editor.js?v=20261114-upload1"></script>
+<script src="clinpath-atlas-editor.js?v=20261114-publish1"></script>
 <script src="clinpath-atlas-photo-upload.js?v=20261114-upload1"></script>
+<script src="clinpath-atlas-owner-publish.js?v=20261114-publish1"></script>
 <script src="blood-smear-lab.js?v=20261114-nav1"></script>
-<script src="clinpath-visual-microscope-atlas.js?v=20261114-nav1"></script>
+<script src="clinpath-visual-microscope-atlas.js?v=20261114-publish1"></script>
 <script src="clinpath-coverage-audit.js?v=20261113-coverage1"></script>
 <script src="clinpath-coverage-recovery.js?v=20261113-renal1"></script>
 <script src="clinpath-renal-cases.js?v=20261113-renal1"></script>
@@ -2874,6 +2875,8 @@ window.VPQ_CLINPATH_LAB.init({body:$('modalBody'),showModal,openCases,awardQuest
 window.VPQ_ADVANCED_LAB.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_SURGERY_NECROPSY.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_CLINPATH_REFERENCE_HUB.init({body:$('modalBody'),showModal,openCases});
+window.VPQ_ATLAS_PUBLISHER.init({body:$('modalBody'),showModal});
+window.VPQ_ATLAS_PUBLISHER.load();
 window.VPQ_BLOOD_SMEAR_LAB.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_CLINPATH_VISUAL_ATLAS.init({body:$('modalBody'),showModal,openCases,awardQuestion:masterQuestion,studyRewardInfo});
 window.VPQ_CLINPATH_GUIDED.init({body:$('modalBody'),showModal,openCases,state,persist,awardQuestion:masterQuestion});
