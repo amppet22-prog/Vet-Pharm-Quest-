@@ -17,9 +17,17 @@ function frame(x,title,sub,fill,stroke){
  return R(x,153,174,204,fill,stroke,22)+R(x+8,160,158,48,'#fffefe',stroke,13)+T(x+87,180,title,16,'#594a7b')+T(x+87,198,sub,12,'#7b709a')+
  R(x+7,340,160,14,'#dfd5eb','#ac9bc6',6)+R(x+13,355,14,38,'#bcc9dd','#93a6c2',5)+R(x+147,355,14,38,'#bcc9dd','#93a6c2',5);
 }
-function plant(x,y){return R(x-9,y+16,23,26,'#eac3db','#af94bb',7)+P('M'+(x+2)+' '+(y+15)+'L'+x+' '+(y-26),'#83b18b',3)+
- '<ellipse cx="'+(x-11)+'" cy="'+(y-13)+'" rx="10" ry="17" fill="#a4d1b0" transform="rotate(-30 '+(x-11)+' '+(y-13)+')"/>'+
- '<ellipse cx="'+(x+10)+'" cy="'+(y-23)+'" rx="10" ry="16" fill="#8ecab5" transform="rotate(33 '+(x+10)+' '+(y-23)+')"/>'}
+function vines(){
+ // Border-only SVG vines: keep the title, benches, walkable floor and dock clear.
+ let s='<g opacity=".95" aria-hidden="true">'+
+ P('M0 26Q33 17 65 28Q96 14 129 24','#78b89d',5)+
+ P('M1000 24Q965 17 935 30Q902 16 871 25','#78b89d',5)+
+ P('M13 29Q30 55 17 80Q31 103 13 127','#7eae9b',4)+
+ P('M987 29Q971 56 986 82Q970 104 984 128','#7eae9b',4);
+ const leaf=(x,y,a,color)=>'<ellipse cx="'+x+'" cy="'+y+'" rx="6" ry="12" transform="rotate('+a+' '+x+' '+y+')" fill="'+color+'" stroke="#79b19b" stroke-width="1"/>';
+ [[29,23,-45],[49,28,52],[73,21,-46],[92,24,50],[115,20,-47],[971,22,46],[947,26,-53],[926,21,45],[900,25,-50],[882,19,48],[17,53,-43],[26,75,52],[16,101,-45],[981,53,43],[976,79,-52],[984,105,43]].forEach((v,i)=>s+=leaf(v[0],v[1],v[2],i%3===0?'#8ac7aa':i%3===1?'#b0dabb':'#9ccead'));
+ return s+'</g>';
+}
 function props(){
  let s='';
  // Credible, distinct instrument silhouettes, not branded copies
@@ -38,14 +46,15 @@ function props(){
 function decor(){
  let s='';
  // Actual coded bookshelf with books and LEARN title, plus hanging plants
- s+=R(29,84,188,65,'#ead9ea','#b69fce',9)+R(39,94,167,43,'#fffafa','#c5b8d7',6);
- for(let i=0;i<12;i++)s+=R(45+i*13,102,10,29,['#dab4d8','#95bbdb','#ecc6d3','#dccb97'][i%4],'#fff',2);
- s+=R(91,73,88,26,'#fff4cf','#ad97bb',11)+T(135,92,'LEARN',15);
+ s+=R(26,82,195,69,'#e7d6e9','#ad94c7',10)+R(38,103,171,37,'#fffafa','#bda8d4',6);
+ for(let i=0;i<12;i++)s+=R(44+i*13,107,10,29,['#dab4d8','#95bbdb','#ecc6d3','#dccb97'][i%4],'#fff',2);
+ s+=R(54,72,142,34,'#fff0bb','#aa88b2',13)+T(125,86,'📖 LEARN FIRST',14,'#67477f')+
+ T(125,99,'START HERE · STUDY',8.5,'#85669a');
  s+=R(782,88,166,50,'#f5ebf7','#c5b3d7',8)+T(865,106,'LAB STORAGE',12)+tubes(813,113,5,'#ae9bd2',.55);
- s+=plant(18,105)+plant(965,106);
+ s+=vines();
  // Center-back classroom sign, independent of clickable bench locations
  s+=R(363,95,271,44,'#fffafd','#c7b2d9',12)+T(498,114,'REFERRAL DIAGNOSTICS',16,'#796194')+
- T(498,131,'Learn the WHY · Practice a case',11,'#8b93a9');
+ T(498,131,'LEARN THE WHY · THEN PRACTICE THE CASE',11,'#70628c');
  // Cozy science props below benches, away from navigation dock
  s+=R(36,376,190,23,'#ebedf9','#a2b7d1',5)+tubes(48,352,4,'#bd9bd4',.7)+R(142,362,49,26,'#faf6fd','#bdacd7',4)+T(166,377,'SLIDES',9);
  s+=R(781,377,170,22,'#f0ecf8','#b7aacb',6)+R(820,358,58,24,'#f8e8dd','#c1adc7',4)+T(849,374,'FILES',10);
@@ -66,7 +75,8 @@ function draw(){
  frame(810,'Microscopy','Smear image ID','#e9f8f3','#9bcdbb')+
  props()+'</g>'+
  '<ellipse cx="500" cy="411" rx="151" ry="13" fill="#e4cae4" opacity=".7"/>'+
- R(78,417,844,78,'#fffaff','#b6a2d5',19)+T(500,435,'📚 REFERENCE &amp; STUDY SHORTCUTS',13,'#7e669b')+
+ R(78,412,844,83,'#fffaff','#b6a2d5',19)+
+ P('M706 427V488','#cbb8dd',2)+
  '</svg>';
  return s;
 }
