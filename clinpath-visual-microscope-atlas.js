@@ -87,7 +87,7 @@ function menu(){
  if(!api)return;
  api.showModal('🔬 Clinical Pathology · Microscope Atlas',header()+'<p><b>'+entries.length+' structures</b> across RBCs, WBCs, platelets, urine cells, casts, crystals and artifacts. Learn the mechanism, compare lookalikes, then identify without labels.</p>'+
  '<div style="display:flex;gap:6px;flex-wrap:wrap;margin:10px 0">'+groups.map(x=>'<button data-cpv-group="'+safe(x)+'" style="font-size:12px;padding:7px;background:'+(x===group?'#e4f3fa':'#fff')+'">'+safe(x)+'</button>').join('')+'</div>'+
- '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-mode="Learn">📖 Learn</button><button data-cpv-mode="Quiz">🎯 Quiz</button><button data-cpv-compare="1">⚖️ Don’t Confuse</button><button data-cpv-real="1">📸 Real Hematology Photos</button><button data-cpv-urine="1">🧫 Urinalysis Cases</button></div>'+
+ '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-mode="Learn">📖 Learn</button><button data-cpv-mode="Quiz">🎯 Quiz</button><button data-cpv-compare="1">⚖️ Don’t Confuse</button><button data-cpv-real="1">📸 Real Hematology Photos</button><button data-cpv-urine="1">🧫 Urinalysis Cases</button><button data-atlas-edit="plateletclump" data-atlas-from="visual">✏️ Edit Atlas / Request to Publish</button></div>'+
  (group==='Artifacts'?hemeGuide():'')+'<p><b>Selected:</b> '+safe(group)+' · '+list().length+' findings. <b>Mode:</b> '+safe(mode)+'</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px">'+list().map((x,i)=>'<button data-cpv-open="'+x.id+'" style="text-align:left;background:#fcf7ff;border:2px solid #dccbe9;padding:12px;white-space:normal"><b>'+(mode==='Quiz'?'Unlabeled field '+(i+1):safe(x.name))+'</b><small style="display:block">'+safe(x.group)+' · '+safe(x.species)+'</small></button>').join('')+'</div>');
 }
@@ -116,7 +116,7 @@ function show(id){
  api.showModal('🔬 '+(quiz?'Unknown microscopic field':e.name),header()+realPhoto(e,quiz)+
  (quiz?'<h3>Identify the illustrated finding</h3><div style="display:grid;gap:7px">'+optionsFor(e).map((o,i)=>'<button data-cpv-answer="'+safe(o.id)+'" style="text-align:left;padding:10px;background:#fffafc;border:2px solid #d7c7e3">'+String.fromCharCode(65+i)+'. '+safe(o.name)+'</button>').join('')+'</div>':
  '<p><b>Appearance:</b> '+safe(e.look)+'</p><p><b>WHY it looks that way:</b> '+safe(e.why)+'</p><p><b>Don’t confuse:</b> '+safe(e.confuse)+'</p><p><b>Clinical significance:</b> '+safe(e.clinical)+'</p><p><b>Species:</b> '+safe(e.species)+'</p>'+(e.group==='Artifacts'?hemeGuide():''))+
- '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-back="1">← Atlas</button><button data-cpv-switch="1">'+(quiz?'📖 Reveal & learn':'🎯 Test this image')+'</button>'+(quiz?'':'<a href="'+safe(links[e.group])+'" target="_blank" rel="noopener noreferrer">📸 Open real photo atlas (Cornell eClinPath)</a>')+'</div>');
+ '<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-cpv-back="1">← Atlas</button>'+(quiz?'':'<button data-atlas-edit="'+safe(e.id)+'" data-atlas-from="visual">✏️ Edit this finding</button>')+'<button data-cpv-switch="1">'+(quiz?'📖 Reveal & learn':'🎯 Test this image')+'</button>'+(quiz?'':'<a href="'+safe(links[e.group])+'" target="_blank" rel="noopener noreferrer">📸 Open real photo atlas (Cornell eClinPath)</a>')+'</div>');
 }
 function answer(id){
  if(!current||quizAnswer!==null)return;
