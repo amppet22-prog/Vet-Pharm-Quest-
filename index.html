@@ -407,7 +407,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="walkable-clinic-rooms-25d.js?v=20261110-skillsdoor2"></script>
 <script src="clinic-approach-interactions.js?v=20261110-hallentry2"></script>
 <script src="clinpath-hybrid-room-art.js?v=20261114-polish2"></script>
-<script src="specialist-clinic-wings.js?v=20261114-polish2"></script>
+<script src="clinpath-bench-guides.js?v=20261114-phaseC2"></script>
+<script src="specialist-clinic-wings.js?v=20261114-phaseC2"></script>
 <script src="feline-behavior-game.js?v=20261111-cuter-cats3"></script>
 <script src="feline-enrichment-game.js?v=20261111-play-enrich1"></script>
 <script src="reception-hallway-and-habitats.js?v=20261111-dog-layout24"></script>
@@ -2893,7 +2894,8 @@ window.VPQ_PARASITOLOGY_LAB.init({body:$('modalBody'),showModal,awardQuestion:ma
 window.VPQ_VIRAL_JOURNEYS.init({body:$('modalBody'),showModal});
 const vpqWalkableClinicArt=window.VPQ_WALKABLE_CLINIC_ART({doAction:a=>doAction(a),rooms:ROOMS});
 const vpqApproachOtherRooms=window.VPQ_ROOM_INTERACTIONS({rooms:ROOMS});
-const vpqSpecialistWings=window.VPQ_SPECIALIST_ROOMS({doAction:a=>doAction(a),rooms:ROOMS});
+window.VPQ_CLINPATH_BENCH_GUIDES.init({body:$('modalBody'),showModal,closeModal,doAction:a=>doAction(a)});
+const vpqSpecialistWings=window.VPQ_SPECIALIST_ROOMS({doAction:a=>doAction(a),showModal,rooms:ROOMS});
 const vpqReceptionWings=window.VPQ_RECEPTION_WINGS({state,rooms:ROOMS,showModal,changeRoom,persist,updateHUD,renderRoom,closeModal,modalBody:$('modalBody'),doAction:a=>doAction(a)});
 const vpqImageBackgrounds=window.VPQ_IMAGE_BACKGROUNDS({state});
 // Use the SAME station activation for walking up with E and clicking an illustrated object.
