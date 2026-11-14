@@ -34,6 +34,45 @@
       ],
       "updated": "2026-11-14T02:21:23.675Z",
       "approvedBy": "amppet22-prog"
+    },
+    "cell-rouleaux": {
+      "id": "rouleaux",
+      "name": "Rouleaux formation",
+      "group": "Red cells",
+      "look": "RBCs stack like coins, often dissolving with saline dispersion",
+      "meaning": "May be physiologic in horses; increases with inflammatory proteins, not the same as true agglutination",
+      "why": "Plasma protein changes promote reversible RBC stacking",
+      "note": "",
+      "speciesTags": [
+        "Dog",
+        "Cat",
+        "Horse"
+      ],
+      "species": "Dog, Cat, Horse",
+      "speciesEvidence": {
+        "Dog": {
+          "why": "",
+          "source": ""
+        },
+        "Cat": {
+          "why": "",
+          "source": ""
+        },
+        "Horse": {
+          "why": "",
+          "source": ""
+        }
+      },
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/atlas-photos/cell-rouleaux-1.jpg",
+          "source": "https://eclinpath.com/hematology/morphologic-features/red-blood-cells/quick-guide/",
+          "credit": "Cornell eClinPath · RBC Morphology Quick Guide",
+          "originalPhoto": false
+        }
+      ],
+      "updated": "2026-11-14T04:58:57.917Z",
+      "approvedBy": "amppet22-prog"
     }
   }
 }
