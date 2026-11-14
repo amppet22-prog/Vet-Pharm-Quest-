@@ -9,7 +9,7 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 let api=null,active=null,position=0;
 function rows(id){
  const x=library[id];if(!x)return '';
- return '<details class="vpqWardRefs"><summary>🧪 Patient values & reference intervals (open chart)</summary><table style="width:100%;font-size:12px;border-collapse:collapse"><thead><tr><th>Analyte</th><th>Patient value</th><th>Reference / threshold</th><th>Interpretation</th></tr></thead><tbody>'+
+ return '<details class="vpqWardRefs" open><summary>🧪 Patient values & reference intervals (open chart)</summary><table style="width:100%;font-size:12px;border-collapse:collapse"><thead><tr><th>Analyte</th><th>Patient value</th><th>Reference / threshold</th><th>Interpretation</th></tr></thead><tbody>'+
  x.reference.map(r=>'<tr>'+r.map(t=>'<td style="padding:5px;border-bottom:1px solid #dbe5ef">'+esc(t)+'</td>').join('')+'</tr>').join('')+'</tbody></table>'+
  '<p class="tiny">Simulated teaching values. Serum chemistry reference intervals: Cornell AHDC Cobas. Patient-specific trends matter. Clinical decision thresholds and pain/sedation scores are NOT population laboratory reference intervals.</p>'+
  '<details><summary>Sources and interpretive cautions</summary><p>'+esc(x.source)+'</p><p><a href="https://www.vet.cornell.edu/animal-health-diagnostic-center/laboratories/clinical-pathology/reference-intervals/chemistry-cobas" target="_blank" rel="noopener noreferrer">Cornell intervals</a> · <a href="https://eclinpath.com/test-basics/reference-intervals/" target="_blank" rel="noopener noreferrer">eClinPath interpretation</a></p></details></details>';
