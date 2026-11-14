@@ -56,14 +56,14 @@ function validated(draft){
   if((p.dataUrl||imageUrl)&&(!credit||credit==='Reference source to be provided'))throw Error('Photo '+(i+1)+' needs a credit and permission/license description. Add it in the editor first.');
   return {url:imageUrl,source,credit,dataUrl:p.dataUrl||'',fileName:p.fileName||''}
  });
- if(!photos.some(p=>p.url||p.dataUrl))throw Error('Add at least one photo URL or uploaded image.');
+ // Text-only corrections are valid: do not force a replacement photo when fixing species or explanations.
  return {id:draft.id,name:base.name,species:String(draft.species||base.species||'').slice(0,300),
   note:String(draft.note||base.note||'').slice(0,5000),photos};
 }
 function form(draft){
  const base=window.VPQ_ATLAS_EDITOR?.catalog?.().find(x=>x.id===draft.id);
  const filled=validated(draft);
- return '<p><b>'+esc(base?.name||draft.id)+'</b> · '+filled.photos.filter(x=>x.dataUrl||x.url).length+' photo(s) ready.</p>'+
+ return '<p><b>'+esc(base?.name||draft.id)+'</b> · '+filled.photos.filter(x=>x.dataUrl||x.url).length+' new photo(s) selected. Text-only corrections are also supported.</p>'+
  '<p><b>Owner publishing:</b> Use a short-lived <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">fine-grained GitHub token</a> for only <b>'+OWNER+'/'+REPO+'</b> with <b>Contents: Read and write</b>. Enter it below; the game never saves it.</p>'+
  '<p class="tiny">GitHub will verify the signed-in token belongs to <b>'+OWNER+'</b>. This updates the public repository; GitHub Pages deployment may take time. Do not paste tokens into chat, issues, source code or shared computers.</p>'+
  '<label for="vpqPublishToken">GitHub fine-grained access token</label><input id="vpqPublishToken" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" style="width:100%;padding:10px;margin:6px 0 12px">'+
@@ -97,7 +97,7 @@ async function publish(token,draft,progress){
   }
   photos.push({url:photoUrl,source:p.source,credit:p.credit});
  }
- manifest.findings[item.id]={name:item.name,species:item.species,note:item.note,photos,updated:new Date().toISOString(),approvedBy:OWNER};
+ manifest.findings[item.id]={name:item.name,species:item.species,note:item.note,photos:photos.length?photos:(manifest.findings[item.id]?.photos||[]),updated:new Date().toISOString(),approvedBy:OWNER};
  progress('Publishing reviewed atlas entry…');
  await put(MANIFEST,utf8encode(JSON.stringify(manifest,null,2)+'\n'),current?.sha,token,'Publish atlas entry: '+item.name+' (owner approved)');
  published=manifest;ready=true;
