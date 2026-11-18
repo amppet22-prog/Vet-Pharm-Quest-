@@ -9,7 +9,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const encode=s=>{const arr=new TextEncoder().encode(s);let raw='';for(let i=0;i<arr.length;i+=8192)raw+=String.fromCharCode(...arr.subarray(i,i+8192));return btoa(raw)};
 const decode=s=>new TextDecoder().decode(Uint8Array.from(atob(String(s).replace(/\s/g,'')),c=>c.charCodeAt(0)));
 const goodUrl=s=>{try{let u=new URL(s);return u.protocol==='https:'?u.href:''}catch{return ''}};
-let published={version:1,cases:{},specimens:{}},api=null,pending=null,loaded=false;
+let published={version:1,cases:{},specimens:{},lectures:{}},api=null,pending=null,loaded=false;
 async function load(){
  try{
   const r=await fetch('./'+MANIFEST+'?v='+Date.now(),{cache:'no-store'});
@@ -19,17 +19,20 @@ async function load(){
 }
 function getCase(id){return published.cases[id]||null}
 function getSpecimen(id){return published.specimens[id]||null}
+function getLecturePhoto(id){return published.lectures?.[id]?.photo||null}
 function publishedCaseImage(id){const x=getCase(id);return x?.photo?.url||''}
 function publicImage(image,caption){if(!image)return '';return '<div style="border:1px solid #b6d3cf;border-radius:10px;padding:9px;background:#f3fcfa;margin:8px 0"><b style="font-size:12px">✓ Owner-published pathology photograph</b><img src="'+esc(image)+'" loading="lazy" alt="'+esc(caption||'Owner-published necropsy photo')+'" style="display:block;max-width:100%;max-height:290px;object-fit:contain;margin:8px auto;border-radius:6px">'+(caption?'<small>'+esc(caption)+'</small>':'')+'</div>'}
 function casePhotoHTML(id){const c=getCase(id);return c?.photo?.url?publicImage(c.photo.url,c.photo.caption):''}
 function specimenPhoto(id){return getSpecimen(id)?.photo?.url||''}
 function show(title,body){api?.showModal(title,body)}
-function editor(type,id){
- const c=type==='case'?(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]).find(x=>x.id===id):(window.VPQ_PATH_EXAM7_DATA||[]).find(x=>x.id===id);
+async function editor(type,id){
+ const lectureParts=type==='lecture'?/^L(\d+)-S(\d+)-P([01])$/.exec(id):null;
+ const lesson=lectureParts?window.VPQ_PATH_LECTURE_LEARN?.[lectureParts[1]]?.sections?.[Number(lectureParts[2])]:null;
+ const c=type==='lecture'&&lesson?{id,title:'L'+lectureParts[1]+' · '+lesson.title+' · photo '+(Number(lectureParts[3])+1)}:type==='case'?(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]).find(x=>x.id===id):(window.VPQ_PATH_EXAM7_DATA||[]).find(x=>x.id===id);
  if(!c)return show('Publishing unavailable','<p>This case could not be found in the verified game bank.</p>');
  pending={type,id,title:c.title};
- const current=(type==='case'?getCase(id):getSpecimen(id))||{};
- const draft=type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftPhoto?.(id):window.VPQ_PATH_EXAM7?.draftPhoto?.(id);
+ const current=(type==='case'?getCase(id):type==='lecture'?published.lectures?.[id]:getSpecimen(id))||{};
+ const draft=type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftPhoto?.(id):type==='lecture'?await window.VPQ_PATH_INLINE_PHOTOS?.draftPhoto?.(lectureParts[1],lectureParts[2],lectureParts[3]):window.VPQ_PATH_EXAM7?.draftPhoto?.(id);
  pending.localPhoto=String(draft||'').startsWith('data:image/jpeg;base64,')?draft:'';
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  show('📸 Owner photo editor · '+esc(c.title),
@@ -46,7 +49,7 @@ function editor(type,id){
  '<div style="background:#f6f9ff;border:1px solid #cad9e9;border-radius:9px;padding:9px"><b>Owner authentication</b><p style="font-size:12px">Uses the same encrypted publishing key as the Clinical Pathology Atlas.'+(saved?' An encrypted key is already saved in this browser.':' First time: supply a GitHub fine-grained token for this repository with Contents: Read and write; optionally save it encrypted under your own password.')+'</p>'+
  '<label>Publishing password<input type="password" id="npOwnerPassword" autocomplete="off" style="width:100%;padding:8px" placeholder="'+(saved?'Unlock your saved publishing key':'Create a 12+ character encryption password (optional)')+'"></label>'+
  '<label>GitHub token (only if initial setup/replacement)<input type="password" id="npOwnerToken" autocomplete="off" style="width:100%;padding:8px" placeholder="github_pat_…"></label></div>'+
- '<div class="buttonrow" style="margin-top:10px"><button data-necro-owner-publish="1">🚀 Publish Now</button><button data-necro-owner-close="1">← Back to '+(type==='case'?'differential case':'specimen')+'</button></div>'+
+ '<div class="buttonrow" style="margin-top:10px"><button data-necro-owner-publish="1">🚀 Publish Now</button><button data-necro-owner-close="1">← Back to '+(type==='case'?'differential case':type==='lecture'?'lecture':'specimen')+'</button></div>'+
  '<p style="font-size:12px;color:#596d82">An existing published photo stays visible until a replacement is successfully published. Your password and token are never written to public game files.</p>'+
  '<p id="npOwnerResult" role="status" aria-live="polite" style="font-size:12px"></p>');
 }
@@ -87,7 +90,8 @@ async function publish(pending,fields,token,update){
  const old=await file(MANIFEST,token);
  const loadedManifest=JSON.parse(decode(old.content));
  if(!loadedManifest?.cases||!loadedManifest?.specimens)throw Error('Published necropsy manifest is invalid.');
- const dir=pending.type==='case'?'cases':'specimens';
+ loadedManifest.lectures=loadedManifest.lectures||{};
+ const dir=pending.type==='case'?'cases':pending.type==='lecture'?'lectures':'specimens';
  let imgUrl=fields.external;
  if(fields.file||fields.draftData){
   const target='necropsy-photos/'+dir+'/'+pending.id+'.jpg';
@@ -109,7 +113,7 @@ function init(context){
  context.body.addEventListener('click',ev=>{
   const b=ev.target.closest('[data-necro-owner-publish],[data-necro-owner-close]');if(!b)return;
   ev.preventDefault();ev.stopImmediatePropagation();
-  if(b.hasAttribute('data-necro-owner-close')){const q=pending;if(q?.type==='case')return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(q.id);if(q?.type==='specimen')return window.VPQ_PATH_EXAM7?.openCard?.(q.id);return;}
+  if(b.hasAttribute('data-necro-owner-close')){const q=pending;if(q?.type==='case')return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(q.id);if(q?.type==='specimen')return window.VPQ_PATH_EXAM7?.openCard?.(q.id);if(q?.type==='lecture')return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.(q.id.match(/^L(\d+)/)?.[1]);return;}
   if(!pending)return;
   let fields;try{fields=readFields()}catch(e){show('Photo cannot be published','<p>'+esc(e.message)+'</p><button data-necro-owner-close="1">← Back</button>');return;}
   let token=String(context.body.querySelector('#npOwnerToken')?.value||'').trim();
@@ -127,5 +131,5 @@ function init(context){
   })().catch(e=>{show('Publication was not completed','<p>'+esc(e.message)+'</p><p>The existing published image was not replaced in the manifest. You can try again.</p><button data-necro-owner-close="1">Back</button>')}).finally(()=>{token='';password='';b.disabled=false});
  },true);
 }
-return Object.freeze({init,load,getCase,getSpecimen,publishedCaseImage,casePhotoHTML,specimenPhoto,editor});
+return Object.freeze({init,load,getCase,getSpecimen,getLecturePhoto,publishedCaseImage,casePhotoHTML,specimenPhoto,editor});
 })();
