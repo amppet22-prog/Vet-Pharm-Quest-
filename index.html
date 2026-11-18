@@ -573,7 +573,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="necropsy-differential-lab.js?v=20261118-l68-fungalgroup"></script>
 <script src="necropsy-owner-publish.js?v=20261118-etiology-publish1"></script>
 <script src="pathology-inline-photos.js?v=20261118-multiphoto-textonly1"></script>
-<script src="pathology-foundations.js?v=20261118-intro-cell-injury1"></script>
+<script src="pathology-foundations.js?v=20261118-lectures1to4"></script>
 <script src="necropsy-handbook.js?v=20261118-refresh-resume1"></script>
 <script src="necropsy-exam7-practice.js?v=exam7-quiz1"></script>
 <script src="livestock-avian-parasites.js?v=20261110-livestock1"></script>
@@ -803,7 +803,7 @@ r.props.map((p,i)=>`<div class="prop" tabindex="0" role="button" aria-label="${p
 const quickRooms=['reception','exam','treatment'];
 $('roomnav').innerHTML=(roomBackStack.length?'<button type="button" data-room-back="1">↩ Previous room</button>':'<button type="button" disabled>↩ Previous room</button>')+
 quickRooms.map(k=>'<button data-room="'+k+'" class="'+(k===activeRoom?'active':'')+'">'+({reception:'🏠 Reception',exam:'🩺 Examination Room',treatment:'❤️ Treatment Ward'}[k])+'</button>').join('')+
-'<details class="vpqMoreRooms"><summary>✦ Other rooms</summary><div class="vpqMoreRoomsGrid">'+Object.entries(ROOMS).filter(([k])=>!quickRooms.includes(k)).map(([k,v])=>'<button data-room="'+k+'" class="'+(k===activeRoom?'active':'')+'">'+({pharmacy:'💊',isolation:'🛡️',study:'📚',clinpath:'🔬',imaging:'🩻',necropsy:'🔬',surgery:'🩺',skills:'💉',hallway:'🚪',catcorner:'🐈',yardview:'🐕'}[k]||'🐾')+' '+v.name.split(' & ')[0]+'</button>').join('')+'</div></details>'+(activeRoom==='necropsy'?'<button type="button" data-path-foundations="1" style="background:#eaf3ff;border-color:#a5c8e8">📘 Pathology Foundations · L1–2</button>':'');
+'<details class="vpqMoreRooms"><summary>✦ Other rooms</summary><div class="vpqMoreRoomsGrid">'+Object.entries(ROOMS).filter(([k])=>!quickRooms.includes(k)).map(([k,v])=>'<button data-room="'+k+'" class="'+(k===activeRoom?'active':'')+'">'+({pharmacy:'💊',isolation:'🛡️',study:'📚',clinpath:'🔬',imaging:'🩻',necropsy:'🔬',surgery:'🩺',skills:'💉',hallway:'🚪',catcorner:'🐈',yardview:'🐕'}[k]||'🐾')+' '+v.name.split(' & ')[0]+'</button>').join('')+'</div></details>'+(activeRoom==='necropsy'?'<button type="button" data-path-foundations="1" style="background:#eaf3ff;border-color:#a5c8e8">📘 Pathology Foundations · L1–4</button>':'');
 updatePosition()}
 function updatePosition(){avatarX=Math.min(93,Math.max(7,avatarX));$('avatarSprite').style.left=`calc(${avatarX}% - 28px)`;$('petSprite').style.left=`calc(${petX}% - 20px)`;const nearest=ROOMS[activeRoom].props.reduce((a,p,i)=>Math.abs(p.x-avatarX)<a.dist?{idx:i,dist:Math.abs(p.x-avatarX)}:a,{idx:-1,dist:999});document.querySelectorAll('.prop').forEach((el,i)=>el.classList.toggle('near',i===nearest.idx&&nearest.dist<14));$('interactToast').textContent=nearest.dist<14?`Press E: ${ROOMS[activeRoom].props[nearest.idx].label}`:'Move near a station • WASD / arrows';}
 function move(delta){if(modalVisible)return;avatarX=Math.min(93,Math.max(7,avatarX+delta));petX+=Math.max(-2.1,Math.min(2.1,avatarX-petX-(avatarX>petX?7:-7)));$('avatarSprite').classList.toggle('left',delta<0);$('avatarSprite').classList.add('walking');updatePosition()}
