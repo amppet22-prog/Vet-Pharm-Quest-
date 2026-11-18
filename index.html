@@ -3028,20 +3028,20 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const db=window.VPQ_PHARM_NEXT||{drugs:[],questions:[]};
  const source=window.VPQ_PHARM_EXAM2_OBJECTIVE_CARDS||[];
  const pdf=window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[];
- const lectures=['Lecture 18','Lecture 19','Lecture 20'];
+ const lectures=Array.from({length:10},(_,i)=>'Lecture '+(i+11));
  const eligible=x=>lectures.includes(x.lecture)&&(lecture==='all'||x.lecture===lecture);
  const priority=db.drugs.filter(x=>x.coursePriority&&eligible(x));
  const objectives=source.filter(eligible);
  const questions=[...db.questions.filter(eligible),...pdf.filter(eligible)].filter(x=>x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
  const n=Math.max(0,Number(position)||0);
- const selector='<div class="buttonrow"><button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="all">All L18–20</button>'+lectures.map(l=>'<button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="'+escapeHtml(l)+'">'+escapeHtml(l)+'</button>').join('')+'</div>';
+ const selector='<div class="buttonrow"><button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="all">All L11–20</button>'+lectures.map(l=>'<button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="'+escapeHtml(l)+'">'+escapeHtml(l)+'</button>').join('')+'</div>';
  const menu='<p><b>Start with the instructor-starred medications and big study-guide objectives.</b> Learn the mechanism and physiological WHY, recall the original faculty objective, then apply it to clinical questions.</p><p class="tiny">All drugs and questions below reuse the Exam 2 library; any caution attached to an instructor answer is shown separately. ★ refers to identified lecture stars and high-priority tables—not necessarily every bold-highlighted line.</p>'+
- '<div class="vpqNewPharmCards"><button data-vpqhy-mode="drugs" data-vpqhy-lecture="all"><b>1 · ★ Priority Drug Walkthrough</b><small>23 high-priority drugs · drug choice, mechanism, comparison, monitoring and patient scenarios</small></button><button data-vpqhy-mode="objectives" data-vpqhy-lecture="all"><b>2 · Instructor Objectives</b><small>Original guide prompts for behavior, seizures, sedation and opioids, with clinical cautions when needed</small></button><button data-vpqhy-mode="questions" data-vpqhy-lecture="all"><b>3 · Patient Questions</b><small>Clinical questions and original guide practice · reasoning and explanations</small></button></div>';
- if(mode==='menu')return showModal('★ Exam 2 · High-Yield Review · Lectures 18–20',menu+'<div class="buttonrow"><button data-vpqnewpharm-menu="1">← All Exam 2 lectures</button></div>');
+ '<div class="vpqNewPharmCards"><button data-vpqhy-mode="drugs" data-vpqhy-lecture="all"><b>1 · ★ Priority Drug Walkthrough</b><small>51 high-priority drugs · drug choice, mechanism, comparison, monitoring and patient scenarios</small></button><button data-vpqhy-mode="objectives" data-vpqhy-lecture="all"><b>2 · Instructor Objectives</b><small>122 original instructor objectives across all Exam 2 lectures, with clinical cautions where needed</small></button><button data-vpqhy-mode="questions" data-vpqhy-lecture="all"><b>3 · Patient Questions</b><small>226 clinical and guide questions · mechanisms, decisions and explanations</small></button></div>';
+ if(mode==='menu')return showModal('★ Exam 2 · High-Yield Review · Lectures 11–20',menu+'<div class="buttonrow"><button data-vpqnewpharm-menu="1">← All Exam 2 lectures</button></div>');
  const d=mode==='drugs'?priority:mode==='objectives'?objectives:questions;
  const at=Math.min(n,Math.max(d.length-1,0)),x=d[at];
  if(!x)return showModal('★ Exam 2 · High-Yield Review',selector+'<p>No matching study material in this selection.</p><button data-vpqhy-mode="menu">← High-Yield menu</button>');
- let html=selector+'<p class="vpq-case-meta">'+(at+1)+' / '+d.length+' · '+escapeHtml(lecture==='all'?'Lectures 18–20':lecture)+'</p>';
+ let html=selector+'<p class="vpq-case-meta">'+(at+1)+' / '+d.length+' · '+escapeHtml(lecture==='all'?'Lectures 11–20':lecture)+'</p>';
  if(mode==='drugs'){
  const t=x.teachingDepth||{},c=x.clinicalMicrocase||{};
  html+='<div class="vpq-patient-case" style="padding:14px"><h3>★ '+escapeHtml(x.name)+'</h3><p><b>Class:</b> '+escapeHtml(x.class)+'</p>'+
