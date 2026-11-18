@@ -29,6 +29,14 @@ let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=Array.from({length:13},(_,i)=>String(i+67));
 const CASE_MATCH={
 'n68-meningitis':['leptomeningitis versus pachymeningitis','neonatal septicemia with cns infection'],
+'n68-wnv':['west nile virus'],
+'n68-ehv-neuro':['equine herpesvirus 1 (ehv 1) myeloencephalopathy'],
+'n68-cae':['caprine arthritis encephalitis'],
+'n68-crypto':['cryptococcosis'],
+'n68-epm':['equine protozoal myeloencephalitis'],
+'n68-fce':['fibrocartilaginous embolic ischemic myelopathy'],
+'n68-ivdd':['intervertebral disk disease'],
+'n68-nme':['necrotizing meningoencephalitis'],
 'n68-brainstem':['listerio'],'n68-feedlot':['thrombotic meningoencephalitis','histophilus'],
 'n69-white-matter':['leukoencephalomalacia','fumonisin'],'n69-pem':['polioencephalomalacia'],'n68-bse':['bovine spongiform encephalopathy','prion'],
 'n70-flaccid':['botulism'],
