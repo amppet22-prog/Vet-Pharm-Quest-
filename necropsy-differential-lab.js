@@ -2,6 +2,7 @@
 window.VPQ_NECROPSY_DIFFERENTIAL_LAB=(function(){
 'use strict';
 const data=window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[];
+function allCases(){return [...data,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomCases?.()||[])]}
 const KEY='vpq-necropsy-differential-local-images-v1';
 let ui=null,filter='all',current=null,phase=0,leading=-1,shortlist=[],showWhy=false;
 const safe=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -10,12 +11,13 @@ function updatePhoto(id,image){const state=photoStore();if(image)state[id]=image
 function modal(title,body){ui?.showModal(title,body)}
 function start(api,chosen='all'){ui=api;filter=chosen;menu()}
 function menu(){
- const matched=data.filter(x=>filter==='all'||x.lecture===filter);
- const counts=[...new Set(data.map(x=>x.lecture))];
+ const matched=allCases().filter(x=>filter==='all'||x.lecture===filter);
+ const counts=[...new Set(allCases().map(x=>x.lecture))];
  modal('🧩 Necropsy Differential Diagnosis Center',
  '<div style="padding:11px;border:1px solid #b7d1eb;background:#f2f8ff;border-radius:12px"><b>Think like a pathologist:</b> signalment and history → anatomic location/gross pattern → shortlist differentials → histology → leading etiology and next test. These are <b>simulated teaching cases</b>, not photographs of real patients.</div>'+
  '<div class="buttonrow" style="margin:10px 0">'+['all',...counts].map(n=>'<button data-pathdiff-filter="'+safe(n)+'" aria-pressed="'+(filter===n?'true':'false')+'">'+(n==='all'?'All systems':'L'+safe(n))+'</button>').join('')+'</div>'+
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Audit all lecture conditions (L67–79)</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-create="1" style="background:#e5f6eb;border:1px solid #88c6a3;font-weight:800">➕ Create New Differential Card · Publish to Game</button></div>'+
  '<div class="buttonrow"><button data-modalaction="necroPatientPractice" style="font-size:12px">🐾 Optional: original patient-style practice questions</button></div>'+ 
  '<p class="tiny">'+matched.length+' instructor-slide-linked differential cases in this first module. Each includes four etiologic possibilities and why they become more or less likely.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:9px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:12px;border:1px solid #b7cce5;border-radius:12px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+' · '+safe(x.system)+'</small></button>').join('')+'</div>'+
@@ -129,7 +131,7 @@ function lectureConditions(){return (window.VPQ_PATH_LECTURE_LEARN||{})[conditio
 function norm(t){return String(t||'').toLowerCase().replace(/[–—-]/g,' ').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
 function relatedCases(lecture,title){
  const t=norm(title);
- return data.filter(c=>c.lecture===lecture&&(CASE_MATCH[c.id]||[]).some(alias=>t.includes(norm(alias))));
+ return allCases().filter(c=>c.lecture===lecture&&((CASE_MATCH[c.id]||[]).some(alias=>t.includes(norm(alias)))||(c.id.startsWith('custom-')&&((norm(c.title).includes(t)&&t.length>8)||(t.includes(norm(c.best))&&norm(c.best).length>8)))));
 }
 function evidence(lecture,section){
  const linked=relatedCases(lecture,section.title);
@@ -211,7 +213,7 @@ function sourcedPhotos(x){
 }
 function photoHTML(x){const photo=photoStore()[x.id];return '<div style="max-width:330px;padding:10px;background:#f8faff;border:1px dashed #bdcce0;border-radius:10px">'+(photo?'<img src="'+safe(photo)+'" alt="User added necropsy specimen" style="max-width:100%;max-height:205px;object-fit:contain;display:block;margin:auto">':'<div style="min-height:92px;display:grid;place-items:center;color:#566a89;font-size:13px">📷 No source photograph yet — add one from your lectures</div>')+'<label style="display:block;margin-top:7px;font-size:12px"><b>Add / replace this case image (local only)</b><input type="file" accept="image/*" data-pathdiff-photo="'+safe(x.id)+'" style="max-width:100%;font-size:12px"></label>'+(photo?'<button style="margin-top:5px;font-size:11px" data-pathdiff-remove="'+safe(x.id)+'">Remove local photo</button>':'')+'<small style="display:block;color:#66758b">Local draft photo; publish to make it available across devices. Only use photos you have rights to share.</small><button data-pathdiff-publish="'+safe(x.id)+'" style="display:block;margin-top:7px;background:#e4f6eb;border:1px solid #75b996">🚀 Edit / Publish photo now</button></div>'}
 function view(){
- const baseCase=data.find(v=>v.id===current);if(!baseCase)return menu();
+ const baseCase=allCases().find(v=>v.id===current);if(!baseCase)return menu();
  const x={...baseCase,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
  const revealed=phase>=2;
  const opted=leading>=0?x.options[leading]:null;
@@ -237,6 +239,7 @@ function init(api){
  const button=ev.target.closest('button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
+ if(d.pathdiffCreate!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newCaseEditor?.();
  if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
  if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;return conditionIndex()}
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
@@ -264,7 +267,7 @@ function init(api){
  reader.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,780/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*k));c.height=Math.max(1,Math.round(img.height*k));c.getContext('2d').drawImage(img,0,0,c.width,c.height);const ok=updatePhoto(d.pathdiffPhoto,c.toDataURL('image/jpeg',0.67));if(ok)view();else modal('Image too large','<p>Browser storage is full. Please resize the image and try again.</p><button data-pathdiff-list="1">Return to cases</button>')};img.src=String(reader.result)};reader.readAsDataURL(file);
  },true);
 }
-function openCase(id){if(data.some(x=>x.id===id)){current=id;return view()}return menu()}
+function openCase(id){if(allCases().some(x=>x.id===id)){current=id;return view()}return menu()}
 function draftPhoto(id){return photoStore()[id]||''}
 function draftText(id){return {}}
 return {init,start,cases:data,openCase,draftPhoto,draftText};
