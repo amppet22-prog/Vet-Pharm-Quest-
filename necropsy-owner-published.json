@@ -502,6 +502,19 @@
             "CNS / Neurology"
           ],
           "conditionId": "pathx-68-25"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-25-1795042567081-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "fungal spores",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-25"
         }
       ],
       "photo": {
@@ -526,7 +539,7 @@
         "why": "**Fungal agents in professor's list:** *Aspergillus, Candida, Cryptococcus neoformans, the historical 'Zygomycetes' group, Blastomyces dermatitidis, Histoplasma capsulatum and Coccidioides spp. *",
         "notes": ""
       },
-      "updated": "2026-11-18T22:55:05.119Z",
+      "updated": "2026-11-18T22:56:08.181Z",
       "approvedBy": "amppet22-prog"
     }
   },
