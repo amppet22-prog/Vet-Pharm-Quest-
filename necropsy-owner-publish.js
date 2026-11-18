@@ -9,7 +9,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const encode=s=>{const arr=new TextEncoder().encode(s);let raw='';for(let i=0;i<arr.length;i+=8192)raw+=String.fromCharCode(...arr.subarray(i,i+8192));return btoa(raw)};
 const decode=s=>new TextDecoder().decode(Uint8Array.from(atob(String(s).replace(/\s/g,'')),c=>c.charCodeAt(0)));
 const goodUrl=s=>{try{let u=new URL(s);return u.protocol==='https:'?u.href:''}catch{return ''}};
-let published={version:1,cases:{},specimens:{},lectures:{}},api=null,pending=null,loaded=false;
+let published={version:1,cases:{},specimens:{},lectures:{},customCases:{}},api=null,pending=null,loaded=false;
 async function load(){
  try{
   const r=await fetch('./'+MANIFEST+'?v='+Date.now(),{cache:'no-store'});
@@ -18,6 +18,7 @@ async function load(){
  loaded=true;return published;
 }
 
+function getCustomCases(){return Object.values(published.customCases||{}).filter(c=>c&&c.id&&Array.isArray(c.options)&&c.options.length===4)}
 function getCase(id){return published.cases?.[id]||null}
 function getSpecimen(id){return published.specimens?.[id]||null}
 function getLecturePhoto(id){return photosOf(published.lectures?.[id])[0]||null}
@@ -39,7 +40,7 @@ async function editor(type,id){
  const lp=type==='lecture'?/^L(\d+)-S(\d+)-P([01])$/.exec(id):null;
  const lesson=lp?window.VPQ_PATH_LECTURE_LEARN?.[lp[1]]?.sections?.[Number(lp[2])]:null;
  const base=type==='lecture'&&lesson?{id,title:'L'+lp[1]+' · '+lesson.title+' · image slot '+(Number(lp[3])+1)}:
- type==='case'?(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]).find(x=>x.id===id):(window.VPQ_PATH_EXAM7_DATA||[]).find(x=>x.id===id);
+ type==='case'?[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...getCustomCases()].find(x=>x.id===id):(window.VPQ_PATH_EXAM7_DATA||[]).find(x=>x.id===id);
  if(!base){show('Entry unavailable','<p>The selected entry could not be found.</p>');return}
  pending={type,id,title:base.title};
  const cur=type==='case'?getCase(id):type==='specimen'?getSpecimen(id):published.lectures?.[id]||{};
@@ -72,6 +73,58 @@ async function editor(type,id){
  '<label>GitHub token (only first setup / replacement)<input id="npOwnerToken" type="password" autocomplete="off" style="width:100%;padding:8px"></label></div>'+
  '<div class="buttonrow" style="margin:12px 0"><button data-necro-owner-publish="1">🚀 Publish Now</button><button data-necro-owner-close="1">← Back</button></div>'+
  '<p id="npOwnerResult" role="status" aria-live="polite" style="font-size:12px"></p>');
+}
+
+
+function newCaseEditor(){
+ const lectures=Array.from({length:13},(_,i)=>String(i+67));
+ show('➕ Create differential diagnosis card',
+ '<p>Create a permanent teaching case with <b>four genuinely competing diagnoses</b>. The first is the best-supported choice. Photos are optional and can be added later through the normal multi-photo editor.</p>'+
+ '<label>Card title<input id="ncTitle" style="width:100%" placeholder="e.g. Meningitis: purulent versus nonsuppurative"></label>'+
+ '<label>Lecture<select id="ncLecture">'+lectures.map(n=>'<option value="'+n+'"'+(n==='68'?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
+ '<label>System<input id="ncSystem" style="width:100%" value="CNS / Meninges"></label>'+
+ '<label>Species and signalment<textarea id="ncSpecies" rows="2" style="width:100%"></textarea></label>'+
+ '<label>History<textarea id="ncHistory" rows="3" style="width:100%"></textarea></label>'+
+ '<label>Gross lesions / localization<textarea id="ncGross" rows="3" style="width:100%"></textarea></label>'+
+ '<label>Histology (revealed after differential selection)<textarea id="ncHisto" rows="3" style="width:100%"></textarea></label>'+
+ '<label>Morphologic diagnosis<textarea id="ncMorph" rows="2" style="width:100%"></textarea></label>'+
+ '<label>Why / pathogenesis<textarea id="ncMechanism" rows="3" style="width:100%"></textarea></label>'+
+ '<label>Confirmation and next tests<textarea id="ncTests" rows="2" style="width:100%"></textarea></label>'+
+ '<label>Lecture slide or reference<input id="ncRef" style="width:100%" placeholder="Lecture 68 slide 7"></label>'+
+ Array.from({length:4},(_,i)=>'<div style="border:1px solid #cad7e5;border-radius:10px;padding:9px;margin:8px 0"><b>'+(i===0?'★ Best-supported diagnosis':'Alternative differential '+i)+'</b>'+
+ '<label>Diagnosis name<input data-nc-name="'+i+'" style="width:100%"></label>'+
+ '<label>Why it fits<textarea data-nc-supports="'+i+'" rows="2" style="width:100%"></textarea></label>'+
+ '<label>Why less likely / limitations<textarea data-nc-against="'+i+'" rows="2" style="width:100%"></textarea></label>'+
+ '<label>Histology discriminator<textarea data-nc-hist="'+i+'" rows="2" style="width:100%"></textarea></label></div>').join('')+
+ '<div style="background:#f1f6ff;padding:9px;border-radius:9px"><p><b>Owner publishing</b>: unlock your existing saved GitHub publishing key. No photograph is required.</p>'+
+ '<label>Publishing password<input id="ncPassword" type="password" autocomplete="off" style="width:100%"></label>'+
+ '<label>GitHub token (only if not saved)<input id="ncToken" type="password" autocomplete="off" style="width:100%"></label></div>'+
+ '<div class="buttonrow"><button data-necro-create-submit="1">🚀 Publish New Card</button><button data-necro-create-cancel="1">← Cancel</button></div>'+
+ '<p id="ncStatus" role="status" aria-live="polite" style="color:#6e3e17"></p>');
+}
+function caseForm(){
+ const root=api.body,el=id=>root.querySelector('#'+id),val=id=>String(el(id)?.value||'').trim();
+ const fields=['Title','Lecture','System','Species','History','Gross','Histo','Morph','Mechanism','Tests','Ref'];
+ const values=Object.fromEntries(fields.map(x=>[x.toLowerCase(),val('nc'+x)]));
+ const opts=Array.from({length:4},(_,i)=>Object.fromEntries(['name','supports','against','hist'].map(k=>[k,String(root.querySelector('[data-nc-'+k+'="'+i+'"]')?.value||'').trim()])));
+ if(!values.title||!values.species||!values.history||!values.gross||!values.histo||!values.morph||!values.mechanism||!values.tests||!values.ref)throw Error('Complete all teaching fields, including the reference.');
+ if(opts.some(x=>Object.values(x).some(y=>!y)))throw Error('Complete all four diagnosis names, supporting evidence, limitations and histology.');
+ if(new Set(opts.map(x=>x.name.toLowerCase())).size!==4)throw Error('The four differential diagnoses must be distinct.');
+ if(!/^(67|68|69|70|71|72|73|74|75|76|77|78|79)$/.test(values.lecture))throw Error('Choose a valid lecture.');
+ return {lecture:values.lecture,system:values.system||'Pathology',title:values.title.slice(0,180),species:values.species.slice(0,400),history:values.history.slice(0,3500),gross:values.gross.slice(0,3500),histo:values.histo.slice(0,3500),morph:values.morph.slice(0,3500),mechanism:values.mechanism.slice(0,3500),tests:values.tests.slice(0,3500),ref:values.ref.slice(0,350),best:opts[0].name.slice(0,220),options:opts.map((x,i)=>({...x,role:i===0?'best':'less'}))};
+}
+async function publishNewCase(c,token){
+ const who=await github('https://api.github.com/user',token);
+ if(who?.login?.toLowerCase()!==OWNER.toLowerCase())throw Error('The publishing token must belong to the repository owner.');
+ const old=await file(MANIFEST,token),m=JSON.parse(decode(old.content));
+ m.customCases=m.customCases||{};
+ const slug=c.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,48)||'new-case';
+ const id='custom-'+c.lecture+'-'+slug;
+ const existing=[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...Object.values(m.customCases)];
+ if(existing.some(x=>x.id===id))throw Error('A card with this title already exists. Please choose a distinct title or edit the existing card.');
+ c.id=id;m.customCases[id]=c;
+ await put(MANIFEST,encode(JSON.stringify(m,null,2)+'\n'),old.sha,token,'Owner created necropsy differential card '+id);
+ published=m;return c;
 }
 
 async function github(path,token,method='GET',payload=null,missing=false){
@@ -159,6 +212,22 @@ async function publish(job,fields,token,update){
 function init(context){
  api=context;
  load();
+ context.body.addEventListener('click',ev=>{
+ const b=ev.target.closest('[data-necro-create-submit],[data-necro-create-cancel]');if(!b)return;
+ ev.preventDefault();ev.stopImmediatePropagation();
+ if(b.hasAttribute('data-necro-create-cancel'))return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start(api);
+ if(b.disabled)return;
+ const status=()=>context.body.querySelector('#ncStatus');
+ let c;try{c=caseForm()}catch(e){if(status())status().textContent=e.message;return}
+ let password=String(context.body.querySelector('#ncPassword')?.value||''),token=String(context.body.querySelector('#ncToken')?.value||'').trim();
+ b.disabled=true;if(status())status().textContent='Verifying owner and publishing card…';
+ (async()=>{const vault=window.VPQ_OWNER_KEY_VAULT;
+  if(!token){if(!vault?.exists?.())throw Error('No saved publishing key. Enter the owner GitHub token once.');if(!password)throw Error('Enter your publishing password.');token=await vault.unlock(password);}
+  const card=await publishNewCase(c,token);
+  if(vault&&!vault.exists()&&password&&token)await vault.store(token,password);
+  window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(card.id);
+ })().catch(e=>{if(status())status().textContent='Publish failed: '+e.message+' Your text remains in the editor.'}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
+ },true);
  context.body.addEventListener('change',ev=>{
   if(ev.target?.id!=='npOwnerFiles')return;
   const files=Array.from(ev.target.files||[]);
@@ -191,5 +260,5 @@ function init(context){
   })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
-return Object.freeze({init,load,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
+return Object.freeze({init,load,getCustomCases,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
 })();
