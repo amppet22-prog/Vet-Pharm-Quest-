@@ -61,12 +61,12 @@ function show(){
 function lecture(n){
  rememberView('lecture',n);
  chapter=n;const c=chapters.find(x=>x[0]===n);if(!c)return show();
- const cases=(window.VPQ_PATH_EXAM7?.cards||[]).filter(x=>x.lecture===n);
+ const cases=(window.VPQ_PATH_EXAM7?.cards||[]).filter(x=>x.lecture===n).sort((a,b)=>String(a.title||'').localeCompare(String(b.title||''),undefined,{sensitivity:'base',numeric:true}));
  popup('📚 L'+n+' · '+c[1],
  nav()+
  '<div class="np-cover"><span class="np-tag">'+safe(c[2])+'</span><h3>'+safe(c[1])+' '+helpButton('chapter',n,c[1])+'</h3><p>'+safe(c[3])+'</p><p><b>What earns points on an image question?</b> '+safe(c[4])+'</p></div>'+
  (window.VPQ_PATH_LECTURE_LEARN?.[n]?'<div class="buttonrow"><button data-nplearn="'+safe(n)+'" style="font-weight:800;background:#e1f7eb;border:2px solid #8dbda4">📖 Learn the full lecture · Slide-by-slide topics</button></div>':'<p class="tiny">Full lecture lesson pending slide-by-slide verification.</p>')+
- '<h4>All named conditions/concepts in this lecture index ('+c[5].split(';').length+')</h4><div class="np-scroll">'+c[5].split(';').map((x,i)=>'<div class="np-entryrow"><span class="np-entryname">🦴 '+safe(x)+'</span>'+helpButton('entry',n+':'+i,x)+'</div>').join('')+'</div>'+
+ '<h4>All named conditions/concepts in this lecture index ('+c[5].split(';').length+') · A–Z</h4><div class="np-scroll">'+c[5].split(';').map((x,i)=>({name:x,originalIndex:i})).sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base',numeric:true})).map(x=>'<div class="np-entryrow"><span class="np-entryname">🦴 '+safe(x.name)+'</span>'+helpButton('entry',n+':'+x.originalIndex,x.name)+'</div>').join('')+'</div>'+
  '<p class="tiny">Index entries are study coverage reminders, not fabricated histology diagnoses. Detailed specimen cards are shown only where the source supports them.</p>'+
  '<h4>Verified gross / histology practice cards ('+cases.length+')</h4><div class="buttonrow">'+cases.map(x=>'<button data-npstudio="gross" data-npnote="'+safe(x.title)+'">'+safe(x.title)+'</button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-npback="1">← All chapters</button><button data-nppattern="1">🔗 Cross-system patterns</button></div>');
