@@ -8,7 +8,7 @@
 5. Differential Diagnosis Center: signalment + gross lesion → select a leading etiology → reveal histology → choose again → compare mechanisms and tests.
 
 ## New targeted question bank
-- `pathology-curated-flashcards.js` supplies **149 targeted questions across 73 matching lecture sections**.
+- `pathology-curated-flashcards.js` supplies **149 targeted questions across 70 matching lecture sections**.
 - L67: 25 new curated questions in eight mechanism sections, plus the 17 previously written barrier and vocabulary focus questions retained in `pathology-lecture-learning.js`.
 - L68–L74: 12 curated questions each, emphasizing viral vs bacterial neuropathology, malacia compartment, nerve pathology, dermatologic lesion patterns, infectious/parasite identification, and autoimmune diseases.
 - L75–L79: 8 curated questions each. L76 ovarian-tumor questions and L77 abortion/placentation questions use the instructor-audited/speaker-notes sections, not unsourced assumptions.
