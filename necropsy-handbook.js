@@ -73,7 +73,7 @@ function learnLecture(n){
  '<style>.np-pat{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal}.np-pat p{white-space:normal;overflow-wrap:anywhere}.np-visual{box-sizing:border-box;max-width:100%;width:100%;margin:10px 0;padding:10px;border:1px solid #d9dfeb;border-radius:12px;background:#fff}.np-visual img{max-width:100%;height:auto}</style><h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
  '<h4>Check your understanding</h4>'+l.checks.map((q,i)=>'<details class="np-pat"><summary><b>Q'+(i+1)+'.</b> '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join('')+
  '<div class="buttonrow"><button data-npchapter="'+safe(n)+'">← Lecture index</button><button data-npstudio="gross">🔬 Practice lesion cases</button></div>');
- if(slideUi)slideUi.hydrate(api.body,n);
+ if(slideUi){slideUi.hydrate(api.body,n);slideUi.hydrate(api.body,'BOOK')}
 }
 
 function across(){
