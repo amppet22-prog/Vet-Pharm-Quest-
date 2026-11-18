@@ -201,6 +201,16 @@ style.textContent='.vpqSpecArt{position:absolute;inset:0;width:100%;height:100%;
 '.vpqSpecHit.vpqSpecNear:after{content:"E · INTERACT";position:absolute;top:1%;left:50%;transform:translateX(-50%);font-size:11px;font-weight:900;color:#744d22;background:#fff8dd;border:2px solid #e9bf76;border-radius:12px;padding:4px 8px;white-space:nowrap}'+
 '@media(max-width:650px){.vpqSpecHit span{font-size:10px;padding:4px 5px;white-space:normal;min-width:80%}}';
 document.head.appendChild(style);
+// Necropsy labels should not cover the illustrated tables, specimens, or player.
+const necroStyle=document.createElement('style');
+necroStyle.textContent='.stage[data-room="necropsy"] .vpqSpecHit span{bottom:-1%;min-width:0;width:max-content;max-width:125px;white-space:normal;font-size:10px;line-height:1.15;padding:3px 6px;border-width:1px;border-radius:9px;background:#fffdf4e8;box-shadow:0 2px 5px #60718d27;opacity:.68;transition:opacity .15s,transform .15s}'+
+'.stage[data-room="necropsy"] .vpqSpecHit span small{display:none}'+
+'.stage[data-room="necropsy"] .vpqSpecHit:hover span,.stage[data-room="necropsy"] .vpqSpecHit:focus-visible span,.stage[data-room="necropsy"] .vpqSpecHit.vpqSpecNear span{opacity:1;background:#fff9eb;max-width:150px;font-size:11px;border-width:2px;z-index:3}'+
+'.stage[data-room="necropsy"] .vpqSpecHit:hover span small,.stage[data-room="necropsy"] .vpqSpecHit:focus-visible span small,.stage[data-room="necropsy"] .vpqSpecHit.vpqSpecNear span small{display:block;font-size:9px;margin-top:2px}'+
+'.stage[data-room="necropsy"] .vpqSpecHit.vpqSpecNear:after{font-size:9px;padding:2px 5px;top:2%}'+
+'@media(max-width:650px){.stage[data-room="necropsy"] .vpqSpecHit span{max-width:85px;font-size:9px;padding:2px 3px}}';
+document.head.appendChild(necroStyle);
+
 function refresh(){
  const room=stage.dataset.room,old=stage.querySelector('#vpqSpecHits');
  if(!data[room]){old?.remove();return}
