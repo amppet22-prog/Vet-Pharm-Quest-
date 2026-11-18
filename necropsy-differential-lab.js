@@ -321,7 +321,9 @@ function flashDeck(scope){
 function startFlash(scope='topic',review=false){
  flashScope=scope;flashReview=review;flashFace=false;flashComplete=false;
  const all=flashDeck(scope),progress=flashProgress();
- flashCards=(review?all.filter(c=>progress[c.id]):all);
+ // Lecture-wide sessions prioritize authored cards; generic note prompts remain available when opening individual topics.
+ const clean=scope==='lecture'&&all.some(c=>c.curated)?all.filter(c=>c.curated):all;
+ flashCards=(review?clean.filter(c=>progress[c.id]):clean);
  // Limit a lecture session to a manageable size. Cards missed in earlier rounds
  // are presented first, then shuffle the remaining eligible questions.
  const shuffled=flashCards.map(c=>({c,k:Math.random()})).sort((a,b)=>
