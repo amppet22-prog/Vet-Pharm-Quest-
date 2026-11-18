@@ -60,8 +60,16 @@ function learnLecture(n){
  chapter=n;
  const l=window.VPQ_PATH_LECTURE_LEARN?.[n];
  if(!l)return lecture(n);
+
+ const photoCards={
+  1:[['Normal dog brain · gross specimen','https://commons.wikimedia.org/wiki/Special:FilePath/Dog_brain_and_eyeballs.jpg','Identify cerebral surface, folding and symmetry before identifying injury.','Museum of Veterinary Anatomy FMVZ USP / Wagner Souza e Silva · CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Dog_brain_and_eyeballs.jpg'],
+     ['Spinal cord cross section · anatomy','https://commons.wikimedia.org/wiki/Special:FilePath/Spinal_Cord.jpg','Locate central gray matter and peripheral white matter. Human reference anatomy; arrangement is shared with domestic mammals.','Chippolito · CC BY-SA 3.0','https://commons.wikimedia.org/wiki/File:Spinal_Cord.jpg']],
+  12:[['Gross cerebral edema · pathology photo','https://commons.wikimedia.org/wiki/Special:FilePath/Cerebral_oedema.jpg','Look for swelling and compression of the normal sulcal spaces; species and cause must be verified before generalizing.','Narraburra · CC0','https://commons.wikimedia.org/wiki/File:Cerebral_oedema.jpg']]
+ };
+ const pictureBlock=i=>(photoCards[i]||[]).map(p=>'<figure style="margin:10px 0;padding:10px;border:1px solid #dbe1ed;border-radius:12px;background:#fff"><a href="'+safe(p[4])+'" target="_blank" rel="noopener noreferrer" title="Open full resolution and image credit"><img loading="lazy" src="'+safe(p[1])+'" alt="'+safe(p[0])+'" style="display:block;width:100%;max-height:260px;object-fit:contain;border-radius:7px;background:#f1f5f9"></a><figcaption style="font-size:12px;line-height:1.5;margin-top:6px"><b>'+safe(p[0])+'.</b> '+safe(p[2])+'<br><small>Image: '+safe(p[3])+' · <a target="_blank" rel="noopener noreferrer" href="'+safe(p[4])+'">Source / full image / license</a></small></figcaption></figure>').join('');
+
  const rows=l.sections.map((s,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(s.title)+'</b> <small>slides '+safe(s.slides)+'</small></summary>'+
- s.points.map(p=>'<p style="margin:8px 0;line-height:1.5"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
+ pictureBlock(i)+s.points.map(p=>'<p style="margin:8px 0;line-height:1.5"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
  popup('📖 L'+n+' · Learn the Lecture',nav()+
  '<div class="np-cover"><strong style="font-size:19px">'+safe(l.title)+'</strong><p>Comprehensive guided lecture lesson, grounded in the professor’s actual slide sequence. Open each section for terms, pathways, mechanisms, and recognition differences.</p><small>'+safe(l.source)+' · Lesson content is a paraphrased learning companion, not the original slide deck.</small></div>'+
  '<h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
