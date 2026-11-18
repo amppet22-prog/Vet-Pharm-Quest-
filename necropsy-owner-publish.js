@@ -189,7 +189,7 @@ async function editor(type,id){
  const lp=type==='lecture'?/^L(\d+)-S(\d+)-P([01])$/.exec(id):null;
  const lesson=lp?window.VPQ_PATH_LECTURE_LEARN?.[lp[1]]?.sections?.[Number(lp[2])]:null;
  const base=type==='lecture'&&lesson?{id,title:'L'+lp[1]+' · '+lesson.title+' · image slot '+(Number(lp[3])+1)}:
- type==='case'?[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...getCustomCases()].find(x=>x.id===id):(window.VPQ_PATH_EXAM7_DATA||[]).find(x=>x.id===id);
+ type==='case'?[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...getCustomCases()].find(x=>x.id===id):[...(window.VPQ_PATH_EXAM7_DATA||[]),...getCustomSpecimens()].find(x=>x.id===id);
  if(!base){show('Entry unavailable','<p>The selected entry could not be found.</p>');return}
  pending={type,id,title:base.title};
  const cur=type==='case'?getCase(id):type==='specimen'?getSpecimen(id):published.lectures?.[id]||{};
