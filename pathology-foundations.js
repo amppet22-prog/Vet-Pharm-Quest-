@@ -125,10 +125,10 @@ questions.push(
 function shell(body,title){
  host?.showModal('📘 Pathology Foundations · '+(title||pages[lesson].title),
  '<div style="font-size:13px;line-height:1.5;max-width:900px">'+
- '<div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px"><button data-pathfound="home">🏠 Foundations</button><button data-pathfound="intro">Lecture 1</button><button data-pathfound="cells">Lecture 2</button><button data-pathfound="injury">Lecture 3</button><button data-pathfound="postmortem">Lecture 4</button><button data-pathfound="quiz">🧠 Practice</button></div>'+body+'</div>');
+ '<div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px"><button data-pathfound="home">🏠 Foundations</button><button data-pathfound="intro">Lecture 1</button><button data-pathfound="cells">Lecture 2</button><button data-pathfound="injury">Lecture 3</button><button data-pathfound="postmortem">Lecture 4</button><button data-pathfound="death">Lecture 5</button><button data-pathfound="growth">Lecture 6</button><button data-pathfound="metaplasia">Lecture 7</button><button data-pathfound="accumulations">Accumulations</button><button data-pathfound="quiz">🧠 Practice</button></div>'+body+'</div>');
 }
 function home(){
- shell('<div style="padding:13px;background:#f1f7ff;border:1px solid #c5d9f3;border-radius:12px"><h3 style="margin:0 0 8px">🔬 Start with the normal cell, then explain the lesion</h3><p>These are <b>Exam 1 foundations (Lectures 1–4)</b>, separate from the Exam 7 atlas. Your professor emphasizes core concepts, clinical implications, and recognizing both gross and microscopic lesions.</p></div>'+
+ shell('<div style="padding:13px;background:#f1f7ff;border:1px solid #c5d9f3;border-radius:12px"><h3 style="margin:0 0 8px">🔬 Start with the normal cell, then explain the lesion</h3><p>These are <b>General pathology foundations (Lectures 1–7 and Accumulations)</b>, separate from the Exam 7 atlas. Your professor emphasizes core concepts, clinical implications, and recognizing both gross and microscopic lesions.</p></div>'+
  Object.entries(pages).map(([k,p])=>'<button data-pathfound="'+k+'" style="display:block;text-align:left;width:100%;padding:13px;margin-top:9px"><b>'+esc(p.title)+'</b><small style="display:block">'+esc(p.summary)+'</small><small>'+esc(p.source)+'</small></button>').join('')+
  '<p style="font-size:12px;color:#587087">Original teaching paraphrases from your annotated lecture PDFs. No instructor photographs copied to the public game. The Lecture 9 Morphologic vs Etiologic Diagnosis format remains the reference for formal naming.</p>','Overview');
 }
@@ -162,5 +162,5 @@ function init(api){
   if(act==='next'){qindex++;revealed=false;choice=null;return practice()}
  },true);
 }
-return {init,open:home};
+return {init,open:home,extend:(extra)=>{if(extra?.pages)Object.assign(pages,extra.pages);if(Array.isArray(extra?.questions))questions.push(...extra.questions)}};
 })();
