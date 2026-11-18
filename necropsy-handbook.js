@@ -28,11 +28,26 @@ const patterns=[
 ['Necropsy safety','Stop before opening a potentially reportable/zoonotic carcass; suspected anthrax must not be opened. Plan fresh versus fixed specimens for laboratory testing.','Consult the teaching clinician or diagnostic laboratory for collection and submission protocols.']
 ];
 let api=null,topic='all',search='',chapter='67';
+const RESUME_KEY='vpq-necropsy-handbook-view-v1';
+function rememberView(view,n){
+ try{localStorage.setItem(RESUME_KEY,JSON.stringify({view,lecture:n||chapter,open:true}))}catch(e){}
+}
+function resume(){
+ let saved=null;
+ try{saved=JSON.parse(localStorage.getItem(RESUME_KEY)||'null')}catch(e){}
+ if(!saved?.open||!api)return false;
+ if(saved.view==='learn'&&saved.lecture){learnLecture(String(saved.lecture));return true}
+ if(saved.view==='lecture'&&saved.lecture){lecture(String(saved.lecture));return true}
+ if(saved.view==='across'){across();return true}
+ show();return true;
+}
+
 const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const theme='<style>.np-cover{background:linear-gradient(115deg,#f3e3ff,#e1f7eb 55%,#ffefdc);border:2px solid #dfc4ef;border-radius:18px;padding:15px;margin:7px 0 13px}.np-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.np-tabs button{font-size:12px;padding:7px 10px}.np-chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.np-chapter{padding:13px;background:#fff;border:2px solid #dbd5eb;border-radius:16px;text-align:left}.np-chapter small{display:block;color:#60708c;margin-top:4px}.np-tag{display:inline-block;border-radius:9px;background:#fff4d8;padding:3px 7px;font-size:11px;font-weight:800}.np-pat{padding:12px;background:#f9f8fc;border:1px solid #d6ddec;border-radius:14px;margin:8px 0}.np-scroll{max-height:40vh;overflow:auto;border:1px solid #dfe1ec;border-radius:12px;padding:9px}.np-question{display:inline-grid;place-items:center;vertical-align:middle;min-width:25px;width:25px;height:25px;padding:0;margin-left:6px;border:2px solid #a38ac3;border-radius:50%;background:#fff8e7;color:#755690;font-size:14px;font-weight:900;cursor:help}.np-question:hover,.np-question:focus-visible{background:#e9daf9;outline:2px solid #f5d6ad}.np-entryrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 3px;border-bottom:1px solid #eef1f5}.np-entryrow .np-entryname{min-width:0}</style>';
 function popup(t,html){api?.showModal(t,theme+html)}
 function nav(){return '<div class="np-tabs"><button data-nphome="1">📚 Handbook</button><button data-nppattern="1">🔗 Across systems</button><button data-npstudio="gross">🔍 Gross ID</button><button data-npstudio="histo">🔬 Histology</button><button data-npquiz="1">🎓 Practice Quiz</button><button data-npedit="1">🖼️ Editable atlas</button></div>'}
 function show(){
+ rememberView('home');
  const systems=['all','Neuro','Skin','Repro','Special Senses'];
  const selected=chapters.filter(c=>topic==='all'||c[2]===topic).filter(c=>!search||[...c].join(' ').toLowerCase().includes(search));
  popup('📚 Necropsy Handbook · Path Exam 7',
@@ -44,6 +59,7 @@ function show(){
  '<div class="np-chapters">'+selected.map(c=>'<button class="np-chapter" data-npchapter="'+c[0]+'"><span class="np-tag">'+safe(c[2])+' · L'+c[0]+'</span><strong style="display:block;margin-top:6px">'+safe(c[1])+'</strong><small>'+c[5].split(';').length+' named concepts/conditions</small><small>'+safe(c[3].slice(0,115))+'…</small></button>').join('')+'</div>');
 }
 function lecture(n){
+ rememberView('lecture',n);
  chapter=n;const c=chapters.find(x=>x[0]===n);if(!c)return show();
  const cases=(window.VPQ_PATH_EXAM7?.cards||[]).filter(x=>x.lecture===n);
  popup('📚 L'+n+' · '+c[1],
@@ -57,6 +73,7 @@ function lecture(n){
 }
 
 function learnLecture(n){
+ rememberView('learn',n);
  chapter=n;
  const l=window.VPQ_PATH_LECTURE_LEARN?.[n];if(!l)return lecture(n);
  const photos=window.VPQ_PATH_INLINE_PHOTOS;
@@ -80,6 +97,7 @@ function learnLecture(n){
 }
 
 function across(){
+ rememberView('across');
  popup('🔗 Across Systems · Necropsy Handbook',
  nav()+'<div class="np-cover"><h3>Think like a pathologist</h3><p>These patterns reappear across the entire exam. Use them to reason from location and histology rather than memorizing isolated names.</p></div>'+
  patterns.map((p,i)=>'<div class="np-pat">'+helpButton('pattern',i,p[0])+'<details><summary><b>'+safe(p[0])+'</b></summary><p>'+safe(p[1])+'</p><p><b>Compare:</b> '+safe(p[2])+'</p></details></div>').join('')+
@@ -170,5 +188,5 @@ function init(host){
    if(t?.dataset?.npsearch!==undefined){search=t.value.toLowerCase().trim();show()}
  },true);
 }
-return {init,open:show,openLecture:learnLecture,lecture,across,chapters,patterns};
+return {init,open:show,openLecture:learnLecture,lecture,across,resume,chapters,patterns};
 })();
