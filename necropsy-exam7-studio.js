@@ -19,6 +19,7 @@ function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]
 function modal(title,body){if(ui)ui.showModal(title,body)}
 function visible(){refreshCustom();const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
 function start(k){mode=k||'gross';tab='lesions';filter='all';normalSystem='all';menu()}
+function studyLecture(lecture){tab='lesions';mode='gross';filter=String(lecture||'all');normalSystem='all';search='';refreshCustom();menu()}
 function showTab(kind){tab=kind==='normals'?'normals':'lesions';mode='gross';filter='all';normalSystem='all';search='';refreshCustom();menu()}
 function menu(){
  const selected=visible();
@@ -146,5 +147,5 @@ function openCard(id){refreshCustom();const i=base.findIndex(x=>x.id===id);if(i>
 function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
 function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
 function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
-return {init,start,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
+return {init,start,studyLecture,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
 })();
