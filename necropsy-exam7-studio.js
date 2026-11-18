@@ -6,7 +6,7 @@ const KEY='vpq-path-exam7-user-edits-v1';
 let ui=null,mode='gross',filter='all',search='',current=-1,quiz=[],step=0,revealed=false;
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
-function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};return Object.assign({},src,{image:official.photo?.url||src.image||''},draft)}
+function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};const entry=Object.assign({},src,draft);if(official.photo?.url)entry.image=official.photo.url;return entry}
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
 function visible(){return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>(filter==='all'||x.lecture===filter)&&(!search||[x.title,x.lecture,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
