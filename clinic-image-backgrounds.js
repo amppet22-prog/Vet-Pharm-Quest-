@@ -9,7 +9,8 @@ const assets={
  skills:'assets/rooms/clinical-skills.svg',
  hallway:'assets/rooms/clinical-hallway.svg',
  surgery:'assets/rooms/surgery-suite.svg',
- necropsy:'assets/rooms/necropsy-floor.svg',
+ // Necropsy is rendered by VPQ_NECROPSY_ROOM_ART via specialist-clinic-wings.js.
+ // Do not replace the live SVG with the retired necropsy-floor.svg image.
  // The specialist room SVG controller owns 'clinpath'. Do not override its
  // playable hybrid art with the older flat advanced-clinpath.svg image.
  isolation:'assets/rooms/isolation-one-health.svg',
