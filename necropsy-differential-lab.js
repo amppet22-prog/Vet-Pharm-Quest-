@@ -22,12 +22,38 @@ function menu(){
  modal('🧩 Necropsy Differential Diagnosis Center',
  '<div style="padding:11px;border:1px solid #b7d1eb;background:#f2f8ff;border-radius:12px"><b>Think like a pathologist:</b> signalment and history → anatomic location/gross pattern → shortlist differentials → histology → leading etiology and next test. These are <b>simulated teaching cases</b>, not photographs of real patients.</div>'+
  '<div class="buttonrow" style="margin:10px 0">'+['all',...counts].map(n=>'<button data-pathdiff-filter="'+safe(n)+'" aria-pressed="'+(filter===n?'true':'false')+'">'+(n==='all'?'All systems':'L'+safe(n))+'</button>').join('')+'</div>'+
- '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Audit all lecture conditions (L67–79)</button></div>'+
+ '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Audit all lecture conditions (L67–79)</button><button data-pathdiff-umbrella="1">🧠 Pattern / umbrella atlas</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-create="1" style="background:#e5f6eb;border:1px solid #88c6a3;font-weight:800">➕ Create New Differential Card · Publish to Game</button></div>'+
  '<div class="buttonrow"><button data-modalaction="necroPatientPractice" style="font-size:12px">🐾 Optional: original patient-style practice questions</button></div>'+ 
  '<p class="tiny">'+matched.length+' instructor-slide-linked differential cases in this first module. Each includes four etiologic possibilities and why they become more or less likely.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:9px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:12px;border:1px solid #b7cce5;border-radius:12px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+' · '+safe(x.system)+'</small></button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-pathdiff-return="1">← Gross / histology specimen bank</button></div>');
+}
+
+/* Umbrella terms describe morphology, anatomic patterns or syndromes; never count them as etiologic diagnoses. */
+let umbrellaCurrent='';
+function umbrellaMenu(){
+ const cards=window.VPQ_NECROPSY_PATTERNS||[];
+ modal('🧠 Pathology pattern & umbrella atlas',
+ '<div class="buttonrow"><button data-pathdiff-list="1">← Differential Center</button><button data-pathdiff-condition-index="1">Lecture disease audit</button></div>'+
+ '<p class="tiny">First identify the tissue and lesion pattern. Next compare possible causes. These concepts are not separate etiologic diagnoses and are not counted as additional cases.</p>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px">'+cards.map(c=>
+ '<button data-pathdiff-umbrella-open="'+safe(c.id)+'" style="text-align:left;background:#f5f8ff;border:1px solid #bdcede;padding:12px;border-radius:11px"><b>'+safe(c.title)+'</b><small style="display:block;color:#59738a;margin:5px 0">'+safe(c.kind)+' · L'+safe(c.lectures.join(', L'))+'</small><small>'+safe(c.definition)+'</small></button>').join('')+'</div>');
+}
+function umbrellaDetail(){
+ const c=(window.VPQ_NECROPSY_PATTERNS||[]).find(x=>x.id===umbrellaCurrent);if(!c)return umbrellaMenu();
+ const candidates=allCases().filter(x=>c.lectures.includes(x.lecture)&&
+ (c.caseIds.includes(x.id)||c.keywords.some(w=>(x.best+' '+x.title+' '+x.morph).toLowerCase().includes(w))));
+ modal('🔎 '+safe(c.title),
+ '<div class="buttonrow"><button data-pathdiff-umbrella="1">← Pattern atlas</button><button data-pathdiff-list="1">All cases</button></div>'+
+ '<p class="tiny"><b>'+safe(c.kind)+'</b> · Lecture '+safe(c.lectures.join(', '))+' · Not a single etiologic diagnosis</p>'+
+ [['Learn first: definition',c.definition],['Why the body responds this way',c.why],['Gross lesion recognition',c.gross],['Histology: what to identify',c.histo],['Do not confuse with',c.mimics]].map(([k,v])=>
+ '<div style="background:#f6f9fd;border:1px solid #d5e0eb;border-radius:10px;padding:11px;margin:7px 0"><b>'+safe(k)+'</b><p style="margin:5px 0">'+safe(v)+'</p></div>').join('')+
+ '<h3>Diagnostic branches — what makes them different</h3>'+
+ c.branches.map(b=>'<div style="padding:9px;border-bottom:1px solid #e2eaf2"><b>'+safe(b[0])+'</b><p style="margin:3px 0;font-size:13px">'+safe(b[1])+'</p></div>').join('')+
+ '<h3>Connected differential cases ('+candidates.length+')</h3><p class="tiny">Linked by curated IDs or relevant lesion terms. Each case still requires independent evidence; multiple pattern cards may link to the same case.</p>'+
+ '<div class="buttonrow">'+candidates.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;font-size:12px">'+safe(x.title)+' · L'+safe(x.lecture)+'</button>').join('')+'</div>'+
+ '<p class="tiny"><b>Suggested image slots:</b> '+safe(c.photo)+' Photos are not implied to be attached or licensed.</p>');
 }
 
 /* Lecture coverage uses live lecture data, not a shortened list. */
@@ -263,6 +289,8 @@ function init(api){
  const button=ev.target.closest('button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
+ if(d.pathdiffUmbrella!==undefined)return umbrellaMenu();
+ if(d.pathdiffUmbrellaOpen!==undefined){umbrellaCurrent=d.pathdiffUmbrellaOpen;return umbrellaDetail();}
  if(d.pathdiffCreate!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newCaseEditor?.();
  if(d.pathdiffCreateTopic!==undefined){const lesson=lectureConditions()[conditionChosen];return window.VPQ_NECROPSY_OWNER_PUBLISH?.newCaseEditor?.({title:lesson?.title||'',lecture:conditionLecture});}
  if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
