@@ -200,7 +200,9 @@
           "credit": "Pathology lecture LMU",
           "caption": "Pathology study reference",
           "type": "gross",
-          "external": false
+          "external": false,
+          "lectures": [],
+          "systems": []
         }
       ],
       "photo": {
@@ -209,16 +211,18 @@
         "credit": "Pathology lecture LMU",
         "caption": "Pathology study reference",
         "type": "gross",
-        "external": false
+        "external": false,
+        "lectures": [],
+        "systems": []
       },
       "text": {
         "gross": "Gross: Often no visible lesion. When present, bilateral symmetric yellow/gray/red foci of malacia and cavitation preferentially in white matter. Do not confuse: Symmetric toxin-associated white matter lesions versus random septic embolic lesions from TME.",
-        "dx": "Working identification: Overeating disease — C. perfringens type D. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "**Working identification: **Overeating disease — ***C. perfringens type D.*** Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
         "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
-        "why": "Species and trigger: Sheep and goats of any age after sudden diet change causing microbial imbalance and clostridial proliferation. Why CNS damage occurs: Enterotoxemia produces vascular injury and breakdown of the blood-brain barrier.",
+        "why": "**Species and trigger:** Sheep and goats of any age after sudden* diet* change causing microbial imbalance and clostridial proliferation. \n**Why CNS damage occurs: **Enterotoxemia produces vascular injury and breakdown of the blood-brain barrier.",
         "notes": ""
       },
-      "updated": "2026-11-18T11:27:17.174Z",
+      "updated": "2026-11-18T22:21:15.311Z",
       "approvedBy": "amppet22-prog"
     },
     "pathx-68-10": {
