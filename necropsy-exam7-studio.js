@@ -10,7 +10,7 @@ function refreshCustom(){
  return base;
 }
 const KEY='vpq-path-exam7-user-edits-v1';
-let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',search='',current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
+let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',etiologyFilter='all',search='',current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
 const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -25,7 +25,7 @@ function photoStatus(x){
 }
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
-function visible(){refreshCustom();const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
+function visible(){refreshCustom();const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(etiologyFilter==='all'||window.VPQ_PATH_ETIOLOGY?.forCard?.(x)?.categories?.includes(etiologyFilter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
 function start(k){mode=k||'gross';tab='lesions';filter='all';normalSystem='all';menu()}
 function studyLecture(lecture){tab='lesions';mode='gross';filter=String(lecture||'all');normalSystem='all';search='';refreshCustom();menu()}
 function showTab(kind){tab=kind==='normals'?'normals':'lesions';mode='gross';filter='all';normalSystem='all';search='';refreshCustom();menu()}
@@ -53,6 +53,7 @@ function menu(){
  '<div class="buttonrow"><button data-path7-differentials="1" style="background:#e0f3ed;border:2px solid #8ebea8;font-weight:850">🧩 Differential Case Center · Signalment → Histo → Etiology</button></div>'+ 
  '<div class="buttonrow"><button data-path7-library="1">📷 Browse published photos by lecture / system</button></div>'+ 
  '<div class="buttonrow"><button data-path7-mode="gross">🔎 Gross + morphologic DX</button><button data-path7-mode="histo">🔬 Histo + WHY</button><button data-path7-mode="edit">✏️ Edit atlas images</button><button data-path7-test="coached" style="background:#e6f3ff;border-color:#aac9eb">🎓 Guided morphologic DX · 12 cases</button><button data-path7-test="all">🧪 All atlas unknowns</button></div>'+
+ '<label style="display:block;font-size:12px;margin:9px 0"><b>🧬 Browse by etiology</b><select data-path7-etiology-filter="1" style="display:block;padding:8px;max-width:390px;width:100%;margin-top:4px"><option value="all">All etiologies</option>'+Object.entries(window.VPQ_PATH_ETIOLOGY?.categories||{}).map(([k,v])=>'<option value="'+h(k)+'"'+(etiologyFilter===k?' selected':'')+'>'+h(v.label)+'</option>').join('')+'</select><small>Multiple tags may apply. Untagged cards appear under All etiologies.</small></label>'+
  '<div class="buttonrow">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" style="padding:6px 9px;font-size:11px" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':'L'+h(l))+'</button>').join('')+'</div>'+
  '<p class="tiny"><b>'+selected.length+' of '+base.length+' slide-linked lesion / recognition cards.</b> Slide images are not copied into the public game; add your own locally.</p>'+ 
  '<label style="display:block;margin:8px 0">Find disease or lesion <input id="path7Search" data-path7-search="1" placeholder="e.g. pyometra, optic nerve, granuloma" value="'+h(search)+'" style="width:min(100%,430px);padding:9px;border:1px solid #bccbe0;border-radius:9px"></label>'+ 
@@ -176,7 +177,7 @@ function init(api){
  window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.load?.().then(()=>{refreshCustom();if(ui===api&&api.body?.querySelector?.('[data-path7-tab]'))menu()}).catch(()=>{});
- api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
+ api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7EtiologyFilter!==undefined){etiologyFilter=ev.target.value||'all';return menu()}if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
  api.body.addEventListener('click',ev=>{
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
   if(!Object.keys(d).some(k=>k.startsWith('path7')))return;
