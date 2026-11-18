@@ -202,6 +202,36 @@
       },
       "updated": "2026-11-18T11:27:17.174Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-10": {
+      "title": "Granulomatous meningoencephalitis (GME)",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-10-1795001643970-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-10-1795001643970-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false
+      },
+      "text": {
+        "gross": "Clinical: Behavior change, circling, seizures; paresis and ataxia when spinal cord is involved. Gross: Often no mass; when present irregular gray-white to red, gelatinous/granular foci in white matter, especially brainstem.",
+        "dx": "Working identification: Granulomatous meningoencephalitis (GME). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Histology: Perivascular cuffs containing macrophages and lymphocytes with relatively few plasma cells. Differentiate: GME perivascular inflammation from the suppurative microabscesses of Listeria or thrombotic lesions of Histophilus.",
+        "why": "Host: Young to middle-aged small-breed dogs, idiopathic with suspected T-cell-mediated mechanism. Differentiate: GME perivascular inflammation from the suppurative microabscesses of Listeria or thrombotic lesions of Histophilus.",
+        "notes": "Most severe in the brainstem (white matter) "
+      },
+      "updated": "2026-11-18T11:34:05.137Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
