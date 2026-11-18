@@ -51,10 +51,14 @@ function menu(){
  '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px">'+selected.map(x=>'<button style="text-align:left;padding:12px" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small style="display:block">Lecture '+h(x.lecture)+'</small><small style="display:block;color:#60758a">'+(mode==='edit'?'Add image and personal notes':mode==='histo'?'Histology & explanation':'Gross ID & morphologic diagnosis')+'</small></button>').join('')+'</div>');
 }
 function card(i){
- current=i;const x=record(i);
+ current=i;const x=record(i),shelf=visible(),at=shelf.findIndex(v=>v.index===i);
+ const previous=at>0?shelf[at-1]:null,next=at>=0&&at<shelf.length-1?shelf[at+1]:null;
+ const nav='<div class="buttonrow" style="margin:0 0 10px"><button data-path7-back="1">← Back to '+(tab==='normals'?'Normals Atlas':'Disease Atlas')+'</button><button data-path7-view="'+(previous?.index??'')+'" '+(!previous?'disabled':'')+'>◀ Previous</button><button data-path7-view="'+(next?.index??'')+'" '+(!next?'disabled':'')+'>Next specimen ▶</button></div>'+
+ '<p class="tiny">'+(at>=0?('Specimen '+(at+1)+' of '+shelf.length+' · '):'')+'Browse within your current tab, search and filter.</p>';
  const gallery=window.VPQ_NECROPSY_OWNER_PUBLISH?.specimenPhotoHTML?.(x.id)||'';
  const media=gallery|| (x.image?'<img alt="Local pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>');
  modal((x.normal?'🌱 Normal reference · ':'Lecture '+h(x.lecture)+' · ')+h(x.title),
+ nav+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"><div>'+media+'</div><div>'+(x.normal?'<p><b>System:</b> '+h(x.system)+' · <b>Species:</b> '+h(x.species)+'</p>':'')+'<p><b>'+(x.normal?'Normal gross appearance':'Gross description')+':</b> '+rich(x.gross)+' <button type="button" data-path7-why="gross" aria-label="Explain gross findings" title="Why does the lesion look this way?">?</button></p>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal identification':'Reveal morphologic diagnosis')+'</b> ❔</summary><p>'+rich(x.dx)+'</p></details>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal histology':'Histology')+'</b> ❔</summary><p>'+rich(x.histo)+'</p></details>'+
@@ -62,7 +66,7 @@ function card(i){
  (x.notes?'<p><b>Your annotation:</b> '+rich(x.notes)+'</p>':'')+
  '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+
  (x.normal?'':'<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>')+ 
- '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-hide="'+i+'" style="font-size:12px">🗂 Hide card</button><button data-path7-back="1">← '+(x.normal?'Normals':'Specimens')+'</button></div>');
+ '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-hide="'+i+'" style="font-size:12px">🗂 Hide card</button></div>');
 }
 function edit(i){
  current=i;const x=record(i);
@@ -129,7 +133,7 @@ function init(api){
   if(d.path7Filter!==undefined){filter=d.path7Filter;return menu()}
   if(d.path7Card!==undefined){const i=Number(d.path7Card);return mode==='edit'?edit(i):card(i)}
   if(d.path7Edit!==undefined)return edit(Number(d.path7Edit));
-  if(d.path7View!==undefined)return card(Number(d.path7View));
+  if(d.path7View!==undefined){const n=Number(d.path7View);return Number.isInteger(n)&&n>=0&&n<base.length?card(n):menu()}
   if(d.path7Save!==undefined)return saveForm(Number(d.path7Save));
   if(d.path7OwnerPublish!==undefined){const i=Number(d.path7OwnerPublish);
    const field=api.body.querySelector('#path7Gross');
