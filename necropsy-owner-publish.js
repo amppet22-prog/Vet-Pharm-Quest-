@@ -197,6 +197,7 @@ function readFields(){
  const remove=Array.from(root.querySelectorAll('[data-np-remove]:checked')).map(x=>Number(x.dataset.npRemove));
  const edits={};root.querySelectorAll('[data-np-text]').forEach(x=>{edits[x.dataset.npText]=String(x.value||'').slice(0,9000)});
  const tags=tagsFrom(root,'new');
+ const existingTags=Array.from(root.querySelectorAll('[data-np-remove]')).map(x=>tagsFrom(root,'existing-'+x.dataset.npRemove));
  const newCount=files.length+(draftData?1:0)+(external?1:0);
  if(files.length>12)throw Error('Please select at most 12 files per upload.');
  for(const file of files)if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>20000000)throw Error('Use JPEG, PNG or WebP photos under 20 MB each.');
@@ -211,7 +212,7 @@ function readFields(){
  return {files,filesMeta,draftData,external:goodUrl(external),source:goodUrl(source),
   credit:(credit||'Owner-supplied image; publication rights confirmed').slice(0,500),
   caption:(caption||'Pathology study reference').slice(0,1000),
-  kind,replaceAll,remove,edits,newCount,tags};
+  kind,replaceAll,remove,edits,newCount,tags,existingTags};
 }
 
 async function imageBase64(f){
@@ -234,7 +235,7 @@ async function publish(job,fields,token,update){
  manifest.lectures=manifest.lectures||{};
  const dir=job.type==='case'?'cases':job.type==='lecture'?'lectures':'specimens';
  const prev=manifest[dir][job.id]||{},oldPhotos=photosOf(prev);
- let photos=fields.replaceAll?[]:oldPhotos.filter((p,i)=>!fields.remove.includes(i));
+ let photos=fields.replaceAll?[]:oldPhotos.map((p,i)=>({...p,...(fields.existingTags?.[i]||{})})).filter((p,i)=>!fields.remove.includes(i));
  const incoming=[...fields.files.map((f,i)=>({file:f,name:f.name,caption:fields.filesMeta[i]?.caption||'',kind:fields.filesMeta[i]?.kind||fields.kind})),...(fields.draftData?[{data:fields.draftData,name:'saved-local-draft.jpg'}]:[]),...(fields.external?[{url:fields.external,name:'linked-photo'}]:[])];
  if(photos.length+incoming.length>30)throw Error('This condition can hold up to 30 published photos; remove some first.');
  for(let i=0;i<incoming.length;i++){
