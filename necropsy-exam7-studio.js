@@ -82,7 +82,7 @@ function card(i){
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal histology':'Histology')+'</b> ❔</summary><p>'+rich(x.histo)+'</p></details>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal vs abnormal · what to compare':'Why it happens / distinctive clues')+'</b> ❔</summary><p>'+rich(x.why)+'</p></details>'+
  (x.notes?'<p><b>Your annotation:</b> '+rich(x.notes)+'</p>':'')+
- (x.normal?'':(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||''))+
+ (x.normal?'':(x.visualClue?'<p><b>🔎 Recognition clue:</b> '+rich(x.visualClue)+'</p>':'')+(x.compare?'<p><b>⚖️ Don’t confuse with:</b> '+rich(x.compare)+'</p>':'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')) +
  '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+
  (x.normal?'':'<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>')+ 
  '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-hide="'+i+'" style="font-size:12px">🗂 Hide card</button></div>');
@@ -96,13 +96,15 @@ function edit(i){
  '<label>'+(x.normal?'Normal gross anatomy':'Gross lesion')+'<textarea id="path7Gross" rows="3" style="width:100%">'+h(x.gross)+'</textarea></label>'+
  '<label>'+(x.normal?'Normal identification':'Morphologic DX')+'<textarea id="path7Dx" rows="2" style="width:100%">'+h(x.dx)+'</textarea></label>'+
  '<label>'+(x.normal?'Normal histology':'Histology')+'<textarea id="path7Histo" rows="2" style="width:100%">'+h(x.histo)+'</textarea></label>'+
- '<label>Instructor annotations / personal clues<textarea id="path7Notes" rows="3" style="width:100%">'+h(x.notes||'')+'</textarea></label>'+
+ '<label>Quick visual recognition clue<textarea id="path7VisualClue" rows="2" style="width:100%">'+h(x.visualClue||'')+'</textarea></label>'+ 
+ '<label>Don’t confuse with / distinguishing differentials<textarea id="path7Compare" rows="3" style="width:100%">'+h(x.compare||'')+'</textarea></label>'+ 
+'<label>Instructor annotations / personal clues<textarea id="path7Notes" rows="3" style="width:100%">'+h(x.notes||'')+'</textarea></label>'+
  (x.normal?'':(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(x)||'')) +
  '<div class="buttonrow"><button data-path7-save="'+i+'">💾 Save Draft</button><button data-path7-owner-publish="'+i+'">🚀 Publish photo now</button><button data-path7-view="'+i+'">Cancel</button></div>');
 }
 function saveForm(i){
  const val=n=>ui.body.querySelector('#'+n)?.value||'';
- const part={image:val('path7Url').trim(),gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{})};
+ const part={image:val('path7Url').trim(),gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{})};
  const finish=()=>{if(save(i,part))card(i);else modal('Local storage full','<p>This image is too large for your browser storage. Try a smaller image or a URL.</p><button data-path7-edit="'+i+'">Back to editor</button>')};
  const file=ui.body.querySelector('#path7File')?.files?.[0];
  if(!file)return finish();
@@ -215,7 +217,7 @@ function init(api){
   if(d.path7OwnerPublish!==undefined){const i=Number(d.path7OwnerPublish);
    const field=api.body.querySelector('#path7Gross');
    if(field){const val=n=>api.body.querySelector('#'+n)?.value||'';
-    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{})});}
+    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{})});}
    return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('specimen',base[i]?.id)
   }
   if(d.path7Back!==undefined)return menu();
@@ -226,7 +228,7 @@ function init(api){
 }
 function openCard(id){refreshCustom();const i=base.findIndex(x=>x.id===id);if(i>=0){tab=base[i].normal?'normals':'lesions';return card(i)}return menu()}
 function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
-function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes','etiologyCategories','etiologyAgents','etiologyCertainty'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
-function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
+function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
+function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
 return {init,start,studyLecture,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
 })();
