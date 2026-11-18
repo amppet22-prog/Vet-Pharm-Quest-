@@ -56,6 +56,18 @@ const CASE_MATCH={
 's74-culicoides':['equine culicoides hypersensitivity'],
 's74-em':['erythema multiforme'],
 's74-mosquito':['feline mosquito-bite hypersensitivity'],
+
+'s71-catfrag':['feline hyperadrenocorticism'],
+'s71-digital':['bovine papillomatous digital dermatitis'],
+'s72-lumpy':['capripoxvirus lumpy skin disease'],
+'s72-bps':['bovine papular stomatitis'],
+'s72-seneca':['senecavirus a vesicular disease'],
+'s72-canker':['equine proliferative pododermatitis','canker'],
+'s72-pdns':['porcine dermatitis and nephropathy syndrome'],
+'s73-notoedres':['notoedric mange'],
+'s73-scalyleg':['scaly-leg mite'],
+'s74-ten':['toxic epidermal necrolysis'],
+'s74-atopy':['canine atopic dermatitis'],
 'n69-hydro':['hydrocephalus'],
 'n69-salt':['sodium toxicosis','water deprivation'],
 'n70-dysautonomia':['dysautonomias and feline key gaskell syndrome'],
@@ -86,7 +98,8 @@ function evidence(lecture,section){
  const t=norm(section.title);
  const specimen=bank.some(x=>x.lecture===lecture&&(norm(x.title)===t||(t.length>8&&norm(x.title).includes(t))||(norm(x.title).length>8&&t.includes(norm(x.title)))));
  const imgs=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES||{};
- const embedded=linked.some(x=>(imgs[x.id]?.images||[]).length>0);
+ const owner=window.VPQ_NECROPSY_OWNER_PUBLISH;
+ const embedded=linked.some(x=>(imgs[x.id]?.images||[]).length>0||!!owner?.getCase?.(x.id)?.photo?.url);
  const linkedPhotos=linked.some(x=>(imgs[x.id]?.links||[]).length>0);
  return {linked,specimen,embedded,linkedPhotos};
 }
