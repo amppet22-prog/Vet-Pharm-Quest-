@@ -49,11 +49,26 @@ function lecture(n){
  popup('📚 L'+n+' · '+c[1],
  nav()+
  '<div class="np-cover"><span class="np-tag">'+safe(c[2])+'</span><h3>'+safe(c[1])+' '+helpButton('chapter',n,c[1])+'</h3><p>'+safe(c[3])+'</p><p><b>What earns points on an image question?</b> '+safe(c[4])+'</p></div>'+
+ (window.VPQ_PATH_LECTURE_LEARN?.[n]?'<div class="buttonrow"><button data-nplearn="'+safe(n)+'" style="font-weight:800;background:#e1f7eb;border:2px solid #8dbda4">📖 Learn the full lecture · Slide-by-slide topics</button></div>':'<p class="tiny">Full lecture lesson pending slide-by-slide verification.</p>')+
  '<h4>All named conditions/concepts in this lecture index ('+c[5].split(';').length+')</h4><div class="np-scroll">'+c[5].split(';').map((x,i)=>'<div class="np-entryrow"><span class="np-entryname">🦴 '+safe(x)+'</span>'+helpButton('entry',n+':'+i,x)+'</div>').join('')+'</div>'+
  '<p class="tiny">Index entries are study coverage reminders, not fabricated histology diagnoses. Detailed specimen cards are shown only where the source supports them.</p>'+
  '<h4>Verified gross / histology practice cards ('+cases.length+')</h4><div class="buttonrow">'+cases.map(x=>'<button data-npstudio="gross" data-npnote="'+safe(x.title)+'">'+safe(x.title)+'</button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-npback="1">← All chapters</button><button data-nppattern="1">🔗 Cross-system patterns</button></div>');
 }
+
+function learnLecture(n){
+ chapter=n;
+ const l=window.VPQ_PATH_LECTURE_LEARN?.[n];
+ if(!l)return lecture(n);
+ const rows=l.sections.map((s,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(s.title)+'</b> <small>slides '+safe(s.slides)+'</small></summary>'+
+ s.points.map(p=>'<p style="margin:8px 0;line-height:1.5"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
+ popup('📖 L'+n+' · Learn the Lecture',nav()+
+ '<div class="np-cover"><strong style="font-size:19px">'+safe(l.title)+'</strong><p>Comprehensive guided lecture lesson, grounded in the professor’s actual slide sequence. Open each section for terms, pathways, mechanisms, and recognition differences.</p><small>'+safe(l.source)+' · Lesson content is a paraphrased learning companion, not the original slide deck.</small></div>'+
+ '<h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
+ '<h4>Check your understanding</h4>'+l.checks.map((q,i)=>'<details class="np-pat"><summary><b>Q'+(i+1)+'.</b> '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join('')+
+ '<div class="buttonrow"><button data-npchapter="'+safe(n)+'">← Lecture index</button><button data-npstudio="gross">🔬 Practice lesion cases</button></div>');
+}
+
 function across(){
  popup('🔗 Across Systems · Necropsy Handbook',
  nav()+'<div class="np-cover"><h3>Think like a pathologist</h3><p>These patterns reappear across the entire exam. Use them to reason from location and histology rather than memorizing isolated names.</p></div>'+
@@ -125,6 +140,7 @@ function init(host){
  if(d.nphelp!==undefined)return openWhy(d.nphelp,d.nphelpid||'');
  if(d.npreturn!==undefined)return lecture(chapter);
  if(d.nphome!==undefined||d.npback!==undefined)return show();
+ if(d.nplearn!==undefined)return learnLecture(d.nplearn);
  if(d.npchapter!==undefined)return lecture(d.npchapter);
  if(d.nppattern!==undefined)return across();
  if(d.npquiz!==undefined)return window.VPQ_NECROPSY_QUIZ?.start();
