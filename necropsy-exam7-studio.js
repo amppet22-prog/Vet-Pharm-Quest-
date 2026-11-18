@@ -18,6 +18,7 @@ function menu(){
  modal('🔬 Necropsy · Monday Pathology Exam',
  '<p><b>Gross photograph → lesion description → morphologic diagnosis → histology → pathogenesis.</b> This is an exam study bank built from the uploaded lectures, with original summaries and spaces for your editable images and annotations.</p>'+
  '<div class="buttonrow"><button data-path7-differentials="1" style="background:#e0f3ed;border:2px solid #8ebea8;font-weight:850">🧩 Differential Case Center · Signalment → Histo → Etiology</button></div>'+ 
+ '<div class="buttonrow"><button data-path7-library="1">📷 Browse published photos by lecture / system</button></div>'+ 
  '<div class="buttonrow"><button data-path7-mode="gross">🔎 Gross + morphologic DX</button><button data-path7-mode="histo">🔬 Histo + WHY</button><button data-path7-mode="edit">✏️ Edit atlas images</button><button data-path7-test="1">🎓 Exam unknowns</button></div>'+
  '<div class="buttonrow">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" style="padding:6px 9px;font-size:11px" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':'L'+h(l))+'</button>').join('')+'</div>'+
  '<p class="tiny"><b>'+selected.length+' of '+base.length+' slide-linked lesion / recognition cards.</b> Slide images are not copied into the public game; add your own locally.</p>'+ 
@@ -92,6 +93,7 @@ function init(api){
    :'<p><b>Key distinction:</b> '+rich(x.why)+'</p><p><b>Use these findings:</b> '+rich(x.gross)+'</p><p><b>Histology:</b> '+rich(x.histo)+'</p>';
   modal('❔ '+h(x.title)+' · '+(topic==='gross'?'Why gross looks this way':topic==='histo'?'Microscopy and mechanism':'Distinguishing clues'),sections+'<p class="tiny">Drawn from this existing study card. Confirm specific interpretations with the lecture slides.</p><button data-path7-view="'+current+'">← Return to specimen</button>');return;
  }
+ if(d.path7Library!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.photoLibrary?.();
  if(d.path7Differentials!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start(ui,filter);
  if(d.path7Mode!==undefined){mode=d.path7Mode;return menu()}
   if(d.path7Filter!==undefined){filter=d.path7Filter;return menu()}
