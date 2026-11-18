@@ -24,8 +24,8 @@ function sourcedPhotos(x){
  if(!d)return '';
  const pics=(d.images||[]).map(p=>{
   const filename=String(p.file||'');
-  const url='https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(filename);
-  const source='https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(filename).replace(/%20/g,'_');
+  const url=p.url||'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(filename);
+  const source=p.sourceUrl||'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(filename).replace(/%20/g,'_');
   if(p.type==='histology'&&phase===0)return '<div style="padding:10px;background:#f3f1fa;border:1px dashed #c1bcd3;border-radius:9px;font-size:12px;margin:7px 0">🔬 Histology reference becomes visible after the histology clue.</div>';
   return '<div style="padding:8px;border:1px solid #d2deed;border-radius:10px;background:white;margin:7px 0"><img src="'+safe(url)+'" alt="'+safe(p.caption)+'" loading="lazy" style="display:block;width:100%;max-height:210px;object-fit:contain;border-radius:6px"><div style="font-size:12px;margin-top:5px"><b>'+safe(p.type==='histology'?'Microscopic reference':'Visual reference')+'</b> · '+(phase>=2?safe(p.caption):'Observe the lesion first; the diagnosis and full caption are revealed after the comparison.')+'</div><div style="font-size:11px;color:#5b718b">Credit: '+safe(p.credit)+' · <a target="_blank" rel="noopener noreferrer" href="'+safe(source)+'">Source / license</a></div></div>';
  }).join('');
