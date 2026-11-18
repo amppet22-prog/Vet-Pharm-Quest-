@@ -198,12 +198,14 @@ async function editor(type,id){
  pending.localPhoto=String(draft||'').startsWith('data:image/jpeg;base64,')?draft:'';
  const localText=type==='specimen'?window.VPQ_PATH_EXAM7?.draftText?.(id):type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftText?.(id):null;
  const edits={...base,...(cur?.text||{}),...(localText||{})};
- const fields=type==='case'?['history','gross','histo','morph','mechanism','tests']:type==='specimen'?['gross','dx','histo','why','notes']:[];
+ if(type==='specimen'){const tags=window.VPQ_PATH_ETIOLOGY?.forCard?.(edits);if(tags){if(edits.etiologyCategories===undefined)edits.etiologyCategories=tags.categories.join(', ');if(edits.etiologyAgents===undefined)edits.etiologyAgents=tags.agents;if(edits.etiologyCertainty===undefined)edits.etiologyCertainty=tags.certainty;}}
+ const fields=type==='case'?['history','gross','histo','morph','mechanism','tests']:type==='specimen'?['gross','dx','histo','why','notes','etiologyCategories','etiologyAgents','etiologyCertainty']:[];
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  draftState={};
  show('✏️ Edit & publish · '+esc(base.title),
  '<p><b>Text-only updates are allowed.</b> Leave image inputs blank to preserve all published photos. Select multiple new images to append them. Existing photos are kept unless you check Remove or explicitly select Replace all.</p>'+
  (fields.length?'<h4>📝 Teaching content (editable independently of photos)</h4>'+fields.map(k=>'<label style="display:block;margin:7px 0"><b>'+esc(k.replace(/^\w/,c=>c.toUpperCase()))+'</b><textarea data-np-text="'+k+'" rows="3" style="display:block;width:100%">'+esc(edits[k]||'')+'</textarea></label>').join(''):'')+
+ (type==='specimen'?'<p class="tiny">Etiology categories: comma-separated IDs (bacterial, viral, fungal, protozoal, helminthic, arthropod, neoplastic, immune, toxic, nutritional, endocrine, vascular, traumatic, developmental, degenerative, idiopathic). Enter multiple if needed. Etiology certainty: differential / associated / confirmed. Morphologic diagnosis remains a separate field.</p>':'')+
  '<h4>📷 Currently published ('+existing.length+')</h4>'+
  (existing.length?existing.map((p,i)=>'<div style="display:flex;gap:9px;align-items:start;padding:8px;border:1px solid #cdd9e6;border-radius:9px;margin:6px 0"><img src="'+esc(p.url)+'" style="width:90px;height:85px;object-fit:contain" alt="'+esc(p.caption||'')+'"><div style="flex:1;font-size:12px"><b>'+esc(p.type||'image')+'</b><p>'+esc(p.caption||'')+'</p><small>'+esc(p.credit||'')+'</small>'+photoTagsHTML('existing-'+i,p.lectures||[],p.systems||[])+'<label style="display:block"><input type="checkbox" data-np-remove="'+i+'"> Remove this published photo</label></div></div>').join(''):'<p>No published photos yet.</p>')+
  (existing.length?'<label style="display:block;margin:8px 0"><input type="checkbox" id="npOwnerReplaceAll"> Replace all published photos with new uploads (intentional)</label>':'')+
