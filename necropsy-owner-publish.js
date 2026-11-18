@@ -53,6 +53,67 @@ async function publishCondition(c,token){
  published=manifest;return c;
 }
 
+
+/* Custom pathology specimen cards and reversible hiding share the authenticated owner manifest.
+ * Neither operation alters instructor-authored disease source files or erases photographs. */
+function getCustomSpecimens(){return Object.values(published.customSpecimens||{}).filter(c=>c&&c.id&&c.title);}
+function getHiddenSpecimens(){return Array.isArray(published.hiddenSpecimens)?published.hiddenSpecimens:[];}
+function newSpecimenEditor(kind='normal',lecture='67'){
+ const normal=kind==='normal',lectures=Array.from({length:13},(_,i)=>String(i+67));
+ show('➕ Add '+(normal?'normal reference':'pathology specimen')+' card',
+ '<p>Publish a permanent '+(normal?'healthy anatomy/histology reference':'gross and histology study specimen')+' to the <b>Specimen Cabinet</b>. A photo is optional: add gross and H&E images later using Edit / Publish Photos. Existing cards are never overwritten.</p>'+
+ '<label>Card name<input id="npSpecTitle" style="display:block;width:100%" placeholder="e.g. Normal feline liver"></label>'+
+ '<label>Lecture<select id="npSpecLecture" style="width:100%">'+lectures.map(n=>'<option value="'+n+'"'+(n===String(lecture)?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
+ '<label>Body system<input id="npSpecSystem" style="display:block;width:100%" placeholder="e.g. Nervous System"></label>'+
+ '<label>Species / signalment<input id="npSpecSpecies" style="display:block;width:100%" placeholder="e.g. Dog / cat / horse"></label>'+
+ [['Gross appearance','npSpecGross'],[normal?'Normal identification':'Morphologic diagnosis','npSpecDx'],['Histology','npSpecHisto'],[normal?'Normal vs abnormal comparison':'Why / pathogenesis','npSpecWhy']].map(([label,id])=>'<label style="display:block;margin:8px 0"><b>'+label+'</b><textarea id="'+id+'" style="width:100%" rows="3"></textarea></label>').join('')+
+ '<label>Source / lecture slide<input id="npSpecSource" style="display:block;width:100%" placeholder="Lecture 67 slide 10 / approved reference"></label>'+
+ '<div style="padding:10px;border:1px solid #cbd9e8;border-radius:9px"><b>Owner publishing</b><p class="tiny">Unlock your saved GitHub publishing key with its password; a token is required only on first setup.</p><label>Password<input id="npSpecPassword" type="password" autocomplete="off" style="width:100%"></label><label>GitHub token (first setup only)<input id="npSpecToken" type="password" autocomplete="off" style="width:100%"></label></div>'+
+ '<div class="buttonrow"><button data-np-spec-create="'+(normal?'normal':'lesion')+'" style="background:#e5f6eb">🚀 Publish new card</button><button data-np-spec-cancel="1">← Back to cabinet</button></div><p id="npSpecStatus" role="status"></p>');
+}
+function hideSpecimenEditor(id,restore=false){
+ const built=(window.VPQ_PATH_EXAM7_DATA||[]).find(x=>x.id===id),custom=getCustomSpecimens().find(x=>x.id===id);
+ const card=built||custom;if(!card)return;
+ show((restore?'↩ Restore':'🗂 Hide')+' specimen card',
+ '<p><b>'+esc(card.title)+'</b></p>'+
+ '<p>'+(restore?'Restoring this card will put it back in the Specimen Cabinet.':'This hides the card from the Specimen Cabinet and study unknowns. Original lecture notes and published photographs are preserved. You can restore it later from Manage hidden cards.')+'</p>'+
+ '<input type="hidden" id="npSpecTarget" value="'+esc(id)+'">'+
+ '<div style="padding:10px;border:1px solid #cbd9e8;border-radius:9px"><label>Publishing password<input id="npSpecPassword" type="password" autocomplete="off" style="width:100%"></label><label>GitHub token (first setup only)<input id="npSpecToken" type="password" autocomplete="off" style="width:100%"></label></div>'+
+ '<div class="buttonrow"><button data-np-spec-visibility="'+(restore?'restore':'hide')+'" style="background:'+(restore?'#e5f6eb':'#fff0ed')+'">'+(restore?'↩ Restore card':'Hide this card')+'</button><button data-np-spec-cancel="1">Cancel</button></div><p id="npSpecStatus" role="status"></p>');
+}
+function hiddenSpecimenMenu(){
+ const hidden=getHiddenSpecimens();
+ const all=[...(window.VPQ_PATH_EXAM7_DATA||[]),...getCustomSpecimens()];
+ show('🗂 Hidden specimen cards',
+ '<p>These cards are hidden from both the normal reference and disease specimen lists, but remain recoverable, including previously published photos.</p>'+
+ (hidden.length?hidden.map(id=>{const c=all.find(x=>x.id===id);return '<div style="display:flex;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid #d8e2ec;padding:9px"><span>'+esc(c?.title||id)+'</span><button data-np-spec-restore="'+esc(id)+'">↩ Restore</button></div>'}).join(''):'<p>No hidden cards.</p>')+
+ '<button data-np-spec-cancel="1">← Back to cabinet</button>');
+}
+async function publishSpecimen(c,token){
+ const who=await github('https://api.github.com/user',token);
+ if(who?.login?.toLowerCase()!==OWNER.toLowerCase())throw Error('Only the repository owner can publish cards.');
+ const old=await file(MANIFEST,token),m=JSON.parse(decode(old.content));m.customSpecimens=m.customSpecimens||{};
+ const original=[...(window.VPQ_PATH_EXAM7_DATA||[]),...Object.values(m.customSpecimens)];
+ if(original.some(x=>x.title?.trim().toLowerCase()===c.title.toLowerCase()&&String(x.lecture)===c.lecture&&!!x.normal===c.normal))throw Error('A card with this name already exists in that lecture and tab. Edit the existing card instead.');
+ const id=(c.normal?'normal-custom-':'specimen-custom-')+c.lecture+'-'+c.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,48);
+ if(original.some(x=>x.id===id))throw Error('A card with this identifier already exists.');
+ c.id=id;m.customSpecimens[id]=c;
+ await put(MANIFEST,encode(JSON.stringify(m,null,2)+'\n'),old.sha,token,'Owner create specimen cabinet card '+id);
+ published=m;return c;
+}
+async function setSpecimenVisibility(id,hidden,token){
+ const who=await github('https://api.github.com/user',token);
+ if(who?.login?.toLowerCase()!==OWNER.toLowerCase())throw Error('Only the repository owner can change published card visibility.');
+ const old=await file(MANIFEST,token),m=JSON.parse(decode(old.content));
+ const known=[...(window.VPQ_PATH_EXAM7_DATA||[]),...Object.values(m.customSpecimens||{})].some(c=>c.id===id);
+ if(!known)throw Error('Specimen card not found; nothing was changed.');
+ const hiddenIds=new Set(Array.isArray(m.hiddenSpecimens)?m.hiddenSpecimens:[]);
+ if(hidden)hiddenIds.add(id);else hiddenIds.delete(id);
+ m.hiddenSpecimens=[...hiddenIds];
+ await put(MANIFEST,encode(JSON.stringify(m,null,2)+'\n'),old.sha,token,(hidden?'Owner hide ':'Owner restore ')+'specimen card '+id);
+ published=m;return true;
+}
+
 function getCustomCases(){return Object.values(published.customCases||{}).filter(c=>c&&c.id&&Array.isArray(c.options)&&c.options.length===4)}
 function getCase(id){return published.cases?.[id]||null}
 function getSpecimen(id){return published.specimens?.[id]||null}
@@ -304,6 +365,33 @@ function init(context){
  if(context.body.__vpqNecroOwnerInit)return;
  context.body.__vpqNecroOwnerInit=true;
  load();
+ context.body.addEventListener('click',ev=>{
+  const button=ev.target.closest('[data-np-spec-create],[data-np-spec-visibility],[data-np-spec-cancel],[data-np-spec-restore]');
+  if(!button)return;
+  ev.preventDefault();ev.stopImmediatePropagation();
+  if(button.dataset.npSpecCancel!==undefined)return window.VPQ_PATH_EXAM7?.start?.('gross');
+  if(button.dataset.npSpecRestore!==undefined)return hideSpecimenEditor(button.dataset.npSpecRestore,true);
+  if(button.disabled)return;
+  const root=context.body,v=id=>String(root.querySelector('#'+id)?.value||'').trim();
+  const create=button.dataset.npSpecCreate!==undefined,hidden=button.dataset.npSpecVisibility==='hide';
+  const kind=button.dataset.npSpecCreate;
+  const card=create?{title:v('npSpecTitle'),lecture:v('npSpecLecture'),system:v('npSpecSystem'),species:v('npSpecSpecies'),gross:v('npSpecGross'),dx:v('npSpecDx'),histo:v('npSpecHisto'),why:v('npSpecWhy'),source:v('npSpecSource'),normal:kind==='normal'}:null;
+  const id=v('npSpecTarget'),status=root.querySelector('#npSpecStatus');
+  if(create&&(!card.title||!card.system||!card.species||!card.gross||!card.dx||!card.histo||!card.why||!card.source)){if(status)status.textContent='Please fill in every teaching field. You can add photographs later.';return;}
+  let token=v('npSpecToken'),password=v('npSpecPassword');
+  if(root.querySelector('#npSpecToken'))root.querySelector('#npSpecToken').value='';
+  if(root.querySelector('#npSpecPassword'))root.querySelector('#npSpecPassword').value='';
+  button.disabled=true;if(status)status.textContent='Checking ownership and publishing…';
+  (async()=>{
+   const vault=window.VPQ_OWNER_KEY_VAULT;
+   if(!token){if(!vault?.exists?.())throw Error('No saved publishing key. Enter the GitHub token for first-time setup.');if(!password)throw Error('Enter publishing password.');token=await vault.unlock(password);}
+   if(create){const c=await publishSpecimen(card,token);if(vault&&!vault.exists()&&password)await vault.store(token,password);window.VPQ_PATH_EXAM7?.refreshCustom?.();return window.VPQ_PATH_EXAM7?.openCard?.(c.id);}
+   await setSpecimenVisibility(id,hidden,token);
+   if(vault&&!vault.exists()&&password)await vault.store(token,password);
+   window.VPQ_PATH_EXAM7?.refreshCustom?.();
+   return window.VPQ_PATH_EXAM7?.start?.('gross');
+  })().catch(err=>{if(status)status.textContent='Publishing failed: '+err.message+' Your card has not been altered.'}).finally(()=>{token='';password='';if(button.isConnected)button.disabled=false;});
+ },true);
  context.body.addEventListener('change',ev=>{
   if(ev.target?.dataset?.npLibraryLecture!==undefined){photoLecture=ev.target.value;return photoLibrary();}
   if(ev.target?.dataset?.npLibrarySystem!==undefined){photoSystem=ev.target.value;return photoLibrary();}
@@ -387,5 +475,5 @@ context.body.addEventListener('click',ev=>{
   })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
-return Object.freeze({init,load,getCustomCases,getCustomConditions,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,getPhotoLibrary,photoLibrary,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
+return Object.freeze({init,load,getCustomCases,getCustomConditions,getCustomSpecimens,getHiddenSpecimens,newSpecimenEditor,hideSpecimenEditor,hiddenSpecimenMenu,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,getPhotoLibrary,photoLibrary,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
 })();
