@@ -37,7 +37,7 @@ const pageMap={'BOOK':[1], '67':[5,8,15,16,20,21,25,27,28,30,32,34,35,39,43],
 '78':[2,5,9,15,22,29,36,43,51],
 '79':[2,4,7,9,12,15,18,21]};
 function slide(lecture,i,start){const p=pageMap[lecture]?.[i]||start||2;return '<div class="np-slide-view" data-npslideview="'+esc(lecture)+'" data-nppage="'+p+'" style="padding:10px;border:1px solid #b3cadf;border-radius:11px;background:#f7fbff;margin:12px 0;max-width:100%;min-width:0"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><b style="font-size:12px">📷 Original lecture slide photograph</b><span style="font-size:11px;color:#526778">Private on this device</span></div><div class="np-slide-state" style="font-size:12px;margin:7px 0">Select the original lecture PDF above to show the actual slide here.</div><div class="np-slide-controls" style="display:none;gap:5px;align-items:center;flex-wrap:wrap"><button data-npslideprev="1" type="button" style="font-size:12px;padding:5px 8px">◀</button><label style="font-size:12px">Slide <input class="np-slide-pagenum" type="number" min="1" value="'+p+'" style="width:65px;font-size:12px"></label><button data-npslidenext="1" type="button" style="font-size:12px;padding:5px 8px">▶</button><button data-npslidezoom="1" type="button" style="font-size:12px;padding:5px 8px">Zoom</button></div><canvas class="np-slide-canvas" style="display:none;max-width:100%;height:auto;margin:8px auto 0;border-radius:8px;border:1px solid #dde4ed"></canvas><p style="font-size:11px;margin:5px 0">Use the arrows to move to adjacent slides. Textbook figures may be opened separately using your own textbook PDF.</p></div>'}
-function uploader(lecture){const book=lecture==='BOOK';return '<div style="background:#fff;border:1px solid #b3cadf;border-radius:12px;padding:12px;margin:12px 0"><b>📚 View your actual course images</b><p style="font-size:12px;line-height:1.5;margin:5px 0">Choose your '+(book?'pathology textbook':'professor’s Lecture '+esc(lecture))+' PDF from your computer. The game displays original figures here without uploading the file to GitHub. Large textbook files might not fit in browser storage.</p><label style="font-size:12px">'+(book?'Choose textbook PDF':'Choose Lecture '+esc(lecture)+' PDF')+' <input type="file" accept="application/pdf,.pdf" data-nplecturepdf="'+esc(lecture)+'" style="max-width:100%;font-size:12px"></label><div class="np-slide-uploadstatus" style="font-size:12px;margin:7px 0"></div><button type="button" data-npdeletepdf="'+esc(lecture)+'" style="font-size:11px;padding:5px 8px">Remove saved PDF</button></div>'}
+function uploader(lecture){const book=lecture==='BOOK';return '<div data-nppdfuploader="'+esc(lecture)+'" style="background:#fff;border:1px solid #b3cadf;border-radius:12px;padding:12px;margin:12px 0"><b>📚 View your actual course images</b><p style="font-size:12px;line-height:1.5;margin:5px 0">Choose your '+(book?'pathology textbook':'professor’s Lecture '+esc(lecture))+' PDF from your computer. The game displays original figures here without uploading the file to GitHub. Large textbook files might not fit in browser storage.</p><label style="font-size:12px">'+(book?'Choose textbook PDF':'Choose Lecture '+esc(lecture)+' PDF')+' <input type="file" accept="application/pdf,.pdf" data-nplecturepdf="'+esc(lecture)+'" style="max-width:100%;font-size:12px"></label><div class="np-slide-uploadstatus" style="font-size:12px;margin:7px 0"></div><button type="button" data-npdeletepdf="'+esc(lecture)+'" style="font-size:11px;padding:5px 8px">Remove saved PDF</button></div>'}
 async function renderOne(el,pdf){
  if(!el.isConnected||!pdf)return;
  let page=Math.max(1,Math.min(pdf.numPages,Number(el.dataset.nppage)||1));
@@ -58,7 +58,7 @@ async function renderOne(el,pdf){
  }catch(e){label.textContent='Could not display this PDF page: '+e.message}
 }
 async function hydrate(root,lecture){
- const holder=root.querySelector('.np-slide-uploadstatus');
+ const holder=root.querySelector('[data-nppdfuploader="'+lecture+'"] .np-slide-uploadstatus');
  try{
   const pdf=await pdfFor(lecture);
   if(!root.isConnected)return;
@@ -70,7 +70,7 @@ async function hydrate(root,lecture){
 }
 async function fileSelected(root,input){
  const lecture=input.dataset.nplecturepdf,file=input.files?.[0];if(!file)return;
- const status=root.querySelector('.np-slide-uploadstatus');if(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')){status.textContent='Please choose a PDF.';return}
+ const status=root.querySelector('[data-nppdfuploader="'+lecture+'"] .np-slide-uploadstatus');if(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')){status.textContent='Please choose a PDF.';return}
  status.textContent='Reading local PDF…';
  try{if(file.size>55*1024*1024){cache.set('BLOB-'+lecture,file);status.textContent='Large PDF loaded for this visit (not saved between visits).'}else await persist('L'+lecture,file);const old=cache.get(lecture);if(old)await old.destroy();cache.delete(lecture);await hydrate(root,lecture)}
  catch(e){status.textContent='Unable to save/read this PDF: '+e.message}
@@ -79,7 +79,7 @@ async function clicked(root,button){
  if(button.dataset.npdeletepdf!==undefined){
   const l=button.dataset.npdeletepdf;await remove('L'+l);const old=cache.get(l);if(old)await old.destroy();cache.delete(l);cache.delete('BLOB-'+l);
   root.querySelectorAll('[data-npslideview="'+l+'"]').forEach(el=>{el.querySelector('.np-slide-state').textContent='No private lecture PDF selected.';el.querySelector('.np-slide-controls').style.display='none';el.querySelector('canvas').style.display='none'});
-  const status=root.querySelector('.np-slide-uploadstatus');if(status)status.textContent='Removed the saved PDF from this browser.';return;
+  const status=root.querySelector('[data-nppdfuploader="'+l+'"] .np-slide-uploadstatus');if(status)status.textContent='Removed the saved PDF from this browser.';return;
  }
  const v=button.closest('[data-npslideview]');if(!v)return;
  const lecture=v.dataset.npslideview,pdf=await pdfFor(lecture);if(!pdf)return;
