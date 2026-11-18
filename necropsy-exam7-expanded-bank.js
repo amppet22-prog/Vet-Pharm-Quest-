@@ -33,11 +33,36 @@ if(!bank.some(x=>x.id==='pathx-68-meningitis')){
  why:'Septicemia or contiguous infection can seed the meninges; gross appearance and leukocyte pattern localize and classify inflammation, but bacterial identity requires laboratory confirmation.',
  source:'Instructor Lecture 68 slides 7–9 · leptomeningitis versus pachymeningitis and neonatal septicemia. Photos are owner-supplied and publishable.'});
 }
+/* Consolidate mosquito-borne equine viral encephalitis in the gross specimen atlas.
+ * Keep distinct EHV-1 vascular myeloencephalopathy and protozoal EPM separately.
+ * The original lecture disease sections and differential cases are NOT removed.
+ */
+const viralEquineNames=new Set([
+ 'eastern equine encephalomyelitis (eee)',
+ 'western equine encephalomyelitis (wee)',
+ 'venezuelan equine encephalomyelitis (vee)',
+ 'west nile virus (wnv)'
+]);
+const viralEquineCard={
+ id:'pathx-68-equine-arboviral-group',lecture:'68',
+ title:'Equine mosquito-borne viral encephalomyelitis — EEE / WEE / VEE / WNV',
+ gross:'**Typically no specific gross lesion.** The brain and spinal cord may be grossly normal or show nonspecific **hyperemia, edema, petechial hemorrhage, or softening**. Do not attempt to distinguish EEE, WEE, VEE, and WNV from gross appearance alone.',
+ dx:'**Brain / spinal cord: nonsuppurative (lymphohistiocytic) encephalomyelitis**, often with neuronal injury, neuronophagia and microgliosis. The anatomic distribution must be described; **etiologic virus identification is pending**.',
+ histo:'**Overlapping histopathology:** perivascular mononuclear cuffs, microgliosis, neuronophagia and neuronal necrosis. **EEE/WEE/VEE:** often gray-matter polioencephalomyelitis. **WNV:** frequently brainstem and ventral spinal cord gray matter involvement; distribution overlaps and is not definitive. Vasculitis or hemorrhage may occur, but neither is uniquely diagnostic.',
+ why:'**EEE/WEE/VEE are mosquito-borne alphaviruses; WNV is a mosquito-borne flavivirus.** Clinical history, season and geography inform suspicion, but **gross and routine H&E alone do not reliably speciate the virus**. Request agent-specific testing on appropriately collected samples: **PCR / RT-PCR and other laboratory-confirmed assays** where indicated. In live horses with WNV, **serum or CSF IgM capture ELISA is often more useful than PCR**, because viremia is typically low/transient; interpret all results using exposure, vaccination and laboratory guidance. **EEE/WEE/VEE require urgent veterinary diagnostic/public-health consultation when suspected.** EHV-1 myeloencephalopathy (vascular thrombosis/infarction) and EPM (protozoal multifocal asymmetric necrosis) remain separate gross atlas cards due to meaningfully different lesion patterns.',
+ source:'Instructor Lecture 68 slides 18–21: Eastern, Western, Venezuelan equine encephalomyelitis and West Nile virus; integrated diagnostic comparison (not a copied lecture image).'
+};
+if(!bank.some(x=>x.id===viralEquineCard.id)){
+ bank.push(viralEquineCard);
+ existing.add('68|'+viralEquineCard.title.toLowerCase());
+}
+
 for(let n=67;n<=79;n++){
  const num=String(n),lecture=lessons[num];
  if(!lecture?.sections)continue;
  lecture.sections.forEach((sec,i)=>{
   const name=strip(sec.title);
+  if(num==='68'&&viralEquineNames.has(name.toLowerCase()))return;
   if(!name||excluded.test(name)||!strong.test(name)||/NONEXAM|FOR REFERENCE ONLY|OBJECTIVES-ONLY/i.test(name))return;
   const k=num+'|'+name.toLowerCase();if(existing.has(k))return;
   const lines=pointsToText(sec.points);
