@@ -240,6 +240,50 @@
       },
       "updated": "2026-11-18T11:35:19.845Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-67-40": {
+      "title": "Neuronal necrosis",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-67-40-1795037730668-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "67"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-67-40"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-67-40-1795037730668-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "67"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-67-40"
+      },
+      "text": {
+        "gross": "Irreversibly injured neurons may not create a visible gross lesion early",
+        "dx": "Brain: neuronal necrosis",
+        "histo": "Angular shrunken intensely eosinophilic ( hypereosinophilic) red neurons with pyknotic or lost nuclei",
+        "why": "Ischemia/ATP failure or other neuronal injury; distinguish normal neurons from injured red neurons. Common response to a variety of CNS injuries. ",
+        "notes": "Neurons are the most susceptible of CNS cells to ischemia (neurons> oligodendrocytes> astrocytes> microglia> endothelial cells) "
+      },
+      "updated": "2026-11-18T21:35:33.034Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
