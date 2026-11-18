@@ -29,15 +29,15 @@ const patterns=[
 ];
 let api=null,topic='all',search='',chapter='67';
 const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
-const theme='<style>.np-cover{background:linear-gradient(115deg,#f3e3ff,#e1f7eb 55%,#ffefdc);border:2px solid #dfc4ef;border-radius:18px;padding:15px;margin:7px 0 13px}.np-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.np-tabs button{font-size:12px;padding:7px 10px}.np-chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.np-chapter{padding:13px;background:#fff;border:2px solid #dbd5eb;border-radius:16px;text-align:left}.np-chapter small{display:block;color:#60708c;margin-top:4px}.np-tag{display:inline-block;border-radius:9px;background:#fff4d8;padding:3px 7px;font-size:11px;font-weight:800}.np-pat{padding:12px;background:#f9f8fc;border:1px solid #d6ddec;border-radius:14px;margin:8px 0}.np-scroll{max-height:40vh;overflow:auto;border:1px solid #dfe1ec;border-radius:12px;padding:9px}</style>';
+const theme='<style>.np-cover{background:linear-gradient(115deg,#f3e3ff,#e1f7eb 55%,#ffefdc);border:2px solid #dfc4ef;border-radius:18px;padding:15px;margin:7px 0 13px}.np-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.np-tabs button{font-size:12px;padding:7px 10px}.np-chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.np-chapter{padding:13px;background:#fff;border:2px solid #dbd5eb;border-radius:16px;text-align:left}.np-chapter small{display:block;color:#60708c;margin-top:4px}.np-tag{display:inline-block;border-radius:9px;background:#fff4d8;padding:3px 7px;font-size:11px;font-weight:800}.np-pat{padding:12px;background:#f9f8fc;border:1px solid #d6ddec;border-radius:14px;margin:8px 0}.np-scroll{max-height:40vh;overflow:auto;border:1px solid #dfe1ec;border-radius:12px;padding:9px}.np-question{display:inline-grid;place-items:center;vertical-align:middle;min-width:25px;width:25px;height:25px;padding:0;margin-left:6px;border:2px solid #a38ac3;border-radius:50%;background:#fff8e7;color:#755690;font-size:14px;font-weight:900;cursor:help}.np-question:hover,.np-question:focus-visible{background:#e9daf9;outline:2px solid #f5d6ad}.np-entryrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 3px;border-bottom:1px solid #eef1f5}.np-entryrow .np-entryname{min-width:0}</style>';
 function popup(t,html){api?.showModal(t,theme+html)}
 function nav(){return '<div class="np-tabs"><button data-nphome="1">📚 Handbook</button><button data-nppattern="1">🔗 Across systems</button><button data-npstudio="gross">🔍 Gross ID</button><button data-npstudio="histo">🔬 Histology</button><button data-npquiz="1">🎓 Practice Quiz</button><button data-npedit="1">🖼️ Editable atlas</button></div>'}
 function show(){
  const systems=['all','Neuro','Skin','Repro','Special Senses'];
  const selected=chapters.filter(c=>topic==='all'||c[2]===topic).filter(c=>!search||[...c].join(' ').toLowerCase().includes(search));
  popup('📚 Necropsy Handbook · Path Exam 7',
- '<style>.np-cover{background:linear-gradient(120deg,#f3e3ff,#e1f7eb 55%,#ffefdc);border:2px solid #dfc4ef;border-radius:18px;padding:15px;margin:7px 0 13px}.np-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.np-tabs button{font-size:12px;padding:7px 10px}.np-chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.np-chapter{padding:13px;background:#fff;border:2px solid #dbd5eb;border-radius:16px;text-align:left}.np-chapter small{display:block;color:#60708c;margin-top:4px}.np-tag{display:inline-block;border-radius:9px;background:#fff4d8;padding:3px 7px;font-size:11px;font-weight:800}.np-pat{padding:12px;background:#f9f8fc;border:1px solid #d6ddec;border-radius:14px;margin:8px 0}.np-scroll{max-height:40vh;overflow:auto;border:1px solid #dfe1ec;border-radius:12px;padding:9px}</style>'+
- '<div class="np-cover"><strong style="font-size:19px">🦴 The Little Necropsy Handbook</strong><p style="margin:6px 0">Learn the lesion, understand WHY, then identify it on a specimen. Start with a system or look up a disease. The illustrated specimen room and atlas are linked to this handbook.</p><small>Instructor slides + annotated notes first; supplemental guide cross-checked. Specific lecture entries may still require a slide-by-slide validation.</small></div>'+
+ '<style>.np-cover{background:linear-gradient(120deg,#f3e3ff,#e1f7eb 55%,#ffefdc);border:2px solid #dfc4ef;border-radius:18px;padding:15px;margin:7px 0 13px}.np-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.np-tabs button{font-size:12px;padding:7px 10px}.np-chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.np-chapter{padding:13px;background:#fff;border:2px solid #dbd5eb;border-radius:16px;text-align:left}.np-chapter small{display:block;color:#60708c;margin-top:4px}.np-tag{display:inline-block;border-radius:9px;background:#fff4d8;padding:3px 7px;font-size:11px;font-weight:800}.np-pat{padding:12px;background:#f9f8fc;border:1px solid #d6ddec;border-radius:14px;margin:8px 0}.np-scroll{max-height:40vh;overflow:auto;border:1px solid #dfe1ec;border-radius:12px;padding:9px}.np-question{display:inline-grid;place-items:center;vertical-align:middle;min-width:25px;width:25px;height:25px;padding:0;margin-left:6px;border:2px solid #a38ac3;border-radius:50%;background:#fff8e7;color:#755690;font-size:14px;font-weight:900;cursor:help}.np-question:hover,.np-question:focus-visible{background:#e9daf9;outline:2px solid #f5d6ad}.np-entryrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 3px;border-bottom:1px solid #eef1f5}.np-entryrow .np-entryname{min-width:0}</style>'+
+ '<div class="np-cover"><strong style="font-size:19px">🦴 The Little Necropsy Handbook</strong>'+helpButton('intro','0','how to use the pathology Handbook')+'<p style="margin:6px 0">Learn the lesion, understand WHY, then identify it on a specimen. Start with a system or look up a disease. The illustrated specimen room and atlas are linked to this handbook.</p><small>Instructor slides + annotated notes first; supplemental guide cross-checked. Specific lecture entries may still require a slide-by-slide validation.</small></div>'+
  nav()+
  '<div class="buttonrow">'+systems.map(s=>'<button data-npsystem="'+safe(s)+'" aria-pressed="'+(s===topic)+'">'+(s==='all'?'All systems':safe(s))+'</button>').join('')+'</div>'+
  '<label>Find a lecture or disease <input data-npsearch="1" id="npSearch" placeholder="e.g. pyometra, meningitis, eye" value="'+safe(search)+'" style="width:100%"></label>'+
@@ -48,8 +48,8 @@ function lecture(n){
  const cases=(window.VPQ_PATH_EXAM7?.cards||[]).filter(x=>x.lecture===n);
  popup('📚 L'+n+' · '+c[1],
  nav()+
- '<div class="np-cover"><span class="np-tag">'+safe(c[2])+'</span><h3>'+safe(c[1])+'</h3><p>'+safe(c[3])+'</p><p><b>What earns points on an image question?</b> '+safe(c[4])+'</p></div>'+
- '<h4>All named conditions/concepts in this lecture index ('+c[5].split(';').length+')</h4><div class="np-scroll">'+c[5].split(';').map(x=>'<div style="padding:5px 3px;border-bottom:1px solid #eef1f5">🦴 '+safe(x)+'</div>').join('')+'</div>'+
+ '<div class="np-cover"><span class="np-tag">'+safe(c[2])+'</span><h3>'+safe(c[1])+' '+helpButton('chapter',n,c[1])+'</h3><p>'+safe(c[3])+'</p><p><b>What earns points on an image question?</b> '+safe(c[4])+'</p></div>'+
+ '<h4>All named conditions/concepts in this lecture index ('+c[5].split(';').length+')</h4><div class="np-scroll">'+c[5].split(';').map((x,i)=>'<div class="np-entryrow"><span class="np-entryname">🦴 '+safe(x)+'</span>'+helpButton('entry',n+':'+i,x)+'</div>').join('')+'</div>'+
  '<p class="tiny">Index entries are study coverage reminders, not fabricated histology diagnoses. Detailed specimen cards are shown only where the source supports them.</p>'+
  '<h4>Verified gross / histology practice cards ('+cases.length+')</h4><div class="buttonrow">'+cases.map(x=>'<button data-npstudio="gross" data-npnote="'+safe(x.title)+'">'+safe(x.title)+'</button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-npback="1">← All chapters</button><button data-nppattern="1">🔗 Cross-system patterns</button></div>');
@@ -57,15 +57,73 @@ function lecture(n){
 function across(){
  popup('🔗 Across Systems · Necropsy Handbook',
  nav()+'<div class="np-cover"><h3>Think like a pathologist</h3><p>These patterns reappear across the entire exam. Use them to reason from location and histology rather than memorizing isolated names.</p></div>'+
- patterns.map(p=>'<details class="np-pat"><summary><b>'+safe(p[0])+'</b></summary><p>'+safe(p[1])+'</p><p><b>Compare:</b> '+safe(p[2])+'</p></details>').join('')+
+ patterns.map((p,i)=>'<div class="np-pat">'+helpButton('pattern',i,p[0])+'<details><summary><b>'+safe(p[0])+'</b></summary><p>'+safe(p[1])+'</p><p><b>Compare:</b> '+safe(p[2])+'</p></details></div>').join('')+
  '<div class="buttonrow"><button data-npback="1">← Handbook</button></div>');
 }
+
+/* Contextual study hints: only show lesion-specific findings from existing case cards.
+ * Index-only entries remain labeled as coverage reminders, not fabricated diagnoses.
+ */
+function cardFor(term,lectureId){
+ const cards=window.VPQ_PATH_EXAM7?.cards||[];
+ const norm=v=>String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+ return cards.find(x=>x.lecture===lectureId&&norm(x.title)===norm(term))||null;
+}
+function helpButton(kind,id,extra=''){
+ return '<button type="button" class="np-question" data-nphelp="'+safe(kind)+'" data-nphelpid="'+safe(id)+'" title="Explain this concept and why it matters" aria-label="Why? Explain '+safe(extra||kind)+'">?</button>';
+}
+function helpPanel(title,sections,footer){
+ popup('❔ '+title,nav()+
+ '<div class="np-cover"><h3>'+safe(title)+'</h3><p>Use this explanation to connect the finding to the diagnosis.</p></div>'+
+ sections.map(x=>'<div class="np-pat"><b>'+safe(x[0])+'</b><p>'+safe(x[1])+'</p></div>').join('')+
+ (footer?'<p class="tiny">'+safe(footer)+'</p>':'')+
+ '<div class="buttonrow"><button data-npreturn="1">← Return to lecture</button></div>');
+}
+function openWhy(kind,id){
+ if(kind==='intro')return helpPanel('How to study a lesion',[
+ ['Observe','Start with organ and distribution, then identify the lesion rather than immediately guessing an etiologic agent.'],
+ ['Explain','Connect the histologic injury to the gross change, clinical signs, and disease mechanism.'],
+ ['Differentiate','Compare the closest look-alike and choose the feature that actually separates them.']
+ ],'Framework only: the Handbook index is not a complete slide-by-slide disease encyclopedia.');
+ if(kind==='chapter'){
+  const c=chapters.find(x=>x[0]===id);if(!c)return;
+  chapter=c[0];return helpPanel('L'+c[0]+' · '+c[1],[
+   ['What is happening?',c[3]],['What to focus on when identifying it',c[4]],
+   ['Why this matters','Explain how the site, distribution, and underlying injury lead to the findings. Do not infer a specific organism from a nonspecific lesion.']
+  ],'These are lecture-level teaching notes. Individual condition details require matching evidence.');
+ }
+ if(kind==='entry'){
+  const sep=id.indexOf(':');const n=id.slice(0,sep),index=Number(id.slice(sep+1));
+  const c=chapters.find(x=>x[0]===n);if(!c)return;
+  const term=c[5].split(';')[index];if(!term)return;
+  chapter=n;
+  const match=cardFor(term,n);
+  if(match)return helpPanel(term,[
+   ['Gross appearance',match.gross],['Morphologic diagnosis',match.dx],
+   ['What you should see microscopically',match.histo],['Why this happens / distinguishing clue',match.why],
+   ['Exam strategy','Describe the visible features first. Compare signalment, distribution, and histology before choosing an etiology.']
+  ],'Based on an existing original Exam 7 study card; verify against the instructor lecture images.');
+  return helpPanel(term,[
+   ['Coverage','This condition appears in the L'+n+' lecture index. A validated lesion-specific card has not yet been entered.'],
+   ['What to learn','Identify the affected species and tissue, expected distribution, gross lesion, histologic change, underlying mechanism, and the nearest differential using your lecture slides.'],
+   ['Why it matters','The ability to describe a lesion and rule out a similar disorder is more useful than memorizing the condition name alone.'],
+   ['Lecture-level clue',c[4]]
+  ],'Index-only entry: no disease-specific gross or microscopic findings have been invented.');
+ }
+ if(kind==='pattern'){
+  const p=patterns[Number(id)];if(!p)return;
+  return helpPanel(p[0],[['What this pattern means',p[1]],['Important comparison',p[2]],['How to use it','Ask where the lesion is, which cells or vessels are affected, and whether the distribution supports one mechanism over another.']],'Cross-system concept; verify the particular lesion against its lecture.');
+ }
+}
+
 function init(host){
  api=host;
  host.body.addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;const d=b.dataset;
  if(!Object.keys(d).some(k=>k.startsWith('np')))return;
  e.preventDefault();e.stopImmediatePropagation();
+ if(d.nphelp!==undefined)return openWhy(d.nphelp,d.nphelpid||'');
+ if(d.npreturn!==undefined)return lecture(chapter);
  if(d.nphome!==undefined||d.npback!==undefined)return show();
  if(d.npchapter!==undefined)return lecture(d.npchapter);
  if(d.nppattern!==undefined)return across();
