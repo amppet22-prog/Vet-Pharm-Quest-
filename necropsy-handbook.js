@@ -70,6 +70,7 @@ function learnLecture(n){
  img(i,s)+s.points.map(p=>'<p style="margin:8px 0;line-height:1.5"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
  popup('📖 L'+n+' · Learn the Lecture',nav()+
  '<div class="np-cover"><strong style="font-size:19px">'+safe(l.title)+'</strong><p>Comprehensive guided lecture lesson, grounded in the professor’s actual slide sequence. Open each section for terms, pathways, mechanisms, and recognition differences.</p><small>'+safe(l.source)+' · Lesson content is a paraphrased learning companion, not the original slide deck.</small></div>'+
+  (slideUi?slideUi.uploader(n)+slideUi.uploader('BOOK')+slideUi.slide('BOOK',0,1):'')+
  '<style>.np-pat{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal}.np-pat p{white-space:normal;overflow-wrap:anywhere}.np-visual{box-sizing:border-box;max-width:100%;width:100%;margin:10px 0;padding:10px;border:1px solid #d9dfeb;border-radius:12px;background:#fff}.np-visual img{max-width:100%;height:auto}</style><h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
  '<h4>Check your understanding</h4>'+l.checks.map((q,i)=>'<details class="np-pat"><summary><b>Q'+(i+1)+'.</b> '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join('')+
  '<div class="buttonrow"><button data-npchapter="'+safe(n)+'">← Lecture index</button><button data-npstudio="gross">🔬 Practice lesion cases</button></div>');
