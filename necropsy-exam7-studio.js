@@ -15,6 +15,14 @@ const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
 function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};const entry=Object.assign({},src,official.text||{},draft);const photos=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);if(photos.length)entry.image=photos[0].url;return entry}
+function photoStatus(x){
+ const official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(x.id)||{};
+ const pictures=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);
+ const local=!!edits()[x.id]?.image;
+ if(pictures.some(p=>p.verified===true&&p.source&&p.credit))return '✓ Photo verified';
+ if(pictures.length||local||x.image)return '📷 Photo added';
+ return '◻ Photo needed';
+}
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
 function visible(){refreshCustom();const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
@@ -59,6 +67,7 @@ function card(i){
  const media=gallery|| (x.image?'<img alt="Local pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>');
  modal((x.normal?'🌱 Normal reference · ':'Lecture '+h(x.lecture)+' · ')+h(x.title),
  nav+
+ '<p class="tiny">'+photoStatus(x)+' · Photos optional; uploading is not the same as verifying.</p>'+ 
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"><div>'+media+'</div><div>'+(x.normal?'<p><b>System:</b> '+h(x.system)+' · <b>Species:</b> '+h(x.species)+'</p>':'')+'<p><b>'+(x.normal?'Normal gross appearance':'Gross description')+':</b> '+rich(x.gross)+' <button type="button" data-path7-why="gross" aria-label="Explain gross findings" title="Why does the lesion look this way?">?</button></p>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal identification':'Reveal morphologic diagnosis')+'</b> ❔</summary><p>'+rich(x.dx)+'</p></details>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal histology':'Histology')+'</b> ❔</summary><p>'+rich(x.histo)+'</p></details>'+
