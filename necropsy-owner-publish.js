@@ -76,12 +76,12 @@ async function editor(type,id){
 }
 
 
-function newCaseEditor(){
+function newCaseEditor(seed={}){
  const lectures=Array.from({length:13},(_,i)=>String(i+67));
  show('➕ Create differential diagnosis card',
  '<p>Create a permanent teaching case with <b>four genuinely competing diagnoses</b>. The first is the best-supported choice. Photos are optional and can be added later through the normal multi-photo editor.</p>'+
- '<label>Card title<input id="ncTitle" style="width:100%" placeholder="e.g. Meningitis: purulent versus nonsuppurative"></label>'+
- '<label>Lecture<select id="ncLecture">'+lectures.map(n=>'<option value="'+n+'"'+(n==='68'?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
+ '<label>Card title<input id="ncTitle" style="width:100%" value="'+esc(seed.title||'')+'" placeholder="e.g. Meningitis: purulent versus nonsuppurative"></label>'+
+ '<label>Lecture<select id="ncLecture">'+lectures.map(n=>'<option value="'+n+'"'+(n===(seed.lecture||'68')?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
  '<label>System<input id="ncSystem" style="width:100%" value="CNS / Meninges"></label>'+
  '<label>Species and signalment<textarea id="ncSpecies" rows="2" style="width:100%"></textarea></label>'+
  '<label>History<textarea id="ncHistory" rows="3" style="width:100%"></textarea></label>'+
