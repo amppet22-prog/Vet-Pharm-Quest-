@@ -29,10 +29,13 @@ function editor(type,id){
  if(!c)return show('Publishing unavailable','<p>This case could not be found in the verified game bank.</p>');
  pending={type,id,title:c.title};
  const current=(type==='case'?getCase(id):getSpecimen(id))||{};
+ const draft=type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftPhoto?.(id):window.VPQ_PATH_EXAM7?.draftPhoto?.(id);
+ pending.localPhoto=String(draft||'').startsWith('data:image/jpeg;base64,')?draft:'';
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  show('📸 Owner photo editor · '+esc(c.title),
  '<p>Publish a <b>gross</b>, <b>histology</b>, or <b>clinical</b> reference. A published photograph is visible on every device after refreshing the game. Save Draft is optional; publishing is a separate authenticated action.</p>'+
  (current.photo?.url?publicImage(current.photo.url,current.photo.caption):'')+
+ (pending.localPhoto?'<label style="display:block;margin:8px 0"><input id="npOwnerUseDraft" type="checkbox" checked> <b>Use my saved local draft photo</b></label><img src="'+esc(pending.localPhoto)+'" alt="Local draft ready for publishing" style="max-width:100%;max-height:150px;object-fit:contain">':'')+
  '<label><b>Upload an image</b><input id="npOwnerFile" type="file" accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:7px 0"></label>'+
  '<label><b>Or direct HTTPS image URL</b><input id="npOwnerImageUrl" type="url" value="'+esc(current.photo?.external?'':current.photo?.url&& !current.photo?.url.includes('raw.githubusercontent.com')?current.photo.url:'')+'" placeholder="https://example.org/figure.jpg" style="width:100%;padding:8px"></label>'+
  '<label><b>Image type</b><select id="npOwnerKind" style="width:100%;padding:8px"><option value="gross">Gross lesion</option><option value="histology">Histology / H&E</option><option value="clinical">Clinical</option></select></label>'+
@@ -57,16 +60,16 @@ async function file(path,token,missing=false){return github(ROOT+path+'?ref=main
 async function put(path,contents,sha,token,msg){return github(ROOT+path,token,'PUT',{message:msg,content:contents,branch:'main',...(sha?{sha}:{})})}
 function readFields(){
  const el=id=>api?.body?.querySelector('#'+id);
- const file=el('npOwnerFile')?.files?.[0],external=String(el('npOwnerImageUrl')?.value||'').trim(),source=String(el('npOwnerSource')?.value||'').trim(),credit=String(el('npOwnerCredit')?.value||'').trim(),caption=String(el('npOwnerCaption')?.value||'').trim();
+ const file=el('npOwnerFile')?.files?.[0],draftData=(!file&&el('npOwnerUseDraft')?.checked&&pending?.localPhoto)||'',external=String(el('npOwnerImageUrl')?.value||'').trim(),source=String(el('npOwnerSource')?.value||'').trim(),credit=String(el('npOwnerCredit')?.value||'').trim(),caption=String(el('npOwnerCaption')?.value||'').trim();
  const rights=!!el('npOwnerRights')?.checked;
  const kind=String(el('npOwnerKind')?.value||'gross');
  if(file&&(!file.type.startsWith('image/')||file.size>20000000))throw Error('Select a JPEG/PNG/WebP under 20 MB.');
- if(!file&&!goodUrl(external))throw Error('Choose an image file or enter a valid direct HTTPS image URL.');
+ if(!file&&!draftData&&!goodUrl(external))throw Error('Choose an image file, use your saved local draft or enter a valid direct HTTPS image URL.');
  if(source&&!goodUrl(source))throw Error('Source must be an HTTPS URL.');
  if(!rights)throw Error('Please confirm that you own the photo or have permission to publish it.');
  if(!credit||!caption)throw Error('Include an image caption and attribution/license.');
- if(!source&&!file)throw Error('For an external URL, provide a source URL and permission information.');
- return {file,external:goodUrl(external),source:goodUrl(source),credit:credit.slice(0,500),caption:caption.slice(0,1000),kind};
+ if(!source&&!file&&!draftData)throw Error('For an external URL, provide a source URL and permission information.');
+ return {file,draftData,external:goodUrl(external),source:goodUrl(source),credit:credit.slice(0,500),caption:caption.slice(0,1000),kind};
 }
 async function imageBase64(f){
  const img=await new Promise((resolve,reject)=>{let obj=new Image(),u=URL.createObjectURL(f);obj.onload=()=>{URL.revokeObjectURL(u);resolve(obj)};obj.onerror=()=>{URL.revokeObjectURL(u);reject(Error('Image could not be opened.'))};obj.src=u});
@@ -86,14 +89,14 @@ async function publish(pending,fields,token,update){
  if(!loadedManifest?.cases||!loadedManifest?.specimens)throw Error('Published necropsy manifest is invalid.');
  const dir=pending.type==='case'?'cases':'specimens';
  let imgUrl=fields.external;
- if(fields.file){
+ if(fields.file||fields.draftData){
   const target='necropsy-photos/'+dir+'/'+pending.id+'.jpg';
   const previous=await file(target,token,true);
   update('Uploading compressed photograph to the public game…');
-  await put(target,await imageBase64(fields.file),previous?.sha,token,'Owner-publish necropsy photo: '+pending.id);
+  await put(target,fields.file?await imageBase64(fields.file):fields.draftData.split(',')[1],previous?.sha,token,'Owner-publish necropsy photo: '+pending.id);
   imgUrl='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+target+'?v='+Date.now();
  }
- const photo={url:imgUrl,source:fields.source,credit:fields.credit,caption:fields.caption,type:fields.kind,external:!fields.file};
+ const photo={url:imgUrl,source:fields.source,credit:fields.credit,caption:fields.caption,type:fields.kind,external:!fields.file&&!fields.draftData};
  loadedManifest[dir][pending.id]={title:pending.title,photo,updated:new Date().toISOString(),approvedBy:OWNER};
  update('Publishing updated necropsy manifest…');
  await put(MANIFEST,encode(JSON.stringify(loadedManifest,null,2)+'\n'),old.sha,token,'Owner-publish necropsy '+pending.type+': '+pending.title);
