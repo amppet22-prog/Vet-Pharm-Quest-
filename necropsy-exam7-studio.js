@@ -6,7 +6,7 @@ const KEY='vpq-path-exam7-user-edits-v1';
 let ui=null,mode='gross',filter='all',search='',current=-1,quiz=[],step=0,revealed=false;
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
-function record(i){return Object.assign({},base[i],edits()[base[i].id]||{})}
+function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};return Object.assign({},src,{image:official.photo?.url||src.image||''},draft)}
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
 function visible(){return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>(filter==='all'||x.lecture===filter)&&(!search||[x.title,x.lecture,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
@@ -34,19 +34,19 @@ function card(i){
  (x.notes?'<p><b>Your annotation:</b> '+h(x.notes)+'</p>':'')+
  '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+
  '<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>'+ 
- '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit image, DX, notes</button><button data-path7-back="1">← Cases</button></div>');
+ '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit image, DX, notes</button><button data-path7-owner-publish="'+i+'">🚀 Publish photo now</button><button data-path7-back="1">← Cases</button></div>');
 }
 function edit(i){
  current=i;const x=record(i);
  modal('✏️ Necropsy image and notes · '+h(x.title),
- '<p>Image and annotation edits are stored in <b>your browser only</b>; they do not publish to GitHub. Keep a backup of important edits.</p>'+
+ '<p>Save Draft keeps your photo and annotations in this browser. To make a photo visible on every device, select <b>🚀 Publish photo now</b> after saving the draft. The public publishing step is owner-authorized.</p>'+
  '<label>Image URL<input id="path7Url" style="width:100%" value="'+h(x.image||'')+'" placeholder="https://…"></label>'+
  '<label>Or choose a photo from your device<input id="path7File" type="file" accept="image/*"></label>'+
  '<label>Gross lesion<textarea id="path7Gross" rows="3" style="width:100%">'+h(x.gross)+'</textarea></label>'+
  '<label>Morphologic DX<textarea id="path7Dx" rows="2" style="width:100%">'+h(x.dx)+'</textarea></label>'+
  '<label>Histology<textarea id="path7Histo" rows="2" style="width:100%">'+h(x.histo)+'</textarea></label>'+
  '<label>Instructor annotations / personal clues<textarea id="path7Notes" rows="3" style="width:100%">'+h(x.notes||'')+'</textarea></label>'+
- '<div class="buttonrow"><button data-path7-save="'+i+'">💾 Save locally</button><button data-path7-view="'+i+'">Cancel</button></div>');
+ '<div class="buttonrow"><button data-path7-save="'+i+'">💾 Save Draft</button><button data-path7-owner-publish="'+i+'">🚀 Publish photo now</button><button data-path7-view="'+i+'">Cancel</button></div>');
 }
 function saveForm(i){
  const val=n=>ui.body.querySelector('#'+n)?.value||'';
@@ -96,11 +96,13 @@ function init(api){
   if(d.path7Edit!==undefined)return edit(Number(d.path7Edit));
   if(d.path7View!==undefined)return card(Number(d.path7View));
   if(d.path7Save!==undefined)return saveForm(Number(d.path7Save));
+  if(d.path7OwnerPublish!==undefined){const i=Number(d.path7OwnerPublish);return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('specimen',base[i]?.id)}
   if(d.path7Back!==undefined)return menu();
   if(d.path7Test!==undefined)return test();
   if(d.path7Reveal!==undefined){revealed=true;return question()}
   if(d.path7Nextq!==undefined){step++;revealed=false;return question()}
  },true);
 }
-return {init,start,cards:base};
+function openCard(id){const i=base.findIndex(x=>x.id===id);return i>=0?card(i):menu()}
+return {init,start,cards:base,openCard};
 })();
