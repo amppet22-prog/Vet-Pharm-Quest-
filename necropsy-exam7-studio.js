@@ -44,9 +44,9 @@ function edit(i){
  '<p>Save Draft keeps your photo and annotations in this browser. To make a photo visible on every device, select <b>🚀 Publish photo now</b> after saving the draft. The public publishing step is owner-authorized.</p>'+
  '<label>Image URL<input id="path7Url" style="width:100%" value="'+h(x.image||'')+'" placeholder="https://…"></label>'+
  '<label>Or choose a photo from your device<input id="path7File" type="file" accept="image/*"></label>'+
- '<label>Gross lesion<textarea id="path7Gross" rows="3" style="width:100%"'+h(x.gross)+'</textarea></label>'+
- '<label>Morphologic DX<textarea id="path7Dx" rows="2" style="width:100%"'+h(x.dx)+'</textarea></label>'+
- '<label>Histology<textarea id="path7Histo" rows="2" style="width:100%"'+h(x.histo)+'</textarea></label>'+
+ '<label>Gross lesion<textarea id="path7Gross" rows="3" style="width:100%">'+h(x.gross)+'</textarea></label>'+
+ '<label>Morphologic DX<textarea id="path7Dx" rows="2" style="width:100%">'+h(x.dx)+'</textarea></label>'+
+ '<label>Histology<textarea id="path7Histo" rows="2" style="width:100%">'+h(x.histo)+'</textarea></label>'+
  '<label>Instructor annotations / personal clues<textarea id="path7Notes" rows="3" style="width:100%">'+h(x.notes||'')+'</textarea></label>'+
  '<div class="buttonrow"><button data-path7-save="'+i+'">💾 Save Draft</button><button data-path7-owner-publish="'+i+'">🚀 Publish photo now</button><button data-path7-view="'+i+'">Cancel</button></div>');
 }
