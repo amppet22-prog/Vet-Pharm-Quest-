@@ -1,0 +1,644 @@
+# Pathology Lectures 67–79 — Source Topic and Disease Coverage Checklist
+
+> **This checklist preserves every named professor-note topic, including normal anatomy and mechanisms.** It is **not proof that every disease from the original PowerPoint has been independently checked**. 'Dedicated case ✓' means an explicitly mapped, curated differential case; 'Case needed' means no dedicated matched case yet. Either status can still lack correct photo pairs. Newly created owner cards are reflected dynamically in the game, not automatically in this static checklist.
+
+Photo completion requires actual correct owner-published/verified embedded images, not a linked textbook page.
+
+## Lecture 67 — 48 topics
+- [ ] **Objectives and orientation** (slide 1–5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Gray versus white matter; normal gross recognition** (slide 6–12) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Neurons and astrocytes** (slide 13–15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Oligodendrocytes and microglia** (slide 16–17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ependyma, ventricles, and CSF circulation** (slide 18–20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Meninges and supporting vascular structures** (slide 21–23) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Four CNS pathogen entry routes** (slide 24–25) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Why the CNS responds poorly to injury** (slide 26–27) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Axonal injury and Wallerian degeneration** (slide 28) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Astrocyte, oligodendrocyte and ependymal responses** (slide 29–31) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Microglia and meningeal injury** (slide 32–33) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cerebral infarction and gross diagnosis** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cerebral edema: gross and mechanisms** (slide 35–37) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Defense and barrier systems** (slide 38–42) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Terminology and interpretation** (slide 43 (FYI)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Objectives and inflammation patterns** (slide 1–4) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cerebral versus vertebral abscess** (slide 5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Choroid plexitis, ependymitis and meningitis** (slide 6–7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Neonatal septicemia and meningitis** (slide 8–9) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Listeriosis** (slide 10) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Thrombotic meningoencephalitis (TME)** (slide 11–12) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Overeating disease and granulomatous meningoencephalitis** (slide 13–14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Rabies and equine arboviruses** (slide 15–20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **EHV-1, MCF, CAE** (slide 21–23) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine distemper, herpesvirus and feline FIP** (slide 24–27) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Fungal CNS infection and cryptococcosis** (slide 28–30) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Neospora, Toxoplasma and EPM** (slide 31–35) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Parasitic migration, Cuterebra and nematodiasis** (slide 36–40) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Fibrocartilaginous embolism, IVDD and necrotizing encephalitides** (slide 41–45) — No dedicated case mapped; source notes/recall may exist
+- [ ] **What to recognize and how to describe it** (slide 1–4) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hydrocephalus and fluid pressure** (slide 5–6) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Absent tissue versus abnormal cortical folding** (slide 7–9) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Other CNS congenital defects** (slide 10–15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Gliomas** (slide 16–20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Choroid plexus tumors, meningiomas and metastasis** (slide 21–25) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hepatic encephalopathy and metabolic injury** (slide 26–30) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Toxic CNS injury: neurochemical versus structural lesions** (slide 30–39) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Plants, fungi, and species-specific malacia** (slide 39–45) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Deficiency states and spinal cord compression** (slide 45–53) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pain syndromes and cognitive degeneration** (slide 54–57) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lecture objectives and CNS/PNS distinction** (slide 1–5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Somatic and autonomic components** (slide 6–7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Axon physiology and peripheral nerve structure** (slide 8–9) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Dysautonomia and enteric syndromes** (slide 10–14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Myelination, endocrine and nutritional disorders** (slide 14–19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Botulism** (slide 19–22) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Traumatic injury and peripheral neoplasms** (slide 22–25) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Species-specific peripheral nerve diseases** (slide 25–30) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 68 — 44 topics
+- [ ] **Lecture objectives and recognition approach** (slide 2–4) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cerebral abscess** (slide 5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Vertebral abscess** (slide 5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Choroid plexitis** (slide 6) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ependymitis** (slide 6) — No dedicated case mapped; source notes/recall may exist
+- [x] **Leptomeningitis versus pachymeningitis** (slide 7) — Dedicated case ✓: n68-meningitis
+- [x] **Neonatal septicemia with CNS infection** (slide 8–9) — Dedicated case ✓: n68-meningitis
+- [x] **Listeriosis — Listeria monocytogenes** (slide 10) — Dedicated case ✓: n68-brainstem
+- [x] **Thrombotic meningoencephalitis — Histophilus somni** (slide 11–12) — Dedicated case ✓: n68-feedlot
+- [ ] **Overeating disease — C. perfringens type D** (slide 13) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Granulomatous meningoencephalitis (GME)** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [x] **Rabies — Lyssavirus** (slide 16–17) — Dedicated case ✓: n68-rabies
+- [ ] **Eastern equine encephalomyelitis (EEE)** (slide 18–19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Western equine encephalomyelitis (WEE)** (slide 18–19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Venezuelan equine encephalomyelitis (VEE)** (slide 18–19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **West Nile virus (WNV)** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine herpesvirus 1 (EHV-1) myeloencephalopathy** (slide 21) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Malignant catarrhal fever** (slide 22) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Caprine arthritis encephalitis (CAE)** (slide 23) — No dedicated case mapped; source notes/recall may exist
+- [x] **Canine distemper virus — systemic/CNS mechanism** (slide 24) — Dedicated case ✓: n68-distemper
+- [x] **Canine distemper — classic puppy presentation** (slide 25) — Dedicated case ✓: n68-distemper
+- [ ] **Canine distemper — postvaccinal presentation** (slide 25) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine distemper — old dog encephalitis** (slide 25) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine herpesvirus 1 CNS infection** (slide 26) — No dedicated case mapped; source notes/recall may exist
+- [x] **Feline infectious peritonitis (FIP) CNS disease** (slide 27) — Dedicated case ✓: n68-fip
+- [ ] **Fungal CNS infections — organism list** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Aspergillus — angioinvasive fungal disease** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cryptococcosis — C. neoformans / C. gattii** (slide 30) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Neosporosis — Neospora caninum** (slide 32) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Toxoplasmosis — Toxoplasma gondii** (slide 33) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine protozoal myeloencephalitis (EPM)** (slide 34–35) — No dedicated case mapped; source notes/recall may exist
+- [ ] **General CNS parasitic injury** (slide 36–37) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cuterebra larvae — dogs and cats** (slide 38) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Oestrus ovis larvae — sheep** (slide 38) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hypoderma bovis larvae — cattle** (slide 38) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Feline ischemic encephalopathy — Cuterebra** (slide 39) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Parelaphostrongylus tenuis cerebrospinal migration** (slide 40) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Strongylus vulgaris cerebrospinal migration** (slide 40) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Toxocara canis cerebrospinal migration** (slide 40) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Baylisascaris procyonis cerebrospinal migration** (slide 40) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Fibrocartilaginous embolic ischemic myelopathy (FCE)** (slide 42) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Intervertebral disk disease (IVDD)** (slide 43) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Necrotizing meningoencephalitis (NME)** (slide 44–45) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Necrotizing leukoencephalitis (NLE)** (slide 44–45) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 69 — 50 topics
+- [ ] **Instructor objectives and gross approach** (slide 2–4) — No dedicated case mapped; source notes/recall may exist
+- [x] **Hydrocephalus** (slide 5–6) — Dedicated case ✓: n69-hydro
+- [ ] **Anencephaly** (slide 7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cerebral aplasia** (slide 7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lissencephaly** (slide 8) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Porencephaly** (slide 9) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hydranencephaly** (slide 9) — No dedicated case mapped; source notes/recall may exist
+- [x] **Cerebellar hypoplasia** (slide 10) — Dedicated case ✓: n69-cerebellar-hypo
+- [ ] **Meningocele** (slide 11) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Meningoencephalocele** (slide 11) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hydromyelia** (slide 12) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Syringomyelia** (slide 13) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Chiari-like malformation** (slide 14–15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Meningioma** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Astrocytoma** (slide 18–19) — No dedicated case mapped; source notes/recall may exist
+- [x] **Oligodendroglioma** (slide 18,20–21) — Dedicated case ✓: n69-oligo
+- [ ] **Ependymoma** (slide 18,22) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Choroid plexus papilloma and carcinoma** (slide 23) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Metastatic hemangiosarcoma to CNS** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Metastatic pulmonary and mammary carcinomas** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hepatic encephalopathy** (slide 26) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Organophosphate toxicosis** (slide 27) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Selenium toxicosis in pigs** (slide 28) — No dedicated case mapped; source notes/recall may exist
+- [x] **Sodium toxicosis / water deprivation** (slide 29) — Dedicated case ✓: n69-salt
+- [x] **Bromethalin toxicosis** (slide 30) — Dedicated case ✓: n69-bromethalin
+- [ ] **Arsenic toxicosis** (slide 31) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lead toxicosis** (slide 32) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Tetanus / tetanospasmin** (slide 33) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Phalaris grass neurotoxicosis** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [x] **Fumonisin B1 — equine leukoencephalomalacia** (slide 35) — Dedicated case ✓: n69-white-matter
+- [ ] **Centaurea spp. — nigropallidal encephalomalacia** (slide 36) — No dedicated case mapped; source notes/recall may exist
+- [x] **Thiamine deficiency — ruminant polioencephalomalacia** (slide 37–38) — Dedicated case ✓: n69-pem
+- [ ] **Thiamine deficiency — small animals** (slide 39) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Copper deficiency — small ruminants** (slide 40) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Compression injury and compartment localization** (slide 42) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cervical vertebral stenotic myelopathy (Wobbler)** (slide 43) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Steroid-responsive meningitis-arteritis / Beagle pain syndrome** (slide 44) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine cognitive dysfunction** (slide 45) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Postanesthetic hemorrhagic myelopathy** (slide 47) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Dural ossification** (slide 48) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine degenerative myeloencephalopathy (EDM / neuroaxonal dystrophy)** (slide 49) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine motor neuron disease (EMND)** (slide 50) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Embryonal CNS tumors — medulloblastoma and related entities** (slide 51) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Histiocytic sarcoma involving CNS** (slide 52) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Viral hypomyelinogenesis — classical swine fever** (slide 53) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Viral hypomyelinogenesis — border disease virus** (slide 53) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Primary versus secondary demyelination** (slide 54) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Degenerative myelopathy — SOD1 association** (slide 55) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine choroid plexus cholesteatoma / cholesterol granuloma** (slide 56) — No dedicated case mapped; source notes/recall may exist
+- [ ] **CNS hemorrhage / hematomyelia** (slide 57) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 70 — 33 topics
+- [ ] **Objectives and PNS localization** (slide 2–5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Somatic sensory and motor pathways** (slide 6) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Sympathetic, parasympathetic and enteric ANS** (slide 7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **PNS axons and axoplasmic transport** (slide 8) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Peripheral nerve sheaths and glia** (slide 9) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Clinical peripheral nervous syndromes** (slide 11) — No dedicated case mapped; source notes/recall may exist
+- [x] **Dysautonomias and feline Key-Gaskell syndrome** (slide 12) — Dedicated case ✓: n70-dysautonomia
+- [ ] **Peritonitis-induced autonomic dysfunction** (slide 13) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Congenital peripheral hypomyelinating polyneuropathy** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Coyotillo toxicosis** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Vitamin A deficiency optic nerve injury** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Riboflavin B2 deficiency in poultry** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lead-associated PNS demyelination** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Methylmercury neuronopathy** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Doxorubicin neuropathy** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Vincristine neuropathy** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Salinomycin-contaminated feed neuropathy** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [x] **Botulism cause, exposure and signs** (slide 18) — Dedicated case ✓: n70-flaccid
+- [x] **Botulism pathogenesis** (slide 19) — Dedicated case ✓: n70-flaccid
+- [ ] **Neurapraxia** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Axonotmesis** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Neurotmesis** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Peripheral nerve sheath neoplasms** (slide 21) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Schwannoma** (slide 22–23) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Neurofibroma** (slide 21) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Perineurioma** (slide 21) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine grass sickness (equine dysautonomia)** (slide 25) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine recurrent laryngeal paralysis** (slide 26) — Dedicated case ✓: n70-larynx
+- [x] **Equine polyneuritis equi (cauda equina neuritis)** (slide 27) — Dedicated case ✓: n70-polyneuritis
+- [x] **Canine acute idiopathic polyradiculoneuritis** (slide 28) — Dedicated case ✓: n70-acute-polyrad
+- [ ] **Canine sensory neuropathy of English pointers** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine colonic aganglionosis — objectives-only** (slide 2) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Endocrine effects on PNS — objectives-only** (slide 2) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 71 — 64 topics
+- [ ] **Lecture objectives and skin map** (slide 2–4) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Epidermis and keratinocytes** (slide 5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Melanocytes and UV protection** (slide 6) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Epidermal basement membrane** (slide 7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Dermis and adnexa** (slide 8) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Subcutis** (slide 9) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Skin response and macroscopic patterns** (slide 10–12) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Skin atrophy** (slide 13) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lichenification** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Callus** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hygroma** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Comedone** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Epidermal collarette** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Papule** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Plaque** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Nodule** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cyst** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pustule** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Papilloma** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Crust** (slide 19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hyperkeratosis and scale** (slide 19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ulcer** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Erosion** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Decubital pressure ulcer** (slide 21) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Vesicle** (slide 22) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bulla** (slide 22) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Leukotrichia** (slide 23) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Feline acne** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine acne** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [x] **Photosensitization: overview** (slide 25) — Dedicated case ✓: s71-photosense
+- [ ] **Type I photosensitization** (slide 26) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Type II photosensitization** (slide 26) — No dedicated case mapped; source notes/recall may exist
+- [x] **Type III photosensitization** (slide 26) — Dedicated case ✓: s71-photosense
+- [x] **Xanthomas** (slide 27) — Dedicated case ✓: s71-xanthoma
+- [ ] **Hypotrichosis and alopecia: differential** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Seasonal recurrent flank alopecia** (slide 30) — No dedicated case mapped; source notes/recall may exist
+- [x] **Canine hyperadrenocorticism (Cushing)** (slide 31) — Dedicated case ✓: s71-cushing
+- [x] **Feline hyperadrenocorticism / acquired skin fragility** (slide 32) — Dedicated case ✓: s71-catfrag
+- [ ] **Ferret adrenal-associated endocrinopathy** (slide 33) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hypersomatotropism** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hyposomatotropism / pituitary dwarfism** (slide 35) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hyperestrogenism** (slide 36) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine hypothyroidism** (slide 37) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine PPID associated hypertrichosis** (slide 38) — No dedicated case mapped; source notes/recall may exist
+- [x] **Superficial necrolytic dermatitis / hepatocutaneous syndrome** (slide 39) — Dedicated case ✓: s71-hepatocutaneous
+- [x] **Feline plasma-cell pododermatitis / pillow foot** (slide 40) — Dedicated case ✓: s71-pillowfoot
+- [x] **Bovine papillomatous digital dermatitis** (slide 41) — Dedicated case ✓: s71-digital
+- [ ] **Biopsy decision-making and sampling** (slide 43–45) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Punch biopsy** (slide 46,51) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Shave biopsy** (slide 47) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Wedge biopsy (incisional)** (slide 48–49) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Wedge biopsy (excisional)** (slide 48,50) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Biopsy artifact prevention and collection** (slide 51) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Biopsy fixation and submission history** (slide 52) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ancillary diagnostics** (slide 53) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Shar-Pei cutaneous mucinosis** (slide 55) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cutaneous horns** (slide 56) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Follicular dysplasia and congenital hairlessness** (slide 57) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Chronic solar dermatitis / solar elastosis / actinic comedones** (slide 58) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Frostbite** (slide 59) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Thermal burns by depth** (slide 59) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Sunburn** (slide 59) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Prolonged post-clipping alopecia** (slide 60) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Traction alopecia** (slide 60) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 72 — 53 topics
+- [ ] **Objectives and diagnostic strategy** (slide 2) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Poxvirus family and transmission** (slide 4–6) — No dedicated case mapped; source notes/recall may exist
+- [x] **Capripoxvirus: sheeppox** (slide 6–7) — Dedicated case ✓: s72-sheep-pox
+- [ ] **Capripoxvirus: goatpox** (slide 6,8) — No dedicated case mapped; source notes/recall may exist
+- [x] **Capripoxvirus: lumpy skin disease** (slide 5–6) — Dedicated case ✓: s72-lumpy
+- [ ] **Cowpox (orthopoxvirus)** (slide 9) — No dedicated case mapped; source notes/recall may exist
+- [x] **Fowlpox: dry cutaneous form** (slide 10) — Dedicated case ✓: s72-fowlpox
+- [x] **Fowlpox: wet/diphtheritic form** (slide 10) — Dedicated case ✓: s72-fowlpox
+- [x] **Orf / contagious ecthyma** (slide 11) — Dedicated case ✓: s72-crust
+- [x] **Bovine papular stomatitis** (slide 12) — Dedicated case ✓: s72-bps
+- [ ] **Pseudocowpox / milker's nodules** (slide 5,12) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Swinepox (Suipoxvirus)** (slide 5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Papillomavirus pathogenesis** (slide 13–14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine pigmented viral plaques** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Feline viral plaques** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine aural plaques** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine genital papillomas** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine sarcoids** (slide 16) — Dedicated case ✓: s72-sarcoid
+- [ ] **Feline sarcoids** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Herpesviral cutaneous lesion pattern** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bovine herpesvirus 2: ulcerative mammillitis** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bovine herpesvirus 2: pseudo-lumpy skin disease** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bovine herpesvirus 4: mammary dermatitis** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [x] **Feline herpesvirus 1 ulcerative dermatitis** (slide 19) — Dedicated case ✓: s72-fhvskin
+- [ ] **Equine herpesvirus 3 / coital exanthema** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Marek's disease** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [x] **Senecavirus A vesicular disease of swine** (slide 21) — Dedicated case ✓: s72-seneca
+- [ ] **Porcine juvenile pustular psoriasiform dermatitis (pityriasis rosea)** (slide 22) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Folliculitis** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Furunculosis** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cellulitis** (slide 25) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pyoderma classification by depth** (slide 26–27) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine exfoliative superficial pyoderma** (slide 28) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Intertrigo / skin fold dermatitis** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Mucocutaneous pyoderma** (slide 30) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pyotraumatic dermatitis / hot spot** (slide 31) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Interdigital palmar/plantar comedones and follicular cysts** (slide 32) — No dedicated case mapped; source notes/recall may exist
+- [x] **Post-grooming furunculosis** (slide 33) — Dedicated case ✓: s72-grooming
+- [ ] **Cutaneous anthrax** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ovine fleece rot** (slide 35) — No dedicated case mapped; source notes/recall may exist
+- [x] **Dermatophilosis: cause and spread** (slide 36) — Dedicated case ✓: s72-dermatophilus
+- [x] **Dermatophilosis: gross and microscopic recognition** (slide 37) — Dedicated case ✓: s72-dermatophilus
+- [x] **Exudative epidermitis / greasy pig disease** (slide 38) — Dedicated case ✓: s72-greasy-pig
+- [x] **Porcine erysipelas / diamond skin disease** (slide 39) — Dedicated case ✓: s72-erysipelas
+- [ ] **Contagious interdigital foot rot in cattle** (slide 40–41) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine proliferative pododermatitis / canker** (slide 42) — Dedicated case ✓: s72-canker
+- [ ] **Equine necrotizing pododermatitis / thrush** (slide 43) — No dedicated case mapped; source notes/recall may exist
+- [x] **Porcine dermatitis and nephropathy syndrome (PDNS)** (slide 45) — Dedicated case ✓: s72-pdns
+- [ ] **FeLV-associated giant-cell dermatosis** (slide 46) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Feline calicivirus dermatologic manifestations** (slide 47) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Impetigo** (slide 48) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Streptococcal toxic shock-like syndrome** (slide 49) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Toxic shock-like syndrome without fasciitis** (slide 49) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 73 — 43 topics
+- [ ] **Objectives and parasite classification** (slide 2–4) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine localized demodicosis** (slide 5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine generalized demodicosis** (slide 5) — No dedicated case mapped; source notes/recall may exist
+- [x] **Feline Demodex cati** (slide 6) — Dedicated case ✓: s73-demodex-cati
+- [x] **Feline Demodex gatoi** (slide 6) — Dedicated case ✓: s73-pruritus
+- [ ] **Large-animal Demodex** (slide 7) — No dedicated case mapped; source notes/recall may exist
+- [x] **Sarcoptic mange / scabies** (slide 8) — Dedicated case ✓: s73-sarcoptes
+- [x] **Notoedric mange** (slide 9) — Dedicated case ✓: s73-notoedres
+- [ ] **Otodectic mange** (slide 10) — No dedicated case mapped; source notes/recall may exist
+- [x] **Psoroptic mange** (slide 11) — Dedicated case ✓: s73-psoroptes
+- [x] **Chorioptic mange** (slide 12) — Dedicated case ✓: s73-chorioptes
+- [x] **Cheyletiellosis** (slide 13) — Dedicated case ✓: s73-cheyletiella
+- [ ] **Chigger dermatitis / trombiculiasis** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Poultry red mite (Dermanyssus gallinae)** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Northern fowl mite (Ornithonyssus sylviarum)** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [x] **Scaly-leg mite (Knemidokoptes mutans)** (slide 15) — Dedicated case ✓: s73-scalyleg
+- [ ] **Hard ticks (Ixodidae)** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Soft ticks (Argasidae)** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Tick-bite pseudolymphoma** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lice / pediculosis** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Chicken lice** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Fleas: Ctenocephalides felis and C. canis** (slide 19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Myiasis: accidental, facultative and obligatory** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cutaneous helminths and filariae: differential list** (slide 21) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine Onchocerca cervicalis dermatitis** (slide 22) — Dedicated case ✓: s73-onchocerca
+- [ ] **Stephanofilaria dermatitis of ruminants** (slide 23) — No dedicated case mapped; source notes/recall may exist
+- [x] **Cutaneous habronemiasis / summer sores** (slide 24) — Dedicated case ✓: s73-habronema
+- [ ] **Mycotic infection depth classification** (slide 25–26) — No dedicated case mapped; source notes/recall may exist
+- [x] **Dermatophytosis: Microsporum canis** (slide 27) — Dedicated case ✓: s73-ringworm
+- [ ] **Dermatophytosis: Trichophyton spp.** (slide 27) — No dedicated case mapped; source notes/recall may exist
+- [x] **Malassezia pachydermatis dermatitis** (slide 28) — Dedicated case ✓: s73-malassezia
+- [ ] **Phaeohyphomycosis** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [x] **Sporotrichosis: Sporothrix schenckii complex** (slide 30) — Dedicated case ✓: s73-sporothrix
+- [x] **Pythiosis: Pythium insidiosum** (slide 31) — Dedicated case ✓: s73-pythium
+- [ ] **Systemic mycoses with skin lesions** (slide 32) — No dedicated case mapped; source notes/recall may exist
+- [x] **Zinc-responsive dermatosis: type I** (slide 34–35) — Dedicated case ✓: s73-zinc
+- [x] **Zinc-responsive dermatosis: type II** (slide 35) — Dedicated case ✓: s73-zinc
+- [ ] **Zinc deficiency in livestock** (slide 35) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Copper deficiency: hypopigmentation** (slide 36) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Selenium toxicosis: chronic integumentary disease** (slide 37) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine pastern dermatitis / grease heel / scratches** (slide 38) — No dedicated case mapped; source notes/recall may exist
+- [x] **Chronic progressive lymphedema of draft horses** (slide 39) — Dedicated case ✓: s73-cpl
+- [ ] **Equine coronary band dystrophy** (slide 40) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 74 — 48 topics
+- [ ] **Vasculitis and immune-complex injury** (slide 4–6) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bullous disease versus pemphigus** (slide 7–10) — No dedicated case mapped; source notes/recall may exist
+- [x] **Pemphigus foliaceus** (slide 11) — Dedicated case ✓: s74-blister
+- [x] **Pemphigus vulgaris** (slide 12) — Dedicated case ✓: s74-pemphigus-vulgaris
+- [ ] **Paraneoplastic pemphigus** (slide 13) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pemphigus vegetans** (slide 10) — No dedicated case mapped; source notes/recall may exist
+- [x] **Bullous pemphigoid** (slide 14–15) — Dedicated case ✓: s74-pemphigoid
+- [ ] **Cutaneous lupus erythematosus** (slide 16–17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Systemic lupus erythematosus** (slide 16,18) — No dedicated case mapped; source notes/recall may exist
+- [x] **Discoid lupus erythematosus** (slide 19) — Dedicated case ✓: s74-dle
+- [x] **Erythema multiforme** (slide 20) — Dedicated case ✓: s74-em
+- [ ] **Stevens-Johnson syndrome** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [x] **Toxic epidermal necrolysis** (slide 20) — Dedicated case ✓: s74-ten
+- [x] **Uveodermatologic syndrome / VKH-like disease** (slide 21) — Dedicated case ✓: s74-vkh
+- [ ] **Ischemic dermatopathy / juvenile dermatomyositis** (slide 22) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hypersensitivity clinical naming** (slide 24–25) — No dedicated case mapped; source notes/recall may exist
+- [x] **Canine atopic dermatitis** (slide 26–27) — Dedicated case ✓: s74-atopy
+- [ ] **Feline atopic dermatitis** (slide 28) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine atopic dermatitis** (slide 28) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine acral lick dermatitis** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Allergic contact dermatitis** (slide 30) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Irritant contact dermatitis** (slide 30) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine Culicoides hypersensitivity** (slide 31) — Dedicated case ✓: s74-culicoides
+- [x] **Flea allergy dermatitis** (slide 32) — Dedicated case ✓: s74-flea
+- [ ] **Eosinophilic dermatosis: reaction pattern** (slide 33) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Feline eosinophilic granuloma complex overview** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Eosinophilic granuloma** (slide 35) — No dedicated case mapped; source notes/recall may exist
+- [x] **Eosinophilic plaque** (slide 36) — Dedicated case ✓: s74-eosinophilic-plaque
+- [ ] **Indolent ulcer** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine eosinophilic facial furunculosis** (slide 37) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine multisystemic eosinophilic epitheliotropic disease** (slide 38) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Urticaria** (slide 39) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Angioedema** (slide 39) — No dedicated case mapped; source notes/recall may exist
+- [x] **Feline mosquito-bite hypersensitivity** (slide 40) — Dedicated case ✓: s74-mosquito
+- [ ] **Ichthyosis** (slide 41) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Primary idiopathic seborrhea** (slide 42) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Border disease-associated congenital hypertrichosis** (slide 43) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Collagen dysplasia / cutaneous asthenia** (slide 44) — No dedicated case mapped; source notes/recall may exist
+- [ ] **HERDA** (slide 44) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lethal acrodermatitis of bull terriers** (slide 45) — No dedicated case mapped; source notes/recall may exist
+- [x] **Nodular dermatofibrosis / renal disease** (slide 46) — Dedicated case ✓: s74-nodular-renal
+- [ ] **Epidermolysis bullosa** (slide 47) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Schnauzer comedo syndrome** (slide 49) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine pastern leukocytoclastic vasculitis** (slide 50) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Congenital alopecia and hypotrichosis** (slide 51) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Vitiligo** (slide 52) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Feline hypereosinophilic syndrome** (slide 53) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine eosinophilic dermatitis with edema / Wells-like syndrome** (slide 54) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 75 — 43 topics
+- [ ] **Lecture objectives and morphologic recognition** (slide 2) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Spermatogenic cells and spermatogenesis** (slide 4) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Sertoli (sustentacular) cells** (slide 4) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Leydig (interstitial endocrine) cells** (slide 4) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Three phases of testicular descent** (slide 5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Testicular immune privilege and the blood–testis barrier** (slide 6) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Boar scrotal hemangioma** (slide 10) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Stallion scrotal trauma and dependent edema** (slide 10) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ram scrotal Chorioptes bovis infestation** (slide 10) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Scrotal and inguinal hernias** (slide 11) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cryptorchidism — general and consequences** (slide 13) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine cryptorchidism** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Feline cryptorchidism** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Monorchia and true testicular agenesis** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Polyorchidism and fused testes** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Unilateral testicular degeneration** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bilateral testicular degeneration** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Orchitis — general** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Brucella-associated orchitis** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Tuberculous orchitis** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Epididymitis — general** (slide 19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Brucella-associated epididymitis** (slide 19) — No dedicated case mapped; source notes/recall may exist
+- [x] **Ram epididymitis — Brucella ovis** (slide 20) — Dedicated case ✓: r75-ram-epididymis
+- [x] **Ram epididymitis — Actinobacillus seminis** (slide 20) — Dedicated case ✓: r75-ram-epididymis
+- [x] **Canine Brucella canis reproductive inflammation** (slide 21) — Dedicated case ✓: r75-bcanis
+- [ ] **Feline epididymitis and rare viral involvement** (slide 21) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Testicular tumor overview** (slide 22,26) — No dedicated case mapped; source notes/recall may exist
+- [x] **Leydig (interstitial) cell tumor** (slide 23,26) — Dedicated case ✓: r75-leydig
+- [x] **Sertoli-cell tumor** (slide 24,26) — Dedicated case ✓: r75-testis
+- [x] **Seminoma** (slide 25–26) — Dedicated case ✓: r75-seminoma
+- [ ] **Hormone-producing tumor syndrome and marrow suppression** (slide 22,24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Prostatic cysts and pseudocysts** (slide 28) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Prostatitis and prostatic abscess** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [x] **Benign prostatic hyperplasia** (slide 30) — Dedicated case ✓: r75-bph
+- [x] **Prostatic carcinoma** (slide 31) — Dedicated case ✓: r75-prostate
+- [ ] **Wether ulcerative posthitis (pizzle rot): mechanism** (slide 33) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Wether ulcerative posthitis (pizzle rot): gross progression** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Penile and preputial tumor differential** (slide 35) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bull penile fibropapilloma (BPV1)** (slide 36) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine penile/preputial squamous cell carcinoma** (slide 37) — Dedicated case ✓: r75-equine-scc
+- [x] **Canine transmissible venereal tumor (TVT)** (slide 38) — Dedicated case ✓: r75-tvt
+- [ ] **Canine genital papilloma — listed differential** (slide 35,38) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Persistent penile frenulum** (slide 39) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 76 — 53 topics
+- [ ] **Lecture objectives and female reproductive anatomy** (slide 2–5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Normal estrous ovarian structures** (slide 4–7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ovarian developmental / cystic disorders** (slide 5–12) — No dedicated case mapped; source notes/recall may exist
+- [x] **Follicular cyst** (slide 7–12) — Dedicated case ✓: r76-follicular-cyst
+- [ ] **Luteal cyst and persistent luteal tissue** (slide 7–12) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ovarian agenesis and hypoplasia** (slide 4–12) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Uterine and vaginal congenital malformations** (slide 4–13) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Uterine prolapse and traumatic lesions** (slide 13–15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Uterine rupture** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Mare uterine artery rupture** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hydrometra** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Mucometra** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cystic endometrial hyperplasia (CEH)** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pseudoplacentational endometrial hyperplasia (PEH)** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [x] **Feline fibroadenomatous mammary hyperplasia** (slide 18) — Dedicated case ✓: r76-feline-hyperplasia
+- [ ] **Endometrial polyp** (slide 19) — No dedicated case mapped; source notes/recall may exist
+- [x] **Metritis** (slide 21) — Dedicated case ✓: r76-metritis
+- [x] **Pyometra — general** (slide 22) — Dedicated case ✓: r76-pyometra
+- [x] **Canine pyometra** (slide 22–23) — Dedicated case ✓: r76-pyometra
+- [ ] **Feline pyometra** (slide 23) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cattle pyometra** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Mare pyometra** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [x] **Endometritis and postcoital inflammation** (slide 25) — Dedicated case ✓: r76-metritis
+- [ ] **Equine endometrial biopsy and grading** (slide 26) — No dedicated case mapped; source notes/recall may exist
+- [ ] **PRRS-associated reproductive failure** (slide 28) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Porcine parvovirus and SMEDI pattern** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Porcine circovirus 2 reproductive disease** (slide 30) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pseudorabies / Suid herpesvirus 1** (slide 31) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine herpesvirus 1 reproductive/neonatal disease** (slide 32) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bovine herpesvirus 1 reproductive disease** (slide 33) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bovine herpesvirus 4 — reproductive association** (slide 33) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine herpesvirus 1 abortion** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Mastitis: routes and mammary anatomy** (slide 36) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bovine mastitis: general** (slide 37) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Staphylococcus aureus mastitis** (slide 38) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Streptococcal mastitis** (slide 39) — No dedicated case mapped; source notes/recall may exist
+- [x] **Coliform / E. coli mastitis** (slide 40) — Dedicated case ✓: r76-mastitis
+- [ ] **Summer mastitis of dry dairy cows** (slide 41) — No dedicated case mapped; source notes/recall may exist
+- [x] **Mycoplasma mastitis** (slide 42) — Dedicated case ✓: r76-mycoplasma-mastitis
+- [ ] **Swine postpartum dysgalactia syndrome** (slide 43) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ovine / caprine mastitis** (slide 44) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine mammary tumors** (slide 46) — No dedicated case mapped; source notes/recall may exist
+- [x] **Feline mammary carcinoma** (slide 46) — Dedicated case ✓: r76-feline-mammary-ca
+- [ ] **Uterine smooth muscle tumors** (slide 47) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Uterine lymphoma in cattle** (slide 47) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine transmissible venereal tumor of vulva/vagina** (slide 48) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ovarian tumor groups — speaker notes** (slide PPT 76-77 slides 3–6; original L76 slides 49–52) — No dedicated case mapped; source notes/recall may exist
+- [x] **Granulosa-theca cell tumor — speaker notes** (slide PPT slide 4; L76 slide 50) — Dedicated case ✓: r76-granulosa
+- [ ] **Ovarian thecoma or luteoma** (slide PPT slide 3; L76 slide 49) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ovarian papillary cystadenoma** (slide PPT slide 5; L76 slide 51) — No dedicated case mapped; source notes/recall may exist
+- [x] **Ovarian papillary cystadenocarcinoma** (slide PPT slide 5; L76 slide 51) — Dedicated case ✓: r76-ovarian-epithelial
+- [ ] **Ovarian dysgerminoma** (slide PPT slide 6; L76 slide 52) — No dedicated case mapped; source notes/recall may exist
+- [x] **Ovarian teratoma** (slide PPT slide 6; L76 slide 52) — Dedicated case ✓: r76-teratoma
+
+## Lecture 77 — 43 topics
+- [ ] **Lecture 77 objectives and examinable boundary** (slide PPT slides 7–8) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Placental types: carnivores versus ruminants** (slide PPT slide 10) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Placental types: horse, pig and primate** (slide PPT slide 10) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Corpus luteum persistence and early embryonic loss** (slide PPT slide 11) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Mare endometrial cups — formation and purpose** (slide PPT slides 12–13 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Mare endometrial cups — pseudopregnancy after fetal death** (slide PPT slides 12–13 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pregnancy maintenance in dogs and cats** (slide PPT slide 14 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Pregnancy maintenance in cattle** (slide PPT slide 15 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Embryonic death versus fetal death and perinatal death** (slide PPT slides 16–17) — No dedicated case mapped; source notes/recall may exist
+- [x] **Fetal mummification** (slide PPT slide 18 (speaker notes)) — Dedicated case ✓: r77-mummy
+- [ ] **Fetal maceration** (slide PPT slide 19 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Emphysematous fetus** (slide PPT slide 20 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hydroamnios** (slide PPT slide 21 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [x] **Hydroallantois** (slide PPT slide 21 (speaker notes)) — Dedicated case ✓: r77-hydrallantois
+- [ ] **Mare umbilical cord torsion** (slide PPT slide 22 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine twin pregnancy and placental insufficiency** (slide PPT slide 23 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Veratrum californicum / cyclopamine prolonged gestation** (slide PPT slide 24) — No dedicated case mapped; source notes/recall may exist
+- [x] **Endophyte-infected fescue / ergot alkaloids** (slide PPT slide 24) — Dedicated case ✓: r77-fescue
+- [ ] **Estrogenic plants: Trifolium and Medicago** (slide PPT slide 25 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Zearalenone / Fusarium estrogenism in gilts** (slide PPT slide 25 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Abortion versus stillbirth** (slide PPT slides 26–27 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Abortion workup: history and epidemiology** (slide PPT slide 28 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Abortion workup: sample selection** (slide PPT slide 29 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Brucellosis: chronic infection and spread** (slide PPT slides 30–31 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [x] **Brucellosis: placental and fetal gross lesions** (slide PPT slide 32 (speaker notes)) — Dedicated case ✓: r77-brucella-bovine
+- [x] **Bovine brucellosis: Brucella abortus** (slide PPT slide 33 (speaker notes)) — Dedicated case ✓: r77-brucella-bovine
+- [ ] **Ovine brucellosis: Brucella ovis** (slide PPT slide 34 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine brucellosis: Brucella canis** (slide PPT slide 35 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [x] **Campylobacter species and hosts** (slide PPT slide 36) — Dedicated case ✓: r77-campy
+- [ ] **Campylobacter fetus subsp. venerealis — cattle** (slide PPT slide 37 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [x] **Campylobacter jejuni / fetus subsp. fetus abortions** (slide PPT slide 38 (speaker notes)) — Dedicated case ✓: r77-campy
+- [x] **Leptospirosis: transmission and abortion** (slide PPT slide 39) — Dedicated case ✓: r77-lepto
+- [ ] **Leptospirosis: cattle** (slide PPT slide 40) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Leptospirosis: swine** (slide PPT slide 40) — No dedicated case mapped; source notes/recall may exist
+- [x] **Leptospirosis: horses** (slide PPT slide 40) — Dedicated case ✓: r77-lepto
+- [x] **Chlamydiosis: Chlamydia abortus in sheep/goats** (slide PPT slides 40–41 (speaker notes)) — Dedicated case ✓: r77-abortion
+- [x] **Q fever: Coxiella burnetii** (slide PPT slide 42 (speaker notes)) — Dedicated case ✓: r77-coxiella
+- [ ] **Contagious equine metritis: Taylorella equigenitalis** (slide PPT slide 43 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [x] **Bovine mycotic abortion: Aspergillus fumigatus** (slide PPT slide 44 (speaker notes)) — Dedicated case ✓: r77-mycotic
+- [x] **Ovine/caprine toxoplasmosis: Toxoplasma gondii** (slide PPT slide 45 (speaker notes)) — Dedicated case ✓: r77-toxo
+- [x] **Bovine neosporosis: Neospora caninum** (slide PPT slide 46 (speaker notes)) — Dedicated case ✓: r77-neospora
+- [ ] **Bovine Tritrichomonas foetus: venereal pathogenesis** (slide PPT slide 47 (speaker notes)) — No dedicated case mapped; source notes/recall may exist
+- [x] **Bovine tritrichomoniasis: gross lesions** (slide PPT slide 48 (speaker notes)) — Dedicated case ✓: r77-trich
+
+## Lecture 78 — 50 topics
+- [ ] **Lecture 78 objectives and ocular localization** (slide 2–3) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Normal fibrous tunic, tear film and vitreous** (slide 4–6) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ciliary body and aqueous humor drainage** (slide 7–8) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lens, retina and optic nerve anatomy** (slide 9–11) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Anophthalmia** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Microphthalmia** (slide 14) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Cyclopia** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Synophthalmia** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Coloboma** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Collie eye anomaly** (slide 17) — No dedicated case mapped; source notes/recall may exist
+- [x] **Glaucoma: syndrome and consequences** (slide 18–19) — Dedicated case ✓: e78-glaucoma
+- [ ] **Primary glaucoma** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Secondary glaucoma** (slide 20) — No dedicated case mapped; source notes/recall may exist
+- [x] **Glaucoma gross/histologic sequelae** (slide 21–22) — Dedicated case ✓: e78-glaucoma
+- [ ] **Entropion** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ectropion** (slide 24) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Chalazion** (slide 25) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Conjunctivitis: reaction patterns** (slide 26) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ocular onchocerciasis (Onchocerca lupi)** (slide 27) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Thelazia ocular nematodiasis** (slide 28) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Eyelid/conjunctival neoplasms** (slide 29) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Corneal dermoid** (slide 31) — No dedicated case mapped; source notes/recall may exist
+- [x] **Keratoconjunctivitis sicca (KCS)** (slide 32) — Dedicated case ✓: e78-kcs
+- [x] **Infectious bovine keratoconjunctivitis (IBK)** (slide 33) — Dedicated case ✓: e78-ibk
+- [ ] **Feline eosinophilic keratitis** (slide 34) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Equine fungal keratitis (keratomycosis)** (slide 35) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Corneal ulceration: gross recognition** (slide 36) — No dedicated case mapped; source notes/recall may exist
+- [x] **Keratomalacia / melting ulcer** (slide 37) — Dedicated case ✓: e78-melting
+- [x] **Feline corneal sequestrum** (slide 38) — Dedicated case ✓: e78-corneal
+- [ ] **Persistent pupillary membrane (PPM)** (slide 40) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine recurrent uveitis (ERU)** (slide 41) — Dedicated case ✓: e78-eru
+- [ ] **Uveodermatologic / VKH-like syndrome** (slide 42) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Phacolytic lens-induced uveitis** (slide 43) — No dedicated case mapped; source notes/recall may exist
+- [x] **Phacoclastic lens-induced uveitis** (slide 43) — Dedicated case ✓: e78-phacoclastic
+- [ ] **Ocular melanosis — Cairn terrier** (slide 44) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine uveal melanocytoma** (slide 45) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine malignant uveal melanoma** (slide 45) — No dedicated case mapped; source notes/recall may exist
+- [x] **Feline diffuse iris melanoma** (slide 46) — Dedicated case ✓: e78-feline-iris
+- [ ] **Lens subluxation** (slide 48) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Lens luxation** (slide 48) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Feline post-traumatic ocular sarcoma** (slide 49) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Diabetic cataracts in dogs** (slide 50) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Hypertensive retinopathy** (slide 52) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Retinitis — infectious differential** (slide 53) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Bracken fern toxic retinopathy** (slide 54) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Locoweed toxic retinopathy** (slide 54) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Enrofloxacin / fluoroquinolone feline retinopathy** (slide 54) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Nutritional retinal degeneration — vitamin or taurine deficiency** (slide 54) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Ivermectin-associated retinal dysfunction** (slide 54) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Orbital/optic nerve meningioma** (slide 56) — No dedicated case mapped; source notes/recall may exist
+
+## Lecture 79 — 20 topics
+- [ ] **Lecture objectives and ear compartments** (slide 2–5) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Otitis externa — causes and predispositions** (slide 6) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Acute otitis externa** (slide 7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Chronic otitis externa** (slide 7) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Parasitic otitis** (slide 8) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Auricular infarction** (slide 9) — No dedicated case mapped; source notes/recall may exist
+- [x] **Acute auricular hematoma** (slide 10) — Dedicated case ✓: ear79-hematoma
+- [x] **Chronic auricular hematoma** (slide 10) — Dedicated case ✓: ear79-hematoma
+- [x] **Auricular chondritis** (slide 11) — Dedicated case ✓: ear79-chondritis
+- [ ] **Auricular dermatophilosis** (slide 12) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Canine leproid granuloma** (slide 13) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine dentigerous cyst** (slide 14) — Dedicated case ✓: ear79-dentigerous
+- [ ] **External ear tumor differential** (slide 15) — No dedicated case mapped; source notes/recall may exist
+- [x] **Ceruminous gland adenocarcinoma** (slide 16) — Dedicated case ✓: ear79-ceruminous
+- [ ] **Ceruminous gland adenoma** (slide 16) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Otitis media — overall** (slide 18–19) — No dedicated case mapped; source notes/recall may exist
+- [ ] **Porcine otitis media bacteria** (slide 18) — No dedicated case mapped; source notes/recall may exist
+- [x] **Ruminant otitis media bacteria** (slide 18) — Dedicated case ✓: ear79-bovis-otitis
+- [x] **Tympanokeratoma / aural cholesteatoma** (slide 20) — Dedicated case ✓: ear79-bulla
+- [x] **Aural inflammatory / nasopharyngeal polyp** (slide 21) — Dedicated case ✓: ear79-polyp
+
+## Coverage summary
+
+- L67: 0 / 48 topics with mapped differential case (topics may contain multiple conditions)
+- L68: 8 / 44 topics with mapped differential case (topics may contain multiple conditions)
+- L69: 7 / 50 topics with mapped differential case (topics may contain multiple conditions)
+- L70: 6 / 33 topics with mapped differential case (topics may contain multiple conditions)
+- L71: 8 / 64 topics with mapped differential case (topics may contain multiple conditions)
+- L72: 16 / 53 topics with mapped differential case (topics may contain multiple conditions)
+- L73: 17 / 43 topics with mapped differential case (topics may contain multiple conditions)
+- L74: 13 / 48 topics with mapped differential case (topics may contain multiple conditions)
+- L75: 10 / 43 topics with mapped differential case (topics may contain multiple conditions)
+- L76: 12 / 53 topics with mapped differential case (topics may contain multiple conditions)
+- L77: 15 / 43 topics with mapped differential case (topics may contain multiple conditions)
+- L78: 9 / 50 topics with mapped differential case (topics may contain multiple conditions)
+- L79: 8 / 20 topics with mapped differential case (topics may contain multiple conditions)
+
+## Required follow-through
+- For each unchecked **disease** topic: verify the original lecture slide and speaker notes, build a full signalment → gross → differential → histology → etiology → testing case, and add it to the index.
+- For unchecked **foundation/anatomy** topics: retain detailed learning notes and source-grounded active recall; a disease case is not necessarily appropriate.
+- Preserve user-created case authoring and the multi-photo owner publishing workflow; do not mislabel blank photo records as images.
