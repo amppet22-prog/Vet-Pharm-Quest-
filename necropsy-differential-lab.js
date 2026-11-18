@@ -263,7 +263,7 @@ function conditionIndex(){
  * A progress mark is a study preference, never a claim of diagnostic mastery.
  */
 const FLASH_KEY='vpq-necropsy-flashcards-v1';
-let flashCards=[],flashIndex=0,flashFace=false,flashScope='topic',flashReview=false,flashOrigin=-1;
+let flashCards=[],flashIndex=0,flashFace=false,flashScope='topic',flashReview=false,flashComplete=false;
 function flashProgress(){try{return JSON.parse(localStorage.getItem(FLASH_KEY)||'{}')}catch(_){return {}}}
 function saveFlashProgress(id,needsPractice){
  const data=flashProgress();if(needsPractice)data[id]=true;else delete data[id];
@@ -279,7 +279,12 @@ function flashDeck(scope){
    if(!Array.isArray(p)||!String(p[1]||'').trim())continue;
    const label=String(p[0]||'Key finding'),answer=String(p[1]);
    const vague=/^(key (finding|feature|point|information)|core (lesion|finding)|lecture feature|instructor slide|professor.s core finding)\s*\d*$/i.test(label);
-   const prompt=vague?'What must you recognize about '+section.title+'?':label==='Compare'?'What distinguishes '+section.title+' from its closest mimics?':'For '+section.title+': '+label+'?';
+   const lower=answer.toLowerCase();
+   const focus=/histo|microscop|acanthol|cellular|neutrophil|lymphocyt|epithel|perivascular/.test(lower)?'What histologic findings are described for ':
+   /gross|mass|plaque|pustule|erosion|ulcer|skin|cavity|softening|discolor|hemorrhag/.test(lower)?'What gross lesion or distribution is described for ':
+   /cause|pathogen|virus|parasite|mechanism|immune|deficien|toxin|transmiss/.test(lower)?'What causes or explains ':
+   'What distinguishes ';
+   const prompt=vague?focus+section.title+'? (finding '+(j+1)+')':label==='Compare'?'What distinguishes '+section.title+' from its closest mimics?':'For '+section.title+': '+label+'?';
    const id=conditionLecture+'|'+section.title.toLowerCase()+'|'+j;
    deck.push({id,title:section.title,prompt,answer,slide:section.slides||'see source',topicIndex:globalIndex});
   }
@@ -287,7 +292,7 @@ function flashDeck(scope){
  return deck;
 }
 function startFlash(scope='topic',review=false){
- flashScope=scope;flashReview=review;flashFace=false;flashOrigin=conditionChosen;
+ flashScope=scope;flashReview=review;flashFace=false;flashComplete=false;
  const all=flashDeck(scope),progress=flashProgress();
  flashCards=(review?all.filter(c=>progress[c.id]):all);
  // Limit a lecture session to a manageable size. Cards missed in earlier rounds
@@ -298,6 +303,10 @@ function startFlash(scope='topic',review=false){
 }
 function flashView(){
  const progress=flashProgress(),c=flashCards[flashIndex],pending=flashCards.filter(x=>progress[x.id]).length;
+ if(flashComplete)return modal('🧠 Flashcard session complete',
+ '<p>You reviewed <b>'+flashCards.length+' card(s)</b>. '+pending+' are marked <b>Need practice</b> in this set.</p>'+
+ '<div class="buttonrow"><button data-pathdiff-flash-review="1">↺ Practice missed cards</button><button data-pathdiff-flash-all="1">New shuffled set</button><button data-pathdiff-flash-back="1">← Back to notes</button></div>'+ 
+ '<p class="tiny">Self-ratings are saved only in this browser. These cards use instructor-derived notes; review gross/histology images separately.</p>');
  if(!c)return modal('🧠 Pathology flashcards',
  '<div class="buttonrow"><button data-pathdiff-flash-back="1">← Lecture topics</button></div>'+
  '<p>'+(flashReview?'No saved practice cards in this lecture yet. Mark any card “Need practice” to build a review deck.':'No flashcards were found for this selected topic.')+'</p>'+
@@ -411,7 +420,7 @@ function init(api){
  if(d.pathdiffFlashFlip!==undefined){flashFace=!flashFace;return flashView()}
  if(d.pathdiffFlashPrev!==undefined){flashIndex=Math.max(0,flashIndex-1);flashFace=false;return flashView()}
  if(d.pathdiffFlashNext!==undefined){flashIndex=(flashIndex+1)%Math.max(1,flashCards.length);flashFace=false;return flashView()}
- if(d.pathdiffFlashRate!==undefined){if(flashCards[flashIndex])saveFlashProgress(flashCards[flashIndex].id,d.pathdiffFlashRate==='again');flashIndex=(flashIndex+1)%Math.max(1,flashCards.length);flashFace=false;return flashView()}
+ if(d.pathdiffFlashRate!==undefined){if(flashCards[flashIndex])saveFlashProgress(flashCards[flashIndex].id,d.pathdiffFlashRate==='again');flashIndex+=1;flashComplete=flashIndex>=flashCards.length;flashFace=false;return flashView()}
  if(d.pathdiffFlashReview!==undefined)return startFlash(flashScope,true);
  if(d.pathdiffFlashAll!==undefined)return startFlash(flashScope,false);
  if(d.pathdiffFlashBack!==undefined)return flashScope==='topic'?conditionDetail():conditionIndex();
