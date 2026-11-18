@@ -134,6 +134,36 @@
       },
       "updated": "2026-11-18T11:18:25.453Z",
       "approvedBy": "amppet22-prog"
+    },
+    "exam7-5": {
+      "title": "Thrombotic meningoencephalitis",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-5-1795000997526-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "brain",
+          "type": "gross",
+          "external": false
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-5-1795000997526-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "brain",
+        "type": "gross",
+        "external": false
+      },
+      "text": {
+        "gross": "Multifocal hemorrhagic and necrotic foci in feedlot cattle CNS",
+        "dx": "Brain: multifocal hemorrhagic necrotizing thrombotic meningoencephalitis\nMost frequent in the cerebrum, commonly on the *grey-white matter interface*",
+        "histo": "Septic vasculitis and fibrin thrombi",
+        "why": "Histophilus somni endothelial injury",
+        "notes": ""
+      },
+      "updated": "2026-11-18T11:23:18.744Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
