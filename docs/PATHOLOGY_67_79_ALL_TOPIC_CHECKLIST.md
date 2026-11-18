@@ -70,10 +70,10 @@ Photo completion requires actual correct owner-published/verified embedded image
 - [ ] **Eastern equine encephalomyelitis (EEE)** (slide 18–19) — No dedicated case mapped; source notes/recall may exist
 - [ ] **Western equine encephalomyelitis (WEE)** (slide 18–19) — No dedicated case mapped; source notes/recall may exist
 - [ ] **Venezuelan equine encephalomyelitis (VEE)** (slide 18–19) — No dedicated case mapped; source notes/recall may exist
-- [ ] **West Nile virus (WNV)** (slide 20) — No dedicated case mapped; source notes/recall may exist
-- [ ] **Equine herpesvirus 1 (EHV-1) myeloencephalopathy** (slide 21) — No dedicated case mapped; source notes/recall may exist
+- [x] **West Nile virus (WNV)** (slide 20) — Dedicated case ✓: n68-wnv
+- [x] **Equine herpesvirus 1 (EHV-1) myeloencephalopathy** (slide 21) — Dedicated case ✓: n68-ehv-neuro
 - [ ] **Malignant catarrhal fever** (slide 22) — No dedicated case mapped; source notes/recall may exist
-- [ ] **Caprine arthritis encephalitis (CAE)** (slide 23) — No dedicated case mapped; source notes/recall may exist
+- [x] **Caprine arthritis encephalitis (CAE)** (slide 23) — Dedicated case ✓: n68-cae
 - [x] **Canine distemper virus — systemic/CNS mechanism** (slide 24) — Dedicated case ✓: n68-distemper
 - [x] **Canine distemper — classic puppy presentation** (slide 25) — Dedicated case ✓: n68-distemper
 - [ ] **Canine distemper — postvaccinal presentation** (slide 25) — No dedicated case mapped; source notes/recall may exist
@@ -82,10 +82,10 @@ Photo completion requires actual correct owner-published/verified embedded image
 - [x] **Feline infectious peritonitis (FIP) CNS disease** (slide 27) — Dedicated case ✓: n68-fip
 - [ ] **Fungal CNS infections — organism list** (slide 29) — No dedicated case mapped; source notes/recall may exist
 - [ ] **Aspergillus — angioinvasive fungal disease** (slide 29) — No dedicated case mapped; source notes/recall may exist
-- [ ] **Cryptococcosis — C. neoformans / C. gattii** (slide 30) — No dedicated case mapped; source notes/recall may exist
+- [x] **Cryptococcosis — C. neoformans / C. gattii** (slide 30) — Dedicated case ✓: n68-crypto
 - [ ] **Neosporosis — Neospora caninum** (slide 32) — No dedicated case mapped; source notes/recall may exist
 - [ ] **Toxoplasmosis — Toxoplasma gondii** (slide 33) — No dedicated case mapped; source notes/recall may exist
-- [ ] **Equine protozoal myeloencephalitis (EPM)** (slide 34–35) — No dedicated case mapped; source notes/recall may exist
+- [x] **Equine protozoal myeloencephalitis (EPM)** (slide 34–35) — Dedicated case ✓: n68-epm
 - [ ] **General CNS parasitic injury** (slide 36–37) — No dedicated case mapped; source notes/recall may exist
 - [ ] **Cuterebra larvae — dogs and cats** (slide 38) — No dedicated case mapped; source notes/recall may exist
 - [ ] **Oestrus ovis larvae — sheep** (slide 38) — No dedicated case mapped; source notes/recall may exist
@@ -95,9 +95,9 @@ Photo completion requires actual correct owner-published/verified embedded image
 - [ ] **Strongylus vulgaris cerebrospinal migration** (slide 40) — No dedicated case mapped; source notes/recall may exist
 - [ ] **Toxocara canis cerebrospinal migration** (slide 40) — No dedicated case mapped; source notes/recall may exist
 - [ ] **Baylisascaris procyonis cerebrospinal migration** (slide 40) — No dedicated case mapped; source notes/recall may exist
-- [ ] **Fibrocartilaginous embolic ischemic myelopathy (FCE)** (slide 42) — No dedicated case mapped; source notes/recall may exist
-- [ ] **Intervertebral disk disease (IVDD)** (slide 43) — No dedicated case mapped; source notes/recall may exist
-- [ ] **Necrotizing meningoencephalitis (NME)** (slide 44–45) — No dedicated case mapped; source notes/recall may exist
+- [x] **Fibrocartilaginous embolic ischemic myelopathy (FCE)** (slide 42) — Dedicated case ✓: n68-fce
+- [x] **Intervertebral disk disease (IVDD)** (slide 43) — Dedicated case ✓: n68-ivdd
+- [x] **Necrotizing meningoencephalitis (NME)** (slide 44–45) — Dedicated case ✓: n68-nme
 - [ ] **Necrotizing leukoencephalitis (NLE)** (slide 44–45) — No dedicated case mapped; source notes/recall may exist
 
 ## Lecture 69 — 50 topics
@@ -625,7 +625,7 @@ Photo completion requires actual correct owner-published/verified embedded image
 ## Coverage summary
 
 - L67: 0 / 48 topics with mapped differential case (topics may contain multiple conditions)
-- L68: 8 / 44 topics with mapped differential case (topics may contain multiple conditions)
+- L68: 16 / 44 topics with mapped differential case (topics may contain multiple conditions)
 - L69: 7 / 50 topics with mapped differential case (topics may contain multiple conditions)
 - L70: 6 / 33 topics with mapped differential case (topics may contain multiple conditions)
 - L71: 8 / 64 topics with mapped differential case (topics may contain multiple conditions)
@@ -642,3 +642,7 @@ Photo completion requires actual correct owner-published/verified embedded image
 - For each unchecked **disease** topic: verify the original lecture slide and speaker notes, build a full signalment → gross → differential → histology → etiology → testing case, and add it to the index.
 - For unchecked **foundation/anatomy** topics: retain detailed learning notes and source-grounded active recall; a disease case is not necessarily appropriate.
 - Preserve user-created case authoring and the multi-photo owner publishing workflow; do not mislabel blank photo records as images.
+## Continuing audit update
+- Dedicated meningitis case: `n68-meningitis`, plus editable photo-publishable specimen `pathx-68-meningitis` in Lecture 68.
+- Eight additional Lecture 68 CNS differential cards added: WNV, EHV-1 myeloencephalopathy, CAE, Cryptococcus, EPM, fibrocartilaginous embolism, intervertebral disk extrusion and necrotizing meningoencephalitis.
+- The owner can now publish new custom differential cards from the Case Center or a specific lecture condition. The interactive index checks dynamically for published custom cards; this static Markdown checklist must be refreshed after user-created cases.
