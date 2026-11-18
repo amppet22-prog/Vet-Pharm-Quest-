@@ -62,6 +62,20 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=Array.from({length:13},(_,i)=>String(i+67));
 const CASE_MATCH={
+"s71-feline-acne":["feline acne"],
+"s71-seasonal-flank":["seasonal recurrent flank alopecia"],
+"s71-hypothyroid":["canine hypothyroidism"],
+"s71-sharpei-mucin":["shar-pei cutaneous mucinosis"],
+"s72-pseudocowpox":["pseudocowpox / milker's nodules"],
+"s72-ehv3":["equine herpesvirus 3 / coital exanthema"],
+"s72-collarettes":["canine exfoliative superficial pyoderma"],
+"s72-thrush":["equine necrotizing pododermatitis / thrush"],
+"s73-stephanofilaria":["stephanofilaria dermatitis of ruminants"],
+"s73-zinc-type2":["zinc-responsive dermatosis: type ii"],
+"s73-pastern":["equine pastern dermatitis / grease heel / scratches"],
+"s74-eosinophilic-face":["canine eosinophilic facial furunculosis"],
+"s74-herda":["herda"],
+"s74-epidermolysis-bullosa":["epidermolysis bullosa"],
 'n69-ependymoma':['ependymoma'],
 'n69-metastatic-hsa':['metastatic hemangiosarcoma to cns'],
 'n69-lead':['lead toxicosis'],
