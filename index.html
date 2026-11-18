@@ -3327,15 +3327,34 @@ $('vpqArcadeTopBtn').addEventListener('click',()=>$('pharmArcadeBtn').click());
 $('vpqUpgradeStudioBtn').addEventListener('click',()=>doAction('receptionStudio'));
 $('vpqShiftTreatmentBtn').addEventListener('click',()=>{changeRoom('treatment');doAction('inpatientWard')});
 bookmarkRoom(activeRoom);updateAvatar();updateHUD();renderRoom();loop();
-// On refresh, return the viewport to the game stage, not the top welcome banner.
-// This is initial-load only; normal in-game navigation keeps its existing behavior.
-if(activeRoom!=='reception'){
- window.addEventListener('load',()=>{
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-   if(document.visibilityState==='visible'&&activeRoom!=='reception')$('stage')?.scrollIntoView({block:'start',behavior:'instant'});
-  }));
- },{once:true});
+// Refresh recovery: the browser may restore scroll after the first render,
+// making the welcome/reception screen look like the current room.
+// Re-check the requested room at pageshow (also handles back-forward cache),
+// then focus the room heading once the browser has completed restoration.
+try{window.history.scrollRestoration='manual'}catch{}
+function restoreVisibleRoom(){
+ let requested=null;
+ try{requested=new URL(window.location.href).searchParams.get('room')}catch{}
+ if(!validRoom(requested)){
+  const last=safeRead(LAST_ROOM_KEY,null);
+  requested=validRoom(last)?last:(validRoom(state.room)?state.room:activeRoom);
+ }
+ if(!validRoom(requested))return;
+ if(requested!==activeRoom)changeRoom(requested);
+ else{
+  state.room=activeRoom;
+  bookmarkRoom(activeRoom);
+ }
+ if(requested==='reception')return;
+ const moveViewport=()=>{
+  if(document.visibilityState==='hidden')return;
+  const heading=$('roomTitle')||$('stage');
+  if(heading)heading.scrollIntoView({block:'start',inline:'nearest',behavior:'instant'});
+ };
+ requestAnimationFrame(()=>requestAnimationFrame(moveViewport));
 }
+window.addEventListener('pageshow',restoreVisibleRoom);
+window.addEventListener('load',restoreVisibleRoom,{once:true});
 })();
 
 </script><script src="oh3-final-review.js"></script></body></html>
