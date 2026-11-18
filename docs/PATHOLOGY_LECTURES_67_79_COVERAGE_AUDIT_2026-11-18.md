@@ -30,11 +30,11 @@ Scope: Vet Pharm Quest, instructor-derived lecture study material and Necropsy D
 Counts above are the audited *sections*, not unique conditions or verified complete exam coverage. The interactive UI uses the loaded lessons at runtime and includes foundational notes plus supplements. It is the more precise source of current UI counts.
 
 ## Current cross-coverage
-- Thirty curated necropsy differential cases are deployed, each with four etiologic/diagnostic options and mechanism.
-- Many lecture topics do **not** yet have dedicated interactive differential cases; this is now explicitly visible using **Needs differential case**.
+- Seventy-seven curated necropsy differential cases are deployed, each with four etiologic/diagnostic options and mechanism.
+- Many lecture topics do **not** yet have dedicated interactive differential cases; this is explicitly visible using **Needs differential case**. The 77 cases include 42 cases for Lectures 71–74 (L71: 5, L72: 12, L73: 14, L74: 11).
 - Many do **not** have embedded gross + histology photo pairs; this is visible using **Needs attached photo**.
 - Some image records link to references instead of embedding an image. Links must be checked for appropriate species, gross vs histology, provenance, accessibility, and image license.
-- Image editing remains browser-local for student uploads; this is **not GitHub publishing**.
+- Owner image publishing is now implemented through the existing encrypted-key/password GitHub workflow for differential cases, specimen cards, and lecture photo slots. Browser-local drafts remain local until **Publish Now** succeeds; live authenticated browser verification remains outstanding.
 - No condition should be described as “complete” solely because it has an instructor note.
 
 ## Required next-pass checks
@@ -47,3 +47,10 @@ Counts above are the audited *sections*, not unique conditions or verified compl
 
 ## UI
 From the Necropsy Case Center, open **Audit all lecture conditions (L67–79)** and choose the lecture. Filter by **All / Needs differential case / Needs attached photo**. Topic cards show notes, specimen, case and attached-image indicators. These are coverage indicators, *not final scientific accuracy certification*.
+
+## 2026-11-18 follow-up: L71–74 differential expansion
+- Current case bank: **77 simulated cases**, each with four diagnostic possibilities and rationale.
+- Newly added: feline acquired skin fragility, bovine digital dermatitis, lumpy skin disease, bovine papular stomatitis, Senecavirus A, equine canker, porcine dermatitis-nephropathy syndrome, Notoedres cati mange, avian scaly-leg mite, toxic epidermal necrolysis, canine atopy.
+- Every new case has a source page and lecture-slide target, but **no claim of an embedded textbook photograph**. Owner can upload and Publish Now with appropriate permissions.
+- Imported publisher: `necropsy-owner-publish.js`; keep `docs/OWNER_PUBLISHING_STANDARD.md` as the implementation requirement in every future atlas or photo editor.
+- Most important unmet goals: confirm all external photo URLs, provide appropriately licensed gross/histo paired images, build dedicated case questions for every remaining important lecture condition, and end-to-end browser test owner publishing.
