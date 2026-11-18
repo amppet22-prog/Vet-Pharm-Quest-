@@ -285,7 +285,7 @@ function saveFlashProgress(id,needsPractice){
  try{localStorage.setItem(FLASH_KEY,JSON.stringify(data))}catch(_){}
 }
 function flashDeck(scope){
- const sections=lectureConditions(),source=scope==='topic'?[sections[conditionChosen]].filter(Boolean):scope==='foundation'?sections.filter(x=>Array.isArray(x.flashcards)&&x.flashcards.length):sections;
+ const sections=lectureConditions(),source=scope==='topic'?[sections[conditionChosen]].filter(Boolean):scope==='foundation'?sections.filter(x=>['Defense and barrier systems','Terminology and interpretation'].includes(x.title)):sections;
  const deck=[];
  for(const [i,section] of source.entries()){
   if(!section)continue;
