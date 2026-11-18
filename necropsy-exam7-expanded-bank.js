@@ -43,18 +43,27 @@ const viralEquineNames=new Set([
  'venezuelan equine encephalomyelitis (vee)',
  'west nile virus (wnv)'
 ]);
-const viralEquineCard={
+// One shared alphavirus gross-pattern card. WNV is a DIFFERENT virus and remains separately labeled.
+const alphavirusCard={
  id:'pathx-68-equine-arboviral-group',lecture:'68',
- title:'Equine mosquito-borne viral encephalomyelitis — EEE / WEE / VEE / WNV',
- gross:'**Typically no specific gross lesion.** The brain and spinal cord may be grossly normal or show nonspecific **hyperemia, edema, petechial hemorrhage, or softening**. Do not attempt to distinguish EEE, WEE, VEE, and WNV from gross appearance alone.',
- dx:'**Brain / spinal cord: nonsuppurative (lymphohistiocytic) encephalomyelitis**, often with neuronal injury, neuronophagia and microgliosis. The anatomic distribution must be described; **etiologic virus identification is pending**.',
- histo:'**Overlapping histopathology:** perivascular mononuclear cuffs, microgliosis, neuronophagia and neuronal necrosis. **EEE/WEE/VEE:** often gray-matter polioencephalomyelitis. **WNV:** frequently brainstem and ventral spinal cord gray matter involvement; distribution overlaps and is not definitive. Vasculitis or hemorrhage may occur, but neither is uniquely diagnostic.',
- why:'**EEE/WEE/VEE are mosquito-borne alphaviruses; WNV is a mosquito-borne flavivirus.** Clinical history, season and geography inform suspicion, but **gross and routine H&E alone do not reliably speciate the virus**. Request agent-specific testing on appropriately collected samples: **PCR / RT-PCR and other laboratory-confirmed assays** where indicated. In live horses with WNV, **serum or CSF IgM capture ELISA is often more useful than PCR**, because viremia is typically low/transient; interpret all results using exposure, vaccination and laboratory guidance. **EEE/WEE/VEE require urgent veterinary diagnostic/public-health consultation when suspected.** EHV-1 myeloencephalopathy (vascular thrombosis/infarction) and EPM (protozoal multifocal asymmetric necrosis) remain separate gross atlas cards due to meaningfully different lesion patterns.',
- source:'Instructor Lecture 68 slides 18–21: Eastern, Western, Venezuelan equine encephalomyelitis and West Nile virus; integrated diagnostic comparison (not a copied lecture image).'
+ title:'Equine alphavirus encephalomyelitis — EEE / WEE / VEE',
+ gross:'**Gross findings are nonspecific** and may be absent. Hyperemia, edema, small hemorrhages, and malacia may be seen, but gross appearance cannot distinguish EEE, WEE, or VEE.',
+ dx:'**Brain / spinal cord: nonsuppurative polioencephalomyelitis** (morphologic pattern). Etiology unconfirmed by routine histology.',
+ histo:'**Gray matter neuronal necrosis, neuronophagia, microgliosis and mononuclear perivascular cuffing**. The three mosquito-borne alphaviruses overlap substantially in lesion distribution and histology.',
+ why:'**EEE (Eastern equine encephalitis virus), WEE (Western equine encephalitis virus) and VEE (Venezuelan equine encephalitis virus) are distinct alphaviruses.** Request pathogen-specific testing (including appropriate RT-PCR or reference-laboratory assays) and consult the diagnostic laboratory about specimen selection, biosafety, and reporting. **West Nile virus is NOT WEE**; it is a flavivirus with a separate card below.',
+ source:'Instructor Lecture 68 slides 18–19; EEE / WEE / VEE source-note comparison.'
 };
-if(!bank.some(x=>x.id===viralEquineCard.id)){
- bank.push(viralEquineCard);
- existing.add('68|'+viralEquineCard.title.toLowerCase());
+const wnvCard={
+ id:'pathx-68-west-nile-virus',lecture:'68',
+ title:'West Nile virus (WNV) — equine encephalomyelitis',
+ gross:'**Often grossly normal or nonspecific.** Some cases show congestion, edema or petechial hemorrhage in CNS tissue. The lecture emphasizes that hemorrhage may be more noticeable than with EEE/WEE/VEE, but this **does not establish viral identity**.',
+ dx:'**Brain and spinal cord: nonsuppurative polioencephalomyelitis**, often involving brainstem and ventral horn gray matter; **specific etiology requires testing**.',
+ histo:'Neuronal degeneration/necrosis, **neuronophagia, microgliosis and lymphohistiocytic perivascular cuffs**; frequently brainstem/spinal cord gray matter involvement. The histologic pattern is **not pathognomonic**.',
+ why:'**WNV is a mosquito-borne flavivirus, not Western equine encephalomyelitis virus (WEE).** In live horses, **serum or CSF WNV IgM capture ELISA** is often used for diagnosis; viremia is typically low/transient, limiting blood PCR sensitivity. **RT-PCR on suitable CNS tissue or other reference-laboratory testing** may be useful in postmortem investigation, according to laboratory guidance. Interpret assays with vaccination history and epidemiology. WNV gross findings alone cannot separate it from other viral encephalitides.',
+ source:'Instructor Lecture 68 slide 20 — West Nile virus (WNV); separate from Western equine encephalomyelitis (WEE) on slides 18–19.'
+};
+for(const card of [alphavirusCard,wnvCard]){
+ if(!bank.some(x=>x.id===card.id)){bank.push(card);existing.add('68|'+card.title.toLowerCase());}
 }
 
 for(let n=67;n<=79;n++){
