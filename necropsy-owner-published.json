@@ -284,6 +284,50 @@
       },
       "updated": "2026-11-18T21:35:33.034Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-67-45": {
+      "title": "Cerebral infarction",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-67-45-1795038158335-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "67"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-67-45"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-67-45-1795038158335-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "67"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-67-45"
+      },
+      "text": {
+        "gross": "Well-demarcated focal regional softening (malacia), swelling or hemorrhagic discoloration depending on timing/\n**Grey Matter: ** hemorrhagic \n**White Matter: ** often pale. \nSmall (<1mm) areas filled with astrocytes on histo, larger ones can become cyst like ",
+        "dx": "Brain: focal ischemic infarction / malacia",
+        "histo": "Neuronal necrosis and later macrophage infiltration with tissue rarefaction\nareas will be filled with astrocytes",
+        "why": "Blood flow failure causes energy depletion and necrosis; distribution follows vessel.\nMore rapid ischemia → more severe lesion\n• Sudden obstruction (ex: embolus, compression) → neurons die\nwithin minutes\n• Gradual reduction in flow (ex: atherosclerosis) → often\nsufficient time for anastomotic vessels to dilate and\ncompensate ",
+        "notes": "Necrosis in the CNS is liquefactive. "
+      },
+      "updated": "2026-11-18T21:42:39.705Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
