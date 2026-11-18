@@ -347,7 +347,7 @@ function flashView(){
  '<div class="buttonrow"><button data-pathdiff-flash-back="1">← '+(flashScope==='topic'?'Topic notes':'Lecture topics')+'</button><button data-pathdiff-flash-all="1">↻ New shuffled set</button></div>'+
  '<p class="tiny"><b>Card '+(flashIndex+1)+' of '+flashCards.length+'</b> · '+(flashReview?'Missed-card review':c.curated?'Focused question from lecture':'Lecture note recall')+' · '+pending+' marked for practice in this set. Your marks stay in this browser.</p>'+
  '<div style="height:5px;max-width:100%;border-radius:6px;background:#e4eaf4;overflow:hidden;margin:10px 0"><div style="width:'+Math.round((flashIndex+1)/flashCards.length*100)+'%;background:#7391cc;height:100%;border-radius:6px"></div></div>'+
- '<div style="position:relative;border:1px solid #bbcae1;border-radius:18px;background:linear-gradient(145deg,#ffffff 5%,#eef5ff 100%);box-shadow:0 7px 22px rgba(44,62,100,.09);padding:clamp(16px,4vw,30px);min-height:250px;display:flex;flex-direction:column;justify-content:center;gap:14px;margin:12px 0;text-align:center">'+
+ '<div role="button" tabindex="0" data-pathdiff-flash-flip="1" title="Flip flashcard" aria-label="Flip flashcard to '+(flashFace?'question':'answer')+'" style="cursor:pointer;position:relative;border:1px solid #bbcae1;border-radius:18px;background:linear-gradient(145deg,#ffffff 5%,#eef5ff 100%);box-shadow:0 7px 22px rgba(44,62,100,.09);padding:clamp(16px,4vw,30px);min-height:250px;display:flex;flex-direction:column;justify-content:center;gap:14px;margin:12px 0;text-align:center">'+
  '<div style="color:#5a7296;font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:850">'+(flashFace?'ANSWER':'QUESTION')+' · '+(c.curated?'Focused recall':'Lecture concept')+'</div>'+
  '<div style="font-size:12px;color:#576c87">L'+safe(conditionLecture)+' · '+safe(c.title)+'</div>'+
  (flashFace?
@@ -442,7 +442,7 @@ function init(api){
  if(api.body.__vpqNecroDifferentialInit)return;
  api.body.__vpqNecroDifferentialInit=true;
  api.body.addEventListener('click',ev=>{
- const button=ev.target.closest('button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
+ const button=ev.target.closest('[data-pathdiff-flash-flip],button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
  if(d.pathdiffStudyStart!==undefined)return startFlash('lecture');
@@ -487,6 +487,7 @@ function init(api){
  if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;phase=2;return view()}
  if(d.pathdiffRemove!==undefined){updatePhoto(d.pathdiffRemove,'');return view()}
  },true);
+ api.body.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target?.dataset?.pathdiffFlashFlip!==undefined){ev.preventDefault();flashFace=!flashFace;flashView()}},true);
  api.body.addEventListener('change',ev=>{
  const d=ev.target?.dataset;
  if(d?.pathdiffLeadingSelect!==undefined){leading=Number(ev.target.value);leadHint=false;return;}
