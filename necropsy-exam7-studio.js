@@ -25,12 +25,13 @@ function card(i){
  current=i;const x=record(i);
  const media=x.image?'<img alt="User-provided pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>';
  modal('Lecture '+h(x.lecture)+' · '+h(x.title),
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"><div>'+media+'</div><div><p><b>Gross description:</b> '+h(x.gross)+'</p>'+
- '<details '+(mode==='histo'?'open':'')+'><summary><b>Reveal morphologic diagnosis</b></summary><p>'+h(x.dx)+'</p></details>'+
- '<details '+(mode==='histo'?'open':'')+'><summary><b>Histology</b></summary><p>'+h(x.histo)+'</p></details>'+
- '<details '+(mode==='histo'?'open':'')+'><summary><b>Why it happens / distinctive clues</b></summary><p>'+h(x.why)+'</p></details>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"><div>'+media+'</div><div><p><b>Gross description:</b> '+h(x.gross)+' <button type="button" data-path7-why="gross" aria-label="Explain gross findings" title="Why does the lesion look this way?">?</button></p>'+
+ '<details '+(mode==='histo'?'open':'')+'><summary><b>Reveal morphologic diagnosis</b> ❔</summary><p>'+h(x.dx)+'</p></details>'+
+ '<details '+(mode==='histo'?'open':'')+'><summary><b>Histology</b> ❔</summary><p>'+h(x.histo)+'</p></details>'+
+ '<details '+(mode==='histo'?'open':'')+'><summary><b>Why it happens / distinctive clues</b> ❔</summary><p>'+h(x.why)+'</p></details>'+
  (x.notes?'<p><b>Your annotation:</b> '+h(x.notes)+'</p>':'')+
  '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+
+ '<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>'+ 
  '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit image, DX, notes</button><button data-path7-back="1">← Cases</button></div>');
 }
 function edit(i){
@@ -74,7 +75,17 @@ function init(api){
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
   if(!Object.keys(d).some(k=>k.startsWith('path7')))return;
   ev.preventDefault();ev.stopImmediatePropagation();
-  if(d.path7Mode!==undefined){mode=d.path7Mode;return menu()}
+  if(d.path7Why!==undefined){
+  if(current<0||current>=base.length)return;
+  const x=record(current),topic=d.path7Why;
+  const sections=topic==='gross'
+   ?'<p><b>Gross appearance:</b> '+h(x.gross)+'</p><p><b>Why it appears:</b> '+h(x.why)+'</p>'
+   :topic==='histo'
+   ?'<p><b>Microscopic lesion:</b> '+h(x.histo)+'</p><p><b>Mechanism / why:</b> '+h(x.why)+'</p><p><b>Morphologic diagnosis:</b> '+h(x.dx)+'</p>'
+   :'<p><b>Key distinction:</b> '+h(x.why)+'</p><p><b>Use these findings:</b> '+h(x.gross)+'</p><p><b>Histology:</b> '+h(x.histo)+'</p>';
+  modal('❔ '+h(x.title)+' · '+(topic==='gross'?'Why gross looks this way':topic==='histo'?'Microscopy and mechanism':'Distinguishing clues'),sections+'<p class="tiny">Drawn from this existing study card. Confirm specific interpretations with the lecture slides.</p><button data-path7-view="'+current+'">← Return to specimen</button>');return;
+ }
+ if(d.path7Mode!==undefined){mode=d.path7Mode;return menu()}
   if(d.path7Filter!==undefined){filter=d.path7Filter;return menu()}
   if(d.path7Card!==undefined){const i=Number(d.path7Card);return mode==='edit'?edit(i):card(i)}
   if(d.path7Edit!==undefined)return edit(Number(d.path7Edit));
