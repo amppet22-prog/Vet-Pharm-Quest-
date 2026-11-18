@@ -6,7 +6,7 @@ const KEY='vpq-path-exam7-user-edits-v1';
 let ui=null,mode='gross',filter='all',search='',current=-1,quiz=[],step=0,revealed=false;
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
-function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};const entry=Object.assign({},src,draft);if(official.photo?.url)entry.image=official.photo.url;return entry}
+function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};const entry=Object.assign({},src,official.text||{},draft);const photos=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);if(photos.length)entry.image=photos[0].url;return entry}
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
 function visible(){return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>(filter==='all'||x.lecture===filter)&&(!search||[x.title,x.lecture,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
@@ -25,7 +25,8 @@ function menu(){
 }
 function card(i){
  current=i;const x=record(i);
- const media=x.image?'<img alt="User-provided pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>';
+ const gallery=window.VPQ_NECROPSY_OWNER_PUBLISH?.specimenPhotoHTML?.(x.id)||'';
+ const media=gallery|| (x.image?'<img alt="Local pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>');
  modal('Lecture '+h(x.lecture)+' · '+h(x.title),
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"><div>'+media+'</div><div><p><b>Gross description:</b> '+h(x.gross)+' <button type="button" data-path7-why="gross" aria-label="Explain gross findings" title="Why does the lesion look this way?">?</button></p>'+
  '<details '+(mode==='histo'?'open':'')+'><summary><b>Reveal morphologic diagnosis</b> ❔</summary><p>'+h(x.dx)+'</p></details>'+
@@ -97,7 +98,12 @@ function init(api){
   if(d.path7Edit!==undefined)return edit(Number(d.path7Edit));
   if(d.path7View!==undefined)return card(Number(d.path7View));
   if(d.path7Save!==undefined)return saveForm(Number(d.path7Save));
-  if(d.path7OwnerPublish!==undefined){const i=Number(d.path7OwnerPublish);return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('specimen',base[i]?.id)}
+  if(d.path7OwnerPublish!==undefined){const i=Number(d.path7OwnerPublish);
+   const field=api.body.querySelector('#path7Gross');
+   if(field){const val=n=>api.body.querySelector('#'+n)?.value||'';
+    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes')});}
+   return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('specimen',base[i]?.id)
+  }
   if(d.path7Back!==undefined)return menu();
   if(d.path7Test!==undefined)return test();
   if(d.path7Reveal!==undefined){revealed=true;return question()}
@@ -106,5 +112,7 @@ function init(api){
 }
 function openCard(id){const i=base.findIndex(x=>x.id===id);return i>=0?card(i):menu()}
 function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
-return {init,start,cards:base,openCard,draftPhoto};
+function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
+function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
+return {init,start,cards:base,openCard,draftPhoto,draftText,afterPublished};
 })();
