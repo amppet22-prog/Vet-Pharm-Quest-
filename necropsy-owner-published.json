@@ -541,6 +541,46 @@
       },
       "updated": "2026-11-18T22:56:08.181Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-26": {
+      "title": "Cryptococcosis — C. neoformans / C. gattii",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-26-1795042824216-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-26"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-26-1795042824216-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [],
+        "conditionId": "pathx-68-26"
+      },
+      "text": {
+        "gross": "Cloudy/viscous leptomeninges and multiple small cyst-like lesions with a viscous, *gelatinous* appearance of the meninges or CNS parenchyma. \n\n",
+        "dx": "Working identification:* Cryptococcosis — C. neoformans / C. gattii*. \nSpecimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.\n*Cryptococcus spp. secrete a thick complex polysaccharide capsule that protects the fungus from host defenses*",
+        "histo": "Encapsulated budding yeasts, often with a prominent clear halo around the organism; inflammation varies with host immune response. Confirm with microbiology. ",
+        "why": "Hosts: Particular CNS affinity in cats and dogs, occasionally horses. \n",
+        "notes": "**Diagnostic confirmation:** Evaluate tissue cytology/histology and organism identification; fungal antigen testing can support cryptococcosis. A gross lesion alone does not prove etiology.\n**Route of infection:**\n• Enters the leptomeninges by direct extension through the\ncribriform plate after a nasal or sinus infection\n• Hematogenous usually from a pulmonary infection.\n• Spread of the infection can result in encephalitis and ventriculitis\n\nImmunosuppression (i.e viral infections or long term\nglucocorticoid) can increase susceptibility\n• Immunocompetent animals usually clear the infection before it spreads systemically"
+      },
+      "updated": "2026-11-18T23:00:26.142Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
