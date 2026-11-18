@@ -9,7 +9,13 @@ const safe=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;
 function photoStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
 function updatePhoto(id,image){const state=photoStore();if(image)state[id]=image;else delete state[id];try{localStorage.setItem(KEY,JSON.stringify(state));return true}catch(e){return false}}
 function modal(title,body){ui?.showModal(title,body)}
-function start(api,chosen='all'){ui=api;filter=chosen;menu()}
+function start(api,chosen='all'){
+ ui=api;filter=chosen;menu();
+ const owner=window.VPQ_NECROPSY_OWNER_PUBLISH;
+ owner?.load?.().then(()=>{
+  if(ui===api&&ui.body.querySelector('[data-pathdiff-filter]')&&!ui.body.querySelector('[data-necro-create-submit]'))menu();
+ }).catch(()=>{});
+}
 function menu(){
  const matched=allCases().filter(x=>filter==='all'||x.lecture===filter);
  const counts=[...new Set(allCases().map(x=>x.lecture))];
