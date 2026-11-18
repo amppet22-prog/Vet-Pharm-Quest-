@@ -24,6 +24,7 @@ function menu(){
  '<div style="padding:11px;border:1px solid #b7d1eb;background:#f2f8ff;border-radius:12px"><b>Think like a pathologist:</b> signalment and history → anatomic location/gross pattern → shortlist differentials → histology → leading etiology and next test. These are <b>simulated teaching cases</b>, not photographs of real patients.</div>'+
  '<div class="buttonrow" style="margin:10px 0">'+['all',...counts].map(n=>'<button data-pathdiff-filter="'+safe(n)+'" aria-pressed="'+(filter===n?'true':'false')+'">'+(n==='all'?'All systems':'L'+safe(n))+'</button>').join('')+'</div>'+
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Audit all lecture conditions (L67–79)</button><button data-pathdiff-umbrella="1">🧠 Pattern / umbrella atlas</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-library="1">📷 Browse published pathology photos</button></div>'+ 
  '<div class="buttonrow"><button data-pathdiff-create="1" style="background:#e5f6eb;border:1px solid #88c6a3;font-weight:800">➕ Create New Differential Card · Publish to Game</button></div>'+
  '<div class="buttonrow"><button data-modalaction="necroPatientPractice" style="font-size:12px">🐾 Optional: original patient-style practice questions</button></div>'+ 
  '<p class="tiny">'+matched.length+' instructor-slide-linked differential cases in this first module. Each includes four etiologic possibilities and why they become more or less likely.</p>'+
@@ -290,6 +291,7 @@ function init(api){
  const button=ev.target.closest('button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
+ if(d.pathdiffLibrary!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.photoLibrary?.();
  if(d.pathdiffUmbrella!==undefined)return umbrellaMenu();
  if(d.pathdiffUmbrellaOpen!==undefined){umbrellaCurrent=d.pathdiffUmbrellaOpen;return umbrellaDetail();}
  if(d.pathdiffCreate!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newCaseEditor?.();
