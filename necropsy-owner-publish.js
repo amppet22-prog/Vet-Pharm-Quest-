@@ -211,6 +211,8 @@ async function publish(job,fields,token,update){
 
 function init(context){
  api=context;
+ if(context.body.__vpqNecroOwnerInit)return;
+ context.body.__vpqNecroOwnerInit=true;
  load();
  context.body.addEventListener('click',ev=>{
  const b=ev.target.closest('[data-necro-create-submit],[data-necro-create-cancel]');if(!b)return;
