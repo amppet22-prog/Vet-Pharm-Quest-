@@ -319,6 +319,7 @@ function flashView(){
  const progress=flashProgress(),c=flashCards[flashIndex],pending=flashCards.filter(x=>progress[x.id]).length;
  if(flashComplete)return modal('🧠 Flashcard session complete',
  '<p>You reviewed <b>'+flashCards.length+' card(s)</b>. '+pending+' are marked <b>Need practice</b> in this set.</p>'+
+ '<div style="border-top:1px solid #cfdded;padding-top:11px;margin-top:12px"><b>Apply what you learned</b><p class="tiny" style="margin:5px 0">Flashcards teach recognition terms. The atlas checks gross and histologic patterns; cases challenge you to distinguish the causes.</p><div class="buttonrow"><button data-pathdiff-flash-specimens="1">🔬 Identify L'+safe(conditionLecture)+' specimens</button><button data-pathdiff-flash-cases="1">🧩 Solve L'+safe(conditionLecture)+' differential cases</button></div></div>'+
  '<div class="buttonrow"><button data-pathdiff-flash-review="1">↺ Practice missed cards</button><button data-pathdiff-flash-all="1">New shuffled set</button><button data-pathdiff-flash-back="1">← Back to notes</button></div>'+ 
  '<p class="tiny">Self-ratings are saved only in this browser. These cards use instructor-derived notes; review gross/histology images separately.</p>');
  if(!c)return modal('🧠 Pathology flashcards',
@@ -338,6 +339,7 @@ function flashView(){
  '<button data-pathdiff-flash-flip="1" style="background:#e7f0ff;font-weight:800">Flip / show answer</button>')+'</div>'+
  '<div class="buttonrow"><button data-pathdiff-flash-prev="1" '+(flashIndex===0?'disabled':'')+'>← Previous</button><button data-pathdiff-flash-next="1">Next →</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-flash-review="1">Practice missed cards</button>'+(flashScope==='topic'?'<button data-pathdiff-flash-lecture="1">Study entire L'+safe(conditionLecture)+'</button>':'')+'</div>'+
+ (flashFace?'<div class="buttonrow"><button data-pathdiff-flash-specimens="1" style="font-size:12px">🔬 Practice image recognition</button><button data-pathdiff-flash-cases="1" style="font-size:12px">🧩 Apply in differential cases</button></div>':'')+
  (flashScope==='topic'?'<button data-pathdiff-recall-all="1" style="font-size:12px">Show all lecture-derived recall prompts</button>':'')+
  '<p class="tiny">“Got it” removes the card from your practice list; “Need practice” saves it. These are paraphrased lecture notes, not validated exam questions or photo-based specimen IDs.</p>');
 }
@@ -433,6 +435,8 @@ function init(api){
  if(d.pathdiffConditionBack!==undefined)return conditionIndex();
  if(d.pathdiffRecallStart!==undefined)return startFlash('topic');
  if(d.pathdiffFlashLecture!==undefined)return startFlash('lecture');
+ if(d.pathdiffFlashSpecimens!==undefined)return window.VPQ_PATH_EXAM7?.studyLecture?.(conditionLecture);
+ if(d.pathdiffFlashCases!==undefined){filter=conditionLecture;menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(d.pathdiffFlashFlip!==undefined){flashFace=!flashFace;return flashView()}
  if(d.pathdiffFlashPrev!==undefined){flashIndex=Math.max(0,flashIndex-1);flashFace=false;return flashView()}
  if(d.pathdiffFlashNext!==undefined){flashIndex=(flashIndex+1)%Math.max(1,flashCards.length);flashFace=false;return flashView()}
