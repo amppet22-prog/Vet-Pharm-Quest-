@@ -74,6 +74,36 @@
       },
       "updated": "2026-11-18T11:10:08.443Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-2": {
+      "title": "Vertebral abscess",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-2-1795000397560-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Vertebrae",
+          "type": "gross",
+          "external": false
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-2-1795000397560-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Vertebrae",
+        "type": "gross",
+        "external": false
+      },
+      "text": {
+        "gross": "Gross and clinical consequence: Inflammation in epaxial musculature may extend dorsolaterally and compress the spinal cord.",
+        "dx": "Working identification: Vertebral abscess. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Gross and clinical consequence: Inflammation in epaxial musculature may extend dorsolaterally and compress the spinal cord. Do not confuse: An extrinsic compressive abscess is different from primary inflammatory destruction of spinal cord parenchyma.",
+        "why": "Origin: Often extension from vertebral osteomyelitis, discospondylitis or adjacent injury (the slides include tail docking); less commonly hematogenous. Do not confuse: An extrinsic compressive abscess is different from primary inflammatory destruction of spinal cord parenchyma.",
+        "notes": ""
+      },
+      "updated": "2026-11-18T11:13:18.684Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {}
