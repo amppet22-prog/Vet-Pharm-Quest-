@@ -49,7 +49,7 @@ async function publishCondition(c,token){
  if(canonical)throw Error('This condition is already in the instructor lecture list. Open the existing condition instead.');
  const id='condition-'+c.lecture+'-'+c.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,55);
  c.id=id;manifest.customConditions[id]=c;
- await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\\n'),old.sha,token,'Owner add lecture condition '+id);
+ await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\n'),old.sha,token,'Owner add lecture condition '+id);
  published=manifest;return c;
 }
 
@@ -61,6 +61,19 @@ function getLecturePhotos(id){return photosOf(published.lectures?.[id])}
 function publishedCaseImage(id){return photosOf(getCase(id))[0]?.url||''}
 function specimenPhoto(id){return photosOf(getSpecimen(id))[0]?.url||''}
 function photosOf(record){return Array.isArray(record?.photos)?record.photos:(record?.photo?.url?[record.photo]:[])}
+function photoTagsHTML(prefix,existingLectures=[],existingSystems=[]){
+ const lectures=Array.from({length:13},(_,i)=>String(i+67));
+ const systems=['CNS / Neurology','Peripheral nerves','Skin / Integument','Male reproduction','Female reproduction / Mammary','Placenta / Fetus','Eye','Ear','Musculoskeletal','Other'];
+ return '<fieldset style="border:1px solid #cbd9e8;border-radius:10px;margin:9px 0;padding:9px"><legend><b>Lecture & system tags</b></legend>'+
+ '<p style="font-size:12px">Select all lectures where this image is relevant. Tags make an image findable without changing its original condition or source.</p>'+
+ '<div style="display:flex;gap:9px;flex-wrap:wrap">'+lectures.map(n=>'<label style="font-size:12px"><input type="checkbox" data-np-tag-lecture="'+esc(prefix)+'" value="'+n+'"'+(existingLectures.includes(n)?' checked':'')+'> L'+n+'</label>').join('')+'</div>'+
+ '<p style="font-size:12px;margin:9px 0 3px">Body systems (select more than one if needed)</p>'+
+ '<div style="display:flex;gap:9px;flex-wrap:wrap">'+systems.map(n=>'<label style="font-size:12px"><input type="checkbox" data-np-tag-system="'+esc(prefix)+'" value="'+esc(n)+'"'+(existingSystems.includes(n)?' checked':'')+'> '+esc(n)+'</label>').join('')+'</div></fieldset>';
+}
+function tagsFrom(root,prefix){
+ return {lectures:Array.from(root.querySelectorAll('[data-np-tag-lecture="'+prefix+'"]:checked')).map(x=>x.value),systems:Array.from(root.querySelectorAll('[data-np-tag-system="'+prefix+'"]:checked')).map(x=>x.value)};
+}
+
 function photoGrid(list){
  if(!list.length)return '';
  return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:10px 0">'+
@@ -93,7 +106,7 @@ async function editor(type,id){
  '<h4>📷 Currently published ('+existing.length+')</h4>'+
  (existing.length?existing.map((p,i)=>'<div style="display:flex;gap:9px;align-items:start;padding:8px;border:1px solid #cdd9e6;border-radius:9px;margin:6px 0"><img src="'+esc(p.url)+'" style="width:90px;height:85px;object-fit:contain" alt="'+esc(p.caption||'')+'"><div style="flex:1;font-size:12px"><b>'+esc(p.type||'image')+'</b><p>'+esc(p.caption||'')+'</p><small>'+esc(p.credit||'')+'</small><label style="display:block"><input type="checkbox" data-np-remove="'+i+'"> Remove this published photo</label></div></div>').join(''):'<p>No published photos yet.</p>')+
  (existing.length?'<label style="display:block;margin:8px 0"><input type="checkbox" id="npOwnerReplaceAll"> Replace all published photos with new uploads (intentional)</label>':'')+
- '<h4>Add photos (optional)</h4><p style="font-size:12px">For local image files, just select photos, confirm publishing permission, and enter your publishing password. Captions, photo credit and source are optional. External image links still need the source page.</p>'+
+ '<h4>Add photos (optional)</h4>'+photoTagsHTML('new',[String(base.lecture||lp?.[1]||'68')],base.system?[String(base.system)]:[])+ '<p style="font-size:12px">For local image files, just select photos, confirm publishing permission, and enter your publishing password. Captions, photo credit and source are optional. External image links still need the source page.</p>'+
  (pending.localPhoto?'<label style="display:block"><input type="checkbox" id="npOwnerUseDraft"> Include my saved local draft photo</label><img src="'+esc(pending.localPhoto)+'" alt="Local photo draft" style="max-width:100%;max-height:110px;object-fit:contain">':'')+
  '<label style="display:block">Select one or several images<input id="npOwnerFiles" type="file" multiple accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:6px 0"></label>'+
  '<div id="npOwnerFileDetails" style="margin:8px 0"></div>'+
@@ -183,6 +196,7 @@ function readFields(){
  const kind=el('npOwnerKind')?.value||'gross',replaceAll=!!el('npOwnerReplaceAll')?.checked;
  const remove=Array.from(root.querySelectorAll('[data-np-remove]:checked')).map(x=>Number(x.dataset.npRemove));
  const edits={};root.querySelectorAll('[data-np-text]').forEach(x=>{edits[x.dataset.npText]=String(x.value||'').slice(0,9000)});
+ const tags=tagsFrom(root,'new');
  const newCount=files.length+(draftData?1:0)+(external?1:0);
  if(files.length>12)throw Error('Please select at most 12 files per upload.');
  for(const file of files)if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>20000000)throw Error('Use JPEG, PNG or WebP photos under 20 MB each.');
@@ -197,7 +211,7 @@ function readFields(){
  return {files,filesMeta,draftData,external:goodUrl(external),source:goodUrl(source),
   credit:(credit||'Owner-supplied image; publication rights confirmed').slice(0,500),
   caption:(caption||'Pathology study reference').slice(0,1000),
-  kind,replaceAll,remove,edits,newCount};
+  kind,replaceAll,remove,edits,newCount,tags};
 }
 
 async function imageBase64(f){
@@ -233,7 +247,7 @@ async function publish(job,fields,token,update){
    url='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+target;
   }
   photos.push({url,source:fields.source,credit:fields.credit,
-   caption:(item.caption||fields.caption)+(incoming.length>1?' · '+item.name:''),type:item.kind||fields.kind,external:!!item.url});
+   caption:(item.caption||fields.caption)+(incoming.length>1?' · '+item.name:''),type:item.kind||fields.kind,external:!!item.url,lectures:fields.tags.lectures,systems:fields.tags.systems,conditionId:job.id});
  }
  const textEdits=fields.edits||{};
  const entry={...prev,title:job.title,photos,photo:photos[0]||null,text:{...(prev.text||{}),...textEdits},updated:new Date().toISOString(),approvedBy:OWNER};
