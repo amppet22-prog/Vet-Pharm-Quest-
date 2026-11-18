@@ -30,7 +30,7 @@ Scope: Vet Pharm Quest, instructor-derived lecture study material and Necropsy D
 Counts above are the audited *sections*, not unique conditions or verified complete exam coverage. The interactive UI uses the loaded lessons at runtime and includes foundational notes plus supplements. It is the more precise source of current UI counts.
 
 ## Current cross-coverage
-- One hundred fifteen curated necropsy differential cases are deployed, each with four etiologic/diagnostic options and mechanism.
+- One hundred twenty-four curated necropsy differential cases are deployed, each with four etiologic/diagnostic options and mechanism.
 - Many lecture topics do **not** yet have dedicated interactive differential cases; this is explicitly visible using **Needs differential case**. The 91 cases now include expanded dermatopathology coverage alongside new male/female reproductive, abortion, ophthalmic, and otic cases.
 - Many do **not** have embedded gross + histology photo pairs; this is visible using **Needs attached photo**.
 - Some image records link to references instead of embedding an image. Links must be checked for appropriate species, gross vs histology, provenance, accessibility, and image license.
@@ -67,3 +67,11 @@ From the Necropsy Case Center, open **Audit all lecture conditions (L67–79)** 
 - Current curated case bank **115 cases**; counts per lecture: L68 6, L69 7, L70 5, L71 7, L72 14, L73 16, L74 13, L75 9, L76 10, L77 13, L78 8, L79 7. L67 comprises foundational morphology rather than individual specific diagnoses, and is covered in the lecture inventory/recall drills.
 - All 115 have four differential choices and exactly one best diagnosis, with matching photo record and audit mapping. Photo records are **not images**. The multi-image, text-only, authenticated owner Publish Now system is unchanged.
 - Still open: systematic slide-by-slide source check for all individual diseases, verified appropriately licensed paired gross/histology photographs, more dedicated cases for topics without a case, and browser/end-to-end publish testing.
+
+## Meningitis, custom card creator, and Lecture 68 completion pass
+- Curated bank now includes **124 cases**; meningitis is a dedicated Lecture 68 four-way differential case (`n68-meningitis`) and a gross/histology specimen card (`pathx-68-meningitis`).
+- The Necropsy Differential Diagnosis Center can create and publish new owner-authored four-option cards via the encrypted GitHub token/password workflow, with no photo requirement. Published custom cards live in `necropsy-owner-published.json` under `customCases`. Owner-created cards can later have photo galleries and teaching text edited independently.
+- Every lecture-condition detail now offers a **Create differential card for this disease** shortcut that pre-fills title and lecture.
+- Added eight more full Lecture 68 cases: WNV polioencephalomyelitis, EHV-1 myeloencephalopathy, CAE, cryptococcal meningoencephalitis, EPM, fibrocartilaginous embolic myelopathy, IVDD and NME.
+- Exhaustive professor-note section index and case status saved in `docs/PATHOLOGY_67_79_ALL_TOPIC_CHECKLIST.md`. It lists **592 source topics**, including basic anatomy and general principles, and flags unfilled case coverage. This is a checklist against existing audited notes, **not a claim that original PowerPoints were fully reverified** or every disease is now complete.
+- Current development checks: JavaScript syntax and static case uniqueness/integrity passed. User-password authenticated GitHub publishing of a newly created custom card needs live browser testing.
