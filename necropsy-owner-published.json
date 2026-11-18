@@ -25,8 +25,25 @@
         "type": "gross",
         "external": false
       },
-      "updated": "2026-11-18T10:36:21.955Z",
-      "approvedBy": "amppet22-prog"
+      "updated": "2026-11-18T10:55:10.035Z",
+      "approvedBy": "amppet22-prog",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-1.jpg?v=1794998181955",
+          "source": "",
+          "credit": "Textbook Pathology",
+          "caption": "Excess fluid accumulation, brain swells and sulci and gyri become indistinct",
+          "type": "gross",
+          "external": false
+        }
+      ],
+      "text": {
+        "gross": "Diffuse flattening of gyri and narrowed sulci; brain may herniate",
+        "dx": "Brain: diffuse edema",
+        "histo": "Vasogenic: extracellular white matter fluid; cytotoxic: swollen cells",
+        "why": "BBB disruption or ATP-dependent pump failure",
+        "notes": "Two types: Cytotoxic edema and vasogenic\n\nCytotoxic edema:\nAccumulation of fluid intracellularly in astrocytes, endothelial cells, neurons, and\noligodendrocytes\n• Secondary to altered cellular metabolism\n• Interference with Na+/K+-ATPase pump\n• Can’t maintain cellular homeostasis\n• Results in elevated intracellular sodium and thus influx of water\n• Blood-brain barrier remains intact\n• Causes of cytotoxic edema:\n• Hypoxia-ischemia\n• Severe hypothermia\n• Some toxicants\n\nVasogenic edema:\nMost common type of edema in the CNS\n• Occurs after vascular injury adjacent to inflammation, hematomas, contusions,\ninfarcts, cerebral hypertension, or neoplasms\n• An increase in vascular permeability from the breakdown of the blood-brain barrier\n• Allows movement of plasma constituents (water, ions, plasma proteins) into the extracellular\nspace\n• Can be accompanied by some cellular\n swelling involving astrocytes\n• Increases intracranial pressure\n• If severe, pressure can cause neurologic\n dysfunction and caudal displacement of\n brain structures\n(ie. coning of the cerebellar vermis)\n"
+      }
     }
   },
   "lectures": {}
