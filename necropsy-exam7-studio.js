@@ -73,6 +73,7 @@ function card(i){
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal histology':'Histology')+'</b> ❔</summary><p>'+rich(x.histo)+'</p></details>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal vs abnormal · what to compare':'Why it happens / distinctive clues')+'</b> ❔</summary><p>'+rich(x.why)+'</p></details>'+
  (x.notes?'<p><b>Your annotation:</b> '+rich(x.notes)+'</p>':'')+
+ (x.normal?'':(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||''))+
  '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+
  (x.normal?'':'<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>')+ 
  '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-hide="'+i+'" style="font-size:12px">🗂 Hide card</button></div>');
@@ -87,11 +88,12 @@ function edit(i){
  '<label>'+(x.normal?'Normal identification':'Morphologic DX')+'<textarea id="path7Dx" rows="2" style="width:100%">'+h(x.dx)+'</textarea></label>'+
  '<label>'+(x.normal?'Normal histology':'Histology')+'<textarea id="path7Histo" rows="2" style="width:100%">'+h(x.histo)+'</textarea></label>'+
  '<label>Instructor annotations / personal clues<textarea id="path7Notes" rows="3" style="width:100%">'+h(x.notes||'')+'</textarea></label>'+
+ (x.normal?'':(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(x)||'')) +
  '<div class="buttonrow"><button data-path7-save="'+i+'">💾 Save Draft</button><button data-path7-owner-publish="'+i+'">🚀 Publish photo now</button><button data-path7-view="'+i+'">Cancel</button></div>');
 }
 function saveForm(i){
  const val=n=>ui.body.querySelector('#'+n)?.value||'';
- const part={image:val('path7Url').trim(),gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes')};
+ const part={image:val('path7Url').trim(),gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{})};
  const finish=()=>{if(save(i,part))card(i);else modal('Local storage full','<p>This image is too large for your browser storage. Try a smaller image or a URL.</p><button data-path7-edit="'+i+'">Back to editor</button>')};
  const file=ui.body.querySelector('#path7File')?.files?.[0];
  if(!file)return finish();
@@ -204,7 +206,7 @@ function init(api){
   if(d.path7OwnerPublish!==undefined){const i=Number(d.path7OwnerPublish);
    const field=api.body.querySelector('#path7Gross');
    if(field){const val=n=>api.body.querySelector('#'+n)?.value||'';
-    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes')});}
+    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{})});}
    return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('specimen',base[i]?.id)
   }
   if(d.path7Back!==undefined)return menu();
