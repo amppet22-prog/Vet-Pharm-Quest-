@@ -144,7 +144,13 @@
           "credit": "Pathology lecture LMU",
           "caption": "brain",
           "type": "gross",
-          "external": false
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ]
         },
         {
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-5-1795001155414-0.jpg",
@@ -152,7 +158,13 @@
           "credit": "Pathology lecture LMU",
           "caption": "Marked vasculitis and vascular necrosis, thrombosis/ infarction",
           "type": "gross",
-          "external": false
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ]
         }
       ],
       "photo": {
@@ -161,16 +173,22 @@
         "credit": "Pathology lecture LMU",
         "caption": "brain",
         "type": "gross",
-        "external": false
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ]
       },
       "text": {
-        "gross": "Multifocal hemorrhagic and necrotic foci in feedlot cattle CNS",
-        "dx": "Brain: multifocal hemorrhagic necrotizing thrombotic meningoencephalitis\nMost frequent in the cerebrum, commonly on the *grey-white matter interface*",
-        "histo": "Septic vasculitis and fibrin thrombi",
-        "why": "Histophilus somni endothelial injury",
-        "notes": ""
+        "gross": "Randomly scattered, irregularly sized foci of hemorrhage and necrosis; cerebral edema. \nMostly in the cerebrum, common at the*** cortical grey-white matter interface ***\n+/- leptomeningitis with cloudiness of the CSF \n",
+        "dx": "Brain: multifocal hemorrhagic necrotizing thrombotic meningoencephalitis\nMost frequent in the cerebrum, commonly on the *grey-white matter interface*\nEtiology: ***Histophilus somi ***",
+        "histo": "Marked vasculitis and vascular necrosis, thrombosis/ infarcation. ",
+        "why": "Histophilus somni enters the respiratory tract--> bacterial proliferation--> hematogenous spread to the CNS--> direct damage to endothelial cells --> thrombosis, necrosis, inflammation. ",
+        "notes": "***Histophilus somni*** endothelial injury which results in septicemia in cattle.\nVariable clinical presentations, including pneumonia, polyarthritis, myocarditis, abortion, and meningoencephalitis\n• Most prevalent in feedlot cattle, typically 6 – 12 months of age  \n**C/S:** Initial ataxia and circling, head pressing, and appear to be blind. \n"
       },
-      "updated": "2026-11-18T11:25:56.608Z",
+      "updated": "2026-11-18T22:12:44.831Z",
       "approvedBy": "amppet22-prog"
     },
     "pathx-68-9": {
