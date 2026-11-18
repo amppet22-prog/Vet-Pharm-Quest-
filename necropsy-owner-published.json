@@ -372,6 +372,50 @@
       },
       "updated": "2026-11-18T21:56:58.881Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-meningitis": {
+      "title": "Meningitis — leptomeningitis vs pachymeningitis",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-meningitis-1795039322006-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-68-meningitis"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-meningitis-1795039322006-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-68-meningitis"
+      },
+      "text": {
+        "gross": "Opaque, hyperemic meninges (typically referring to leptomeninges) with yellow-white exudate tracking sulci; distinguish inflammation of pia/arachnoid and subarachnoid space from thickened inflamed dura.",
+        "dx": "CNS meninges: diffuse fibrinosuppurative leptomeningitis (working pattern; etiology pending)",
+        "histo": "Suppurative leptomeningitis: abundant neutrophils/fibrin within the subarachnoid space. Nonsuppurative: lymphocytes/mononuclear cells. Granulomatous: macrophages/giant cells and possible fungi. Pachymeningitis: dura. Meningoencephalitis: adjacent brain parenchyma.",
+        "why": "Septicemia or contiguous infection can seed the meninges; gross appearance and leukocyte pattern localize and classify inflammation, but bacterial identity requires laboratory confirmation. Can be spread by direct extension or leukocyte trafficking. \nMost commonly caused by bacteria that reach the leptomeninges and subarachnoid space** hematogenously. **",
+        "notes": "Strict viral leptomeningitis is rare (those tend to cause meningoencephalitis)\nCan have multiple levels of chronicitiy. "
+      },
+      "updated": "2026-11-18T22:02:03.463Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
