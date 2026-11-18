@@ -30,7 +30,7 @@ const patterns=[
 let api=null,topic='all',search='',chapter='67';
 const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function popup(t,html){api?.showModal(t,html)}
-function nav(){return '<div class="np-tabs"><button data-nphome="1">📚 Handbook</button><button data-nppattern="1">🔗 Across systems</button><button data-npstudio="gross">🔍 Gross ID</button><button data-npstudio="histo">🔬 Histology</button><button data-npedit="1">🖼️ Editable atlas</button></div>'}
+function nav(){return '<div class="np-tabs"><button data-nphome="1">📚 Handbook</button><button data-nppattern="1">🔗 Across systems</button><button data-npstudio="gross">🔍 Gross ID</button><button data-npstudio="histo">🔬 Histology</button><button data-npquiz="1">🎓 Practice Quiz</button><button data-npedit="1">🖼️ Editable atlas</button></div>'}
 function show(){
  const systems=['all','Neuro','Skin','Repro','Special Senses'];
  const selected=chapters.filter(c=>topic==='all'||c[2]===topic).filter(c=>!search||[...c].join(' ').toLowerCase().includes(search));
@@ -68,6 +68,7 @@ function init(host){
  if(d.nphome!==undefined||d.npback!==undefined)return show();
  if(d.npchapter!==undefined)return lecture(d.npchapter);
  if(d.nppattern!==undefined)return across();
+ if(d.npquiz!==undefined)return window.VPQ_NECROPSY_QUIZ?.start();
  if(d.npsystem!==undefined){topic=d.npsystem;return show()}
  if(d.npstudio!==undefined)return window.VPQ_PATH_EXAM7?.start(d.npstudio);
  if(d.npedit!==undefined)return window.VPQ_PATH_EXAM7?.start('edit');
