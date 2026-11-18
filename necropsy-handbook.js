@@ -62,17 +62,30 @@ function learnLecture(n){
  if(!l)return lecture(n);
 
  const photoCards={
-  1:[['Normal dog brain · gross specimen','https://commons.wikimedia.org/wiki/Special:FilePath/Dog_brain_and_eyeballs.jpg','Identify cerebral surface, folding and symmetry before identifying injury.','Museum of Veterinary Anatomy FMVZ USP / Wagner Souza e Silva · CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Dog_brain_and_eyeballs.jpg'],
-     ['Spinal cord cross section · anatomy','https://commons.wikimedia.org/wiki/Special:FilePath/Spinal_Cord.jpg','Locate central gray matter and peripheral white matter. Human reference anatomy; arrangement is shared with domestic mammals.','Chippolito · CC BY-SA 3.0','https://commons.wikimedia.org/wiki/File:Spinal_Cord.jpg']],
-  12:[['Gross cerebral edema · pathology photo','https://commons.wikimedia.org/wiki/Special:FilePath/Cerebral_oedema.jpg','Look for swelling and compression of the normal sulcal spaces; species and cause must be verified before generalizing.','Narraburra · CC0','https://commons.wikimedia.org/wiki/File:Cerebral_oedema.jpg']]
+  0:[
+   ['Canine CNS — normal anatomical specimen','https://upload.wikimedia.org/wikipedia/commons/2/28/Dog_brain_and_eyeballs.jpg','Canine brain fixed in formalin; identify paired cerebral hemispheres and brainstem. The eye specimens are attached.','Museum of Veterinary Anatomy FMVZ USP / Wagner Souza e Silva · CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Dog_brain_and_eyeballs.jpg']
+  ],
+  1:[
+   ['Normal canine encephalon · gross specimen','https://upload.wikimedia.org/wikipedia/commons/a/aa/Dog_encephalon.jpg','Canine specimen. Learn normal symmetry and sulci/gyri before diagnosing deformation or malacia.','Museum of Veterinary Anatomy FMVZ USP / Wagner Souza e Silva · CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Dog_encephalon.jpg'],
+   ['Spinal cord transverse section · gray versus white matter','https://upload.wikimedia.org/wikipedia/commons/b/b2/Spinal_Cord.jpg','Human illustrative diagram: butterfly-shaped gray matter is central and white matter is peripheral. Same basic arrangement in domestic mammals.','Chippolito · CC BY-SA 3.0','https://commons.wikimedia.org/wiki/File:Spinal_Cord.jpg']
+  ],
+  7:[
+   ['Red dead neurons — normal versus infarcted tissue (H&E)','https://upload.wikimedia.org/wikipedia/commons/1/1e/Histopathology_of_thalamus_infarction_at_approximately_24_hours%2C_high_magnification%2C_annotated.jpg','Left: normal neuron. Right: hypereosinophilic neuron during ischemic infarction, with neutrophils. This is a HUMAN micrograph illustrating a shared lesion pattern.','Mikael Häggström · CC0','https://commons.wikimedia.org/wiki/File:Histopathology_of_thalamus_infarction_at_approximately_24_hours,_high_magnification,_annotated.jpg']
+  ],
+  11:[
+   ['Infarction-associated neuronal injury, H&E','https://upload.wikimedia.org/wikipedia/commons/1/1e/Histopathology_of_thalamus_infarction_at_approximately_24_hours%2C_high_magnification%2C_annotated.jpg','Infarction can produce acute neuronal necrosis. This is MICROSCOPIC evidence, not a gross view of malacia. Human specimen.','Mikael Häggström · CC0','https://commons.wikimedia.org/wiki/File:Histopathology_of_thalamus_infarction_at_approximately_24_hours,_high_magnification,_annotated.jpg']
+  ],
+  12:[
+   ['Cerebral edema — gross specimen','https://upload.wikimedia.org/wikipedia/commons/d/db/Cerebral_oedema.jpg','Inspect gyri and sulci for swelling and compression. Confirm organ/species in the attribution; image appearance alone does not identify the edema mechanism.','Wikimedia Commons · see original file attribution and license','https://commons.wikimedia.org/wiki/File:Cerebral_oedema.jpg']
+  ]
  };
- const pictureBlock=i=>(photoCards[i]||[]).map(p=>'<figure style="margin:10px 0;padding:10px;border:1px solid #dbe1ed;border-radius:12px;background:#fff"><a href="'+safe(p[4])+'" target="_blank" rel="noopener noreferrer" title="Open full resolution and image credit"><img loading="lazy" src="'+safe(p[1])+'" alt="'+safe(p[0])+'" style="display:block;width:100%;max-height:260px;object-fit:contain;border-radius:7px;background:#f1f5f9"></a><figcaption style="font-size:12px;line-height:1.5;margin-top:6px"><b>'+safe(p[0])+'.</b> '+safe(p[2])+'<br><small>Image: '+safe(p[3])+' · <a target="_blank" rel="noopener noreferrer" href="'+safe(p[4])+'">Source / full image / license</a></small></figcaption></figure>').join('');
+ const pictureBlock=i=>(photoCards[i]||[]).map(p=>'<figure class="np-visual"><a href="'+safe(p[4])+'" target="_blank" rel="noopener noreferrer" title="Open full image and attribution"><img loading="lazy" decoding="async" src="'+safe(p[1])+'" alt="'+safe(p[0])+'" onerror="this.style.display=&quot;none&quot;;this.parentNode.querySelector(&quot;.np-image-fallback&quot;).style.display=&quot;block&quot;" style="display:block;width:100%;max-height:280px;object-fit:contain;border-radius:8px;background:#eef1f8"><span class="np-image-fallback" style="display:none;padding:25px;text-align:center;background:#eef1f8;border-radius:8px">🖼️ Photo preview unavailable — click to open the source photograph</span></a><figcaption style="font-size:12px;line-height:1.5;margin-top:7px"><b>'+safe(p[0])+'.</b> '+safe(p[2])+'<div style="font-size:11px;color:#5d6980;margin-top:4px">Photo credit: '+safe(p[3])+' · <a target="_blank" rel="noopener noreferrer" href="'+safe(p[4])+'">Open original photo</a></div></figcaption></figure>').join('');
 
  const rows=l.sections.map((s,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(s.title)+'</b> <small>slides '+safe(s.slides)+'</small></summary>'+
  pictureBlock(i)+s.points.map(p=>'<p style="margin:8px 0;line-height:1.5"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
  popup('📖 L'+n+' · Learn the Lecture',nav()+
  '<div class="np-cover"><strong style="font-size:19px">'+safe(l.title)+'</strong><p>Comprehensive guided lecture lesson, grounded in the professor’s actual slide sequence. Open each section for terms, pathways, mechanisms, and recognition differences.</p><small>'+safe(l.source)+' · Lesson content is a paraphrased learning companion, not the original slide deck.</small></div>'+
- '<h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
+ '<style>.np-pat{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal}.np-pat p{white-space:normal;overflow-wrap:anywhere}.np-visual{box-sizing:border-box;max-width:100%;width:100%;margin:10px 0;padding:10px;border:1px solid #d9dfeb;border-radius:12px;background:#fff}.np-visual img{max-width:100%;height:auto}</style><h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
  '<h4>Check your understanding</h4>'+l.checks.map((q,i)=>'<details class="np-pat"><summary><b>Q'+(i+1)+'.</b> '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join('')+
  '<div class="buttonrow"><button data-npchapter="'+safe(n)+'">← Lecture index</button><button data-npstudio="gross">🔬 Practice lesion cases</button></div>');
 }
