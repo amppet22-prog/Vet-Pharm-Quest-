@@ -104,5 +104,6 @@ function init(api){
  },true);
 }
 function openCard(id){const i=base.findIndex(x=>x.id===id);return i>=0?card(i):menu()}
-return {init,start,cards:base,openCard};
+function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
+return {init,start,cards:base,openCard,draftPhoto};
 })();
