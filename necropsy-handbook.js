@@ -59,14 +59,7 @@ function lecture(n){
 function learnLecture(n){
  chapter=n;
  const l=window.VPQ_PATH_LECTURE_LEARN?.[n];if(!l)return lecture(n);
- const images={
-  '67':{
-   0:[['Normal canine brain, veterinary specimen','https://commons.wikimedia.org/wiki/Special:FilePath/Dog_brain_and_eyeballs.jpg','https://commons.wikimedia.org/wiki/File:Dog_brain_and_eyeballs.jpg','Photo: University of São Paulo Museum of Veterinary Anatomy; open the original for attribution/license.']],
-   1:[['Dog brain gross anatomical specimen','https://commons.wikimedia.org/wiki/Special:FilePath/Dog_encephalon.jpg','https://commons.wikimedia.org/wiki/File:Dog_encephalon.jpg','Normal brain anatomy: examine symmetry, sulci and gyri.']],
-   7:[['Hypoxic neuronal injury — red neuron (H&E)','https://commons.wikimedia.org/wiki/Special:FilePath/Hypoxic_neuronal_injury%2C_HE_1.jpg','https://commons.wikimedia.org/wiki/File:Hypoxic_neuronal_injury,_HE_1.jpg','Recognize a shrunken, hypereosinophilic cell body. Histology example from an open-licensed educational source.']]
-  }
- };
- const panels=images[n]||{};
+ const photos=window.VPQ_PATH_INLINE_PHOTOS;
  const diagram=(i)=>{
   if(n!=='67')return '';
   if(i===4)return '<div class="np-edu-diagram"><b>CSF pathway</b><p>Lateral ventricles → Third ventricle → Cerebral aqueduct → Fourth ventricle → Subarachnoid space → Arachnoid villi</p><small>Original teaching pathway based on lecture slides 19–20.</small></div>';
@@ -75,14 +68,15 @@ function learnLecture(n){
   if(i===9)return '<div class="np-edu-diagram"><b>Primary versus secondary demyelination</b><p><b>Primary:</b> oligodendrocyte/myelin injured first; axon relatively preserved.</p><p><b>Secondary:</b> axon injured first, then myelin breaks down.</p></div>';
   return '';
  };
- const visual=i=>(panels[i]||[]).map(p=>'<figure class="np-lesson-photo"><a href="'+safe(p[2])+'" rel="noopener noreferrer" target="_blank"><img loading="lazy" src="'+safe(p[1])+'" alt="'+safe(p[0])+'" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;block&quot;"><span style="display:none;padding:16px;background:#f1f4f9">Photo preview unavailable. Open original image and its attribution.</span></a><figcaption><b>'+safe(p[0])+'</b><p>'+safe(p[3])+'</p><a href="'+safe(p[2])+'" target="_blank" rel="noopener noreferrer">Open full photograph and credit</a></figcaption></figure>').join('');
- const rows=l.sections.map((sec,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(sec.title)+'</b> <small>slides '+safe(sec.slides)+'</small></summary>'+visual(i)+diagram(i)+sec.points.map(p=>'<p class="np-learn-point"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
+ const rows=l.sections.map((sec,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(sec.title)+'</b> <small>slides '+safe(sec.slides)+'</small></summary>'+diagram(i)+sec.points.map(p=>'<p class="np-learn-point"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+(photos?photos.card(n,i):'')+'</details>').join('');
  popup('📖 L'+n+' · Learn the Lecture',nav()+
+ (photos?photos.style:'')+
  '<style>.np-pat{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}.np-learn-point{margin:8px 0;line-height:1.5;white-space:normal;overflow-wrap:anywhere}.np-lesson-photo{margin:10px 0;padding:10px;background:white;border:1px solid #cdd9e8;border-radius:12px;max-width:100%}.np-lesson-photo img{display:block;max-width:100%;width:100%;max-height:360px;object-fit:contain;background:#f4f6fb;border-radius:8px}.np-lesson-photo figcaption{font-size:12px;line-height:1.45;margin-top:7px}.np-lesson-photo figcaption p{margin:3px 0}.np-edu-diagram{margin:10px 0;padding:12px;border:1px solid #b9d6eb;background:#f3faff;border-radius:12px;font-size:13px}.np-edu-diagram p{margin:7px 0}</style>'+
- '<div class="np-cover"><strong style="font-size:18px">'+safe(l.title)+'</strong><p>Read the teaching material and study the images directly in each section. Lecture and textbook figures guide the content; public images must be licensed for display.</p><small>'+safe(l.source)+'</small></div>'+
+ '<div class="np-cover"><strong style="font-size:18px">'+safe(l.title)+'</strong><p>Learn the material, then add up to two useful photos within each section. Images you add are saved privately on this device.</p><small>'+safe(l.source)+'</small></div>'+
  '<h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
  '<h4>Check your understanding</h4>'+l.checks.map((q,i)=>'<details class="np-pat"><summary><b>Q'+(i+1)+'.</b> '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join('')+
  '<div class="buttonrow"><button data-npchapter="'+safe(n)+'">← Lecture index</button><button data-npstudio="gross">🔬 Practice lesion cases</button></div>');
+ if(photos)photos.hydrate(api.body,n);
 }
 
 function across(){
@@ -157,6 +151,7 @@ function init(host){
  if(d.npreturn!==undefined)return lecture(chapter);
  if(d.nphome!==undefined||d.npback!==undefined)return show();
  if(d.npslideprev!==undefined||d.npslidenext!==undefined||d.npslidezoom!==undefined||d.npdeletepdf!==undefined){window.VPQ_PATH_SLIDES?.clicked(host.body,b);return}
+ if(d.pathImageRemove!==undefined){window.VPQ_PATH_INLINE_PHOTOS?.remove(b);return}
  if(d.nplearn!==undefined)return learnLecture(d.nplearn);
  if(d.npchapter!==undefined)return lecture(d.npchapter);
  if(d.nppattern!==undefined)return across();
@@ -170,6 +165,7 @@ function init(host){
    const t=e.target;
    if(t?.dataset?.nplecturepdf!==undefined){window.VPQ_PATH_SLIDES?.fileSelected(host.body,t);return}
    if(t?.classList?.contains('np-slide-pagenum')){window.VPQ_PATH_SLIDES?.pageChanged(t);return}
+   if(t?.dataset?.pathImageInput!==undefined){window.VPQ_PATH_INLINE_PHOTOS?.upload(t);return}
    if(t?.dataset?.npsearch!==undefined){search=t.value.toLowerCase().trim();show()}
  },true);
 }
