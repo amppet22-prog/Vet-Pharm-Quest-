@@ -1,4 +1,4 @@
-/* Necropsy Case Center: differential-first clinical pathology reasoning. */
+/* Necropsy Differential Diagnosis Center: use gross lesions, signalment and histology to rank etiologies. */
 window.VPQ_NECROPSY_DIFFERENTIAL_LAB=(function(){
 'use strict';
 const data=window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[];
@@ -12,13 +12,14 @@ function start(api,chosen='all'){ui=api;filter=chosen;menu()}
 function menu(){
  const matched=data.filter(x=>filter==='all'||x.lecture===filter);
  const counts=[...new Set(data.map(x=>x.lecture))];
- modal('🔬 Necropsy Case Center · Build the differential',
+ modal('🧩 Necropsy Differential Diagnosis Center',
  '<div style="padding:11px;border:1px solid #b7d1eb;background:#f2f8ff;border-radius:12px"><b>Think like a pathologist:</b> signalment and history → anatomic location/gross pattern → shortlist differentials → histology → leading etiology and next test. These are <b>simulated teaching cases</b>, not photographs of real patients.</div>'+
  '<div class="buttonrow" style="margin:10px 0">'+['all',...counts].map(n=>'<button data-pathdiff-filter="'+safe(n)+'" aria-pressed="'+(filter===n?'true':'false')+'">'+(n==='all'?'All systems':'L'+safe(n))+'</button>').join('')+'</div>'+
- '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Audit all lecture conditions (L67–79)</button></div>'+ 
+ '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Audit all lecture conditions (L67–79)</button></div>'+
+ '<div class="buttonrow"><button data-modalaction="necroPatientPractice" style="font-size:12px">🐾 Optional: original patient-style practice questions</button></div>'+ 
  '<p class="tiny">'+matched.length+' instructor-slide-linked differential cases in this first module. Each includes four etiologic possibilities and why they become more or less likely.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:9px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:12px;border:1px solid #b7cce5;border-radius:12px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+' · '+safe(x.system)+'</small></button>').join('')+'</div>'+
- '<div class="buttonrow"><button data-pathdiff-return="1">← Necropsy study bank</button></div>');
+ '<div class="buttonrow"><button data-pathdiff-return="1">← Gross / histology specimen bank</button></div>');
 }
 
 /* Lecture coverage uses live lecture data, not a shortened list. */
