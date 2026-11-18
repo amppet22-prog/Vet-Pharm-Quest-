@@ -290,3 +290,60 @@ checks:[
 ['What is the important neurotoxin in hepatic encephalopathy?','Ammonia, among other compounds, alters astrocyte metabolism and brain function.'],
 ['A canine lesion lies adjacent to a ventricle and blocks CSF drainage. What is the major secondary consequence?','Obstructive/acquired hydrocephalus and increased intracranial pressure.']
 ]};
+
+
+window.VPQ_PATH_LECTURE_LEARN['70']={
+title:'Peripheral Nervous System: Function and Pathology',
+source:'Instructor Lecture 70 · 30 slides; supported by Zachary & McGavin, Ch. 14',
+sections:[
+{title:'Lecture objectives and CNS/PNS distinction',slides:'1–5',points:[
+['Professor priorities','Explain PNS organization, somatic versus autonomic function, nerve cells and axonal transport, injury/repair, toxic, nutritional, congenital and species-specific peripheral neuropathies.'],
+['Scope','Peripheral nerves connect CNS to effectors and sensory receptors; somatic nerves mediate voluntary muscle activity and autonomic pathways govern involuntary responses.'],
+['Critical anatomic exception','Cranial nerves I and II are considered CNS-associated pathways with oligodendrocyte rather than Schwann-cell myelin.']]},
+{title:'Somatic and autonomic components',slides:'6–7',points:[
+['Somatic pathways','Afferent fibers carry sensory information to CNS; efferent motor fibers carry signals to skeletal muscle at the neuromuscular junction.'],
+['Autonomic pathways','Sympathetic prepares the body for action, parasympathetic supports rest/digestion, enteric neurons coordinate GI smooth muscle, secretion and absorption.'],
+['Enteric plexuses','Myenteric plexus is closely linked to intestinal motility, and submucosal plexus to secretion, absorption and local blood flow.'],
+['Clinical connection','Motor neuropathy may produce weakness/denervation; autonomic neuropathy may cause ileus, dysphagia, abnormal secretions or cardiovascular dysfunction.']]},
+{title:'Axon physiology and peripheral nerve structure',slides:'8–9',points:[
+['Myelinated versus unmyelinated','Myelinated axons conduct more rapidly; unmyelinated fibers conduct more slowly and are important in autonomic and sensory signaling.'],
+['Axoplasmic transport','Microtubules support anterograde movement from soma to terminals and retrograde movement back to soma; neurofilaments provide structural integrity.'],
+['Nerve sheaths','Endoneurium surrounds individual fibers, perineurium surrounds fascicles, epineurium surrounds the entire nerve.'],
+['Schwann cells','Form PNS myelin and support regeneration, unlike CNS oligodendrocytes. Satellite glial cells surround ganglion neurons.'],
+['Repair physiology','Schwann cell support, vascular supply and preserved endoneurial tubes facilitate some PNS regrowth, but severe transection or long gaps limit recovery.']]},
+{title:'Dysautonomia and enteric syndromes',slides:'10–14',points:[
+['Dysautonomia','Degeneration or dysfunction of autonomic ganglion neurons affects multiple organ systems: GI movement, pupils, mucous membranes and cardiovascular regulation.'],
+['Equine colonic aganglionosis','Loss of enteric neurons can result in failure of normal colonic motility and intestinal dysfunction.'],
+['Peritonitis-associated autonomic dysfunction','Inflammation around intestinal structures can disrupt enteric neural signaling and contribute to paralytic ileus.'],
+['Pattern recognition','The clinical distribution reflects loss of coordinated autonomic output rather than necessarily a visible gross peripheral nerve lesion.']]},
+{title:'Myelination, endocrine and nutritional disorders',slides:'14–19',points:[
+['Congenital hypomyelinating polyneuropathy','Reduced myelin development in predisposed young dogs, including golden retrievers in this lecture, produces weakness and neurologic deficits.'],
+['Coyotillo toxicosis','Plant-associated myelin/nerve injury producing neurologic dysfunction, particularly in grazing animals.'],
+['Endocrine disease','Endocrine and metabolic disturbances can damage nerve fibers or impair nerve metabolism, producing peripheral neuropathy.'],
+['Nutrition','The lecture includes vitamin A and riboflavin deficiency as examples of nutrition-linked peripheral nervous dysfunction.'],
+['Differentiate','Hypomyelination means myelin was inadequately formed; demyelination means previously formed myelin has been lost.']]},
+{title:'Botulism',slides:'19–22',points:[
+['Mechanism','Clostridium botulinum toxin prevents synaptic acetylcholine release at the neuromuscular junction by disrupting vesicle fusion proteins.'],
+['Consequence','Flaccid muscle paralysis, reduced tone and weakness without an obligate gross lesion in the muscle or peripheral nerve.'],
+['Species context','Recognize predisposing exposure history and syndromes in birds, horses, cattle and other susceptible species.'],
+['Compare with tetanus','Botulism prevents acetylcholine release at motor terminals, producing flaccid paralysis; tetanus inhibits inhibitory neurotransmission in CNS pathways, producing spastic paralysis.']]},
+{title:'Traumatic injury and peripheral neoplasms',slides:'22–25',points:[
+['Neurapraxia','Transient conduction block without complete axonal discontinuity; recovery may be possible when the cause is relieved.'],
+['Axonotmesis','Axonal interruption with some supporting connective tissue preserved, producing Wallerian degeneration distal to lesion.'],
+['Neurotmesis','Complete severing of nerve and supporting structures, with poor spontaneous recovery.'],
+['Schwannoma','Neoplasm of Schwann-cell lineage, often a firm nerve-associated mass; histology distinguishes it from other spindle-cell tumors.'],
+['Why severity matters','Whether an endoneurial pathway remains intact helps predict axonal regeneration and functional recovery.']]},
+{title:'Species-specific peripheral nerve diseases',slides:'25–30',points:[
+['Equine grass sickness','Dysautonomia with degeneration of autonomic and enteric neurons causing severe ileus and related dysfunction; gross neural lesions may be subtle.'],
+['Equine recurrent laryngeal neuropathy','Long axon degeneration, commonly left-sided, results in cricoarytenoideus dorsalis denervation atrophy and impaired arytenoid abduction.'],
+['Canine acute idiopathic polyradiculoneuritis','Acute weakness reflecting inflammation of motor nerve roots with flaccid lower motor neuron signs.'],
+['English pointer sensory neuropathy','Inherited sensory neuropathy resulting in poor sensation and potential self-injury.'],
+['Final differentiation','Localize to sensory, motor or autonomic pathways, identify myelin versus axonal injury, and anticipate denervation changes in target muscle.']]}
+],
+checks:[
+['What makes cranial nerves I and II unusual relative to most peripheral nerves?','They are CNS-associated and myelinated by oligodendrocytes rather than Schwann cells.'],
+['What is the difference between neurapraxia and neurotmesis?','Neurapraxia is a transient conduction block; neurotmesis is complete disruption of the nerve and its supporting tissues.'],
+['A horse with left arytenoid paralysis has atrophy of cricoarytenoideus dorsalis. Which mechanism?','Left recurrent laryngeal neuropathy causing denervation atrophy.'],
+['Which toxin produces flaccid paralysis by preventing ACh release?','Botulinum neurotoxin at the neuromuscular junction.'],
+['Why can PNS axons regenerate more effectively than CNS axons?','Schwann cells, endoneurial guidance tubes and more efficient debris cleanup facilitate regeneration when structural continuity is preserved.']
+]};
