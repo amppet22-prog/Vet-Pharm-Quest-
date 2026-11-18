@@ -34,6 +34,12 @@ function menu(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=Array.from({length:13},(_,i)=>String(i+67));
 const CASE_MATCH={
+'n69-syringomyelia':["syringomyelia"],
+'n69-meningioma':["meningioma"],
+'n69-hepatic-enceph':["hepatic encephalopathy"],
+'n69-wobbler':["cervical vertebral stenotic myelopathy"],
+'n70-grass-sickness':["equine grass sickness"],
+'n70-schwannoma':["schwannoma"],
 'n68-meningitis':['leptomeningitis versus pachymeningitis','neonatal septicemia with cns infection'],
 'n68-wnv':['west nile virus'],
 'n68-ehv-neuro':['equine herpesvirus 1 (ehv 1) myeloencephalopathy'],
