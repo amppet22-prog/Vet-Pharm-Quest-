@@ -4,7 +4,7 @@
  */
 (function(){
  "use strict";
- const LOCAL_KEY="vpq-v2-clinic-state", BACKUP_PREFIX="vpq-cloud-pre-restore-";
+ const LOCAL_KEY="vpq-v2-clinic-state", BACKUP_PREFIX="vpq-cloud-pre-restore-", LOCAL_OWNER="vpq-cloud-local-owner";
  const $=id=>document.getElementById(id);
  let activeUser=null, enabledForUser=false, syncTimer=null, inFlight=false, pending=false, latestSaved=null;
  let client=null;
@@ -63,6 +63,7 @@
    if(!cloudSnapshot())return;
    if(!confirm("Back up your CURRENT browser's clinic progress to your account? This replaces the existing cloud copy, if any. Download a full save first if you are unsure."))return;
    enabledForUser=true;localStorage.setItem("vpq-cloud-opt-in-"+activeUser,"1");
+   localStorage.setItem(LOCAL_OWNER,activeUser);
    status("Uploading clinic progress…");await put();render();
  }
  async function chooseRestore(){
@@ -75,6 +76,7 @@
      const prior=localStorage.getItem(LOCAL_KEY);
      if(prior!==null)localStorage.setItem(BACKUP_PREFIX+activeUser+"-"+Date.now(),prior);
      localStorage.setItem(LOCAL_KEY,JSON.stringify(data.save_data));
+     localStorage.setItem(LOCAL_OWNER,activeUser);
      enabledForUser=true;localStorage.setItem("vpq-cloud-opt-in-"+activeUser,"1");
      window.location.reload();
    }catch(err){status("Cloud restore failed; local progress unchanged. "+(err.message||""),"error");}
@@ -96,7 +98,7 @@
    client=window.VPQ_PLAYER_ACCOUNT?.getClient?.()||null;
    const user=window.VPQ_PLAYER_ACCOUNT?.getUser?.()||null;
    activeUser=user?.id||null;
-   enabledForUser=!!activeUser&&localStorage.getItem("vpq-cloud-opt-in-"+activeUser)==="1";
+   enabledForUser=!!activeUser&&localStorage.getItem("vpq-cloud-opt-in-"+activeUser)==="1"&&localStorage.getItem(LOCAL_OWNER)===activeUser;
    render();
  }
  window.addEventListener("vpq-player-auth-change",()=>{clearTimeout(syncTimer);inFlight=false;pending=false;launch();});
