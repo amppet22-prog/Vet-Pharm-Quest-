@@ -20,11 +20,12 @@ const data={
   {x:69,y:36,w:24,h:38,walk:81,label:'🛡️ Public health',action:'ohHub'}
  ],
  necropsy:[
-  {x:3,y:25,w:20,h:45,walk:14,label:'🦴 Specimen Cabinet',subtitle:'Gross lesion ID',action:'necroGross'},
-  {x:25,y:27,w:16,h:44,walk:33,label:'📚 Necropsy Handbook',subtitle:'Learn first',action:'necroHandbook'},
-  {x:42,y:30,w:16,h:42,walk:50,label:'🩸 Histo Atlas',subtitle:'Microscopy & WHY',action:'necroHisto'},
-  {x:59,y:31,w:17,h:42,walk:68,label:'☣️ Biosafety',subtitle:'Safe sampling',action:'necroBio'},
-  {x:77,y:27,w:20,h:44,walk:87,label:'🐾 Pathology Cases',subtitle:'Clinical application',action:'necroCases'}
+  {x:3,y:25,w:20,h:45,walk:14,label:'🦴 Specimen Cabinet',subtitle:'Identify gross lesions',hint:'Gross pathology: recognize the organ, describe the lesion and practice gross diagnoses',action:'necroGross'},
+  {x:25,y:27,w:16,h:44,walk:33,label:'📚 Necropsy Handbook',subtitle:'Learn each condition',hint:'Learn First: lecture diseases, gross changes, histology, WHY and differentials',action:'necroHandbook'},
+  {x:42,y:30,w:16,h:42,walk:50,label:'📋 Diagnosis Board',subtitle:'Write a morphologic DX',hint:'Morphologic diagnosis: organ, distribution, process and severity',action:'necroDx'},
+  {x:59,y:31,w:17,h:42,walk:68,label:'🔬 Microscope',subtitle:'Histology & WHY',hint:'Histology atlas: microscopic features, tissue changes and pathogenesis',action:'necroHisto'},
+  {x:78,y:25,w:19,h:44,walk:82,label:'🐾 Case Board',subtitle:'Apply clinical findings',hint:'Patient cases: combine gross lesions, clinical findings and diagnostic reasoning',action:'necroCases'},
+  {x:79,y:71,w:18,h:23,walk:93,label:'🧼 Boot Wash & PPE',subtitle:'Biosecurity & sampling',hint:'Biosecurity: PPE, cleaning and specimen handling',action:'necroBio'}
  ],
  skills:[
   {x:7,y:39,w:26,h:41,walk:19,label:'💉 Injection Practice',action:'injectionPractice'},
@@ -216,6 +217,13 @@ necroPolish.textContent='.stage[data-room="necropsy"] .vpqSpecHit span{bottom:3%
 '.stage[data-room="necropsy"] .vpqSpecHit{border-radius:10px}'+
 '.stage[data-room="necropsy"] .vpqSpecHit.vpqSpecNear:after{top:5%;font-size:9px;padding:2px 5px}';
 document.head.appendChild(necroPolish);
+const necroGuideStyle=document.createElement('style');
+necroGuideStyle.textContent='.stage[data-room="necropsy"] .vpqNecroGuide{position:absolute;right:2%;top:2%;z-index:15;pointer-events:auto;border:2px solid #b6a3c6;border-radius:10px;background:#fffaf0eb;color:#635976;font-size:11px;font-weight:900;padding:5px 9px;box-shadow:0 2px 7px #4b57702d;white-space:nowrap}'+
+'.stage[data-room="necropsy"] .vpqNecroGuide:hover,.stage[data-room="necropsy"] .vpqNecroGuide:focus-visible{background:#f4e4ff;border-color:#866fb1}'+
+'.stage[data-room="necropsy"] .vpqSpecHit[data-vpqspecact="necroBio"] span{bottom:3%;left:49%;max-width:125px}'+
+'.stage[data-room="necropsy"] .vpqSpecHit[data-vpqspecact="necroCases"] span{bottom:5%}';
+document.head.appendChild(necroGuideStyle);
+
 
 
 function refresh(){
@@ -225,8 +233,19 @@ function refresh(){
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
  div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" data-vpqspec-kind="'+(p.kind||'practice')+'" title="'+(p.hint||p.label)+'" aria-label="'+p.label+(p.subtitle?' — '+p.subtitle:'')+'"><span>'+p.label+(p.subtitle?'<small>'+p.subtitle+'</small>':'')+'</span></button>').join('')+
  (room==='clinpath'?['coag','gas','urine','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([16.3,36.0,55.7,75.4,92.5][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
+ (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
  (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Learn First — open lecture study guides and references" aria-label="Learn First reference bookshelf — open study guides"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Lecture-based study guides">📖 Learn First</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
- div.addEventListener('click',e=>{const guide=e.target.closest('[data-vpqbench-guide]');if(guide){window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b)api.doAction(b.dataset.vpqspecact)});
+ div.addEventListener('click',e=>{if(e.target.closest('[data-vpqnecro-guide]')){
+  api.showModal('🦴 How to use the Necropsy Lab',
+  '<p><b>Start with the Handbook</b> to understand the diseases, then work from gross appearance to diagnosis and microscopic confirmation.</p>'+
+  '<p>🦴 <b>Glass specimen cabinet:</b> identify organs and visible gross lesions.</p>'+
+  '<p>📚 <b>Book shelf:</b> learn diseases by system and lecture, including the clinical WHY.</p>'+
+  '<p>📋 <b>Diagnosis board:</b> write a morphologic diagnosis — organ + distribution + lesion type + severity when justified.</p>'+
+  '<p>🔬 <b>Microscope:</b> recognize microscopic lesions and connect histology to pathogenesis.</p>'+
+  '<p>🐾 <b>Case board:</b> apply findings to patient cases.</p>'+
+  '<p>🧼 <b>Boot wash and PPE:</b> learn safety, cleaning and sample handling.</p>'+
+  '<p class="tiny">Click an object or walk near it and press E. The two stainless tables are visual necropsy workstations; the six labeled learning objects open activities.</p>');return}
+ const guide=e.target.closest('[data-vpqbench-guide]');if(guide){window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b)api.doAction(b.dataset.vpqspecact)});
  stage.appendChild(div);
 }
 function updateNearby(room,x){
