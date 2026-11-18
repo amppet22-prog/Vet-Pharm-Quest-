@@ -215,3 +215,78 @@ checks:[
 ['Why can inflammatory ventricular exudate cause acquired hydrocephalus?','It blocks CSF circulation, resulting in upstream ventricular dilation.'],
 ['How do FCE and compressive IVDD differ mechanistically?','FCE is vascular occlusion by fibrocartilage; IVDD primarily compresses tissue and can cause subsequent ischemia and Wallerian degeneration.']
 ]};
+
+
+window.VPQ_PATH_LECTURE_LEARN['69']={
+title:'CNS Malformations, Neoplasia, Toxic and Degenerative Disease',
+source:'Instructor Lecture 69 · 57 slides; textbook support: Zachary & McGavin, Ch. 14',
+sections:[
+{title:'What to recognize and how to describe it',slides:'1–4',points:[
+['Professor’s objective','Recognize congenital CNS defects, gliomas and other tumors, metabolic encephalopathies, toxicoses, nutrient deficiencies, and selected spinal diseases from gross lesions and mechanisms.'],
+['Gross lesion checklist','Identify involved region, symmetric or asymmetric, white or gray matter, tissue missing versus compressed, cystic versus solid, and vascular versus inflammatory injury.'],
+['Distinguishing mechanism','A ventricle enlarged by accumulated CSF is not the same lesion as cerebral tissue destroyed and replaced by a fluid-filled space.']]},
+{title:'Hydrocephalus and fluid pressure',slides:'5–6',points:[
+['Definition','Abnormal CSF accumulation with ventricular dilation; congenital or acquired.'],
+['Causes','Malformations of CSF passages, prior developmental viral injury, inherited predisposition in some toy/brachycephalic dogs, inflammation and obstruction by masses.'],
+['Gross lesion','Enlarged cerebral ventricles with compression/thinning of surrounding neural tissue; congenital severe cases may have a domed, thinned skull.'],
+['Why location matters','Ventricles proximal to the obstruction dilate; white matter is particularly susceptible to compression injury.'],
+['Compare','Hydrocephalus expands the ventricular system, whereas hydranencephaly replaces much of the cerebral mantle after destructive fetal injury.']]},
+{title:'Absent tissue versus abnormal cortical folding',slides:'7–9',points:[
+['Anencephaly and cerebral aplasia','Anencephaly is extreme absence of the brain; cerebral aplasia lacks cerebral hemispheres while brainstem and cerebellum may remain.'],
+['Lissencephaly','The cerebrum is abnormally smooth with reduced gyri/sulci because of abnormal neuronal migration and cortical development; breed and species matter.'],
+['Porencephaly','Cystic cavity within a cerebral hemisphere, often following prenatal destructive injury.'],
+['Hydranencephaly','Extensive absence of cerebral cortical and white matter tissue replaced by fluid-filled spaces, with meninges often remaining.'],
+['Important sources','Fetal neurotropic viral infections may injure developing neural cells, including Akabane, BVDV and bluetongue viruses.']]},
+{title:'Other CNS congenital defects',slides:'10–15',points:[
+['Cerebellar hypoplasia','Underdevelopment of the cerebellum can follow viral injury to proliferating fetal or neonatal cells; affected animals have cerebellar motor signs without progressive inflammatory disease.'],
+['Meningocele and meningoencephalocele','Herniation of meninges alone versus meninges plus neural tissue through a bony defect.'],
+['Hydromyelia and syringomyelia','Hydromyelia dilates the central spinal canal; syringomyelia denotes an abnormal fluid-filled cavity within spinal cord parenchyma.'],
+['Chiari-like malformation','Crowding/displacement of caudal brain structures can interfere with CSF flow and associate with syringomyelia.'],
+['Image recognition','Assess what forms the sac/cavity, what tissue is missing, and whether the fluid-filled structure communicates with normal ventricles or central canal.']]},
+{title:'Gliomas',slides:'16–20',points:[
+['Three primary categories','Astrocytoma, oligodendroglioma and ependymoma are the three glial tumor types emphasized.'],
+['Astrocytoma','Neoplasm of astrocytic lineage, often infiltrative and variably distinct from surrounding brain.'],
+['Oligodendroglioma','Typically arises from oligodendroglial lineage and can show soft gray-pink intraparenchymal masses; histology is needed for definitive classification.'],
+['Ependymoma','Arises from cells associated with ventricular or central canal lining, so location relative to CSF spaces is a major clue.'],
+['Test yourself','Location, gross margins, infiltration and tissue of origin are useful, but gross color alone cannot establish the specific glial subtype.']]},
+{title:'Choroid plexus tumors, meningiomas and metastasis',slides:'21–25',points:[
+['Choroid plexus neoplasia','Intraventricular mass associated with CSF production pathways; may produce obstruction, hydrocephalus and pressure effects.'],
+['Meningioma','Extra-axial, usually dural-associated and compressive rather than originating within the neural parenchyma.'],
+['Metastatic lesions','Often multifocal, bloodborne and associated with the cerebral gray-white junction. Hemangiosarcoma is an important hemorrhagic metastatic tumor example.'],
+['Gross differential','Dura-based compressive mass versus intraventricular mass versus intraparenchymal neoplasm versus multiple metastatic nodules.']]},
+{title:'Hepatic encephalopathy and metabolic injury',slides:'26–30',points:[
+['Mechanism','Failure of hepatic detoxification and/or portosystemic shunting allows ammonia and other neuroactive substances to affect the brain.'],
+['Neural response','Hyperammonemia changes astrocyte metabolism, resulting in astrocyte swelling and functional neurologic impairment.'],
+['Microscopic clue','Alzheimer type II astrocytes are a characteristic microscopic association described in pathology texts; this lecture does not require histologic identification of the lesion.'],
+['Do not confuse','Metabolic dysfunction can produce marked neurologic signs without a discrete gross inflammatory or tumoral lesion.']]},
+{title:'Toxic CNS injury: neurochemical versus structural lesions',slides:'30–39',points:[
+['Organophosphates','Acetylcholinesterase inhibition causes cholinergic overstimulation and neuromuscular/autonomic neurologic signs; characteristic CNS gross lesions may be absent.'],
+['Lead','Causes multisystemic and neurologic toxicosis, potentially including cerebral edema and neuronal degeneration; species and exposure history matter.'],
+['Selenium','Toxicosis can produce focal or bilaterally symmetric spinal cord damage in susceptible species, with weakness and neurologic deficits.'],
+['Salt intoxication','Sodium disturbances and correction-related osmotic shifts can contribute to encephalopathy, edema and characteristic inflammatory/neuronal lesions in pigs.'],
+['Bromethalin','A mitochondrial toxicant causing CNS edema and white-matter intramyelinic vacuolation.'],
+['Arsenic and tetanus','Arsenic has important vascular/GI toxicity; tetanospasmin interferes with inhibitory neurotransmitter release, causing spasticity, often without an identifiable primary gross CNS lesion.']]},
+{title:'Plants, fungi, and species-specific malacia',slides:'39–45',points:[
+['Phalaris grass','Neurotoxicosis can cause abnormal pigment accumulation and neurologic dysfunction, especially in grazing animals.'],
+['Moldy corn (fumonisins)','Equine leukoencephalomalacia features white-matter softening/necrosis after fumonisin exposure.'],
+['Centaurea species','Can produce nigropallidal encephalomalacia in horses with neurologic and feeding abnormalities.'],
+['Species-location rule','Polio- means gray matter and leuko- means white matter; the lesion name indicates the preferred anatomic site.'],
+['Look-alikes','Differentiate toxin-associated white/gray matter necrosis from vascular infarction and inflammatory encephalitis by distribution and exposure.']]},
+{title:'Deficiency states and spinal cord compression',slides:'45–53',points:[
+['Thiamine deficiency','Loss of thiamine-dependent metabolism impairs ATP production. Ruminant polioencephalomalacia and species-specific neural lesions must be interpreted in the correct metabolic context.'],
+['Copper deficiency','Hypomyelination or degeneration of developing neural pathways can produce congenital or progressive motor dysfunction, especially in small ruminants.'],
+['Wobbler syndrome','Cervical vertebral malformation/instability and canal narrowing can compress the spinal cord, particularly in large-breed dogs and horses.'],
+['Postanesthetic myelopathy','Ischemic/spinal perfusion mechanisms are proposed in some postoperative neurologic deficits; differentiate vascular injury from mechanical compression.']]},
+{title:'Pain syndromes and cognitive degeneration',slides:'54–57',points:[
+['Beagle pain syndrome','Steroid-responsive meningitis-arteritis is a painful inflammatory syndrome associated with cervical pain and other signs in predisposed young dogs.'],
+['Canine cognitive dysfunction','Age-associated neurodegeneration causes behavioral/cognitive decline, potentially without a distinctive gross lesion.'],
+['Final recognition rule','Work from the clinical presentation and the lesion distribution to the mechanism. A named disease is a differential until the pattern and testing support it.']]}
+],
+checks:[
+['Which gross lesion suggests hydrocephalus instead of hydranencephaly?','Expanded normal ventricular spaces with compression and thinning of the cerebral mantle, rather than extensive absence of cerebral hemispheric tissue.'],
+['A cerebral mass is attached to dura and compresses the underlying cortex. Which primary tumor category is favored?','Meningioma, an extra-axial dural-based tumor.'],
+['What separates hydromyelia and syringomyelia?','Hydromyelia is dilation of the spinal central canal; syringomyelia is a cavity within spinal cord parenchyma.'],
+['A horse exposed to moldy corn has white-matter malacia. What toxin-related process is important?','Fumonisin-associated equine leukoencephalomalacia.'],
+['What is the important neurotoxin in hepatic encephalopathy?','Ammonia, among other compounds, alters astrocyte metabolism and brain function.'],
+['A canine lesion lies adjacent to a ventricle and blocks CSF drainage. What is the major secondary consequence?','Obstructive/acquired hydrocephalus and increased intracranial pressure.']
+]};
