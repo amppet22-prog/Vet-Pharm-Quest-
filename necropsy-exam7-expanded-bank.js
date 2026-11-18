@@ -24,6 +24,15 @@ const extra67=[
 ['Hydrocephalus from impaired CSF flow','Enlarged cerebral ventricles and attenuation of surrounding neural tissue','Brain: ventricular dilatation / hydrocephalus','Ependymal stretching and pressure changes in adjacent parenchyma','CSF production, flow and absorption imbalance; compare congenital destructive hydranencephaly']
 ];
 for(const [title,gross,dx,histo,why] of extra67){const k='67|'+title.toLowerCase();if(existing.has(k))continue;existing.add(k);bank.push({id:'pathx-67-'+bank.length,lecture:'67',title,gross,dx,histo,why,source:'Professor L67 slide-audited CNS foundations; mechanism/appearance study card. No slide image reproduced.'})}
+/* Dedicated meningeal inflammation card: owner can edit and publish multiple gross/H&E photos independently. */
+if(!bank.some(x=>x.id==='pathx-68-meningitis')){
+ bank.push({id:'pathx-68-meningitis',lecture:'68',title:'Meningitis — leptomeningitis vs pachymeningitis',
+ gross:'Opaque, hyperemic leptomeninges with yellow-white exudate tracking sulci; distinguish inflammation of pia/arachnoid and subarachnoid space from thickened inflamed dura.',
+ dx:'CNS meninges: diffuse fibrinosuppurative leptomeningitis (working pattern; etiology pending)',
+ histo:'Suppurative leptomeningitis: abundant neutrophils/fibrin within the subarachnoid space. Nonsuppurative: lymphocytes/mononuclear cells. Granulomatous: macrophages/giant cells and possible fungi. Pachymeningitis: dura. Meningoencephalitis: adjacent brain parenchyma.',
+ why:'Septicemia or contiguous infection can seed the meninges; gross appearance and leukocyte pattern localize and classify inflammation, but bacterial identity requires laboratory confirmation.',
+ source:'Instructor Lecture 68 slides 7–9 · leptomeningitis versus pachymeningitis and neonatal septicemia. Photos are owner-supplied and publishable.'});
+}
 for(let n=67;n<=79;n++){
  const num=String(n),lecture=lessons[num];
  if(!lecture?.sections)continue;
