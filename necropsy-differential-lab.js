@@ -253,9 +253,70 @@ function conditionIndex(){
  '<p class="tiny">Coverage audit: <b>'+total+' lecture topics</b> across L67–79. Topics include normal anatomy and general principles as well as individual diseases; they are not all distinct diagnoses. A lecture note does NOT imply a dedicated case or photograph.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:5px;margin:9px 0">'+summary.map(v=>'<button data-pathdiff-condition-lecture="'+v.lecture+'" aria-pressed="'+(conditionLecture===v.lecture?'true':'false')+'" style="padding:7px 5px;font-size:12px">L'+v.lecture+'<small style="display:block;font-size:10px">'+v.teaching+' topics</small></button>').join('')+'</div>'+
  '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture)+'</b><p style="font-size:12px;margin:5px 0">Lecture topics: '+row.teaching+' · Matched specimen cards: '+row.specimens+' · Matched differential cases: '+row.cases+' · Attached image references: '+row.embedded+'</p><small>Counts are conservatively matched by case mapping/title, not a certified complete disease audit. External links without an embedded image are not counted as attached images.</small></div>'+
+ '<div class="buttonrow"><button data-pathdiff-flash-lecture="1" style="background:#e8f2ff">🧠 Study this lecture · flashcards</button></div>'+
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-gap="all" aria-pressed="'+(conditionGap==='all')+'">All '+sections.length+'</button><button data-pathdiff-gap="case" aria-pressed="'+(conditionGap==='case')+'">Needs differential case</button><button data-pathdiff-gap="photo" aria-pressed="'+(conditionGap==='photo')+'">Needs attached photo</button></div>'+
  '<p class="tiny">'+displayed.length+' topics displayed. Select any topic to see full instructor-derived notes and the source slide reference.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px">'+displayed.map(({x,i,ev})=>'<button data-pathdiff-condition-open="'+i+'" style="text-align:left;padding:10px;background:white;border:1px solid #c6d7e9;border-radius:10px"><b>'+safe(x.title)+'</b><small style="display:block;color:#597087;margin-top:5px">Slides '+safe(x.slides||'see lecture')+'</small><small style="display:block;color:#536575;margin-top:4px">Notes ✓ · Specimen '+(ev.specimen?'✓':'—')+' · Case '+(ev.linked.length?'✓':'—')+' · Image '+(ev.embedded?'✓':'—')+'</small></button>').join('')+'</div>');
+}
+
+/* Lightweight source-derived flashcards reuse the existing lecture recall space.
+ * A progress mark is a study preference, never a claim of diagnostic mastery.
+ */
+const FLASH_KEY='vpq-necropsy-flashcards-v1';
+let flashCards=[],flashIndex=0,flashFace=false,flashScope='topic',flashReview=false,flashOrigin=-1;
+function flashProgress(){try{return JSON.parse(localStorage.getItem(FLASH_KEY)||'{}')}catch(_){return {}}}
+function saveFlashProgress(id,needsPractice){
+ const data=flashProgress();if(needsPractice)data[id]=true;else delete data[id];
+ try{localStorage.setItem(FLASH_KEY,JSON.stringify(data))}catch(_){}
+}
+function flashDeck(scope){
+ const sections=lectureConditions(),source=scope==='topic'?[sections[conditionChosen]].filter(Boolean):sections;
+ const deck=[];
+ for(const [i,section] of source.entries()){
+  if(!section)continue;
+  const globalIndex=scope==='topic'?conditionChosen:i;
+  for(const [j,p] of (section.points||[]).entries()){
+   if(!Array.isArray(p)||!String(p[1]||'').trim())continue;
+   const label=String(p[0]||'Key finding'),answer=String(p[1]);
+   const vague=/^(key (finding|feature|point|information)|core (lesion|finding)|lecture feature|instructor slide|professor.s core finding)\s*\d*$/i.test(label);
+   const prompt=vague?'What must you recognize about '+section.title+'?':label==='Compare'?'What distinguishes '+section.title+' from its closest mimics?':'For '+section.title+': '+label+'?';
+   const id=conditionLecture+'|'+section.title.toLowerCase()+'|'+j;
+   deck.push({id,title:section.title,prompt,answer,slide:section.slides||'see source',topicIndex:globalIndex});
+  }
+ }
+ return deck;
+}
+function startFlash(scope='topic',review=false){
+ flashScope=scope;flashReview=review;flashFace=false;flashOrigin=conditionChosen;
+ const all=flashDeck(scope),progress=flashProgress();
+ flashCards=(review?all.filter(c=>progress[c.id]):all);
+ // Limit a lecture session to a manageable size. Cards missed in earlier rounds
+ // are presented first, then shuffle the remaining eligible questions.
+ const shuffled=flashCards.map(c=>({c,k:Math.random()})).sort((a,b)=>(!!progress[b.c.id])-(!!progress[a.c.id])||a.k-b.k).map(x=>x.c);
+ flashCards=shuffled.slice(0,scope==='lecture'?15:20);flashIndex=0;
+ flashView();
+}
+function flashView(){
+ const progress=flashProgress(),c=flashCards[flashIndex],pending=flashCards.filter(x=>progress[x.id]).length;
+ if(!c)return modal('🧠 Pathology flashcards',
+ '<div class="buttonrow"><button data-pathdiff-flash-back="1">← Lecture topics</button></div>'+
+ '<p>'+(flashReview?'No saved practice cards in this lecture yet. Mark any card “Need practice” to build a review deck.':'No flashcards were found for this selected topic.')+'</p>'+
+ '<button data-pathdiff-flash-all="1">Study all '+(flashScope==='lecture'?'lecture':'topic')+' cards</button>');
+ modal('🧠 L'+safe(conditionLecture)+' · '+(flashScope==='lecture'?'Lecture flashcards':'Topic flashcards'),
+ '<div class="buttonrow"><button data-pathdiff-flash-back="1">← '+(flashScope==='topic'?'Topic notes':'Lecture topics')+'</button><button data-pathdiff-flash-all="1">↻ New shuffled set</button></div>'+
+ '<p class="tiny"><b>Card '+(flashIndex+1)+' of '+flashCards.length+'</b> · '+(flashReview?'Practice-only deck':'Source-based recall')+' · '+pending+' marked for practice in this set. Your marks stay in this browser.</p>'+
+ '<div style="background:#f4f7fc;border:1px solid #c8d7e8;border-radius:12px;padding:17px;margin:10px 0;min-height:180px;display:flex;flex-direction:column;justify-content:center;gap:10px">'+
+ '<small style="color:#637a92">L'+safe(conditionLecture)+' · '+safe(c.title)+' · slides '+safe(c.slide)+'</small>'+
+ '<b style="font-size:17px;line-height:1.35">'+safe(c.prompt)+'</b>'+
+ (flashFace?'<div style="border-top:1px solid #d1dfeb;padding-top:10px;white-space:pre-wrap;font-size:14px">'+rich(c.answer)+'</div>':'<p class="tiny">Recall the answer before flipping. Try to include tissue, species, lesion and WHY where relevant.</p>')+
+ '</div>'+
+ '<div class="buttonrow">'+(flashFace?
+ '<button data-pathdiff-flash-rate="again" style="background:#fff2e6">↺ Need practice</button><button data-pathdiff-flash-rate="know" style="background:#e7f5eb">✓ Got it</button>':
+ '<button data-pathdiff-flash-flip="1" style="background:#e7f0ff;font-weight:800">Flip / show answer</button>')+'</div>'+
+ '<div class="buttonrow"><button data-pathdiff-flash-prev="1" '+(flashIndex===0?'disabled':'')+'>← Previous</button><button data-pathdiff-flash-next="1">Next →</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-flash-review="1">Practice missed cards</button>'+(flashScope==='topic'?'<button data-pathdiff-flash-lecture="1">Study entire L'+safe(conditionLecture)+'</button>':'')+'</div>'+
+ (flashScope==='topic'?'<button data-pathdiff-recall-all="1" style="font-size:12px">Show all lecture-derived recall prompts</button>':'')+
+ '<p class="tiny">“Got it” removes the card from your practice list; “Need practice” saves it. These are paraphrased lecture notes, not validated exam questions or photo-based specimen IDs.</p>');
 }
 
 /* Every lecture topic, including topics without bespoke differential questions, has a source-grounded active-recall exercise. */
@@ -345,7 +406,16 @@ function init(api){
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
  if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
  if(d.pathdiffConditionBack!==undefined)return conditionIndex();
- if(d.pathdiffRecallStart!==undefined){recallShow=false;return recallView()}
+ if(d.pathdiffRecallStart!==undefined)return startFlash('topic');
+ if(d.pathdiffFlashLecture!==undefined)return startFlash('lecture');
+ if(d.pathdiffFlashFlip!==undefined){flashFace=!flashFace;return flashView()}
+ if(d.pathdiffFlashPrev!==undefined){flashIndex=Math.max(0,flashIndex-1);flashFace=false;return flashView()}
+ if(d.pathdiffFlashNext!==undefined){flashIndex=(flashIndex+1)%Math.max(1,flashCards.length);flashFace=false;return flashView()}
+ if(d.pathdiffFlashRate!==undefined){if(flashCards[flashIndex])saveFlashProgress(flashCards[flashIndex].id,d.pathdiffFlashRate==='again');flashIndex=(flashIndex+1)%Math.max(1,flashCards.length);flashFace=false;return flashView()}
+ if(d.pathdiffFlashReview!==undefined)return startFlash(flashScope,true);
+ if(d.pathdiffFlashAll!==undefined)return startFlash(flashScope,false);
+ if(d.pathdiffFlashBack!==undefined)return flashScope==='topic'?conditionDetail():conditionIndex();
+ if(d.pathdiffRecallAll!==undefined){recallShow=false;return recallView()}
  if(d.pathdiffRecallReveal!==undefined){recallShow=true;return recallView()}
  if(d.pathdiffRecallReset!==undefined){recallShow=false;return recallView()}
  if(d.pathdiffRecallBack!==undefined)return conditionDetail();
