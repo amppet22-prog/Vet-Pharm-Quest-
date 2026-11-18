@@ -28,7 +28,8 @@ function menu(){
  '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
  '<label style="font-size:12px;font-weight:700;flex:1;min-width:115px">Choose lecture<select data-pathdiff-study-lecture="1" style="display:block;width:100%;font-size:14px;padding:9px;margin-top:4px;border:1px solid #a9c5b5;border-radius:8px;background:#fff">'+counts.map(n=>'<option value="'+n+'"'+(selectedStudy===n?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
  '<button data-pathdiff-study-start="1" style="flex:2;min-width:170px;padding:13px 10px;background:#d5f0df;border:1px solid #7ebc96;border-radius:9px;font-size:14px;font-weight:850">▶ Start flashcards</button></div>'+
- '<small style="display:block;margin-top:7px;color:#486354">Flip → Got it / Need practice → Review difficult cards</small></div>'+
+ '<small style="display:block;margin-top:7px;color:#486354">Flip → Got it / Need practice → Review difficult cards</small>'+
+ (selectedStudy==='67'?'<button data-pathdiff-flash-foundations="1" style="display:block;margin-top:9px;font-size:12px">📚 Focus: brain barriers & neuropathology vocabulary</button>':'')+'</div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin:10px 0">'+
  '<button data-pathdiff-return="1" style="padding:12px;min-height:56px;text-align:left;border-radius:10px"><b>🔬 Gross & histology atlas</b><small style="display:block">Recognize the lesion</small></button>'+
  '<button data-pathdiff-show-cases="1" style="padding:12px;min-height:56px;text-align:left;border-radius:10px"><b>🧩 Differential cases</b><small style="display:block">Compare possible causes</small></button></div>'+
@@ -284,11 +285,16 @@ function saveFlashProgress(id,needsPractice){
  try{localStorage.setItem(FLASH_KEY,JSON.stringify(data))}catch(_){}
 }
 function flashDeck(scope){
- const sections=lectureConditions(),source=scope==='topic'?[sections[conditionChosen]].filter(Boolean):sections;
+ const sections=lectureConditions(),source=scope==='topic'?[sections[conditionChosen]].filter(Boolean):scope==='foundation'?sections.filter(x=>Array.isArray(x.flashcards)&&x.flashcards.length):sections;
  const deck=[];
  for(const [i,section] of source.entries()){
   if(!section)continue;
-  const globalIndex=scope==='topic'?conditionChosen:i;
+  const globalIndex=scope==='topic'?conditionChosen:sections.indexOf(section);
+  // Curated question-and-answer cards replace generic note prompts for these sections.
+  if(Array.isArray(section.flashcards)&&section.flashcards.length){
+   section.flashcards.forEach(([prompt,answer],j)=>{if(String(prompt||'').trim()&&String(answer||'').trim())deck.push({id:conditionLecture+'|'+section.title.toLowerCase()+'|focus-'+j,title:section.title,prompt:String(prompt),answer:String(answer),slide:section.slides||'see source',topicIndex:globalIndex});});
+   continue;
+  }
   for(const [j,p] of (section.points||[]).entries()){
    if(!Array.isArray(p)||!String(p[1]||'').trim())continue;
    const label=String(p[0]||'Key finding'),answer=String(p[1]);
@@ -312,7 +318,7 @@ function startFlash(scope='topic',review=false){
  // Limit a lecture session to a manageable size. Cards missed in earlier rounds
  // are presented first, then shuffle the remaining eligible questions.
  const shuffled=flashCards.map(c=>({c,k:Math.random()})).sort((a,b)=>(!!progress[b.c.id])-(!!progress[a.c.id])||a.k-b.k).map(x=>x.c);
- flashCards=shuffled.slice(0,scope==='lecture'?15:20);flashIndex=0;
+ flashCards=shuffled.slice(0,scope==='lecture'?15:scope==='foundation'?20:20);flashIndex=0;
  flashView();
 }
 function flashView(){
@@ -326,7 +332,7 @@ function flashView(){
  '<div class="buttonrow"><button data-pathdiff-flash-back="1">← Lecture topics</button></div>'+
  '<p>'+(flashReview?'No saved practice cards in this lecture yet. Mark any card “Need practice” to build a review deck.':'No flashcards were found for this selected topic.')+'</p>'+
  '<button data-pathdiff-flash-all="1">Study all '+(flashScope==='lecture'?'lecture':'topic')+' cards</button>');
- modal('🧠 L'+safe(conditionLecture)+' · '+(flashScope==='lecture'?'Lecture flashcards':'Topic flashcards'),
+ modal('🧠 L'+safe(conditionLecture)+' · '+(flashScope==='lecture'?'Lecture flashcards':flashScope==='foundation'?'CNS foundations':'Topic flashcards'),
  '<div class="buttonrow"><button data-pathdiff-flash-back="1">← '+(flashScope==='topic'?'Topic notes':'Lecture topics')+'</button><button data-pathdiff-flash-all="1">↻ New shuffled set</button></div>'+
  '<p class="tiny"><b>Card '+(flashIndex+1)+' of '+flashCards.length+'</b> · '+(flashReview?'Practice-only deck':'Source-based recall')+' · '+pending+' marked for practice in this set. Your marks stay in this browser.</p>'+
  '<div style="background:#f4f7fc;border:1px solid #c8d7e8;border-radius:12px;padding:17px;margin:10px 0;min-height:180px;display:flex;flex-direction:column;justify-content:center;gap:10px">'+
@@ -435,6 +441,7 @@ function init(api){
  if(d.pathdiffConditionBack!==undefined)return conditionIndex();
  if(d.pathdiffRecallStart!==undefined)return startFlash('topic');
  if(d.pathdiffFlashLecture!==undefined)return startFlash('lecture');
+ if(d.pathdiffFlashFoundations!==undefined){conditionLecture='67';return startFlash('foundation')}
  if(d.pathdiffFlashSpecimens!==undefined)return window.VPQ_PATH_EXAM7?.studyLecture?.(conditionLecture);
  if(d.pathdiffFlashCases!==undefined){filter=conditionLecture;menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(d.pathdiffFlashFlip!==undefined){flashFace=!flashFace;return flashView()}
@@ -461,7 +468,7 @@ function init(api){
  },true);
  api.body.addEventListener('change',ev=>{
  const d=ev.target?.dataset;
- if(d?.pathdiffStudyLecture!==undefined){conditionLecture=String(ev.target.value||'68');return;}
+ if(d?.pathdiffStudyLecture!==undefined){conditionLecture=String(ev.target.value||'68');return menu();}
  if(d?.pathdiffCaseFilter!==undefined){filter=String(ev.target.value||'all');menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(!d||d.pathdiffPhoto===undefined)return;
  const input=ev.target,file=input.files?.[0];if(!file||!file.type.startsWith('image/'))return;
