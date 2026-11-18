@@ -172,7 +172,8 @@ function sourcedPhotos(x){
 }
 function photoHTML(x){const photo=photoStore()[x.id];return '<div style="max-width:330px;padding:10px;background:#f8faff;border:1px dashed #bdcce0;border-radius:10px">'+(photo?'<img src="'+safe(photo)+'" alt="User added necropsy specimen" style="max-width:100%;max-height:205px;object-fit:contain;display:block;margin:auto">':'<div style="min-height:92px;display:grid;place-items:center;color:#566a89;font-size:13px">📷 No source photograph yet — add one from your lectures</div>')+'<label style="display:block;margin-top:7px;font-size:12px"><b>Add / replace this case image (local only)</b><input type="file" accept="image/*" data-pathdiff-photo="'+safe(x.id)+'" style="max-width:100%;font-size:12px"></label>'+(photo?'<button style="margin-top:5px;font-size:11px" data-pathdiff-remove="'+safe(x.id)+'">Remove local photo</button>':'')+'<small style="display:block;color:#66758b">Local draft photo; publish to make it available across devices. Only use photos you have rights to share.</small><button data-pathdiff-publish="'+safe(x.id)+'" style="display:block;margin-top:7px;background:#e4f6eb;border:1px solid #75b996">🚀 Edit / Publish photo now</button></div>'}
 function view(){
- const x=data.find(v=>v.id===current);if(!x)return menu();
+ const baseCase=data.find(v=>v.id===current);if(!baseCase)return menu();
+ const x={...baseCase,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
  const revealed=phase>=2;
  const opted=leading>=0?x.options[leading]:null;
  modal('🔬 Differential case · L'+safe(x.lecture)+' · '+safe(x.title),
@@ -226,5 +227,6 @@ function init(api){
 }
 function openCase(id){if(data.some(x=>x.id===id)){current=id;return view()}return menu()}
 function draftPhoto(id){return photoStore()[id]||''}
-return {init,start,cases:data,openCase,draftPhoto};
+function draftText(id){return {}}
+return {init,start,cases:data,openCase,draftPhoto,draftText};
 })();
