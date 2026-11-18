@@ -125,3 +125,93 @@ checks:[
 ['Trace CSF from the lateral ventricles to reabsorption.','Lateral ventricles → third → cerebral aqueduct → fourth → lateral apertures → subarachnoid space → arachnoid villi → venous circulation.'],
 ['Which four entry routes does the professor list for CNS pathogens?','Direct extension, hematogenous spread (most common), leukocyte trafficking, retrograde axonal transport.']
 ]};
+
+
+window.VPQ_PATH_LECTURE_LEARN['68']={
+title:'CNS Inflammatory Conditions',
+source:'Instructor Lecture 68 · 46 slides · supplemented by Zachary & McGavin, Ch. 14',
+sections:[
+{title:'Objectives and inflammation patterns',slides:'1–4',points:[
+['Instructor priorities','Recognize lesions and provide morphologic diagnoses; know which pathogen, route, species and characteristic lesion distinguish each CNS infection or inflammatory condition.'],
+['Read the lesion first','Determine meninges, parenchyma, ventricular lining or vessel distribution. Then classify suppurative, nonsuppurative, granulomatous, necrotizing or hemorrhagic inflammation.'],
+['Why location matters','Hematogenous seeding, cranial-nerve ascent, local extension and leukocyte trafficking preferentially affect different CNS compartments.']]},
+{title:'Cerebral versus vertebral abscess',slides:'5',points:[
+['Cerebral abscess','Can arise from direct extension or bloodborne spread, including spread associated with ventriculitis or leptomeningitis. Focal suppurative necrosis can compress vital neural structures.'],
+['Weak capsule','CNS astrocytic scarring does not encapsulate purulent material as firmly as fibroblast-rich tissues; a poorly contained abscess may extend.'],
+['Vertebral abscess','Adjacent osteomyelitis, discospondylitis or local trauma may produce epaxial inflammation and compress the spinal cord; hematogenous spread also occurs.'],
+['What to describe','Focal or multifocal, location, purulent necrosis, displacement/compression and whether there is adjacent spinal disease.']]},
+{title:'Choroid plexitis, ependymitis and meningitis',slides:'6–7',points:[
+['Choroid plexitis vs ependymitis','Inflammation of choroid plexus versus ventricular ependymal lining, often bacterial and arising by bloodborne or direct entry.'],
+['Gross ventricular findings','Turbid gray-white to yellow-green, thickened or gelatinous CSF; hyperemic, granular or hemorrhagic choroid plexus.'],
+['Downstream complication','Inflammatory exudate may spread into subarachnoid compartments or block CSF flow and cause acquired hydrocephalus.'],
+['Leptomeningitis','Inflammation of pia and arachnoid. Neutrophilic forms often follow bacteremia. Dural inflammation is pachymeningitis; viral disease often involves brain parenchyma too.']]},
+{title:'Neonatal septicemia and meningitis',slides:'8–9',points:[
+['Routes','Neonatal bacteremia starts from umbilical, enteric, respiratory or intrauterine entry; hematogenous dissemination seeds CNS vessels and leptomeninges.'],
+['Common organisms','E. coli, Streptococcus, Salmonella, Pasteurella and Haemophilus species are emphasized in the lecture.'],
+['Pathogenesis','Circulating microbial products and inflammatory mediators damage vessels and the blood-brain barrier, producing suppurative leptomeningitis with edema.'],
+['Gross reasoning','Search for meningeal cloudiness/exudate and evidence of systemic neonatal infection rather than guessing the bacterium from appearance.']]},
+{title:'Listeriosis',slides:'10',points:[
+['Host and entry','Listeria monocytogenes is important in domestic ruminants; poor-quality silage is a major exposure.'],
+['Lesion distribution','Predilection for brainstem, reflecting neural entry and ascending spread along cranial nerves; gross lesions may be absent.'],
+['Histology','Characteristic neutrophilic microabscesses in the brainstem, often with perivascular inflammatory cuffs and microglial reaction.'],
+['Distinguish','Focal brainstem suppurative microabscesses favor listeriosis over diffuse hematogenous bacterial meningitis.']]},
+{title:'Thrombotic meningoencephalitis (TME)',slides:'11–12',points:[
+['Cause and host','Histophilus somni causes septicemia and vascular injury in cattle, particularly young feedlot animals.'],
+['Gross lesions','Random multifocal hemorrhagic and necrotic foci, often near the cerebral cortical gray-white junction, with edema and sometimes leptomeningitis.'],
+['Mechanism','Septic vasculitis and vascular necrosis lead to thrombosis, ischemia, hemorrhage and infarction.'],
+['Distinguish','The vessel-centered thrombotic/hemorrhagic lesion separates TME from Listeria brainstem microabscesses.']]},
+{title:'Overeating disease and granulomatous meningoencephalitis',slides:'13–14',points:[
+['Overeating disease','Clostridium perfringens type D enterotoxemia in sheep and goats after dietary change causes toxin-mediated vascular damage and BBB disruption.'],
+['Typical distribution','Gross lesions often absent; when present, symmetric malacic foci, particularly in selected deep brain structures.'],
+['GME','An idiopathic, suspected T-cell–mediated inflammatory disease of small-breed dogs; multifocal or focal neurologic dysfunction.'],
+['Histology and distinction','Perivascular macrophage-rich/granulomatous inflammation in GME versus toxin-mediated vascular injury in overeating disease.']]},
+{title:'Rabies and equine arboviruses',slides:'15–20',points:[
+['Rabies entry and spread','Lyssavirus enters peripheral tissues from an infected bite, travels retrogradely in nerves and ascends into CNS; gross lesions often absent.'],
+['Rabies histology','Nonsuppurative polioencephalomyelitis, microgliosis, neuron damage and characteristic Negri bodies in some neurons; absence of inclusions does not exclude infection.'],
+['EEE/WEE/VEE','Mosquito-borne alphaviruses causing encephalomyelitis in equids; primarily gray matter disease with nonsuppurative inflammation and neuronal injury.'],
+['West Nile virus','Mosquito-borne flavivirus with gray-matter predilection in horses and birds, often involving the spinal cord; hemorrhage may be more evident than with equine alphaviruses.'],
+['Safety and clinical relevance','Suspected rabies demands appropriate public-health and laboratory precautions; histology alone is not definitive.']]},
+{title:'EHV-1, MCF, CAE',slides:'21–23',points:[
+['EHV-1 neurologic disease','Equine herpesvirus 1 can cause myeloencephalopathy, abortion and respiratory disease. Vascular inflammation and thrombosis produce focal ischemic necrosis in nervous tissue.'],
+['Malignant catarrhal fever','Gammaherpesvirus-associated disease of susceptible ruminants targets vessels, epithelia and lymphoid tissues; systemic vasculitis with possible CNS lesions.'],
+['Caprine arthritis encephalitis','Lentivirus infection of goats with macrophage tropism; young kids can develop neurologic disease while adults more often have arthritis or mammary disease.'],
+['Differential','EHV-1 and MCF are prominent vascular injury syndromes; CAE has an age- and macrophage-associated disease pattern.']]},
+{title:'Canine distemper, herpesvirus and feline FIP',slides:'24–27',points:[
+['Canine distemper','Pantropic morbillivirus produces immunosuppression and CNS disease; viral injury to oligodendrocytes/myelin produces demyelinating encephalitis.'],
+['Presentation variations','The professor differentiates classic young-dog disease, uncommon postvaccinal syndromes, and old dog encephalitis.'],
+['Canine herpesvirus-1','Can produce multisystemic infection in neonates and occasionally CNS necrosis/microglial nodules, with cerebellar and brainstem involvement.'],
+['FIP','Macrophage-associated feline coronavirus disease may cause pyogranulomatous/vascular CNS inflammation, ventricular exudate, nodules and secondary hydrocephalus.'],
+['Compare','Distemper: demyelination; FIP: pyogranulomatous exudate and vasculitis; canine neonatal herpesvirus: systemic necrotizing infection.']]},
+{title:'Fungal CNS infection and cryptococcosis',slides:'28–30',points:[
+['Fungal differentials','Aspergillus, Candida, Cryptococcus, Blastomyces, Histoplasma, Coccidioides and mucoralean fungi can involve CNS.'],
+['Angioinvasive fungi','Aspergillus is highlighted for vascular invasion in dogs, resulting in vasculitis, thrombosis and necrosis.'],
+['Cryptococcus','C. neoformans and C. gattii may reach the CNS from nasal/sinus extension through the cribriform plate or hematogenous spread from pulmonary disease.'],
+['Recognition','Soft gelatinous cryptococcal lesions, thickly encapsulated yeasts and inflammatory response that may vary by immune status; compare with angioinvasive fungal infarcts.']]},
+{title:'Neospora, Toxoplasma and EPM',slides:'31–35',points:[
+['Neospora caninum','Can involve neural and muscle tissues; intrauterine and ingestion routes; multifocal necrotizing nonsuppurative inflammation and glial nodules.'],
+['Toxoplasma gondii','Can involve numerous tissues including CNS; intracellular protozoa may produce multifocal necrotizing encephalitis.'],
+['EPM','Sarcocystis neurona predominates, with Neospora hughesi another cause. The opossum is the definitive host for S. neurona; lesions can be asymmetric and randomly distributed through spinal gray/white matter.'],
+['Gross and histologic clues','EPM can yield irregular dark reddish brown necrosis/hemorrhage; confirm protozoal identity with appropriate ancillary testing, not gross appearance alone.'],
+['Diagnostic testing','PCR, serology/ELISA and immunohistochemistry each address different diagnostic questions; correlate with lesion location and clinical signs.']]},
+{title:'Parasitic migration, Cuterebra and nematodiasis',slides:'36–40',points:[
+['General CNS parasite injury','Migrating parasites cause linear hemorrhagic/necrotic tracts, malacia, space-occupying lesions and often eosinophilic inflammation.'],
+['Insect larvae','Cuterebra in dogs/cats, Oestrus ovis in sheep and Hypoderma bovis in cattle are lecture examples with differing normal habitats and aberrant CNS routes.'],
+['Feline ischemic encephalopathy','Aberrant Cuterebra migration can produce acute, often unilateral cerebral injury in cats, commonly in warmer months.'],
+['Named nematodes','Parelaphostrongylus tenuis, Strongylus vulgaris, Toxocara canis and Baylisascaris procyonis: know host, migration route and lesions.'],
+['Distinguish','Migration tracks and eosinophils versus vascular emboli; not all protozoal disease produces eosinophilic inflammation.']]},
+{title:'Fibrocartilaginous embolism, IVDD and necrotizing encephalitides',slides:'41–45',points:[
+['Fibrocartilaginous embolism','Disk-associated fibrocartilage enters spinal vasculature, occludes flow and produces acute ischemic myelopathy, commonly described in dogs.'],
+['Intervertebral disk disease','Compression can cause direct axonal injury, Wallerian degeneration, ischemia and potentially progressive myelomalacia.'],
+['Necrotizing meningoencephalitis','Small-breed dog condition historically termed pug dog encephalitis; predominantly cerebral necrosis with meningeal involvement.'],
+['Necrotizing leukoencephalitis','Prominent white matter necrosis, classically described in Yorkshire terriers and other small breeds.'],
+['Compare','FCE = vascular infarct; IVDD = mechanical compression plus secondary injury; NME/NLE = inflammatory necrotizing encephalitides.']]}
+],
+checks:[
+['Why does Listeria in ruminants often target the brainstem?','Neural ascent along cranial nerves produces brainstem localization with suppurative microabscesses.'],
+['A feedlot calf has randomly distributed hemorrhagic cortical junction lesions with septic thrombosis. What is the top cause?','Histophilus somni–associated thrombotic meningoencephalitis (TME).'],
+['A goat with recent sudden feed change develops symmetric CNS lesions. What is the mechanism of overeating disease?','Clostridium perfringens type D epsilon toxin damages vascular endothelium/BBB, causing edema and malacia.'],
+['A horse develops neurologic deficits with an asymmetric hemorrhagic spinal cord focus. Which protozoal syndrome is important?','Equine protozoal myeloencephalitis, usually Sarcocystis neurona.'],
+['Which fungal genus is emphasized as angioinvasive in dogs?','Aspergillus, producing vascular damage, thrombosis and necrosis.'],
+['Why can inflammatory ventricular exudate cause acquired hydrocephalus?','It blocks CSF circulation, resulting in upstream ventricular dilation.'],
+['How do FCE and compressive IVDD differ mechanistically?','FCE is vascular occlusion by fibrocartilage; IVDD primarily compresses tissue and can cause subsequent ischemia and Wallerian degeneration.']
+]};
