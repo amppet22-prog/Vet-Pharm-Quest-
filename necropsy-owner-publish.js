@@ -59,6 +59,7 @@ async function editor(type,id){
  '<h4>Add photos (optional)</h4>'+
  (pending.localPhoto?'<label style="display:block"><input type="checkbox" id="npOwnerUseDraft"> Include my saved local draft photo</label><img src="'+esc(pending.localPhoto)+'" alt="Local photo draft" style="max-width:100%;max-height:110px;object-fit:contain">':'')+
  '<label style="display:block">Select one or several images<input id="npOwnerFiles" type="file" multiple accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:6px 0"></label>'+
+ '<div id="npOwnerFileDetails" style="margin:8px 0"></div>'+
  '<label style="display:block">Or add a direct HTTPS image URL<input id="npOwnerImageUrl" type="url" placeholder="https://example.org/image.jpg" style="width:100%;padding:8px"></label>'+
  '<label style="display:block">Type of new photos<select id="npOwnerKind" style="display:block;width:100%;padding:8px"><option value="gross">Gross</option><option value="histology">Histology / H&E</option><option value="clinical">Clinical</option><option value="illustration">Illustration</option></select></label>'+
  '<label style="display:block">Caption for new photo(s) (individual filenames are included)<textarea id="npOwnerCaption" rows="2" style="width:100%" placeholder="Species, tissue, lesion and stain"></textarea></label>'+
@@ -84,6 +85,7 @@ async function put(path,contents,sha,token,msg){return github(ROOT+path,token,'P
 function readFields(){
  const root=api.body,el=id=>root.querySelector('#'+id);
  const files=Array.from(el('npOwnerFiles')?.files||[]);
+ const filesMeta=files.map((file,i)=>({name:file.name,caption:String(root.querySelector('[data-np-file-caption="'+i+'"]')?.value||'').trim(),kind:root.querySelector('[data-np-file-kind="'+i+'"]')?.value||'gross'}));
  const draftData=el('npOwnerUseDraft')?.checked&&pending.localPhoto?pending.localPhoto:'';
  const external=String(el('npOwnerImageUrl')?.value||'').trim(),source=String(el('npOwnerSource')?.value||'').trim();
  const credit=String(el('npOwnerCredit')?.value||'').trim(),caption=String(el('npOwnerCaption')?.value||'').trim();
@@ -99,7 +101,7 @@ function readFields(){
  if(external&&!source)throw Error('External photos also need a source URL.');
  if(!newCount&&!Object.keys(edits).length&&!replaceAll&&!remove.length)throw Error('No changes selected. Add images, edit text, or choose photos to remove.');
  if(replaceAll&&!newCount)throw Error('To replace all photos, add the new photographs first. To remove individual photos, use their checkboxes.');
- return {files,draftData,external:goodUrl(external),source:goodUrl(source),credit:credit.slice(0,500),caption:caption.slice(0,1000),kind,replaceAll,remove,edits,newCount};
+ return {files,filesMeta,draftData,external:goodUrl(external),source:goodUrl(source),credit:credit.slice(0,500),caption:caption.slice(0,1000),kind,replaceAll,remove,edits,newCount};
 }
 
 async function imageBase64(f){
@@ -123,7 +125,7 @@ async function publish(job,fields,token,update){
  const dir=job.type==='case'?'cases':job.type==='lecture'?'lectures':'specimens';
  const prev=manifest[dir][job.id]||{},oldPhotos=photosOf(prev);
  let photos=fields.replaceAll?[]:oldPhotos.filter((p,i)=>!fields.remove.includes(i));
- const incoming=[...fields.files.map(f=>({file:f,name:f.name})),...(fields.draftData?[{data:fields.draftData,name:'saved-local-draft.jpg'}]:[]),...(fields.external?[{url:fields.external,name:'linked-photo'}]:[])];
+ const incoming=[...fields.files.map((f,i)=>({file:f,name:f.name,caption:fields.filesMeta[i]?.caption||'',kind:fields.filesMeta[i]?.kind||fields.kind})),...(fields.draftData?[{data:fields.draftData,name:'saved-local-draft.jpg'}]:[]),...(fields.external?[{url:fields.external,name:'linked-photo'}]:[])];
  if(photos.length+incoming.length>30)throw Error('This condition can hold up to 30 published photos; remove some first.');
  for(let i=0;i<incoming.length;i++){
   const item=incoming[i];let url=item.url;
@@ -135,7 +137,7 @@ async function publish(job,fields,token,update){
    url='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+target;
   }
   photos.push({url,source:fields.source,credit:fields.credit,
-   caption:fields.caption+(incoming.length>1?' · '+item.name:''),type:fields.kind,external:!!item.url});
+   caption:(item.caption||fields.caption)+(incoming.length>1?' · '+item.name:''),type:item.kind||fields.kind,external:!!item.url});
  }
  const textEdits=fields.edits||{};
  const entry={...prev,title:job.title,photos,photo:photos[0]||null,text:{...(prev.text||{}),...textEdits},updated:new Date().toISOString(),approvedBy:OWNER};
@@ -149,6 +151,15 @@ async function publish(job,fields,token,update){
 function init(context){
  api=context;
  load();
+ context.body.addEventListener('change',ev=>{
+  if(ev.target?.id!=='npOwnerFiles')return;
+  const files=Array.from(ev.target.files||[]);
+  const target=context.body.querySelector('#npOwnerFileDetails');
+  if(!target)return;
+  target.innerHTML=files.map((file,i)=>'<div style="padding:8px;border:1px solid #bed2e4;border-radius:9px;margin:7px 0"><b>Photo '+(i+1)+': '+esc(file.name)+'</b>'+
+    '<label style="display:block">Image type<select data-np-file-kind="'+i+'" style="width:100%;padding:7px"><option value="gross">Gross</option><option value="histology">Histology / H&E</option><option value="clinical">Clinical</option><option value="illustration">Illustration</option></select></label>'+
+    '<label style="display:block">Individual caption (optional; defaults to shared caption)<input data-np-file-caption="'+i+'" style="width:100%;padding:7px" placeholder="Species, tissue and lesion"></label></div>').join('');
+ },true);
  context.body.addEventListener('click',ev=>{
   const b=ev.target.closest('[data-necro-owner-publish],[data-necro-owner-close]');if(!b)return;
   ev.preventDefault();ev.stopImmediatePropagation();
@@ -165,6 +176,7 @@ function init(context){
    const vault=window.VPQ_OWNER_KEY_VAULT;
    if(!token){if(!vault?.exists?.())throw Error('No encrypted publishing key found. Enter your fine-grained GitHub token once.');if(!password)throw Error('Enter the password used to encrypt your publishing key.');token=await vault.unlock(password);}
    await publish(job,fields,token,update);
+   if(job.type==='specimen')window.VPQ_PATH_EXAM7?.afterPublished?.(job.id);
    if(vault&&!vault.exists()&&password&&fields&&token){await vault.store(token,password);}
    show('✓ Changes published','<p>Changes saved to GitHub. Existing photos were preserved unless you explicitly removed or replaced them. Reload on another device to view updates.</p><button data-necro-owner-close="1">← Return</button>');
   })().catch(e=>{show('Publication was not completed','<p>'+esc(e.message)+'</p><p>The existing published image was not replaced in the manifest. You can try again.</p><button data-necro-owner-close="1">Back</button>')}).finally(()=>{token='';password='';b.disabled=false});
