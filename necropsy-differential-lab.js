@@ -4,7 +4,7 @@ window.VPQ_NECROPSY_DIFFERENTIAL_LAB=(function(){
 const data=window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[];
 function allCases(){return [...data,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomCases?.()||[])]}
 const KEY='vpq-necropsy-differential-local-images-v1';
-let ui=null,filter='all',current=null,phase=0,leading=-1,shortlist=[],showWhy=false;
+let ui=null,filter='all',current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false;
 const rich=v=>window.VPQ_PATH_RICH_TEXT?.render?.(v)||safe(v);
 const safe=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function photoStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -411,12 +411,14 @@ function view(){
  '<h4 style="margin:4px 0">1. Build your differential list</h4><p class="tiny">Select every reasonable possibility. More than one diagnosis may fit early findings.</p>'+
  x.options.map((o,i)=>'<button data-pathdiff-toggle="'+i+'" aria-pressed="'+shortlist.includes(i)+'" style="display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border:2px solid '+(shortlist.includes(i)?'#4784b5':'#dbe4ef')+';background:'+(shortlist.includes(i)?'#ecf6ff':'#fff')+';border-radius:10px">'+(shortlist.includes(i)?'☑ ':'☐ ')+safe(o.name)+'</button>').join('')+
  '<h4 style="margin:14px 0 5px">2. Choose the most likely diagnosis</h4><p class="tiny">Pick your leading possibility based on the evidence currently visible.</p>'+
- '<select id="pathdiff-lead" style="width:100%;padding:9px;border:1px solid #a9bed5;border-radius:9px"><option value="-1">Choose a leading diagnosis...</option>'+x.options.map((o,i)=>'<option value="'+i+'"'+(leading===i?' selected':'')+'>'+safe(o.name)+'</option>').join('')+'</select>'+
+ '<select id="pathdiff-lead" data-pathdiff-leading-select="1" style="width:100%;padding:9px;border:1px solid #a9bed5;border-radius:9px"><option value="-1">Choose a leading diagnosis...</option>'+x.options.map((o,i)=>'<option value="'+i+'"'+(leading===i?' selected':'')+'>'+safe(o.name)+'</option>').join('')+'</select>'+
+ (leadHint?'<p style="color:#944b20;font-size:12px;font-weight:750">Choose your leading diagnosis from the dropdown before comparing the answers.</p>':'')+
  '<div class="buttonrow" style="margin:9px 0"><button data-pathdiff-histo="1">'+(phase===0?'🔬 Reveal histology clue':'🔬 Histology revealed ✓')+'</button>'+(phase>=1?'<button data-pathdiff-compare="1">📋 Compare all etiologies</button>':'')+'</div>'+
- (phase>=1?'<div style="background:#f5eefc;border:1px solid #d8c9ed;padding:12px;border-radius:10px"><b>3. Histology revealed</b><p>'+rich(x.histo)+'</p><small>Now reconsider whether the differentials remain equally plausible.</small></div>':'')+
+ (phase>=1?'<div style="background:#f5eefc;border:1px solid #d8c9ed;padding:12px;border-radius:10px"><b>3. Histology revealed</b>'+(grossLeading>=0?'<p class="tiny"><b>Your initial gross-based leader:</b> '+safe(x.options[grossLeading]?.name||'—')+'</p>':'')+'<p>'+rich(x.histo)+'</p><small>Now reconsider whether the differentials remain equally plausible.</small></div>':'')+
  '</div><div>'+(window.VPQ_NECROPSY_OWNER_PUBLISH?.casePhotoHTML?.(x.id)||'')+sourcedPhotos(x)+photoHTML(x)+'</div></div>'+
  (revealed?'<div style="margin-top:14px;border-top:2px solid #cbd9e9;padding-top:10px"><h4>4. Evidence-weighted differential comparison</h4><p>'+(opted?(opted.name===x.best?'✅ Your leading diagnosis matched the best-supported etiology.':'Your initial leader was <b>'+safe(opted.name)+'</b>. Compare the evidence below and revise your conclusion.'):'No leading diagnosis selected. Compare the possibilities below before returning to the case.')+'</p>'+
  '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Differential</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Supports</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Makes less likely / limitation</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Histology distinction</th></tr></thead><tbody>'+x.options.map(o=>'<tr><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6"><b>'+safe(o.name)+'</b>'+(o.role==='best'?' ★':'')+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.supports)+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.against)+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.hist)+'</td></tr>').join('')+'</tbody></table></div>'+
+ (grossLeading>=0?'<p style="font-size:12px"><b>Reasoning progression:</b> Before histology you favored '+safe(x.options[grossLeading]?.name||'—')+'. After histology you selected '+safe(opted?.name||'—')+'. '+(grossLeading!==leading?'You revised your leading differential after seeing additional evidence.':'You kept your original leading differential.')+'</p>':'')+
  '<div style="background:#eef8f0;border:1px solid #b8d7bf;border-radius:12px;padding:11px;margin-top:12px"><b>Best-supported etiology:</b> '+safe(x.best)+'<p><b>Morphologic diagnosis:</b> '+rich(x.morph)+'</p><p><b>Why it happens:</b> '+rich(x.mechanism)+'</p><p><b>What confirms it / next tests:</b> '+rich(x.tests)+'</p><small>Grounded in '+safe(x.ref)+'. This is an educational differential, not a definitive diagnosis from a simulated history.</small></div></div>':'')+
  '<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-list="1">All cases</button><button data-pathdiff-reset="1">Try without clues again</button></div>');
 }
@@ -460,16 +462,17 @@ function init(api){
  if(d.pathdiffPublish!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('case',d.pathdiffPublish);
  if(d.pathdiffList!==undefined)return menu();
  if(d.pathdiffFilter!==undefined){filter=d.pathdiffFilter;return menu()}
- if(d.pathdiffOpen!==undefined){current=d.pathdiffOpen;phase=0;leading=-1;shortlist=[];return view()}
+ if(d.pathdiffOpen!==undefined){current=d.pathdiffOpen;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];return view()}
  if(d.pathdiffReturn!==undefined)return window.VPQ_PATH_EXAM7?.start('histo');
- if(d.pathdiffReset!==undefined){phase=0;leading=-1;shortlist=[];return view()}
+ if(d.pathdiffReset!==undefined){phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];return view()}
  if(d.pathdiffToggle!==undefined){const i=Number(d.pathdiffToggle);shortlist=shortlist.includes(i)?shortlist.filter(v=>v!==i):[...shortlist,i];return view()}
- if(d.pathdiffHisto!==undefined){phase=Math.max(phase,1);return view()}
- if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');leading=el?Number(el.value):-1;phase=2;return view()}
+ if(d.pathdiffHisto!==undefined){if(phase===0)grossLeading=leading;phase=Math.max(phase,1);return view()}
+ if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;phase=2;return view()}
  if(d.pathdiffRemove!==undefined){updatePhoto(d.pathdiffRemove,'');return view()}
  },true);
  api.body.addEventListener('change',ev=>{
  const d=ev.target?.dataset;
+ if(d?.pathdiffLeadingSelect!==undefined){leading=Number(ev.target.value);leadHint=false;return;}
  if(d?.pathdiffStudyLecture!==undefined){conditionLecture=String(ev.target.value||'68');return menu();}
  if(d?.pathdiffCaseFilter!==undefined){filter=String(ev.target.value||'all');menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(!d||d.pathdiffPhoto===undefined)return;
