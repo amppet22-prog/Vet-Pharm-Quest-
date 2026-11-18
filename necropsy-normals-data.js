@@ -220,5 +220,18 @@ window.VPQ_PATH_NORMALS=[
     "why": "**Normal vs abnormal:** otitis causes epithelial hyperplasia, edema, glandular changes and inflammatory exudate; ceruminous gland tumors are focal proliferations.",
     "source": "Lecture 79 external ear pathology context; general comparative histologic reference.",
     "normal": true
+  },
+  {
+    "id": "normal-cns-barrier-systems",
+    "lecture": "67",
+    "system": "Nervous System",
+    "title": "CNS barrier systems — blood–brain barrier and glia limitans",
+    "species": "Domestic mammals",
+    "normal": true,
+    "gross": "These barriers are microscopic, not structures recognizable as a distinct gross lesion. In normal sections, cerebral vessels course through intact parenchyma beneath intact pia and leptomeninges; there is no inflammatory exudate or tissue edema.",
+    "dx": "**NORMAL REFERENCE** — CNS neurovascular and pial barrier architecture",
+    "histo": "Blood–brain barrier: specialized capillary endothelium joined by tight junctions, with basement membrane and supporting astrocytic foot processes. Glia limitans: astrocytic processes immediately subjacent to pia mater. Resident microglia are immune cells, not a structural layer of either barrier.",
+    "why": "**Blood versus CSF interfaces:** BBB regulates vascular-to-neural entry; glia limitans helps separate CSF-associated compartments from neural parenchyma. Barrier disruption can contribute to vasogenic extracellular edema and CNS inflammatory-cell entry. Compare normal vascular and pial interfaces with inflamed or edematous neural tissue.",
+    "source": "Instructor Lecture 67 · CNS barrier systems, slides 38–42 (FYI). Notes adapted from lecture teaching material; no published photomicrograph is attached."
   }
 ];
