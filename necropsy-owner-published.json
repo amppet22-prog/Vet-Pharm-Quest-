@@ -44,6 +44,36 @@
         "why": "BBB disruption or ATP-dependent pump failure",
         "notes": "Two types: Cytotoxic edema and vasogenic\n\nCytotoxic edema:\nAccumulation of fluid intracellularly in astrocytes, endothelial cells, neurons, and\noligodendrocytes\n• Secondary to altered cellular metabolism\n• Interference with Na+/K+-ATPase pump\n• Can’t maintain cellular homeostasis\n• Results in elevated intracellular sodium and thus influx of water\n• Blood-brain barrier remains intact\n• Causes of cytotoxic edema:\n• Hypoxia-ischemia\n• Severe hypothermia\n• Some toxicants\n\nVasogenic edema:\nMost common type of edema in the CNS\n• Occurs after vascular injury adjacent to inflammation, hematomas, contusions,\ninfarcts, cerebral hypertension, or neoplasms\n• An increase in vascular permeability from the breakdown of the blood-brain barrier\n• Allows movement of plasma constituents (water, ions, plasma proteins) into the extracellular\nspace\n• Can be accompanied by some cellular\n swelling involving astrocytes\n• Increases intracranial pressure\n• If severe, pressure can cause neurologic\n dysfunction and caudal displacement of\n brain structures\n(ie. coning of the cerebellar vermis)\n"
       }
+    },
+    "exam7-6": {
+      "title": "Cerebral abscess",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-6-1795000207359-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Brain",
+          "type": "gross",
+          "external": false
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-6-1795000207359-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Brain",
+        "type": "gross",
+        "external": false
+      },
+      "text": {
+        "gross": "Yellow-white soft focal lesion compressing surrounding brain",
+        "dx": "Brain: focal suppurative encephalitis (abscess)",
+        "histo": "Necrotic neutrophilic focus with reactive gliosis",
+        "why": "Can cause mass effect; fibrous capsules may be poorly developed in CNS",
+        "notes": " Sequelae: Depending on size and location,\ncan compress/displace tissue and/or vital\nstructures (ex: cardiac or respiratory centers)"
+      },
+      "updated": "2026-11-18T11:10:08.443Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {}
