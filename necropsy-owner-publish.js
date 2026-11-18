@@ -90,7 +90,7 @@ function getPhotoLibrary(){
  for(const group of ['cases','specimens','lectures']){
   for(const [id,record] of Object.entries(published[group]||{})){
    const parent=group==='cases'?baseCases.find(x=>x.id===id):group==='specimens'?specimens.find(x=>x.id===id):null;
-   const homeLecture=String(parent?.lecture||(/L(\\d+)/.exec(id)||[])[1]||'');
+   const homeLecture=String(parent?.lecture||(/L(\d+)/.exec(id)||[])[1]||'');
    const homeSystem=String(parent?.system||'');
    for(const [index,photo] of photosOf(record).entries()){
     if(!photo?.url)continue;
@@ -317,7 +317,7 @@ function init(context){
   const raw=b.dataset.npLibraryOpen||'',colon=raw.indexOf(':'),group=raw.slice(0,colon),id=raw.slice(colon+1);
   if(group==='cases')return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(id);
   if(group==='specimens')return window.VPQ_PATH_EXAM7?.openCard?.(id);
-  if(group==='lectures')return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.((/L(\\d+)/.exec(id)||[])[1]||'68');
+  if(group==='lectures')return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.((/L(\d+)/.exec(id)||[])[1]||'68');
  },true);
 context.body.addEventListener('click',ev=>{
   const b=ev.target.closest('[data-necro-condition-save],[data-necro-condition-cancel]');if(!b)return;
