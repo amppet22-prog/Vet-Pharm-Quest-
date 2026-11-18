@@ -297,19 +297,26 @@ function flashDeck(scope){
   }
   for(const [j,p] of (section.points||[]).entries()){
    if(!Array.isArray(p)||!String(p[1]||'').trim())continue;
-   const label=String(p[0]||'Key finding'),answer=String(p[1]);
-   const vague=/^(key (finding|feature|point|information)|core (lesion|finding)|lecture feature|instructor slide|professor.s core finding)\s*\d*$/i.test(label);
-   const lower=answer.toLowerCase();
-   const focus=/histo|microscop|acanthol|cellular|neutrophil|lymphocyt|epithel|perivascular/.test(lower)?'What histologic findings are described for ':
-   /gross|mass|plaque|pustule|erosion|ulcer|skin|cavity|softening|discolor|hemorrhag/.test(lower)?'What gross lesion or distribution is described for ':
-   /cause|pathogen|virus|parasite|mechanism|immune|deficien|toxin|transmiss/.test(lower)?'What causes or explains ':
-   'What distinguishes ';
-   const prompt=vague?focus+section.title+'? (finding '+(j+1)+')':label==='Compare'?'What distinguishes '+section.title+' from its closest mimics?':'For '+section.title+': '+label+'?';
+   const label=String(p[0]||'').trim(),answer=String(p[1]).trim();
+   // Reject generic heading, meta-text and objectives as flashcards.
+   if(!label||/^(key (finding|feature|point|information)|lecture feature|instructor slide|professor.s core finding|objectives?|source|references?|background|clinical overview|summary|note)\s*\d*$/i.test(label))continue;
+   if(/^(lecture (objectives|scope)|instructor expectations|professor.s assessment note|faculty note)/i.test(label))continue;
+   // Each question asks for a specific named feature. "Why" only if the slide gives a mechanism.
+   const isWhy=/^(mechanism|pathogenesis|etiology|why|cause|pathway)/i.test(label);
+   const isGross=/gross|lesion|distribution|site|location|appearance|clinical sign|presentation|signalment/i.test(label);
+   const isHisto=/histo|microscop|cytolog|cellular|inclusion/i.test(label);
+   const isTreatment=/test|diagnos|confirm|distinguish|differential/i.test(label);
+   const prompt=isWhy?'What mechanism explains '+section.title+'?':
+    isGross?'What '+label.toLowerCase()+' characterizes '+section.title+'?':
+    isHisto?'What '+label.toLowerCase()+' supports '+section.title+'?':
+    isTreatment?'How do you evaluate '+section.title+'? ('+label+')':
+    'For '+section.title+', what does "'+label+'" describe?';
+   if(answer.length>600||prompt.length>220)continue;
    const id=conditionLecture+'|'+section.title.toLowerCase()+'|'+j;
    deck.push({id,title:section.title,prompt,answer,slide:section.slides||'see source',topicIndex:globalIndex,curated:false});
   }
  }
- return deck;
+ return window.VPQ_FLASHCARD_OWNER?.apply?.('pathology',conditionLecture,deck)||deck;
 }
 function startFlash(scope='topic',review=false){
  flashScope=scope;flashReview=review;flashFace=false;flashComplete=false;
@@ -337,16 +344,20 @@ function flashView(){
  modal('🧠 L'+safe(conditionLecture)+' · '+(flashScope==='lecture'?'Lecture flashcards':flashScope==='foundation'?'CNS foundations':'Topic flashcards'),
  '<div class="buttonrow"><button data-pathdiff-flash-back="1">← '+(flashScope==='topic'?'Topic notes':'Lecture topics')+'</button><button data-pathdiff-flash-all="1">↻ New shuffled set</button></div>'+
  '<p class="tiny"><b>Card '+(flashIndex+1)+' of '+flashCards.length+'</b> · '+(flashReview?'Missed-card review':c.curated?'Focused question from lecture':'Lecture note recall')+' · '+pending+' marked for practice in this set. Your marks stay in this browser.</p>'+
- '<div style="background:#f4f7fc;border:1px solid #c8d7e8;border-radius:12px;padding:17px;margin:10px 0;min-height:180px;display:flex;flex-direction:column;justify-content:center;gap:10px">'+
- '<small style="color:#637a92">L'+safe(conditionLecture)+' · '+safe(c.title)+' · slides '+safe(c.slide)+'</small>'+
- '<b style="font-size:17px;line-height:1.35">'+safe(c.prompt)+'</b>'+
- (flashFace?'<div style="border-top:1px solid #d1dfeb;padding-top:10px;white-space:pre-wrap;font-size:14px">'+rich(c.answer)+'</div>':'<p class="tiny">Recall the answer before flipping. Try to include tissue, species, lesion and WHY where relevant.</p>')+
- '</div>'+
+ '<div style="height:5px;max-width:100%;border-radius:6px;background:#e4eaf4;overflow:hidden;margin:10px 0"><div style="width:'+Math.round((flashIndex+1)/flashCards.length*100)+'%;background:#7391cc;height:100%;border-radius:6px"></div></div>'+
+ '<div style="position:relative;border:1px solid #bbcae1;border-radius:18px;background:linear-gradient(145deg,#ffffff 5%,#eef5ff 100%);box-shadow:0 7px 22px rgba(44,62,100,.09);padding:clamp(16px,4vw,30px);min-height:250px;display:flex;flex-direction:column;justify-content:center;gap:14px;margin:12px 0;text-align:center">'+
+ '<div style="color:#5a7296;font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:850">'+(flashFace?'ANSWER':'QUESTION')+' · '+(c.curated?'Focused recall':'Lecture concept')+'</div>'+
+ '<div style="font-size:12px;color:#576c87">L'+safe(conditionLecture)+' · '+safe(c.title)+'</div>'+
+ (flashFace?
+  '<p style="font-size:clamp(17px,2.5vw,21px);line-height:1.5;margin:4px 0;font-weight:750;color:#25385b">'+rich(c.answer)+'</p>'+
+  (c.why?'<div style="text-align:left;border-top:1px solid #cedbec;padding-top:12px;font-size:13px"><b>WHY it matters</b><p>'+rich(c.why)+'</p></div>':''):
+  '<p style="font-size:clamp(18px,2.5vw,23px);line-height:1.45;font-weight:800;color:#263a5d;margin:10px 0">'+safe(c.prompt)+'</p><small style="color:#7887a1">Recall your answer, then flip the card.</small>')+
+ '<small style="color:#65768c">Source · '+safe(c.slide)+'</small></div>'+
  '<div class="buttonrow">'+(flashFace?
  '<button data-pathdiff-flash-rate="again" style="background:#fff2e6">↺ Need practice</button><button data-pathdiff-flash-rate="know" style="background:#e7f5eb">✓ Got it</button>':
  '<button data-pathdiff-flash-flip="1" style="background:#e7f0ff;font-weight:800">Flip / show answer</button>')+'</div>'+
  '<div class="buttonrow"><button data-pathdiff-flash-prev="1" '+(flashIndex===0?'disabled':'')+'>← Previous</button><button data-pathdiff-flash-next="1">'+(flashFace?'Skip rating · next →':'Skip · save for review →')+'</button></div>'+
- '<div class="buttonrow"><button data-pathdiff-flash-review="1">Practice missed cards</button>'+(flashScope==='topic'?'<button data-pathdiff-flash-lecture="1">Study entire L'+safe(conditionLecture)+'</button>':'')+'</div>'+
+ '<div class="buttonrow"><button data-pathdiff-flash-edit="1">✏️ Edit / publish card</button><button data-pathdiff-flash-new="1">➕ Add card</button><button data-pathdiff-flash-review="1">Practice missed cards</button>'+(flashScope==='topic'?'<button data-pathdiff-flash-lecture="1">Study entire L'+safe(conditionLecture)+'</button>':'')+'</div>'+
  (flashFace?'<div class="buttonrow"><button data-pathdiff-flash-specimens="1" style="font-size:12px">🔬 Practice image recognition</button><button data-pathdiff-flash-cases="1" style="font-size:12px">🧩 Apply in differential cases</button></div>':'')+
  (flashScope==='topic'?'<button data-pathdiff-recall-all="1" style="font-size:12px">Show all lecture-derived recall prompts</button>':'')+
  '<p class="tiny">“Got it” removes the card from your practice list; “Need practice” saves it. These are paraphrased lecture notes, not validated exam questions or photo-based specimen IDs.</p>');
@@ -424,6 +435,8 @@ function view(){
 }
 function init(api){
  ui=api;
+ window.VPQ_FLASHCARD_OWNER?.init?.(api.body,api.showModal);
+ window.VPQ_FLASHCARD_OWNER?.load?.().catch(()=>{});
  if(api.body.__vpqNecroDifferentialInit)return;
  api.body.__vpqNecroDifferentialInit=true;
  api.body.addEventListener('click',ev=>{
@@ -446,6 +459,8 @@ function init(api){
  if(d.pathdiffRecallStart!==undefined)return startFlash('topic');
  if(d.pathdiffFlashLecture!==undefined)return startFlash('lecture');
  if(d.pathdiffFlashFoundations!==undefined){conditionLecture='67';return startFlash('foundation')}
+ if(d.pathdiffFlashEdit!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pathology',conditionLecture,flashCards[flashIndex],()=>flashView());
+ if(d.pathdiffFlashNew!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pathology',conditionLecture,null,()=>flashView());
  if(d.pathdiffFlashSpecimens!==undefined)return window.VPQ_PATH_EXAM7?.studyLecture?.(conditionLecture);
  if(d.pathdiffFlashCases!==undefined){filter=conditionLecture;menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(d.pathdiffFlashFlip!==undefined){flashFace=!flashFace;return flashView()}
