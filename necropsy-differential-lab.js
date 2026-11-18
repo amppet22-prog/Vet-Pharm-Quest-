@@ -212,5 +212,6 @@ function init(api){
  },true);
 }
 function openCase(id){if(data.some(x=>x.id===id)){current=id;return view()}return menu()}
-return {init,start,cases:data,openCase};
+function draftPhoto(id){return photoStore()[id]||''}
+return {init,start,cases:data,openCase,draftPhoto};
 })();
