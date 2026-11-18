@@ -14,6 +14,19 @@
       },
       "updated": "2026-11-18T10:33:47.611Z",
       "approvedBy": "amppet22-prog"
+    },
+    "exam7-1": {
+      "title": "Cerebral edema",
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-1.jpg?v=1794998181955",
+        "source": "",
+        "credit": "Textbook Pathology",
+        "caption": "Excess fluid accumulation, brain swells and sulci and gyri become indistinct",
+        "type": "gross",
+        "external": false
+      },
+      "updated": "2026-11-18T10:36:21.955Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {}
