@@ -62,6 +62,23 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=Array.from({length:13},(_,i)=>String(i+67));
 const CASE_MATCH={
+'n69-hydranencephaly':['hydranencephaly'],
+'n69-hydromyelia':['hydromyelia'],
+'n69-astrocytoma':['astrocytoma'],
+'n69-choroid-plexus':['choroid plexus papilloma and carcinoma'],
+'n69-selenium-pig':['selenium toxicosis in pigs'],
+'n69-centaurea':['centaurea spp.'],
+'n69-srma':['steroid-responsive meningitis-arteritis'],
+'n69-edm':['equine degenerative myeloencephalopathy'],
+'n69-emnd':['equine motor neuron disease'],
+'n69-degenerative-myelo':['degenerative myelopathy'],
+'n69-cholesterol-granuloma':['equine choroid plexus cholesteatoma'],
+'n70-congenital-hypomyelin':['congenital peripheral hypomyelinating'],
+'n70-coyotillo':['coyotillo toxicosis'],
+'n70-riboflavin':['riboflavin b2 deficiency'],
+'n70-salinomycin':['salinomycin-contaminated feed'],
+'n70-axonotmesis':['axonotmesis'],
+'n70-sensory-pointer':['canine sensory neuropathy'],
 'n69-syringomyelia':["syringomyelia"],
 'n69-meningioma':["meningioma"],
 'n69-hepatic-enceph':["hepatic encephalopathy"],
