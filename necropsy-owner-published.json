@@ -1,6 +1,20 @@
 {
   "version": 1,
   "cases": {},
-  "specimens": {},
+  "specimens": {
+    "exam7-2": {
+      "title": "Wallerian degeneration",
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-2.jpg?v=1794998027611",
+        "source": "",
+        "credit": "Textbook Pathology",
+        "caption": "Wallerian degeneration",
+        "type": "gross",
+        "external": false
+      },
+      "updated": "2026-11-18T10:33:47.611Z",
+      "approvedBy": "amppet22-prog"
+    }
+  },
   "lectures": {}
 }
