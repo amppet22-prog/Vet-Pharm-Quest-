@@ -8,6 +8,7 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function marks(){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch(_){return {}}}
 function save(id,missed){const m=marks();if(missed)m[id]=true;else delete m[id];try{localStorage.setItem(key,JSON.stringify(m))}catch(_){}}
 function cards(){return window.VPQ_FLASHCARD_OWNER?.apply?.('pharmacology',lecture,bank.filter(x=>x.lecture===lecture))||bank.filter(x=>x.lecture===lecture)}
+function select(value){if(bank.some(c=>c.lecture===value))lecture=value;}
 function menu(){
  const lectures=[...new Set(bank.map(x=>x.lecture))];
  show('🧠 Exam 2 · Quick Recall Flashcards',
@@ -52,5 +53,5 @@ function init(body,modal,lesson,quiz){if(!body||body.__vpqPharmRecall)return;ui=
  if(d.vpqpharmfcNext!==undefined){if(!revealed&&deck[at])save(deck[at].id,true);at++;complete=at>=deck.length;revealed=false;return render()}
  },true);
 }
-return Object.freeze({init,menu,begin,bank});
+return Object.freeze({init,menu,begin,select,bank});
 })();
