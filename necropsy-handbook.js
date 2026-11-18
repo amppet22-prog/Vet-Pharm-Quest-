@@ -61,28 +61,39 @@ function learnLecture(n){
  const l=window.VPQ_PATH_LECTURE_LEARN?.[n];
  if(!l)return lecture(n);
 
- const photoCards={
-  0:[
-   ['Canine CNS — normal anatomical specimen','https://upload.wikimedia.org/wikipedia/commons/2/28/Dog_brain_and_eyeballs.jpg','Canine brain fixed in formalin; identify paired cerebral hemispheres and brainstem. The eye specimens are attached.','Museum of Veterinary Anatomy FMVZ USP / Wagner Souza e Silva · CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Dog_brain_and_eyeballs.jpg']
-  ],
-  1:[
-   ['Normal canine encephalon · gross specimen','https://upload.wikimedia.org/wikipedia/commons/a/aa/Dog_encephalon.jpg','Canine specimen. Learn normal symmetry and sulci/gyri before diagnosing deformation or malacia.','Museum of Veterinary Anatomy FMVZ USP / Wagner Souza e Silva · CC BY-SA 4.0','https://commons.wikimedia.org/wiki/File:Dog_encephalon.jpg'],
-   ['Spinal cord transverse section · gray versus white matter','https://upload.wikimedia.org/wikipedia/commons/b/b2/Spinal_Cord.jpg','Human illustrative diagram: butterfly-shaped gray matter is central and white matter is peripheral. Same basic arrangement in domestic mammals.','Chippolito · CC BY-SA 3.0','https://commons.wikimedia.org/wiki/File:Spinal_Cord.jpg']
-  ],
-  7:[
-   ['Red dead neurons — normal versus infarcted tissue (H&E)','https://upload.wikimedia.org/wikipedia/commons/1/1e/Histopathology_of_thalamus_infarction_at_approximately_24_hours%2C_high_magnification%2C_annotated.jpg','Left: normal neuron. Right: hypereosinophilic neuron during ischemic infarction, with neutrophils. This is a HUMAN micrograph illustrating a shared lesion pattern.','Mikael Häggström · CC0','https://commons.wikimedia.org/wiki/File:Histopathology_of_thalamus_infarction_at_approximately_24_hours,_high_magnification,_annotated.jpg']
-  ],
-  11:[
-   ['Infarction-associated neuronal injury, H&E','https://upload.wikimedia.org/wikipedia/commons/1/1e/Histopathology_of_thalamus_infarction_at_approximately_24_hours%2C_high_magnification%2C_annotated.jpg','Infarction can produce acute neuronal necrosis. This is MICROSCOPIC evidence, not a gross view of malacia. Human specimen.','Mikael Häggström · CC0','https://commons.wikimedia.org/wiki/File:Histopathology_of_thalamus_infarction_at_approximately_24_hours,_high_magnification,_annotated.jpg']
-  ],
-  12:[
-   ['Cerebral edema — gross specimen','https://upload.wikimedia.org/wikipedia/commons/d/db/Cerebral_oedema.jpg','Inspect gyri and sulci for swelling and compression. Confirm organ/species in the attribution; image appearance alone does not identify the edema mechanism.','Wikimedia Commons · see original file attribution and license','https://commons.wikimedia.org/wiki/File:Cerebral_oedema.jpg']
-  ]
+
+ const imageSources={
+  0:[['Normal CNS anatomy','Professor lecture 67: slides 4–5; slides 8–12 show normal gross images.','Textbook ch. 14: normal brain and spinal cord anatomy.']],
+  1:[['Normal brain and gray/white distribution','Professor lecture 67: slides 6–12 (gross images, including dog/cat/horse).','Textbook ch. 14: cerebral, cerebellar and spinal gray/white matter.']],
+  2:[['Neuron and astrocyte structures','Professor lecture 67: slides 14–15 (illustrated neuron, astrocyte histology).','Textbook ch. 14: normal neurohistology and glial cells.']],
+  3:[['Oligodendrocyte/myelin and microglia','Professor lecture 67: slides 16–17.','Textbook ch. 14: oligodendroglial injury and microglial reactions.']],
+  4:[['Ventricular system and CSF path','Professor lecture 67: slides 18–20.','Textbook ch. 14: ventricular and choroid plexus structures.']],
+  5:[['Meninges and cerebral circulation','Professor lecture 67: slides 21–23.','Textbook ch. 14: meninges, cerebral circulation and barriers.']],
+  6:[['CNS pathogen portals','Professor lecture 67: slide 25.','Textbook ch. 14: pathogen entry and distribution.']],
+  7:[['Neuronal necrosis — red dead neurons','Professor lecture 67: slide 27, H&E image annotated “dead neurons”.','Textbook ch. 14: neuronal necrosis and injury figures.']],
+  8:[['Wallerian degeneration — spheroids','Professor lecture 67: slide 28, annotated H&E showing spheroids.','Textbook ch. 14: Wallerian degeneration and PNS/CNS repair differences.']],
+  9:[['Reactive astrocytosis and demyelination','Professor lecture 67: slides 29–31 (astrocyte, demyelination examples).','Textbook ch. 14: glial response, myelin injury and ependyma.']],
+  10:[['Microglial and meningeal responses','Professor lecture 67: slides 32–33.','Textbook ch. 14: macrophage response and meningitis.']],
+  11:[['Cerebral infarction and malacia','Professor lecture 67: slide 34.','Textbook ch. 14: cerebral infarction, malacia and repair.']],
+  12:[['Cerebral edema','Professor lecture 67: slides 35–37; gross and mechanisms.','Textbook ch. 14: edema patterns; extra types are enrichment.']],
+  13:[['Blood-brain barrier','Professor lecture 67: slides 39–42.','Textbook ch. 14: blood-brain barrier and glia limitans.']],
+  14:[['CNS terminology','Professor lecture 67: slide 43 (FYI).','Textbook ch. 14: pathology terminology.']]
  };
- const pictureBlock=i=>(photoCards[i]||[]).map(p=>'<figure class="np-visual"><a href="'+safe(p[4])+'" target="_blank" rel="noopener noreferrer" title="Open full image and attribution"><img loading="lazy" decoding="async" src="'+safe(p[1])+'" alt="'+safe(p[0])+'" onerror="this.style.display=&quot;none&quot;;this.parentNode.querySelector(&quot;.np-image-fallback&quot;).style.display=&quot;block&quot;" style="display:block;width:100%;max-height:280px;object-fit:contain;border-radius:8px;background:#eef1f8"><span class="np-image-fallback" style="display:none;padding:25px;text-align:center;background:#eef1f8;border-radius:8px">🖼️ Photo preview unavailable — click to open the source photograph</span></a><figcaption style="font-size:12px;line-height:1.5;margin-top:7px"><b>'+safe(p[0])+'.</b> '+safe(p[2])+'<div style="font-size:11px;color:#5d6980;margin-top:4px">Photo credit: '+safe(p[3])+' · <a target="_blank" rel="noopener noreferrer" href="'+safe(p[4])+'">Open original photo</a></div></figcaption></figure>').join('');
+ const key=(i)=>'vpq-path-lecture-67-source-image-'+i;
+ const imageBlock=i=>{
+  const items=imageSources[i]||[];
+  const saved=(()=>{try{return JSON.parse(localStorage.getItem(key(i))||'null')}catch(e){return null}})();
+  return items.map((p,j)=>'<div class="np-visual"><b>🔬 '+safe(p[0])+'</b>'+
+  '<p style="margin:4px 0;font-size:12px"><b>Lecture first:</b> '+safe(p[1])+'</p><p style="margin:4px 0;font-size:12px"><b>Textbook second:</b> '+safe(p[2])+'</p>'+
+  (saved&&saved.data?'<img src="'+safe(saved.data)+'" alt="Personally loaded study image" style="width:100%;max-height:340px;object-fit:contain;border-radius:9px;margin-top:7px"><p style="font-size:11px">Your private study image: '+safe(saved.source||'lecture')+' · stored only in this browser</p>':'<p class="tiny">📷 Source image slot — use your own lecture/textbook image privately with the control below.</p>')+
+  '<label style="display:block;font-size:12px;margin:8px 0">Source <select data-npsource-select="'+i+'" style="font-size:12px"><option value="Professor lecture 67">Professor lecture 67</option><option value="Pathologic Basis of Veterinary Disease ch. 14">Pathology textbook, ch. 14</option></select></label>'+
+  '<label style="font-size:12px">Add private study photo <input type="file" accept="image/*" data-nplecturephoto="'+i+'" style="max-width:100%;font-size:12px"></label>'+
+  (saved?'<button data-npremovelphoto="'+i+'" style="font-size:11px;margin:6px 0">Remove private image</button>':'')+
+  '<p class="tiny">Photos from lecture and textbook are not copied to the public game. Your chosen image stays in this browser and is not sent to GitHub.</p></div>').join('');
+ };
 
  const rows=l.sections.map((s,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(s.title)+'</b> <small>slides '+safe(s.slides)+'</small></summary>'+
- pictureBlock(i)+s.points.map(p=>'<p style="margin:8px 0;line-height:1.5"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
+ imageBlock(i)+s.points.map(p=>'<p style="margin:8px 0;line-height:1.5"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
  popup('📖 L'+n+' · Learn the Lecture',nav()+
  '<div class="np-cover"><strong style="font-size:19px">'+safe(l.title)+'</strong><p>Comprehensive guided lecture lesson, grounded in the professor’s actual slide sequence. Open each section for terms, pathways, mechanisms, and recognition differences.</p><small>'+safe(l.source)+' · Lesson content is a paraphrased learning companion, not the original slide deck.</small></div>'+
  '<style>.np-pat{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal}.np-pat p{white-space:normal;overflow-wrap:anywhere}.np-visual{box-sizing:border-box;max-width:100%;width:100%;margin:10px 0;padding:10px;border:1px solid #d9dfeb;border-radius:12px;background:#fff}.np-visual img{max-width:100%;height:auto}</style><h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
@@ -161,6 +172,7 @@ function init(host){
  if(d.nphelp!==undefined)return openWhy(d.nphelp,d.nphelpid||'');
  if(d.npreturn!==undefined)return lecture(chapter);
  if(d.nphome!==undefined||d.npback!==undefined)return show();
+ if(d.npremovelphoto!==undefined){localStorage.removeItem('vpq-path-lecture-67-source-image-'+Number(d.npremovelphoto));return learnLecture('67')}
  if(d.nplearn!==undefined)return learnLecture(d.nplearn);
  if(d.npchapter!==undefined)return lecture(d.npchapter);
  if(d.nppattern!==undefined)return across();
@@ -169,7 +181,23 @@ function init(host){
  if(d.npstudio!==undefined)return window.VPQ_PATH_EXAM7?.start(d.npstudio);
  if(d.npedit!==undefined)return window.VPQ_PATH_EXAM7?.start('edit');
  },true);
- host.body.addEventListener('change',e=>{if(e.target?.dataset?.npsearch!==undefined){search=e.target.value.toLowerCase().trim();show()}},true);
+ host.body.addEventListener('change',e=>{
+  const t=e.target;
+  if(t?.dataset?.nplecturephoto!==undefined){
+   const i=Number(t.dataset.nplecturephoto),file=t.files?.[0];if(!file||!file.type.startsWith('image/'))return;
+   const source=host.body.querySelector('[data-npsource-select="'+i+'"]')?.value||'Professor lecture 67';
+   const reader=new FileReader(); reader.onload=()=>{
+    const img=new Image();img.onload=()=>{
+     const factor=Math.min(1,1050/Math.max(img.width,img.height));
+     const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.floor(img.width*factor));canvas.height=Math.max(1,Math.floor(img.height*factor));
+     canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+     try{localStorage.setItem('vpq-path-lecture-67-source-image-'+i,JSON.stringify({data:canvas.toDataURL('image/jpeg',0.72),source}));learnLecture('67')}
+     catch(err){alert('Browser storage is full. Use a smaller image, or remove a previously saved image.')}
+    };img.src=String(reader.result);
+   };reader.readAsDataURL(file);return;
+  }
+  if(t?.dataset?.npsearch!==undefined){search=t.value.toLowerCase().trim();show()}
+ },true);
 }
 return {init,open:show,lecture,across,chapters,patterns};
 })();
