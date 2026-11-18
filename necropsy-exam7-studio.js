@@ -73,6 +73,7 @@ function question(){
 }
 function init(api){
  ui=api;
+ window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.init(api);
  api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7Search!==undefined){search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
  api.body.addEventListener('click',ev=>{
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
