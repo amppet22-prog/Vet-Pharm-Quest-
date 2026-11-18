@@ -223,8 +223,32 @@ necroGuideStyle.textContent='.stage[data-room="necropsy"] .vpqNecroGuide{positio
 '.stage[data-room="necropsy"] .vpqSpecHit[data-vpqspecact="necroBio"] span{bottom:3%;left:49%;max-width:125px}'+
 '.stage[data-room="necropsy"] .vpqSpecHit[data-vpqspecact="necroCases"] span{bottom:5%}';
 document.head.appendChild(necroGuideStyle);
+const necroQuestionStyle=document.createElement('style');
+necroQuestionStyle.textContent='.stage[data-room="necropsy"] .vpqNecroHelp{position:absolute;z-index:18;pointer-events:auto;width:26px;height:26px;padding:0;transform:translate(-50%,-50%);display:grid;place-items:center;border-radius:50%;border:2px solid #967fba;background:#fff9e9;color:#725b99;box-shadow:0 2px 7px #43526e4a;font-size:15px;font-weight:900;line-height:1;cursor:help}'+
+'.stage[data-room="necropsy"] .vpqNecroHelp:hover,.stage[data-room="necropsy"] .vpqNecroHelp:focus-visible{background:#eadcff;border-color:#6f56a4;outline:2px solid #fff5bf;outline-offset:2px;transform:translate(-50%,-50%) scale(1.1)}'+
+'@media(max-width:640px){.stage[data-room="necropsy"] .vpqNecroHelp{width:23px;height:23px;font-size:13px}}';
+document.head.appendChild(necroQuestionStyle);
 
 
+
+
+// In-room help is descriptive only: it never invokes the underlying activity.
+const necroHelp={
+ necroGross:{title:'🦴 Specimen Cabinet · Gross Pathology',what:'Explore visible organ lesions: location, color, size, shape, texture and distribution.',practice:'Identify the organ and describe what is abnormal before revealing the diagnosis.',why:'Gross description is the evidence behind an accurate morphologic diagnosis.'},
+ necroHandbook:{title:'📚 Necropsy Handbook · Learn First',what:'Review pathology conditions grouped by lecture and body system, with cross-system patterns.',practice:'Read the disease clues and compare gross findings, histology and mechanisms.',why:'Understanding how a lesion develops makes it easier to recognize unfamiliar examples.'},
+ necroDx:{title:'📋 Diagnosis Board · Morphologic Diagnosis',what:'Learn the structure of a lesion-based diagnosis, not just an etiologic disease name.',practice:'State organ or tissue, distribution, lesion/process, and severity or chronicity only when supported.',why:'This is how pathologists summarize observable tissue injury without guessing the cause.'},
+ necroHisto:{title:'🔬 Microscope · Histology',what:'Compare microscopic patterns and the cellular changes responsible for gross lesions.',practice:'Identify inflammatory cells, necrosis, degeneration, proliferative changes and tissue distribution.',why:'Histology helps verify and refine the morphologic diagnosis when gross changes overlap.'},
+ necroCases:{title:'🐾 Case Board · Clinical Pathology Cases',what:'Apply gross and microscopic findings alongside history, species and other clinical evidence.',practice:'Make and justify a working diagnosis, then consider differentials and next tests.',why:'One lesion pattern can have multiple causes; clinicopathologic context helps discriminate.'},
+ necroBio:{title:'🧼 Boot Wash & PPE · Biosecurity',what:'Review protective equipment, clean/dirty workflows, sampling and decontamination.',practice:'Choose appropriate precautions and handling steps before and after a necropsy.',why:'Good infection control protects personnel and prevents sample contamination.'}
+};
+function necroHelpModal(action){
+ const h=necroHelp[action];if(!h)return;
+ const html='<p><b>What is this station for?</b> '+h.what+'</p>'+
+ '<p><b>What will I practice?</b> '+h.practice+'</p>'+
+ '<p><b>Why it matters:</b> '+h.why+'</p>'+
+ '<p class="tiny">Select the illustrated station itself to open the activity. This question mark only explains its purpose.</p>';
+ api.showModal(h.title,html);
+}
 
 function refresh(){
  const room=stage.dataset.room,old=stage.querySelector('#vpqSpecHits');
@@ -233,9 +257,13 @@ function refresh(){
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
  div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" data-vpqspec-kind="'+(p.kind||'practice')+'" title="'+(p.hint||p.label)+'" aria-label="'+p.label+(p.subtitle?' — '+p.subtitle:'')+'"><span>'+p.label+(p.subtitle?'<small>'+p.subtitle+'</small>':'')+'</span></button>').join('')+
  (room==='clinpath'?['coag','gas','urine','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([16.3,36.0,55.7,75.4,92.5][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
+ (room==='necropsy'?data.necropsy.filter(p=>necroHelp[p.action]).map(p=>'<button type="button" class="vpqNecroHelp" data-vpqnecro-help="'+p.action+'" style="left:'+Math.min(95,p.x+p.w-2)+'%;top:'+Math.max(3,p.y-3)+'%" title="About '+p.label+'" aria-label="What does '+p.label+' teach?">?</button>').join(''):'')+
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
  (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Learn First — open lecture study guides and references" aria-label="Learn First reference bookshelf — open study guides"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Lecture-based study guides">📖 Learn First</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
- div.addEventListener('click',e=>{if(e.target.closest('[data-vpqnecro-guide]')){
+ div.addEventListener('click',e=>{
+ const help=e.target.closest('[data-vpqnecro-help]');
+ if(help){e.preventDefault();e.stopPropagation();necroHelpModal(help.dataset.vpqnecroHelp);return}
+ if(e.target.closest('[data-vpqnecro-guide]')){
   api.showModal('🦴 How to use the Necropsy Lab',
   '<p><b>Start with the Handbook</b> to understand the diseases, then work from gross appearance to diagnosis and microscopic confirmation.</p>'+
   '<p>🦴 <b>Glass specimen cabinet:</b> identify organs and visible gross lesions.</p>'+
