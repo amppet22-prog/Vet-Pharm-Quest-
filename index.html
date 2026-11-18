@@ -739,7 +739,7 @@ const KEY='vpq-v2-clinic-state',EDITS_KEY='vpq-v2-content-edits';
 function safeRead(k,fallback){try{return JSON.parse(localStorage.getItem(k))||fallback}catch{return fallback}}
 let state={...DEFAULT,...safeRead(KEY,{})}, edits=safeRead(EDITS_KEY,{cases:{},drugs:{},study:{}});
 if(!state.questionHistory||typeof state.questionHistory!=='object')state.questionHistory={};
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem(EDITS_KEY,JSON.stringify(edits))}catch{}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem(EDITS_KEY,JSON.stringify(edits));window.dispatchEvent(new Event("vpq-clinic-progress-saved"))}catch{}}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function patch(obj,type){return {...obj,...(edits[type]?.[obj.id]||{})}}
 function dataCases(){return D.cases.concat(window.VPQ_CLINICAL_PRACTICE?.caseFiles||[],window.VPQ_NAVLE_EXPANSION?.caseFiles||[],window.VPQ_CLINPATH_LAB?.cases||[],window.VPQ_ADVANCED_LAB?.cases||[],window.VPQ_SURGERY_NECROPSY?.caseFiles||[],window.VPQ_BLOOD_SMEAR_LAB?.cases||[],window.VPQ_PATHOGEN_ATLAS?.cases||[]).map(x=>patch(x,'cases'))} function dataDrugs(){return D.drugs.map(x=>patch(x,'drugs'))} function dataStudy(){return D.study.map(x=>patch(x,'study'))}
@@ -3406,4 +3406,4 @@ window.addEventListener('pageshow',restoreVisibleRoom);
 window.addEventListener('load',restoreVisibleRoom,{once:true});
 })();
 
-</script><script src="oh3-final-review.js"></script><script src="player-auth-config.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="player-accounts.js" defer></script></body></html>
+</script><script src="oh3-final-review.js"></script><script src="player-auth-config.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="player-accounts.js" defer></script><script src="player-cloud-saves.js" defer></script><script src="player-update-notice.js" defer></script></body></html>
