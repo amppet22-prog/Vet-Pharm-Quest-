@@ -3,13 +3,13 @@ window.VPQ_PATH_EXAM7=(function(){
 'use strict';
 const base=window.VPQ_PATH_EXAM7_DATA||[];
 const KEY='vpq-path-exam7-user-edits-v1';
-let ui=null,mode='gross',filter='all',current=-1,quiz=[],step=0,revealed=false;
+let ui=null,mode='gross',filter='all',search='',current=-1,quiz=[],step=0,revealed=false;
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
 function record(i){return Object.assign({},base[i],edits()[base[i].id]||{})}
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
-function visible(){return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>filter==='all'||x.lecture===filter)}
+function visible(){return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>(filter==='all'||x.lecture===filter)&&(!search||[x.title,x.lecture,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
 function start(k){mode=k||'gross';filter='all';menu()}
 function menu(){
  const selected=visible();
@@ -18,7 +18,8 @@ function menu(){
  '<p><b>Gross photograph → lesion description → morphologic diagnosis → histology → pathogenesis.</b> This is an exam study bank built from the uploaded lectures, with original summaries and spaces for your editable images and annotations.</p>'+
  '<div class="buttonrow"><button data-path7-mode="gross">🔎 Gross + morphologic DX</button><button data-path7-mode="histo">🔬 Histo + WHY</button><button data-path7-mode="edit">✏️ Edit atlas images</button><button data-path7-test="1">🎓 Exam unknowns</button></div>'+
  '<div class="buttonrow">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" style="padding:6px 9px;font-size:11px" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':'L'+h(l))+'</button>').join('')+'</div>'+
- '<p class="tiny">'+selected.length+' original lesion cases. Slide images are not copied into the public game; edit/add your own images locally.</p>'+
+ '<p class="tiny"><b>'+selected.length+' of '+base.length+' slide-linked lesion / recognition cards.</b> Slide images are not copied into the public game; add your own locally.</p>'+ 
+ '<label style="display:block;margin:8px 0">Find disease or lesion <input id="path7Search" data-path7-search="1" placeholder="e.g. pyometra, optic nerve, granuloma" value="'+h(search)+'" style="width:min(100%,430px);padding:9px;border:1px solid #bccbe0;border-radius:9px"></label>'+ 
  '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px">'+selected.map(x=>'<button style="text-align:left;padding:12px" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small style="display:block">Lecture '+h(x.lecture)+'</small><small style="display:block;color:#60758a">'+(mode==='edit'?'Add image and personal notes':mode==='histo'?'Histology & explanation':'Gross ID & morphologic diagnosis')+'</small></button>').join('')+'</div>');
 }
 function card(i){
@@ -71,6 +72,7 @@ function question(){
 }
 function init(api){
  ui=api;
+ api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7Search!==undefined){search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
  api.body.addEventListener('click',ev=>{
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
   if(!Object.keys(d).some(k=>k.startsWith('path7')))return;
