@@ -58,23 +58,31 @@ function lecture(n){
 
 function learnLecture(n){
  chapter=n;
- const l=window.VPQ_PATH_LECTURE_LEARN?.[n];
- if(!l)return lecture(n);
-
-
-
- const slideUi=window.VPQ_PATH_SLIDES;
- const img=(i,s)=>slideUi?slideUi.slide(n,i,Number((s.slides||'').match(/\d+/)?.[0])||2):'';
-
- const rows=l.sections.map((s,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(s.title)+'</b> <small>slides '+safe(s.slides)+'</small></summary>'+
- img(i,s)+s.points.map(p=>'<p style="margin:8px 0;line-height:1.5"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
+ const l=window.VPQ_PATH_LECTURE_LEARN?.[n];if(!l)return lecture(n);
+ const images={
+  '67':{
+   0:[['Normal canine brain, veterinary specimen','https://commons.wikimedia.org/wiki/Special:FilePath/Dog_brain_and_eyeballs.jpg','https://commons.wikimedia.org/wiki/File:Dog_brain_and_eyeballs.jpg','Photo: University of São Paulo Museum of Veterinary Anatomy; open the original for attribution/license.']],
+   1:[['Dog brain gross anatomical specimen','https://commons.wikimedia.org/wiki/Special:FilePath/Dog_encephalon.jpg','https://commons.wikimedia.org/wiki/File:Dog_encephalon.jpg','Normal brain anatomy: examine symmetry, sulci and gyri.']],
+   7:[['Hypoxic neuronal injury — red neuron (H&E)','https://commons.wikimedia.org/wiki/Special:FilePath/Hypoxic_neuronal_injury%2C_HE_1.jpg','https://commons.wikimedia.org/wiki/File:Hypoxic_neuronal_injury,_HE_1.jpg','Recognize a shrunken, hypereosinophilic cell body. Histology example from an open-licensed educational source.']]
+  }
+ };
+ const panels=images[n]||{};
+ const diagram=(i)=>{
+  if(n!=='67')return '';
+  if(i===4)return '<div class="np-edu-diagram"><b>CSF pathway</b><p>Lateral ventricles → Third ventricle → Cerebral aqueduct → Fourth ventricle → Subarachnoid space → Arachnoid villi</p><small>Original teaching pathway based on lecture slides 19–20.</small></div>';
+  if(i===12)return '<div class="np-edu-diagram"><b>Compare the two lecture edema mechanisms</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0"><div style="background:#e6f3ff;border-radius:9px;padding:10px"><b>Cytotoxic</b><p>ATP loss → Na⁺ pump failure → intracellular swelling</p><small>BBB intact</small></div><div style="background:#ffece4;border-radius:9px;padding:10px"><b>Vasogenic</b><p>BBB disruption → plasma leakage → extracellular edema</p><small>BBB disrupted</small></div></div></div>';
+  if(i===8)return '<div class="np-edu-diagram"><b>Wallerian degeneration</b><p>Axon injury → blocked axonal transport → distal axonal breakdown → spheroids and macrophage cleanup</p><small>Original mechanism pathway informed by lecture slide 28.</small></div>';
+  if(i===9)return '<div class="np-edu-diagram"><b>Primary versus secondary demyelination</b><p><b>Primary:</b> oligodendrocyte/myelin injured first; axon relatively preserved.</p><p><b>Secondary:</b> axon injured first, then myelin breaks down.</p></div>';
+  return '';
+ };
+ const visual=i=>(panels[i]||[]).map(p=>'<figure class="np-lesson-photo"><a href="'+safe(p[2])+'" rel="noopener noreferrer" target="_blank"><img loading="lazy" src="'+safe(p[1])+'" alt="'+safe(p[0])+'" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;block&quot;"><span style="display:none;padding:16px;background:#f1f4f9">Photo preview unavailable. Open original image and its attribution.</span></a><figcaption><b>'+safe(p[0])+'</b><p>'+safe(p[3])+'</p><a href="'+safe(p[2])+'" target="_blank" rel="noopener noreferrer">Open full photograph and credit</a></figcaption></figure>').join('');
+ const rows=l.sections.map((sec,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(sec.title)+'</b> <small>slides '+safe(sec.slides)+'</small></summary>'+visual(i)+diagram(i)+sec.points.map(p=>'<p class="np-learn-point"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
  popup('📖 L'+n+' · Learn the Lecture',nav()+
- '<div class="np-cover"><strong style="font-size:19px">'+safe(l.title)+'</strong><p>Comprehensive guided lecture lesson, grounded in the professor’s actual slide sequence. Open each section for terms, pathways, mechanisms, and recognition differences.</p><small>'+safe(l.source)+' · Lesson content is a paraphrased learning companion, not the original slide deck.</small></div>'+
-  (slideUi?slideUi.uploader(n)+slideUi.uploader('BOOK')+slideUi.slide('BOOK',0,1):'')+
- '<style>.np-pat{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal}.np-pat p{white-space:normal;overflow-wrap:anywhere}.np-visual{box-sizing:border-box;max-width:100%;width:100%;margin:10px 0;padding:10px;border:1px solid #d9dfeb;border-radius:12px;background:#fff}.np-visual img{max-width:100%;height:auto}</style><h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
+ '<style>.np-pat{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}.np-learn-point{margin:8px 0;line-height:1.5;white-space:normal;overflow-wrap:anywhere}.np-lesson-photo{margin:10px 0;padding:10px;background:white;border:1px solid #cdd9e8;border-radius:12px;max-width:100%}.np-lesson-photo img{display:block;max-width:100%;width:100%;max-height:360px;object-fit:contain;background:#f4f6fb;border-radius:8px}.np-lesson-photo figcaption{font-size:12px;line-height:1.45;margin-top:7px}.np-lesson-photo figcaption p{margin:3px 0}.np-edu-diagram{margin:10px 0;padding:12px;border:1px solid #b9d6eb;background:#f3faff;border-radius:12px;font-size:13px}.np-edu-diagram p{margin:7px 0}</style>'+
+ '<div class="np-cover"><strong style="font-size:18px">'+safe(l.title)+'</strong><p>Read the teaching material and study the images directly in each section. Lecture and textbook figures guide the content; public images must be licensed for display.</p><small>'+safe(l.source)+'</small></div>'+
+ '<h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
  '<h4>Check your understanding</h4>'+l.checks.map((q,i)=>'<details class="np-pat"><summary><b>Q'+(i+1)+'.</b> '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join('')+
  '<div class="buttonrow"><button data-npchapter="'+safe(n)+'">← Lecture index</button><button data-npstudio="gross">🔬 Practice lesion cases</button></div>');
- if(slideUi){slideUi.hydrate(api.body,n);slideUi.hydrate(api.body,'BOOK')}
 }
 
 function across(){
