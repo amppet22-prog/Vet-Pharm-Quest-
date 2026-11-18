@@ -2331,7 +2331,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   showModal('📖 Learning Lab · Select → Save → Start',
    '<p>Choose your lectures, <b>Save Selection</b>, then start. <b>Learn</b> and <b>Test</b> alongside each lecture also start that specific lecture immediately.</p>'+
    '<div class="infobox"><div class="vpqLFhead"><b>Choose Pharmacology lectures</b><span id="vpqLFCount"></span></div><div class="vpqLFlist">'+list+'</div><p id="vpqLFStatus" role="status" aria-live="polite"></p><div class="buttonrow"><button id="vpqLFSave" data-vpqlfsave="1">💾 Save Selection</button><button data-vpqlfall="1">Select all</button><button data-vpqlfclear="1">Clear selections</button></div></div>'+
-   '<div class="vpqLFsteps"><h3>Start studying</h3><p><b>Guided Learning</b> teaches the physiological mechanisms and clinical WHY; <b>Learn + Apply</b> mixes cards with exam questions.</p><div class="buttonrow"><button data-vpqlflaunch="learn">📖 Start Learning</button><button data-vpqlflaunch="mixed">🩺 Start Learn + Apply</button><button data-vpqlfmastery="1">🏆 Mastery / Exam Testing</button></div></div>'+
+   '<div class="vpqLFsteps"><h3>Start studying</h3><p><b>Guided Learning Studio</b> is the original teaching area with guided cards, physiology and clinical WHY. <b>Learn + Apply</b> mixes cards with exam questions.</p><div class="buttonrow"><button data-vpqlfstudio="1">📖 Open Guided Learning Studio</button><button data-vpqlfexam2="1">📚 Browse detailed Exam 2 lessons</button><button data-vpqlflaunch="learn">▶ Start selected cards</button><button data-vpqlflaunch="mixed">🩺 Start Learn + Apply</button><button data-vpqlfmastery="1">🏆 Mastery / Exam Testing</button></div></div>'+
    '<h3>Targeted games</h3><div class="vpq-gamegrid">'+[
      ['match','🧩 Drug Match','Learn class, name and target'],
      ['battle','🦠 Bug Battles','Reinforce antibiotic resistance and coverage'],
@@ -2370,6 +2370,8 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
   try{
    if(d.vpqlfhome!==undefined){menuState.pending=null;showLearning();return}
+   if(d.vpqlfstudio!==undefined){if(pending().length)saveSelection();master27.selected=selected();masteryMenu27();return}
+   if(d.vpqlfexam2!==undefined){vpqPharmNextMenu();return}
    if(d.vpqlfsave!==undefined){saveSelection();return}
    if(d.vpqlfall!==undefined){setPending(curriculum.courses.map(x=>x[0]));showLearning();return}
    if(d.vpqlfclear!==undefined){setPending([]);showLearning();return}
