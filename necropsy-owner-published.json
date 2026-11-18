@@ -444,6 +444,46 @@
       },
       "updated": "2026-11-18T22:02:03.463Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-24": {
+      "title": "Feline infectious peritonitis (FIP) CNS disease",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-24-1795041689870-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-24"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-24-1795041689870-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [],
+        "conditionId": "pathx-68-24"
+      },
+      "text": {
+        "gross": "Firm white-tan granulomas/pyogranulomas; fibrin-rich ventricular exudate, white to tan plaques along sulci or near circle of Willis. \nSecondary: Ventricular exudate can cause hydrocephalus or cerebellar herniation.",
+        "dx": "Working identification: Feline infectious peritonitis (FIP) CNS disease. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Pyogranulomatous nodules with vasculitis\nTends to perfer involvement to small to medium-sized veins. ",
+        "why": "Cause/pathogenesis: Feline coronavirus-associated disease with macrophage replication and dissemination. Secondary: Ventricular exudate can cause hydrocephalus or cerebellar herniation.",
+        "notes": "CNS C/S: Behavorial changes, dullness, coma, paresis, ataxis, paralysis and seizures. "
+      },
+      "updated": "2026-11-18T22:41:31.245Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
