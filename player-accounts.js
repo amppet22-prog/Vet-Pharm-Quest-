@@ -9,7 +9,7 @@
   const enabled = /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i.test(cfg.supabaseUrl || "") &&
     typeof cfg.supabaseAnonKey === "string" && cfg.supabaseAnonKey.length > 20 &&
     !!window.supabase?.createClient;
-  let client = null, session = null, busy = false;
+  let client = null, session = null, busy = false, recoveryMode = false;
   if (enabled) {
     client = window.supabase.createClient(cfg.supabaseUrl.replace(/\/$/, ""), cfg.supabaseAnonKey, {
       auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
@@ -31,6 +31,7 @@
     .vpq-account-message{font-size:12px;margin:12px 0;padding:9px;border-radius:9px;background:#f1f5ff;white-space:pre-wrap}
     .vpq-account-message[hidden]{display:none}
     .vpq-account-panel button:disabled{opacity:.55;cursor:wait}
+    .vpq-account-panel [hidden]{display:none!important}
   `;
   document.head.appendChild(css);
 
@@ -72,6 +73,7 @@
             <button id="vpqAccountSignup" type="button">Create Account</button>
           </div>
         </form>
+        <form id="vpqAccountRecoveryForm" hidden><label for="vpqAccountNewPassword">New password</label><input id="vpqAccountNewPassword" type="password" autocomplete="new-password" minlength="12" required><label for="vpqAccountConfirmPassword">Confirm new password</label><input id="vpqAccountConfirmPassword" type="password" autocomplete="new-password" minlength="12" required><button class="vpq-account-primary" type="submit">Update Password</button></form>
         <div id="vpqAccountSignedIn" hidden>
           <p>Signed in as <strong id="vpqAccountAddress"></strong></p>
           <button id="vpqAccountLogout" type="button">Sign Out</button>
@@ -85,7 +87,6 @@
       </section>`;
     document.body.appendChild(overlay);
     const el = id => overlay.querySelector("#" + id);
-    let mode = "login";
     const message = (txt, error = false) => {
       el("vpqAccountMessage").hidden = !txt;
       el("vpqAccountMessage").textContent = txt || "";
@@ -93,13 +94,14 @@
     };
     const show = () => {
       const signedIn = !!session?.user;
-      el("vpqAccountForm").hidden = signedIn || !enabled;
-      el("vpqAccountSignedIn").hidden = !signedIn;
-      el("vpqAccountReset").hidden = signedIn || !enabled;
+      el("vpqAccountForm").hidden = signedIn || !enabled || recoveryMode;
+      el("vpqAccountRecoveryForm").hidden = !enabled || !recoveryMode;
+      el("vpqAccountSignedIn").hidden = !signedIn || recoveryMode;
+      el("vpqAccountReset").hidden = signedIn || !enabled || recoveryMode;
       el("vpqAccountAddress").textContent = signedIn ? session.user.email : "";
       el("vpqAccountIntro").textContent = !enabled
         ? "Guest mode is available. Secure account registration will be enabled when the site owner configures the authentication service."
-        : signedIn ? "Your player account is active. All accounts have the same game permissions." :
+        : recoveryMode ? "Enter a new password for this account. Your game saves and owner publishing credentials will not be changed." : signedIn ? "Your player account is active. All accounts have the same game permissions." :
         "Create a free account or continue as a guest. Everyone can request edit access through the existing game controls.";
     };
     async function run(action) {
@@ -134,6 +136,19 @@
       }
     }
     el("vpqAccountForm").addEventListener("submit", event => {event.preventDefault();run("login");});
+    el("vpqAccountRecoveryForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const password = el("vpqAccountNewPassword").value;
+      if (password !== el("vpqAccountConfirmPassword").value) {message("The two passwords do not match.", true);return;}
+      if (!client || busy) return;
+      busy = true;
+      try {
+        const {error} = await client.auth.updateUser({password});
+        if (error) throw error;
+        recoveryMode = false;show();message("Password updated. You are signed in.");
+      } catch (error) {message(error?.message || "Could not update password.", true);}
+      finally {busy = false;}
+    });
     el("vpqAccountSignup").addEventListener("click", () => run("signup"));
     el("vpqAccountReset").addEventListener("click", () => run("reset"));
     el("vpqAccountLogout").addEventListener("click", async () => {
@@ -156,16 +171,26 @@
     client.auth.getSession().then(({data,error}) => {
       if (!error) {session = data.session; updateButton();}
     }).catch(() => {});
-    client.auth.onAuthStateChange((_event,newSession) => {
-      session = newSession;updateButton();
+    client.auth.onAuthStateChange((event,newSession) => {
+      const previousId = session?.user?.id || null;
+      session = newSession;
+      if(event === "PASSWORD_RECOVERY") recoveryMode = true;
+      if(event === "SIGNED_OUT") recoveryMode = false;
+      updateButton();
+      // Cloud save listeners do not need token refresh events.
+      if(previousId !== (newSession?.user?.id || null)) {
+        window.dispatchEvent(new CustomEvent("vpq-player-auth-change",{detail:{userId:newSession?.user?.id || null}}));
+      }
       const modal = document.getElementById("vpqAccountOverlay");
-      // An open dialog can be reopened to reflect a confirmed login.
-      if (modal) {modal.remove();openModal();}
+      if (modal && (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN" || event === "SIGNED_OUT")) {
+        modal.remove();openModal();
+      } else if(event === "PASSWORD_RECOVERY") openModal();
     });
   }
   window.VPQ_PLAYER_ACCOUNT = Object.freeze({
     configured: enabled,
     getUser: () => session?.user || null,
+    getClient: () => client,
     open: openModal
   });
 })();
