@@ -29,3 +29,11 @@
 
 ## Definition of done
 The **Publish Now** button is usable; GitHub owner token validation works; the original browser-local draft is supported; public manifest and image paths update; returning to the lesson works; and a second browser can view the approved photo. Test the complete authenticated workflow in a live browser before claiming final end-to-end verification.
+
+## Multi-photo and text-only corrections (2026-11-18)
+- Entries can now keep a **gallery of published photographs** (gross, histology, clinical, illustration), with up to 30 photos per pathology case/lecture image slot/specimen entry. The editor accepts multiple files in one publishing action, with separate image-type labels and optional individual captions.
+- Published photographs are retained by default when publishing **text-only corrections**, and remain untouched when adding more images. Only explicit **Remove** selections or **Replace all** can remove published photos from the visible manifest.
+- The public manifest supports both legacy single `photo` and newer `photos[]` entries for backward compatibility; current published photos are preserved through format migration.
+- Text fields are independently editable and publishable for necropsy specimen cards and differential cases, including gross lesions, histology, clinical history, morphologic diagnosis and pathogenesis where the respective entry supports them.
+- Existing local image drafts remain in the editor; selecting an existing draft for upload is optional, not required to publish text.
+- Check end-to-end GitHub password-unlock publishing, multi-photo upload, image removal, and cross-device text/image display in a live browser before marking the workflow fully verified.
