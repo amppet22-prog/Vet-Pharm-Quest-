@@ -39,11 +39,11 @@ function menu(){
  '<button data-pathdiff-library="1" style="font-size:12px">Published pathology photo library</button>'+
  '<button data-pathdiff-create="1" style="font-size:12px">➕ Create / publish differential card</button>'+
  '<button data-modalaction="necroPatientPractice" style="font-size:12px">Original patient-style questions</button></div></details>'+
- '<section id="vpq-necro-case-list"><b style="display:block;font-size:14px;margin:8px 0">Differential practice cases</b>'+
+ '<details id="vpq-necro-case-list" style="margin:12px 0"><summary style="font-size:14px;font-weight:800;cursor:pointer;padding:8px 0">🧩 Browse differential practice cases ('+matched.length+')</summary>'+
  '<label style="display:block;font-size:12px;margin-bottom:7px">Filter cases by lecture<select data-pathdiff-case-filter="1" style="display:block;width:100%;max-width:240px;font-size:13px;padding:8px;margin-top:4px;border:1px solid #bdcde1;border-radius:8px;background:white">'+
  ['all',...counts].map(n=>'<option value="'+n+'"'+(filter===n?' selected':'')+'>'+(n==='all'?'All lectures':'Lecture '+n)+'</option>').join('')+'</select></label>'+
  '<p class="tiny" style="margin:6px 0">'+matched.length+' cases · Select one to compare signalment, gross findings, histology and etiologies.</p>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:10px;border:1px solid #b7cce5;border-radius:10px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+'</small></button>').join('')+'</div></section>');
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:10px;border:1px solid #b7cce5;border-radius:10px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+'</small></button>').join('')+'</div></details>');
 }
 
 /* Umbrella terms describe morphology, anatomic patterns or syndromes; never count them as etiologic diagnoses. */
@@ -419,7 +419,7 @@ function init(api){
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
  if(d.pathdiffStudyStart!==undefined)return startFlash('lecture');
- if(d.pathdiffShowCases!==undefined){const section=api.body.querySelector('#vpq-necro-case-list');section?.scrollIntoView?.({block:'start',behavior:'smooth'});return;}
+ if(d.pathdiffShowCases!==undefined){const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;section?.scrollIntoView?.({block:'start',behavior:'smooth'});return;}
  if(d.pathdiffLibrary!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.photoLibrary?.();
  if(d.pathdiffUmbrella!==undefined)return umbrellaMenu();
  if(d.pathdiffUmbrellaOpen!==undefined){umbrellaCurrent=d.pathdiffUmbrellaOpen;return umbrellaDetail();}
@@ -458,7 +458,7 @@ function init(api){
  api.body.addEventListener('change',ev=>{
  const d=ev.target?.dataset;
  if(d?.pathdiffStudyLecture!==undefined){conditionLecture=String(ev.target.value||'68');return;}
- if(d?.pathdiffCaseFilter!==undefined){filter=String(ev.target.value||'all');return menu();}
+ if(d?.pathdiffCaseFilter!==undefined){filter=String(ev.target.value||'all');menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(!d||d.pathdiffPhoto===undefined)return;
  const input=ev.target,file=input.files?.[0];if(!file||!file.type.startsWith('image/'))return;
  const reader=new FileReader();
