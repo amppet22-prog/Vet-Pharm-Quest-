@@ -208,11 +208,18 @@ sections:[
 ['Canine herpesvirus-1','Can produce multisystemic infection in neonates and occasionally CNS necrosis/microglial nodules, with cerebellar and brainstem involvement.'],
 ['FIP','Macrophage-associated feline coronavirus disease may cause pyogranulomatous/vascular CNS inflammation, ventricular exudate, nodules and secondary hydrocephalus.'],
 ['Compare','Distemper: demyelination; FIP: pyogranulomatous exudate and vasculitis; canine neonatal herpesvirus: systemic necrotizing infection.']]},
-{title:'Fungal CNS infection and cryptococcosis',slides:'28–30',points:[
-['Fungal differentials','Aspergillus, Candida, Cryptococcus, Blastomyces, Histoplasma, Coccidioides and mucoralean fungi can involve CNS.'],
-['Angioinvasive fungi','Aspergillus is highlighted for vascular invasion in dogs, resulting in vasculitis, thrombosis and necrosis.'],
-['Cryptococcus','C. neoformans and C. gattii may reach the CNS from nasal/sinus extension through the cribriform plate or hematogenous spread from pulmonary disease.'],
-['Recognition','Soft gelatinous cryptococcal lesions, thickly encapsulated yeasts and inflammatory response that may vary by immune status; compare with angioinvasive fungal infarcts.']]},
+{title:'Fungal CNS infections — overview and differential etiologies',slides:'29',group:'Fungal CNS infections',points:[
+['Organism list','Aspergillus, Candida, Cryptococcus, Blastomyces, Histoplasma, Coccidioides and mucoralean fungi can involve CNS. Cryptococcosis has its own dedicated disease card.'],
+['Inflammation','Granulomatous to pyogranulomatous inflammation, sometimes with vascular invasion.'],
+['Aspergillus example','Aspergillus is highlighted for vascular invasion in dogs with vasculitis, thrombosis, infarction and necrosis.'],
+['Gross limitations','Yellow-brown expansile lesions do not establish fungal species; inspect organisms and perform relevant testing.']]},
+{title:'Cryptococcosis — C. neoformans / C. gattii',slides:'30',group:'Fungal CNS infections',kind:'disease',points:[
+['Hosts','Cats and dogs are emphasized, occasionally horses.'],
+['Routes','C. neoformans and C. gattii may reach CNS from nasal/sinus extension across the cribriform region or via blood after respiratory infection.'],
+['Virulence','A thick polysaccharide capsule supports immune evasion.'],
+['Gross','Gelatinous or cyst-like CNS lesions and cloudy or viscous leptomeninges.'],
+['Histopathology','Encapsulated yeasts and variable granulomatous or pyogranulomatous inflammation.'],
+['Distinguishing clue','Compare gelatinous yeast-containing cryptococcal lesions with angioinvasive Aspergillus injury.']]},
 {title:'Neospora, Toxoplasma and EPM',slides:'31–35',points:[
 ['Neospora caninum','Can involve neural and muscle tissues; intrauterine and ingestion routes; multifocal necrotizing nonsuppurative inflammation and glial nodules.'],
 ['Toxoplasma gondii','Can involve numerous tissues including CNS; intracellular protozoa may produce multifocal necrotizing encephalitis.'],
