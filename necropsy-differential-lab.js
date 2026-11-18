@@ -15,10 +15,37 @@ function menu(){
  modal('🔬 Necropsy Case Center · Build the differential',
  '<div style="padding:11px;border:1px solid #b7d1eb;background:#f2f8ff;border-radius:12px"><b>Think like a pathologist:</b> signalment and history → anatomic location/gross pattern → shortlist differentials → histology → leading etiology and next test. These are <b>simulated teaching cases</b>, not photographs of real patients.</div>'+
  '<div class="buttonrow" style="margin:10px 0">'+['all',...counts].map(n=>'<button data-pathdiff-filter="'+safe(n)+'" aria-pressed="'+(filter===n?'true':'false')+'">'+(n==='all'?'All systems':'L'+safe(n))+'</button>').join('')+'</div>'+
+ '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Study lecture conditions (L75–77)</button></div>'+ 
  '<p class="tiny">'+matched.length+' instructor-slide-linked differential cases in this first module. Each includes four etiologic possibilities and why they become more or less likely.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:9px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:12px;border:1px solid #b7cce5;border-radius:12px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+' · '+safe(x.system)+'</small></button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-pathdiff-return="1">← Necropsy study bank</button></div>');
 }
+
+/* The condition atlas deliberately reads the instructor-slide-derived lecture database.
+   No separate abridged drug/disease list can silently omit conditions. */
+let conditionLecture='75',conditionChosen=-1;
+function lectureConditions(){const learn=window.VPQ_PATH_LECTURE_LEARN||{};return learn[conditionLecture]?.sections||[]}
+function conditionIndex(){
+ const lectures=['75','76','77'];
+ const sections=lectureConditions();
+ modal('📚 Pathology condition atlas · Lecture '+safe(conditionLecture),
+ '<div class="buttonrow"><button data-pathdiff-list="1">← Differential cases</button></div>'+
+ '<p class="tiny">This is the full lecture-derived condition/reference index, including instructor speaker notes when available. Normal anatomy and mechanisms are retained alongside disease entities. Open a condition for its original lecture detail and slide numbers; then practice the related case.</p>'+
+ '<div class="buttonrow" style="margin:8px 0">'+lectures.map(v=>'<button data-pathdiff-condition-lecture="'+v+'" aria-pressed="'+(conditionLecture===v?'true':'false')+'">Lecture '+v+'</button>').join('')+'</div>'+
+ '<p><b>'+sections.length+' lecture topics</b> · '+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'')+'</p>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:7px">'+sections.map((v,i)=>'<button data-pathdiff-condition-open="'+i+'" style="text-align:left;padding:10px;background:white;border:1px solid #c6d7e9;border-radius:10px"><b>'+safe(v.title)+'</b><small style="display:block;color:#597087">Slides '+safe(v.slides||'see lecture')+'</small></button>').join('')+'</div>');
+}
+function conditionDetail(){
+ const all=lectureConditions(),item=all[conditionChosen];if(!item)return conditionIndex();
+ const linked=data.filter(x=>x.lecture===conditionLecture&&(x.title.toLowerCase().includes(item.title.toLowerCase().split(' — ')[0])||item.title.toLowerCase().includes(String(x.best).toLowerCase().split(' (')[0])||String(x.ref).toLowerCase().includes(item.title.toLowerCase())));
+ modal('📖 L'+safe(conditionLecture)+' · '+safe(item.title),
+ '<div class="buttonrow"><button data-pathdiff-condition-back="1">← All lecture conditions</button><button data-pathdiff-list="1">Differential cases</button></div>'+
+ '<div style="background:#f0f6fb;padding:11px;border:1px solid #c8dbeb;border-radius:10px;margin:10px 0"><b>Original instructor material</b><p style="font-size:13px">Lecture '+safe(conditionLecture)+' · slides '+safe(item.slides||'not specified')+'</p></div>'+
+ (item.points||[]).map(p=>'<section style="border-bottom:1px solid #e0e7ef;padding:9px 0"><b>'+safe(p[0])+'</b><p style="margin:5px 0;white-space:pre-wrap;line-height:1.5">'+safe(p[1])+'</p></section>').join('')+
+ '<div style="padding:10px;background:#f8f6ed;border-radius:10px;margin:12px 0;font-size:12px"><b>Photograph policy:</b> Use the indicated original lecture slide as the primary specimen photo. The linked differential-case references distinguish gross, histology and simulated cases. This atlas does not claim copyrighted lecture images are embedded.</div>'+
+ (linked.length?'<h4>Practice this condition</h4><div class="buttonrow">'+linked.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'">'+safe(x.title)+'</button>').join('')+'</div>':'<small>No dedicated differential case for this lecture condition yet. The condition is still covered in its slide-derived notes.</small>'));
+}
+
 function sourcedPhotos(x){
  const d=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES?.[x.id];
  if(!d)return '';
@@ -59,6 +86,10 @@ function init(api){
  const button=ev.target.closest('button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
+ if(d.pathdiffConditionIndex!==undefined){conditionLecture='75';return conditionIndex()}
+ if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;return conditionIndex()}
+ if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
+ if(d.pathdiffConditionBack!==undefined)return conditionIndex();
  if(d.pathdiffList!==undefined)return menu();
  if(d.pathdiffFilter!==undefined){filter=d.pathdiffFilter;return menu()}
  if(d.pathdiffOpen!==undefined){current=d.pathdiffOpen;phase=0;leading=-1;shortlist=[];return view()}
