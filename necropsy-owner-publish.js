@@ -94,7 +94,7 @@ async function publish(pending,fields,token,update){
  const dir=pending.type==='case'?'cases':pending.type==='lecture'?'lectures':'specimens';
  let imgUrl=fields.external;
  if(fields.file||fields.draftData){
-  const target='necropsy-photos/'+dir+'/'+pending.id+'.jpg';
+  const target='necropsy-photos/'+dir+'/'+pending.id+'-'+Date.now()+'.jpg';
   const previous=await file(target,token,true);
   update('Uploading compressed photograph to the public game…');
   await put(target,fields.file?await imageBase64(fields.file):fields.draftData.split(',')[1],previous?.sha,token,'Owner-publish necropsy photo: '+pending.id);
