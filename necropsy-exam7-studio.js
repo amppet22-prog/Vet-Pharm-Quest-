@@ -4,6 +4,11 @@ window.VPQ_PATH_EXAM7=(function(){
 const base=window.VPQ_PATH_EXAM7_DATA||[];
 // Reuse the existing specimen editing/publishing system for non-disease normal references.
 for(const x of window.VPQ_PATH_NORMALS||[]){if(!base.some(v=>v.id===x.id))base.push(x)}
+function refreshCustom(){
+ const owner=window.VPQ_NECROPSY_OWNER_PUBLISH;
+ for(const x of owner?.getCustomSpecimens?.()||[]){if(!base.some(c=>c.id===x.id))base.push(x);}
+ return base;
+}
 const KEY='vpq-path-exam7-user-edits-v1';
 let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',search='',current=-1,quiz=[],step=0,revealed=false;
 const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
@@ -12,7 +17,7 @@ function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e)
 function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};const entry=Object.assign({},src,official.text||{},draft);const photos=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);if(photos.length)entry.image=photos[0].url;return entry}
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
-function visible(){return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
+function visible(){refreshCustom();const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
 function start(k){mode=k||'gross';tab='lesions';filter='all';normalSystem='all';menu()}
 function menu(){
  const selected=visible();
@@ -23,6 +28,7 @@ function menu(){
   const selected=visible();
   return modal('🔬 Specimen Cabinet · Normal Atlas',
    tabs+
+   '<div class="buttonrow" style="margin:8px 0"><button data-path7-add="normal" style="background:#e5f6eb;font-weight:800">➕ Add normal card</button><button data-path7-manage-hidden="1">🗂 Hidden cards / restore</button></div>'+
    '<p style="font-size:13px;margin:6px 0 11px">Recognize <b>healthy gross anatomy and histology</b> before evaluating diseased tissue. Normal variation depends on species, organ site, age, and physiologic state. Photographs are added and published through the existing specimen editor.</p>'+
    '<label style="display:block;font-size:12px;font-weight:700">System<select data-path7-normal-system="1" style="display:block;width:100%;max-width:380px;padding:9px;margin:5px 0 9px;border-radius:8px;background:white"><option value="all">All systems</option>'+systems.filter(x=>x!=='all').map(x=>'<option value="'+h(x)+'"'+(normalSystem===x?' selected':'')+'>'+h(x)+'</option>').join('')+'</select></label>'+
    '<label style="display:block;font-size:12px">Search normal structures<input id="path7Search" data-path7-search="1" style="display:block;width:100%;max-width:380px;padding:9px;margin:5px 0 9px" value="'+h(search)+'" placeholder="e.g. cerebellum, placenta, cornea"></label>'+
@@ -32,6 +38,7 @@ function menu(){
  }
  modal('🔬 Necropsy · Specimen Cabinet',
  tabs+
+ '<div class="buttonrow" style="margin:8px 0"><button data-path7-add="lesion" style="background:#e5f6eb;font-weight:800">➕ Add specimen card</button><button data-path7-manage-hidden="1">🗂 Hidden cards / restore</button></div>'+
  '<p><b>Gross photograph → lesion description → morphologic diagnosis → histology → pathogenesis.</b> This is an exam study bank built from the uploaded lectures, with original summaries and spaces for your editable images and annotations.</p>'+
  '<div class="buttonrow"><button data-path7-differentials="1" style="background:#e0f3ed;border:2px solid #8ebea8;font-weight:850">🧩 Differential Case Center · Signalment → Histo → Etiology</button></div>'+ 
  '<div class="buttonrow"><button data-path7-library="1">📷 Browse published photos by lecture / system</button></div>'+ 
@@ -53,7 +60,7 @@ function card(i){
  (x.notes?'<p><b>Your annotation:</b> '+rich(x.notes)+'</p>':'')+
  '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+
  (x.normal?'':'<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>')+ 
- '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-back="1">← '+(x.normal?'Normals':'Specimens')+'</button></div>');
+ '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-hide="'+i+'" style="font-size:12px">🗂 Hide card</button><button data-path7-back="1">← '+(x.normal?'Normals':'Specimens')+'</button></div>');
 }
 function edit(i){
  current=i;const x=record(i);
@@ -94,6 +101,7 @@ function init(api){
  ui=api;
  window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.init(api);
+ window.VPQ_NECROPSY_OWNER_PUBLISH?.load?.().then(()=>{refreshCustom();if(ui===api&&api.body?.querySelector?.('[data-path7-tab]'))menu()}).catch(()=>{});
  api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
  api.body.addEventListener('click',ev=>{
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
@@ -109,6 +117,9 @@ function init(api){
    :'<p><b>Key distinction:</b> '+rich(x.why)+'</p><p><b>Use these findings:</b> '+rich(x.gross)+'</p><p><b>Histology:</b> '+rich(x.histo)+'</p>';
   modal('❔ '+h(x.title)+' · '+(topic==='gross'?'Why gross looks this way':topic==='histo'?'Microscopy and mechanism':'Distinguishing clues'),sections+'<p class="tiny">Drawn from this existing study card. Confirm specific interpretations with the lecture slides.</p><button data-path7-view="'+current+'">← Return to specimen</button>');return;
  }
+ if(d.path7Add!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newSpecimenEditor?.(d.path7Add==='normal'?'normal':'lesion',tab==='normals'?'67':(filter==='all'?'68':filter));
+ if(d.path7ManageHidden!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.hiddenSpecimenMenu?.();
+ if(d.path7Hide!==undefined){const item=base[Number(d.path7Hide)];return item&&window.VPQ_NECROPSY_OWNER_PUBLISH?.hideSpecimenEditor?.(item.id,false)}
  if(d.path7Tab!==undefined){tab=d.path7Tab==='normals'?'normals':'lesions';search='';return menu()}
  if(d.path7Library!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.photoLibrary?.();
  if(d.path7Differentials!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start(ui,filter);
@@ -130,9 +141,9 @@ function init(api){
   if(d.path7Nextq!==undefined){step++;revealed=false;return question()}
  },true);
 }
-function openCard(id){const i=base.findIndex(x=>x.id===id);if(i>=0){tab=base[i].normal?'normals':'lesions';return card(i)}return menu()}
+function openCard(id){refreshCustom();const i=base.findIndex(x=>x.id===id);if(i>=0){tab=base[i].normal?'normals':'lesions';return card(i)}return menu()}
 function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
 function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
 function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
-return {init,start,cards:base,openCard,draftPhoto,draftText,afterPublished};
+return {init,start,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
 })();
