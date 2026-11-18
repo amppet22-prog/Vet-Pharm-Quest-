@@ -62,6 +62,18 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=Array.from({length:13},(_,i)=>String(i+67));
 const CASE_MATCH={
+'n69-ependymoma':['ependymoma'],
+'n69-metastatic-hsa':['metastatic hemangiosarcoma to cns'],
+'n69-lead':['lead toxicosis'],
+'n69-tetanus':['tetanus / tetanospasmin'],
+'n69-phalaris':['phalaris grass neurotoxicosis'],
+'n69-copper-deficiency':['copper deficiency — small ruminants'],
+'n69-medulloblastoma':['embryonal cns tumors'],
+'n69-border-disease':['viral hypomyelinogenesis — border disease virus'],
+'n69-postanesthetic':['postanesthetic hemorrhagic myelopathy'],
+'n70-vitamin-a':['vitamin a deficiency optic nerve injury'],
+'n70-vincristine':['vincristine neuropathy'],
+'n70-neurotmesis':['neurotmesis'],
 'n69-hydranencephaly':['hydranencephaly'],
 'n69-hydromyelia':['hydromyelia'],
 'n69-astrocytoma':['astrocytoma'],
