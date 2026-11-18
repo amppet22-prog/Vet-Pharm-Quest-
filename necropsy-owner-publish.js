@@ -81,6 +81,46 @@ function photoGrid(list){
 }
 function casePhotoHTML(id){return photoGrid(photosOf(getCase(id)))}
 function specimenPhotoHTML(id){return photoGrid(photosOf(getSpecimen(id)))}
+/* Published-photo index: reuse references without duplicating images or changing their source diagnoses. */
+let photoLecture='all',photoSystem='all',photoSearch='';
+function getPhotoLibrary(){
+ const baseCases=[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...getCustomCases()];
+ const specimens=window.VPQ_PATH_EXAM7_DATA||[];
+ const results=[];
+ for(const group of ['cases','specimens','lectures']){
+  for(const [id,record] of Object.entries(published[group]||{})){
+   const parent=group==='cases'?baseCases.find(x=>x.id===id):group==='specimens'?specimens.find(x=>x.id===id):null;
+   const homeLecture=String(parent?.lecture||(/L(\\d+)/.exec(id)||[])[1]||'');
+   const homeSystem=String(parent?.system||'');
+   for(const [index,photo] of photosOf(record).entries()){
+    if(!photo?.url)continue;
+    const lectures=[...new Set([...(photo.lectures||[]).map(String),...(homeLecture?[homeLecture]:[])])];
+    const systems=[...new Set([...(photo.systems||[]),...(homeSystem?[homeSystem]:[])])];
+    results.push({id,group,index,title:record.title||parent?.title||id,photo,lectures,systems});
+   }
+  }
+ }
+ return results;
+}
+function photoLibrary(){
+ const all=getPhotoLibrary();
+ const selected=all.filter(x=>(photoLecture==='all'||x.lectures.includes(photoLecture))&&(photoSystem==='all'||x.systems.includes(photoSystem))&&(!photoSearch||[x.title,x.photo.caption,x.photo.credit,x.id].join(' ').toLowerCase().includes(photoSearch)));
+ const allSystems=[...new Set(all.flatMap(x=>x.systems).filter(Boolean))].sort();
+ show('📷 Published pathology photo library',
+ '<p class="tiny">Filter published images by lecture or body system. The same photo can be tagged for multiple lectures; its original condition and credit stay attached. This includes only genuinely published photos, not empty image references.</p>'+
+ '<div class="buttonrow"><button data-np-library-back="1">← Gross atlas</button><button data-np-library-differentials="1">Differential cases</button></div>'+
+ '<label style="display:block">Lecture <select data-np-library-lecture="1" style="width:100%;padding:7px"><option value="all">All lectures</option>'+Array.from({length:13},(_,i)=>String(i+67)).map(n=>'<option value="'+n+'"'+(photoLecture===n?' selected':'')+'>L'+n+'</option>').join('')+'</select></label>'+
+ '<label style="display:block">Body system <select data-np-library-system="1" style="width:100%;padding:7px"><option value="all">All systems</option>'+allSystems.map(n=>'<option value="'+esc(n)+'"'+(photoSystem===n?' selected':'')+'>'+esc(n)+'</option>').join('')+'</select></label>'+
+ '<label style="display:block">Condition / photo search <input data-np-library-search="1" value="'+esc(photoSearch)+'" style="width:100%;padding:8px" placeholder="e.g. WNV, spinal cord, dermatitis"></label>'+
+ '<p class="tiny">'+selected.length+' matching published image'+(selected.length===1?'':'s')+' ('+all.length+' total).</p>'+
+ (selected.length?'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px">'+selected.map(x=>
+ '<div style="border:1px solid #c5d6e5;border-radius:10px;padding:8px"><img src="'+esc(x.photo.url)+'" loading="lazy" alt="'+esc(x.photo.caption||x.title)+'" style="display:block;width:100%;height:175px;object-fit:contain"><b style="font-size:12px">'+esc(x.title)+'</b>'+
+ '<small style="display:block">'+esc(x.photo.type||'Image')+' · '+esc(x.photo.caption||'No caption')+'</small>'+
+ '<small style="display:block">L'+x.lectures.map(esc).join(', L')+(x.systems.length?' · '+x.systems.map(esc).join(' / '):'')+'</small>'+
+ '<small style="display:block">Credit: '+esc(x.photo.credit||'not specified')+'</small>'+
+ '<button data-np-library-open="'+esc(x.group+':'+x.id)+'" style="font-size:12px;margin-top:5px">Open source condition</button></div>').join('')+'</div>':'<p>No published images match these filters. Try All lectures / All systems, or publish a correctly attributed image from its source card.</p>'));
+}
+
 function getText(type,id){const r=type==='case'?getCase(id):type==='specimen'?getSpecimen(id):published.lectures?.[id];return r?.text||{}}
 function show(title,body){api?.showModal(title,body);window.VPQ_PATH_RICH_TEXT?.install?.(api?.body)}
 let draftState=null;
@@ -264,7 +304,22 @@ function init(context){
  if(context.body.__vpqNecroOwnerInit)return;
  context.body.__vpqNecroOwnerInit=true;
  load();
+ context.body.addEventListener('change',ev=>{
+  if(ev.target?.dataset?.npLibraryLecture!==undefined){photoLecture=ev.target.value;return photoLibrary();}
+  if(ev.target?.dataset?.npLibrarySystem!==undefined){photoSystem=ev.target.value;return photoLibrary();}
+  if(ev.target?.dataset?.npLibrarySearch!==undefined){photoSearch=String(ev.target.value||'').trim().toLowerCase();return photoLibrary();}
+ },true);
  context.body.addEventListener('click',ev=>{
+  const b=ev.target.closest('[data-np-library-open],[data-np-library-back],[data-np-library-differentials]');if(!b)return;
+  ev.preventDefault();ev.stopImmediatePropagation();
+  if(b.dataset.npLibraryBack!==undefined)return window.VPQ_PATH_EXAM7?.start?.('gross');
+  if(b.dataset.npLibraryDifferentials!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start?.(api);
+  const raw=b.dataset.npLibraryOpen||'',colon=raw.indexOf(':'),group=raw.slice(0,colon),id=raw.slice(colon+1);
+  if(group==='cases')return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(id);
+  if(group==='specimens')return window.VPQ_PATH_EXAM7?.openCard?.(id);
+  if(group==='lectures')return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.((/L(\\d+)/.exec(id)||[])[1]||'68');
+ },true);
+context.body.addEventListener('click',ev=>{
   const b=ev.target.closest('[data-necro-condition-save],[data-necro-condition-cancel]');if(!b)return;
   ev.preventDefault();ev.stopImmediatePropagation();
   if(b.hasAttribute('data-necro-condition-cancel'))return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.showConditions?.();
@@ -332,5 +387,5 @@ function init(context){
   })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
-return Object.freeze({init,load,getCustomCases,getCustomConditions,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
+return Object.freeze({init,load,getCustomCases,getCustomConditions,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,getPhotoLibrary,photoLibrary,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
 })();
