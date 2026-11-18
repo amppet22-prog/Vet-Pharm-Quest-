@@ -21,6 +21,7 @@ async function load(){
 function getCase(id){return published.cases?.[id]||null}
 function getSpecimen(id){return published.specimens?.[id]||null}
 function getLecturePhoto(id){return photosOf(published.lectures?.[id])[0]||null}
+function getLecturePhotos(id){return photosOf(published.lectures?.[id])}
 function publishedCaseImage(id){return photosOf(getCase(id))[0]?.url||''}
 function specimenPhoto(id){return photosOf(getSpecimen(id))[0]?.url||''}
 function photosOf(record){return Array.isArray(record?.photos)?record.photos:(record?.photo?.url?[record.photo]:[])}
@@ -182,5 +183,5 @@ function init(context){
   })().catch(e=>{show('Publication was not completed','<p>'+esc(e.message)+'</p><p>The existing published image was not replaced in the manifest. You can try again.</p><button data-necro-owner-close="1">Back</button>')}).finally(()=>{token='';password='';b.disabled=false});
  },true);
 }
-return Object.freeze({init,load,getCase,getSpecimen,getLecturePhoto,getText,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
+return Object.freeze({init,load,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
 })();
