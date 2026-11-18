@@ -18,6 +18,41 @@ async function load(){
  loaded=true;return published;
 }
 
+
+function getCustomConditions(lecture){
+ return Object.values(published.customConditions||{}).filter(c=>c&&c.title&&c.lecture===String(lecture)).map(c=>({
+  title:c.title,slides:c.slides||'Owner-added teaching entry',
+  points:[['Gross lesions',c.gross||'Not yet specified'],['Histopathology',c.histo||'Not yet specified'],['Mechanism / etiology',c.mechanism||'Not yet specified'],['Differential diagnosis and testing',c.differentials||'Not yet specified']],
+  ownerCreated:true,ownerId:c.id
+ }));
+}
+function newConditionEditor(lecture='68'){
+ const options=Array.from({length:13},(_,i)=>String(i+67));
+ show('➕ Add pathology condition to lecture',
+ '<p>Create a <b>lecture condition</b> (not a four-choice differential case). It will appear in the lecture inventory and coverage audit after owner publishing. Photographs can be added separately to the specimen atlas.</p>'+
+ '<label>Lecture<select id="npCondLecture">'+options.map(n=>'<option value="'+n+'"'+(n===String(lecture)?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
+ '<label>Condition name<input id="npCondTitle" style="width:100%" placeholder="e.g. West Nile virus (WNV)"></label>'+
+ '<label>Source slide / citation<input id="npCondSlides" style="width:100%" placeholder="Lecture 68 slide 20"></label>'+
+ [['Gross description','npCondGross'],['Histopathology','npCondHisto'],['Why / mechanism','npCondMechanism'],['Differentials and confirmatory tests','npCondDifferentials']].map(([label,id])=>'<label style="display:block;margin:9px 0"><b>'+label+'</b><textarea id="'+id+'" rows="3" style="width:100%"></textarea></label>').join('')+
+ '<div style="border:1px solid #cbd9e8;padding:10px;border-radius:10px"><b>Owner publishing</b><p style="font-size:12px">Enter your publishing password for the encrypted GitHub key; a token is needed only for first-time setup.</p><label>Password<input id="npCondPassword" type="password" autocomplete="off" style="width:100%"></label><label>Token (first setup only)<input id="npCondToken" type="password" autocomplete="off" style="width:100%"></label></div>'+
+ '<div class="buttonrow"><button data-necro-condition-save="1">🚀 Publish condition</button><button data-necro-condition-cancel="1">← Back</button></div><p id="npCondStatus" role="status" aria-live="polite"></p>');
+}
+async function publishCondition(c,token){
+ const who=await github('https://api.github.com/user',token);
+ if(who?.login?.toLowerCase()!==OWNER.toLowerCase())throw Error('Only the repository owner can publish.');
+ const old=await file(MANIFEST,token),manifest=JSON.parse(decode(old.content));
+ manifest.customConditions=manifest.customConditions||{};
+ const key=c.lecture+'|'+c.title.toLowerCase().replace(/\\s+/g,' ').trim();
+ const existing=Object.values(manifest.customConditions).find(x=>x.lecture===c.lecture&&x.title.toLowerCase()===c.title.toLowerCase());
+ if(existing)throw Error('This condition already exists as an owner-created entry. Avoid duplicates.');
+ const canonical=(window.VPQ_PATH_LECTURE_LEARN?.[c.lecture]?.sections||[]).some(x=>String(x.title).toLowerCase()===c.title.toLowerCase());
+ if(canonical)throw Error('This condition is already in the instructor lecture list. Open the existing condition instead.');
+ const id='condition-'+c.lecture+'-'+c.title.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,55);
+ c.id=id;manifest.customConditions[id]=c;
+ await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\\n'),old.sha,token,'Owner add lecture condition '+id);
+ published=manifest;return c;
+}
+
 function getCustomCases(){return Object.values(published.customCases||{}).filter(c=>c&&c.id&&Array.isArray(c.options)&&c.options.length===4)}
 function getCase(id){return published.cases?.[id]||null}
 function getSpecimen(id){return published.specimens?.[id]||null}
@@ -215,6 +250,24 @@ function init(context){
  context.body.__vpqNecroOwnerInit=true;
  load();
  context.body.addEventListener('click',ev=>{
+  const b=ev.target.closest('[data-necro-condition-save],[data-necro-condition-cancel]');if(!b)return;
+  ev.preventDefault();ev.stopImmediatePropagation();
+  if(b.hasAttribute('data-necro-condition-cancel'))return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.showConditions?.();
+  if(b.disabled)return;
+  const root=context.body, val=id=>String(root.querySelector('#'+id)?.value||'').trim();
+  const c={lecture:val('npCondLecture'),title:val('npCondTitle'),slides:val('npCondSlides'),gross:val('npCondGross'),histo:val('npCondHisto'),mechanism:val('npCondMechanism'),differentials:val('npCondDifferentials')};
+  const status=root.querySelector('#npCondStatus');
+  if(!c.title||!c.gross||!c.histo||!c.mechanism||!c.differentials||!c.slides){if(status)status.textContent='Complete the condition name, source, gross, histology, mechanism and diagnostic details.';return;}
+  let password=val('npCondPassword'),token=val('npCondToken');if(root.querySelector('#npCondToken'))root.querySelector('#npCondToken').value='';if(root.querySelector('#npCondPassword'))root.querySelector('#npCondPassword').value='';
+  b.disabled=true;if(status)status.textContent='Publishing owner condition…';
+  (async()=>{const vault=window.VPQ_OWNER_KEY_VAULT;
+   if(!token){if(!vault?.exists?.())throw Error('No saved publishing key. Enter the token once.');if(!password)throw Error('Enter publishing password.');token=await vault.unlock(password);}
+   await publishCondition(c,token);
+   if(vault&&!vault.exists()&&password&&token)await vault.store(token,password);
+   window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.showConditions?.(c.lecture);
+  })().catch(e=>{if(status)status.textContent='Publish failed: '+e.message}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
+ },true);
+ context.body.addEventListener('click',ev=>{
   if(window.VPQ_PATH_RICH_TEXT?.handle?.(ev,context.body))return;
 
  const b=ev.target.closest('[data-necro-create-submit],[data-necro-create-cancel]');if(!b)return;
@@ -264,5 +317,5 @@ function init(context){
   })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
-return Object.freeze({init,load,getCustomCases,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
+return Object.freeze({init,load,getCustomCases,getCustomConditions,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
 })();
