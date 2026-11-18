@@ -34,7 +34,7 @@ function photoGrid(list){
 function casePhotoHTML(id){return photoGrid(photosOf(getCase(id)))}
 function specimenPhotoHTML(id){return photoGrid(photosOf(getSpecimen(id)))}
 function getText(type,id){const r=type==='case'?getCase(id):type==='specimen'?getSpecimen(id):published.lectures?.[id];return r?.text||{}}
-function show(title,body){api?.showModal(title,body)}
+function show(title,body){api?.showModal(title,body);window.VPQ_PATH_RICH_TEXT?.install?.(api?.body)}
 let draftState=null;
 async function editor(type,id){
  const lp=type==='lecture'?/^L(\d+)-S(\d+)-P([01])$/.exec(id):null;
@@ -215,6 +215,8 @@ function init(context){
  context.body.__vpqNecroOwnerInit=true;
  load();
  context.body.addEventListener('click',ev=>{
+  if(window.VPQ_PATH_RICH_TEXT?.handle?.(ev,context.body))return;
+
  const b=ev.target.closest('[data-necro-create-submit],[data-necro-create-cancel]');if(!b)return;
  ev.preventDefault();ev.stopImmediatePropagation();
  if(b.hasAttribute('data-necro-create-cancel'))return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start(api);
