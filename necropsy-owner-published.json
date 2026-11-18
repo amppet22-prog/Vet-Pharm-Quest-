@@ -328,6 +328,50 @@
       },
       "updated": "2026-11-18T21:42:39.705Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-3": {
+      "title": "Choroid plexitis",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-3-1795039017265-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-68-3"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-3-1795039017265-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-68-3"
+      },
+      "text": {
+        "gross": "Granular, gray-white plexus with hyperemia/hemorrhage and cloudy to yellow-green, thick or gelatinous in the ventricular system. \nChoroid plexuses may be granular and gray/ white with hyperemia and hemorrhage. \nWhy it matters: Inflammation may extend through CSF spaces into the leptomeninges, and purulent exudate can impede CSF flow, causing acquired hydrocephalus.",
+        "dx": "Working identification: Choroid plexitis. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Location: Inflammation of the choroid plexus, most commonly due to bacteria entering directly or hematogenously, though viral infection is possible. Why it matters: Inflammation may extend through CSF spaces into the leptomeninges, and purulent exudate can impede CSF flow, causing acquired hydrocephalus.",
+        "why": "Why it matters: Inflammation may extend through CSF spaces into leptomeninges, and purulent exudate can impede CSF flow, causing acquired hydrocephalus. Differentiate: Choroid plexus is the CSF-producing structure; ependyma lines the ventricular wall.",
+        "notes": "If severe, it can traverse the fourth ventricle and spread throughout the subarachnoid space, causing suppurative leptomeningitis. The exudate can also obstruct the CSF flow *which can lead to hydrocephalus. *\n\nAlso called Ependymitis. "
+      },
+      "updated": "2026-11-18T21:56:58.881Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
