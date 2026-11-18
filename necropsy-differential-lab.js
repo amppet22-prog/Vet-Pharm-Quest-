@@ -44,7 +44,18 @@ const CASE_MATCH={
 's73-sarcoptes':['sarcoptic mange'],
 's73-ringworm':['dermatophytosis microsporum canis'],
 's73-malassezia':['malassezia pachydermatis dermatitis'],
-'s74-dle':['discoid lupus erythematosus'],'s72-crust':['contagious ecthyma','orf'],'s73-pruritus':['demodex gatoi'],'s74-blister':['pemphigus foliaceus'],
+'s74-dle':['discoid lupus erythematosus'],
+'s73-demodex-cati':['feline demodex cati'],
+'s73-chorioptes':['chorioptic mange'],
+'s73-psoroptes':['psoroptic mange'],
+'s73-cheyletiella':['cheyletiellosis'],
+'s73-sporothrix':['sporotrichosis'],
+'s73-zinc':['zinc-responsive dermatosis type i'],
+'s74-pemphigoid':['bullous pemphigoid'],
+'s74-flea':['flea allergy dermatitis'],
+'s74-culicoides':['equine culicoides hypersensitivity'],
+'s74-em':['erythema multiforme'],
+'s74-mosquito':['feline mosquito-bite hypersensitivity'],'s72-crust':['contagious ecthyma','orf'],'s73-pruritus':['demodex gatoi'],'s74-blister':['pemphigus foliaceus'],
 'r75-testis':['sertoli-cell tumor','sertoli cell tumor'],'r75-ram-epididymis':['ram epididymitis','brucella ovis'],'r75-prostate':['prostatic carcinoma'],
 'r76-granulosa':['granulosa-theca cell tumor'],'r76-pyometra':['canine pyometra','pyometra — general'],'r76-mastitis':['coliform / e. coli mastitis'],
 'r77-abortion':['chlamydia abortus','chlamydiosis'],'r77-campy':['campylobacter jejuni / fetus','campylobacter species'],
@@ -92,6 +103,21 @@ function conditionIndex(){
  '<p class="tiny">'+displayed.length+' topics displayed. Select any topic to see full instructor-derived notes and the source slide reference.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px">'+displayed.map(({x,i,ev})=>'<button data-pathdiff-condition-open="'+i+'" style="text-align:left;padding:10px;background:white;border:1px solid #c6d7e9;border-radius:10px"><b>'+safe(x.title)+'</b><small style="display:block;color:#597087;margin-top:5px">Slides '+safe(x.slides||'see lecture')+'</small><small style="display:block;color:#536575;margin-top:4px">Notes ✓ · Specimen '+(ev.specimen?'✓':'—')+' · Case '+(ev.linked.length?'✓':'—')+' · Image '+(ev.embedded?'✓':'—')+'</small></button>').join('')+'</div>');
 }
+
+/* Every lecture topic, including topics without bespoke differential questions, has a source-grounded active-recall exercise. */
+let recallShow=false;
+function recallView(){
+ const x=lectureConditions()[conditionChosen];if(!x)return conditionIndex();
+ const ev=evidence(conditionLecture,x);
+ const points=x.points||[];
+ modal('🧠 Lecture '+safe(conditionLecture)+' · Source-grounded active recall',
+ '<div class="buttonrow"><button data-pathdiff-recall-back="1">← Lecture topic</button><button data-pathdiff-recall-reset="1">↺ Hide answers</button></div>'+
+ '<div style="background:#eff6ff;border-radius:10px;padding:11px;margin:10px 0"><b>'+safe(x.title)+'</b><p style="font-size:12px">Original slide: '+safe(x.slides||'see lecture')+'</p><p>Without looking at notes, explain each of the prompts below. Include species, distribution, gross lesions, histology, causation, and what makes it different where applicable.</p></div>'+
+ points.map((q,i)=>'<div style="border:1px solid #cfdfed;border-radius:9px;padding:10px;margin:7px 0"><b>'+safe(i+1)+'. '+safe(q[0])+'</b>'+(recallShow?'<p style="white-space:pre-wrap;margin:6px 0">'+safe(q[1])+'</p>':'<p style="color:#63758a;margin:7px 0;font-size:12px">Try to recall the explanation before revealing the source-derived answer.</p>')+'</div>').join('')+
+ '<div class="buttonrow"><button data-pathdiff-recall-reveal="1">'+(recallShow?'Answers visible ✓':'Reveal lecture-derived answers')+'</button></div>'+
+ '<p style="font-size:12px;margin-top:10px">This is a source-note recall drill, not a full independent differential case. '+(ev.linked.length?'There is also a dedicated differential case for this topic.':'This topic still needs a dedicated differential case.')+'</p>');
+}
+
 function conditionDetail(){
  const item=lectureConditions()[conditionChosen];if(!item)return conditionIndex();
  const ev=evidence(conditionLecture,item),images=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES||{};
@@ -103,6 +129,7 @@ function conditionDetail(){
  }).join('');
  modal('📖 L'+safe(conditionLecture)+' · '+safe(item.title),
  '<div class="buttonrow"><button data-pathdiff-condition-back="1">← Full lecture inventory</button><button data-pathdiff-list="1">Cases</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-recall-start="1">🧠 Test me on this topic</button></div>'+
  '<div style="background:#f0f6fb;padding:10px;border:1px solid #c8dbeb;border-radius:10px;margin:9px 0"><b>Instructor-based lesson</b><p style="font-size:13px;margin:5px 0">Lecture '+safe(conditionLecture)+' · slides '+safe(item.slides||'not specified')+'</p><small>Specimen card: '+(ev.specimen?'Matched':'Not matched')+' · Dedicated case: '+(ev.linked.length?'Matched':'Not yet')+' · Attached reference: '+(ev.embedded?'Yes':'Not yet')+'</small></div>'+
  (item.points||[]).map(p=>'<section style="border-bottom:1px solid #e0e7ef;padding:9px 0"><b>'+safe(p[0])+'</b><p style="margin:5px 0;white-space:pre-wrap;line-height:1.5">'+safe(p[1])+'</p></section>').join('')+
  '<div style="padding:9px;background:#f8f6ed;border-radius:10px;margin:10px 0;font-size:12px"><b>Photo evidence:</b> Original professor slide '+safe(item.slides||'(see source deck)')+' is the primary teaching reference. We have not copied lecture slides into this index. Published pathology images must be identified by species and gross/histology type.</div>'+
@@ -154,6 +181,10 @@ function init(api){
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
  if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
  if(d.pathdiffConditionBack!==undefined)return conditionIndex();
+ if(d.pathdiffRecallStart!==undefined){recallShow=false;return recallView()}
+ if(d.pathdiffRecallReveal!==undefined){recallShow=true;return recallView()}
+ if(d.pathdiffRecallReset!==undefined){recallShow=false;return recallView()}
+ if(d.pathdiffRecallBack!==undefined)return conditionDetail();
  if(d.pathdiffList!==undefined)return menu();
  if(d.pathdiffFilter!==undefined){filter=d.pathdiffFilter;return menu()}
  if(d.pathdiffOpen!==undefined){current=d.pathdiffOpen;phase=0;leading=-1;shortlist=[];return view()}
