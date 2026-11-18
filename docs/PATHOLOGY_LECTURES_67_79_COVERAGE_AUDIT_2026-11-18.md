@@ -30,7 +30,7 @@ Scope: Vet Pharm Quest, instructor-derived lecture study material and Necropsy D
 Counts above are the audited *sections*, not unique conditions or verified complete exam coverage. The interactive UI uses the loaded lessons at runtime and includes foundational notes plus supplements. It is the more precise source of current UI counts.
 
 ## Current cross-coverage
-- Ninety-one curated necropsy differential cases are deployed, each with four etiologic/diagnostic options and mechanism.
+- One hundred fifteen curated necropsy differential cases are deployed, each with four etiologic/diagnostic options and mechanism.
 - Many lecture topics do **not** yet have dedicated interactive differential cases; this is explicitly visible using **Needs differential case**. The 91 cases now include expanded dermatopathology coverage alongside new male/female reproductive, abortion, ophthalmic, and otic cases.
 - Many do **not** have embedded gross + histology photo pairs; this is visible using **Needs attached photo**.
 - Some image records link to references instead of embedding an image. Links must be checked for appropriate species, gross vs histology, provenance, accessibility, and image license.
@@ -61,3 +61,9 @@ From the Necropsy Case Center, open **Audit all lecture conditions (L67–79)** 
 - The curated differential case bank has **91** cases (all four options with one designated best), and the additions from this pass include feline plasma-cell pododermatitis, xanthomas, FHV-1 skin dermatitis, post-grooming furunculosis, equine Onchocerca dermatitis, chronic progressive lymphedema, uveodermatologic syndrome, renal dermatofibrosis, seminoma, feline fibroadenomatous hyperplasia, bovine Brucella abortion, glaucoma, bovine infectious keratoconjunctivitis, and ceruminous gland carcinoma.
 - Photo references are placeholders/lecture slide targets unless actual source image URLs or uploaded owner-published photos exist. **Do not interpret the presence of a photo-reference record as an embedded image.** The multi-photo owner publishing system and text-only publishing should remain available for every new case.
 - JavaScript syntax and identifier integrity checked; **live browser behavior has not been verified**.
+
+## System completion pass — 2026-11-18 (continued)
+- Added 24 simulated, four-option cases: **16 from lectures 75–79** (Leydig tumor, canine BPH, Brucella canis epididymitis, follicular ovarian cyst, puerperal metritis, feline mammary carcinoma, Mycoplasma mastitis, hydroallantois, equine Leptospira abortion, endophyte-infected fescue reproductive toxicosis, KCS, feline diffuse iris melanoma, phacoclastic uveitis, auricular chondritis, equine dentigerous cyst, calf Mycoplasma otitis), plus **8 from lectures 68–70** (distemper, neurologic FIP, rabies, bromethalin, cerebellar hypoplasia, oligodendroglioma, polyneuritis equi and acute canine polyradiculoneuritis).
+- Current curated case bank **115 cases**; counts per lecture: L68 6, L69 7, L70 5, L71 7, L72 14, L73 16, L74 13, L75 9, L76 10, L77 13, L78 8, L79 7. L67 comprises foundational morphology rather than individual specific diagnoses, and is covered in the lecture inventory/recall drills.
+- All 115 have four differential choices and exactly one best diagnosis, with matching photo record and audit mapping. Photo records are **not images**. The multi-image, text-only, authenticated owner Publish Now system is unchanged.
+- Still open: systematic slide-by-slide source check for all individual diseases, verified appropriately licensed paired gross/histology photographs, more dedicated cases for topics without a case, and browser/end-to-end publish testing.
