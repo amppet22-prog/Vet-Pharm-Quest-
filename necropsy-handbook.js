@@ -145,7 +145,7 @@ function init(host){
  api=host;
  host.body.addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;const d=b.dataset;
- if(!Object.keys(d).some(k=>k.startsWith('np')))return;
+ if(!Object.keys(d).some(k=>k.startsWith('np')||k.startsWith('pathImage')))return;
  e.preventDefault();e.stopImmediatePropagation();
  if(d.nphelp!==undefined)return openWhy(d.nphelp,d.nphelpid||'');
  if(d.npreturn!==undefined)return lecture(chapter);
