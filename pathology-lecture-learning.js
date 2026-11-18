@@ -99,19 +99,45 @@ sections:[
 ['Critical outcome','Severe edema raises intracranial pressure, can impair neurologic function and displace brain structures caudally (e.g. cerebellar coning/herniation).'],
 ['Fast distinction','Cytotoxic = failed cell pumps, intact BBB, intracellular. Vasogenic = leaky BBB, extracellular, plasma fluid and protein.']
 ]},
-{title:'Defense and barrier systems',slides:'38–42',points:[
-['BBB function','Protects CNS against circulating harmful agents while allowing essential oxygen and nutrient exchange.'],
-['Structural elements','Tight junctions between capillary endothelial cells, supporting basement membrane and astrocytic foot processes.'],
-['Glia limitans versus BBB','Glia limitans lies beneath pia and helps restrict CSF-parenchyma movement; BBB regulates blood-parenchyma access.'],
-['Immune defenses','Resident microglia and trafficking macrophages participate in innate and adaptive immune responses.'],
-['Professor’s assessment note','Her closing slide says exam questions follow the supplied lecture material, stated objectives and Canvas quizzes. The extra FYI summary and terminology slides should be accessible, but clearly labeled FYI.']
+{title:'Defense and barrier systems',slides:'38–42 (FYI summary)',points:[
+['Blood–brain barrier (BBB)','The capillary endothelial barrier regulates passage of agents from circulating blood into brain parenchyma; specialized endothelial tight junctions are the primary seal, supported by basement membrane and astrocytic foot processes.'],
+['BBB structural components','The lecture emphasizes endothelium, basement membrane and astrocytic endfeet. Specialized endothelial tight junctions limit paracellular entry; nutrient transport is selective rather than unrestricted.'],
+['Glia limitans','Astrocytic processes immediately subjacent to the pia mater form a boundary associated with the pial surface, helping restrict movement from CSF-associated spaces into neural tissue. This is not the vascular BBB.'],
+['Microglia and trafficking macrophages','Microglia are resident CNS innate immune cells. During inflammation, circulating monocyte-derived macrophages may enter and clear debris. Both contribute to immune responses, but neither is an anatomical barrier layer.'],
+['Innate and adaptive immunity','CNS immune responses include resident innate surveillance, recruited inflammatory cells and adaptive immune-cell contributions when activated; immune defense should not be confused with BBB or glia-limitans anatomy.'],
+['Clinical WHY: vasogenic edema','BBB dysfunction permits plasma fluid and proteins to enter extracellular neural tissue. Contrast cytotoxic edema, in which ionic-pump failure drives intracellular swelling with an initially intact BBB.'],
+['Professor’s assessment note','The closing slide prioritizes instructor material, objectives and Canvas quizzes; the additional barrier and terminology slides are labeled FYI in the lecturer’s summary.']
+],flashcards:[
+['What controls movement from blood into the brain?','The blood–brain barrier, chiefly specialized capillary endothelium with tight junctions.'],
+['Name the three BBB components emphasized in Lecture 67.','Endothelium, basement membrane and astrocytic foot processes.'],
+['Where is the glia limitans located?','Astrocytic processes immediately beneath the pia mater.'],
+['BBB versus glia limitans: which interface does each protect?','BBB: blood to neural tissue. Glia limitans: pia/CSF-associated space to neural parenchyma.'],
+['Are microglia part of the anatomical BBB?','No. They are resident CNS immune sentinels and phagocytic cells.'],
+['Resident microglia versus recruited macrophages?','Microglia reside in CNS; monocyte-derived macrophages can traffic in during injury or inflammation.'],
+['What mechanism produces vasogenic CNS edema?','Increased BBB permeability allows extracellular accumulation of plasma fluid and proteins.']
 ]},
 {title:'Terminology and interpretation',slides:'43 (FYI)',points:[
-['Malacia','Softening of CNS tissue, often associated with liquefactive necrosis.'],
-['Leuko / polio','White / gray matter, respectively.'],
-['Myelo / encephalo','Spinal cord / brain tissue; encephalomyelitis means inflammation of both.'],
-['Neuronopathy / axonopathy / myelinopathy / neuropathy','Primary pathology of neurons / axons / myelin / nerves, respectively.'],
-['Look-alikes','Neuron necrosis (“red dead”) vs axonal spheroid (Wallerian degeneration); primary vs secondary demyelination; cytotoxic vs vasogenic edema; meningitis vs pachymeningitis; astrocyte scar vs microglial phagocytosis.']
+['Cerebral cortex','Outermost gray matter of the cerebrum, containing neuronal somata and associated neuropil/glia.'],
+['Malacia','Softening of brain or spinal cord tissue, commonly resulting from necrosis and tissue breakdown, including liquefactive necrosis.'],
+['Leuko- versus polio-','Leuko- identifies white matter; polio- identifies gray matter. These prefixes describe tissue distribution, not an etiologic diagnosis.'],
+['Myelo- versus encephalo-','Myelo- refers to spinal cord in the context of neurologic lesion terminology; encephalo- refers to brain. Encephalomyelitis is inflammation of both brain and spinal cord.'],
+['Neuronopathy','Primary process affecting neuronal cell bodies.'],
+['Axonopathy','Primary process affecting axons.'],
+['Myelinopathy','Primary process affecting myelin.'],
+['Neuropathy','Pathology affecting nerves; may involve axons, myelin or other peripheral-nerve structures.'],
+['Primary versus secondary change','An axon-first injury can lead to secondary myelin breakdown; a primary myelin lesion initially targets myelin with relative axonal preservation. Name the primary injury when evidence supports it.'],
+['Look-alikes','Neuronal necrosis (“red dead”) versus axonal spheroids; primary versus secondary demyelination; cytotoxic versus vasogenic edema; meningitis versus pachymeningitis.']
+],flashcards:[
+['Which tissue forms the cerebral cortex?','Gray matter along the outer cerebrum.'],
+['What does malacia mean in neuropathology?','Softening of brain or spinal cord tissue, often after necrosis.'],
+['Leuko- versus polio-?','White matter versus gray matter.'],
+['Myelo- versus encephalo-?','Spinal cord versus brain.'],
+['What does encephalomyelitis involve?','Inflammation of both brain and spinal cord.'],
+['A lesion starts in neuronal cell bodies: name the process.','Neuronopathy.'],
+['A lesion starts in axons: name the process.','Axonopathy.'],
+['A lesion primarily damages myelin: name the process.','Myelinopathy.'],
+['How is neuropathy broader than axonopathy?','Neuropathy means nerve disease; axonopathy identifies primary axonal injury.'],
+['Why can myelin loss follow an axonopathy?','Axonal degeneration can cause secondary breakdown of the surrounding myelin.']
 ]}
 ],
 checks:[
