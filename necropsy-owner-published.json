@@ -484,6 +484,50 @@
       },
       "updated": "2026-11-18T22:41:31.245Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-25": {
+      "title": "Fungal CNS infections — overview and differential etiologies",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-25-1795042503641-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-68-25"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-25-1795042503641-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-68-25"
+      },
+      "text": {
+        "gross": "Moderately well demarcated, expansive, yellow- brown foci that displace and disrupt normal tissue. ",
+        "dx": "Most cases are opportunistic infections in immunocompromised individuals. \nAspergillus is an example of trophism for vessels (angioinvasive) and can cause vasculitis leading to thrombosis or infarction. \n\n**Working identification:** Fungal CNS infections — overview and differential etiologies. Specimen site: Brain / spinal cord/meninges. ",
+        "histo": "Granulomatous to pyogranulomatous inflammation with spores able to be seen in samples. \nCan have angioinvasive with vessel trophism species. ",
+        "why": "**Fungal agents in professor's list:** *Aspergillus, Candida, Cryptococcus neoformans, the historical 'Zygomycetes' group, Blastomyces dermatitidis, Histoplasma capsulatum and Coccidioides spp. *",
+        "notes": ""
+      },
+      "updated": "2026-11-18T22:55:05.119Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
