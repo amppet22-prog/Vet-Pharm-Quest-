@@ -20,10 +20,11 @@ const data={
   {x:69,y:36,w:24,h:38,walk:81,label:'🛡️ Public health',action:'ohHub'}
  ],
  necropsy:[
-  {x:5,y:40,w:22,h:39,walk:16,label:'🔎 Gross Lesions',action:'necroGross'},
-  {x:28,y:40,w:21,h:39,walk:39,label:'🔬 Histology',action:'necroHisto'},
-  {x:52,y:40,w:20,h:39,walk:63,label:'☣️ Biosecurity',action:'necroBio'},
-  {x:76,y:40,w:21,h:39,walk:87,label:'🐾 Patient Cases',action:'necroCases'}
+  {x:3,y:25,w:20,h:45,walk:14,label:'🦴 Specimen Cabinet',subtitle:'Gross lesion ID',action:'necroGross'},
+  {x:25,y:27,w:16,h:44,walk:33,label:'📚 Necropsy Handbook',subtitle:'Learn first',action:'necroHandbook'},
+  {x:42,y:30,w:16,h:42,walk:50,label:'🩸 Histo Atlas',subtitle:'Microscopy & WHY',action:'necroHisto'},
+  {x:59,y:31,w:17,h:42,walk:68,label:'☣️ Biosafety',subtitle:'Safe sampling',action:'necroBio'},
+  {x:77,y:27,w:20,h:44,walk:87,label:'🐾 Pathology Cases',subtitle:'Clinical application',action:'necroCases'}
  ],
  skills:[
   {x:7,y:39,w:26,h:41,walk:19,label:'💉 Injection Practice',action:'injectionPractice'},
@@ -40,6 +41,7 @@ const data={
 };
 const rect=(x,y,w,h,fill,stroke='#a4b7c9')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="13" fill="'+fill+'" stroke="'+stroke+'" stroke-width="5"/>';
 function scene(key){
+ if(key==='necropsy'&&typeof window.VPQ_NECROPSY_ROOM_ART==='function')return window.VPQ_NECROPSY_ROOM_ART();
  if(key==='clinpath'&&typeof window.VPQ_CLINPATH_HYBRID_SCENE==='function')return window.VPQ_CLINPATH_HYBRID_SCENE();
  const iso=key==='isolation',cp=key==='clinpath';
  const bg=iso?'#d6eee6':cp?'#dceff8':'#edf1e5';
