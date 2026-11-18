@@ -492,7 +492,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="feline-behavior-game.js?v=20261111-cuter-cats3"></script>
 <script src="feline-enrichment-game.js?v=20261111-play-enrich1"></script>
 <script src="reception-hallway-and-habitats.js?v=20261111-dog-layout24"></script>
-<script src="clinic-image-backgrounds.js?v=20261114-hybridfix1"></script>
+<script src="clinic-image-backgrounds.js?v=20261118-necropsy-unmasked1"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261108-artroster2"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
@@ -713,7 +713,13 @@ function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));localStor
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function patch(obj,type){return {...obj,...(edits[type]?.[obj.id]||{})}}
 function dataCases(){return D.cases.concat(window.VPQ_CLINICAL_PRACTICE?.caseFiles||[],window.VPQ_NAVLE_EXPANSION?.caseFiles||[],window.VPQ_CLINPATH_LAB?.cases||[],window.VPQ_ADVANCED_LAB?.cases||[],window.VPQ_SURGERY_NECROPSY?.caseFiles||[],window.VPQ_BLOOD_SMEAR_LAB?.cases||[],window.VPQ_PATHOGEN_ATLAS?.cases||[]).map(x=>patch(x,'cases'))} function dataDrugs(){return D.drugs.map(x=>patch(x,'drugs'))} function dataStudy(){return D.study.map(x=>patch(x,'study'))}
-let avatarX=44,petX=35,hold=0,frame=0,modalVisible=false,activeRoom=state.room in ROOMS?state.room:'reception';
+// Keep the last visited room independently of large save-state objects.
+const LAST_ROOM_KEY='vpq-v2-last-visited-room';
+const savedRoom=safeRead(LAST_ROOM_KEY,null);
+const initialRoom=(typeof savedRoom==='string'&&Object.prototype.hasOwnProperty.call(ROOMS,savedRoom))
+ ? savedRoom : (Object.prototype.hasOwnProperty.call(ROOMS,state.room)?state.room:'reception');
+let avatarX=44,petX=35,hold=0,frame=0,modalVisible=false,activeRoom=initialRoom;
+state.room=activeRoom;
 const unlocks={isolation:true,study:true};
 function roomsUnlocked(){return Object.keys(ROOMS).filter(k=>ROOMS[k]&&(!ROOMS[k].requires||state.upgrades.includes(k)))}
 function updateHUD(){const lv=Math.floor(state.xp/LEVEL_THRESH)+1;$('xp').textContent=state.xp;$('coins').textContent=state.coins;$('level').textContent=lv;$('playerName').textContent=`🩺 Dr. ${state.name} · ${state.petName} ${state.pet}`;$('caseCount').textContent=state.completed.length;$('studyCount').textContent=state.studyCorrect;$('roomCount').textContent=roomsUnlocked().length;$('accuracy').textContent=state.attempts?Math.round(100*state.correct/state.attempts)+'%':'—';$('xpMeter').style.width=(state.xp%LEVEL_THRESH)/LEVEL_THRESH*100+'%';$('levelNote').textContent=`${state.xp%LEVEL_THRESH}/${LEVEL_THRESH} XP to next level`;renderUpgrades();}
@@ -743,7 +749,7 @@ function studyRewardInfo(){
  return {perQuestion:STUDY_XP_PER_NEW_MASTERED,threshold:STUDY_XP_PER_COIN_MILESTONE,coins:STUDY_MILESTONE_COINS,progress:earned%STUDY_XP_PER_COIN_MILESTONE,mastered:Object.keys(state.rewardLedger||{}).length};
 }
 const roomBackStack=[];
-function changeRoom(room){if(!ROOMS[room])return;if(room!==activeRoom){roomBackStack.push(activeRoom);if(roomBackStack.length>20)roomBackStack.shift()}activeRoom=room;state.room=room;avatarX=43;petX=35;hold=0;persist();renderRoom();updateHUD();$('stage').focus({preventScroll:true})}
+function changeRoom(room){if(!ROOMS[room])return;if(room!==activeRoom){roomBackStack.push(activeRoom);if(roomBackStack.length>20)roomBackStack.shift()}activeRoom=room;state.room=room;avatarX=43;petX=35;hold=0;try{localStorage.setItem(LAST_ROOM_KEY,JSON.stringify(room))}catch{}persist();renderRoom();updateHUD();$('stage').focus({preventScroll:true})}
 function renderRoom(){const r=ROOMS[activeRoom];$('roomTitle').textContent=r.name;$('roomHint').textContent=activeRoom==='isolation'?'Investigate zoonoses, host roles, infection control and reportability.':'Walk with A/D or ←/→; E interacts near a station. You can also click the station.';$('mission').textContent={reception:'🏥 Begin your shift',exam:'🐾 Choose a patient',pharmacy:'💊 Learn drug safety',treatment:'❤️ Clinical care',isolation:'🛡️ One Health response',study:'📚 Master your material',clinpath:'🩸 Read the smear'}[activeRoom];$('stage').style.background=r.color; $('stage').dataset.room=activeRoom;
 let dec=r.decor.map(d=>`<span class="roomdecor" style="left:${d[1]};top:${d[2]}">${d[0]}</span>`).join('');if(activeRoom==='reception'&&state.upgrades.includes('garden'))dec+='<span class="roomdecor" style="left:5%;top:53%">🌷🌼</span>';if(activeRoom==='pharmacy'&&state.upgrades.includes('pharmDeco'))dec+='<span class="roomdecor" style="left:53%;top:22%">🧸</span>';if(activeRoom==='treatment'&&state.upgrades.includes('wardDeco'))dec+='<span class="roomdecor" style="left:68%;top:25%">🪴</span>';if(activeRoom==='reception'&&state.upgrades.includes('certificate'))dec+='<span class="roomdecor" style="left:46%;top:12%">🏆</span>';
 $('scene').innerHTML=window.VPQ_SCENERY.roomArt(activeRoom)+dec+`<div class="roomBanner">${r.name}</div>`+
@@ -3306,7 +3312,7 @@ $('vpqFloorplanTopBtn').addEventListener('click',()=>vpqReceptionWings.map());
 $('vpqArcadeTopBtn').addEventListener('click',()=>$('pharmArcadeBtn').click());
 $('vpqUpgradeStudioBtn').addEventListener('click',()=>doAction('receptionStudio'));
 $('vpqShiftTreatmentBtn').addEventListener('click',()=>{changeRoom('treatment');doAction('inpatientWard')});
-updateAvatar();updateHUD();renderRoom();loop();
+try{localStorage.setItem(LAST_ROOM_KEY,JSON.stringify(activeRoom))}catch{}updateAvatar();updateHUD();renderRoom();loop();
 })();
 
 </script><script src="oh3-final-review.js"></script></body></html>
