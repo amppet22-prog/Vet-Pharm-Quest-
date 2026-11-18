@@ -498,6 +498,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
 <script src="pharm-next-lectures.js?v=20261117-source-audit210-v4"></script>
+<script src="study-flashcard-owner.js?v=20261118-flashowner1"></script>
+<script src="pharm-exam2-flashcards.js?v=20261118-e2-flash40"></script>
 <script src="pharm-exam2-interactive-pathways.js?v=20261114-p6-lecture-filter3"></script>
 <script src="pharm-exam2-visual-anatomy.js?v=20261114-p52-v1"></script>
 <script src="pharm-exam2-pdf-practice.js?v=20261117-source14-revised"></script>
@@ -546,7 +548,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="necropsy-rich-text.js?v=20261118-format1"></script>
 <script src="necropsy-exam7-data.js?v=20261118-fix78-79"></script>
 <script src="necropsy-normals-data.js?v=20261118-l67-foundations2"></script>
-<script src="necropsy-exam7-studio.js?v=20261118-learning-pass149"></script>
+<script src="necropsy-exam7-studio.js?v=20261118-atlasbrowse-status3"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>\n<script src="pathology-source-viewer.js?v=20261118-source-pdf-fix"></script>\n<script src="pathology-lecture-learning.js?v=20261118-l67-foundations2"></script>
 <script src="pathology-lecture68-audited.js?v=20261118-l68-disease-audit2"></script>
 <script src="pathology-lecture69-audited.js?v=20261118-l69-audit1"></script>
@@ -567,7 +569,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="necropsy-differential-neuro-expansion.js?v=20261118-l69l70-thirtyfive3"></script>
 <script src="necropsy-pattern-cards.js?v=20261118-umbrella1"></script>
 <script src="necropsy-differential-skin-expansion.js?v=20261118-skin14"></script>
-<script src="necropsy-differential-lab.js?v=20261118-learning-pass149"></script>
+<script src="necropsy-differential-lab.js?v=20261118-flipcards-redesign3"></script>
 <script src="necropsy-owner-publish.js?v=20261118-custom-spec-editor"></script>
 <script src="pathology-inline-photos.js?v=20261118-multiphoto-textonly1"></script>
 <script src="necropsy-handbook.js?v=20261118-owner-publish-final4"></script>
@@ -3025,6 +3027,9 @@ vpqLearningHub=function(...args){
 
 /* New Pharmacology lecture importer and reference lessons. No changes to Exam 1 cards. */
 const vpqPharmNext=window.VPQ_PHARM_NEXT;
+const vpqExam2QuickRecall=window.VPQ_PHARM_EXAM2_FLASHCARDS;
+vpqExam2QuickRecall?.init($('modalBody'),showModal,id=>vpqPharmNextLesson(id),id=>vpqExam2HighYield('questions',id));
+window.VPQ_FLASHCARD_OWNER?.load?.().catch(()=>{});
 const vpqExam2Interactive=window.VPQ_PHARM_EXAM2_INTERACTIVE;
 const vpqExam2Anatomy=window.VPQ_PHARM_EXAM2_VISUAL_ANATOMY;
 vpqExam2Anatomy?.init({modalBody:$('modalBody'),showModal,openStudy:()=>vpqPharmNextMenu()});
@@ -3120,7 +3125,7 @@ function vpqPharmNextLesson(id){
  (l.reviewFlags?.length?'<details class="vpqNewPharmOptional"><summary>⚠ Confirm with instructor / clinical references ('+l.reviewFlags.length+')</summary>'+l.reviewFlags.map(x=>'<p>⚠ '+escapeHtml(x)+'</p>').join('')+'</details>':'')+
  '<details class="vpqNewPharmOptional"><summary>📚 Sources & review</summary><p>'+escapeHtml(l.recording)+'</p>'+l.sources.map(x=>'<p>'+escapeHtml(x)+'</p>').join('')+'<p>'+escapeHtml(l.status)+'</p></details>'+
  '<p class="tiny">Course study material, not a veterinary prescribing protocol. Supplementary and disputed points are separated above.</p>'+
- '<div class="buttonrow"><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpq-p2-visual="1">🎨 Visual Anatomy</button> <button data-vpq-p2-visual="1">🎨 Visual Anatomy</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanisms</button><button data-vpqpharmdrug-lecture="'+escapeHtml(l.id)+'">💊 Compare drugs</button><button data-vpqnewpharm-menu="1">← All lectures</button></div>');
+ '<div class="buttonrow"><button data-vpqpharmfc-open="1" data-vpqpharmfc-choose="'+escapeHtml(l.id)+'">🧠 Quick flashcards</button><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpq-p2-visual="1">🎨 Visual Anatomy</button> <button data-vpq-p2-visual="1">🎨 Visual Anatomy</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanisms</button><button data-vpqpharmdrug-lecture="'+escapeHtml(l.id)+'">💊 Compare drugs</button><button data-vpqnewpharm-menu="1">← All lectures</button></div>');
 }
 
 function vpqExam2HighYield(mode='menu',lecture='all',position=0){
@@ -3161,6 +3166,7 @@ function vpqPharmNextMenu(){
  const data=vpqPharmNext; const examLectures=(data?.lectures||[]).filter(x=>/^Lecture (1[1-9]|20)$/.test(x.id));
  showModal('📚 Pharmacology · Exam 2 · Lectures 11–20',
  '<p>Updated Exam 2 lecture materials from your PDFs: core study essentials, optional plus-note explanations, and question practice. Exam 1 remains unchanged.</p>'+
+ '<div style="background:#eff6ff;border:1px solid #b9cfe6;padding:12px;border-radius:12px;margin:10px 0"><b>🧠 Quick Recall · Exam 2</b><p class="tiny">Short, clear flip cards first; then disease mechanisms and harder patient questions.</p><button data-vpqpharmfc-open="1" style="background:#dcefff;font-weight:850">▶ Study flashcards</button></div>'+
  '<div class="vpqNewPharmCards">'+examLectures.map(x=>'<button data-vpqnewpharm-lesson="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.id)+' · '+escapeHtml(x.title)+'</b><small>'+escapeHtml(x.focus||x.summary)+'</small><em>'+data.questions.filter(q=>q.lecture===x.id).length+' initial questions · browse lesson</em></button>').join('')+'</div>'+
  '<p><b>📋 Source-authored Exam 2 practice:</b> 96 questions from the uploaded answer/practice guide, including explanations. Select Lecture 10–20 in the Study Desk question filter. These are practice items, not Dr. Carlson\'s verbatim objective prompts.</p>'+
  '<p class="tiny"><b>Lecture 10 is optional pre-exam preparation, not an Exam 2 lecture.</b> You can still review it below.</p><div class="buttonrow"><button data-vpqnewpharm-lesson="Lecture 10">📘 Optional L10 prep</button><button data-vpqhy-mode="menu">★ HIGH-YIELD EXAM 2 (L11–20)</button><button data-vpq-p2-visual="1">🎨 Explore Nephron, Synapse & Receptors</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanism Stations</button><button data-vpqnewpharm-objectives="1">📋 132 instructor objectives</button><button data-vpqpharmdrug-lecture="Lecture 10">💊 Master Drug Comparison</button><button data-vpqpharm-treats="1">🩺 What Treats What</button></div>'+ '<p class="tiny">Lecture overviews and new practice questions are available. This first import is not yet a complete slide-by-slide reconciliation of the 142-page guide.</p>');
@@ -3181,6 +3187,7 @@ $('modalBody').addEventListener('click',ev=>{
  $('modalBody').querySelectorAll('[data-vpqhy-answer]').forEach(el=>{el.disabled=true;if(Number(el.dataset.vpqhyAnswer)===q.answer)el.style.border='2px solid #19854e';if(Number(el.dataset.vpqhyAnswer)===chosen&&chosen!==q.answer)el.style.border='2px solid #b24b4b'});
  return;
  }
+ if(d.vpqpharmfcOpen!==undefined){if(d.vpqpharmfcChoose)vpqExam2QuickRecall?.select?.(d.vpqpharmfcChoose);return vpqExam2QuickRecall?.menu()}
  if(d.vpqnewpharmMenu!==undefined)return vpqPharmNextMenu();
  if(d.vpqP2Launch!==undefined)return vpqExam2Interactive?.menu();
  if(d.vpqP2Visual!==undefined)return vpqExam2Anatomy?.home();
