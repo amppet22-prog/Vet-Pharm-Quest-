@@ -237,9 +237,15 @@ appendTransaction(item);preview(id);
 const prevAction=api.getAction();
 api.setAction(function(action){if(action==='receptionStudio')return menu();if(action==='catLounge')return catLounge();if(action==='receptionYard')return yard();if(action==='receptionBank')return wallet();return prevAction(action)});
 const props=ROOMS.reception.props;
-props[0].x=12;props[1].x=31;props[2].x=51;
-props.push({x:72,emoji:'🎨',label:'Reception Studio',bubble:'Decorate',action:'receptionStudio'});
-props.push({x:91,emoji:'🐕',label:'Kennel & yard',bubble:'Coming soon',action:'receptionYard'});
+// Two native reception stations: patient check-in and Reception Studio.
+// Do not access props[2] or insert a duplicate Studio station.
+const checkin=props.find(p=>p.action==='queue');
+const studio=props.find(p=>p.action==='receptionStudio');
+if(checkin)checkin.x=33;
+if(studio)studio.x=73;
+if(!props.some(p=>p.action==='receptionYard')){
+ props.push({x:91,emoji:'🐕',label:'Kennel & yard',bubble:'Coming soon',action:'receptionYard'});
+}
 // Replace only the reception SVG wall fill (not scenery or navigation).
 const oldArt=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 window.VPQ_SCENERY.roomArt=function(k){
