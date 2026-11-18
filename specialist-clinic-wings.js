@@ -24,8 +24,8 @@ const data={
   {x:25,y:27,w:16,h:44,walk:33,label:'📚 Necropsy Handbook',subtitle:'Learn each condition',hint:'Learn First: lecture diseases, gross changes, histology, WHY and differentials',action:'necroHandbook'},
   {x:42,y:30,w:16,h:42,walk:50,label:'📋 Diagnosis Board',subtitle:'Write a morphologic DX',hint:'Morphologic diagnosis: organ, distribution, process and severity',action:'necroDx'},
   {x:59,y:31,w:17,h:42,walk:68,label:'🔬 Microscope',subtitle:'Histology & WHY',hint:'Histology atlas: microscopic features, tissue changes and pathogenesis',action:'necroHisto'},
-  {x:78,y:25,w:19,h:44,walk:87,label:'🐾 Case Board',subtitle:'Apply clinical findings',hint:'Patient cases: combine gross lesions, clinical findings and diagnostic reasoning',action:'necroCases'},
-  {x:79,y:71,w:18,h:23,walk:91,label:'🧼 Boot Wash & PPE',subtitle:'Biosecurity & sampling',hint:'Biosecurity: PPE, cleaning and specimen handling',action:'necroBio'}
+  {x:78,y:25,w:19,h:44,walk:82,label:'🐾 Case Board',subtitle:'Apply clinical findings',hint:'Patient cases: combine gross lesions, clinical findings and diagnostic reasoning',action:'necroCases'},
+  {x:79,y:71,w:18,h:23,walk:93,label:'🧼 Boot Wash & PPE',subtitle:'Biosecurity & sampling',hint:'Biosecurity: PPE, cleaning and specimen handling',action:'necroBio'}
  ],
  skills:[
   {x:7,y:39,w:26,h:41,walk:19,label:'💉 Injection Practice',action:'injectionPractice'},
