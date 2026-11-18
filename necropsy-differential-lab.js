@@ -15,35 +15,81 @@ function menu(){
  modal('🔬 Necropsy Case Center · Build the differential',
  '<div style="padding:11px;border:1px solid #b7d1eb;background:#f2f8ff;border-radius:12px"><b>Think like a pathologist:</b> signalment and history → anatomic location/gross pattern → shortlist differentials → histology → leading etiology and next test. These are <b>simulated teaching cases</b>, not photographs of real patients.</div>'+
  '<div class="buttonrow" style="margin:10px 0">'+['all',...counts].map(n=>'<button data-pathdiff-filter="'+safe(n)+'" aria-pressed="'+(filter===n?'true':'false')+'">'+(n==='all'?'All systems':'L'+safe(n))+'</button>').join('')+'</div>'+
- '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Study lecture conditions (L75–77)</button></div>'+ 
+ '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Audit all lecture conditions (L67–79)</button></div>'+ 
  '<p class="tiny">'+matched.length+' instructor-slide-linked differential cases in this first module. Each includes four etiologic possibilities and why they become more or less likely.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:9px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:12px;border:1px solid #b7cce5;border-radius:12px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+' · '+safe(x.system)+'</small></button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-pathdiff-return="1">← Necropsy study bank</button></div>');
 }
 
-/* The condition atlas deliberately reads the instructor-slide-derived lecture database.
-   No separate abridged drug/disease list can silently omit conditions. */
-let conditionLecture='75',conditionChosen=-1;
-function lectureConditions(){const learn=window.VPQ_PATH_LECTURE_LEARN||{};return learn[conditionLecture]?.sections||[]}
+/* Lecture coverage uses live lecture data, not a shortened list. */
+let conditionLecture='75',conditionChosen=-1,conditionGap='all';
+const LECTURES=Array.from({length:13},(_,i)=>String(i+67));
+const CASE_MATCH={
+'n68-brainstem':['listerio'],'n68-feedlot':['thrombotic meningoencephalitis','histophilus'],
+'n69-white-matter':['leukoencephalomalacia','fumonisin'],'n69-pem':['polioencephalomalacia'],'n68-bse':['bovine spongiform encephalopathy','prion'],
+'n70-flaccid':['botulism'],'s72-crust':['contagious ecthyma','orf'],'s73-pruritus':['demodex gatoi'],'s74-blister':['pemphigus foliaceus'],
+'r75-testis':['sertoli-cell tumor','sertoli cell tumor'],'r75-ram-epididymis':['ram epididymitis','brucella ovis'],'r75-prostate':['prostatic carcinoma'],
+'r76-granulosa':['granulosa-theca cell tumor'],'r76-pyometra':['canine pyometra','pyometra — general'],'r76-mastitis':['coliform / e. coli mastitis'],
+'r77-abortion':['chlamydia abortus','chlamydiosis'],'r77-campy':['campylobacter jejuni / fetus','campylobacter species'],
+'r77-ehv':['equine herpesvirus 1 abortion'],'r77-mummy':['fetal mummification'],'r77-toxo':['ovine/caprine toxoplasmosis'],
+'r77-mycotic':['bovine mycotic abortion'],'r77-neospora':['bovine neosporosis'],
+'r76-teratoma':['ovarian teratoma'],'r76-ovarian-epithelial':['ovarian papillary cystadenocarcinoma'],
+'r75-equine-scc':['equine penile/preputial squamous cell carcinoma'],'r75-tvt':['canine transmissible venereal tumor'],
+'r77-coxiella':['q fever','coxiella burnetii'],'r77-trich':['bovine tritrichomoniasis','bovine trichomoniasis'],
+'e78-corneal':['corneal sequestrum'],'ear79-bulla':['cholesteatoma']
+};
+function lectureConditions(){return (window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]}
+function norm(t){return String(t||'').toLowerCase().replace(/[–—-]/g,' ').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
+function relatedCases(lecture,title){
+ const t=norm(title);
+ return data.filter(c=>c.lecture===lecture&&(CASE_MATCH[c.id]||[]).some(alias=>t.includes(norm(alias))));
+}
+function evidence(lecture,section){
+ const linked=relatedCases(lecture,section.title);
+ const bank=window.VPQ_PATH_EXAM7_DATA||[];
+ const t=norm(section.title);
+ const specimen=bank.some(x=>x.lecture===lecture&&(norm(x.title)===t||(t.length>8&&norm(x.title).includes(t))||(norm(x.title).length>8&&t.includes(norm(x.title)))));
+ const imgs=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES||{};
+ const embedded=linked.some(x=>(imgs[x.id]?.images||[]).length>0);
+ const linkedPhotos=linked.some(x=>(imgs[x.id]?.links||[]).length>0);
+ return {linked,specimen,embedded,linkedPhotos};
+}
+function coverageAll(){
+ const lessons=window.VPQ_PATH_LECTURE_LEARN||{};
+ return LECTURES.map(n=>{
+  const rows=lessons[n]?.sections||[],e=rows.map(x=>evidence(n,x));
+  return {lecture:n,rows,teaching:rows.length,specimens:e.filter(x=>x.specimen).length,cases:e.filter(x=>x.linked.length>0).length,embedded:e.filter(x=>x.embedded).length,external:e.filter(x=>x.linkedPhotos).length};
+ });
+}
 function conditionIndex(){
- const lectures=['75','76','77'];
- const sections=lectureConditions();
- modal('📚 Pathology condition atlas · Lecture '+safe(conditionLecture),
+ const sections=lectureConditions(),facts=sections.map(x=>evidence(conditionLecture,x));
+ const summary=coverageAll(),total=summary.reduce((a,x)=>a+x.teaching,0);
+ const displayed=sections.map((x,i)=>({x,i,ev:facts[i]})).filter(({ev})=>conditionGap==='all'||conditionGap==='case'&&!ev.linked.length||conditionGap==='photo'&&!ev.embedded);
+ const row=summary.find(x=>x.lecture===conditionLecture);
+ modal('📚 Complete pathology lecture inventory · L'+safe(conditionLecture),
  '<div class="buttonrow"><button data-pathdiff-list="1">← Differential cases</button></div>'+
- '<p class="tiny">This is the full lecture-derived condition/reference index, including instructor speaker notes when available. Normal anatomy and mechanisms are retained alongside disease entities. Open a condition for its original lecture detail and slide numbers; then practice the related case.</p>'+
- '<div class="buttonrow" style="margin:8px 0">'+lectures.map(v=>'<button data-pathdiff-condition-lecture="'+v+'" aria-pressed="'+(conditionLecture===v?'true':'false')+'">Lecture '+v+'</button>').join('')+'</div>'+
- '<p><b>'+sections.length+' lecture topics</b> · '+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'')+'</p>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:7px">'+sections.map((v,i)=>'<button data-pathdiff-condition-open="'+i+'" style="text-align:left;padding:10px;background:white;border:1px solid #c6d7e9;border-radius:10px"><b>'+safe(v.title)+'</b><small style="display:block;color:#597087">Slides '+safe(v.slides||'see lecture')+'</small></button>').join('')+'</div>');
+ '<p class="tiny">Coverage audit: <b>'+total+' lecture topics</b> across L67–79. Topics include normal anatomy and general principles as well as individual diseases; they are not all distinct diagnoses. A lecture note does NOT imply a dedicated case or photograph.</p>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:5px;margin:9px 0">'+summary.map(v=>'<button data-pathdiff-condition-lecture="'+v.lecture+'" aria-pressed="'+(conditionLecture===v.lecture?'true':'false')+'" style="padding:7px 5px;font-size:12px">L'+v.lecture+'<small style="display:block;font-size:10px">'+v.teaching+' topics</small></button>').join('')+'</div>'+
+ '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture)+'</b><p style="font-size:12px;margin:5px 0">Lecture topics: '+row.teaching+' · Matched specimen cards: '+row.specimens+' · Matched differential cases: '+row.cases+' · Attached image references: '+row.embedded+'</p><small>Counts are conservatively matched by case mapping/title, not a certified complete disease audit. External links without an embedded image are not counted as attached images.</small></div>'+
+ '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-gap="all" aria-pressed="'+(conditionGap==='all')+'">All '+sections.length+'</button><button data-pathdiff-gap="case" aria-pressed="'+(conditionGap==='case')+'">Needs differential case</button><button data-pathdiff-gap="photo" aria-pressed="'+(conditionGap==='photo')+'">Needs attached photo</button></div>'+
+ '<p class="tiny">'+displayed.length+' topics displayed. Select any topic to see full instructor-derived notes and the source slide reference.</p>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px">'+displayed.map(({x,i,ev})=>'<button data-pathdiff-condition-open="'+i+'" style="text-align:left;padding:10px;background:white;border:1px solid #c6d7e9;border-radius:10px"><b>'+safe(x.title)+'</b><small style="display:block;color:#597087;margin-top:5px">Slides '+safe(x.slides||'see lecture')+'</small><small style="display:block;color:#536575;margin-top:4px">Notes ✓ · Specimen '+(ev.specimen?'✓':'—')+' · Case '+(ev.linked.length?'✓':'—')+' · Image '+(ev.embedded?'✓':'—')+'</small></button>').join('')+'</div>');
 }
 function conditionDetail(){
- const all=lectureConditions(),item=all[conditionChosen];if(!item)return conditionIndex();
- const linked=data.filter(x=>x.lecture===conditionLecture&&(x.title.toLowerCase().includes(item.title.toLowerCase().split(' — ')[0])||item.title.toLowerCase().includes(String(x.best).toLowerCase().split(' (')[0])||String(x.ref).toLowerCase().includes(item.title.toLowerCase())));
+ const item=lectureConditions()[conditionChosen];if(!item)return conditionIndex();
+ const ev=evidence(conditionLecture,item),images=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES||{};
+ const refBlock=ev.linked.map(x=>{
+  const p=images[x.id]||{};
+  return '<div style="padding:9px;border:1px solid #d4dfec;border-radius:9px;margin:8px 0"><button data-pathdiff-open="'+safe(x.id)+'">🧩 Practice case: '+safe(x.title)+'</button>'+
+   (p.images||[]).map(i=>'<small style="display:block;margin-top:6px">📷 '+safe(i.type||'reference')+': '+safe(i.caption||i.file||'photo')+'</small>').join('')+
+   (p.links||[]).map(l=>'<a href="'+safe(l.url)+'" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:5px;font-size:12px">📖 '+safe(l.label)+'</a>').join('')+'</div>';
+ }).join('');
  modal('📖 L'+safe(conditionLecture)+' · '+safe(item.title),
- '<div class="buttonrow"><button data-pathdiff-condition-back="1">← All lecture conditions</button><button data-pathdiff-list="1">Differential cases</button></div>'+
- '<div style="background:#f0f6fb;padding:11px;border:1px solid #c8dbeb;border-radius:10px;margin:10px 0"><b>Original instructor material</b><p style="font-size:13px">Lecture '+safe(conditionLecture)+' · slides '+safe(item.slides||'not specified')+'</p></div>'+
+ '<div class="buttonrow"><button data-pathdiff-condition-back="1">← Full lecture inventory</button><button data-pathdiff-list="1">Cases</button></div>'+
+ '<div style="background:#f0f6fb;padding:10px;border:1px solid #c8dbeb;border-radius:10px;margin:9px 0"><b>Instructor-based lesson</b><p style="font-size:13px;margin:5px 0">Lecture '+safe(conditionLecture)+' · slides '+safe(item.slides||'not specified')+'</p><small>Specimen card: '+(ev.specimen?'Matched':'Not matched')+' · Dedicated case: '+(ev.linked.length?'Matched':'Not yet')+' · Attached reference: '+(ev.embedded?'Yes':'Not yet')+'</small></div>'+
  (item.points||[]).map(p=>'<section style="border-bottom:1px solid #e0e7ef;padding:9px 0"><b>'+safe(p[0])+'</b><p style="margin:5px 0;white-space:pre-wrap;line-height:1.5">'+safe(p[1])+'</p></section>').join('')+
- '<div style="padding:10px;background:#f8f6ed;border-radius:10px;margin:12px 0;font-size:12px"><b>Photograph policy:</b> Use the indicated original lecture slide as the primary specimen photo. The linked differential-case references distinguish gross, histology and simulated cases. This atlas does not claim copyrighted lecture images are embedded.</div>'+
- (linked.length?'<h4>Practice this condition</h4><div class="buttonrow">'+linked.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'">'+safe(x.title)+'</button>').join('')+'</div>':'<small>No dedicated differential case for this lecture condition yet. The condition is still covered in its slide-derived notes.</small>'));
+ '<div style="padding:9px;background:#f8f6ed;border-radius:10px;margin:10px 0;font-size:12px"><b>Photo evidence:</b> Original professor slide '+safe(item.slides||'(see source deck)')+' is the primary teaching reference. We have not copied lecture slides into this index. Published pathology images must be identified by species and gross/histology type.</div>'+
+ (refBlock||'<p style="font-size:12px">No dedicated differential case is linked to this exact lecture topic yet. This remains visible in the coverage audit rather than being marked complete.</p>'));
 }
 
 function sourcedPhotos(x){
@@ -86,8 +132,9 @@ function init(api){
  const button=ev.target.closest('button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
- if(d.pathdiffConditionIndex!==undefined){conditionLecture='75';return conditionIndex()}
+ if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
  if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;return conditionIndex()}
+ if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
  if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
  if(d.pathdiffConditionBack!==undefined)return conditionIndex();
  if(d.pathdiffList!==undefined)return menu();
