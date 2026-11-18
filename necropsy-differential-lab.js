@@ -19,17 +19,31 @@ function start(api,chosen='all'){
 }
 function menu(){
  const matched=allCases().filter(x=>filter==='all'||x.lecture===filter);
- const counts=[...new Set(allCases().map(x=>x.lecture))];
- modal('🧩 Necropsy Differential Diagnosis Center',
- '<div style="padding:11px;border:1px solid #b7d1eb;background:#f2f8ff;border-radius:12px"><b>Think like a pathologist:</b> signalment and history → anatomic location/gross pattern → shortlist differentials → histology → leading etiology and next test. These are <b>simulated teaching cases</b>, not photographs of real patients.</div>'+
- '<div class="buttonrow" style="margin:10px 0">'+['all',...counts].map(n=>'<button data-pathdiff-filter="'+safe(n)+'" aria-pressed="'+(filter===n?'true':'false')+'">'+(n==='all'?'All systems':'L'+safe(n))+'</button>').join('')+'</div>'+
- '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-condition-index="1">📚 Audit all lecture conditions (L67–79)</button><button data-pathdiff-umbrella="1">🧠 Pattern / umbrella atlas</button></div>'+
- '<div class="buttonrow"><button data-pathdiff-library="1">📷 Browse published pathology photos</button></div>'+ 
- '<div class="buttonrow"><button data-pathdiff-create="1" style="background:#e5f6eb;border:1px solid #88c6a3;font-weight:800">➕ Create New Differential Card · Publish to Game</button></div>'+
- '<div class="buttonrow"><button data-modalaction="necroPatientPractice" style="font-size:12px">🐾 Optional: original patient-style practice questions</button></div>'+ 
- '<p class="tiny">'+matched.length+' instructor-slide-linked differential cases in this first module. Each includes four etiologic possibilities and why they become more or less likely.</p>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:9px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:12px;border:1px solid #b7cce5;border-radius:12px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+' · '+safe(x.system)+'</small></button>').join('')+'</div>'+
- '<div class="buttonrow"><button data-pathdiff-return="1">← Gross / histology specimen bank</button></div>');
+ const counts=Array.from({length:13},(_,i)=>String(i+67));
+ const selectedStudy=counts.includes(conditionLecture)?conditionLecture:'68';
+ modal('🧩 Necropsy · Study & Differential Center',
+ '<div style="padding:10px 12px;border:1px solid #c4d6e9;background:#f3f8ff;border-radius:11px;margin-bottom:11px"><b>How would you like to practice?</b><p style="font-size:12px;margin:5px 0 0">Learn the key findings with flashcards, identify lesions in the gross atlas, then solve realistic differential cases.</p></div>'+
+ '<div style="background:#f2f8f3;border:1px solid #abd4b9;border-radius:12px;padding:12px;margin:9px 0">'+
+ '<b style="display:block;margin-bottom:8px;font-size:15px">🧠 Quick flashcards · 15 questions</b>'+
+ '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
+ '<label style="font-size:12px;font-weight:700;flex:1;min-width:115px">Choose lecture<select data-pathdiff-study-lecture="1" style="display:block;width:100%;font-size:14px;padding:9px;margin-top:4px;border:1px solid #a9c5b5;border-radius:8px;background:#fff">'+counts.map(n=>'<option value="'+n+'"'+(selectedStudy===n?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
+ '<button data-pathdiff-study-start="1" style="flex:2;min-width:170px;padding:13px 10px;background:#d5f0df;border:1px solid #7ebc96;border-radius:9px;font-size:14px;font-weight:850">▶ Start flashcards</button></div>'+
+ '<small style="display:block;margin-top:7px;color:#486354">Flip → Got it / Need practice → Review difficult cards</small></div>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin:10px 0">'+
+ '<button data-pathdiff-return="1" style="padding:12px;min-height:56px;text-align:left;border-radius:10px"><b>🔬 Gross & histology atlas</b><small style="display:block">Recognize the lesion</small></button>'+
+ '<button data-pathdiff-show-cases="1" style="padding:12px;min-height:56px;text-align:left;border-radius:10px"><b>🧩 Differential cases</b><small style="display:block">Compare possible causes</small></button></div>'+
+ '<details style="margin:8px 0 12px;border:1px solid #d0ddec;border-radius:10px;padding:9px 11px"><summary style="cursor:pointer;font-size:13px;font-weight:750">📚 More tools · lecture notes, patterns, photos & editing</summary>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:7px;margin-top:10px">'+
+ '<button data-pathdiff-condition-index="1" style="font-size:12px">📖 Full lecture notes & disease inventory</button>'+
+ '<button data-pathdiff-umbrella="1" style="font-size:12px">Pattern / umbrella atlas</button>'+
+ '<button data-pathdiff-library="1" style="font-size:12px">Published pathology photo library</button>'+
+ '<button data-pathdiff-create="1" style="font-size:12px">➕ Create / publish differential card</button>'+
+ '<button data-modalaction="necroPatientPractice" style="font-size:12px">Original patient-style questions</button></div></details>'+
+ '<section id="vpq-necro-case-list"><b style="display:block;font-size:14px;margin:8px 0">Differential practice cases</b>'+
+ '<label style="display:block;font-size:12px;margin-bottom:7px">Filter cases by lecture<select data-pathdiff-case-filter="1" style="display:block;width:100%;max-width:240px;font-size:13px;padding:8px;margin-top:4px;border:1px solid #bdcde1;border-radius:8px;background:white">'+
+ ['all',...counts].map(n=>'<option value="'+n+'"'+(filter===n?' selected':'')+'>'+(n==='all'?'All lectures':'Lecture '+n)+'</option>').join('')+'</select></label>'+
+ '<p class="tiny" style="margin:6px 0">'+matched.length+' cases · Select one to compare signalment, gross findings, histology and etiologies.</p>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:10px;border:1px solid #b7cce5;border-radius:10px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+'</small></button>').join('')+'</div></section>');
 }
 
 /* Umbrella terms describe morphology, anatomic patterns or syndromes; never count them as etiologic diagnoses. */
@@ -404,6 +418,8 @@ function init(api){
  const button=ev.target.closest('button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
+ if(d.pathdiffStudyStart!==undefined)return startFlash('lecture');
+ if(d.pathdiffShowCases!==undefined){const section=api.body.querySelector('#vpq-necro-case-list');section?.scrollIntoView?.({block:'start',behavior:'smooth'});return;}
  if(d.pathdiffLibrary!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.photoLibrary?.();
  if(d.pathdiffUmbrella!==undefined)return umbrellaMenu();
  if(d.pathdiffUmbrellaOpen!==undefined){umbrellaCurrent=d.pathdiffUmbrellaOpen;return umbrellaDetail();}
@@ -440,7 +456,10 @@ function init(api){
  if(d.pathdiffRemove!==undefined){updatePhoto(d.pathdiffRemove,'');return view()}
  },true);
  api.body.addEventListener('change',ev=>{
- const d=ev.target?.dataset;if(!d||d.pathdiffPhoto===undefined)return;
+ const d=ev.target?.dataset;
+ if(d?.pathdiffStudyLecture!==undefined){conditionLecture=String(ev.target.value||'68');return;}
+ if(d?.pathdiffCaseFilter!==undefined){filter=String(ev.target.value||'all');return menu();}
+ if(!d||d.pathdiffPhoto===undefined)return;
  const input=ev.target,file=input.files?.[0];if(!file||!file.type.startsWith('image/'))return;
  const reader=new FileReader();
  reader.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,780/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*k));c.height=Math.max(1,Math.round(img.height*k));c.getContext('2d').drawImage(img,0,0,c.width,c.height);const ok=updatePhoto(d.pathdiffPhoto,c.toDataURL('image/jpeg',0.67));if(ok)view();else modal('Image too large','<p>Browser storage is full. Please resize the image and try again.</p><button data-pathdiff-list="1">Return to cases</button>')};img.src=String(reader.result)};reader.readAsDataURL(file);
