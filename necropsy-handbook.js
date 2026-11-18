@@ -68,12 +68,12 @@ function learnLecture(n){
   if(i===9)return '<div class="np-edu-diagram"><b>Primary versus secondary demyelination</b><p><b>Primary:</b> oligodendrocyte/myelin injured first; axon relatively preserved.</p><p><b>Secondary:</b> axon injured first, then myelin breaks down.</p></div>';
   return '';
  };
- const rows=l.sections.map((sec,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(sec.title)+'</b> <small>slides '+safe(sec.slides)+'</small></summary>'+diagram(i)+sec.points.map(p=>'<p class="np-learn-point"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+(photos?photos.card(n,i):'')+'</details>').join('');
+ const rows=l.sections.map((sec,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(sec.title)+'</b> <small>slides '+safe(sec.slides)+'</small></summary>'+(photos?photos.card(n,i):'<p class="np-photo-warning">Image controls failed to load. Refresh the page to restore them.</p>')+diagram(i)+sec.points.map(p=>'<p class="np-learn-point"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
  popup('📖 L'+n+' · Learn the Lecture',nav()+
  (photos?photos.style:'')+
  '<style>.np-pat{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}.np-learn-point{margin:8px 0;line-height:1.5;white-space:normal;overflow-wrap:anywhere}.np-lesson-photo{margin:10px 0;padding:10px;background:white;border:1px solid #cdd9e8;border-radius:12px;max-width:100%}.np-lesson-photo img{display:block;max-width:100%;width:100%;max-height:360px;object-fit:contain;background:#f4f6fb;border-radius:8px}.np-lesson-photo figcaption{font-size:12px;line-height:1.45;margin-top:7px}.np-lesson-photo figcaption p{margin:3px 0}.np-edu-diagram{margin:10px 0;padding:12px;border:1px solid #b9d6eb;background:#f3faff;border-radius:12px;font-size:13px}.np-edu-diagram p{margin:7px 0}</style>'+
- '<div class="np-cover"><strong style="font-size:18px">'+safe(l.title)+'</strong><p>Learn the material, then add up to two useful photos within each section. Images you add are saved privately on this device.</p><small>'+safe(l.source)+'</small></div>'+
- '<h4>Learn the material ('+l.sections.length+' sections)</h4>'+rows+
+ '<div class="np-cover"><strong style="font-size:18px">'+safe(l.title)+'</strong><p>📷 Two photo slots are at the TOP of each expanded topic. Add your own lecture or textbook images; they are saved privately in this browser.</p><small>'+safe(l.source)+'</small></div>'+
+ '<h4>Learn the material ('+l.sections.length+' sections) · photo slots available</h4>'+rows+
  '<h4>Check your understanding</h4>'+l.checks.map((q,i)=>'<details class="np-pat"><summary><b>Q'+(i+1)+'.</b> '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join('')+
  '<div class="buttonrow"><button data-npchapter="'+safe(n)+'">← Lecture index</button><button data-npstudio="gross">🔬 Practice lesion cases</button></div>');
  if(photos)photos.hydrate(api.body,n);
