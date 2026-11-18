@@ -237,6 +237,8 @@ function view(){
 }
 function init(api){
  ui=api;
+ if(api.body.__vpqNecroDifferentialInit)return;
+ api.body.__vpqNecroDifferentialInit=true;
  api.body.addEventListener('click',ev=>{
  const button=ev.target.closest('button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
