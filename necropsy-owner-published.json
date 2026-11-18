@@ -234,7 +234,9 @@
           "credit": "Pathology lecture LMU",
           "caption": "Pathology study reference",
           "type": "gross",
-          "external": false
+          "external": false,
+          "lectures": [],
+          "systems": []
         },
         {
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-10-1795001718585-0.jpg",
@@ -242,7 +244,9 @@
           "credit": "Pathology lecture LMU",
           "caption": "Histology image",
           "type": "histology",
-          "external": false
+          "external": false,
+          "lectures": [],
+          "systems": []
         }
       ],
       "photo": {
@@ -251,16 +255,18 @@
         "credit": "Pathology lecture LMU",
         "caption": "Pathology study reference",
         "type": "gross",
-        "external": false
+        "external": false,
+        "lectures": [],
+        "systems": []
       },
       "text": {
-        "gross": "Clinical: Behavior change, circling, seizures; paresis and ataxia when spinal cord is involved. Gross: Often no mass; when present irregular gray-white to red, gelatinous/granular foci in white matter, especially brainstem.",
-        "dx": "Working identification: Granulomatous meningoencephalitis (GME). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
-        "histo": "Histology: Perivascular cuffs containing macrophages and lymphocytes with relatively few plasma cells. \nDifferentiate: GME perivascular inflammation from the suppurative microabscesses of Listeria or thrombotic lesions of Histophilus.",
-        "why": "Host: Young to middle-aged small-breed dogs, idiopathic with suspected T-cell-mediated mechanism.\n Differentiate: GME perivascular inflammation from the suppurative microabscesses of Listeria or thrombotic lesions of Histophilus.",
-        "notes": "Most severe in the brainstem (white matter) "
+        "gross": "Often no gross visible mass; when present, irregular gray-white to red, gelatinous/granular foci in white matter, especially brainstem. Can have a gelatinous or granular consistency. ",
+        "dx": "Working identification: Granulomatous meningoencephalitis (GME). \nSpecimen site: Brain / spinal cord/meninges. \nFormulate the final morphologic diagnosis from the visible tissue, distribution, severity, and process; etiology requires supporting evidence.",
+        "histo": "Perivascular cuffs containing macrophages and lymphocytes with relatively few plasma cells. \n",
+        "why": "**Idiopathic condition. **\n**Host: **Young to middle-aged small-breed dogs, idiopathic with suspected T-cell-mediated mechanism.\n Differentiate: GME perivascular inflammation from the suppurative microabscesses of Listeria or thrombotic lesions of Histophilus.",
+        "notes": "Most severe in the brainstem (white matter) \n**Clinical:** Behavior change, circling, seizures; paresis and ataxia when spinal cord is involved. \n\n**Differentiate:** GME perivascular inflammation from the suppurative microabscesses of Listeria or thrombotic lesions of *Histophilus.*"
       },
-      "updated": "2026-11-18T11:35:19.845Z",
+      "updated": "2026-11-18T22:25:33.424Z",
       "approvedBy": "amppet22-prog"
     },
     "pathx-67-40": {
