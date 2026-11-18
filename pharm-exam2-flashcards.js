@@ -29,7 +29,7 @@ function render(){
  '<div class="buttonrow"><button data-vpqpharmfc-menu="1">← Flashcard lectures</button><button data-vpqpharmfc-edit="1">✏️ Edit / publish</button><button data-vpqpharmfc-new="1">➕ Add</button></div>'+
  '<p class="tiny"><b>Card '+(at+1)+' of '+deck.length+'</b> · '+(missedOnly?'Practice missed':'Drug & disease foundations')+'</p>'+
  '<div style="height:5px;background:#e0e9f5;border-radius:8px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:#739acb"></div></div>'+
- '<div style="padding:clamp(18px,4vw,32px);min-height:235px;border:1px solid #b8cce1;background:linear-gradient(145deg,#fff,#eef6ff);box-shadow:0 7px 20px rgba(52,79,128,.08);border-radius:18px;margin:12px 0;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;gap:13px">'+
+ '<div role="button" tabindex="0" data-vpqpharmfc-flip="1" title="Flip flashcard" aria-label="Flip flashcard" style="cursor:pointer;padding:clamp(18px,4vw,32px);min-height:235px;border:1px solid #b8cce1;background:linear-gradient(145deg,#fff,#eef6ff);box-shadow:0 7px 20px rgba(52,79,128,.08);border-radius:18px;margin:12px 0;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;gap:13px">'+
  '<small style="letter-spacing:.1em;text-transform:uppercase;color:#536f91;font-weight:800">'+(revealed?'ANSWER':'QUESTION')+'</small>'+
  (revealed?'<p style="font-size:19px;font-weight:750;line-height:1.5;color:#263c5d">'+esc(c.answer)+'</p><div style="border-top:1px solid #cbd6e7;padding-top:12px;text-align:left;width:100%"><b>WHY · disease or drug mechanism</b><p>'+esc(c.why||'Review clinical implications in the lecture notes.')+'</p></div>':'<p style="font-size:22px;font-weight:850;line-height:1.45;color:#273e61">'+esc(c.prompt)+'</p>')+
  '<small style="color:#677c94">'+esc(c.slide||lecture)+'</small></div>'+
@@ -38,6 +38,7 @@ function render(){
 }
 function init(body,modal,lesson,quiz){if(!body||body.__vpqPharmRecall)return;ui=body;show=modal;body.__vpqPharmRecall=true;
  window.VPQ_FLASHCARD_OWNER?.init?.(body,modal);
+ body.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target?.dataset?.vpqpharmfcFlip!==undefined){ev.preventDefault();revealed=!revealed;render()}},true);
  body.addEventListener('change',ev=>{if(ev.target?.dataset?.vpqpharmfcLecture!==undefined){lecture=ev.target.value;menu()}},true);
  body.addEventListener('click',ev=>{const b=ev.target.closest('[data-vpqpharmfc-menu],[data-vpqpharmfc-start],[data-vpqpharmfc-missed],[data-vpqpharmfc-flip],[data-vpqpharmfc-rate],[data-vpqpharmfc-next],[data-vpqpharmfc-prev],[data-vpqpharmfc-edit],[data-vpqpharmfc-new],[data-vpqpharmfc-lesson],[data-vpqpharmfc-quiz]');if(!b)return;ev.preventDefault();ev.stopImmediatePropagation();const d=b.dataset;
  if(d.vpqpharmfcMenu!==undefined)return menu();
