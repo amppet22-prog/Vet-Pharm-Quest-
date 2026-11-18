@@ -10,7 +10,7 @@ function refreshCustom(){
  return base;
 }
 const KEY='vpq-path-exam7-user-edits-v1';
-let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',search='',current=-1,quiz=[],step=0,revealed=false;
+let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',search='',current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
 const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -100,17 +100,42 @@ function saveForm(i){
  reader.onload=()=>{const img=new Image();img.onload=()=>{const factor=Math.min(1,700/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*factor));canvas.height=Math.max(1,Math.round(img.height*factor));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);part.image=canvas.toDataURL('image/jpeg',0.67);finish()};img.src=String(reader.result)};
  reader.readAsDataURL(file);
 }
+// Morphologic diagnosis teaching format follows the uploaded instructor lecture:
+// lesion description -> organ/process/modifiers/distribution -> supported time and
+// severity -> etiologic interpretation. A disease name alone is NOT a morphologic DX.
+function unknownValues(){
+ const data={};
+ for(const field of ['description','morphology','etiology']){
+  const el=ui?.body?.querySelector?.('[data-unknown-field="'+field+'"]');
+  if(el)data[field]=el.value;
+ }
+ unknownDraft[step]={...(unknownDraft[step]||{}),...data};
+}
+function unknownTextarea(field,label,help){
+ const value=unknownDraft[step]?.[field]||'';
+ return '<label style="display:block;margin:10px 0"><b>'+label+'</b><small style="display:block;color:#526981;margin:3px 0 5px">'+help+'</small><textarea data-unknown-field="'+field+'" rows="3" style="width:100%;padding:9px" placeholder="Write your answer before revealing">'+h(value)+'</textarea></label>';
+}
 function test(){
- tab='lesions';quiz=visible().sort(()=>Math.random()-.5).slice(0,12);step=0;revealed=false;question();
+ tab='lesions';quiz=visible().sort(()=>Math.random()-.5).slice(0,12);step=0;revealed=false;unknownDraft={};question();
 }
 function question(){
  if(step>=quiz.length){modal('Practice completed','<p>Reviewed '+quiz.length+' lesion unknowns. Try again for additional cases.</p><button data-path7-back="1">Back to atlas</button>');return}
  const x=quiz[step];
+ const explanation=revealed?'<div class="response">'+
+  '<p><b>Atlas reference / currently recorded DX:</b> '+rich(x.dx)+'</p>'+
+  '<p><b>Microscopic description:</b> '+rich(x.histo)+'</p>'+
+  '<p><b>Etiology, mechanism, or reasoning from this card:</b> '+rich(x.why)+'</p>'+
+  '<p><b>Check your morphology:</b> Did you name the organ, primary lesion process and observed distribution? Add modifiers only when supported by the gross or histologic findings. Chronicity requires evidence of lesion age (e.g., organization/fibrosis) and severity needs enough information to judge extent or damage; neither should be guessed.</p>'+
+  '<p class="tiny"><b>Important:</b> Some older atlas DX fields are disease/etiologic labels rather than complete morphologic diagnoses. Treat this as a source reference, not a guaranteed model morphologic answer. We will review these individually.</p></div>':'';
  modal('🎓 Necropsy unknown '+(step+1)+' / '+quiz.length,
- '<p><b>Gross finding:</b> '+rich(x.gross)+'</p>'+(x.image?'<img alt="User-selected gross pathology" src="'+h(x.image)+'" style="max-width:100%;max-height:280px;object-fit:contain">':'')+
- '<p><b>Write your morphologic diagnosis:</b> Organ + distribution + process, and severity when supported.</p><textarea rows="3" style="width:100%" placeholder="Think through the lesion before revealing"></textarea>'+
- (revealed?'<div class="response"><p><b>Suggested diagnosis:</b> '+rich(x.dx)+'</p><p><b>Histology:</b> '+rich(x.histo)+'</p><p><b>Clinical WHY:</b> '+rich(x.why)+'</p></div>':'')+
- '<div class="buttonrow">'+(revealed?'<button data-path7-nextq="1">Next unknown →</button>':'<button data-path7-reveal="1">Reveal diagnosis & why</button>')+'<button data-path7-back="1">Stop</button></div>');
+ '<p><b>Gross finding:</b> '+rich(x.gross)+'</p>'+(x.image?'<img alt="Gross pathology specimen" src="'+h(x.image)+'" style="max-width:100%;max-height:280px;object-fit:contain">':'')+
+ '<details style="margin:8px 0 12px"><summary><b>📖 Morphologic diagnosis format (instructor lecture)</b></summary><p><b>Organ: process ± modifier, distribution, chronicity, severity</b> — only use terms supported by findings. Description is observational; morphologic DX interprets the lesion; etiologic DX names the cause.</p>'+
+ '<p><b>Worked example supplied from professor practice — canine brain:</b><br><b>Description:</b> Multifocal to coalescing, dark red-black, variably sized, round-to-ovoid lesions in gray and white matter. Histology: irregular blood-filled spaces lined by plump spindle-shaped cells.<br><b>Possible morphologic formulation:</b> Brain: multifocal to coalescing hemorrhagic neoplasia (severity and chronicity not established).<br><b>Etiologic/diagnostic interpretation:</b> Metastatic hemangiosarcoma. Differentials include melanoma, although the vascular channels on histology favor hemangiosarcoma.</p></details>'+
+ unknownTextarea('description','1. Gross lesion description','Location, number, distribution, size/color, shape, consistency and other OBSERVABLE features. No disease name yet.')+
+ unknownTextarea('morphology','2. Morphologic diagnosis','Organ: process ± modifier, distribution; chronicity and severity ONLY when justified by observed changes.')+
+ unknownTextarea('etiology','3. Etiologic diagnosis / differentials','What caused it? Include differential diagnoses and the evidence that helps separate them.')+
+ explanation+
+ '<div class="buttonrow">'+(revealed?'<button data-path7-nextq="1">Next unknown →</button>':'<button data-path7-reveal="1">Reveal instructor-style comparison →</button>')+'<button data-path7-back="1">Stop</button></div>');
 }
 function init(api){
  ui=api;
@@ -152,8 +177,8 @@ function init(api){
   }
   if(d.path7Back!==undefined)return menu();
   if(d.path7Test!==undefined)return test();
-  if(d.path7Reveal!==undefined){revealed=true;return question()}
-  if(d.path7Nextq!==undefined){step++;revealed=false;return question()}
+  if(d.path7Reveal!==undefined){unknownValues();revealed=true;return question()}
+  if(d.path7Nextq!==undefined){unknownValues();step++;revealed=false;return question()}
  },true);
 }
 function openCard(id){refreshCustom();const i=base.findIndex(x=>x.id===id);if(i>=0){tab=base[i].normal?'normals':'lesions';return card(i)}return menu()}
