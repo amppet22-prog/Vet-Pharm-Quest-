@@ -3023,17 +3023,65 @@ function vpqPharmNextLesson(id){
  '<p class="tiny">Course study material, not a veterinary prescribing protocol. Supplementary and disputed points are separated above.</p>'+
  '<div class="buttonrow"><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 Practice '+escapeHtml(l.id)+'</button><button data-vpq-p2-visual="1">🎨 Visual Anatomy</button> <button data-vpq-p2-visual="1">🎨 Visual Anatomy</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanisms</button><button data-vpqpharmdrug-lecture="'+escapeHtml(l.id)+'">💊 Compare drugs</button><button data-vpqnewpharm-menu="1">← All lectures</button></div>');
 }
+
+function vpqExam2HighYield(mode='menu',lecture='all',position=0){
+ const db=window.VPQ_PHARM_NEXT||{drugs:[],questions:[]};
+ const source=window.VPQ_PHARM_EXAM2_OBJECTIVE_CARDS||[];
+ const pdf=window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[];
+ const lectures=['Lecture 18','Lecture 19','Lecture 20'];
+ const eligible=x=>lectures.includes(x.lecture)&&(lecture==='all'||x.lecture===lecture);
+ const priority=db.drugs.filter(x=>x.coursePriority&&eligible(x));
+ const objectives=source.filter(eligible);
+ const questions=[...db.questions.filter(eligible),...pdf.filter(eligible)].filter(x=>x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
+ const n=Math.max(0,Number(position)||0);
+ const selector='<div class="buttonrow"><button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="all">All L18–20</button>'+lectures.map(l=>'<button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="'+escapeHtml(l)+'">'+escapeHtml(l)+'</button>').join('')+'</div>';
+ const menu='<p><b>Start with the instructor-starred medications and big study-guide objectives.</b> Learn the mechanism and physiological WHY, recall the original faculty objective, then apply it to clinical questions.</p><p class="tiny">All drugs and questions below reuse the Exam 2 library; any caution attached to an instructor answer is shown separately. ★ refers to identified lecture stars and high-priority tables—not necessarily every bold-highlighted line.</p>'+
+ '<div class="vpqNewPharmCards"><button data-vpqhy-mode="drugs" data-vpqhy-lecture="all"><b>1 · ★ Priority Drug Walkthrough</b><small>23 high-priority drugs · drug choice, mechanism, comparison, monitoring and patient scenarios</small></button><button data-vpqhy-mode="objectives" data-vpqhy-lecture="all"><b>2 · Instructor Objectives</b><small>Original guide prompts for behavior, seizures, sedation and opioids, with clinical cautions when needed</small></button><button data-vpqhy-mode="questions" data-vpqhy-lecture="all"><b>3 · Patient Questions</b><small>Clinical questions and original guide practice · reasoning and explanations</small></button></div>';
+ if(mode==='menu')return showModal('★ Exam 2 · High-Yield Review · Lectures 18–20',menu+'<div class="buttonrow"><button data-vpqnewpharm-menu="1">← All Exam 2 lectures</button></div>');
+ const d=mode==='drugs'?priority:mode==='objectives'?objectives:questions;
+ const at=Math.min(n,Math.max(d.length-1,0)),x=d[at];
+ if(!x)return showModal('★ Exam 2 · High-Yield Review',selector+'<p>No matching study material in this selection.</p><button data-vpqhy-mode="menu">← High-Yield menu</button>');
+ let html=selector+'<p class="vpq-case-meta">'+(at+1)+' / '+d.length+' · '+escapeHtml(lecture==='all'?'Lectures 18–20':lecture)+'</p>';
+ if(mode==='drugs'){
+ const t=x.teachingDepth||{},c=x.clinicalMicrocase||{};
+ html+='<div class="vpq-patient-case" style="padding:14px"><h3>★ '+escapeHtml(x.name)+'</h3><p><b>Class:</b> '+escapeHtml(x.class)+'</p>'+
+ [['When would a veterinarian choose it?',t.clinicalDecision],['Physiological WHY',t.physiologyWhy],['What is it confused with?',t.compareAndContrast],['Monitor and avoid',t.monitorAndAvoid],['Route/formulation',x.route]].map(([label,value])=>'<p style="margin:9px 0"><b>'+escapeHtml(label)+':</b> '+escapeHtml(value||'Not given')+'</p>').join('')+
+ '<details><summary>🩺 Practice patient scenario (reveal)</summary><p><b>Patient:</b> '+escapeHtml(c.presentation||'')+'</p><p><b>Decision:</b> '+escapeHtml(c.decision||'')+'</p><p><b>WHY:</b> '+escapeHtml(c.why||'')+'</p><p><b>What changes:</b> '+escapeHtml(c.whatChanges||'')+'</p></details><p class="tiny">Original guide pages: '+escapeHtml(x.coursePriority?.guidePages||'see lecture')+'</p></div>';
+ }else if(mode==='objectives'){
+ html+='<section class="vpq-patient-case" style="padding:14px"><p class="vpq-case-meta">Objective #'+escapeHtml(x.order)+' · '+escapeHtml(x.lecture)+'</p><h3>'+escapeHtml(x.q)+'</h3><details><summary>💡 Reveal professor-derived answer</summary><p>'+escapeHtml(x.answer)+'</p></details>'+(x.note?'<details class="vpqNewPharmOptional"><summary>⚠ Important clinical interpretation</summary><p>'+escapeHtml(x.note)+'</p></details>':'')+'</section>';
+ }else{
+ html+='<section class="vpq-patient-case" style="padding:14px"><h3>'+escapeHtml(x.q)+'</h3><p class="vpq-case-meta">'+escapeHtml(x.lecture)+' · '+escapeHtml(x.source||'Course-aligned clinical practice')+'</p>'+
+ x.options.map((opt,i)=>'<button style="display:block;width:100%;text-align:left;margin:7px 0" data-vpqhy-answer="'+i+'" data-vpqhy-position="'+at+'" data-vpqhy-lecture="'+escapeHtml(lecture)+'">'+String.fromCharCode(65+i)+'. '+escapeHtml(opt)+'</button>').join('')+
+ '<div id="vpqhyExplanation" style="margin:9px 0"></div></section>';
+ }
+ html+='<div class="buttonrow"><button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="'+escapeHtml(lecture)+'" data-vpqhy-position="'+Math.max(0,at-1)+'" '+(at===0?'disabled':'')+'>← Previous</button><button data-vpqhy-mode="menu">★ High-Yield menu</button><button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="'+escapeHtml(lecture)+'" data-vpqhy-position="'+Math.min(d.length-1,at+1)+'" '+(at===d.length-1?'disabled':'')+'>Next →</button></div>';
+ showModal('★ Exam 2 High-Yield · '+(mode==='drugs'?'Priority Medications':mode==='objectives'?'Instructor Objectives':'Clinical Questions'),html);
+}
+
 function vpqPharmNextMenu(){
  const data=vpqPharmNext;
  showModal('📚 Pharmacology · Exam 2 · Lectures 10–20',
  '<p>Updated Exam 2 lecture materials from your PDFs: core study essentials, optional plus-note explanations, and question practice. Exam 1 remains unchanged.</p>'+
  '<div class="vpqNewPharmCards">'+(data?.lectures||[]).map(x=>'<button data-vpqnewpharm-lesson="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.id)+' · '+escapeHtml(x.title)+'</b><small>'+escapeHtml(x.focus||x.summary)+'</small><em>'+data.questions.filter(q=>q.lecture===x.id).length+' initial questions · browse lesson</em></button>').join('')+'</div>'+
  '<p><b>📋 Source-authored Exam 2 practice:</b> 96 questions from the uploaded answer/practice guide, including explanations. Select Lecture 10–20 in the Study Desk question filter. These are practice items, not Dr. Carlson\'s verbatim objective prompts.</p>'+
- '<div class="buttonrow"><button data-vpq-p2-visual="1">🎨 Explore Nephron, Synapse & Receptors</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanism Stations</button><button data-vpqnewpharm-objectives="1">📋 132 instructor objectives</button><button data-vpqpharmdrug-lecture="Lecture 10">💊 Master Drug Comparison</button><button data-vpqpharm-treats="1">🩺 What Treats What</button></div>'+ '<p class="tiny">Lecture overviews and new practice questions are available. This first import is not yet a complete slide-by-slide reconciliation of the 142-page guide.</p>');
+ '<div class="buttonrow"><button data-vpqhy-mode="menu">★ HIGH-YIELD L18–20 REVIEW</button><button data-vpq-p2-visual="1">🎨 Explore Nephron, Synapse & Receptors</button><button data-vpq-p2-launch="1">🔬 Interactive Mechanism Stations</button><button data-vpqnewpharm-objectives="1">📋 132 instructor objectives</button><button data-vpqpharmdrug-lecture="Lecture 10">💊 Master Drug Comparison</button><button data-vpqpharm-treats="1">🩺 What Treats What</button></div>'+ '<p class="tiny">Lecture overviews and new practice questions are available. This first import is not yet a complete slide-by-slide reconciliation of the 142-page guide.</p>');
 }
 $('modalBody').addEventListener('click',ev=>{
  const b=ev.target.closest('button');if(!b)return;
  const d=b.dataset;
+ if(d.vpqhyMode!==undefined)return vpqExam2HighYield(d.vpqhyMode,d.vpqhyLecture||'all',d.vpqhyPosition||0);
+ if(d.vpqhyAnswer!==undefined){
+ const l=d.vpqhyLecture||'all',at=Number(d.vpqhyPosition||0);
+ const lset=['Lecture 18','Lecture 19','Lecture 20'];
+ const eligible=x=>lset.includes(x.lecture)&&(l==='all'||x.lecture===l);
+ const qs=[...vpqPharmNext.questions.filter(eligible),...(window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[]).filter(eligible)].filter(x=>x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
+ const q=qs[at],chosen=Number(d.vpqhyAnswer),area=$('vpqhyExplanation');
+ if(!q||!area||area.dataset.answered)return;
+ area.dataset.answered='true';
+ area.innerHTML='<div class="response '+(chosen===q.answer?'':'bad')+'"><b>'+(chosen===q.answer?'✅ Correct':'💡 Review this mechanism')+'</b><p><b>Correct answer:</b> '+escapeHtml(q.options[q.answer])+'</p><p><b>WHY:</b> '+escapeHtml(q.why)+'</p>'+(q.reviewFlag?'<details><summary>⚠ Source caution</summary><p>'+escapeHtml(q.reviewFlag)+'</p></details>':'')+(q.sourceOriginal?'<details><summary>Original uploaded-guide question/answer</summary><p>'+escapeHtml(q.sourceOriginal.q||q.sourceOriginal.question||'')+'</p><p><b>Original answer:</b> '+escapeHtml(q.sourceOriginal.options?.[q.sourceOriginal.answer]||'')+'</p></details>':'')+'</div>';
+ $('modalBody').querySelectorAll('[data-vpqhy-answer]').forEach(el=>{el.disabled=true;if(Number(el.dataset.vpqhyAnswer)===q.answer)el.style.border='2px solid #19854e';if(Number(el.dataset.vpqhyAnswer)===chosen&&chosen!==q.answer)el.style.border='2px solid #b24b4b'});
+ return;
+ }
  if(d.vpqnewpharmMenu!==undefined)return vpqPharmNextMenu();
  if(d.vpqP2Launch!==undefined)return vpqExam2Interactive?.menu();
  if(d.vpqP2Visual!==undefined)return vpqExam2Anatomy?.home();
@@ -3045,9 +3093,9 @@ $('modalBody').addEventListener('click',ev=>{
  if(d.vpqnewpharmStudy!==undefined){state.focus=d.vpqnewpharmStudy;studySession=null;return showStudyMenu()}
 });
 const vpqPharmNewStudyMenu=showStudyMenu;
-showStudyMenu=function(...args){vpqPharmNewStudyMenu(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Exam 2 · Lectures 10–20</b><p>Diabetes, thyroid, autonomics, cardiovascular, respiratory, renal, GI and neuropharmacology. Use the lecture picker to focus Exam 2.</p><button data-vpqnewpharm-menu="1">Browse Exam 2 lessons</button> <button data-vpq-p2-launch="1">🔬 Interactive Mechanisms</button> <button data-vpqnewpharm-objectives="1">132 instructor objectives</button></div>')};
+showStudyMenu=function(...args){vpqPharmNewStudyMenu(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Exam 2 · Lectures 10–20</b><p>Diabetes, thyroid, autonomics, cardiovascular, respiratory, renal, GI and neuropharmacology. Use the lecture picker to focus Exam 2.</p><button data-vpqnewpharm-menu="1">Browse Exam 2 lessons</button> <button data-vpq-p2-launch="1">🔬 Interactive Mechanisms</button> <button data-vpqhy-mode="menu">★ High-Yield L18–20</button> <button data-vpqnewpharm-objectives="1">132 instructor objectives</button></div>')};
 const vpqPharmNewLearningHub=vpqLearningHub;
-vpqLearningHub=function(...args){vpqPharmNewLearningHub(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Exam 2 · Lectures 10–20</b><p>Exam 2 Lectures 10–20 are available with core lessons, optional deeper WHY material and question practice.</p><button data-vpqnewpharm-menu="1">Browse Exam 2 lessons</button> <button data-vpqnewpharm-objectives="1">132 instructor objectives</button></div>')};
+vpqLearningHub=function(...args){vpqPharmNewLearningHub(...args);const body=$('modalBody');if(body&&!body.querySelector('[data-vpqnewpharm-menu]'))body.insertAdjacentHTML('beforeend','<div class="vpqNewPharmBanner"><b>📖 Pharmacology · Exam 2 · Lectures 10–20</b><p>Exam 2 Lectures 10–20 are available with core lessons, optional deeper WHY material and question practice.</p><button data-vpqnewpharm-menu="1">Browse Exam 2 lessons</button> <button data-vpqhy-mode="menu">★ High-Yield L18–20</button> <button data-vpqnewpharm-objectives="1">132 instructor objectives</button></div>')};
 const vpqPharmNewStyle=document.createElement('style');vpqPharmNewStyle.textContent='.vpqNewPharmBanner{padding:14px;margin:14px 0;border:1px solid #b7cbed;background:#eff7ff;border-radius:12px}.vpqNewPharmBanner p{margin:6px 0;font-size:13px}.vpqNewPharmCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}.vpqNewPharmCards button{background:white;border-radius:12px;padding:14px;text-align:left;border:1px solid #c8d4e5}.vpqNewPharmCards b,.vpqNewPharmCards small,.vpqNewPharmCards em{display:block}.vpqNewPharmCards small{font-size:12px;margin:8px 0}.vpqNewPharmCards em{font-size:11px;font-style:normal;color:#487c99}.vpqNewPharmConcept{padding:12px 14px;margin:9px 0;border-radius:11px;border:1px solid #d2dce9;background:#fff}.vpqNewPharmConcept h3{margin:0 0 6px;font-size:15px}.vpqNewPharmConcept p{font-size:13px;line-height:1.5}';document.head.appendChild(vpqPharmNewStyle);
 
 
