@@ -25,7 +25,15 @@ function photoStatus(x){
 }
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
-function visible(){refreshCustom();const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);return base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(etiologyFilter==='all'||window.VPQ_PATH_ETIOLOGY?.forCard?.(x)?.categories?.includes(etiologyFilter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)))}
+const nameSorter=new Intl.Collator(undefined,{sensitivity:'base',numeric:true,ignorePunctuation:true});
+function visible(){
+ refreshCustom();
+ const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);
+ const items=base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(etiologyFilter==='all'||window.VPQ_PATH_ETIOLOGY?.forCard?.(x)?.categories?.includes(etiologyFilter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)));
+ // Sort the displayed cards only. Their immutable IDs and original indices
+ // remain unchanged so drafts, published images, and edit buttons still match.
+ return items.sort((a,b)=>((tab==='normals'?nameSorter.compare(a.system||'',b.system||''):filter==='all'?nameSorter.compare(String(a.lecture||''),String(b.lecture||'')):0)||nameSorter.compare(a.title||'',b.title||'')||a.index-b.index));
+}
 function start(k){mode=k||'gross';tab='lesions';filter='all';normalSystem='all';menu()}
 function studyLecture(lecture){tab='lesions';mode='gross';filter=String(lecture||'all');normalSystem='all';search='';refreshCustom();menu()}
 function showTab(kind){tab=kind==='normals'?'normals':'lesions';mode='gross';filter='all';normalSystem='all';search='';refreshCustom();menu()}
