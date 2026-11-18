@@ -419,6 +419,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 /* Phase 1: less chrome; rooms remain accessible without replacing original art. */
 #roomnav{display:flex;align-items:flex-start;flex-wrap:wrap;gap:7px;padding:8px 0}
 #roomnav>button{flex:0 0 auto;font-size:12px;padding:8px 11px}
+#roomnav .vpq-room-nav-label{flex:1 1 100%;font-size:11px;font-weight:800;color:#63788e;letter-spacing:.04em;text-transform:uppercase;margin-top:4px}
+#roomnav button[aria-current="page"]{outline:2px solid #214c8e;outline-offset:1px}
 #roomnav .vpqMoreRooms{flex:1 1 100%;border:1px solid #d6e1f0;background:#f9fbff;border-radius:10px;padding:7px 11px}
 #roomnav .vpqMoreRooms summary{font-weight:800;color:#58738f;cursor:pointer}
 .vpqMoreRoomsGrid{display:flex;gap:6px;flex-wrap:wrap;padding:8px 0 3px}
@@ -802,10 +804,16 @@ let dec=r.decor.map(d=>`<span class="roomdecor" style="left:${d[1]};top:${d[2]}"
 $('scene').innerHTML=window.VPQ_SCENERY.roomArt(activeRoom)+dec+`<div class="roomBanner">${r.name}</div>`+
 (activeRoom==='reception'?'<div class="vpqPatientQueueArt" aria-hidden="true"><span>🐕</span><span>🐈</span><span>🐇</span><small>Next patients</small></div>':'')+
 r.props.map((p,i)=>`<div class="prop" tabindex="0" role="button" aria-label="${p.label}" title="Open ${p.label}" data-prop="${i}" style="left:${p.x}%"><span class="bubble">${p.bubble}</span><div class="emoji">${p.emoji}</div><div class="sign">${p.label}</div></div>`).join('');
-const quickRooms=['reception','exam','treatment'];
-$('roomnav').innerHTML=(roomBackStack.length?'<button type="button" data-room-back="1">↩ Previous room</button>':'<button type="button" disabled>↩ Previous room</button>')+
-quickRooms.map(k=>'<button data-room="'+k+'" class="'+(k===activeRoom?'active':'')+'">'+({reception:'🏠 Reception',exam:'🩺 Examination Room',treatment:'❤️ Treatment Ward'}[k])+'</button>').join('')+
-'<details class="vpqMoreRooms"><summary>✦ Other rooms</summary><div class="vpqMoreRoomsGrid">'+Object.entries(ROOMS).filter(([k])=>!quickRooms.includes(k)).map(([k,v])=>'<button data-room="'+k+'" class="'+(k===activeRoom?'active':'')+'">'+({pharmacy:'💊',isolation:'🛡️',study:'📚',clinpath:'🔬',imaging:'🩻',necropsy:'🔬',surgery:'🩺',skills:'💉',hallway:'🚪',catcorner:'🐈',yardview:'🐕'}[k]||'🐾')+' '+v.name.split(' & ')[0]+'</button>').join('')+'</div></details>'+(activeRoom==='necropsy'?'<button type="button" data-path-foundations="1" style="background:#eaf3ff;border-color:#a5c8e8">📘 Pathology Foundations · L1–7 + Accumulations</button>':'');
+// Every hospital room is always visible in the bottom navigation. The
+// previous collapsed "Other rooms" menu hid the active room on reload.
+const preferredRoomOrder=['reception','exam','treatment','study','pharmacy','clinpath','imaging','necropsy','surgery','skills','isolation','hallway','catcorner','yardview'];
+const orderedRooms=[...preferredRoomOrder.filter(k=>ROOMS[k]),...Object.keys(ROOMS).filter(k=>!preferredRoomOrder.includes(k))];
+const roomIcons={reception:'🏠',exam:'🩺',treatment:'❤️',study:'📚',pharmacy:'💊',clinpath:'🔬',imaging:'🩻',necropsy:'🔬',surgery:'🩺',skills:'💉',isolation:'🛡️',hallway:'🚪',catcorner:'🐈',yardview:'🐕'};
+$('roomnav').innerHTML=
+ (roomBackStack.length?'<button type="button" data-room-back="1">↩ Previous room</button>':'<button type="button" disabled>↩ Previous room</button>')+
+ '<span class="vpq-room-nav-label">Hospital rooms</span>'+
+ orderedRooms.map(k=>'<button type="button" data-room="'+k+'" class="'+(k===activeRoom?'active':'')+'"'+(k===activeRoom?' aria-current="page"':'')+'>'+roomIcons[k]+' '+ROOMS[k].name.split(' & ')[0]+'</button>').join('')+
+ (activeRoom==='necropsy'?'<button type="button" data-path-foundations="1" style="background:#eaf3ff;border-color:#a5c8e8">📘 Pathology Foundations · L1–7 + Accumulations</button>':'');
 updatePosition()}
 function updatePosition(){avatarX=Math.min(93,Math.max(7,avatarX));$('avatarSprite').style.left=`calc(${avatarX}% - 28px)`;$('petSprite').style.left=`calc(${petX}% - 20px)`;const nearest=ROOMS[activeRoom].props.reduce((a,p,i)=>Math.abs(p.x-avatarX)<a.dist?{idx:i,dist:Math.abs(p.x-avatarX)}:a,{idx:-1,dist:999});document.querySelectorAll('.prop').forEach((el,i)=>el.classList.toggle('near',i===nearest.idx&&nearest.dist<14));$('interactToast').textContent=nearest.dist<14?`Press E: ${ROOMS[activeRoom].props[nearest.idx].label}`:'Move near a station • WASD / arrows';}
 function move(delta){if(modalVisible)return;avatarX=Math.min(93,Math.max(7,avatarX+delta));petX+=Math.max(-2.1,Math.min(2.1,avatarX-petX-(avatarX>petX?7:-7)));$('avatarSprite').classList.toggle('left',delta<0);$('avatarSprite').classList.add('walking');updatePosition()}
