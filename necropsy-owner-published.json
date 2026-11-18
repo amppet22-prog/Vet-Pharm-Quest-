@@ -594,6 +594,68 @@
       },
       "updated": "2026-11-18T23:01:44.582Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-27": {
+      "title": "Neosporosis — Neospora caninum",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-27-1795045560152-0.jpg",
+          "source": "https://capcvet.org/guidelines/neosporosis/",
+          "credit": "CAPC Vet",
+          "caption": "Pathology study reference · 800x600_Neosporosis_caninum_bradyzoites.jpg",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-68-27"
+        },
+        {
+          "url": "https://capcvet.org/guidelines/neosporosis/",
+          "source": "https://capcvet.org/guidelines/neosporosis/",
+          "credit": "CAPC Vet",
+          "caption": "Pathology study reference · linked-photo",
+          "type": "gross",
+          "external": true,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-68-27"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-27-1795045560152-0.jpg",
+        "source": "https://capcvet.org/guidelines/neosporosis/",
+        "credit": "CAPC Vet",
+        "caption": "Pathology study reference · 800x600_Neosporosis_caninum_bradyzoites.jpg",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-68-27"
+      },
+      "text": {
+        "gross": "Hemorrhage or necrosis; *multifocal necrosis with glial nodules and mixed inflammation*; yellow-brown-gray granular foci in gray or white matter. \n**Chronic: **Larger granular discolored areas may blur gray-white boundaries.\n",
+        "dx": "\nWorking identification: Neosporosis — Neospora caninum. Affinity for the nervous system. \n**Transmission:** Ingestion of cysts or transplacental infection \nSpecimen site: Brain / spinal cord/meninges. \nFormulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "",
+        "why": "**Host and transmission:** Dogs, cattle and other mammals; infection can follow ingestion of cysts or transplacental spread. \n**Age differences**: Young dogs: polyradiculoneuritis/polymyositis; adult dogs: encephalitis (often cerebellum) and myositis.",
+        "notes": "Neurologic disease can be divided into two categories:\n- Polyradiculoneuritis and polymyositis: young dogs\n-Encephalitis (predilection for cerebellum_ and myosititis: adult dogs \n**Stages**\nOocysts (environmental stages formed in canine intestinal epithelium and passed with the feces)\nTachyzoites (asexual rapidly growing stages that actively invade tissues; present during acute phase of infection.\n\nBradyzoites (slowly dividing stages that encyst within tissues)\n",
+        "etiologyCategories": "Protoza \n",
+        "etiologyAgents": "*Neosporosis caninum *",
+        "etiologyCertainty": "not-assigned"
+      },
+      "updated": "2026-11-18T23:46:01.867Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
