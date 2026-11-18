@@ -210,6 +210,13 @@ necroStyle.textContent='.stage[data-room="necropsy"] .vpqSpecHit span{bottom:-1%
 '.stage[data-room="necropsy"] .vpqSpecHit.vpqSpecNear:after{font-size:9px;padding:2px 5px;top:2%}'+
 '@media(max-width:650px){.stage[data-room="necropsy"] .vpqSpecHit span{max-width:85px;font-size:9px;padding:2px 3px}}';
 document.head.appendChild(necroStyle);
+const necroPolish=document.createElement('style');
+necroPolish.textContent='.stage[data-room="necropsy"] .vpqSpecHit span{bottom:3%;font-size:9px;line-height:1.1;padding:2px 4px;max-width:105px;opacity:.48;border:1px solid #c5b5c8;background:#fffdf6d9;box-shadow:0 1px 3px #42567426}'+
+'.stage[data-room="necropsy"] .vpqSpecHit:hover span,.stage[data-room="necropsy"] .vpqSpecHit:focus-visible span,.stage[data-room="necropsy"] .vpqSpecHit.vpqSpecNear span{opacity:1;max-width:145px;font-size:10px;background:#fffbea;border:2px solid #d4ae78}'+
+'.stage[data-room="necropsy"] .vpqSpecHit{border-radius:10px}'+
+'.stage[data-room="necropsy"] .vpqSpecHit.vpqSpecNear:after{top:5%;font-size:9px;padding:2px 5px}';
+document.head.appendChild(necroPolish);
+
 
 function refresh(){
  const room=stage.dataset.room,old=stage.querySelector('#vpqSpecHits');
