@@ -30,8 +30,8 @@ Scope: Vet Pharm Quest, instructor-derived lecture study material and Necropsy D
 Counts above are the audited *sections*, not unique conditions or verified complete exam coverage. The interactive UI uses the loaded lessons at runtime and includes foundational notes plus supplements. It is the more precise source of current UI counts.
 
 ## Current cross-coverage
-- Seventy-seven curated necropsy differential cases are deployed, each with four etiologic/diagnostic options and mechanism.
-- Many lecture topics do **not** yet have dedicated interactive differential cases; this is explicitly visible using **Needs differential case**. The 77 cases include 42 cases for Lectures 71–74 (L71: 5, L72: 12, L73: 14, L74: 11).
+- Ninety-one curated necropsy differential cases are deployed, each with four etiologic/diagnostic options and mechanism.
+- Many lecture topics do **not** yet have dedicated interactive differential cases; this is explicitly visible using **Needs differential case**. The 91 cases now include expanded dermatopathology coverage alongside new male/female reproductive, abortion, ophthalmic, and otic cases.
 - Many do **not** have embedded gross + histology photo pairs; this is visible using **Needs attached photo**.
 - Some image records link to references instead of embedding an image. Links must be checked for appropriate species, gross vs histology, provenance, accessibility, and image license.
 - Owner image publishing is now implemented through the existing encrypted-key/password GitHub workflow for differential cases, specimen cards, and lecture photo slots. Browser-local drafts remain local until **Publish Now** succeeds; live authenticated browser verification remains outstanding.
@@ -54,3 +54,10 @@ From the Necropsy Case Center, open **Audit all lecture conditions (L67–79)** 
 - Every new case has a source page and lecture-slide target, but **no claim of an embedded textbook photograph**. Owner can upload and Publish Now with appropriate permissions.
 - Imported publisher: `necropsy-owner-publish.js`; keep `docs/OWNER_PUBLISHING_STANDARD.md` as the implementation requirement in every future atlas or photo editor.
 - Most important unmet goals: confirm all external photo URLs, provide appropriately licensed gross/histo paired images, build dedicated case questions for every remaining important lecture condition, and end-to-end browser test owner publishing.
+
+## Workflow and case expansion — 2026-11-18 follow-up
+- The **Necropsy room Case Center** hotspot now opens the dedicated **Differential Diagnosis Center**, not the shared clinical patient rounds. Signalment → gross lesion → shortlist → histology → ranked diagnoses and testing remain the diagnostic workflow.
+- Older necropsy patient-style questions are preserved under **Optional: original patient-style practice questions**; they are secondary practice, not the main center.
+- The curated differential case bank has **91** cases (all four options with one designated best), and the additions from this pass include feline plasma-cell pododermatitis, xanthomas, FHV-1 skin dermatitis, post-grooming furunculosis, equine Onchocerca dermatitis, chronic progressive lymphedema, uveodermatologic syndrome, renal dermatofibrosis, seminoma, feline fibroadenomatous hyperplasia, bovine Brucella abortion, glaucoma, bovine infectious keratoconjunctivitis, and ceruminous gland carcinoma.
+- Photo references are placeholders/lecture slide targets unless actual source image URLs or uploaded owner-published photos exist. **Do not interpret the presence of a photo-reference record as an embedded image.** The multi-photo owner publishing system and text-only publishing should remain available for every new case.
+- JavaScript syntax and identifier integrity checked; **live browser behavior has not been verified**.
