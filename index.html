@@ -3072,7 +3072,7 @@ $('modalBody').addEventListener('click',ev=>{
  if(d.vpqhyMode!==undefined)return vpqExam2HighYield(d.vpqhyMode,d.vpqhyLecture||'all',d.vpqhyPosition||0);
  if(d.vpqhyAnswer!==undefined){
  const l=d.vpqhyLecture||'all',at=Number(d.vpqhyPosition||0);
- const lset=['Lecture 18','Lecture 19','Lecture 20'];
+ const lset=Array.from({length:10},(_,i)=>'Lecture '+(i+11));
  const eligible=x=>lset.includes(x.lecture)&&(l==='all'||x.lecture===l);
  const qs=[...vpqPharmNext.questions.filter(eligible),...(window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[]).filter(eligible)].filter(x=>x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
  const q=qs[at],chosen=Number(d.vpqhyAnswer),area=$('vpqhyExplanation');
