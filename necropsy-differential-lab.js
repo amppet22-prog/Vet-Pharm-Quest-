@@ -175,7 +175,7 @@ const CASE_MATCH={
 'r77-coxiella':['q fever','coxiella burnetii'],'r77-trich':['bovine tritrichomoniasis','bovine trichomoniasis'],
 'e78-corneal':['corneal sequestrum'],'ear79-bulla':['cholesteatoma']
 };
-function lectureConditions(){return (window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]}
+function lectureConditions(){return [...((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]),...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomConditions?.(conditionLecture)||[])]}
 function norm(t){return String(t||'').toLowerCase().replace(/[–—-]/g,' ').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
 function relatedCases(lecture,title){
  const t=norm(title);
@@ -195,7 +195,7 @@ function evidence(lecture,section){
 function coverageAll(){
  const lessons=window.VPQ_PATH_LECTURE_LEARN||{};
  return LECTURES.map(n=>{
-  const rows=lessons[n]?.sections||[],e=rows.map(x=>evidence(n,x));
+  const rows=[...(lessons[n]?.sections||[]),...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomConditions?.(n)||[])],e=rows.map(x=>evidence(n,x));
   return {lecture:n,rows,teaching:rows.length,specimens:e.filter(x=>x.specimen).length,cases:e.filter(x=>x.linked.length>0).length,embedded:e.filter(x=>x.embedded).length,external:e.filter(x=>x.linkedPhotos).length};
  });
 }
@@ -205,7 +205,7 @@ function conditionIndex(){
  const displayed=sections.map((x,i)=>({x,i,ev:facts[i]})).filter(({ev})=>conditionGap==='all'||conditionGap==='case'&&!ev.linked.length||conditionGap==='photo'&&!ev.embedded);
  const row=summary.find(x=>x.lecture===conditionLecture);
  modal('📚 Complete pathology lecture inventory · L'+safe(conditionLecture),
- '<div class="buttonrow"><button data-pathdiff-list="1">← Differential cases</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-list="1">← Differential cases</button><button data-pathdiff-add-condition="1" style="background:#e8f8ea">➕ Add condition to L'+safe(conditionLecture)+'</button></div>'+
  '<p class="tiny">Coverage audit: <b>'+total+' lecture topics</b> across L67–79. Topics include normal anatomy and general principles as well as individual diseases; they are not all distinct diagnoses. A lecture note does NOT imply a dedicated case or photograph.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:5px;margin:9px 0">'+summary.map(v=>'<button data-pathdiff-condition-lecture="'+v.lecture+'" aria-pressed="'+(conditionLecture===v.lecture?'true':'false')+'" style="padding:7px 5px;font-size:12px">L'+v.lecture+'<small style="display:block;font-size:10px">'+v.teaching+' topics</small></button>').join('')+'</div>'+
  '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture)+'</b><p style="font-size:12px;margin:5px 0">Lecture topics: '+row.teaching+' · Matched specimen cards: '+row.specimens+' · Matched differential cases: '+row.cases+' · Attached image references: '+row.embedded+'</p><small>Counts are conservatively matched by case mapping/title, not a certified complete disease audit. External links without an embedded image are not counted as attached images.</small></div>'+
@@ -294,6 +294,7 @@ function init(api){
  if(d.pathdiffUmbrellaOpen!==undefined){umbrellaCurrent=d.pathdiffUmbrellaOpen;return umbrellaDetail();}
  if(d.pathdiffCreate!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newCaseEditor?.();
  if(d.pathdiffCreateTopic!==undefined){const lesson=lectureConditions()[conditionChosen];return window.VPQ_NECROPSY_OWNER_PUBLISH?.newCaseEditor?.({title:lesson?.title||'',lecture:conditionLecture});}
+ if(d.pathdiffAddCondition!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newConditionEditor?.(conditionLecture);
  if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
  if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;return conditionIndex()}
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
@@ -324,5 +325,5 @@ function init(api){
 function openCase(id){if(allCases().some(x=>x.id===id)){current=id;return view()}return menu()}
 function draftPhoto(id){return photoStore()[id]||''}
 function draftText(id){return {}}
-return {init,start,cases:data,openCase,draftPhoto,draftText};
+return {init,start,cases:data,openCase,draftPhoto,draftText,showConditions:(lecture)=>{if(lecture)conditionLecture=String(lecture);conditionIndex()}};
 })();
