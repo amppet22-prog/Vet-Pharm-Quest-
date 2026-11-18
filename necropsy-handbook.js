@@ -72,7 +72,7 @@ function learnLecture(n){
  popup('📖 L'+n+' · Learn the Lecture',nav()+
  (photos?photos.style:'')+
  '<style>.np-pat{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}.np-learn-point{margin:8px 0;line-height:1.5;white-space:normal;overflow-wrap:anywhere}.np-lesson-photo{margin:10px 0;padding:10px;background:white;border:1px solid #cdd9e8;border-radius:12px;max-width:100%}.np-lesson-photo img{display:block;max-width:100%;width:100%;max-height:360px;object-fit:contain;background:#f4f6fb;border-radius:8px}.np-lesson-photo figcaption{font-size:12px;line-height:1.45;margin-top:7px}.np-lesson-photo figcaption p{margin:3px 0}.np-edu-diagram{margin:10px 0;padding:12px;border:1px solid #b9d6eb;background:#f3faff;border-radius:12px;font-size:13px}.np-edu-diagram p{margin:7px 0}</style>'+
- '<div class="np-cover"><strong style="font-size:18px">'+safe(l.title)+'</strong><p>📷 Two photo slots are at the TOP of each expanded topic. Add your own lecture or textbook images; they are saved privately in this browser.</p><small>'+safe(l.source)+'</small></div>'+
+ '<div class="np-cover"><strong style="font-size:18px">'+safe(l.title)+'</strong><p>📷 Two photo slots are at the TOP of each expanded topic. Save Draft keeps photos on this device. Select 🚀 Publish Now on a photo slot to publish it across devices with your owner password.</p><small>'+safe(l.source)+'</small></div>'+
  '<h4>Learn the material ('+l.sections.length+' sections) · photo slots available</h4>'+rows+
  '<h4>Check your understanding</h4>'+l.checks.map((q,i)=>'<details class="np-pat"><summary><b>Q'+(i+1)+'.</b> '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join('')+
  '<div class="buttonrow"><button data-npchapter="'+safe(n)+'">← Lecture index</button><button data-npstudio="gross">🔬 Practice lesion cases</button></div>');
@@ -152,6 +152,7 @@ function init(host){
  if(d.nphome!==undefined||d.npback!==undefined)return show();
  if(d.npslideprev!==undefined||d.npslidenext!==undefined||d.npslidezoom!==undefined||d.npdeletepdf!==undefined){window.VPQ_PATH_SLIDES?.clicked(host.body,b);return}
  if(d.pathImageRemove!==undefined){window.VPQ_PATH_INLINE_PHOTOS?.remove(b);return}
+ if(d.pathImagePublish!==undefined){const cell=b.closest('.np-photo-cell'),g=b.closest('[data-path-images-lecture]');if(!cell||!g)return;const id='L'+g.dataset.pathImagesLecture+'-S'+g.dataset.pathImagesSection+'-P'+cell.dataset.pathImagesSlot;window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('lecture',id);return}
  if(d.nplearn!==undefined)return learnLecture(d.nplearn);
  if(d.npchapter!==undefined)return lecture(d.npchapter);
  if(d.nppattern!==undefined)return across();
@@ -169,5 +170,5 @@ function init(host){
    if(t?.dataset?.npsearch!==undefined){search=t.value.toLowerCase().trim();show()}
  },true);
 }
-return {init,open:show,lecture,across,chapters,patterns};
+return {init,open:show,openLecture:learnLecture,lecture,across,chapters,patterns};
 })();
