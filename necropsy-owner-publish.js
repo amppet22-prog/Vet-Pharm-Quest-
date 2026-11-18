@@ -57,15 +57,15 @@ async function editor(type,id){
  '<h4>📷 Currently published ('+existing.length+')</h4>'+
  (existing.length?existing.map((p,i)=>'<div style="display:flex;gap:9px;align-items:start;padding:8px;border:1px solid #cdd9e6;border-radius:9px;margin:6px 0"><img src="'+esc(p.url)+'" style="width:90px;height:85px;object-fit:contain" alt="'+esc(p.caption||'')+'"><div style="flex:1;font-size:12px"><b>'+esc(p.type||'image')+'</b><p>'+esc(p.caption||'')+'</p><small>'+esc(p.credit||'')+'</small><label style="display:block"><input type="checkbox" data-np-remove="'+i+'"> Remove this published photo</label></div></div>').join(''):'<p>No published photos yet.</p>')+
  (existing.length?'<label style="display:block;margin:8px 0"><input type="checkbox" id="npOwnerReplaceAll"> Replace all published photos with new uploads (intentional)</label>':'')+
- '<h4>Add photos (optional)</h4>'+
+ '<h4>Add photos (optional)</h4><p style="font-size:12px">For local image files, just select photos, confirm publishing permission, and enter your publishing password. Captions, photo credit and source are optional. External image links still need the source page.</p>'+
  (pending.localPhoto?'<label style="display:block"><input type="checkbox" id="npOwnerUseDraft"> Include my saved local draft photo</label><img src="'+esc(pending.localPhoto)+'" alt="Local photo draft" style="max-width:100%;max-height:110px;object-fit:contain">':'')+
  '<label style="display:block">Select one or several images<input id="npOwnerFiles" type="file" multiple accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:6px 0"></label>'+
  '<div id="npOwnerFileDetails" style="margin:8px 0"></div>'+
  '<label style="display:block">Or add a direct HTTPS image URL<input id="npOwnerImageUrl" type="url" placeholder="https://example.org/image.jpg" style="width:100%;padding:8px"></label>'+
  '<label style="display:block">Type of new photos<select id="npOwnerKind" style="display:block;width:100%;padding:8px"><option value="gross">Gross</option><option value="histology">Histology / H&E</option><option value="clinical">Clinical</option><option value="illustration">Illustration</option></select></label>'+
- '<label style="display:block">Caption for new photo(s) (individual filenames are included)<textarea id="npOwnerCaption" rows="2" style="width:100%" placeholder="Species, tissue, lesion and stain"></textarea></label>'+
- '<label style="display:block">Original source URL for new photo(s)<input id="npOwnerSource" type="url" style="width:100%;padding:8px" placeholder="https://..."></label>'+
- '<label style="display:block">Photo credit, permission or license<input id="npOwnerCredit" style="width:100%;padding:8px" placeholder="Photographer / license"></label>'+
+ '<label style="display:block">Caption (optional)<textarea id="npOwnerCaption" rows="2" style="width:100%" placeholder="Species, tissue, lesion and stain"></textarea></label>'+
+ '<label style="display:block">Source URL (required only for an external image link)<input id="npOwnerSource" type="url" style="width:100%;padding:8px" placeholder="https://..."></label>'+
+ '<label style="display:block">Photo credit or license (optional for uploaded files)<input id="npOwnerCredit" style="width:100%;padding:8px" placeholder="Photographer / license"></label>'+
  '<label style="display:block;margin:9px 0"><input type="checkbox" id="npOwnerRights"> I have the rights or permission to publish these new images publicly</label>'+
  '<div style="padding:9px;border-radius:9px;background:#f1f6ff"><b>Owner publishing authentication</b><p style="font-size:12px">Uses the same encrypted GitHub key as your other atlases. '+(saved?'Enter your existing publishing password.':'If no key is saved, enter a fine-grained GitHub token for first-time setup (Contents: Read/write).')+'</p>'+
  '<label>Publishing password<input id="npOwnerPassword" type="password" autocomplete="off" style="width:100%;padding:8px"></label>'+
@@ -87,22 +87,29 @@ function readFields(){
  const root=api.body,el=id=>root.querySelector('#'+id);
  const files=Array.from(el('npOwnerFiles')?.files||[]);
  const filesMeta=files.map((file,i)=>({name:file.name,caption:String(root.querySelector('[data-np-file-caption="'+i+'"]')?.value||'').trim(),kind:root.querySelector('[data-np-file-kind="'+i+'"]')?.value||'gross'}));
- const draftData=el('npOwnerUseDraft')?.checked&&pending.localPhoto?pending.localPhoto:'';
- const external=String(el('npOwnerImageUrl')?.value||'').trim(),source=String(el('npOwnerSource')?.value||'').trim();
- const credit=String(el('npOwnerCredit')?.value||'').trim(),caption=String(el('npOwnerCaption')?.value||'').trim();
+ const draftData=el('npOwnerUseDraft')?.checked&&pending?.localPhoto?pending.localPhoto:'';
+ const external=String(el('npOwnerImageUrl')?.value||'').trim();
+ const source=String(el('npOwnerSource')?.value||'').trim();
+ const credit=String(el('npOwnerCredit')?.value||'').trim();
+ const caption=String(el('npOwnerCaption')?.value||'').trim();
  const kind=el('npOwnerKind')?.value||'gross',replaceAll=!!el('npOwnerReplaceAll')?.checked;
  const remove=Array.from(root.querySelectorAll('[data-np-remove]:checked')).map(x=>Number(x.dataset.npRemove));
  const edits={};root.querySelectorAll('[data-np-text]').forEach(x=>{edits[x.dataset.npText]=String(x.value||'').slice(0,9000)});
  const newCount=files.length+(draftData?1:0)+(external?1:0);
- if(files.length>12)throw Error('Add up to 12 files per publishing action.');
- for(const file of files)if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>20000000)throw Error('Only JPEG, PNG or WebP files under 20 MB are supported.');
- if(external&&!goodUrl(external))throw Error('Photo URL must use HTTPS.');
- if(source&&!goodUrl(source))throw Error('Source URL must use HTTPS.');
- if(newCount&&(!el('npOwnerRights')?.checked||!caption||!credit))throw Error('New photos need rights confirmation, a caption and a credit/license.');
- if(external&&!source)throw Error('External photos also need a source URL.');
- if(!newCount&&!Object.keys(edits).length&&!replaceAll&&!remove.length)throw Error('No changes selected. Add images, edit text, or choose photos to remove.');
- if(replaceAll&&!newCount)throw Error('To replace all photos, add the new photographs first. To remove individual photos, use their checkboxes.');
- return {files,filesMeta,draftData,external:goodUrl(external),source:goodUrl(source),credit:credit.slice(0,500),caption:caption.slice(0,1000),kind,replaceAll,remove,edits,newCount};
+ if(files.length>12)throw Error('Please select at most 12 files per upload.');
+ for(const file of files)if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>20000000)throw Error('Use JPEG, PNG or WebP photos under 20 MB each.');
+ if(external&&!goodUrl(external))throw Error('Direct photo links must begin with https://');
+ if(source&&!goodUrl(source))throw Error('The source URL must begin with https://, or leave it empty for photos you have permission to upload directly.');
+ if(newCount&&!el('npOwnerRights')?.checked)throw Error('Please check the permission-to-publish box for the new photo(s).');
+ if(external&&!source)throw Error('For an external image link, enter the original source page URL.');
+ if(!newCount&&!Object.keys(edits).length&&!replaceAll&&!remove.length)throw Error('Choose a photo or edit text before publishing.');
+ if(replaceAll&&!newCount)throw Error('To replace all photos, select replacement images first. To remove one, use its Remove checkbox.');
+ // Uploaded images can be published without filling the shared caption/credit again.
+ // Retain the owner confirmation, but do not falsely assert authorship of the images.
+ return {files,filesMeta,draftData,external:goodUrl(external),source:goodUrl(source),
+  credit:(credit||'Owner-supplied image; publication rights confirmed').slice(0,500),
+  caption:(caption||'Pathology study reference').slice(0,1000),
+  kind,replaceAll,remove,edits,newCount};
 }
 
 async function imageBase64(f){
@@ -165,8 +172,9 @@ function init(context){
   const b=ev.target.closest('[data-necro-owner-publish],[data-necro-owner-close]');if(!b)return;
   ev.preventDefault();ev.stopImmediatePropagation();
   if(b.hasAttribute('data-necro-owner-close')){const q=pending;if(q?.type==='case')return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(q.id);if(q?.type==='specimen')return window.VPQ_PATH_EXAM7?.openCard?.(q.id);if(q?.type==='lecture')return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.(q.id.match(/^L(\d+)/)?.[1]);return;}
-  if(!pending)return;
-  let fields;try{fields=readFields()}catch(e){show('Photo cannot be published','<p>'+esc(e.message)+'</p><button data-necro-owner-close="1">← Back</button>');return;}
+  if(!pending||b.disabled)return;
+  const inlineError=message=>{const status=context.body.querySelector('#npOwnerResult');if(status){status.textContent=message;status.style.color='#a52525';status.scrollIntoView({block:'nearest',behavior:'smooth'});}else show('Publishing error','<p>'+esc(message)+'</p>');};
+  let fields;try{fields=readFields()}catch(e){inlineError(e.message);return;}
   let token=String(context.body.querySelector('#npOwnerToken')?.value||'').trim();
   let password=String(context.body.querySelector('#npOwnerPassword')?.value||'');
   if(context.body.querySelector('#npOwnerToken'))context.body.querySelector('#npOwnerToken').value='';
@@ -180,7 +188,7 @@ function init(context){
    if(job.type==='specimen')window.VPQ_PATH_EXAM7?.afterPublished?.(job.id);
    if(vault&&!vault.exists()&&password&&fields&&token){await vault.store(token,password);}
    show('✓ Changes published','<p>Changes saved to GitHub. Existing photos were preserved unless you explicitly removed or replaced them. Reload on another device to view updates.</p><button data-necro-owner-close="1">← Return</button>');
-  })().catch(e=>{show('Publication was not completed','<p>'+esc(e.message)+'</p><p>The existing published image was not replaced in the manifest. You can try again.</p><button data-necro-owner-close="1">Back</button>')}).finally(()=>{token='';password='';b.disabled=false});
+  })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
 return Object.freeze({init,load,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
