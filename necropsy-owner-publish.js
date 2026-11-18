@@ -199,7 +199,7 @@ async function editor(type,id){
  const localText=type==='specimen'?window.VPQ_PATH_EXAM7?.draftText?.(id):type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftText?.(id):null;
  const edits={...base,...(cur?.text||{}),...(localText||{})};
  if(type==='specimen'){const tags=window.VPQ_PATH_ETIOLOGY?.forCard?.(edits);if(tags){if(edits.etiologyCategories===undefined)edits.etiologyCategories=tags.categories.join(', ');if(edits.etiologyAgents===undefined)edits.etiologyAgents=tags.agents;if(edits.etiologyCertainty===undefined)edits.etiologyCertainty=tags.certainty;}}
- const fields=type==='case'?['history','gross','histo','morph','mechanism','tests']:type==='specimen'?['gross','dx','histo','why','notes','etiologyCategories','etiologyAgents','etiologyCertainty']:[];
+ const fields=type==='case'?['history','gross','histo','morph','mechanism','tests']:type==='specimen'?['gross','dx','histo','why','visualClue','compare','notes','etiologyCategories','etiologyAgents','etiologyCertainty']:[];
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  draftState={};
  show('✏️ Edit & publish · '+esc(base.title),
