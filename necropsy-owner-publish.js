@@ -369,7 +369,7 @@ function init(context){
   const button=ev.target.closest('[data-np-spec-create],[data-np-spec-visibility],[data-np-spec-cancel],[data-np-spec-restore]');
   if(!button)return;
   ev.preventDefault();ev.stopImmediatePropagation();
-  if(button.dataset.npSpecCancel!==undefined)return window.VPQ_PATH_EXAM7?.start?.('gross');
+  if(button.dataset.npSpecCancel!==undefined)return window.VPQ_PATH_EXAM7?.showTab?.(window.VPQ_PATH_EXAM7?.activeTab?.()||'lesions');
   if(button.dataset.npSpecRestore!==undefined)return hideSpecimenEditor(button.dataset.npSpecRestore,true);
   if(button.disabled)return;
   const root=context.body,v=id=>String(root.querySelector('#'+id)?.value||'').trim();
@@ -389,7 +389,7 @@ function init(context){
    await setSpecimenVisibility(id,hidden,token);
    if(vault&&!vault.exists()&&password)await vault.store(token,password);
    window.VPQ_PATH_EXAM7?.refreshCustom?.();
-   return window.VPQ_PATH_EXAM7?.start?.('gross');
+   return window.VPQ_PATH_EXAM7?.showTab?.((window.VPQ_PATH_EXAM7?.cards||[]).find(x=>x.id===id)?.normal?'normals':'lesions');
   })().catch(err=>{if(status)status.textContent='Publishing failed: '+err.message+' Your card has not been altered.'}).finally(()=>{token='';password='';if(button.isConnected)button.disabled=false;});
  },true);
  context.body.addEventListener('change',ev=>{
