@@ -498,8 +498,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
 <script src="pharm-next-lectures.js?v=20261117-source-audit210-v4"></script>
-<script src="study-flashcard-owner.js?v=20261118-flashowner1"></script>
-<script src="pharm-exam2-flashcards.js?v=20261118-e2-flash40"></script>
+<script src="study-flashcard-owner.js?v=20261118-owner-edit2"></script>
+<script src="pharm-exam2-flashcards.js?v=20261118-e2-flash40b"></script>
 <script src="pharm-exam2-interactive-pathways.js?v=20261114-p6-lecture-filter3"></script>
 <script src="pharm-exam2-visual-anatomy.js?v=20261114-p52-v1"></script>
 <script src="pharm-exam2-pdf-practice.js?v=20261117-source14-revised"></script>
@@ -548,7 +548,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="necropsy-rich-text.js?v=20261118-format1"></script>
 <script src="necropsy-exam7-data.js?v=20261118-fix78-79"></script>
 <script src="necropsy-normals-data.js?v=20261118-l67-foundations2"></script>
-<script src="necropsy-exam7-studio.js?v=20261118-atlasbrowse-status3"></script>
+<script src="necropsy-exam7-studio.js?v=20261118-browsephotostatus4"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>\n<script src="pathology-source-viewer.js?v=20261118-source-pdf-fix"></script>\n<script src="pathology-lecture-learning.js?v=20261118-l67-foundations2"></script>
 <script src="pathology-lecture68-audited.js?v=20261118-l68-disease-audit2"></script>
 <script src="pathology-lecture69-audited.js?v=20261118-l69-audit1"></script>
@@ -569,7 +569,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="necropsy-differential-neuro-expansion.js?v=20261118-l69l70-thirtyfive3"></script>
 <script src="necropsy-pattern-cards.js?v=20261118-umbrella1"></script>
 <script src="necropsy-differential-skin-expansion.js?v=20261118-skin14"></script>
-<script src="necropsy-differential-lab.js?v=20261118-flipcards-redesign3"></script>
+<script src="necropsy-differential-lab.js?v=20261118-polished-flashonly4"></script>
 <script src="necropsy-owner-publish.js?v=20261118-custom-spec-editor"></script>
 <script src="pathology-inline-photos.js?v=20261118-multiphoto-textonly1"></script>
 <script src="necropsy-handbook.js?v=20261118-owner-publish-final4"></script>
@@ -2148,7 +2148,7 @@ const allLectures27=window.VPQCurriculum.courses.map(row=>row[0]);
 function cards27(){const a=concept27.filter(c=>master27.selected.includes(c[0])).map(c=>({id:'concept:'+c[1],lecture:c[0],topic:c[1],front:c[2],back:c[3],why:c[4],apply:c[5]}));return a.concat(dataDrugs().filter(d=>master27.selected.includes(d.lecture)).map(d=>({id:'drug:'+d.id,lecture:d.lecture,topic:d.class,front:'Describe '+d.name+': mechanism and uses.',back:(d.moa||'')+' '+(d.uses||''),why:d.why||'Connect target to effect.',apply:'What changes your decision to use this drug? '+(d.species||'')})))}
 function questions27(){return dataStudy().filter(q=>master27.selected.includes(q.lecture)&&q.options&&q.options.length>1)}
 const previousStudyMenu27=showStudyMenu,previousOpenStudy27=openStudy,previousDoAction27=doAction;
-function masteryMenu27(){master27.selected=master27.selected.filter(l=>allLectures27.includes(l));showModal('📖 Guided Learning Studio',`<p>Guided Learning explains the physiology, mechanism, WHY and clinical consequences. Choose one or multiple lectures, then start a session. Mastery separately tests your understanding.</p><div class="infobox"><b>Lecture selection</b><div class="vpq27grid">${allLectures27.map(l=>`<label><input type="checkbox" data-vpq27lecture="${escapeHtml(l)}" ${master27.selected.includes(l)?'checked':''}> ${escapeHtml(l)} <small style="font-size:10px;color:#61748a">(${concept27.filter(c=>c[0]===l).length+dataDrugs().filter(d=>d.lecture===l).length} cards · ${dataStudy().filter(q=>q.lecture===l).length} Q)</small></label>`).join('')}</div></div><p>${cards27().length} flashcards · ${questions27().length} existing exam questions · ${master27.missed.length} weak items marked</p><div class="buttonrow"><button data-vpq27start="learn">📖 Start guided cards</button><button data-vpq27start="mixed">🩺 Start Learn + Apply</button><button data-vpqgmastery="1">🏆 Mastery Tracker</button><button data-vpqghub="1">← Learning Lab</button></div><p class="tiny">Rotation prioritizes unseen material and resurfaces missed items. The bank is finite; questions are not invented. Detailed mechanistic cards emphasize Foundations and Lectures 6–7. Lectures 10–20 use the existing Exam 2 drug mechanisms and clinical questions; select a lecture to see its available counts. Full lecture lessons remain accessible through Browse Exam 2 lessons.</p><button data-vpq27old="1">Original Study Desk / One Health</button>`)}
+function masteryMenu27(){master27.selected=master27.selected.filter(l=>allLectures27.includes(l));showModal('📖 Guided Learning Studio',`<p>Guided Learning explains the physiology, mechanism, WHY and clinical consequences. Choose one or multiple lectures, then start a session. Mastery separately tests your understanding.</p><div class="infobox"><b>Lecture selection</b><div class="vpq27grid">${allLectures27.map(l=>`<label><input type="checkbox" data-vpq27lecture="${escapeHtml(l)}" ${master27.selected.includes(l)?'checked':''}> ${escapeHtml(l)} <small style="font-size:10px;color:#61748a">(${concept27.filter(c=>c[0]===l).length+dataDrugs().filter(d=>d.lecture===l).length} cards · ${dataStudy().filter(q=>q.lecture===l).length} Q)</small></label>`).join('')}</div></div><p>${cards27().length} flashcards · ${questions27().length} existing exam questions · ${master27.missed.length} weak items marked</p><div class="buttonrow"><button data-vpqpharmfc-open="1" style="background:#e6f2ff">🧠 Exam 2 quick flashcards</button><button data-vpq27start="learn">📖 Start guided cards</button><button data-vpq27start="mixed">🩺 Start Learn + Apply</button><button data-vpqgmastery="1">🏆 Mastery Tracker</button><button data-vpqghub="1">← Learning Lab</button></div><p class="tiny">Rotation prioritizes unseen material and resurfaces missed items. The bank is finite; questions are not invented. Detailed mechanistic cards emphasize Foundations and Lectures 6–7. Lectures 10–20 use the existing Exam 2 drug mechanisms and clinical questions; select a lecture to see its available counts. Full lecture lessons remain accessible through Browse Exam 2 lessons.</p><button data-vpq27old="1">Original Study Desk / One Health</button>`)}
 showStudyMenu=function(){if(state.focus&&state.focus.startsWith('One Health'))return previousStudyMenu27();masteryMenu27()};
 openStudy=function(ohOnly=false){if(ohOnly)return previousOpenStudy27(true);state.focus='All lectures';masteryMenu27()};
 
@@ -3140,6 +3140,7 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const n=Math.max(0,Number(position)||0);
  const selector='<div class="buttonrow"><button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="all">All L11–20</button>'+lectures.map(l=>'<button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="'+escapeHtml(l)+'">'+escapeHtml(l)+'</button>').join('')+'</div>';
  const menu='<p><b>Start with the instructor-starred medications and big study-guide objectives.</b> Learn the mechanism and physiological WHY, recall the original faculty objective, then apply it to clinical questions.</p><p class="tiny">All drugs and questions below reuse the Exam 2 library; any caution attached to an instructor answer is shown separately. ★ refers to identified lecture stars and high-priority tables—not necessarily every bold-highlighted line.</p>'+
+ '<div class="buttonrow"><button data-vpqpharmfc-open="1" style="background:#e4f1ff;font-weight:800">🧠 Quick flashcards · Exam 2</button></div>'+
  '<div class="vpqNewPharmCards"><button data-vpqhy-mode="drugs" data-vpqhy-lecture="all"><b>1 · ★ Priority Drug Walkthrough</b><small>51 high-priority drugs · drug choice, mechanism, comparison, monitoring and patient scenarios</small></button><button data-vpqhy-mode="objectives" data-vpqhy-lecture="all"><b>2 · Instructor Objectives</b><small>122 original instructor objectives across all Exam 2 lectures, with clinical cautions where needed</small></button><button data-vpqhy-mode="questions" data-vpqhy-lecture="all"><b>3 · Patient Questions</b><small>226 clinical and guide questions · mechanisms, decisions and explanations</small></button></div>';
  if(mode==='menu')return showModal('★ Exam 2 · High-Yield Review · Lectures 11–20',menu+'<div class="buttonrow"><button data-vpqnewpharm-menu="1">← All Exam 2 lectures</button></div>');
  const d=mode==='drugs'?priority:mode==='objectives'?objectives:questions;
