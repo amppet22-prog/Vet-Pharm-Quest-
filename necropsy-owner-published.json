@@ -1434,6 +1434,79 @@
       },
       "updated": "2026-11-19T02:10:20.850Z",
       "approvedBy": "amppet22-prog"
+    },
+    "exam7-9": {
+      "title": "Cerebellar hypoplasia",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-9-1795054612437-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 211408.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "exam7-9"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-9-1795054614064-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 211414.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "exam7-9"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-9-1795054612437-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-18 211408.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "exam7-9"
+      },
+      "text": {
+        "gross": "Small cerebellum ",
+        "dx": "Cerebellum: diffuse hypoplasia. Virus-induced. \nVirus targets the external granule layer of the cerebellum that are still dividing during the late gestational and early neonatal periods. \nDegree of hypoplasia varies depending on if the neonate or the fetus was infected. ",
+        "histo": "Granule cell depletion due to injury to proliferating cells",
+        "why": "The most common causes in animals are \n Panleukopenia virus ± kitten\n Bovine viral diarrhea virus ± calves\n Classical swing fever ± pigs",
+        "visualClue": "",
+        "compare": "",
+        "notes": "",
+        "etiologyCategories": [
+          "viral",
+          "developmental"
+        ],
+        "etiologyAgents": "Developmental malformation; prenatal viral injury is one possible cause, depending on species",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"cat\":\"common\",\"cattle\":\"common\",\"pig\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T02:16:55.495Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
