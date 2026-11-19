@@ -2307,6 +2307,65 @@
       },
       "updated": "2026-11-19T07:09:38.486Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-22": {
+      "title": "Selenium toxicosis in pigs",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-22-1795072503081-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-22"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-22-1795072503081-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-22"
+      },
+      "text": {
+        "gross": "Distinctive gross lesion is **bilaterally symmetrical** yellow malacia in the ventral gray matter of spinal cord; compare with white-matter myelomalacia.",
+        "dx": "Working identification: Selenium toxicosis in pigs. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "why": " Overexposure in swine feed causes neurologic deficits in feeder pigs with alertness, sternal recumbency, progression to flaccid rear-limb dysfunction and quadriplegia. ",
+        "visualClue": "Bilaterally symmetric in the ventral spinal gray matter ",
+        "compare": "",
+        "notes": "In feeder pigs with toxic selenium. Affected pgis are alert, rest in sternal recumbency. Progress to quadriplegia with flaccid paralysis of the rear limbs. \n\nCutaneous manifestations are rough hair coat, partial alopecia, hoof separation, and sloughing. ",
+        "etiologyCategories": [
+          "toxic"
+        ],
+        "etiologyAgents": "Selenium ",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"pig\":\"common\"}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "seleniumtoxicosis",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T07:15:04.592Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
