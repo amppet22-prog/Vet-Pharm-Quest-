@@ -84,6 +84,48 @@
       },
       "updated": "2026-11-19T08:45:21.937Z",
       "approvedBy": "amppet22-prog"
+    },
+    "n69-srma": {
+      "title": "Young Beagle with cervical pain and vasculitis",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/n69-srma-1795079233358-0.jpg",
+          "source": "",
+          "credit": "DOI:10.1111/j.1748-5827.2009.00848.x",
+          "caption": "a) Ventral surface of the caudal medulla with a leptomeningeal plaque (arrow) (b) High-magnification views of the prolific arterial inflammation in the cervical spinal cord leptomeninges. Neutrophils are prominent. Note the thrombosis of the arteriole. (c) Transverse section of the cervical spinal cord – low-magnification view of an inflammatory plaque in the ventral leptomeninges (arrow). In the two insets at higher magnification, note the advanced fibrinoid mural degeneration and neutrophilic infiltration",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "n69-srma"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/n69-srma-1795079233358-0.jpg",
+        "source": "",
+        "credit": "DOI:10.1111/j.1748-5827.2009.00848.x",
+        "caption": "a) Ventral surface of the caudal medulla with a leptomeningeal plaque (arrow) (b) High-magnification views of the prolific arterial inflammation in the cervical spinal cord leptomeninges. Neutrophils are prominent. Note the thrombosis of the arteriole. (c) Transverse section of the cervical spinal cord – low-magnification view of an inflammatory plaque in the ventral leptomeninges (arrow). In the two insets at higher magnification, note the advanced fibrinoid mural degeneration and neutrophilic infiltration",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "n69-srma"
+      },
+      "text": {
+        "title": "Young Beagle with cervical pain and vasculitis",
+        "history": "Acute fever, hunched posture and marked neck hyperesthesia; CSF has pronounced neutrophilic pleocytosis.",
+        "gross": "Cervical leptomeningeal petechiae or hemorrhage may be present; other large arteries can also be involved.",
+        "histo": "Meningeal arterial fibrinoid necrosis and mixed leukocytic arteritis, sometimes with neutrophilic meningitis.",
+        "morph": "Cervical leptomeninges: necrotizing arteritis with neutrophilic meningitis",
+        "mechanism": "Immune-mediated arterial inflammation disrupts vessels and irritates meninges, producing pain and CSF neutrophilia.",
+        "tests": "CSF analysis and infectious disease exclusion before immune suppression; biopsy if available and clinical response."
+      },
+      "updated": "2026-11-19T09:07:15.204Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "specimens": {
