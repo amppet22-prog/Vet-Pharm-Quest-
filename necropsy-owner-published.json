@@ -726,6 +726,66 @@
       },
       "updated": "2026-11-18",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-29": {
+      "title": "Equine protozoal myeloencephalitis (EPM)",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-29-1795048128088-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-68-29"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-29-1795048128088-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-68-29"
+      },
+      "text": {
+        "gross": "Random, variably sized irregular dark-red/brown foci of hemorrhage/necrosis in spinal cord gray/white matter; if brain involved, tends toward brainstem. This",
+        "dx": "Working identification: Equine protozoal myeloencephalitis (EPM). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Necrosis, hemorrhage and mixed perivascular inflammatory cuffs, often including eosinophils; lecture specifies no vasculitis.",
+        "why": "**Agents:** *Sarcocystis neurona* (most common) and *Neospora hughesi.* Lecture relates S. neurona infective sporocysts to opossum feces; do not assign the same source to both agents. \n**Risk/signs:** Young adults, stress or immunocompromise; deficits depend on location and include ataxia, cranial nerve signs, dysphagia and asymmetric muscle atrophy.",
+        "visualClue": "",
+        "compare": "",
+        "notes": "Signalment: Young adult horses under stress or immunocompromised. \nClinical signs: Depression, seizures, ataxia, facial nerve paralysis, paralysis of the\ntongue, dysphagia, atrophy of the quadriceps and/or gluteal muscles etc\n• Signs depend on where protozoa localizes",
+        "etiologyCategories": "protozoal",
+        "etiologyAgents": "Sarcocystis neurona; Neospora hughesi",
+        "etiologyCertainty": "associated",
+        "speciesOccurrence": "Equine Horse ",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "Spinal cord brainstem when severe ",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "EPM, Equine protozoal myelocencephalitis ",
+        "zoonoticStatus": "",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T00:28:49.719Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
