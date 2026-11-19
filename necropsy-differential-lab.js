@@ -74,7 +74,7 @@ function umbrellaDetail(){
 }
 
 /* Lecture coverage uses live lecture data, not a shortened list. */
-let conditionLecture='75',conditionChosen=-1,conditionGap='all';
+let conditionLecture='75',conditionChosen=-1,conditionGap='all',conditionTopicMode='all';
 const LECTURES=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
 'practice5-hcm':["Hypertrophic cardiomyopathy","Concentric versus eccentric hypertrophy"],
@@ -332,7 +332,7 @@ function conditionIndex(){
  const sections=lectureConditions(),facts=sections.map(x=>evidence(conditionLecture,x));
  const summary=coverageAll(),total=summary.reduce((a,x)=>a+x.teaching,0);
  const displayed=sections.map((x,i)=>({x,i,ev:facts[i]}))
- .filter(({ev})=>conditionGap==='all'||conditionGap==='case'&&!ev.linked.length||conditionGap==='photo'&&!ev.embedded)
+ .filter(({x,ev})=>(conditionTopicMode==='all'||x.diseaseAtlas===true)&& (conditionGap==='all'||conditionGap==='case'&&!ev.linked.length||conditionGap==='photo'&&!ev.embedded))
  .sort((a,b)=>String(a.x.title||'').localeCompare(String(b.x.title||''),undefined,{sensitivity:'base',numeric:true})||a.i-b.i);
  const alphaOf=title=>{const c=String(title||'').trim().charAt(0).toUpperCase();return /^[A-Z]$/.test(c)?c:'#'};
  const presentLetters=[...new Set(displayed.map(({x})=>alphaOf(x.title)))];
@@ -345,6 +345,7 @@ function conditionIndex(){
  '<div class="buttonrow"><button data-pathdiff-condition-lecture="31" style="background:#eaf6ef;font-weight:800">🫘 Urinary Exam 3 · L31–35</button><button data-pathdiff-condition-lecture="36" style="background:#f9eedd;font-weight:800">🫀 Hepatic Exam 3 · L36–40</button><button data-pathdiff-condition-lecture="41" style="background:#efe9ff;font-weight:800">🧪 Pancreas · L41</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-condition-lecture="50" style="background:#eef6ff;font-weight:800">❤️ Exam 5 · Cardiac L50–53</button><button data-pathdiff-condition-lecture="54" style="background:#e8f5f8;font-weight:800">🫁 Exam 5 · Respiratory L54–58</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-flash-lecture="1" style="background:#e8f2ff">🧠 Study this lecture · flashcards</button></div>'+
+ '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-topic-mode="disease" aria-pressed="'+(conditionTopicMode==='disease')+'" style="background:#f5edff">🩺 Diseases only</button><button data-pathdiff-topic-mode="all" aria-pressed="'+(conditionTopicMode==='all')+'">All topics / foundations</button></div>'+ 
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-gap="all" aria-pressed="'+(conditionGap==='all')+'">All '+sections.length+'</button><button data-pathdiff-gap="case" aria-pressed="'+(conditionGap==='case')+'">Needs differential case</button><button data-pathdiff-gap="photo" aria-pressed="'+(conditionGap==='photo')+'">Needs attached photo</button></div>'+
  '<p class="tiny">'+displayed.length+' topics displayed. Select any topic to see full instructor-derived notes and the source slide reference.</p>'+
  '<nav aria-label="Jump to condition letter" style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0">'+presentLetters.map(letter=>'<button data-pathdiff-alpha="'+safe(letter)+'" style="padding:6px 9px;min-width:31px;font-size:12px;font-weight:800" aria-label="Jump to '+safe(letter)+'">'+safe(letter)+'</button>').join('')+'</nav>'+
@@ -545,7 +546,8 @@ function init(api){
   return;
  }
  if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
- if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;return conditionIndex()}
+ if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;conditionTopicMode=Number(conditionLecture)>=50&&Number(conditionLecture)<=58?'disease':'all';return conditionIndex()}
+ if(d.pathdiffTopicMode!==undefined){conditionTopicMode=d.pathdiffTopicMode;return conditionIndex()}
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
  if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
  if(d.pathdiffConditionBack!==undefined)return conditionIndex();
