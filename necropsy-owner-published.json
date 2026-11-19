@@ -1214,6 +1214,67 @@
       },
       "updated": "2026-11-19T01:25:02.091Z",
       "approvedBy": "amppet22-prog"
+    },
+    "exam7-7": {
+      "title": "Hydrocephalus",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-7-1795052285373-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "exam7-7"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-7-1795052285373-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "exam7-7"
+      },
+      "text": {
+        "gross": "Dilation of ventricular system. Will look hollow on cut section. \n\nThe portion of the ventricular system that dilates depends on the site of blockage. \nWhite matter is more sensitive than gray matter due to the effects of pressure from increased CSF. \n\n**Congenital:** *Symmetrical* enlargement and dome-shaped calvaria; the bones of the calvaria are thinned and distorted from pressure expanding the brain during gestation. ",
+        "dx": "Brain: severe internal hydrocephalus, can be congenital or acquired. Excessive build up of CSF within the ventricular system. \n***Most common congenital CNS abnormality in domestic animals. ***",
+        "histo": "Ependymal attenuation and pressure damage",
+        "why": "Distinguish compressed tissue from tissue destroyed in hydranencephaly",
+        "visualClue": "",
+        "compare": "",
+        "notes": "Variety of causes:\n In utero viral infection (ex: feline panleukopenia)\n Developmental abnormalities in the ependyma or\nventricular system\n Infection with blockage of the ventricular system\n Genetic predisposition in some dog breeds\n Toy and brachycephalic breeds\n Compression by mass (cerebral abscesses or neoplasms)\n Cholesteatomas in the choroid plexus of the lateral\nventricles of the horse - rare",
+        "etiologyCategories": [
+          "traumatic",
+          "developmental",
+          "idiopathic"
+        ],
+        "etiologyAgents": "Congenital or acquired disturbances of CSF flow",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\",\"cat\":\"common\"}",
+        "hostScope": "multiple",
+        "speciesEvidence": "Can be very common in cats with Feline panleukopenia. \nToy and brachycephalic breeds are affected. ",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T01:38:07.267Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
