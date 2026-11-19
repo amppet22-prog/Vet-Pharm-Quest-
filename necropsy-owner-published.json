@@ -2508,6 +2508,19 @@
       "source": "Pathology lecture LMU",
       "normal": false,
       "id": "specimen-custom-69-chiari-like-malformation"
+    },
+    "specimen-custom-69-leukoencephalomalacia": {
+      "title": "Leukoencephalomalacia",
+      "lecture": "69",
+      "system": "Nervous system",
+      "species": "Horse",
+      "gross": "Characteristic gross lesion at the time of death is malacia and liquefaction of the affected white matter\n Brainstem and cerebellum can also be impacted\n Gray matter typically spared - mechanism for this selectivity is unknown\n Edema ± marked swelling, flattening of cerebrocortical gyri\n**Typically has a yellow to yellow-orange or brown-yellow color in affected tissue **",
+      "dx": "Leukoencephalomalacia",
+      "histo": "Liquefactive necrosis showing loss of normal architecture and eosinophilic proteinaceous debris with edema, congested blood vessels and mild hemorrhage, and gitter cells (lipid-laden macrophages) clearing the necrotic debris along with perivascular cuffing.",
+      "why": "Consumption of moldy feed, typically Fusarium mycotoxins like fumonisin B1, moldy corn.",
+      "source": "Pathology lecture LMU",
+      "normal": false,
+      "id": "specimen-custom-69-leukoencephalomalacia"
     }
   },
   "hiddenSpecimens": [
