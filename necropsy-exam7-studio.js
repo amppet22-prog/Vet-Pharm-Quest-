@@ -10,7 +10,7 @@ function refreshCustom(){
  return base;
 }
 const KEY='vpq-path-exam7-user-edits-v1';
-let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',etiologyFilter='all',search='',current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
+let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',etiologyFilter='all',speciesFilter='all',frequencyFilter='all',conditionFilter='all',subtypeFilter='all',systemFilter='all',search='',current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
 const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -29,7 +29,7 @@ const nameSorter=new Intl.Collator(undefined,{sensitivity:'base',numeric:true,ig
 function visible(){
  refreshCustom();
  const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);
- const items=base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(etiologyFilter==='all'||window.VPQ_PATH_ETIOLOGY?.forCard?.(x)?.categories?.includes(etiologyFilter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)));
+ const items=base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(etiologyFilter==='all'||window.VPQ_PATH_ETIOLOGY?.forCard?.(x)?.categories?.includes(etiologyFilter))&&(speciesFilter==='all'||window.VPQ_PATH_ATLAS_META?.speciesMatches?.(x,speciesFilter,frequencyFilter))&&(conditionFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionType===conditionFilter)&&(subtypeFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionSubtype===subtypeFilter)&&(systemFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.organSystem===systemFilter)&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why].join(' ').toLowerCase().includes(search)));
  // Sort the displayed cards only. Their immutable IDs and original indices
  // remain unchanged so drafts, published images, and edit buttons still match.
  return items.sort((a,b)=>((tab==='normals'?nameSorter.compare(a.system||'',b.system||''):filter==='all'?nameSorter.compare(String(a.lecture||''),String(b.lecture||'')):0)||nameSorter.compare(a.title||'',b.title||'')||a.index-b.index));
@@ -62,7 +62,10 @@ function menu(){
  '<div class="buttonrow"><button data-path7-library="1">📷 Browse published photos by lecture / system</button></div>'+ 
  '<div class="buttonrow"><button data-path7-mode="gross">🔎 Gross + morphologic DX</button><button data-path7-mode="histo">🔬 Histo + WHY</button><button data-path7-mode="edit">✏️ Edit atlas images</button><button data-path7-test="coached" style="background:#e6f3ff;border-color:#aac9eb">🎓 Guided morphologic DX · 12 cases</button><button data-path7-test="all">🧪 All atlas unknowns</button></div>'+
  '<label style="display:block;font-size:12px;margin:9px 0"><b>🧬 Browse by etiology</b><select data-path7-etiology-filter="1" style="display:block;padding:8px;max-width:390px;width:100%;margin-top:4px"><option value="all">All etiologies</option>'+Object.entries(window.VPQ_PATH_ETIOLOGY?.categories||{}).map(([k,v])=>'<option value="'+h(k)+'"'+(etiologyFilter===k?' selected':'')+'>'+h(v.label)+'</option>').join('')+'</select><small>Multiple tags may apply. Untagged cards appear under All etiologies.</small></label>'+
- '<div class="buttonrow">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" style="padding:6px 9px;font-size:11px" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':'L'+h(l))+'</button>').join('')+'</div>'+
+ '<details style="margin:9px 0;padding:9px;border:1px solid #d6e0ed;border-radius:12px" open><summary><b>🔍 Combine species, condition, pathogen family and organ filters</b></summary><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin-top:10px">'+
+ (function(){const m=window.VPQ_PATH_ATLAS_META;const choose=(name,value,items,placeholder)=>'<label style="font-size:12px">'+name+'<select data-path7-metadata-filter="'+name+'" style="display:block;width:100%;padding:7px;margin-top:4px"><option value="all">'+placeholder+'</option>'+Object.entries(items||{}).map(([k,label])=>'<option value="'+h(k)+'"'+(value===k?' selected':'')+'>'+h(label)+'</option>').join('')+'</select></label>';return choose('species',speciesFilter,m?.species,'All species')+choose('frequency',frequencyFilter,m?.frequency,'Any occurrence')+choose('condition',conditionFilter,m?.conditionTypes,'All condition types')+choose('subtype',subtypeFilter,m?.subtypes,'All pathogen / tumor groups')+choose('system',systemFilter,m?.systems,'All organ systems')})()+
+ '</div><p class="tiny">Only verified or manually classified species appear in species-filtered results. Missing tags mean unassessed, not unaffected. Filters combine with the lecture and etiology selections.</p></details>'+ 
+'<div class="buttonrow">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" style="padding:6px 9px;font-size:11px" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':'L'+h(l))+'</button>').join('')+'</div>'+
  '<p class="tiny"><b>'+selected.length+' of '+base.length+' slide-linked lesion / recognition cards.</b> Slide images are not copied into the public game; add your own locally.</p>'+ 
  '<label style="display:block;margin:8px 0">Find disease or lesion <input id="path7Search" data-path7-search="1" placeholder="e.g. pyometra, optic nerve, granuloma" value="'+h(search)+'" style="width:min(100%,430px);padding:9px;border:1px solid #bccbe0;border-radius:9px"></label>'+ 
  '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px">'+selected.map(x=>'<button style="text-align:left;padding:12px" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small style="display:block">Lecture '+h(x.lecture)+'</small><small style="display:block;color:#60758a">'+(mode==='edit'?'Add image and personal notes':mode==='histo'?'Histology & explanation':'Gross ID & morphologic diagnosis')+'</small></button>').join('')+'</div>');
@@ -82,8 +85,8 @@ function card(i){
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal histology':'Histology')+'</b> ❔</summary><p>'+rich(x.histo)+'</p></details>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal vs abnormal · what to compare':'Why it happens / distinctive clues')+'</b> ❔</summary><p>'+rich(x.why)+'</p></details>'+
  (x.notes?'<p><b>Your annotation:</b> '+rich(x.notes)+'</p>':'')+
- (x.normal?'':(x.visualClue?'<p><b>🔎 Recognition clue:</b> '+rich(x.visualClue)+'</p>':'')+(x.compare?'<p><b>⚖️ Don’t confuse with:</b> '+rich(x.compare)+'</p>':'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')) +
- '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+
+ (x.normal?'':(window.VPQ_PATH_ATLAS_META?.browseHTML?.(x)||'')+(x.visualClue?'<p><b>🔎 Recognition clue:</b> '+rich(x.visualClue)+'</p>':'')+(x.compare?'<p><b>⚖️ Don’t confuse with:</b> '+rich(x.compare)+'</p>':'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')) +
+ '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+ (x.normal?'':window.VPQ_PATH_ATLAS_META?.relatedHTML?.(x,base.map((b,j)=>record(j)),id=>base.findIndex(c=>c.id===id))||'')+
  (x.normal?'':'<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>')+ 
  '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-hide="'+i+'" style="font-size:12px">🗂 Hide card</button></div>');
 }
@@ -99,12 +102,12 @@ function edit(i){
  '<label>Quick visual recognition clue<textarea id="path7VisualClue" rows="2" style="width:100%">'+h(x.visualClue||'')+'</textarea></label>'+ 
  '<label>Don’t confuse with / distinguishing differentials<textarea id="path7Compare" rows="3" style="width:100%">'+h(x.compare||'')+'</textarea></label>'+ 
 '<label>Instructor annotations / personal clues<textarea id="path7Notes" rows="3" style="width:100%">'+h(x.notes||'')+'</textarea></label>'+
- (x.normal?'':(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(x)||'')) +
+ (x.normal?'':(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(x)||'')+(window.VPQ_PATH_ATLAS_META?.editorHTML?.(x)||'')) +
  '<div class="buttonrow"><button data-path7-save="'+i+'">💾 Save Draft</button><button data-path7-owner-publish="'+i+'">🚀 Publish photo now</button><button data-path7-view="'+i+'">Cancel</button></div>');
 }
 function saveForm(i){
  const val=n=>ui.body.querySelector('#'+n)?.value||'';
- const part={image:val('path7Url').trim(),gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{})};
+ const part={image:val('path7Url').trim(),gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{}),...(window.VPQ_PATH_ATLAS_META?.readEditor?.(ui.body)||{})};
  const finish=()=>{if(save(i,part))card(i);else modal('Local storage full','<p>This image is too large for your browser storage. Try a smaller image or a URL.</p><button data-path7-edit="'+i+'">Back to editor</button>')};
  const file=ui.body.querySelector('#path7File')?.files?.[0];
  if(!file)return finish();
@@ -187,7 +190,7 @@ function init(api){
  window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.load?.().then(()=>{refreshCustom();if(ui===api&&api.body?.querySelector?.('[data-path7-tab]'))menu()}).catch(()=>{});
- api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7EtiologyFilter!==undefined){etiologyFilter=ev.target.value||'all';return menu()}if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
+ api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7MetadataFilter!==undefined){const k=ev.target.dataset.path7MetadataFilter,v=ev.target.value||'all';if(k==='species')speciesFilter=v;else if(k==='frequency')frequencyFilter=v;else if(k==='condition')conditionFilter=v;else if(k==='subtype')subtypeFilter=v;else if(k==='system')systemFilter=v;return menu()}if(ev.target?.dataset?.path7EtiologyFilter!==undefined){etiologyFilter=ev.target.value||'all';return menu()}if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
  api.body.addEventListener('click',ev=>{
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
   if(!Object.keys(d).some(k=>k.startsWith('path7')))return;
@@ -217,7 +220,7 @@ function init(api){
   if(d.path7OwnerPublish!==undefined){const i=Number(d.path7OwnerPublish);
    const field=api.body.querySelector('#path7Gross');
    if(field){const val=n=>api.body.querySelector('#'+n)?.value||'';
-    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{})});}
+    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{}),...(window.VPQ_PATH_ATLAS_META?.readEditor?.(ui.body)||{})});}
    return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('specimen',base[i]?.id)
   }
   if(d.path7Back!==undefined)return menu();
@@ -228,7 +231,7 @@ function init(api){
 }
 function openCard(id){refreshCustom();const i=base.findIndex(x=>x.id===id);if(i>=0){tab=base[i].normal?'normals':'lesions';return card(i)}return menu()}
 function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
-function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
-function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
+function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','speciesEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
+function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','speciesEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
 return {init,start,studyLecture,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
 })();
