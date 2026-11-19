@@ -80,6 +80,7 @@ function getGroups(){
   for(const t of eti)g.etiologies.add(t);
   for(const k of Object.keys(window.VPQ_PATH_ETIOLOGY?.categories||{}))if(window.VPQ_PATH_ATLAS_META?.etiologyMatches?.(c,k))g.etiologies.add(k);
   for(const k of Object.keys(meta.species||{}))g.species.add(k);
+  if(meta.hostScope==='multiple'||Object.keys(meta.species||{}).length>=2)g.species.add('multiple');
   for(const p of (meta.pathogen||'').split(/[;,]/).map(z=>z.trim()).filter(Boolean))g.pathogens.add(p);
  }
  return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base'}));
@@ -93,7 +94,7 @@ function show(){
  '<p><b>'+groups.length+' indexed named conditions</b> · '+matched.length+' shown · '+sourceCards().length+' pathology specimens available</p>'+
  '<label style="display:block;font-size:12px;font-weight:750">Search disease, pathogen or lesion<input data-master-search="1" value="'+esc(search)+'" placeholder="e.g. Listeriosis, toxoplasmosis" style="display:block;width:100%;padding:10px;margin-top:5px;border:1px solid #cbd6e5;border-radius:9px"></label>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin:12px 0">'+
- selector('Species',species,m.species||{},'All species')+selector('Organ',system,m.systems||{},'All systems')+
+ selector('Species',species,{...(m.species||{}),multiple:'Multiple species / broad host range'},'All species')+selector('Organ',system,m.systems||{},'All systems')+
  selector('Etiology',etiology,Object.fromEntries(Object.entries(window.VPQ_PATH_ETIOLOGY?.categories||{}).map(([k,v])=>[k,v.label])),'All etiologies')+
  selector('Condition',kind,m.conditionTypes||{},'All condition types')+'</div>'+
  '<p class="tiny">Species matches require documented metadata. Unclassified diseases are excluded from species-specific results, not assumed unaffected.</p>'+
