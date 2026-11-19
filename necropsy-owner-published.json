@@ -1886,6 +1886,65 @@
       },
       "updated": "2026-11-19T05:02:52.459Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-16": {
+      "title": "Ependymoma",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-16-1795064786640-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-16"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-16-1795064786640-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-16"
+      },
+      "text": {
+        "gross": "Large expansile, relatively well-circumscribed intraventricular soft gray-white to red mass; dogs tend to smooth and cats granular cut surfaces in the lecture. Aggressive tumors show invasion into the normal tissue at its margins. ",
+        "dx": "Working identification: Ependymoma. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "neoplastic ependymal cells ",
+        "why": "In the umbrella of gliomas. Neoplastic expansion of ependymal cells. Usually involves the lateral ventricle, less so the third and fourth. Can also occur in the central canal of the spinal cord. Can metastasize to the subarachnoid space due to flow of the CSF. \n",
+        "visualClue": "",
+        "compare": "Contrast choroid plexus tumor: both intraventricular, differentiation requires histology.",
+        "notes": "Frequent in cats. ",
+        "etiologyCategories": [
+          "neoplastic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"cat\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "neoplasm",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T05:06:27.996Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
