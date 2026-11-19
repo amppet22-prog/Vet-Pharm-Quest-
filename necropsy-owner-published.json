@@ -825,6 +825,62 @@
       },
       "updated": "2026-11-19T00:33:24.974Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-34": {
+      "title": "Feline ischemic encephalopathy — Cuterebra",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-34-1795049278630-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-34"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-34-1795049278630-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [],
+        "conditionId": "pathx-68-34"
+      },
+      "text": {
+        "gross": "Acute: Often unilateral in the white and grey matter of the cerebral hemispheres. Necrosis with hemorrhages in the neuroparenchyma or leptomeninges",
+        "dx": "Working identification: Feline ischemic encephalopathy — Cuterebra. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Infarction/necrosis, hemorrhage and eosinophilic parasite migration tracks.",
+        "why": "Cause: Aberrant cerebrospinal migration of Cuterebra fly from the nasal cavity into brain; cats of any age, often acute and more frequent in summer. ",
+        "visualClue": "",
+        "compare": "",
+        "notes": " Clinical Signs: Unilateral cerebral dysfunction: seizures, ataxia, behavioral change, blindness or depression.\n\n",
+        "etiologyCategories": "",
+        "etiologyAgents": "Cuterebra fly ",
+        "etiologyCertainty": "Parasite\nCutebra fly. ",
+        "speciesOccurrence": "Feline ",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "CNS ",
+        "affectedOrgan": "Brain ",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T00:48:00.038Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
