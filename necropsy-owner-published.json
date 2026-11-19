@@ -1945,6 +1945,78 @@
       },
       "updated": "2026-11-19T05:06:27.996Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-17": {
+      "title": "Choroid plexus papilloma and carcinoma",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-17-1795065048779-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-19 001032.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-17"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-17-1795065049814-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-19 001035.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-17"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-17-1795065048779-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-19 001032.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-17"
+      },
+      "text": {
+        "gross": "Expansive, well-defined granular/papillary growth within the ventricular system. \nGray to white to red, and compresses the adjacent nervous tissues. Occurs most freqently in the fourth ventricle  ",
+        "dx": "Working identification: Choroid plexus papilloma and carcinoma. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": " distinguish from ependymoma ",
+        "why": "Papilloma/carcinoma of choroid plexus, commonest in dogs among species discussed; lecture notes predisposition in **Golden Retrievers** and 5–10% of canine primary brain tumors.  If it obstructs CSF flow it can produce hydrocephalus; distinguish from ependymoma via histology.",
+        "visualClue": "",
+        "compare": "distinguish from ependymoma via histology.",
+        "notes": "",
+        "etiologyCategories": [
+          "neoplastic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\",\"horse\":\"occasional\",\"cattle\":\"occasional\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T05:10:51.093Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
