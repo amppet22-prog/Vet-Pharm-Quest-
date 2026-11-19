@@ -204,6 +204,7 @@ async function editor(type,id){
  draftState={};
  show('✏️ Edit & publish · '+esc(base.title),
  '<p><b>Text-only updates are allowed.</b> Leave image inputs blank to preserve all published photos. Select multiple new images to append them. Existing photos are kept unless you check Remove or explicitly select Replace all.</p>'+
+ (type!=='lecture'?'<label style="display:block;margin:9px 0"><b>✏️ Card name (editable)</b><input data-np-text="title" maxlength="180" style="width:100%;display:block;margin-top:4px" value="'+esc(edits.title||base.title)+'" placeholder="Condition or specimen name"></label><p class="tiny">Renaming keeps the existing card ID, photos, captions, species tags and case links. Publish your name change using the same password.</p>':'')+
  (fields.length?'<h4>📝 Teaching content (editable independently of photos)</h4>'+fields.map(k=>'<label style="display:block;margin:7px 0"><b>'+esc(k.replace(/^\w/,c=>c.toUpperCase()))+'</b><textarea data-np-text="'+k+'" rows="3" style="display:block;width:100%">'+esc(edits[k]||'')+'</textarea></label>').join(''):'')+
  (type==='specimen'?'<h4>✅ Structured classifications — select from the options</h4>'+(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(edits)||'')+(window.VPQ_PATH_ATLAS_META?.editorHTML?.(edits)||''):'')+
  
@@ -310,6 +311,11 @@ function readFields(){
  if(pending?.type==='specimen'){
   Object.assign(edits,window.VPQ_PATH_ETIOLOGY?.readEditor?.(root)||{},window.VPQ_PATH_ATLAS_META?.readEditor?.(root)||{});
  }
+ if(pending?.type!=='lecture'){
+  const requested=String(edits.title||'').trim().replace(/\\s+/g,' ');
+  if(!requested||requested.length>180)throw Error('Enter a card name between 1 and 180 characters.');
+  edits.title=requested;
+ }
  const tags=tagsFrom(root,'new');
  const existingTags=Array.from(root.querySelectorAll('[data-np-remove]')).map(x=>tagsFrom(root,'existing-'+x.dataset.npRemove));
  const existingPhotoEdits=Array.from(root.querySelectorAll('[data-np-photo-caption]')).map((x,i)=>({
@@ -377,7 +383,17 @@ async function publish(job,fields,token,update){
    caption:(item.caption||fields.caption)+(incoming.length>1?' · '+item.name:''),type:item.kind||fields.kind,external:!!item.url,lectures:fields.tags.lectures,systems:fields.tags.systems,conditionId:job.id});
  }
  const textEdits=fields.edits||{};
- const entry={...prev,title:job.title,photos,photo:photos[0]||null,text:{...(prev.text||{}),...textEdits},updated:new Date().toISOString(),approvedBy:OWNER};
+ const newTitle=job.type==='lecture'?job.title:String(textEdits.title||prev?.text?.title||prev.title||job.title).trim();
+ if(job.type!=='lecture'){
+  if(!newTitle||newTitle.length>180)throw Error('Name cannot be empty or exceed 180 characters.');
+  const lecture=String((job.type==='specimen'?[...(window.VPQ_PATH_EXAM7_DATA||[]),...getCustomSpecimens()]:[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...getCustomCases()]).find(x=>x.id===job.id)?.lecture||'');
+  const catalog=job.type==='specimen'?[...(window.VPQ_PATH_EXAM7_DATA||[]),...getCustomSpecimens()]:[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...getCustomCases()];
+  const duplicate=catalog.find(x=>x.id!==job.id&&String(x.lecture)===lecture&&String((manifest[dir][x.id]?.text?.title||manifest[dir][x.id]?.title||x.title)||'').trim().toLowerCase()===newTitle.toLowerCase());
+  if(duplicate)throw Error('Another card in this lecture already has that name.');
+  if(job.type==='specimen'&&manifest.customSpecimens?.[job.id])manifest.customSpecimens[job.id].title=newTitle;
+  if(job.type==='case'&&manifest.customCases?.[job.id])manifest.customCases[job.id].title=newTitle;
+ }
+ const entry={...prev,title:newTitle,photos,photo:photos[0]||null,text:{...(prev.text||{}),...textEdits},updated:new Date().toISOString(),approvedBy:OWNER};
  manifest[dir][job.id]=entry;
  update('Publishing '+(incoming.length?incoming.length+' new image(s) and ':'')+'your edits…');
  await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\n'),old.sha,token,'Owner publish '+job.type+' '+job.id+' (photos/text)');
