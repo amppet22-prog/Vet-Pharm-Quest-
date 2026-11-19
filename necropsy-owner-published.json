@@ -1651,6 +1651,19 @@
           ],
           "systems": [],
           "conditionId": "pathx-69-13"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-13-1795065501071-0.jpg",
+          "source": "",
+          "credit": "Owner-supplied image; publication rights confirmed",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-13"
         }
       ],
       "photo": {
@@ -1692,7 +1705,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T04:30:26.196Z",
+      "updated": "2026-11-19T05:18:22.462Z",
       "approvedBy": "amppet22-prog"
     },
     "specimen-custom-69-hydromyelia": {
