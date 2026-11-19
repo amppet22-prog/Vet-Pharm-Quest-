@@ -89,8 +89,11 @@ function umbrellaDetail(){
 
 /* Lecture coverage uses live lecture data, not a shortened list. */
 let conditionLecture='75',conditionChosen=-1,conditionGap='all',conditionTopicMode='all';
-const LECTURES=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+const LECTURES=[...Array.from({length:36},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'gi6-practice-stomach-ulcers':['Acute gastric ulceration','Chronic gastric ulceration','Gastritis, erosions and gastric ulcers','Acute versus chronic gastric ulcers'],
+'gi6-practice-haemonchus':['Haemonchus contortus abomasal parasitism','Hookworms and whipworms'],
+'gi6-practice-bovine-abomasal-lymphoma':['Gastrointestinal neoplasms'],
 'practice5-hcm':["Hypertrophic cardiomyopathy","Concentric versus eccentric hypertrophy"],
 'practice5-cardiac-fibrin':["Fibrinous/fibrinosuppurative pericarditis"],
 'practice5-bull-valve':["Vegetative valvular endocarditis","Fibrinous/fibrinosuppurative pericarditis"],
@@ -489,7 +492,7 @@ function conditionDetail(){
  '<div class="buttonrow"><button data-pathdiff-condition-back="1">← Full lecture inventory</button><button data-pathdiff-list="1">Cases</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-condition-rename="1" style="background:#fff1dc">✏️ Rename this condition</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-recall-start="1">🧠 Test me on this topic</button></div>'+
- (/^(3[1-9]|4[0-9]|5[0-8])$/.test(conditionLecture)?'<div class="buttonrow"><button data-pathdiff-photo-lecture="1" style="background:#e3f4f7">📷 Open lecture photo slots / publish images</button></div>':'')+
+ (/^(3[1-9]|4[0-9]|5[0-9]|6[0-6])$/.test(conditionLecture)?'<div class="buttonrow"><button data-pathdiff-photo-lecture="1" style="background:#e3f4f7">📷 Open lecture photo slots / publish images</button></div>':'')+
  '<div class="buttonrow"><button data-pathdiff-create-topic="1" style="background:#e6f6ec">➕ Create differential card for this disease</button></div>'+
  '<div style="background:#f0f6fb;padding:10px;border:1px solid #c8dbeb;border-radius:10px;margin:9px 0"><b>Instructor-based lesson</b><p style="font-size:13px;margin:5px 0">Lecture '+safe(conditionLecture)+' · slides '+safe(item.slides||'not specified')+'</p><small>Specimen card: '+(ev.specimen?'Matched':'Not matched')+' · Dedicated case: '+(ev.linked.length?'Matched':'Not yet')+' · Attached reference: '+(ev.embedded?'Yes':'Not yet')+'</small></div>'+
  visual+imageChecklist+
