@@ -2163,6 +2163,65 @@
       },
       "updated": "2026-11-19T06:55:56.718Z",
       "approvedBy": "amppet22-prog"
+    },
+    "specimen-custom-69-chiari-like-malformation": {
+      "title": "Chiari-Like Malformation",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-chiari-like-malformation-1795071646613-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-69-chiari-like-malformation"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-chiari-like-malformation-1795071646613-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "specimen-custom-69-chiari-like-malformation"
+      },
+      "text": {
+        "gross": "Internal herniation of the cerebellar vermis and medulla oblongata into the foramen magnum",
+        "dx": "Internal herniation, Chiar like malformation",
+        "histo": "ectopic?",
+        "why": "Mismatch between the caudal fossa of the skull and the brain where the vault can't accommodate. \nHerniation and leads to disruption of CSF and can lead to syringomyelia",
+        "visualClue": "",
+        "compare": "",
+        "notes": "Cavalier King Charles Spaniel is overrepresented ",
+        "etiologyCategories": [
+          "developmental"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T07:00:48.373Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
