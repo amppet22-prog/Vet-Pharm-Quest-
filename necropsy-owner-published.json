@@ -1096,6 +1096,65 @@
       },
       "updated": "2026-11-19T01:12:47.703Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-42": {
+      "title": "Necrotizing meningoencephalitis (NME)",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-42-1795051161446-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-42"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-42-1795051161446-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [],
+        "conditionId": "pathx-68-42"
+      },
+      "text": {
+        "gross": "**Cerebral **swelling and necrotizing meningoencephalitis; slide describes sparing of brainstem, cerebellum and spinal cord.",
+        "dx": "Working identification: Necrotizing meningoencephalitis (NME). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "why": "Host: Young to middle-aged small-breed dogs, particularly pugs and also shih tzus, Chihuahuas and Maltese. Distinguish: NME involves cerebral cortex and meninges more than NLE, which emphasizes white matter.",
+        "visualClue": "",
+        "compare": "NLE ",
+        "notes": "Formerly called \"Pug Encephalitis\" \nThe brainstem, cerebellum and spinal cord are spared. \n\nIdiopathic immune-mediated disorder characterized by severe inflammaiton and extensive tissue destruction of the cerebral hemisphered and brain (VIN). \nTypical onset is 6months to 7 years of age. \n\nC/S: sudden and recurrent seizures, behavioral changes and depression, circling, stumbling, or wobbly gait (ataxia). Amaurosis, head tilt, etc. \n\nCan only be confirmed vis PM histopatholigical exam. \nCSF tap will show monocytic pleocytosis and elecated protein levels ",
+        "etiologyCategories": [
+          "idiopathic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T01:19:22.822Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
