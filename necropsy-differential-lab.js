@@ -407,6 +407,8 @@ function conditionDetail(){
  const item=lectureConditions()[conditionChosen];if(!item)return conditionIndex();
  const ev=evidence(conditionLecture,item),images=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES||{};
  const visual=(window.VPQ_PATH_URINARY_VISUALS?.card?.(item,conditionLecture)||window.VPQ_PATH_HEPATIC_VISUALS?.card?.(item,conditionLecture)||'');
+ const imageRefs=(window.VPQ_PATH_EXAM3_HEPATIC_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[]).filter(x=>x.title===item.title);
+ const imageChecklist=imageRefs.length?'<div style="background:#f6f9fc;border:1px solid #d1dfef;border-radius:10px;padding:10px;margin:9px 0"><b>📷 Lecture-image recognition checklist · not an attached photograph</b>'+imageRefs.map(x=>'<p style="font-size:12px;line-height:1.45;margin:8px 0"><b>Lecture '+safe(conditionLecture)+' slides '+safe(x.slides)+'</b> · '+safe(x.modality)+'<br><b>Identify:</b> '+safe(x.look)+'<br><b>Ask yourself:</b> '+safe(x.question)+'</p>').join('')+'<small>Use the editable lecture photo slots to attach and publish credited images. The original PDF remains the visual reference until an image is attached.</small></div>':'';
  const refBlock=ev.linked.map(x=>{
   const p=images[x.id]||{};
   return '<div style="padding:9px;border:1px solid #d4dfec;border-radius:9px;margin:8px 0"><button data-pathdiff-open="'+safe(x.id)+'">🧩 Practice case: '+safe(x.title)+'</button>'+
@@ -419,7 +421,7 @@ function conditionDetail(){
  (/^3[1-9]$|^40$/.test(conditionLecture)?'<div class="buttonrow"><button data-pathdiff-photo-lecture="1" style="background:#e3f4f7">📷 Open lecture photo slots / publish images</button></div>':'')+
  '<div class="buttonrow"><button data-pathdiff-create-topic="1" style="background:#e6f6ec">➕ Create differential card for this disease</button></div>'+
  '<div style="background:#f0f6fb;padding:10px;border:1px solid #c8dbeb;border-radius:10px;margin:9px 0"><b>Instructor-based lesson</b><p style="font-size:13px;margin:5px 0">Lecture '+safe(conditionLecture)+' · slides '+safe(item.slides||'not specified')+'</p><small>Specimen card: '+(ev.specimen?'Matched':'Not matched')+' · Dedicated case: '+(ev.linked.length?'Matched':'Not yet')+' · Attached reference: '+(ev.embedded?'Yes':'Not yet')+'</small></div>'+
- visual+
+ visual+imageChecklist+
  (item.points||[]).map(p=>'<section style="border-bottom:1px solid #e0e7ef;padding:9px 0"><b>'+safe(p[0])+'</b><p style="margin:5px 0;white-space:pre-wrap;line-height:1.5">'+safe(p[1])+'</p></section>').join('')+
  '<div style="padding:9px;background:#f8f6ed;border-radius:10px;margin:10px 0;font-size:12px"><b>Photo evidence:</b> Original professor slide '+safe(item.slides||'(see source deck)')+' is the primary teaching reference. We have not copied lecture slides into this index. Published pathology images must be identified by species and gross/histology type.</div>'+
  (refBlock||'<p style="font-size:12px">No dedicated differential case is linked to this exact lecture topic yet. This remains visible in the coverage audit rather than being marked complete.</p>'));
