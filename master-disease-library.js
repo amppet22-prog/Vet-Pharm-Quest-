@@ -78,6 +78,7 @@ function getGroups(){
   const sys=meta.organSystem||spec?.[3];if(sys)g.systems.add(sys);
   const eti=window.VPQ_PATH_ETIOLOGY?.forCard?.(c)?.categories||[];
   for(const t of eti)g.etiologies.add(t);
+  for(const k of Object.keys(window.VPQ_PATH_ETIOLOGY?.categories||{}))if(window.VPQ_PATH_ATLAS_META?.etiologyMatches?.(c,k))g.etiologies.add(k);
   for(const k of Object.keys(meta.species||{}))g.species.add(k);
   for(const p of (meta.pathogen||'').split(/[;,]/).map(z=>z.trim()).filter(Boolean))g.pathogens.add(p);
  }
