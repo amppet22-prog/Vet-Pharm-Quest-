@@ -2366,6 +2366,66 @@
       },
       "updated": "2026-11-19T07:15:04.592Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-28": {
+      "title": "Phalaris grass neurotoxicosis",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-28-1795072853351-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-28"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-28-1795072853351-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-28"
+      },
+      "text": {
+        "title": "Phalaris grass neurotoxicosis",
+        "gross": "Bilaterally symmetric greenish brainstem parenchyma and gray-to-green kidney discoloration may occur. ",
+        "dx": "Working identification: Phalaris grass neurotoxicosis. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "why": "Two syndromes:\n1. Cardiac disorder resulting in acute death\n2. Nervous system disorder characterized by ataxia, tremors, and paresis\n     Accumulation of an unknown pigment within neurons of the brainstem, spinal cord, and dorsal root ganglia\n    Pigment also accumulates in renal tubular epithelial cells",
+        "visualClue": "Bilaterally symmetrical green hue to the parenchyma ",
+        "compare": "Differentiate pigment-associated Phalaris injury from hemorrhagic/malacic toxin lesions.",
+        "notes": "Causes extensive loss of sheep and cattle; horses are also susceptible",
+        "etiologyCategories": [
+          "toxic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"horse\":\"occasional\",\"cattle\":\"common\",\"sheep\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T07:20:54.555Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
