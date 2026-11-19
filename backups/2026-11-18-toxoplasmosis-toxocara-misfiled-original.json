@@ -1,0 +1,53 @@
+{
+  "note": "Original owner-published specimen entry before moving misplaced T. gondii text/photo from Toxocara canis card to Toxoplasmosis card. Restore only after checking current manifest.",
+  "sourceSpecimenId": "pathx-68-37",
+  "destinationSpecimenId": "pathx-68-28",
+  "original": {
+    "title": "Toxocara canis cerebrospinal migration",
+    "photos": [
+      {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-37-1795047277446-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "histology",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-68-37"
+      }
+    ],
+    "photo": {
+      "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-37-1795047277446-0.jpg",
+      "source": "",
+      "credit": "Pathology lecture LMU",
+      "caption": "Pathology study reference",
+      "type": "histology",
+      "external": false,
+      "lectures": [
+        "68"
+      ],
+      "systems": [
+        "CNS / Neurology"
+      ],
+      "conditionId": "pathx-68-37"
+    },
+    "text": {
+      "gross": "Can involve any area of the CNS (no predilection for gray or white matter)\n• Nerve roots may also be involved\n• Foci of hemorrhage and necrosis, which may progress to granular, yellow-brown to gray foci",
+      "dx": "Working identification: Toxocara canis cerebrospinal migration.\nObligate intracellular protozoan. CNS infection targets neurons and astrocytes. \nIn utero infections likely to result in the CNS infection. \n\nSpecimen site: Brain / spinal cord / meninges. \nFormulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+      "histo": "Protozoa are seen targeting neurons and astrocytes\nHemorrhage and necrosis ",
+      "why": "Host: Dogs in the lecture list. Mechanism: Aberrant CNS migration may injure neural tissue and vessels.",
+      "notes": "This parasite targets different cell types. Parasitizes variety of cell types (lungs, lymphoid system, liver, heart, skeletal muscle, pancreas,\ngastrointestinal (GI) tract, eyes, and nervous system)\n• CNS infection targets neurons and astrocytes\n\nIn mature animals, T. gondii infections have been associated with immunosuppression, like canine distempter virus. ",
+      "etiologyCategories": "Protozoa \nZoonotic ",
+      "etiologyAgents": "Toxoplasma gondii ",
+      "etiologyCertainty": "Protozoa, Toxoplasmosis, One health "
+    },
+    "updated": "2026-11-19T00:18:19.947Z",
+    "approvedBy": "amppet22-prog"
+  },
+  "sourceManifestSha": "4cda12fe99427de648b78db1aaddafefe8a67754"
+}
