@@ -841,6 +841,19 @@
           ],
           "systems": [],
           "conditionId": "pathx-68-34"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-34-1795049340479-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Brain cut section",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-34"
         }
       ],
       "photo": {
@@ -879,7 +892,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T00:48:00.038Z",
+      "updated": "2026-11-19T00:49:01.929Z",
       "approvedBy": "amppet22-prog"
     }
   },
