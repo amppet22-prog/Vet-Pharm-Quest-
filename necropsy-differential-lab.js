@@ -77,6 +77,17 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=['31','32','33','34','35',...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'n31-renal-infarct':['Renal infarction — acute','Renal infarction'],
+'n32-amyloid':['Glomerular amyloidosis'],
+'n32-hemoglobin':['Chronic copper toxicosis in sheep','Hemoglobinuric nephrosis'],
+'n32-ethylene-glycol':['Ethylene glycol nephrotoxicity'],
+'n33-pyelonephritis':['Acute pyelonephritis','Pyelonephritis'],
+'n33-cat-fip':['FIP-associated pyogranulomatous nephritis'],
+'n34-urethral-obstruction':['Urinary obstruction and hydroureter','Urolithiasis'],
+'n34-bracken':['Bracken fern enzootic hematuria'],
+'n35-uremia':['Chronic renal failure and fibrosis','Uremic glossitis and stomatitis','Intercostal uremic mineralization'],
+'n35-neonatal-calf':['Septic embolic glomerulonephritis'],
+
 "s71-feline-acne":["feline acne"],
 "s71-seasonal-flank":["seasonal recurrent flank alopecia"],
 "s71-hypothyroid":["canine hypothyroidism"],
