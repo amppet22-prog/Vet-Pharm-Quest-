@@ -217,7 +217,7 @@ function shell(body,title){
  '<div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px"><button data-pathfound="home">🏠 Foundations</button><button data-pathfound="intro">Lecture 1</button><button data-pathfound="cells">Lecture 2</button><button data-pathfound="injury">Lecture 3</button><button data-pathfound="postmortem">Lecture 4</button><button data-pathfound="death">Lecture 5</button><button data-pathfound="growth">Lecture 6</button><button data-pathfound="metaplasia">Lecture 7</button><button data-pathfound="accumulations">Accumulations</button><button data-pathfound="quiz">🧠 Practice</button></div>'+body+'</div>');
 }
 function home(){
- shell('<div style="padding:13px;background:#f1f7ff;border:1px solid #c5d9f3;border-radius:12px"><h3 style="margin:0 0 8px">🔬 Start with the normal cell, then explain the lesion</h3><p>These are <b>General pathology foundations (Lectures 1–16)</b>, separate from the Exam 7 atlas. Your professor emphasizes core concepts, clinical implications, and recognizing both gross and microscopic lesions.</p></div>'+
+ shell('<div style="padding:13px;background:#f1f7ff;border:1px solid #c5d9f3;border-radius:12px"><h3 style="margin:0 0 8px">🔬 Start with the normal cell, then explain the lesion</h3><p>These are <b>General pathology foundations (Lectures 1–30, Exams 1 and 2)</b>, separate from the Exam 7 atlas. Your professor emphasizes core concepts, clinical implications, and recognizing both gross and microscopic lesions.</p></div>'+
  Object.entries(pages).map(([k,p])=>'<button data-pathfound="'+k+'" style="display:block;text-align:left;width:100%;padding:13px;margin-top:9px"><b>'+esc(p.title)+'</b><small style="display:block">'+esc(p.summary)+'</small><small>'+esc(p.source)+'</small></button>').join('')+
  '<button data-pathfound="fc-all" style="display:block;width:100%;margin:9px 0;padding:13px;background:#eaf4ff"><b>🃏 Flashcards for selected lecture</b><small style="display:block">Flip cards, check answers, and review missed concepts.</small></button>'+ 
  '<button data-pathfound-visual="9" style="display:block;width:100%;text-align:left;margin-top:9px;padding:12px;background:#fff9e9;border:1px solid #e1cfa2"><b>🧠 Morphologic vs Etiologic Diagnosis · Visual recognition practice (uploaded file 9)</b><small style="display:block">Describe → name lesion process → supported cause; lecture 9 methodology cards</small></button>'+ 
@@ -272,12 +272,13 @@ function fcEdit(isNew){
 }
 
 function practice(){
- const pool=questions.filter(q=>q[0]===lesson);
+ const practiceKey=lesson.startsWith('exam2Master_')?'exam2_'+lesson.slice('exam2Master_'.length):lesson;
+ const pool=questions.filter(q=>q[0]===practiceKey);
  if(qindex>=pool.length){shell('<h3>✅ Finished this lecture’s practice</h3><p>Review the explanation for each answer, then choose another lecture.</p><button data-pathfound="reset">Retry</button>','Practice complete');return}
  const q=pool[qindex];
  shell('<small>'+esc(pages[lesson].title)+' · Question '+(qindex+1)+' of '+pool.length+'</small><h3>'+esc(q[1])+'</h3>'+
- q[2].map((opt,i)=>'<button data-pathfoundchoice="'+i+'" '+(revealed?'disabled':'')+' style="display:block;text-align:left;width:100%;margin:7px 0;padding:11px;border-color:'+(choice===i?'#7d98c9':'#d7e2f0')+';background:'+(choice===i?'#e5f0ff':'white')+'">'+esc(opt)+'</button>').join('')+
- (revealed?'<div style="background:#eef8f1;border:1px solid #bcdac8;border-radius:10px;padding:12px"><b>'+(choice===q[3]?'✓ Correct':'Review the reasoning')+'</b><p>'+esc(q[4])+'</p><small>'+esc(q[5])+'</small></div><button data-pathfound="next">Next →</button>':'<p style="color:#61768b">Select an answer to see the reasoning.</p>')+
+ q[2].map((opt,i)=>'<button data-pathfoundchoice="'+i+'" '+(revealed?'disabled':'')+' style="display:block;text-align:left;width:100%;margin:7px 0;padding:11px;border-color:'+(revealed&&i===q[3]?'#6aa985':revealed&&choice===i?'#d08d8d':choice===i?'#7d98c9':'#d7e2f0')+';background:'+(revealed&&i===q[3]?'#e4f6ea':revealed&&choice===i?'#ffeded':choice===i?'#e5f0ff':'white')+'">'+esc(opt)+'</button>').join('')+
+ (revealed?'<div style="background:#eef8f1;border:1px solid #bcdac8;border-radius:10px;padding:12px"><b>'+(choice===q[3]?'✓ Correct':'Not quite — correct answer: '+esc(q[2][q[3]]))+'</b><p><b>Why:</b> '+esc(q[4])+'</p><small>'+esc(q[5])+'</small></div><button data-pathfound="next">Next →</button>':'<p style="color:#61768b">Select an answer to see the reasoning.</p>')+
  '<button data-pathfound="home" style="margin-left:6px">Exit practice</button>','Practice');
 }
 function init(api){
@@ -303,5 +304,5 @@ function init(api){
   if(act==='next'){qindex++;revealed=false;choice=null;return practice()}
  },true);
 }
-return {init,open:home,extend:(extra)=>{if(extra?.pages)Object.assign(pages,extra.pages);if(Array.isArray(extra?.questions))questions.push(...extra.questions)}};
+return {init,open:home,extend:(extra)=>{if(extra?.pages)Object.assign(pages,extra.pages);if(Array.isArray(extra?.replaceQuestions)){const keys=new Set(extra.replaceQuestions.map(q=>q[0]));for(let i=questions.length-1;i>=0;i--){if(keys.has(questions[i][0]))questions.splice(i,1)}questions.push(...extra.replaceQuestions)}if(Array.isArray(extra?.questions))questions.push(...extra.questions)}};
 })();
