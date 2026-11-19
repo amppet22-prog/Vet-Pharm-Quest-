@@ -418,6 +418,19 @@
             "CNS / Neurology"
           ],
           "conditionId": "pathx-68-meningitis"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-meningitis-1795063102655-0.jpg",
+          "source": "",
+          "credit": "Owner-supplied image; publication rights confirmed",
+          "caption": "Meningitis",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-meningitis"
         }
       ],
       "photo": {
@@ -440,9 +453,26 @@
         "dx": "CNS meninges: diffuse fibrinosuppurative leptomeningitis (working pattern; etiology pending)",
         "histo": "Suppurative leptomeningitis: abundant neutrophils/fibrin within the subarachnoid space. Nonsuppurative: lymphocytes/mononuclear cells. Granulomatous: macrophages/giant cells and possible fungi. Pachymeningitis: dura. Meningoencephalitis: adjacent brain parenchyma.",
         "why": "Septicemia or contiguous infection can seed the meninges; gross appearance and leukocyte pattern localize and classify inflammation, but bacterial identity requires laboratory confirmation. Can be spread by direct extension or leukocyte trafficking. \nMost commonly caused by bacteria that reach the leptomeninges and subarachnoid space** hematogenously. **",
-        "notes": "Strict viral leptomeningitis is rare (those tend to cause meningoencephalitis)\nCan have multiple levels of chronicitiy. "
+        "notes": "Strict viral leptomeningitis is rare (those tend to cause meningoencephalitis)\nCan have multiple levels of chronicitiy. ",
+        "visualClue": "",
+        "compare": "",
+        "etiologyCategories": [],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
       },
-      "updated": "2026-11-18T22:02:03.463Z",
+      "updated": "2026-11-19T04:38:24.100Z",
       "approvedBy": "amppet22-prog"
     },
     "pathx-68-24": {
