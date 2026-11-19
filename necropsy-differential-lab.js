@@ -77,6 +77,15 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=[...Array.from({length:19},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'n49-fod':['Fibrous osteodystrophy'],
+'n49-disco':['Discospondylitis'],
+'n49-joint-tumor':['Synovial myxoma'],
+'n49-pig':['Infectious arthritis'],
+'n49-synovitis':['Degenerative joint disease'],
+'n49-ivdd':['Intervertebral disc disease'],
+'n49-hod':['Hypertrophic osteodystrophy (metaphyseal osteopathy)'],
+'n49-osteosarcoma':['Osteosarcoma'],
+
 'exam4-42-case1':["Pheochromocytoma"],
 'exam4-43-case1':["Thyroid follicular carcinoma"],
 'exam4-44-case1':["Canine diffuse large B-cell lymphoma"],
