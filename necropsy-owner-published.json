@@ -1243,6 +1243,21 @@
           ],
           "systems": [],
           "conditionId": "exam7-7"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-7-1795052441760-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "exam7-7"
         }
       ],
       "photo": {
@@ -1286,7 +1301,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T01:39:13.160Z",
+      "updated": "2026-11-19T01:40:43.172Z",
       "approvedBy": "amppet22-prog"
     }
   },
