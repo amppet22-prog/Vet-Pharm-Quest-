@@ -981,6 +981,19 @@
           ],
           "systems": [],
           "conditionId": "pathx-68-40"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-40-1795050319103-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-40"
         }
       ],
       "photo": {
@@ -1009,19 +1022,20 @@
         ],
         "etiologyAgents": "Ischemic myelopathy\nFibrocartilaginous embolic myelopathy, FCE ",
         "etiologyCertainty": "differential",
-        "speciesOccurrence": "{}",
+        "speciesOccurrence": "{\"dog\":\"common\"}",
         "speciesEvidence": "",
         "conditionType": "vascular",
         "conditionSubtype": "",
         "organSystem": "",
-        "affectedOrgan": "spinal cord ",
+        "affectedOrgan": "spinal cord",
         "pathogenNames": "",
         "diseaseId": "",
         "zoonoticStatus": "unknown",
         "zoonoticNotes": "",
-        "reportabilityNotes": ""
+        "reportabilityNotes": "",
+        "hostScope": "multiple"
       },
-      "updated": "2026-11-19T01:03:31.441Z",
+      "updated": "2026-11-19T01:05:20.374Z",
       "approvedBy": "amppet22-prog"
     }
   },
