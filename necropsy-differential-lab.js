@@ -77,6 +77,14 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=[...Array.from({length:19},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'exam4-42-case1':["Pheochromocytoma"],
+'exam4-43-case1':["Thyroid follicular carcinoma"],
+'exam4-44-case1':["Canine diffuse large B-cell lymphoma"],
+'exam4-45-case1':["Caseous lymphadenitis"],
+'exam4-46-case1':["Myofiber necrosis and regeneration"],
+'exam4-47-case1':["Blackleg from Clostridium chauvoei"],
+'exam4-48-case1':["Osteochondrosis dissecans"],
+'exam4-49-case1':["Actinomyces bovis lumpy jaw"],
 'n41-acute':['Acute pancreatitis and necrosis','Peripancreatic fat saponification'],
 'n41-chronic':['Chronic pancreatitis'],
 'n41-juvenile':['Juvenile pancreatic acinar atrophy'],
