@@ -1724,6 +1724,19 @@
       "source": "Pathology lecture LMU",
       "normal": false,
       "id": "specimen-custom-69-syringomyelia"
+    },
+    "specimen-custom-69-hydromyelia": {
+      "title": "Hydromyelia",
+      "lecture": "69",
+      "system": "Nervous System",
+      "species": "Dog cats",
+      "gross": "An abnormal dilatation of the central canal of the spinal cord that leads to the formation of a cavity in which CSF may accumulate",
+      "dx": "Hydromyelia",
+      "histo": "Central canal absent",
+      "why": "Infectious or genetic injury that results in damage to ependymal cells lining the canal--> disruption of the normal flow of CSF--> abnormal CSF pressure gradients within the central canal.\nCongenital or acquired\nAcquired: **Rare** and is caused by an obstruction of the central canal CSF flow (inflammation or neoplasia)",
+      "source": "Pathology lecture LMU",
+      "normal": false,
+      "id": "specimen-custom-69-hydromyelia"
     }
   },
   "hiddenSpecimens": [
