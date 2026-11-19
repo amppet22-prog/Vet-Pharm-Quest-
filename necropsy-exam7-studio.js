@@ -32,11 +32,20 @@ function visible(){
  const items=base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(etiologyFilter==='all'||window.VPQ_PATH_ATLAS_META?.etiologyMatches?.(x,etiologyFilter))&&(speciesFilter==='all'||window.VPQ_PATH_ATLAS_META?.speciesMatches?.(x,speciesFilter,frequencyFilter))&&(conditionFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionType===conditionFilter)&&(subtypeFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionSubtype===subtypeFilter)&&(systemFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.organSystem===systemFilter)&&(zoonoticFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.zoonotic===zoonoticFilter)&&(frequencyFilter==='all'||speciesFilter!=='all'||Object.values(window.VPQ_PATH_ATLAS_META?.data?.(x)?.species||{}).includes(frequencyFilter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why,x.pathogenNames,x.diseaseId,window.VPQ_PATH_ATLAS_META?.data?.(x)?.pathogen].join(' ').toLowerCase().includes(search)));
  // Sort the displayed cards only. Their immutable IDs and original indices
  // remain unchanged so drafts, published images, and edit buttons still match.
- return items.sort((a,b)=>((tab==='normals'?nameSorter.compare(a.system||'',b.system||''):filter==='all'?nameSorter.compare(String(a.lecture||''),String(b.lecture||'')):0)||nameSorter.compare(a.title||'',b.title||'')||a.index-b.index));
+ return items.sort((a,b)=>nameSorter.compare(a.title||'',b.title||'')||nameSorter.compare(String(a.lecture||''),String(b.lecture||''))||a.index-b.index);
 }
 function start(k){mode=k||'gross';tab='lesions';filter='all';normalSystem='all';menu()}
 function studyLecture(lecture){tab='lesions';mode='gross';filter=String(lecture||'all');normalSystem='all';search='';refreshCustom();menu()}
 function showTab(kind){tab=kind==='normals'?'normals':'lesions';mode='gross';filter='all';normalSystem='all';search='';refreshCustom();menu()}
+// Accessible alphabetical dividers, generated only for letters represented in filtered results.
+function alphaKey(title){const first=String(title||'').trim().charAt(0).toUpperCase();return /^[A-Z]$/.test(first)?first:'#';}
+function alphaGrid(items,draw){
+ let last='';
+ return items.map(x=>{
+  const letter=alphaKey(x.title),header=letter===last?'':'<div role="heading" aria-level="3" style="grid-column:1/-1;position:relative;margin:14px 0 3px;padding:7px 12px;background:#eaf1f9;border-left:4px solid #718fb1;border-radius:6px;font-size:15px;font-weight:850;letter-spacing:.06em">'+h(letter)+'</div>';
+  last=letter;return header+draw(x);
+ }).join('');
+}
 function menu(){
  const selected=visible();
  const lectures=['all',...[...new Set(base.filter(x=>!x.normal).map(x=>String(x.lecture)))].sort(nameSorter.compare)];
@@ -51,7 +60,7 @@ function menu(){
    '<label style="display:block;font-size:12px;font-weight:700">System<select data-path7-normal-system="1" style="display:block;width:100%;max-width:380px;padding:9px;margin:5px 0 9px;border-radius:8px;background:white"><option value="all">All systems</option>'+systems.filter(x=>x!=='all').map(x=>'<option value="'+h(x)+'"'+(normalSystem===x?' selected':'')+'>'+h(x)+'</option>').join('')+'</select></label>'+
    '<label style="display:block;font-size:12px">Search normal structures<input id="path7Search" data-path7-search="1" style="display:block;width:100%;max-width:380px;padding:9px;margin:5px 0 9px" value="'+h(search)+'" placeholder="e.g. cerebellum, placenta, cornea"></label>'+
    '<p class="tiny"><b>'+selected.length+' normal references</b> shown. Image placeholders are not published photographs.</p>'+
-   '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:9px">'+selected.map(x=>'<button data-path7-card="'+x.index+'" style="text-align:left;padding:12px;border:1px solid #bbd9c5;border-radius:11px;background:#fafffb"><b>'+h(x.title)+'</b><small style="display:block;margin:5px 0">'+h(x.system)+'</small><small style="display:block;color:#60758a">'+h(x.species)+'</small></button>').join('')+'</div>'+
+   '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:9px">'+alphaGrid(selected,x=>'<button data-path7-card="'+x.index+'" style="text-align:left;padding:12px;border:1px solid #bbd9c5;border-radius:11px;background:#fafffb"><b>'+h(x.title)+'</b><small style="display:block;margin:5px 0">'+h(x.system)+'</small><small style="display:block;color:#60758a">'+h(x.species)+'</small></button>')+'</div>'+
    '<div class="buttonrow"><button data-path7-library="1">📷 Published photo library</button><button data-path7-differentials="1">Differential cases</button></div>');
  }
  modal('🔬 Necropsy · Specimen Cabinet',
@@ -68,7 +77,7 @@ function menu(){
 '<div class="buttonrow">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" style="padding:6px 9px;font-size:11px" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':l==='8'?'L8 · Cell Accumulations*':l==='9'?'L9 · Morphologic DX':'L'+h(l))+'</button>').join('')+'</div>'+
  '<p class="tiny"><b>'+selected.length+' atlas cards shown.</b> *The uploaded Cell Accumulations PDF is file 8 but its title slide says Lecture 9. The separate file 9 teaches morphologic vs etiologic diagnosis. Photo slots are editable; instructor photographs are not copied into this public game.</p>'+ 
  '<label style="display:block;margin:8px 0">Find disease or lesion <input id="path7Search" data-path7-search="1" placeholder="e.g. pyometra, optic nerve, granuloma" value="'+h(search)+'" style="width:min(100%,430px);padding:9px;border:1px solid #bccbe0;border-radius:9px"></label>'+ 
- '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px">'+selected.map(x=>'<button style="text-align:left;padding:12px" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small style="display:block">Lecture '+h(x.lecture)+'</small><small style="display:block;color:#60758a">'+(window.VPQ_PATH_ATLAS_META?.subtypes?.[window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionSubtype]||'Classification pending')+' · '+(mode==='edit'?'Edit atlas entry':mode==='histo'?'Histology':'Gross ID')+'</small></button>').join('')+'</div>');
+ '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px">'+alphaGrid(selected,x=>'<button style="text-align:left;padding:12px" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small style="display:block">Lecture '+h(x.lecture)+'</small><small style="display:block;color:#60758a">'+(window.VPQ_PATH_ATLAS_META?.subtypes?.[window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionSubtype]||'Classification pending')+' · '+(mode==='edit'?'Edit atlas entry':mode==='histo'?'Histology':'Gross ID')+'</small></button>')+'</div>');
 }
 function card(i){
  current=i;const x=record(i),shelf=visible(),at=shelf.findIndex(v=>v.index===i);
