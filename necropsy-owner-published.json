@@ -910,6 +910,19 @@
           ],
           "systems": [],
           "conditionId": "specimen-custom-68-cerebrospinal-nematodiasis"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-68-cerebrospinal-nematodiasis-1795050004603-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-68-cerebrospinal-nematodiasis"
         }
       ],
       "photo": {
@@ -939,7 +952,7 @@
         "etiologyAgents": "",
         "etiologyCertainty": "differential",
         "speciesOccurrence": "{\"dog\":\"occasional\",\"cat\":\"occasional\",\"horse\":\"occasional\",\"cattle\":\"occasional\",\"sheep\":\"occasional\",\"goat\":\"occasional\"}",
-        "speciesEvidence": "Reported in multiple species depending on the nematode. ",
+        "speciesEvidence": "Reported in multiple species depending on the nematode.",
         "conditionType": "infectious",
         "conditionSubtype": "helminths",
         "organSystem": "",
@@ -950,7 +963,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T00:58:53.271Z",
+      "updated": "2026-11-19T01:00:05.808Z",
       "approvedBy": "amppet22-prog"
     }
   },
