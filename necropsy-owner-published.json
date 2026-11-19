@@ -2520,7 +2520,7 @@
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-31-1795074810146-0.jpg",
           "source": "",
           "credit": "Pathology lecture LMU",
-          "caption": "Pathology study reference · Screenshot 2026-11-19 024354.png",
+          "caption": "Autofluorescence of the brain in UV light due to degenerating neurons",
           "type": "gross",
           "external": false,
           "lectures": [
@@ -2533,7 +2533,7 @@
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-31-1795074811381-1.jpg",
           "source": "",
           "credit": "Pathology lecture LMU",
-          "caption": "Pathology study reference · Screenshot 2026-11-19 024435.png",
+          "caption": "Close up of the softening of the cerebrocortical gray matter",
           "type": "gross",
           "external": false,
           "lectures": [
@@ -2546,7 +2546,7 @@
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-31-1795074812444-2.jpg",
           "source": "",
           "credit": "Pathology lecture LMU",
-          "caption": "Pathology study reference · Screenshot 2026-11-19 024626.png",
+          "caption": "Polioencephalomalacia",
           "type": "gross",
           "external": false,
           "lectures": [
@@ -2560,7 +2560,7 @@
         "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-31-1795074810146-0.jpg",
         "source": "",
         "credit": "Pathology lecture LMU",
-        "caption": "Pathology study reference · Screenshot 2026-11-19 024354.png",
+        "caption": "Autofluorescence of the brain in UV light due to degenerating neurons",
         "type": "gross",
         "external": false,
         "lectures": [
@@ -2596,7 +2596,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T07:53:33.839Z",
+      "updated": "2026-11-19T07:55:13.978Z",
       "approvedBy": "amppet22-prog"
     }
   },
