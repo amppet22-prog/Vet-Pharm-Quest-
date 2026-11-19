@@ -2219,6 +2219,19 @@
       "source": "Pathology lecture LMU",
       "normal": false,
       "id": "specimen-custom-69-cervical-vertebral-stenotic-myelopathy-wobbler-s"
+    },
+    "specimen-custom-69-chiari-like-malformation": {
+      "title": "Chiari-Like Malformation",
+      "lecture": "69",
+      "system": "Nervous System",
+      "species": "Dog",
+      "gross": "Internal herniation of the cerebellar vermis and medulla oblongata into the foramen magnum",
+      "dx": "Internal herniation, Chiar like malformation",
+      "histo": "ectopic?",
+      "why": "Mismatch between the caudal fossa of the skull and the brain where the vault can't accommodate. \nHerniation and leads to disruption of CSF and can lead to syringomyelia",
+      "source": "Pathology lecture LMU",
+      "normal": false,
+      "id": "specimen-custom-69-chiari-like-malformation"
     }
   },
   "hiddenSpecimens": [
