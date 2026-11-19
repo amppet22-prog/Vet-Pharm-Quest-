@@ -42,6 +42,48 @@
       },
       "updated": "2026-11-19T08:39:57.322Z",
       "approvedBy": "amppet22-prog"
+    },
+    "n69-white-matter": {
+      "title": "Horse with acute cerebral malacia",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/n69-white-matter-1795077920568-0.jpg",
+          "source": "",
+          "credit": "Kansas State Diagnostic Lab public reports",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "n69-white-matter"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/n69-white-matter-1795077920568-0.jpg",
+        "source": "",
+        "credit": "Kansas State Diagnostic Lab public reports",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "n69-white-matter"
+      },
+      "text": {
+        "title": "Horse with acute cerebral malacia",
+        "history": "A horse that has eaten contaminated moldy corn develops abrupt blindness, head pressing and seizures. On sectioning the brain, cerebral white matter is softened and liquefied while much of the gray matter is relatively spared.",
+        "gross": "Pale/yellow softened or cavitated regions concentrated in cerebral white matter.",
+        "histo": "Liquefactive necrosis and degeneration of white matter, with macrophages during lesion evolution.",
+        "morph": "Cerebrum: multifocal to regionally extensive leukoencephalomalacia",
+        "mechanism": "Fusarium-associated fumonisin B1 toxicosis causes preferential severe injury to equine cerebral white matter. The professor notes its tissue selectivity is incompletely explained.",
+        "tests": "Feed/exposure history and toxin testing support the association; evaluate the lesion distribution and exclude other toxic/vascular causes."
+      },
+      "updated": "2026-11-19T08:45:21.937Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "specimens": {
