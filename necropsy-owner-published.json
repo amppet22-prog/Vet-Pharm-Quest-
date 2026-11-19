@@ -897,5 +897,20 @@
     }
   },
   "lectures": {},
-  "customCases": {}
+  "customCases": {},
+  "customSpecimens": {
+    "specimen-custom-68-cerebrospinal-nematodiasis": {
+      "title": "Cerebrospinal Nematodiasis",
+      "lecture": "68",
+      "system": "Nervous system",
+      "species": "Dog/cat/horse",
+      "gross": "Linear tracts of necrosis and hemorrhage\nMigration results in endothelial injury, vasculitis and thrombosis. May cause vascular occlusion and infarction.",
+      "dx": "Cerebral spinal nematodiasis,",
+      "histo": "If larvae are in sections, they can induce a mononuclear cell inflammatory exudate, often including eosinophiles",
+      "why": "Aberrant migration of larval nematodes within the CNS",
+      "source": "Pathology lecture LMU",
+      "normal": false,
+      "id": "specimen-custom-68-cerebrospinal-nematodiasis"
+    }
+  }
 }
