@@ -3,3 +3,5 @@
 
 /* Public lecture-photo asset, with the instructor slide's comparison intact. Owner-published galleries override this default. */
 (function(){const cards=window.VPQ_PATH_EXAM7_DATA||[];for(const card of cards){if(card.id==='found-exam2-neoplasia-004'||card.id==='found-exam2-neoplasia-006'){card.image='assets/pathology/lecture26-papilloma-vs-scc.jpg';card.photoCaption='Instructor Lecture 26, slide 25: benign papilloma (left) versus invasive squamous cell carcinoma (right); focus on the basement membrane and epithelial invasion.';card.photoCredit='Pathology Lecture 26 · annotated teaching slide, permission provided by user';}}})();
+
+(function(){const cards=window.VPQ_PATH_EXAM7_DATA||[];const card=cards.find(x=>x.id==='found-exam2-neoplasia-022');if(card){card.image='assets/pathology/lecture29-rosette-vs-pseudorosette.jpg';card.photoCaption='Instructor Lecture 29, slide 6: true rosette with central lumen (left) versus pseudorosette without a true lumen (right).';card.photoCredit='Pathology Lecture 29 · annotated teaching slide, permission provided by user';}})();
