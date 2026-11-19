@@ -1,6 +1,49 @@
 {
   "version": 1,
-  "cases": {},
+  "cases": {
+    "n69-pem": {
+      "title": "Blind feedlot lamb: gray versus white matter",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/n69-pem-1795077596077-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "n69-pem"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/n69-pem-1795077596077-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "n69-pem"
+      },
+      "text": {
+        "title": "Blind feedlot lamb: gray versus white matter",
+        "history": "After a rapid shift to a high-concentrate ration, a lamb becomes dull, develops cortical blindness and head-pressing, and then has seizures. No obvious ocular abnormality explains the blindness. The cerebral cortex is subtly swollen and yellow-gray; some gyri are flattened.",
+        "gross": "Bilaterally distributed cortical swelling, yellow discoloration and softening; chronic lesions may become cavitated. A Wood's lamp may demonstrate cortical autofluorescence, but absence does not exclude the disease.",
+        "histo": "Laminar neuronal necrosis in the cerebral gray matter, with neuronal eosinophilia and nuclear pyknosis, neuropil vacuolation, edema and variable macrophage reaction depending on duration.",
+        "morph": "Cerebrum: bilateral, laminar, cortical neuronal necrosis (polioencephalomalacia)",
+        "mechanism": "Polioencephalomalacia describes the cortical lesion pattern, not one uniquely identified agent. In ruminants it can follow disruption of thiamine availability/metabolism or high sulfur exposure. Energy failure preferentially injures metabolically active cortical neurons.",
+        "tests": "Assess diet, ration transition, sulfur in water/feed and possible thiamine-related risk factors; evaluate response to treatment clinically. Histology establishes the lesion pattern but cannot distinguish sulfur-associated from thiamine-associated injury alone."
+      },
+      "updated": "2026-11-19T08:39:57.322Z",
+      "approvedBy": "amppet22-prog"
+    }
+  },
   "specimens": {
     "exam7-2": {
       "title": "Wallerian degeneration",
