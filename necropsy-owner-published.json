@@ -2222,6 +2222,91 @@
       },
       "updated": "2026-11-19T07:00:48.373Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-19": {
+      "title": "Metastatic pulmonary and mammary carcinomas",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-19-1795072077318-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-19 020641.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-19"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-19-1795072078868-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-19 020645.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-19"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-19-1795072080200-2.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-19 020701.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-19"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-19-1795072077318-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-19 020641.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-19"
+      },
+      "text": {
+        "gross": "Depends on tumor type:\nHemangiosarcoma: multifocal to coalescing variably sized black lesions on the grey- white matter interface. \nCarcinomas depend, in white matter ",
+        "dx": "Working identification: Metastatic pulmonary and mammary carcinomas. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Neoplastic growth of the originating cell in hemangiosarcoma tortuous vessels. ",
+        "why": "Hematogenously metastasizing neoplasms will impact the brain more then the spinal cord. and CNS metastasis is more often in dogs and cats then other nonhuman species. \n**Hemangiosarcoma** is one of the most common metastasizing tumors to the brain. \n",
+        "visualClue": "",
+        "compare": "",
+        "notes": "Multiple metastasizing carcinomas, mammary gland and pulmonary gland carcinomas in the dogs are reported higher than others. ",
+        "etiologyCategories": [
+          "neoplastic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T07:08:01.449Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
