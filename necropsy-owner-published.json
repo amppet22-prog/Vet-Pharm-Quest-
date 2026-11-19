@@ -1566,6 +1566,19 @@
           ],
           "systems": [],
           "conditionId": "specimen-custom-69-syringomyelia"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-syringomyelia-1795065739613-0.jpg",
+          "source": "",
+          "credit": "Owner-supplied image; publication rights confirmed",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-69-syringomyelia"
         }
       ],
       "photo": {
@@ -1582,9 +1595,9 @@
         "conditionId": "specimen-custom-69-syringomyelia"
       },
       "text": {
-        "gross": "Cavity (syrinx) that forms in the spinal cord.",
+        "gross": "A fluid-filled cavity (syrinx) that dissects outside the central canal into the spinal cord tissue (parenchyma). ",
         "dx": "Syringomyelia",
-        "histo": "Absence of tissue in the spinal cord",
+        "histo": "Absence of tissue in the spinal cord, Not lined by ependyma; typically surrounded by glial/gliotic tissue.",
         "why": "Congenital and acquired forms, most commonly in calves and dog breeds. \nProposed causes include infection, trauma, or neoplasia that result in degeneration and cavitation of the spinal cord.",
         "visualClue": "",
         "compare": "",
@@ -1607,7 +1620,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T03:41:25.561Z",
+      "updated": "2026-11-19T05:22:20.908Z",
       "approvedBy": "amppet22-prog"
     },
     "pathx-69-13": {
