@@ -1755,6 +1755,78 @@
       },
       "updated": "2026-11-19T04:46:28.657Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-14": {
+      "title": "Astrocytoma",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-14-1795064261019-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 235204.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-14"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-14-1795064262200-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 235207.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-14"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-14-1795064261019-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-18 235204.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-14"
+      },
+      "text": {
+        "gross": "Difficult to distinguish from adjacent parenchyma. Often displaces normal tissues. \n**Low-grade**- poorly defined mass, firm, white to pink\n**High grade**- regions of hemorrhage, necrosis, cavitation ",
+        "dx": "Working identification: Astrocytoma. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Astrocyte neoplastic proliferation ",
+        "why": "Under the umbrella term of glioma. Common sites include the cerebral hemispheres and less frequently, the cerebellum and spinal cord. ",
+        "visualClue": "",
+        "compare": "Ependymoma and Oligodendroglioma ",
+        "notes": "Common in Brachycephalic breeds and are the most commonly affected and generally have peak incidence from ages 5-11 years. ",
+        "etiologyCategories": [
+          "neoplastic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T04:57:43.336Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
