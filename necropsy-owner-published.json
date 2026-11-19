@@ -1230,6 +1230,19 @@
           ],
           "systems": [],
           "conditionId": "exam7-7"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-7-1795052351611-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "exam7-7"
         }
       ],
       "photo": {
@@ -1262,7 +1275,7 @@
         "etiologyCertainty": "differential",
         "speciesOccurrence": "{\"dog\":\"common\",\"cat\":\"common\"}",
         "hostScope": "multiple",
-        "speciesEvidence": "Can be very common in cats with Feline panleukopenia. \nToy and brachycephalic breeds are affected. ",
+        "speciesEvidence": "Can be very common in cats with Feline panleukopenia. \nToy and brachycephalic breeds are affected.",
         "conditionType": "",
         "conditionSubtype": "",
         "organSystem": "",
@@ -1273,7 +1286,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T01:38:07.267Z",
+      "updated": "2026-11-19T01:39:13.160Z",
       "approvedBy": "amppet22-prog"
     }
   },
