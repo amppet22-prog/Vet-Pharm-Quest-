@@ -61,6 +61,14 @@ function data(x){
   evidence:String(x?.speciesEvidence||'').trim()
  };
 }
+const subtypeEtiology={protozoa:'protozoal',bacteria:'bacterial',viruses:'viral',fungi:'fungal',helminths:'helminthic',arthropods:'arthropod'};
+const typeEtiology={neoplasm:'neoplastic',congenital:'developmental',malformation:'developmental',vascular:'vascular',toxic:'toxic',nutritional:'nutritional',endocrine:'endocrine',degenerative:'degenerative',traumatic:'traumatic',idiopathic:'idiopathic',inflammatory:'immune'};
+function etiologyMatches(x,id){
+ if(id==='all')return true;
+ const declared=window.VPQ_PATH_ETIOLOGY?.forCard?.(x)?.categories||[];
+ const d=data(x);
+ return declared.includes(id)||subtypeEtiology[d.conditionSubtype]===id||typeEtiology[d.conditionType]===id;
+}
 function speciesMatches(x,key,rank){
  const d=data(x),status=d.species[key];
  return !!status&&(rank==='all'||status===rank);
@@ -120,5 +128,5 @@ function relatedHTML(x,all,indexFor){
  return '<div style="border-top:1px solid #d9e1e8;padding-top:9px;margin-top:8px"><b>🔗 Other organ manifestations of this disease</b><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">'+
  matches.map(y=>'<button type="button" data-path7-view="'+indexFor(y.id)+'">'+esc(y.title)+' · '+esc(systems[data(y).organSystem]||data(y).organ||'Other site')+'</button>').join('')+'</div></div>';
 }
-return {species,frequency,conditionTypes,subtypes,systems,zoonotic,data,speciesMatches,browseHTML,editorHTML,readEditor,relatedHTML,lectureSeed};
+return {species,frequency,conditionTypes,subtypes,systems,zoonotic,data,speciesMatches,browseHTML,editorHTML,readEditor,relatedHTML,lectureSeed,etiologyMatches};
 })();
