@@ -1155,6 +1155,65 @@
       },
       "updated": "2026-11-19T01:19:22.822Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-43": {
+      "title": "Necrotizing leukoencephalitis (NLE)",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-43-1795051500674-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-43"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-43-1795051500674-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [],
+        "conditionId": "pathx-68-43"
+      },
+      "text": {
+        "gross": "Cavitation, inflammation and glial scarring in periventricular cerebral white matter and brainstem.",
+        "dx": "Working identification: Necrotizing leukoencephalitis (NLE). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": " necrosis and cavitation (malacia) of the cerebral white matter and thalamus, accompanied by nonsuppurative inflammation",
+        "why": "Host: Yorkshire terriers and other small-breed dogs. Distinguish: The professor specifically says cerebral cortex and meninges are spared in NLE, unlike NME.\n**Targets the deep cerebral white matter **",
+        "visualClue": "",
+        "compare": "NME ",
+        "notes": "Yorkshire terrior high on list.\nAge of onset is vast (1-10 years). \nProgressive neuro signs that depend on the lesion location. \nChronic, often fatal disease",
+        "etiologyCategories": [
+          "idiopathic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T01:25:02.091Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
