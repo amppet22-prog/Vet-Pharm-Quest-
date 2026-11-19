@@ -2086,6 +2086,19 @@
       "source": "Pathology lecture LMU",
       "normal": false,
       "id": "specimen-custom-69-hydromyelia"
+    },
+    "specimen-custom-69-cervical-vertebral-stenotic-myelopathy-wobbler-s": {
+      "title": "Cervical vertebral stenotic myelopathy (Wobbler syndrome)",
+      "lecture": "69",
+      "system": "Nervous system",
+      "species": "Horse",
+      "gross": "Stenosis of the cervical vertebral canal with spinal cord compression or narrowing",
+      "dx": "Cervical vertebral stenotic myelopathy",
+      "histo": "Changes in the spinal cord focused on axons resutling from compression of the spinal cord",
+      "why": "Multifactorial pathogenesis, genetic, nutritional, growth rate",
+      "source": "Pathology lecture LMU",
+      "normal": false,
+      "id": "specimen-custom-69-cervical-vertebral-stenotic-myelopathy-wobbler-s"
     }
   },
   "hiddenSpecimens": [
