@@ -1507,6 +1507,78 @@
       },
       "updated": "2026-11-19T02:16:55.495Z",
       "approvedBy": "amppet22-prog"
+    },
+    "specimen-custom-69-syringomyelia": {
+      "title": "Syringomyelia",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-syringomyelia-1795059683081-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 224102.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-69-syringomyelia"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-syringomyelia-1795059684331-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 224107.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-69-syringomyelia"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-syringomyelia-1795059683081-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-18 224102.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "specimen-custom-69-syringomyelia"
+      },
+      "text": {
+        "gross": "Cavity (syrinx) that forms in the spinal cord.",
+        "dx": "Syringomyelia",
+        "histo": "Absence of tissue in the spinal cord",
+        "why": "Congenital and acquired forms, most commonly in calves and dog breeds. \nProposed causes include infection, trauma, or neoplasia that result in degeneration and cavitation of the spinal cord.",
+        "visualClue": "",
+        "compare": "",
+        "notes": " Clinical signs in young dogs and calves with syringomyelia vary, depending on the location and size of the spinal cord lesion\n Ataxia, urinary incontinence, respiratory difficulty, muscle weakness in front and/or hind\nlimbs, and abnormal proprioceptive reflexes\n The syrinx can extend over several spinal cord segments\n Central canal is normal but may secondarily become compressed",
+        "etiologyCategories": [
+          "idiopathic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\",\"cattle\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T03:41:25.561Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
