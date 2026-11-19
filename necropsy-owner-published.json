@@ -1362,6 +1362,65 @@
       },
       "updated": "2026-11-19T01:44:40.638Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-30": {
+      "title": "Centaurea spp. — nigropallidal encephalomalacia",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-30-1795054147713-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-30"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-30-1795054147713-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-30"
+      },
+      "text": {
+        "gross": "****Localization is very specific to this etiology* ***\n Sharply demarcated bilateral (sometimes unilateral) sharp yellow malacic foci in globus pallidus and substantia nigra. Causes *nigropallidial encephalomalacia.* \n",
+        "dx": "Working identification: Centaurea spp. — nigropallidal encephalomalacia.\n**Poisoning, chronic, and mostly in horses **\n Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Necrosis with loss of neurons. ",
+        "why": "Horses grazing on Yellow Star Thistle or Russian knapweed. \nChronic condition with them grazing on the plants for 1 month or longer during the hot summer, when other forage is dried and unpalatable since the thistle remains green. ",
+        "visualClue": "",
+        "compare": "",
+        "notes": "C/S: Somnolent (sleepy, drowsy), persistent chewing and difficulty in prehension of feed and drinking water. ",
+        "etiologyCategories": [
+          "toxic"
+        ],
+        "etiologyAgents": "Yellow Star Thistle, Russian knapweed, Centaurea ssp. ",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"horse\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T02:09:09.369Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
