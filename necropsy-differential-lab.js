@@ -4,7 +4,7 @@ window.VPQ_NECROPSY_DIFFERENTIAL_LAB=(function(){
 const data=window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[];
 function allCases(){return [...data,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomCases?.()||[])]}
 const KEY='vpq-necropsy-differential-local-images-v1';
-let ui=null,filter='all',current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false;
+let ui=null,filter='all',current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false,caseReward=null;
 const rich=v=>window.VPQ_PATH_RICH_TEXT?.render?.(v)||safe(v);
 const safe=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function photoStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -498,13 +498,22 @@ function sourcedPhotos(x){
  return '<div style="background:#eff8f5;border:1px solid #c5dace;border-radius:10px;padding:9px;margin:7px 0"><b style="font-size:13px">📸 Original veterinary references (not this simulated patient)</b>'+pics+(links?'<details '+(phase>=2?'open':'')+' style="margin:6px 0"><summary style="font-size:12px;font-weight:700">Additional pathology references (may reveal diagnosis)</summary>'+links+'</details>':'')+(d.note?'<p style="font-size:12px;color:#536375">'+safe(d.note)+'</p>':'')+'</div>';
 }
 function photoHTML(x){const photo=photoStore()[x.id];return '<div style="max-width:330px;padding:10px;background:#f8faff;border:1px dashed #bdcce0;border-radius:10px">'+(photo?'<img src="'+safe(photo)+'" alt="User added necropsy specimen" style="max-width:100%;max-height:205px;object-fit:contain;display:block;margin:auto">':'<div style="min-height:92px;display:grid;place-items:center;color:#566a89;font-size:13px">📷 No source photograph yet — add one from your lectures</div>')+'<label style="display:block;margin-top:7px;font-size:12px"><b>Add / replace this case image (local only)</b><input type="file" accept="image/*" data-pathdiff-photo="'+safe(x.id)+'" style="max-width:100%;font-size:12px"></label>'+(photo?'<button style="margin-top:5px;font-size:11px" data-pathdiff-remove="'+safe(x.id)+'">Remove local photo</button>':'')+'<small style="display:block;color:#66758b">Local draft photo; publish to make it available across devices. Only use photos you have rights to share.</small><button data-pathdiff-publish="'+safe(x.id)+'" style="display:block;margin-top:7px;background:#e4f6eb;border:1px solid #75b996">🚀 Edit / Publish photo now</button></div>'}
+function caseSequence(){return allCases().filter(x=>filter==='all'||x.lecture===filter)}
+function moveCase(direction){
+ const cases=caseSequence(),index=cases.findIndex(x=>x.id===current);
+ if(index<0)return menu();
+ const target=cases[index+direction];if(!target)return view();
+ current=target.id;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;
+ return view();
+}
 function view(){
  const baseCase=allCases().find(v=>v.id===current);if(!baseCase)return menu();
  const x={...baseCase,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
  const revealed=phase>=2;
+  const sequence=caseSequence(),position=sequence.findIndex(c=>c.id===current);
  const opted=leading>=0?x.options[leading]:null;
  modal('🔬 Differential case · L'+safe(x.lecture)+' · '+safe(x.title),
- '<div class="buttonrow"><button data-pathdiff-list="1">← All differential cases</button><button data-pathdiff-reset="1">↺ Restart case</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-list="1">← All differential cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>← Previous case</button><span style="align-self:center;font-size:12px">Case '+(position+1)+' of '+sequence.length+'</span><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next case →</button><button data-pathdiff-reset="1">↺ Restart case</button></div>'+
  '<div style="background:#f1f7ff;border-left:4px solid #7798cb;padding:10px;border-radius:8px;margin:10px 0"><b>'+safe(x.species)+' — presenting history</b><p>'+rich(x.history)+'</p><b>Gross lesion / localization:</b> '+rich(x.gross)+'</div>'+
  '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:12px;align-items:start;max-width:100%;overflow-wrap:anywhere"><div>'+
  '<h4 style="margin:4px 0">1. Build your differential list</h4><p class="tiny">Select every reasonable possibility. More than one diagnosis may fit early findings.</p>'+
@@ -519,7 +528,8 @@ function view(){
  '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Differential</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Supports</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Makes less likely / limitation</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Histology distinction</th></tr></thead><tbody>'+x.options.map(o=>'<tr><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6"><b>'+safe(o.name)+'</b>'+(o.role==='best'?' ★':'')+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.supports)+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.against)+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.hist)+'</td></tr>').join('')+'</tbody></table></div>'+
  (grossLeading>=0?'<p style="font-size:12px"><b>Reasoning progression:</b> Before histology you favored '+safe(x.options[grossLeading]?.name||'—')+'. After histology you selected '+safe(opted?.name||'—')+'. '+(grossLeading!==leading?'You revised your leading differential after seeing additional evidence.':'You kept your original leading differential.')+'</p>':'')+
  '<div style="background:#eef8f0;border:1px solid #b8d7bf;border-radius:12px;padding:11px;margin-top:12px"><b>Best-supported etiology:</b> '+safe(x.best)+'<p><b>Morphologic diagnosis:</b> '+rich(x.morph)+'</p><p><b>Why it happens:</b> '+rich(x.mechanism)+'</p><p><b>What confirms it / next tests:</b> '+rich(x.tests)+'</p><small>Grounded in '+safe(x.ref)+'. This is an educational differential, not a definitive diagnosis from a simulated history.</small></div></div>':'')+
- '<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-list="1">All cases</button><button data-pathdiff-reset="1">Try without clues again</button></div>');
+ (revealed?'<p style="font-size:12px;margin:8px 0"><b>🏅 Study rewards:</b> '+(caseReward?.xp?('+'+caseReward.xp+' XP'+(caseReward.coins?' · +'+caseReward.coins+' coins':'')+' earned!'):caseReward?.reason==='already-mastered'?'Previously mastered — rewards saved.':caseReward?.reason==='incorrect'?'Review and retry this diagnosis for XP.':'First correct diagnosis earns 10 XP; coins accrue through study milestones.')+'</p>':'')+
+'<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>← Previous case</button><button data-pathdiff-list="1">All cases</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next case →</button><button data-pathdiff-reset="1">Try without clues again</button></div>');
 }
 function init(api){
  ui=api;
@@ -571,14 +581,16 @@ function init(api){
  if(d.pathdiffRecallReset!==undefined){recallShow=false;return recallView()}
  if(d.pathdiffRecallBack!==undefined)return conditionDetail();
  if(d.pathdiffPublish!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('case',d.pathdiffPublish);
- if(d.pathdiffList!==undefined)return menu();
+ if(d.pathdiffPrevcase!==undefined)return moveCase(-1);
+  if(d.pathdiffNextcase!==undefined)return moveCase(1);
+  if(d.pathdiffList!==undefined)return menu();
  if(d.pathdiffFilter!==undefined){filter=d.pathdiffFilter;return menu()}
- if(d.pathdiffOpen!==undefined){current=d.pathdiffOpen;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];return view()}
+ if(d.pathdiffOpen!==undefined){current=d.pathdiffOpen;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;return view()}
  if(d.pathdiffReturn!==undefined)return window.VPQ_PATH_EXAM7?.start('histo');
  if(d.pathdiffReset!==undefined){phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];return view()}
  if(d.pathdiffToggle!==undefined){const i=Number(d.pathdiffToggle);shortlist=shortlist.includes(i)?shortlist.filter(v=>v!==i):[...shortlist,i];return view()}
  if(d.pathdiffHisto!==undefined){if(phase===0)grossLeading=leading;phase=Math.max(phase,1);return view()}
- if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;phase=2;return view()}
+ if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;const base=allCases().find(v=>v.id===current);const record={...base,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};const correct=String(record.options?.[leading]?.name||'').trim().toLowerCase()===String(record.best||'').trim().toLowerCase();if(phase<2&&typeof ui?.awardQuestion==='function')caseReward=ui.awardQuestion('necropsy-differential',String(current),correct);phase=2;return view()}
  if(d.pathdiffRemove!==undefined){updatePhoto(d.pathdiffRemove,'');return view()}
  },true);
  api.body.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target?.dataset?.pathdiffFlashFlip!==undefined){ev.preventDefault();flashFace=!flashFace;flashView()}},true);
