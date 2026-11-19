@@ -564,5 +564,5 @@ function init(api){
 function openCase(id){if(allCases().some(x=>x.id===id)){current=id;return view()}return menu()}
 function draftPhoto(id){return photoStore()[id]||''}
 function draftText(id){return {}}
-return {init,start,cases:data,openCase,draftPhoto,draftText,showConditions:(lecture)=>{if(lecture)conditionLecture=String(lecture);conditionIndex()}};
+return {init,start,cases:data,openCase,draftPhoto,draftText,openConditionInventory:conditionIndex,showConditions:(lecture)=>{if(lecture)conditionLecture=String(lecture);conditionIndex()}};
 })();
