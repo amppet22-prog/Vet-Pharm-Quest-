@@ -1055,5 +1055,8 @@
       "normal": false,
       "id": "specimen-custom-68-cerebrospinal-nematodiasis"
     }
-  }
+  },
+  "hiddenSpecimens": [
+    "exam7-4"
+  ]
 }
