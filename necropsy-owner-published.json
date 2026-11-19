@@ -2439,6 +2439,79 @@
       },
       "updated": "2026-11-19T07:22:08.351Z",
       "approvedBy": "amppet22-prog"
+    },
+    "specimen-custom-69-leukoencephalomalacia": {
+      "title": "Leukoencephalomalacia",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-leukoencephalomalacia-1795073723278-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Brain lesion · Screenshot 2026-11-19 023306.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-69-leukoencephalomalacia"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-leukoencephalomalacia-1795073724690-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Brain lesion · Screenshot 2026-11-19 023406.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-69-leukoencephalomalacia"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-leukoencephalomalacia-1795073723278-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Brain lesion · Screenshot 2026-11-19 023306.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "specimen-custom-69-leukoencephalomalacia"
+      },
+      "text": {
+        "title": "Leukoencephalomalacia",
+        "gross": "Characteristic gross lesion at the time of death is malacia and liquefaction of the affected white matter\n Brainstem and cerebellum can also be impacted\n Gray matter typically spared - mechanism for this selectivity is unknown\n Edema ± marked swelling, flattening of cerebrocortical gyri\n**Typically has a yellow to yellow-orange or brown-yellow color in affected tissue **",
+        "dx": "Leukoencephalomalacia",
+        "histo": "Liquefactive necrosis showing loss of normal architecture and eosinophilic proteinaceous debris with edema, congested blood vessels and mild hemorrhage, and gitter cells (lipid-laden macrophages) clearing the necrotic debris along with perivascular cuffing.",
+        "why": "Consumption of moldy feed, typically Fusarium mycotoxins like fumonisin B1, moldy corn.",
+        "visualClue": "Yellow to brown or slightly rusted color in the white matter \nAcute ",
+        "compare": "",
+        "notes": "The most common cause is the ingestion of moldy feed with the fungus fusarium verticilliodies. Horses are the most commonly affected. \nCauses an acute, fatal neurologic disease. \n\nCS: Depression, somnolence, head pressing, aimless wandering, blindness or seizures. Rapid progression followed by death 1-10 days after onset. \n",
+        "etiologyCategories": [
+          "toxic"
+        ],
+        "etiologyAgents": "Fusarium mycotoxin ",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"horse\":\"common\"}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "toxic",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T07:35:26.032Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
