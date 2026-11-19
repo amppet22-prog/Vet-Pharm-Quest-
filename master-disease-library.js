@@ -41,21 +41,28 @@ const excluded=/\b(necrosis|apoptosis|cellular swelling|nuclear changes|gangrene
 function sourceCards(){
  window.VPQ_PATH_EXAM7?.refreshCustom?.();
  const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);
- return (window.VPQ_PATH_EXAM7?.cards||window.VPQ_PATH_EXAM7_DATA||[]).filter(x=>!x.normal&&!hidden.has(x.id)).map(x=>{
-  // Curated IDs are shared as non-destructive fallback metadata.
-  // Published owner edits override the fallback when a user explicitly changes an ID.
-  const seed=curated[x.id];
-  if(!seed)return x;
-  if(!x.diseaseId)x.diseaseId=seed[0];
-  if(!x.conditionType&&seed[2])x.conditionType=seed[2];
-  if(!x.organSystem&&seed[3])x.organSystem=seed[3];
-  return x;
- });
+ return (window.VPQ_PATH_EXAM7?.cards||window.VPQ_PATH_EXAM7_DATA||[]).filter(x=>!x.normal&&!hidden.has(x.id));
 }
+// Merge on read, not by mutating the shared base atlas records.
+// The published record is authoritative; local draft metadata is visible in
+// this browser until the owner publishes it for all users.
 function readCard(card){
  const owner=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(card.id);
- const raw=owner?.text||{};
- return {...card,...raw};
+ const draft=window.VPQ_PATH_EXAM7?.draftText?.(card.id)||{};
+ const seed=curated[card.id];
+ const fallback=seed?{diseaseId:seed[0],conditionType:seed[2],organSystem:seed[3]}:{};
+ return {...fallback,...card,...(owner?.text||{}),...draft};
+}
+function diseaseForSpecimen(id){
+ const c=sourceCards().find(x=>x.id===id);
+ if(!c)return '';
+ const card=readCard(c);
+ return window.VPQ_PATH_ATLAS_META?.data?.(card)?.diseaseId||curated[id]?.[0]||'';
+}
+function openForSpecimen(id){
+ const disease=diseaseForSpecimen(id);
+ if(disease)return detail(disease);
+ return show();
 }
 function getGroups(){
  const map=new Map();
@@ -124,5 +131,5 @@ function init(api){
   if(el.dataset.masterSearch!==undefined){search=el.value.toLowerCase().trim();return show()}
  },true);
 }
-return {init,open:show,openDisease:detail,groups:getGroups};
+return {init,open:show,openDisease:detail,openForSpecimen,diseaseForSpecimen,groups:getGroups};
 })();
