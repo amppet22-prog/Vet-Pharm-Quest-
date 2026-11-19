@@ -521,6 +521,19 @@ function moveCase(direction){
  const target=cases[index+direction];if(!target)return view();
  return prepareCase(target.id);
 }
+function caseAtlasMatches(x){
+ const lecture=String(x.lecture||''),lesson=window.VPQ_PATH_LECTURE_LEARN?.[lecture];
+ if(!lesson)return [];
+ const named=(CASE_MATCH[x.id]||[]).map(norm);
+ return (lesson.sections||[]).map((item,i)=>({item,i})).filter(({item})=>
+  item.diseaseAtlas===true&&named.some(label=>norm(item.title)===label||norm(item.title).includes(label)||label.includes(norm(item.title)))
+ );
+}
+function openCaseAtlas(index){
+ const base=allCases().find(v=>v.id===current);if(!base||phase<2)return view();
+ const match=caseAtlasMatches(base)[index];if(!match)return view();
+ conditionLecture=String(base.lecture);conditionChosen=match.i;return conditionDetail();
+}
 function view(){
  const baseCase=allCases().find(v=>v.id===current);if(!baseCase)return menu();
  const source={...baseCase,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
@@ -545,6 +558,7 @@ function view(){
  '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Differential</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Supports</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Makes less likely / limitation</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Histology distinction</th></tr></thead><tbody>'+x.options.map(o=>'<tr><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6"><b>'+safe(o.name)+'</b>'+(o.role==='best'?' ★':'')+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.supports)+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.against)+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.hist)+'</td></tr>').join('')+'</tbody></table></div>'+
  (grossLeading>=0?'<p style="font-size:12px"><b>Reasoning progression:</b> Before histology you favored '+safe(x.options[grossLeading]?.name||'—')+'. After histology you selected '+safe(opted?.name||'—')+'. '+(grossLeading!==leading?'You revised your leading differential after seeing additional evidence.':'You kept your original leading differential.')+'</p>':'')+
  '<div style="background:#eef8f0;border:1px solid #b8d7bf;border-radius:12px;padding:11px;margin-top:12px"><b>Best-supported etiology:</b> '+safe(x.best)+'<p><b>Morphologic diagnosis:</b> '+rich(x.morph)+'</p><p><b>Why it happens:</b> '+rich(x.mechanism)+'</p><p><b>What confirms it / next tests:</b> '+rich(x.tests)+'</p><small>Grounded in '+safe(x.ref)+'. This is an educational differential, not a definitive diagnosis from a simulated history.</small></div></div>':'')+
+ (revealed&&caseAtlasMatches(x).length?'<div style="margin:10px 0;padding:10px;border:1px solid #cbdbea;border-radius:10px"><b>📚 Review this case in the disease atlas</b><p class="tiny">Open the related lesson for species, gross lesions, histology, mechanism and flashcards.</p><div class="buttonrow">'+caseAtlasMatches(x).map(({item},i)=>'<button data-pathdiff-case-atlas="'+i+'">🔬 '+safe(item.title)+'</button>').join('')+'</div></div>':'')+
  (revealed?'<p style="font-size:12px;margin:8px 0"><b>🏅 Study rewards:</b> '+(caseReward?.xp?('+'+caseReward.xp+' XP'+(caseReward.coins?' · +'+caseReward.coins+' coins':'')+' earned!'):caseReward?.reason==='already-mastered'?'Previously mastered — rewards saved.':caseReward?.reason==='incorrect'?'Review and retry this diagnosis for XP.':'First correct diagnosis earns 10 XP; coins accrue through study milestones.')+'</p>':'')+
 '<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>← Previous case</button><button data-pathdiff-list="1">All cases</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next case →</button><button data-pathdiff-reset="1">Try without clues again</button></div>');
 }
@@ -598,7 +612,8 @@ function init(api){
  if(d.pathdiffRecallReset!==undefined){recallShow=false;return recallView()}
  if(d.pathdiffRecallBack!==undefined)return conditionDetail();
  if(d.pathdiffPublish!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('case',d.pathdiffPublish);
- if(d.pathdiffPrevcase!==undefined)return moveCase(-1);
+ if(d.pathdiffCaseAtlas!==undefined)return openCaseAtlas(Number(d.pathdiffCaseAtlas));
+  if(d.pathdiffPrevcase!==undefined)return moveCase(-1);
   if(d.pathdiffNextcase!==undefined)return moveCase(1);
   if(d.pathdiffShuffle!==undefined)return shuffleCases();
   if(d.pathdiffList!==undefined)return menu();
