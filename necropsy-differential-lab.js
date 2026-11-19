@@ -4,7 +4,7 @@ window.VPQ_NECROPSY_DIFFERENTIAL_LAB=(function(){
 const data=window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[];
 function allCases(){return [...data,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomCases?.()||[])]}
 const KEY='vpq-necropsy-differential-local-images-v1';
-let ui=null,filter='all',current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false,caseReward=null;
+let ui=null,filter='all',current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false,caseReward=null,shuffledIds=[],optionOrder=[];
 const rich=v=>window.VPQ_PATH_RICH_TEXT?.render?.(v)||safe(v);
 const safe=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function photoStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -17,8 +17,12 @@ function start(api,chosen='all'){
   if(ui===api&&ui.body.querySelector('[data-pathdiff-filter]')&&!ui.body.querySelector('[data-necro-create-submit]'))menu();
  }).catch(()=>{});
 }
+function shuffleArray(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function caseSequence(){const filtered=allCases().filter(x=>filter==='all'||x.lecture===filter);if(!shuffledIds.length)return filtered;const order=new Map(shuffledIds.map((id,i)=>[id,i]));return filtered.sort((a,b)=>(order.get(a.id)??Infinity)-(order.get(b.id)??Infinity));}
+function shuffleCases(){shuffledIds=shuffleArray(allCases().filter(x=>filter==='all'||x.lecture===filter).map(x=>x.id));current=null;phase=0;leading=-1;grossLeading=-1;shortlist=[];leadHint=false;caseReward=null;optionOrder=[];return menu();}
+function prepareCase(id){current=id;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
 function menu(){
- const matched=allCases().filter(x=>filter==='all'||x.lecture===filter);
+ const matched=caseSequence();
  const counts=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
  const selectedStudy=counts.includes(conditionLecture)?conditionLecture:'68';
  modal('🧩 Necropsy · Study & Differential Center',
@@ -44,6 +48,7 @@ function menu(){
  '<label style="display:block;font-size:12px;margin-bottom:7px">Filter cases by lecture<select data-pathdiff-case-filter="1" style="display:block;width:100%;max-width:240px;font-size:13px;padding:8px;margin-top:4px;border:1px solid #bdcde1;border-radius:8px;background:white">'+
  ['all',...counts].map(n=>'<option value="'+n+'"'+(filter===n?' selected':'')+'>'+(n==='all'?'All lectures':'Lecture '+n)+'</option>').join('')+'</select></label>'+
  '<p class="tiny" style="margin:6px 0">'+matched.length+' cases · Select one to compare signalment, gross findings, histology and etiologies.</p>'+
+ '<div class="buttonrow"><button data-pathdiff-shuffle="1" style="background:#e9f3ff;font-weight:800">🔀 Shuffle cases</button><small>Random order and diagnosis choices · rewards remain saved</small></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">'+matched.map(x=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:10px;border:1px solid #b7cce5;border-radius:10px;background:#fff"><b>'+safe(x.title)+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species)+'</small></button>').join('')+'</div></details>');
 }
 
@@ -498,22 +503,22 @@ function sourcedPhotos(x){
  return '<div style="background:#eff8f5;border:1px solid #c5dace;border-radius:10px;padding:9px;margin:7px 0"><b style="font-size:13px">📸 Original veterinary references (not this simulated patient)</b>'+pics+(links?'<details '+(phase>=2?'open':'')+' style="margin:6px 0"><summary style="font-size:12px;font-weight:700">Additional pathology references (may reveal diagnosis)</summary>'+links+'</details>':'')+(d.note?'<p style="font-size:12px;color:#536375">'+safe(d.note)+'</p>':'')+'</div>';
 }
 function photoHTML(x){const photo=photoStore()[x.id];return '<div style="max-width:330px;padding:10px;background:#f8faff;border:1px dashed #bdcce0;border-radius:10px">'+(photo?'<img src="'+safe(photo)+'" alt="User added necropsy specimen" style="max-width:100%;max-height:205px;object-fit:contain;display:block;margin:auto">':'<div style="min-height:92px;display:grid;place-items:center;color:#566a89;font-size:13px">📷 No source photograph yet — add one from your lectures</div>')+'<label style="display:block;margin-top:7px;font-size:12px"><b>Add / replace this case image (local only)</b><input type="file" accept="image/*" data-pathdiff-photo="'+safe(x.id)+'" style="max-width:100%;font-size:12px"></label>'+(photo?'<button style="margin-top:5px;font-size:11px" data-pathdiff-remove="'+safe(x.id)+'">Remove local photo</button>':'')+'<small style="display:block;color:#66758b">Local draft photo; publish to make it available across devices. Only use photos you have rights to share.</small><button data-pathdiff-publish="'+safe(x.id)+'" style="display:block;margin-top:7px;background:#e4f6eb;border:1px solid #75b996">🚀 Edit / Publish photo now</button></div>'}
-function caseSequence(){return allCases().filter(x=>filter==='all'||x.lecture===filter)}
 function moveCase(direction){
  const cases=caseSequence(),index=cases.findIndex(x=>x.id===current);
  if(index<0)return menu();
  const target=cases[index+direction];if(!target)return view();
- current=target.id;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;
- return view();
+ return prepareCase(target.id);
 }
 function view(){
  const baseCase=allCases().find(v=>v.id===current);if(!baseCase)return menu();
- const x={...baseCase,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
+ const source={...baseCase,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
+ if(optionOrder.length!==source.options?.length)optionOrder=shuffleArray((source.options||[]).map((_,i)=>i));
+ const x={...source,options:optionOrder.map(i=>source.options[i])};
  const revealed=phase>=2;
   const sequence=caseSequence(),position=sequence.findIndex(c=>c.id===current);
  const opted=leading>=0?x.options[leading]:null;
  modal('🔬 Differential case · L'+safe(x.lecture)+' · '+safe(x.title),
- '<div class="buttonrow"><button data-pathdiff-list="1">← All differential cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>← Previous case</button><span style="align-self:center;font-size:12px">Case '+(position+1)+' of '+sequence.length+'</span><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next case →</button><button data-pathdiff-reset="1">↺ Restart case</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-list="1">← All differential cases</button><button data-pathdiff-shuffle="1">🔀 Shuffle cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>← Previous case</button><span style="align-self:center;font-size:12px">Case '+(position+1)+' of '+sequence.length+'</span><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next case →</button><button data-pathdiff-reset="1">↺ Restart case</button></div>'+
  '<div style="background:#f1f7ff;border-left:4px solid #7798cb;padding:10px;border-radius:8px;margin:10px 0"><b>'+safe(x.species)+' — presenting history</b><p>'+rich(x.history)+'</p><b>Gross lesion / localization:</b> '+rich(x.gross)+'</div>'+
  '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:12px;align-items:start;max-width:100%;overflow-wrap:anywhere"><div>'+
  '<h4 style="margin:4px 0">1. Build your differential list</h4><p class="tiny">Select every reasonable possibility. More than one diagnosis may fit early findings.</p>'+
@@ -583,14 +588,15 @@ function init(api){
  if(d.pathdiffPublish!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('case',d.pathdiffPublish);
  if(d.pathdiffPrevcase!==undefined)return moveCase(-1);
   if(d.pathdiffNextcase!==undefined)return moveCase(1);
+  if(d.pathdiffShuffle!==undefined)return shuffleCases();
   if(d.pathdiffList!==undefined)return menu();
  if(d.pathdiffFilter!==undefined){filter=d.pathdiffFilter;return menu()}
- if(d.pathdiffOpen!==undefined){current=d.pathdiffOpen;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;return view()}
+ if(d.pathdiffOpen!==undefined)return prepareCase(d.pathdiffOpen)
  if(d.pathdiffReturn!==undefined)return window.VPQ_PATH_EXAM7?.start('histo');
  if(d.pathdiffReset!==undefined){phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];return view()}
  if(d.pathdiffToggle!==undefined){const i=Number(d.pathdiffToggle);shortlist=shortlist.includes(i)?shortlist.filter(v=>v!==i):[...shortlist,i];return view()}
  if(d.pathdiffHisto!==undefined){if(phase===0)grossLeading=leading;phase=Math.max(phase,1);return view()}
- if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;const base=allCases().find(v=>v.id===current);const record={...base,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};const chosen=record.options?.[leading];const correct=chosen?.role==='best'||String(chosen?.name||'').trim().toLowerCase()===String(record.best||'').trim().toLowerCase();if(phase<2&&typeof ui?.awardQuestion==='function')caseReward=ui.awardQuestion('necropsy-differential',String(current),correct);phase=2;return view()}
+ if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;const base=allCases().find(v=>v.id===current);const record={...base,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};const chosen=record.options?.[leading];const originalChoice=record.options?.[optionOrder[leading]];const correct=originalChoice?.role==='best'||String(originalChoice?.name||'').trim().toLowerCase()===String(record.best||'').trim().toLowerCase();if(phase<2&&typeof ui?.awardQuestion==='function')caseReward=ui.awardQuestion('necropsy-differential',String(current),correct);phase=2;return view()}
  if(d.pathdiffRemove!==undefined){updatePhoto(d.pathdiffRemove,'');return view()}
  },true);
  api.body.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target?.dataset?.pathdiffFlashFlip!==undefined){ev.preventDefault();flashFace=!flashFace;flashView()}},true);
@@ -598,7 +604,7 @@ function init(api){
  const d=ev.target?.dataset;
  if(d?.pathdiffLeadingSelect!==undefined){leading=Number(ev.target.value);leadHint=false;return;}
  if(d?.pathdiffStudyLecture!==undefined){conditionLecture=String(ev.target.value||'68');return menu();}
- if(d?.pathdiffCaseFilter!==undefined){filter=String(ev.target.value||'all');menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
+ if(d?.pathdiffCaseFilter!==undefined){filter=String(ev.target.value||'all');shuffledIds=[];menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(!d||d.pathdiffPhoto===undefined)return;
  const input=ev.target,file=input.files?.[0];if(!file||!file.type.startsWith('image/'))return;
  const reader=new FileReader();
