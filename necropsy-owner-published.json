@@ -1303,6 +1303,65 @@
       },
       "updated": "2026-11-19T01:40:43.172Z",
       "approvedBy": "amppet22-prog"
+    },
+    "exam7-10": {
+      "title": "Lissencephaly",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-10-1795052679355-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "exam7-10"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-10-1795052679355-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "exam7-10"
+      },
+      "text": {
+        "gross": "Part or complete smooth cerebrum without normal gyri and sulci. Cerebral cortext is thicker than normal on transverse section. ",
+        "dx": "Cerebrum: diffuse lissencephaly",
+        "histo": "Abnormal neuronal migration and cortical lamination",
+        "why": "Thought to have a genetic basis and results from an arrest or defect in neuronal migration during development since it can be a normal brain shape in birds, some laboratory rodents. ",
+        "visualClue": "Smooth brain ",
+        "compare": "",
+        "notes": "Most commonly reported in the Lhasa apso dog. ",
+        "etiologyCategories": [
+          "developmental"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\",\"cat\":\"occasional\",\"sheep\":\"occasional\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T01:44:40.638Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
