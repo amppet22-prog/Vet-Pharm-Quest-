@@ -462,7 +462,7 @@ function conditionDetail(){
  const item=lectureConditions()[conditionChosen];if(!item)return conditionIndex();
  const ev=evidence(conditionLecture,item),images=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES||{};
  const visual=(window.VPQ_PATH_URINARY_VISUALS?.card?.(item,conditionLecture)||window.VPQ_PATH_HEPATIC_VISUALS?.card?.(item,conditionLecture)||window.VPQ_PATH_PANCREAS_VISUALS?.card?.(item,conditionLecture)||'');
- const imageRefs=[...(window.VPQ_PATH_EXAM3_HEPATIC_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[]),...(window.VPQ_PATH_EXAM3_PANCREAS_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[])].filter(x=>x.title===item.title);
+ const imageRefs=[...(window.VPQ_PATH_EXAM3_HEPATIC_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[]),...(window.VPQ_PATH_EXAM3_PANCREAS_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[]),...(window.VPQ_PATH_EXAM5_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[])].filter(x=>x.title===item.title);
  const imageChecklist=imageRefs.length?'<div style="background:#f6f9fc;border:1px solid #d1dfef;border-radius:10px;padding:10px;margin:9px 0"><b>📷 Lecture-image recognition checklist · not an attached photograph</b>'+imageRefs.map(x=>'<p style="font-size:12px;line-height:1.45;margin:8px 0"><b>Lecture '+safe(conditionLecture)+' slides '+safe(x.slides)+'</b> · '+safe(x.modality)+'<br><b>Identify:</b> '+safe(x.look)+'<br><b>Ask yourself:</b> '+safe(x.question)+'</p>').join('')+'<small>Use the editable lecture photo slots to attach and publish credited images. The original PDF remains the visual reference until an image is attached.</small></div>':'';
  const refBlock=ev.linked.map(x=>{
   const p=images[x.id]||{};
@@ -474,7 +474,7 @@ function conditionDetail(){
  '<div class="buttonrow"><button data-pathdiff-condition-back="1">← Full lecture inventory</button><button data-pathdiff-list="1">Cases</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-condition-rename="1" style="background:#fff1dc">✏️ Rename this condition</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-recall-start="1">🧠 Test me on this topic</button></div>'+
- (/^(3[1-9]|40|41)$/.test(conditionLecture)?'<div class="buttonrow"><button data-pathdiff-photo-lecture="1" style="background:#e3f4f7">📷 Open lecture photo slots / publish images</button></div>':'')+
+ (/^(3[1-9]|4[0-9]|5[0-8])$/.test(conditionLecture)?'<div class="buttonrow"><button data-pathdiff-photo-lecture="1" style="background:#e3f4f7">📷 Open lecture photo slots / publish images</button></div>':'')+
  '<div class="buttonrow"><button data-pathdiff-create-topic="1" style="background:#e6f6ec">➕ Create differential card for this disease</button></div>'+
  '<div style="background:#f0f6fb;padding:10px;border:1px solid #c8dbeb;border-radius:10px;margin:9px 0"><b>Instructor-based lesson</b><p style="font-size:13px;margin:5px 0">Lecture '+safe(conditionLecture)+' · slides '+safe(item.slides||'not specified')+'</p><small>Specimen card: '+(ev.specimen?'Matched':'Not matched')+' · Dedicated case: '+(ev.linked.length?'Matched':'Not yet')+' · Attached reference: '+(ev.embedded?'Yes':'Not yet')+'</small></div>'+
  visual+imageChecklist+
