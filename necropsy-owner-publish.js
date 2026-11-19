@@ -27,7 +27,7 @@ function getCustomConditions(lecture){
  }));
 }
 function newConditionEditor(lecture='68'){
- const options=[...Array.from({length:10},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+ const options=[...Array.from({length:11},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
  show('➕ Add pathology condition to lecture',
  '<p>Create a <b>lecture condition</b> (not a four-choice differential case). It will appear in the lecture inventory and coverage audit after owner publishing. Photographs can be added separately to the specimen atlas.</p>'+
  '<label>Lecture<select id="npCondLecture">'+options.map(n=>'<option value="'+n+'"'+(n===String(lecture)?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
@@ -59,7 +59,7 @@ async function publishCondition(c,token){
 function getCustomSpecimens(){return Object.values(published.customSpecimens||{}).filter(c=>c&&c.id&&c.title);}
 function getHiddenSpecimens(){return Array.isArray(published.hiddenSpecimens)?published.hiddenSpecimens:[];}
 function newSpecimenEditor(kind='normal',lecture='67'){
- const normal=kind==='normal',lectures=[...Array.from({length:10},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+ const normal=kind==='normal',lectures=[...Array.from({length:11},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
  show('➕ Add '+(normal?'normal reference':'pathology specimen')+' card',
  '<p>Publish a permanent '+(normal?'healthy anatomy/histology reference':'gross and histology study specimen')+' to the <b>Specimen Cabinet</b>. A photo is optional: add gross and H&E images later using Edit / Publish Photos. Existing cards are never overwritten.</p>'+
  '<label>Card name<input id="npSpecTitle" style="display:block;width:100%" placeholder="e.g. Normal feline liver"></label>'+
@@ -123,8 +123,8 @@ function publishedCaseImage(id){return photosOf(getCase(id))[0]?.url||''}
 function specimenPhoto(id){return photosOf(getSpecimen(id))[0]?.url||''}
 function photosOf(record){return Array.isArray(record?.photos)?record.photos:(record?.photo?.url?[record.photo]:[])}
 function photoTagsHTML(prefix,existingLectures=[],existingSystems=[]){
- const lectures=[...Array.from({length:10},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
- const systems=['Urinary / Renal','Liver / Hepatobiliary','CNS / Neurology','Peripheral nerves','Skin / Integument','Male reproduction','Female reproduction / Mammary','Placenta / Fetus','Eye','Ear','Musculoskeletal','Other'];
+ const lectures=[...Array.from({length:11},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+ const systems=['Urinary / Renal','Liver / Hepatobiliary','Pancreas / Endocrine','CNS / Neurology','Peripheral nerves','Skin / Integument','Male reproduction','Female reproduction / Mammary','Placenta / Fetus','Eye','Ear','Musculoskeletal','Other'];
  return '<fieldset style="border:1px solid #cbd9e8;border-radius:10px;margin:9px 0;padding:9px"><legend><b>Lecture & system tags</b></legend>'+
  '<p style="font-size:12px">Select all lectures where this image is relevant. Tags make an image findable without changing its original condition or source.</p>'+
  '<div style="display:flex;gap:9px;flex-wrap:wrap">'+lectures.map(n=>'<label style="font-size:12px"><input type="checkbox" data-np-tag-lecture="'+esc(prefix)+'" value="'+n+'"'+(existingLectures.includes(n)?' checked':'')+'> L'+n+'</label>').join('')+'</div>'+
@@ -170,7 +170,7 @@ function photoLibrary(){
  show('📷 Published pathology photo library',
  '<p class="tiny">Filter published images by lecture or body system. The same photo can be tagged for multiple lectures; its original condition and credit stay attached. This includes only genuinely published photos, not empty image references.</p>'+
  '<div class="buttonrow"><button data-np-library-back="1">← Gross atlas</button><button data-np-library-differentials="1">Differential cases</button></div>'+
- '<label style="display:block">Lecture <select data-np-library-lecture="1" style="width:100%;padding:7px"><option value="all">All lectures</option>'+[...Array.from({length:10},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))].map(n=>'<option value="'+n+'"'+(photoLecture===n?' selected':'')+'>L'+n+'</option>').join('')+'</select></label>'+
+ '<label style="display:block">Lecture <select data-np-library-lecture="1" style="width:100%;padding:7px"><option value="all">All lectures</option>'+[...Array.from({length:11},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))].map(n=>'<option value="'+n+'"'+(photoLecture===n?' selected':'')+'>L'+n+'</option>').join('')+'</select></label>'+
  '<label style="display:block">Body system <select data-np-library-system="1" style="width:100%;padding:7px"><option value="all">All systems</option>'+allSystems.map(n=>'<option value="'+esc(n)+'"'+(photoSystem===n?' selected':'')+'>'+esc(n)+'</option>').join('')+'</select></label>'+
  '<label style="display:block">Condition / photo search <input data-np-library-search="1" value="'+esc(photoSearch)+'" style="width:100%;padding:8px" placeholder="e.g. WNV, spinal cord, dermatitis"></label>'+
  '<p class="tiny">'+selected.length+' matching published image'+(selected.length===1?'':'s')+' ('+all.length+' total).</p>'+
@@ -236,7 +236,7 @@ async function editor(type,id){
 
 
 function newCaseEditor(seed={}){
- const lectures=[...Array.from({length:10},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+ const lectures=[...Array.from({length:11},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
  show('➕ Create differential diagnosis card',
  '<p>Create a permanent teaching case with <b>four genuinely competing diagnoses</b>. The first is the best-supported choice. Photos are optional and can be added later through the normal multi-photo editor.</p>'+
  '<label>Card title<input id="ncTitle" style="width:100%" value="'+esc(seed.title||'')+'" placeholder="e.g. Meningitis: purulent versus nonsuppurative"></label>'+
