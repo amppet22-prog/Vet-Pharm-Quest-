@@ -219,6 +219,7 @@ function shell(body,title){
 function home(){
  shell('<div style="padding:13px;background:#f1f7ff;border:1px solid #c5d9f3;border-radius:12px"><h3 style="margin:0 0 8px">🔬 Start with the normal cell, then explain the lesion</h3><p>These are <b>General pathology foundations (Lectures 1–16)</b>, separate from the Exam 7 atlas. Your professor emphasizes core concepts, clinical implications, and recognizing both gross and microscopic lesions.</p></div>'+
  Object.entries(pages).map(([k,p])=>'<button data-pathfound="'+k+'" style="display:block;text-align:left;width:100%;padding:13px;margin-top:9px"><b>'+esc(p.title)+'</b><small style="display:block">'+esc(p.summary)+'</small><small>'+esc(p.source)+'</small></button>').join('')+
+ '<button data-pathfound="fc-all" style="display:block;width:100%;margin:9px 0;padding:13px;background:#eaf4ff"><b>🃏 Flashcards for selected lecture</b><small style="display:block">Flip cards, check answers, and review missed concepts.</small></button>'+ 
  '<button data-pathfound-visual="9" style="display:block;width:100%;text-align:left;margin-top:9px;padding:12px;background:#fff9e9;border:1px solid #e1cfa2"><b>🧠 Morphologic vs Etiologic Diagnosis · Visual recognition practice (uploaded file 9)</b><small style="display:block">Describe → name lesion process → supported cause; lecture 9 methodology cards</small></button>'+ 
  '<p style="font-size:12px;color:#587087">Original teaching paraphrases from your annotated lecture PDFs. No instructor photographs copied to the public game. The Lecture 9 Morphologic vs Etiologic Diagnosis format remains the reference for formal naming.</p>','Overview');
 }
@@ -227,8 +228,49 @@ function showLesson(k){
  shell('<h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p>'+
  p.sections.map((item,i)=>'<details style="margin:7px 0;border:1px solid #d2e2ef;padding:10px 12px;border-radius:10px" '+(i===0?'open':'')+'><summary><b>'+esc(item[0])+'</b></summary><p>'+esc(item[1])+'</p></details>').join('')+
  '<p style="font-size:12px;color:#5b7488">Source: '+esc(p.source)+'. Text is paraphrased for studying; slides may include annotated examples and images not reproduced here.</p>'+
- ( ({death:'5',growth:'6',metaplasia:'7',accumulations:'8',edema:'10',hemostasis1:'11',hemostasis2:'12',hemorrhage:'13',ischemia:'14',vascular:'15',cases16:'16'})[k]?'<button data-pathfound-visual="'+({death:'5',growth:'6',metaplasia:'7',accumulations:'8',edema:'10',hemostasis1:'11',hemostasis2:'12',hemorrhage:'13',ischemia:'14',vascular:'15',cases16:'16'})[k]+'" style="margin:7px 5px 7px 0;background:#eaf2ff;border:1px solid #9cb9db;font-weight:700">🔬 Open this lecture’s visual reference cards</button>':'')+'<button data-pathfound="quiz">🧠 Check understanding</button>',p.title);
+ ( ({death:'5',growth:'6',metaplasia:'7',accumulations:'8',edema:'10',hemostasis1:'11',hemostasis2:'12',hemorrhage:'13',ischemia:'14',vascular:'15',cases16:'16'})[k]?'<button data-pathfound-visual="'+({death:'5',growth:'6',metaplasia:'7',accumulations:'8',edema:'10',hemostasis1:'11',hemostasis2:'12',hemorrhage:'13',ischemia:'14',vascular:'15',cases16:'16'})[k]+'" style="margin:7px 5px 7px 0;background:#eaf2ff;border:1px solid #9cb9db;font-weight:700">🔬 Open this lecture’s visual reference cards</button>':'')+'<button data-pathfound="fc-all" style="background:#ebf5ff">🃏 Quick recall flashcards</button><button data-pathfound="quiz">🩺 Clinical questions</button>',p.title);
 }
+
+/* Real flip-card study mode: question front, answer back, spaced review of missed cards.
+   Stable card IDs preserve owner edits and review records across reloads. */
+let fcDeck=[],fcIndex=0,fcFlipped=false,fcMissed=false;
+const fcStorageKey='vpq-path-foundations-missed-v1';
+function fcMarks(){try{return JSON.parse(localStorage.getItem(fcStorageKey)||'{}')||{}}catch(_){return {}}}
+function fcMark(id,miss){const m=fcMarks();if(miss)m[id]=true;else delete m[id];try{localStorage.setItem(fcStorageKey,JSON.stringify(m))}catch(_){}}
+function fcSource(){const source=Array.isArray(window.VPQ_PATH_FOUNDATION_FLASHCARDS)?window.VPQ_PATH_FOUNDATION_FLASHCARDS:[];const key=lesson.startsWith('exam2Master_')?'exam2_'+lesson.slice('exam2Master_'.length):lesson;const cards=source.filter(x=>x.lecture===key);return window.VPQ_FLASHCARD_OWNER?.apply?.('pathology',key,cards)||cards}
+function fcStart(review=false){
+ fcMissed=review;fcFlipped=false;fcIndex=0;
+ let arr=fcSource().slice();
+ if(review){const missed=fcMarks();arr=arr.filter(x=>missed[x.id])}
+ else{const marks=fcMarks();arr=arr.map(x=>({x,random:Math.random()})).sort((a,b)=>Number(!!marks[b.x.id])-Number(!!marks[a.x.id])||a.random-b.random).map(v=>v.x)}
+ fcDeck=arr;fcRender();
+}
+function fcRender(){
+ const heading=pages[lesson]?.title||'Pathology Foundations';
+ if(!fcDeck.length||fcIndex>=fcDeck.length){
+  shell('<h3>'+(fcDeck.length?'Review complete':'No missed flashcards yet')+'</h3>'+
+   '<p>'+(fcDeck.length?'You finished '+fcDeck.length+' cards. Try a clinical question next.':'Use Start all cards to begin recalling the lecture facts.')+'</p>'+
+   '<div class="buttonrow"><button data-pathfound="fc-all">↺ Study all cards</button><button data-pathfound="fc-missed">Review missed</button><button data-pathfound="quiz">🩺 Clinical questions</button><button data-pathfound="'+esc(lesson)+'">← Lecture notes</button></div>','Flashcards');return}
+ const card=fcDeck[fcIndex],pct=Math.round(100*(fcIndex+1)/fcDeck.length);
+ shell('<div style="display:flex;flex-wrap:wrap;gap:6px"><button data-pathfound="'+esc(lesson)+'">← Notes</button><button data-pathfound="fc-all">Shuffle all</button><button data-pathfound="fc-missed">Missed</button><button data-pathfound="fc-edit">✏️ Edit / publish</button><button data-pathfound="fc-new">➕ Add card</button></div>'+
+ '<p style="margin:8px 0 5px;font-size:12px;color:#526984"><b>'+esc(heading)+'</b> · Card '+(fcIndex+1)+' of '+fcDeck.length+(fcMissed?' · missed review':'')+'</p>'+
+ '<div style="height:5px;background:#e1ebf5;border-radius:7px;overflow:hidden;margin-bottom:11px"><div style="height:100%;width:'+pct+'%;background:#7297d5"></div></div>'+
+ '<button data-pathfound="fc-flip" aria-label="Flip study card to '+(fcFlipped?'question':'answer')+'" style="width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:245px;padding:22px 18px;border:2px solid #b7cbe3;border-radius:17px;background:'+(fcFlipped?'#f4fff8':'#f4f8ff')+';box-shadow:0 6px 16px rgba(44,70,112,.08);gap:14px;white-space:normal">'+
+ '<span style="font-size:11px;letter-spacing:.1em;font-weight:850;color:#5e7895">'+(fcFlipped?'BACK · ANSWER':'FRONT · QUESTION')+'</span>'+
+ '<span style="font-size:clamp(17px,2.4vw,23px);line-height:1.4;max-width:650px;font-weight:800;color:#283d5f">'+esc(fcFlipped?(card.answer||card.back):(card.prompt||card.front))+'</span>'+
+ (fcFlipped&&card.why?'<span style="font-size:13px;max-width:620px;line-height:1.5;padding-top:11px;border-top:1px solid #c7d7e6;font-weight:500"><b>Why it matters:</b> '+esc(card.why)+'</span>':'')+
+ '<span style="color:#68809b;font-size:12px">'+(fcFlipped?'Tap to see the question again':'Tap to reveal the answer')+'</span></button>'+
+ '<p class="tiny" style="text-align:center">'+esc(card.slide||'Instructor lecture')+'</p>'+
+ '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:11px 0">'+(fcFlipped?'<button data-pathfound="fc-again" style="background:#fff1e9">↺ Study again</button><button data-pathfound="fc-known" style="background:#e3f6e9">✓ Got it</button>':'<button data-pathfound="fc-flip" style="background:#dfedff">Flip card</button>')+'</div>'+
+ '<div class="buttonrow"><button data-pathfound="fc-prev" '+(fcIndex===0?'disabled':'')+'>← Previous</button><button data-pathfound="fc-skip">Skip →</button><button data-pathfound="quiz">🩺 Apply in clinical questions</button></div>','Flashcards');
+}
+function fcEdit(isNew){
+ const c=isNew?null:fcDeck[fcIndex];
+ if(!window.VPQ_FLASHCARD_OWNER?.editor){shell('<p>Owner editor is not available. Reload the game to use this feature.</p><button data-pathfound="fc-all">Back to cards</button>','Edit flashcard');return}
+ const key=lesson.startsWith('exam2Master_')?'exam2_'+lesson.slice('exam2Master_'.length):lesson;
+ window.VPQ_FLASHCARD_OWNER.editor('pathology',key,c,()=>fcRender());
+}
+
 function practice(){
  const pool=questions.filter(q=>q[0]===lesson);
  if(qindex>=pool.length){shell('<h3>✅ Finished this lecture’s practice</h3><p>Review the explanation for each answer, then choose another lecture.</p><button data-pathfound="reset">Retry</button>','Practice complete');return}
@@ -248,6 +290,14 @@ function init(api){
   if(b.dataset.pathfoundchoice!==undefined&&!revealed){choice=Number(b.dataset.pathfoundchoice);revealed=true;practice();return}
   const act=b.dataset.pathfound;
   if(act==='home')return home();
+  if(act==='fc-all')return fcStart(false);
+  if(act==='fc-missed')return fcStart(true);
+  if(act==='fc-flip'){fcFlipped=!fcFlipped;return fcRender()}
+  if(act==='fc-prev'){fcIndex=Math.max(0,fcIndex-1);fcFlipped=false;return fcRender()}
+  if(act==='fc-skip'){if(fcDeck[fcIndex])fcMark(fcDeck[fcIndex].id,true);fcIndex++;fcFlipped=false;return fcRender()}
+  if(act==='fc-again'||act==='fc-known'){if(fcDeck[fcIndex])fcMark(fcDeck[fcIndex].id,act==='fc-again');fcIndex++;fcFlipped=false;return fcRender()}
+  if(act==='fc-edit')return fcEdit(false);
+  if(act==='fc-new')return fcEdit(true);
   if(pages[act]){qindex=0;revealed=false;choice=null;return showLesson(act)}
   if(act==='quiz'||act==='reset'){qindex=0;revealed=false;choice=null;return practice()}
   if(act==='next'){qindex++;revealed=false;choice=null;return practice()}
