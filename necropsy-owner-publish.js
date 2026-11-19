@@ -208,7 +208,14 @@ async function editor(type,id){
  (type==='specimen'?'<p class="tiny">Etiology categories: comma-separated IDs (bacterial, viral, fungal, protozoal, helminthic, arthropod, neoplastic, immune, toxic, nutritional, endocrine, vascular, traumatic, developmental, degenerative, idiopathic). Enter multiple if needed. Etiology certainty: differential / associated / confirmed. Morphologic diagnosis remains a separate field.</p>':'')+
  (type==='specimen'?'<p class="tiny">Species occurrence is stored as JSON by the atlas editor (e.g. {"cat":"reported"}); for reliable changes use the visual atlas editor first. Disease ID should match across manifestations of the same named disease. Unknown frequency is not zero prevalence.</p>':'')+
  '<h4>📷 Currently published ('+existing.length+')</h4>'+
- (existing.length?existing.map((p,i)=>'<div style="display:flex;gap:9px;align-items:start;padding:8px;border:1px solid #cdd9e6;border-radius:9px;margin:6px 0"><img src="'+esc(p.url)+'" style="width:90px;height:85px;object-fit:contain" alt="'+esc(p.caption||'')+'"><div style="flex:1;font-size:12px"><b>'+esc(p.type||'image')+'</b><p>'+esc(p.caption||'')+'</p><small>'+esc(p.credit||'')+'</small>'+photoTagsHTML('existing-'+i,p.lectures||[],p.systems||[])+'<label style="display:block"><input type="checkbox" data-np-remove="'+i+'"> Remove this published photo</label></div></div>').join(''):'<p>No published photos yet.</p>')+
+ (existing.length?'<p class="tiny"><b>Edit any existing photo below.</b> Change its caption, credit, source, or type without adding a new image. All other photos and your teaching text stay in place unless you explicitly remove or replace them.</p>':'')+
+ (existing.length?existing.map((p,i)=>'<div style="display:flex;gap:9px;align-items:start;padding:8px;border:1px solid #cdd9e6;border-radius:9px;margin:6px 0"><img src="'+esc(p.url)+'" style="width:90px;height:85px;object-fit:contain" alt="'+esc(p.caption||'Published pathology photo')+'"><div style="flex:1;min-width:0;font-size:12px"><b>Published photo '+(i+1)+'</b>'+
+ '<label style="display:block;margin:5px 0">Caption for this photo<textarea rows="2" data-np-photo-caption="'+i+'" style="display:block;width:100%">'+esc(p.caption||'')+'</textarea></label>'+
+ '<label style="display:block;margin:5px 0">Photo credit / license<input data-np-photo-credit="'+i+'" style="display:block;width:100%;padding:6px" value="'+esc(p.credit||'')+'"></label>'+
+ '<label style="display:block;margin:5px 0">Original source URL<input data-np-photo-source="'+i+'" style="display:block;width:100%;padding:6px" placeholder="https://… (if applicable)" value="'+esc(p.source||'')+'"></label>'+
+ '<label style="display:block;margin:5px 0">Photo type<select data-np-photo-type="'+i+'" style="display:block;width:100%;padding:6px">'+['gross','histology','clinical','illustration'].map(t=>'<option value="'+t+'"'+(t===(p.type||'gross')?' selected':'')+'>'+({gross:'Gross',histology:'Histology / H&E',clinical:'Clinical',illustration:'Illustration'}[t])+'</option>').join('')+'</select></label>'+
+ photoTagsHTML('existing-'+i,p.lectures||[],p.systems||[])+
+ '<label style="display:block;margin-top:7px"><input type="checkbox" data-np-remove="'+i+'"> Remove this published photo</label></div></div>').join(''):'<p>No published photos yet.</p>')+
  (existing.length?'<label style="display:block;margin:8px 0"><input type="checkbox" id="npOwnerReplaceAll"> Replace all published photos with new uploads (intentional)</label>':'')+
  '<h4>Add photos (optional)</h4>'+photoTagsHTML('new',[String(base.lecture||lp?.[1]||'68')],base.system?[String(base.system)]:[])+ '<p style="font-size:12px">For local image files, just select photos, confirm publishing permission, and enter your publishing password. Captions, photo credit and source are optional. External image links still need the source page.</p>'+
  (pending.localPhoto?'<label style="display:block"><input type="checkbox" id="npOwnerUseDraft"> Include my saved local draft photo</label><img src="'+esc(pending.localPhoto)+'" alt="Local photo draft" style="max-width:100%;max-height:110px;object-fit:contain">':'')+
@@ -302,6 +309,17 @@ function readFields(){
  const edits={};root.querySelectorAll('[data-np-text]').forEach(x=>{edits[x.dataset.npText]=String(x.value||'').slice(0,9000)});
  const tags=tagsFrom(root,'new');
  const existingTags=Array.from(root.querySelectorAll('[data-np-remove]')).map(x=>tagsFrom(root,'existing-'+x.dataset.npRemove));
+ const existingPhotoEdits=Array.from(root.querySelectorAll('[data-np-photo-caption]')).map((x,i)=>({
+  caption:String(x.value||'').trim().slice(0,1000),
+  credit:String(root.querySelector('[data-np-photo-credit="'+i+'"]')?.value||'').trim().slice(0,500),
+  source:String(root.querySelector('[data-np-photo-source="'+i+'"]')?.value||'').trim().slice(0,1200),
+  type:String(root.querySelector('[data-np-photo-type="'+i+'"]')?.value||'gross')
+ }));
+ for(const p of existingPhotoEdits){
+  if(p.source&&!goodUrl(p.source))throw Error('An existing photo source must use an HTTPS URL, or be left blank.');
+  if(!['gross','histology','clinical','illustration'].includes(p.type))throw Error('Select a valid photo type.');
+ }
+
  const newCount=files.length+(draftData?1:0)+(external?1:0);
  if(files.length>12)throw Error('Please select at most 12 files per upload.');
  for(const file of files)if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>20000000)throw Error('Use JPEG, PNG or WebP photos under 20 MB each.');
@@ -316,7 +334,7 @@ function readFields(){
  return {files,filesMeta,draftData,external:goodUrl(external),source:goodUrl(source),
   credit:(credit||'Owner-supplied image; publication rights confirmed').slice(0,500),
   caption:(caption||'Pathology study reference').slice(0,1000),
-  kind,replaceAll,remove,edits,newCount,tags,existingTags};
+  kind,replaceAll,remove,edits,newCount,tags,existingTags,existingPhotoEdits};
 }
 
 async function imageBase64(f){
@@ -339,7 +357,7 @@ async function publish(job,fields,token,update){
  manifest.lectures=manifest.lectures||{};
  const dir=job.type==='case'?'cases':job.type==='lecture'?'lectures':'specimens';
  const prev=manifest[dir][job.id]||{},oldPhotos=photosOf(prev);
- let photos=fields.replaceAll?[]:oldPhotos.map((p,i)=>({...p,...(fields.existingTags?.[i]||{})})).filter((p,i)=>!fields.remove.includes(i));
+ let photos=fields.replaceAll?[]:oldPhotos.map((p,i)=>({...p,...(fields.existingTags?.[i]||{}),...(fields.existingPhotoEdits?.[i]||{})})).filter((p,i)=>!fields.remove.includes(i));
  const incoming=[...fields.files.map((f,i)=>({file:f,name:f.name,caption:fields.filesMeta[i]?.caption||'',kind:fields.filesMeta[i]?.kind||fields.kind})),...(fields.draftData?[{data:fields.draftData,name:'saved-local-draft.jpg'}]:[]),...(fields.external?[{url:fields.external,name:'linked-photo'}]:[])];
  if(photos.length+incoming.length>30)throw Error('This condition can hold up to 30 published photos; remove some first.');
  for(let i=0;i<incoming.length;i++){
