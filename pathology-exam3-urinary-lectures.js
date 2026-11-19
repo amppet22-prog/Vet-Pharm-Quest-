@@ -70,4 +70,39 @@ const rows=[
 ];
 for(let i=0;i<rows.length;i++){const r=rows[i],id='exam3-urinary-'+r[0]+'-'+String(i+1).padStart(2,'0');if(specimens.some(x=>x.id===id))continue;specimens.push({id,lecture:r[0],title:r[1],gross:r[2],dx:r[3],histo:r[4],why:r[5],source:'Uploaded instructor pathology Lecture '+r[0]+'; text-only slide-grounded specimen; no source photo bundled'});}
 }
+
+/* Conservative specimen filter defaults. Source-linked hosts are not prevalence estimates.
+   Owner-published overrides are applied separately by the existing atlas editor. */
+const speciesBySpecimen={
+'Glomerular amyloidosis':['dog','cat'],
+'Embolic suppurative glomerulonephritis':['horse','pig','sheep','goat'],
+'Canine herpesvirus renal lesions':['dog'],
+'Copper-associated hemoglobinuric nephrosis':['sheep'],
+'Ethylene glycol nephrosis':['dog','cat'],
+'Acute pyelonephritis':['dog','cat'],
+'Renal FIP':['cat'],
+'Renal lymphoma':['cat','cattle'],
+'Renal carcinoma':['dog'],
+'Nephroblastoma':['pig','poultry','dog'],
+'Acute bacterial cystitis':['dog','cat','horse','cattle'],
+'Polypoid chronic cystitis':['dog'],
+'Urothelial carcinoma':['dog'],
+'Urolith-associated obstruction':['goat','sheep','cat'],
+'Uremic stomatitis':['horse','cattle','dog','cat'],
+'Uremic gastritis':['dog','cat'],
+'Intercostal uremic mineralization':['dog','cat']
+};
+if(Array.isArray(specimens))for(const x of specimens){
+if(!/^exam3-urinary-/.test(x.id))continue;
+x.organSystem='renal';
+x.affectedOrgan=/Uremic stomatitis/.test(x.title)?'Oral mucosa':/Uremic gastritis/.test(x.title)?'Stomach':/Intercostal/.test(x.title)?'Thoracic pleura':/cystitis|Urothelial|Urolith/i.test(x.title)?'Urinary bladder and lower urinary tract':'Kidney';
+const hosts=speciesBySpecimen[x.title]||[];
+if(hosts.length){x.speciesOccurrence=JSON.stringify(Object.fromEntries(hosts.map(h=>[h,'reported'])));if(hosts.length>1)x.hostScope='multiple';}
+if(/carcinoma|lymphoma|nephroblastoma/i.test(x.title))x.conditionType='neoplasm';
+else if(/infarct/i.test(x.title))x.conditionType='vascular';
+else if(/tox|Ethylene glycol|Copper/i.test(x.title))x.conditionType='toxic';
+else if(/hydronephrosis|obstruction/i.test(x.title))x.conditionType='malformation';
+else if(/herpesvirus|pyelonephritis|cystitis|glomerulonephritis|FIP/i.test(x.title))x.conditionType='infectious';
+}
+
 })();
