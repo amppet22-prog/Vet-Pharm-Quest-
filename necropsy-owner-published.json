@@ -2512,6 +2512,92 @@
       },
       "updated": "2026-11-19T07:35:26.032Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-31": {
+      "title": "Thiamine deficiency — ruminant polioencephalomalacia",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-31-1795074810146-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-19 024354.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-31"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-31-1795074811381-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-19 024435.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-31"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-31-1795074812444-2.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-19 024626.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-31"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-31-1795074810146-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-19 024354.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-31"
+      },
+      "text": {
+        "title": "Thiamine deficiency — ruminant polioencephalomalacia",
+        "gross": "**Polioencephalomalacia:** Gray cerebral cortex becomes yellow and soft, with autofluorescence under UV. \nEarly swelling flattens gyri; later cortical separation at gray-white junction (8–10 days) ",
+        "dx": "Working identification: Thiamine deficiency — ruminant polioencephalomalacia. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Ill add later ",
+        "why": "Dietary change! Animals fed rations rich in carbohydrates with little roughage. Can be associated with clinical or subclinical acidosis that may precipitate changes in the rumen microflora. \n",
+        "visualClue": "",
+        "compare": "",
+        "notes": "Young aimals: prior to estabilishing ruminal flora, rumen microbs are unable to synthezise thiamine\nAdults:  grain overload and overgrowth of thiaminase producing bacteria or via ingestion of thiaminase containing plants.\nCS: Depression, stupor, ataxis, head pressing, apparent cortical blindess, opisthotonos, recumbency with paddling and then death.\n\nRuminants, with goats less affected. ",
+        "etiologyCategories": [
+          "nutritional"
+        ],
+        "etiologyAgents": "Thiamine deficiency ",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"cattle\":\"common\",\"sheep\":\"common\",\"goat\":\"occasional\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T07:53:33.839Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
