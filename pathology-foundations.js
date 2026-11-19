@@ -130,6 +130,7 @@ function shell(body,title){
 function home(){
  shell('<div style="padding:13px;background:#f1f7ff;border:1px solid #c5d9f3;border-radius:12px"><h3 style="margin:0 0 8px">🔬 Start with the normal cell, then explain the lesion</h3><p>These are <b>General pathology foundations (Lectures 1–7 and Accumulations)</b>, separate from the Exam 7 atlas. Your professor emphasizes core concepts, clinical implications, and recognizing both gross and microscopic lesions.</p></div>'+
  Object.entries(pages).map(([k,p])=>'<button data-pathfound="'+k+'" style="display:block;text-align:left;width:100%;padding:13px;margin-top:9px"><b>'+esc(p.title)+'</b><small style="display:block">'+esc(p.summary)+'</small><small>'+esc(p.source)+'</small></button>').join('')+
+ '<button data-pathfound-visual="9" style="display:block;width:100%;text-align:left;margin-top:9px;padding:12px;background:#fff9e9;border:1px solid #e1cfa2"><b>🧠 Morphologic vs Etiologic Diagnosis · Visual recognition practice (uploaded file 9)</b><small style="display:block">Describe → name lesion process → supported cause; lecture 9 methodology cards</small></button>'+ 
  '<p style="font-size:12px;color:#587087">Original teaching paraphrases from your annotated lecture PDFs. No instructor photographs copied to the public game. The Lecture 9 Morphologic vs Etiologic Diagnosis format remains the reference for formal naming.</p>','Overview');
 }
 function showLesson(k){
@@ -137,7 +138,7 @@ function showLesson(k){
  shell('<h3>'+esc(p.title)+'</h3><p>'+esc(p.summary)+'</p>'+
  p.sections.map((item,i)=>'<details style="margin:7px 0;border:1px solid #d2e2ef;padding:10px 12px;border-radius:10px" '+(i===0?'open':'')+'><summary><b>'+esc(item[0])+'</b></summary><p>'+esc(item[1])+'</p></details>').join('')+
  '<p style="font-size:12px;color:#5b7488">Source: '+esc(p.source)+'. Text is paraphrased for studying; slides may include annotated examples and images not reproduced here.</p>'+
- (k==='death'?'<button data-pathfound-visual="5" style="margin:7px 5px 7px 0;background:#eaf2ff;border:1px solid #9cb9db;font-weight:700">🔬 Open Lecture 5 visual specimen cards</button>':'')+'<button data-pathfound="quiz">🧠 Check understanding</button>',p.title);
+ ( ({death:'5',growth:'6',metaplasia:'7',accumulations:'8'})[k]?'<button data-pathfound-visual="'+({death:'5',growth:'6',metaplasia:'7',accumulations:'8'})[k]+'" style="margin:7px 5px 7px 0;background:#eaf2ff;border:1px solid #9cb9db;font-weight:700">🔬 Open this lecture’s visual reference cards</button>':'')+'<button data-pathfound="quiz">🧠 Check understanding</button>',p.title);
 }
 function practice(){
  const pool=questions.filter(q=>q[0]===lesson);
@@ -151,7 +152,7 @@ function practice(){
 function init(api){
  if(host)return;host=api;
  api.body.addEventListener('click',e=>{
-  if(e.target.closest('[data-pathfound-visual]')){e.preventDefault();e.stopImmediatePropagation();window.VPQ_PATH_EXAM7?.studyLecture?.('5');return}
+  if(e.target.closest('[data-pathfound-visual]')){e.preventDefault();e.stopImmediatePropagation();window.VPQ_PATH_EXAM7?.studyLecture?.(e.target.closest('[data-pathfound-visual]').dataset.pathfoundVisual);return}
   const b=e.target.closest('[data-pathfound],[data-pathfoundchoice]');
   if(!b)return;
   e.preventDefault();e.stopImmediatePropagation();
