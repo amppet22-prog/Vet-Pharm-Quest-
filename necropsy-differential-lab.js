@@ -75,7 +75,7 @@ function umbrellaDetail(){
 
 /* Lecture coverage uses live lecture data, not a shortened list. */
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
-const LECTURES=[...Array.from({length:11},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+const LECTURES=[...Array.from({length:19},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
 'n41-acute':['Acute pancreatitis and necrosis','Peripancreatic fat saponification'],
 'n41-chronic':['Chronic pancreatitis'],
