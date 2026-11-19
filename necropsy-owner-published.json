@@ -1753,11 +1753,11 @@
       },
       "text": {
         "gross": "An abnormal dilatation of the central canal of the spinal cord that leads to the formation of a cavity in which CSF may accumulate",
-        "dx": "Hydromyelia",
-        "histo": "Central canal absent",
+        "dx": "Hydromyelia ",
+        "histo": "Central canal absent, lined by ependymal cells (the normal lining of the central canal).",
         "why": "Infectious or genetic injury that results in damage to ependymal cells lining the canal--> disruption of the normal flow of CSF--> abnormal CSF pressure gradients within the central canal.\nCongenital or acquired\nAcquired: **Rare** and is caused by an obstruction of the central canal CSF flow (inflammation or neoplasia)",
-        "visualClue": "",
-        "compare": "",
+        "visualClue": "Dilation of the central canal ",
+        "compare": "Syringomeylia ",
         "notes": "Clinical signs in young animals with congenital hydromyelia vary, depending on the location and size of the dilatation of the central canal in the spinal cord",
         "etiologyCategories": [
           "bacterial",
@@ -1779,7 +1779,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T04:46:28.657Z",
+      "updated": "2026-11-19T05:25:54.220Z",
       "approvedBy": "amppet22-prog"
     },
     "pathx-69-14": {
