@@ -2103,6 +2103,66 @@
       },
       "updated": "2026-11-19T05:39:34.618Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-9": {
+      "title": "Meningoencephalocele",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-9-1795071355210-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-9"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-9-1795071355210-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-9"
+      },
+      "text": {
+        "gross": "Dorsal midline cranial defect (cranium bifidum) where meningeal and/or brain tissue protrude from a sac (-cele). \n",
+        "dx": "Working identification: Meningoencephalocele. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "why": "Hereditary in pigs and cats\nGriseofulvin TX in pregnant cats during the first week of gestation\nThey are uncommon and sporadic in most domestic species. ",
+        "visualClue": "",
+        "compare": "",
+        "notes": "**Meningocele-** lined by the meninges\n**Meningoencephalocele**- meninges accompanied by a part of the brain ",
+        "etiologyCategories": [
+          "toxic",
+          "developmental"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"cat\":\"common\",\"pig\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T06:55:56.718Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
