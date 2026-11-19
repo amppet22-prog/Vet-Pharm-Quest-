@@ -2716,6 +2716,66 @@
       },
       "updated": "2026-11-19T08:07:05.275Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-70-7": {
+      "title": "Peritonitis-induced autonomic dysfunction",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-70-7-1795077022826-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Nerve fiber bundle edematous, affected neurons have central chromatolysis",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "70"
+          ],
+          "systems": [],
+          "conditionId": "pathx-70-7"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-70-7-1795077022826-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Nerve fiber bundle edematous, affected neurons have central chromatolysis",
+        "type": "histology",
+        "external": false,
+        "lectures": [
+          "70"
+        ],
+        "systems": [],
+        "conditionId": "pathx-70-7"
+      },
+      "text": {
+        "title": "Peritonitis-induced autonomic dysfunction",
+        "gross": "Normally no gross lesions in PNS. ",
+        "dx": "Working identification: Peritonitis-induced autonomic dysfunction. Specimen site: Peripheral nerve / autonomic ganglion. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Central chromatolysis, edematous nerve bundles, and hyperplasia of supporting cells. May reverse if peritonitis resolves.\nLook at the specific nerve or axon in the center. Significantly smaller and has a lot of clear space (edema) ",
+        "why": "GI localization. Degeneration of autonomic neurons in the myenteric and submucosal plexus in animals with peritonitis. Thought to arise from inflammatory cytokine-mediated injury to ANS neurons. May cause alterations of intestinal motility. ",
+        "visualClue": "Affected neurons exhibit central *chromatolysis*\nNerve fiber bundles are *edematous *",
+        "compare": "",
+        "notes": "Dysautonomia: need clinical history and supporting information. \nDegree of neuronal degeneartion may be related to the severity and type of inflammation response and the ability of those inflammatory mediators to reach the plexus. ",
+        "etiologyCategories": [
+          "idiopathic"
+        ],
+        "etiologyAgents": "Dyasutonmia ",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "pns",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T08:30:24.591Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
