@@ -312,7 +312,11 @@ function coverageAll(){
 function conditionIndex(){
  const sections=lectureConditions(),facts=sections.map(x=>evidence(conditionLecture,x));
  const summary=coverageAll(),total=summary.reduce((a,x)=>a+x.teaching,0);
- const displayed=sections.map((x,i)=>({x,i,ev:facts[i]})).filter(({ev})=>conditionGap==='all'||conditionGap==='case'&&!ev.linked.length||conditionGap==='photo'&&!ev.embedded);
+ const displayed=sections.map((x,i)=>({x,i,ev:facts[i]}))
+ .filter(({ev})=>conditionGap==='all'||conditionGap==='case'&&!ev.linked.length||conditionGap==='photo'&&!ev.embedded)
+ .sort((a,b)=>String(a.x.title||'').localeCompare(String(b.x.title||''),undefined,{sensitivity:'base',numeric:true})||a.i-b.i);
+ const alphaOf=title=>{const c=String(title||'').trim().charAt(0).toUpperCase();return /^[A-Z]$/.test(c)?c:'#'};
+ const presentLetters=[...new Set(displayed.map(({x})=>alphaOf(x.title)))];
  const row=summary.find(x=>x.lecture===conditionLecture);
  modal('📚 Complete pathology lecture inventory · L'+safe(conditionLecture),
  '<div class="buttonrow"><button data-pathdiff-list="1">← Differential cases</button><button data-pathdiff-add-condition="1" style="background:#e8f8ea">➕ Add condition to L'+safe(conditionLecture)+'</button></div>'+
@@ -323,8 +327,9 @@ function conditionIndex(){
  '<div class="buttonrow"><button data-pathdiff-flash-lecture="1" style="background:#e8f2ff">🧠 Study this lecture · flashcards</button></div>'+
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-gap="all" aria-pressed="'+(conditionGap==='all')+'">All '+sections.length+'</button><button data-pathdiff-gap="case" aria-pressed="'+(conditionGap==='case')+'">Needs differential case</button><button data-pathdiff-gap="photo" aria-pressed="'+(conditionGap==='photo')+'">Needs attached photo</button></div>'+
  '<p class="tiny">'+displayed.length+' topics displayed. Select any topic to see full instructor-derived notes and the source slide reference.</p>'+
+ '<nav aria-label="Jump to condition letter" style="display:flex;flex-wrap:wrap;gap:5px;margin:10px 0">'+presentLetters.map(letter=>'<button data-pathdiff-alpha="'+safe(letter)+'" style="padding:6px 9px;min-width:31px;font-size:12px;font-weight:800" aria-label="Jump to '+safe(letter)+'">'+safe(letter)+'</button>').join('')+'</nav>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px">'+displayed.map(({x,i,ev},n)=>
- (x.group&&(!n||displayed[n-1].x.group!==x.group)?'<div style="grid-column:1/-1;background:#e9f1fc;border:1px solid #c4d6eb;border-radius:9px;padding:10px 12px;font-size:13px;font-weight:850">🧫 '+safe(x.group)+' <small style="font-weight:500">· grouped overview + individual diagnoses</small></div>':'')+
+ (n===0||alphaOf(displayed[n-1].x.title)!==alphaOf(x.title)?'<div data-pathdiff-alpha-section="'+safe(alphaOf(x.title))+'" role="heading" aria-level="3" style="grid-column:1/-1;margin:14px 0 3px;padding:8px 12px;background:#eaf1f9;border-left:4px solid #718fb1;border-radius:7px;font-size:15px;font-weight:850;letter-spacing:.06em">'+safe(alphaOf(x.title))+'</div>':'')+
  '<button data-pathdiff-condition-open="'+i+'" style="text-align:left;padding:10px;background:'+(x.kind==='disease'?'#f3faf4':'white')+';border:1px solid '+(x.kind==='disease'?'#9fc9ad':'#c6d7e9')+';border-radius:10px"><b>'+safe(x.title)+'</b>'+(x.kind==='disease'?'<small style="display:block;color:#417453;margin-top:3px">Individual disease card</small>':'')+'<small style="display:block;color:#597087;margin-top:5px">Slides '+safe(x.slides||'see lecture')+'</small><small style="display:block;color:#536575;margin-top:4px">Notes ✓ · Specimen '+(ev.specimen?'✓':'—')+' · Case '+(ev.linked.length?'✓':'—')+' · Image '+(ev.embedded?'✓':'—')+'</small></button>').join('')+'</div>');
 }
 
@@ -514,6 +519,11 @@ function init(api){
  if(d.pathdiffCreateTopic!==undefined){const lesson=lectureConditions()[conditionChosen];return window.VPQ_NECROPSY_OWNER_PUBLISH?.newCaseEditor?.({title:lesson?.title||'',lecture:conditionLecture});}
  if(d.pathdiffAddCondition!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newConditionEditor?.(conditionLecture);
  if(d.pathdiffPhotoLecture!==undefined)return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.(conditionLecture);
+ if(d.pathdiffAlpha!==undefined){
+  const target=Array.from(api.body.querySelectorAll('[data-pathdiff-alpha-section]')).find(x=>x.dataset.pathdiffAlphaSection===d.pathdiffAlpha);
+  if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
+  return;
+ }
  if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
  if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;return conditionIndex()}
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
