@@ -2598,6 +2598,66 @@
       },
       "updated": "2026-11-19T07:55:13.978Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-32": {
+      "title": "Thiamine deficiency — small animals",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-32-1795075258574-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-32"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-32-1795075258574-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-32"
+      },
+      "text": {
+        "title": "Thiamine deficiency — small animals",
+        "gross": " Bilateral symmetric brainstem cavitated malacic foci are emphasized, contrasting ruminant cortical malacia.",
+        "dx": "Working identification: Thiamine deficiency — small animals. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Brainstem necrosis ",
+        "why": "Secondary to dietary insufficiency of Vit B1 (thiamine)\nGet via ingesting of fish containing thiaminase or through thiamine-deficient diets. \n",
+        "visualClue": "Bilaterally symmetric softening in the brainstem ",
+        "compare": "Thiamine deficiency in LA is poliencephalomalacia here this is the brainstem ",
+        "notes": " Clinical signs: Anorexia, vomiting, depression,\nwide-based stance, ataxia, spastic paresis, circling, seizures, muscle weakness, recumbency, opisthotonus, and coma",
+        "etiologyCategories": [
+          "nutritional"
+        ],
+        "etiologyAgents": "Thiamine/ Vit B 1 deficiency ",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\",\"cat\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T08:01:00.408Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
