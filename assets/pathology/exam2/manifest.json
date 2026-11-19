@@ -1,0 +1,135 @@
+{
+  "title": "Exam 2 annotated public pathology lecture photos",
+  "status": "images pending upload to public repository",
+  "note": "All photographs originate from the user's uploaded annotated lecture PDFs and are not included in this text manifest. The public game activates a photo when its matching JPG exists.",
+  "images": [
+    {
+      "path": "assets/pathology/exam2/lecture26-p17-polyp-vs-papilloma.jpg",
+      "lecture": "26",
+      "page": 17,
+      "cardId": "found-exam2-neoplasia-004",
+      "caption": "Polyp versus papilloma",
+      "studyPrompt": "Identify surface shape, stalk, and papillary projections. Gross pattern is not enough to establish invasiveness."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture26-p23-scc-keratin-pearl.jpg",
+      "lecture": "26",
+      "page": 23,
+      "cardId": "found-exam2-neoplasia-006",
+      "caption": "SCC keratinization",
+      "studyPrompt": "Find keratin pearls and nests of squamous tumor cells; determine whether the basement membrane is breached."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture26-p25-papilloma-vs-scc.jpg",
+      "lecture": "26",
+      "page": 25,
+      "cardId": "found-exam2-neoplasia-006",
+      "caption": "Papilloma vs invasive SCC",
+      "studyPrompt": "Compare intact basement membrane on the left with tumor nests infiltrating dermis on the right."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture27-p11-leiomyoma-vs-leiomyosarcoma.jpg",
+      "lecture": "27",
+      "page": 11,
+      "cardId": "found-exam2-neoplasia-009",
+      "caption": "Smooth muscle tumor contrast",
+      "studyPrompt": "Compare orderly smooth muscle bundles with atypia and infiltrating irregular spindle growth."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture27-p19-hemangiosarcoma-vessels.jpg",
+      "lecture": "27",
+      "page": 19,
+      "cardId": "found-exam2-neoplasia-011",
+      "caption": "Hemangiosarcoma microarchitecture",
+      "studyPrompt": "Look for malignant endothelial cells making irregular blood-filled channels and wrapping around collagen."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture27-p23-soft-tissue-sarcoma-grades.jpg",
+      "lecture": "27",
+      "page": 23,
+      "cardId": "found-exam2-neoplasia-013",
+      "caption": "Soft tissue sarcoma grade",
+      "studyPrompt": "Grade 1 versus grade 3: compare cell differentiation, nuclear atypia, mitoses and invasion."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture28-p18-plasmacytoma-perinuclear-hof.jpg",
+      "lecture": "28",
+      "page": 18,
+      "cardId": "found-exam2-neoplasia-017",
+      "caption": "Plasmacytoma hof",
+      "studyPrompt": "Identify eccentric nuclei and perinuclear pale area typical of plasma cells."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture28-p19-plasmacytoma-amyloid.jpg",
+      "lecture": "28",
+      "page": 19,
+      "cardId": "found-exam2-neoplasia-017",
+      "caption": "Amyloid with plasma-cell tumor",
+      "studyPrompt": "Spot extracellular pink amyloid deposits and distinguish them from collagen or necrosis."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture28-p21-mast-cell-low-grade.jpg",
+      "lecture": "28",
+      "page": 21,
+      "cardId": "found-exam2-neoplasia-018",
+      "caption": "Low-grade mast cell tumor",
+      "studyPrompt": "Find differentiated mast cells, eosinophils and collagen, with relatively mild atypia."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture28-p22-mast-cell-high-grade.jpg",
+      "lecture": "28",
+      "page": 22,
+      "cardId": "found-exam2-neoplasia-018",
+      "caption": "High-grade mast cell tumor",
+      "studyPrompt": "Find anisokaryosis, mitoses, collagenolysis and architecture distortion; compare with low grade."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture28-p25-histiocytic-sarcoma.jpg",
+      "lecture": "28",
+      "page": 25,
+      "cardId": "found-exam2-neoplasia-019",
+      "caption": "Histiocytic sarcoma",
+      "studyPrompt": "Find marked anisocytosis/anisokaryosis and multinucleated giant cells in malignant histiocytic tumor."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture29-p06-rosette-vs-pseudorosette.jpg",
+      "lecture": "29",
+      "page": 6,
+      "cardId": "found-exam2-neoplasia-022",
+      "caption": "Rosette vs pseudorosette",
+      "studyPrompt": "True rosette has a central lumen; pseudorosette lacks one and often surrounds a vessel or fibrillary region."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture29-p11-insulinoma-ihc.jpg",
+      "lecture": "29",
+      "page": 11,
+      "cardId": "found-exam2-neoplasia-023",
+      "caption": "Insulinoma with IHC",
+      "studyPrompt": "Compare H&E nests to synaptophysin and insulin staining; use clinicopathology to establish functionality."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture29-p24-biopsy-incisional-excisional.jpg",
+      "lecture": "29",
+      "page": 24,
+      "cardId": "found-exam2-neoplasia-027",
+      "caption": "Biopsy choice",
+      "studyPrompt": "Incisional biopsy samples representative lesion and interface; excisional biopsy allows margin assessment."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture30-p08-hypercalcemia-agasaca-lymphoma.jpg",
+      "lecture": "30",
+      "page": 8,
+      "cardId": "found-exam2-neoplasia-028",
+      "caption": "Hypercalcemia of malignancy",
+      "studyPrompt": "PTHrP-mediated humoral hypercalcemia: compare AGASACA and lymphoma examples; do not infer bone metastasis."
+    },
+    {
+      "path": "assets/pathology/exam2/lecture30-p21-hypertrophic-osteopathy.jpg",
+      "lecture": "30",
+      "page": 21,
+      "cardId": "found-exam2-neoplasia-031",
+      "caption": "Hypertrophic osteopathy",
+      "studyPrompt": "Look for smooth periosteal proliferation along long bones and connect it to thoracic mass."
+    }
+  ]
+}
