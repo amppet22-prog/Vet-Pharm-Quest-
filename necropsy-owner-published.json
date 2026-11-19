@@ -1037,6 +1037,65 @@
       },
       "updated": "2026-11-19T01:05:20.374Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-41": {
+      "title": "Intervertebral disk disease (IVDD)",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-41-1795050766426-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-41"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-41-1795050766426-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [],
+        "conditionId": "pathx-68-41"
+      },
+      "text": {
+        "gross": "Severe complication: Myelomalacia can spread cranially and caudally with gray/white matter necrosis and hemorrhage, sometimes within 12–24 hours.\n ",
+        "dx": "Working identification: Intervertebral disk disease (IVDD). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Mechanism: Direct spinal compression injures axons (Wallerian degeneration) and may impair blood supply, causing ischemia and malacia. Severe complication: Myelomalacia can spread cranially and caudally with gray/white matter necrosis and hemorrhage, sometimes within 12–24 hours.",
+        "why": "Especially common in chondrodystrophic dogs.\n **Mechanism:** Direct spinal compression injures axons (Wallerian degeneration) and may impair blood supply, causing ischemia and malacia. Overall pathogenesis is still poorly understood. Appears to involve compromise of blood flow to the affected cord segment. ",
+        "visualClue": "",
+        "compare": "",
+        "notes": "**Clinical**: Sudden flaccid paralysis and sensory deficits; extensive ascending/descending myelomalacia carries grave prognosis.\n\nLess reported in cats due to flexible spine. ",
+        "etiologyCategories": [
+          "traumatic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\",\"cat\":\"occasional\"}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T01:12:47.703Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
