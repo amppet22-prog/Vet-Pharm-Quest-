@@ -64,7 +64,7 @@ async function publishConditionName(ref,title,token){
   if(duplicate)throw Error('Another condition in this lecture already has that name.');
   if(requested===original)delete manifest.conditionTitleOverrides[ref];else manifest.conditionTitleOverrides[ref]=requested;
  }
- await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\\n'),old.sha,token,'Owner rename pathology condition '+ref);
+ await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\n'),old.sha,token,'Owner rename pathology condition '+ref);
  published=manifest;
 }
 function getCustomConditions(lecture){
