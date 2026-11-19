@@ -285,16 +285,16 @@ const CASE_MATCH={
 'r77-coxiella':['q fever','coxiella burnetii'],'r77-trich':['bovine tritrichomoniasis','bovine trichomoniasis'],
 'e78-corneal':['corneal sequestrum'],'ear79-bulla':['cholesteatoma']
 };
-function lectureConditions(){return [...((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]),...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomConditions?.(conditionLecture)||[])]}
+function lectureConditions(){const owner=window.VPQ_NECROPSY_OWNER_PUBLISH;return [...((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]),...(owner?.getCustomConditions?.(conditionLecture)||[])].map(x=>({...x,sourceTitle:x.title,title:owner?.renamedConditionTitle?.(conditionLecture,x)||x.title}));}
 function norm(t){return String(t||'').toLowerCase().replace(/[–—-]/g,' ').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
 function relatedCases(lecture,title){
  const t=norm(title);
  return allCases().filter(c=>c.lecture===lecture&&((CASE_MATCH[c.id]||[]).some(alias=>t.includes(norm(alias)))||((c.id.startsWith('custom-')||c.id.startsWith('n3'))&&((norm(c.title).includes(t)&&t.length>8)||(t.includes(norm(c.best))&&norm(c.best).length>8)||(norm(c.morph).includes(t)&&t.length>12)))));
 }
 function evidence(lecture,section){
- const linked=relatedCases(lecture,section.title);
+ const linked=relatedCases(lecture,section.sourceTitle||section.title);
  const bank=window.VPQ_PATH_EXAM7_DATA||[];
- const t=norm(section.title);
+ const t=norm(section.sourceTitle||section.title);
  const specimen=bank.some(x=>x.lecture===lecture&&(norm(x.title)===t||(t.length>8&&norm(x.title).includes(t))||(norm(x.title).length>8&&t.includes(norm(x.title)))));
  const imgs=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES||{};
  const owner=window.VPQ_NECROPSY_OWNER_PUBLISH;
@@ -447,6 +447,7 @@ function conditionDetail(){
  }).join('');
  modal('📖 L'+safe(conditionLecture)+' · '+safe(item.title),
  '<div class="buttonrow"><button data-pathdiff-condition-back="1">← Full lecture inventory</button><button data-pathdiff-list="1">Cases</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-condition-rename="1" style="background:#fff1dc">✏️ Rename this condition</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-recall-start="1">🧠 Test me on this topic</button></div>'+
  (/^(3[1-9]|40|41)$/.test(conditionLecture)?'<div class="buttonrow"><button data-pathdiff-photo-lecture="1" style="background:#e3f4f7">📷 Open lecture photo slots / publish images</button></div>':'')+
  '<div class="buttonrow"><button data-pathdiff-create-topic="1" style="background:#e6f6ec">➕ Create differential card for this disease</button></div>'+
@@ -518,6 +519,7 @@ function init(api){
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
  if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
  if(d.pathdiffConditionBack!==undefined)return conditionIndex();
+ if(d.pathdiffConditionRename!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.renameConditionEditor?.(conditionLecture,conditionChosen);
  if(d.pathdiffRecallStart!==undefined)return startFlash('topic');
  if(d.pathdiffFlashLecture!==undefined)return startFlash('lecture');
  if(d.pathdiffFlashFoundations!==undefined){conditionLecture='67';return startFlash('foundation')}
