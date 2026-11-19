@@ -77,6 +77,15 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'practice5-hcm':["Hypertrophic cardiomyopathy","Concentric versus eccentric hypertrophy"],
+'practice5-cardiac-fibrin':["Fibrinous/fibrinosuppurative pericarditis"],
+'practice5-bull-valve':["Vegetative valvular endocarditis","Fibrinous/fibrinosuppurative pericarditis"],
+'practice5-cavalier-valve':["Myxomatous valvular endocardiosis"],
+'practice5-pfo':["Patent foramen ovale in small ruminants"],
+'practice5-pda':["Patent ductus arteriosus"],
+'practice5-cattle-hardware':["Traumatic reticulopericarditis"],
+'practice5-bovine-heart-lymphoma':["Large-animal cardiac tumors"],
+
 'practice5-calf-hsomni':["Histophilus somni bovine pneumonia","Suppurative bronchopneumonia","Histophilus somni"],
 'practice5-bovine-sweetpotato':["Interstitial pneumonia","Pulmonary edema versus diffuse alveolar damage"],
 'practice5-fungalnodules':["Granulomatous pneumonia"],
