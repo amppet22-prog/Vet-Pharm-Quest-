@@ -11,6 +11,16 @@
       "domain": "pathology",
       "lecture": "67",
       "curated": true
+    },
+    {
+      "prompt": "What are the portals of entry for the CNS?",
+      "answer": "Direct extension, hematogenous, leukocyte trafficking, and retrograde axonal transport.",
+      "why": "The most common is hematogenous. \nDirect extension is penetrative trauma or extension from the inner ear, bone, or nasal cavity. \nLeukocyte trafficking includes macrophages and lymphoid cells\nand the retrograde axonal transport is infectious etiologies.",
+      "slide": "Pathology lecture LMU",
+      "id": "owner-pathology-mwn1kat7-q4agv",
+      "domain": "pathology",
+      "lecture": "67",
+      "curated": true
     }
   ],
   "hidden": []
