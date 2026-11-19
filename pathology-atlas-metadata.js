@@ -13,7 +13,19 @@ const safeChoice=(map,v,fallback='')=>Object.hasOwn(map,v)?v:fallback;
 function parseSpecies(v){
  try{const raw=typeof v==='string'?JSON.parse(v||'{}'):v||{};return Object.fromEntries(Object.entries(raw).filter(([k,z])=>species[k]&&frequency[z]))}catch{return {}}
 }
+// Source-grounded initial selections. These are documented hosts/teaching
+// associations, NOT population prevalence estimates. Published edits override.
+const lectureSeed={
+ 'pathx-68-28':{speciesOccurrence:JSON.stringify({dog:'reported'}),conditionType:'infectious',conditionSubtype:'protozoa',organSystem:'cns',affectedOrgan:'Brain and spinal cord',pathogenNames:'Toxoplasma gondii',diseaseId:'toxoplasmosis',speciesEvidence:'Instructor Lecture 68, slide 33; dog CNS associations noted. Occurrence frequency not quantified.'},
+ 'pathx-68-37':{speciesOccurrence:JSON.stringify({dog:'reported'}),conditionType:'infectious',conditionSubtype:'helminths',organSystem:'cns',affectedOrgan:'Brain and spinal cord',pathogenNames:'Toxocara canis',diseaseId:'toxocara-can-nerve-migration',speciesEvidence:'Instructor Lecture 68, slide 40; dogs listed. Nematode larval migration, distinct from toxoplasmosis.'},
+ 'pathx-68-27':{speciesOccurrence:JSON.stringify({dog:'reported'}),conditionType:'infectious',conditionSubtype:'protozoa',organSystem:'cns',pathogenNames:'Neospora caninum',diseaseId:'neosporosis',speciesEvidence:'Instructor Lecture 68, slide 32; dog neural disease described.'},
+ 'pathx-68-29':{speciesOccurrence:JSON.stringify({horse:'reported'}),conditionType:'infectious',conditionSubtype:'protozoa',organSystem:'cns',pathogenNames:'Sarcocystis neurona; Neospora hughesi',diseaseId:'equine-protozoal-myeloencephalitis',speciesEvidence:'Instructor Lecture 68, slides 34–35; equine disease discussed.'},
+ 'pathx-68-26':{conditionType:'infectious',conditionSubtype:'fungi',organSystem:'cns',pathogenNames:'Cryptococcus neoformans / gattii',diseaseId:'cryptococcosis'},
+ 'pathx-68-11':{conditionType:'infectious',conditionSubtype:'viruses',organSystem:'cns',pathogenNames:'Rabies lyssavirus',diseaseId:'rabies'}
+};
+const seeded=x=>{const seed=lectureSeed[x?.id]||{};return {...seed,...x}};
 function data(x){
+ x=seeded(x||{});
  return {
   species:parseSpecies(x?.speciesOccurrence),
   conditionType:safeChoice(conditionTypes,x?.conditionType),
@@ -87,5 +99,5 @@ function relatedHTML(x,all,indexFor){
  return '<div style="border-top:1px solid #d9e1e8;padding-top:9px;margin-top:8px"><b>🔗 Other organ manifestations of this disease</b><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">'+
  matches.map(y=>'<button type="button" data-path7-view="'+indexFor(y.id)+'">'+esc(y.title)+' · '+esc(systems[data(y).organSystem]||data(y).organ||'Other site')+'</button>').join('')+'</div></div>';
 }
-return {species,frequency,conditionTypes,subtypes,systems,zoonotic,data,speciesMatches,browseHTML,editorHTML,readEditor,relatedHTML};
+return {species,frequency,conditionTypes,subtypes,systems,zoonotic,data,speciesMatches,browseHTML,editorHTML,readEditor,relatedHTML,lectureSeed};
 })();
