@@ -9,8 +9,7 @@ const curated={
 'exam7-3':['neonatal-septic-meningitis','Neonatal septic meningitis','infectious','cns'],
 'exam7-4':['listeriosis','Listeriosis','infectious','cns'],
 'exam7-5':['thrombotic-meningoencephalitis','Thrombotic meningoencephalitis','infectious','cns'],
-'exam7-6':['cerebral-abscess','Cerebral abscess','infectious','cns'],
-'exam7-7':['hydrocephalus','Hydrocephalus','malformation','cns'],
+'exam7-7':['hydrocephalus','Hydrocephalus','','cns'],
 'exam7-8':['hydranencephaly','Hydranencephaly','malformation','cns'],
 'exam7-9':['cerebellar-hypoplasia','Cerebellar hypoplasia','congenital','cns'],
 'exam7-10':['lissencephaly','Lissencephaly','malformation','cns'],
@@ -33,7 +32,6 @@ const curated={
 'exam7-30':['uterine-prolapse','Uterine prolapse','malformation','reproductive'],
 'exam7-31':['granulosa-theca-cell-tumor','Granulosa-theca cell tumor','neoplasm','reproductive'],
 'exam7-32':['ovarian-teratoma','Ovarian teratoma','neoplasm','reproductive'],
-'exam7-33':['fetal-mummification','Fetal mummification','other','reproductive'],
 'exam7-35':['otitis-externa','Otitis externa','inflammatory','aural'],
 'exam7-38':['glaucoma','Glaucoma','other','ocular'],
 'exam7-39':['corneal-sequestrum','Corneal sequestrum','degenerative','ocular'],
@@ -42,7 +40,17 @@ const curated={
 const excluded=/\b(necrosis|apoptosis|cellular swelling|nuclear changes|gangrene)\b/i;
 function sourceCards(){
  window.VPQ_PATH_EXAM7?.refreshCustom?.();
- return (window.VPQ_PATH_EXAM7?.cards||window.VPQ_PATH_EXAM7_DATA||[]).filter(x=>!x.normal);
+ const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);
+ return (window.VPQ_PATH_EXAM7?.cards||window.VPQ_PATH_EXAM7_DATA||[]).filter(x=>!x.normal&&!hidden.has(x.id)).map(x=>{
+  // Curated IDs are shared as non-destructive fallback metadata.
+  // Published owner edits override the fallback when a user explicitly changes an ID.
+  const seed=curated[x.id];
+  if(!seed)return x;
+  if(!x.diseaseId)x.diseaseId=seed[0];
+  if(!x.conditionType&&seed[2])x.conditionType=seed[2];
+  if(!x.organSystem&&seed[3])x.organSystem=seed[3];
+  return x;
+ });
 }
 function readCard(card){
  const owner=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(card.id);
