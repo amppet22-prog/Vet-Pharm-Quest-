@@ -26,14 +26,7 @@
   for(const fc of questions)if(!section.flashcards.some(x=>x[0]===fc[0]))section.flashcards.push(fc);
   stats.byLecture[n]=(stats.byLecture[n]||0)+1;
  }
- // Tag pre-existing discrete disease cards from Exam 5, without changing their text.
- for(let n=50;n<=58;n++){
-  const sections=L[n]?.sections||[];
-  for(const s of sections){
-   if(s.diseaseAtlas)continue;
-   if(s.kind==='disease'&&!foundation.test(s.title))s.diseaseAtlas=true;
-  }
- }
+ // Only explicitly audited disease cards are marked complete. Untested summary/foundation cards remain visible under All topics.
  stats.diseaseTotal=Array.from({length:9},(_,i)=>(L[String(i+50)]?.sections||[]).filter(x=>x.diseaseAtlas).length).reduce((a,b)=>a+b,0);
  window.VPQ_PATH_EXAM5_DISEASE_ATLAS=stats;
 })();
