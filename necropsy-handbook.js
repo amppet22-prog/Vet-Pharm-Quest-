@@ -48,7 +48,7 @@ function popup(t,html){api?.showModal(t,theme+html)}
 function nav(){return '<div class="np-tabs"><button data-nphome="1">📚 Handbook</button><button data-nppattern="1">🔗 Across systems</button><button data-npstudio="gross">🔍 Gross ID</button><button data-npstudio="histo">🔬 Histology</button><button data-npquiz="1">🎓 Practice Quiz</button><button data-npedit="1">🖼️ Editable atlas</button></div>'}
 function show(){
  rememberView('home');
- const systems=['all','Neuro','Skin','Repro','Special Senses','Urinary','Hepatic'];
+ const systems=['all','Neuro','Skin','Repro','Special Senses','Urinary','Hepatic','Pancreas'];
  const selected=chapters.filter(c=>topic==='all'||c[2]===topic).filter(c=>!search||[...c].join(' ').toLowerCase().includes(search));
  popup('📚 Necropsy Handbook · Path Exam 7',
  '<style>.np-cover{background:linear-gradient(120deg,#f3e3ff,#e1f7eb 55%,#ffefdc);border:2px solid #dfc4ef;border-radius:18px;padding:15px;margin:7px 0 13px}.np-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.np-tabs button{font-size:12px;padding:7px 10px}.np-chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.np-chapter{padding:13px;background:#fff;border:2px solid #dbd5eb;border-radius:16px;text-align:left}.np-chapter small{display:block;color:#60708c;margin-top:4px}.np-tag{display:inline-block;border-radius:9px;background:#fff4d8;padding:3px 7px;font-size:11px;font-weight:800}.np-pat{padding:12px;background:#f9f8fc;border:1px solid #d6ddec;border-radius:14px;margin:8px 0}.np-scroll{max-height:40vh;overflow:auto;border:1px solid #dfe1ec;border-radius:12px;padding:9px}.np-question{display:inline-grid;place-items:center;vertical-align:middle;min-width:25px;width:25px;height:25px;padding:0;margin-left:6px;border:2px solid #a38ac3;border-radius:50%;background:#fff8e7;color:#755690;font-size:14px;font-weight:900;cursor:help}.np-question:hover,.np-question:focus-visible{background:#e9daf9;outline:2px solid #f5d6ad}.np-entryrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 3px;border-bottom:1px solid #eef1f5}.np-entryrow .np-entryname{min-width:0}</style>'+
@@ -80,6 +80,7 @@ function learnLecture(n){
  const diagram=(i)=>{
   if(/^3[1-5]$/.test(n))return window.VPQ_PATH_URINARY_VISUALS?.card?.(l.sections[i],n)||'';
   if(/^(36|37|38|39|40)$/.test(n))return window.VPQ_PATH_HEPATIC_VISUALS?.card?.(l.sections[i],n)||'';
+  if(n==='41')return window.VPQ_PATH_PANCREAS_VISUALS?.card?.(l.sections[i],n)||'';
   if(n!=='67')return '';
   if(i===4)return '<div class="np-edu-diagram"><b>CSF pathway</b><p>Lateral ventricles → Third ventricle → Cerebral aqueduct → Fourth ventricle → Subarachnoid space → Arachnoid villi</p><small>Original teaching pathway based on lecture slides 19–20.</small></div>';
   if(i===12)return '<div class="np-edu-diagram"><b>Compare the two lecture edema mechanisms</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0"><div style="background:#e6f3ff;border-radius:9px;padding:10px"><b>Cytotoxic</b><p>ATP loss → Na⁺ pump failure → intracellular swelling</p><small>BBB intact</small></div><div style="background:#ffece4;border-radius:9px;padding:10px"><b>Vasogenic</b><p>BBB disruption → plasma leakage → extracellular edema</p><small>BBB disrupted</small></div></div></div>';
@@ -87,8 +88,8 @@ function learnLecture(n){
   if(i===9)return '<div class="np-edu-diagram"><b>Primary versus secondary demyelination</b><p><b>Primary:</b> oligodendrocyte/myelin injured first; axon relatively preserved.</p><p><b>Secondary:</b> axon injured first, then myelin breaks down.</p></div>';
   return '';
  };
- const sourceImageGuide=(sec)=>{if(!/^(36|37|38|39|40)$/.test(n))return '';
-  const records=window.VPQ_PATH_EXAM3_HEPATIC_IMAGE_AUDIT?.byLecture?.[n]||[];
+ const sourceImageGuide=(sec)=>{if(!/^(36|37|38|39|40|41)$/.test(n))return '';
+  const records=[...(window.VPQ_PATH_EXAM3_HEPATIC_IMAGE_AUDIT?.byLecture?.[n]||[]),...(window.VPQ_PATH_EXAM3_PANCREAS_IMAGE_AUDIT?.byLecture?.[n]||[])];
   const checks=records.filter(x=>x.title===sec.title);
   if(!checks.length)return '';
   return '<details class="np-edu-diagram"><summary><b>🔎 Lecture image checklist · '+checks.length+' reference'+(checks.length===1?'':'s')+'</b></summary>'+
