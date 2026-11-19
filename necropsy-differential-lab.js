@@ -77,6 +77,13 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=[...Array.from({length:10},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'n38-fasciola-compare':['Fasciola hepatica/gigantica infection'],
+'n39-iron-pigment':['Hemosiderosis'],
+'n40-vascular-nodule':['Hepatic hemangiosarcoma','Metastatic hepatic neoplasia'],
+'n40-biliary-tumor':['Cholangiocellular carcinoma'],
+'n38-cat-cholangitis':['Neutrophilic cholangitis'],
+'n39-oxidative-toxin':['Microcystin cyanobacterial hepatotoxicosis'],
+
 'n37-nutmeg':['Chronic passive hepatic congestion'],
 'n37-shunt':['Congenital extrahepatic portosystemic shunt'],
 'n38-tyzzer':['Tyzzer disease (Clostridium piliforme)'],
@@ -286,7 +293,7 @@ function conditionIndex(){
  const row=summary.find(x=>x.lecture===conditionLecture);
  modal('📚 Complete pathology lecture inventory · L'+safe(conditionLecture),
  '<div class="buttonrow"><button data-pathdiff-list="1">← Differential cases</button><button data-pathdiff-add-condition="1" style="background:#e8f8ea">➕ Add condition to L'+safe(conditionLecture)+'</button></div>'+
- '<p class="tiny">Coverage audit: <b>'+total+' lecture topics</b> across available pathology lectures (including urinary L31–35). Topics include normal anatomy and general principles as well as individual diseases; they are not all distinct diagnoses. A lecture note does NOT imply a dedicated case or photograph.</p>'+
+ '<p class="tiny">Coverage audit: <b>'+total+' lecture topics</b> across available pathology lectures (including Exam 3 urinary L31–35 and hepatic L36–40). Topics include normal anatomy and general principles as well as individual diseases; they are not all distinct diagnoses. A lecture note does NOT imply a dedicated case or photograph.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:5px;margin:9px 0">'+summary.map(v=>'<button data-pathdiff-condition-lecture="'+v.lecture+'" aria-pressed="'+(conditionLecture===v.lecture?'true':'false')+'" style="padding:7px 5px;font-size:12px">L'+v.lecture+'<small style="display:block;font-size:10px">'+v.teaching+' topics</small></button>').join('')+'</div>'+
  '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture)+'</b><p style="font-size:12px;margin:5px 0">Lecture topics: '+row.teaching+' · Matched specimen cards: '+row.specimens+' · Matched differential cases: '+row.cases+' · Attached image references: '+row.embedded+'</p><small>Counts are conservatively matched by case mapping/title, not a certified complete disease audit. External links without an embedded image are not counted as attached images.</small></div>'+
  '<div class="buttonrow"><button data-pathdiff-condition-lecture="31" style="background:#eaf6ef;font-weight:800">🫘 Urinary Exam 3 · L31–35</button><button data-pathdiff-condition-lecture="36" style="background:#f9eedd;font-weight:800">🫀 Hepatic Exam 3 · L36–40</button></div>'+
