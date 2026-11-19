@@ -91,6 +91,9 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all',conditionTopicMode='all';
 const LECTURES=[...Array.from({length:36},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'gi6-l65-equine-arterial-colic':['Strongylus vulgaris verminous arteritis'],
+'gi6-l66-pyloric-rugal-loss':['Gastric adenocarcinoma of dogs'],
+'gi6-l66-small-bowel-stenosis':['Intestinal adenocarcinoma of dogs'],
 'gi6-l62-postweaning-edema':['Porcine edema disease (postweaning E. coli)'],
 'gi6-l62-pig-corrugated-ileum':['Lawsonia intracellularis proliferative enteropathy in pigs'],
 'gi6-l63-neonatal-pig-villus-loss':['Porcine transmissible gastroenteritis (TGE)'],
