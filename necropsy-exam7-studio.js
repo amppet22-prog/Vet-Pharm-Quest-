@@ -88,6 +88,7 @@ function card(i){
  (x.normal?'':(window.VPQ_PATH_ATLAS_META?.browseHTML?.(x)||'')+(x.visualClue?'<p><b>🔎 Recognition clue:</b> '+rich(x.visualClue)+'</p>':'')+(x.compare?'<p><b>⚖️ Don’t confuse with:</b> '+rich(x.compare)+'</p>':'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')) +
  '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+ (x.normal?'':window.VPQ_PATH_ATLAS_META?.relatedHTML?.(x,base.map((b,j)=>record(j)),id=>base.findIndex(c=>c.id===id))||'')+
  (x.normal?'':'<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>')+ 
+ (x.normal?'':(window.VPQ_MASTER_DISEASE_LIBRARY?.diseaseForSpecimen?.(x.id)?'<div class="buttonrow"><button data-path7-master="'+h(x.id)+'" style="background:#f0eaff;border:1px solid #b8a7db;font-weight:700">📚 View all manifestations · Master Disease Library</button></div>':'<p class="tiny">Master disease connection not classified yet. Add a shared disease ID in the atlas editor.</p>'))+
  '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-hide="'+i+'" style="font-size:12px">🗂 Hide card</button></div>');
 }
 function edit(i){
@@ -205,6 +206,7 @@ function init(api){
    :'<p><b>Key distinction:</b> '+rich(x.why)+'</p><p><b>Use these findings:</b> '+rich(x.gross)+'</p><p><b>Histology:</b> '+rich(x.histo)+'</p>';
   modal('❔ '+h(x.title)+' · '+(topic==='gross'?'Why gross looks this way':topic==='histo'?'Microscopy and mechanism':'Distinguishing clues'),sections+'<p class="tiny">Drawn from this existing study card. Confirm specific interpretations with the lecture slides.</p><button data-path7-view="'+current+'">← Return to specimen</button>');return;
  }
+ if(d.path7Master!==undefined)return window.VPQ_MASTER_DISEASE_LIBRARY?.openForSpecimen?.(d.path7Master);
  if(d.path7Add!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newSpecimenEditor?.(d.path7Add==='normal'?'normal':'lesion',tab==='normals'?'67':(filter==='all'?'68':filter));
  if(d.path7ManageHidden!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.hiddenSpecimenMenu?.();
  if(d.path7Hide!==undefined){const item=base[Number(d.path7Hide)];return item&&window.VPQ_NECROPSY_OWNER_PUBLISH?.hideSpecimenEditor?.(item.id,false)}
