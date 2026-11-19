@@ -1694,6 +1694,67 @@
       },
       "updated": "2026-11-19T04:30:26.196Z",
       "approvedBy": "amppet22-prog"
+    },
+    "specimen-custom-69-hydromyelia": {
+      "title": "Hydromyelia",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-hydromyelia-1795063587146-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-69-hydromyelia"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-hydromyelia-1795063587146-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "specimen-custom-69-hydromyelia"
+      },
+      "text": {
+        "gross": "An abnormal dilatation of the central canal of the spinal cord that leads to the formation of a cavity in which CSF may accumulate",
+        "dx": "Hydromyelia",
+        "histo": "Central canal absent",
+        "why": "Infectious or genetic injury that results in damage to ependymal cells lining the canal--> disruption of the normal flow of CSF--> abnormal CSF pressure gradients within the central canal.\nCongenital or acquired\nAcquired: **Rare** and is caused by an obstruction of the central canal CSF flow (inflammation or neoplasia)",
+        "visualClue": "",
+        "compare": "",
+        "notes": "Clinical signs in young animals with congenital hydromyelia vary, depending on the location and size of the dilatation of the central canal in the spinal cord",
+        "etiologyCategories": [
+          "bacterial",
+          "neoplastic",
+          "developmental"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T04:46:28.657Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
