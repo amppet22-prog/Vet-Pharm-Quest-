@@ -75,8 +75,14 @@ function umbrellaDetail(){
 
 /* Lecture coverage uses live lecture data, not a shortened list. */
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
-const LECTURES=[...Array.from({length:10},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+const LECTURES=[...Array.from({length:11},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'n41-acute':['Acute pancreatitis and necrosis','Peripancreatic fat saponification'],
+'n41-chronic':['Chronic pancreatitis'],
+'n41-juvenile':['Juvenile pancreatic acinar atrophy'],
+'n41-nodules':['Pancreatic nodular hyperplasia'],
+'n41-carcinoma':['Exocrine pancreatic carcinoma'],
+'n41-insulinoma':['Insulinoma (beta-cell neoplasm)'],
 'n38-fasciola-compare':['Fasciola hepatica/gigantica infection'],
 'n39-iron-pigment':['Hemosiderosis'],
 'n40-vascular-nodule':['Hepatic hemangiosarcoma','Metastatic hepatic neoplasia'],
@@ -296,7 +302,7 @@ function conditionIndex(){
  '<p class="tiny">Coverage audit: <b>'+total+' lecture topics</b> across available pathology lectures (including Exam 3 urinary L31–35 and hepatic L36–40). Topics include normal anatomy and general principles as well as individual diseases; they are not all distinct diagnoses. A lecture note does NOT imply a dedicated case or photograph.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:5px;margin:9px 0">'+summary.map(v=>'<button data-pathdiff-condition-lecture="'+v.lecture+'" aria-pressed="'+(conditionLecture===v.lecture?'true':'false')+'" style="padding:7px 5px;font-size:12px">L'+v.lecture+'<small style="display:block;font-size:10px">'+v.teaching+' topics</small></button>').join('')+'</div>'+
  '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture)+'</b><p style="font-size:12px;margin:5px 0">Lecture topics: '+row.teaching+' · Matched specimen cards: '+row.specimens+' · Matched differential cases: '+row.cases+' · Attached image references: '+row.embedded+'</p><small>Counts are conservatively matched by case mapping/title, not a certified complete disease audit. External links without an embedded image are not counted as attached images.</small></div>'+
- '<div class="buttonrow"><button data-pathdiff-condition-lecture="31" style="background:#eaf6ef;font-weight:800">🫘 Urinary Exam 3 · L31–35</button><button data-pathdiff-condition-lecture="36" style="background:#f9eedd;font-weight:800">🫀 Hepatic Exam 3 · L36–40</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-condition-lecture="31" style="background:#eaf6ef;font-weight:800">🫘 Urinary Exam 3 · L31–35</button><button data-pathdiff-condition-lecture="36" style="background:#f9eedd;font-weight:800">🫀 Hepatic Exam 3 · L36–40</button><button data-pathdiff-condition-lecture="41" style="background:#efe9ff;font-weight:800">🧪 Pancreas · L41</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-flash-lecture="1" style="background:#e8f2ff">🧠 Study this lecture · flashcards</button></div>'+
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-gap="all" aria-pressed="'+(conditionGap==='all')+'">All '+sections.length+'</button><button data-pathdiff-gap="case" aria-pressed="'+(conditionGap==='case')+'">Needs differential case</button><button data-pathdiff-gap="photo" aria-pressed="'+(conditionGap==='photo')+'">Needs attached photo</button></div>'+
  '<p class="tiny">'+displayed.length+' topics displayed. Select any topic to see full instructor-derived notes and the source slide reference.</p>'+
@@ -413,8 +419,8 @@ function recallView(){
 function conditionDetail(){
  const item=lectureConditions()[conditionChosen];if(!item)return conditionIndex();
  const ev=evidence(conditionLecture,item),images=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES||{};
- const visual=(window.VPQ_PATH_URINARY_VISUALS?.card?.(item,conditionLecture)||window.VPQ_PATH_HEPATIC_VISUALS?.card?.(item,conditionLecture)||'');
- const imageRefs=(window.VPQ_PATH_EXAM3_HEPATIC_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[]).filter(x=>x.title===item.title);
+ const visual=(window.VPQ_PATH_URINARY_VISUALS?.card?.(item,conditionLecture)||window.VPQ_PATH_HEPATIC_VISUALS?.card?.(item,conditionLecture)||window.VPQ_PATH_PANCREAS_VISUALS?.card?.(item,conditionLecture)||'');
+ const imageRefs=[...(window.VPQ_PATH_EXAM3_HEPATIC_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[]),...(window.VPQ_PATH_EXAM3_PANCREAS_IMAGE_AUDIT?.byLecture?.[conditionLecture]||[])].filter(x=>x.title===item.title);
  const imageChecklist=imageRefs.length?'<div style="background:#f6f9fc;border:1px solid #d1dfef;border-radius:10px;padding:10px;margin:9px 0"><b>📷 Lecture-image recognition checklist · not an attached photograph</b>'+imageRefs.map(x=>'<p style="font-size:12px;line-height:1.45;margin:8px 0"><b>Lecture '+safe(conditionLecture)+' slides '+safe(x.slides)+'</b> · '+safe(x.modality)+'<br><b>Identify:</b> '+safe(x.look)+'<br><b>Ask yourself:</b> '+safe(x.question)+'</p>').join('')+'<small>Use the editable lecture photo slots to attach and publish credited images. The original PDF remains the visual reference until an image is attached.</small></div>':'';
  const refBlock=ev.linked.map(x=>{
   const p=images[x.id]||{};
@@ -425,7 +431,7 @@ function conditionDetail(){
  modal('📖 L'+safe(conditionLecture)+' · '+safe(item.title),
  '<div class="buttonrow"><button data-pathdiff-condition-back="1">← Full lecture inventory</button><button data-pathdiff-list="1">Cases</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-recall-start="1">🧠 Test me on this topic</button></div>'+
- (/^3[1-9]$|^40$/.test(conditionLecture)?'<div class="buttonrow"><button data-pathdiff-photo-lecture="1" style="background:#e3f4f7">📷 Open lecture photo slots / publish images</button></div>':'')+
+ (/^(3[1-9]|40|41)$/.test(conditionLecture)?'<div class="buttonrow"><button data-pathdiff-photo-lecture="1" style="background:#e3f4f7">📷 Open lecture photo slots / publish images</button></div>':'')+
  '<div class="buttonrow"><button data-pathdiff-create-topic="1" style="background:#e6f6ec">➕ Create differential card for this disease</button></div>'+
  '<div style="background:#f0f6fb;padding:10px;border:1px solid #c8dbeb;border-radius:10px;margin:9px 0"><b>Instructor-based lesson</b><p style="font-size:13px;margin:5px 0">Lecture '+safe(conditionLecture)+' · slides '+safe(item.slides||'not specified')+'</p><small>Specimen card: '+(ev.specimen?'Matched':'Not matched')+' · Dedicated case: '+(ev.linked.length?'Matched':'Not yet')+' · Attached reference: '+(ev.embedded?'Yes':'Not yet')+'</small></div>'+
  visual+imageChecklist+
