@@ -87,7 +87,15 @@ function learnLecture(n){
   if(i===9)return '<div class="np-edu-diagram"><b>Primary versus secondary demyelination</b><p><b>Primary:</b> oligodendrocyte/myelin injured first; axon relatively preserved.</p><p><b>Secondary:</b> axon injured first, then myelin breaks down.</p></div>';
   return '';
  };
- const rows=l.sections.map((sec,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(sec.title)+'</b> <small>slides '+safe(sec.slides)+'</small></summary>'+(photos?photos.card(n,i):'<p class="np-photo-warning">Image controls failed to load. Refresh the page to restore them.</p>')+diagram(i)+sec.points.map(p=>'<p class="np-learn-point"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
+ const sourceImageGuide=(sec)=>{if(!/^(36|37|38|39|40)$/.test(n))return '';
+  const records=window.VPQ_PATH_EXAM3_HEPATIC_IMAGE_AUDIT?.byLecture?.[n]||[];
+  const checks=records.filter(x=>x.title===sec.title);
+  if(!checks.length)return '';
+  return '<details class="np-edu-diagram"><summary><b>🔎 Lecture image checklist · '+checks.length+' reference'+(checks.length===1?'':'s')+'</b></summary>'+
+   checks.map(x=>'<p><b>Original lecture slide '+safe(x.slides)+'</b> · '+safe(x.modality)+'</p><p><b>Identify:</b> '+safe(x.look)+'</p><p><b>Ask yourself:</b> '+safe(x.question)+'</p>').join('')+
+   '<small>Reference only: the professor\'s image is not included here unless an owner-published credited photo appears in the slots above.</small></details>';
+ };
+ const rows=l.sections.map((sec,i)=>'<details class="np-pat" '+(i===0?'open':'')+'><summary><b>'+safe(sec.title)+'</b> <small>slides '+safe(sec.slides)+'</small></summary>'+(photos?photos.card(n,i):'<p class="np-photo-warning">Image controls failed to load. Refresh the page to restore them.</p>')+sourceImageGuide(sec)+diagram(i)+sec.points.map(p=>'<p class="np-learn-point"><b>'+safe(p[0])+':</b> '+safe(p[1])+'</p>').join('')+'</details>').join('');
  popup('📖 L'+n+' · Learn the Lecture',nav()+
  (photos?photos.style:'')+
  '<style>.np-pat{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}.np-learn-point{margin:8px 0;line-height:1.5;white-space:normal;overflow-wrap:anywhere}.np-lesson-photo{margin:10px 0;padding:10px;background:white;border:1px solid #cdd9e8;border-radius:12px;max-width:100%}.np-lesson-photo img{display:block;max-width:100%;width:100%;max-height:360px;object-fit:contain;background:#f4f6fb;border-radius:8px}.np-lesson-photo figcaption{font-size:12px;line-height:1.45;margin-top:7px}.np-lesson-photo figcaption p{margin:3px 0}.np-edu-diagram{margin:10px 0;padding:12px;border:1px solid #b9d6eb;background:#f3faff;border-radius:12px;font-size:13px}.np-edu-diagram p{margin:7px 0}</style>'+
