@@ -199,14 +199,14 @@ async function editor(type,id){
  const localText=type==='specimen'?window.VPQ_PATH_EXAM7?.draftText?.(id):type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftText?.(id):null;
  const edits={...base,...(cur?.text||{}),...(localText||{})};
  if(type==='specimen'){const tags=window.VPQ_PATH_ETIOLOGY?.forCard?.(edits);if(tags){if(edits.etiologyCategories===undefined)edits.etiologyCategories=tags.categories.join(', ');if(edits.etiologyAgents===undefined)edits.etiologyAgents=tags.agents;if(edits.etiologyCertainty===undefined)edits.etiologyCertainty=tags.certainty;}}
- const fields=type==='case'?['history','gross','histo','morph','mechanism','tests']:type==='specimen'?['gross','dx','histo','why','visualClue','compare','notes','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','speciesEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes']:[];
+ const fields=type==='case'?['history','gross','histo','morph','mechanism','tests']:type==='specimen'?['gross','dx','histo','why','visualClue','compare','notes']:[];
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  draftState={};
  show('✏️ Edit & publish · '+esc(base.title),
  '<p><b>Text-only updates are allowed.</b> Leave image inputs blank to preserve all published photos. Select multiple new images to append them. Existing photos are kept unless you check Remove or explicitly select Replace all.</p>'+
  (fields.length?'<h4>📝 Teaching content (editable independently of photos)</h4>'+fields.map(k=>'<label style="display:block;margin:7px 0"><b>'+esc(k.replace(/^\w/,c=>c.toUpperCase()))+'</b><textarea data-np-text="'+k+'" rows="3" style="display:block;width:100%">'+esc(edits[k]||'')+'</textarea></label>').join(''):'')+
- (type==='specimen'?'<p class="tiny">Etiology categories: comma-separated IDs (bacterial, viral, fungal, protozoal, helminthic, arthropod, neoplastic, immune, toxic, nutritional, endocrine, vascular, traumatic, developmental, degenerative, idiopathic). Enter multiple if needed. Etiology certainty: differential / associated / confirmed. Morphologic diagnosis remains a separate field.</p>':'')+
- (type==='specimen'?'<p class="tiny">Species occurrence is stored as JSON by the atlas editor (e.g. {"cat":"reported"}); for reliable changes use the visual atlas editor first. Disease ID should match across manifestations of the same named disease. Unknown frequency is not zero prevalence.</p>':'')+
+ (type==='specimen'?'<h4>✅ Structured classifications — select from the options</h4>'+(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(edits)||'')+(window.VPQ_PATH_ATLAS_META?.editorHTML?.(edits)||''):'')+
+ 
  '<h4>📷 Currently published ('+existing.length+')</h4>'+
  (existing.length?'<p class="tiny"><b>Edit any existing photo below.</b> Change its caption, credit, source, or type without adding a new image. All other photos and your teaching text stay in place unless you explicitly remove or replace them.</p>':'')+
  (existing.length?existing.map((p,i)=>'<div style="display:flex;gap:9px;align-items:start;padding:8px;border:1px solid #cdd9e6;border-radius:9px;margin:6px 0"><img src="'+esc(p.url)+'" style="width:90px;height:85px;object-fit:contain" alt="'+esc(p.caption||'Published pathology photo')+'"><div style="flex:1;min-width:0;font-size:12px"><b>Published photo '+(i+1)+'</b>'+
@@ -307,6 +307,9 @@ function readFields(){
  const kind=el('npOwnerKind')?.value||'gross',replaceAll=!!el('npOwnerReplaceAll')?.checked;
  const remove=Array.from(root.querySelectorAll('[data-np-remove]:checked')).map(x=>Number(x.dataset.npRemove));
  const edits={};root.querySelectorAll('[data-np-text]').forEach(x=>{edits[x.dataset.npText]=String(x.value||'').slice(0,9000)});
+ if(pending?.type==='specimen'){
+  Object.assign(edits,window.VPQ_PATH_ETIOLOGY?.readEditor?.(root)||{},window.VPQ_PATH_ATLAS_META?.readEditor?.(root)||{});
+ }
  const tags=tagsFrom(root,'new');
  const existingTags=Array.from(root.querySelectorAll('[data-np-remove]')).map(x=>tagsFrom(root,'existing-'+x.dataset.npRemove));
  const existingPhotoEdits=Array.from(root.querySelectorAll('[data-np-photo-caption]')).map((x,i)=>({
