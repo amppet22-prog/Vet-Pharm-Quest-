@@ -2230,7 +2230,7 @@
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-19-1795072077318-0.jpg",
           "source": "",
           "credit": "Pathology lecture LMU",
-          "caption": "Pathology study reference · Screenshot 2026-11-19 020641.png",
+          "caption": "Metastatic hemangiosarcoma",
           "type": "gross",
           "external": false,
           "lectures": [
@@ -2243,7 +2243,7 @@
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-19-1795072078868-1.jpg",
           "source": "",
           "credit": "Pathology lecture LMU",
-          "caption": "Pathology study reference · Screenshot 2026-11-19 020645.png",
+          "caption": "Metastasizing mammary gland carcinoma",
           "type": "gross",
           "external": false,
           "lectures": [
@@ -2256,7 +2256,7 @@
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-19-1795072080200-2.jpg",
           "source": "",
           "credit": "Pathology lecture LMU",
-          "caption": "Pathology study reference · Screenshot 2026-11-19 020701.png",
+          "caption": "vessels from hemangiosarcoma",
           "type": "gross",
           "external": false,
           "lectures": [
@@ -2270,7 +2270,7 @@
         "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-19-1795072077318-0.jpg",
         "source": "",
         "credit": "Pathology lecture LMU",
-        "caption": "Pathology study reference · Screenshot 2026-11-19 020641.png",
+        "caption": "Metastatic hemangiosarcoma",
         "type": "gross",
         "external": false,
         "lectures": [
@@ -2305,7 +2305,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T07:08:01.449Z",
+      "updated": "2026-11-19T07:09:38.486Z",
       "approvedBy": "amppet22-prog"
     }
   },
