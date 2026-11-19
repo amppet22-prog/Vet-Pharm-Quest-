@@ -23,7 +23,7 @@ function shuffleCases(){shuffledIds=shuffleArray(allCases().filter(x=>filter==='
 function prepareCase(id){current=id;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
 function menu(){
  const matched=caseSequence();
- const counts=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+ const counts=[...Array.from({length:36},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
  const selectedStudy=counts.includes(conditionLecture)?conditionLecture:'68';
  modal('🧩 Necropsy · Study & Differential Center',
  '<div style="padding:10px 12px;border:1px solid #c4d6e9;background:#f3f8ff;border-radius:11px;margin-bottom:11px"><b>How would you like to practice?</b><p style="font-size:12px;margin:5px 0 0">Learn the key findings with flashcards, identify lesions in the gross atlas, then solve realistic differential cases.</p></div>'+
@@ -561,7 +561,7 @@ function init(api){
   return;
  }
  if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
- if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;const hasDisease=((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]).some(x=>x.diseaseAtlas===true);conditionTopicMode=Number(conditionLecture)>=50&&Number(conditionLecture)<=58&&hasDisease?'disease':'all';return conditionIndex()}
+ if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;const hasDisease=((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]).some(x=>x.diseaseAtlas===true);conditionTopicMode=Number(conditionLecture)>=50&&Number(conditionLecture)<=66&&hasDisease?'disease':'all';return conditionIndex()}
  if(d.pathdiffTopicMode!==undefined){conditionTopicMode=d.pathdiffTopicMode;return conditionIndex()}
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
  if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
@@ -596,7 +596,7 @@ function init(api){
  if(d.pathdiffReset!==undefined){phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];return view()}
  if(d.pathdiffToggle!==undefined){const i=Number(d.pathdiffToggle);shortlist=shortlist.includes(i)?shortlist.filter(v=>v!==i):[...shortlist,i];return view()}
  if(d.pathdiffHisto!==undefined){if(phase===0)grossLeading=leading;phase=Math.max(phase,1);return view()}
- if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;const base=allCases().find(v=>v.id===current);const record={...base,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};const chosen=record.options?.[leading];const originalChoice=record.options?.[optionOrder[leading]];const correct=originalChoice?.role==='best'||String(originalChoice?.name||'').trim().toLowerCase()===String(record.best||'').trim().toLowerCase();if(phase<2&&typeof ui?.awardQuestion==='function')caseReward=ui.awardQuestion('necropsy-differential',String(current),correct);phase=2;return view()}
+ if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;const base=allCases().find(v=>v.id===current);const record={...base,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};const originalChoice=record.options?.[optionOrder[leading]];const correct=originalChoice?.role==='best'||String(originalChoice?.name||'').trim().toLowerCase()===String(record.best||'').trim().toLowerCase();if(phase<2&&typeof ui?.awardQuestion==='function')caseReward=ui.awardQuestion('necropsy-differential',String(current),correct);phase=2;return view()}
  if(d.pathdiffRemove!==undefined){updatePhoto(d.pathdiffRemove,'');return view()}
  },true);
  api.body.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target?.dataset?.pathdiffFlashFlip!==undefined){ev.preventDefault();flashFace=!flashFace;flashView()}},true);
