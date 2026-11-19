@@ -91,6 +91,7 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all',conditionTopicMode='all';
 const LECTURES=[...Array.from({length:36},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'n69-bovine-congenital-cns-figure1':['Congenital bovine CNS malformations: viral versus genetic'],
 'gi6-practice-stomach-ulcers':['Acute gastric ulceration','Chronic gastric ulceration','Gastritis, erosions and gastric ulcers','Acute versus chronic gastric ulcers'],
 'gi6-practice-haemonchus':['Haemonchus contortus abomasal parasitism','Hookworms and whipworms'],
 'gi6-practice-bovine-abomasal-lymphoma':['Gastrointestinal neoplasms'],
