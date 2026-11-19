@@ -501,6 +501,17 @@ function conditionDetail(){
  (refBlock||'<p style="font-size:12px">No dedicated differential case is linked to this exact lecture topic yet. This remains visible in the coverage audit rather than being marked complete.</p>'));
 }
 
+function zoomCaseImage(raw){
+ const url=String(raw||'');if(!/^https:\/\//i.test(url)&&!/^data:image\//i.test(url))return;
+ const shade=document.createElement('div');shade.setAttribute('role','dialog');shade.setAttribute('aria-label','Enlarged pathology image, no diagnostic caption');
+ shade.style.cssText='position:fixed;inset:0;z-index:999999;background:rgba(8,15,30,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:8px';
+ const close=document.createElement('button');close.type='button';close.textContent='✕ Close image';close.style.cssText='padding:9px 18px;background:white;color:#111;border-radius:8px;cursor:pointer';
+ const image=document.createElement('img');image.src=url;image.alt='Enlarged unlabeled case image';image.style.cssText='max-width:96vw;max-height:86vh;object-fit:contain';
+ shade.append(close,image);document.body.appendChild(shade);
+ const dismiss=()=>{shade.remove();document.removeEventListener('keydown',escape);};
+ const escape=e=>{if(e.key==='Escape')dismiss();};
+ close.addEventListener('click',dismiss);shade.addEventListener('click',e=>{if(e.target===shade)dismiss()});document.addEventListener('keydown',escape);close.focus();
+}
 function sourcedPhotos(x){
  const d=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES?.[x.id];
  if(!d)return '';
@@ -509,12 +520,12 @@ function sourcedPhotos(x){
   const url=p.url||'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(filename);
   const source=p.sourceUrl||'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(filename).replace(/%20/g,'_');
   if(p.type==='histology'&&phase===0)return '<div style="padding:10px;background:#f3f1fa;border:1px dashed #c1bcd3;border-radius:9px;font-size:12px;margin:7px 0">🔬 Histology reference becomes visible after the histology clue.</div>';
-  return '<div style="padding:8px;border:1px solid #d2deed;border-radius:10px;background:white;margin:7px 0"><img src="'+safe(url)+'" alt="'+safe(p.caption)+'" loading="lazy" style="display:block;width:100%;max-height:210px;object-fit:contain;border-radius:6px"><div style="font-size:12px;margin-top:5px"><b>'+safe(p.type==='histology'?'Microscopic reference':'Visual reference')+'</b> · '+(phase>=2?safe(p.caption):'Observe the lesion first; the diagnosis and full caption are revealed after the comparison.')+'</div><div style="font-size:11px;color:#5b718b">Credit: '+safe(p.credit)+' · <a target="_blank" rel="noopener noreferrer" href="'+safe(source)+'">Source / license</a></div></div>';
+  return '<div style="padding:8px;border:1px solid #d2deed;border-radius:10px;background:white;margin:7px 0"><button type="button" data-pathdiff-zoom="'+safe(url)+'" aria-label="Enlarge case image without showing caption" style="display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in"><img src="'+safe(url)+'" alt="Unlabeled pathology teaching image" loading="lazy" style="display:block;width:100%;max-height:210px;object-fit:contain;border-radius:6px"></button><div style="font-size:12px;margin-top:5px"><b>'+safe(p.type==='histology'?'Microscopic reference':'Gross reference')+'</b> · '+(phase>=2?safe(p.caption):'Tap image to enlarge; explanatory caption is hidden until comparison.')+'</div>'+(phase>=2?'<div style="font-size:11px;color:#5b718b">Credit: '+safe(p.credit)+' · <a target="_blank" rel="noopener noreferrer" href="'+safe(source)+'">Source / license</a></div>':'')+'</div>';
  }).join('');
- const links=(d.links||[]).map(p=>'<a target="_blank" rel="noopener noreferrer" href="'+safe(p.url)+'" style="display:block;margin:6px 0;font-size:12px;text-decoration:underline;color:#315b9b">🔎 '+safe(p.label)+'</a>').join('');
- return '<div style="background:#eff8f5;border:1px solid #c5dace;border-radius:10px;padding:9px;margin:7px 0"><b style="font-size:13px">📸 Original veterinary references (not this simulated patient)</b>'+pics+(links?'<details '+(phase>=2?'open':'')+' style="margin:6px 0"><summary style="font-size:12px;font-weight:700">Additional pathology references (may reveal diagnosis)</summary>'+links+'</details>':'')+(d.note?'<p style="font-size:12px;color:#536375">'+safe(d.note)+'</p>':'')+'</div>';
+ const links=phase>=2?(d.links||[]).map(p=>'<a target="_blank" rel="noopener noreferrer" href="'+safe(p.url)+'" style="display:block;margin:6px 0;font-size:12px;text-decoration:underline;color:#315b9b">🔎 '+safe(p.label)+'</a>').join(''):'';
+ return '<div style="background:#eff8f5;border:1px solid #c5dace;border-radius:10px;padding:9px;margin:7px 0"><b style="font-size:13px">📸 Original veterinary references (not this simulated patient)</b>'+pics+(links?'<details '+(phase>=2?'open':'')+' style="margin:6px 0"><summary style="font-size:12px;font-weight:700">Additional pathology references (may reveal diagnosis)</summary>'+links+'</details>':'')+(phase>=2&&d.note?'<p style="font-size:12px;color:#536375">'+safe(d.note)+'</p>':'')+'</div>';
 }
-function photoHTML(x){const photo=photoStore()[x.id];return '<div style="max-width:330px;padding:10px;background:#f8faff;border:1px dashed #bdcce0;border-radius:10px">'+(photo?'<img src="'+safe(photo)+'" alt="User added necropsy specimen" style="max-width:100%;max-height:205px;object-fit:contain;display:block;margin:auto">':'<div style="min-height:92px;display:grid;place-items:center;color:#566a89;font-size:13px">📷 No source photograph yet — add one from your lectures</div>')+'<label style="display:block;margin-top:7px;font-size:12px"><b>Add / replace this case image (local only)</b><input type="file" accept="image/*" data-pathdiff-photo="'+safe(x.id)+'" style="max-width:100%;font-size:12px"></label>'+(photo?'<button style="margin-top:5px;font-size:11px" data-pathdiff-remove="'+safe(x.id)+'">Remove local photo</button>':'')+'<small style="display:block;color:#66758b">Local draft photo; publish to make it available across devices. Only use photos you have rights to share.</small><button data-pathdiff-publish="'+safe(x.id)+'" style="display:block;margin-top:7px;background:#e4f6eb;border:1px solid #75b996">🚀 Edit / Publish photo now</button></div>'}
+function photoHTML(x){const photo=photoStore()[x.id];return '<div style="max-width:330px;padding:10px;background:#f8faff;border:1px dashed #bdcce0;border-radius:10px">'+(photo?'<button type="button" data-pathdiff-zoom-local="'+safe(x.id)+'" aria-label="Enlarge your uploaded specimen without captions" style="display:block;padding:0;border:0;background:transparent;cursor:zoom-in"><img src="'+safe(photo)+'" alt="Unlabeled case specimen" style="max-width:100%;max-height:205px;object-fit:contain;display:block;margin:auto"></button>':'<div style="min-height:92px;display:grid;place-items:center;color:#566a89;font-size:13px">📷 No source photograph yet — add one from your lectures</div>')+'<label style="display:block;margin-top:7px;font-size:12px"><b>Add / replace this case image (local only)</b><input type="file" accept="image/*" data-pathdiff-photo="'+safe(x.id)+'" style="max-width:100%;font-size:12px"></label>'+(photo?'<button style="margin-top:5px;font-size:11px" data-pathdiff-remove="'+safe(x.id)+'">Remove local photo</button>':'')+'<small style="display:block;color:#66758b">Local draft photo; publish to make it available across devices. Only use photos you have rights to share.</small><button data-pathdiff-publish="'+safe(x.id)+'" style="display:block;margin-top:7px;background:#e4f6eb;border:1px solid #75b996">🚀 Edit / Publish photo now</button></div>'}
 function moveCase(direction){
  const cases=caseSequence(),index=cases.findIndex(x=>x.id===current);
  if(index<0)return menu();
@@ -612,7 +623,9 @@ function init(api){
  if(d.pathdiffRecallReset!==undefined){recallShow=false;return recallView()}
  if(d.pathdiffRecallBack!==undefined)return conditionDetail();
  if(d.pathdiffPublish!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('case',d.pathdiffPublish);
- if(d.pathdiffCaseAtlas!==undefined)return openCaseAtlas(Number(d.pathdiffCaseAtlas));
+ if(d.pathdiffZoom!==undefined)return zoomCaseImage(d.pathdiffZoom);
+  if(d.pathdiffZoomLocal!==undefined)return zoomCaseImage(photoStore()[d.pathdiffZoomLocal]);
+  if(d.pathdiffCaseAtlas!==undefined)return openCaseAtlas(Number(d.pathdiffCaseAtlas));
   if(d.pathdiffPrevcase!==undefined)return moveCase(-1);
   if(d.pathdiffNextcase!==undefined)return moveCase(1);
   if(d.pathdiffShuffle!==undefined)return shuffleCases();
