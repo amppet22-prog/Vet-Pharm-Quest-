@@ -212,7 +212,7 @@ async function editor(type,id){
  (existing.length?existing.map((p,i)=>'<div style="display:flex;gap:9px;align-items:start;padding:8px;border:1px solid #cdd9e6;border-radius:9px;margin:6px 0"><img src="'+esc(p.url)+'" style="width:90px;height:85px;object-fit:contain" alt="'+esc(p.caption||'Published pathology photo')+'"><div style="flex:1;min-width:0;font-size:12px"><b>Published photo '+(i+1)+'</b>'+
  '<label style="display:block;margin:5px 0">Caption for this photo<textarea rows="2" data-np-photo-caption="'+i+'" style="display:block;width:100%">'+esc(p.caption||'')+'</textarea></label>'+
  '<label style="display:block;margin:5px 0">Photo credit / license<input data-np-photo-credit="'+i+'" style="display:block;width:100%;padding:6px" value="'+esc(p.credit||'')+'"></label>'+
- '<label style="display:block;margin:5px 0">Original source URL<input data-np-photo-source="'+i+'" style="display:block;width:100%;padding:6px" placeholder="https://… (if applicable)" value="'+esc(p.source||'')+'"></label>'+
+ '<label style="display:block;margin:5px 0">Original source URL<input data-np-photo-source="'+i+'" data-np-original-source="'+esc(p.source||'')+'" style="display:block;width:100%;padding:6px" placeholder="https://… (if applicable)" value="'+esc(p.source||'')+'"></label>'+
  '<label style="display:block;margin:5px 0">Photo type<select data-np-photo-type="'+i+'" style="display:block;width:100%;padding:6px">'+['gross','histology','clinical','illustration'].map(t=>'<option value="'+t+'"'+(t===(p.type||'gross')?' selected':'')+'>'+({gross:'Gross',histology:'Histology / H&E',clinical:'Clinical',illustration:'Illustration'}[t])+'</option>').join('')+'</select></label>'+
  photoTagsHTML('existing-'+i,p.lectures||[],p.systems||[])+
  '<label style="display:block;margin-top:7px"><input type="checkbox" data-np-remove="'+i+'"> Remove this published photo</label></div></div>').join(''):'<p>No published photos yet.</p>')+
@@ -316,7 +316,8 @@ function readFields(){
   type:String(root.querySelector('[data-np-photo-type="'+i+'"]')?.value||'gross')
  }));
  for(const p of existingPhotoEdits){
-  if(p.source&&!goodUrl(p.source))throw Error('An existing photo source must use an HTTPS URL, or be left blank.');
+  const original=root.querySelector('[data-np-photo-source="'+existingPhotoEdits.indexOf(p)+'"]')?.dataset.npOriginalSource||'';
+  if(p.source!==original&&p.source&&!goodUrl(p.source))throw Error('A changed photo source must use HTTPS, or be left blank.');
   if(!['gross','histology','clinical','illustration'].includes(p.type))throw Error('Select a valid photo type.');
  }
 
