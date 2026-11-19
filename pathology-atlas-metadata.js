@@ -11,7 +11,17 @@ const zoonotic={unknown:'Not assessed',direct:'Direct animal-to-human transmissi
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeChoice=(map,v,fallback='')=>Object.hasOwn(map,v)?v:fallback;
 function parseSpecies(v){
- try{const raw=typeof v==='string'?JSON.parse(v||'{}'):v||{};return Object.fromEntries(Object.entries(raw).filter(([k,z])=>species[k]&&frequency[z]))}catch{return {}}
+ try{
+  const raw=typeof v==='string'?JSON.parse(v||'{}'):v||{};
+  return Object.fromEntries(Object.entries(raw).filter(([k,z])=>species[k]&&frequency[z]));
+ }catch{
+  // Older owner edits used unrestricted species text instead of the dropdown.
+  // Convert explicit names only to "reported" (frequency not known).
+  const label=String(v||'').toLowerCase(),found={};
+  const aliases={dog:/\\b(dog|dogs|canine|canines)\\b/,cat:/\\b(cat|cats|feline|felines)\\b/,horse:/\\b(horse|horses|equine|equines)\\b/,cattle:/\\b(cattle|bovine|cow|cows)\\b/,sheep:/\\b(sheep|ovine)\\b/,goat:/\\b(goat|goats|caprine)\\b/,pig:/\\b(pig|pigs|porcine|swine)\\b/,poultry:/\\b(poultry|chickens|chicken)\\b/,reptile:/\\b(reptiles|reptile)\\b/};
+  for(const [key,re]of Object.entries(aliases))if(re.test(label))found[key]='reported';
+  return found;
+ }
 }
 // Source-grounded initial selections. These are documented hosts/teaching
 // associations, NOT population prevalence estimates. Published edits override.
@@ -23,7 +33,18 @@ const lectureSeed={
  'pathx-68-26':{conditionType:'infectious',conditionSubtype:'fungi',organSystem:'cns',pathogenNames:'Cryptococcus neoformans / gattii',diseaseId:'cryptococcosis'},
  'pathx-68-11':{conditionType:'infectious',conditionSubtype:'viruses',organSystem:'cns',pathogenNames:'Rabies lyssavirus',diseaseId:'rabies'}
 };
-const seeded=x=>{const seed=lectureSeed[x?.id]||{};return {...seed,...x}};
+const seeded=x=>{
+ const seed=lectureSeed[x?.id]||{},merged={...seed,...x};
+ // A few older published records used free-text classes and organ systems.
+ // Preserve that text on the actual record, but fall back to grounded slide
+ // classifications for filtering until a structured edit is published.
+ for(const [field,options] of [['conditionType',conditionTypes],['conditionSubtype',subtypes],['organSystem',systems]]){
+  if(!Object.hasOwn(options,merged[field])&&seed[field])merged[field]=seed[field];
+ }
+ if(!Object.keys(parseSpecies(merged.speciesOccurrence)).length&&seed.speciesOccurrence)merged.speciesOccurrence=seed.speciesOccurrence;
+ if(seed.diseaseId&&!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(String(merged.diseaseId||'')))merged.diseaseId=seed.diseaseId;
+ return merged;
+};
 function data(x){
  x=seeded(x||{});
  return {
