@@ -47,7 +47,7 @@ async function publishConditionName(ref,title,token){
  const who=await github('https://api.github.com/user',token);
  if(who?.login?.toLowerCase()!==OWNER.toLowerCase())throw Error('Only the repository owner can publish.');
  const old=await file(MANIFEST,token),manifest=JSON.parse(decode(old.content));
- const requested=String(title||'').trim().replace(/\\s+/g,' ');
+ const requested=String(title||'').trim().replace(/\s+/g,' ');
  if(!requested||requested.length>180)throw Error('Use a name between 1 and 180 characters.');
  if(ref.startsWith('custom:')){
   const id=ref.slice(7),c=manifest.customConditions?.[id];
@@ -360,7 +360,7 @@ function readFields(){
   Object.assign(edits,window.VPQ_PATH_ETIOLOGY?.readEditor?.(root)||{},window.VPQ_PATH_ATLAS_META?.readEditor?.(root)||{});
  }
  if(pending?.type!=='lecture'){
-  const requested=String(edits.title||'').trim().replace(/\\s+/g,' ');
+  const requested=String(edits.title||'').trim().replace(/\s+/g,' ');
   if(!requested||requested.length>180)throw Error('Enter a card name between 1 and 180 characters.');
   edits.title=requested;
  }
