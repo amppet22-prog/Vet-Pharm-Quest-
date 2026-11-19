@@ -770,6 +770,19 @@
           ],
           "systems": [],
           "conditionId": "pathx-68-29"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-29-1795048403494-0.jpg",
+          "source": "https://tvmdl.tamu.edu/case-studies/equine-protozoal-myeloencephalitis-epm-in-a-horse/",
+          "credit": "TVMEDT EDU",
+          "caption": "scattered foci of lymphohistocytic inflammation with rare small areas of necrosis",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-29"
         }
       ],
       "photo": {
@@ -810,7 +823,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T00:31:11.062Z",
+      "updated": "2026-11-19T00:33:24.974Z",
       "approvedBy": "amppet22-prog"
     }
   },
