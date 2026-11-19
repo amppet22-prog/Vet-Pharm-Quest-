@@ -1579,6 +1579,91 @@
       },
       "updated": "2026-11-19T03:41:25.561Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-13": {
+      "title": "Meningioma",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-13-1795062621949-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 232905.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-13"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-13-1795062623330-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 232907.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-13"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-13-1795062624760-2.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-18 232910.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-13"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-13-1795062621949-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-18 232905.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-13"
+      },
+      "text": {
+        "gross": "Usually solitary, firm, well-defined, gray-white, spherical/lobulated/plaque-like and compressive, leading to pressure atrophy; hemorrhage/necrosis may alter cut surface. Soft, red, brown, or gray areas of hemorrhage and necrosis. \n\n**Cat:** Almost always compressive, shelled out \n**Dog: **Tend to be more attached to the underlying parenchyma and not as easy to shell out. ",
+        "dx": "Working identification: Meningioma. \nSpecimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Neoplastic cells ",
+        "why": "***Most common CNS neoplasm in dogs and cats.*** Tumor arising from the meninges (arachnoid cell layer and projecting into the subdural space).\n- Slow-growing\n-Secondary pressure atrophy of adjacent parenchyma secondary to compression. ",
+        "visualClue": "",
+        "compare": "",
+        "notes": " Most common CNS neoplasm in dogs and cats\n 50% and 60% of intracranial neoplasms respectively\n More common in brain than spinal cord\n Dogs 7-14 years of age; Cats 10 years+",
+        "etiologyCategories": [
+          "neoplastic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\",\"cat\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "neoplasm",
+        "conditionSubtype": "",
+        "organSystem": "cns",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T04:30:26.196Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
