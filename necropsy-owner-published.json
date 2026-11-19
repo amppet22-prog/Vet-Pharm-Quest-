@@ -965,6 +965,64 @@
       },
       "updated": "2026-11-19T01:00:05.808Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-40": {
+      "title": "Fibrocartilaginous embolic ischemic myelopathy (FCE)",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-40-1795050210144-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-40"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-40-1795050210144-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [],
+        "conditionId": "pathx-68-40"
+      },
+      "text": {
+        "gross": "Acute focal spinal cord infarct.",
+        "dx": "Working identification: Fibrocartilaginous embolic ischemic myelopathy (FCE). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Fibrocartilaginous material occluding spinal vessels.",
+        "why": "Mechanism: Fibrocartilage from intervertebral disk reaches spinal cord vasculature, causing occlusive emboli and acute ischemia. Host: Most commonly dogs, especially larger breeds, though reported across domestic species.",
+        "visualClue": "",
+        "compare": "",
+        "notes": "",
+        "etiologyCategories": [
+          "vascular"
+        ],
+        "etiologyAgents": "Ischemic myelopathy\nFibrocartilaginous embolic myelopathy, FCE ",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "speciesEvidence": "",
+        "conditionType": "vascular",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "spinal cord ",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T01:03:31.441Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
