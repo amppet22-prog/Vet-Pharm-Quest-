@@ -78,6 +78,7 @@ function learnLecture(n){
  const l=window.VPQ_PATH_LECTURE_LEARN?.[n];if(!l)return lecture(n);
  const photos=window.VPQ_PATH_INLINE_PHOTOS;
  const diagram=(i)=>{
+  if(/^3[1-5]$/.test(n))return window.VPQ_PATH_URINARY_VISUALS?.card?.(l.sections[i],n)||'';
   if(n!=='67')return '';
   if(i===4)return '<div class="np-edu-diagram"><b>CSF pathway</b><p>Lateral ventricles → Third ventricle → Cerebral aqueduct → Fourth ventricle → Subarachnoid space → Arachnoid villi</p><small>Original teaching pathway based on lecture slides 19–20.</small></div>';
   if(i===12)return '<div class="np-edu-diagram"><b>Compare the two lecture edema mechanisms</b><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0"><div style="background:#e6f3ff;border-radius:9px;padding:10px"><b>Cytotoxic</b><p>ATP loss → Na⁺ pump failure → intracellular swelling</p><small>BBB intact</small></div><div style="background:#ffece4;border-radius:9px;padding:10px"><b>Vasogenic</b><p>BBB disruption → plasma leakage → extracellular edema</p><small>BBB disrupted</small></div></div></div>';
