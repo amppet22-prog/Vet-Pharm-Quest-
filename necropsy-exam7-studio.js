@@ -76,7 +76,9 @@ function card(i){
  const nav='<div class="buttonrow" style="margin:0 0 10px"><button data-path7-back="1">← Back to '+(tab==='normals'?'Normals Atlas':'Disease Atlas')+'</button><button data-path7-view="'+(previous?.index??'')+'" '+(!previous?'disabled':'')+'>◀ Previous</button><button data-path7-view="'+(next?.index??'')+'" '+(!next?'disabled':'')+'>Next specimen ▶</button></div>'+
  '<p class="tiny">'+(at>=0?('Specimen '+(at+1)+' of '+shelf.length+' · '):'')+'Browse within your current tab, search and filter.</p>';
  const gallery=window.VPQ_NECROPSY_OWNER_PUBLISH?.specimenPhotoHTML?.(x.id)||'';
- const media=gallery|| (x.image?'<img alt="Local pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>');
+ const publicPhotos=Array.isArray(x.publicLecturePhotos)?x.publicLecturePhotos:[];
+ const publicGallery=publicPhotos.length?'<div style="display:grid;gap:9px">'+publicPhotos.map(p=>'<figure style="margin:0;border:1px solid #d8ddea;border-radius:12px;padding:7px"><img alt="'+h(p.caption)+'" src="'+h(p.asset)+'" style="display:block;width:100%;max-height:430px;object-fit:contain"><figcaption style="font-size:12px;line-height:1.4;margin-top:5px"><b>'+h(p.caption)+'</b> · '+h(p.source)+'<div>'+h(p.studyPrompt)+'</div></figcaption></figure>').join('')+'</div>':'';
+ const media=gallery||publicGallery||(x.image?'<img alt="Local pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>');
  modal((x.normal?'🌱 Normal reference · ':'Lecture '+h(x.lecture)+' · ')+h(x.title),
  nav+
  '<p class="tiny">'+photoStatus(x)+' · Photos optional; uploading is not the same as verifying.</p>'+ 
