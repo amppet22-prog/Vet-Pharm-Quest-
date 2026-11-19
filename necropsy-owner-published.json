@@ -2043,6 +2043,66 @@
       },
       "updated": "2026-11-19T05:10:51.093Z",
       "approvedBy": "amppet22-prog"
+    },
+    "specimen-custom-69-cervical-vertebral-stenotic-myelopathy-wobbler-s": {
+      "title": "Cervical vertebral stenotic myelopathy (Wobbler syndrome)",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-cervical-vertebral-stenotic-myelopathy-wobbler-s-1795066773242-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-69-cervical-vertebral-stenotic-myelopathy-wobbler-s"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-69-cervical-vertebral-stenotic-myelopathy-wobbler-s-1795066773242-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "specimen-custom-69-cervical-vertebral-stenotic-myelopathy-wobbler-s"
+      },
+      "text": {
+        "gross": "Stenosis of the cervical vertebral canal with spinal cord compression or narrowing",
+        "dx": "Cervical vertebral stenotic myelopathy",
+        "histo": "Changes in the spinal cord focused on axons resulting from compression of the spinal cord",
+        "why": "Multifactorial pathogenesis, genetic, nutritional, growth rate.\nStenosis causes compressive trauma to the spinal cord ",
+        "visualClue": "Cervical location ",
+        "compare": "",
+        "notes": "Occurs primarily in young, rapidly growing horses and large-breed dogs\n**Dogs:** most common in C5-C7\n**Horses:** throughout C3-C7 ",
+        "etiologyCategories": [
+          "nutritional",
+          "developmental"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\",\"horse\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "congenital",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "spinal cord ",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T05:39:34.618Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
