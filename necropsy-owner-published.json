@@ -1524,6 +1524,19 @@
       "source": "Pathology lecture LMU",
       "normal": false,
       "id": "specimen-custom-68-cerebrospinal-nematodiasis"
+    },
+    "specimen-custom-69-syringomyelia": {
+      "title": "Syringomyelia",
+      "lecture": "69",
+      "system": "Nervous system",
+      "species": "Cattle, Dogs",
+      "gross": "Cavity (syrinx) that forms in the spinal cord.",
+      "dx": "Syringomyelia",
+      "histo": "Absence of tissue in the spinal cord",
+      "why": "Congenital and acquired forms, most commonly in calves and dog breeds. \nProposed causes include infection, trauma, or neoplasia that result in degeneration and cavitation of the spinal cord.",
+      "source": "Pathology lecture LMU",
+      "normal": false,
+      "id": "specimen-custom-69-syringomyelia"
     }
   },
   "hiddenSpecimens": [
