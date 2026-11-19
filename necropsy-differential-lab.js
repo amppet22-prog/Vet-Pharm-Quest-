@@ -19,7 +19,7 @@ function start(api,chosen='all'){
 }
 function menu(){
  const matched=allCases().filter(x=>filter==='all'||x.lecture===filter);
- const counts=Array.from({length:13},(_,i)=>String(i+67));
+ const counts=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
  const selectedStudy=counts.includes(conditionLecture)?conditionLecture:'68';
  modal('🧩 Necropsy · Study & Differential Center',
  '<div style="padding:10px 12px;border:1px solid #c4d6e9;background:#f3f8ff;border-radius:11px;margin-bottom:11px"><b>How would you like to practice?</b><p style="font-size:12px;margin:5px 0 0">Learn the key findings with flashcards, identify lesions in the gross atlas, then solve realistic differential cases.</p></div>'+
@@ -77,6 +77,16 @@ function umbrellaDetail(){
 let conditionLecture='75',conditionChosen=-1,conditionGap='all';
 const LECTURES=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
 const CASE_MATCH={
+'practice5-calf-hsomni':["Histophilus somni bovine pneumonia","Suppurative bronchopneumonia","Histophilus somni"],
+'practice5-bovine-sweetpotato':["Interstitial pneumonia","Pulmonary edema versus diffuse alveolar damage"],
+'practice5-fungalnodules':["Granulomatous pneumonia"],
+'practice5-horse-septicemboli':["Embolic pneumonia","Septic pulmonary emboli","Septic pulmonary embolism versus bland thromboembolism"],
+'practice5-dog-aspiration':["Aspiration bronchopneumonia"],
+'practice5-canine-atelectasis':["Congenital versus acquired atelectasis"],
+'practice5-caninemiliary':["Granulomatous pneumonia"],
+'practice5-smoke-trachea':["Pulmonary hemorrhage","Viral tracheitis"],
+'practice5-pulmonary-hemosiderosis':["Pulmonary congestion and heart failure cells"],
+
 'n49-fod':['Fibrous osteodystrophy'],
 'n49-disco':['Discospondylitis'],
 'n49-joint-tumor':['Synovial myxoma'],
@@ -324,6 +334,7 @@ function conditionIndex(){
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:5px;margin:9px 0">'+summary.map(v=>'<button data-pathdiff-condition-lecture="'+v.lecture+'" aria-pressed="'+(conditionLecture===v.lecture?'true':'false')+'" style="padding:7px 5px;font-size:12px">L'+v.lecture+'<small style="display:block;font-size:10px">'+v.teaching+' topics</small></button>').join('')+'</div>'+
  '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture)+'</b><p style="font-size:12px;margin:5px 0">Lecture topics: '+row.teaching+' · Matched specimen cards: '+row.specimens+' · Matched differential cases: '+row.cases+' · Attached image references: '+row.embedded+'</p><small>Counts are conservatively matched by case mapping/title, not a certified complete disease audit. External links without an embedded image are not counted as attached images.</small></div>'+
  '<div class="buttonrow"><button data-pathdiff-condition-lecture="31" style="background:#eaf6ef;font-weight:800">🫘 Urinary Exam 3 · L31–35</button><button data-pathdiff-condition-lecture="36" style="background:#f9eedd;font-weight:800">🫀 Hepatic Exam 3 · L36–40</button><button data-pathdiff-condition-lecture="41" style="background:#efe9ff;font-weight:800">🧪 Pancreas · L41</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-condition-lecture="50" style="background:#eef6ff;font-weight:800">❤️ Exam 5 · Cardiac L50–53</button><button data-pathdiff-condition-lecture="54" style="background:#e8f5f8;font-weight:800">🫁 Exam 5 · Respiratory L54–58</button></div>'+
  '<div class="buttonrow"><button data-pathdiff-flash-lecture="1" style="background:#e8f2ff">🧠 Study this lecture · flashcards</button></div>'+
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-gap="all" aria-pressed="'+(conditionGap==='all')+'">All '+sections.length+'</button><button data-pathdiff-gap="case" aria-pressed="'+(conditionGap==='case')+'">Needs differential case</button><button data-pathdiff-gap="photo" aria-pressed="'+(conditionGap==='photo')+'">Needs attached photo</button></div>'+
  '<p class="tiny">'+displayed.length+' topics displayed. Select any topic to see full instructor-derived notes and the source slide reference.</p>'+
