@@ -1827,6 +1827,65 @@
       },
       "updated": "2026-11-19T04:57:43.336Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-15": {
+      "title": "Oligodendroglioma",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-15-1795064571004-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-15"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-15-1795064571004-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-15"
+      },
+      "text": {
+        "gross": "Well-demarcated soft to **gelatinous** gray-to-pink-red mass with hemorrhage and possibly cystic center when large. (Gelatinous because oligodendrocytes produce myelin) larger tumors may have a central center that is cystic ",
+        "dx": "Working identification: Oligodendroglioma. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Neoplastic proliferation of oligodendrocytes.",
+        "why": "Neoplastic oligodendrocytes. Most commonly in the dog, but far the most common glioma neoplasm (up to 70% incidence). Brachycephalic breeds have a higher occurance. Age rage is 5-11 years ",
+        "visualClue": "",
+        "compare": "Other gliomas",
+        "notes": "",
+        "etiologyCategories": [
+          "neoplastic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "neoplasm",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T05:02:52.459Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
