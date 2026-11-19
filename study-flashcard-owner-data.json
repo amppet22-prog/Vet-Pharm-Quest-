@@ -1,6 +1,17 @@
 {
   "version": 1,
   "overrides": {},
-  "custom": [],
+  "custom": [
+    {
+      "prompt": "What does the endothelium form and what does it maintain?",
+      "answer": "Forms the BBB and maintains a nonthrombogenic boundary to prevent blood clot formation. Regulates hemostasis. Participates in the inflammatory response.\nActively transports molecules that the brain consumes rapidly and in large quanities (amino acids, glucose)",
+      "why": "",
+      "slide": "Pathology lecture LMU",
+      "id": "owner-pathology-mwn114k6-bsge9",
+      "domain": "pathology",
+      "lecture": "67",
+      "curated": true
+    }
+  ],
   "hidden": []
 }
