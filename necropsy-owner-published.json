@@ -1378,6 +1378,19 @@
           ],
           "systems": [],
           "conditionId": "pathx-69-30"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-30-1795054219582-0.jpg",
+          "source": "",
+          "credit": "Google images",
+          "caption": "Yellow Star Thistle Plant",
+          "type": "clinical",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-30"
         }
       ],
       "photo": {
@@ -1419,7 +1432,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T02:09:09.369Z",
+      "updated": "2026-11-19T02:10:20.850Z",
       "approvedBy": "amppet22-prog"
     }
   },
