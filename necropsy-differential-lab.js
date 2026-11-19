@@ -546,7 +546,7 @@ function init(api){
   return;
  }
  if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
- if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;conditionTopicMode=Number(conditionLecture)>=50&&Number(conditionLecture)<=58?'disease':'all';return conditionIndex()}
+ if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;const hasDisease=((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]).some(x=>x.diseaseAtlas===true);conditionTopicMode=Number(conditionLecture)>=50&&Number(conditionLecture)<=58&&hasDisease?'disease':'all';return conditionIndex()}
  if(d.pathdiffTopicMode!==undefined){conditionTopicMode=d.pathdiffTopicMode;return conditionIndex()}
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
  if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
