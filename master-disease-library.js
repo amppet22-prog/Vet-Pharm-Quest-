@@ -16,7 +16,7 @@ const curated={
 'exam7-11':['equine-recurrent-laryngeal-neuropathy','Equine recurrent laryngeal neuropathy','degenerative','pns'],
 'exam7-12':['equine-grass-sickness','Equine grass sickness','degenerative','pns'],
 'exam7-13':['schwannoma','Schwannoma','neoplasm','pns'],
-'exam7-16':['endocrine-alopecia','Endocrine alopecia','nutritional','integument'],
+'exam7-16':['endocrine-alopecia','Endocrine alopecia','endocrine','integument'],
 'exam7-17':['contagious-ecthyma','Contagious ecthyma (orf)','infectious','integument'],
 'exam7-18':['sheeppox','Sheeppox','infectious','integument'],
 'exam7-19':['fowlpox','Fowlpox','infectious','integument'],
