@@ -1,6 +1,13 @@
 {
   "version": 1,
-  "overrides": {},
+  "overrides": {
+    "69|astrocytoma|focus-1": {
+      "prompt": "Which domestic animal group commonly develops astrocytoma?",
+      "answer": "Dogs and cats",
+      "why": "",
+      "slide": "18–19"
+    }
+  },
   "custom": [
     {
       "prompt": "What does the endothelium form and what does it maintain?",
