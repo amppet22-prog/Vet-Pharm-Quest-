@@ -894,6 +894,64 @@
       },
       "updated": "2026-11-19T00:49:01.929Z",
       "approvedBy": "amppet22-prog"
+    },
+    "specimen-custom-68-cerebrospinal-nematodiasis": {
+      "title": "Cerebrospinal Nematodiasis",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-68-cerebrospinal-nematodiasis-1795049932249-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "specimen-custom-68-cerebrospinal-nematodiasis"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-68-cerebrospinal-nematodiasis-1795049932249-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [],
+        "conditionId": "specimen-custom-68-cerebrospinal-nematodiasis"
+      },
+      "text": {
+        "gross": "Linear tracts of necrosis and hemorrhage\nMigration results in endothelial injury, vasculitis and thrombosis. May cause vascular occlusion and infarction.",
+        "dx": "Cerebral spinal nematodiasis,",
+        "histo": "If larvae are in sections, they can induce a mononuclear cell inflammatory exudate, often including eosinophiles",
+        "why": "Aberrant migration of larval nematodes within the CNS",
+        "visualClue": "",
+        "compare": "",
+        "notes": "Parelaphostrongylus tenuis (ruminants, camelids, and rarely\nhorses)\n• Strongylus vulgaris (horse)\n• Toxocara canis (dogs)\n• Baylisascaris procyonis (many species including dogs, primates,\nrabbits, and birds",
+        "etiologyCategories": [
+          "helminthic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"occasional\",\"cat\":\"occasional\",\"horse\":\"occasional\",\"cattle\":\"occasional\",\"sheep\":\"occasional\",\"goat\":\"occasional\"}",
+        "speciesEvidence": "Reported in multiple species depending on the nematode. ",
+        "conditionType": "infectious",
+        "conditionSubtype": "helminths",
+        "organSystem": "",
+        "affectedOrgan": "brain",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T00:58:53.271Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
