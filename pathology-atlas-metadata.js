@@ -3,6 +3,7 @@
 window.VPQ_PATH_ATLAS_META=(function(){
 'use strict';
 const species={dog:'Dog',cat:'Cat',horse:'Horse',cattle:'Cattle',sheep:'Sheep',goat:'Goat',pig:'Pig',poultry:'Poultry',other_bird:'Other birds',reptile:'Reptiles',small_mammal:'Small mammals',wildlife:'Wildlife / exotics',human:'Human'};
+const hostScopes={unspecified:'Not assessed',multiple:'Multiple species / broad host range'};
 const frequency={reported:'Reported; frequency unknown',common:'Commonly reported',occasional:'Occasionally reported',rare:'Rarely reported',exceptional:'Exceptionally rare'};
 const conditionTypes={infectious:'Infectious disease',congenital:'Congenital / developmental anomaly',malformation:'Structural anomaly',neoplasm:'Neoplasia / tumor',inflammatory:'Inflammatory / immune-mediated',degenerative:'Degenerative',vascular:'Vascular / ischemic',toxic:'Toxic / drug-induced',nutritional:'Nutritional / metabolic',endocrine:'Endocrine disorder',traumatic:'Traumatic',idiopathic:'Idiopathic / undetermined',adaptation:'Cell adaptation',artifact:'Artifact / non-lesion'};
 const subtypes={protozoa:'Protozoal pathogens',bacteria:'Bacterial pathogens',viruses:'Viral pathogens',fungi:'Fungal pathogens',helminths:'Helminths',arthropods:'Arthropods',epithelial_tumor:'Epithelial neoplasms',mesenchymal_tumor:'Mesenchymal neoplasms',round_cell_tumor:'Round-cell neoplasms',germ_cell_tumor:'Germ-cell neoplasms',neuroectodermal_tumor:'Neural/neuroectodermal neoplasms',birth_defect:'Birth defects',genetic:'Genetic disorders',endocrine:'Endocrine disorders'};
@@ -49,6 +50,7 @@ function data(x){
  x=seeded(x||{});
  return {
   species:parseSpecies(x?.speciesOccurrence),
+  hostScope:x?.hostScope==='multiple'?'multiple':'unspecified',
   conditionType:safeChoice(conditionTypes,x?.conditionType),
   conditionSubtype:safeChoice(subtypes,x?.conditionSubtype),
   organSystem:safeChoice(systems,x?.organSystem),
@@ -70,14 +72,17 @@ function etiologyMatches(x,id){
  return declared.includes(id)||subtypeEtiology[d.conditionSubtype]===id||typeEtiology[d.conditionType]===id;
 }
 function speciesMatches(x,key,rank){
- const d=data(x),status=d.species[key];
+ const d=data(x);
+ if(key==='multiple')return (d.hostScope==='multiple'||Object.keys(d.species).length>=2)&&(rank==='all'||Object.values(d.species).includes(rank));
+ const status=d.species[key];
  return !!status&&(rank==='all'||status===rank);
 }
 function browseHTML(x){
  const d=data(x);
  const items=Object.entries(d.species).map(([key,level])=>'<span style="display:inline-block;margin:3px;padding:5px 8px;border-radius:12px;border:1px solid #cadce7;background:#f5faff;font-size:12px">'+esc(species[key])+': '+esc(frequency[level])+'</span>').join('');
  return '<details style="border-top:1px solid #d4dce8;padding-top:10px;margin-top:12px" open><summary><b>🐾 Species, One Health & condition classification</b></summary>'+
- (items?'<div style="margin:7px 0">'+items+'</div>':'<p class="tiny">Species frequencies not yet assessed. No occurrence is assumed.</p>')+
+ (d.hostScope==='multiple'||Object.keys(d.species).length>=2?'<p style="margin:5px 0"><b>🐾 Multiple species / broad host range</b> · Specific hosts should be listed when established.</p>':'')+
+ (items?'<div style="margin:7px 0">'+items+'</div>':'<p class="tiny">Individual species frequencies not yet assessed. No occurrence is assumed.</p>')+
  (d.conditionType?'<p><b>Condition type:</b> '+esc(conditionTypes[d.conditionType])+(d.conditionSubtype?' · '+esc(subtypes[d.conditionSubtype]):'')+'</p>':'')+
  (d.organSystem?'<p><b>Organ system:</b> '+esc(systems[d.organSystem])+(d.organ?' · '+esc(d.organ):'')+'</p>':'')+
  (d.pathogen?'<p><b>Pathogen(s) / causal agents:</b> '+esc(d.pathogen)+'</p>':'')+
@@ -95,6 +100,8 @@ function editorHTML(x){
  const d=data(x);
  return '<fieldset style="border:1px solid #bdd3e5;border-radius:12px;padding:10px;margin:12px 0"><legend><b>🐾 Species & disease connections</b></legend>'+
  '<p class="tiny">Only select species with documentation. Missing means unassessed, NOT unaffected. Common/rare describe reported frequency, not population prevalence.</p>'+
+ '<label style="display:block;margin:7px 0">Host range'+selectHTML(hostScopes,'pathMetaHostScope',d.hostScope,false)+'</label>'+
+ '<p class="tiny">Choose Multiple species for a broadly applicable disease, even before every host has been classified. Then assign individual species occurrence below when supported. This choice alone does not assert that all species are affected.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px">'+Object.entries(species).map(([key,label])=>'<label style="font-size:12px">'+esc(label)+'<select data-path-species="'+esc(key)+'" style="width:100%;padding:5px"><option value="">Not assessed</option>'+Object.entries(frequency).map(([f,v])=>'<option value="'+esc(f)+'"'+(d.species[key]===f?' selected':'')+'>'+esc(v)+'</option>').join('')+'</select></label>').join('')+'</div>'+
  '<label>Evidence/source for frequency<textarea id="pathMetaEvidence" rows="2" style="width:100%">'+esc(d.evidence)+'</textarea></label>'+
  '<label>Condition type'+selectHTML(conditionTypes,'pathMetaType',d.conditionType,true)+'</label>'+
@@ -113,7 +120,7 @@ function readEditor(root){
  const ranks={};
  root.querySelectorAll('[data-path-species]').forEach(el=>{if(species[el.dataset.pathSpecies]&&frequency[el.value])ranks[el.dataset.pathSpecies]=el.value});
  return {
- speciesOccurrence:JSON.stringify(ranks),speciesEvidence:v('pathMetaEvidence'),
+ speciesOccurrence:JSON.stringify(ranks),hostScope:v('pathMetaHostScope'),speciesEvidence:v('pathMetaEvidence'),
  conditionType:v('pathMetaType'),conditionSubtype:v('pathMetaSubtype'),
  organSystem:v('pathMetaSystem'),affectedOrgan:v('pathMetaOrgan'),
  pathogenNames:v('pathMetaPathogen'),diseaseId:v('pathMetaDisease').toLowerCase().replace(/[^a-z0-9-]/g,''),
@@ -128,5 +135,5 @@ function relatedHTML(x,all,indexFor){
  return '<div style="border-top:1px solid #d9e1e8;padding-top:9px;margin-top:8px"><b>🔗 Other organ manifestations of this disease</b><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">'+
  matches.map(y=>'<button type="button" data-path7-view="'+indexFor(y.id)+'">'+esc(y.title)+' · '+esc(systems[data(y).organSystem]||data(y).organ||'Other site')+'</button>').join('')+'</div></div>';
 }
-return {species,frequency,conditionTypes,subtypes,systems,zoonotic,data,speciesMatches,browseHTML,editorHTML,readEditor,relatedHTML,lectureSeed,etiologyMatches};
+return {species,hostScopes,frequency,conditionTypes,subtypes,systems,zoonotic,data,speciesMatches,browseHTML,editorHTML,readEditor,relatedHTML,lectureSeed,etiologyMatches};
 })();
