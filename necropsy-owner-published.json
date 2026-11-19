@@ -2658,6 +2658,64 @@
       },
       "updated": "2026-11-19T08:01:00.408Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-69-33": {
+      "title": "Copper deficiency — small ruminants",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-33-1795075623590-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "69"
+          ],
+          "systems": [],
+          "conditionId": "pathx-69-33"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-69-33-1795075623590-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "69"
+        ],
+        "systems": [],
+        "conditionId": "pathx-69-33"
+      },
+      "text": {
+        "title": "Copper deficiency — small ruminants",
+        "gross": "Bilateral cerebrocortical lesions- cortex focally soft and fluctuant or collapsed, may be gelatinous softening or cavitation\nBrainstem and spinal cord are affected ",
+        "dx": "Working identification: Copper deficiency — small ruminants. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Cavitation, gelatinous ",
+        "why": "***Complex and poorly understood.***\n**Primary:** Copper-deficent soils or inadequate intake from forage\n     Enzootic ataxia \n         Goat kid > lamb; Onset delayed up to 6 months after birth\n        Brain stem and spinal cord affected\n Lordosis \n       Lambs > goat kid; Born to dams with insufficient copper levels\n       Cerebrum, brainstem, spinal cord affected\n**Secondary:** Defective absorption from interactions with other\nminerals/metals\n",
+        "visualClue": "",
+        "compare": "Differentiate developmental hypomyelination from later neurodegeneration, and record which species/age pattern the professor assigns.",
+        "notes": "Uncommon. More likely to have toxicosis. ",
+        "etiologyCategories": [],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-19T08:07:05.275Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
