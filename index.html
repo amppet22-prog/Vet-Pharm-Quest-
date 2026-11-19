@@ -748,21 +748,27 @@ function patch(obj,type){return {...obj,...(edits[type]?.[obj.id]||{})}}
 function dataCases(){return D.cases.concat(window.VPQ_CLINICAL_PRACTICE?.caseFiles||[],window.VPQ_NAVLE_EXPANSION?.caseFiles||[],window.VPQ_CLINPATH_LAB?.cases||[],window.VPQ_ADVANCED_LAB?.cases||[],window.VPQ_SURGERY_NECROPSY?.caseFiles||[],window.VPQ_BLOOD_SMEAR_LAB?.cases||[],window.VPQ_PATHOGEN_ATLAS?.cases||[]).map(x=>patch(x,'cases'))} function dataDrugs(){return D.drugs.map(x=>patch(x,'drugs'))} function dataStudy(){return D.study.map(x=>patch(x,'study'))}
 // Keep the last visited room independently of large save-state objects.
 const LAST_ROOM_KEY='vpq-v2-last-visited-room';
-// Prefer a room-specific page URL: it survives reloads and gives a shareable room location.
-let roomFromUrl=null;
-try{roomFromUrl=new URL(window.location.href).searchParams.get('room')}catch{}
-const savedRoom=safeRead(LAST_ROOM_KEY,null);
+const SESSION_ROOM_KEY='vpq-v2-session-room';
 const validRoom=v=>typeof v==='string'&&Object.prototype.hasOwnProperty.call(ROOMS,v);
-const initialRoom=validRoom(roomFromUrl)?roomFromUrl:(validRoom(savedRoom)?savedRoom:(validRoom(state.room)?state.room:'reception'));
+function readRoomStorage(storage,key){
+ try{const raw=storage.getItem(key);if(!raw)return null;const value=JSON.parse(raw);return validRoom(value)?value:null}catch{return null}
+}
+function roomFromAddress(){
+ try{const url=new URL(window.location.href);const q=url.searchParams.get('room');return validRoom(q)?q:null}catch{return null}
+}
+// A stale ?room=reception must not override a more recently saved room.
+const initialRoom=readRoomStorage(sessionStorage,SESSION_ROOM_KEY)||
+ readRoomStorage(localStorage,LAST_ROOM_KEY)||
+ (validRoom(state.room)?state.room:null)||
+ roomFromAddress()||'reception';
 let avatarX=44,petX=35,hold=0,frame=0,modalVisible=false,activeRoom=initialRoom;
 state.room=activeRoom;
 function bookmarkRoom(room){
  if(!validRoom(room))return;
+ try{sessionStorage.setItem(SESSION_ROOM_KEY,JSON.stringify(room))}catch{}
  try{localStorage.setItem(LAST_ROOM_KEY,JSON.stringify(room))}catch{}
  try{
   const url=new URL(window.location.href);
-  // The room query survives hard refreshes; the #stage anchor keeps the
-  // viewport in the game rather than the top-of-page welcome/dashboard.
   url.searchParams.set('room',room);
   const anchor=(!url.hash||url.hash==='#stage')?'#stage':url.hash;
   const historyState={...(window.history.state||{}),vpqRoom:room};
@@ -3385,32 +3391,22 @@ if(activeRoom==='necropsy')window.VPQ_NECROPSY_HANDBOOK?.resume?.();
 // the page's first paint, so an initial scrollIntoView alone is not enough.
 try{window.history.scrollRestoration='manual'}catch{}
 function restoreVisibleRoom(){
- let requested=null;
- try{requested=new URL(window.location.href).searchParams.get('room')}catch{}
- if(!validRoom(requested)){
-  const historyRoom=window.history.state?.vpqRoom;
-  const last=safeRead(LAST_ROOM_KEY,null);
-  requested=validRoom(historyRoom)?historyRoom:(validRoom(last)?last:(validRoom(state.room)?state.room:activeRoom));
- }
- if(!validRoom(requested))return;
- if(requested!==activeRoom)changeRoom(requested);
- state.room=activeRoom;
- bookmarkRoom(activeRoom);
- persist();
- // Only force the game into view when recovering a load/refresh; normal
- // room navigation keeps its existing scroll behavior.
+ const saved=readRoomStorage(sessionStorage,SESSION_ROOM_KEY)||
+  readRoomStorage(localStorage,LAST_ROOM_KEY)||
+  (validRoom(state.room)?state.room:null)||
+  roomFromAddress()||activeRoom;
+ if(validRoom(saved)&&saved!==activeRoom)changeRoom(saved);
+ state.room=activeRoom;bookmarkRoom(activeRoom);persist();
  function showGame(){
   if(document.visibilityState==='hidden')return;
-  const target=$('stage');
-  if(!target)return;
+  const target=$('stage');if(!target)return;
   const top=Math.max(0,target.getBoundingClientRect().top+window.scrollY-12);
   window.scrollTo({top,behavior:'instant'});
  }
  requestAnimationFrame(()=>requestAnimationFrame(showGame));
- // Layout, fonts, images and browser scroll restoration can all settle late.
  [80,300,900].forEach(ms=>setTimeout(showGame,ms));
 }
-window.addEventListener('pagehide',()=>{bookmarkRoom(activeRoom);persist()});
+window.addEventListener('pagehide',()=>{if(validRoom(activeRoom)){bookmarkRoom(activeRoom);persist()}});
 window.addEventListener('pageshow',restoreVisibleRoom);
 window.addEventListener('load',restoreVisibleRoom,{once:true});
 })();
