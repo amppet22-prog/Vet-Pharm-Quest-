@@ -19,6 +19,54 @@ async function load(){
 }
 
 
+function renamedConditionTitle(lecture,section){
+ const raw=String(section?.sourceTitle||section?.title||'');
+ const key=String(lecture)+'|'+raw;
+ return String(published.conditionTitleOverrides?.[key]||raw);
+}
+function renameConditionEditor(lecture,index){
+ const core=window.VPQ_PATH_LECTURE_LEARN?.[lecture]?.sections||[];
+ const records=[...core,...getCustomConditions(lecture)];
+ const entry=records[Number(index)];
+ if(!entry){show('Condition not available','<p>This condition could not be located.</p>');return;}
+ const oldTitle=String(entry.sourceTitle||entry.title||'');
+ const current=renamedConditionTitle(lecture,entry);
+ const ownerId=entry.ownerId||'';
+ const ref=ownerId?'custom:'+ownerId:String(lecture)+'|'+oldTitle;
+ show('✏️ Rename pathology condition',
+ '<p>Change only the displayed name. The original condition identity, teaching notes, specimens, photos and case references are preserved.</p>'+
+ '<label style="display:block"><b>Condition name</b><input id="npRenameTitle" maxlength="180" style="width:100%;display:block;margin-top:6px" value="'+esc(current)+'"></label>'+
+ '<p class="tiny">Original lecture name: '+esc(oldTitle)+' · L'+esc(lecture)+'</p>'+
+ '<input id="npRenameRef" type="hidden" value="'+esc(ref)+'">'+
+ '<label>Password for owner publishing<input id="npRenamePassword" type="password" autocomplete="off" style="width:100%"></label>'+
+ '<label>Token (only on first setup)<input id="npRenameToken" type="password" autocomplete="off" style="width:100%"></label>'+
+ '<div class="buttonrow"><button data-np-rename-save="1">💾 Publish new name</button><button data-np-rename-cancel="1">← Cancel</button></div>'+
+ '<p role="status" id="npRenameStatus"></p>');
+}
+async function publishConditionName(ref,title,token){
+ const who=await github('https://api.github.com/user',token);
+ if(who?.login?.toLowerCase()!==OWNER.toLowerCase())throw Error('Only the repository owner can publish.');
+ const old=await file(MANIFEST,token),manifest=JSON.parse(decode(old.content));
+ const requested=String(title||'').trim().replace(/\\s+/g,' ');
+ if(!requested||requested.length>180)throw Error('Use a name between 1 and 180 characters.');
+ if(ref.startsWith('custom:')){
+  const id=ref.slice(7),c=manifest.customConditions?.[id];
+  if(!c)throw Error('Owner-created condition not found.');
+  const same=(window.VPQ_PATH_LECTURE_LEARN?.[c.lecture]?.sections||[]).some(x=>x.title.toLowerCase()===requested.toLowerCase());
+  if(same)throw Error('Another instructor condition already uses that name.');
+  c.title=requested;
+ }else{
+  const pos=ref.indexOf('|'),lecture=ref.slice(0,pos),original=ref.slice(pos+1);
+  const section=(window.VPQ_PATH_LECTURE_LEARN?.[lecture]?.sections||[]).find(x=>x.title===original);
+  if(!section)throw Error('Original source condition has moved; reload and retry.');
+  manifest.conditionTitleOverrides=manifest.conditionTitleOverrides||{};
+  const duplicate=(window.VPQ_PATH_LECTURE_LEARN?.[lecture]?.sections||[]).some(x=>x.title!==original&&String(manifest.conditionTitleOverrides[lecture+'|'+x.title]||x.title).toLowerCase()===requested.toLowerCase());
+  if(duplicate)throw Error('Another condition in this lecture already has that name.');
+  if(requested===original)delete manifest.conditionTitleOverrides[ref];else manifest.conditionTitleOverrides[ref]=requested;
+ }
+ await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\\n'),old.sha,token,'Owner rename pathology condition '+ref);
+ published=manifest;
+}
 function getCustomConditions(lecture){
  return Object.values(published.customConditions||{}).filter(c=>c&&c.title&&c.lecture===String(lecture)).map(c=>({
   title:c.title,slides:c.slides||'Owner-added teaching entry',
@@ -407,6 +455,23 @@ function init(context){
  context.body.__vpqNecroOwnerInit=true;
  load();
  context.body.addEventListener('click',ev=>{
+ const b=ev.target.closest('[data-np-rename-save],[data-np-rename-cancel]');if(!b)return;
+ ev.preventDefault();ev.stopImmediatePropagation();
+ if(b.dataset.npRenameCancel!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openConditionInventory?.();
+ if(b.disabled)return;
+ const root=context.body,ref=String(root.querySelector('#npRenameRef')?.value||''),title=String(root.querySelector('#npRenameTitle')?.value||'').trim();
+ let password=String(root.querySelector('#npRenamePassword')?.value||''),token=String(root.querySelector('#npRenameToken')?.value||'');
+ root.querySelector('#npRenamePassword').value='';root.querySelector('#npRenameToken').value='';
+ const stat=root.querySelector('#npRenameStatus');b.disabled=true;if(stat)stat.textContent='Publishing name…';
+ (async()=>{
+  const vault=window.VPQ_OWNER_KEY_VAULT;
+  if(!token){if(!vault?.exists?.())throw Error('No saved publishing key. Enter your token for first setup.');token=await vault.unlock(password);}
+  await publishConditionName(ref,title,token);
+  if(vault&&!vault.exists()&&password)await vault.store(token,password);
+  window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openConditionInventory?.();
+ })().catch(e=>{if(stat)stat.textContent='Rename failed: '+e.message+' Your original name is unchanged.'}).finally(()=>{password='';token='';if(b.isConnected)b.disabled=false});
+ },true);
+ context.body.addEventListener('click',ev=>{
   const button=ev.target.closest('[data-np-spec-create],[data-np-spec-visibility],[data-np-spec-cancel],[data-np-spec-restore]');
   if(!button)return;
   ev.preventDefault();ev.stopImmediatePropagation();
@@ -516,5 +581,5 @@ context.body.addEventListener('click',ev=>{
   })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
-return Object.freeze({init,load,getCustomCases,getCustomConditions,getCustomSpecimens,getHiddenSpecimens,newSpecimenEditor,hideSpecimenEditor,hiddenSpecimenMenu,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,getPhotoLibrary,photoLibrary,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
+return Object.freeze({init,load,getCustomCases,getCustomConditions,renamedConditionTitle,renameConditionEditor,getCustomSpecimens,getHiddenSpecimens,newSpecimenEditor,hideSpecimenEditor,hiddenSpecimenMenu,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,getPhotoLibrary,photoLibrary,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
 })();
