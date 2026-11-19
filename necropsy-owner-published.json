@@ -692,7 +692,7 @@
         "conditionId": "pathx-68-37"
       },
       "text": {
-        "gross": "Can involve any area of the CNS (no predilection for gray or white matter)\n• Nerve roots may also be involved\n• Foci of hemorrhage and necrosis, which may progress to granular, yellow-brown to\ngray foci",
+        "gross": "Can involve any area of the CNS (no predilection for gray or white matter)\n• Nerve roots may also be involved\n• Foci of hemorrhage and necrosis, which may progress to granular, yellow-brown to gray foci",
         "dx": "Working identification: Toxocara canis cerebrospinal migration.\nObligate intracellular protozoan. CNS infection targets neurons and astrocytes. \nIn utero infections likely to result in the CNS infection. \n\nSpecimen site: Brain / spinal cord / meninges. \nFormulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
         "histo": "Protozoa are seen targeting neurons and astrocytes\nHemorrhage and necrosis ",
         "why": "Host: Dogs in the lecture list. Mechanism: Aberrant CNS migration may injure neural tissue and vessels.",
@@ -701,7 +701,7 @@
         "etiologyAgents": "Toxoplasma gondii ",
         "etiologyCertainty": "Protozoa, Toxoplasmosis, One health "
       },
-      "updated": "2026-11-19T00:14:38.675Z",
+      "updated": "2026-11-19T00:18:19.947Z",
       "approvedBy": "amppet22-prog"
     }
   },
