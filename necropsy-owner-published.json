@@ -744,6 +744,19 @@
             "CNS / Neurology"
           ],
           "conditionId": "pathx-68-29"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-29-1795048206336-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [],
+          "conditionId": "pathx-68-29"
         }
       ],
       "photo": {
@@ -784,7 +797,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-19T00:28:49.719Z",
+      "updated": "2026-11-19T00:30:07.501Z",
       "approvedBy": "amppet22-prog"
     }
   },
