@@ -690,18 +690,32 @@ function view(){
  const initialSlots=photoSlots.filter(p=>!p.reveal||p.reveal==='initial');
  const followupSlots=photoSlots.filter(p=>p.reveal==='followup');
  const histoSlots=photoSlots.filter(p=>p.reveal==='histo');
- const labeledSlots=initialSlots.length?'<details style="margin-top:8px" open><summary style="font-size:12px;font-weight:750">Image slots · '+initialSlots.length+' clinical / gross</summary><div style="font-size:12px;padding:6px 0">'+initialSlots.map((p,i)=>'<div style="padding:6px 0;border-bottom:1px solid #dce6f0">📷 '+safe(p.label)+'</div>').join('')+'</div></details>':'';
- const imagePanel='<aside style="min-width:0;border:1px solid #c7d8e7;border-radius:11px;background:#f8faff;padding:11px;align-self:start">'+
-  '<b>📷 Clinical, ultrasound & gross images</b><p class="tiny" style="margin:5px 0">Images help localize and describe lesions before identifying the cause.</p>'+
-  (window.VPQ_NECROPSY_OWNER_PUBLISH?.casePhotoHTML?.(x.id,{includeHistology:false})||'')+sourcedPhotos(x)+photoHTML(x)+labeledSlots+
-  (histoSlots.length?'<p class="tiny" style="margin:8px 0">🔬 '+histoSlots.length+' histology image slots unlock after the histology reveal.</p>':'')+
-  '<button data-pathdiff-edit-case="'+safe(x.id)+'" style="width:100%;margin-top:8px;border:1px solid #81b5a0;background:#e6f6ee;border-radius:8px;padding:9px">＋ Add / label multiple photographs</button></aside>';
- const patientParts=String(history||'').split(/\b(Clinical signs|Bloodwork|Ancillary diagnostics|Laboratory findings|Diagnostic findings|Diagnostics):\s*/i);
+ const publishedImages=window.VPQ_NECROPSY_OWNER_PUBLISH?.casePhotoHTML?.(x.id,{includeHistology:false})||'';
+ const localPhoto=photoStore()[x.id];
+ const localPreview=localPhoto?'<button type="button" data-pathdiff-zoom-local="'+safe(x.id)+'" aria-label="Enlarge this specimen" style="display:block;width:100%;padding:4px;background:white;border:1px solid #d4e2ee;border-radius:9px"><img src="'+safe(localPhoto)+'" alt="Locally uploaded specimen preview" style="display:block;width:100%;height:auto;max-height:250px;object-fit:contain"></button>':'';
+ const initialGallery=publishedImages+sourcedPhotos(x)+localPreview;
+ const imagePanel='<aside class="vpq-ddx-images" style="min-width:0;align-self:start;background:#f7faff;border:1px solid #d7e4f1;border-radius:13px;padding:12px">'+
+ '<div style="display:flex;align-items:center;justify-content:space-between;gap:7px"><b style="font-size:13px">📷 Patient imaging</b><span style="font-size:11px;color:#627d96">Clinical · Gross</span></div>'+
+ (initialGallery?'<div style="margin-top:9px">'+initialGallery+'</div>':'<div style="display:grid;place-items:center;min-height:145px;border:1px dashed #c3d4e5;background:#fff;border-radius:10px;margin-top:10px;text-align:center;padding:12px;box-sizing:border-box"><div><span style="font-size:24px">🖼️</span><p style="font-size:12px;margin:6px 0;color:#526b84">Images not added yet</p><small>Clinical photographs and diagnostic images will appear here.</small></div></div>')+
+ (initialSlots.length?'<details style="border-top:1px solid #dae5ee;margin-top:11px;padding-top:9px"><summary style="font-size:12px;cursor:pointer;font-weight:700">View planned images ('+initialSlots.length+')</summary><div style="display:grid;gap:5px;margin-top:8px">'+initialSlots.map(p=>'<div style="font-size:11px;padding:7px;border:1px solid #dce7f0;border-radius:7px;background:#fff">'+safe(p.label)+'</div>').join('')+'</div></details>':'')+
+ '<button data-pathdiff-edit-case="'+safe(x.id)+'" style="display:block;width:100%;margin-top:10px;padding:9px;background:white;border:1px solid #bfd1e2;border-radius:9px;font-size:12px;font-weight:800">＋ Manage case photos</button></aside>';
+ const patientParts=String(history||'').split(/\\b(Clinical signs|Bloodwork|Ancillary diagnostics|Laboratory findings|Diagnostic findings|Diagnostics):\\s*/i);
  const narrative=patientParts[0]||'';
- let findings='';
- for(let i=1;i<patientParts.length-1;i+=2){const key=String(patientParts[i]).toLowerCase(),value=patientParts[i+1];const label=key==='clinical signs'?'Clinical signs':key==='bloodwork'||key==='laboratory findings'?'Ancillary diagnostics · Bloodwork':'Ancillary diagnostics';if(String(value||'').trim())findings+='<p style="margin:7px 0;line-height:1.5"><b>'+label+':</b> '+rich(String(value).trim())+'</p>';}
- const gross='<div style="background:#edf4fb;border-left:4px solid #6b94c9;padding:12px;border-radius:9px;margin-bottom:11px"><b>'+safe(signalment(x))+'</b>'+(narrative.trim()?'<p style="margin:6px 0 9px">'+rich(narrative)+'</p>':'')+findings+
- '<div style="padding:10px;border:1px solid #b4cce3;border-radius:8px;background:white"><b style="font-size:15px">🔍 GROSS FINDINGS — OBSERVE FIRST</b><p style="margin:7px 0 0;line-height:1.55">'+rich(x.gross)+'</p></div></div>';
+ let signs='',diagnostics='';
+ for(let i=1;i<patientParts.length-1;i+=2){
+  const key=String(patientParts[i]||'').toLowerCase(),v=String(patientParts[i+1]||'').trim();
+  if(!v)continue;
+  if(key==='clinical signs')signs+='<p style="margin:0;line-height:1.55">'+rich(v)+'</p>';
+  else diagnostics+='<p style="margin:0 0 6px;line-height:1.5">'+rich(v)+'</p>';
+ }
+ const infoCard=(label,icon,content,style)=>content?'<div style="padding:11px 12px;border-radius:10px;background:#fff;border:1px solid '+(style||'#d4e0ec')+';margin-top:9px"><b style="display:block;font-size:12px;color:#315478;margin-bottom:6px">'+icon+' '+label+'</b><div style="font-size:13px;line-height:1.55">'+content+'</div></div>':'';
+ const gross='<section class="vpq-ddx-patient" style="border:1px solid #d0dfec;background:#f3f8fd;border-radius:13px;padding:13px;margin-bottom:11px">'+
+ '<div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#617d9a">Patient profile</div>'+
+ '<div style="font-size:15px;font-weight:800;line-height:1.35;margin-top:4px;color:#233f66">'+safe(signalment(x))+'</div>'+
+ infoCard('Presenting history','📋',narrative.trim()?rich(narrative):'')+
+ infoCard('Clinical signs','🩺',signs)+
+ (diagnostics?'<details class="vpq-ddx-ancillary" style="margin-top:9px;border-radius:10px;background:white;border:1px solid #d4e0ec;padding:11px 12px"><summary style="cursor:pointer;font-size:12px;font-weight:800;color:#315478">🧪 Ancillary diagnostics <span style="font-weight:400">· click to expand</span></summary><div style="font-size:13px;line-height:1.5;margin-top:9px">'+diagnostics+'</div></details>':'')+
+ infoCard('GROSS FINDINGS — OBSERVE FIRST','🔍',rich(x.gross),'#a9c5e5')+'</section>';
  const morphology='<details style="margin:9px 0;border:1px solid #b9d4e6;border-radius:10px;padding:10px;background:#f6fbfd"><summary style="font-weight:800;cursor:pointer">✍️ Pattern recognition · Build a morphologic diagnosis (optional)</summary>'+
  '<p class="tiny" style="margin:8px 0">Lecture 9: Describe the lesion objectively, then form a morphologic diagnosis. This is different from naming the organism or disease.</p>'+
  '<div style="border-left:3px solid #6b9ab3;padding-left:9px;margin:8px 0;font-size:12px"><b>Description checklist:</b> tissue/location · number · distribution · size · color · shape · pattern · consistency · special features<br><b>Morphologic formula:</b> Organ → process ± modifier → distribution → chronicity → severity.</div>'+
@@ -738,9 +752,9 @@ function view(){
  const resource='<details style="margin:13px 0;border:1px solid #ccdaeb;border-radius:9px;padding:10px"><summary style="font-weight:750;cursor:pointer">📚 Sources, lecture links & image management</summary>'+
  '<div class="buttonrow" style="margin-top:8px"><button data-pathdiff-exam7-lecture="'+safe(x.id)+'">Lecture '+safe(x.lecture)+'</button><button data-pathdiff-exam7-atlas="'+safe(x.id)+'">Specimen atlas</button><button data-pathdiff-edit-case="'+safe(x.id)+'">✏️ Edit & publish</button></div>'+
  (x.photoToAdd?'<p class="tiny">Suggested photograph: '+safe(x.photoToAdd)+'</p>':'')+(x.sourceArticleUrl?'<p><a href="'+safe(x.sourceArticleUrl)+'" target="_blank" rel="noopener noreferrer">Read original case article</a></p>':'')+'<p><a href="https://slides.davisthompsonfoundation.org/arkive?image=4" target="_blank" rel="noopener noreferrer">Explore Davis–Thompson Noah’s Arkive</a></p><small>Check image attribution and reuse rights before publishing.</small><p><small>'+safe(x.ref||'Source reference not specified')+'</small></p></details>';
- modal('🩺 L'+safe(x.lecture)+' · '+safe(signalment(x)),
+ modal('🩺 Patient case · Lecture '+safe(x.lecture),
  '<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:9px"><div class="buttonrow"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>◀ Previous</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next ▶</button></div><div class="buttonrow"><button data-pathdiff-edit-case="'+safe(x.id)+'" style="font-weight:800;background:#e6f5e9;border:1px solid #7bb694">✏️ Edit & publish</button><button data-pathdiff-reset="1">↺ Restart</button></div></div>'+
- '<div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(210px,0.9fr);gap:12px;align-items:start" class="vpq-case-dual"><div style="min-width:0">'+main+'</div>'+imagePanel+'</div>'+
+ '<div style="display:grid;grid-template-columns:minmax(0,1.55fr) minmax(240px,0.95fr);gap:14px;align-items:start" class="vpq-case-dual"><div style="min-width:0">'+main+'</div>'+imagePanel+'</div>'+
  comparison+extraQuestionHTML(x)+resource+
  '<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next patient →</button></div>');
 }
