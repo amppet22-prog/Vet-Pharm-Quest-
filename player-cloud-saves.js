@@ -158,7 +158,7 @@ async function restore(){
  }catch(error){notify("Restore failed. Your previous browser save should be intact; use the downloaded recovery file if needed. "+(error.message||""),true);}
 }
 function render(){
- panel();
+ if(!$("vpqCloudSavePanel"))return;
  const target=$("vpqCloudSaveButtons");target.replaceChildren();
  if(!client){notify("Cloud saving is not configured. Browser saves still work.");return;}
  if(!userId){notify("Sign in to save game progress across devices. Guests keep browser-local progress.");return;}
@@ -183,7 +183,7 @@ function makeButton(){
  if(!target||$("vpqCloudButton"))return;
  const b=document.createElement("button");
  b.type="button";b.id="vpqCloudButton";b.className="mini";b.textContent="☁️ Cloud Save";
- b.onclick=()=>{if($("vpqCloudSavePanel"))$("vpqCloudSavePanel").remove();else launch();};
+ b.onclick=()=>{if($("vpqCloudSavePanel"))$("vpqCloudSavePanel").remove();else{panel();launch();}};
  target.insertAdjacentElement("afterend",b);
 }
 window.addEventListener("vpq-player-auth-change",()=>{clearTimeout(timer);conflict=false;optedIn=false;lastFingerprint="";launch();});
@@ -196,5 +196,5 @@ document.addEventListener("DOMContentLoaded",()=>{
  scanTimer=setInterval(queue,10000);
  document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")queue();});
 });
-window.VPQ_CLOUD_SAVE=Object.freeze({open:launch,queue,supportedKeys:KEYS.slice()});
+window.VPQ_CLOUD_SAVE=Object.freeze({open:()=>{panel();launch();},queue,supportedKeys:KEYS.slice()});
 })();
