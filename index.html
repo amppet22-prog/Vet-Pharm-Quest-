@@ -538,6 +538,28 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
  .vpq-team-preview{grid-template-columns:repeat(2,minmax(0,1fr))}
  .app>.side{top:0}
 }
+</style><style id="vpq-welcome-controls-polish-20261120">
+/* Remove unmatched reception mode button without changing 2.5D rendering or gameplay state. */
+#vpqReceptionView25,.vpqReceptionView25{display:none!important}
+/* Bring room navigation immediately below the walking controls. */
+.gamecol .controls{margin-top:4px!important;padding:5px 5px 0!important}
+.gamecol .roomnav{margin:5px 0 7px!important;padding:2px 0!important;gap:5px!important;align-items:center!important}
+.gamecol .roomnav .vpq-room-nav-label{flex:1 1 100%!important;margin:0!important;line-height:1!important;font-size:10px!important}
+.gamecol .roomnav button[data-room-back]{padding:4px 7px!important;font-size:10px!important;line-height:1.1!important;border-radius:9px!important;box-shadow:none!important;margin:0!important;min-height:0!important}
+.gamecol .roomnav button[data-room-back]:disabled{opacity:.45!important}
+.gamecol .roomnav button[data-room]{padding:6px 8px!important;font-size:11px!important;line-height:1.1!important}
+/* Make more of the existing group portrait visible, with no changes to game scene size. */
+.vpq-welcome-section{grid-template-columns:minmax(0,1fr) 296px!important;padding:7px 13px!important;gap:13px!important}
+.vpq-mera-portrait{padding:4px!important;min-height:0!important}
+.vpq-mera-portrait img{width:278px!important;height:155px!important;max-height:none!important;object-fit:contain!important;object-position:center!important}
+.vpq-mera-portrait strong{font-size:11px!important}
+.vpq-mera-portrait small{font-size:8px!important}
+@media(max-width:650px){
+ .vpq-welcome-section{grid-template-columns:minmax(0,1fr) 130px!important;gap:7px!important}
+ .vpq-mera-portrait img{width:120px!important;height:110px!important}
+ .vpq-mera-portrait small{display:none!important}
+ .gamecol .roomnav button[data-room]{font-size:10px!important;padding:5px 6px!important}
+}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><button id="vpqMeetTeamBtn" type="button" class="vpq-meet-team-button" aria-label="Meet the Vet Pharm Quest team">🐾 Meet the Team</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
