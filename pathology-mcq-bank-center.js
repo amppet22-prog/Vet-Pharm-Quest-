@@ -26,7 +26,7 @@ function totals(){
  const foundation=window.VPQ_PATH_FOUNDATIONS?.inventory?.()||[];
  const foundationByNumber={};
  for(const entry of foundation){
-  const match=String(entry.title||'').match(/^(\\d{1,2})\\s*[·.\\-]/);
+  const match=String(entry.title||'').match(/^(\d{1,2})\s*[·.\-]/);
   if(match)foundationByNumber[match[1]]=entry;
  }
  const cases=[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomCases?.()||[])];
@@ -36,7 +36,7 @@ function totals(){
   const prelim=sections.filter(s=>/preliminary|source.index|objective.index|verification pending|foundation/i.test(String(s.sourceStatus||''))||/Exam 6 source.index/i.test(String(s.group||'')));
   const detailed=sections.filter(s=>s.diseaseAtlas||s.points?.some(p=>/gross|histo|pathogenesis|differential/i.test(String(p?.[0]||''))));
   const parts=sections.filter(s=>s.points?.length||s.flashcards?.length||s.practiceQuestions?.length).length;
-  const entry={n,title:l?.title||titles.get(n)||base?.title?.replace(/^\\d+\\s*[·.\\-]\\s*/,'')||'Not indexed',
+  const entry={n,title:l?.title||titles.get(n)||base?.title?.replace(/^\d+\s*[·.\-]\s*/,'')||'Not indexed',
    sections:sections.length,foundations:base?.sections||0,flash:sections.reduce((a,x)=>a+(x.flashcards?.length||0),0),
    mcq:mcq.length,atlas:specs.filter(x=>String(x.lecture)===n&&!x.normal).length,
    cases:cases.filter(x=>String(x.lecture)===n&&x.sourceType!=='SBA').length,
