@@ -16,7 +16,7 @@ for(const [n,[title,topics,objective]] of Object.entries(raw)){
   points:[['Lecture objective / scope',objective],['Topic to review',topic],['Status','Source-index entry only. Specific species, gross lesions, histology and differential diagnoses require a separate slide-by-slide atlas pass.'],['Instructor source','GI Lecture '+n+'; consult the uploaded deck for slide photographs.']],
   flashcards:[['Which Exam 6 lecture covers '+topic+'?','Lecture '+n+' — '+title]]});added++;
  }
- if(Array.isArray(H?.chapters)&&!H.chapters.some(c=>String(c[0])===n))H.chapters.push([n,title,'Gastrointestinal pathology',objective,'Identify morphology and site before assigning an etiology.',topics.join('; ')]);
+ if(Array.isArray(H?.chapters)&&!H.chapters.some(c=>String(c[0])===n))H.chapters.push([n,title,'Gastrointestinal',objective,'Identify morphology and site before assigning an etiology.',topics.join('; ')]);
 }
 window.VPQ_PATH_EXAM6_GI_INDEX={lectures:Object.keys(raw),addedTopics:added,status:'Preliminary, objective-indexed; no photographs or complete case bank yet'};
 })();
