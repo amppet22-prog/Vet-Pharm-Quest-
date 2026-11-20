@@ -335,7 +335,15 @@
 .vpq-oh-exam-q input{width:19px;height:19px;flex:none;accent-color:#8765ac}
 .vpq-oh-exam-why{margin:12px 0;padding:12px;border-radius:11px;background:#f0e7fa;border-left:4px solid #8d6ca7}
 .vpq-oh-exam-status{font-size:12px;color:#715a83;margin:8px 0}
-@media (max-width:690px){.vpq-case-dual{grid-template-columns:minmax(0,1fr)!important}}</style><style>
+/* Differential cases: clean patient overview and readable image/decision panels */
+.vpq-ddx-patient,.vpq-ddx-images{box-sizing:border-box;overflow-wrap:anywhere}
+.vpq-ddx-patient p{line-height:1.55}
+.vpq-ddx-ancillary summary{list-style-position:inside}
+.vpq-ddx-images figure{max-width:100%;margin:8px 0}
+.vpq-ddx-images img{max-width:100%;height:auto;object-fit:contain}
+.vpq-case-dual>div,.vpq-case-dual>aside{min-width:0}
+@media(max-width:740px){.vpq-case-dual{grid-template-columns:minmax(0,1fr)!important}.vpq-ddx-images{order:-1}}
+</style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
 body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),radial-gradient(circle at 91% 25%,#c6f3ec 0%,transparent 34%),#f6f4ff}
@@ -1054,7 +1062,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="necropsy-differential-bovine-congenital-cns-figure1.js?v=20261119-figure1-v1"></script>
 <script src="necropsy-differential-exam5-cardiac.js?v=20261119-exam5-cardiac8"></script>
 <script src="necropsy-differential-exam7-navle-cases.js?v=20261120-ancillary-audit-v4"></script>
-<script src="necropsy-differential-lab.js?v=20261120-followup-arkive-v10"></script>
+<script src="necropsy-differential-lab.js?v=20261120-universal-case-layout-v11"></script>
 <script src="pathology-exam4-l49-deep-dive.js?v=20261119-l49-deep-v1"></script>
 <script src="pathology-exams45-cabinet-bridge.js?v=20261120-exams45-linked1"></script>
 <script src="pathology-exam3-urinary-visual-patterns.js?v=20261119-urinary-visual1"></script>
