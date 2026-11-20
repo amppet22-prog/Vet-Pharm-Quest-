@@ -833,6 +833,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="pharm-exam2-renal-diuretics-lecture16-user-mcq.js?v=20261120-90-mcq1"></script>
 <script src="pharm-exam2-gastrointestinal-lecture17-user-mcq.js?v=20261120-90-mcq1"></script>
 <script src="pharm-exam2-behavior-neurology-lectures18-20-user-mcq.js?v=20261120-100-mcq1"></script>
+<script src="pharm-exam2-patient-cases-uploaded.js?v=20261120-navle-cases47-1"></script>
 <script src="pharm-exam2-objective-cards.js?v=20261117-clinical-flags24"></script>
 <script src="navle-pharm-expansion.js?v=20261109-navle1"></script>
 <script src="clinpath-reference-hub.js?v=20261114-phaseC3-6a"></script>
@@ -2960,7 +2961,7 @@ function actionForFocus(action,lec){
   if(action==='learn'){if(vpqPharmNext?.lectures?.some(x=>x.id===id))return vpqPharmNextLesson(id);return launch('learn',id)}
   if(action==='clinical'){if(/^Lecture (1[0-9]|20)$/.test(id))return vpqExam2HighYield('questions',id);return launch('quiz',id)}
   if(action==='prof'){if(/^Lecture (1[1-9]|20)$/.test(id))return vpqExam2HighYield('objectives',id);setPending([id]);saveSelection();return launchGame('guide')}
-  if(action==='case'){setPending([id]);saveSelection();return openCases('Pharmacology')}
+  if(action==='case'){if(/^Lecture (1[0-9]|20)$/.test(id))return vpqExam2CasePractice(id);setPending([id]);saveSelection();return openCases('Pharmacology')}
   if(action==='arcade'){setPending([id]);saveSelection();return launchGame(/^Lecture (1[1-9]|20)$/.test(id)?'exam2-challenge':'exam-center')}
   if(action==='match'){
    if(drugMatchCount(id)<3)return showModal('🧩 Drug Match','<p>This lecture needs at least three distinct matching pairs before a useful game can start.</p><button data-vpqlfhome="1">← Pharmacology Learning Center</button>');
@@ -2986,9 +2987,9 @@ function actionForFocus(action,lec){
   btn('clinical','3 · 🩺 Clinical MCQs','Multiple-choice questions from this lecture, including uploaded sets.','vpqPharmFlowClinical')+
   btn('mastery','4 · 🎓 Assess','Independent mastery and tracked weak points.')+'</div>'+
   '<div class="vpqPharmFlowClinicalShortcut"><button type="button" data-vpqlfroute="clinical">🩺 START '+escapeHtml(focus)+' CLINICAL MULTIPLE-CHOICE PRACTICE →</button><small>4-choice questions · uploaded MCQs and patient applications · answers and explanations</small></div>'+
-  '<div class="vpqPharmFlowLink"><b>More ways to practice this lecture</b><div>'+
+  '<div class="vpqPharmFlowCaseShortcut"><button data-vpqlfroute="case">🐾 START '+escapeHtml(focus)+' PATIENT CASES · NAVLE-STYLE →</button><small>47 uploaded clinical scenarios, separate from factual MCQs and flashcards</small></div>'+'<div class="vpqPharmFlowLink"><b>More ways to practice this lecture</b><div>'+
   btn('prof','📋 Professor Guide',e2?'Instructor objectives for this lecture.':'Course-style recall in the Arcade.')+
-  btn('case','🐾 Patient Cases','Work through clinical reasoning and decisions.')+
+  btn('case','🐾 Exam 2 Patient Cases','47 uploaded patient scenarios, clinical decisions and explanations.')+
   btn('arcade','🕹️ Exam Arcade',e2?'Exam 2 clinical challenge with XP and explanations.':'Exam 1 Professor Guide and Exam Boss rounds.')+
   btn('match','🧩 Drug Match',drugMatchCount(focus)+' available drug or mechanism pairs · practice after flashcards.')+
   (/^Lecture [2-5]$/.test(focus)?btn('battle','🦠 Bug Battles','Optional antimicrobial resistance and pathogen challenges.'):'')+'</div></div>'+
@@ -3830,6 +3831,25 @@ function vpqPharmCaseReference(question){
  if(!items.length)return '';
  return '<div class="vpqPharmRefs"><b>🧪 '+species+' reference interval'+(items.length>1?'s':'')+':</b> '+escapeHtml(items.join(' · '))+' <small>Example serum intervals, Cornell AHDC Cobas 501. Use the testing laboratory’s own ranges.</small></div>';
 }
+
+/* Exam 2 patient practice — uploaded clinical scenarios kept distinct from factual MCQs. */
+function vpqExam2CasePractice(lecture='all',position=0){
+ const all=window.VPQ_PHARM_EXAM2_NAVLE_CASES||[];
+ const lectures=Array.from({length:11},(_,i)=>'Lecture '+(i+10));
+ const selected=lectures.includes(lecture)?lecture:'all';
+ const cases=all.filter(c=>selected==='all'||c.lectureTags?.includes(selected));
+ const at=Math.max(0,Math.min(cases.length-1,Number(position)||0));
+ const c=cases[at];
+ const back='<div class="buttonrow"><button data-vpqlfhome="1">← Learning Center</button><button data-vpqhy-mode="questions" data-vpqhy-lecture="'+escapeHtml(selected)+'">🩺 Lecture MCQs</button></div>';
+ const selector='<div class="vpq-e2cases-lectures"><button data-e2case-lec="all">All 47 cases</button>'+lectures.map(x=>'<button data-e2case-lec="'+escapeHtml(x)+'" '+(x===selected?'class="selected"':'')+'>'+escapeHtml(x)+' ('+all.filter(c=>c.lectureTags?.includes(x)).length+')</button>').join('')+'</div>';
+ if(!c)return showModal('🐾 Exam 2 Patient Cases',back+selector+'<p>No uploaded case for this lecture yet.</p>');
+ const ref=c.id==='E2-005'?'<div class="vpq-e2cases-ref">Cat glucose reference context: approximately 70–150 mg/dL (laboratory-dependent). 48 mg/dL is low.</div>':c.id==='E2-017'?'<div class="vpq-e2cases-ref">Cat systolic BP context: persistent ≥160 mmHg increases risk of target-organ damage; use calm repeat measurements.</div>':'';
+ const question='<p class="tiny">Case '+(at+1)+' / '+cases.length+' · '+escapeHtml(c.id)+' · '+escapeHtml(c.lecture)+'</p><div class="vpq-e2cases-patient"><b>🐾 '+escapeHtml(c.topic)+'</b><p>'+escapeHtml(c.scenario)+'</p></div>'+ref+
+ '<h3>'+escapeHtml(c.question)+'</h3><div class="vpq-e2cases-answers">'+c.options.map((x,i)=>'<button data-e2case-answer="'+i+'" data-e2case-at="'+at+'" data-e2case-selected="'+escapeHtml(selected)+'">'+String.fromCharCode(65+i)+'. '+escapeHtml(x)+'</button>').join('')+'</div><div id="vpqE2CasesFeedback" aria-live="polite"></div>';
+ const controls='<div class="buttonrow"><button data-e2case-nav="'+(at-1)+'" data-e2case-selected="'+escapeHtml(selected)+'" '+(at===0?'disabled':'')+'>← Previous</button><button data-e2case-nav="'+(at+1)+'" data-e2case-selected="'+escapeHtml(selected)+'" '+(at===cases.length-1?'disabled':'')+'>Next case →</button></div>';
+ showModal('🐾 Exam 2 · Patient Cases',back+selector+question+controls+'<p class="tiny">Uploaded teaching notes; treatment and safety claims have not been independently validated. Refer to current veterinary references for actual patients.</p>');
+}
+
 function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const db=window.VPQ_PHARM_NEXT||{drugs:[],questions:[]};
  const source=window.VPQ_PHARM_EXAM2_OBJECTIVE_CARDS||[];
