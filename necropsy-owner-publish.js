@@ -247,7 +247,7 @@ async function editor(type,id){
  const localText=type==='specimen'?window.VPQ_PATH_EXAM7?.draftText?.(id):type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftText?.(id):null;
  const edits={...base,...(cur?.text||{}),...(localText||{})};
  if(type==='specimen'){const tags=window.VPQ_PATH_ETIOLOGY?.forCard?.(edits);if(tags){if(edits.etiologyCategories===undefined)edits.etiologyCategories=tags.categories.join(', ');if(edits.etiologyAgents===undefined)edits.etiologyAgents=tags.agents;if(edits.etiologyCertainty===undefined)edits.etiologyCertainty=tags.certainty;}}
- const fields=type==='case'?['history','gross','histo','morph','mechanism','tests']:type==='specimen'?['gross','dx','histo','why','visualClue','compare','notes']:[];
+ const fields=type==='case'?['species','age','speciesName','breed','sex','reproductiveStatus','history','gross','histo','morph','mechanism','tests']:type==='specimen'?['gross','dx','histo','why','visualClue','compare','notes']:[];
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  draftState={};
  show('✏️ Edit & publish · '+esc(base.title),
@@ -292,7 +292,9 @@ function newCaseEditor(seed={}){
  '<label>Card title<input id="ncTitle" style="width:100%" value="'+esc(seed.title||'')+'" placeholder="e.g. Meningitis: purulent versus nonsuppurative"></label>'+
  '<label>Lecture<select id="ncLecture">'+lectures.map(n=>'<option value="'+n+'"'+(n===(seed.lecture||'68')?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
  '<label>System<input id="ncSystem" style="width:100%" value="CNS / Meninges"></label>'+
- '<label>Species and signalment<textarea id="ncSpecies" rows="2" style="width:100%"></textarea></label>'+
+ '<label>Signalment summary (required)<textarea id="ncSpecies" rows="2" style="width:100%" placeholder="3-year-old spayed female Labrador Retriever"></textarea></label>'+
+ '<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px"><label>Age<input id="ncAge" style="width:100%" placeholder="3 years"></label><label>Species<input id="ncSpeciesName" style="width:100%" placeholder="Dog"></label><label>Breed<input id="ncBreed" style="width:100%" placeholder="Labrador Retriever"></label><label>Sex<input id="ncSex" style="width:100%" placeholder="Female"></label><label>Reproductive status<input id="ncReproductiveStatus" style="width:100%" placeholder="Spayed, neutered, intact, gelding"></label></div>'+
+
  '<label>History<textarea id="ncHistory" rows="3" style="width:100%"></textarea></label>'+
  '<label>Gross lesions / localization<textarea id="ncGross" rows="3" style="width:100%"></textarea></label>'+
  '<label>Histology (revealed after differential selection)<textarea id="ncHisto" rows="3" style="width:100%"></textarea></label>'+
@@ -313,7 +315,7 @@ function newCaseEditor(seed={}){
 }
 function caseForm(){
  const root=api.body,el=id=>root.querySelector('#'+id),val=id=>String(el(id)?.value||'').trim();
- const fields=['Title','Lecture','System','Species','History','Gross','Histo','Morph','Mechanism','Tests','Ref'];
+ const fields=['Title','Lecture','System','Species','Age','SpeciesName','Breed','Sex','ReproductiveStatus','History','Gross','Histo','Morph','Mechanism','Tests','Ref'];
  const values=Object.fromEntries(fields.map(x=>[x.toLowerCase(),val('nc'+x)]));
  const opts=Array.from({length:4},(_,i)=>Object.fromEntries(['name','supports','against','hist'].map(k=>[k,String(root.querySelector('[data-nc-'+k+'="'+i+'"]')?.value||'').trim()])));
  if(!values.title||!values.species||!values.history||!values.gross||!values.histo||!values.morph||!values.mechanism||!values.tests||!values.ref)throw Error('Complete all teaching fields, including the reference.');
