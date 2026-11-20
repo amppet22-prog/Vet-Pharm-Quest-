@@ -254,6 +254,7 @@ async function editor(type,id){
  '<p><b>Text-only updates are allowed.</b> Leave image inputs blank to preserve all published photos. Select multiple new images to append them. Existing photos are kept unless you check Remove or explicitly select Replace all.</p>'+
  (type!=='lecture'?'<label style="display:block;margin:9px 0"><b>✏️ Card name (editable)</b><input data-np-text="title" maxlength="180" style="width:100%;display:block;margin-top:4px" value="'+esc(edits.title||base.title)+'" placeholder="Condition or specimen name"></label><p class="tiny">Renaming keeps the existing card ID, photos, captions, species tags and case links. Publish your name change using the same password.</p>':'')+
  (fields.length?'<h4>📝 Teaching content (editable independently of photos)</h4>'+fields.map(k=>'<label style="display:block;margin:7px 0"><b>'+esc(k.replace(/^\w/,c=>c.toUpperCase()))+'</b><textarea data-np-text="'+k+'" rows="3" style="display:block;width:100%">'+esc(edits[k]||'')+'</textarea></label>').join(''):'')+
+ (type==='case'?'<h4>🧩 Diagnosis choices & reasoning</h4><p class="tiny">Edit each answer and its supporting evidence. Mark exactly one as the best-supported diagnosis. Changes will publish with the case.</p>'+((edits.options||[]).map((o,i)=>'<div style="border:1px solid #cad9e7;border-radius:9px;padding:9px;margin:8px 0"><label style="font-weight:800"><input type="radio" name="np-best-option" value="'+i+'" '+(o.role==='best'||o.name===edits.best?'checked':'')+'> Best diagnosis '+(i+1)+'</label><label style="display:block;margin:5px 0">Diagnosis<input data-np-option-name="'+i+'" value="'+esc(o.name||'')+'" style="display:block;width:100%;padding:7px"></label>'+[['supports','Why it fits'],['against','Why less likely'],['hist','Histology distinction']].map(([k,label])=>'<label style="display:block;margin:5px 0">'+label+'<textarea data-np-option-'+k+'="'+i+'" rows="2" style="display:block;width:100%">'+esc(o[k]||'')+'</textarea></label>').join('')+'</div>').join('')):'')+
  (type==='specimen'?'<h4>✅ Structured classifications — select from the options</h4>'+(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(edits)||'')+(window.VPQ_PATH_ATLAS_META?.editorHTML?.(edits)||''):'')+
  
  '<h4>📷 Currently published ('+existing.length+')</h4>'+
@@ -356,6 +357,19 @@ function readFields(){
  const kind=el('npOwnerKind')?.value||'gross',replaceAll=!!el('npOwnerReplaceAll')?.checked;
  const remove=Array.from(root.querySelectorAll('[data-np-remove]:checked')).map(x=>Number(x.dataset.npRemove));
  const edits={};root.querySelectorAll('[data-np-text]').forEach(x=>{edits[x.dataset.npText]=String(x.value||'').slice(0,9000)});
+ if(pending?.type==='case'){
+  const optFields=Array.from(root.querySelectorAll('[data-np-option-name]'));
+  if(optFields.length){
+   const bestIndex=Number(root.querySelector('input[name="np-best-option"]:checked')?.value??-1);
+   if(bestIndex<0||bestIndex>=optFields.length)throw Error('Select the best-supported diagnosis.');
+   edits.options=optFields.map((field,i)=>{
+    const pick=name=>String(root.querySelector('[data-np-option-'+name+'="'+i+'"]')?.value||'').trim().slice(0,9000);
+    return {name:String(field.value||'').trim().slice(0,500),supports:pick('supports'),against:pick('against'),hist:pick('hist'),role:i===bestIndex?'best':'less'};
+   });
+   if(edits.options.some(o=>!o.name))throw Error('Every answer choice needs a diagnosis name.');
+   edits.best=edits.options[bestIndex].name;
+  }
+ }
  if(pending?.type==='specimen'){
   Object.assign(edits,window.VPQ_PATH_ETIOLOGY?.readEditor?.(root)||{},window.VPQ_PATH_ATLAS_META?.readEditor?.(root)||{});
  }
