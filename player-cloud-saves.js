@@ -168,8 +168,8 @@ async function firstUpload(){
     }
   }
   const message=existing ?
-   "Your ONLINE save: "+progressLabel(normalize(existing.save_data))+"\nThis BROWSER: "+progressLabel(payload)+"\n\nReplace your online save with this browser's progress? This cannot be automatically undone." :
-   "Back up the progress currently on this browser to your account? Future progress will then save automatically while the game is open.";
+   "CLOUD SAVE (stored in your account and available to other browsers):\n"+progressLabel(normalize(existing.save_data))+"\n\nTHIS BROWSER (the current device and browser):\n"+progressLabel(payload)+"\n\nUPLOAD FROM THIS BROWSER TO CLOUD?\nThis REPLACES the cloud copy with this browser's progress. The saved progress in this browser will NOT change." :
+   "UPLOAD THIS BROWSER TO CLOUD?\nSave the progress on this device to your online account? Other browsers can restore it later. Changes will then auto-save.";
   if(!confirm(message))return;
   optedIn=true;conflict=false;lastFingerprint="";
   await upload({confirmed:true});
@@ -187,7 +187,7 @@ async function inspectSave(){
    if(owner!==userId)return;
    if(!remote){notify("No online save exists for this account. This browser's progress has not been replaced.",true);return;}
    const payload=normalize(remote.save_data);
-   notify("ONLINE BACKUP ("+new Date(remote.updated_at).toLocaleString()+"): "+progressLabel(payload)+". CURRENT BROWSER: "+progressLabel(readSelected())+".");
+   notify("CLOUD SAVE (your account, available to other browsers; updated "+new Date(remote.updated_at).toLocaleString()+"): "+progressLabel(payload)+"\nTHIS BROWSER (the current device): "+progressLabel(readSelected()));
  }catch(error){notify("Could not inspect online save: "+(error.message||""),true);}
 }
 async function restore(){
@@ -201,7 +201,7 @@ async function restore(){
   const payload=normalize(remote.save_data);
   if(!payload.slots[PRIMARY]&&!payload.slots["vet-pharm-quest-v1"]){notify("Cloud backup has no supported game progress.",true);return;}
   notify("Online save found: "+progressLabel(payload));
-  if(!confirm("ONLINE SAVE: "+progressLabel(payload)+"\nCURRENT BROWSER: "+progressLabel(readSelected())+"\n\nRestore this online save to this browser? A local recovery snapshot will let you undo."))return;
+  if(!confirm("CLOUD SAVE (on your account): "+progressLabel(payload)+"\nTHIS BROWSER (current device): "+progressLabel(readSelected())+"\n\nRESTORE FROM CLOUD TO THIS BROWSER?\nThis REPLACES the browser's progress. The cloud copy stays unchanged. A local recovery snapshot allows undo."))return;
   // A browser-local recovery snapshot is created; downloading is optional.
   // Take a second browser-local recovery snapshot before writing any keys.
   const recoveryKey="vpq-cloud-recovery-"+owner;
@@ -223,12 +223,12 @@ function render(){
  const target=$("vpqCloudSaveButtons");target.replaceChildren();
  if(!client){notify("Cloud saving is not configured. Browser saves still work.");return;}
  if(!userId){notify("Sign in to save game progress across devices. Guests keep browser-local progress.");return;}
- if(conflict)notify("Cloud backup paused because another save exists. Review before overwriting.",true);
+ if(conflict)notify("Two versions exist: your account's CLOUD SAVE and THIS BROWSER's save. Compare them, then choose which direction to copy.",true);
  else if(optedIn)notify("☁️ Auto-save is ON. Progress saves to your account and this browser.");
  else notify(localGet(OWNER_KEY)&&localGet(OWNER_KEY)!==userId?"This browser has progress linked to another account. Choose Restore or explicitly back up this browser; no automatic replacement.":"Choose Back up this browser or Restore cloud save. Nothing will be overwritten without confirmation.");
- addButton("Check online XP",inspectSave);
- addButton("Back up this browser",firstUpload);
- addButton("Restore cloud save",restore);
+ addButton("Compare browser and cloud",inspectSave);
+ addButton("Upload browser to cloud",firstUpload);
+ addButton("Restore cloud to browser",restore);
  if(localGet("vpq-cloud-recovery-"+userId))addButton("Undo last restore",()=>{
    if(!confirm("Restore the prior on-browser progress saved before your last cloud restore? Automatic cloud backup will pause to avoid overwriting your cloud copy."))return;
    try{
