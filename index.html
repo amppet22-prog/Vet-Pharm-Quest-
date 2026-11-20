@@ -555,6 +555,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="clinic-image-backgrounds.js?v=20261118-necropsy-unmasked1"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261120-matched-gallery-1"></script>
+<script src="avatar-uploaded-manifest.js?v=20261120-roster1"></script>
+<script src="avatar-uploaded-gallery.js?v=20261120-roster1"></script>
 <script src="toxicology-preview-data.js?v=20261108-expanded1"></script>
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
 <script src="pharm-next-lectures.js?v=20261117-source-audit210-v4"></script>
@@ -3556,6 +3558,23 @@ openAvatar=function(...args){
  vpqAdditionalArtRoster.addChoices();
 };
 $('avatarBtn').onclick=()=>openAvatar();
+
+/* Newly uploaded one-person standing artwork replaces the general roster.
+ * Alexandria and Gary keep their existing saved IDs and artwork. */
+const vpqUploadedGallery=window.VPQ_UPLOADED_AVATAR_GALLERY({
+ gallery:vpqStandingGallery,
+ getForm:()=>$('avatarForm'),
+ getState:()=>state,
+ modalBody:()=>$('modalBody')
+});
+const vpqBeforeUploadedGalleryOpen=openAvatar;
+openAvatar=function(...args){
+ vpqBeforeUploadedGalleryOpen(...args);
+ vpqUploadedGallery.addGallery();
+};
+$('avatarBtn').onclick=()=>openAvatar();
+// Restore uploaded avatar after the earlier avatar scripts finish initializing.
+updateAvatar();
 
 /* Interactive pathway art shares the existing modal, without changing course progress or saves. */
 window.VPQ_VISUAL_PATHWAYS.init({body:$('modalBody'),showModal});
