@@ -62,7 +62,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
     '</g>':'';
   const placed=Array.isArray(bag.placed)?bag.placed:[];
   const has=id=>placed.includes(id);
-  const flora=has('decor-cat')?'<g transform="translate(24 282)"><rect x="10" y="42" width="98" height="65" rx="13" fill="#e2bfd1" stroke="#947e9e" stroke-width="5"/><text x="59" y="88" font-size="37" text-anchor="middle">🐈</text><path d="M-3 110h127" stroke="#a98ea8" stroke-width="12"/></g>':'<g transform="translate(34 318)"><rect width="96" height="36" rx="16" fill="#d8c8d9"/><text x="48" y="28" font-size="26" text-anchor="middle">🐾</text></g>';
+  const flora=has('decor-cat')?'<g transform="translate(24 282)"><rect x="10" y="42" width="98" height="65" rx="13" fill="#e2bfd1" stroke="#947e9e" stroke-width="5"/><text x="59" y="88" font-size="37" text-anchor="middle">🐈</text><path d="M-3 110h127" stroke="#a98ea8" stroke-width="12"/></g>':'';
   const kids=has('decor-kids')?'<g transform="translate(921 275) scale(.68)"><rect width="116" height="63" rx="15" fill="#f5debb" stroke="#d6b7a7" stroke-width="5"/><text x="57" y="44" font-size="36" text-anchor="middle">🧸</text></g>':'<g transform="translate(937 308) scale(.5)"><rect x="0" y="18" width="64" height="38" rx="11" fill="#f4dfdf" stroke="#c5a5c0" stroke-width="4"/><text x="32" y="43" text-anchor="middle" font-size="24">🐾</text></g>';
   const decorations='';
   const holiday=has('decor-holiday')?'<text x="881" y="85" font-size="25">✨</text>':'';
