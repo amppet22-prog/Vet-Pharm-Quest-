@@ -25,7 +25,10 @@ const MAX_BYTES=480000;
 // Live release is deliberately opt-in. Never upload editor content or credentials.
 const $=id=>document.getElementById(id);
 const dataSize=value=>new TextEncoder().encode(JSON.stringify(value)).length;
-let client=null,userId=null,optedIn=false,remoteRevision=null, timer=null,scanTimer=null,inFlight=false,again=false,lastFingerprint="",conflict=false;
+let client=null,userId=null,optedIn=false,remoteRevision=null, timer=null,scanTimer=null,inFlight=false,again=false,lastFingerprint="",conflict=false,checkingInitial=false,lastStatus="";
+const PENDING_PREFIX="vpq-cloud-pending-";
+function pendingMarker(owner,pending){if(!owner)return;try{if(pending)localStorage.setItem(PENDING_PREFIX+owner,"1");else localStorage.removeItem(PENDING_PREFIX+owner)}catch{}}
+function updateIndicator(){const b=$("vpqCloudButton");if(!b)return;b.textContent=!userId?"☁️ Guest save":conflict?"⚠️ Choose save":!optedIn?"☁️ Cloud setup":inFlight||timer||localGet(PENDING_PREFIX+userId)?"☁️ Saving…":"☁️ Saved";b.title=lastStatus||"Cloud save settings";}
 function localGet(key){try{return localStorage.getItem(key)}catch{return null}}
 function localSet(key,value){localStorage.setItem(key,value)}
 function readSelected(){
@@ -53,8 +56,10 @@ function normalize(data){
   throw Error("Cloud backup is not a supported game-save format.");
 }
 function notify(msg,error=false){
+ lastStatus=msg;
  const el=$("vpqCloudSaveStatus");
  if(el){el.textContent=msg;el.style.color=error?"#a13a3a":"#304c70";}
+ updateIndicator();
 }
 function panel(){
  let p=$("vpqCloudSavePanel");if(p)return p;
@@ -84,7 +89,7 @@ async function upload({confirmed=false}={}){
  const owner=userId, payload=readSelected();
  if(!payload.slots[PRIMARY]&&!payload.slots["vet-pharm-quest-v1"])return;
  if(dataSize(payload)>MAX_BYTES){notify("Cloud data exceeds the current save limit. Local progress is safe. Download your complete save in the Save Center.",true);return;}
- inFlight=true;
+ inFlight=true;pendingMarker(owner,true);updateIndicator();
  try{
    const remote=await fetchRemote(owner);
    if(owner!==userId||!optedIn)return;
@@ -98,15 +103,17 @@ async function upload({confirmed=false}={}){
    if(owner!==userId)return;
    setRevision(owner,data.updated_at);
    lastFingerprint=JSON.stringify(payload);
-   notify("Cloud backup saved at "+new Date().toLocaleTimeString()+".");
+   pendingMarker(owner,false);
+   notify("☁️ All progress saved online at "+new Date().toLocaleTimeString()+".");
  }catch(error){notify("Cloud backup failed; local progress was kept. "+(error.message||""),true);}
- finally{inFlight=false;if(again){again=false;queue();}}
+ finally{inFlight=false;if(again){again=false;queue();}updateIndicator();}
 }
 function queue(){
  if(!optedIn||!userId||conflict)return;
  const payload=readSelected();
  if(JSON.stringify(payload)===lastFingerprint)return;
- clearTimeout(timer);timer=setTimeout(()=>{if(inFlight){again=true;return;}upload();},2400);
+ pendingMarker(userId,true);notify("Saving your progress automatically…");
+ clearTimeout(timer);timer=setTimeout(()=>{timer=null;if(inFlight){again=true;return;}upload();},2400);
 }
 async function firstUpload(){
  if(!client||!userId)return;
@@ -137,9 +144,7 @@ async function restore(){
   const payload=normalize(remote.save_data);
   if(!payload.slots[PRIMARY]&&!payload.slots["vet-pharm-quest-v1"]){notify("Cloud backup has no supported game progress.",true);return;}
   if(!confirm("Restore this account's saved game on this browser? A backup of the current supported progress will be downloaded first. This will REPLACE the current supported progress on this browser and reload the game."))return;
-  const backup=new Blob([JSON.stringify({app:"Vet Pharm Quest multi-module local backup",created_at:new Date().toISOString(),save:readSelected()},null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(backup),a=document.createElement("a");
-  a.href=url;a.download="Vet_Pharm_Quest_Pre_Cloud_Restore.json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+  // A browser-local recovery snapshot is created; downloading is optional.
   // Take a second browser-local recovery snapshot before writing any keys.
   const recoveryKey="vpq-cloud-recovery-"+owner;
   try{localSet(recoveryKey,JSON.stringify(readSelected()))}catch{/* download is still the backup */}
@@ -152,6 +157,7 @@ async function restore(){
     }
     localSet(OWNER_KEY,owner);
     localSet("vpq-cloud-opt-in-"+owner,"1");
+    pendingMarker(owner,false);
   }catch(error){
     for(const key of KEYS){try{if(previous[key]===null)localStorage.removeItem(key);else localSet(key,previous[key])}catch{}}
     throw error;
@@ -166,7 +172,7 @@ function render(){
  if(!client){notify("Cloud saving is not configured. Browser saves still work.");return;}
  if(!userId){notify("Sign in to save game progress across devices. Guests keep browser-local progress.");return;}
  if(conflict)notify("Cloud backup paused because another save exists. Review before overwriting.",true);
- else if(optedIn)notify("Automatic cloud backup is enabled. Game progress also remains on this browser.");
+ else if(optedIn)notify("☁️ Auto-save is ON. Progress saves to your account and this browser.");
  else notify(localGet(OWNER_KEY)&&localGet(OWNER_KEY)!==userId?"This browser has progress linked to another account. Choose Restore or explicitly back up this browser; no automatic replacement.":"Choose Back up this browser or Restore cloud save. Nothing will be overwritten without confirmation.");
  addButton("Back up this browser",firstUpload);
  addButton("Restore cloud save",restore);
@@ -180,7 +186,31 @@ function render(){
      location.reload();
    }catch(err){notify("Unable to undo this restore: "+(err.message||""),true);}
  });
- if(optedIn)addButton("Pause auto backup",()=>{optedIn=false;clearTimeout(timer);localStorage.removeItem("vpq-cloud-opt-in-"+userId);render();});
+ if(optedIn)addButton("Pause auto backup",()=>{optedIn=false;clearTimeout(timer);timer=null;pendingMarker(userId,false);localStorage.removeItem("vpq-cloud-opt-in-"+userId);render();updateIndicator();});
+ updateIndicator();
+}
+async function initializeAutomaticSave(owner){
+ if(!client||!owner||checkingInitial||optedIn)return;
+ checkingInitial=true;
+ try{
+   const existing=await fetchRemote(owner);
+   if(owner!==userId)return;
+   const differentOwner=localGet(OWNER_KEY)&&localGet(OWNER_KEY)!==owner;
+   if(existing){
+     conflict=true;
+     notify("Your account already has an online save. Choose Restore or Back up this browser; neither will be overwritten without permission.",true);
+     panel();render();
+   }else if(differentOwner){
+     notify("This browser has another account's progress. Choose which save to keep.",true);
+     panel();render();
+   }else{
+     optedIn=true;conflict=false;
+     localSet("vpq-cloud-opt-in-"+owner,"1");localSet(OWNER_KEY,owner);
+     notify("Auto-save enabled. No download needed.");
+     queue();render();
+   }
+ }catch(error){notify("Cloud save check failed. Your browser progress is safe. "+(error.message||""),true);}
+ finally{checkingInitial=false;updateIndicator();}
 }
 function launch(){
  client=window.VPQ_PLAYER_ACCOUNT?.getClient?.()||null;
@@ -188,14 +218,15 @@ function launch(){
  conflict=false;lastFingerprint="";
  optedIn=!!userId&&localGet("vpq-cloud-opt-in-"+userId)==="1"&&localGet(OWNER_KEY)===userId;
  remoteRevision=userId?getRevision(userId):null;
- render();
+ render();updateIndicator();
  if(optedIn)queue();
+ else if(userId)initializeAutomaticSave(userId);
 }
 function makeButton(){
  const target=$("saveBtn")||$("vpqAccountBtn")||document.querySelector("header nav")||document.querySelector("header .hud");
  if(!target||$("vpqCloudButton"))return;
  const b=document.createElement("button");
- b.type="button";b.id="vpqCloudButton";b.className="mini";b.textContent="☁️ Cloud Save";
+ b.type="button";b.id="vpqCloudButton";b.className="mini";b.textContent="☁️ Save status";
  b.onclick=()=>{if($("vpqCloudSavePanel"))$("vpqCloudSavePanel").remove();else{panel();launch();}};
  if(target.matches("nav, .hud"))target.appendChild(b);else target.insertAdjacentElement("afterend",b);
 }
@@ -209,5 +240,5 @@ document.addEventListener("DOMContentLoaded",()=>{
  scanTimer=setInterval(queue,10000);
  document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")queue();});
 });
-window.VPQ_CLOUD_SAVE=Object.freeze({open:()=>{panel();launch();},queue,supportedKeys:KEYS.slice()});
+window.VPQ_CLOUD_SAVE=Object.freeze({open:()=>{panel();launch();},queue,supportedKeys:KEYS.slice(),isPending:()=>!!userId&&(!!timer||inFlight||!!localGet(PENDING_PREFIX+userId)),saveNow:async()=>{if(!optedIn||conflict)return false;clearTimeout(timer);timer=null;await upload();return !conflict&&!localGet(PENDING_PREFIX+userId);}});
 })();
