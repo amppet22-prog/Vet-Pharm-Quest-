@@ -19,7 +19,7 @@ function start(api,chosen='all'){
 }
 function shuffleArray(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function caseSequence(){
- const filtered=allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(practiceMode==='all'||practiceMode==='DDx'&&x.sourceType==='DDx'||practiceMode==='SBA'&&x.sourceType==='SBA'||practiceMode==='clinical'&&!x.sourceType)&&(filter==='all'||x.lecture===filter));
+ const filtered=allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(practiceMode==='all'||practiceMode==='DDx'&&x.sourceType!=='SBA'||practiceMode==='SBA'&&x.sourceType==='SBA'||practiceMode==='clinical'&&!x.sourceType)&&(filter==='all'||x.lecture===filter));
  // Start in a randomized order, rather than showing cases in source/best-first order.
  // Keep that order stable while reviewing an individual session.
  const ids=filtered.map(x=>x.id),existing=new Set(shuffledIds);
@@ -32,7 +32,7 @@ function shuffleCases(){shuffledIds=shuffleArray(allCases().filter(x=>(!roundsOn
 function prepareCase(id){current=id;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
 function menu(){
  const matched=caseSequence();
- const counts=[...Array.from({length:36},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+ const counts=LECTURES;
  const selectedStudy=counts.includes(conditionLecture)?conditionLecture:'68';
  modal('🧩 Necropsy · Study & Differential Center',
  '<div style="padding:10px 12px;border:1px solid #c4d6e9;background:#f3f8ff;border-radius:11px;margin-bottom:11px"><b>How would you like to practice?</b><p style="font-size:12px;margin:5px 0 0">Learn the key findings with flashcards, identify lesions in the gross atlas, then solve realistic differential cases.</p></div>'+
@@ -58,6 +58,7 @@ function menu(){
  '<label style="display:block;font-size:12px;margin-bottom:7px">Filter cases by lecture<select data-pathdiff-case-filter="1" style="display:block;width:100%;max-width:240px;font-size:13px;padding:8px;margin-top:4px;border:1px solid #bdcde1;border-radius:8px;background:white">'+
  ['all',...counts].map(n=>'<option value="'+n+'"'+(filter===n?' selected':'')+'>'+(n==='all'?'All lectures':'Lecture '+n)+'</option>').join('')+'</select></label>'+
  '<div style="display:flex;gap:7px;flex-wrap:wrap;margin:6px 0"><label style="flex:1;min-width:160px;font-size:12px">Exam<select data-pathdiff-case-exam="1" style="display:block;width:100%;padding:7px"><option value="all">All exams</option>'+EXAM_GROUPS.map(g=>'<option value="'+g.id+'"'+(caseExam===g.id?' selected':'')+'>'+safe(g.label)+'</option>').join('')+'</select></label><label style="flex:1;min-width:160px;font-size:12px">Question type<select data-pathdiff-practice-mode="1" style="display:block;width:100%;padding:7px">'+[['all','All case formats'],['DDx','Build differential list'],['SBA','NAVLE single-best answer'],['clinical','Other clinical case practice']].map(([id,label])=>'<option value="'+id+'"'+(practiceMode===id?' selected':'')+'>'+label+'</option>').join('')+'</select></label></div>'+ 
+ (matched.length?'':'<p style="font-size:12px;color:#78542d;padding:9px;border:1px solid #e4d3b2;border-radius:8px">No cases are currently linked to this lecture and format. This is a visible content gap, not an error. Switch to All exams or All case formats to explore other available practice.</p>')+
  '<p class="tiny" style="margin:6px 0">'+matched.length+' cases · Select one to compare signalment, gross findings, histology and etiologies.</p>'+
  '<div class="buttonrow"><button data-pathdiff-shuffle="1" style="background:#e9f3ff;font-weight:800">🔀 Shuffle cases</button><small>Cases are randomized automatically; shuffle again for a new order. Answer choices also change on restart. Rewards remain saved.</small></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">'+matched.map((x,i)=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:10px;border:1px solid #b7cce5;border-radius:10px;background:#fff"><b>🔬 Mystery case '+String(i+1).padStart(2,'0')+'</b><small style="display:block;margin-top:5px">Lecture '+safe(x.lecture)+' · Open to review history and gross findings</small></button>').join('')+'</div></details>');
@@ -387,7 +388,7 @@ function openExam7Lecture(idOrLecture){
  if(c){const possible=lectureConditions();const index=possible.findIndex(p=>exam7Matches(lecture,p.sourceTitle||p.title).some(hit=>hit.id===c.id));if(index>=0){conditionChosen=index;return conditionDetail()}}
  return conditionIndex();
 }
-function openExam7Rounds(lecture){filter=lecture?String(lecture):'all';caseExam='7';practiceMode='all';roundsOnly=true;shuffledIds=[];return menu();}
+function openExam7Rounds(lecture){filter=lecture?String(lecture):'all';caseExam='7';practiceMode='all';roundsOnly=true;shuffledIds=[];menu();const section=ui?.body?.querySelector('#vpq-necro-case-list');if(section)section.open=true;}
 function evidence(lecture,section){
  const linked=relatedCases(lecture,section.sourceTitle||section.title);
  const bank=window.VPQ_PATH_EXAM7_DATA||[];
@@ -723,8 +724,8 @@ function init(api){
  if(d.pathdiffConditionIndex!==undefined){selectedExam=groupForLecture(conditionLecture)?.id||'7';return conditionIndex()}
  if(d.pathdiffSelectExam!==undefined){selectedExam=d.pathdiffSelectExam;const group=EXAM_GROUPS.find(x=>x.id===selectedExam);if(group)conditionLecture=String(group.start);conditionGap='all';conditionTopicMode='all';return conditionIndex();}
  if(d.pathdiffLectureSpecimens!==undefined)return window.VPQ_PATH_EXAM7?.studyLecture?.(conditionLecture);
- if(d.pathdiffLectureCases!==undefined){roundsOnly=false;caseExam=groupForLecture(conditionLecture)?.id||'all';practiceMode='all';filter=conditionLecture;shuffledIds=[];return menu();}
- if(d.pathdiffLectureDdx!==undefined){roundsOnly=false;caseExam=groupForLecture(conditionLecture)?.id||'all';practiceMode='DDx';filter=conditionLecture;shuffledIds=[];return menu();}
+ if(d.pathdiffLectureCases!==undefined){roundsOnly=false;caseExam=groupForLecture(conditionLecture)?.id||'all';practiceMode='all';filter=conditionLecture;shuffledIds=[];menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
+ if(d.pathdiffLectureDdx!==undefined){roundsOnly=false;caseExam=groupForLecture(conditionLecture)?.id||'all';practiceMode='DDx';filter=conditionLecture;shuffledIds=[];menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;selectedExam=groupForLecture(conditionLecture)?.id||selectedExam;const hasDisease=((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]).some(x=>x.diseaseAtlas===true);conditionTopicMode=Number(conditionLecture)>=50&&Number(conditionLecture)<=66&&hasDisease?'disease':'all';return conditionIndex()}
  if(d.pathdiffTopicMode!==undefined){conditionTopicMode=d.pathdiffTopicMode;return conditionIndex()}
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
