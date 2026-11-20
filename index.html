@@ -3612,7 +3612,7 @@ function vpqPharmCaseReference(question){
  if(!isCat&&!isDog)return '';
  const species=isCat?'Cat':'Dog';
  const items=[];
- const hasK=/(?:\bK\+?\s*(?:is|=|from|rises|falls|\d)|\bpotassium\s*(?:is|=|of|rises|\d))[^.]{0,90}(?:\d+(?:\.\d+)?\s*(?:mmol\/L|mEq\/L))/i.test(prompt);
+ const hasK=/(?:\bK\+?|\bpotassium\b)/i.test(prompt)&&/\d+(?:\.\d+)?\s*(?:mmol\/L|mEq\/L)/i.test(prompt);
  const hasGlucose=/(?:glucose|blood glucose|BG)\s*(?:is|=|of|\d)\s*\d+(?:\.\d+)?\s*mg\/dL/i.test(prompt);
  if(hasK)items.push('Potassium '+(isCat?'3.8–5.5':'4.1–5.4')+' mmol/L');
  if(hasGlucose)items.push('Glucose '+(isCat?'71–182':'68–104')+' mg/dL');
