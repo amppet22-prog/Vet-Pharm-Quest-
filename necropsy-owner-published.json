@@ -3386,6 +3386,83 @@
       },
       "updated": "2026-11-20T14:19:44.105Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-78-18": {
+      "title": "Tympanokeratoma / aural cholesteatoma",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-18-1795215848091-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-20 180122.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Ear"
+          ],
+          "conditionId": "pathx-78-18"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-18-1795215849529-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Cholesterol clefts · Screenshot 2026-11-20 180132.png",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Ear"
+          ],
+          "conditionId": "pathx-78-18"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-18-1795215848091-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-20 180122.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "78"
+        ],
+        "systems": [
+          "Ear"
+        ],
+        "conditionId": "pathx-78-18"
+      },
+      "text": {
+        "title": "Tympanokeratoma / aural cholesteatoma",
+        "gross": " Keratin-filled bulla cyst with fibrovascular stroma, granulomatous inflammation and cholesterol crystals; distinct from purulent otitis media. GMiddle-ear bulla cyst containing keratinaceous material",
+        "dx": "Working identification: Tympanokeratoma / aural cholesteatoma. Specimen site: Auricle / ear canal / middle ear. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Gross, histology and clinical differentiation: Keratin-filled bulla cyst with fibrovascular stroma, granulomatous inflammation and cholesterol crystals; distinct from purulent otitis media. Etiology / cause: Keratin-filled epithelial cyst associated with chronic ear disease",
+        "why": "Etiology / pathogenesis: Middle-aged or older dogs, especially Cocker Spaniels; benign epidermal cyst of tympanic membrane associated with chronic otitis media/externa. Gross, histology and clinical differentiation: Keratin-filled bulla cyst with fibrovascular stroma, granulomatous inflammation and cholesterol crystals; distinct from purulent otitis media.",
+        "visualClue": "",
+        "compare": "",
+        "notes": "",
+        "etiologyCategories": [],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-20T23:04:10.806Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
