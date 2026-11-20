@@ -651,6 +651,14 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 #modalBody .vpqNewPharmConcept h3{font-size:18px!important;font-weight:850!important}
 #modalBody .vpqPharmWhyPhys p{font-size:15px!important;line-height:1.6!important}
 @media(max-width:600px){#modalBody .vpqPharmBasics dl div{grid-template-columns:1fr;gap:1px}#modalBody .vpqPharmQuestionCard button[data-vpqhy-answer]{font-size:15px!important}}
+</style><style id="vpq-pharm-clinical-reference-refinement">
+#modalBody .vpqPharmRefs{font-size:13px;color:#344b65;background:#f3f9f8;border:1px solid #a3d0c8;border-radius:9px;padding:8px 10px;margin:0 0 8px;line-height:1.45}
+#modalBody .vpqPharmRefs b{font-size:13px;color:#326c65}
+#modalBody .vpqPharmRefs small{font-size:11px!important;display:block;color:#526b73;margin-top:3px}
+#modalBody .vpqPharmQuestionCard button[data-vpqhy-answer].vpqHyRight,#modalBody .vpqPharmQuestionCard button[data-vpqhy-answer].vpqHyRight:disabled{border:2px solid #3b9965!important;background:#e8f8ec!important;color:#1c5b3d!important;opacity:1!important}
+#modalBody .vpqPharmQuestionCard button[data-vpqhy-answer].vpqHyWrong,#modalBody .vpqPharmQuestionCard button[data-vpqhy-answer].vpqHyWrong:disabled{border:2px solid #da8740!important;background:#fff0e0!important;color:#8a4d21!important;opacity:1!important}
+#modalBody .vpqPharmQuestionCard #vpqhyExplanation .response{font-size:15px!important;line-height:1.55!important;padding:13px 14px!important}
+#modalBody .vpqPharmQuestionCard #vpqhyExplanation .response p{font-size:15px!important;line-height:1.55!important}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><button id="vpqMeetTeamBtn" type="button" class="vpq-meet-team-button" aria-label="Meet the Vet Pharm Quest team">🐾 Meet the Team</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
@@ -3585,6 +3593,19 @@ function vpqPharmNextLesson(id){
  '<div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button><button data-vpqnewpharm-study="'+escapeHtml(l.id)+'">🎲 More practice questions</button><button data-vpq-p2-visual="1">🎨 Visual Anatomy</button><button data-vpqpharmdrug-lecture="'+escapeHtml(l.id)+'">💊 Compare drugs</button><button data-vpqnewpharm-menu="1">← All lectures</button></div>');
 }
 
+function vpqPharmCaseReference(question){
+ const prompt=String(question||'');
+ const isCat=/\b(cat|feline)\b/i.test(prompt),isDog=/\b(dog|canine)\b/i.test(prompt);
+ if(!isCat&&!isDog)return '';
+ const species=isCat?'Cat':'Dog';
+ const items=[];
+ const hasK=/(?:\bK\+?\s*(?:is|=|from|rises|falls|\d)|\bpotassium\s*(?:is|=|of|rises|\d))[^.]{0,90}(?:\d+(?:\.\d+)?\s*(?:mmol\/L|mEq\/L))/i.test(prompt);
+ const hasGlucose=/(?:glucose|blood glucose|BG)\s*(?:is|=|of|\d)\s*\d+(?:\.\d+)?\s*mg\/dL/i.test(prompt);
+ if(hasK)items.push('Potassium '+(isCat?'3.8–5.5':'4.1–5.4')+' mmol/L');
+ if(hasGlucose)items.push('Glucose '+(isCat?'71–182':'68–104')+' mg/dL');
+ if(!items.length)return '';
+ return '<div class="vpqPharmRefs"><b>🧪 '+species+' reference interval'+(items.length>1?'s':'')+':</b> '+escapeHtml(items.join(' · '))+' <small>Example serum intervals, Cornell AHDC Cobas 501. Use the testing laboratory’s own ranges.</small></div>';
+}
 function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const db=window.VPQ_PHARM_NEXT||{drugs:[],questions:[]};
  const source=window.VPQ_PHARM_EXAM2_OBJECTIVE_CARDS||[];
@@ -3612,7 +3633,7 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  }else if(mode==='objectives'){
  html+='<section class="vpq-patient-case" style="padding:14px"><p class="vpq-case-meta">Objective #'+escapeHtml(x.order)+' · '+escapeHtml(x.lecture)+'</p><h3>'+escapeHtml(x.q)+'</h3><details><summary>💡 Reveal professor-derived answer</summary><p>'+escapeHtml(x.answer)+'</p></details>'+(x.note?'<details class="vpqNewPharmOptional"><summary>⚠ Important clinical interpretation</summary><p>'+escapeHtml(x.note)+'</p></details>':'')+'</section>';
  }else{
- html+=vpqPharmBasicGuide(x.lecture,true)+'<section class="vpq-patient-case vpqPharmQuestionCard"><h3>'+escapeHtml(x.q)+'</h3><p class="vpq-case-meta">'+escapeHtml(x.lecture)+' · '+escapeHtml(x.source||'Course-aligned clinical practice')+'</p>'+
+ html+=vpqPharmBasicGuide(x.lecture,true)+'<section class="vpq-patient-case vpqPharmQuestionCard"><h3>'+escapeHtml(x.q)+'</h3>'+vpqPharmCaseReference(x.q)+'<p class="vpq-case-meta">'+escapeHtml(x.lecture)+' · '+escapeHtml(x.source||'Course-aligned clinical practice')+'</p>'+
  x.options.map((opt,i)=>'<button style="display:block;width:100%;text-align:left;margin:7px 0" data-vpqhy-answer="'+i+'" data-vpqhy-position="'+at+'" data-vpqhy-lecture="'+escapeHtml(lecture)+'">'+String.fromCharCode(65+i)+'. '+escapeHtml(opt)+'</button>').join('')+
  '<div id="vpqhyExplanation" style="margin:9px 0" aria-live="polite"></div></section>';
  }
@@ -3642,7 +3663,7 @@ $('modalBody').addEventListener('click',ev=>{
  if(!q||!area||area.dataset.answered)return;
  area.dataset.answered='true';
  area.innerHTML='<div class="response '+(chosen===q.answer?'':'bad')+'"><b>'+(chosen===q.answer?'✅ Correct':'💡 Review this mechanism')+'</b><p><b>Correct answer:</b> '+escapeHtml(q.options[q.answer])+'</p><p><b>WHY:</b> '+escapeHtml(q.why)+'</p>'+(q.reviewFlag?'<details><summary>⚠ Source caution</summary><p>'+escapeHtml(q.reviewFlag)+'</p></details>':'')+(q.sourceOriginal?'<details><summary>Original uploaded-guide question/answer</summary><p>'+escapeHtml(q.sourceOriginal.q||q.sourceOriginal.question||'')+'</p><p><b>Original answer:</b> '+escapeHtml(q.sourceOriginal.options?.[q.sourceOriginal.answer]||'')+'</p></details>':'')+'</div>';
- $('modalBody').querySelectorAll('[data-vpqhy-answer]').forEach(el=>{el.disabled=true;if(Number(el.dataset.vpqhyAnswer)===q.answer)el.style.border='2px solid #19854e';if(Number(el.dataset.vpqhyAnswer)===chosen&&chosen!==q.answer)el.style.border='2px solid #b24b4b'});
+ $('modalBody').querySelectorAll('[data-vpqhy-answer]').forEach(el=>{el.disabled=true;el.classList.remove('vpqHyRight','vpqHyWrong');if(Number(el.dataset.vpqhyAnswer)===q.answer)el.classList.add('vpqHyRight');if(Number(el.dataset.vpqhyAnswer)===chosen&&chosen!==q.answer)el.classList.add('vpqHyWrong')});
  return;
  }
  if(d.vpqpharmfcOpen!==undefined){if(d.vpqpharmfcChoose)vpqExam2QuickRecall?.select?.(d.vpqpharmfcChoose);return vpqExam2QuickRecall?.menu()}
