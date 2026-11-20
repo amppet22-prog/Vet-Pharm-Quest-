@@ -84,6 +84,7 @@ function show(){
  $("signedIn").hidden=!client||!session||recovery;
  $("accountEmail").textContent=session?.user?.email||"";
  $("returnGame").hidden=!session;
+ if(session&&!recovery)$("returnGame").textContent="☁️ Load My Saved Hospital";
 }
 function setBusy(value){busy=value;document.querySelectorAll("button").forEach(b=>b.disabled=value);}
 if(!client){$("loading").textContent="Could not load the account service. Check your internet connection and try refreshing.";return;}
@@ -144,8 +145,98 @@ function enterGame(){
   destination.searchParams.set("vpq_enter","1");
   location.assign(destination.href);
 }
+const CLOUD_KEYS=["vpq-v2-clinic-state","vpq-v2-last-visited-room","vet-pharm-quest-v1","vpq-pharm-exam-setup-v1","vpq-match-recent-v1","vpq-bugbattle-sources-v1","vpq-shared-learning-focus-v1","vpq-shared-learning-progress-v1","vpq-mastery-v27","vpq-oh-recent-v4","vpq-inpatient-care-v3","vpq-pathogen-lab-v1","vpq-necropsy-flashcards-v1"];
+function getBrowserSave(){
+ const slots={};
+ for(const k of CLOUD_KEYS){try{const v=localStorage.getItem(k);if(v!==null)slots[k]=JSON.parse(v)}catch(e){}}
+ return {format:3,slots};
+}
+function snapshotSummary(data){
+ const a=data?.slots?.["vpq-v2-clinic-state"]||{};
+ const arcade=data?.slots?.["vet-pharm-quest-v1"]||{};
+ const collection=a.receptionCollection||{};
+ const xp=Number(a.xp)||0,coins=Number(a.coins)||0;
+ const cases=Array.isArray(a.completed)?a.completed.length:0;
+ const owned=Array.isArray(collection.owned)?collection.owned.length:0;
+ const placed=Array.isArray(collection.placed)?collection.placed.length:0;
+ const arcadeXP=Number(arcade.xp)||0;
+ const custom=!!a.avatarPreset||!!a.avatarBase||!!a.receptionCollection||!!a.avatarArtStyle;
+ return {xp,coins,cases,owned,placed,arcadeXP,meaningful:xp>0||coins>0||cases>0||owned>6||placed>2||arcadeXP>0||custom};
+}
+function describeSave(x){
+ const a=snapshotSummary(x);
+ return "Clinic XP "+a.xp+", coins "+a.coins+", cases "+a.cases+", Arcade XP "+a.arcadeXP+", decorations "+a.owned+" owned/"+a.placed+" placed";
+}
+async function openWithAccountProgress(){
+ if(busy)return;
+ if(!session?.user){say("Please sign in first, or choose Continue as Guest.",true);return;}
+ const owner=session.user.id;
+ setBusy(true);
+ say("☁️ Checking your account's latest saved hospital before opening…");
+ try{
+   const {data,error}=await client.from("player_saves").select("save_data,updated_at").eq("user_id",owner).maybeSingle();
+   if(error)throw error;
+   if(!session||session.user.id!==owner)return;
+   if(!data){
+     const other=localStorage.getItem("vpq-cloud-local-owner");
+     const here=getBrowserSave();
+     if(other&&other!==owner&&snapshotSummary(here).meaningful){
+       say("This browser has progress from another account. The game will not transfer that progress into your new account automatically.",true);
+       if(!confirm("This browser contains another player's progress. Open the game without uploading it? Use a separate browser profile for fully separate accounts."))return;
+       localStorage.removeItem("vpq-cloud-opt-in-"+owner);
+       enterGame();return;
+     }
+     // No previous online progress: start with this browser's local game, then auto-save.
+     localStorage.setItem("vpq-cloud-local-owner",owner);
+     localStorage.setItem("vpq-cloud-opt-in-"+owner,"1");
+     say("New account ready. Your game will save online automatically.");
+     enterGame();return;
+   }
+   const remote=data.save_data;
+   if(!remote||remote.format!==3||!remote.slots||typeof remote.slots!=="object"||
+       Array.isArray(remote.slots)||Object.keys(remote.slots).some(k=>!CLOUD_KEYS.includes(k))) {
+     throw Error("Your online save uses an older format. Please open the game and use the cloud-save controls to review it.");
+   }
+   const here=getBrowserSave();
+   const localOwner=localStorage.getItem("vpq-cloud-local-owner");
+   const current=snapshotSummary(here),online=snapshotSummary(remote);
+   const revision=localStorage.getItem("vpq-cloud-revision-"+owner);
+   let useCloud=true;
+   if(current.meaningful){
+     if(localOwner===owner && revision===data.updated_at){
+       // This browser already has the last cloud revision. Retain unsynced local changes.
+       useCloud=false;
+     }else{
+       useCloud=confirm("Two saved versions exist.\n\nCLOUD ACCOUNT (available on all devices): "+describeSave(remote)+"\nTHIS BROWSER (this device only): "+describeSave(here)+"\n\nOK: Open the CLOUD version on this device.\nCancel: Keep THIS BROWSER version.\n\nNeither version will be overwritten online by this choice.");
+       if(!useCloud){
+         // Pause auto upload until the two versions are compared in the game.
+         localStorage.removeItem("vpq-cloud-opt-in-"+owner);
+         localStorage.removeItem("vpq-cloud-revision-"+owner);
+         say("Opening this browser's progress. Automatic upload is paused until you choose which version to keep.");
+         enterGame();return;
+       }
+     }
+   }
+   if(useCloud){
+     // Applied by game-cloud-restore-boot.js BEFORE game state initializes.
+     // Keep an undo copy in this browser; never trigger a mandatory download.
+     localStorage.setItem("vpq-cloud-recovery-"+owner,JSON.stringify(here));
+     sessionStorage.setItem("vpq-cloud-restore-handoff-v1",JSON.stringify(remote));
+     say("☁️ Your saved XP, avatar and reception are ready to load.");
+   }else{
+     say("Your latest browser progress is ready.");
+   }
+   localStorage.setItem("vpq-cloud-local-owner",owner);
+   localStorage.setItem("vpq-cloud-opt-in-"+owner,"1");
+   localStorage.setItem("vpq-cloud-revision-"+owner,data.updated_at);
+   localStorage.removeItem("vpq-cloud-pending-"+owner);
+   enterGame();
+ }catch(err){
+   say("Could not safely load your online progress: "+(err.message||"Please try again.")+". Your existing browser save was not replaced.",true);
+ }finally{setBusy(false);}
+}
 $("guest").onclick=enterGame;
-$("returnGame").onclick=enterGame;
+$("returnGame").onclick=openWithAccountProgress;
 show();
 })();
 </script></body></html>
