@@ -75,6 +75,26 @@ function art(item){
  '<path d="M120 63v70" stroke="'+dark+'" stroke-width="8"/>'+
  '<path d="M78 71l18-47h48l18 47z" fill="'+main+'" '+stroke+'/>'+
  '<path d="M96 76h48" stroke="'+light+'" stroke-width="6"/>'+motif;
+ }else if(kind==='plant'){
+ shape='<ellipse cx="120" cy="145" rx="63" ry="8" fill="'+dark+'" opacity=".14"/>'+
+ '<path d="M75 99h90l-13 42H88z" fill="'+main+'" '+stroke+'/>'+
+ '<ellipse cx="120" cy="99" rx="46" ry="12" fill="'+light+'" '+stroke+'/>'+
+ '<path d="M120 98V29M120 79Q81 65 64 38M120 66Q160 54 175 25M120 88Q86 93 69 76M120 91Q158 82 180 64" fill="none" stroke="#548b6f" stroke-width="6" stroke-linecap="round"/>'+
+ '<path d="M119 48Q91 11 71 28Q77 49 119 48M120 70Q148 13 176 21Q177 51 120 70M118 87Q70 51 54 73Q65 97 118 87M124 89Q164 55 189 74Q184 100 124 89" fill="#8eb79a" stroke="#598e73" stroke-width="2"/>'+
+ '<path d="M105 112q15-8 30 0" fill="none" stroke="'+dark+'" stroke-width="3"/>';
+ }else if(kind==='cart'){
+ shape='<path d="M37 52h166v18H37z" fill="'+light+'" '+stroke+'/>'+
+ '<path d="M47 84h146v17H47z" fill="'+main+'" '+stroke+'/>'+
+ '<path d="M58 71v52m124-52v52" stroke="'+dark+'" stroke-width="8"/>'+
+ '<circle cx="58" cy="133" r="12" fill="'+light+'" stroke="'+dark+'" stroke-width="4"/>'+
+ '<circle cx="182" cy="133" r="12" fill="'+light+'" stroke="'+dark+'" stroke-width="4"/>'+
+ '<rect x="88" y="28" width="64" height="24" rx="8" fill="'+main+'" '+stroke+'/>';
+ }else if(kind==='shelf'){
+ shape='<path d="M49 23h142v119H49z" fill="'+main+'" '+stroke+'/>'+
+ '<path d="M57 28h126v106H57z" fill="'+light+'" stroke="'+dark+'" stroke-width="2"/>'+
+ '<path d="M57 63h126m-126 36h126" stroke="'+dark+'" stroke-width="6"/>'+
+ [65,86,108,134,161].map((x,i)=>'<rect x="'+x+'" y="'+(34+i%2*4)+'" width="14" height="'+(23-i%2*4)+'" rx="2" fill="'+[main,dark,'#80b9aa','#e8bf9a','#ae9ec6'][i]+'"/>').join('')+
+ '<path d="M96 103v28m8-26v26" stroke="'+dark+'" stroke-width="8"/>';
  }else if(kind==='terrarium'){
  shape='<rect x="42" y="43" width="156" height="89" rx="17" fill="'+light+'" '+stroke+'/>'+
  '<path d="M51 106 Q115 73 189 111v13H51z" fill="'+main+'"/>'+
@@ -173,7 +193,7 @@ function art(item){
    accent=[55,98,148,184].map((x,i)=>star(x,48+(i%2)*42,'#ffffff')).join('')+
     circle(121,92,16,'#f9fcff','#94b5ca',2)+circle(121,68,11,'#f9fcff','#94b5ca',2)+
     path('M114 48h15v7h-15z','#83a9c1','#83a9c1',1);
-  }else if(group.includes('Cow')||group.includes('Barnyard')){
+  }else if((group.includes('Cow Cottage')||group.includes('Barnyard Buddies'))){
    accent=[ellipse(72,82,21,13,'#55575c'),ellipse(150,55,16,13,'#55575c'),ellipse(180,100,11,7,'#55575c')].join('')+
     flower(112,55,'#f5d9a4');
   }else if(group.includes('Jurassic')){
