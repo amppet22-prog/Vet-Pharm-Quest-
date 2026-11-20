@@ -12,6 +12,12 @@
       "answer": "Meal timing and intake are often unpredictable.",
       "why": "Periprandial regimens can be difficult to implement consistently.",
       "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
+    },
+    "pharm-e2-diabetes-11-065": {
+      "prompt": "How do sulfonylureas increase insulin secretion?",
+      "answer": "They close beta-cell ATP-sensitive K+ channels.",
+      "why": "They need functioning beta cells and may cause hypoglycemia.\nThis is an insulin alternative. (dont do it)",
+      "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
     }
   },
   "custom": [
