@@ -19,14 +19,14 @@ function start(lecture){
  list=shuffled(questions).slice(0,12).map(q=>({...q,order:undefined}));at=0;score=0;choice=-1;draw();
 }
 function draw(){
- if(at>=list.length){api.showModal('🎓 Necropsy exam practice complete','<h3>'+score+' / '+list.length+' correct</h3><p>Review the explanations and try again to cover more systems.</p><button data-nqrestart="1">🔁 New practice set</button><button data-nqhandbook="1">📚 Handbook</button>');return}
+ if(at>=list.length){api.showModal('🎓 Necropsy exam practice complete','<h3>'+score+' / '+list.length+' correct</h3><p>Review the explanations and try again to cover more systems.</p><button data-nqrestart="1">🔁 New practice set</button><button data-nqback="1">← Back to cases</button><button data-nqhandbook="1">📚 Handbook</button>');return}
  const q=list[at],correct=Number.isInteger(q.correct)?q.correct:0,order=q.order||(q.order=shuffled(q.options.map((_,i)=>i)));
  api.showModal('🎓 Path Exam 7 · Question '+(at+1)+' / '+list.length,
- '<p><b>Read the lesion and clinical context carefully.</b></p><h3 style="line-height:1.35">'+h(q.question)+'</h3>'+
+ '<div class="buttonrow" style="margin-bottom:12px"><button data-nqback="1">← Back to cases</button><button data-nqhandbook="1">📚 Handbook</button></div><p><b>Read the lesion and clinical context carefully.</b></p><h3 style="line-height:1.35">'+h(q.question)+'</h3>'+
  order.map(k=>'<button data-nqanswer="'+k+'" '+(choice>=0?'disabled':'')+' style="display:block;width:100%;text-align:left;margin:8px 0;padding:11px;border:2px solid '+(choice<0?'#cbd2e3':k===correct?'#85bea7':choice===k?'#efac61':'#cbd2e3')+';background:'+(choice>=0&&k===correct?'#e7f8e9':choice>=0&&choice===k?'#fff0df':'#fff')+'">'+h(q.options[k])+'</button>').join('')+
  (choice>=0?'<div class="response"><b>'+(choice===correct?'Correct ✓':'Review your answer')+'</b><p>'+h(q.why)+'</p><p><b>Correct:</b> '+h(q.options[correct])+'</p></div><button data-nqnext="1">Next →</button>':'<p class="tiny">Choose the most defensible diagnosis or interpretation. Answer order is shuffled.</p>')+
  '<button data-nqhandbook="1">📚 Open Handbook</button>');
 }
-function init(host){api=host;host.body.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;if(!Object.keys(d).some(k=>k.startsWith('nq')))return;e.preventDefault();e.stopImmediatePropagation();if(d.nqrestart!==undefined)return start();if(d.nqhandbook!==undefined)return window.VPQ_NECROPSY_HANDBOOK?.open();if(d.nqanswer!==undefined&&choice<0){choice=Number(d.nqanswer);if(choice===(Number.isInteger(list[at].correct)?list[at].correct:0))score++;return draw()}if(d.nqnext!==undefined){at++;choice=-1;return draw()}},true)}
+function init(host){api=host;host.body.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;if(!Object.keys(d).some(k=>k.startsWith('nq')))return;e.preventDefault();e.stopImmediatePropagation();if(d.nqback!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start?.(api,lectureFilter||'all');if(d.nqrestart!==undefined)return start(lectureFilter);if(d.nqhandbook!==undefined)return window.VPQ_NECROPSY_HANDBOOK?.open();if(d.nqanswer!==undefined&&choice<0){choice=Number(d.nqanswer);if(choice===(Number.isInteger(list[at].correct)?list[at].correct:0))score++;return draw()}if(d.nqnext!==undefined){at++;choice=-1;return draw()}},true)}
 return {init,start,bank,importedQuestions};
 })();
