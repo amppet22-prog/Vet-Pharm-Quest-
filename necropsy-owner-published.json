@@ -126,6 +126,59 @@
       },
       "updated": "2026-11-19T09:07:15.204Z",
       "approvedBy": "amppet22-prog"
+    },
+    "exam7-navle-m1": {
+      "title": "M1 · The male dog that other males follow",
+      "photos": [],
+      "photo": null,
+      "text": {
+        "title": "M1 · The male dog that other males follow",
+        "species": "Canine ",
+        "age": "9 year old ",
+        "speciesName": "Dog ",
+        "breed": "Shetland Sheepdog ",
+        "sex": "Male",
+        "reproductiveStatus": "Intact ",
+        "history": "9-year-old intact male Shetland Sheepdog. Only one testicle has ever been felt in the scrotum. Other male dogs try to mount him. \n**Clinical signs:** Bilaterally symmetric alopecia, gynecomastia, pendulous prepuce, atrophy of the scrotal testis, firm mass in the right inguinal region.\n** Bloodwork:** nonregenerative anemia, thrombocytopenia, leukopenia.",
+        "gross": "Inguinal testis replaced by a firm, white, lobulated mass divided by fibrous bands.",
+        "histo": "elongated tumor cells palisading along basement membranes in tubules, with abundant fibrous stroma.",
+        "morph": "Path Exam 7 · Male reproductive · differential reasoning",
+        "mechanism": "Diagnosis: Sertoli cell tumor with hyperestrogenism.",
+        "tests": "Histology, gross, and clinical reasoning ",
+        "options": [
+          {
+            "name": "Sertoli cell tumor",
+            "supports": "cryptorchid testis, firm white lobulated, hyperestrogenism (feminization, alopecia, bone-marrow suppression).",
+            "against": "Compare competing causes using lesion location, histology and signalment.",
+            "hist": "Inguinal testis replaced by a firm, white, lobulated mass divided by fibrous bands. Histo: elongated tumor cells palisading along basement membranes in tubules, with abundant fibrous stroma.",
+            "role": "best"
+          },
+          {
+            "name": "Seminoma",
+            "supports": "also more common in retained testes, but soft, bulging, homogeneous white-gray, sheets of large round cells with lymphocyte clusters; usually no hormone effects.",
+            "against": "also more common in retained testes, but soft, bulging, homogeneous white-gray, sheets of large round cells with lymphocyte clusters; usually no hormone effects.",
+            "hist": "Compare the distinguishing lesions described in the source rationale.",
+            "role": "less"
+          },
+          {
+            "name": "Interstitial (Leydig) cell tumor",
+            "supports": "usually incidental in a scrotal testis, soft, yellow- orange with hemorrhage; may cause perianal gland hyperplasia (androgens).",
+            "against": "usually incidental in a scrotal testis, soft, yellow- orange with hemorrhage; may cause perianal gland hyperplasia (androgens).",
+            "hist": "Compare the distinguishing lesions described in the source rationale.",
+            "role": "less"
+          },
+          {
+            "name": "Orchitis",
+            "supports": "painful, hot, enlarged testis, fever; inflammation rather than a mass.",
+            "against": "painful, hot, enlarged testis, fever; inflammation rather than a mass.",
+            "hist": "Compare the distinguishing lesions described in the source rationale.",
+            "role": "less"
+          }
+        ],
+        "best": "Sertoli cell tumor"
+      },
+      "updated": "2026-11-20T21:05:23.540Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "specimens": {
