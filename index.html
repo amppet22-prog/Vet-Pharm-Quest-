@@ -779,6 +779,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="pharm-exam2-respiratory-lecture15-user-mcq.js?v=20261120-90-mcq1"></script>
 <script src="pharm-exam2-renal-diuretics-lecture16-user-mcq.js?v=20261120-90-mcq1"></script>
 <script src="pharm-exam2-gastrointestinal-lecture17-user-mcq.js?v=20261120-90-mcq1"></script>
+<script src="pharm-exam2-behavior-neurology-lectures18-20-user-mcq.js?v=20261120-100-mcq1"></script>
 <script src="pharm-exam2-objective-cards.js?v=20261117-clinical-flags24"></script>
 <script src="navle-pharm-expansion.js?v=20261109-navle1"></script>
 <script src="clinpath-reference-hub.js?v=20261114-phaseC3-6a"></script>
@@ -3664,7 +3665,7 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const source=window.VPQ_PHARM_EXAM2_OBJECTIVE_CARDS||[];
  const pdf=window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[];
  const lectures=Array.from({length:11},(_,i)=>'Lecture '+(i+10));
- const eligible=x=>lectures.includes(x.lecture)&&(lecture==='all'||x.lecture===lecture);
+ const eligible=x=>(lectures.includes(x.lecture)&&(lecture==='all'||x.lecture===lecture))||(x.lecture==='Lectures 18–20'&&(lecture==='all'||['Lecture 18','Lecture 19','Lecture 20'].includes(lecture)));
  const priority=db.drugs.filter(x=>x.coursePriority&&eligible(x));
  const objectives=source.filter(eligible);
  const questions=[...db.questions.filter(eligible),...pdf.filter(eligible)].filter(x=>x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
@@ -3714,7 +3715,7 @@ $('modalBody').addEventListener('click',ev=>{
  if(d.vpqhyAnswer!==undefined){
  const l=d.vpqhyLecture||'all',at=Number(d.vpqhyPosition||0);
  const lset=Array.from({length:11},(_,i)=>'Lecture '+(i+10));
- const eligible=x=>lset.includes(x.lecture)&&(l==='all'||x.lecture===l);
+ const eligible=x=>(lset.includes(x.lecture)&&(l==='all'||x.lecture===l))||(x.lecture==='Lectures 18–20'&&(l==='all'||['Lecture 18','Lecture 19','Lecture 20'].includes(l)));
  const qs=[...vpqPharmNext.questions.filter(eligible),...(window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[]).filter(eligible)].filter(x=>x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
  const q=qs[at],chosen=Number(d.vpqhyAnswer),area=$('vpqhyExplanation');
  if(!q||!area||area.dataset.answered)return;
