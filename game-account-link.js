@@ -15,6 +15,12 @@ top.textContent="👤 Sign In / Create Account";
 top.setAttribute("aria-label","Sign in or create your Vet Pharm Quest account");
 top.style.cssText="display:inline-flex;align-items:center;justify-content:center;border:2px solid #c5b4e7;border-radius:12px;background:#f4eaff;padding:8px 12px;color:#634589;font-size:12px;font-weight:900;text-decoration:none;min-height:36px";
 hud.appendChild(top);
+// Room refresh restores the game viewport below the header, so keep account access visible.
+const dock=document.createElement("a");
+dock.id="vpqPlayerAccountDock";dock.href=BASE;dock.textContent="👤 Account";
+dock.setAttribute("aria-label","Open player account registration or sign in");
+dock.style.cssText="position:fixed;right:12px;top:12px;z-index:12;display:inline-flex;align-items:center;gap:4px;border:2px solid #bba9df;border-radius:18px;background:#fff9ffeb;box-shadow:0 3px 14px #35406a26;padding:7px 11px;font-size:12px;font-weight:900;color:#64488c;text-decoration:none";
+document.body.appendChild(dock);
 const welcome=document.querySelector(".vpq-welcome-copy");
 if(welcome){
  const callout=document.createElement("div");
@@ -31,8 +37,8 @@ if(welcome){
 }
 function showCurrentUser(email){
  const label=email?.split("@")[0]?.slice(0,20);
- if(label){top.textContent="👤 "+label+" · Account";top.title="Signed in as "+email;}
- else{top.textContent="👤 Sign In / Create Account";top.title="Sign in or create account";}
+ if(label){top.textContent="👤 "+label+" · Account";top.title="Signed in as "+email;dock.title="Signed in as "+email;dock.textContent="👤 "+label;}
+ else{top.textContent="👤 Sign In / Create Account";top.title="Sign in or create account";dock.title="Sign in or create account";dock.textContent="👤 Sign In";}
 }
 function initAuth(){
  if(!window.supabase?.createClient)return;
