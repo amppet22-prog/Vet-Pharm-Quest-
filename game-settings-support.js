@@ -56,8 +56,8 @@ function getReport(){
 document.getElementById("vpq-support-github").addEventListener("click",function(){
  var r=getReport();if(!r)return;
  var u=repo+"/issues/new?"+new URLSearchParams({title:r.title,body:r.body}).toString();
- var w=window.open(u,"_blank","noopener");
- document.getElementById("vpq-support-status").textContent=w?"GitHub opened. Review and submit the issue there.":"If a new tab is blocked, copy the report and open GitHub Issues manually.";
+ window.open(u,"_blank","noopener");
+ document.getElementById("vpq-support-status").textContent="A GitHub report tab was requested. Review and submit the issue there. If no tab appears, copy the report and open GitHub Issues manually.";
 });
 document.getElementById("vpq-support-copy").addEventListener("click",async function(){
  var r=getReport();if(!r)return;
