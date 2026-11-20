@@ -34,6 +34,16 @@
       "domain": "pathology",
       "lecture": "67",
       "curated": true
+    },
+    {
+      "prompt": "What is Somogyi effect?",
+      "answer": "An overdose of insulin causes a rapid fall in glucose, then a rebound with a cyclic pattern.",
+      "why": "Critical in the disease management of DM. \nCyclic up-and-down pattern for 1-2 days of good control, then several poor days. \nDetected with a glucose curve.\nTX: Reduce the dose!",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwougda6-8erg1",
+      "domain": "pharmacology",
+      "lecture": "Lecture 11",
+      "curated": true
     }
   ],
   "hidden": []
