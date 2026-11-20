@@ -469,6 +469,29 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 .stage[data-room="reception"] #vpqReceptionExtras [data-vpqwingaction="vpqGoCat"]{max-width:105px;white-space:normal;line-height:1.2}
 @media(max-width:900px){.app{grid-template-columns:1fr}.stage[data-room="reception"]{height:clamp(430px,62vw,575px)}}
 @media(max-width:650px){.vpq-welcome-section{grid-template-columns:minmax(0,1fr) 86px;padding:10px;gap:8px}.vpq-mera-portrait{display:flex;flex-direction:column}.vpq-mera-portrait img{width:65px;height:65px}.vpq-mera-portrait small{display:none}.vpq-welcome-copy h1{font-size:20px}.vpq-welcome-small{display:none}.stage[data-room="reception"]{height:440px}}
+</style><style id="vpq-reception-visual-polish-20261120">
+/* Only the 2.5-D Reception view; do not reposition patient sprites in other rooms. */
+#stage[data-room="reception"][data-reception-view="isometric"] .vpqPatientQueueArt{
+ left:28%;bottom:24%;transform:translateX(-4%);z-index:7;gap:2px
+}
+#stage[data-room="reception"][data-reception-view="isometric"] .vpqPatientQueueArt span{
+ font-size:clamp(19px,2.5vw,31px)
+}
+#stage[data-room="reception"][data-reception-view="isometric"] .vpqPatientQueueArt small{
+ top:-21px;left:-7px;background:#fffaf4;border:1px solid #d2b9c4;
+ border-radius:12px;font-size:9px;padding:2px 6px
+}
+#stage[data-room="reception"][data-reception-view="isometric"] .vpqShadowHotspot span{
+ box-shadow:0 2px 5px #5e56632a;max-width:160px
+}
+#stage[data-room="reception"][data-reception-view="isometric"] .vpqShadow-front span{
+ bottom:1%;left:43%;font-size:10px
+}
+#stage[data-room="reception"][data-reception-view="isometric"] #vpqReceptionExtras [data-vpqwingaction="vpqBlueprint"]{display:none}
+@media(max-width:650px){
+ #stage[data-room="reception"][data-reception-view="isometric"] .vpqPatientQueueArt{left:27%;bottom:25%}
+ #stage[data-room="reception"][data-reception-view="isometric"] .vpqPatientQueueArt span{font-size:19px}
+}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
@@ -491,7 +514,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="reception-modular-assets.js?v=20261111-cat-hides21"></script>
 <script src="reception-customization.js?v=20261117-startup-crashfix1"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
-<script src="reception-shadowbox-phase-a.js?v=20261111-cat-lounge-rugs12"></script>
+<script src="reception-shadowbox-phase-a.js?v=20261120-desk-sofa-1"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
@@ -514,7 +537,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="specialist-clinic-wings.js?v=20261118-necropsy-question-marks"></script>
 <script src="feline-behavior-game.js?v=20261111-cuter-cats3"></script>
 <script src="feline-enrichment-game.js?v=20261111-play-enrich1"></script>
-<script src="reception-hallway-and-habitats.js?v=20261111-dog-layout24"></script>
+<script src="reception-hallway-and-habitats.js?v=20261120-no-duplicate-2"></script>
 <script src="clinic-image-backgrounds.js?v=20261118-necropsy-unmasked1"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261120-matched-gallery-1"></script>
