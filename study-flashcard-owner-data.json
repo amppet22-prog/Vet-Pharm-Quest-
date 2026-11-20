@@ -36,6 +36,12 @@
       "answer": "U-40 and U-100 products require compatible dosing equipment to avoid dose errors.\nInsulin has a very narrow safety margin. Proper pens ensure that the correct dose and concentration is administered to avoid under or overdosing.",
       "why": "Mismatched devices can cause dangerous under- or overdosing.",
       "slide": "Diabetes I · safe administration"
+    },
+    "pharm-e2-diabetes-10-036": {
+      "prompt": "Which insulin analog has very prolonged duration? What species can it be an option for if insulin glargine is unavailable?",
+      "answer": "Degludec. Up to 48 hours and possible to be used in cats.",
+      "why": "Long duration does not automatically make it the best choice for each patient.\nIt is an insulin analog and fatty acid with muli hexamers. Comes in a pen only form. Very few glucose nadirs (only one low point)",
+      "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
     }
   },
   "custom": [
