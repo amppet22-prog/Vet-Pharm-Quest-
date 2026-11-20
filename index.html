@@ -2579,7 +2579,7 @@ function actionForFocus(action,lec){
   const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqlf'));
   if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
   try{
-   if(d.vpqlfroute!==undefined){actionForFocus(d.vpqlfroute);return}
+   if(d.vpqlfroute!==undefined){actionForFocus(d.vpqlfroute,d.vpqlflecture);return}
    if(d.vpqlfhome!==undefined){menuState.pending=null;showLearning();return}
    if(d.vpqlfstudio!==undefined){if(pending().length)saveSelection();master27.selected=selected();masteryMenu27();return}
    if(d.vpqlfexam2!==undefined){vpqPharmNextMenu();return}
@@ -3318,8 +3318,8 @@ function vpqPharmStudyPath(lecture){
  stage('Learn the WHY','1 · UNDERSTAND','Physiology, drug classes, mechanisms and cautions.','data-vpqnewpharm-lesson="'+safeId+'"')+
  stage('Flashcards','2 · REMEMBER','Quick question/answer recall. Flip, mark missed and review.','data-vpqpharmfc-open="1" data-vpqpharmfc-choose="'+safeId+'"','vpqPharmPathPrimary')+
  stage('Clinical Questions','3 · APPLY','Four-choice patient decisions with answer explanations.','data-vpqhy-mode="questions" data-vpqhy-lecture="'+safeId+'"')+
- stage('Mechanism Lab','4 · VISUALIZE','Interactive pathways and receptor/drug targets.','data-vpq-p2-launch="1"')+
- '</div><p class="vpqPharmPathNote">Flashcards test recall; clinical MCQs test patient application. Your selected lecture carries into recall and clinical questions.</p></section>';
+ stage('Drug Match','4 · PRACTICE','Match drugs to mechanisms and clinical clues, then try a patient question.','data-vpqlfroute="match" data-vpqlflecture="'+safeId+'"')+
+ '</div><p class="vpqPharmPathNote">Learn → Flashcards → Drug Match → Clinical Questions. Mechanism visualization remains available in the other lecture tools.</p></section>';
 }
 
 function vpqPharmNextLesson(id){
