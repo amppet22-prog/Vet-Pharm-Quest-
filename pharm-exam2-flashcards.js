@@ -34,7 +34,8 @@ function marks(){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch(_)
 function save(id,rating){const m=marks();if(rating==='miss')m[id]=true;else if(rating==='almost')m[id]='review';else delete m[id];try{localStorage.setItem(key,JSON.stringify(m))}catch(_){}}
 function cards(){return window.VPQ_FLASHCARD_OWNER?.apply?.('pharmacology',lecture,bank.filter(x=>x.lecture===lecture))||bank.filter(x=>x.lecture===lecture)}
 function select(value){if(bank.some(c=>c.lecture===value))lecture=value;}
-function menu(){
+async function menu(){
+ await window.VPQ_FLASHCARD_OWNER?.load?.();
  const lectures=(window.VPQCurriculum?.courses||[]).map(x=>x[0]).filter(l=>bank.some(c=>c.lecture===l));
  show('🧠 Pharmacology · Quick Recall Flashcards',
  '<div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button></div><p>Choose any pharmacology lecture: <b>Exam 1</b> uses existing foundational teaching concepts, <b>Lecture 10</b> has diabetes foundations, and <b>Exam 2</b> includes 122 additional focused quick-recall cards. Recall checks memory; patient MCQs test clinical decisions.</p>'+
@@ -46,7 +47,7 @@ function menu(){
  '<div class="buttonrow"><button data-vpqpharmfc-lesson="1">📖 Lecture & disease mechanisms</button><button data-vpqpharmfc-quiz="1">🩺 Clinical MCQs</button></div>');
 }
 function shuffleRemaining(){if(!deck.length)return;const prefix=deck.slice(0,at+1),remaining=deck.slice(at+1);for(let i=remaining.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[remaining[i],remaining[j]]=[remaining[j],remaining[i]]}deck=prefix.concat(remaining);render()}
-function begin(review=false){missedOnly=review;revealed=false;complete=false;at=0;const m=marks();let a=cards();if(review)a=a.filter(x=>m[x.id]===true||m[x.id]==='review');else a=a.map(x=>({x,r:Math.random()})).sort((a,b)=>(m[b.x.id]===true?2:m[b.x.id]==='review'?1:0)-(m[a.x.id]===true?2:m[a.x.id]==='review'?1:0)||a.r-b.r).map(y=>y.x);deck=a;render()}
+async function begin(review=false){await window.VPQ_FLASHCARD_OWNER?.load?.();missedOnly=review;revealed=false;complete=false;at=0;const m=marks();let a=cards();if(review)a=a.filter(x=>m[x.id]===true||m[x.id]==='review');else a=a.map(x=>({x,r:Math.random()})).sort((a,b)=>(m[b.x.id]===true?2:m[b.x.id]==='review'?1:0)-(m[a.x.id]===true?2:m[a.x.id]==='review'?1:0)||a.r-b.r).map(y=>y.x);deck=a;render()}
 function render(){
  if(complete||!deck.length)return show('🧠 Pharmacology · '+(!deck.length?'No cards to review':'Recall session complete'),
  '<p>'+(deck.length?'You completed '+deck.length+' cards. Revisit what you missed, or apply the drug mechanisms in clinical cases.':'No cards marked Missed or Almost. Start a new recall session to build your review list.')+'</p>'+
@@ -76,7 +77,7 @@ function init(body,modal,lesson,quiz,drugMatch){if(!body||body.__vpqPharmRecall)
  if(d.vpqpharmfcLesson!==undefined)return lesson?.(lecture);
  if(d.vpqpharmfcQuiz!==undefined)return quiz?.(lecture);
  if(d.vpqpharmfcMatch!==undefined)return drugMatch?.(lecture);
- if(d.vpqpharmfcEdit!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pharmacology',lecture,deck[at],()=>render());
+ if(d.vpqpharmfcEdit!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pharmacology',lecture,deck[at],()=>{deck=window.VPQ_FLASHCARD_OWNER?.refresh?.('pharmacology',lecture,deck)||deck;render()});
  if(d.vpqpharmfcNew!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pharmacology',lecture,null,()=>menu());
  if(d.vpqpharmfcFlip!==undefined){revealed=!revealed;return render()}
  if(d.vpqpharmfcPrev!==undefined){at=Math.max(0,at-1);revealed=false;return render()}
