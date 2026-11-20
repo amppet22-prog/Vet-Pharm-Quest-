@@ -22,13 +22,35 @@ function collect(n){
  return items;
 }
 function totals(){
- const chapters=window.VPQ_NECROPSY_HANDBOOK?.chapters||[],title=new Map(chapters.map(c=>[String(c[0]),c[1]]));
- const all=Array.from({length:79},(_,i)=>String(i+1)).filter(n=>lessons()[n]||title.has(n));
- const cases=window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[];
+ const chapters=window.VPQ_NECROPSY_HANDBOOK?.chapters||[],titles=new Map(chapters.map(x=>[String(x[0]),x[1]]));
+ const foundation=window.VPQ_PATH_FOUNDATIONS?.inventory?.()||[];
+ const foundationByNumber={};
+ for(const entry of foundation){
+  const match=String(entry.title||'').match(/^(\\d{1,2})\\s*[·.\\-]/);
+  if(match)foundationByNumber[match[1]]=entry;
+ }
+ const cases=[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomCases?.()||[])];
  const specs=window.VPQ_PATH_EXAM7?.cards||[];
- return all.map(n=>{
-  const l=lessons()[n],sections=l?.sections||[],mcq=collect(n);
-  return {n,title:title.get(n)||l?.title||'Lecture '+n,sections:sections.length,flash:sections.reduce((a,x)=>a+(x.flashcards?.length||0),0),mcq:mcq.length,atlas:specs.filter(x=>String(x.lecture)===n&&!x.normal).length,cases:cases.filter(x=>String(x.lecture)===n).length,source:l?.source||'',hasLesson:!!l};
+ return Array.from({length:79},(_,i)=>String(i+1)).map(n=>{
+  const l=lessons()[n],sections=l?.sections||[],base=foundationByNumber[n],mcq=collect(n);
+  const prelim=sections.filter(s=>/preliminary|source.index|objective.index|verification pending|foundation/i.test(String(s.sourceStatus||''))||/Exam 6 source.index/i.test(String(s.group||'')));
+  const detailed=sections.filter(s=>s.diseaseAtlas||s.points?.some(p=>/gross|histo|pathogenesis|differential/i.test(String(p?.[0]||''))));
+  const parts=sections.filter(s=>s.points?.length||s.flashcards?.length||s.practiceQuestions?.length).length;
+  const entry={n,title:l?.title||titles.get(n)||base?.title?.replace(/^\\d+\\s*[·.\\-]\\s*/,'')||'Not indexed',
+   sections:sections.length,foundations:base?.sections||0,flash:sections.reduce((a,x)=>a+(x.flashcards?.length||0),0),
+   mcq:mcq.length,atlas:specs.filter(x=>String(x.lecture)===n&&!x.normal).length,
+   cases:cases.filter(x=>String(x.lecture)===n&&x.sourceType!=='SBA').length,
+   source:l?.source||base?.source||'',hasLesson:!!l,hasFoundation:!!base,
+   preliminary:prelim.length,detailed:detailed.length,populated:parts};
+  entry.flags=[];
+  if(!entry.hasLesson&&!entry.hasFoundation)entry.flags.push('No indexed Learn First lesson');
+  if(entry.preliminary)entry.flags.push(entry.preliminary+' source-index topics need deep verification');
+  if(!entry.mcq)entry.flags.push('No MCQs in shared lecture bank');
+  if(!entry.flash&&!entry.hasFoundation)entry.flags.push('No linked recall cards');
+  if(!entry.atlas)entry.flags.push('No linked specimen cards');
+  if(!entry.cases)entry.flags.push('No linked differential cases');
+  if(!entry.source)entry.flags.push('Lecture source not indexed');
+  return entry;
  });
 }
 function options(){return totals().map(t=>'<option value="'+esc(t.n)+'" '+(lecture===t.n?'selected':'')+'>L'+esc(t.n)+' · '+esc(t.title)+' ('+t.mcq+' MCQs)</option>').join('')}
@@ -81,11 +103,28 @@ function endQuiz(){
 }
 function coverage(){
  mode='coverage';
- const rows=totals(),byExam=[['Exam 1',1,16],['Exam 2',17,29],['Exam 3',30,41],['Exam 4',42,49],['Exam 5',50,58],['Exam 6',59,66],['Exam 7',67,79]];
- shell('📋 Pathology · Lecture Coverage Inventory',
- '<div class="pmcq-intro"><b>Live repository-derived coverage indicators</b><p class="pmcq-note">Counts reflect loaded lesson sections, question records, specimen cards, and the baseline differential case bank. Zero means not indexed in this module, not proof that the source lecture lacks material. Clinical completeness and UI visibility still require review against the professor files.</p></div>'+
- byExam.map(([title,a,b])=>{const group=rows.filter(r=>Number(r.n)>=a&&Number(r.n)<=b);return '<details '+(title==='Exam 6'||title==='Exam 7'?'open':'')+' class="pmcq-entry" style="margin:8px 0"><summary><b>'+title+'</b> · '+group.length+' indexed lecture(s)</summary><div class="pmcq-grid" style="margin-top:9px">'+group.map(r=>'<button class="pmcq-entry" data-pathmcq-focus="'+esc(r.n)+'"><b>L'+esc(r.n)+' · '+esc(r.title)+'</b><small>'+r.sections+' sections · '+r.mcq+' MCQs · '+r.flash+' flashcards · '+r.atlas+' specimen cards · '+r.cases+' differential cases</small></button>').join('')+'</div></details>'}).join('')+
- '<p class="pmcq-note">Coverage is a diagnostic index, not a professor-objective signoff. Modules without explicit chapter entries require separate cross-link and source verification.</p>');
+ // Official project grouping: Exam 2 continues through L30; Exam 3 starts at L31.
+ const rows=totals(),byExam=[['Exam 1',1,16],['Exam 2',17,30],['Exam 3',31,41],['Exam 4',42,49],['Exam 5',50,58],['Exam 6',59,66],['Exam 7',67,79]];
+ const count=(group,field)=>group.reduce((a,x)=>a+(x[field]||0),0);
+ shell('📋 Pathology · Course Quality Worklist',
+ '<div class="pmcq-intro"><b>All 79 lectures · Live quality inventory</b><p class="pmcq-note">A counted item means an entry was loaded—not that every professor objective was met. Missing question counts here refer ONLY to the shared structured MCQ bank; other course quizzes may exist elsewhere. Every lecture remains marked for original-source review until manually signed off.</p>'+
+ '<p style="font-size:12px;margin:7px 0 0"><b>Work order:</b> 1. Missing Learn First → 2. Preliminary sections → 3. Empty MCQ/recall banks → 4. Atlas/case connections → 5. Source and image audit.</p></div>'+
+ byExam.map(([title,a,b])=>{
+  const group=rows.filter(r=>Number(r.n)>=a&&Number(r.n)<=b);
+  const missing=group.filter(r=>!r.hasLesson&&!r.hasFoundation).length;
+  const preliminary=count(group,'preliminary');
+  const emptyMCQ=group.filter(r=>!r.mcq).length;
+  const emptyAtlas=group.filter(r=>!r.atlas).length;
+  return '<details '+(title==='Exam 6'?'open':'')+' class="pmcq-entry" style="margin:8px 0"><summary><b>'+title+' · L'+a+'–'+b+'</b><small>'+group.length+' lectures · '+missing+' without indexed lessons · '+preliminary+' preliminary topics · '+emptyMCQ+' with no shared MCQs · '+emptyAtlas+' without linked specimen cards</small></summary>'+
+  '<div style="display:grid;gap:8px;margin-top:10px">'+group.map(r=>{
+   const lessonCount=r.sections||r.foundations;
+   return '<div class="pmcq-entry" style="padding:10px;border-left:3px solid '+(r.preliminary||!lessonCount?'#d59b62':'#89a9b2')+'">'+
+    '<b>L'+esc(r.n)+' · '+esc(r.title)+'</b><small>'+lessonCount+' learning sections'+(r.hasFoundation&&!r.hasLesson?' (Foundations)':'')+' · '+r.mcq+' structured MCQs · '+r.flash+' recall cards · '+r.atlas+' specimen cards · '+r.cases+' patient cases</small>'+
+    (r.flags.length?'<small style="margin-top:6px;color:#8b5a3f"><b>Review:</b> '+r.flags.map(esc).join(' · ')+'</small>':'<small style="margin-top:6px">Counts present. Still requires professor-objective verification.</small>')+
+    '<div class="pmcq-controls" style="margin-bottom:0"><button data-pathmcq-learn="'+esc(r.n)+'">📚 Learn First</button><button data-pathmcq-focus="'+esc(r.n)+'">📝 MCQs ('+r.mcq+')</button><button data-pathmcq-atlas="'+esc(r.n)+'">🔬 Atlas</button><button data-pathmcq-cases="'+esc(r.n)+'">🐾 Cases</button></div></div>';
+  }).join('')+'</div></details>';
+ }).join('')+
+ '<p class="pmcq-note">Automatic indicators are a worklist, not an accuracy certification. Questions, images, species distinctions, references, reportability, and lecture objectives still require source-by-source checking before approval.</p>');
 }
 function open(api,n){host=api||host;missedOnly=false;browsePage=0;menu(n||lecture)}
 function init(api){
@@ -99,6 +138,15 @@ function init(api){
   if(d.pathmcqHome!==undefined||d.pathmcqReturn!==undefined){return menu()}
   if(d.pathmcqCoverage!==undefined){return coverage()}
   if(d.pathmcqHandbook!==undefined){return window.VPQ_NECROPSY_HANDBOOK?.open?.()}
+  if(d.pathmcqLearn!==undefined){
+   const n=String(d.pathmcqLearn);
+   const lesson=lessons()[n];
+   if(lesson?.sections?.length)return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.(n);
+   if(Number(n)<=30)return window.VPQ_PATH_FOUNDATIONS?.open?.();
+   return window.VPQ_NECROPSY_HANDBOOK?.lecture?.(n);
+  }
+  if(d.pathmcqAtlas!==undefined)return window.VPQ_PATH_EXAM7?.studyLecture?.(String(d.pathmcqAtlas));
+  if(d.pathmcqCases!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start?.(host,String(d.pathmcqCases));
   if(d.pathmcqFocus!==undefined){missedOnly=false;browsePage=0;return menu(d.pathmcqFocus)}
   if(d.pathmcqStart!==undefined){return start(d.pathmcqStart)}
   if(d.pathmcqOpenone!==undefined){return start('all',d.pathmcqOpenone)}
