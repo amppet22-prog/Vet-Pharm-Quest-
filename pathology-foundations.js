@@ -238,7 +238,8 @@ const fcStorageKey='vpq-path-foundations-missed-v1';
 function fcMarks(){try{return JSON.parse(localStorage.getItem(fcStorageKey)||'{}')||{}}catch(_){return {}}}
 function fcMark(id,rating){const m=fcMarks();if(rating==='miss')m[id]=true;else if(rating==='almost')m[id]='review';else delete m[id];try{localStorage.setItem(fcStorageKey,JSON.stringify(m))}catch(_){}}
 function fcSource(){const source=Array.isArray(window.VPQ_PATH_FOUNDATION_FLASHCARDS)?window.VPQ_PATH_FOUNDATION_FLASHCARDS:[];const key=lesson.startsWith('exam2Master_')?'exam2_'+lesson.slice('exam2Master_'.length):lesson;const cards=source.filter(x=>x.lecture===key);return window.VPQ_FLASHCARD_OWNER?.apply?.('pathology',key,cards)||cards}
-function fcStart(review=false){
+async function fcStart(review=false){
+ await window.VPQ_FLASHCARD_OWNER?.load?.();
  fcMissed=review;fcFlipped=false;fcIndex=0;
  let arr=fcSource().slice();
  if(review){const missed=fcMarks();arr=arr.filter(x=>missed[x.id]===true||missed[x.id]==='review')}
@@ -268,7 +269,7 @@ function fcEdit(isNew){
  const c=isNew?null:fcDeck[fcIndex];
  if(!window.VPQ_FLASHCARD_OWNER?.editor){shell('<p>Owner editor is not available. Reload the game to use this feature.</p><button data-pathfound="fc-all">Back to cards</button>','Edit flashcard');return}
  const key=lesson.startsWith('exam2Master_')?'exam2_'+lesson.slice('exam2Master_'.length):lesson;
- window.VPQ_FLASHCARD_OWNER.editor('pathology',key,c,()=>fcRender());
+ window.VPQ_FLASHCARD_OWNER.editor('pathology',key,c,()=>{fcDeck=window.VPQ_FLASHCARD_OWNER?.refresh?.('pathology',key,fcDeck)||fcDeck;fcRender()});
 }
 
 function practice(){
