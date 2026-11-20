@@ -16,8 +16,8 @@ button:disabled{opacity:.5;cursor:wait}.primary{background:#695db3;color:white;b
 
 /* Cozy account art: identical chosen illustration, after adding assets/Whimsical%20Veterinary%20Learning%20Clinic.png.
    A warm pastel background remains legible while the art asset is being published. */
-body{background:#edddf4 url("assets/Whimsical%20Veterinary%20Learning%20Clinic.png") center center / cover no-repeat fixed;min-height:100svh;padding:clamp(12px,2vw,28px)}
-main{width:min(490px,100%);max-width:490px;border:3px solid #c7a7cb;border-radius:35px;background:linear-gradient(145deg,rgba(255,250,244,.985),rgba(255,238,241,.985));box-shadow:0 12px 35px #50365b52,0 0 0 8px #fff9;max-height:95svh;overflow:auto;padding:clamp(17px,2.5vw,28px);color:#4b3662}
+body{background:#edddf4 url("assets/Whimsical%20Veterinary%20Learning%20Clinic.png") center center / cover no-repeat fixed;min-height:100svh;padding:clamp(12px,2vw,28px);align-items:start;padding-top:clamp(155px,20vh,215px);padding-bottom:30px}
+main{width:min(490px,100%);max-width:490px;border:3px solid #c7a7cb;border-radius:35px;background:linear-gradient(145deg,rgba(255,250,244,.998),rgba(255,238,241,.998));box-shadow:0 12px 35px #50365b52,0 0 0 8px #fff9;max-height:95svh;overflow:auto;padding:clamp(17px,2.5vw,28px);color:#4b3662}
 h1{font:800 clamp(24px,3vw,35px)/1.2 Georgia,serif;color:#684587;margin-bottom:9px}
 p{color:#604d71}.note{background:#fff8f7;border:1px solid #e2cfe0}
 input{background:#fffaf7;border:2px solid #ceb5d5;border-radius:13px;color:#4b3863}
@@ -25,13 +25,13 @@ button{border-radius:13px;color:#60427c;border-color:#a681bb}
 button.primary{background:linear-gradient(#a765be,#774199);border-color:#724194;color:white}
 #signedIn p{overflow-wrap:anywhere}
 #guest{width:100%;margin-top:9px}
-@media(max-width:760px){body{background-position:55% center}.note{font-size:12px}main{background:#fff6f1f5;box-shadow:0 10px 32px #50365b55}}
+@media(max-width:760px){body{background-position:55% center;padding-top:clamp(115px,17vh,165px)}.note{font-size:12px}main{background:#fff8f5fb;box-shadow:0 10px 32px #50365b55}}@media(max-height:730px){body{padding-top:100px}main{max-height:calc(100svh - 118px)}}
 </style></head>
 <body><main>
 <div style="font-size:42px;text-align:center">🐾</div>
 <h1>Vet Pharm Quest</h1>
 <p style="text-align:center;margin-top:0"><b>Veterinary Learning Hospital · Account Center</b></p>
-<p class="note">Welcome to the Veterinary Learning Hospital! Create your free player account, sign in, or continue exploring as a guest. Your existing browser game progress is not replaced by signing in.</p>
+<p class="note">Welcome! Sign in, create a free account, or continue as a guest. Your existing game progress stays safe.</p>
 <div id="loading" role="status">Connecting to account service…</div>
 <form id="authForm" hidden>
 <label for="email">Email address</label><input id="email" type="email" required autocomplete="email" placeholder="you@example.com">
