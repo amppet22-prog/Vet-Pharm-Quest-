@@ -53,11 +53,17 @@ function progressSummary(payload){
  const xp=Math.max(0,Number(clinic.xp)||0),coins=Math.max(0,Number(clinic.coins)||0);
  const arcadeXP=Math.max(0,Number(arcade.xp)||0);
  const cases=Array.isArray(clinic.completed)?clinic.completed.length:0;
- return {xp,coins,arcadeXP,cases,meaningful:xp>0||coins>0||arcadeXP>0||cases>0};
+ const hasClinic=!!slots[PRIMARY];
+ const collection=clinic.receptionCollection||{};
+ const decor=Array.isArray(collection.owned)?collection.owned.length:0;
+ const placed=Array.isArray(collection.placed)?collection.placed.length:0;
+ const avatar=clinic.avatarPreset||clinic.avatarBase||clinic.name||"Default";
+ const wallpaper=collection.equippedWall||"Default";
+ return {xp,coins,arcadeXP,cases,hasClinic,avatar,wallpaper,decor,placed,meaningful:xp>0||coins>0||cases>0||decor>0||placed>0||!!clinic.avatarPreset||!!clinic.avatarBase};
 }
 function progressLabel(payload){
  const a=progressSummary(payload);
- return "Clinic XP: "+a.xp+", coins: "+a.coins+", completed cases: "+a.cases+", Arcade XP: "+a.arcadeXP;
+ return "Clinic XP: "+a.xp+", coins: "+a.coins+", cases: "+a.cases+", Arcade XP: "+a.arcadeXP+" | Avatar: "+a.avatar+" | Reception wallpaper: "+a.wallpaper+", decor owned: "+a.decor+", placed: "+a.placed+(a.hasClinic?"":" | NO CLINIC SAVE");
 }
 function validateLegacy(data){
   return data && typeof data==="object" && Number.isFinite(data.xp) &&
@@ -113,7 +119,16 @@ async function upload({confirmed=false}={}){
    if(remote){
      const online=progressSummary(normalize(remote.save_data));
      const here=progressSummary(payload);
-     if(online.meaningful&&!here.meaningful){
+     if(!here.hasClinic&&online.hasClinic){
+       conflict=true;optedIn=false;clearTimeout(timer);timer=null;
+       notify("Cloud upload paused: this browser has no complete clinic save. Your online avatar and reception are protected.",true);
+       panel();render();return;
+     }
+     if(!here.hasClinic&&online.hasClinic){
+      notify("Upload blocked: this browser is missing its clinic/avatar/reception save. Online settings are protected.",true);
+      return;
+    }
+    if(online.meaningful&&!here.meaningful){
        conflict=true;optedIn=false;clearTimeout(timer);timer=null;
        notify("⚠️ PROTECTED: This browser has zero progress, but your cloud backup contains XP or coins. Online progress was NOT overwritten. Choose Restore cloud save.",true);
        panel();render();return;
@@ -153,7 +168,7 @@ async function firstUpload(){
     }
   }
   const message=existing ?
-   "Your ONLINE save: "+progressLabel(normalize(existing.save_data))+"\\nThis BROWSER: "+progressLabel(payload)+"\\n\\nReplace your online save with this browser's progress? This cannot be automatically undone." :
+   "Your ONLINE save: "+progressLabel(normalize(existing.save_data))+"\nThis BROWSER: "+progressLabel(payload)+"\n\nReplace your online save with this browser's progress? This cannot be automatically undone." :
    "Back up the progress currently on this browser to your account? Future progress will then save automatically while the game is open.";
   if(!confirm(message))return;
   optedIn=true;conflict=false;lastFingerprint="";
@@ -186,7 +201,7 @@ async function restore(){
   const payload=normalize(remote.save_data);
   if(!payload.slots[PRIMARY]&&!payload.slots["vet-pharm-quest-v1"]){notify("Cloud backup has no supported game progress.",true);return;}
   notify("Online save found: "+progressLabel(payload));
-  if(!confirm("ONLINE SAVE: "+progressLabel(payload)+"\\nCURRENT BROWSER: "+progressLabel(readSelected())+"\\n\\nRestore this online save to this browser? A local recovery snapshot will let you undo."))return;
+  if(!confirm("ONLINE SAVE: "+progressLabel(payload)+"\nCURRENT BROWSER: "+progressLabel(readSelected())+"\n\nRestore this online save to this browser? A local recovery snapshot will let you undo."))return;
   // A browser-local recovery snapshot is created; downloading is optional.
   // Take a second browser-local recovery snapshot before writing any keys.
   const recoveryKey="vpq-cloud-recovery-"+owner;
