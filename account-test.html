@@ -162,8 +162,10 @@ function snapshotSummary(data){
  const owned=Array.isArray(collection.owned)?collection.owned.length:0;
  const placed=Array.isArray(collection.placed)?collection.placed.length:0;
  const arcadeXP=Number(arcade.xp)||0;
- const custom=!!a.avatarPreset||!!a.avatarBase||!!a.receptionCollection||!!a.avatarArtStyle;
- return {xp,coins,cases,owned,placed,arcadeXP,meaningful:xp>0||coins>0||cases>0||owned>6||placed>2||arcadeXP>0||custom};
+ const customizedName=typeof a.name==="string"&&a.name!=="Student Vet";
+ const customizedAvatar=typeof a.avatarPreset==="string"&&a.avatarPreset!=="custom"&&a.avatarPreset!=="default";
+ const customizedReception=!!collection.equippedWall&&collection.equippedWall!=="paint-peach";
+ return {xp,coins,cases,owned,placed,arcadeXP,meaningful:xp>0||coins>0||cases>0||owned>6||placed>2||arcadeXP>0||customizedName||customizedAvatar||customizedReception};
 }
 function describeSave(x){
  const a=snapshotSummary(x);
