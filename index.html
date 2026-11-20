@@ -2326,7 +2326,8 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
  vpqOpenExamCenter310=function(){vpqLearningHub()};
  if($('vpqExamCenterBtn310'))$('vpqExamCenterBtn310').onclick=vpqLearningHub;
  const modes=[
- ['exam-center','🎓','Exam Center','Combine selected lectures and topics; take professor-style or mixed exam questions.','Apply'],
+ ['exam-center','🎓','Exam Center','Exam 1 professor-style and mixed questions; filters by available source lectures.','Exam 1'],
+ ['exam2-challenge','🎮','Exam 2 Clinical Challenge','Existing L11–20 patient questions as an Arcade round with XP and review.','Exam 2'],
  ['battle','🦠','Bug Battles','Use bacterial mechanisms, resistance and antimicrobial targets to solve challenges.','Antimicrobials'],
  ['match','🧩','Drug Match','Build speed at matching drugs, classes and targets.','Recognition'],
  ['boss','🏆','Exam Boss','Test recall and decision-making under exam-like conditions.','Assessment'],
@@ -2492,7 +2493,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(action==='clinical'){if(/^Lecture (1[1-9]|20)$/.test(id))return vpqExam2HighYield('questions',id);return launch('quiz',id)}
   if(action==='prof'){if(/^Lecture (1[1-9]|20)$/.test(id))return vpqExam2HighYield('objectives',id);setPending([id]);saveSelection();return launchGame('guide')}
   if(action==='case'){setPending([id]);saveSelection();return openCases('Pharmacology')}
-  if(action==='arcade'){setPending([id]);saveSelection();return launchGame('exam-center')}
+  if(action==='arcade'){setPending([id]);saveSelection();return launchGame(/^Lecture (1[1-9]|20)$/.test(id)?'exam2-challenge':'exam-center')}
   if(action==='match'){return launchGame('match')}
   if(action==='battle'){return launchGame('battle')}
   if(action==='mastery'){setPending([id]);saveSelection();return masteryScreen()}
@@ -2511,7 +2512,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   '<div class="vpqPharmFlowLink"><b>More ways to practice this lecture</b><div>'+
   btn('prof','📋 Professor Guide',e2?'Instructor objectives for this lecture.':'Course-style recall in the Arcade.')+
   btn('case','🐾 Patient Cases','Work through clinical reasoning and decisions.')+
-  btn('arcade','🕹️ Exam Arcade','Exam-style rounds using the current lecture focus.')+
+  btn('arcade','🕹️ Exam Arcade',e2?'Exam 2 clinical challenge with XP and explanations.':'Exam 1 Professor Guide and Exam Boss rounds.')+
   btn('match','🧩 Drug Match','Drug classes, names and targets; specialized coverage.')+
   btn('battle','🦠 Bug Battles','Antibiotic resistance and pathogen challenges.')+'</div></div>'+
   '<p class="vpqPharmFlowHelp">Understand → Recall → Apply → Assess is the recommended sequence, not a requirement. Arcade games and cases are practice extensions—not separate courses. Exam 1 and Exam 2 share the flashcard deck.</p></section>';
