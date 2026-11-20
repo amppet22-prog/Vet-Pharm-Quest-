@@ -3220,6 +3220,19 @@
       "source": "Pathology lecture LMU",
       "normal": false,
       "id": "specimen-custom-78-anophthalmia-and-microphthalmia"
+    },
+    "specimen-custom-78-corneal-dermoid": {
+      "title": "Corneal dermoid",
+      "lecture": "78",
+      "system": "Eye",
+      "species": "Dog/cat/horse",
+      "gross": "Ectopic hair follicles on or within the cornea",
+      "dx": "Corenal dermoid",
+      "histo": "Ectopic hair follicles and adnexal glands within the cornea",
+      "why": "It just be doing it sometimes idk dawg",
+      "source": "Pathology lecture LMU",
+      "normal": false,
+      "id": "specimen-custom-78-corneal-dermoid"
     }
   },
   "hiddenSpecimens": [
