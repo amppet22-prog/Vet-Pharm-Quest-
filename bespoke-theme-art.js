@@ -21,7 +21,7 @@ function leatherSofa(){return path('M27 79Q27 40 53 39H186Q211 38 213 79V115H27Z
   '<g fill="#e0b57e">'+[49,71,94,117,140,163,185].map(x=>cir(x,106,1.5,'#e0b57e')).join('')+'</g>'+
   path('M66 54L91 60 89 84 64 75Z','#ead1ab','#9f7652',2)+path('M144 57L177 54 179 76 149 83Z','#d4a778','#886344',2)+horseshoe(121,87);
 }
-function westernRug(){return el(120,105,94,40,'#6c4b3b','#7a583d',4)+el(120,100,86,33,'#edd3af','#856246',2)+
+function westernRug(){return el(120,105,94,40,'#6c4b3b','#7a583d',4)+el(120,100,86,33,'#edd3af','#856246',2)+cowsplot(66,89,-15)+cowsplot(177,109,12)+
  path('M30 99l18-16 15 16 16-16 15 16 16-16 16 16 16-16 16 16 16-16 16 16','#8a4e48','#89584a',2)+
  path('M42 113q26-14 52 0t52 0t52 0','none','#826a56',3)+horseshoe(119,100)+hoof(74,105)+hoof(165,105);}
 function westernTrough(){return path('M22 73H217L199 133H40Z','#a17950','#674933',5)+path('M28 73h184v15H28Z','#d7b58b','#6c4a32',3)+
@@ -148,11 +148,23 @@ function art(item){
   if(kind==='plant')body=path('M73 104h95l-12 36H86Z','#bd8e6b','#835c43',4)+cactus(118,111)+cactusflower(119,65)+cactusflower(98,91);
   if(kind==='pod')body=path('M30 100q90-66 180 0l-15 39H45Z','#e5d0a9','#76543d',4)+cowsplot(82,106)+cowsplot(145,91)+path('M100 138V106q20-29 40 0v32Z','#5e4a42','#5e4a42',2);
  }
- if(group.includes('Cow Cottage')||group.includes('Barnyard Buddies')){
+ if(group.includes('Cow Cottage')){
   if(kind==='sofa')body=cowSofa();
   if(kind==='rug')body=cowRug();
   if(kind==='box')body=cowToy();
-  if(kind==='banner')body=cowRug()+line('M48 26h144','#876a58',7);
+  if(kind==='cart')body=cowToy()+cir(58,141,10,'#9d8d80')+cir(180,141,10,'#9d8d80');
+  if(kind==='banner')body=rect(46,27,148,109,'#f3e5d6','#987a6c',3)+cowsplot(84,81)+cowsplot(159,100)+line('M46 26h148','#887063',6);
+ }
+ if(group.includes('Barnyard Buddies')){
+  if(kind==='sofa')body=cowSofa();
+  if(kind==='rug')body=el(120,101,94,42,'#edb1bd','#b7758f',4)+
+   el(120,104,37,25,'#f6cbd0','#b7758f',3)+cir(107,103,7,'#bb8392')+cir(133,103,7,'#bb8392')+
+   path('M44 80q-5-22 17-20l18 21M163 80q15-29 33-10','none','#db839a',5);
+  if(kind==='box')body=cowToy();
+  if(kind==='banner')body=horseBanner();
+  if(kind==='pod')body=path('M35 120Q42 67 75 48L69 28 94 43 115 25 133 42 155 28 166 49Q201 74 206 122L194 138H46Z','#a89278','#766750',4)+
+   path('M90 132v-25q31-34 61 0v25Z','#564b44','#564b44',2)+
+   [75,93,111,129,147,165].map(x=>path('M'+x+' 58l-8-22 16 9Z','#88745d','#74634f',2)).join('');
  }
  if(group.includes('Horse Stable')){
   if(kind==='sofa')body=horseSofa();
