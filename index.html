@@ -815,7 +815,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="ngf-toxicology-bridge.js?v=20261108-visual2"></script>
 <script src="pharm-next-lectures.js?v=20261120-explain-mechanisms-audit-2"></script>
 <script src="study-flashcard-owner.js?v=20261120-owner-live-github-refresh1"></script>
-<script src="pharm-exam2-flashcards.js?v=20261120-clinical-mcq-shortcut2"></script>
+<script src="pharm-exam2-flashcards.js?v=20261120-shuffle-patient-cases3"></script>
 <script src="pharm-exam2-diabetes-lecture10-11-recall.js?v=20261119-diabetes82"></script>
 <script src="pharm-exam2-thyroid-lecture12-recall.js?v=20261119-thyroid33"></script>
 <script src="pharm-exam2-autonomic-lecture13-recall.js?v=20261119-autonomic30"></script>
@@ -3851,6 +3851,7 @@ function vpqExam2CasePractice(lecture='all',position=0){
  showModal('🐾 Exam 2 · Patient Cases',back+selector+question+controls+'<p class="tiny">Uploaded teaching notes; treatment and safety claims have not been independently validated. Refer to current veterinary references for actual patients.</p>');
 }
 
+window.VPQ_OPEN_EXAM2_PATIENT_CASES=vpqExam2CasePractice;
 function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const db=window.VPQ_PHARM_NEXT||{drugs:[],questions:[]};
  const source=window.VPQ_PHARM_EXAM2_OBJECTIVE_CARDS||[];
