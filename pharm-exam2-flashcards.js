@@ -31,7 +31,7 @@ const key='vpq-pharm-exam2-recall-v1';
 let ui,show,lecture='Lecture 11',deck=[],at=0,revealed=false,complete=false,missedOnly=false;
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function marks(){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch(_){return {}}}
-function save(id,missed){const m=marks();if(missed)m[id]=true;else delete m[id];try{localStorage.setItem(key,JSON.stringify(m))}catch(_){}}
+function save(id,rating){const m=marks();if(rating==='miss')m[id]=true;else if(rating==='almost')m[id]='review';else delete m[id];try{localStorage.setItem(key,JSON.stringify(m))}catch(_){}}
 function cards(){return window.VPQ_FLASHCARD_OWNER?.apply?.('pharmacology',lecture,bank.filter(x=>x.lecture===lecture))||bank.filter(x=>x.lecture===lecture)}
 function select(value){if(bank.some(c=>c.lecture===value))lecture=value;}
 function menu(){
@@ -46,12 +46,12 @@ function menu(){
  '<div class="buttonrow"><button data-vpqpharmfc-lesson="1">📖 Lecture & disease mechanisms</button><button data-vpqpharmfc-quiz="1">🩺 Clinical MCQs</button></div>');
 }
 function shuffleRemaining(){if(!deck.length)return;const prefix=deck.slice(0,at+1),remaining=deck.slice(at+1);for(let i=remaining.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[remaining[i],remaining[j]]=[remaining[j],remaining[i]]}deck=prefix.concat(remaining);render()}
-function begin(review=false){missedOnly=review;revealed=false;complete=false;at=0;const m=marks();let a=cards();if(review)a=a.filter(x=>m[x.id]);else a=a.map(x=>({x,r:Math.random()})).sort((a,b)=>Number(!!m[b.x.id])-Number(!!m[a.x.id])||a.r-b.r).map(y=>y.x);deck=a;render()}
+function begin(review=false){missedOnly=review;revealed=false;complete=false;at=0;const m=marks();let a=cards();if(review)a=a.filter(x=>m[x.id]===true||m[x.id]==='review');else a=a.map(x=>({x,r:Math.random()})).sort((a,b)=>(m[b.x.id]===true?2:m[b.x.id]==='review'?1:0)-(m[a.x.id]===true?2:m[a.x.id]==='review'?1:0)||a.r-b.r).map(y=>y.x);deck=a;render()}
 function render(){
  if(complete||!deck.length)return show('🧠 Pharmacology · '+(!deck.length?'No cards to review':'Recall session complete'),
- '<p>'+(deck.length?'You completed '+deck.length+' cards. Revisit what you missed, or apply the drug mechanisms in clinical cases.':'No matching missed cards. Start a new recall session to build your practice list.')+'</p>'+
+ '<p>'+(deck.length?'You completed '+deck.length+' cards. Revisit what you missed, or apply the drug mechanisms in clinical cases.':'No cards marked Missed or Almost. Start a new recall session to build your review list.')+'</p>'+
  '<div class="vpqPharmRecallNext"><b>🧩 Ready for the next challenge?</b><p>Match this lecture’s drugs, mechanisms and clinical uses in the Arcade. This is optional—you can return to missed cards at any time.</p><button data-vpqpharmfc-match="1">▶ Play '+esc(lecture)+' Drug Match</button></div>'+
- '<div class="buttonrow"><button data-vpqpharmfc-missed="1">↺ Practice missed</button><button data-vpqpharmfc-start="1">New shuffled round</button><button data-vpqpharmfc-quiz="1">🩺 Clinical MCQs</button><button data-vpqpharmfc-menu="1">← Lectures</button></div>');
+ '<div class="buttonrow"><button data-vpqpharmfc-missed="1">↺ Review missed & almost</button><button data-vpqpharmfc-start="1">New shuffled round</button><button data-vpqpharmfc-quiz="1">🩺 Clinical MCQs</button><button data-vpqpharmfc-menu="1">← Lectures</button></div>');
  const c=deck[at],pct=Math.round((at+1)/deck.length*100);
  show('🧠 '+lecture+' · Quick Recall',
  '<div class="buttonrow vpqRecallTools"><button data-vpqlfhome="1">← Learning Center</button><button data-vpqpharmfc-menu="1">← Lectures</button><button data-vpqpharmfc-shuffle="1">🔀 Shuffle remaining</button><button data-vpqpharmfc-edit="1">✏️ Edit</button><button data-vpqpharmfc-new="1">➕ Add</button></div>'+
@@ -61,7 +61,7 @@ function render(){
  '<span class="vpqRecallSide">'+(revealed?'ANSWER':'QUESTION')+'</span>'+
  (revealed?'<p class="vpqRecallAnswer">'+esc(c.answer)+'</p><div class="vpqRecallWhy"><b>💡 WHY it happens</b><p>'+esc(c.why||'Review clinical implications in the lecture notes.')+'</p></div>':'<p class="vpqRecallQuestion">'+esc(c.prompt)+'</p>')+
  '<small class="vpqRecallSource">'+esc(c.slide||lecture)+'</small></div>'+
- '<div class="buttonrow">'+(revealed?'<button data-vpqpharmfc-rate="miss" style="background:#fff1e8">↺ Need practice</button><button data-vpqpharmfc-rate="know" style="background:#e2f3e9">✓ Got it</button>':'<button data-vpqpharmfc-flip="1" style="background:#e0eeff;font-weight:850">Flip to answer</button>')+'</div>'+
+ '<div class="buttonrow">'+(revealed?'<button data-vpqpharmfc-rate="miss" style="background:#fff1e8">↺ Missed it</button><button data-vpqpharmfc-rate="almost" style="background:#fff4cf">◐ Almost got it · review</button><button data-vpqpharmfc-rate="know" style="background:#e2f3e9">✓ Got it</button>':'<button data-vpqpharmfc-flip="1" style="background:#e0eeff;font-weight:850">Flip to answer</button>')+'</div>'+
  '<div class="buttonrow"><button data-vpqpharmfc-prev="1" '+(at===0?'disabled':'')+'>← Previous</button><button data-vpqpharmfc-next="1">'+(revealed?'Next':'Skip · mark for practice')+' →</button></div>');
 }
 function init(body,modal,lesson,quiz,drugMatch){if(!body||body.__vpqPharmRecall)return;ui=body;show=modal;body.__vpqPharmRecall=true;
@@ -80,8 +80,8 @@ function init(body,modal,lesson,quiz,drugMatch){if(!body||body.__vpqPharmRecall)
  if(d.vpqpharmfcNew!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pharmacology',lecture,null,()=>menu());
  if(d.vpqpharmfcFlip!==undefined){revealed=!revealed;return render()}
  if(d.vpqpharmfcPrev!==undefined){at=Math.max(0,at-1);revealed=false;return render()}
- if(d.vpqpharmfcRate!==undefined){if(deck[at])save(deck[at].id,d.vpqpharmfcRate==='miss');at++;complete=at>=deck.length;revealed=false;return render()}
- if(d.vpqpharmfcNext!==undefined){if(!revealed&&deck[at])save(deck[at].id,true);at++;complete=at>=deck.length;revealed=false;return render()}
+ if(d.vpqpharmfcRate!==undefined){if(deck[at])save(deck[at].id,d.vpqpharmfcRate);at++;complete=at>=deck.length;revealed=false;return render()}
+ if(d.vpqpharmfcNext!==undefined){if(!revealed&&deck[at])save(deck[at].id,'miss');at++;complete=at>=deck.length;revealed=false;return render()}
  },true);
 }
 if(typeof document!=='undefined'){
