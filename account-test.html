@@ -64,7 +64,7 @@ main #message{font-size:11px;padding:8px;margin:8px 0}
 </form>
 <section id="signedIn" hidden><p>✅ Signed in as <strong id="accountEmail"></strong>.</p><div class="actions"><button class="primary" id="signout" type="button">Sign Out</button><button id="returnGame" type="button">Open Vet Pharm Quest</button></div></section>
 <p id="message" role="status" aria-live="polite" hidden></p>
-<p style="font-size:11px;color:#75859b">All player accounts have the same game access. Your progress still saves in this browser; account-based cloud saving is being tested separately. Request Edit Access and owner Publish Now are unchanged.</p>
+<p style="font-size:11px;color:#75859b">Your progress auto-saves in the browser. Signed-in players can check the ☁️ Save status in the game for cloud confirmation. Downloads are optional backups. Request Edit Access and owner Publish Now are unchanged.</p>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
@@ -114,7 +114,16 @@ $("resetForm").onsubmit=async e=>{e.preventDefault();if(busy)return;
  const {error}=await client.auth.updateUser({password:$("newPassword").value});
  if(error)throw error;recovery=false;say("Password changed successfully.");show();
  }catch(err){say(err.message||"Password update failed.",true);}finally{setBusy(false);}};
-$("signout").onclick=async()=>{if(busy)return;setBusy(true);try{const {error}=await client.auth.signOut();if(error)throw error;session=null;justSignedOut=true;$("email").value="";$("password").value="";$("newPassword").value="";$("confirmPassword").value="";say("Signed out successfully. Sign in again below, or continue as a guest. Your game data was not touched.");show();}catch(err){say(err.message,true);}finally{setBusy(false);}};
+$("signout").onclick=async()=>{if(busy)return;
+ const uid=session?.user?.id;
+ const isPending=uid && localStorage.getItem("vpq-cloud-pending-"+uid)==="1";
+ const optedIn=uid && localStorage.getItem("vpq-cloud-opt-in-"+uid)==="1";
+ if(isPending){
+   say("⚠️ Your latest changes are not yet confirmed in the cloud. Your browser copy remains saved. Return to the game and check ☁️ Save status before signing out.",true);
+   return;
+ }
+ if(!optedIn && !confirm("This account has not confirmed automatic cloud saving on this browser. Progress may only be saved locally. Sign out anyway?"))return;
+ setBusy(true);try{const {error}=await client.auth.signOut();if(error)throw error;session=null;justSignedOut=true;$("email").value="";$("password").value="";$("newPassword").value="";$("confirmPassword").value="";say("Signed out successfully. Sign in again below, or continue as a guest. Your game data was not touched.");show();}catch(err){say(err.message,true);}finally{setBusy(false);}};
 $("guest").onclick=()=>location.assign(HOME);
 $("returnGame").onclick=()=>location.assign(HOME);
 show();
