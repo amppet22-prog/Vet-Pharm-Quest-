@@ -182,8 +182,47 @@
     },
     "published-ct-9437-boxer-sertoli": {
       "title": "Published case · Boxer with persistent alopecia and abdominal mass",
-      "photos": [],
-      "photo": null,
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/published-ct-9437-boxer-sertoli-1795210522140-0.jpg",
+          "source": "",
+          "credit": "https://clinicaltheriogenology.net/index.php/CT/article/view/9437/15516#content/figure_reference_7",
+          "caption": "Pathology study reference · CT-15-9437-g002.jpg",
+          "type": "clinical",
+          "external": false,
+          "lectures": [
+            "75"
+          ],
+          "systems": [],
+          "conditionId": "published-ct-9437-boxer-sertoli"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/published-ct-9437-boxer-sertoli-1795210523838-1.jpg",
+          "source": "",
+          "credit": "https://clinicaltheriogenology.net/index.php/CT/article/view/9437/15516#content/figure_reference_7",
+          "caption": "Pathology study reference · CT-15-9437-g001.jpg",
+          "type": "clinical",
+          "external": false,
+          "lectures": [
+            "75"
+          ],
+          "systems": [],
+          "conditionId": "published-ct-9437-boxer-sertoli"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/published-ct-9437-boxer-sertoli-1795210522140-0.jpg",
+        "source": "",
+        "credit": "https://clinicaltheriogenology.net/index.php/CT/article/view/9437/15516#content/figure_reference_7",
+        "caption": "Pathology study reference · CT-15-9437-g002.jpg",
+        "type": "clinical",
+        "external": false,
+        "lectures": [
+          "75"
+        ],
+        "systems": [],
+        "conditionId": "published-ct-9437-boxer-sertoli"
+      },
       "text": {
         "title": "Published case · Boxer with persistent alopecia and abdominal mass",
         "species": "6-year-old male Boxer; unilateral orchiectomy at six months, with a contralateral retained testis",
@@ -230,7 +269,7 @@
         ],
         "best": "Sertoli cell tumor (cryptorchid retained testis)"
       },
-      "updated": "2026-11-20T21:33:57.634Z",
+      "updated": "2026-11-20T21:35:25.377Z",
       "approvedBy": "amppet22-prog"
     }
   },
