@@ -2,7 +2,6 @@
 (function(){
 "use strict";
 if(document.getElementById("vpqSupportOpen"))return;
-var repo="https://github.com/amppet22-prog/Vet-Pharm-Quest-";
 var hud=document.querySelector(".hud");
 if(!hud)return;
 var st=document.createElement("style");
@@ -22,17 +21,17 @@ d.innerHTML=[
 "<p><b>Vet Pharm Quest</b> is an independently developed, student-led educational game and evolving work in progress. New rooms, quizzes, atlases, images, learning activities and improvements are added as they are reviewed.</p>",
 "<p class='vpq-support-note'><b>Ownership & attribution:</b> The student creator contributes the concept, project vision, organization and other original contributions. Veterinary facts, course and reference materials, third-party images and other creators' works remain attributable to their respective sources and rights holders; the creator does not claim ownership of those materials. Citations and image credits are included in related lessons and source sections where available. Missing or inaccurate credits should be reported through the Request Center for correction. Some artwork and content have been made with AI assistance.</p>",
 "<p><b>Educational disclaimer:</b> This is a learning game, not a licensed medical reference, diagnosis, prescription or treatment plan. Verify clinical details, drug labels, species reference intervals and reporting rules with current authoritative sources before using them for patient care.</p>",
-"<p><b>Privacy:</b> Never include client/patient identifiers, passwords, confidential school files or personal health data in public issue reports.</p>",
-"<div class='vpq-support-actions'><a href='"+repo+"' target='_blank' rel='noopener noreferrer'>Project repository & updates</a></div></section>",
+"<p><b>Privacy:</b> Never include client/patient identifiers, passwords, confidential school files or personal health data in reports.</p>",
+"</section>",
 "<section class='vpq-support-panel' data-vpq-panel='requests' hidden><h3>📝 Request Center</h3>",
-"<p>Report a bug, missing lecture, wrong answer, image/source credit, accessibility problem or feature idea. This prepares a GitHub issue: <b>nothing is submitted until you finish posting it on GitHub.</b></p>",
+"<p>Report a bug, missing lecture, wrong answer, image/source credit, accessibility problem or feature idea. This prepares a report you can copy and share with the project creator. <b>Reports are not automatically submitted.</b></p>",
 "<label for='vpq-support-type'>Type</label><select id='vpq-support-type'><option>Bug / broken button</option><option>Incorrect clinical or study content</option><option>Missing lecture / flashcard / atlas</option><option>Source or image credit</option><option>Accessibility / layout</option><option>Feature suggestion</option><option>Other</option></select>",
 "<label for='vpq-support-title'>Brief title</label><input id='vpq-support-title' maxlength='120' placeholder='e.g. Necropsy flashcard lecture filter'>",
 "<label for='vpq-support-location'>Room / course / exam / lecture</label><input id='vpq-support-location' maxlength='140' placeholder='e.g. Clinical Pathology • Exam 3'>",
 "<label for='vpq-support-detail'>Details and suggested correction</label><textarea id='vpq-support-detail' maxlength='5000' placeholder='What happened? What did you expect? Add source link if relevant.'></textarea>",
-"<div class='vpq-support-actions'><button type='button' id='vpq-support-github'>Open GitHub report</button><button type='button' id='vpq-support-copy'>Copy report</button><a href='"+repo+"/issues' target='_blank' rel='noopener noreferrer'>Public issues</a></div>",
+"<div class='vpq-support-actions'><button type='button' id='vpq-support-copy'>Copy report</button><button type='button' id='vpq-support-download'>Download report</button></div>",
 "<p class='vpq-support-status' id='vpq-support-status' role='status'></p>",
-"<p class='vpq-support-note'>Submitting an issue needs a GitHub account. Copying a report does not send it. Please do not include confidential information.</p></section>",
+"<p class='vpq-support-note'>Copy or download your report and share it privately with the creator. There is not yet a built-in submission inbox. Please do not include confidential information.</p></section>",
 "<section class='vpq-support-panel' data-vpq-panel='account' hidden><h3>🔐 Account & Save Options</h3>",
 "<p>Manage sign-in or select <b>Forgot Password?</b> on the existing account page. Password recovery happens through the account provider; this game panel never asks for your password.</p>",
 "<div class='vpq-support-actions'><a href='account-test.html'>Account Center / Password recovery</a></div>",
@@ -53,15 +52,17 @@ function getReport(){
  if(!title||!detail){document.getElementById("vpq-support-status").textContent="Please add a title and description.";return null}
  return {title:"["+type+"] "+title,body:"Type: "+type+"\nRoom, course, exam or lecture: "+(where||"Not specified")+"\n\nDetails:\n"+detail+"\n\nPlease omit private or patient information."};
 }
-document.getElementById("vpq-support-github").addEventListener("click",function(){
- var r=getReport();if(!r)return;
- var u=repo+"/issues/new?"+new URLSearchParams({title:r.title,body:r.body}).toString();
- window.open(u,"_blank","noopener");
- document.getElementById("vpq-support-status").textContent="A GitHub report tab was requested. Review and submit the issue there. If no tab appears, copy the report and open GitHub Issues manually.";
-});
 document.getElementById("vpq-support-copy").addEventListener("click",async function(){
  var r=getReport();if(!r)return;
  try{await navigator.clipboard.writeText(r.title+"\n\n"+r.body);document.getElementById("vpq-support-status").textContent="Copied. No report has been submitted."}
  catch(e){document.getElementById("vpq-support-status").textContent="Clipboard blocked. Please select and copy your entered text manually."}
+});
+document.getElementById("vpq-support-download").addEventListener("click",function(){
+ var r=getReport();if(!r)return;
+ var blob=new Blob([r.title+"\n\n"+r.body],{type:"text/plain;charset=utf-8"});
+ var url=URL.createObjectURL(blob);
+ var a=document.createElement("a");a.href=url;a.download="vet-pharm-quest-feedback.txt";document.body.appendChild(a);a.click();a.remove();
+ setTimeout(function(){URL.revokeObjectURL(url)},1000);
+ document.getElementById("vpq-support-status").textContent="Report downloaded to your device. It has not been sent.";
 });
 })();
