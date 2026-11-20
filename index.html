@@ -560,6 +560,12 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
  .vpq-mera-portrait small{display:none!important}
  .gamecol .roomnav button[data-room]{font-size:10px!important;padding:5px 6px!important}
 }
+</style><style id="vpq-real-team-photos-style">
+.vpq-team-preview.vpq-team-group-photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.vpq-team-group-photos figure{padding:8px;background:#fff9ff;border:2px solid #e3d1ec;border-radius:15px}
+.vpq-team-group-photos img{width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;background:#f8f0fb;border-radius:10px}
+.vpq-team-group-photos figcaption{text-align:center;font-size:12px;padding:4px;color:#65517b}
+@media(max-width:560px){.vpq-team-preview.vpq-team-group-photos{grid-template-columns:1fr}}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><button id="vpqMeetTeamBtn" type="button" class="vpq-meet-team-button" aria-label="Meet the Vet Pharm Quest team">🐾 Meet the Team</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
@@ -3738,9 +3744,12 @@ window.addEventListener('load',restoreVisibleRoom,{once:true});
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const url=p=>String(p).split('/').map(encodeURIComponent).join('/');
  button.addEventListener('click',function(){
-   const avatars=Array.isArray(window.VPQ_UPLOADED_AVATARS)?window.VPQ_UPLOADED_AVATARS.slice(0,4):[];
-   const items=avatars.map((a,i)=>'<figure><img loading="lazy" src="'+esc(url(a.path))+'" alt="Illustrated veterinarian avatar '+(i+1)+'"><figcaption>Avatar '+(i+1)+'</figcaption></figure>').join('');
-   const body='<p>Welcome to the veterinary team! These are a few of the playable veterinarian illustrations already in the game. Your group photos will join this gallery when added.</p><div class="vpq-team-preview">'+items+'</div><p><b>Mera Munchasurus and Family</b> are our hospital mascots and chiefs of snacks &amp; encouragement.</p>';
+   const portraits=[
+     {src:'assets/meet-team-pets-preview.svg',alt:'Vet Pharm Quest illustrated team gathered with a dog and a cat',caption:'The team & our furry friends'},
+     {src:'assets/meet-team-group-preview.svg',alt:'Vet Pharm Quest group illustration of diverse veterinary team members',caption:'Meet our veterinary team'}
+   ];
+   const items=portraits.map(p=>'<figure><img loading="lazy" src="'+esc(p.src)+'" alt="'+esc(p.alt)+'"><figcaption>'+esc(p.caption)+'</figcaption></figure>').join('');
+   const body='<p>Meet the crew behind our teaching hospital! These are the two team portraits from your photo collection. Alexandria can join the group portrait in a future update.</p><div class="vpq-team-preview vpq-team-group-photos">'+items+'</div><p><b>Mera Munchasurus and Family</b> are our hospital mascots and chiefs of snacks &amp; encouragement.</p>';
    const title='🐾 Meet the Vet Pharm Quest Team';
    if(typeof window.showModal==='function'){window.showModal(title,body);return}
    const wrap=document.getElementById('modalWrap'),heading=document.getElementById('modalTitle'),target=document.getElementById('modalBody');
