@@ -29,13 +29,15 @@ const patterns=[
 ];
 let api=null,topic='all',search='',chapter='67';
 const RESUME_KEY='vpq-necropsy-handbook-view-v1';
-function rememberView(view,n){
- try{localStorage.setItem(RESUME_KEY,JSON.stringify({view,lecture:n||chapter,open:true}))}catch(e){}
+function rememberView(view,n,section){
+ try{localStorage.setItem(RESUME_KEY,JSON.stringify({view,lecture:n||chapter,section:Number.isInteger(section)?section:undefined,open:true}))}catch(e){}
 }
 function resume(){
  let saved=null;
  try{saved=JSON.parse(localStorage.getItem(RESUME_KEY)||'null')}catch(e){}
  if(!saved?.open||!api)return false;
+ if(saved.view==='atlas'&&saved.lecture){exam6AtlasIndex(String(saved.lecture));return true}
+ if(saved.view==='atlas-entry'&&saved.lecture){exam6AtlasEntry(String(saved.lecture),Number(saved.section));return true}
  if(saved.view==='learn'&&saved.lecture){learnLecture(String(saved.lecture));return true}
  if(saved.view==='lecture'&&saved.lecture){lecture(String(saved.lecture));return true}
  if(saved.view==='across'){across();return true}
@@ -48,9 +50,9 @@ function popup(t,html){api?.showModal(t,theme+html)}
 function nav(){return '<div class="np-tabs"><button data-nphome="1">📚 Handbook</button><button data-nppattern="1">🔗 Across systems</button><button data-npstudio="gross">🔍 Gross ID</button><button data-npstudio="histo">🔬 Histology</button><button data-npquiz="1">🎓 Practice Quiz</button><button data-npedit="1">🖼️ Editable atlas</button></div>'}
 function show(){
  rememberView('home');
- const systems=['all','Neuro','Skin','Repro','Special Senses','Urinary','Hepatic','Pancreas','Endocrine','Hemolymphatic','Muscle','Skeletal','Cardiovascular','Respiratory'];
+ const systems=['all','Gastrointestinal','Neuro','Skin','Repro','Special Senses','Urinary','Hepatic','Pancreas','Endocrine','Hemolymphatic','Muscle','Skeletal','Cardiovascular','Respiratory'];
  const selected=chapters.filter(c=>topic==='all'||c[2]===topic).filter(c=>!search||[...c].join(' ').toLowerCase().includes(search));
- popup('📚 Necropsy Handbook · Path Exam 7',
+ popup('📚 Pathology · Lecture Handbook',
  '<style>.np-cover{background:linear-gradient(120deg,#f3e3ff,#e1f7eb 55%,#ffefdc);border:2px solid #dfc4ef;border-radius:18px;padding:15px;margin:7px 0 13px}.np-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.np-tabs button{font-size:12px;padding:7px 10px}.np-chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.np-chapter{padding:13px;background:#fff;border:2px solid #dbd5eb;border-radius:16px;text-align:left}.np-chapter small{display:block;color:#60708c;margin-top:4px}.np-tag{display:inline-block;border-radius:9px;background:#fff4d8;padding:3px 7px;font-size:11px;font-weight:800}.np-pat{padding:12px;background:#f9f8fc;border:1px solid #d6ddec;border-radius:14px;margin:8px 0}.np-scroll{max-height:40vh;overflow:auto;border:1px solid #dfe1ec;border-radius:12px;padding:9px}.np-question{display:inline-grid;place-items:center;vertical-align:middle;min-width:25px;width:25px;height:25px;padding:0;margin-left:6px;border:2px solid #a38ac3;border-radius:50%;background:#fff8e7;color:#755690;font-size:14px;font-weight:900;cursor:help}.np-question:hover,.np-question:focus-visible{background:#e9daf9;outline:2px solid #f5d6ad}.np-entryrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 3px;border-bottom:1px solid #eef1f5}.np-entryrow .np-entryname{min-width:0}</style>'+
  '<div class="np-cover"><strong style="font-size:19px">🦴 The Little Necropsy Handbook</strong>'+helpButton('intro','0','how to use the pathology Handbook')+'<p style="margin:6px 0">Learn the lesion, understand WHY, then identify it on a specimen. Start with a system or look up a disease. The illustrated specimen room and atlas are linked to this handbook.</p><small>Instructor slides + annotated notes first; supplemental guide cross-checked. Specific lecture entries may still require a slide-by-slide validation.</small></div>'+
  nav()+
@@ -65,14 +67,88 @@ function lecture(n){
  popup('📚 L'+n+' · '+c[1],
  nav()+
  '<div class="np-cover"><span class="np-tag">'+safe(c[2])+'</span><h3>'+safe(c[1])+' '+helpButton('chapter',n,c[1])+'</h3><p>'+safe(c[3])+'</p><p><b>What earns points on an image question?</b> '+safe(c[4])+'</p></div>'+
- (window.VPQ_PATH_LECTURE_LEARN?.[n]?'<div class="buttonrow"><button data-nplearn="'+safe(n)+'" style="font-weight:800;background:#e1f7eb;border:2px solid #8dbda4">📖 Learn the full lecture · Slide-by-slide topics</button></div>':'<p class="tiny">Full lecture lesson pending slide-by-slide verification.</p>')+
+ (window.VPQ_PATH_LECTURE_LEARN?.[n]?'<div class="buttonrow"><button data-nplearn="'+safe(n)+'" style="font-weight:800;background:#e1f7eb;border:2px solid #8dbda4">📖 '+(isExam6(n)?'Quick Learn · Exam 6 refresher':'Learn the full lecture · Slide-by-slide topics')+'</button>'+(isExam6(n)?'<button data-npatlas="'+safe(n)+'">🔬 Exam 6 Disease Atlas</button>':'')+'</div>':'<p class="tiny">Full lecture lesson pending slide-by-slide verification.</p>')+
  '<h4>All named conditions/concepts in this lecture index ('+c[5].split(';').length+') · A–Z</h4><div class="np-scroll">'+c[5].split(';').map((x,i)=>({name:x,originalIndex:i})).sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base',numeric:true})).map(x=>'<div class="np-entryrow"><span class="np-entryname">🦴 '+safe(x.name)+'</span>'+helpButton('entry',n+':'+x.originalIndex,x.name)+'</div>').join('')+'</div>'+
  '<p class="tiny">Index entries are study coverage reminders, not fabricated histology diagnoses. Detailed specimen cards are shown only where the source supports them.</p>'+
  '<h4>Verified gross / histology practice cards ('+cases.length+')</h4><div class="buttonrow">'+cases.map(x=>'<button data-npstudio="gross" data-npnote="'+safe(x.title)+'">'+safe(x.title)+'</button>').join('')+'</div>'+
  '<div class="buttonrow"><button data-npback="1">← All chapters</button><button data-nppattern="1">🔗 Cross-system patterns</button></div>');
 }
 
+
+/* Exam 6 uses its existing, lecture-sourced disease records as the canonical
+ * atlas. Keep original section indices because owner photo uploads are keyed
+ * by lecture + section index. Neither this view nor quick learn copies photos. */
+function isExam6(n){return /^(59|60|61|62|63|64|65|66)$/.test(String(n))}
+function exam6Sections(n){
+ const lesson=window.VPQ_PATH_LECTURE_LEARN?.[n];
+ return (lesson?.sections||[]).map((section,index)=>({section,index}))
+   .filter(x=>x.section?.diseaseAtlas&&Array.isArray(x.section.points)&&x.section.points.length);
+}
+function exam6Field(sec,names){
+ const points=sec?.points||[];
+ const match=points.find(p=>names.some(name=>String(p[0]||'').toLowerCase()===name.toLowerCase()));
+ return match?String(match[1]||''):'';
+}
+const exam6Style='<style>.np-gi-card{border:1px solid #cbdcec;border-radius:12px;background:#fff;padding:10px 12px;margin:7px 0}.np-gi-card summary{cursor:pointer;font-weight:800;color:#254a6b}.np-gi-card p{margin:6px 0;line-height:1.42}.np-gi-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.np-gi-actions button{font-size:12px;padding:7px 10px}.np-gi-atlas-section{border:1px solid #dae1ed;border-radius:12px;background:#f8fbff;margin:9px 0;padding:10px 12px}.np-gi-atlas-section b{color:#294b70}.np-gi-atlas-section p{margin:5px 0;line-height:1.5}</style>';
+function exam6AtlasIndex(n){
+ if(!isExam6(n))return lecture(n);
+ chapter=n;rememberView('atlas',n);
+ const lesson=window.VPQ_PATH_LECTURE_LEARN?.[n];if(!lesson)return lecture(n);
+ const entries=exam6Sections(n);
+ const onlyIndex=(lesson.sections||[]).filter(s=>!s.diseaseAtlas).length;
+ popup('🔬 Exam 6 · L'+n+' Disease Atlas',nav()+exam6Style+
+ '<div class="np-cover"><h3>'+safe(lesson.title)+' · Disease Atlas</h3><p>The detailed reference for species, cause, gross and histologic lesions, pathogenesis and important differentials. Lecture Learn links here instead of duplicating image collections.</p><small>'+entries.length+' source-derived detailed entries · '+onlyIndex+' additional lecture topics are still indexed but not full disease entries.</small></div>'+
+ '<div class="np-gi-actions"><button data-nplearn="'+safe(n)+'">📖 Quick Learn</button><button data-npchapter="'+safe(n)+'">← Lecture overview</button><button data-nppracticegi="'+safe(n)+'">🩺 Differential cases</button></div>'+
+ (entries.length?entries.map(({section,index})=>'<button class="np-chapter" data-npatlasentry="'+safe(n)+'" data-npatlasindex="'+index+'" style="display:block;width:100%;margin:6px 0;text-align:left"><b>'+safe(section.title)+'</b><small>'+safe(exam6Field(section,['Species / signalment'])||'Disease reference · lecture '+n)+'</small></button>').join(''):'<p class="np-pat">No detailed atlas records are published for this lecture yet. Its indexed topics remain available in Learn.</p>'));
+}
+function exam6AtlasEntry(n,index){
+ if(!isExam6(n))return lecture(n);
+ const lesson=window.VPQ_PATH_LECTURE_LEARN?.[n],sec=lesson?.sections?.[index];
+ if(!sec?.diseaseAtlas)return exam6AtlasIndex(n);
+ chapter=n;rememberView('atlas-entry',n,index);
+ const fields=(sec.points||[]).filter(p=>Array.isArray(p)&&p.length>=2);
+ const entries=exam6Sections(n),position=entries.findIndex(x=>x.index===index);
+ const previous=position>0?entries[position-1].index:null,next=position>=0&&position<entries.length-1?entries[position+1].index:null;
+ const photos=window.VPQ_PATH_INLINE_PHOTOS;
+ popup('🔬 L'+n+' · '+sec.title,nav()+exam6Style+(photos?photos.style:'')+
+ '<div class="np-cover"><b>'+safe(sec.title)+'</b><p>Detailed Atlas reference · '+safe(sec.slides||'Lecture '+n)+'</p><small>Source: '+safe(lesson.source||'Lecture '+n)+' · '+safe(sec.sourceStatus||'Lecture-sourced disease record')+'</small></div>'+
+ '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">← Disease list</button><button data-nplearn="'+safe(n)+'">📖 Lecture refresher</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button></div>'+
+ fields.map(p=>'<div class="np-gi-atlas-section"><b>'+safe(p[0])+'</b><p>'+safe(p[1])+'</p></div>').join('')+
+ '<h4>🖼️ Gross / histology images</h4><p class="tiny">Existing photos and owner-published captions stay associated with this original lecture topic. Only upload useful, credited diagnostic images here.</p>'+
+ (photos?photos.card(n,index):'<p class="tiny">Photo viewer unavailable; the written entry remains accessible.</p>')+
+ '<div class="np-gi-actions">'+(previous!==null?'<button data-npatlasentry="'+safe(n)+'" data-npatlasindex="'+previous+'">← Previous disease</button>':'')+
+ (next!==null?'<button data-npatlasentry="'+safe(n)+'" data-npatlasindex="'+next+'">Next disease →</button>':'')+
+ '<button data-npatlas="'+safe(n)+'">All L'+safe(n)+' diseases</button></div>');
+ if(photos)photos.hydrate(api.body,n);
+}
+function exam6QuickLearn(n){
+ chapter=n;rememberView('learn',n);
+ const lesson=window.VPQ_PATH_LECTURE_LEARN?.[n];if(!lesson)return lecture(n);
+ const entries=exam6Sections(n);
+ const indexed=lesson.sections.filter(sec=>!sec.diseaseAtlas);
+ const outline=entries.map(({section:sec,index},i)=>{
+  const species=exam6Field(sec,['Species / signalment']);
+  const gross=exam6Field(sec,['Gross recognition','Gross lesions']);
+  const mechanism=exam6Field(sec,['Pathogenesis — why','Pathogenesis / why']);
+  const distinction=exam6Field(sec,['Do not confuse with']);
+  return '<details class="np-gi-card" '+(i===0?'open':'')+'><summary>'+safe(sec.title)+'</summary>'+
+  (species?'<p><b>Species:</b> '+safe(species)+'</p>':'')+
+  (gross?'<p><b>Recognize:</b> '+safe(gross)+'</p>':'')+
+  (mechanism?'<p><b>Why:</b> '+safe(mechanism)+'</p>':'')+
+  (distinction?'<p><b>Distinguish:</b> '+safe(distinction)+'</p>':'')+
+  '<div class="np-gi-actions"><button data-npatlasentry="'+safe(n)+'" data-npatlasindex="'+index+'">🔬 Full Atlas · photos and histology</button></div></details>';
+ }).join('');
+ popup('📖 L'+n+' · Quick Learn',nav()+exam6Style+
+ '<div class="np-cover"><h3>'+safe(lesson.title)+'</h3><p>Quick recall: recognize the lesion, understand why it occurs, and separate it from the closest differential. Full disease details and all diagnostic photos are kept in the Atlas.</p><small>'+entries.length+' linked disease entries</small></div>'+
+ '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">🔬 Disease Atlas</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button><button data-npchapter="'+safe(n)+'">← Lecture overview</button></div>'+
+ outline+
+ (indexed.length?'<details class="np-gi-card"><summary>Additional lecture objectives / topics still being developed ('+indexed.length+')</summary><p class="tiny">These are coverage reminders, not validated disease Atlas entries.</p>'+indexed.map(s=>'<p>• '+safe(s.title)+'</p>').join('')+'</details>':'')+
+ '<h4>Check your understanding</h4>'+((lesson.checks||[]).map((q,i)=>'<details class="np-gi-card"><summary>Q'+(i+1)+'. '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join(''))+
+ '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">🔬 Browse disease Atlas</button></div>');
+}
+
 function learnLecture(n){
+ if(isExam6(n))return exam6QuickLearn(n);
  rememberView('learn',n);
  chapter=n;
  const l=window.VPQ_PATH_LECTURE_LEARN?.[n];if(!l)return lecture(n);
@@ -182,6 +258,9 @@ function init(host){
  if(d.npslideprev!==undefined||d.npslidenext!==undefined||d.npslidezoom!==undefined||d.npdeletepdf!==undefined){window.VPQ_PATH_SLIDES?.clicked(host.body,b);return}
  if(d.pathImageRemove!==undefined){window.VPQ_PATH_INLINE_PHOTOS?.remove(b);return}
  if(d.pathImagePublish!==undefined){const cell=b.closest('.np-photo-cell'),g=b.closest('[data-path-images-lecture]');if(!cell||!g)return;const id='L'+g.dataset.pathImagesLecture+'-S'+g.dataset.pathImagesSection+'-P'+cell.dataset.pathImagesSlot;window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('lecture',id);return}
+ if(d.npatlasentry!==undefined)return exam6AtlasEntry(d.npatlasentry,Number(d.npatlasindex));
+ if(d.npatlas!==undefined)return exam6AtlasIndex(d.npatlas);
+ if(d.nppracticegi!==undefined){const lib=window.VPQ_NECROPSY_DIFFERENTIAL_LAB;if(lib?.start)return lib.start(host,String(d.nppracticegi));return exam6AtlasIndex(String(d.nppracticegi));}
  if(d.nplearn!==undefined)return learnLecture(d.nplearn);
  if(d.npchapter!==undefined)return lecture(d.npchapter);
  if(d.nppattern!==undefined)return across();
@@ -199,5 +278,5 @@ function init(host){
    if(t?.dataset?.npsearch!==undefined){search=t.value.toLowerCase().trim();show()}
  },true);
 }
-return {init,open:show,openLecture:learnLecture,lecture,across,resume,chapters,patterns};
+return {init,open:show,openLecture:learnLecture,lecture,across,resume,chapters,patterns,openExam6Atlas:exam6AtlasIndex,openExam6Disease:exam6AtlasEntry};
 })();
