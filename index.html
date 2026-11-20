@@ -2352,7 +2352,7 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
    const item=modes.find(x=>x[0]===mode);if(!item)return vpqLearningHub();
    shared.setLectures(shared.getLectures());
    const src='pharm-arcade.html?embedded=1#'+encodeURIComponent(mode);
-   showModal('🎮 '+item[2],'<div class="vpq-sharedheader"><b>'+item[1]+' '+item[2]+'</b><span>'+item[4]+'</span></div><p>'+item[3]+'</p><div class="buttonrow"><button data-vpqsharedhub="1">← All Learning Games</button><button data-vpqsharedlearn="1">📖 Teach Me</button></div><div class="vpq-sharedframe"><iframe src="'+src+'" title="Vet Pharm Quest — '+item[2]+'" loading="eager" allow="fullscreen"></iframe></div><p class="tiny">Exam/guide selections follow the shared focus. For specialized games, the playable content depends on the drug or organism bank.</p>');
+   showModal('🎮 '+item[2],'<div class="vpq-sharedheader"><b>'+item[1]+' '+item[2]+'</b><span>'+item[4]+'</span></div><p>'+item[3]+'</p><div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button><button data-vpqsharedlearn="1">📖 Guided Learn</button></div><div class="vpq-sharedframe"><iframe src="'+src+'" title="Vet Pharm Quest — '+item[2]+'" loading="eager" allow="fullscreen"></iframe></div><p class="tiny">Exam/guide selections follow the shared focus. For specialized games, the playable content depends on the drug or organism bank.</p>');
  }
  $('modalBody').addEventListener('click',e=>{
    const b=e.target.closest('button');if(!b)return;
