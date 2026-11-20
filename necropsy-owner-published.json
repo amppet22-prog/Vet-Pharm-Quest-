@@ -221,6 +221,19 @@
           ],
           "systems": [],
           "conditionId": "published-ct-9437-boxer-sertoli"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/published-ct-9437-boxer-sertoli-1795211295459-0.jpg",
+          "source": "",
+          "credit": "clinicaltheriogenology.net",
+          "caption": "Pathology study reference",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "75"
+          ],
+          "systems": [],
+          "conditionId": "published-ct-9437-boxer-sertoli"
         }
       ],
       "photo": {
@@ -282,7 +295,7 @@
         ],
         "best": "Sertoli cell tumor (cryptorchid retained testis)"
       },
-      "updated": "2026-11-20T21:37:00.506Z",
+      "updated": "2026-11-20T21:48:17.478Z",
       "approvedBy": "amppet22-prog"
     }
   },
