@@ -124,8 +124,28 @@ $("signout").onclick=async()=>{if(busy)return;
  }
  if(!optedIn && !confirm("This account has not confirmed automatic cloud saving on this browser. Progress may only be saved locally. Sign out anyway?"))return;
  setBusy(true);try{const {error}=await client.auth.signOut();if(error)throw error;session=null;justSignedOut=true;$("email").value="";$("password").value="";$("newPassword").value="";$("confirmPassword").value="";say("Signed out successfully. Sign in again below, or continue as a guest. Your game data was not touched.");show();}catch(err){say(err.message,true);}finally{setBusy(false);}};
-$("guest").onclick=()=>location.assign(HOME);
-$("returnGame").onclick=()=>location.assign(HOME);
+function enterGame(){
+  // Only return to pages on this exact website; never follow arbitrary redirect hosts.
+  const requested=new URL(location.href).searchParams.get("next");
+  let destination=new URL(HOME,location.href);
+  if(requested){
+    try{
+      const candidate=new URL(requested,location.origin);
+      const base=new URL(HOME,location.href);
+      if(candidate.origin===location.origin &&
+         candidate.pathname.startsWith(base.pathname) &&
+         !candidate.pathname.endsWith("/account-test.html")){
+        destination=candidate;
+      }
+    }catch(e){}
+  }
+  // The game remains usable without accounts; this only records entry for this tab.
+  try{sessionStorage.setItem("vpq-entry-open-this-tab-v1","1")}catch(e){}
+  destination.searchParams.set("vpq_enter","1");
+  location.assign(destination.href);
+}
+$("guest").onclick=enterGame;
+$("returnGame").onclick=enterGame;
 show();
 })();
 </script></body></html>
