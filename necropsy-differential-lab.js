@@ -4,7 +4,7 @@ window.VPQ_NECROPSY_DIFFERENTIAL_LAB=(function(){
 const data=window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[];
 function allCases(){return [...data,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomCases?.()||[])].filter(x=>x.sourceType!=='SBA')}
 const KEY='vpq-necropsy-differential-local-images-v1';
-let extraAnswer=-1,extraOpen=false,ui=null,filter='all',roundsOnly=false,current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false,caseReward=null,shuffledIds=[],optionOrder=[];
+let morphDraft='',extraAnswer=-1,extraOpen=false,ui=null,filter='all',roundsOnly=false,current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false,caseReward=null,shuffledIds=[],optionOrder=[];
 const rich=v=>window.VPQ_PATH_RICH_TEXT?.render?.(v)||safe(v);
 const safe=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function photoStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -29,7 +29,7 @@ function caseSequence(){
  return filtered.sort((a,b)=>(order.get(a.id)??Infinity)-(order.get(b.id)??Infinity));
 }
 function shuffleCases(){shuffledIds=shuffleArray(allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(filter==='all'||x.lecture===filter)).map(x=>x.id));current=null;phase=0;leading=-1;grossLeading=-1;shortlist=[];leadHint=false;caseReward=null;optionOrder=[];return menu();}
-function prepareCase(id){current=id;extraAnswer=-1;extraOpen=false;extraAnswer=-1;extraOpen=false;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
+function prepareCase(id){current=id;morphDraft='';extraAnswer=-1;extraOpen=false;extraAnswer=-1;extraOpen=false;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
 function signalment(x){
  const pieces=[x.age,x.breed,x.speciesName,x.sex,x.reproductiveStatus].filter(v=>String(v||'').trim()).map(v=>String(v).trim());
  return pieces.length?pieces.join(' · '):String(x.species||'Signalment not supplied').replace(/\s+/g,' ').trim();
@@ -676,34 +676,59 @@ function extraQuestionHTML(x){
  '</div></details>';
 }
 function view(){
- const baseCase=allCases().find(v=>v.id===current);if(!baseCase)return menu();
- const source={...baseCase,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
+ const original=allCases().find(v=>v.id===current);if(!original)return menu();
+ const source={...original,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
  if(optionOrder.length!==source.options?.length)optionOrder=shuffleArray((source.options||[]).map((_,i)=>i));
  const x={...source,options:optionOrder.map(i=>source.options[i])};
- const revealed=phase>=2;
-  const sequence=caseSequence(),position=sequence.findIndex(c=>c.id===current);
- const opted=leading>=0?x.options[leading]:null;
+ const sequence=caseSequence(),position=sequence.findIndex(c=>c.id===current);
+ const revealed=phase>=2,selected=leading>=0?x.options[leading]:null;
+ const correct=x.options.findIndex(o=>o.role==='best'||String(o.name).trim().toLowerCase()===String(x.best).trim().toLowerCase());
+ const leadCorrect=leading>=0&&leading===correct;
+ const history=String(x.history||'').startsWith(String(x.species||''))?String(x.history||'').slice(String(x.species||'').length).replace(/^[., ]+/,''):x.history;
+ const realMorph=x.morph&&!/^Path Exam [0-9]+ ·/.test(String(x.morph))&&!/differential reasoning|single-best-answer/i.test(x.morph);
+ const imagePanel='<aside style="min-width:0;border:1px solid #c7d8e7;border-radius:11px;background:#f8faff;padding:11px;align-self:start">'+
+  '<b>📷 Specimen images</b><p class="tiny" style="margin:5px 0">Use the image to localize and describe lesions before deciding the cause.</p>'+
+  (window.VPQ_NECROPSY_OWNER_PUBLISH?.casePhotoHTML?.(x.id)||'')+sourcedPhotos(x)+photoHTML(x)+
+  '<small style="display:block;margin-top:8px">Microscopic findings stay hidden until you reveal histology.</small></aside>';
+ const gross='<div style="background:#edf4fb;border-left:4px solid #6b94c9;padding:12px;border-radius:9px;margin-bottom:11px"><b>'+safe(signalment(x))+'</b><p style="margin:6px 0 9px">'+rich(history)+'</p>'+
+ '<div style="padding:10px;border:1px solid #b4cce3;border-radius:8px;background:white"><b style="font-size:15px">🔍 GROSS FINDINGS — OBSERVE FIRST</b><p style="margin:7px 0 0;line-height:1.55">'+rich(x.gross)+'</p></div></div>';
+ const morphology='<details style="margin:9px 0;border:1px solid #b9d4e6;border-radius:10px;padding:10px;background:#f6fbfd"><summary style="font-weight:800;cursor:pointer">✍️ Pattern recognition · Build a morphologic diagnosis (optional)</summary>'+
+ '<p class="tiny" style="margin:8px 0">Lecture 9: Describe the lesion objectively, then form a morphologic diagnosis. This is different from naming the organism or disease.</p>'+
+ '<div style="border-left:3px solid #6b9ab3;padding-left:9px;margin:8px 0;font-size:12px"><b>Description checklist:</b> tissue/location · number · distribution · size · color · shape · pattern · consistency · special features<br><b>Morphologic formula:</b> Organ → process ± modifier → distribution → chronicity → severity.</div>'+
+ '<label style="font-size:13px;font-weight:750">Your morphologic diagnosis<textarea data-pathdiff-morph="1" rows="2" placeholder="Organ: pathologic process, modifier, distribution, chronicity, severity (only when supported by evidence)" style="display:block;width:100%;box-sizing:border-box;padding:9px;margin-top:5px;border:1px solid #9fb9d3;border-radius:8px">'+safe(morphDraft)+'</textarea></label>'+
+ (revealed?'<p style="margin:8px 0;font-size:13px"><b>Reference:</b> '+(realMorph?rich(x.morph):'A specific, source-verified morphologic diagnosis has not yet been recorded for this case. Do not substitute the etiologic diagnosis automatically.')+'</p>':'<p class="tiny">Your response stays private to this practice attempt until the comparison is revealed.</p>')+'</details>';
+ const opts=x.options.map((o,i)=>{
+  const chosen=shortlist.includes(i),best=i===correct,isLead=i===leading;
+  const border=revealed?(best?'#4a9f66':isLead?'#d88a36':'#cad9e8'):isLead?'#668bc4':chosen?'#779fd3':'#cad9e8';
+  const bg=revealed?(best?'#e5f6e9':isLead?'#fff1e1':'white'):isLead?'#e9f2ff':chosen?'#f0f6ff':'white';
+  return '<div style="display:flex;align-items:center;gap:6px;margin:6px 0"><button data-pathdiff-toggle="'+i+'" aria-pressed="'+chosen+'" style="flex:1;text-align:left;border:2px solid '+border+';background:'+bg+';border-radius:9px;padding:10px;font-weight:700">'+(chosen?'☑ ':'☐ ')+safe(o.name)+(revealed?(best?' · ✓ Supported diagnosis':isLead?' · Review alternative':''):'')+'</button><button data-pathdiff-set-lead="'+i+'" '+(revealed?'disabled':'')+' aria-label="Choose '+safe(o.name)+' as leading diagnosis" title="Set as leading diagnosis" style="white-space:nowrap;border:1px solid '+(isLead?'#6287ba':'#bfcfe1')+';border-radius:8px;padding:10px;background:'+(isLead?'#ddeafb':'white')+'">'+(isLead?'★ Lead':'☆ Lead')+'</button></div>';
+ }).join('');
+ const main='<section style="min-width:0">'+gross+morphology+
+ '<h4 style="margin:13px 0 5px">1 · Compare possible causes</h4><p class="tiny" style="margin:5px 0">Check plausible alternatives, then select your leading diagnosis using ☆ Lead. Options stay neutral until you submit your answer.</p>'+opts+
+ '<div style="border:1px solid '+(revealed?(leadCorrect?'#92c7a0':'#e6bb8b'):'#c0d2e7')+';background:'+(revealed?(leadCorrect?'#eaf8ee':'#fff2e4'):'#f1f6fd')+';padding:11px;border-radius:9px;margin:10px 0"><b>2 · Your leading diagnosis</b>'+
+ '<p style="margin:6px 0;font-weight:700">'+(selected?safe(selected.name):'Not selected yet — choose ☆ Lead beside a diagnosis.')+'</p>'+
+ (revealed?'<p style="margin:5px 0;color:'+(leadCorrect?'#286c3b':'#9b5515')+'"><b>'+(leadCorrect?'✓ Best-supported diagnosis':'Review the evidence and compare with the supported diagnosis')+'</b></p>':'<small>Your selected lead appears immediately. Correctness is revealed after histology and submission.</small>')+'</div>'+
+ (phase===0?'<button data-pathdiff-histo="1" style="width:100%;padding:11px;border:1px solid #9eb9d4;border-radius:9px;font-weight:800;background:#e9f1fc">🔬 Reveal histology and reconsider</button>':'<div style="padding:11px;border-left:4px solid #9a79be;background:#f5effb;border-radius:9px"><b>3 · Histology</b><p style="margin:7px 0">'+rich(x.histo)+'</p>'+(grossLeading>=0?'<small>Before histology you favored '+safe(x.options[grossLeading]?.name||'—')+'.</small>':'')+'</div>')+
+ (phase===1?'<button data-pathdiff-compare="1" style="width:100%;margin-top:10px;padding:12px;background:#dff1e5;border:1px solid #8abda0;border-radius:9px;font-weight:800">✓ Submit diagnosis · View comparisons</button>':'')+
+ (leadHint?'<p role="alert" style="color:#99551c">Choose a leading diagnosis using the ☆ Lead button before submitting.</p>':'')+
+ '</section>';
+ const comparison=revealed?'<section style="border-top:2px solid #d4e2ee;margin-top:14px;padding-top:12px"><h4 style="margin:0 0 7px">4 · Evidence-weighted comparisons</h4>'+
+ '<p class="tiny">Green identifies the best-supported choice; orange identifies your alternative selection when it was not best supported. Other diagnoses remain neutral—not automatically impossible.</p>'+
+ x.options.map(o=>{const best=o.role==='best'||o.name===x.best,chosen=selected?.name===o.name;return '<div style="border:2px solid '+(best?'#82b893':chosen?'#dcac75':'#cbd9e7')+';background:'+(best?'#ebf8ee':chosen?'#fff4e9':'#fafcff')+';border-radius:10px;padding:11px;margin:8px 0"><b>'+(best?'✓ ':chosen?'↪ ':'')+safe(o.name)+'</b>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:9px;margin-top:9px"><div><b>Evidence for</b><p style="font-size:13px;margin:4px 0">'+rich(o.supports)+'</p></div><div><b>Evidence against / limitation</b><p style="font-size:13px;margin:4px 0">'+rich(o.against)+'</p></div><div><b>Microscopic discriminator</b><p style="font-size:13px;margin:4px 0">'+rich(o.hist)+'</p></div></div></div>';}).join('')+
+ '<div style="padding:12px;background:#f1f6fd;border-radius:10px;margin-top:10px"><b>Best-supported etiology:</b> '+safe(x.best)+
+ (realMorph?'<p><b>Morphologic diagnosis:</b> '+rich(x.morph)+'</p>':'<p class="tiny">A complete morphologic diagnosis is not yet documented for this case.</p>')+
+ '<p><b>Pathogenesis / why this occurs:</b> '+rich(x.mechanism)+'</p><p><b>Confirmation / next tests:</b> '+rich(x.tests)+'</p><small>'+safe(x.ref||'Pathology learning source')+'</small></div>'+
+ (caseAtlasMatches(x).length?'<div class="buttonrow" style="margin-top:10px">'+caseAtlasMatches(x).map(({item},i)=>'<button data-pathdiff-case-atlas="'+i+'">📚 Review '+safe(item.title)+'</button>').join('')+'</div>':'')+
+ (caseReward?.xp?'<p class="tiny">+'+caseReward.xp+' XP earned'+(caseReward.coins?' · +'+caseReward.coins+' coins':'')+'</p>':'')+'</section>':'';
+ const resource='<details style="margin:13px 0;border:1px solid #ccdaeb;border-radius:9px;padding:10px"><summary style="font-weight:750;cursor:pointer">📚 Sources, lecture links & image management</summary>'+
+ '<div class="buttonrow" style="margin-top:8px"><button data-pathdiff-exam7-lecture="'+safe(x.id)+'">Lecture '+safe(x.lecture)+'</button><button data-pathdiff-exam7-atlas="'+safe(x.id)+'">Specimen atlas</button><button data-pathdiff-edit-case="'+safe(x.id)+'">✏️ Edit & publish</button></div>'+
+ (x.photoToAdd?'<p class="tiny">Suggested photograph: '+safe(x.photoToAdd)+'</p>':'')+'<small>'+safe(x.ref||'Source reference not specified')+'</small></details>';
  modal('🩺 L'+safe(x.lecture)+' · '+safe(signalment(x)),
- '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:9px"><div class="buttonrow"><button data-pathdiff-list="1">← Cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>◀ Previous</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next ▶</button></div><div class="buttonrow"><button data-pathdiff-edit-case="'+safe(x.id)+'" style="background:#e8f7e9;border:1px solid #80b69b;font-weight:800">✏️ Edit & publish</button><button data-pathdiff-reset="1">↺ Restart</button></div></div>'+
- '<div style="background:#f1f7ff;border-left:4px solid #7798cb;padding:10px;border-radius:8px;margin:10px 0"><b>'+safe(signalment(x))+'</b><p>'+rich(String(x.history||'').startsWith(String(x.species||''))?String(x.history).slice(String(x.species).length).replace(/^[., ]+/, ''):x.history)+'</p><b>Gross findings:</b> '+rich(x.gross)+'</div>'+
- '<div style="max-width:100%"><div>'+
- '<h4 style="margin:4px 0">1. Build your differential list</h4><p class="tiny">Select every reasonable possibility. More than one diagnosis may fit early findings.</p>'+
- x.options.map((o,i)=>'<button data-pathdiff-toggle="'+i+'" aria-pressed="'+shortlist.includes(i)+'" style="display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border:2px solid '+(shortlist.includes(i)?'#4784b5':'#dbe4ef')+';background:'+(shortlist.includes(i)?'#ecf6ff':'#fff')+';border-radius:10px">'+(shortlist.includes(i)?'☑ ':'☐ ')+safe(o.name)+'</button>').join('')+
- '<h4 style="margin:14px 0 5px">2. Choose the most likely diagnosis</h4><p class="tiny">Pick your leading possibility based on the evidence currently visible.</p>'+
- '<select id="pathdiff-lead" data-pathdiff-leading-select="1" style="width:100%;padding:9px;border:1px solid #a9bed5;border-radius:9px"><option value="-1">Choose a leading diagnosis...</option>'+x.options.map((o,i)=>'<option value="'+i+'"'+(leading===i?' selected':'')+'>'+safe(o.name)+'</option>').join('')+'</select>'+
- (leadHint?'<p style="color:#944b20;font-size:12px;font-weight:750">Choose your leading diagnosis from the dropdown before comparing the answers.</p>':'')+
- '<div class="buttonrow" style="margin:9px 0"><button data-pathdiff-histo="1">'+(phase===0?'🔬 Reveal histology clue':'🔬 Histology revealed ✓')+'</button>'+(phase>=1?'<button data-pathdiff-compare="1">📋 Compare all etiologies</button>':'')+'</div>'+
- (phase>=1?'<div style="background:#f5eefc;border:1px solid #d8c9ed;padding:12px;border-radius:10px"><b>3. Histology revealed</b>'+(grossLeading>=0?'<p class="tiny"><b>Your initial gross-based leader:</b> '+safe(x.options[grossLeading]?.name||'—')+'</p>':'')+'<p>'+rich(x.histo)+'</p><small>Now reconsider whether the differentials remain equally plausible.</small></div>':'')+
- '</div></div>'+
- (revealed?'<div style="margin-top:14px;border-top:2px solid #cbd9e9;padding-top:10px"><h4>4. Evidence-weighted differential comparison</h4><p class="tiny"><b>Case title unlocked:</b> '+safe(x.title)+'</p><p>'+(opted?(opted.name===x.best?'✅ Your leading diagnosis matched the best-supported etiology.':'Your initial leader was <b>'+safe(opted.name)+'</b>. Compare the evidence below and revise your conclusion.'):'No leading diagnosis selected. Compare the possibilities below before returning to the case.')+'</p>'+
- '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Differential</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Supports</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Makes less likely / limitation</th><th style="text-align:left;padding:7px;border-bottom:2px solid #d6dce9">Histology distinction</th></tr></thead><tbody>'+x.options.map(o=>'<tr><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6"><b>'+safe(o.name)+'</b>'+(o.role==='best'?' ★':'')+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.supports)+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.against)+'</td><td style="vertical-align:top;padding:8px;border-bottom:1px solid #edf1f6">'+rich(o.hist)+'</td></tr>').join('')+'</tbody></table></div>'+
- (grossLeading>=0?'<p style="font-size:12px"><b>Reasoning progression:</b> Before histology you favored '+safe(x.options[grossLeading]?.name||'—')+'. After histology you selected '+safe(opted?.name||'—')+'. '+(grossLeading!==leading?'You revised your leading differential after seeing additional evidence.':'You kept your original leading differential.')+'</p>':'')+
- '<div style="background:#eef8f0;border:1px solid #b8d7bf;border-radius:12px;padding:11px;margin-top:12px"><b>Best-supported etiology:</b> '+safe(x.best)+'<p><b>Morphologic diagnosis:</b> '+rich(x.morph)+'</p><p><b>Why it happens:</b> '+rich(x.mechanism)+'</p><p><b>What confirms it / next tests:</b> '+rich(x.tests)+'</p><small>Grounded in '+safe(x.ref)+'. This is an educational differential, not a definitive diagnosis from a simulated history.</small></div></div>':'')+
- (revealed&&caseAtlasMatches(x).length?'<div style="margin:10px 0;padding:10px;border:1px solid #cbdbea;border-radius:10px"><b>📚 Review this case in the disease atlas</b><p class="tiny">Open the related lesson for species, gross lesions, histology, mechanism and flashcards.</p><div class="buttonrow">'+caseAtlasMatches(x).map(({item},i)=>'<button data-pathdiff-case-atlas="'+i+'">🔬 '+safe(item.title)+'</button>').join('')+'</div></div>':'')+
- (revealed?'<p style="font-size:12px;margin:8px 0"><b>🏅 Study rewards:</b> '+(caseReward?.xp?('+'+caseReward.xp+' XP'+(caseReward.coins?' · +'+caseReward.coins+' coins':'')+' earned!'):caseReward?.reason==='already-mastered'?'Previously mastered — rewards saved.':caseReward?.reason==='incorrect'?'Review and retry this diagnosis for XP.':'First correct diagnosis earns 10 XP; coins accrue through study milestones.')+'</p>':'')+
- extraQuestionHTML(x)+
- '<details style="margin:10px 0;border:1px solid #d1dfed;border-radius:9px;padding:9px"><summary style="cursor:pointer;font-weight:700">📷 Photos, sources & lecture links</summary><div class="buttonrow" style="margin-top:9px"><button data-pathdiff-exam7-lecture="'+safe(x.id)+'">📚 Lecture '+safe(x.lecture)+'</button><button data-pathdiff-exam7-atlas="'+safe(x.id)+'">🔬 Specimen atlas</button><button data-pathdiff-edit-case="'+safe(x.id)+'">✏️ Edit & publish case</button></div><small>Source: '+safe(x.ref||'Lecture material')+'</small>'+(x.photoToAdd?'<p class="tiny">Suggested photo: '+safe(x.photoToAdd)+'</p>':'')+(window.VPQ_NECROPSY_OWNER_PUBLISH?.casePhotoHTML?.(x.id)||'')+sourcedPhotos(x)+photoHTML(x)+'</details>'+
-'<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>← Previous case</button><button data-pathdiff-list="1">All cases</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next case →</button><button data-pathdiff-reset="1">Try without clues again</button></div>');
+ '<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:9px"><div class="buttonrow"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>◀ Previous</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next ▶</button></div><div class="buttonrow"><button data-pathdiff-edit-case="'+safe(x.id)+'" style="font-weight:800;background:#e6f5e9;border:1px solid #7bb694">✏️ Edit & publish</button><button data-pathdiff-reset="1">↺ Restart</button></div></div>'+
+ '<div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(210px,0.9fr);gap:12px;align-items:start" class="vpq-case-dual"><div style="min-width:0">'+main+'</div>'+imagePanel+'</div>'+
+ comparison+extraQuestionHTML(x)+resource+
+ '<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next patient →</button></div>');
 }
 function init(api){
  ui=api;
@@ -779,10 +804,11 @@ function init(api){
  if(d.pathdiffFilter!==undefined){filter=d.pathdiffFilter;return menu()}
  if(d.pathdiffOpen!==undefined)return prepareCase(d.pathdiffOpen)
  if(d.pathdiffReturn!==undefined)return window.VPQ_PATH_EXAM7?.start('histo');
- if(d.pathdiffReset!==undefined){extraAnswer=-1;extraOpen=false;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const currentRecord=allCases().find(x=>x.id===current);optionOrder=shuffleArray((currentRecord?.options||[]).map((_,i)=>i));return view()}
+ if(d.pathdiffReset!==undefined){morphDraft='';extraAnswer=-1;extraOpen=false;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const currentRecord=allCases().find(x=>x.id===current);optionOrder=shuffleArray((currentRecord?.options||[]).map((_,i)=>i));return view()}
+ if(d.pathdiffSetLead!==undefined){const i=Number(d.pathdiffSetLead);if(phase<2&&i>=0&&i<optionOrder.length){leading=i;leadHint=false;return view()}return;}
  if(d.pathdiffToggle!==undefined){const i=Number(d.pathdiffToggle);shortlist=shortlist.includes(i)?shortlist.filter(v=>v!==i):[...shortlist,i];return view()}
  if(d.pathdiffHisto!==undefined){if(phase===0)grossLeading=leading;phase=Math.max(phase,1);return view()}
- if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;const base=allCases().find(v=>v.id===current);const record={...base,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};const originalChoice=record.options?.[optionOrder[leading]];const correct=originalChoice?.role==='best'||String(originalChoice?.name||'').trim().toLowerCase()===String(record.best||'').trim().toLowerCase();if(phase<2&&typeof ui?.awardQuestion==='function')caseReward=ui.awardQuestion('necropsy-differential',String(current),correct);phase=2;return view()}
+ if(d.pathdiffCompare!==undefined){if(phase<1)return;if(leading<0){leadHint=true;return view()}leadHint=false;const base=allCases().find(v=>v.id===current);const record={...base,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};const originalChoice=record.options?.[optionOrder[leading]];const correct=originalChoice?.role==='best'||String(originalChoice?.name||'').trim().toLowerCase()===String(record.best||'').trim().toLowerCase();if(phase<2&&typeof ui?.awardQuestion==='function')caseReward=ui.awardQuestion('necropsy-differential',String(current),correct);phase=2;return view()}
  if(d.pathdiffRemove!==undefined){updatePhoto(d.pathdiffRemove,'');return view()}
  },true);
  api.body.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target?.dataset?.pathdiffFlashFlip!==undefined){ev.preventDefault();flashFace=!flashFace;flashView()}},true);
@@ -791,7 +817,8 @@ function init(api){
  if(d?.pathdiffMenuExam!==undefined){const group=EXAM_GROUPS.find(g=>g.id===ev.target.value);if(group){selectedExam=group.id;conditionLecture=String(group.start);filter=conditionLecture;caseExam=group.id;roundsOnly=false;practiceMode='all';shuffledIds=[];menu();}return;}
  if(d?.pathdiffMenuLecture!==undefined){conditionLecture=String(ev.target.value);selectedExam=groupForLecture(conditionLecture)?.id||'7';filter=conditionLecture;caseExam=selectedExam;roundsOnly=false;practiceMode='all';shuffledIds=[];return menu();}
 
- if(d?.pathdiffLeadingSelect!==undefined){leading=Number(ev.target.value);leadHint=false;return;}
+ if(d?.pathdiffLeadingSelect!==undefined){leading=Number(ev.target.value);leadHint=false;return view();}
+ if(d?.pathdiffMorph!==undefined){morphDraft=String(ev.target.value||'').slice(0,1200);return;}
  if(d?.pathdiffStudyLecture!==undefined){conditionLecture=String(ev.target.value||'68');return menu();}
  if(d?.pathdiffCaseExam!==undefined){caseExam=String(ev.target.value);roundsOnly=false;filter='all';shuffledIds=[];menu();api.body.querySelector('#vpq-necro-case-list')?.setAttribute('open','');return;}
  if(d?.pathdiffPracticeMode!==undefined){practiceMode=String(ev.target.value);shuffledIds=[];menu();api.body.querySelector('#vpq-necro-case-list')?.setAttribute('open','');return;}
