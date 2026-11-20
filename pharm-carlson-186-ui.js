@@ -12,7 +12,16 @@ let progress=read(SK);progress.seen=Array.isArray(progress.seen)?progress.seen:[
 let personal=read(CK);personal.overrides=personal.overrides||{};personal.added=Array.isArray(personal.added)?personal.added:[];
 const save=()=>{try{localStorage.setItem(CK,JSON.stringify(personal))}catch(e){alert('Could not save locally. Use Export Cards to preserve content.')}};
 const saveProgress=()=>{try{localStorage.setItem(SK,JSON.stringify(progress))}catch(e){}};
-let chosen=new Set(groups),queue=[],position=0,revealed=false,editId=null;
+const sharedFocus=window.VPQCurriculum?.getLectures?.()||[];
+let chosen=new Set(sharedFocus.some(g=>groups.includes(g))?sharedFocus.filter(g=>groups.includes(g)):groups),queue=[],position=0,revealed=false,editId=null;
+const jumpToFlashcards=lecture=>{
+ if(window.parent!==window)window.parent.postMessage({type:'vpq-pharm-bridge',action:'flashcards',lecture},location.origin);
+ else location.href='index.html';
+};
+const backToLearning=()=>{
+ if(window.parent!==window)window.parent.postMessage({type:'vpq-pharm-bridge',action:'home',lecture:[...chosen][0]||'Lecture 1'},location.origin);
+ else location.href='index.html';
+};
 const every=()=>source.map(x=>({...x,...(personal.overrides[x.id]||{})})).concat(personal.added.filter(x=>x&&x.id&&!base.has(x.id)));
 const card=id=>every().find(x=>x.id===id);
 const pool=()=>every().filter(x=>chosen.has(x.lecture));
@@ -31,7 +40,7 @@ function answerHTML(value){
 }
 function home(message=''){
  const items=every(),viewed=progress.seen.filter(x=>base.has(x)).length,known=items.filter(x=>progress.ratings[x.id]==='know').length,weak=items.filter(x=>progress.ratings[x.id]==='miss').length;
- screen.innerHTML='<h2>📚 Professor Guide · 186 prompts + your cards</h2>'+
+ screen.innerHTML='<div class="pg2-actions"><button type="button" class="btn" data-pg2learning="1">← Pharmacology Learning Center</button></div><h2>📚 Professor Guide · 186 prompts + your cards</h2>'+
  '<p>Recall the answer before revealing it. You can correct questions, add your own cards, and export/import your personal collection. The original instructor guide remains intact in GitHub.</p>'+
  (message?'<div class="note">'+esc(message)+'</div>':'')+
  '<div class="note"><b>'+viewed+' / 186 original prompts viewed</b> · '+personal.added.length+' added cards · '+known+' understood · '+weak+' to review</div>'+
@@ -52,7 +61,7 @@ function begin(mode){
 function showQuestion(){
  const x=card(queue[position]);if(!x)return home('This card is no longer available.');
  const custom=!base.has(x.id);
- screen.innerHTML='<div class="section-title"><h2>'+esc(x.lecture)+' · Professor Guide</h2><span class="chip">'+(position+1)+' / '+queue.length+'</span></div>'+
+ screen.innerHTML='<div class="pg2-actions"><button type="button" class="btn" data-pg2learning="1">← Learning Center</button><button type="button" class="btn" data-pg2flash="1">🧠 '+esc(x.lecture)+' flashcards</button></div><div class="section-title"><h2>'+esc(x.lecture)+' · Professor Guide</h2><span class="chip">'+(position+1)+' / '+queue.length+'</span></div>'+
  '<p class="muted">'+esc(x.section||'My Cards')+' · '+(custom?'personal card':'prompt '+x.number)+'</p>'+
  '<div class="pg2-question"><small>Try to answer before revealing:</small><h2>'+esc(x.prompt)+'</h2></div>'+
  (revealed?'<div class="pg2-answer"><h3>Model answer · mechanism and clinical WHY</h3>'+answerHTML(x.answer)+
@@ -119,6 +128,8 @@ screen.addEventListener('click',e=>{
   vpqGuideIds37=sample(items,Math.min(12,items.length)).map(x=>x.id);
   vpqGuideIndex37=0;vpqGuideScore37=0;return vpqGuideQuestion37();
  }
+ if(d.pg2learning!==undefined)return backToLearning();
+ if(d.pg2flash!==undefined){const current=card(queue[position]);return jumpToFlashcards(current?.lecture||[...chosen][0]||'Lecture 1')}
  if(d.pg2home!==undefined||d.pg2cancel!==undefined)return home();
  if(d.pg2start!==undefined)return begin(d.pg2start);
  if(d.pg2reveal!==undefined){revealed=true;const id=queue[position];if(!progress.seen.includes(id))progress.seen.push(id);saveProgress();return showQuestion()}
