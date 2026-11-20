@@ -75,6 +75,8 @@ const style=document.createElement('style');
 style.textContent='.vpqWingArt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.stage[data-room="hallway"] .prop,.stage[data-room="catcorner"] .prop,.stage[data-room="yardview"] .prop,.stage[data-room="hallway"] .roomBanner,.stage[data-room="catcorner"] .roomBanner,.stage[data-room="yardview"] .roomBanner{display:none!important}'+
 '#vpqWingHits{position:absolute;inset:0;z-index:5;pointer-events:none}.vpqWingHit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:16px;box-shadow:none;transform:none!important;padding:0}.vpqWingHit:hover,.vpqWingHit:focus-visible,.vpqWingHit.vpqWingNear{border:3px solid #ffc768;background:#fff1c42c;box-shadow:0 0 17px #ffdb94;outline:2px solid #fffae4}'+
 '.vpqWingHit span{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);font-size:12px;font-weight:900;background:#fff9ff;border:2px solid #b4a2d4;color:#675780;border-radius:14px;padding:6px 8px;white-space:nowrap;box-shadow:0 4px 9px #604e7755}.vpqWingHit.vpqWingNear span{background:#fff2c9;border-color:#e9b15e}.vpqWingHit.vpqWingNear:after{content:"E · INTERACT";position:absolute;top:2%;left:50%;transform:translateX(-50%);background:#fff9df;border:2px solid #ecc16e;border-radius:10px;padding:4px 6px;font-size:10px;font-weight:900;white-space:nowrap}'+
+'.vpqYardWindowEntry{left:10%;top:47%;width:11%;min-width:78px;text-align:center;padding:5px 4px;font-size:10px;background:#fffdf6e8;border-color:#b1a0c5;box-shadow:0 2px 4px #68547f25}'+
+'.vpqCatGlassEntry{left:83%;top:53%;width:12%;min-width:83px;text-align:center;padding:5px 4px;font-size:10px;background:#fffdf6e8;border-color:#b1a0c5;box-shadow:0 2px 4px #68547f25}'+
 '#vpqReceptionExtras{position:absolute;inset:0;z-index:6;pointer-events:none}.vpqReceptionExtra{position:absolute;pointer-events:auto;background:#fffaf4f0;border:2px solid #b59bcc;color:#67517e;border-radius:13px;padding:7px 10px;font-size:12px;font-weight:900;box-shadow:0 5px 8px #68547f55}.vpqReceptionExtra:hover,.vpqReceptionExtra:focus-visible{background:#fff3c8;border-color:#e0b056}@media(max-width:650px){.vpqWingHit span{font-size:9px;white-space:normal;padding:4px}.vpqReceptionExtra{font-size:10px;padding:4px}}';
 document.head.appendChild(style);
 function refresh(){
@@ -89,7 +91,7 @@ function refresh(){
  stage.appendChild(div);
  if(room==='reception'&&stage.dataset.receptionView==='isometric'){
   const n=document.createElement('div');n.id='vpqReceptionExtras';
-  n.innerHTML='<button class="vpqReceptionExtra" data-vpqwingaction="vpqGoYard" style="right:1.5%;top:18%">🐕 Dog yard</button><button class="vpqReceptionExtra" data-vpqwingaction="vpqGoCat" style="right:1.5%;top:31%">🐈 Cat corner</button><button class="vpqReceptionExtra" data-vpqwingaction="vpqBlueprint" style="left:2%;top:3%">🗺️ Floor plan</button>';
+  n.innerHTML='<button class="vpqReceptionExtra vpqYardWindowEntry" data-vpqwingaction="vpqGoYard" aria-label="View dog play yard">🐕 View yard</button><button class="vpqReceptionExtra vpqCatGlassEntry" data-vpqwingaction="vpqGoCat" aria-label="Enter cat corner">🐈 Enter cats</button><button class="vpqReceptionExtra" data-vpqwingaction="vpqBlueprint" style="left:2%;top:3%">🗺️ Floor plan</button>';
   n.addEventListener('click',e=>{const b=e.target.closest('[data-vpqwingaction]');if(b)route(b.dataset.vpqwingaction)});
   stage.appendChild(n);
  }
