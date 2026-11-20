@@ -247,6 +247,19 @@
           ],
           "systems": [],
           "conditionId": "published-ct-9437-boxer-sertoli"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/published-ct-9437-boxer-sertoli-1795212663674-0.jpg",
+          "source": "",
+          "credit": "clinicaltheriogenology.net",
+          "caption": "Oblique ultrasonographic image of the irregular mass (33.2 mm between calipers A and 41.8 mm between calipers B) of suspected retained left testis (note moderate cystic and heterogenous echogenicity appearance)",
+          "type": "clinical",
+          "external": false,
+          "lectures": [
+            "75"
+          ],
+          "systems": [],
+          "conditionId": "published-ct-9437-boxer-sertoli"
         }
       ],
       "photo": {
@@ -308,7 +321,7 @@
         ],
         "best": "Sertoli cell tumor (cryptorchid retained testis)"
       },
-      "updated": "2026-11-20T22:09:33.802Z",
+      "updated": "2026-11-20T22:11:05.135Z",
       "approvedBy": "amppet22-prog"
     }
   },
