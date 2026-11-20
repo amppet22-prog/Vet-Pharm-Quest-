@@ -2969,6 +2969,100 @@
       },
       "updated": "2026-11-20T14:08:19.572Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-78-14": {
+      "title": "Entropion",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-14-1795184025987-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU and google",
+          "caption": "Pathology study reference · Screenshot 2026-11-20 091155.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Eye"
+          ],
+          "conditionId": "pathx-78-14"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-14-1795184027342-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU and google",
+          "caption": "Pathology study reference · Screenshot 2026-11-20 091314.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Eye"
+          ],
+          "conditionId": "pathx-78-14"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-14-1795184028577-2.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU and google",
+          "caption": "Pathology study reference · Screenshot 2026-11-20 091318.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Eye"
+          ],
+          "conditionId": "pathx-78-14"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-14-1795184025987-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU and google",
+        "caption": "Pathology study reference · Screenshot 2026-11-20 091155.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "78"
+        ],
+        "systems": [
+          "Eye"
+        ],
+        "conditionId": "pathx-78-14"
+      },
+      "text": {
+        "title": "Entropion",
+        "gross": "Corneal irritation, nonspecific keratitis, blepharospasm and possible ulceration.",
+        "dx": "Working identification: Entropion. Specimen site: Eye / ocular adnexa. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "why": "Compare: Unlike ectropion, inward eyelid causes direct hair-corneal contact.",
+        "visualClue": "",
+        "compare": "",
+        "notes": "",
+        "etiologyCategories": [
+          "developmental"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{\"dog\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "ocular",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-20T14:13:49.798Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
