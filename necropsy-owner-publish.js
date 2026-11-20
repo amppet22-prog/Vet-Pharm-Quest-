@@ -183,12 +183,24 @@ function tagsFrom(root,prefix){
  return {lectures:Array.from(root.querySelectorAll('[data-np-tag-lecture="'+prefix+'"]:checked')).map(x=>x.value),systems:Array.from(root.querySelectorAll('[data-np-tag-system="'+prefix+'"]:checked')).map(x=>x.value)};
 }
 
-function photoGrid(list){
+function photoGrid(list,options={}){
  if(!list.length)return '';
- return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:10px 0">'+
- list.map((p,i)=>'<figure style="padding:8px;border:1px solid #b6d3cf;border-radius:10px;background:#f3fcfa;margin:0"><img src="'+esc(p.url)+'" alt="'+esc(p.caption||'Published pathology photo')+'" loading="lazy" style="width:100%;height:165px;object-fit:contain"><figcaption style="font-size:11px"><b>'+esc(p.type||'Photo')+' '+(i+1)+'</b><p>'+esc(p.caption||'')+'</p><small>'+esc(p.credit||'')+'</small></figcaption></figure>').join('')+'</div>';
+ const forCase=options.caseViewer===true;
+ return '<div class="'+(forCase?'vpq-case-photo-gallery':'vpq-photo-gallery')+'" style="display:grid;grid-template-columns:repeat(auto-fit,minmax('+(forCase?'220px':'160px')+',1fr));gap:10px;margin:10px 0">'+
+ list.map((p,i)=>{
+  const photoUrl=String(p.url||''),kind=String(p.type||'Photo');
+  const label=kind.charAt(0).toUpperCase()+kind.slice(1)+(list.length>1?' '+(i+1):'');
+  const button=forCase?'<button type="button" data-pathdiff-zoom="'+esc(photoUrl)+'" aria-label="Enlarge '+esc(label)+'" title="Click to enlarge" style="display:block;width:100%;padding:0;background:#fff;border:0;cursor:zoom-in;border-radius:8px;overflow:hidden"><img src="'+esc(photoUrl)+'" alt="'+esc(p.caption||label)+'" loading="lazy" style="display:block;width:100%;height:auto;min-height:215px;max-height:370px;object-fit:contain;background:#f9fcff"></button>':'<img src="'+esc(photoUrl)+'" alt="'+esc(p.caption||label)+'" loading="lazy" style="width:100%;height:165px;object-fit:contain">';
+  const caption=String(p.caption||'').trim(),credit=String(p.credit||'').trim();
+  const isUrl=v=>/^https?:\/\//i.test(v);
+  const attribution=forCase?(credit?'<details style="margin-top:5px"><summary style="cursor:pointer;font-size:11px;color:#526d85">Source / credit</summary>'+(isUrl(credit)?'<a href="'+esc(credit)+'" target="_blank" rel="noopener noreferrer" style="display:block;font-size:11px;overflow-wrap:anywhere">Open source</a>':'<small style="display:block;overflow-wrap:anywhere">'+esc(credit)+'</small>')+'</details>':''):'<small>'+esc(credit)+'</small>';
+  return '<figure class="'+(forCase?'vpq-case-photo-card':'')+'" style="padding:'+(forCase?'8px':'8px')+';border:1px solid #d4e2ed;border-radius:11px;background:#fff;margin:0;min-width:0">'+button+
+  '<figcaption style="font-size:12px;padding:8px 4px 3px"><b>'+esc(label)+'</b>'+(forCase?'<span style="float:right;font-size:11px;color:#577392">⌕ Enlarge</span>':'')+
+  (caption&&!isUrl(caption)?'<p style="font-size:11px;color:#516982;margin:5px 0;overflow-wrap:anywhere">'+esc(caption)+'</p>':'')+
+  attribution+'</figcaption></figure>';
+ }).join('')+'</div>';
 }
-function casePhotoHTML(id,options={}){const items=photosOf(getCase(id));return photoGrid(items.filter(p=>{const t=String(p.type||'').toLowerCase();return options.onlyHistology?t==='histology':options.onlyFollowup?t==='followup':options.includeHistology===false?t!=='histology'&&t!=='followup':t!=='followup'}))}
+function casePhotoHTML(id,options={}){const items=photosOf(getCase(id));return photoGrid(items.filter(p=>{const t=String(p.type||'').toLowerCase();return options.onlyHistology?t==='histology':options.onlyFollowup?t==='followup':options.includeHistology===false?t!=='histology'&&t!=='followup':t!=='followup'}),{caseViewer:true})}
 function specimenPhotoHTML(id){return photoGrid(photosOf(getSpecimen(id)))}
 /* Published-photo index: reuse references without duplicating images or changing their source diagnoses. */
 let photoLecture='all',photoSystem='all',photoSearch='';
