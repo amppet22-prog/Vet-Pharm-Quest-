@@ -305,5 +305,12 @@ function init(api){
   if(act==='next'){qindex++;revealed=false;choice=null;return practice()}
  },true);
 }
-return {init,open:home,inventory:()=>Object.entries(pages).map(([id,p])=>({id,title:p.title,source:p.source||'',sections:(p.sections||[]).length,summary:p.summary||''})),extend:(extra)=>{if(extra?.pages)Object.assign(pages,extra.pages);if(Array.isArray(extra?.replaceQuestions)){const keys=new Set(extra.replaceQuestions.map(q=>q[0]));for(let i=questions.length-1;i>=0;i--){if(keys.has(questions[i][0]))questions.splice(i,1)}questions.push(...extra.replaceQuestions)}if(Array.isArray(extra?.questions))questions.push(...extra.questions)}};
+function openLecture(number){
+ const target=String(number).trim();
+ const found=Object.entries(pages).find(([,p])=>String(p.title||'').match(/^(\d{1,2})\s*[·.\-]/)?.[1]===target);
+ if(!found){home();return false}
+ qindex=0;revealed=false;choice=null;
+ showLesson(found[0]);return true;
+}
+return {init,open:home,openLecture,inventory:()=>Object.entries(pages).map(([id,p])=>({id,title:p.title,source:p.source||'',sections:(p.sections||[]).length,summary:p.summary||''})),extend:(extra)=>{if(extra?.pages)Object.assign(pages,extra.pages);if(Array.isArray(extra?.replaceQuestions)){const keys=new Set(extra.replaceQuestions.map(q=>q[0]));for(let i=questions.length-1;i>=0;i--){if(keys.has(questions[i][0]))questions.splice(i,1)}questions.push(...extra.replaceQuestions)}if(Array.isArray(extra?.questions))questions.push(...extra.questions)}};
 })();
