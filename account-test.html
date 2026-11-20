@@ -32,7 +32,7 @@ button:disabled{opacity:.5;cursor:wait}.primary{background:#695db3;color:white;b
 <label for="confirmPassword">Confirm new password</label><input id="confirmPassword" type="password" minlength="12" required autocomplete="new-password">
 <div class="actions"><button class="primary" type="submit">Update Password</button></div>
 </form>
-<section id="signedIn" hidden><p>Signed in as <strong id="accountEmail"></strong>.</p><div class="actions"><button class="primary" id="signout" type="button">Sign Out</button><button id="returnGame" type="button">Open Vet Pharm Quest</button></div></section>
+<section id="signedIn" hidden><p>✅ Signed in as <strong id="accountEmail"></strong>.</p><div class="actions"><button class="primary" id="signout" type="button">Sign Out</button><button id="returnGame" type="button">Open Vet Pharm Quest</button></div></section>
 <p id="message" role="status" aria-live="polite" hidden></p>
 <p style="font-size:11px;color:#75859b">All accounts have regular player permissions. Request Edit Access and owner Publish Now are unchanged. This preview does not upload or restore game saves.</p>
 </main>
@@ -45,7 +45,7 @@ const PUBLISHABLE_KEY="sb_publishable_PInLcQclmr_snFfb1O10Sg_3JJQWrvy";
 const $=id=>document.getElementById(id);
 const HOME="./";
 const client=window.supabase?.createClient?.(PROJECT_URL,PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-let session=null,recovery=false,busy=false;
+let session=null,recovery=false,busy=false,justSignedOut=false;
 function say(msg,error=false){const el=$("message");el.textContent=msg;el.classList.toggle("error",error);el.hidden=false;}
 function show(){
  $("loading").hidden=!!client;
@@ -53,23 +53,25 @@ function show(){
  $("resetForm").hidden=!client||!recovery;
  $("signedIn").hidden=!client||!session||recovery;
  $("accountEmail").textContent=session?.user?.email||"";
+ $("returnGame").hidden=!session;
 }
 function setBusy(value){busy=value;document.querySelectorAll("button").forEach(b=>b.disabled=value);}
 if(!client){$("loading").textContent="Could not load the account service. Check your internet connection and try refreshing.";return;}
 client.auth.onAuthStateChange((event,newSession)=>{
  session=newSession;
  if(event==="PASSWORD_RECOVERY"){recovery=true;say("Recovery link verified. Choose your new password.");}
- if(event==="SIGNED_OUT")recovery=false;
+ if(event==="SIGNED_OUT"){recovery=false;justSignedOut=true;$("email").value="";$("password").value="";$("newPassword").value="";$("confirmPassword").value="";}
+ if(event==="SIGNED_IN")justSignedOut=false;
  show();
 });
-client.auth.getSession().then(({data,error})=>{if(error)say(error.message,true);else session=data.session;show();}).catch(e=>{say(e.message,true);show();});
+client.auth.getSession().then(({data,error})=>{if(error)say(error.message,true);else if(!justSignedOut)session=data.session;show();}).catch(e=>{say(e.message,true);show();});
 $("authForm").onsubmit=async e=>{e.preventDefault();if(busy)return;setBusy(true);try{
  const {data,error}=await client.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
- if(error)throw error;session=data.session;say("Signed in successfully!");show();
+ if(error)throw error;session=data.session;$("password").value="";say("Signed in successfully!");show();
 }catch(err){say(err.message||"Sign-in failed.",true);}finally{setBusy(false);}};
 $("signup").onclick=async()=>{if(busy)return;if(!$("email").reportValidity()||!$("password").reportValidity())return;setBusy(true);try{
  const {data,error}=await client.auth.signUp({email:$("email").value.trim(),password:$("password").value,options:{emailRedirectTo:location.origin+location.pathname}});
- if(error)throw error;session=data.session||null;
+ if(error)throw error;session=data.session||null;$("password").value="";
  say(data.session?"Account created! You are signed in.":"Check your email to confirm your account. After confirming, return to this page to sign in.");show();
 }catch(err){say(err.message||"Sign-up failed.",true);}finally{setBusy(false);}};
 $("forgot").onclick=async()=>{if(busy)return;if(!$("email").reportValidity())return;setBusy(true);try{
@@ -82,7 +84,7 @@ $("resetForm").onsubmit=async e=>{e.preventDefault();if(busy)return;
  const {error}=await client.auth.updateUser({password:$("newPassword").value});
  if(error)throw error;recovery=false;say("Password changed successfully.");show();
  }catch(err){say(err.message||"Password update failed.",true);}finally{setBusy(false);}};
-$("signout").onclick=async()=>{if(busy)return;setBusy(true);try{const {error}=await client.auth.signOut();if(error)throw error;session=null;say("Signed out. Your game data was not touched.");show();}catch(err){say(err.message,true);}finally{setBusy(false);}};
+$("signout").onclick=async()=>{if(busy)return;setBusy(true);try{const {error}=await client.auth.signOut();if(error)throw error;session=null;justSignedOut=true;$("email").value="";$("password").value="";$("newPassword").value="";$("confirmPassword").value="";say("Signed out successfully. Sign in again below, or continue as a guest. Your game data was not touched.");show();}catch(err){say(err.message,true);}finally{setBusy(false);}};
 $("guest").onclick=()=>location.assign(HOME);
 $("returnGame").onclick=()=>location.assign(HOME);
 show();
