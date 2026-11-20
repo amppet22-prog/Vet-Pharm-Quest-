@@ -826,13 +826,15 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="national-flag-art.js?v=20261120-national-flags3"></script>
 <script src="bespoke-theme-art.js?v=20261120-bespoke-v2"></script>
 <script src="finished-ranch-barnyard-art.js?v=20261120-ranch-barnyard-finished1"></script>
+<script src="reptile-jurassic-collection-art.js?v=20261120-detailed-theme1"></script>
 <script>
 (function(){
  var base=window.VPQ_REWARD_ART;
  if(!base)return;
  var old=base.art;
  base.art=function(item){
-  return window.VPQ_FINISHED_RANCH_BARNYARD_ART?.art(item)||
+  return window.VPQ_REPTILE_JURASSIC_ART?.art(item)||
+   return window.VPQ_FINISHED_RANCH_BARNYARD_ART?.art(item)||
    window.VPQ_NATIONAL_FLAG_ART?.art(item)||
    window.VPQ_BESPOKE_THEME_ART?.art(item)||
    old(item);
