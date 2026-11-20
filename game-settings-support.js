@@ -16,7 +16,7 @@ var d=document.createElement("dialog");d.className="vpq-support-dialog";d.id="vp
 d.setAttribute("aria-label","Vet Pharm Quest Settings & Support");
 d.innerHTML=[
 "<div class='vpq-support-head'><h2>⚙️ Settings & Support</h2><button type='button' data-vpq-close aria-label='Close Settings'>✕</button></div>",
-"<div class='vpq-support-tabs'><button type='button' data-vpq-tab='about' aria-pressed='true'>About & Credits</button><button type='button' data-vpq-tab='requests' aria-pressed='false'>Request Center</button><button type='button' data-vpq-tab='account' aria-pressed='false'>Account & Saves</button></div>",
+"<div class='vpq-support-tabs'><button type='button' data-vpq-tab='about' aria-pressed='true'>About & Credits</button><button type='button' data-vpq-tab='requests' aria-pressed='false'>Request Center</button><button type='button' data-vpq-tab='account' aria-pressed='false'>Account & Saves</button><button type='button' data-vpq-tab='inbox' id='vpq-support-inbox-tab' aria-pressed='false' hidden>🔐 Owner Inbox</button></div>",
 "<div class='vpq-support-body'>",
 "<section class='vpq-support-panel' data-vpq-panel='about'><h3>🐾 Student-made and always growing</h3>",
 "<p><b>Vet Pharm Quest</b> is an independently developed, student-led educational game and evolving work in progress. New rooms, quizzes, atlases, images, learning activities and improvements are added as they are reviewed.</p>",
@@ -25,18 +25,18 @@ d.innerHTML=[
 "<p><b>Privacy:</b> Never include client/patient identifiers, passwords, confidential school files or personal health data in reports.</p>",
 "</section>",
 "<section class='vpq-support-panel' data-vpq-panel='requests' hidden><h3>📝 Request Center</h3>",
-"<p>Report a bug, missing lecture, wrong answer, image/source credit, accessibility problem or feature idea. This prepares a report you can copy and share with the project creator. <b>Reports are not automatically submitted.</b></p>",
+"<p>Report a bug, missing lecture, wrong answer, image/source credit, accessibility problem or feature idea. Send your report privately to the project owner without using GitHub. No account is required to submit; you will receive an explicit confirmation only after the server accepts it.</p>",
 "<label for='vpq-support-type'>Type</label><select id='vpq-support-type'><option>Bug / broken button</option><option>Incorrect clinical or study content</option><option>Missing lecture / flashcard / atlas</option><option>Source or image credit</option><option>Accessibility / layout</option><option>Feature suggestion</option><option>Other</option></select>",
 "<label for='vpq-support-title'>Brief title</label><input id='vpq-support-title' maxlength='120' placeholder='e.g. Necropsy flashcard lecture filter'>",
 "<label for='vpq-support-location'>Room / course / exam / lecture</label><input id='vpq-support-location' maxlength='140' placeholder='e.g. Clinical Pathology • Exam 3'>",
 "<label for='vpq-support-detail'>Details and suggested correction</label><textarea id='vpq-support-detail' maxlength='5000' placeholder='What happened? What did you expect? Add source link if relevant.'></textarea>",
-"<div class='vpq-support-actions'><button type='button' id='vpq-support-copy'>Copy report</button><button type='button' id='vpq-support-download'>Download report</button></div>",
+"<div class='vpq-support-actions'><button type='button' id='vpq-support-send'>📨 Send to owner</button><button type='button' id='vpq-support-copy'>Copy report</button><button type='button' id='vpq-support-download'>Download report</button></div>",
 "<p class='vpq-support-status' id='vpq-support-status' role='status'></p>",
-"<p class='vpq-support-note'>Copy or download your report and share it privately with the creator. There is not yet a built-in submission inbox. Please do not include confidential information.</p></section>",
+"<p class='vpq-support-note'>If delivery is temporarily unavailable, copy or download your report instead. No report is considered sent unless you see a successful confirmation. Do not include confidential information.</p></section>",
 "<section class='vpq-support-panel' data-vpq-panel='account' hidden><h3>🔐 Account & Save Options</h3>",
 "<p>Manage sign-in or select <b>Forgot Password?</b> on the existing account page. Password recovery happens through the account provider; this game panel never asks for your password.</p>",
 "<div class='vpq-support-actions'><a href='account-test.html'>Account Center / Password recovery</a></div>",
-"<p>Check the cloud save indicator before switching devices. Guest progress and some locally edited learning cards may be saved only on this browser until exported or confirmed synced.</p></section></div>"
+"<p>Check the cloud save indicator before switching devices. Guest progress and some locally edited learning cards may be saved only on this browser until exported or confirmed synced.</p></section><section class='vpq-support-panel' data-vpq-panel='inbox' hidden><h3>🔐 Private Owner Request Box</h3><p>Only an authorized owner account may read or manage requests. Players cannot see this inbox.</p><button type='button' id='vpq-support-refresh'>Refresh requests</button><div id='vpq-support-owner-list' role='status'></div></section></div>"
 ].join("");
 document.body.appendChild(d);
 function selectTab(name){
@@ -44,7 +44,7 @@ function selectTab(name){
  d.querySelectorAll("[data-vpq-panel]").forEach(function(p){p.hidden=p.dataset.vpqPanel!==name});
 }
 btn.addEventListener("click",function(){selectTab("about");d.showModal()});
-d.addEventListener("click",function(e){var t=e.target.closest("[data-vpq-tab]");if(t)selectTab(t.dataset.vpqTab);if(e.target.closest("[data-vpq-close]"))d.close()});
+d.addEventListener("click",function(e){var t=e.target.closest("[data-vpq-tab]");if(t){selectTab(t.dataset.vpqTab);if(t.dataset.vpqTab==="inbox")refreshInbox()}if(e.target.closest("[data-vpq-close]"))d.close()});
 function getReport(){
  var type=document.getElementById("vpq-support-type").value;
  var title=document.getElementById("vpq-support-title").value.trim();
@@ -53,6 +53,64 @@ function getReport(){
  if(!title||!detail){document.getElementById("vpq-support-status").textContent="Please add a title and description.";return null}
  return {title:"["+type+"] "+title,body:"Type: "+type+"\nRoom, course, exam or lecture: "+(where||"Not specified")+"\n\nDetails:\n"+detail+"\n\nPlease omit private or patient information."};
 }
+// The private database enforces owner-only reads and updates with Row Level Security.
+// Never trust client-side hiding as the authorization boundary.
+function backend(){return window.VPQ_PLAYER_ACCOUNT?.getClient?.()||null}
+var ownerConfirmed=false;
+async function checkOwner(){
+ var client=backend(),tab=document.getElementById("vpq-support-inbox-tab");
+ if(!client)return;
+ try{
+  var user=(await client.auth.getUser()).data?.user;
+  if(!user)return;
+  var found=await client.from("vpq_request_owners").select("user_id").eq("user_id",user.id).maybeSingle();
+  if(!found.error&&found.data?.user_id===user.id){ownerConfirmed=true;tab.hidden=false}
+ }catch(e){}
+}
+async function refreshInbox(){
+ var list=document.getElementById("vpq-support-owner-list"),client=backend();
+ if(!ownerConfirmed||!client){list.textContent="Please sign into the authorized owner account.";return}
+ list.textContent="Loading requests…";
+ var result=await client.from("vpq_requests").select("id,created_at,category,title,location,details,status").order("created_at",{ascending:false}).limit(100);
+ if(result.error){list.textContent="Could not open owner inbox: "+result.error.message;return}
+ list.replaceChildren();
+ if(!result.data?.length){list.textContent="No requests received yet.";return}
+ for(var item of result.data){
+  var card=document.createElement("section");
+  card.className="vpq-support-note";card.style.margin="10px 0";
+  var h=document.createElement("h4");h.textContent=item.title;h.style.margin="3px 0";
+  var meta=document.createElement("p");meta.textContent=item.category+" · "+(item.location||"Unspecified location")+" · "+new Date(item.created_at).toLocaleString();
+  var detail=document.createElement("p");detail.textContent=item.details;
+  var sel=document.createElement("select");sel.setAttribute("aria-label","Request status");
+  for(var st of ["new","reviewing","resolved"]){var o=document.createElement("option");o.value=st;o.textContent=st[0].toUpperCase()+st.slice(1);o.selected=st===item.status;sel.appendChild(o)}
+  sel.addEventListener("change",async function(id,el){
+   var update=await backend().from("vpq_requests").update({status:el.value}).eq("id",id);
+   if(update.error)alert("Could not update request: "+update.error.message);
+  }.bind(null,item.id,sel));
+  card.append(h,meta,detail,sel);list.appendChild(card);
+ }
+}
+document.getElementById("vpq-support-refresh").addEventListener("click",refreshInbox);
+document.getElementById("vpq-support-send").addEventListener("click",async function(){
+ var report=getReport();if(!report)return;
+ var status=document.getElementById("vpq-support-status"),client=backend();
+ if(!client){status.textContent="Private inbox connection is not configured yet. The report was NOT sent; use Copy or Download.";return}
+ var button=this;button.disabled=true;status.textContent="Submitting securely…";
+ try{
+  var category=document.getElementById("vpq-support-type").value;
+  var title=document.getElementById("vpq-support-title").value.trim();
+  var location=document.getElementById("vpq-support-location").value.trim();
+  var details=document.getElementById("vpq-support-detail").value.trim();
+  var response=await client.from("vpq_requests").insert({category:category,title:title,location:location,details:details});
+  if(response.error)throw response.error;
+  status.textContent="✓ Request received by the private owner inbox. Thank you!";
+  document.getElementById("vpq-support-title").value="";
+  document.getElementById("vpq-support-detail").value="";
+ }catch(error){status.textContent="Request NOT sent: "+(error?.message||"Delivery unavailable")+". Copy or download your report instead."}
+ finally{button.disabled=false}
+});
+setTimeout(checkOwner,700);
+window.addEventListener("vpq-player-auth-change",checkOwner);
 document.getElementById("vpq-support-copy").addEventListener("click",async function(){
  var r=getReport();if(!r)return;
  try{await navigator.clipboard.writeText(r.title+"\n\n"+r.body);document.getElementById("vpq-support-status").textContent="Copied. No report has been submitted."}
