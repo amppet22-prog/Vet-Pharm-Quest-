@@ -834,7 +834,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
  var old=base.art;
  base.art=function(item){
   return window.VPQ_REPTILE_JURASSIC_ART?.art(item)||
-   return window.VPQ_FINISHED_RANCH_BARNYARD_ART?.art(item)||
+   window.VPQ_FINISHED_RANCH_BARNYARD_ART?.art(item)||
    window.VPQ_NATIONAL_FLAG_ART?.art(item)||
    window.VPQ_BESPOKE_THEME_ART?.art(item)||
    old(item);
