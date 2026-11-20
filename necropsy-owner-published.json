@@ -3523,6 +3523,68 @@
       },
       "updated": "2026-11-20T23:13:26.936Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-68-11": {
+      "title": "Rabies — Lyssavirus",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-11-1795216524946-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "68"
+          ],
+          "systems": [
+            "CNS / Neurology"
+          ],
+          "conditionId": "pathx-68-11"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-68-11-1795216524946-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "68"
+        ],
+        "systems": [
+          "CNS / Neurology"
+        ],
+        "conditionId": "pathx-68-11"
+      },
+      "text": {
+        "title": "Rabies — Lyssavirus",
+        "gross": "Gross: Frequently absent; hemorrhage may occur, particularly in spinal cord.",
+        "dx": "Working identification: Rabies — Lyssavirus. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Histology: Nonsuppurative leptomeningitis/perivascular lymphocytes, macrophages and plasma cells; polioencephalomyelitis, brainstem predilection, microgliosis and neuronal degeneration.",
+        "why": "Transmission: Typically saliva or bite; the slide depicts initial local replication, neuromuscular entry and retrograde axoplasmic travel through spinal cord to brain.",
+        "visualClue": "",
+        "compare": "",
+        "notes": "",
+        "etiologyCategories": [],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "infectious",
+        "conditionSubtype": "viruses",
+        "organSystem": "cns",
+        "affectedOrgan": "",
+        "pathogenNames": "Rabies lyssavirus",
+        "diseaseId": "rabies",
+        "zoonoticStatus": "direct",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-20T23:15:26.230Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
