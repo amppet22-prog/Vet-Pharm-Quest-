@@ -666,6 +666,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 .stage[data-theme="winter"] .clinicArt{filter:hue-rotate(155deg) saturate(.88) brightness(1.09)}
 .stage[data-theme="space"] .clinicArt{filter:hue-rotate(200deg) saturate(1.12) brightness(.88)}
 .stage[data-theme="joy"] .clinicArt{filter:saturate(1.45) brightness(1.04)}
+.vpq-reward-theme-head{font-size:13px;font-weight:850;color:#314f77;padding:10px 8px 4px;border-bottom:1px solid #b9d1eb;margin-top:5px}
 </style><style id="vpq-pharm-drug-reference-readable">
 #modalBody .vpqPharmDrugLesson{border:1px solid #bfd0ea;border-radius:14px;padding:13px;background:#fff;line-height:1.55}
 #modalBody .vpqPharmDrugHero{background:#eaf2ff;border-left:6px solid #688fbf;padding:12px 14px;border-radius:10px;margin-bottom:12px}
@@ -1536,19 +1537,19 @@ for(const u of vpqThemedRoomRewards)if(!upgrades.some(v=>v.id===u.id))upgrades.p
 renderUpgrades=function(){
  const root=$('upgradeList');if(!root)return;
  const categories=['All','Level Rewards','Themed Sets','Backgrounds','Decor','Outfits','Accessories'];
- const visible=upgrades.filter(x=>vpqRewardCategory==='All'||x.category===vpqRewardCategory);
+ const visible=upgrades.filter(x=>vpqRewardCategory==='All'||x.category===vpqRewardCategory).sort((a,b)=>vpqRewardCategory==='Themed Sets'?String(a.themeGroup||'').localeCompare(String(b.themeGroup||''))||(a.levelRequired||0)-(b.levelRequired||0):0);
  const owned=upgrades.filter(x=>state.upgrades.includes(x.id)).length;
  root.innerHTML='<div class="vpq-reward-count">🎁 '+owned+'/'+upgrades.length+' rewards collected · '+state.coins+' coins · Level '+(Math.floor((Number(state.xp)||0)/LEVEL_THRESH)+1)+'</div>'+
 
  '<div class="vpq-reward-toolbar">'+categories.map(x=>'<button type="button" data-rewardcat="'+x+'" class="'+(x===vpqRewardCategory?'is-active':'')+'">'+x+'</button>').join('')+'</div>'+
- '<div class="vpq-reward-scroll">'+visible.map(u=>{
+ '<div class="vpq-reward-scroll">'+visible.map((u,i)=>{
   const owned=state.upgrades.includes(u.id);
   const level=Math.floor((Number(state.xp)||0)/LEVEL_THRESH)+1;
   const lockedByLevel=!!u.levelRequired&&level<u.levelRequired;
   const canBuy=!lockedByLevel&&state.coins>=u.price;
   const active=u.theme&&state.activeTheme===u.theme;
   const action=owned?(u.theme?'<button data-rewardequip="'+u.theme+'">'+(active?'Equipped':'Equip')+'</button>':'<button disabled>Owned ✓</button>'):'<button data-upgrade="'+u.id+'" '+(canBuy?'':'disabled')+'>'+(lockedByLevel?'Level '+u.levelRequired+' 🔒':canBuy?'Unlock':'Need coins')+' · '+u.price+' 🪙</button>';
-  return '<div class="vpq-reward-item"><div class="vpq-reward-icon">'+(u.label.match(/^\S+/)||['🎁'])[0]+'</div><div class="vpq-reward-copy"><strong>'+escapeHtml(u.label)+'</strong><small>'+escapeHtml(u.desc)+(u.levelRequired?' · Level '+u.levelRequired+' required':'')+(u.themeGroup?' · '+escapeHtml(u.themeGroup):'')+(u.levelRoom?' · '+({reception:'Reception',treatment:'Treatment Ward',catcorner:'Cat Corner',yardview:'Dog Kennel'}[u.levelRoom]||u.levelRoom):'')+(owned?' · Owned!':'')+'</small></div>'+action+'</div>';
+  return (vpqRewardCategory==='Themed Sets'&&u.themeGroup&&(!i||visible[i-1].themeGroup!==u.themeGroup)?'<div class="vpq-reward-theme-head">'+escapeHtml(u.themeGroup)+' · Collect the set</div>':'')+'<div class="vpq-reward-item"><div class="vpq-reward-icon">'+(u.label.match(/^\S+/)||['🎁'])[0]+'</div><div class="vpq-reward-copy"><strong>'+escapeHtml(u.label)+'</strong><small>'+escapeHtml(u.desc)+(u.levelRequired?' · Level '+u.levelRequired+' required':'')+(u.themeGroup?' · '+escapeHtml(u.themeGroup):'')+(u.levelRoom?' · '+({reception:'Reception',treatment:'Treatment Ward',catcorner:'Cat Corner',yardview:'Dog Kennel'}[u.levelRoom]||u.levelRoom):'')+(owned?' · Owned!':'')+'</small></div>'+action+'</div>';
  }).join('')+'</div>'+
  (state.activeTheme!=='default'?'<button type="button" data-rewardequip="default" style="margin-top:7px">Use original background</button>':'');
 };
