@@ -16,6 +16,7 @@ const patch=(x,y,sc=1)=>'<g transform="translate('+x+' '+y+') scale('+sc+')">'+P
 const flower=(x,y,c='#f5d2b7')=>'<g transform="translate('+x+' '+y+')">'+[0,72,144,216,288].map(a=>'<ellipse cx="0" cy="-7" rx="5" ry="8" fill="'+c+'" transform="rotate('+a+')"/>').join('')+C(0,0,4,'#eab35d')+'</g>';
 const horseShoe=(x,y,sc=1)=>'<g transform="translate('+x+' '+y+') scale('+sc+')">'+P('M-23 14v-22q0-26 23-26t23 26v22H12V-8Q12-22 0-22T-12-8v22z','#dfbb75','#977150',3)+[-16,16].map(xx=>C(xx,5,2.5,'#fff0cc')).join('')+'</g>';
 const rope=(x,y)=>'<g transform="translate('+x+' '+y+')">'+E(0,0,20,12,'none','#d3a36b',7)+E(0,0,20,12,'none','#f4d09d',2)+L('M-14-10l5 3m10-8 4 4m8 11 5 4','#98704b',2)+'</g>';
+const cactusflower=(x,y)=>flower(x,y,'#efb3ba');
 const cactus=(x,y,sc=1)=>'<g transform="translate('+x+' '+y+') scale('+sc+')">'+L('M0 4v-65m0 38q-28 2-28-17v-15m28 20q28 1 28-18v-13','#497b63',16)+L('M0 4v-65m0 38q-28 2-28-17v-15m28 20q28 1 28-18v-13','#81b393',10)+flower(0,-61,'#efb3ba')+'</g>';
 const hay=(x,y)=>'<g transform="translate('+x+' '+y+')">'+R(-28,-12,56,26,'#e1b16f','#a77a45',6,2)+[[-20,-7,24,9],[0,-4,17,8],[10,9,22,1]].map(([a,b,c,d])=>L('M'+a+' '+b+'l'+c+' '+d,'#f6da91',2)).join('')+'</g>';
 const barn=(x,y,sc=1)=>'<g transform="translate('+x+' '+y+') scale('+sc+')">'+P('M-36-6L0-34 36-6v50h-72z','#b95d56','#8c5047',4)+P('M-42-5L0-39 42-5','#7e4642','#7e4642',4)+R(-13,6,26,38,'#f5e5d0','#805749',2,3)+L('M-11 7l22 34M11 7l-22 34','#b87b60',3)+R(-25,4,8,10,'#f9e1a0','#825f4a',1,1)+R(17,4,8,10,'#f9e1a0','#825f4a',1,1)+'</g>';
