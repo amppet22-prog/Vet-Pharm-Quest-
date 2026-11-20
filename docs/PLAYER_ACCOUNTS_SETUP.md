@@ -10,9 +10,10 @@ This work is **not on main** until the owner reviews/merges the pull request. It
 - Existing editing/publish-request UI and password-protected owner publishing remain unmodified.
 - Until Supabase is configured, the button explains that guest play works and account registration is not yet enabled.
 - The existing browser save remains active. A logged-in player can explicitly upload their clinic progress to an account cloud backup, or restore a prior cloud backup. Once activated, subsequent clinic-state saves are backed up after a short debounce. The existing Save Center export/import still works.
-- On cloud restore, a timestamped local backup of the prior clinic state is created before replacement and a page reload. Browser-local game content edits are not sent to the cloud.
+- On cloud restore, the previous supported modules are downloaded to a timestamped recovery JSON and a browser-local recovery snapshot is created before replacement. The cloud-save panel includes an **Undo last restore** button when a local recovery snapshot is available. Legacy clinic-only cloud backups do not delete newer independent module progress. Browser-local game content edits are not sent to the cloud.
 - A background update check detects a new deployed `index.html` version about every five minutes and offers **Save & Refresh**, without forcing a reload. Approved public lesson/photo changes are shared through GitHub Pages and the publishing manifests; local owner drafts are never globally published automatically.
-- Extra progress saved by other stand-alone game systems (including Arcade save keys) is **not yet synchronized**; this first implementation backs up the central `vpq-v2-clinic-state` only.
+- Game-wide progress backup now includes the main clinic, Arcade rewards/case history, Exam setup, recent matches, Bug Battle preferences, lecture selections, shared learning progress, mastery history, One Health practice history, inpatient practice, pathogen lab results and necropsy flashcard practice. Owner drafts, unpublished photos, edit records and encrypted publishing credentials remain local-only.
+- Automatic cloud backup checks for saved state changes about every ten seconds while the game is open and responds sooner to major clinic/Arcade progress events. Cloud writes may still fail when offline or if the browser closes immediately after a change; local saves remain authoritative until an upload succeeds.
 - No password, service-role key, GitHub owner token, or custom administrator flag is included in frontend config.
 
 ## One-time setup (site owner)
@@ -34,7 +35,8 @@ This work is **not on main** until the owner reviews/merges the pull request. It
 - Account records are handled by Supabase. Provide an account deletion/privacy process before broad public launch.
 
 ## Explicitly out of scope for this first increment
-- Cloud backup of non-clinic saves (Arcade and additional module-specific storage); full per-user isolation for guest/browser data remains a later step.
+- Complete independent account/guest save isolation on shared devices remains a later step; browser-local game keys are currently shared by all visitors using that same browser profile. The cloud sync detects other-account and newer-cloud-save scenarios and refuses automatic overwrite, but this is not a full privacy boundary on a shared computer.
+- Any future new study module that uses a new localStorage key must be added explicitly to the save key manifest and tested. Large unpublished photos and owner drafts must never be included.
 - Server-verified edit approvals or approval dashboards.
 - Production password recovery email delivery must still be configured and verified in Supabase.
 - Automatic import of existing browser-local saves into an authenticated account; the player must choose an initial upload or restore, to prevent silent replacement.
@@ -47,7 +49,11 @@ This work is **not on main** until the owner reviews/merges the pull request. It
 - [ ] Password reset sends an email and the recovery link opens the in-app new-password form.
 - [ ] Owner's existing Publish Now path remains functional.
 - [ ] Existing Request Edit Access path still works.
-- [ ] A second browser sees the account session only after signing in (progress is still local).
+- [ ] An account's clinic and Arcade XP, coins, completed cases, lecture selections and practice history reappear after restoring from another browser.
+- [ ] A logout and different account login do not silently overwrite either player's cloud copy.
+- [ ] A fresh visit to the main game or standalone Arcade does not pop the cloud panel until clicked.
+- [ ] Test offline save, browser refresh, rapid progress changes, restore undo, and cloud revision conflict warning.
+- [ ] Verify owner drafts, local photo data, GitHub token vault and content edits are absent from all cloud payloads.
 
 ## Before publishing broadly
 - **Do not confuse cloud backup with globally published educational content.** Each player's clinic progress is private under Row Level Security. Approved lecture/content changes reach every account after the GitHub Pages deployment, and users can refresh when notified. Publishing still requires the owner's existing GitHub-authorized Publish Now flow.
