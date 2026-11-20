@@ -752,7 +752,7 @@ function view(){
  (x.photoToAdd?'<p class="tiny">Suggested photograph: '+safe(x.photoToAdd)+'</p>':'')+(x.sourceArticleUrl?'<p><a href="'+safe(x.sourceArticleUrl)+'" target="_blank" rel="noopener noreferrer">Read original case article</a></p>':'')+'<p><a href="https://slides.davisthompsonfoundation.org/arkive?image=4" target="_blank" rel="noopener noreferrer">Explore Davis–Thompson Noah’s Arkive</a></p><small>Check image attribution and reuse rights before publishing.</small><p><small>'+safe(x.ref||'Source reference not specified')+'</small></p></details>';
  modal('🩺 Patient case · Lecture '+safe(x.lecture),
  '<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:9px"><div class="buttonrow"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>◀ Previous</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next ▶</button></div><div class="buttonrow"><button data-pathdiff-reset="1">↺ Restart</button></div></div>'+
- gross+'<div style="display:grid;grid-template-columns:minmax(0,1.55fr) minmax(240px,0.95fr);gap:14px;align-items:start" class="vpq-case-dual"><div style="min-width:0">'+main+'</div>'+imagePanel+'</div>'+
+ gross+'<div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,1fr);gap:16px;align-items:start" class="vpq-case-dual"><div style="min-width:0">'+main+'</div>'+imagePanel+'</div>'+
  comparison+extraQuestionHTML(x)+resource+
  '<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next patient →</button></div>');
 }
