@@ -316,13 +316,13 @@ function newCaseEditor(seed={}){
 function caseForm(){
  const root=api.body,el=id=>root.querySelector('#'+id),val=id=>String(el(id)?.value||'').trim();
  const fields=['Title','Lecture','System','Species','Age','SpeciesName','Breed','Sex','ReproductiveStatus','History','Gross','Histo','Morph','Mechanism','Tests','Ref'];
- const values=Object.fromEntries(fields.map(x=>[x.toLowerCase(),val('nc'+x)]));
+ const values=Object.fromEntries(fields.map(x=>[x.charAt(0).toLowerCase()+x.slice(1),val('nc'+x)]));
  const opts=Array.from({length:4},(_,i)=>Object.fromEntries(['name','supports','against','hist'].map(k=>[k,String(root.querySelector('[data-nc-'+k+'="'+i+'"]')?.value||'').trim()])));
  if(!values.title||!values.species||!values.history||!values.gross||!values.histo||!values.morph||!values.mechanism||!values.tests||!values.ref)throw Error('Complete all teaching fields, including the reference.');
  if(opts.some(x=>Object.values(x).some(y=>!y)))throw Error('Complete all four diagnosis names, supporting evidence, limitations and histology.');
  if(new Set(opts.map(x=>x.name.toLowerCase())).size!==4)throw Error('The four differential diagnoses must be distinct.');
  if(!/^(67|68|69|70|71|72|73|74|75|76|77|78|79)$/.test(values.lecture))throw Error('Choose a valid lecture.');
- return {lecture:values.lecture,system:values.system||'Pathology',title:values.title.slice(0,180),species:values.species.slice(0,400),history:values.history.slice(0,3500),gross:values.gross.slice(0,3500),histo:values.histo.slice(0,3500),morph:values.morph.slice(0,3500),mechanism:values.mechanism.slice(0,3500),tests:values.tests.slice(0,3500),ref:values.ref.slice(0,350),best:opts[0].name.slice(0,220),options:opts.map((x,i)=>({...x,role:i===0?'best':'less'}))};
+ return {lecture:values.lecture,system:values.system||'Pathology',title:values.title.slice(0,180),species:values.species.slice(0,400),age:values.age.slice(0,80),speciesName:values.speciesName.slice(0,80),breed:values.breed.slice(0,100),sex:values.sex.slice(0,60),reproductiveStatus:values.reproductiveStatus.slice(0,80),history:values.history.slice(0,3500),gross:values.gross.slice(0,3500),histo:values.histo.slice(0,3500),morph:values.morph.slice(0,3500),mechanism:values.mechanism.slice(0,3500),tests:values.tests.slice(0,3500),ref:values.ref.slice(0,350),best:opts[0].name.slice(0,220),options:opts.map((x,i)=>({...x,role:i===0?'best':'less'}))};
 }
 async function publishNewCase(c,token){
  const who=await github('https://api.github.com/user',token);
