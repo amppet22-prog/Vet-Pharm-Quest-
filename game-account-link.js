@@ -46,7 +46,10 @@ function refreshAccountLabel(){
 // The shared cloud auth bridge owns the one Supabase client for this page.
 document.addEventListener("click",async event=>{
  const link=event.target.closest?.('a[href="account-test.html"]');
- if(!link||!window.VPQ_CLOUD_SAVE?.isPending?.())return;
+ if(!link)return;
+ // Immediately detect a fresh unsaved change even before the periodic autosave scan.
+ window.VPQ_CLOUD_SAVE?.queue?.();
+ if(!window.VPQ_CLOUD_SAVE?.isPending?.())return;
  event.preventDefault();
  const target=link.href;
  const saved=await window.VPQ_CLOUD_SAVE.saveNow();
