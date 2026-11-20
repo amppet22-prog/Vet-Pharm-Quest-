@@ -2985,6 +2985,19 @@
       "source": "Pathology lecture LMU",
       "normal": false,
       "id": "specimen-custom-69-leukoencephalomalacia"
+    },
+    "specimen-custom-78-anophthalmia-and-microphthalmia": {
+      "title": "Anophthalmia and Microphthalmia",
+      "lecture": "78",
+      "system": "Eyes",
+      "species": "Dog/cat/horse/Cattle",
+      "gross": "**Anophthalmia**: Complete absence of the eye, mostly bilateral\n**Microphthalmia:** Small, disorganized globe in an orbit of a normally sized eye, unilateral",
+      "dx": "Anopthalmia- absence\nMicropthalmia- small",
+      "histo": "No or little ocular tissue",
+      "why": "Failure to develop the eye or a small amount in a normal orbit. \nMicrophthalmia is more common and unilateral. Most often from traumatic injury to the globe via utero trauma, ischemic injury or infection",
+      "source": "Pathology lecture LMU",
+      "normal": false,
+      "id": "specimen-custom-78-anophthalmia-and-microphthalmia"
     }
   },
   "hiddenSpecimens": [
