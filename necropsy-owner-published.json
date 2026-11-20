@@ -179,6 +179,59 @@
       },
       "updated": "2026-11-20T21:05:23.540Z",
       "approvedBy": "amppet22-prog"
+    },
+    "published-ct-9437-boxer-sertoli": {
+      "title": "Published case · Boxer with persistent alopecia and abdominal mass",
+      "photos": [],
+      "photo": null,
+      "text": {
+        "title": "Published case · Boxer with persistent alopecia and abdominal mass",
+        "species": "6-year-old male Boxer; unilateral orchiectomy at six months, with a contralateral retained testis",
+        "age": "6 years",
+        "speciesName": "Dog",
+        "breed": "Boxer",
+        "sex": "Male",
+        "reproductiveStatus": "Unilaterally castrated at six months; contralateral testis retained (cryptorchid)",
+        "history": "A 6-year-old Boxer underwent removal of one testis at six months of age. Approximately 18 months later he developed persistent generalized alopecia and pruritus and was treated for presumed atopic dermatitis for years without resolution of the alopecia. Clinical signs: Bilateral alopecia, moderate-to-severe scale and lichenification of the sternum, axillae and medial thighs; lichenified and edematous scrotal skin; pendulous, edematous prepuce; elongated/enlarged mammary papillae. Ancillary diagnostics: CBC and serum chemistry were within reported normal limits. Preputial cytology contained superficial epithelial cells. Abdominal ultrasound showed a 4.2 × 3.3 cm irregular, heterogeneous, moderately cystic mass just cranioventral and left of the urinary bladder, suspicious for retained testicular tissue. Mild–moderate iliac lymph node enlargement and splenic nodules were noted; their aspirates supported reactive/hyperplastic changes rather than proven metastasis. Thoracic radiographs showed no pulmonary metastases.",
+        "gross": "Following exploratory laparotomy, a retained left abdominal testis adjacent to the urinary bladder was removed. It measured 5.0 × 4.0 × 3.5 cm and was multinodular, irregularly contoured and partly replaced by a soft tan multinodular mass with multiple brown-fluid-filled cysts.",
+        "histo": "The left testis contained a partially encapsulated, infiltrative, multilobular sex-cord stromal neoplasm. Polygonal-to-elongated neoplastic cells formed coalescing lobules divided by fibrous trabeculae and palisaded along connective-tissue bands. Residual seminiferous tubules were markedly atrophic, devoid of germ cells. Tumor emboli occurred in testicular and pampiniform-plexus vessels; the sampled medial iliac node contained no neoplastic cells.",
+        "morph": "Left abdominal testis: expansile, multilobular, partially infiltrative neoplasm with cystic change, marked adjacent tubular atrophy, and histologically confirmed vascular invasion.",
+        "mechanism": "Neoplastic Sertoli cells can produce endocrine signals including anti-Müllerian hormone and inhibin; tumor-associated estrogenic activity altered hair follicle cycling and contributed to bilateral alopecia and feminization (pendulous prepuce and enlarged mammary papillae). The concurrent pruritus may have reflected separate allergic skin disease. The steep declines in AMH and inhibin B following removal support a gonadal tumor source, but hormone concentrations alone do not establish the microscopic tumor type. Vascular tumor emboli raised future metastatic-risk concerns despite negative staging tests at presentation.",
+        "tests": "Article-confirmed investigations: preputial cytology (superficial epithelial cells); ultrasonography localizing a heterogeneous 4.2 × 3.3 cm retained abdominal testis; normal CBC and serum chemistry; splenic and iliac node cytology; thoracic radiographs without pulmonary metastases; surgical removal with testis, spermatic cord and lymph-node histopathology. AMH decreased from 8,435 to 56 ng/mL three weeks after surgery (reported adult male intact interval 0.2–73.4 ng/mL; castrated interval <0.15 ng/mL, assay-specific). Inhibin B decreased from about 807 to <6 pg/mL; the article reports no comparable reference interval. Estrone sulphate was 1.5 before and 1.3 ng/mL after surgery, without an established canine male reference interval. Recheck and surveillance were advised because of vascular invasion.",
+        "options": [
+          {
+            "name": "Sertoli cell tumor (cryptorchid retained testis)",
+            "supports": "Absent contralateral scrotal testis, suspicious abdominal gonadal mass, bilateral alopecia and feminization changes; tumor histology ultimately confirms Sertoli cell differentiation.",
+            "against": "Endocrine signs and ultrasonography alone cannot prove Sertoli cell tumor; other testicular tumors must be distinguished microscopically.",
+            "hist": "Palisading polygonal-to-elongated neoplastic cells in multilobular fibrous stroma, with seminiferous tubular atrophy and vascular emboli.",
+            "role": "best"
+          },
+          {
+            "name": "Seminoma in a retained testis",
+            "supports": "Cryptorchid testes are predisposed to neoplasia; seminoma can present as an abdominal testicular mass.",
+            "against": "Feminization and hormonal manifestations favor Sertoli cell tumor. Seminoma usually shows sheets of germ cells rather than the described Sertoli-type palisading architecture.",
+            "hist": "Large round germ-cell populations in sheets, sometimes with lymphocytic infiltrates, rather than sex-cord tubular/palisading arrangement.",
+            "role": "less"
+          },
+          {
+            "name": "Leydig (interstitial) cell tumor",
+            "supports": "Older male dogs may develop endocrine-associated testicular tumors and interstitial tumors can alter hormonal profiles.",
+            "against": "Often small, soft, yellow-orange or brown testicular nodules rather than this invasive, cystic retained-testis mass; Sertoli cell tumor better explains the full presentation.",
+            "hist": "Nests or sheets of interstitial endocrine cells without the characteristic Sertoli-cell palisading and fibrous trabecular pattern.",
+            "role": "less"
+          },
+          {
+            "name": "Chronic allergic dermatitis / atopic dermatitis as sole explanation",
+            "supports": "Pruritus and scaling were genuine concerns and some residual itch responded to anti-IL-31 therapy.",
+            "against": "Does not explain the absent testis, abdominal gonadal mass, enlarged mammary papillae, pendulous prepuce and endocrine-marker decline after tumor removal. Separate allergic disease could coexist.",
+            "hist": "Inflammatory skin changes cannot account for the testicular sex-cord stromal neoplasm; the removed testis reveals the decisive pathology.",
+            "role": "less"
+          }
+        ],
+        "best": "Sertoli cell tumor (cryptorchid retained testis)"
+      },
+      "updated": "2026-11-20T21:33:57.634Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "specimens": {
