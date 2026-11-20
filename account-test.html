@@ -165,7 +165,7 @@ function snapshotSummary(data){
  const customizedName=typeof a.name==="string"&&a.name!=="Student Vet";
  const customizedAvatar=typeof a.avatarPreset==="string"&&a.avatarPreset!=="custom"&&a.avatarPreset!=="default";
  const customizedReception=!!collection.equippedWall&&collection.equippedWall!=="paint-peach";
- return {xp,coins,cases,owned,placed,arcadeXP,meaningful:xp>0||coins>0||cases>0||owned>6||placed>2||arcadeXP>0||customizedName||customizedAvatar||customizedReception};
+ return {xp,coins,cases,owned,placed,arcadeXP,meaningful:xp>0||coins>0||cases>0||owned>6||placed>2||arcadeXP>0||customizedName||customizedAvatar||customizedReception,clinicProgress:xp>0||coins>0||cases>0||owned>6||placed>2||customizedName||customizedReception};
 }
 function describeSave(x){
  const a=snapshotSummary(x);
@@ -206,14 +206,26 @@ async function openWithAccountProgress(){
    const current=snapshotSummary(here),online=snapshotSummary(remote);
    const revision=localStorage.getItem("vpq-cloud-revision-"+owner);
    let useCloud=true;
-   if(current.meaningful){
+   // A default, zero-progress clinic is not a separate player save.
+   // Even if it contains starter decorations or old Arcade browser data,
+   // load the populated account clinic automatically on a new device.
+   const cloudHasClinic=online.clinicProgress;
+   const browserHasClinic=current.clinicProgress;
+   const browserIsDefault=!browserHasClinic &&
+     current.xp===0&&current.coins===0&&current.cases===0&&
+     current.owned<=6&&current.placed<=2;
+   if(cloudHasClinic&&browserIsDefault){
+     useCloud=true;
+   }else if(current.meaningful){
      if(localOwner===owner && revision===data.updated_at){
-       // This browser already has the last cloud revision. Retain unsynced local changes.
+       // Same cloud revision, keep possible offline work on this device.
+       useCloud=false;
+     }else if(JSON.stringify(here.slots)===JSON.stringify(remote.slots)){
+       // Already identical; there is nothing to choose.
        useCloud=false;
      }else{
-       useCloud=confirm("Two saved versions exist.\n\nCLOUD ACCOUNT (available on all devices): "+describeSave(remote)+"\nTHIS BROWSER (this device only): "+describeSave(here)+"\n\nOK: Open the CLOUD version on this device.\nCancel: Keep THIS BROWSER version.\n\nNeither version will be overwritten online by this choice.");
+       useCloud=confirm("Two different sets of progress exist.\n\nCLOUD ACCOUNT (available on all devices): "+describeSave(remote)+"\nTHIS BROWSER (this device only): "+describeSave(here)+"\n\nOK: Open the CLOUD version on this device.\nCancel: Keep THIS BROWSER version.\n\nNeither version will be overwritten online by this choice.");
        if(!useCloud){
-         // Pause auto upload until the two versions are compared in the game.
          localStorage.removeItem("vpq-cloud-opt-in-"+owner);
          localStorage.removeItem("vpq-cloud-revision-"+owner);
          say("Opening this browser's progress. Automatic upload is paused until you choose which version to keep.");
