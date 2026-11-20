@@ -24,3 +24,7 @@ body.vpq-embedded-arcade:has(#screen .choices) #screen .feedback{padding:10px 12
 #screen .vpq-ref-interval{margin:6px 0 10px;padding:7px 10px;border:1px solid #bed4ec;border-radius:9px;background:#f3f8ff;font-size:12px}
 #screen .vpq-ref-interval summary{cursor:pointer;font-weight:800;color:#365e8d}
 #screen .vpq-ref-interval p{margin:6px 0 0;line-height:1.35}
+
+/* Keep the advance action available after grading without scrolling past long rationales. */
+body.vpq-embedded-arcade #screen:has(.vpq-next-action){padding-bottom:72px!important}
+body.vpq-embedded-arcade #screen #feedbackArea .vpq-next-action{position:fixed;bottom:10px;left:12px;width:calc(100% - 24px);max-width:none;min-height:44px;z-index:12;box-shadow:0 6px 20px #25446b30}
