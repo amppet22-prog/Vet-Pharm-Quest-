@@ -30,6 +30,10 @@ function caseSequence(){
 }
 function shuffleCases(){shuffledIds=shuffleArray(allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(filter==='all'||x.lecture===filter)).map(x=>x.id));current=null;phase=0;leading=-1;grossLeading=-1;shortlist=[];leadHint=false;caseReward=null;optionOrder=[];return menu();}
 function prepareCase(id){current=id;extraAnswer=-1;extraOpen=false;extraAnswer=-1;extraOpen=false;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
+function signalment(x){
+ const pieces=[x.age,x.breed,x.speciesName,x.sex,x.reproductiveStatus].filter(v=>String(v||'').trim()).map(v=>String(v).trim());
+ return pieces.length?pieces.join(' · '):String(x.species||'Signalment not supplied').replace(/\s+/g,' ').trim();
+}
 function menu(){
  const group=EXAM_GROUPS.find(g=>g.id===(groupForLecture(conditionLecture)?.id||'7'))||EXAM_GROUPS[6];
  const lectures=Array.from({length:group.end-group.start+1},(_,i)=>String(group.start+i));
@@ -44,7 +48,7 @@ function menu(){
  '<div style="display:flex;align-items:center;justify-content:space-between;gap:7px;margin:13px 0 7px"><b>🩺 Patient cases</b><button data-pathdiff-create="1" style="font-size:12px">＋ Add case</button></div>'+
  '<p class="tiny" style="margin:4px 0 9px">Choose a patient for clinical reasoning. Optional extra questions appear in a collapsed dropdown inside related cases.</p>'+
  '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 9px"><button data-pathdiff-list-lecture="1">L'+safe(conditionLecture)+' only</button><button data-pathdiff-list-exam="1">Entire exam</button><button data-pathdiff-all-rounds="1">All exams</button><button data-pathdiff-shuffle="1">🔀 Shuffle</button></div>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:8px">'+matched.map((x,i)=>'<button data-pathdiff-open="'+safe(x.id)+'" style="display:block;text-align:left;padding:11px;border:1px solid #bacde2;border-radius:10px;background:#fff"><b>Case '+(i+1)+' · '+safe(x.title.replace(/^[A-Z]\d+\s*·\s*/,''))+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(x.species||x.system||'Clinical case')+'</small></button>').join('')+'</div>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:8px">'+matched.map((x,i)=>'<button data-pathdiff-open="'+safe(x.id)+'" style="display:block;text-align:left;padding:11px;border:1px solid #bacde2;border-radius:10px;background:#fff"><b>Case '+(i+1)+' · '+safe(x.title.replace(/^[A-Z]\d+\s*·\s*/,''))+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · '+safe(signalment(x))+'</small></button>').join('')+'</div>'+
  (!matched.length?'<p style="padding:10px;border:1px dashed #c8d6e4;border-radius:9px">No cases in this selection yet. Choose another lecture or add one.</p>':'')+
  '<details style="margin-top:13px"><summary style="cursor:pointer;font-size:12px">More resources and editing</summary><div class="buttonrow" style="margin-top:8px"><button data-pathdiff-umbrella="1">Pathology patterns</button><button data-pathdiff-library="1">Photo library</button><button data-pathdiff-condition-index="1">Full lecture inventory</button></div></details>');
 }
@@ -679,9 +683,9 @@ function view(){
  const revealed=phase>=2;
   const sequence=caseSequence(),position=sequence.findIndex(c=>c.id===current);
  const opted=leading>=0?x.options[leading]:null;
- modal('🩺 Case '+(position+1)+' of '+sequence.length+' · L'+safe(x.lecture)+(revealed?' · '+safe(x.title):''),
+ modal('🩺 L'+safe(x.lecture)+' · '+safe(signalment(x)),
  '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:9px"><div class="buttonrow"><button data-pathdiff-list="1">← Cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>◀ Previous</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next ▶</button></div><div class="buttonrow"><button data-pathdiff-edit-case="'+safe(x.id)+'" style="background:#e8f7e9;border:1px solid #80b69b;font-weight:800">✏️ Edit & publish</button><button data-pathdiff-reset="1">↺ Restart</button></div></div>'+
- '<div style="background:#f1f7ff;border-left:4px solid #7798cb;padding:10px;border-radius:8px;margin:10px 0"><b>'+safe(x.species)+' · Patient history</b><p>'+rich(String(x.history||'').startsWith(String(x.species||''))?String(x.history).slice(String(x.species).length).replace(/^[., ]+/, ''):x.history)+'</p><b>Gross findings:</b> '+rich(x.gross)+'</div>'+
+ '<div style="background:#f1f7ff;border-left:4px solid #7798cb;padding:10px;border-radius:8px;margin:10px 0"><b>'+safe(signalment(x))+'</b><p>'+rich(String(x.history||'').startsWith(String(x.species||''))?String(x.history).slice(String(x.species).length).replace(/^[., ]+/, ''):x.history)+'</p><b>Gross findings:</b> '+rich(x.gross)+'</div>'+
  '<div style="max-width:100%"><div>'+
  '<h4 style="margin:4px 0">1. Build your differential list</h4><p class="tiny">Select every reasonable possibility. More than one diagnosis may fit early findings.</p>'+
  x.options.map((o,i)=>'<button data-pathdiff-toggle="'+i+'" aria-pressed="'+shortlist.includes(i)+'" style="display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border:2px solid '+(shortlist.includes(i)?'#4784b5':'#dbe4ef')+';background:'+(shortlist.includes(i)?'#ecf6ff':'#fff')+';border-radius:10px">'+(shortlist.includes(i)?'☑ ':'☐ ')+safe(o.name)+'</button>').join('')+
