@@ -44,6 +44,15 @@ function refreshAccountLabel(){
  showCurrentUser(window.VPQ_PLAYER_ACCOUNT?.getUser?.()?.email||null);
 }
 // The shared cloud auth bridge owns the one Supabase client for this page.
+document.addEventListener("click",async event=>{
+ const link=event.target.closest?.('a[href="account-test.html"]');
+ if(!link||!window.VPQ_CLOUD_SAVE?.isPending?.())return;
+ event.preventDefault();
+ const target=link.href;
+ const saved=await window.VPQ_CLOUD_SAVE.saveNow();
+ if(saved){location.assign(target);return;}
+ if(confirm("Your latest progress has not been confirmed online yet. It is still stored in this browser. Continue to Account Center anyway?"))location.assign(target);
+},true);
 window.addEventListener("vpq-player-auth-change",refreshAccountLabel);
 refreshAccountLabel();
 })();
