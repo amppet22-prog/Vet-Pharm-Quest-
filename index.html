@@ -2486,7 +2486,12 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   const saved=selected().find(x=>list.includes(x));
   return menuState.focus=saved||list[0];
  }
- function actionForFocus(action,lec){
+  function drugMatchCount(lecture){
+  const exam1={'Lecture 1':5,'Lecture 2':5,'Lecture 3':6,'Lecture 4':12,'Lecture 5':6,'Lectures 6–7':6,'Lecture 8':4,'Lecture 9':5};
+  if(exam1[lecture])return exam1[lecture];
+  return (window.VPQ_PHARM_NEXT?.drugs||[]).filter(d=>d.lecture===lecture&&d.name&&d.class&&d.moa&&d.uses).length;
+ }
+function actionForFocus(action,lec){
   const id=lec||focusLecture();
   if(action==='flash'){vpqExam2QuickRecall?.select?.(id);return vpqExam2QuickRecall?.menu?.()}
   if(action==='learn'){if(vpqPharmNext?.lectures?.some(x=>x.id===id))return vpqPharmNextLesson(id);return launch('learn',id)}
@@ -2494,7 +2499,10 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(action==='prof'){if(/^Lecture (1[1-9]|20)$/.test(id))return vpqExam2HighYield('objectives',id);setPending([id]);saveSelection();return launchGame('guide')}
   if(action==='case'){setPending([id]);saveSelection();return openCases('Pharmacology')}
   if(action==='arcade'){setPending([id]);saveSelection();return launchGame(/^Lecture (1[1-9]|20)$/.test(id)?'exam2-challenge':'exam-center')}
-  if(action==='match'){setPending([id]);saveSelection();return launchGame('match')}
+  if(action==='match'){
+   if(drugMatchCount(id)<3)return showModal('🧩 Drug Match','<p>This lecture needs at least three distinct matching pairs before a useful game can start.</p><button data-vpqlfhome="1">← Pharmacology Learning Center</button>');
+   setPending([id]);saveSelection();return launchGame('match')
+  }
   if(action==='battle'){setPending([id]);saveSelection();return launchGame('battle')}
   if(action==='mastery'){setPending([id]);saveSelection();return masteryScreen()}
  }
@@ -2511,14 +2519,14 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   '<label>Current lecture<select data-vpqlffocus="1" aria-label="Choose Pharmacology lecture">'+curriculum.courses.map(([name,,desc])=>'<option value="'+escapeHtml(name)+'" '+(name===focus?'selected':'')+'>'+escapeHtml(name+' · '+desc)+'</option>').join('')+'</select></label></div>'+
   '<div class="vpqPharmFlowSteps">'+
   btn('learn','1 · 📖 Understand','Lesson, physiology, drug actions and clinical WHY.')+
-  btn('flash','2 · 🧠 Remember',n+' focused flashcards, missed-card review.','vpqPharmFlowFeatured')+
+  btn('flash','2 · 🧠 Remember',n+' flashcards → try Drug Match next.','vpqPharmFlowFeatured')+
   btn('clinical','3 · 🩺 Apply','Patient-style questions with explanation.')+
   btn('mastery','4 · 🎓 Assess','Independent mastery and tracked weak points.')+'</div>'+
   '<div class="vpqPharmFlowLink"><b>More ways to practice this lecture</b><div>'+
   btn('prof','📋 Professor Guide',e2?'Instructor objectives for this lecture.':'Course-style recall in the Arcade.')+
   btn('case','🐾 Patient Cases','Work through clinical reasoning and decisions.')+
   btn('arcade','🕹️ Exam Arcade',e2?'Exam 2 clinical challenge with XP and explanations.':'Exam 1 Professor Guide and Exam Boss rounds.')+
-  btn('match','🧩 Drug Match','Drug classes, names and targets; specialized coverage.')+
+  btn('match','🧩 Drug Match',drugMatchCount(focus)+' available drug or mechanism pairs · practice after flashcards.')+
   btn('battle','🦠 Bug Battles','Antibiotic resistance and pathogen challenges.')+'</div></div>'+
   '<div class="vpqPharmFlowReview"><b>🔁 Your review queues</b><p><strong>'+due+'</strong> missed flashcards in '+escapeHtml(focus)+' · <strong>'+arcadeWeak+'</strong> Arcade misses across your history · <strong>'+professorWeak+'</strong> self-rated Professor Guide cards to review.</p><small>These are separate saved records, not a combined exam grade. Review by lecture or enter Arcade Missed Concepts.</small><div class="buttonrow"><button data-vpqlfroute="flash">🧠 Review flashcards</button><button data-vpqlfgame="review">📒 Arcade missed concepts</button></div></div>'+
   '<p class="vpqPharmFlowHelp">Understand → Recall → Apply → Assess is the recommended sequence, not a requirement. Arcade games and cases reinforce the same lecture content. Exam 1 and Exam 2 share the flashcard interface.</p></section>';
@@ -2593,7 +2601,12 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  },true);
  const pharmFlowStyle=document.createElement('style');
  pharmFlowStyle.textContent='.vpqPharmFlowHome{border:1px solid #b7cde8;border-radius:15px;background:#f7faff;padding:16px;margin:0 0 13px}.vpqPharmFlowHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}.vpqPharmFlowHead>div{flex:1;min-width:210px}.vpqPharmFlowHead b{font-size:18px;color:#23456f}.vpqPharmFlowHead p{margin:5px 0;font-size:12px;color:#506784}.vpqPharmFlowHead label{font-size:11px;font-weight:800;color:#476387;min-width:200px;flex:1;max-width:380px}.vpqPharmFlowHead select{display:block;width:100%;padding:10px;margin-top:5px;background:#fff;border:1px solid #a6c2e6;border-radius:9px;color:#243d60}.vpqPharmFlowSteps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:14px 0}.vpqPharmFlowTile{display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left;white-space:normal;border:1px solid #c5d6ea;border-radius:11px;background:white;padding:12px;min-width:0;min-height:105px}.vpqPharmFlowTile b{font-size:14px;color:#29476a}.vpqPharmFlowTile small{font-size:12px;line-height:1.4;color:#536a83}.vpqPharmFlowFeatured{background:#eaf3ff;border:2px solid #719bcf}.vpqPharmFlowLink{padding-top:12px;border-top:1px solid #d3dfed}.vpqPharmFlowLink>b{display:block;margin-bottom:9px;font-size:13px;color:#365578}.vpqPharmFlowLink>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.vpqPharmFlowLink .vpqPharmFlowTile{min-height:73px;padding:10px}.vpqPharmFlowHelp{font-size:12px;color:#536b86;line-height:1.5;margin:11px 0 0}.vpqPharmFlowReview{margin-top:12px;padding:12px;background:#fff;border:1px solid #cfdaeb;border-radius:11px}.vpqPharmFlowReview>b{display:block;color:#315780;font-size:13px}.vpqPharmFlowReview p{font-size:12px;margin:7px 0;color:#435d79;line-height:1.5}.vpqPharmFlowReview small{font-size:11px;color:#6a7d95}.vpqPharmFlowReview .buttonrow{margin-top:9px}.vpqPharmFlowDetails{border:1px solid #c9d6e8;background:#fbfcff;border-radius:13px;padding:12px;margin:12px 0}.vpqPharmFlowDetails>summary{cursor:pointer;font-size:14px;font-weight:800;color:#2e527c}.vpqPharmFlowDetails[open]>summary{margin-bottom:12px}@media(max-width:700px){.vpqPharmFlowSteps{grid-template-columns:repeat(2,minmax(0,1fr))}.vpqPharmFlowLink>div{grid-template-columns:1fr}.vpqPharmFlowTile{min-height:105px}.vpqPharmFlowHead label{max-width:none}}';document.head.appendChild(pharmFlowStyle);
- // Only receive navigation from the same-origin Arcade iframe currently opened in this modal.
+  window.VPQ_LAUNCH_PHARM_DRUG_MATCH=function(lecture){
+  const valid=curriculum.courses.some(c=>c[0]===lecture);
+  if(valid)menuState.focus=lecture;
+  return actionForFocus('match',valid?lecture:focusLecture());
+ };
+// Only receive navigation from the same-origin Arcade iframe currently opened in this modal.
  window.addEventListener('message',event=>{
   if(event.origin!==location.origin||!event.data||event.data.type!=='vpq-pharm-bridge')return;
   const frame=$('modalBody')?.querySelector('iframe[src*="pharm-arcade.html"]');
