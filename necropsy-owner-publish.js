@@ -188,7 +188,7 @@ function photoGrid(list){
  return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:10px 0">'+
  list.map((p,i)=>'<figure style="padding:8px;border:1px solid #b6d3cf;border-radius:10px;background:#f3fcfa;margin:0"><img src="'+esc(p.url)+'" alt="'+esc(p.caption||'Published pathology photo')+'" loading="lazy" style="width:100%;height:165px;object-fit:contain"><figcaption style="font-size:11px"><b>'+esc(p.type||'Photo')+' '+(i+1)+'</b><p>'+esc(p.caption||'')+'</p><small>'+esc(p.credit||'')+'</small></figcaption></figure>').join('')+'</div>';
 }
-function casePhotoHTML(id,options={}){const items=photosOf(getCase(id));return photoGrid(items.filter(p=>options.onlyHistology?String(p.type||'').toLowerCase()==='histology':options.includeHistology===false?String(p.type||'').toLowerCase()!=='histology':true))}
+function casePhotoHTML(id,options={}){const items=photosOf(getCase(id));return photoGrid(items.filter(p=>{const t=String(p.type||'').toLowerCase();return options.onlyHistology?t==='histology':options.onlyFollowup?t==='followup':options.includeHistology===false?t!=='histology'&&t!=='followup':t!=='followup'}))}
 function specimenPhotoHTML(id){return photoGrid(photosOf(getSpecimen(id)))}
 /* Published-photo index: reuse references without duplicating images or changing their source diagnoses. */
 let photoLecture='all',photoSystem='all',photoSearch='';
@@ -263,7 +263,7 @@ async function editor(type,id){
  '<label style="display:block;margin:5px 0">Caption for this photo<textarea rows="2" data-np-photo-caption="'+i+'" style="display:block;width:100%">'+esc(p.caption||'')+'</textarea></label>'+
  '<label style="display:block;margin:5px 0">Photo credit / license<input data-np-photo-credit="'+i+'" style="display:block;width:100%;padding:6px" value="'+esc(p.credit||'')+'"></label>'+
  '<label style="display:block;margin:5px 0">Original source URL<input data-np-photo-source="'+i+'" data-np-original-source="'+esc(p.source||'')+'" style="display:block;width:100%;padding:6px" placeholder="https://… (if applicable)" value="'+esc(p.source||'')+'"></label>'+
- '<label style="display:block;margin:5px 0">Photo type<select data-np-photo-type="'+i+'" style="display:block;width:100%;padding:6px">'+['gross','histology','clinical','illustration'].map(t=>'<option value="'+t+'"'+(t===(p.type||'gross')?' selected':'')+'>'+({gross:'Gross',histology:'Histology / H&E',clinical:'Clinical',illustration:'Illustration'}[t])+'</option>').join('')+'</select></label>'+
+ '<label style="display:block;margin:5px 0">Photo type<select data-np-photo-type="'+i+'" style="display:block;width:100%;padding:6px">'+['gross','histology','clinical','illustration','followup'].map(t=>'<option value="'+t+'"'+(t===(p.type||'gross')?' selected':'')+'>'+({gross:'Gross',histology:'Histology / H&E',clinical:'Clinical',illustration:'Illustration',followup:'Follow-up / outcome'}[t])+'</option>').join('')+'</select></label>'+
  photoTagsHTML('existing-'+i,p.lectures||[],p.systems||[])+
  '<label style="display:block;margin-top:7px"><input type="checkbox" data-np-remove="'+i+'"> Remove this published photo</label></div></div>').join(''):'<p>No published photos yet.</p>')+
  (existing.length?'<label style="display:block;margin:8px 0"><input type="checkbox" id="npOwnerReplaceAll"> Replace all published photos with new uploads (intentional)</label>':'')+
@@ -272,7 +272,7 @@ async function editor(type,id){
  '<label style="display:block">Select one or several images<input id="npOwnerFiles" type="file" multiple accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:6px 0"></label>'+
  '<div id="npOwnerFileDetails" style="margin:8px 0"></div>'+
  '<label style="display:block">Or add a direct HTTPS image URL<input id="npOwnerImageUrl" type="url" placeholder="https://example.org/image.jpg" style="width:100%;padding:8px"></label>'+
- '<label style="display:block">Type of new photos<select id="npOwnerKind" style="display:block;width:100%;padding:8px"><option value="gross">Gross</option><option value="histology">Histology / H&E</option><option value="clinical">Clinical</option><option value="illustration">Illustration</option></select></label>'+
+ '<label style="display:block">Type of new photos<select id="npOwnerKind" style="display:block;width:100%;padding:8px"><option value="gross">Gross</option><option value="histology">Histology / H&E</option><option value="clinical">Clinical</option><option value="illustration">Illustration</option><option value="followup">Follow-up / outcome (hidden until comparison)</option></select></label>'+
  '<label style="display:block">Caption (optional)<textarea id="npOwnerCaption" rows="2" style="width:100%" placeholder="Species, tissue, lesion and stain"></textarea></label>'+
  '<label style="display:block">Source URL (required only for an external image link)<input id="npOwnerSource" type="url" style="width:100%;padding:8px" placeholder="https://..."></label>'+
  '<label style="display:block">Photo credit or license (optional for uploaded files)<input id="npOwnerCredit" style="width:100%;padding:8px" placeholder="Photographer / license"></label>'+
@@ -391,7 +391,7 @@ function readFields(){
  for(const p of existingPhotoEdits){
   const original=root.querySelector('[data-np-photo-source="'+existingPhotoEdits.indexOf(p)+'"]')?.dataset.npOriginalSource||'';
   if(p.source!==original&&p.source&&!goodUrl(p.source))throw Error('A changed photo source must use HTTPS, or be left blank.');
-  if(!['gross','histology','clinical','illustration'].includes(p.type))throw Error('Select a valid photo type.');
+  if(!['gross','histology','clinical','illustration','followup'].includes(p.type))throw Error('Select a valid photo type.');
  }
 
  const newCount=files.length+(draftData?1:0)+(external?1:0);
