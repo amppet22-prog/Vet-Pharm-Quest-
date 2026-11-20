@@ -3125,6 +3125,70 @@
       },
       "updated": "2026-11-20T14:16:22.073Z",
       "approvedBy": "amppet22-prog"
+    },
+    "specimen-custom-78-corneal-dermoid": {
+      "title": "Corneal dermoid",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-78-corneal-dermoid-1795184382662-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Eye"
+          ],
+          "conditionId": "specimen-custom-78-corneal-dermoid"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-78-corneal-dermoid-1795184382662-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "78"
+        ],
+        "systems": [
+          "Eye"
+        ],
+        "conditionId": "specimen-custom-78-corneal-dermoid"
+      },
+      "text": {
+        "title": "Corneal dermoid",
+        "gross": "Ectopic hair follicles on or within the cornea",
+        "dx": "Corenal dermoid",
+        "histo": "Ectopic hair follicles and adnexal glands within the cornea",
+        "why": "It just be doing it sometimes idk dawg",
+        "visualClue": "",
+        "compare": "",
+        "notes": "",
+        "etiologyCategories": [
+          "developmental"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "ocular",
+        "affectedOrgan": "Eyes",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-20T14:19:44.105Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
