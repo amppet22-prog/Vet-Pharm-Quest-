@@ -18,6 +18,12 @@
       "answer": "They close beta-cell ATP-sensitive K+ channels.",
       "why": "They need functioning beta cells and may cause hypoglycemia.\nThis is an insulin alternative. (dont do it)",
       "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
+    },
+    "pharm-e2-diabetes-11-077": {
+      "prompt": "Why does severe insulin resistance increase EMS (Equine Metabolic Syndrome) laminitis risk?",
+      "answer": "Sustained hyperinsulinemia can damage lamellar function.",
+      "why": "The link is endocrinopathic laminitis, not always hyperglycemia.",
+      "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
     }
   },
   "custom": [
