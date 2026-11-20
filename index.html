@@ -672,8 +672,8 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 .vpq-room-furniture:hover{filter:drop-shadow(0 4px 8px #6984cf)}
 .vpq-furniture-body{position:relative;width:100%;height:100%;display:block}
 .vpq-furniture-body i{position:absolute;box-sizing:border-box;display:block}
-.vpq-furniture-sofa i:first-child{left:6%;right:6%;top:14%;bottom:29%;background:#d991b1;border:4px solid #8d6680;border-radius:17px 17px 8px 8px}
-.vpq-furniture-sofa i:nth-child(2){left:0;right:0;bottom:13%;height:29%;background:#efb1c9;border:4px solid #8d6680;border-radius:8px}
+.vpq-furniture-sofa i:first-child{left:6%;right:6%;top:14%;bottom:29%;background:var(--vpq-furn-main,#d991b1);border:4px solid var(--vpq-furn-trim,#8d6680);border-radius:17px 17px 8px 8px}
+.vpq-furniture-sofa i:nth-child(2){left:0;right:0;bottom:13%;height:29%;background:var(--vpq-furn-highlight,#efb1c9);border:4px solid var(--vpq-furn-trim,#8d6680);border-radius:8px}
 .vpq-furniture-sofa i:last-child{left:18%;top:34%;width:25%;height:22%;background:#fdf1d7;border-radius:7px;box-shadow:36px 0 #c4ddf6}
 .vpq-furniture-table i:first-child{left:5%;right:5%;top:41%;height:22%;background:#bb855b;border:4px solid #876043;border-radius:45%}
 .vpq-furniture-table i:nth-child(2){left:26%;top:58%;width:8%;height:32%;background:#876043;box-shadow:38px 0 #876043}
@@ -688,16 +688,16 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 .vpq-furniture-plant i:nth-child(2){left:43%;top:13%;width:10%;height:46%;background:#608b6b}
 .vpq-furniture-plant i:last-child{left:13%;top:11%;width:37%;height:43%;background:#69b589;border-radius:0 90% 0 90%;box-shadow:30px 3px #4f9e72;transform:rotate(22deg)}
 .vpq-furniture-tree i:first-child,.vpq-furniture-pod i:first-child{left:44%;top:8%;width:12%;height:79%;background:#ae977b}
-.vpq-furniture-tree i:nth-child(2),.vpq-furniture-pod i:nth-child(2){left:8%;top:43%;width:61%;height:17%;background:#e9c8a6;border:3px solid #ac8c70;border-radius:8px}
-.vpq-furniture-tree i:last-child,.vpq-furniture-pod i:last-child{right:4%;top:8%;width:46%;height:40%;background:#edd4b7;border:3px solid #ac8c70;border-radius:50%}
+.vpq-furniture-tree i:nth-child(2),.vpq-furniture-pod i:nth-child(2){left:8%;top:43%;width:61%;height:17%;background:var(--vpq-furn-main,#e9c8a6);border:3px solid var(--vpq-furn-trim,#ac8c70);border-radius:8px}
+.vpq-furniture-tree i:last-child,.vpq-furniture-pod i:last-child{right:4%;top:8%;width:46%;height:40%;background:var(--vpq-furn-highlight,#edd4b7);border:3px solid var(--vpq-furn-trim,#ac8c70);border-radius:50%}
 .vpq-furniture-pod i:last-child{background:#c8b5ee;border-color:#8f80be}
 .vpq-furniture-bed i:first-child{left:5%;right:5%;bottom:17%;height:44%;background:#a9c4e7;border:4px solid #758eb7;border-radius:47%}
 .vpq-furniture-bed i:nth-child(2){left:21%;right:21%;bottom:24%;height:22%;background:#ffedd2;border-radius:45%}
-.vpq-furniture-box i:first-child{left:10%;right:10%;top:39%;height:44%;background:#b7d2a5;border:4px solid #719779;border-radius:4px 4px 9px 9px}
+.vpq-furniture-box i:first-child{left:10%;right:10%;top:39%;height:44%;background:var(--vpq-furn-main,#b7d2a5);border:4px solid var(--vpq-furn-trim,#719779);border-radius:4px 4px 9px 9px}
 .vpq-furniture-box i:nth-child(2){left:5%;right:5%;top:30%;height:16%;background:#9bc5a8;border:3px solid #719779;border-radius:8px}
 .vpq-furniture-box i:last-child{left:25%;top:15%;width:22%;height:22%;background:#efaab6;border-radius:50%;box-shadow:26px 0 #a5b8eb}
 .vpq-furniture-lamp i:first-child{left:43%;top:25%;width:9%;height:68%;background:#9b9b9b}
-.vpq-furniture-lamp i:nth-child(2){left:25%;top:6%;width:46%;height:34%;background:#ffe4b8;border:4px solid #b7a17f;border-radius:14px 14px 3px 3px}
+.vpq-furniture-lamp i:nth-child(2){left:25%;top:6%;width:46%;height:34%;background:var(--vpq-furn-highlight,#ffe4b8);border:4px solid var(--vpq-furn-trim,#b7a17f);border-radius:14px 14px 3px 3px}
 .vpq-furniture-lamp i:last-child{left:23%;bottom:5%;width:55%;height:8%;background:#929292;border-radius:10px}
 .vpq-furniture-shoprow{padding:10px;border:1px solid #d7dfea;background:#fafdff;border-radius:11px;margin:7px 0}
 .vpq-furniture-shoprow small{display:block;margin:3px 0 8px;font-size:11px;color:#546d88}
@@ -709,7 +709,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 .vpq-lvl-showroom-controls,.vpq-lvl-theme-tabs{display:flex;flex-wrap:wrap;gap:6px}.vpq-lvl-showroom-controls button,.vpq-lvl-theme-tabs button{font-size:11px;line-height:1.3;padding:8px 9px;border-radius:9px}.vpq-lvl-theme-tabs{max-height:150px;overflow:auto;padding:8px 0}.vpq-lvl-theme-tabs button{background:#f7f9ff;border:1px solid #becfe5}.vpq-lvl-theme-tabs button.chosen{background:#fff0c8;border:2px solid #c99e4f;font-weight:900}.vpq-lvl-theme-title{font-size:16px!important;margin:11px 0 5px}
 .vpq-lvl-reward-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:9px;margin-top:10px}.vpq-lvl-reward-card{display:grid;grid-template-columns:53px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;gap:5px 9px;border:1px solid #c9d4e5;border-radius:12px;background:#fafbff;padding:10px;min-width:0}.vpq-lvl-thumb{width:52px;height:48px;display:flex;align-items:center;justify-content:center;border:1px solid #d9dce8;border-radius:9px;background:#f0f5ff}.vpq-lvl-item-emoji{font-size:29px}.vpq-lvl-flag-swatch{display:block;width:39px;height:23px;border:1px solid #a4adc4;box-shadow:0 2px 4px #0002}.vpq-lvl-item-info{min-width:0}.vpq-lvl-item-info b{display:block;font-size:12px;line-height:1.3}.vpq-lvl-item-info small{display:block;font-size:10px;color:#5d6f83;line-height:1.4;margin-top:2px}.vpq-lvl-reward-card button{grid-column:1/-1;font-size:11px;padding:8px;font-weight:800}.vpq-lvl-reward-card button:disabled{background:#edf0f5;color:#657389;border:1px solid #d4dbe6;opacity:1}
 .vpq-room-furniture .vpq-furniture-glyph{position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);font-size:25px;line-height:1;pointer-events:none;text-shadow:0 2px 2px #0003}
-.vpq-furniture-rug{width:113px;height:48px;z-index:2;filter:drop-shadow(0 3px 3px #0003)}.vpq-furniture-rug .vpq-furniture-body{border-radius:50%;background:radial-gradient(ellipse at center,#fcf0ca 0 42%,#8db8a9 44% 57%,#ecd0a7 59% 75%,#b58eab 78%);border:3px solid #9b87a5;transform:scaleY(.69)}.vpq-furniture-rug .vpq-furniture-glyph{font-size:20px;top:40%}
+.vpq-furniture-rug{width:113px;height:48px;z-index:2;filter:drop-shadow(0 3px 3px #0003)}.vpq-furniture-rug .vpq-furniture-body{border-radius:50%;background:radial-gradient(ellipse at center,var(--vpq-furn-highlight,#fcf0ca) 0 42%,var(--vpq-furn-main,#8db8a9) 44% 57%,var(--vpq-furn-highlight,#ecd0a7) 59% 75%,var(--vpq-furn-trim,#b58eab) 78%);border:3px solid var(--vpq-furn-trim,#9b87a5);transform:scaleY(.69)}.vpq-furniture-rug .vpq-furniture-glyph{font-size:20px;top:40%}
 .vpq-furniture-banner{width:92px;height:66px}.vpq-furniture-banner .vpq-furniture-body{border:5px solid #b28b5e;background:linear-gradient(130deg,#fff7cc,#ddccf4);border-radius:6px;box-shadow:inset 0 0 0 3px #f9fafc}.vpq-furniture-banner .vpq-furniture-glyph{font-size:34px;top:51%}
 .vpq-furniture-terrarium{width:100px;height:66px}.vpq-furniture-terrarium .vpq-furniture-body{border:6px solid #93b6be;background:linear-gradient(#cbeef6c9 0 72%,#b7cd99 72%);border-radius:10px}.vpq-furniture-terrarium .vpq-furniture-glyph{top:49%;font-size:35px}
 .vpq-furniture-flag{width:90px;height:74px}.vpq-furniture-flag .vpq-furniture-body{width:68%;height:48%;position:absolute;left:20%;top:14%;background:var(--vpq-flag-colors,#f8f8f8);border:1px solid #8898aa;box-shadow:0 3px 5px #0003}.vpq-furniture-flag .vpq-furniture-body:before{content:"";position:absolute;width:3px;height:73px;left:-5px;top:-7px;background:#81858b}.vpq-furniture-flag .vpq-furniture-body i{display:none}.vpq-furniture-flag .vpq-furniture-glyph{font-size:33px;top:39%;left:53%}.vpq-furniture-flag[style*="--vpq-flag-colors"] .vpq-furniture-glyph{display:none}
@@ -1617,6 +1617,7 @@ renderUpgrades=function(){
 /* Illustrated clinic furnishings: editable positions, hidden state, room-specific ownership. */
 const vpqFurnitureRoomList=[['reception','🏥 Reception'],['treatment','🩺 Treatment'],['catcorner','🐈 Cats'],['yardview','🐕 Dogs']];
 let vpqFurnitureRoom='reception';
+const vpqFurniturePalettes={"Mushroom Cottage":["#dc9b94","#9a675e","#fff1d9"],"Fairy Garden":["#cbb1e4","#8c80bc","#fcf1c8"],"Royal Palace":["#9877c5","#59447d","#f9db9b"],"Pink Paradise":["#f5a8d2","#ce6ca9","#fff3f9"],"Dracula's Castle":["#594561","#281f3c","#bf6775"],"Comic Heroes":["#6d98ed","#364e8e","#f6c552"],"Snow Day":["#b8dce9","#829dc8","#ffffff"],"Stars & Stripes":["#c96166","#436da6","#f8f7f1"],"Cowboy Ranch":["#b98a65","#765940","#f3ddb0"],"Barnyard Buddies":["#c6b7a6","#645c53","#f0d9d0"],"Reptile Rescue":["#90c0a2","#547e68","#f4eec6"],"Jurassic Vet":["#98b991","#50755a","#f0ca73"],"Cow Cottage":["#d0c9be","#555759","#fafafa"],"Horse Stable":["#b88b67","#805d44","#e5d5a8"],"Piggy Picnic":["#f3a8bc","#cc788f","#fff3e6"],"Hedgehog Hollow":["#b6ad89","#897d5f","#e8d8ac"],"Pride Celebration":["#e9abc8","#8067be","#f1e8a1"]};
 function vpqDrawFurniture(){
  const scene=$('scene');
  for(const u of vpqFurnitureItems){
@@ -1625,6 +1626,7 @@ function vpqDrawFurniture(){
   const item=document.createElement('button');item.type='button';item.className='vpq-room-furniture vpq-furniture-'+u.furnitureKind;
   item.dataset.vpqFurnitureObject=u.id;if(u.flagType)item.dataset.flagType=u.flagType;item.title=u.label+' · open Furniture Studio';
   item.setAttribute('aria-label',u.label+' · open Furniture Studio');
+  if(u.themeGroup)for(const [name,colors] of Object.entries(vpqFurniturePalettes)){if(u.themeGroup.includes(name)){item.style.setProperty('--vpq-furn-main',colors[0]);item.style.setProperty('--vpq-furn-trim',colors[1]);item.style.setProperty('--vpq-furn-highlight',colors[2]);break}}
   item.style.left=Math.min(91,Math.max(9,Number(p.x)||u.furnitureX))+'%';
   item.style.top=Math.min(83,Math.max(17,Number(p.y)||u.furnitureY))+'%';
   item.innerHTML='<span class="vpq-furniture-body"><i></i><i></i><i></i></span>'+(u.furnitureGlyph?'<span class="vpq-furniture-glyph">'+escapeHtml(u.furnitureGlyph)+'</span>':'');
