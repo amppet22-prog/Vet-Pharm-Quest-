@@ -159,7 +159,7 @@ function init(api){
    const n=String(d.pathmcqLearn);
    const lesson=lessons()[n];
    if(lesson?.sections?.length)return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.(n);
-   if(Number(n)<=30)return window.VPQ_PATH_FOUNDATIONS?.open?.();
+   if(Number(n)<=30)return window.VPQ_PATH_FOUNDATIONS?.openLecture?.(n)??window.VPQ_PATH_FOUNDATIONS?.open?.();
    return window.VPQ_NECROPSY_HANDBOOK?.lecture?.(n);
   }
   if(d.pathmcqAtlas!==undefined)return window.VPQ_PATH_EXAM7?.studyLecture?.(String(d.pathmcqAtlas));
