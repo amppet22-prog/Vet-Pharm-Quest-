@@ -762,6 +762,12 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 .vpq-lvl-collection-intro b{font-size:15px;color:#73518c}.vpq-lvl-collection-intro p{font-size:12px}
 .vpq-lvl-collection-heading{font-size:15px;margin:16px 0 9px;color:#634b86}.vpq-room-furniture.vpq-level-illustrated{width:115px;height:83px;display:block;overflow:visible;filter:drop-shadow(0 3px 3px #3e4b593a);background:transparent!important}.vpq-room-furniture.vpq-level-illustrated svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}.vpq-room-furniture.vpq-level-illustrated:hover{filter:drop-shadow(0 4px 7px #8972b47a)}
 @media(max-width:540px){.vpq-lvl-reward-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.vpq-lvl-reward-card{min-height:220px}}
+</style><style id="vpq-official-national-flags">
+.vpq-national-flag-holder{position:relative;display:block;width:100%;height:100%;line-height:0}
+.vpq-national-flag-holder svg{width:100%;height:100%;display:block}
+.vpq-national-flag-holder>img{position:absolute;left:15.8%;top:14.5%;width:72.5%;height:60%;object-fit:fill;border:1px solid #ffffff6b;pointer-events:none}
+.vpq-room-furniture.vpq-level-illustrated.vpq-furniture-flag{width:102px;height:80px;z-index:4}
+.vpq-room-furniture.vpq-level-illustrated .vpq-national-flag-holder{display:block;width:100%;height:100%}
 </style><style id="vpq-pharm-drug-reference-readable">
 #modalBody .vpqPharmDrugLesson{border:1px solid #bfd0ea;border-radius:14px;padding:13px;background:#fff;line-height:1.55}
 #modalBody .vpqPharmDrugHero{background:#eaf2ff;border-left:6px solid #688fbf;padding:12px 14px;border-radius:10px;margin-bottom:12px}
@@ -817,8 +823,8 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <footer>Vet Pharm Quest · Student-led, continuously developing veterinary educational game · <a href="#" id="vpqFooterSupportLink">Project disclaimer, source credits &amp; Request Center</a> · Learning only; verify clinical content with current references.</footer>
 <script src="level-themed-furniture.js?v=20261120-art-expanded3"></script>
 <script src="level-reward-art.js?v=20261120-storybook-custom4"></script>
-<script src="national-flag-art.js?v=20261120-national-flags2"></script>
-<script src="bespoke-theme-art.js?v=20261120-bespoke-v1"></script>
+<script src="national-flag-art.js?v=20261120-national-flags3"></script>
+<script src="bespoke-theme-art.js?v=20261120-bespoke-v2"></script>
 <script>
 (function(){
  var base=window.VPQ_REWARD_ART;
@@ -1708,7 +1714,7 @@ function vpqDrawFurniture(){
   if(u.themeGroup)for(const [name,colors] of Object.entries(vpqFurniturePalettes)){if(u.themeGroup.includes(name)){item.style.setProperty('--vpq-furn-main',colors[0]);item.style.setProperty('--vpq-furn-trim',colors[1]);item.style.setProperty('--vpq-furn-highlight',colors[2]);break}}
   item.style.left=Math.min(91,Math.max(9,Number(p.x)||u.furnitureX))+'%';
   item.style.top=Math.min(83,Math.max(17,Number(p.y)||u.furnitureY))+'%';
-  if((u.exclusive||u.furnitureKind==='flag')&&window.VPQ_REWARD_ART?.art){item.classList.add('vpq-level-illustrated');item.innerHTML=window.VPQ_REWARD_ART.art(u)}else item.innerHTML='<span class="vpq-furniture-body"><i></i><i></i><i></i></span>'+(u.furnitureGlyph?'<span class="vpq-furniture-glyph">'+escapeHtml(u.furnitureGlyph)+'</span>':'');
+  if((u.exclusive||u.furnitureKind==='flag')&&window.VPQ_REWARD_ART?.art){item.classList.add('vpq-level-illustrated');item.innerHTML=vpqCollectiblePreview(u)}else item.innerHTML='<span class="vpq-furniture-body"><i></i><i></i><i></i></span>'+(u.furnitureGlyph?'<span class="vpq-furniture-glyph">'+escapeHtml(u.furnitureGlyph)+'</span>':'');
   if(u.flagPalette){item.style.setProperty('--vpq-flag-colors','linear-gradient(to bottom,'+u.flagPalette.map((c,i)=>c+' '+(i*100/u.flagPalette.length)+'% '+((i+1)*100/u.flagPalette.length)+'%').join(',')+')');}
   scene.appendChild(item);
  }
@@ -1733,6 +1739,11 @@ function vpqOpenFurnitureStudio(room){
    directly purchasing earned cosmetics, and free Pride/national flags. */
 let vpqRewardShowroomTheme='🍄 Mushroom Cottage';
 function vpqRewardRoomLabel(room){return ({reception:'Reception',treatment:'Treatment Ward',catcorner:'Cat Corner',yardview:'Dog Kennel'})[room]||room}
+function vpqCollectiblePreview(u){
+ const fallback=window.VPQ_REWARD_ART?.art(u)||'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.furnitureGlyph||'🎁')+'</span>';
+ const national=window.VPQ_NATIONAL_FLAG_ART?.imageSrc(u);
+ return national?'<span class="vpq-national-flag-holder">'+fallback+'<img loading="lazy" src="'+escapeHtml(national)+'" alt="'+escapeHtml(u.label)+'" onerror="this.style.display=\'none\'"></span>':fallback;
+}
 function vpqRewardShowroom(theme){
  if(theme)vpqRewardShowroomTheme=theme;
  const level=Math.floor((Number(state.xp)||0)/LEVEL_THRESH)+1;
@@ -1753,7 +1764,7 @@ function vpqRewardShowroom(theme){
  const owned=state.upgrades.includes(u.id),locked=level<(u.levelRequired||1),short=state.coins<u.price,flag=u.furnitureKind==='flag';
  let action=owned?(flag?'<button data-vpqlvl-flag="'+u.id+'">'+(state.activeFlag===u.id?'✓ Displayed':'Display flag')+'</button>':u.furnitureKind==='sofa'&&u.levelRoom==='reception'?'<button data-vpqlvl-sofa="'+u.id+'">'+(state.activeReceptionLevelSofa===u.id?'✓ On Reception Couch':'🛋️ Equip on Couch')+'</button>':u.furnitureKind?'<button data-vpqlvl-place="'+u.levelRoom+'">🛋️ Arrange room</button>':'<button disabled>✓ Owned · in your clinic</button>'):
  '<button data-vpqlvl-buy="'+u.id+'" '+(locked||short?'disabled':'')+'>'+(locked?'🔒 Reach Level '+u.levelRequired:short?'Earn '+u.price+' coins':u.price?'Unlock · '+u.price+' 🪙':'Claim free')+'</button>';
- const swatch=window.VPQ_REWARD_ART?.art(u)||'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.furnitureGlyph||'🎁')+'</span>';
+ const swatch=vpqCollectiblePreview(u);
  return '<article class="vpq-lvl-reward-card"><div class="vpq-lvl-thumb">'+swatch+'</div><div class="vpq-lvl-item-info"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(u.levelRoom?vpqRewardRoomLabel(u.levelRoom):'Clinic decoration')+' · '+(flag?'Free for everyone':'⭐ Level '+u.levelRequired+' exclusive · '+u.price+' 🪙')+'</small><small>'+(owned?'✅ Owned':locked?'🔒 Level locked':short?'🪙 Need more coins':'✨ Available to unlock')+'</small></div>'+action+'</article>';
  }).join('');
  const remove=flagSection&&state.activeFlag?'<button data-vpqlvl-unflag="1">Put away displayed flag</button>':'';
@@ -1767,7 +1778,7 @@ function vpqUnifiedCollection(){
  const art=window.VPQ_REWARD_ART;
  const render=(u,isOriginal)=>{
   const path=window.VPQ_RECEPTION_MODULAR_ASSETS?.manifest?.[u.id]?.src;
-  const visual=isOriginal?(path?'<img loading="lazy" src="'+escapeHtml(path)+'" alt="'+escapeHtml(u.name)+'">':'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.icon||'🎀')+'</span>'):(art?.art(u)||'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.deco||'🎁')+'</span>');
+  const visual=isOriginal?(path?'<img loading="lazy" src="'+escapeHtml(path)+'" alt="'+escapeHtml(u.name)+'">':'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.icon||'🎀')+'</span>'):vpqCollectiblePreview(u);
   const action=isOriginal?'<button data-vpqlvl-reception="1">🎨 Equip in Reception Studio</button>':u.furnitureKind==='flag'?'<button data-vpqlvl-flag="'+escapeHtml(u.id)+'">🏳️ Display flag</button>':u.furnitureKind==='sofa'&&u.levelRoom==='reception'?'<button data-vpqlvl-sofa="'+escapeHtml(u.id)+'">'+(state.activeReceptionLevelSofa===u.id?'✓ On Couch':'🛋️ Equip on Couch')+'</button>':u.furnitureKind?'<button data-vpqlvl-place="'+escapeHtml(u.levelRoom||'reception')+'">🛋️ Arrange room</button>':'<button data-vpqlvl-shop="1">View rewards</button>';
   return '<article class="vpq-lvl-reward-card"><div class="vpq-lvl-thumb">'+visual+'</div><div class="vpq-lvl-item-info"><b>'+escapeHtml(u.name||u.label)+'</b><small>'+(isOriginal?'🎀 Reception Studio':u.furnitureKind?'⭐ '+escapeHtml(vpqRewardRoomLabel(u.levelRoom)):'🌿 Classic reward')+' · Owned ✓</small></div>'+action+'</article>';
  };
