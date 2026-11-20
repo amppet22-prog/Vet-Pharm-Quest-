@@ -760,7 +760,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 .vpq-lvl-theme-tabs button.chosen{background:#ecdfff!important;border-color:#aa8fc9!important}
 .vpq-lvl-collection-intro{padding:14px;margin:12px 0;border-radius:15px;border:1px solid #d5cae7;background:linear-gradient(120deg,#fff0f9,#eff5ff)}
 .vpq-lvl-collection-intro b{font-size:15px;color:#73518c}.vpq-lvl-collection-intro p{font-size:12px}
-.vpq-lvl-collection-heading{font-size:15px;margin:16px 0 9px;color:#634b86}
+.vpq-lvl-collection-heading{font-size:15px;margin:16px 0 9px;color:#634b86}.vpq-room-furniture.vpq-level-illustrated{width:115px;height:83px;display:block;overflow:visible;filter:drop-shadow(0 3px 3px #3e4b593a);background:transparent!important}.vpq-room-furniture.vpq-level-illustrated svg{display:block;width:100%;height:100%;overflow:visible;pointer-events:none}.vpq-room-furniture.vpq-level-illustrated:hover{filter:drop-shadow(0 4px 7px #8972b47a)}
 @media(max-width:540px){.vpq-lvl-reward-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.vpq-lvl-reward-card{min-height:220px}}
 </style><style id="vpq-pharm-drug-reference-readable">
 #modalBody .vpqPharmDrugLesson{border:1px solid #bfd0ea;border-radius:14px;padding:13px;background:#fff;line-height:1.55}
@@ -1693,7 +1693,7 @@ function vpqDrawFurniture(){
   if(u.themeGroup)for(const [name,colors] of Object.entries(vpqFurniturePalettes)){if(u.themeGroup.includes(name)){item.style.setProperty('--vpq-furn-main',colors[0]);item.style.setProperty('--vpq-furn-trim',colors[1]);item.style.setProperty('--vpq-furn-highlight',colors[2]);break}}
   item.style.left=Math.min(91,Math.max(9,Number(p.x)||u.furnitureX))+'%';
   item.style.top=Math.min(83,Math.max(17,Number(p.y)||u.furnitureY))+'%';
-  item.innerHTML='<span class="vpq-furniture-body"><i></i><i></i><i></i></span>'+(u.furnitureGlyph?'<span class="vpq-furniture-glyph">'+escapeHtml(u.furnitureGlyph)+'</span>':'');
+  if(u.exclusive&&window.VPQ_REWARD_ART?.art){item.classList.add('vpq-level-illustrated');item.innerHTML=window.VPQ_REWARD_ART.art(u)}else item.innerHTML='<span class="vpq-furniture-body"><i></i><i></i><i></i></span>'+(u.furnitureGlyph?'<span class="vpq-furniture-glyph">'+escapeHtml(u.furnitureGlyph)+'</span>':'');
   if(u.flagPalette){item.style.setProperty('--vpq-flag-colors','linear-gradient(to bottom,'+u.flagPalette.map((c,i)=>c+' '+(i*100/u.flagPalette.length)+'% '+((i+1)*100/u.flagPalette.length)+'%').join(',')+')');}
   scene.appendChild(item);
  }
