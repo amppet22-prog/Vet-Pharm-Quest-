@@ -172,6 +172,42 @@ function art(item){
     '<path d="M91 102Q120 116 151 102" stroke="#ead39f" stroke-width="4" fill="none"/>'+
     flower(81,137)+leaf(161,139);
   }
+ }else if(group.includes('Fairy Garden')&&kind==='sofa'){
+  shape=shadow+
+   path('M32 95Q24 64 60 34Q78 27 93 45Q119 10 140 44Q163 25 188 42Q215 65 208 98Z','#c4b4e8','#917bad',4)+
+   path('M36 87Q59 52 88 78Q106 49 121 72Q145 48 168 77Q191 55 210 88L205 116H35Z','#f5d7e7','#ac8dbc',4)+
+   ellipse(120,115,78,20,'#ddbbe8','#ac8dbc',3)+
+   path('M39 113Q24 95 20 121L25 134H215L220 120Q216 99 201 113','#aa9ad0','#8b76ae',3)+
+   [57,87,120,153,182].map((x,i)=>path('M'+x+' 100q-18-15 0-31q18 16 0 31Z',i%2?'#dfb7dc':'#eadac0','#bd9bc2',1)).join('')+
+   flower(83,115,'#efb4d4')+flower(157,112,'#f5cbde')+star(120,44,'#fbe4a4')+
+   path('M43 135v8m154-8v8','none','#8e78ae',7);
+ }else if(group.includes('Royal Palace')&&kind==='sofa'){
+  shape=shadow+path('M29 44Q42 9 74 31Q101 5 121 17Q144 4 169 31Q204 12 211 44V112H29Z','#856ab0','#604d91',5)+
+   path('M40 48Q120 3 199 48v58H40Z','#c5a9e2','#8068aa',3)+
+   [57,92,127,162,194].map(x=>path('M'+x+' 39v60','none','#aa8acb',2)).join('')+
+   path('M38 99Q120 88 205 99L207 128H34Z','#8d72b4','#644f8e',4)+
+   path('M39 107Q120 94 202 107v14H39Z','#d1b2ec','#9576bb',2)+
+   path('M23 86Q25 68 44 71h14v54H29Z','#7a619e','#604d89',4)+
+   path('M182 72h15q19 0 21 15l-6 39h-30Z','#7a619e','#604d89',4)+
+   path('M52 135v9m136-9v9','none','#be9c63',9)+
+   path('M96 60l-8-19 17 7 15-21 15 21 17-7-8 19z','#f9de91','#a7834c',3)+
+   circle(120,48,5,'#cf91b5')+circle(101,56,4,'#76bac1')+circle(139,56,4,'#76bac1');
+ }else if(group.includes("Dracula's Castle")&&kind==='sofa'){
+  shape=shadow+path('M26 51Q41 16 61 41Q83 13 105 37Q121 3 136 37Q162 12 185 42Q208 20 216 54L205 125H32Z','#55405f','#322a47',4)+
+   path('M40 59Q120 32 202 59v50H40Z','#7e608a','#46344f',3)+
+   path('M40 104q78-22 162 0v22H40Z','#aa6f86','#5c3d55',4)+
+   path('M27 95Q15 78 13 115l14 20h26V98Z','#40344e','#32283f',4)+
+   path('M188 98h25l14 17-14 20h-25Z','#40344e','#32283f',4)+
+   path('M70 55v42m100-42v42m-50-50v50','none','#b58ca6',2)+
+   star(120,67,'#e9c7ad')+path('M48 132v10m145-10v10','none','#362b43',8);
+ }else if(group.includes('Jurassic Vet')&&kind==='sofa'){
+  shape=shadow+path('M38 93Q26 51 62 47Q76 21 108 39Q145 24 157 54Q201 42 209 84L202 119H40Z','#76a47a','#507660',4)+
+   path('M48 82Q80 49 111 66Q143 45 191 76v31H48Z','#acd0a0','#668f70',3)+
+   path('M54 107q64-21 137 0v21H54Z','#80b88a','#558267',3)+
+   path('M35 96Q21 86 23 114l14 20h28V98Z','#5c9472','#44785e',3)+
+   path('M175 98h29l15 17-15 19h-29Z','#5c9472','#44785e',3)+
+   path('M54 61l15-22 14 23m10-20 14-20 14 23m13-21 16-17 13 29','#8ab17c','#537c62',3)+
+   paw(112,86,'#5a8265')+path('M50 131v10m140-10v10','none','#5a7865',8);
  }else{
   // Collection-specific finishing details alter the silhouettes, not just their colors.
   let accent='';
