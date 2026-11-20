@@ -121,17 +121,45 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    // clinical hall doorway (left), pharmacy doorway (right)
    '<g><rect x="243" y="109" width="151" height="208" rx="8" fill="#668c9d" stroke="#567989" stroke-width="12"/><rect x="260" y="124" width="119" height="180" fill="#cbe4e7"/><path d="M263 125L380 125L367 155H275Z" fill="#effbfa" opacity=".75"/><rect x="266" y="149" width="107" height="47" rx="8" fill="#fffaf1" stroke="#a4c4ce" stroke-width="3"/><text x="320" y="176" text-anchor="middle" font-size="17" font-weight="800" font-family="sans-serif" fill="#35596f">EXAM ROOM</text><rect x="275" y="223" width="89" height="62" rx="7" fill="#e6f2f1"/><text x="319" y="263" text-anchor="middle" font-size="31">🩺</text></g>'+
    '<g><rect x="669" y="109" width="148" height="208" rx="8" fill="#8e9bad" stroke="#687f99" stroke-width="12"/><rect x="685" y="124" width="116" height="180" fill="#dbecda"/><rect x="690" y="149" width="105" height="47" rx="8" fill="#fffaf1" stroke="#bdd6c1" stroke-width="3"/><text x="742" y="178" text-anchor="middle" font-size="17" font-weight="800" font-family="sans-serif" fill="#426a60">PHARMACY</text><rect x="698" y="216" width="89" height="69" rx="7" fill="#f0faf0"/><text x="742" y="261" text-anchor="middle" font-size="34">💊</text></g>'+
-   // dimensional front desk on foreground left
-   '<ellipse cx="230" cy="411" rx="203" ry="28" fill="#4f4e65" opacity=".21" filter="url(#vpqShadowAmbient)"/>'+
-   '<g transform="translate(40 89) scale(.78)"><path d="M30 333L109 298H341L419 333L347 360H95Z" fill="#fff6e8" stroke="#b88f81" stroke-width="6"/>'+
-   '<path d="M95 360H347V440H95Z" fill="#b8d5de" stroke="#7b9caa" stroke-width="7"/>'+
-   '<path d="M30 333L95 360V440L30 398Z" fill="#88aebb" stroke="#7194a0" stroke-width="6"/>'+
-   '<path d="M347 360L419 333V400L347 440Z" fill="#88afbb" stroke="#7194a0" stroke-width="6"/>'+
-   '<rect x="151" y="377" width="151" height="43" rx="10" fill="#fff7f5" stroke="#91bac3" stroke-width="4"/>'+
-   '<text x="227" y="404" text-anchor="middle" font-size="20" font-weight="800" font-family="sans-serif" fill="#486b80">WELCOME!</text>'+
-   '<rect x="169" y="267" width="82" height="58" rx="7" fill="#536d82"/><rect x="176" y="273" width="69" height="43" fill="#bde9ed"/><path d="M204 325v13h16v-13" stroke="#627e92" stroke-width="7"/>'+
-   '<rect x="103" y="301" width="51" height="22" rx="5" fill="#fdf5e3" stroke="#cebdb0" stroke-width="3"/><path d="M117 302h24" stroke="#89b3a0" stroke-width="4"/>'+
-   '<text x="215" y="370" text-anchor="middle" font-size="24">🐾</text><path d="M284 312q13-18 26 0v6h-26Z" fill="#e4b164"/><circle cx="297" cy="298" r="5" fill="#e4b164"/><rect x="270" y="317" width="56" height="6" rx="3" fill="#a78868"/></g>'+
+   // Cozy illustrated check-in desk: patient list monitor and clipboard.
+   // SVG-only scenery; the existing HTML front-desk hotspot remains clickable.
+   '<ellipse cx="223" cy="422" rx="215" ry="32" fill="#4d4a63" opacity=".21" filter="url(#vpqShadowAmbient)"/>'+
+   '<g transform="translate(34 79) scale(.85)">'+
+   // Rounded pastel desk with dimensional side panels.
+   '<path d="M22 330L106 291H336L421 330L351 366H94Z" fill="#fff9ed" stroke="#b992a7" stroke-width="6" stroke-linejoin="round"/>'+
+   '<path d="M93 357H352V447Q260 468 93 447Z" fill="#b1d9d4" stroke="#7faea9" stroke-width="6"/>'+
+   '<path d="M22 330L94 357V447L22 400Z" fill="#8fbbb7" stroke="#719c99" stroke-width="6"/>'+
+   '<path d="M352 357L421 330V401L352 447Z" fill="#9dc8c3" stroke="#719c99" stroke-width="6"/>'+
+   '<path d="M100 359Q220 376 345 359" stroke="#f0fffa" stroke-width="5" fill="none" opacity=".8"/>'+
+   '<rect x="143" y="387" width="164" height="43" rx="18" fill="#fff8f2" stroke="#ab90b6" stroke-width="4"/>'+
+   '<text x="225" y="412" font-size="20" font-weight="900" text-anchor="middle" font-family="Arial,sans-serif" fill="#665078">🐾 CHECK-IN</text>'+
+   '<g fill="#fbe3ed" opacity=".9"><circle cx="112" cy="400" r="8"/><circle cx="337" cy="400" r="8"/></g>'+
+   // Tablet-style computer showing the patient list, not an empty decorative screen.
+   '<g transform="translate(165 219)">'+
+   '<rect x="-6" y="-6" width="150" height="112" rx="14" fill="#77698d" opacity=".16"/>'+
+   '<rect width="140" height="105" rx="13" fill="#5a617d" stroke="#413c62" stroke-width="4"/>'+
+   '<rect x="8" y="8" width="124" height="85" rx="7" fill="#f5fbff"/>'+
+   '<path d="M8 15Q8 8 15 8H125Q132 8 132 15V33H8Z" fill="#d6c8ee"/>'+
+   '<text x="70" y="25" font-family="Arial,sans-serif" font-size="11" font-weight="900" text-anchor="middle" fill="#50436b">🐾 PATIENT LIST</text>'+
+   '<circle cx="22" cy="44" r="5" fill="#b7dcd1"/><rect x="33" y="40" width="74" height="7" rx="3.5" fill="#93b7cb"/><circle cx="117" cy="44" r="5" fill="#e4ad83"/>'+
+   '<circle cx="22" cy="60" r="5" fill="#f0c6d2"/><rect x="33" y="56" width="62" height="7" rx="3.5" fill="#aebbd7"/><circle cx="117" cy="60" r="5" fill="#9bcda9"/>'+
+   '<circle cx="22" cy="76" r="5" fill="#e8d3a6"/><rect x="33" y="72" width="71" height="7" rx="3.5" fill="#93b7cb"/><circle cx="117" cy="76" r="5" fill="#9bcda9"/>'+
+   '<rect x="53" y="105" width="34" height="12" rx="3" fill="#737895"/><path d="M40 118H101" stroke="#5b5e79" stroke-width="8" stroke-linecap="round"/>'+
+   '</g>'+
+   // Physical clipboard with a visible patient-check-in checklist.
+   '<g transform="translate(68 290) rotate(-8 39 35)">'+
+   '<rect x="0" y="0" width="82" height="78" rx="8" fill="#bb91b4" stroke="#967096" stroke-width="3"/>'+
+   '<rect x="8" y="9" width="66" height="60" rx="4" fill="#fffdf7"/>'+
+   '<rect x="27" y="-5" width="30" height="12" rx="5" fill="#81748e"/>'+
+   '<text x="41" y="23" font-family="Arial,sans-serif" font-size="10" text-anchor="middle" font-weight="900" fill="#695275">CHECK-IN</text>'+
+   '<g stroke="#90b2aa" stroke-width="2.5" fill="none"><path d="M16 34l4 4 7-9 M16 48l4 4 7-9"/></g>'+
+   '<path d="M33 35h31M33 49h26M16 61h48" stroke="#c7bfcb" stroke-width="3" stroke-linecap="round"/>'+
+   '</g>'+
+   // Soft desk accessories: tiny plant, bell, pencil cup and paw-print accent.
+   '<g transform="translate(327 277)"><path d="M0 18h33l-5 28H6Z" fill="#f3c7d4" stroke="#b88da3" stroke-width="3"/><path d="M15 23Q-3 15 7 -4Q22 0 15 23M17 22Q18 1 31 -7Q42 12 17 22" fill="#78b39b" stroke="#55957d" stroke-width="2"/><circle cx="16" cy="31" r="4" fill="#fff8e5"/></g>'+
+   '<g transform="translate(288 337)"><path d="M-9 0Q0 -22 13 0Z" fill="#f4cb87" stroke="#c29962" stroke-width="3"/><rect x="-15" y="1" width="33" height="6" rx="3" fill="#bb9267"/><circle cx="1" cy="-16" r="4" fill="#d8ac68"/></g>'+
+   '<g transform="translate(115 290)"><rect x="0" y="0" width="19" height="29" rx="4" fill="#eccee2"/><path d="M5 -13v20M11 -18v25M16 -10v17" stroke="#8378af" stroke-width="4" stroke-linecap="round"/></g>'+
+   '</g>'+
    // Illustrated dog play-yard vignette: original SVG asset scaled into the room window.
    '<g aria-label="Dog play yard picture window"><rect x="83" y="108" width="145" height="151" rx="16" fill="#f6e8fc" stroke="#aa8bbd" stroke-width="7"/>'+
    '<image href="assets/reception/dog-play-yard-cute.svg" x="92" y="118" width="127" height="115" preserveAspectRatio="xMidYMid slice" pointer-events="none"/>'+
