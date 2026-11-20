@@ -353,11 +353,16 @@ function vpqMatchRender40(message=''){
  '<div class="meter" style="margin:12px 0"><div style="width:'+(matched.size/total*100)+'%"></div></div>'+
  '<div class="match-board">'+matchDeck.map((x,i)=>'<button class="tile '+(matched.has(x.id)?'matched':'')+' '+(selection===i?'selected':'')+'" data-vpqmatchtile="'+i+'" '+(matched.has(x.id)?'disabled':'')+'>'+safe(x.text)+'</button>').join('')+'</div>'+
  '<div class="feedback '+(message.startsWith('✓')?'good':'')+'" style="margin-top:12px">'+(message||'Choose a drug and its corresponding mechanism or clinical clue.')+'</div>'+
- (matched.size===total?'<p class="note">✓ Completed this set. Start a new set to encounter new drugs and contexts.</p>':'');
+ (matched.size===total?'<div class="note"><b>🏆 Drug Match complete!</b><p>Excellent—now use those mechanisms in a clinical decision, or practice another matching set.</p><div class="buttonrow"><button class="btn primary" id="vpqMatchClinicalNext">🩺 Next: Clinical Questions</button><button class="btn" id="vpqMatchFlashReview">🧠 Review Flashcards</button></div></div>':'');
  $('vpqMatchModeClass').onclick=()=>{vpqMatchMode40='className';vpqMatchInit40()};
  $('vpqMatchModeMechanism').onclick=()=>{vpqMatchMode40='mechanism';vpqMatchInit40()};
  $('vpqMatchModeClinical').onclick=()=>{vpqMatchMode40='clinical';vpqMatchInit40()};
  $('vpqMatchNew').onclick=vpqMatchInit40;
+ if(matched.size===total){
+  const first=(window.VPQCurriculum?.getLectures?.()||[])[0]||'Lecture 1';
+  $('vpqMatchClinicalNext')?.addEventListener('click',()=>window.VPQ_ARCADE_COURSE_NAV?.('clinical',first));
+  $('vpqMatchFlashReview')?.addEventListener('click',()=>window.VPQ_ARCADE_COURSE_NAV?.('flashcards',first));
+ }
  document.querySelectorAll('[data-vpqmatchtile]').forEach(b=>b.onclick=()=>{
   const i=Number(b.dataset.vpqmatchtile),t=matchDeck[i];if(matched.has(t.id))return;
   if(selection===null){selection=i;b.classList.add('selected');return}
@@ -504,6 +509,7 @@ review=function(){
   if(window.parent!==window)window.parent.postMessage({type:'vpq-pharm-bridge',action,lecture:target},location.origin);
   else if(action==='home'||action==='lesson'||action==='flashcards'||action==='cases')location.href='index.html';
  };
+ window.VPQ_ARCADE_COURSE_NAV=send;
  const selection=focus.filter(x=>valid.has(x));
  const exam1=selection.filter(x=>vpqExamLectureList310.some(l=>window.VPQCurriculum?.fromArcade?.(l[0])===x));
  const active=exam1.length?exam1:selection;
