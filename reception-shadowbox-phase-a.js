@@ -207,7 +207,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    sofaVisual+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
    window.VPQ_RECEPTION_MODULAR_ASSETS.render(state,'isometric','nonrug')+
-   '<g aria-label="Vet Pharm Quest veterinary teaching hospital logo">'+
+   '<g transform="translate(500 40) scale(1.2) translate(-500 -40)" aria-label="Vet Pharm Quest veterinary teaching hospital logo">'+
    '<rect x="374" y="13" width="252" height="54" rx="17" fill="#f8f0fb" stroke="#a78bbe" stroke-width="3"/>'+
    '<rect x="380" y="19" width="240" height="42" rx="13" fill="#fffdf8" stroke="#edd8e8" stroke-width="2"/>'+
    '<path d="M389 20Q500 10 611 20" fill="none" stroke="#e8a8c7" stroke-width="3" stroke-linecap="round"/>'+
