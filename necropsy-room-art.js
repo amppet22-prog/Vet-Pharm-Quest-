@@ -32,25 +32,25 @@ s=s.replace('</svg>', `<g aria-label="Necropsy lab workstations" pointer-events=
 <rect x="115" y="356" width="42" height="13" rx="3" fill="#ffffff" stroke="#b5cbd0" stroke-width="2"/><path d="M121 361h29M121 365h19" stroke="#b2c8cd" stroke-width="1.4"/>
 <rect x="169" y="351" width="23" height="18" rx="4" fill="#d5c5e4" stroke="#a391b7" stroke-width="2"/>
 </g>
-<!-- Matched stainless examination tables with independent legs -->
-<g filter="url(#necroShadow)">
-<path d="M229 367L402 347 477 374 305 399Z" fill="#eff7f9" stroke="#849fac" stroke-width="5" stroke-linejoin="round"/>
-<path d="M241 368l160-15 64 22-159 18" fill="none" stroke="#fff" stroke-width="3"/>
-<path d="M229 367l76 32v11l-76-30zM305 399l172-25v12l-172 24z" fill="#aec8d0" stroke="#829eaa" stroke-width="2.5"/>
-<path d="M267 397v54M433 391v60" stroke="#829daa" stroke-width="11"/>
-<path d="M253 452h28M419 452h28" stroke="#829daa" stroke-width="7" stroke-linecap="round"/>
-<circle cx="267" cy="453" r="9" fill="#536c7c"/><circle cx="433" cy="453" r="9" fill="#536c7c"/>
-<ellipse cx="355" cy="373" rx="18" ry="5" fill="#d0e2e7"/><ellipse cx="355" cy="373" rx="7" ry="2.5" fill="#a6c2ca"/>
+<!-- Two stable stainless necropsy tables -->
+<g filter="url(#necroShadow)" aria-label="Necropsy table left">
+<path d="M254 378v70M447 378v70" stroke="#7c9ba8" stroke-width="12"/>
+<path d="M240 449h29M433 449h29" stroke="#9bb8c2" stroke-width="7"/>
+<rect x="248" y="445" width="12" height="8" rx="2" fill="#597484"/><rect x="440" y="445" width="12" height="8" rx="2" fill="#597484"/>
+<path d="M226 352h207l43 20H269Z" fill="#f5fbfc" stroke="#849fac" stroke-width="4" stroke-linejoin="round"/>
+<path d="M226 352l43 20v12l-43-20zM269 372h207v12H269z" fill="#acc8d0" stroke="#809eab" stroke-width="2.5"/>
+<path d="M238 358h193l27 12H270" fill="none" stroke="#ffffff" stroke-width="3"/>
+<ellipse cx="351" cy="361" rx="15" ry="4" fill="#c3dbe2"/>
 </g>
-<g filter="url(#necroShadow)">
-<path d="M512 394L681 373 768 401 598 429Z" fill="#eff7f9" stroke="#849fac" stroke-width="5" stroke-linejoin="round"/>
-<path d="M524 395l156-17 75 23-157 22" fill="none" stroke="#fff" stroke-width="3"/>
-<path d="M512 394l86 35v12l-86-34zM598 429l170-28v13l-170 27z" fill="#aec8d0" stroke="#829eaa" stroke-width="2.5"/>
-<path d="M548 425v45M719 421v49" stroke="#829daa" stroke-width="11"/>
-<path d="M535 471h27M705 471h27" stroke="#829daa" stroke-width="7" stroke-linecap="round"/>
-<circle cx="548" cy="472" r="9" fill="#536c7c"/><circle cx="719" cy="472" r="9" fill="#536c7c"/>
-<rect x="653" y="391" width="59" height="12" rx="4" fill="#e0eded" stroke="#9fb9c0" stroke-width="2"/>
-<rect x="660" y="395" width="11" height="4" rx="2" fill="#d0a0c2"/><rect x="677" y="395" width="11" height="4" rx="2" fill="#a1c8b8"/><rect x="694" y="395" width="11" height="4" rx="2" fill="#a6b6db"/>
+<g filter="url(#necroShadow)" aria-label="Necropsy table right">
+<path d="M545 396v69M738 396v69" stroke="#7c9ba8" stroke-width="12"/>
+<path d="M531 466h29M724 466h29" stroke="#9bb8c2" stroke-width="7"/>
+<rect x="539" y="462" width="12" height="8" rx="2" fill="#597484"/><rect x="731" y="462" width="12" height="8" rx="2" fill="#597484"/>
+<path d="M517 370h207l43 20H560Z" fill="#f5fbfc" stroke="#849fac" stroke-width="4" stroke-linejoin="round"/>
+<path d="M517 370l43 20v12l-43-20zM560 390h207v12H560z" fill="#acc8d0" stroke="#809eab" stroke-width="2.5"/>
+<path d="M529 376h193l27 12H561" fill="none" stroke="#ffffff" stroke-width="3"/>
+<rect x="660" y="375" width="58" height="9" rx="3" fill="#e1edee" stroke="#97b4bd" stroke-width="1.5"/>
+<rect x="666" y="378" width="10" height="4" rx="2" fill="#d5a8ca"/><rect x="681" y="378" width="10" height="4" rx="2" fill="#a5cfbf"/><rect x="696" y="378" width="10" height="4" rx="2" fill="#b1bde0"/>
 </g>
 <!-- Defined decontamination bay: sink, cleaning supplies, PPE and boot rinse -->
 <g filter="url(#necroShadow)">
@@ -72,6 +72,6 @@ s=s.replace('</svg>', `<g aria-label="Necropsy lab workstations" pointer-events=
 <text x="116" y="485" font-family="Arial" text-anchor="middle" font-size="12" font-weight="900" fill="#587889">SPECIMEN PREP</text>
 <text x="885" y="485" font-family="Arial" text-anchor="middle" font-size="12" font-weight="900" fill="#587889">CLEANING &amp; PPE</text>
 </g>`+'</svg>');
-s=s.replace('</svg>',"\n<g pointer-events=\"none\" aria-label=\"Wall-mounted instrument rack and mobile bench stools\">\n<rect x=\"599\" y=\"111\" width=\"160\" height=\"37\" rx=\"10\" fill=\"#fff7e8\" stroke=\"#c8b4ba\" stroke-width=\"3\"/>\n<path d=\"M617 124h121\" stroke=\"#a7a9b6\" stroke-width=\"5\"/>\n<g stroke=\"#7998a5\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\"><path d=\"M628 127v14l8 7m-8-7-7 7\"/><path d=\"M661 127v16m-7 0h14\"/><path d=\"M697 127v14m-5-6 11 11m-1-11-12 11\"/><path d=\"M727 127v13\"/></g>\n<rect x=\"578\" y=\"335\" width=\"52\" height=\"13\" rx=\"5\" fill=\"#c3a9c7\" stroke=\"#a58db3\" stroke-width=\"3\"/><path d=\"M604 347v35M588 380h32\" stroke=\"#8498a8\" stroke-width=\"7\"/><circle cx=\"588\" cy=\"384\" r=\"5\" fill=\"#5a7083\"/><circle cx=\"620\" cy=\"384\" r=\"5\" fill=\"#5a7083\"/>\n<rect x=\"137\" y=\"355\" width=\"58\" height=\"12\" rx=\"5\" fill=\"#bfcfcb\" stroke=\"#8ba7aa\" stroke-width=\"3\"/><path d=\"M167 367v14M146 382h42\" stroke=\"#8199a4\" stroke-width=\"6\"/>\n</g>"+'</svg>');
+s=s.replace('</svg>',"\n<g pointer-events=\"none\" aria-label=\"Wall-mounted instrument rack and mobile bench stools\">\n<rect x=\"599\" y=\"111\" width=\"160\" height=\"37\" rx=\"10\" fill=\"#fff7e8\" stroke=\"#c8b4ba\" stroke-width=\"3\"/>\n<path d=\"M617 124h121\" stroke=\"#a7a9b6\" stroke-width=\"5\"/>\n<g stroke=\"#7998a5\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\"><path d=\"M628 127v14l8 7m-8-7-7 7\"/><path d=\"M661 127v16m-7 0h14\"/><path d=\"M697 127v14m-5-6 11 11m-1-11-12 11\"/><path d=\"M727 127v13\"/></g>\n<rect x=\"137\" y=\"355\" width=\"58\" height=\"12\" rx=\"5\" fill=\"#bfcfcb\" stroke=\"#8ba7aa\" stroke-width=\"3\"/><path d=\"M167 367v14M146 382h42\" stroke=\"#8199a4\" stroke-width=\"6\"/>\n</g>"+'</svg>');
 return s;
 };
