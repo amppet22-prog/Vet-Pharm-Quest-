@@ -192,12 +192,12 @@ function launch(){
  if(optedIn)queue();
 }
 function makeButton(){
- const target=$("saveBtn")||$("vpqAccountBtn");
+ const target=$("saveBtn")||$("vpqAccountBtn")||document.querySelector("header nav")||document.querySelector("header .hud");
  if(!target||$("vpqCloudButton"))return;
  const b=document.createElement("button");
  b.type="button";b.id="vpqCloudButton";b.className="mini";b.textContent="☁️ Cloud Save";
  b.onclick=()=>{if($("vpqCloudSavePanel"))$("vpqCloudSavePanel").remove();else{panel();launch();}};
- target.insertAdjacentElement("afterend",b);
+ if(target.matches("nav, .hud"))target.appendChild(b);else target.insertAdjacentElement("afterend",b);
 }
 window.addEventListener("vpq-player-auth-change",()=>{clearTimeout(timer);conflict=false;optedIn=false;lastFingerprint="";launch();});
 window.addEventListener("vpq-clinic-progress-saved",queue);
