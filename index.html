@@ -509,9 +509,38 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
  #stage[data-room="reception"][data-reception-view="isometric"] #avatarSprite.left{transform:scaleX(-1.22) scaleY(1.22)!important}
 }
 </style>
-</head><body>
+<style id="vpq-welcome-team-refinement-20261120">
+/* Compact welcome ribbon, preserving clinic canvas proportions and room interaction layout. */
+.vpq-welcome-section{max-width:1450px;padding:8px 14px!important;margin:7px auto 8px!important;grid-template-columns:minmax(0,1fr) 240px!important;gap:16px!important;min-height:0!important;align-items:center!important;position:relative}
+.vpq-welcome-copy{min-width:0}
+.vpq-welcome-copy h1{margin:2px 0 4px!important;font-size:clamp(21px,2.25vw,28px)!important}
+.vpq-welcome-copy p{margin:3px 0 5px!important;font-size:12px!important}
+.vpq-welcome-small{margin-top:4px!important;font-size:9px!important}
+.vpq-howtoplay{padding:7px 11px!important;font-size:11px!important}
+.vpq-mera-portrait{width:100%;min-height:0!important;padding:5px 6px!important;gap:1px!important;border-width:3px!important}
+.vpq-mera-portrait img{display:block!important;width:215px!important;height:118px!important;max-width:100%!important;max-height:none!important;object-fit:contain!important;object-position:center!important;background:#fff8ed}
+.vpq-mera-portrait strong{font-size:11px!important;line-height:1.05!important}
+.vpq-mera-portrait small{font-size:8px!important;line-height:1.1!important}
+.app>.side{position:relative;top:-9px}
+.vpq-meet-team-button{margin-left:8px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #b9a9d3;border-radius:11px;background:#fff9ff;padding:7px 10px;font-size:11px;color:#64518b;font-weight:850;vertical-align:middle;box-shadow:none}
+.vpq-meet-team-button:hover{background:#f3e7ff}
+.vpq-team-preview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:end;margin:8px 0}
+.vpq-team-preview figure{margin:0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;border:1px solid #e3d7ed;border-radius:11px;background:#fcf9ff;padding:8px}
+.vpq-team-preview img{height:145px;max-width:100%;width:100%;object-fit:contain}
+.vpq-team-preview figcaption{font-size:10px;color:#65577e;font-weight:800}
+@media(max-width:650px){
+ .vpq-welcome-section{grid-template-columns:minmax(0,1fr) 115px!important;gap:8px!important;padding:7px!important}
+ .vpq-mera-portrait img{width:105px!important;height:95px!important}
+ .vpq-mera-portrait strong{font-size:9px!important}
+ .vpq-mera-portrait small{display:none!important}
+ .vpq-welcome-copy h1{font-size:19px!important}
+ .vpq-meet-team-button{margin-left:4px;padding:6px;font-size:10px}
+ .vpq-team-preview{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .app>.side{top:0}
+}
+</style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
-<section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
+<section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><button id="vpqMeetTeamBtn" type="button" class="vpq-meet-team-button" aria-label="Meet the Vet Pharm Quest team">🐾 Meet the Team</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
 <div class="stageframe"><div class="stage" id="stage" tabindex="0" role="application" aria-label="Side view veterinary clinic. Use arrow keys or A and D to walk. E to interact."><div class="walls" id="wall"></div><div class="scene" id="scene"></div><div class="floor"><div class="floorline"></div></div><div id="petSprite" class="petSprite">🐕</div><div id="avatarSprite" class="avatarSprite"><div class="hair"></div><div class="headface">•ᴗ•</div><div class="bodycoat">✚</div><div class="legs"><i></i><i></i></div></div><div class="interactToast" id="interactToast">Move near a station to interact</div></div>
 <div class="controls"><button id="leftBtn" aria-label="Walk left">◀ Walk</button><button id="interactBtn">✦ Interact (E)</button><button id="rightBtn" aria-label="Walk right">Walk ▶</button></div></div>
@@ -3680,4 +3709,21 @@ window.addEventListener('pageshow',restoreVisibleRoom);
 window.addEventListener('load',restoreVisibleRoom,{once:true});
 })();
 
-</script><script src="oh3-final-review.js"></script><script src="game-account-link.js" defer></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="game-cloud-auth-bridge.js" defer></script><script src="player-cloud-saves.js?v=20261120-compare-cards" defer></script></body></html>
+</script><script src="oh3-final-review.js"></script><script src="game-account-link.js" defer></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="game-cloud-auth-bridge.js" defer></script><script src="player-cloud-saves.js?v=20261120-compare-cards" defer></script><script id="vpq-welcome-team-script">
+(function(){
+ const button=document.getElementById('vpqMeetTeamBtn');
+ if(!button)return;
+ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const url=p=>String(p).split('/').map(encodeURIComponent).join('/');
+ button.addEventListener('click',function(){
+   const avatars=Array.isArray(window.VPQ_UPLOADED_AVATARS)?window.VPQ_UPLOADED_AVATARS.slice(0,4):[];
+   const items=avatars.map((a,i)=>'<figure><img loading="lazy" src="'+esc(url(a.path))+'" alt="Illustrated veterinarian avatar '+(i+1)+'"><figcaption>Avatar '+(i+1)+'</figcaption></figure>').join('');
+   const body='<p>Welcome to the veterinary team! These are a few of the playable veterinarian illustrations already in the game. Your group photos will join this gallery when added.</p><div class="vpq-team-preview">'+items+'</div><p><b>Mera Munchasurus and Family</b> are our hospital mascots and chiefs of snacks &amp; encouragement.</p>';
+   const title='🐾 Meet the Vet Pharm Quest Team';
+   if(typeof window.showModal==='function'){window.showModal(title,body);return}
+   const wrap=document.getElementById('modalWrap'),heading=document.getElementById('modalTitle'),target=document.getElementById('modalBody');
+   if(wrap&&heading&&target){heading.textContent=title;target.innerHTML=body;wrap.classList.remove('hidden');return}
+   const dlg=document.createElement('dialog');dlg.style.cssText='max-width:690px;width:min(92vw,690px);border:2px solid #b9a9d3;border-radius:16px;padding:20px;background:#fff';dlg.innerHTML='<h2>'+title+'</h2>'+body+'<form method="dialog"><button>Close</button></form>';document.body.appendChild(dlg);dlg.addEventListener('close',()=>dlg.remove());dlg.showModal();
+ });
+})();
+</script></body></html>
