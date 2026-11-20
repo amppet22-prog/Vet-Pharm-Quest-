@@ -482,7 +482,13 @@ async function publish(job,fields,token,update){
  manifest[dir][job.id]=entry;
  update('Publishing '+(incoming.length?incoming.length+' new image(s) and ':'')+'your edits…');
  await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\n'),old.sha,token,'Owner publish '+job.type+' '+job.id+' (photos/text)');
- published=manifest;
+ update('Verifying published photo record on GitHub…');
+ const verifiedFile=await file(MANIFEST,token),verified=JSON.parse(decode(verifiedFile.content));
+ const saved=verified?.[dir]?.[job.id];
+ if(!saved||!Array.isArray(saved.photos)||saved.photos.length!==photos.length||photos.some((p,i)=>saved.photos[i]?.url!==p.url)){
+  throw Error('Published record could not be verified. Reopen the card before retrying; some changes may already be saved.');
+ }
+ published=verified;
  return {added:incoming.length,retained:photos.length-incoming.length,textFields:Object.keys(textEdits).length};
 }
 
@@ -611,10 +617,11 @@ context.body.addEventListener('click',ev=>{
   (async()=>{
    const vault=window.VPQ_OWNER_KEY_VAULT;
    if(!token){if(!vault?.exists?.())throw Error('No encrypted publishing key found. Enter your fine-grained GitHub token once.');if(!password)throw Error('Enter the password used to encrypt your publishing key.');token=await vault.unlock(password);}
-   await publish(job,fields,token,update);
+   const result=await publish(job,fields,token,update);
    if(job.type==='specimen')window.VPQ_PATH_EXAM7?.afterPublished?.(job.id);
    if(vault&&!vault.exists()&&password&&fields&&token){await vault.store(token,password);}
-   show('✓ Changes published','<p>Changes saved to GitHub. Existing photos were preserved unless you explicitly removed or replaced them. Reload on another device to view updates.</p><button data-necro-owner-close="1">← Return</button>');
+   const details=result.added?'<p><b>'+result.added+' new photo(s)</b> saved in the verified GitHub record.</p>':'<p><b>No new photos were selected in this action.</b> Text or existing photo details were saved.</p>';
+   show('✓ GitHub publish verified',details+'<p>Existing photos were preserved unless explicitly removed or replaced. Refresh the game to see published images.</p><button data-necro-owner-close="1">← Return to card</button>');
   })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
