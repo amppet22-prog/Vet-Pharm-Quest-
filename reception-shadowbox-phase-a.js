@@ -132,7 +132,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<path d="M352 357L421 330V401L352 447Z" fill="#9dc8c3" stroke="#719c99" stroke-width="6"/>'+
    '<path d="M100 359Q220 376 345 359" stroke="#f0fffa" stroke-width="5" fill="none" opacity=".8"/>'+
    '<rect x="143" y="387" width="164" height="43" rx="18" fill="#fff8f2" stroke="#ab90b6" stroke-width="4"/>'+
-   '<text x="225" y="412" font-size="20" font-weight="900" text-anchor="middle" font-family="Arial,sans-serif" fill="#665078">🐾 CHECK-IN</text>'+
+   '<text x="225" y="413" font-size="20" font-weight="900" text-anchor="middle" font-family="Arial,sans-serif" fill="#665078">RECEPTION</text>'+
    '<g fill="#fbe3ed" opacity=".9"><circle cx="112" cy="400" r="8"/><circle cx="337" cy="400" r="8"/></g>'+
    // Tablet-style computer showing the patient list, not an empty decorative screen.
    '<g transform="translate(165 219)">'+
@@ -140,7 +140,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<rect width="140" height="105" rx="13" fill="#5a617d" stroke="#413c62" stroke-width="4"/>'+
    '<rect x="8" y="8" width="124" height="85" rx="7" fill="#f5fbff"/>'+
    '<path d="M8 15Q8 8 15 8H125Q132 8 132 15V33H8Z" fill="#d6c8ee"/>'+
-   '<text x="70" y="25" font-family="Arial,sans-serif" font-size="11" font-weight="900" text-anchor="middle" fill="#50436b">🐾 PATIENT LIST</text>'+
+   '<text x="70" y="25" font-family="Arial,sans-serif" font-size="11" font-weight="900" text-anchor="middle" fill="#50436b">PATIENT LIST</text>'+
    '<circle cx="22" cy="44" r="5" fill="#b7dcd1"/><rect x="33" y="40" width="74" height="7" rx="3.5" fill="#93b7cb"/><circle cx="117" cy="44" r="5" fill="#e4ad83"/>'+
    '<circle cx="22" cy="60" r="5" fill="#f0c6d2"/><rect x="33" y="56" width="62" height="7" rx="3.5" fill="#aebbd7"/><circle cx="117" cy="60" r="5" fill="#9bcda9"/>'+
    '<circle cx="22" cy="76" r="5" fill="#e8d3a6"/><rect x="33" y="72" width="71" height="7" rx="3.5" fill="#93b7cb"/><circle cx="117" cy="76" r="5" fill="#9bcda9"/>'+
@@ -155,10 +155,26 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<g stroke="#90b2aa" stroke-width="2.5" fill="none"><path d="M16 34l4 4 7-9 M16 48l4 4 7-9"/></g>'+
    '<path d="M33 35h31M33 49h26M16 61h48" stroke="#c7bfcb" stroke-width="3" stroke-linecap="round"/>'+
    '</g>'+
-   // Soft desk accessories: tiny plant, bell, pencil cup and paw-print accent.
-   '<g transform="translate(327 277)"><path d="M0 18h33l-5 28H6Z" fill="#f3c7d4" stroke="#b88da3" stroke-width="3"/><path d="M15 23Q-3 15 7 -4Q22 0 15 23M17 22Q18 1 31 -7Q42 12 17 22" fill="#78b39b" stroke="#55957d" stroke-width="2"/><circle cx="16" cy="31" r="4" fill="#fff8e5"/></g>'+
-   '<g transform="translate(288 337)"><path d="M-9 0Q0 -22 13 0Z" fill="#f4cb87" stroke="#c29962" stroke-width="3"/><rect x="-15" y="1" width="33" height="6" rx="3" fill="#bb9267"/><circle cx="1" cy="-16" r="4" fill="#d8ac68"/></g>'+
-   '<g transform="translate(115 290)"><rect x="0" y="0" width="19" height="29" rx="4" fill="#eccee2"/><path d="M5 -13v20M11 -18v25M16 -10v17" stroke="#8378af" stroke-width="4" stroke-linecap="round"/></g>'+
+   // Clinic front-counter accessories: clear treat jar, pamphlets and reception bell.
+   '<g transform="translate(327 251)">'+
+   '<ellipse cx="17" cy="57" rx="27" ry="8" fill="#6c6d83" opacity=".17"/>'+
+   '<rect x="-4" y="10" width="43" height="50" rx="9" fill="#e1f5f1" stroke="#81a8a9" stroke-width="3"/>'+
+   '<rect x="-9" y="7" width="53" height="10" rx="5" fill="#cba1b8" stroke="#a77c9b" stroke-width="2"/>'+
+   '<rect x="7" y="-2" width="20" height="9" rx="4" fill="#e9c1d4"/>'+
+   '<g fill="#dfaf72" stroke="#b9885f" stroke-width="1.5"><path d="M2 28q5-7 10 0l10 0q6-7 10 0q-5 7-10 2H12q-5 5-10-2Z"/><path d="M4 42q4-5 9 0h9q5-5 9 0q-4 6-9 2h-9q-5 4-9-2Z"/></g>'+
+   '<rect x="0" y="45" width="35" height="12" rx="5" fill="#fff7e9"/><text x="17" y="53.5" font-size="8" font-weight="900" text-anchor="middle" font-family="Arial,sans-serif" fill="#84617e">TREATS</text>'+
+   '</g>'+
+   // Free-standing brochure/pamphlet holder, three different health handouts.
+   '<g transform="translate(47 255)">'+
+   '<path d="M0 21H83L76 80H6Z" fill="#b6cad7" stroke="#879fb7" stroke-width="3"/>'+
+   '<rect x="5" y="0" width="24" height="66" rx="3" fill="#f4d9e5" stroke="#c79cb5" stroke-width="2"/>'+
+   '<rect x="29" y="-9" width="23" height="72" rx="3" fill="#d8e9d9" stroke="#9fbca9" stroke-width="2"/>'+
+   '<rect x="52" y="5" width="22" height="58" rx="3" fill="#e3dbf6" stroke="#b0a1d1" stroke-width="2"/>'+
+   '<g font-family="Arial,sans-serif" font-weight="900" font-size="7" text-anchor="middle" fill="#69536f"><text x="17" y="14">PET</text><text x="17" y="23">CARE</text><text x="40" y="6">VACCINE</text><text x="63" y="20">NEW</text><text x="63" y="29">PETS</text></g>'+
+   '<path d="M3 45H77L72 76H8Z" fill="#f8f4ec" opacity=".9" stroke="#9ba9bf" stroke-width="2"/>'+
+   '<text x="40" y="61" font-size="10" font-family="Arial,sans-serif" font-weight="800" fill="#766a89" text-anchor="middle">INFO</text>'+
+   '</g>'+
+   '<g transform="translate(280 336)"><path d="M-9 0Q0 -22 13 0Z" fill="#f4cb87" stroke="#c29962" stroke-width="3"/><rect x="-15" y="1" width="33" height="6" rx="3" fill="#bb9267"/><circle cx="1" cy="-16" r="4" fill="#d8ac68"/></g>'+
    '</g>'+
    // Illustrated dog play-yard vignette: original SVG asset scaled into the room window.
    '<g aria-label="Dog play yard picture window"><rect x="83" y="108" width="145" height="151" rx="16" fill="#f6e8fc" stroke="#aa8bbd" stroke-width="7"/>'+
