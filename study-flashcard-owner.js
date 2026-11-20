@@ -7,7 +7,28 @@ let data={version:1,overrides:{},custom:[],hidden:[]},ui=null,show=null,loaded=f
 const html=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const encode=s=>btoa(Array.from(new TextEncoder().encode(s),b=>String.fromCharCode(b)).join(''));
 const decode=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,'')),x=>x.charCodeAt(0)));
-async function load(){try{const r=await fetch('./'+PATH+'?v='+Date.now(),{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.overrides&&Array.isArray(j.custom))data=j;}}catch(_){ }loaded=true;return data;}
+let pendingLoad=null;
+async function load(){
+ if(pendingLoad)return pendingLoad;
+ pendingLoad=(async()=>{
+  let found=null;
+  try{
+   const response=await fetch('https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/'+PATH+'?ref=main&t='+Date.now(),{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
+   if(response.ok){const file=await response.json();found=JSON.parse(decode(file.content));}
+  }catch(_){}
+  if(!found){try{const response=await fetch('./'+PATH+'?v='+Date.now(),{cache:'no-store'});if(response.ok)found=await response.json();}catch(_){}}
+  if(found&&found.overrides&&Array.isArray(found.custom))data=found;
+  loaded=true;return data;
+ })();
+ try{return await pendingLoad}finally{pendingLoad=null}
+}
+function refresh(domain,lecture,current){
+ const lookup=new Map(apply(domain,lecture,[]).map(c=>[c.id,c]));
+ return current.map(c=>{
+  const found=lookup.get(c.id);
+  return found||({...c,...(data.overrides?.[c.id]||{})});
+ });
+}
 function apply(domain,lecture,cards){
  const prefix=domain+'|'+lecture+'|',hidden=new Set(data.hidden||[]);
  const modified=cards.filter(c=>!hidden.has(c.id)).map(c=>({...c,...(data.overrides?.[c.id]||{})}));
@@ -70,5 +91,5 @@ function init(body,modal){if(!body||body.__vpqFlashOwnerBound)return;ui=body;sho
  commit(b.dataset.vpqfcHide!==undefined?'hide':'save').finally(()=>{if(b.isConnected)b.disabled=false});
  },true);
 }
-return Object.freeze({load,apply,editor,init,loaded:()=>loaded});
+return Object.freeze({load,apply,refresh,editor,init,loaded:()=>loaded});
 })();
