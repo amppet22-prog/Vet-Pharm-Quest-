@@ -52,6 +52,20 @@ window.VPQ_ILLUSTRATED_CHOICES=function(api){
        const id='standing-'+galleryOrder[i];
        return '<button type="button" class="vpq-art-select-btn" data-vpqportrait="'+id+'" aria-label="Choose illustrated veterinarian '+(i+1)+'">'+image(id,'tile')+'<span>Veterinarian '+String(i+1).padStart(2,'0')+'</span></button>';
     }).join('')+'</div>';
+   // Move identity fields into the visible character picker before hiding
+   // legacy appearance tabs. This keeps names/pronouns editable and form-valid.
+   const identity=document.createElement('div');
+   identity.className='vpq-art-identity';
+   const vetSection=f.querySelector('[data-vpqsection="vet"]');
+   for(const selector of ['[name="name"]','[name="pronouns"]']){
+     const field=vetSection?.querySelector(selector)?.closest('label');
+     if(field)identity.appendChild(field);
+   }
+   if(identity.children.length)portraitSection.appendChild(identity);
+   // Pet accessories remain editable with the companion, rather than an obsolete avatar tab.
+   const petSection=f.querySelector('[data-vpqsection="pet"]');
+   const petAccessory=f.querySelector('[data-vpqsection="extras"] [name="petAccessory"]')?.closest('label');
+   if(petAccessory&&petSection)petSection.appendChild(petAccessory);
    portraitSection.prepend(wrap);
    // The older 31-photo roster is not matched to its vector standing avatars.
    // Keep it in the form DOM for backward compatibility but hide the mismatched catalog.
@@ -83,9 +97,13 @@ style.textContent +=
  '.vpq-art-select-wrap{margin:8px 0 13px;padding:12px;background:#faf6ff}.vpq-art-select-grid{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:9px}'+
  '.vpq-art-select-btn{background:#fff;transition:border-color .12s,box-shadow .12s}.vpq-art-select-btn:hover{border-color:#a480c0}.vpq-art-sprite{image-rendering:auto;filter:none;transform:translateZ(0)}'+
  '.vpq-avatar-legacy-note{font-size:12px;line-height:1.5;color:#6b5877;background:#fff4dd;border:1px solid #e9d8af;border-radius:10px;padding:9px;margin:7px 0}'+
- '#avatarForm [data-vpqsection="vet"]{display:none!important}'+
- '#avatarForm [data-vpqtab="vet"]{display:none!important}'+
- '#avatarForm .vpqStandingPresets{display:none!important}'+
+ '#avatarForm [data-vpqsection="vet"],#avatarForm [data-vpqsection="outfits"],#avatarForm [data-vpqsection="extras"]{display:none!important}'+
+ '#avatarForm .vpq-art-identity{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0 13px}'+
+ '#avatarForm .vpq-art-identity label{min-width:0}'+
+ '#avatarForm .vpq-art-identity .input{width:100%;max-width:100%}'+
+ '@media(max-width:500px){#avatarForm .vpq-art-identity{grid-template-columns:1fr}}'+
+ '#avatarForm [data-vpqtab="vet"],#avatarForm [data-vpqtab="outfits"],#avatarForm [data-vpqtab="extras"]{display:none!important}'+
+ '#avatarForm .vpqStandingPresets,.vpq-story-actions{display:none!important}'+
  '#avatarForm [data-vpqsection="portraits"]>.vpq-roster-grid,#avatarForm [data-vpqsection="portraits"]>.vpq-roster-picks{display:none!important}'+
  '#avatarForm .vpq-art-select-wrap .vpq-art-select-btn.chosen{border-color:#8b5bb6;box-shadow:0 0 0 3px #eee0ff}'+
  '@media(max-width:600px){.vpq-art-select-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.vpq-art-select-btn{padding:6px 2px}.vpq-art-tile{max-height:130px}}';
