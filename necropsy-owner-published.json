@@ -2903,6 +2903,72 @@
       },
       "updated": "2026-11-19T08:30:24.591Z",
       "approvedBy": "amppet22-prog"
+    },
+    "specimen-custom-78-anophthalmia-and-microphthalmia": {
+      "title": "Anophthalmia and Microphthalmia",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-78-anophthalmia-and-microphthalmia-1795183631080-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Eye"
+          ],
+          "conditionId": "specimen-custom-78-anophthalmia-and-microphthalmia"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/specimen-custom-78-anophthalmia-and-microphthalmia-1795183631080-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "78"
+        ],
+        "systems": [
+          "Eye"
+        ],
+        "conditionId": "specimen-custom-78-anophthalmia-and-microphthalmia"
+      },
+      "text": {
+        "title": "Anophthalmia and Microphthalmia",
+        "gross": "**Anophthalmia**: Complete absence of the eye, mostly bilateral\n**Microphthalmia:** Small, disorganized globe in an orbit of a normally sized eye, unilateral",
+        "dx": "Anopthalmia- absence\nMicropthalmia- small",
+        "histo": "No or little ocular tissue",
+        "why": "Failure to develop the eye or a small amount in a normal orbit. \nMicrophthalmia is more common and unilateral. Most often from traumatic injury to the globe via utero trauma, ischemic injury or infection",
+        "visualClue": "Lol not one ",
+        "compare": "",
+        "notes": "",
+        "etiologyCategories": [
+          "bacterial",
+          "vascular",
+          "developmental"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "Eyes",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-20T14:07:12.279Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
