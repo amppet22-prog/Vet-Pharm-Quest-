@@ -273,7 +273,7 @@ function refresh(){
   '<b>🐾 Patient Cases:</b> dedicated multispecies differential diagnosis cases.<hr style="border:0;border-top:1px solid #dce7f2">'+
   '<b>🧼 Cleaning & PPE:</b> necropsy safety and sampling.</div>'+
   '<div style="margin-top:10px;padding:11px 13px;border:1px solid #d7c8e5;background:#f6f0fa;border-radius:10px;font-size:13px"><b>🔎 Future Veterinary Forensics Case Files</b><p style="margin:5px 0">Planned as a separate case library and station. It will focus on scene and history, documentation, injuries, postmortem changes, evidence handling, and defensible interpretations. No forensic cases are currently included.</p></div>'+
-  '<p class="tiny">Click a station or walk up and press E. The stainless tables are scenery, not separate clickable stations.</p>'');return}
+  '<p class="tiny">Click a station or walk up and press E. The stainless tables are scenery, not separate clickable stations.</p>');return}
  const guide=e.target.closest('[data-vpqbench-guide]');if(guide){window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b)api.doAction(b.dataset.vpqspecact)});
  stage.appendChild(div);
 }
