@@ -10,7 +10,7 @@ function refreshCustom(){
  return base;
 }
 const KEY='vpq-path-exam7-user-edits-v1';
-let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',etiologyFilter='all',speciesFilter='all',frequencyFilter='all',conditionFilter='all',subtypeFilter='all',systemFilter='all',zoonoticFilter='all',search='',current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
+let ui=null,mode='gross',tab='lesions',normalSystem='all',filter='all',etiologyFilter='all',speciesFilter='all',frequencyFilter='all',conditionFilter='all',subtypeFilter='all',systemFilter='all',zoonoticFilter='all',search='',listPage=0,current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
 const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -35,8 +35,8 @@ function visible(){
  // remain unchanged so drafts, published images, and edit buttons still match.
  return items.sort((a,b)=>nameSorter.compare(a.title||'',b.title||'')||nameSorter.compare(String(a.lecture||''),String(b.lecture||''))||a.index-b.index);
 }
-function start(k){mode=k||'gross';tab='lesions';filter='all';normalSystem='all';menu()}
-function studyLecture(lecture){tab='lesions';mode='gross';filter=String(lecture||'all');normalSystem='all';search='';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';refreshCustom();menu()}
+function start(k){listPage=0;mode=k||'gross';tab='lesions';filter='all';normalSystem='all';menu()}
+function studyLecture(lecture){listPage=0;tab='lesions';mode='gross';filter=String(lecture||'all');normalSystem='all';search='';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';refreshCustom();menu()}
 function showTab(kind){tab=kind==='normals'?'normals':'lesions';mode='gross';filter='all';normalSystem='all';search='';refreshCustom();menu()}
 // Accessible alphabetical dividers, generated only for letters represented in filtered results.
 function alphaKey(title){const first=String(title||'').trim().charAt(0).toUpperCase();return /^[A-Z]$/.test(first)?first:'#';}
@@ -49,6 +49,9 @@ function alphaGrid(items,draw){
 }
 function menu(){
  const selected=visible();
+ const pageSize=48,maxPage=Math.max(0,Math.ceil(selected.length/pageSize)-1);
+ listPage=Math.min(Math.max(0,listPage),maxPage);
+ const pageItems=selected.slice(listPage*pageSize,(listPage+1)*pageSize);
  const lectures=['all',...[...new Set(base.filter(x=>!x.normal).map(x=>String(x.lecture)))].sort(nameSorter.compare)];
  const tabs='<div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px"><button data-path7-tab="lesions" aria-pressed="'+(tab==='lesions')+'" style="flex:1;min-width:130px;padding:11px;border:2px solid '+(tab==='lesions'?'#6b9cc8':'#cad7e5')+';border-radius:10px;font-weight:800;background:'+(tab==='lesions'?'#edf5ff':'white')+'">🔬 Disease specimens</button><button data-path7-tab="normals" aria-pressed="'+(tab==='normals')+'" style="flex:1;min-width:130px;padding:11px;border:2px solid '+(tab==='normals'?'#69a68a':'#cad7e5')+';border-radius:10px;font-weight:800;background:'+(tab==='normals'?'#edf9f1':'white')+'">🌱 Normals · reference atlas</button></div>';
  if(tab==='normals'){
@@ -76,9 +79,10 @@ function menu(){
  (function(){const m=window.VPQ_PATH_ATLAS_META;const choose=(name,value,items,placeholder)=>'<label style="font-size:12px">'+name+'<select data-path7-metadata-filter="'+name+'" style="display:block;width:100%;padding:7px;margin-top:4px"><option value="all">'+placeholder+'</option>'+Object.entries(items||{}).map(([k,label])=>'<option value="'+h(k)+'"'+(value===k?' selected':'')+'>'+h(label)+'</option>').join('')+'</select></label>';return choose('species',speciesFilter,{...m?.species,multiple:'Multiple species / broad host range'},'All species')+choose('frequency',frequencyFilter,m?.frequency,'Any occurrence')+choose('condition',conditionFilter,m?.conditionTypes,'All condition types')+choose('subtype',subtypeFilter,m?.subtypes,'All pathogen / tumor groups')+choose('system',systemFilter,m?.systems,'All organ systems')+choose('zoonotic',zoonoticFilter,m?.zoonotic,'All zoonotic statuses')})()+
  '</div><div class="buttonrow"><button data-path7-filter-reset="1" style="font-size:12px">↺ Clear all atlas filters</button></div><p class="tiny">Only verified or manually classified species appear in species-filtered results. Missing tags mean unassessed, not unaffected. Filters combine with the lecture and etiology selections.</p></details>'+ 
 '<div class="buttonrow">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" style="padding:6px 9px;font-size:11px" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':l==='8'?'L8 · Cell Accumulations*':l==='9'?'L9 · Morphologic DX':'L'+h(l))+'</button>').join('')+'</div>'+
- '<p class="tiny"><b>'+selected.length+' atlas cards shown.</b> *The uploaded Cell Accumulations PDF is file 8 but its title slide says Lecture 9. The separate file 9 teaches morphologic vs etiologic diagnosis. Photo slots are editable; instructor photographs are not copied into this public game.</p>'+ 
+ '<p class="tiny"><b>'+selected.length+' matching atlas cards.</b> Showing '+(selected.length?listPage*pageSize+1:0)+'–'+Math.min(selected.length,(listPage+1)*pageSize)+'. *The uploaded Cell Accumulations PDF is file 8 but its title slide says Lecture 9. The separate file 9 teaches morphologic vs etiologic diagnosis. Photo slots are editable; instructor photographs are not copied into this public game.</p>'+ 
  '<label style="display:block;margin:8px 0">Find disease or lesion <input id="path7Search" data-path7-search="1" placeholder="e.g. pyometra, optic nerve, granuloma" value="'+h(search)+'" style="width:min(100%,430px);padding:9px;border:1px solid #bccbe0;border-radius:9px"></label>'+ 
- '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px">'+alphaGrid(selected,x=>'<button style="text-align:left;padding:12px" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small style="display:block">Lecture '+h(x.lecture)+'</small><small style="display:block;color:#60758a">'+(window.VPQ_PATH_ATLAS_META?.subtypes?.[window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionSubtype]||'Classification pending')+' · '+(mode==='edit'?'Edit atlas entry':mode==='histo'?'Histology':'Gross ID')+'</small></button>')+'</div>');
+ '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:8px">'+alphaGrid(pageItems,x=>'<button style="text-align:left;padding:12px" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small style="display:block">Lecture '+h(x.lecture)+'</small><small style="display:block;color:#60758a">'+(window.VPQ_PATH_ATLAS_META?.subtypes?.[window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionSubtype]||'Classification pending')+' · '+(mode==='edit'?'Edit atlas entry':mode==='histo'?'Histology':'Gross ID')+'</small></button>')+'</div>'+
+ (maxPage?'<div class="buttonrow" style="justify-content:center;gap:10px;margin:14px 0"><button data-path7-page="'+(listPage-1)+'" '+(listPage===0?'disabled':'')+'>← Previous 48</button><span style="align-self:center;font-size:12px">Page '+(listPage+1)+' of '+(maxPage+1)+'</span><button data-path7-page="'+(listPage+1)+'" '+(listPage===maxPage?'disabled':'')+'>Next 48 →</button></div>':'') );
 }
 function card(i){
  current=i;const x=record(i),shelf=visible(),at=shelf.findIndex(v=>v.index===i);
@@ -205,7 +209,7 @@ function init(api){
  window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.load?.().then(()=>{refreshCustom();if(ui===api&&api.body?.querySelector?.('[data-path7-tab]'))menu()}).catch(()=>{});
- api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7MetadataFilter!==undefined){const k=ev.target.dataset.path7MetadataFilter,v=ev.target.value||'all';if(k==='species')speciesFilter=v;else if(k==='frequency')frequencyFilter=v;else if(k==='condition')conditionFilter=v;else if(k==='subtype')subtypeFilter=v;else if(k==='system')systemFilter=v;else if(k==='zoonotic')zoonoticFilter=v;return menu()}if(ev.target?.dataset?.path7EtiologyFilter!==undefined){etiologyFilter=ev.target.value||'all';return menu()}if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
+ api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7MetadataFilter!==undefined){listPage=0;const k=ev.target.dataset.path7MetadataFilter,v=ev.target.value||'all';if(k==='species')speciesFilter=v;else if(k==='frequency')frequencyFilter=v;else if(k==='condition')conditionFilter=v;else if(k==='subtype')subtypeFilter=v;else if(k==='system')systemFilter=v;else if(k==='zoonotic')zoonoticFilter=v;return menu()}if(ev.target?.dataset?.path7EtiologyFilter!==undefined){listPage=0;etiologyFilter=ev.target.value||'all';return menu()}if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){listPage=0;search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
  api.body.addEventListener('click',ev=>{
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
   if(!Object.keys(d).some(k=>k.startsWith('path7')))return;
@@ -222,7 +226,7 @@ function init(api){
  }
  if(d.path7GiLearn!==undefined)return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.(String(d.path7GiLearn));
  if(d.path7Master!==undefined)return window.VPQ_MASTER_DISEASE_LIBRARY?.openForSpecimen?.(d.path7Master);
- if(d.path7FilterReset!==undefined){filter='all';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';search='';return menu()}
+ if(d.path7FilterReset!==undefined){listPage=0;filter='all';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';search='';return menu()}
  if(d.path7Add!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newSpecimenEditor?.(d.path7Add==='normal'?'normal':'lesion',tab==='normals'?'67':(filter==='all'?'68':filter));
  if(d.path7ManageHidden!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.hiddenSpecimenMenu?.();
  if(d.path7Hide!==undefined){const item=base[Number(d.path7Hide)];return item&&window.VPQ_NECROPSY_OWNER_PUBLISH?.hideSpecimenEditor?.(item.id,false)}
@@ -230,7 +234,8 @@ function init(api){
  if(d.path7Library!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.photoLibrary?.();
  if(d.path7Differentials!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start(ui,filter);
  if(d.path7Mode!==undefined){tab='lesions';mode=d.path7Mode;return menu()}
-  if(d.path7Filter!==undefined){filter=d.path7Filter;return menu()}
+  if(d.path7Page!==undefined){const n=Number(d.path7Page);if(Number.isInteger(n)&&n>=0){listPage=n;return menu()}return;}
+  if(d.path7Filter!==undefined){listPage=0;filter=d.path7Filter;return menu()}
   if(d.path7Card!==undefined){const i=Number(d.path7Card);return mode==='edit'?edit(i):card(i)}
   if(d.path7Edit!==undefined)return edit(Number(d.path7Edit));
   if(d.path7View!==undefined){const n=Number(d.path7View);return Number.isInteger(n)&&n>=0&&n<base.length?card(n):menu()}
