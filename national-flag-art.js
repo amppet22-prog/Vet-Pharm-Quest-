@@ -34,5 +34,7 @@ function flag(code){
  '<path d="M38 24H212V123H38Z" fill="none" stroke="#ddd4cd" stroke-width="1.4"/>'+
  '<circle cx="30" cy="16" r="6" fill="#cfa975"/></svg>';
 }
-window.VPQ_NATIONAL_FLAG_ART={art:item=>{const match=String(item.id||'').match(/^flag-national-(\d+)$/);if(!match)return null;return flag(['us','ca','mx','gb','pr','br','ph','ua','ie','jp','in','de','za','jm'][Number(match[1])])}};
+const codes=['us','ca','mx','gb','pr','br','ph','ua','ie','jp','in','de','za','jm'];
+const codeFor=item=>{const m=String(item?.id||'').match(/^flag-national-(\d+)$/);return m?codes[Number(m[1])]||null:null};
+window.VPQ_NATIONAL_FLAG_ART={art:item=>{const code=codeFor(item);return code?flag(code):null},imageSrc:item=>{const code=codeFor(item);return code?'https://flagcdn.com/w320/'+code+'.png':null}};
 })();
