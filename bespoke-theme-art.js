@@ -173,7 +173,70 @@ function art(item){
   if(kind==='sofa')body=jurassicCouch();
   if(kind==='terrarium')body=reptileTerrarium()+path('M99 112q25-30 43-7l18 5-19 6Z','#639579','#49725d',2);
  }
- return body?svg(item,body):null;
+ // Other collections: unique shapes for the storybook theme, not a shared motif.
+ if(group.includes('Comic Heroes')){
+  if(kind==='sofa')body=path('M28 68L47 45H193L211 69V123H28Z','#5274c1','#263c80',4)+
+   path('M47 56H193V106H47Z','#9ebcf0','#304e96',3)+
+   path('M42 105h157v24H42Z','#e6b44f','#a46c3a',4)+
+   path('M22 87Q12 83 12 106v23h34V87Z','#da645e','#a64654',4)+
+   path('M194 87h31v42h-31Z','#da645e','#a64654',4)+
+   path('M107 54l-17 26h18l-9 28 46-40h-21l10-14z','#f9e77e','#e4a54b',3)+
+   el(120,132,73,4,'#364777')+line('M52 133v7m136-7v7','#25396b',8);
+  if(kind==='rug')body=path('M26 101L51 79 75 90 92 66 120 87 141 62 164 84 192 73 218 103 188 128 47 128Z','#edce67','#476baf',4)+
+    path('M118 61L96 99h23l-12 33 42-47h-20l12-24Z','#e97b55','#7e4e62',3);
+  if(kind==='banner')body=rect(38,27,164,110,'#f7d46f','#4561a2',5)+
+   path('M44 36L77 60 61 79 90 86 76 119 134 91 162 121 181 86 198 55 162 61 140 31Z','#e57c65','#926b7b',3)+
+   path('M113 43l-20 34h18l-12 37 43-51h-19l10-20Z','#fff3b0','#d2a652',3);
+ }
+ if(group.includes('Snow Day')){
+  if(kind==='sofa')body=path('M28 72Q23 42 52 38H186Q216 38 214 75v51H28Z','#d8edf5','#83a9c3',4)+
+    path('M38 54h165v54H38Z','#f7fbff','#83a9c3',3)+
+    path('M37 108q81-16 169 0v23H37Z','#a8cfe4','#729fbd',4)+
+    path('M22 87Q12 76 13 103v28h31V85Z','#b9dbe9','#789fbb',4)+
+    path('M197 85h29v45h-29Z','#b9dbe9','#789fbb',4)+
+    cir(82,81,20,'#fff','#9cbaca')+cir(82,65,12,'#fff','#9cbaca')+
+    cir(76,62,2,'#48586a')+cir(88,62,2,'#48586a')+
+    path('M80 66l10 3-9 3Z','#df9261','#df9261',2)+
+    path('M68 83h30','#9dbdd0','#9dbdd0',2)+line('M51 135v8m142-8v8','#7598ad',8);
+  if(kind==='pod')body=path('M33 123q-1-83 86-85q87 2 89 85l-20 12H49Z','#effaff','#83aec2',4)+
+    path('M82 131V99q3-33 39-34q36 1 39 34v32Z','#a6cad8','#6a99ae',3)+
+    cir(62,82,6,'#fff')+cir(185,82,6,'#fff')+
+    path('M80 54q42-25 82 0','none','#d0e8ee',6);
+  if(kind==='rug')body=el(120,100,90,43,'#e7f5fa','#7ba7bf',4)+
+    [67,119,172].map((x,i)=>{let y=100+(i%2?17:-9);return line('M'+x+' '+(y-19)+'v38m-17-29 34 20m-34 0 34-20','#9dc8d9',4)+cir(x,y,5,'#f8fbff')}).join('');
+ }
+ if(group.includes('Piggy Picnic')){
+  if(kind==='sofa')body=path('M34 80Q30 43 65 47L83 32Q100 29 109 48Q132 31 147 44Q200 34 208 80L209 123H31Z','#e6a3b8','#a96d81',4)+
+    path('M44 73h155v41H44Z','#f5c7d1','#c3859b',3)+
+    path('M43 107q75-16 158 0v24H43Z','#db91aa','#a66783',4)+
+    el(120,78,35,25,'#f5b6c2','#b47992',3)+cir(109,78,7,'#bb7e8e')+cir(131,78,7,'#bb7e8e')+
+    cir(94,59,4,'#554650')+cir(147,59,4,'#554650')+
+    path('M23 94q-13-5-10 17l10 17h23V93Z','#f0bed0','#ac7992',3)+
+    path('M194 92h28l5 17-6 18h-27Z','#f0bed0','#ac7992',3);
+  if(kind==='rug')body=el(120,99,93,45,'#f5c7d6','#b77d91',4)+
+   el(120,99,43,29,'#eaa5bc','#b77d91',2)+
+   cir(105,98,8,'#a96682')+cir(135,98,8,'#a96682')+
+   [58,181].map(x=>cir(x,101,7,'#f8e0e6')).join('');
+ }
+ if(group.includes('Hedgehog Hollow')){
+  if(kind==='pod')body=path('M30 107Q33 55 76 42L66 25 98 37 111 20 128 37 150 22 159 44Q208 52 211 107L194 136H47Z','#a6957c','#736654',4)+
+    [54,73,92,110,128,146,165,186].map((x,i)=>path('M'+x+' 65l-8-21 21 9z','#82765d','#706554',2)).join('')+
+    path('M86 132V104q34-37 68 0v28Z','#65584c','#65584c',2)+
+    cir(112,112,4,'#f6d1bb')+cir(128,112,4,'#f6d1bb')+
+    cir(120,121,5,'#4f403c');
+  if(kind==='sofa')body=path('M30 83q4-35 36-31l12-19 19 13 21-25 16 24 28-13 15 21q36 0 35 32v40H30Z','#aa9276','#776855',4)+
+    path('M43 74q74-25 156 0v40H43Z','#cfb8a0','#9e8572',3)+
+    path('M37 107q80-15 168 0v24H37Z','#8f7c68','#6c5c4e',3)+
+    path('M21 94h26v34H21ZM192 94h28v34h-28Z','#9f8b73','#6d6150',3)+
+    cir(108,80,4,'#594d47')+cir(133,80,4,'#594d47')+cir(120,87,4,'#8d6b69');
+ }
+ if(group.includes('Pink Paradise')&&kind==='sofa')body=path('M32 89Q17 50 56 47Q62 13 99 35Q123 7 151 34Q191 19 199 49Q221 60 208 100L200 129H37Z','#f7a8d5','#ce77aa',4)+
+   path('M42 91Q58 53 89 70Q119 41 148 69Q183 50 203 91V121H42Z','#ffe1ef','#e49cbe',3)+
+   path('M46 111q75-22 152 0v18H46Z','#f2a6cf','#d17ead',3)+
+   path('M29 105q-16-17-11 12l12 17h26V104Z','#e99bc2','#c57da3',3)+
+   path('M188 105h24l11 14-10 14h-25Z','#e99bc2','#c57da3',3)+
+   path('M120 75q-10-16-23-5q-9 12 23 33q31-21 22-33q-14-11-22 5Z','#ee87af','#ca6995',2);
+  return body?svg(item,body):null;
 }
 window.VPQ_BESPOKE_THEME_ART={art};
 })();
