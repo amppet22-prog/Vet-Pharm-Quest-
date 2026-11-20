@@ -1615,6 +1615,7 @@ function vpqDrawFurniture(){
   if(u.flagPalette){item.style.setProperty('--vpq-flag-colors','linear-gradient(to bottom,'+u.flagPalette.map((c,i)=>c+' '+(i*100/u.flagPalette.length)+'% '+((i+1)*100/u.flagPalette.length)+'%').join(',')+')');}
   scene.appendChild(item);
  }
+ vpqAddLevelReceptionDisplay();
 }
 function vpqOpenFurnitureStudio(room){
  if(vpqFurnitureRoomList.some(x=>x[0]===room))vpqFurnitureRoom=room;
@@ -1629,6 +1630,60 @@ function vpqOpenFurnitureStudio(room){
  return '<article class="vpq-furniture-shoprow"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(u.themeGroup)+' · '+escapeHtml(u.levelRoom)+' · Level '+u.levelRequired+' · '+u.price+' 🪙</small>'+action+'</article>';
  }).join('');
  showModal('🛋️ Furniture Studio',html);
+}
+
+/* Dedicated Level Rewards showroom: visible from Reception; supports thematic collection browsing,
+   directly purchasing earned cosmetics, and free Pride/national flags. */
+let vpqRewardShowroomTheme='🍄 Mushroom Cottage';
+function vpqRewardRoomLabel(room){return ({reception:'Reception',treatment:'Treatment Ward',catcorner:'Cat Corner',yardview:'Dog Kennel'})[room]||room}
+function vpqRewardShowroom(theme){
+ if(theme)vpqRewardShowroomTheme=theme;
+ const level=Math.floor((Number(state.xp)||0)/LEVEL_THRESH)+1;
+ const exclusive=vpqFurnitureItems.filter(u=>u.exclusive);
+ const themes=[...new Set(exclusive.map(u=>u.themeGroup))];
+ const specials=['🏳️‍🌈 Pride Flags','🌍 National Flags'];
+ if(!themes.includes(vpqRewardShowroomTheme)&&!specials.includes(vpqRewardShowroomTheme))vpqRewardShowroomTheme=themes[0];
+ const flagSection=specials.includes(vpqRewardShowroomTheme);
+ const group=flagSection?vpqFurnitureItems.filter(u=>u.category==='Flags'&&u.themeGroup===vpqRewardShowroomTheme):exclusive.filter(u=>u.themeGroup===vpqRewardShowroomTheme);
+ const count=exclusive.filter(u=>state.upgrades.includes(u.id)).length;
+ const next=exclusive.filter(u=>u.levelRequired>level).sort((a,b)=>a.levelRequired-b.levelRequired)[0];
+ const nav='<div class="vpq-lvl-showroom-controls"><button data-vpqlvl-close="1">← Reception</button><button data-vpqlvl-furniture="1">🛋️ Furniture Studio</button><button data-vpqlvl-shop="1">🪙 Shop</button></div>';
+ const header='<section class="vpq-lvl-hero"><strong>⭐ LEVEL-EXCLUSIVE CLINIC COLLECTIONS</strong><h3>Level '+level+' · '+state.coins+' 🪙</h3><p>Study to earn EXP → level up → unlock new furniture → purchase with coins → decorate your veterinary clinic.</p><p>'+count+' / '+exclusive.length+' exclusive furnishings collected'+(next?' · Next collection item at Level '+next.levelRequired:'')+'</p><div class="vpq-lvl-progress"><i style="width:'+Math.round((Number(state.xp)%LEVEL_THRESH)/LEVEL_THRESH*100)+'%"></i></div><small>'+(Number(state.xp)%LEVEL_THRESH)+' / '+LEVEL_THRESH+' EXP toward your next level</small></section>';
+ const tabs='<div class="vpq-lvl-theme-tabs">'+themes.concat(specials).map(t=>'<button data-vpqlvl-theme="'+escapeHtml(t)+'" class="'+(t===vpqRewardShowroomTheme?'chosen':'')+'">'+escapeHtml(t)+'</button>').join('')+'</div>';
+ const heading='<h3 class="vpq-lvl-theme-title">'+escapeHtml(vpqRewardShowroomTheme)+'</h3>'+(flagSection?'<p>Flags are free and available at Level 1, regardless of study progress. Claim any flag and display one at a time in Reception.</p>':'<p>These are <strong>level-unlock exclusives</strong>, not ordinary shop furniture. Purchased items can be positioned in their designated room.</p>');
+ const cards=group.map(u=>{
+ const owned=state.upgrades.includes(u.id),locked=level<(u.levelRequired||1),short=state.coins<u.price,flag=u.furnitureKind==='flag';
+ let action=owned?(flag?'<button data-vpqlvl-flag="'+u.id+'">'+(state.activeFlag===u.id?'✓ Displayed':'Display flag')+'</button>':'<button data-vpqlvl-place="'+u.levelRoom+'">🛋️ Arrange room</button>'):
+ '<button data-vpqlvl-buy="'+u.id+'" '+(locked||short?'disabled':'')+'>'+(locked?'🔒 Reach Level '+u.levelRequired:short?'Earn '+u.price+' coins':u.price?'Unlock · '+u.price+' 🪙':'Claim free')+'</button>';
+ const swatch=u.flagPalette?'<span class="vpq-lvl-flag-swatch" style="background:linear-gradient(to bottom,'+u.flagPalette.map((color,i)=>color+' '+(i*100/u.flagPalette.length)+'% '+((i+1)*100/u.flagPalette.length)+'%').join(',')+')"></span>':'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.furnitureGlyph||u.label.split(' ')[0])+'</span>';
+ return '<article class="vpq-lvl-reward-card"><div class="vpq-lvl-thumb">'+swatch+'</div><div class="vpq-lvl-item-info"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(vpqRewardRoomLabel(u.levelRoom))+' · '+(flag?'Free for everyone':'⭐ Level '+u.levelRequired+' exclusive · '+u.price+' 🪙')+'</small><small>'+(owned?'✅ Owned':locked?'🔒 Level locked':short?'🪙 Need more coins':'✨ Available to unlock')+'</small></div>'+action+'</article>';
+ }).join('');
+ const remove=flagSection&&state.activeFlag?'<button data-vpqlvl-unflag="1">Put away displayed flag</button>':'';
+ showModal('⭐ Level Rewards · Clinic Boutique',nav+header+tabs+heading+'<div class="vpq-lvl-reward-grid">'+cards+'</div>'+remove+'<p class="tiny">Cosmetic items only. Clinical rooms, questions, and learning materials remain unlocked.</p>');
+}
+$('vpqLevelRewardsBtn').addEventListener('click',()=>vpqRewardShowroom());
+$('modalBody').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b||!Object.keys(b.dataset).some(k=>k.startsWith('vpqlvl')))return;
+ e.preventDefault();e.stopImmediatePropagation();const d=b.dataset;
+ if(d.vpqlvlClose){closeModal();return}
+ if(d.vpqlvlTheme){vpqRewardShowroom(d.vpqlvlTheme);return}
+ if(d.vpqlvlFurniture){vpqOpenFurnitureStudio(activeRoom);return}
+ if(d.vpqlvlPlace){vpqOpenFurnitureStudio(d.vpqlvlPlace);return}
+ if(d.vpqlvlShop){closeModal();vpqRewardCategory='Level Rewards';renderUpgrades();$('upgradeList')?.closest('details')?.setAttribute('open','');return}
+ if(d.vpqlvlBuy){const u=vpqFurnitureItems.find(u=>u.id===d.vpqlvlBuy);if(!u)return;buyUpgrade(u.id);if(u.furnitureKind==='flag'&&!state.activeFlag&&state.upgrades.includes(u.id)){state.activeFlag=u.id;persist();renderRoom()}vpqRewardShowroom();return}
+ if(d.vpqlvlFlag){if(state.upgrades.includes(d.vpqlvlFlag)){state.activeFlag=d.vpqlvlFlag;persist();renderRoom()}vpqRewardShowroom();return}
+ if(d.vpqlvlUnflag){state.activeFlag='';persist();renderRoom();vpqRewardShowroom()}
+},true);
+function vpqAddLevelReceptionDisplay(){
+ if(activeRoom!=='reception')return;
+ const scene=$('scene');if(!scene||scene.querySelector('[data-vpqlvl-kiosk]'))return;
+ const level=Math.floor((Number(state.xp)||0)/LEVEL_THRESH)+1;
+ const kiosk=document.createElement('button');
+ kiosk.type='button';kiosk.className='vpq-level-kiosk';kiosk.dataset.vpqlvlKiosk='1';
+ kiosk.innerHTML='<span>⭐ LEVEL REWARDS</span><small>Level '+level+' · 17 themes + flags</small><b>Browse exclusives</b>';
+ kiosk.title='Open level-exclusive themed decorations and flags';
+ kiosk.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();vpqRewardShowroom()});
+ scene.appendChild(kiosk);
 }
 $('vpqFurnitureBtn').addEventListener('click',()=>vpqOpenFurnitureStudio(activeRoom));
 $('scene').addEventListener('click',ev=>{const b=ev.target.closest('[data-vpq-furniture-object]');if(b){ev.preventDefault();ev.stopPropagation();vpqOpenFurnitureStudio(activeRoom)}},true);
