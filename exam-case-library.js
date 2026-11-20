@@ -37,7 +37,8 @@ function filterItems(items){
  (filters.species==='All species'||species(c)===filters.species)&&
  (filters.status==='All patients'||(filters.status==='Completed'?completed.includes(c.id):!completed.includes(c.id)))&&
  (filters.level==='All levels'||(filters.level==='Advanced referral'?!!c.advanced:!c.advanced))&&
- (filters.lectureScope==='All Pharmacology lectures'||course(c)!=='Pharmacology'||!c.lecture||selected.length===0||selected.includes(c.lecture))&&
+ (filters.lectureScope==='All Pharmacology lectures'||course(c)!=='Pharmacology'||!c.lecture||selected.length===0||(Array.isArray(c.lectureTags)&&c.lectureTags.length?c.lectureTags.some(l=>selected.includes(l)):selected.includes(c.lecture)))&&
+ (!filters.lectureFocus||course(c)!=='Pharmacology'||c.lecture===filters.lectureFocus||(Array.isArray(c.lectureTags)&&c.lectureTags.includes(filters.lectureFocus)))&&
  (!q||[c.name,c.intro,c.clues,c.protocol,c.track,c.lecture,c.species,...specialties(c)].join(' ').toLowerCase().includes(q)));
 }
 function opts(values,current){return values.map(v=>'<option value="'+e(v)+'" '+(current===v?'selected':'')+'>'+e(v)+'</option>').join('')}
@@ -61,6 +62,7 @@ function draw(){
  '<label>Pharmacology lecture scope<select class="input" data-vpqcasefilter="lectureScope">'+opts(['Selected Pharmacology lectures','All Pharmacology lectures'],filters.lectureScope)+'</select></label></div>'+
  '<label>Search names, signs, and topics<input id="vpqCaseLibQuery" class="input" type="search" placeholder="e.g. Addison, Giardia, neoplasia..." value="'+e(filters.query)+'"></label>'+
  '<div class="buttonrow"><button data-vpqcaselib="search">🔎 Search</button><button data-vpqcaselib="reset">Reset filters</button><button data-vpqcaselib="surprise" '+(!result.length?'disabled':'')+'>🎲 Surprise patient from '+result.length+' matches</button><button data-vpqcaselib="map">🗺️ Hospital map</button></div>'+
+ (filters.lectureFocus?'<p class="small">Focused on '+e(filters.lectureFocus)+' · <button data-vpqcaselib="alllectures">Show all Pharmacology lectures</button></p>':'')+
  '<h3>Patient records ('+result.length+' matches)</h3>'+
  (cards?'<div class="twocol">'+cards+'</div>':'<div class="infobox"><b>No matching case is currently available.</b><p>Try another specialty or reset filters. This does not mean the course topic is unimportant; it means no matching patient record has been entered yet.</p></div>')+
  '<div class="buttonrow"><button data-vpqcaselib="previous" '+(page===0?'disabled':'')+'>← Previous</button><span class="small">Page '+(page+1)+' of '+pageCount+'</span><button data-vpqcaselib="next" '+(page>=pageCount-1?'disabled':'')+'>Next →</button></div>'+ 
@@ -72,11 +74,24 @@ function init(ctx){api=ctx;ctx.body.addEventListener('change',ev=>{const t=ev.ta
  const action=b.dataset.vpqcaselib,field=ctx.body.querySelector('#vpqCaseLibQuery');
  if(field)filters.query=field.value;
  if(action==='search'){page=0;return draw()}
+ if(action==='alllectures'){filters.lectureFocus='';page=0;return draw()}
  if(action==='previous'){page=Math.max(0,page-1);return draw()}
  if(action==='next'){page++;return draw()}
- if(action==='reset'){filters={specialty:'All specialties',course:'All courses',species:'All species',status:'All patients',level:'All levels',query:''};page=0;return draw()}
+ if(action==='reset'){filters={specialty:'All specialties',course:'All courses',species:'All species',status:'All patients',level:'All levels',lectureScope:'Selected Pharmacology lectures',lectureFocus:'',query:''};page=0;return draw()}
  if(action==='surprise'){const pool=filterItems(allCases());if(pool.length)return ctx.openCase(pool[Math.floor(Math.random()*pool.length)].id)}
  if(action==='map'){ctx.openMap?.()}
  }) }
-return Object.freeze({init,home,allCases,specialties,filterItems});
+function focus(courseName,lecture){
+ filters.course=courseNames.includes(courseName)?courseName:'All courses';
+ filters.specialty='All specialties';filters.species='All species';
+ filters.status='All patients';filters.level='All levels';
+ filters.lectureScope='All Pharmacology lectures';
+ filters.query='';
+ page=0;
+ // Filter to a selected lecture, including cases shared across multiple lectures.
+ if(lecture&&filters.course==='Pharmacology')filters.lectureFocus=lecture;
+ else filters.lectureFocus='';
+ draw();
+}
+return Object.freeze({init,home,focus,allCases,specialties,filterItems});
 })();
