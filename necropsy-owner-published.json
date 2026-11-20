@@ -3419,6 +3419,36 @@
             "Ear"
           ],
           "conditionId": "pathx-78-18"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-18-1795215928469-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-20 180122.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Ear"
+          ],
+          "conditionId": "pathx-78-18"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-18-1795215929767-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Cholesterol clefts · Screenshot 2026-11-20 180132.png",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Ear"
+          ],
+          "conditionId": "pathx-78-18"
         }
       ],
       "photo": {
@@ -3461,7 +3491,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-20T23:04:10.806Z",
+      "updated": "2026-11-20T23:05:31.016Z",
       "approvedBy": "amppet22-prog"
     }
   },
