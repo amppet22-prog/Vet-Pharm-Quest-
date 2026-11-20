@@ -47,7 +47,7 @@ function resume(){
 const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const theme='<style>.np-cover{background:linear-gradient(115deg,#f3e3ff,#e1f7eb 55%,#ffefdc);border:2px solid #dfc4ef;border-radius:18px;padding:15px;margin:7px 0 13px}.np-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.np-tabs button{font-size:12px;padding:7px 10px}.np-chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.np-chapter{padding:13px;background:#fff;border:2px solid #dbd5eb;border-radius:16px;text-align:left}.np-chapter small{display:block;color:#60708c;margin-top:4px}.np-tag{display:inline-block;border-radius:9px;background:#fff4d8;padding:3px 7px;font-size:11px;font-weight:800}.np-pat{padding:12px;background:#f9f8fc;border:1px solid #d6ddec;border-radius:14px;margin:8px 0}.np-scroll{max-height:40vh;overflow:auto;border:1px solid #dfe1ec;border-radius:12px;padding:9px}.np-question{display:inline-grid;place-items:center;vertical-align:middle;min-width:25px;width:25px;height:25px;padding:0;margin-left:6px;border:2px solid #a38ac3;border-radius:50%;background:#fff8e7;color:#755690;font-size:14px;font-weight:900;cursor:help}.np-question:hover,.np-question:focus-visible{background:#e9daf9;outline:2px solid #f5d6ad}.np-entryrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 3px;border-bottom:1px solid #eef1f5}.np-entryrow .np-entryname{min-width:0}</style>';
 function popup(t,html){api?.showModal(t,theme+html)}
-function nav(){return '<div class="np-tabs"><button data-nphome="1">📚 Handbook</button><button data-nppattern="1">🔗 Across systems</button><button data-npstudio="gross">🔍 Gross ID</button><button data-npstudio="histo">🔬 Histology</button><button data-npquiz="1">🎓 Practice Quiz</button><button data-npedit="1">🖼️ Editable atlas</button></div>'}
+function nav(){return '<div class="np-tabs"><button data-nphome="1">📚 Handbook</button><button data-nppattern="1">🔗 Across systems</button><button data-npstudio="gross">🔍 Gross ID</button><button data-npstudio="histo">🔬 Histology</button><button data-npmcq="1">📝 All MCQs</button><button data-npcoverage="1">📋 Lecture Coverage</button><button data-npquiz="1">🎓 Practice Quiz</button><button data-npedit="1">🖼️ Editable atlas</button></div>'}
 function show(){
  rememberView('home');
  const systems=['all','Gastrointestinal','Neuro','Skin','Repro','Special Senses','Urinary','Hepatic','Pancreas','Endocrine','Hemolymphatic','Muscle','Skeletal','Cardiovascular','Respiratory'];
@@ -68,6 +68,7 @@ function lecture(n){
  nav()+
  '<div class="np-cover"><span class="np-tag">'+safe(c[2])+'</span><h3>'+safe(c[1])+' '+helpButton('chapter',n,c[1])+'</h3><p>'+safe(c[3])+'</p><p><b>What earns points on an image question?</b> '+safe(c[4])+'</p></div>'+
  (window.VPQ_PATH_LECTURE_LEARN?.[n]?'<div class="buttonrow"><button data-nplearn="'+safe(n)+'" style="font-weight:800;background:#e1f7eb;border:2px solid #8dbda4">📖 '+(isExam6(n)?'Quick Learn · Exam 6 refresher':'Learn the full lecture · Slide-by-slide topics')+'</button>'+(isExam6(n)?'<button data-npatlas="'+safe(n)+'">🔬 Exam 6 Disease Atlas</button>':'')+'</div>':'<p class="tiny">Full lecture lesson pending slide-by-slide verification.</p>')+
+ '<div class="buttonrow"><button data-npmcq="'+safe(n)+'" style="background:#e6f3ff;font-weight:800">📝 Full MCQ Bank ('+(window.VPQ_PATH_MCQ_CENTER?.collect?.(n).length||0)+')</button><button data-npflashgi="'+safe(n)+'">🧠 Lecture Flashcards</button><button data-nppracticegi="'+safe(n)+'">🩺 Differential Cases</button></div>'+
  '<h4>All named conditions/concepts in this lecture index ('+c[5].split(';').length+') · A–Z</h4><div class="np-scroll">'+c[5].split(';').map((x,i)=>({name:x,originalIndex:i})).sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:'base',numeric:true})).map(x=>'<div class="np-entryrow"><span class="np-entryname">🦴 '+safe(x.name)+'</span>'+helpButton('entry',n+':'+x.originalIndex,x.name)+'</div>').join('')+'</div>'+
  '<p class="tiny">Index entries are study coverage reminders, not fabricated histology diagnoses. Detailed specimen cards are shown only where the source supports them.</p>'+
  '<h4>Verified gross / histology practice cards ('+cases.length+')</h4><div class="buttonrow">'+cases.map(x=>'<button data-npstudio="gross" data-npnote="'+safe(x.title)+'">'+safe(x.title)+'</button>').join('')+'</div>'+
@@ -252,11 +253,14 @@ function openWhy(kind,id){
 
 function init(host){
  api=host;
+ window.VPQ_PATH_MCQ_CENTER?.init(host);
  host.body.addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;const d=b.dataset;
  if(!Object.keys(d).some(k=>k.startsWith('np')||k.startsWith('pathImage')))return;
  e.preventDefault();e.stopImmediatePropagation();
  if(d.nphelp!==undefined)return openWhy(d.nphelp,d.nphelpid||'');
+ if(d.npmcq!==undefined)return window.VPQ_PATH_MCQ_CENTER?.open(host,d.npmcq==='1'?chapter:d.npmcq);
+ if(d.npcoverage!==undefined)return window.VPQ_PATH_MCQ_CENTER?.coverage(host);
  if(d.npreturn!==undefined)return lecture(chapter);
  if(d.nphome!==undefined||d.npback!==undefined)return show();
  if(d.npslideprev!==undefined||d.npslidenext!==undefined||d.npslidezoom!==undefined||d.npdeletepdf!==undefined){window.VPQ_PATH_SLIDES?.clicked(host.body,b);return}
