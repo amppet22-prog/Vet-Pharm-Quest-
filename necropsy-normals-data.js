@@ -184,7 +184,7 @@ window.VPQ_PATH_NORMALS=[
   },
   {
     "id": "normal-eye-retina",
-    "lecture": "78",
+    "lecture": "79",
     "system": "Eye / Ocular Adnexa",
     "title": "Eye — normal retinal layers and optic nerve",
     "species": "Dog / cat / horse",
@@ -192,12 +192,12 @@ window.VPQ_PATH_NORMALS=[
     "dx": "**NORMAL REFERENCE** — Eye — normal retinal layers and optic nerve",
     "histo": "Retina has ordered layered architecture from photoreceptors to ganglion cell/nerve fiber layers; optic nerve bundles carry ganglion-cell axons.",
     "why": "**Normal vs abnormal:** retinal detachment separates sensory retina from pigment epithelium; inflammatory retinitis and glaucoma injure layers differently.",
-    "source": "Lecture 78 ocular pathology context; general veterinary ocular histology reference.",
+    "source": "Lecture 79 ocular pathology context; general veterinary ocular histology reference.",
     "normal": true
   },
   {
     "id": "normal-eye-cornea",
-    "lecture": "78",
+    "lecture": "79",
     "system": "Eye / Ocular Adnexa",
     "title": "Cornea — normal transparent avascular layers",
     "species": "Dog / cat / horse",
@@ -205,12 +205,12 @@ window.VPQ_PATH_NORMALS=[
     "dx": "**NORMAL REFERENCE** — Cornea — normal transparent avascular layers",
     "histo": "Orderly nonkeratinized epithelium, collagen-rich avascular stroma, Descemet membrane and corneal endothelium. Transparency depends on uniform collagen spacing and hydration control.",
     "why": "**Normal vs abnormal:** stromal edema impairs clarity; deep ulceration or descemetocele indicates loss of stromal architecture.",
-    "source": "Lecture 78 corneal disease context; foundational ocular anatomy reference.",
+    "source": "Lecture 79 corneal disease context; foundational ocular anatomy reference.",
     "normal": true
   },
   {
     "id": "normal-ear",
-    "lecture": "79",
+    "lecture": "78",
     "system": "Ear / Auditory",
     "title": "External ear canal — normal epithelium and glands",
     "species": "Dog / cat",
@@ -218,7 +218,7 @@ window.VPQ_PATH_NORMALS=[
     "dx": "**NORMAL REFERENCE** — External ear canal — normal epithelium and glands",
     "histo": "Keratinized squamous epithelial lining with follicular/sebaceous and ceruminous glands. Cartilage supports the canal; gland numbers and lumen vary by site/species.",
     "why": "**Normal vs abnormal:** otitis causes epithelial hyperplasia, edema, glandular changes and inflammatory exudate; ceruminous gland tumors are focal proliferations.",
-    "source": "Lecture 79 external ear pathology context; general comparative histologic reference.",
+    "source": "Lecture 78 external ear pathology context; general comparative histologic reference.",
     "normal": true
   },
   {
