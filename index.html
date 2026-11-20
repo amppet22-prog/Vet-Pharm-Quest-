@@ -2586,6 +2586,19 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  },true);
  const pharmFlowStyle=document.createElement('style');
  pharmFlowStyle.textContent='.vpqPharmFlowHome{border:1px solid #b7cde8;border-radius:15px;background:#f7faff;padding:16px;margin:0 0 13px}.vpqPharmFlowHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}.vpqPharmFlowHead>div{flex:1;min-width:210px}.vpqPharmFlowHead b{font-size:18px;color:#23456f}.vpqPharmFlowHead p{margin:5px 0;font-size:12px;color:#506784}.vpqPharmFlowHead label{font-size:11px;font-weight:800;color:#476387;min-width:200px;flex:1;max-width:380px}.vpqPharmFlowHead select{display:block;width:100%;padding:10px;margin-top:5px;background:#fff;border:1px solid #a6c2e6;border-radius:9px;color:#243d60}.vpqPharmFlowSteps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:14px 0}.vpqPharmFlowTile{display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left;white-space:normal;border:1px solid #c5d6ea;border-radius:11px;background:white;padding:12px;min-width:0;min-height:105px}.vpqPharmFlowTile b{font-size:14px;color:#29476a}.vpqPharmFlowTile small{font-size:12px;line-height:1.4;color:#536a83}.vpqPharmFlowFeatured{background:#eaf3ff;border:2px solid #719bcf}.vpqPharmFlowLink{padding-top:12px;border-top:1px solid #d3dfed}.vpqPharmFlowLink>b{display:block;margin-bottom:9px;font-size:13px;color:#365578}.vpqPharmFlowLink>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.vpqPharmFlowLink .vpqPharmFlowTile{min-height:73px;padding:10px}.vpqPharmFlowHelp{font-size:12px;color:#536b86;line-height:1.5;margin:11px 0 0}.vpqPharmFlowDetails{border:1px solid #c9d6e8;background:#fbfcff;border-radius:13px;padding:12px;margin:12px 0}.vpqPharmFlowDetails>summary{cursor:pointer;font-size:14px;font-weight:800;color:#2e527c}.vpqPharmFlowDetails[open]>summary{margin-bottom:12px}@media(max-width:700px){.vpqPharmFlowSteps{grid-template-columns:repeat(2,minmax(0,1fr))}.vpqPharmFlowLink>div{grid-template-columns:1fr}.vpqPharmFlowTile{min-height:105px}.vpqPharmFlowHead label{max-width:none}}';document.head.appendChild(pharmFlowStyle);
+ // Only receive navigation from the same-origin Arcade iframe currently opened in this modal.
+ window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||!event.data||event.data.type!=='vpq-pharm-bridge')return;
+  const frame=$('modalBody')?.querySelector('iframe[src*="pharm-arcade.html"]');
+  if(!frame||event.source!==frame.contentWindow)return;
+  const action=event.data.action;
+  const target=curriculum.courses.some(x=>x[0]===event.data.lecture)?event.data.lecture:focusLecture();
+  menuState.focus=target;
+  if(action==='home')return showLearning();
+  if(action==='flashcards')return actionForFocus('flash',target);
+  if(action==='lesson')return actionForFocus('learn',target);
+  if(action==='cases')return actionForFocus('case',target);
+ },false);
  // Replace route functions rather than layering another menu inside the prior menu.
  vpqLearningHub=function(){menuState.pending=null;showLearning()};
  vpqGMastery=function(){masteryScreen()};
