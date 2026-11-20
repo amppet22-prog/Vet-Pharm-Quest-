@@ -54,6 +54,12 @@
       "answer": "It supplies gluconeogenic precursors after metabolism.",
       "why": "Dietary and concurrent-disease management are also important.\nIt becomes propionate, a glucose precursor, plus a corticosteroid, which stimulates gluconeogenesis (C3+C3=C6). If severe, IV gluoce then PZI every other day.",
       "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
+    },
+    "pharm-e2-diabetes-11-042": {
+      "prompt": "Can a clinically normal-appearing diabetic cat still be hypoglycemic?",
+      "answer": "Yes.",
+      "why": "Do not rely only on observed symptoms to exclude low blood glucose.",
+      "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
     }
   },
   "custom": [
