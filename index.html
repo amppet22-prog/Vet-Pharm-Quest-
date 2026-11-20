@@ -492,6 +492,8 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
  #stage[data-room="reception"][data-reception-view="isometric"] .vpqPatientQueueArt{left:27%;bottom:25%}
  #stage[data-room="reception"][data-reception-view="isometric"] .vpqPatientQueueArt span{font-size:19px}
 }
+/* Keep the isometric desk clean; the illustrated animals are not the interactive patient queue. */
+#stage[data-room="reception"][data-reception-view="isometric"] .vpqPatientQueueArt{display:none!important}
 </style><style id="vpq-reception-avatar-scale-20261120">
 /* Keep player proportional to the enlarged reception. Other rooms unchanged. */
 #stage[data-room="reception"][data-reception-view="isometric"] #avatarSprite{
@@ -526,9 +528,9 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <script src="antibiotic-pkpd-lesson.js?v=20261108-whycompare2"></script>
 <script src="drug-clinical-reference.js?v=20261114-starred-priority9"></script>
 <script src="reception-modular-assets.js?v=20261111-cat-hides21"></script>
-<script src="reception-customization.js?v=20261117-startup-crashfix1"></script>
+<script src="reception-customization.js?v=20261120-collection-nav-1"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
-<script src="reception-shadowbox-phase-a.js?v=20261120-patient-desk-1"></script>
+<script src="reception-shadowbox-phase-a.js?v=20261120-counter-pamphlets-2"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
