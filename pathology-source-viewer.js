@@ -15,7 +15,21 @@ async function pdfFor(lecture){
  if(cache.has(lecture))return cache.get(lecture);
  if(inFlight.has(lecture))return inFlight.get(lecture);
  const task=(async()=>{
-   const blob=cache.get('BLOB-'+lecture)||await stored('L'+lecture);if(!blob)return null;
+   let blob=cache.get('BLOB-'+lecture)||await stored('L'+lecture);
+// Legacy correction: older versions labelled 78 Eyes / 79 Ears. When a learner
+// attached the actual PDF under that wrong screen number, use the saved File
+// by its identifying name without overwriting or deleting private documents.
+if(lecture==='78'||lecture==='79'){
+ const expected=lecture==='78'?/\bears?\b/i:/\beyes?\b/i;
+ const other=lecture==='78'?'79':'78';
+ const validName=b=>b&&typeof b.name==='string'&&expected.test(b.name);
+ if(!validName(blob)){
+  const alternate=cache.get('BLOB-'+other)||await stored('L'+other);
+  if(validName(alternate))blob=alternate;
+  else if(blob&&typeof blob.name==='string'&&/\b(?:eye|ear)s?\b/i.test(blob.name))blob=null;
+ }
+}
+if(!blob)return null;
    if(!window.pdfjsLib)throw Error('PDF preview library did not load. Refresh while online.');
    window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
    const bytes=await blob.arrayBuffer();
