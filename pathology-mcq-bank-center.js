@@ -40,16 +40,18 @@ function totals(){
   const prelim=sections.filter(s=>(/preliminary|source.index|objective.index|verification pending|foundation/i.test(String(s.sourceStatus||''))||/Exam 6 source.index/i.test(String(s.group||'')))&&!hasCore(s));
   const detailed=sections.filter(s=>s.diseaseAtlas||s.points?.some(p=>/gross|histo|pathogenesis|differential/i.test(String(p?.[0]||''))));
   const linkedOverview=prelim.filter(s=>(window.VPQ_PATH_EXAM6_INDEX_LINKS?.links?.(n,s.title)||[]).length).length;
+  const supplements=sections.filter(s=>s.kind==='supplemental').length;
   const parts=sections.filter(s=>s.points?.length||s.flashcards?.length||s.practiceQuestions?.length).length;
   const entry={n,title:l?.title||titles.get(n)||base?.title?.replace(/^\d+\s*[·.\-]\s*/,'')||'Not indexed',
    sections:sections.length,foundations:base?.sections||0,flash:sections.reduce((a,x)=>a+(x.flashcards?.length||0),0),
    mcq:mcq.length,atlas:specs.filter(x=>String(x.lecture)===n&&!x.normal).length,
    cases:cases.filter(x=>String(x.lecture)===n&&x.sourceType!=='SBA').length,
    source:l?.source||base?.source||'',hasLesson:!!l,hasFoundation:!!base,
-   preliminary:prelim.length,linkedOverview,detailed:detailed.length,populated:parts};
+   preliminary:prelim.length,linkedOverview,supplements,detailed:detailed.length,populated:parts};
   entry.flags=[];
   if(!entry.hasLesson&&!entry.hasFoundation)entry.flags.push('No indexed Learn First lesson');
   if(entry.preliminary>entry.linkedOverview)entry.flags.push((entry.preliminary-entry.linkedOverview)+' overview topics still without a precise detailed atlas link');
+  if(entry.supplements)entry.flags.push(entry.supplements+' externally referenced supplemental cards awaiting professor slide verification');
   if(!entry.mcq)entry.flags.push('No MCQs in shared lecture bank');
   if(!entry.flash&&!entry.hasFoundation)entry.flags.push('No linked recall cards');
   if(!entry.atlas)entry.flags.push('No linked specimen cards');
@@ -127,10 +129,10 @@ function coverage(){
  byExam.map(([title,a,b])=>{
   const group=rows.filter(r=>Number(r.n)>=a&&Number(r.n)<=b);
   const missing=group.filter(r=>!r.hasLesson&&!r.hasFoundation).length;
-  const preliminary=count(group,'preliminary'),linked=count(group,'linkedOverview');
+  const preliminary=count(group,'preliminary'),linked=count(group,'linkedOverview'),external=count(group,'supplements');
   const emptyMCQ=group.filter(r=>!r.mcq).length;
   const emptyAtlas=group.filter(r=>!r.atlas).length;
-  return '<details '+(title==='Exam 6'?'open':'')+' class="pmcq-entry" style="margin:8px 0"><summary><b>'+title+' · L'+a+'–'+b+'</b><small>'+group.length+' lectures · '+missing+' without indexed lessons · '+preliminary+' overview topics ('+linked+' linked) · '+emptyMCQ+' with no shared MCQs · '+emptyAtlas+' without linked specimen cards</small></summary>'+
+  return '<details '+(title==='Exam 6'?'open':'')+' class="pmcq-entry" style="margin:8px 0"><summary><b>'+title+' · L'+a+'–'+b+'</b><small>'+group.length+' lectures · '+missing+' without indexed lessons · '+preliminary+' overview topics ('+linked+' linked) · '+external+' external supplements · '+emptyMCQ+' with no shared MCQs · '+emptyAtlas+' without linked specimen cards</small></summary>'+
   '<div style="display:grid;gap:8px;margin-top:10px">'+group.map(r=>{
    const lessonCount=r.sections||r.foundations;
    return '<div class="pmcq-entry" style="padding:10px;border-left:3px solid '+(r.preliminary||!lessonCount?'#d59b62':'#89a9b2')+'">'+
