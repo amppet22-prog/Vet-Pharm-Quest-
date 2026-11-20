@@ -84,6 +84,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 11",
       "curated": true
+    },
+    {
+      "prompt": "What is a glucose nadir?",
+      "answer": "It is the lowest blood glucose reading after a meal or insulin dose.",
+      "why": "Knowing how low blood sugar drops helps determine whether an insulin or medication dose can be safely increased without causing dangerously low blood sugar (hypoglycemia). Even if readings are high at other times, a low nadir warns against raising the dose",
+      "slide": "Pharm LMU Lecture n my brain",
+      "id": "owner-pharmacology-mwow0nlw-vbn8i",
+      "domain": "pharmacology",
+      "lecture": "Lecture 10",
+      "curated": true
     }
   ],
   "hidden": []
