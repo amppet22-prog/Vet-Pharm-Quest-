@@ -80,3 +80,7 @@ Necropsy & Diagnostic Pathology → Handbook → **Lecture Coverage** (existing 
 
 ## Progress log
 - **2026-11-20:** First phase implementation: full 1–79 dynamic coverage, foundations inventory bridge, corrected exam boundaries, linked destination buttons. Continued academic review is required; phases B–F remain open.
+- **2026-11-20:** Phase B first content pass: authored 24 source-linked, mechanism-focused structured MCQs for GI L59–66 (three each), without replacing original banks or publisher content. Question choices now shuffle per attempt in the shared pathology MCQ engine; authored keys and IDs are preserved.
+- **2026-11-20:** Exam 6 integration pass: created an explicit topic-to-disease bridge covering 53 broad overview headings and 87 exact detailed-atlas links; live GI Quick Learn now exposes those links, while topics without a precise match remain labeled pending. Verification against current code: **24/24 questions attached, zero unmatched; 53/53 curated overview topics have valid detailed links**, among 63 total broad overview topics.
+- **2026-11-20:** Remaining GI index-only topics: L59 1, L60 1, L61 0, L62 1, L63 0, L64 4, L65 0, L66 3 = **10** topics needing a separate source-specific detailed addition or justified overview-only treatment. All 79 lessons remain professor-objective signoff pending, and the present checks do not constitute live browser QA.
+
