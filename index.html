@@ -508,6 +508,32 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
  #stage[data-room="reception"][data-reception-view="isometric"] #avatarSprite{transform:scale(1.22)!important}
  #stage[data-room="reception"][data-reception-view="isometric"] #avatarSprite.left{transform:scaleX(-1.22) scaleY(1.22)!important}
 }
+</style>
+<style id="vpq-reception-layout-balance-20261120">
+/* Preserve original two-column clinic layout while giving reception artwork its 1000:500 proportions. */
+@media(min-width:951px){
+  .app{max-width:1500px;grid-template-columns:minmax(0,1fr) 270px;gap:14px}
+  #stage[data-room="reception"][data-reception-view="isometric"]{
+    height:auto!important;aspect-ratio:2 / 1;min-height:400px;max-height:none!important;
+  }
+  .vpq-welcome-section{max-width:1500px;grid-template-columns:minmax(0,1fr) 180px;padding:10px 18px;gap:16px}
+  .vpq-mera-portrait{padding:7px;gap:2px;border-width:3px;min-height:0}
+  .vpq-mera-portrait img{width:164px;height:112px;max-width:100%;max-height:none;object-fit:contain;background:#fff7ec}
+  .vpq-mera-portrait strong{font-size:11px;line-height:1.1}
+  .vpq-mera-portrait small{font-size:9px;line-height:1.1}
+  .vpq-welcome-copy h1{margin:3px 0;font-size:clamp(21px,2.2vw,27px)}
+  .vpq-welcome-copy p{margin:4px 0 6px}
+  .vpq-welcome-small{margin-top:5px}
+  .vpq-howtoplay{padding:7px 12px}
+}
+@media(min-width:651px) and (max-width:950px){
+  #stage[data-room="reception"][data-reception-view="isometric"]{height:auto!important;aspect-ratio:2 / 1;max-height:none!important}
+  .vpq-mera-portrait img{object-fit:contain}
+}
+@media(max-width:650px){
+  #stage[data-room="reception"][data-reception-view="isometric"]{height:auto!important;aspect-ratio:2 / 1;min-height:280px;max-height:none!important}
+  .vpq-mera-portrait img{object-fit:contain}
+}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
