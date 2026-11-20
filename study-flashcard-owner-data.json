@@ -44,6 +44,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 11",
       "curated": true
+    },
+    {
+      "prompt": "What is important to remember regarding checking blood glucose levels with DM?",
+      "answer": "Checking BG at multiple time points is critical",
+      "why": "Spot checking at certain time frames means you could miss a problem! \nDifficult to do in cats due to epinephrine response. However, long acting glucose monitors are becoming more common and help mitigate this.",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwout0va-q2v0k",
+      "domain": "pharmacology",
+      "lecture": "Lecture 11",
+      "curated": true
     }
   ],
   "hidden": []
