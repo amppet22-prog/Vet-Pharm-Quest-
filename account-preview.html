@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vet Pharm Quest — Account Preview</title>
+<style>
+:root{font-family:ui-rounded,"Trebuchet MS",Arial,sans-serif;color:#344868;background:#f5f7ff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at top left,#ffdfef,transparent 45%),radial-gradient(circle at bottom right,#cff2ee,transparent 45%),#f5f7ff}
+main{max-width:550px;width:100%;padding:25px;border:2px solid #dfd9f3;border-radius:22px;background:white;box-shadow:0 15px 45px #34486818;text-align:center}
+h1{margin:6px 0 8px;color:#6654a2}p{font-size:14px;line-height:1.5}button{font:inherit;cursor:pointer;background:white;color:#425e91;border:2px solid #c9d6f1;border-radius:12px;padding:12px 16px;font-weight:800}
+button.primary{background:#6c5cbd;border-color:#6c5cbd;color:white}button:hover{filter:brightness(.97)}
+.notice{padding:14px;background:#f5f3ff;border-radius:13px;border:1px solid #e4dffc;font-size:13px}
+</style>
+</head>
+<body>
+<main>
+<div style="font-size:42px">🐾</div>
+<h1>Vet Pharm Quest</h1>
+<p><strong>Player Account Preview</strong></p>
+<p>Test creating an account, email verification, signing in, and password recovery without loading the game or changing existing progress.</p>
+<p class="notice">All users have the same ordinary access. Guest play and the owner's password-protected publishing remain unchanged. This page does not save game progress.</p>
+<button class="primary" type="button" id="openAccount">👤 Sign In / Create Account</button>
+<p id="readyStatus" style="font-size:12px;color:#667b95">Initializing account connection…</p>
+</main>
+<header class="head" style="display:none"><div class="hud"></div></header>
+<script src="player-auth-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="player-accounts.js"></script>
+<script>
+(function(){
+ const button=document.getElementById("openAccount"),status=document.getElementById("readyStatus");
+ button.onclick=()=>window.VPQ_PLAYER_ACCOUNT?.open?.();
+ if(window.VPQ_PLAYER_ACCOUNT?.configured){status.textContent="Account connection configured. Open the account dialog to register or sign in.";}
+ else{status.textContent="Account connection is not ready. Confirm Supabase configuration and internet connectivity.";}
+})();
+</script>
+</body>
+</html>
