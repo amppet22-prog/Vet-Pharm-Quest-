@@ -1659,22 +1659,23 @@ function vpqRewardShowroom(theme){
  const level=Math.floor((Number(state.xp)||0)/LEVEL_THRESH)+1;
  const exclusive=vpqFurnitureItems.filter(u=>u.exclusive);
  const themes=[...new Set(exclusive.map(u=>u.themeGroup))];
- const specials=['🏳️‍🌈 Pride Flags','🌍 National Flags'];
+ const specials=['⭐ Classic Level Rewards','🏳️‍🌈 Pride Flags','🌍 National Flags'];
  if(!themes.includes(vpqRewardShowroomTheme)&&!specials.includes(vpqRewardShowroomTheme))vpqRewardShowroomTheme=themes[0];
- const flagSection=specials.includes(vpqRewardShowroomTheme);
- const group=flagSection?vpqFurnitureItems.filter(u=>u.category==='Flags'&&u.themeGroup===vpqRewardShowroomTheme):exclusive.filter(u=>u.themeGroup===vpqRewardShowroomTheme);
+ const flagSection=vpqRewardShowroomTheme==='🏳️‍🌈 Pride Flags'||vpqRewardShowroomTheme==='🌍 National Flags';
+ const classicSection=vpqRewardShowroomTheme==='⭐ Classic Level Rewards';
+ const group=flagSection?vpqFurnitureItems.filter(u=>u.category==='Flags'&&u.themeGroup===vpqRewardShowroomTheme):classicSection?upgrades.filter(u=>u.category==='Level Rewards'||['cat-tree','aquarium','plushies','poster-xray','poster-dog','theme-forest','theme-night'].includes(u.id)):exclusive.filter(u=>u.themeGroup===vpqRewardShowroomTheme);
  const count=exclusive.filter(u=>state.upgrades.includes(u.id)).length;
  const next=exclusive.filter(u=>u.levelRequired>level).sort((a,b)=>a.levelRequired-b.levelRequired)[0];
  const nav='<div class="vpq-lvl-showroom-controls"><button data-vpqlvl-close="1">← Reception</button><button data-vpqlvl-furniture="1">🛋️ Furniture Studio</button><button data-vpqlvl-shop="1">🪙 Shop</button></div>';
  const header='<section class="vpq-lvl-hero"><strong>⭐ LEVEL-EXCLUSIVE CLINIC COLLECTIONS</strong><h3>Level '+level+' · '+state.coins+' 🪙</h3><p>Study to earn EXP → level up → unlock new furniture → purchase with coins → decorate your veterinary clinic.</p><p>'+count+' / '+exclusive.length+' exclusive furnishings collected'+(next?' · Next collection item at Level '+next.levelRequired:'')+'</p><div class="vpq-lvl-progress"><i style="width:'+Math.round((Number(state.xp)%LEVEL_THRESH)/LEVEL_THRESH*100)+'%"></i></div><small>'+(Number(state.xp)%LEVEL_THRESH)+' / '+LEVEL_THRESH+' EXP toward your next level</small></section>';
  const tabs='<div class="vpq-lvl-theme-tabs">'+themes.concat(specials).map(t=>'<button data-vpqlvl-theme="'+escapeHtml(t)+'" class="'+(t===vpqRewardShowroomTheme?'chosen':'')+'">'+escapeHtml(t)+'</button>').join('')+'</div>';
- const heading='<h3 class="vpq-lvl-theme-title">'+escapeHtml(vpqRewardShowroomTheme)+'</h3>'+(flagSection?'<p>Flags are free and available at Level 1, regardless of study progress. Claim any flag and display one at a time in Reception.</p>':'<p>These are <strong>level-unlock exclusives</strong>, not ordinary shop furniture. Purchased items can be positioned in their designated room.</p>');
+ const heading='<h3 class="vpq-lvl-theme-title">'+escapeHtml(vpqRewardShowroomTheme)+'</h3>'+(flagSection?'<p>Flags are free and available at Level 1, regardless of study progress. Claim any flag and display one at a time in Reception.</p>':classicSection?'<p>These are the original level-up decorations plus selected existing shop items now marked as level exclusives. Previously purchased items stay owned.</p>':'<p>These are <strong>level-unlock exclusives</strong>, not ordinary shop furniture. Purchased items can be positioned in their designated room.</p>');
  const cards=group.map(u=>{
  const owned=state.upgrades.includes(u.id),locked=level<(u.levelRequired||1),short=state.coins<u.price,flag=u.furnitureKind==='flag';
- let action=owned?(flag?'<button data-vpqlvl-flag="'+u.id+'">'+(state.activeFlag===u.id?'✓ Displayed':'Display flag')+'</button>':'<button data-vpqlvl-place="'+u.levelRoom+'">🛋️ Arrange room</button>'):
+ let action=owned?(flag?'<button data-vpqlvl-flag="'+u.id+'">'+(state.activeFlag===u.id?'✓ Displayed':'Display flag')+'</button>':u.furnitureKind?'<button data-vpqlvl-place="'+u.levelRoom+'">🛋️ Arrange room</button>':'<button disabled>✓ Owned · in your clinic</button>'):
  '<button data-vpqlvl-buy="'+u.id+'" '+(locked||short?'disabled':'')+'>'+(locked?'🔒 Reach Level '+u.levelRequired:short?'Earn '+u.price+' coins':u.price?'Unlock · '+u.price+' 🪙':'Claim free')+'</button>';
- const swatch=u.flagPalette?'<span class="vpq-lvl-flag-swatch" style="background:linear-gradient(to bottom,'+u.flagPalette.map((color,i)=>color+' '+(i*100/u.flagPalette.length)+'% '+((i+1)*100/u.flagPalette.length)+'%').join(',')+')"></span>':'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.furnitureGlyph||u.label.split(' ')[0])+'</span>';
- return '<article class="vpq-lvl-reward-card"><div class="vpq-lvl-thumb">'+swatch+'</div><div class="vpq-lvl-item-info"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(vpqRewardRoomLabel(u.levelRoom))+' · '+(flag?'Free for everyone':'⭐ Level '+u.levelRequired+' exclusive · '+u.price+' 🪙')+'</small><small>'+(owned?'✅ Owned':locked?'🔒 Level locked':short?'🪙 Need more coins':'✨ Available to unlock')+'</small></div>'+action+'</article>';
+ const swatch=u.flagPalette?'<span class="vpq-lvl-flag-swatch" style="background:linear-gradient(to bottom,'+u.flagPalette.map((color,i)=>color+' '+(i*100/u.flagPalette.length)+'% '+((i+1)*100/u.flagPalette.length)+'%').join(',')+')"></span>':'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.furnitureGlyph||u.deco||u.label.split(' ')[0])+'</span>';
+ return '<article class="vpq-lvl-reward-card"><div class="vpq-lvl-thumb">'+swatch+'</div><div class="vpq-lvl-item-info"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(u.levelRoom?vpqRewardRoomLabel(u.levelRoom):'Clinic decoration')+' · '+(flag?'Free for everyone':'⭐ Level '+u.levelRequired+' exclusive · '+u.price+' 🪙')+'</small><small>'+(owned?'✅ Owned':locked?'🔒 Level locked':short?'🪙 Need more coins':'✨ Available to unlock')+'</small></div>'+action+'</article>';
  }).join('');
  const remove=flagSection&&state.activeFlag?'<button data-vpqlvl-unflag="1">Put away displayed flag</button>':'';
  showModal('⭐ Level Rewards · Clinic Boutique',nav+header+tabs+heading+'<div class="vpq-lvl-reward-grid">'+cards+'</div>'+remove+'<p class="tiny">Cosmetic items only. Clinical rooms, questions, and learning materials remain unlocked.</p>');
@@ -1688,7 +1689,7 @@ $('modalBody').addEventListener('click',e=>{
  if(d.vpqlvlFurniture){vpqOpenFurnitureStudio(activeRoom);return}
  if(d.vpqlvlPlace){vpqOpenFurnitureStudio(d.vpqlvlPlace);return}
  if(d.vpqlvlShop){closeModal();vpqRewardCategory='Level Rewards';renderUpgrades();$('upgradeList')?.closest('details')?.setAttribute('open','');return}
- if(d.vpqlvlBuy){const u=vpqFurnitureItems.find(u=>u.id===d.vpqlvlBuy);if(!u)return;buyUpgrade(u.id);if(u.furnitureKind==='flag'&&!state.activeFlag&&state.upgrades.includes(u.id)){state.activeFlag=u.id;persist();renderRoom()}vpqRewardShowroom();return}
+ if(d.vpqlvlBuy){const u=upgrades.find(u=>u.id===d.vpqlvlBuy);if(!u)return;buyUpgrade(u.id);if(u.furnitureKind==='flag'&&!state.activeFlag&&state.upgrades.includes(u.id)){state.activeFlag=u.id;persist();renderRoom()}vpqRewardShowroom();return}
  if(d.vpqlvlFlag){if(state.upgrades.includes(d.vpqlvlFlag)){state.activeFlag=d.vpqlvlFlag;persist();renderRoom()}vpqRewardShowroom();return}
  if(d.vpqlvlUnflag){state.activeFlag='';persist();renderRoom();vpqRewardShowroom()}
 },true);
