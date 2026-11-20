@@ -3063,6 +3063,68 @@
       },
       "updated": "2026-11-20T14:13:49.798Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-78-15": {
+      "title": "Ectropion",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-15-1795184180611-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Eye"
+          ],
+          "conditionId": "pathx-78-15"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-15-1795184180611-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "78"
+        ],
+        "systems": [
+          "Eye"
+        ],
+        "conditionId": "pathx-78-15"
+      },
+      "text": {
+        "title": "Ectropion",
+        "gross": " Eversion and laxity of the eyelid, no direct corneal irritation ",
+        "dx": "Working identification: Ectropion. Specimen site: Eye / ocular adnexa. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "why": "Exposure and impaired tear distribution may cause chronic keratoconjunctivitis, usually without direct hair-corneal rubbing.",
+        "visualClue": "",
+        "compare": "",
+        "notes": "",
+        "etiologyCategories": [],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "eye",
+        "pathogenNames": "**important term**",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-20T14:16:22.073Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
