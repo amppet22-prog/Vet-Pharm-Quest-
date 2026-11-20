@@ -50,7 +50,7 @@ function menu(){
  '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 9px"><button data-pathdiff-list-lecture="1">L'+safe(conditionLecture)+' only</button><button data-pathdiff-list-exam="1">Entire exam</button><button data-pathdiff-all-rounds="1">All exams</button><button data-pathdiff-shuffle="1">🔀 Shuffle</button></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:8px">'+matched.map((x,i)=>'<button data-pathdiff-open="'+safe(x.id)+'" style="display:block;text-align:left;padding:11px;border:1px solid #bacde2;border-radius:10px;background:#fff"><b>'+safe(signalment(x))+'</b><small style="display:block;margin-top:5px">L'+safe(x.lecture)+' · Patient '+(i+1)+'</small></button>').join('')+'</div>'+
  (!matched.length?'<p style="padding:10px;border:1px dashed #c8d6e4;border-radius:9px">No cases in this selection yet. Choose another lecture or add one.</p>':'')+
- '<details style="margin-top:13px"><summary style="cursor:pointer;font-size:12px">More resources and editing</summary><div class="buttonrow" style="margin-top:8px"><button data-pathdiff-umbrella="1">Pathology patterns</button><button data-pathdiff-library="1">Photo library</button><button data-pathdiff-condition-index="1">Full lecture inventory</button></div></details>');
+ '<details style="margin-top:13px"><summary style="cursor:pointer;font-size:12px">More resources and editing</summary><div class="buttonrow" style="margin-top:8px"><button data-pathdiff-umbrella="1">Pathology patterns</button><button data-pathdiff-library="1">Photo library</button><button data-pathdiff-condition-index="1">Full lecture inventory</button><a href="https://slides.davisthompsonfoundation.org/arkive?image=4" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:8px;border:1px solid #c2d3e7;border-radius:8px;background:white;color:#314f77">🖼️ Davis–Thompson Arkive</a></div></details>');
 }
 
 /* Umbrella terms describe morphology, anatomic patterns or syndromes; never count them as etiologic diagnoses. */
@@ -687,7 +687,8 @@ function view(){
  const history=String(x.history||'').startsWith(String(x.species||''))?String(x.history||'').slice(String(x.species||'').length).replace(/^[., ]+/,''):x.history;
  const realMorph=x.morph&&!/^Path Exam [0-9]+ ·/.test(String(x.morph))&&!/differential reasoning|single-best-answer/i.test(x.morph);
  const photoSlots=Array.isArray(x.photoSlots)?x.photoSlots:[];
- const initialSlots=photoSlots.filter(p=>p.reveal!=='histo');
+ const initialSlots=photoSlots.filter(p=>!p.reveal||p.reveal==='initial');
+ const followupSlots=photoSlots.filter(p=>p.reveal==='followup');
  const histoSlots=photoSlots.filter(p=>p.reveal==='histo');
  const labeledSlots=initialSlots.length?'<details style="margin-top:8px" open><summary style="font-size:12px;font-weight:750">Image slots · '+initialSlots.length+' clinical / gross</summary><div style="font-size:12px;padding:6px 0">'+initialSlots.map((p,i)=>'<div style="padding:6px 0;border-bottom:1px solid #dce6f0">📷 '+safe(p.label)+'</div>').join('')+'</div></details>':'';
  const imagePanel='<aside style="min-width:0;border:1px solid #c7d8e7;border-radius:11px;background:#f8faff;padding:11px;align-self:start">'+
@@ -732,10 +733,11 @@ function view(){
  (x.tests&&!/does not supply|not yet supplied|refer to the linked lecture|not separately provided/i.test(x.tests)?'<p><b>Ancillary diagnostics / confirmation:</b> '+rich(x.tests)+'</p>':'')+
  '<small>'+safe(x.ref||'Pathology learning source')+'</small></div>'+
  (caseAtlasMatches(x).length?'<div class="buttonrow" style="margin-top:10px">'+caseAtlasMatches(x).map(({item},i)=>'<button data-pathdiff-case-atlas="'+i+'">📚 Review '+safe(item.title)+'</button>').join('')+'</div>':'')+
- (caseReward?.xp?'<p class="tiny">+'+caseReward.xp+' XP earned'+(caseReward.coins?' · +'+caseReward.coins+' coins':'')+'</p>':'')+'</section>':'';
+ (caseReward?.xp?'<p class="tiny">+'+caseReward.xp+' XP earned'+(caseReward.coins?' · +'+caseReward.coins+' coins':'')+'</p>':'')+
+ (x.followup||followupSlots.length?'<details style="padding:10px;border:1px solid #b5cde1;border-radius:9px;margin-top:10px"><summary style="font-weight:800;cursor:pointer">📅 Follow-up and outcome (optional)</summary>'+(x.followup?'<p>'+rich(x.followup)+'</p>':'')+followupSlots.map(p=>'<p style="font-size:12px">📷 '+safe(p.label)+'</p>').join('')+'</details>':'')+'</section>':'';
  const resource='<details style="margin:13px 0;border:1px solid #ccdaeb;border-radius:9px;padding:10px"><summary style="font-weight:750;cursor:pointer">📚 Sources, lecture links & image management</summary>'+
  '<div class="buttonrow" style="margin-top:8px"><button data-pathdiff-exam7-lecture="'+safe(x.id)+'">Lecture '+safe(x.lecture)+'</button><button data-pathdiff-exam7-atlas="'+safe(x.id)+'">Specimen atlas</button><button data-pathdiff-edit-case="'+safe(x.id)+'">✏️ Edit & publish</button></div>'+
- (x.photoToAdd?'<p class="tiny">Suggested photograph: '+safe(x.photoToAdd)+'</p>':'')+'<small>'+safe(x.ref||'Source reference not specified')+'</small></details>';
+ (x.photoToAdd?'<p class="tiny">Suggested photograph: '+safe(x.photoToAdd)+'</p>':'')+(x.sourceArticleUrl?'<p><a href="'+safe(x.sourceArticleUrl)+'" target="_blank" rel="noopener noreferrer">Read original case article</a></p>':'')+'<p><a href="https://slides.davisthompsonfoundation.org/arkive?image=4" target="_blank" rel="noopener noreferrer">Explore Davis–Thompson Noah’s Arkive</a></p><small>Check image attribution and reuse rights before publishing.</small><p><small>'+safe(x.ref||'Source reference not specified')+'</small></p></details>';
  modal('🩺 L'+safe(x.lecture)+' · '+safe(signalment(x)),
  '<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:9px"><div class="buttonrow"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>◀ Previous</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next ▶</button></div><div class="buttonrow"><button data-pathdiff-edit-case="'+safe(x.id)+'" style="font-weight:800;background:#e6f5e9;border:1px solid #7bb694">✏️ Edit & publish</button><button data-pathdiff-reset="1">↺ Restart</button></div></div>'+
  '<div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(210px,0.9fr);gap:12px;align-items:start" class="vpq-case-dual"><div style="min-width:0">'+main+'</div>'+imagePanel+'</div>'+
