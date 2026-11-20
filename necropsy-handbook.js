@@ -147,7 +147,13 @@ function exam6QuickLearn(n){
  '<div class="np-cover"><h3>'+safe(lesson.title)+'</h3><p>Quick recall: recognize the lesion, understand why it occurs, and separate it from the closest differential. Full disease details and credited photos open in the existing editable Specimen Cabinet.</p><small>'+entries.length+' linked disease entries</small></div>'+
  '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">🔬 Disease Atlas</button><button data-npflashgi="'+safe(n)+'">🧠 Lecture flashcards</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button><button data-npchapter="'+safe(n)+'">← Lecture overview</button></div>'+
  outline+
- (indexed.length?'<details class="np-gi-card"><summary>Additional lecture objectives / topics still being developed ('+indexed.length+')</summary><p class="tiny">These are coverage reminders, not validated disease Atlas entries.</p>'+indexed.map(s=>'<p>• '+safe(s.title)+'</p>').join('')+'</details>':'')+
+ (indexed.length?'<details class="np-gi-card"><summary>Additional lecture overview topics ('+indexed.length+') · linked disease references</summary><p class="tiny">These are broad source-index topics, not individual validated disease cards. Where a verified detailed disease record is already present, you can open it below; unmatched topics still need a source-specific expansion.</p>'+
+ indexed.map(s=>{
+  const matches=window.VPQ_PATH_EXAM6_INDEX_LINKS?.links?.(n,s.title)||[];
+  return '<div style="padding:9px 0;border-bottom:1px solid #dbe5ef"><b>'+safe(s.title)+'</b>'+
+   (matches.length?'<div class="np-gi-actions" style="margin:6px 0">'+matches.map(x=>'<button data-npatlasentry="'+safe(n)+'" data-npatlasindex="'+x.index+'">🔬 '+safe(x.title)+'</button>').join('')+'</div>':'<small style="display:block;color:#86694f;margin-top:4px">Detailed disease link still pending; use the lecture overview for now.</small>')+
+   '</div>';
+ }).join('')+'</details>':'')+
  '<h4>Check your understanding</h4>'+((lesson.checks||[]).map((q,i)=>'<details class="np-gi-card"><summary>Q'+(i+1)+'. '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join(''))+
  '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">🔬 Browse disease Atlas</button></div>');
 }
