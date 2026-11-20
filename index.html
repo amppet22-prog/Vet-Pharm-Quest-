@@ -3745,8 +3745,8 @@ window.addEventListener('load',restoreVisibleRoom,{once:true});
  const url=p=>String(p).split('/').map(encodeURIComponent).join('/');
  button.addEventListener('click',function(){
    const portraits=[
-     {src:'assets/meet-team-pets-preview.svg',alt:'Vet Pharm Quest illustrated team gathered with a dog and a cat',caption:'The team & our furry friends'},
-     {src:'assets/meet-team-group-preview.svg',alt:'Vet Pharm Quest group illustration of diverse veterinary team members',caption:'Meet our veterinary team'}
+     {src:'assets/meet-team-pets-preview.svg?v=real-photo-20261120',alt:'Vet Pharm Quest illustrated team gathered with a dog and a cat',caption:'The team & our furry friends'},
+     {src:'assets/meet-team-group-preview.svg?v=real-photo-20261120',alt:'Vet Pharm Quest group illustration of diverse veterinary team members',caption:'Meet our veterinary team'}
    ];
    const items=portraits.map(p=>'<figure><img loading="lazy" src="'+esc(p.src)+'" alt="'+esc(p.alt)+'"><figcaption>'+esc(p.caption)+'</figcaption></figure>').join('');
    const body='<p>Meet the crew behind our teaching hospital! These are the two team portraits from your photo collection. Alexandria can join the group portrait in a future update.</p><div class="vpq-team-preview vpq-team-group-photos">'+items+'</div><p><b>Mera Munchasurus and Family</b> are our hospital mascots and chiefs of snacks &amp; encouragement.</p>';
