@@ -232,22 +232,21 @@ document.head.appendChild(necroQuestionStyle);
 
 
 
-// In-room help is descriptive only: it never invokes the underlying activity.
+// The ? help panels describe actual station destinations; no phantom separate activity.
 const necroHelp={
- necroGross:{title:'🦴 Specimen Cabinet · Gross Pathology',what:'Explore visible organ lesions: location, color, size, shape, texture and distribution.',practice:'Identify the organ and describe what is abnormal before revealing the diagnosis.',why:'Gross description is the evidence behind an accurate morphologic diagnosis.'},
- necroHandbook:{title:'📚 Necropsy Handbook · Learn First',what:'Review pathology conditions grouped by lecture and body system, with cross-system patterns.',practice:'Read the disease clues and compare gross findings, histology and mechanisms.',why:'Understanding how a lesion develops makes it easier to recognize unfamiliar examples.'},
- necroDx:{title:'📋 Diagnosis Board · Morphologic Diagnosis',what:'Learn the structure of a lesion-based diagnosis, not just an etiologic disease name.',practice:'State organ or tissue, distribution, lesion/process, and severity or chronicity only when supported.',why:'This is how pathologists summarize observable tissue injury without guessing the cause.'},
- necroHisto:{title:'🔬 Microscope · Histology',what:'Compare microscopic patterns and the cellular changes responsible for gross lesions.',practice:'Identify inflammatory cells, necrosis, degeneration, proliferative changes and tissue distribution.',why:'Histology helps verify and refine the morphologic diagnosis when gross changes overlap.'},
- necroCases:{title:'🐾 Case Board · Clinical Pathology Cases',what:'Apply gross and microscopic findings alongside history, species and other clinical evidence.',practice:'Make and justify a working diagnosis, then consider differentials and next tests.',why:'One lesion pattern can have multiple causes; clinicopathologic context helps discriminate.'},
- necroBio:{title:'🧼 Boot Wash & PPE · Biosecurity',what:'Review protective equipment, clean/dirty workflows, sampling and decontamination.',practice:'Choose appropriate precautions and handling steps before and after a necropsy.',why:'Good infection control protects personnel and prevents sample contamination.'}
+ necroGross:{title:'🦴 Specimen Cabinet',tag:'GROSS · OBSERVE',opens:'Opens the Specimen Cabinet in its gross-lesion view.',learn:'Identify the organ, location, lesion type, distribution and appearance before naming a cause.',different:'This is a specimen-based atlas, not a patient scenario.',next:'Compare histology or attempt guided morphologic diagnosis.'},
+ necroHandbook:{title:'📚 Necropsy Handbook',tag:'LECTURES · LEARN FIRST',opens:'Opens the pathology lecture and body-system handbook.',learn:'Learn gross lesions, histology, pathogenesis, differentials and why the body responds as it does.',different:'The reference and learning station rather than an unknown-specimen challenge.',next:'Take what you learned to the Specimen Cabinet or Patient Cases.'},
+ necroDx:{title:'📋 Diagnosis Board',tag:'MORPHOLOGY · PRACTICE',opens:'Currently opens the same gross Specimen Cabinet page as the gross-lesion station.',learn:'Write a supported morphologic diagnosis: organ/tissue, process, distribution and relevant modifiers.',different:'The focus is precise lesion description, not guessing a specific etiology.',next:'Select the guided morphologic-diagnosis activity within the shared atlas.'},
+ necroHisto:{title:'🔬 Microscope',tag:'HISTOLOGY · EXPLAIN WHY',opens:'Opens the shared Specimen Cabinet with histology-focused study selected.',learn:'Identify microscopic patterns of cellular injury, inflammation, degeneration, neoplasia and repair.',different:'Focuses on microscopic evidence and why it produces the gross lesion.',next:'Compare the corresponding gross lesion and related diagnosis.'},
+ necroCases:{title:'📋 Patient Cases',tag:'CLINICAL · DIFFERENTIALS',opens:'Opens the dedicated Differential Diagnosis Case Center.',learn:'Use signalment, history, gross lesions, histology and testing to rank and distinguish diagnoses.',different:'Multispecies patient-based clinical reasoning instead of a specimen-only reference.',next:'Review the linked lecture and atlas sources when available.'},
+ necroBio:{title:'🧼 Cleaning & PPE',tag:'SAFETY · SAMPLING',opens:'Opens the necropsy biosecurity and sampling activity.',learn:'Review PPE, clean/dirty workflow, sample handling, contamination and decontamination.',different:'Protects staff and sample integrity; it is not a diagnostic case center.',next:'Apply precautions to necropsy scenarios and sample collection.'}
 };
 function necroHelpModal(action){
  const h=necroHelp[action];if(!h)return;
- const html='<p><b>What is this station for?</b> '+h.what+'</p>'+
- '<p><b>What will I practice?</b> '+h.practice+'</p>'+
- '<p><b>Why it matters:</b> '+h.why+'</p>'+
- '<p class="tiny">Select the illustrated station itself to open the activity. This question mark only explains its purpose.</p>';
- api.showModal(h.title,html);
+ const item=(label,body)=>'<div style="padding:10px 12px;border:1px solid #d5e2ef;border-radius:10px;background:white;margin:8px 0"><b style="display:block;color:#214b78;font-size:13px;margin-bottom:5px">'+label+'</b><div style="font-size:13px;line-height:1.55;color:#304862">'+body+'</div></div>';
+ api.showModal(h.title,'<div style="padding:11px 13px;border-radius:10px;background:#eaf3ff;border-left:4px solid #668dc5"><small style="font-weight:900;letter-spacing:.06em;color:#4a6b97">'+h.tag+'</small><p style="margin:6px 0 0;font-weight:800;color:#25486d;font-size:13px">'+h.opens+'</p></div>'+
+ item('What you learn',h.learn)+item('What makes this station different',h.different)+item('Where to go next',h.next)+
+ '<p class="tiny">The question mark provides information only. Click the actual station or walk nearby and press E to enter.</p>');
 }
 
 function refresh(){
@@ -264,15 +263,17 @@ function refresh(){
  const help=e.target.closest('[data-vpqnecro-help]');
  if(help){e.preventDefault();e.stopPropagation();necroHelpModal(help.dataset.vpqnecroHelp);return}
  if(e.target.closest('[data-vpqnecro-guide]')){
-  api.showModal('🦴 How to use the Necropsy Lab',
-  '<p><b>Start with the Handbook</b> to understand the diseases, then work from gross appearance to diagnosis and microscopic confirmation.</p>'+
-  '<p>🦴 <b>Glass specimen cabinet:</b> identify organs and visible gross lesions.</p>'+
-  '<p>📚 <b>Book shelf:</b> learn diseases by system and lecture, including the clinical WHY.</p>'+
-  '<p>📋 <b>Diagnosis board:</b> write a morphologic diagnosis — organ + distribution + lesion type + severity when justified.</p>'+
-  '<p>🔬 <b>Microscope:</b> recognize microscopic lesions and connect histology to pathogenesis.</p>'+
-  '<p>🐾 <b>Case board:</b> apply findings to patient cases.</p>'+
-  '<p>🧼 <b>Boot wash and PPE:</b> learn safety, cleaning and sample handling.</p>'+
-  '<p class="tiny">Click an object or walk near it and press E. The two stainless tables are visual necropsy workstations; the six labeled learning objects open activities.</p>');return}
+  api.showModal('🦴 Necropsy Lab · Station Guide',
+  '<p><b>How the room fits together:</b> Handbook → Gross observations → Morphologic diagnosis → Histology → Patient differentials. PPE and sampling apply throughout.</p>'+
+  '<div style="background:#f7faff;border:1px solid #d6e3ef;border-radius:11px;padding:12px;font-size:13px;line-height:1.75">'+
+  '<b>📚 Handbook:</b> lecture reference, pathology and WHY.<hr style="border:0;border-top:1px solid #dce7f2">'+
+  '<b>🦴 Specimen Cabinet:</b> gross specimen atlas.<hr style="border:0;border-top:1px solid #dce7f2">'+
+  '<b>📋 Diagnosis Board:</b> guided morphologic diagnosis. Shares the gross atlas page for now.<hr style="border:0;border-top:1px solid #dce7f2">'+
+  '<b>🔬 Microscope:</b> histology view of the shared specimen atlas.<hr style="border:0;border-top:1px solid #dce7f2">'+
+  '<b>🐾 Patient Cases:</b> dedicated multispecies differential diagnosis cases.<hr style="border:0;border-top:1px solid #dce7f2">'+
+  '<b>🧼 Cleaning & PPE:</b> necropsy safety and sampling.</div>'+
+  '<div style="margin-top:10px;padding:11px 13px;border:1px solid #d7c8e5;background:#f6f0fa;border-radius:10px;font-size:13px"><b>🔎 Future Veterinary Forensics Case Files</b><p style="margin:5px 0">Planned as a separate case library and station. It will focus on scene and history, documentation, injuries, postmortem changes, evidence handling, and defensible interpretations. No forensic cases are currently included.</p></div>'+
+  '<p class="tiny">Click a station or walk up and press E. The stainless tables are scenery, not separate clickable stations.</p>'');return}
  const guide=e.target.closest('[data-vpqbench-guide]');if(guide){window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b)api.doAction(b.dataset.vpqspecact)});
  stage.appendChild(div);
 }
