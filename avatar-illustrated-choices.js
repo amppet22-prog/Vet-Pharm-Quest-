@@ -16,6 +16,7 @@ window.VPQ_ILLUSTRATED_CHOICES=function(api){
    const x=(n%columns)*100/(columns-1),y=Math.floor(n/columns)*100/(rows-1);
    return '<span class="vpq-art-sprite vpq-art-'+kind+'" role="img" aria-label="Illustrated full-body veterinarian option '+(n+1)+'" style="background-image:url(&quot;'+atlas+'&quot;);background-position:'+x.toFixed(5)+'% '+y.toFixed(5)+'%"></span>';
  };
+ // Single source image for every state: no fabricated headshot/body pairing.
  const oldRender=gallery.renderWalking;
  gallery.renderWalking=function(p){
    if(!isArt(p?.portraitId))return oldRender(p);
@@ -45,13 +46,23 @@ window.VPQ_ILLUSTRATED_CHOICES=function(api){
    const existing=portraitSection?.querySelector('.vpq-art-select-wrap');
    if(!portraitSection||existing)return;
    const wrap=document.createElement('div');wrap.className='vpq-art-select-wrap';
-   wrap.innerHTML='<h3>🚶 Illustrated Standing Characters</h3>'+
-    '<p class="tiny">More full-body veterinarian choices, including varied body builds, hairstyles, the blonde and red-haired options. These characters have no assigned names: choose your name and pronouns separately. Alexandria and Gary remain the named presets; Classic customization is still available.</p>'+
+   wrap.innerHTML='<h3>🐾 Choose Your Veterinarian</h3>'+
+    '<p class="tiny">Each picture is linked to the same standing veterinarian you will see in the hospital. Choose a character, then save your choice below. You can still name your veterinarian and pet.</p>'+
     '<div class="vpq-art-select-grid">'+Array.from({length:total},(_,i)=>{
        const id='standing-'+galleryOrder[i];
-       return '<button type="button" class="vpq-art-select-btn" data-vpqportrait="'+id+'" aria-label="Choose illustrated veterinarian '+(i+1)+'">'+image(id,'tile')+'<span>Illustrated '+String(i+1).padStart(2,'0')+'</span></button>';
+       return '<button type="button" class="vpq-art-select-btn" data-vpqportrait="'+id+'" aria-label="Choose illustrated veterinarian '+(i+1)+'">'+image(id,'tile')+'<span>Veterinarian '+String(i+1).padStart(2,'0')+'</span></button>';
     }).join('')+'</div>';
-   portraitSection.appendChild(wrap);
+   portraitSection.prepend(wrap);
+   // The older 31-photo roster is not matched to its vector standing avatars.
+   // Keep it in the form DOM for backward compatibility but hide the mismatched catalog.
+   portraitSection.querySelectorAll('.vpq-roster-grid,.vpq-roster-picks,.vpq-portrait-help,.vpq-roster-note').forEach(x=>x.hidden=true);
+   const prior=getState()?.portraitId||'';
+   if(!isArt(prior)){
+     const legacy=document.createElement('p');
+     legacy.className='vpq-avatar-legacy-note';
+     legacy.textContent='Your previously saved character stays selected until you choose a new matching illustration. Existing avatar progress is not deleted.';
+     wrap.insertAdjacentElement('afterend',legacy);
+   }
    const selected=f.elements.portraitId?.value;
    wrap.querySelectorAll('[data-vpqportrait]').forEach(b=>b.classList.toggle('chosen',b.dataset.vpqportrait===selected));
  }
@@ -66,6 +77,18 @@ window.VPQ_ILLUSTRATED_CHOICES=function(api){
  '.vpq-art-preview,.vpq-art-viewer{width:94px;height:195px;max-width:100%}.vpq-art-walk{width:54px;height:112px;max-width:100%;position:absolute;bottom:0;left:50%;transform:translateX(-50%)}'+
  '.vpq-matched-frame:has(.vpq-art-portrait){display:flex;align-items:center}.vpq-matched-body:has(.vpq-art-preview),.vpq-matched-body:has(.vpq-art-viewer){display:flex;align-items:center}'+
  '@media(max-width:650px){.vpq-art-select-grid{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px}.vpq-art-tile{width:62px;height:129px}.vpq-art-select-btn{padding:6px 3px}}';
+
+// Keep the avatar setup simple without changing saved fields or removing pet choices.
+style.textContent +=
+ '.vpq-art-select-wrap{margin:8px 0 13px;padding:12px;background:#faf6ff}.vpq-art-select-grid{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:9px}'+
+ '.vpq-art-select-btn{background:#fff;transition:border-color .12s,box-shadow .12s}.vpq-art-select-btn:hover{border-color:#a480c0}.vpq-art-sprite{image-rendering:auto;filter:none;transform:translateZ(0)}'+
+ '.vpq-avatar-legacy-note{font-size:12px;line-height:1.5;color:#6b5877;background:#fff4dd;border:1px solid #e9d8af;border-radius:10px;padding:9px;margin:7px 0}'+
+ '#avatarForm [data-vpqsection="vet"]{display:none!important}'+
+ '#avatarForm [data-vpqtab="vet"]{display:none!important}'+
+ '#avatarForm .vpqStandingPresets{display:none!important}'+
+ '#avatarForm [data-vpqsection="portraits"]>.vpq-roster-grid,#avatarForm [data-vpqsection="portraits"]>.vpq-roster-picks{display:none!important}'+
+ '#avatarForm .vpq-art-select-wrap .vpq-art-select-btn.chosen{border-color:#8b5bb6;box-shadow:0 0 0 3px #eee0ff}'+
+ '@media(max-width:600px){.vpq-art-select-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.vpq-art-select-btn{padding:6px 2px}.vpq-art-tile{max-height:130px}}';
  document.head.appendChild(style);
  return {addChoices,image,isArt,total};
 };
