@@ -1,7 +1,7 @@
 /* Universal, optional player accounts for Vet Pharm Quest.
  * All registered users have identical game permissions.
  * This file NEVER grants owner editing/publishing rights or alters the GitHub key vault.
- * Guest play remains available. Cloud save synchronization is NOT active yet.
+ * Guest play remains available. Cloud backup is offered separately and only after login.
  */
 (function () {
   "use strict";
@@ -67,7 +67,7 @@
           <label for="vpqAccountEmail">Email address</label>
           <input id="vpqAccountEmail" type="email" autocomplete="email" required placeholder="you@example.edu">
           <label for="vpqAccountPassword">Password</label>
-          <input id="vpqAccountPassword" type="password" autocomplete="current-password" minlength="6" required>
+          <input id="vpqAccountPassword" type="password" autocomplete="current-password" minlength="12" required>
           <div class="vpq-account-actions">
             <button id="vpqAccountLogin" class="vpq-account-primary" type="submit">Sign In</button>
             <button id="vpqAccountSignup" type="button">Create Account</button>
@@ -83,10 +83,11 @@
           <button id="vpqAccountGuest" type="button">Continue as Guest</button>
         </div>
         <div id="vpqAccountMessage" class="vpq-account-message" role="status" aria-live="polite" hidden></div>
-        <p style="font-size:11px;color:#6d7995">Game progress is still saved in this browser. Account sign-in does not yet synchronize saves across devices. Edit/publish requests and owner publishing are unchanged.</p>
+        <p style="font-size:11px;color:#6d7995">Guest progress remains saved on this browser. Signed-in players can opt into Cloud Save separately. Signing in never automatically replaces local progress. Edit/publish requests and owner publishing are unchanged.</p>
       </section>`;
     document.body.appendChild(overlay);
     const el = id => overlay.querySelector("#" + id);
+    el("vpqAccountEmail").value = window.VPQ_PLAYER_ACCOUNT_LAST_EMAIL || "";
     const message = (txt, error = false) => {
       el("vpqAccountMessage").hidden = !txt;
       el("vpqAccountMessage").textContent = txt || "";
@@ -107,6 +108,7 @@
     async function run(action) {
       if (!client || busy) return;
       const email = el("vpqAccountEmail").value.trim();
+      window.VPQ_PLAYER_ACCOUNT_LAST_EMAIL = email;
       const password = el("vpqAccountPassword").value;
       if (!el("vpqAccountEmail").reportValidity()) return;
       if (action !== "reset" && !el("vpqAccountPassword").reportValidity()) return;
@@ -123,7 +125,7 @@
           result = await client.auth.signInWithPassword({email, password});
         }
         if (result.error) throw result.error;
-        if (action === "signup") message(result.data?.session ? "Account created and signed in." : "Check your email for a confirmation link.");
+        if (action === "signup") message(result.data?.session ? "Account created and signed in." : "Check your email for a confirmation link before signing in. If you do not see it, check spam/junk.");
         if (action === "reset") message("If this address is registered, a password-reset email will be sent.");
         if (action === "login") message("Signed in successfully.");
         if (result.data?.session) session = result.data.session;
