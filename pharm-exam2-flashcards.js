@@ -41,12 +41,14 @@ function menu(){
  '<p class="tiny">'+cards().length+' focused questions available in this lecture · Practice at your own pace</p>'+
  '<div class="buttonrow"><button data-vpqpharmfc-start="1" style="background:#dff0ff;font-weight:850">▶ Start quick recall</button><button data-vpqpharmfc-missed="1">↺ Review missed</button><button data-vpqpharmfc-new="1">➕ Add flashcard</button></div></div>'+
  '<p class="tiny">Instructor practice questions and existing high-yield MCQs remain in the next study stage. Owner-created and edited flashcards publish separately from the original lecture notes.</p>'+
+ '<div class="vpqPharmRecallNext"><b>🎮 Next step: Drug Match</b><p>After learning the terms, match medications to their targets and clinical clues. Drug Match uses the same lecture focus and awards Arcade XP.</p><button data-vpqpharmfc-match="1">🧩 Play Drug Match · '+esc(lecture)+'</button></div>'+
  '<div class="buttonrow"><button data-vpqpharmfc-lesson="1">📖 Lecture & disease mechanisms</button><button data-vpqpharmfc-quiz="1">🩺 Clinical MCQs</button></div>');
 }
 function begin(review=false){missedOnly=review;revealed=false;complete=false;at=0;const m=marks();let a=cards();if(review)a=a.filter(x=>m[x.id]);else a=a.map(x=>({x,r:Math.random()})).sort((a,b)=>Number(!!m[b.x.id])-Number(!!m[a.x.id])||a.r-b.r).map(y=>y.x);deck=a;render()}
 function render(){
  if(complete||!deck.length)return show('🧠 Pharmacology · '+(!deck.length?'No cards to review':'Recall session complete'),
  '<p>'+(deck.length?'You completed '+deck.length+' cards. Revisit what you missed, or apply the drug mechanisms in clinical cases.':'No matching missed cards. Start a new recall session to build your practice list.')+'</p>'+
+ '<div class="vpqPharmRecallNext"><b>🧩 Ready for the next challenge?</b><p>Match this lecture’s drugs, mechanisms and clinical uses in the Arcade. This is optional—you can return to missed cards at any time.</p><button data-vpqpharmfc-match="1">▶ Play '+esc(lecture)+' Drug Match</button></div>'+
  '<div class="buttonrow"><button data-vpqpharmfc-missed="1">↺ Practice missed</button><button data-vpqpharmfc-start="1">New shuffled round</button><button data-vpqpharmfc-quiz="1">🩺 Clinical MCQs</button><button data-vpqpharmfc-menu="1">← Lectures</button></div>');
  const c=deck[at],pct=Math.round((at+1)/deck.length*100);
  show('🧠 '+lecture+' · Quick Recall',
@@ -60,16 +62,17 @@ function render(){
  '<div class="buttonrow">'+(revealed?'<button data-vpqpharmfc-rate="miss" style="background:#fff1e8">↺ Need practice</button><button data-vpqpharmfc-rate="know" style="background:#e2f3e9">✓ Got it</button>':'<button data-vpqpharmfc-flip="1" style="background:#e0eeff;font-weight:850">Flip to answer</button>')+'</div>'+
  '<div class="buttonrow"><button data-vpqpharmfc-prev="1" '+(at===0?'disabled':'')+'>← Previous</button><button data-vpqpharmfc-next="1">'+(revealed?'Next':'Skip · mark for practice')+' →</button></div>');
 }
-function init(body,modal,lesson,quiz){if(!body||body.__vpqPharmRecall)return;ui=body;show=modal;body.__vpqPharmRecall=true;
+function init(body,modal,lesson,quiz,drugMatch){if(!body||body.__vpqPharmRecall)return;ui=body;show=modal;body.__vpqPharmRecall=true;
  window.VPQ_FLASHCARD_OWNER?.init?.(body,modal);
  body.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target?.dataset?.vpqpharmfcFlip!==undefined){ev.preventDefault();revealed=!revealed;render()}},true);
  body.addEventListener('change',ev=>{if(ev.target?.dataset?.vpqpharmfcLecture!==undefined){lecture=ev.target.value;menu()}},true);
- body.addEventListener('click',ev=>{const b=ev.target.closest('[data-vpqpharmfc-menu],[data-vpqpharmfc-start],[data-vpqpharmfc-missed],[data-vpqpharmfc-flip],[data-vpqpharmfc-rate],[data-vpqpharmfc-next],[data-vpqpharmfc-prev],[data-vpqpharmfc-edit],[data-vpqpharmfc-new],[data-vpqpharmfc-lesson],[data-vpqpharmfc-quiz]');if(!b)return;ev.preventDefault();ev.stopImmediatePropagation();const d=b.dataset;
+ body.addEventListener('click',ev=>{const b=ev.target.closest('[data-vpqpharmfc-menu],[data-vpqpharmfc-start],[data-vpqpharmfc-missed],[data-vpqpharmfc-flip],[data-vpqpharmfc-rate],[data-vpqpharmfc-next],[data-vpqpharmfc-prev],[data-vpqpharmfc-edit],[data-vpqpharmfc-new],[data-vpqpharmfc-lesson],[data-vpqpharmfc-quiz],[data-vpqpharmfc-match]');if(!b)return;ev.preventDefault();ev.stopImmediatePropagation();const d=b.dataset;
  if(d.vpqpharmfcMenu!==undefined)return menu();
  if(d.vpqpharmfcStart!==undefined)return begin(false);
  if(d.vpqpharmfcMissed!==undefined)return begin(true);
  if(d.vpqpharmfcLesson!==undefined)return lesson?.(lecture);
  if(d.vpqpharmfcQuiz!==undefined)return quiz?.(lecture);
+ if(d.vpqpharmfcMatch!==undefined)return drugMatch?.(lecture);
  if(d.vpqpharmfcEdit!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pharmacology',lecture,deck[at],()=>render());
  if(d.vpqpharmfcNew!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pharmacology',lecture,null,()=>menu());
  if(d.vpqpharmfcFlip!==undefined){revealed=!revealed;return render()}
@@ -77,6 +80,11 @@ function init(body,modal,lesson,quiz){if(!body||body.__vpqPharmRecall)return;ui=
  if(d.vpqpharmfcRate!==undefined){if(deck[at])save(deck[at].id,d.vpqpharmfcRate==='miss');at++;complete=at>=deck.length;revealed=false;return render()}
  if(d.vpqpharmfcNext!==undefined){if(!revealed&&deck[at])save(deck[at].id,true);at++;complete=at>=deck.length;revealed=false;return render()}
  },true);
+}
+if(typeof document!=='undefined'){
+ const style=document.createElement('style');
+ style.textContent='.vpqPharmRecallNext{padding:13px;margin:14px 0;border-radius:12px;background:#f4faff;border:1px solid #aac7e8}.vpqPharmRecallNext b{font-size:15px;color:#274d7b}.vpqPharmRecallNext p{font-size:12px;margin:7px 0 10px;line-height:1.5;color:#51677f}.vpqPharmRecallNext button{background:#e0efff;border:2px solid #8bb4e0;border-radius:9px;padding:10px 13px;font-weight:800;color:#224c77}';
+ document.head.appendChild(style);
 }
 return Object.freeze({init,menu,begin,select,bank});
 })();
