@@ -1,0 +1,49 @@
+/* Vet Pharm Quest shared answer-feedback contract — 2026-11-19
+   Load this file in every game/quiz page. For future question renderers, mark
+   graded options with data-vpq-answer-state="correct" or "incorrect".
+   "selected" is a neutral pre-submit state, never an error state.
+   The correct answer is ALWAYS green, even when the learner chose incorrectly;
+   ONLY the learner's incorrect selection is orange.
+*/
+:root {
+  --vpq-answer-correct-bg: #def8e9;
+  --vpq-answer-correct-border: #37a578;
+  --vpq-answer-correct-text: #155e44;
+  --vpq-answer-incorrect-bg: #fff0d6;
+  --vpq-answer-incorrect-border: #e69a31;
+  --vpq-answer-incorrect-text: #854908;
+}
+/* Existing question systems: hospital study, flashcard MCQ, One Health,
+   case decisions, and legacy Pharm Arcade. No global .right/.wrong rules:
+   those names are also used for layout and other non-question widgets. */
+:is(button, label, .cardoption, .vpq-answer-option, [role="radio"], [role="option"])
+:is(.right, .correct, .is-correct, [data-vpq-answer-state="correct"]),
+.choice.right, .choice.correct,
+.vpq-oh-exam-q label.right {
+  background: var(--vpq-answer-correct-bg) !important;
+  border-color: var(--vpq-answer-correct-border) !important;
+  color: var(--vpq-answer-correct-text) !important;
+  opacity: 1 !important;
+}
+:is(button, label, .cardoption, .vpq-answer-option, [role="radio"], [role="option"])
+:is(.wrong, .incorrect, .is-incorrect, [data-vpq-answer-state="incorrect"]),
+.choice.wrong, .choice.incorrect,
+.vpq-oh-exam-q label.wrong {
+  background: var(--vpq-answer-incorrect-bg) !important;
+  border-color: var(--vpq-answer-incorrect-border) !important;
+  color: var(--vpq-answer-incorrect-text) !important;
+  opacity: 1 !important;
+}
+/* Explanation panels: color reinforces results without obscuring rationale. */
+:is(.response, .feedback, .vpq-answer-feedback).bad,
+.vpq-answer-feedback[data-vpq-answer-state="incorrect"] {
+  background: var(--vpq-answer-incorrect-bg) !important;
+  border-color: var(--vpq-answer-incorrect-border) !important;
+}
+:is(.response, .feedback, .vpq-answer-feedback).good,
+.vpq-answer-feedback[data-vpq-answer-state="correct"] {
+  background: var(--vpq-answer-correct-bg) !important;
+  border-color: var(--vpq-answer-correct-border) !important;
+}
+/* Accessibility: do not rely on color alone. Renderers should also show
+   ✓ Correct / ✕ Your answer and an explanation after grading. */
