@@ -176,15 +176,34 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '</g>'+
    '<g transform="translate(280 336)"><path d="M-9 0Q0 -22 13 0Z" fill="#f4cb87" stroke="#c29962" stroke-width="3"/><rect x="-15" y="1" width="33" height="6" rx="3" fill="#bb9267"/><circle cx="1" cy="-16" r="4" fill="#d8ac68"/></g>'+
    '</g>'+
-   // Illustrated dog play-yard vignette: original SVG asset scaled into the room window.
-   '<g aria-label="Dog play yard picture window"><rect x="83" y="108" width="145" height="151" rx="16" fill="#f6e8fc" stroke="#aa8bbd" stroke-width="7"/>'+
-   '<image href="assets/reception/dog-play-yard-cute.svg" x="92" y="118" width="127" height="115" preserveAspectRatio="xMidYMid slice" pointer-events="none"/>'+
-   
-   '<path d="M92 118H219V233H92Z" fill="none" stroke="#fffaf3" stroke-width="4"/>'+
-   '<rect x="89" y="231" width="134" height="26" rx="12" fill="#fff8eb" stroke="#bb9ec9" stroke-width="3"/>'+
-   '<text x="156" y="249" text-anchor="middle" font-size="13" font-weight="900" font-family="Arial,sans-serif" fill="#60537b">DOG PLAY YARD</text></g>'+
-   // wall notice and patient chairs, corners
-   '<g transform="translate(841 98)"><rect width="86" height="48" rx="12" fill="#fff9ee" stroke="'+c[4]+'" stroke-width="5"/><text x="43" y="21" text-anchor="middle" font-size="13" font-weight="900" font-family="Arial" fill="#5d667a">WELCOME</text><text x="43" y="39" text-anchor="middle" font-size="16">🐾</text></g>'+
+   // Architectural exterior picture window with visible dog-yard scenery.
+   '<g aria-label="Glass viewing window into dog play yard">'+
+   '<rect x="79" y="103" width="153" height="159" rx="12" fill="#fbf9ff" stroke="#9585ad" stroke-width="8"/>'+
+   '<rect x="87" y="111" width="137" height="139" rx="6" fill="#dff3f3" stroke="#b8a3c9" stroke-width="2"/>'+
+   '<image href="assets/reception/dog-play-yard-cute.svg" x="89" y="113" width="133" height="134" preserveAspectRatio="xMidYMid slice" pointer-events="none"/>'+
+   '<path d="M155 112V249M88 178H223" stroke="#fffaf9" stroke-width="5" opacity=".94"/>'+
+   '<path d="M94 119L131 119L94 156Z M172 121L211 121L172 161Z" fill="#fff" opacity=".22"/>'+
+   '<rect x="76" y="249" width="160" height="12" rx="5" fill="#e2d2e9" stroke="#a28db7" stroke-width="2"/>'+
+   '<rect x="95" y="259" width="120" height="22" rx="10" fill="#fffdf7" stroke="#a28db7" stroke-width="2"/>'+
+   '<text x="155" y="275" text-anchor="middle" font-size="11.5" font-weight="900" font-family="Trebuchet MS,Arial" fill="#645379">DOG PLAY YARD</text></g>'+
+   // Cat corner is a glazed interior room with an entry door, visible from the lobby.
+   '<g aria-label="Glass-front cat corner and entrance">'+
+   '<rect x="827" y="102" width="127" height="211" rx="11" fill="#f6eef8" stroke="#9587af" stroke-width="8"/>'+
+   '<rect x="834" y="110" width="113" height="194" rx="5" fill="#e8f5f1"/>'+
+   '<path d="M835 242H946V303H835Z" fill="#e4d6e8"/>'+
+   '<path d="M844 185H938" stroke="#baa1bf" stroke-width="7"/>'+
+   '<path d="M845 225H938" stroke="#d0b3c8" stroke-width="6"/>'+
+   '<path d="M850 183L861 157L876 183Z" fill="#cfb5dd"/>'+
+   '<g transform="translate(870 172)"><ellipse rx="15" ry="12" fill="#c69482"/><path d="M-13 -6L-11 -18L-3 -10M5 -10L13 -18L13 -6" fill="#c69482"/><circle cx="-5" cy="-1" r="1.8" fill="#47394d"/><circle cx="5" cy="-1" r="1.8" fill="#47394d"/><path d="M-2 5Q0 7 2 5" stroke="#68485b" stroke-width="1.5" fill="none"/></g>'+
+   '<g transform="translate(922 213)"><ellipse rx="13" ry="11" fill="#b8b4cb"/><path d="M-10 -7L-10 -16L-2 -9M4 -9L10 -16L11 -7" fill="#b8b4cb"/><circle cx="-4" cy="-1" r="1.6" fill="#45445d"/><circle cx="4" cy="-1" r="1.6" fill="#45445d"/></g>'+
+   '<rect x="837" y="113" width="107" height="189" rx="5" fill="#d5f3f5" fill-opacity=".11" stroke="#fffdfc" stroke-width="4"/>'+
+   '<path d="M895 113V303" stroke="#b9b0c8" stroke-width="5"/>'+
+   '<path d="M842 119L865 119L842 176Z M904 121L937 121L904 181Z" fill="#fff" opacity=".25"/>'+
+   '<circle cx="906" cy="233" r="5" fill="#c6a46f" stroke="#fffdf5" stroke-width="2"/>'+
+   '<rect x="828" y="94" width="127" height="27" rx="10" fill="#fffdf8" stroke="#a993bc" stroke-width="3"/>'+
+   '<text x="891" y="112" text-anchor="middle" font-family="Trebuchet MS,Arial" font-size="13" font-weight="900" fill="#665579">CAT CORNER</text></g>'+
+   // Welcome notice without an unexplained paw-print ornament.
+   '<g transform="translate(714 94)"><rect width="91" height="44" rx="11" fill="#fff9ee" stroke="'+c[4]+'" stroke-width="4"/><text x="45" y="19" font-size="12" font-family="Arial,sans-serif" font-weight="900" fill="#766a89" text-anchor="middle">WELCOME</text><text x="45" y="34" font-family="Arial,sans-serif" font-size="9" fill="#8c7797" text-anchor="middle">Check in here!</text></g>'+
    sofaVisual+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
    window.VPQ_RECEPTION_MODULAR_ASSETS.render(state,'isometric','nonrug')+
