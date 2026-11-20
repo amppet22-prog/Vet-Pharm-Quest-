@@ -686,10 +686,15 @@ function view(){
  const leadCorrect=leading>=0&&leading===correct;
  const history=String(x.history||'').startsWith(String(x.species||''))?String(x.history||'').slice(String(x.species||'').length).replace(/^[., ]+/,''):x.history;
  const realMorph=x.morph&&!/^Path Exam [0-9]+ ·/.test(String(x.morph))&&!/differential reasoning|single-best-answer/i.test(x.morph);
+ const photoSlots=Array.isArray(x.photoSlots)?x.photoSlots:[];
+ const initialSlots=photoSlots.filter(p=>p.reveal!=='histo');
+ const histoSlots=photoSlots.filter(p=>p.reveal==='histo');
+ const labeledSlots=initialSlots.length?'<details style="margin-top:8px" open><summary style="font-size:12px;font-weight:750">Image slots · '+initialSlots.length+' clinical / gross</summary><div style="font-size:12px;padding:6px 0">'+initialSlots.map((p,i)=>'<div style="padding:6px 0;border-bottom:1px solid #dce6f0">📷 '+safe(p.label)+'</div>').join('')+'</div></details>':'';
  const imagePanel='<aside style="min-width:0;border:1px solid #c7d8e7;border-radius:11px;background:#f8faff;padding:11px;align-self:start">'+
-  '<b>📷 Specimen images</b><p class="tiny" style="margin:5px 0">Use the image to localize and describe lesions before deciding the cause.</p>'+
-  (window.VPQ_NECROPSY_OWNER_PUBLISH?.casePhotoHTML?.(x.id)||'')+sourcedPhotos(x)+photoHTML(x)+
-  '<small style="display:block;margin-top:8px">Microscopic findings stay hidden until you reveal histology.</small></aside>';
+  '<b>📷 Clinical, ultrasound & gross images</b><p class="tiny" style="margin:5px 0">Images help localize and describe lesions before identifying the cause.</p>'+
+  (window.VPQ_NECROPSY_OWNER_PUBLISH?.casePhotoHTML?.(x.id,{includeHistology:false})||'')+sourcedPhotos(x)+photoHTML(x)+labeledSlots+
+  (histoSlots.length?'<p class="tiny" style="margin:8px 0">🔬 '+histoSlots.length+' histology image slots unlock after the histology reveal.</p>':'')+
+  '<button data-pathdiff-edit-case="'+safe(x.id)+'" style="width:100%;margin-top:8px;border:1px solid #81b5a0;background:#e6f6ee;border-radius:8px;padding:9px">＋ Add / label multiple photographs</button></aside>';
  const patientParts=String(history||'').split(/\b(Clinical signs|Bloodwork|Ancillary diagnostics|Laboratory findings|Diagnostic findings|Diagnostics):\s*/i);
  const narrative=patientParts[0]||'';
  let findings='';
@@ -713,6 +718,7 @@ function view(){
  '<p style="margin:6px 0;font-weight:700">'+(selected?safe(selected.name):'Not selected yet — choose ☆ Lead beside a diagnosis.')+'</p>'+
  (revealed?'<p style="margin:5px 0;color:'+(leadCorrect?'#286c3b':'#9b5515')+'"><b>'+(leadCorrect?'✓ Best-supported diagnosis':'Review the evidence and compare with the supported diagnosis')+'</b></p>':'<small>Your selected lead appears immediately. Correctness is revealed after histology and submission.</small>')+'</div>'+
  (phase===0?'<button data-pathdiff-histo="1" style="width:100%;padding:11px;border:1px solid #9eb9d4;border-radius:9px;font-weight:800;background:#e9f1fc">🔬 Reveal histology and reconsider</button>':'<div style="padding:11px;border-left:4px solid #9a79be;background:#f5effb;border-radius:9px"><b>3 · Histology</b><p style="margin:7px 0">'+rich(x.histo)+'</p>'+(grossLeading>=0?'<small>Before histology you favored '+safe(x.options[grossLeading]?.name||'—')+'.</small>':'')+'</div>')+
+ (phase>=1?'<div style="margin:10px 0">'+(window.VPQ_NECROPSY_OWNER_PUBLISH?.casePhotoHTML?.(x.id,{onlyHistology:true})||'')+(histoSlots.length?'<details><summary style="cursor:pointer;font-size:12px;font-weight:750">🔬 Histology photo slots ('+histoSlots.length+')</summary><div style="font-size:12px;padding:5px 0">'+histoSlots.map(p=>'<p style="margin:5px 0">🔬 '+safe(p.label)+'</p>').join('')+'</div></details>':'')+'</div>':'')+
  (phase===1?'<button data-pathdiff-compare="1" style="width:100%;margin-top:10px;padding:12px;background:#dff1e5;border:1px solid #8abda0;border-radius:9px;font-weight:800">✓ Submit diagnosis · View comparisons</button>':'')+
  (leadHint?'<p role="alert" style="color:#99551c">Choose a leading diagnosis using the ☆ Lead button before submitting.</p>':'')+
  '</section>';
