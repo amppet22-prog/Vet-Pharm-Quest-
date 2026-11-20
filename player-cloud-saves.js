@@ -163,6 +163,18 @@ async function firstUpload(){
   render();
  }catch(error){notify("Could not start cloud saving: "+(error.message||""),true);}
 }
+async function inspectSave(){
+ if(!client||!userId)return;
+ const owner=userId;
+ try{
+   notify("Checking cloud backup…");
+   const remote=await fetchRemote(owner);
+   if(owner!==userId)return;
+   if(!remote){notify("No online save exists for this account. This browser's progress has not been replaced.",true);return;}
+   const payload=normalize(remote.save_data);
+   notify("ONLINE BACKUP ("+new Date(remote.updated_at).toLocaleString()+"): "+progressLabel(payload)+". CURRENT BROWSER: "+progressLabel(readSelected())+".");
+ }catch(error){notify("Could not inspect online save: "+(error.message||""),true);}
+}
 async function restore(){
  if(!client||!userId)return;
  const owner=userId;
@@ -199,6 +211,7 @@ function render(){
  if(conflict)notify("Cloud backup paused because another save exists. Review before overwriting.",true);
  else if(optedIn)notify("☁️ Auto-save is ON. Progress saves to your account and this browser.");
  else notify(localGet(OWNER_KEY)&&localGet(OWNER_KEY)!==userId?"This browser has progress linked to another account. Choose Restore or explicitly back up this browser; no automatic replacement.":"Choose Back up this browser or Restore cloud save. Nothing will be overwritten without confirmation.");
+ addButton("Check online XP",inspectSave);
  addButton("Back up this browser",firstUpload);
  addButton("Restore cloud save",restore);
  if(localGet("vpq-cloud-recovery-"+userId))addButton("Undo last restore",()=>{
