@@ -89,7 +89,7 @@ function refresh(){
  stage.appendChild(div);
  if(room==='reception'&&stage.dataset.receptionView==='isometric'){
   const n=document.createElement('div');n.id='vpqReceptionExtras';
-  n.innerHTML='<button class="vpqReceptionExtra" data-vpqwingaction="vpqGoHallway" style="left:42%;top:13%">🚪 Explore hallway</button><button class="vpqReceptionExtra" data-vpqwingaction="vpqGoYard" style="right:1%;top:21%">🐕 Dog-yard window</button><button class="vpqReceptionExtra" data-vpqwingaction="vpqGoCat" style="right:1%;top:32%">🐈 Cat corner</button><button class="vpqReceptionExtra" data-vpqwingaction="vpqBlueprint" style="left:2%;top:3%">🗺️ Floor plan</button>';
+  n.innerHTML='<button class="vpqReceptionExtra" data-vpqwingaction="vpqGoYard" style="right:1.5%;top:18%">🐕 Dog yard</button><button class="vpqReceptionExtra" data-vpqwingaction="vpqGoCat" style="right:1.5%;top:31%">🐈 Cat corner</button><button class="vpqReceptionExtra" data-vpqwingaction="vpqBlueprint" style="left:2%;top:3%">🗺️ Floor plan</button>';
   n.addEventListener('click',e=>{const b=e.target.closest('[data-vpqwingaction]');if(b)route(b.dataset.vpqwingaction)});
   stage.appendChild(n);
  }

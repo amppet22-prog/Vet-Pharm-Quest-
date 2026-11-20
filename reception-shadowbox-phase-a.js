@@ -165,12 +165,11 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
   const hotspots=[
    ['front','Front desk · check in','welcome'],
    ['patients','Patient queue · new patient cases','queue'],
-   ['clinical','Enter clinical hall and examination room','vpqGoExam'],
+   ['clinical','Enter the main clinical hallway','vpqGoHallway'],
    ['pharmacy','Enter pharmacy and drug shelves','vpqGoPharmacy'],
-   ['study','Enter clinical hallway and clinic departments','vpqGoHallway'],
    ['studio','Customize waiting room · Reception Studio','receptionStudio']
   ];
-  node.innerHTML=hotspots.map(([id,label,name])=>'<button type="button" class="vpqShadowHotspot vpqShadow-'+id+'" data-shadowaction="'+name+'" aria-label="'+label+'" title="'+label+'"><span>'+({front:'🛎️ Desk',patients:'📋 Patients',clinical:'Clinical Hall',pharmacy:'Pharmacy',study:'Clinic Hallway',studio:'🎨 Decorate'}[id])+'</span></button>').join('');
+  node.innerHTML=hotspots.map(([id,label,name])=>'<button type="button" class="vpqShadowHotspot vpqShadow-'+id+'" data-shadowaction="'+name+'" aria-label="'+label+'" title="'+label+'"><span>'+({front:'🛎️ Check in',patients:'📋 Patients',clinical:'🚪 Hallway',pharmacy:'💊 Pharmacy',studio:'🎨 Decorate'}[id])+'</span></button>').join('');
   node.addEventListener('click',ev=>{const button=ev.target.closest('[data-shadowaction]');if(button)action(button.dataset.shadowaction)});
   stage.appendChild(node);
  }
@@ -183,10 +182,10 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
  '.vpqShadowHotspot{position:absolute;display:block;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:12px;padding:0;color:#29445a;box-shadow:none;transform:none!important}'+
  '.vpqShadowHotspot span{position:absolute;left:50%;bottom:-2px;transform:translate(-50%,100%);white-space:nowrap;display:block;background:#fff9edeb;border:1px solid #b7c8d3;border-radius:15px;padding:3px 8px;font-size:10px;font-weight:800;box-shadow:0 3px 4px #384e5b22}'+
  '.vpqShadowHotspot:hover,.vpqShadowHotspot:focus-visible{border-color:#ffd980;background:#fff9d522;outline:2px solid #fff9ed;outline-offset:1px}'+
- '.vpqShadow-front{left:7%;top:65%;width:34%;height:24%}.vpqShadow-front span{left:26%;bottom:26%;transform:translate(-50%,0)}'+
- '.vpqShadow-patients{left:80%;top:66%;width:15%;height:19%}.vpqShadow-patients span{bottom:15%;transform:translate(-50%,0)}'+
- '.vpqShadow-clinical{left:24%;top:22%;width:15%;height:42%}.vpqShadow-pharmacy{left:67%;top:22%;width:15%;height:42%}.vpqShadow-study{left:47%;top:26%;width:12%;height:34%}'+
- '.vpqShadow-clinical span,.vpqShadow-pharmacy span,.vpqShadow-study span{bottom:7%;transform:translate(-50%,0)}'+
+ '.vpqShadow-front{left:8%;top:65%;width:27%;height:21%}.vpqShadow-front span{left:35%;bottom:20%;transform:translate(-50%,0)}'+
+ '.vpqShadow-patients{left:78%;top:67%;width:16%;height:18%}.vpqShadow-patients span{bottom:10%;transform:translate(-50%,0)}'+
+ '.vpqShadow-clinical{left:42%;top:23%;width:17%;height:37%}.vpqShadow-pharmacy{left:67%;top:23%;width:15%;height:33%}'+
+ '.vpqShadow-clinical span,.vpqShadow-pharmacy span{bottom:7%;transform:translate(-50%,0)}'+
  '.vpqShadow-studio{right:1%;top:3%;width:16%;height:9%;border-radius:12px;background:#fff8edbb}.vpqShadow-studio span{bottom:0;transform:translate(-50%,0);font-size:11px}'+
  '@media(max-width:600px){.vpqShadowHotspot span{font-size:9px;padding:3px 5px}.vpqShadow-front span,.vpqShadow-patients span{bottom:15%}}';
  document.head.appendChild(css);

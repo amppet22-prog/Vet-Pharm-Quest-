@@ -449,7 +449,27 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 #stage[data-room="reception"] .prop[data-prop="0"] .sign{max-width:135px!important}
 #stage[data-room="reception"] .prop[data-prop="1"]{left:78%!important}
 </style><link rel="stylesheet" href="question-feedback.css?v=20261119-unified-answers"><link rel="stylesheet" href="arcade-compact.css?v=20261119-compact-2">
-</head><body>
+<style id="vpq-reception-cozy-layout">
+/* Reception cozy-layout pass — scoped to lobby, preserving all other departments. */
+.vpq-welcome-section{padding:12px 18px;margin:10px auto 6px;grid-template-columns:minmax(0,1fr) 148px;gap:13px}
+.vpq-welcome-copy h1{font-size:clamp(20px,2.3vw,27px);margin:3px 0}
+.vpq-welcome-copy p{font-size:12px;margin:5px 0 8px}
+.vpq-welcome-small{font-size:10px}
+.vpq-available-tox{display:none!important}
+#vpqPlayerAccountWelcome{display:none!important}
+.vpq-mera-portrait{padding:7px;min-height:0}
+.vpq-mera-portrait img{max-width:122px;max-height:122px;object-fit:cover}
+.vpq-mera-portrait small{font-size:9px}
+.app{max-width:1600px;grid-template-columns:minmax(0,1fr) 255px;gap:12px}
+.stage[data-room="reception"]{height:clamp(440px,52vw,610px)}
+.stage[data-room="reception"] .vpqShadowHotspot span{font-size:10px;padding:3px 6px;background:#fffaf2e8}
+.stage[data-room="reception"] .vpqShadow-clinical span{font-size:11px;font-weight:900}
+.stage[data-room="reception"] #vpqReceptionExtras .vpqReceptionExtra{font-size:10px;padding:5px 7px;border-radius:12px;box-shadow:0 2px 6px #554b6a20}
+.stage[data-room="reception"] #vpqReceptionExtras [data-vpqwingaction="vpqGoYard"],
+.stage[data-room="reception"] #vpqReceptionExtras [data-vpqwingaction="vpqGoCat"]{max-width:105px;white-space:normal;line-height:1.2}
+@media(max-width:900px){.app{grid-template-columns:1fr}.stage[data-room="reception"]{height:clamp(430px,62vw,575px)}}
+@media(max-width:650px){.vpq-welcome-section{grid-template-columns:minmax(0,1fr) 86px;padding:10px;gap:8px}.vpq-mera-portrait{display:flex;flex-direction:column}.vpq-mera-portrait img{width:65px;height:65px}.vpq-mera-portrait small{display:none}.vpq-welcome-copy h1{font-size:20px}.vpq-welcome-small{display:none}.stage[data-room="reception"]{height:440px}}
+</style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
