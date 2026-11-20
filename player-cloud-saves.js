@@ -143,26 +143,20 @@ async function restore(){
   if(!remote){notify("This account has no cloud save yet.",true);return;}
   const payload=normalize(remote.save_data);
   if(!payload.slots[PRIMARY]&&!payload.slots["vet-pharm-quest-v1"]){notify("Cloud backup has no supported game progress.",true);return;}
-  if(!confirm("Restore this account's saved game on this browser? A backup of the current supported progress will be downloaded first. This will REPLACE the current supported progress on this browser and reload the game."))return;
+  if(!confirm("Restore this account's cloud progress? A local recovery snapshot will let you undo this restore. Your browser progress will be replaced and the game will reload. No download is required."))return;
   // A browser-local recovery snapshot is created; downloading is optional.
   // Take a second browser-local recovery snapshot before writing any keys.
   const recoveryKey="vpq-cloud-recovery-"+owner;
-  try{localSet(recoveryKey,JSON.stringify(readSelected()))}catch{/* download is still the backup */}
-  // Save these keys in a reversible batch; an error restores original browser values.
-  const previous=Object.fromEntries(KEYS.map(k=>[k,localGet(k)]));
+  try{localSet(recoveryKey,JSON.stringify(readSelected()))}catch{notify("Could not create recovery snapshot. Restore cancelled to protect progress.",true);return;}
+  // Apply during the NEXT page boot, after previous pagehide has completed.
   try{
-    for(const key of KEYS){
-      if(Object.prototype.hasOwnProperty.call(payload.slots,key))localSet(key,JSON.stringify(payload.slots[key]));
-      else if(!payload.legacy)localStorage.removeItem(key);
-    }
+    sessionStorage.setItem("vpq-cloud-restore-handoff-v1",JSON.stringify(payload));
     localSet(OWNER_KEY,owner);
     localSet("vpq-cloud-opt-in-"+owner,"1");
     pendingMarker(owner,false);
-  }catch(error){
-    for(const key of KEYS){try{if(previous[key]===null)localStorage.removeItem(key);else localSet(key,previous[key])}catch{}}
-    throw error;
-  }
-  optedIn=true;conflict=false;setRevision(owner,remote.updated_at);
+    setRevision(owner,remote.updated_at);
+  }catch(err){notify("Could not prepare cloud restore: "+err.message,true);return;}
+  optedIn=true;conflict=false;
   location.reload();
  }catch(error){notify("Restore failed. Your previous browser save should be intact; use the downloaded recovery file if needed. "+(error.message||""),true);}
 }
