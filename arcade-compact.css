@@ -28,3 +28,16 @@ body.vpq-embedded-arcade:has(#screen .choices) #screen .feedback{padding:10px 12
 /* Keep the advance action available after grading without scrolling past long rationales. */
 body.vpq-embedded-arcade #screen:has(.vpq-next-action){padding-bottom:72px!important}
 body.vpq-embedded-arcade #screen #feedbackArea .vpq-next-action{position:fixed;bottom:10px;left:12px;width:calc(100% - 24px);max-width:none;min-height:44px;z-index:12;box-shadow:0 6px 20px #25446b30}
+
+/* 2026-11-19: Single scroll surface and compact native challenge layout */
+body.vpq-embedded-arcade:has(#screen .choices) .vpq-embedded-course-bridge{display:none!important}
+body.vpq-embedded-arcade:has(#screen .choices) .wrap{padding:2px 6px!important}
+body.vpq-embedded-arcade:has(#screen .choices) #screen{padding:8px 12px 80px!important}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .little{margin:2px 0!important}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .question{margin:6px 0 10px!important}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .choice{min-height:42px}
+body.vpq-embedded-arcade:has(#screen .choices) #screen #feedbackArea .vpq-next-action{position:fixed;bottom:max(8px,env(safe-area-inset-bottom));left:8px;width:calc(100% - 16px);min-height:48px;z-index:20}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .vpq-ref-interval summary{min-height:32px;display:list-item;padding:5px 0}
+.modal:has(.vpq-sharedframe) #modalBody,.modal:has(.vpq-arcade-shell) #modalBody{overflow:hidden!important}
+.modal:has(.vpq-sharedframe) .vpq-sharedframe,.modal:has(.vpq-arcade-shell) .vpq-arcade-shell{min-height:0;overflow:hidden}
+@media(max-width:650px){body.vpq-embedded-arcade:has(#screen .choices) #screen{padding:7px 8px 75px!important}body.vpq-embedded-arcade:has(#screen .choices) #screen .choice{font-size:13px}}
