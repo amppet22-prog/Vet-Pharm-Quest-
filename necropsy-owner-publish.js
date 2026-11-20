@@ -254,6 +254,21 @@ function caseEditorFields(edits){
  const parts=groups.map((g,section)=>'<section class="vpq-case-edit-group"><h4>'+g.title+'</h4><small>'+g.description+'</small><div class="'+(section===0?'vpq-case-edit-signalment':'')+'">'+g.keys.map(([k,label])=>'<label><b>'+label+'</b>'+(section===0?'<input data-np-text="'+k+'" value="'+esc(edits[k]||'')+'" placeholder="'+label+'">':'<textarea data-np-text="'+k+'" rows="'+(k==='history'?5:3)+'">'+esc(edits[k]||'')+'</textarea>')+'</label>').join('')+'</div></section>').join('');
  return parts+'<details class="vpq-case-edit-legacy"><summary>Original signalment summary (legacy field)</summary><textarea data-np-text="species" rows="2">'+esc(edits.species||'')+'</textarea></details>';
 }
+async function renameCaseEditor(id){
+ const base=[...(window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[]),...getCustomCases()].find(x=>x.id===id);
+ if(!base){show('Case unavailable','<p>Case not found.</p>');return}
+ pending={type:'case',id,title:base.title};
+ const present=String(getText('case',id)?.title||base.title||'');
+ const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
+ show('✏️ Rename differential diagnosis case',
+ '<p style="font-size:13px">Give this case a <b>short, readable display title</b>. This will not modify its patient information, options, specimen photos or ID.</p>'+
+ '<label style="display:block;font-size:13px;font-weight:800">Case title<input data-np-text="title" maxlength="180" value="'+esc(present)+'" style="display:block;width:100%;padding:10px;margin-top:6px" placeholder="e.g. Canine Sertoli cell tumor"></label>'+
+ '<p class="tiny">Original uploaded title: '+esc(base.title||'')+'</p>'+
+ '<label style="display:block;font-size:12px;margin-top:8px">Publishing password<input id="npOwnerPassword" type="password" autocomplete="off" style="display:block;width:100%;padding:9px"></label>'+
+ (saved?'':'<label style="display:block;font-size:12px;margin-top:8px">First-time owner GitHub token<input id="npOwnerToken" type="password" autocomplete="off" style="display:block;width:100%;padding:9px"></label>')+
+ '<div class="buttonrow"><button data-necro-owner-publish="1">💾 Publish title</button><button data-np-case-rename-cancel="1">← Cancel</button></div>'+
+ '<p id="npOwnerResult" role="status" style="font-size:12px"></p>');
+}
 async function editor(type,id){
  const lp=type==='lecture'?/^L(\d+)-S(\d+)-P([01])$/.exec(id):null;
  const lesson=lp?window.VPQ_PATH_LECTURE_LEARN?.[lp[1]]?.sections?.[Number(lp[2])]:null;
@@ -498,6 +513,8 @@ function init(context){
  context.body.__vpqNecroOwnerInit=true;
  load();
  context.body.addEventListener('click',ev=>{
+ const caseCancel=ev.target.closest('[data-np-case-rename-cancel]');
+ if(caseCancel){ev.preventDefault();ev.stopImmediatePropagation();return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(pending?.id)}
  const b=ev.target.closest('[data-np-rename-save],[data-np-rename-cancel]');if(!b)return;
  ev.preventDefault();ev.stopImmediatePropagation();
  if(b.dataset.npRenameCancel!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openConditionInventory?.();
@@ -625,5 +642,5 @@ context.body.addEventListener('click',ev=>{
   })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
-return Object.freeze({init,load,getCustomCases,getCustomConditions,renamedConditionTitle,renameConditionEditor,getCustomSpecimens,getHiddenSpecimens,newSpecimenEditor,hideSpecimenEditor,hiddenSpecimenMenu,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,getPhotoLibrary,photoLibrary,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
+return Object.freeze({init,load,renameCaseEditor,getCustomCases,getCustomConditions,renamedConditionTitle,renameConditionEditor,getCustomSpecimens,getHiddenSpecimens,newSpecimenEditor,hideSpecimenEditor,hiddenSpecimenMenu,newConditionEditor,newCaseEditor,getCase,getSpecimen,getLecturePhoto,getLecturePhotos,getText,getPhotoLibrary,photoLibrary,publishedCaseImage,casePhotoHTML,specimenPhoto,specimenPhotoHTML,editor});
 })();
