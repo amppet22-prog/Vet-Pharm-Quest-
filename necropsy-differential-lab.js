@@ -441,6 +441,37 @@ function startFlash(scope='topic',review=false){
  flashCards=shuffled.slice(0,scope==='lecture'?15:20);flashIndex=0;
  flashView();
 }
+/* Format imported four-option Quizlet MCQs as scannable choices, not one long heading. */
+function flashPromptMarkup(prompt){
+ const raw=String(prompt||'').trim();
+ const lines=raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ let question='',choices=[];
+ if(lines.length>=5){
+  const opts=lines.slice(-4);
+  if(opts.every((v,i)=>new RegExp('^'+String.fromCharCode(65+i)+'\\.\\s+').test(v))){
+   question=lines.slice(0,-4).join(' ');
+   choices=opts.map(x=>x.slice(3).trim());
+  }
+ }
+ if(!choices.length){
+  const pattern=/\s([A-D])\.\s+(?=\S)/g;
+  const hits=[...raw.matchAll(pattern)];
+  if(hits.length===4&&hits.every((m,i)=>m[1]===String.fromCharCode(65+i))){
+   question=raw.slice(0,hits[0].index).trim();
+   choices=hits.map((m,i)=>raw.slice(m.index+m[0].length,i<3?hits[i+1].index:raw.length).trim());
+  }
+ }
+ if(choices.length===4&&question){
+  return '<div style="width:100%;text-align:left;max-width:710px;margin:0 auto">'+
+   '<div style="font-size:clamp(16px,2vw,20px);line-height:1.4;font-weight:800;color:#25385b;margin:4px 0 16px">'+safe(question)+'</div>'+
+   '<div style="display:grid;grid-template-columns:1fr;gap:9px">'+choices.map((choice,i)=>
+    '<div style="display:flex;align-items:flex-start;gap:12px;border:1px solid #d5dfed;background:#fff;border-radius:11px;padding:11px 13px;text-align:left">'+
+    '<span style="flex:0 0 28px;height:28px;border-radius:8px;background:#e9effa;color:#2d5188;display:flex;align-items:center;justify-content:center;font-weight:850;font-size:13px">'+String.fromCharCode(65+i)+'</span>'+
+    '<span style="flex:1;font-size:clamp(14px,1.7vw,16px);font-weight:550;line-height:1.42;color:#2e405e;padding-top:3px">'+safe(choice)+'</span></div>').join('')+'</div></div>';
+ }
+ return '<p style="font-size:clamp(16px,2vw,21px);line-height:1.45;font-weight:750;color:#263a5d;margin:8px 0;white-space:pre-line">'+safe(raw)+'</p>';
+}
+
 function flashView(){
  const progress=flashProgress(),c=flashCards[flashIndex],pending=flashCards.filter(x=>progress[x.id]).length;
  if(flashComplete)return modal('🧠 Flashcard session complete',
@@ -456,13 +487,13 @@ function flashView(){
  '<div class="buttonrow"><button data-pathdiff-flash-back="1">← '+(flashScope==='topic'?'Topic notes':'Lecture topics')+'</button><button data-pathdiff-flash-all="1">↻ New shuffled set</button></div>'+
  '<p class="tiny"><b>Card '+(flashIndex+1)+' of '+flashCards.length+'</b> · '+(flashReview?'Missed-card review':c.curated?'Focused question from lecture':'Lecture note recall')+' · '+pending+' marked for practice in this set. Your marks stay in this browser.</p>'+
  '<div style="height:5px;max-width:100%;border-radius:6px;background:#e4eaf4;overflow:hidden;margin:10px 0"><div style="width:'+Math.round((flashIndex+1)/flashCards.length*100)+'%;background:#7391cc;height:100%;border-radius:6px"></div></div>'+
- '<div role="button" tabindex="0" data-pathdiff-flash-flip="1" title="Flip flashcard" aria-label="Flip flashcard to '+(flashFace?'question':'answer')+'" style="cursor:pointer;position:relative;border:1px solid #bbcae1;border-radius:18px;background:linear-gradient(145deg,#ffffff 5%,#eef5ff 100%);box-shadow:0 7px 22px rgba(44,62,100,.09);padding:clamp(16px,4vw,30px);min-height:250px;display:flex;flex-direction:column;justify-content:center;gap:14px;margin:12px 0;text-align:center">'+
+ '<div role="button" tabindex="0" data-pathdiff-flash-flip="1" title="Flip flashcard" aria-label="Flip flashcard to '+(flashFace?'question':'answer')+'" style="cursor:pointer;position:relative;border:1px solid #bbcae1;border-radius:18px;background:linear-gradient(145deg,#ffffff 5%,#eef5ff 100%);box-shadow:0 7px 22px rgba(44,62,100,.09);padding:clamp(16px,3vw,24px);min-height:230px;display:flex;flex-direction:column;justify-content:center;gap:12px;margin:12px 0;text-align:center">'+
  '<div style="color:#5a7296;font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:850">'+(flashFace?'ANSWER':'QUESTION')+' · '+(c.curated?'Focused recall':'Lecture concept')+'</div>'+
  '<div style="font-size:12px;color:#576c87">L'+safe(conditionLecture)+' · '+safe(c.title)+'</div>'+
  (flashFace?
   '<p style="font-size:clamp(17px,2.5vw,21px);line-height:1.5;margin:4px 0;font-weight:750;color:#25385b">'+rich(c.answer)+'</p>'+
   (c.why?'<div style="text-align:left;border-top:1px solid #cedbec;padding-top:12px;font-size:13px"><b>WHY it matters</b><p>'+rich(c.why)+'</p></div>':''):
-  '<p style="font-size:clamp(18px,2.5vw,23px);line-height:1.45;font-weight:800;color:#263a5d;margin:10px 0">'+safe(c.prompt)+'</p><small style="color:#7887a1">Recall your answer, then flip the card.</small>')+
+  flashPromptMarkup(c.prompt)+'<small style="color:#7887a1">Choose an answer mentally, then flip to check.</small>')+
  '<small style="color:#65768c">Source · '+safe(c.slide)+'</small></div>'+
  '<div class="buttonrow">'+(flashFace?
  '<button data-pathdiff-flash-rate="again" style="background:#fff2e6">↺ Need practice</button><button data-pathdiff-flash-rate="know" style="background:#e7f5eb">✓ Got it</button>':
