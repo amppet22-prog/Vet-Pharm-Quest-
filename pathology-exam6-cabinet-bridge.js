@@ -23,7 +23,9 @@ window.VPQ_PATH_EXAM6_CABINET_BRIDGE=(function(){
    const id=idFor(lecture,index);
    const species=field(s,['Species / signalment']);
    const cause=field(s,['Etiology / cause']);
-   const source=field(s,['Atlas source','Instructor source'])||s.slides||'Lecture '+lecture;
+   const supplemental=s.kind==='supplemental';
+   const refURL=field(s,['External reference']);
+   const source=supplemental?('Supplemental Merck Veterinary Manual · '+refURL):('Pathology Lecture '+lecture+' · '+(field(s,['Atlas source','Instructor source'])||s.slides||'Lecture '+lecture));
    const item={
     id,lecture,title:s.title,normal:false,system:'Gastrointestinal',
     organSystem:'gastrointestinal',
@@ -34,15 +36,15 @@ window.VPQ_PATH_EXAM6_CABINET_BRIDGE=(function(){
     why:field(s,['Pathogenesis — why','Pathogenesis / why'])||cause||'Review pathogenesis in the original lecture.',
     compare:field(s,['Do not confuse with']),
     visualClue:field(s,['Gross recognition','Gross lesions']),
-    notes:cause?'Etiology / cause: '+cause:'',
-    source:'Pathology Lecture '+lecture+' · '+source,
+    notes:(cause?'Etiology / cause: '+cause+'\n':'')+(supplemental?'EXTERNAL SUPPLEMENT; professor lecture verification pending.\nReference: '+refURL:''),
+    source,
     lectureAtlasSection:index,
     lectureAtlasId:lecture+'|'+s.title,
     diseaseId:'',
     // Classification is deliberately unassessed unless explicitly verified.
     // Never infer occurrence frequency, pathogen class or zoonotic status from a title.
     hostScope:'unspecified',
-    speciesEvidence:species?'Lecture '+lecture+' explicitly describes: '+species:''
+    speciesEvidence:species?(supplemental?'External reference describes: ':'Lecture '+lecture+' explicitly describes: ')+species:''
    };
    cards.push(item);s.specimenId=id;added++;
   });
