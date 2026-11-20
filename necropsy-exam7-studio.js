@@ -36,7 +36,7 @@ function visible(){
  return items.sort((a,b)=>nameSorter.compare(a.title||'',b.title||'')||nameSorter.compare(String(a.lecture||''),String(b.lecture||''))||a.index-b.index);
 }
 function start(k){mode=k||'gross';tab='lesions';filter='all';normalSystem='all';menu()}
-function studyLecture(lecture){tab='lesions';mode='gross';filter=String(lecture||'all');normalSystem='all';search='';refreshCustom();menu()}
+function studyLecture(lecture){tab='lesions';mode='gross';filter=String(lecture||'all');normalSystem='all';search='';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';refreshCustom();menu()}
 function showTab(kind){tab=kind==='normals'?'normals':'lesions';mode='gross';filter='all';normalSystem='all';search='';refreshCustom();menu()}
 // Accessible alphabetical dividers, generated only for letters represented in filtered results.
 function alphaKey(title){const first=String(title||'').trim().charAt(0).toUpperCase();return /^[A-Z]$/.test(first)?first:'#';}
