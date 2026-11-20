@@ -112,7 +112,7 @@ function exam6AtlasEntry(n,index){
  const photos=window.VPQ_PATH_INLINE_PHOTOS;
  popup('🔬 L'+n+' · '+sec.title,nav()+exam6Style+(photos?photos.style:'')+
  '<div class="np-cover"><b>'+safe(sec.title)+'</b><p>Detailed Atlas reference · '+safe(sec.slides||'Lecture '+n)+'</p><small>Source: '+safe(lesson.source||'Lecture '+n)+' · '+safe(sec.sourceStatus||'Lecture-sourced disease record')+'</small></div>'+
- '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">← Disease list</button><button data-nplearn="'+safe(n)+'">📖 Lecture refresher</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button></div>'+
+ '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">← Disease list</button><button data-nplearn="'+safe(n)+'">📖 Lecture refresher</button><button data-npflashgi="'+safe(n)+'">🧠 Lecture flashcards</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button></div>'+
  fields.map(p=>'<div class="np-gi-atlas-section"><b>'+safe(p[0])+'</b><p>'+safe(p[1])+'</p></div>').join('')+
  '<h4>🖼️ Gross / histology images</h4><p class="tiny">Existing photos and owner-published captions stay associated with this original lecture topic. Only upload useful, credited diagnostic images here.</p>'+
  (photos?photos.card(n,index):'<p class="tiny">Photo viewer unavailable; the written entry remains accessible.</p>')+
@@ -140,7 +140,7 @@ function exam6QuickLearn(n){
  }).join('');
  popup('📖 L'+n+' · Quick Learn',nav()+exam6Style+
  '<div class="np-cover"><h3>'+safe(lesson.title)+'</h3><p>Quick recall: recognize the lesion, understand why it occurs, and separate it from the closest differential. Full disease details and all diagnostic photos are kept in the Atlas.</p><small>'+entries.length+' linked disease entries</small></div>'+
- '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">🔬 Disease Atlas</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button><button data-npchapter="'+safe(n)+'">← Lecture overview</button></div>'+
+ '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">🔬 Disease Atlas</button><button data-npflashgi="'+safe(n)+'">🧠 Lecture flashcards</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button><button data-npchapter="'+safe(n)+'">← Lecture overview</button></div>'+
  outline+
  (indexed.length?'<details class="np-gi-card"><summary>Additional lecture objectives / topics still being developed ('+indexed.length+')</summary><p class="tiny">These are coverage reminders, not validated disease Atlas entries.</p>'+indexed.map(s=>'<p>• '+safe(s.title)+'</p>').join('')+'</details>':'')+
  '<h4>Check your understanding</h4>'+((lesson.checks||[]).map((q,i)=>'<details class="np-gi-card"><summary>Q'+(i+1)+'. '+safe(q[0])+'</summary><p>'+safe(q[1])+'</p></details>').join(''))+
@@ -261,6 +261,7 @@ function init(host){
  if(d.npatlasentry!==undefined)return exam6AtlasEntry(d.npatlasentry,Number(d.npatlasindex));
  if(d.npatlas!==undefined)return exam6AtlasIndex(d.npatlas);
  if(d.nppracticegi!==undefined){const lib=window.VPQ_NECROPSY_DIFFERENTIAL_LAB;if(lib?.start)return lib.start(host,String(d.nppracticegi));return exam6AtlasIndex(String(d.nppracticegi));}
+ if(d.npflashgi!==undefined){const lib=window.VPQ_NECROPSY_DIFFERENTIAL_LAB;if(lib?.openLectureFlashcards)return lib.openLectureFlashcards(host,String(d.npflashgi));return exam6QuickLearn(String(d.npflashgi));}
  if(d.nplearn!==undefined)return learnLecture(d.nplearn);
  if(d.npchapter!==undefined)return lecture(d.npchapter);
  if(d.nppattern!==undefined)return across();
