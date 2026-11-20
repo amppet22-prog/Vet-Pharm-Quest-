@@ -94,15 +94,18 @@ document.getElementById("vpq-support-refresh").addEventListener("click",refreshI
 document.getElementById("vpq-support-send").addEventListener("click",async function(){
  var report=getReport();if(!report)return;
  var status=document.getElementById("vpq-support-status"),client=backend();
- if(!client){status.textContent="Private inbox connection is not configured yet. The report was NOT sent; use Copy or Download.";return}
+ if(!client){status.textContent="Request NOT sent: the secure submission service is unavailable. Please retry or use Copy/Download.";return}
  var button=this;button.disabled=true;status.textContent="Submitting securely…";
  try{
   var category=document.getElementById("vpq-support-type").value;
   var title=document.getElementById("vpq-support-title").value.trim();
   var location=document.getElementById("vpq-support-location").value.trim();
   var details=document.getElementById("vpq-support-detail").value.trim();
-  var response=await client.from("vpq_requests").insert({category:category,title:title,location:location,details:details});
+  var response=await client.functions.invoke("vpq-submit-feedback",{
+   body:{category:category,title:title,location:location,details:details}
+  });
   if(response.error)throw response.error;
+  if(!response.data?.ok)throw new Error(response.data?.error||"Request service could not confirm delivery");
   status.textContent="✓ Request received by the private owner inbox. Thank you!";
   document.getElementById("vpq-support-title").value="";
   document.getElementById("vpq-support-detail").value="";
