@@ -186,7 +186,7 @@
         {
           "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/published-ct-9437-boxer-sertoli-1795210522140-0.jpg",
           "source": "",
-          "credit": "https://clinicaltheriogenology.net/index.php/CT/article/view/9437/15516#content/figure_reference_7",
+          "credit": "https://clinicaltheriogenology.net/index.php/CT/article/view/9437/15516",
           "caption": "Pathology study reference · CT-15-9437-g002.jpg",
           "type": "clinical",
           "external": false,
@@ -234,12 +234,25 @@
           ],
           "systems": [],
           "conditionId": "published-ct-9437-boxer-sertoli"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/published-ct-9437-boxer-sertoli-1795212572121-0.jpg",
+          "source": "",
+          "credit": "clinicaltheriogenology.net",
+          "caption": "Oblique ultrasonographic image of the irregular mass (33.2 mm between calipers A and 41.8 mm between calipers B) of suspected retained left testis (note moderate cystic and heterogenous echogenicity appearance)",
+          "type": "clinical",
+          "external": false,
+          "lectures": [
+            "75"
+          ],
+          "systems": [],
+          "conditionId": "published-ct-9437-boxer-sertoli"
         }
       ],
       "photo": {
         "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/cases/published-ct-9437-boxer-sertoli-1795210522140-0.jpg",
         "source": "",
-        "credit": "https://clinicaltheriogenology.net/index.php/CT/article/view/9437/15516#content/figure_reference_7",
+        "credit": "https://clinicaltheriogenology.net/index.php/CT/article/view/9437/15516",
         "caption": "Pathology study reference · CT-15-9437-g002.jpg",
         "type": "clinical",
         "external": false,
@@ -295,7 +308,7 @@
         ],
         "best": "Sertoli cell tumor (cryptorchid retained testis)"
       },
-      "updated": "2026-11-20T21:48:17.478Z",
+      "updated": "2026-11-20T22:09:33.802Z",
       "approvedBy": "amppet22-prog"
     }
   },
