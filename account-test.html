@@ -26,6 +26,23 @@ button.primary{background:linear-gradient(#a765be,#774199);border-color:#724194;
 #signedIn p{overflow-wrap:anywhere}
 #guest{width:100%;margin-top:9px}
 @media(max-width:760px){body{background-position:55% center;padding-top:clamp(115px,17vh,165px)}.note{font-size:12px}main{background:#fff8f5fb;box-shadow:0 10px 32px #50365b55}}@media(max-height:730px){body{padding-top:100px}main{max-height:calc(100svh - 118px)}}
+
+/* Compact login card: preserve the illustrated title, mascots, and tutorial board. */
+body{padding-top:clamp(190px,23vh,245px)}
+main{width:min(400px,calc(100vw - 28px));max-width:400px;padding:15px 20px 17px;border-radius:26px;border-width:2px;max-height:calc(100svh - 220px);box-shadow:0 8px 26px #50365b4a,0 0 0 4px #fff9}
+main>div:first-child{font-size:26px!important;line-height:1;margin:0 0 5px}
+main h1{font-size:25px;line-height:1.15;margin:2px 0 4px}
+main>p:nth-of-type(1){font-size:11px;margin:2px 0 9px}
+main .note{font-size:11px;line-height:1.4;padding:8px 10px;margin:8px 0}
+main label{font-size:11px;margin:8px 0 4px}
+main input{font-size:13px;padding:8px 10px;border-radius:10px}
+main .actions{gap:7px;margin:10px 0}
+main .actions button{font-size:12px;min-width:0;padding:9px 6px;border-radius:11px}
+main #guest{margin-top:0}
+main>p:last-child{font-size:10px!important;line-height:1.35;margin:10px 0 0}
+main #message{font-size:11px;padding:8px;margin:8px 0}
+@media(max-width:600px){body{padding-top:clamp(115px,18vh,180px);background-position:53% center}main{width:min(400px,calc(100vw - 22px));max-height:calc(100svh - 135px);padding:14px 15px}main .actions button{font-size:11px}}
+@media(max-height:740px) and (min-width:601px){body{padding-top:145px}main{max-height:calc(100svh - 157px)}}
 </style></head>
 <body><main>
 <div style="font-size:42px;text-align:center">🐾</div>
