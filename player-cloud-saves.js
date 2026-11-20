@@ -22,6 +22,7 @@ const KEYS=Object.freeze([
   "vpq-necropsy-flashcards-v1"
 ]);
 const MAX_BYTES=480000;
+// Live release is deliberately opt-in. Never upload editor content or credentials.
 const $=id=>document.getElementById(id);
 const dataSize=value=>new TextEncoder().encode(JSON.stringify(value)).length;
 let client=null,userId=null,optedIn=false,remoteRevision=null, timer=null,scanTimer=null,inFlight=false,again=false,lastFingerprint="",conflict=false;
@@ -86,11 +87,12 @@ async function upload({confirmed=false}={}){
  inFlight=true;
  try{
    const remote=await fetchRemote(owner);
-   if(owner!==userId)return;
+   if(owner!==userId||!optedIn)return;
    // Another device has a newer saved revision: never overwrite it silently.
    if(remote && !confirmed && remote.updated_at!==getRevision(owner)){
      conflict=true;optedIn=false;clearTimeout(timer);notify("A newer or unknown cloud save exists. Auto-backup paused. Choose Restore or Back up this browser after reviewing both saves.",true);render();return;
    }
+   if(owner!==userId||!optedIn)return;
    const {data,error}=await client.from("player_saves").upsert({user_id:owner,save_data:payload},{onConflict:"user_id"}).select("updated_at").single();
    if(error)throw error;
    if(owner!==userId)return;
@@ -118,9 +120,10 @@ async function firstUpload(){
    "Back up the progress currently on this browser to your account? Future progress will then save automatically while the game is open.";
   if(!confirm(message))return;
   optedIn=true;conflict=false;lastFingerprint="";
-  localSet("vpq-cloud-opt-in-"+userId,"1");
-  localSet(OWNER_KEY,userId);
-  await upload({confirmed:true});render();
+  await upload({confirmed:true});
+  if(!conflict && lastFingerprint){localSet("vpq-cloud-opt-in-"+userId,"1");localSet(OWNER_KEY,userId);}
+  else optedIn=false;
+  render();
  }catch(error){notify("Could not start cloud saving: "+(error.message||""),true);}
 }
 async function restore(){
