@@ -1,0 +1,26 @@
+/* Shared compact Arcade layouts; use for all new embedded game builds. */
+.modal:has(.vpq-sharedframe), .modal:has(.vpq-arcade-shell){width:min(1180px,98vw);height:min(94dvh,1000px);max-height:94dvh}
+.modal:has(.vpq-sharedframe) #modalBody,.modal:has(.vpq-arcade-shell) #modalBody{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:9px 12px 12px}
+.vpq-sharedframe,.vpq-arcade-shell{display:flex;flex:1;min-height:0;flex-direction:column;margin-top:6px}
+.vpq-sharedframe iframe,.vpq-arcade-shell iframe{display:block;width:100%;height:100%!important;flex:1;min-height:0;border:1px solid #cad8ef;border-radius:12px;background:#fff}
+.modal:has(.vpq-sharedframe) .vpq-sharedheader{padding:2px 0}
+.modal:has(.vpq-sharedframe) #modalBody>p,.modal:has(.vpq-arcade-shell) .vpq-arcade-help{margin:3px 0;font-size:12px}
+.modal:has(.vpq-sharedframe) #modalBody>.buttonrow{margin:5px 0;gap:7px}
+.modal:has(.vpq-sharedframe) #modalBody>.buttonrow button{padding:7px 10px}
+@media(max-width:650px){.modal:has(.vpq-sharedframe),.modal:has(.vpq-arcade-shell){width:100vw;height:95dvh;max-height:95dvh}.modal:has(.vpq-sharedframe) #modalBody,.modal:has(.vpq-arcade-shell) #modalBody{padding:5px}}
+/* Embedded arcade uses a single internal question scroll, without redundant sidebar and tabs. */
+body.vpq-embedded-arcade:has(#screen .choices) .wrap{margin:0 auto;padding:5px 8px}
+body.vpq-embedded-arcade:has(#screen .choices) #tabs,
+body.vpq-embedded-arcade:has(#screen .choices) .side{display:none!important}
+body.vpq-embedded-arcade:has(#screen .choices) .layout{display:block!important}
+body.vpq-embedded-arcade:has(#screen .choices) #screen{max-width:100%;padding:12px 15px!important}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .question{font-size:clamp(16px,2vw,19px);line-height:1.36;margin:9px 0 12px}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .choices{gap:6px}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .choice{padding:9px 11px;line-height:1.32;font-size:14px}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .section-title h2{font-size:19px;margin:3px 0}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .muted{margin:4px 0 7px}
+body.vpq-embedded-arcade:has(#screen .choices) #screen .feedback{padding:10px 12px;margin:8px 0}
+#screen #feedbackArea .vpq-next-action{position:sticky;bottom:6px;z-index:5;width:100%;box-shadow:0 3px 12px #233b5d20}
+#screen .vpq-ref-interval{margin:6px 0 10px;padding:7px 10px;border:1px solid #bed4ec;border-radius:9px;background:#f3f8ff;font-size:12px}
+#screen .vpq-ref-interval summary{cursor:pointer;font-weight:800;color:#365e8d}
+#screen .vpq-ref-interval p{margin:6px 0 0;line-height:1.35}
