@@ -609,7 +609,9 @@ function caseAtlasMatches(x){
 function openCaseAtlas(index){
  const base=allCases().find(v=>v.id===current);if(!base||phase<2)return view();
  const match=caseAtlasMatches(base)[index];if(!match)return view();
- conditionLecture=String(base.lecture);conditionChosen=match.i;return conditionDetail();
+ conditionLecture=String(base.lecture);conditionChosen=match.i;
+ if(/^(59|60|61|62|63|64|65|66)$/.test(conditionLecture)&&window.VPQ_NECROPSY_HANDBOOK?.openExam6Disease){return window.VPQ_NECROPSY_HANDBOOK.openExam6Disease(conditionLecture,match.i)}
+ return conditionDetail();
 }
 function view(){
  const baseCase=allCases().find(v=>v.id===current);if(!baseCase)return menu();
