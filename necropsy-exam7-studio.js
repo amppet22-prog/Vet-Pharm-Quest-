@@ -21,6 +21,7 @@ function photoStatus(x){
  const local=!!edits()[x.id]?.image;
  if(pictures.some(p=>p.verified===true&&p.source&&p.credit))return '✓ Photo verified';
  if(pictures.length||local||x.image)return '📷 Photo added';
+ if(Number.isInteger(x.lectureAtlasSection)&&[0,1].some(slot=>(window.VPQ_NECROPSY_OWNER_PUBLISH?.getLecturePhotos?.('L'+x.lecture+'-S'+x.lectureAtlasSection+'-P'+slot)||[]).length))return '📷 Published lecture photo linked';
  return '◻ Photo needed';
 }
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
@@ -87,7 +88,8 @@ function card(i){
  const gallery=window.VPQ_NECROPSY_OWNER_PUBLISH?.specimenPhotoHTML?.(x.id)||'';
  const publicPhotos=Array.isArray(x.publicLecturePhotos)?x.publicLecturePhotos:[];
  const publicGallery=publicPhotos.length?'<div style="display:grid;gap:9px">'+publicPhotos.map(p=>'<figure style="margin:0;border:1px solid #d8ddea;border-radius:12px;padding:7px"><img alt="'+h(p.caption)+'" src="'+h(p.asset)+'" style="display:block;width:100%;max-height:430px;object-fit:contain"><figcaption style="font-size:12px;line-height:1.4;margin-top:5px"><b>'+h(p.caption)+'</b> · '+h(p.source)+'<div>'+h(p.studyPrompt)+'</div></figcaption></figure>').join('')+'</div>':'';
- const media=gallery||publicGallery||(x.image?'<img alt="Local pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>');
+ const lectureGallery=Number.isInteger(x.lectureAtlasSection)?[0,1].flatMap(slot=>window.VPQ_NECROPSY_OWNER_PUBLISH?.getLecturePhotos?.('L'+x.lecture+'-S'+x.lectureAtlasSection+'-P'+slot)||[]).filter(p=>/^https:\/\//i.test(String(p.url||''))).map(p=>'<figure style="margin:5px 0 10px;border:1px solid #cbdbea;padding:8px;border-radius:10px"><img src="'+h(p.url)+'" alt="'+h(p.caption||'Published lecture photo')+'" loading="lazy" style="width:100%;max-height:430px;object-fit:contain"><figcaption style="font-size:12px;margin-top:7px"><b>'+h(p.type||'Lecture photograph')+'</b> · '+h(p.caption||'Owner-published lecture image')+'</figcaption></figure>').join(''):'';
+ const media=gallery||publicGallery||lectureGallery||(x.image?'<img alt="Local pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>');
  modal((x.normal?'🌱 Normal reference · ':'Lecture '+h(x.lecture)+' · ')+h(x.title),
  nav+
  '<p class="tiny">'+photoStatus(x)+' · Photos optional; uploading is not the same as verifying.</p>'+ 
@@ -96,6 +98,7 @@ function card(i){
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal histology':'Histology')+'</b> ❔</summary><p>'+rich(x.histo)+'</p></details>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal vs abnormal · what to compare':'Why it happens / distinctive clues')+'</b> ❔</summary><p>'+rich(x.why)+'</p></details>'+
  (x.notes?'<p><b>Your annotation:</b> '+rich(x.notes)+'</p>':'')+
+ (Number.isInteger(x.lectureAtlasSection)?'<div class="buttonrow"><button data-path7-gi-learn="'+h(x.lecture)+'">📖 Return to Lecture '+h(x.lecture)+' refresher</button></div>':'')+
  (x.normal?'':(window.VPQ_PATH_ATLAS_META?.browseHTML?.(x)||'')+(x.visualClue?'<p><b>🔎 Recognition clue:</b> '+rich(x.visualClue)+'</p>':'')+(x.compare?'<p><b>⚖️ Don’t confuse with:</b> '+rich(x.compare)+'</p>':'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')) +
  '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+ (x.normal?'':window.VPQ_PATH_ATLAS_META?.relatedHTML?.(x,base.map((b,j)=>record(j)),id=>base.findIndex(c=>c.id===id))||'')+
  (x.normal?'':'<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>')+ 
@@ -217,6 +220,7 @@ function init(api){
    :'<p><b>Key distinction:</b> '+rich(x.why)+'</p><p><b>Use these findings:</b> '+rich(x.gross)+'</p><p><b>Histology:</b> '+rich(x.histo)+'</p>';
   modal('❔ '+h(x.title)+' · '+(topic==='gross'?'Why gross looks this way':topic==='histo'?'Microscopy and mechanism':'Distinguishing clues'),sections+'<p class="tiny">Drawn from this existing study card. Confirm specific interpretations with the lecture slides.</p><button data-path7-view="'+current+'">← Return to specimen</button>');return;
  }
+ if(d.path7GiLearn!==undefined)return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.(String(d.path7GiLearn));
  if(d.path7Master!==undefined)return window.VPQ_MASTER_DISEASE_LIBRARY?.openForSpecimen?.(d.path7Master);
  if(d.path7FilterReset!==undefined){filter='all';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';search='';return menu()}
  if(d.path7Add!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newSpecimenEditor?.(d.path7Add==='normal'?'normal':'lesion',tab==='normals'?'67':(filter==='all'?'68':filter));
@@ -244,8 +248,9 @@ function init(api){
  },true);
 }
 function openCard(id){refreshCustom();const i=base.findIndex(x=>x.id===id);if(i>=0){tab=base[i].normal?'normals':'lesions';return card(i)}return menu()}
+function openLectureDisease(lecture,section){const bridge=window.VPQ_PATH_EXAM6_CABINET_BRIDGE;const id=bridge?.get?.(lecture,section);if(!id)return studyLecture(lecture);tab='lesions';filter=String(lecture);search='';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';return openCard(id)}
 function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
 function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
 function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
-return {init,start,studyLecture,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
+return {init,start,studyLecture,openLectureDisease,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
 })();
