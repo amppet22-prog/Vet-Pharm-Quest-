@@ -9,12 +9,13 @@ const toast=document.getElementById('interactToast');
 if(!stage)return {updateNearby:()=>null,interactNearest:()=>false};
 const configs={
  reception:[
-  {selector:'#vpqShadowHotspots [data-shadowaction="welcome"]',x:20,label:'🛎️ Front Desk'},
-  {selector:'#vpqShadowHotspots [data-shadowaction="queue"]',x:87,label:'📋 Patient Queue'},
-  {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoExam"]',x:31,label:'🚪 Exam Hall'},
-  {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoPharmacy"]',x:75,label:'💊 Pharmacy'},
-  {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoHallway"]',x:53,label:'🚪 Clinic Hallway'},
-  {selector:'#vpqShadowHotspots [data-shadowaction="receptionStudio"]',x:96,label:'🎨 Reception Studio',max:7}
+  {selector:'#vpqShadowHotspots [data-shadowaction="queue"]',x:24,label:'📋 Patient List'},
+  {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoExam"]',x:32,label:'🩺 Exam Room',max:8},
+  {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoHallway"]',x:52,label:'🚪 Clinic Hallway',max:10},
+  {selector:'#vpqShadowHotspots [data-shadowaction="vpqGoPharmacy"]',x:74,label:'💊 Pharmacy',max:11},
+  {selector:'#vpqReceptionExtras [data-vpqwingaction="vpqGoYard"]',x:15,label:'🐕 Dog Play Yard',max:8},
+  {selector:'#vpqReceptionExtras [data-vpqwingaction="vpqGoCat"]',x:90,label:'🐈 Cat Corner',max:9},
+  {selector:'#vpqShadowHotspots [data-shadowaction="receptionStudio"]',x:96,label:'🎨 Reception Studio',max:4}
  ],
  exam:[
   {selector:'#vpqExamHotspots [data-vpqexamaction="medicalCharts"]',x:34,label:'📋 Patient Charts'},
