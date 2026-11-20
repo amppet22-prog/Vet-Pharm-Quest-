@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vet Pharm Quest • Account Test</title>
+<style>
+:root{font-family:ui-rounded,"Trebuchet MS",Arial,sans-serif;color:#304b6a;background:#f5f7ff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:18px;background:radial-gradient(circle at 8% 10%,#ffe6f2,transparent 45%),radial-gradient(circle at 90% 90%,#d9f5ec,transparent 48%),#f5f7ff}
+main{max-width:490px;width:100%;background:#fff;border:2px solid #dcdaf1;border-radius:22px;padding:24px;box-shadow:0 14px 45px #2e476b23}
+h1{text-align:center;color:#6454a3;font-size:26px;margin:4px 0 6px}p{line-height:1.55;font-size:13px}label{display:block;font-weight:800;font-size:13px;margin:14px 0 5px}
+input{width:100%;border:2px solid #c9d9ea;border-radius:10px;padding:12px;font:inherit}
+button{font:inherit;font-weight:800;border:2px solid #c6d4ec;background:#fff;color:#355784;padding:10px;border-radius:11px;cursor:pointer}
+button:disabled{opacity:.5;cursor:wait}.primary{background:#695db3;color:white;border-color:#695db3}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.actions button{flex:1;min-width:125px}
+.note{background:#f2f4fc;border:1px solid #dce3f4;border-radius:12px;padding:11px}
+#message{padding:11px;border-radius:12px;background:#eaf6ef;color:#255b42}#message.error{background:#fff0ef;color:#9a3535}
+[hidden]{display:none!important}
+</style></head>
+<body><main>
+<div style="font-size:42px;text-align:center">🐾</div>
+<h1>Vet Pharm Quest</h1>
+<p style="text-align:center;margin-top:0"><b>Account Test Center</b></p>
+<p class="note">This is a safe login-only test page. Your current game, coins, avatars, saved progress, and owner publishing settings will not be changed.</p>
+<div id="loading" role="status">Connecting to account service…</div>
+<form id="authForm" hidden>
+<label for="email">Email address</label><input id="email" type="email" required autocomplete="email" placeholder="you@example.com">
+<label for="password">Password (at least 12 characters)</label><input id="password" type="password" minlength="12" required autocomplete="current-password">
+<div class="actions"><button class="primary" id="signin" type="submit">Sign In</button><button id="signup" type="button">Create Account</button></div>
+<div class="actions"><button id="forgot" type="button">Forgot Password?</button><button id="guest" type="button">Continue as Guest</button></div>
+</form>
+<form id="resetForm" hidden>
+<p>Enter a new password for this account.</p>
+<label for="newPassword">New password</label><input id="newPassword" type="password" minlength="12" required autocomplete="new-password">
+<label for="confirmPassword">Confirm new password</label><input id="confirmPassword" type="password" minlength="12" required autocomplete="new-password">
+<div class="actions"><button class="primary" type="submit">Update Password</button></div>
+</form>
+<section id="signedIn" hidden><p>Signed in as <strong id="accountEmail"></strong>.</p><div class="actions"><button class="primary" id="signout" type="button">Sign Out</button><button id="returnGame" type="button">Open Vet Pharm Quest</button></div></section>
+<p id="message" role="status" aria-live="polite" hidden></p>
+<p style="font-size:11px;color:#75859b">All accounts have regular player permissions. Request Edit Access and owner Publish Now are unchanged. This preview does not upload or restore game saves.</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+"use strict";
+const PROJECT_URL="https://loavyberbsmqidvukfrj.supabase.co";
+const PUBLISHABLE_KEY="sb_publishable_PInLcQclmr_snFfb1O10Sg_3JJQWrvy";
+const $=id=>document.getElementById(id);
+const HOME="./";
+const client=window.supabase?.createClient?.(PROJECT_URL,PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+let session=null,recovery=false,busy=false;
+function say(msg,error=false){const el=$("message");el.textContent=msg;el.classList.toggle("error",error);el.hidden=false;}
+function show(){
+ $("loading").hidden=!!client;
+ $("authForm").hidden=!client||!!session||recovery;
+ $("resetForm").hidden=!client||!recovery;
+ $("signedIn").hidden=!client||!session||recovery;
+ $("accountEmail").textContent=session?.user?.email||"";
+}
+function setBusy(value){busy=value;document.querySelectorAll("button").forEach(b=>b.disabled=value);}
+if(!client){$("loading").textContent="Could not load the account service. Check your internet connection and try refreshing.";return;}
+client.auth.onAuthStateChange((event,newSession)=>{
+ session=newSession;
+ if(event==="PASSWORD_RECOVERY"){recovery=true;say("Recovery link verified. Choose your new password.");}
+ if(event==="SIGNED_OUT")recovery=false;
+ show();
+});
+client.auth.getSession().then(({data,error})=>{if(error)say(error.message,true);else session=data.session;show();}).catch(e=>{say(e.message,true);show();});
+$("authForm").onsubmit=async e=>{e.preventDefault();if(busy)return;setBusy(true);try{
+ const {data,error}=await client.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
+ if(error)throw error;session=data.session;say("Signed in successfully!");show();
+}catch(err){say(err.message||"Sign-in failed.",true);}finally{setBusy(false);}};
+$("signup").onclick=async()=>{if(busy)return;if(!$("email").reportValidity()||!$("password").reportValidity())return;setBusy(true);try{
+ const {data,error}=await client.auth.signUp({email:$("email").value.trim(),password:$("password").value,options:{emailRedirectTo:location.origin+location.pathname}});
+ if(error)throw error;session=data.session||null;
+ say(data.session?"Account created! You are signed in.":"Check your email to confirm your account. After confirming, return to this page to sign in.");show();
+}catch(err){say(err.message||"Sign-up failed.",true);}finally{setBusy(false);}};
+$("forgot").onclick=async()=>{if(busy)return;if(!$("email").reportValidity())return;setBusy(true);try{
+ const {error}=await client.auth.resetPasswordForEmail($("email").value.trim(),{redirectTo:location.origin+location.pathname});
+ if(error)throw error;say("If the email is registered, a password-reset link has been sent. Check your inbox and junk folder.");
+}catch(err){say(err.message||"Reset request failed.",true);}finally{setBusy(false);}};
+$("resetForm").onsubmit=async e=>{e.preventDefault();if(busy)return;
+ if($("newPassword").value!==$("confirmPassword").value){say("Passwords do not match.",true);return;}
+ setBusy(true);try{
+ const {error}=await client.auth.updateUser({password:$("newPassword").value});
+ if(error)throw error;recovery=false;say("Password changed successfully.");show();
+ }catch(err){say(err.message||"Password update failed.",true);}finally{setBusy(false);}};
+$("signout").onclick=async()=>{if(busy)return;setBusy(true);try{const {error}=await client.auth.signOut();if(error)throw error;session=null;say("Signed out. Your game data was not touched.");show();}catch(err){say(err.message,true);}finally{setBusy(false);}};
+$("guest").onclick=()=>location.assign(HOME);
+$("returnGame").onclick=()=>location.assign(HOME);
+show();
+})();
+</script></body></html>
