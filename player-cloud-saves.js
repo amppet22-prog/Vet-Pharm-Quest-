@@ -48,7 +48,7 @@ function validateLegacy(data){
 }
 function normalize(data){
   if(validSave(data))return data;
-  if(validateLegacy(data))return {format:3,slots:{[PRIMARY]:data}};
+  if(validateLegacy(data))return {format:3,legacy:true,slots:{[PRIMARY]:data}};
   throw Error("Cloud backup is not a supported game-save format.");
 }
 function notify(msg,error=false){
@@ -145,7 +145,7 @@ async function restore(){
   try{
     for(const key of KEYS){
       if(Object.prototype.hasOwnProperty.call(payload.slots,key))localSet(key,JSON.stringify(payload.slots[key]));
-      else localStorage.removeItem(key);
+      else if(!payload.legacy)localStorage.removeItem(key);
     }
     localSet(OWNER_KEY,owner);
     localSet("vpq-cloud-opt-in-"+owner,"1");
@@ -167,6 +167,16 @@ function render(){
  else notify(localGet(OWNER_KEY)&&localGet(OWNER_KEY)!==userId?"This browser has progress linked to another account. Choose Restore or explicitly back up this browser; no automatic replacement.":"Choose Back up this browser or Restore cloud save. Nothing will be overwritten without confirmation.");
  addButton("Back up this browser",firstUpload);
  addButton("Restore cloud save",restore);
+ if(localGet("vpq-cloud-recovery-"+userId))addButton("Undo last restore",()=>{
+   if(!confirm("Restore the prior on-browser progress saved before your last cloud restore? Automatic cloud backup will pause to avoid overwriting your cloud copy."))return;
+   try{
+     const saved=JSON.parse(localGet("vpq-cloud-recovery-"+userId));
+     if(!validSave(saved))throw Error("Recovery snapshot is not valid.");
+     for(const key of KEYS){if(Object.prototype.hasOwnProperty.call(saved.slots,key))localSet(key,JSON.stringify(saved.slots[key]));else localStorage.removeItem(key);}
+     localStorage.removeItem("vpq-cloud-opt-in-"+userId);
+     location.reload();
+   }catch(err){notify("Unable to undo this restore: "+(err.message||""),true);}
+ });
  if(optedIn)addButton("Pause auto backup",()=>{optedIn=false;clearTimeout(timer);localStorage.removeItem("vpq-cloud-opt-in-"+userId);render();});
 }
 function launch(){
