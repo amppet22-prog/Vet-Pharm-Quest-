@@ -566,6 +566,20 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 .vpq-team-group-photos img{width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;background:#f8f0fb;border-radius:10px}
 .vpq-team-group-photos figcaption{text-align:center;font-size:12px;padding:4px;color:#65517b}
 @media(max-width:560px){.vpq-team-preview.vpq-team-group-photos{grid-template-columns:1fr}}
+</style><style id="vpq-shift-guide-refresh-20261120">
+.vpq-shift-card{padding:13px!important}
+.vpq-shift-card h2{font-size:16px!important;line-height:1.25}
+.vpq-shift-intro{font-size:12px!important;line-height:1.35!important;margin:6px 0 10px!important}
+.vpq-shift-section{border:1px solid #d9d4eb;background:#faf8ff;border-radius:12px;padding:9px 10px;margin:7px 0}
+.vpq-shift-section strong{font-size:13px;color:#554784}
+.vpq-shift-section .tiny{margin:4px 0 7px!important;font-size:11px;line-height:1.4}
+.vpq-shift-card button.full{margin:5px 0!important;padding:8px 10px!important;font-size:12px!important;text-align:left}
+.vpq-shift-options{border-bottom:1px solid #e1e3f0;padding:5px 0}
+.vpq-shift-options summary{cursor:pointer;list-style:auto;font-weight:800;font-size:12px;color:#425d81;padding:7px 3px}
+.vpq-shift-options[open] summary{color:#6554a7}
+.vpq-shift-options .tiny{font-size:11px;margin:4px 0 8px}
+.vpq-shift-options .vpqArcadeSpotlight{padding:4px!important;margin:3px 0!important}
+.vpq-shift-guide{margin-top:11px!important}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><button id="vpqMeetTeamBtn" type="button" class="vpq-meet-team-button" aria-label="Meet the Vet Pharm Quest team">🐾 Meet the Team</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
@@ -574,7 +588,28 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <div class="controls"><button id="leftBtn" aria-label="Walk left">◀ Walk</button><button id="interactBtn">✦ Interact (E)</button><button id="rightBtn" aria-label="Walk right">Walk ▶</button></div></div>
 <div class="roomnav" id="roomnav" aria-label="Clinic rooms"></div><div class="notice">🎓 Practice simulator only. Medicine, product labels, antimicrobial stewardship and reporting rules need case-specific verification. Wrong answers are learning opportunities—not patient care instructions.</div></section>
 <aside class="side"><div class="card"><h2>🗺️ Clinic dashboard</h2><p id="playerName" class="small">Student veterinarian</p><div class="meter"><div id="xpMeter"></div></div><p class="tiny" id="levelNote"></p><div class="statgrid"><div><b id="caseCount">0</b><small>Cases complete</small></div><div><b id="studyCount">0</b><small>Study answers</small></div><div><b id="roomCount">4</b><small>Rooms open</small></div><div><b id="accuracy">—</b><small>Accuracy</small></div></div></div>
-<div class="card"><h2>📋 Your shift · Choose your next stop</h2><p class="small">Start at the front desk, examine a patient, then monitor and discharge in the Treatment Ward. Explore the Arcade for quick practice games.</p><button class="full accent" id="goExam">🩺 Start patient rounds</button><button class="full" id="vpqShiftTreatmentBtn">❤️ Continue inpatient treatment</button><button class="full" id="goIsol">🛡️ One Health cases</button><button class="full" id="ohLibraryBtn">📚 One Health encyclopedia</button><button class="full accent" id="vpqStudioDashboardBtn">🎨 Reception Studio · Decorate & Shop</button><button class="full" id="vpqToxDashboardBtn">☣️ Toxicology Atlas · 48 toxicants</button><button class="full" id="goStudy">📚 Study desk</button><button class="full accent" id="vpqExamCenterBtn310">🎓 Pharm 1 · Exam Center</button><div class="vpqArcadeSpotlight"><strong>🕹️ The Arcade · Earn XP while you practice</strong><p>Drug Match, Bug Battles and more bite-sized challenges. Jump in anytime from the top bar.</p><button class="full accent" id="pharmArcadeBtn">🦠 Pharm Arcade · Bug Battles & Drug Match</button></div><button class="full" id="openGuide">🗺️ Clinic guide</button></div>
+<div class="card vpq-shift-card" id="vpqShiftCard">
+<h2>📋 Your shift · Choose your next stop</h2>
+<p class="small vpq-shift-intro">Your hospital, your pace. Follow a patient through the clinic or choose a study activity. No timed shift or required order.</p>
+<div class="vpq-shift-section"><strong>🩺 Follow a patient</strong><p class="tiny">1. Check in at Reception → 2. Examine your patient → 3. Treat, monitor and plan discharge.</p>
+<button class="full" id="vpqShiftReceptionBtn">📋 1 · Reception check-in</button>
+<button class="full accent" id="goExam">🩺 2 · Examination Room</button>
+<button class="full" id="vpqShiftTreatmentBtn">❤️ 3 · Treatment &amp; monitoring</button></div>
+<details class="vpq-shift-options"><summary>📚 Study, flashcards &amp; exam practice</summary>
+<p class="tiny">Choose your subject and lecture in the Study Lounge; use the Exam Center for question rounds.</p>
+<button class="full" id="goStudy">📚 Study Lounge · Choose lectures</button>
+<button class="full" id="vpqExamCenterBtn310">🎓 Exam Center · Practice questions</button>
+<button class="full" id="vpqToxDashboardBtn">☣️ Toxicology Atlas</button></details>
+<details class="vpq-shift-options"><summary>🕹️ Arcade &amp; minigames</summary>
+<p class="tiny">Learn by playing Drug Match, Bug Battles and other available practice games.</p>
+<div class="vpqArcadeSpotlight"><button class="full accent" id="pharmArcadeBtn">🕹️ Open Pharm Arcade</button></div></details>
+<details class="vpq-shift-options"><summary>🌎 One Health &amp; reference</summary>
+<button class="full" id="goIsol">🛡️ One Health cases</button>
+<button class="full" id="ohLibraryBtn">📚 One Health encyclopedia</button></details>
+<details class="vpq-shift-options"><summary>🎨 Customize your clinic</summary>
+<button class="full" id="vpqStudioDashboardBtn">🎨 Reception Studio · Decorate &amp; Shop</button></details>
+<button class="full vpq-shift-guide" id="openGuide">🗺️ Explore the complete clinic guide</button>
+</div>
 <div class="card"><h2>🎀 Make the clinic yours</h2><p class="small">Decorate with wallpapers, cat trees, cozy furniture and seasonal themes you already designed. Cosmetic purchases never lock clinical learning.</p><button class="full accent" id="vpqUpgradeStudioBtn">🎨 Browse reception themes & accessories</button><details class="vpqUpgradeHelp"><summary>⭐ How XP and coins work</summary><p>Each newly mastered study question earns <b>10 XP</b>. Every <b>100 study XP</b> earns <b>10 clinic coins</b>. Completing patient challenges can also award rewards. Repeating a previously mastered question helps learning but does not pay its first-time reward again.</p><p>Coins buy optional decorations; progress is kept in this browser unless exported.</p></details><details><summary>🧸 Classic clinic upgrades</summary><div id="upgradeList"></div></details></div>
 <button id="editorBtn" hidden type="button" aria-hidden="true">Legacy editor</button></aside></main>
 <div class="modalwrap hidden" id="modalWrap" role="dialog" aria-modal="true" aria-label="Game interaction"><div class="modal"><div class="modalhead"><h2 id="modalTitle">Clinic</h2><button id="closeModal" class="close" aria-label="Close">✕</button></div><div id="modalBody"></div></div></div>
@@ -3232,25 +3267,17 @@ document.head.appendChild(vpqToxStyle);
 (function(){
  'use strict';
  const quick=[
- ['🎮 Move and interact','Use A/D or ←/→ to walk; press E beside a station, or click/tap any labeled station. The top navigation and dashboard also provide direct shortcuts.'],
- ['🏥 Your shift — the patient journey','Start in Reception at the patient check-in desk, then move to Examination Room for assessment and Treatment Ward for serial monitoring, rechecks and discharge. Other rooms are tucked under Other rooms; Floor Plan and Arcade are in the top navigation.'], 
- ['❔ Mechanism Lab — learn WHY','Enter from the Pharmacy station (or Other rooms → Mechanism Lab). Follow target → cell effect → compensatory physiology → benefit/harm → clinical decision. Receptors are a good first stop; compare antibiotic or toxin pathways after that.'], 
- ['🕹️ Arcade and quick games','Open Arcade from the top navigation or Your Shift. Drug Match and Bug Battles reinforce study content without replacing clinical questions.'], 
- ['⭐ XP and coins','First-time mastery of a new correct study question awards 10 XP. Every 100 study XP converts into 10 clinic coins; completed patient challenges may award additional rewards. Replaying mastered questions is free but does not pay the first-mastery reward again.'],
- ['📚 Choose what to study','Open the Learning Lab or Study Desk. Select a Pharmacology lecture or One Health Exam 1, 2, 3 or 4 from the dropdown, then start a round. Exam Center and Pharm Arcade are separate optional test modes.'],
- ['💉 Clinical Skills & Blood Draw','From the Examination Room or Treatment Ward, enter the Clinical Skills wing. Walk up to the syringe board for Injection Practice, the venous collection tray for Blood Draw and species-specific site identification, or the tube rack for specimen handling and common artifacts. Press E when the object glows, or click it.'],
- ['🐾 Patient examples at every station','Each clinical learning station is intended to reinforce the lesson with species-specific patient examples. Use the patient lists and linked case boards to connect lab findings, treatments, pathogens and clinical decisions; some stations are still being expanded.'],
- ['🗺️ Hospital floor plan & annex','Select Floor Plan in the top bar to open the illustrated building layout and jump to rooms. The Cat Corner and Dog Yard are connected viewing/enrichment wings. Owned habitat add-ons can be placed or stored without buying twice.'],
- ['🩻 Imaging Suite','Explore the X-ray table, ultrasound machine and CT workstation; practice projection naming, kVp/mAs, probe artifacts and CT windows.'],
- ['❤️ Treatment Ward cases','Follow hospitalized patients through assess → treat → monitor → outpatient/discharge decisions. Dedicated CBC, chemistry, urinalysis and microscope lessons live in the Advanced Clinical Pathology Lab.'],
- ['🔬 Microscope Detective','At the Treatment or Clinical Pathology microscope, identify real blood-film findings, then explain clinical meaning and select a next test. The cytology reasoning track begins with population-pattern identification.'],
- ['🩸 Decode blood smears','Visit the Clinical Pathology Laboratory to identify cells, interpret red-cell changes, distinguish artifacts, and build mechanisms-first clinical reasoning. New questions earn first-mastery XP and milestone coins.'],
- ['🩺 Practice clinical reasoning','Visit Examination Room for patient rounds, Pharmacy for drug reference/coverage and side-effect prevention, or One Health for disease cards and host/reporting practice. Read the answer explanations.'],
- ['🎨 Decorate and collect','Click Reception Studio in the header or dashboard. Choose a free wall color, preview paid themes, buy decorations with earned clinic coins, and reuse owned items from My Collection. The coin bank tracks new reception purchases.'],
- ['🧑‍⚕️ Customize your character','Use Customize / View My Avatar to choose portraits and outfits. Standing sprites and framed portraits are separate displays; some art still needs sharper crops and transparency work.'],
- ['✏️ Edit and Add study cards','In Pharm Arcade → Professor Guide, choose Edit Card on any prompt to correct your personal copy, or Add Card to write a new question with its model answer and lecture group. Put separate subjects on new lines; surround important phrases with **double asterisks** for bold text. Your changes appear in future Professor Guide rounds. Export Cards to back them up or share them; Import Cards restores/merges them in another browser. Editing does not automatically publish to the GitHub game for everyone.'],
- ['☣️ Toxicology available · expanding','Toxicology now has 11 lecture groups, 48 reference cards and a starter mechanism-matching game. The full course question bank and other clinic areas are still being built.'],
- ['💾 Protect your save','Your game saves locally while you play. When signed in, check ☁️ Save status for confirmation that your progress reached the account cloud before changing devices. Cloud conflicts require selecting the correct version.']
+ ['🏥 Start your shift','You are a student veterinarian exploring a teaching hospital. Start in Reception and click the patient-list computer, then visit the Examination Room and Treatment Ward. Your shift has no timer, and you can explore rooms in any order.'],
+ ['🎮 Move and interact','Walk with A/D or the left/right arrow keys. Press E near a station, click its illustrated object, or use the on-screen Walk and Interact buttons. Use Previous room, Hospital Rooms, or Floor Plan to navigate.'],
+ ['🩺 Work through patient cases','Check in at Reception, assess a patient in the Exam Room, then make treatment, monitoring and discharge decisions in the Treatment Ward. Read the explanations: ask what the body is trying to compensate for and why a treatment may help or harm.'],
+ ['📚 Choose your lectures','In the Study Lounge/Learning Lab, select a course, exam or lecture before starting flashcards and questions. The Exam Center provides a separate practice mode; the lecture selection determines the learning focus where supported.'],
+ ['🕹️ Play and practice','Open Arcade for Drug Match, Bug Battles and other available minigames. Use these to reinforce lecture knowledge; more specialized games unlock by room or are still in development.'],
+ ['💊 Explore the clinic','Pharmacy reviews drug classes, mechanisms, uses, adverse effects and species cautions. Mechanism Lab explains how drugs work. Advanced Clinical Pathology supports blood, chemistry, urinalysis and microscopy; Imaging and Clinical Skills offer their own stations.'],
+ ['🌎 One Health & Toxicology','One Health has disease, host, zoonotic and reporting practice. Toxicology has linked toxin reference cards and mechanism learning; its full lecture and question coverage is still expanding.'],
+ ['⭐ Earn XP and clinic coins','Newly mastered study questions award 10 XP the first time; every 100 study XP earns 10 clinic coins. Patient challenges may provide additional rewards. Replaying questions is encouraged even when rewards do not repeat.'],
+ ['🎨 Make the clinic yours','Customize your avatar and animal companion, or open Reception Studio for wallpapers and decorations. Cosmetic purchases are optional: no educational lessons require spending coins.'],
+ ['💾 Save and protect progress','Check the account save indicator. Local progress may differ between browsers or devices, so confirm a completed cloud save or use export/restore before switching devices.'],
+ ['📖 Read before treating real patients','Cases and questions are for education, not treatment orders. Species reference intervals and clinical recommendations must be checked against reliable current references.']
  ];
  const directory=[
  ['🏠 Reception & customization','Start in reception, click the front-desk patient check-in queue, or open Reception Studio. Four starter wall colors are free; optional wallpaper, cat nook, kids corner and seasonal decorations use clinic coins. Purchased designs remain owned; full 3D customization is still planned.','reception'],
@@ -3709,6 +3736,7 @@ $('vpqFloorplanTopBtn').addEventListener('click',()=>vpqReceptionWings.map());
 $('vpqArcadeTopBtn').addEventListener('click',()=>$('pharmArcadeBtn').click());
 $('vpqUpgradeStudioBtn').addEventListener('click',()=>doAction('receptionStudio'));
 $('vpqShiftTreatmentBtn').addEventListener('click',()=>{changeRoom('treatment');doAction('inpatientWard')});
+$('vpqShiftReceptionBtn').addEventListener('click',()=>changeRoom('reception'));
 bookmarkRoom(activeRoom);updateAvatar();updateHUD();renderRoom();loop();
 // Restore the actual necropsy handbook lecture, not only its parent room.
 if(activeRoom==='necropsy')window.VPQ_NECROPSY_HANDBOOK?.resume?.();
