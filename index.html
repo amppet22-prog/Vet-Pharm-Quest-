@@ -2482,8 +2482,9 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
  function showLearning(){
   const cur=pending(),list=curriculum.courses.map(([lec,code,desc])=>{
     const q=dataStudy().filter(x=>x.lecture===lec).length;
-    const cards=window.VPQCurriculum.concepts.filter(x=>x[0]===lec).length+dataDrugs().filter(x=>x.lecture===lec).length;
-    return '<div class="vpqLFrow"><label><input type="checkbox" data-vpqlfcheck="'+escapeHtml(lec)+'" '+(cur.includes(lec)?'checked':'')+'><span><b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(desc)+' · '+cards+' cards · '+q+' questions</small></span></label><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="learn">📖 Learn</button><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="flash">🧠 Flashcards</button><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="quiz">🩺 Test</button></div>';
+    const guided=window.VPQCurriculum.concepts.filter(x=>x[0]===lec).length+dataDrugs().filter(x=>x.lecture===lec).length;
+    const quick=vpqExam2QuickRecall?.bank?.filter(x=>x.lecture===lec).length||0;
+    return '<div class="vpqLFrow"><label><input type="checkbox" data-vpqlfcheck="'+escapeHtml(lec)+'" '+(cur.includes(lec)?'checked':'')+'><span><b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(desc)+' · '+quick+' quick cards · '+guided+' guided cards · '+q+' exam Q</small></span></label><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="learn">📖 Learn</button><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="flash">🧠 Flashcards</button><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="quiz">🩺 Test</button></div>';
   }).join('');
   showModal('📖 Learning Lab · Select → Save → Start',
    '<p>Choose a lecture, then use <b>Learn</b>, <b>Recall Cards</b>, or <b>Test</b> on that row. These shortcuts work immediately; Save Selection is for multi-lecture rounds.</p>'+vpqPharmUnifiedPath()+
@@ -3296,9 +3297,9 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
 }
 
 function vpqPharmNextMenu(){
- const data=vpqPharmNext; const examLectures=(data?.lectures||[]).filter(x=>/^Lecture (1[1-9]|20)$/.test(x.id));
+ const data=vpqPharmNext; const examLectures=(data?.lectures||[]).filter(x=>/^Lecture (1[1-9]|20)$/.test(x.id));const startLecture=(window.VPQCurriculum?.getLectures?.()||[]).find(x=>/^Lecture (1[1-9]|20)$/.test(x))||'Lecture 11';
  showModal('📚 Pharmacology · Exam 2 · Lectures 11–20',
- '<p><b>Exam 2 includes Lectures 11–20.</b> Pick the lecture below, or jump to a study mode here.</p>'+vpqPharmStudyPath('Lecture 11')+
+ '<p><b>Exam 2 includes Lectures 11–20.</b> Choose your lecture below. The study shortcuts use your saved Exam 2 lecture when available.</p>'+vpqPharmStudyPath(startLecture)+
  
  '<div class="vpqNewPharmCards">'+examLectures.map(x=>'<button data-vpqnewpharm-lesson="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.id)+' · '+escapeHtml(x.title)+'</b><small>'+escapeHtml(x.focus||x.summary)+'</small><em>'+data.questions.filter(q=>q.lecture===x.id).length+' initial questions · browse lesson</em></button>').join('')+'</div>'+
  '<p><b>📋 Source-authored Exam 2 practice:</b> 96 questions from the uploaded answer/practice guide, including explanations. Select Lecture 10–20 in the Study Desk question filter. These are practice items, not Dr. Carlson\'s verbatim objective prompts.</p>'+
