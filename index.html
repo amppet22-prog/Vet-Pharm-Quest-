@@ -2494,6 +2494,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   if(action==='case'){setPending([id]);saveSelection();return openCases('Pharmacology')}
   if(action==='arcade'){setPending([id]);saveSelection();return launchGame('exam-center')}
   if(action==='match'){return launchGame('match')}
+  if(action==='battle'){return launchGame('battle')}
   if(action==='mastery'){setPending([id]);saveSelection();return masteryScreen()}
  }
  function focusPanel(){
@@ -2510,7 +2511,9 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   '<div class="vpqPharmFlowLink"><b>More ways to practice this lecture</b><div>'+
   btn('prof','📋 Professor Guide',e2?'Instructor objectives for this lecture.':'Course-style recall in the Arcade.')+
   btn('case','🐾 Patient Cases','Work through clinical reasoning and decisions.')+
-  btn('arcade','🕹️ Exam Arcade','Selected-lecture Exam Center and challenges.')+'</div></div>'+
+  btn('arcade','🕹️ Exam Arcade','Exam-style rounds using the current lecture focus.')+
+  btn('match','🧩 Drug Match','Drug classes, names and targets; specialized coverage.')+
+  btn('battle','🦠 Bug Battles','Antibiotic resistance and pathogen challenges.')+'</div></div>'+
   '<p class="vpqPharmFlowHelp">Understand → Recall → Apply → Assess is the recommended sequence, not a requirement. Arcade games and cases are practice extensions—not separate courses. Exam 1 and Exam 2 share the flashcard deck.</p></section>';
  }
  function showLearning(){
