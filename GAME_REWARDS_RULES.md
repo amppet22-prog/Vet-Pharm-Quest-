@@ -36,3 +36,11 @@ Every eligible learning or practice activity **must participate in one shared ga
 - Shop groups rewards under **Themed Sets** with named collections. Room accents are intentionally scoped to Reception, Treatment Ward, Cat Corner, or Dog Kennel; themes adjust the general clinic palette.
 - This is the first functional decoration layer with small themed accents; replacing them with illustrated furniture, rearrangeable placement, coordinated room layouts, and richer cat/dog enrichment art should be developed iteratively without destabilizing existing rooms.
 - Continue focusing progression on customizable clinic environments, **not avatar customization**.
+
+## Illustrated, placeable clinic furniture — first functional version (2026-11-20)
+- User approved moving beyond emoji decorations to meaningful, room-specific furniture and thematic collections, without reverting to customizable-avatar rewards.
+- Added **12 level-gated, coin-purchased illustrated CSS furniture pieces** across Reception, Treatment Ward, Cat Corner, and Dog Kennel. These include a reception sofa, coffee table, pamphlet shelf, lamp, treatment cart, plant, cabinet, cat tower, cat bed, dog bed, enrichment toy chest, and a special cosmic cat pod.
+- New **Furniture Studio** on the clinic dashboard lets players preview each room's furniture list, purchase when unlocked, **move existing furnishings in 5% steps**, hide/show items, and reset positions. The positions and visibility choices persist in the existing clinic state.
+- The existing shop has a **Furniture** category; purchases use the original `buyUpgrade` coin and level checks, without replacing historical coins, EXP, or purchases.
+- CSS illustrations are a first pass rather than fully composited, perspective-matched background assets. Test visual overlap and positions in the deployed game, then enhance illustrations and per-room art while preserving the saved furniture IDs and positions.
+- The combined uploaded **Lectures 18–20** MCQ set has 100 questions in `pharm-exam2-behavior-neurology-lectures18-20-user-mcq.js`. Per-question lecture numbers were absent, so the 100-card shared set is reachable from Lecture 18, 19, and 20 practice routes without arbitrarily assigning it to one lecture.
