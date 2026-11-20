@@ -336,6 +336,15 @@
 .vpq-oh-exam-why{margin:12px 0;padding:12px;border-radius:11px;background:#f0e7fa;border-left:4px solid #8d6ca7}
 .vpq-oh-exam-status{font-size:12px;color:#715a83;margin:8px 0}
 /* Differential cases: clean patient overview and readable image/decision panels */
+
+/* Differential case photo gallery — larger images, focus-visible zoom */
+.vpq-ddx-images{background:#f7faff!important;border-color:#c8d9e9!important;box-shadow:0 2px 10px rgba(48,79,115,.07)}
+.vpq-ddx-images .vpq-case-photo-gallery{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important}
+.vpq-ddx-images .vpq-case-photo-card{padding:8px!important;border-color:#d3e0ec!important;box-shadow:0 2px 7px rgba(35,73,111,.07)}
+.vpq-case-photo-card button:focus-visible{outline:3px solid #467ac0;outline-offset:3px}
+.vpq-ddx-images .vpq-case-photo-card img{width:100%;max-height:390px;object-fit:contain}
+.vpq-ddx-patient{background:#f6f9fd!important;border-color:#c8d8e9!important}
+.vpq-ddx-patient>div:not(:first-child){max-width:100%}
 .vpq-ddx-patient,.vpq-ddx-images{box-sizing:border-box;overflow-wrap:anywhere}
 .vpq-ddx-patient p{line-height:1.55}
 .vpq-ddx-ancillary summary{list-style-position:inside}
@@ -1016,7 +1025,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="pathology-exam3-pancreas-specimens-cases.js?v=20261119-pancreas-cases-v1"></script>
 <script src="necropsy-differential-exam4-cases.js?v=20261119-exam4-cases-v1"></script>
 <script src="necropsy-differential-l49-expanded.js?v=20261119-l49-expanded-v1"></script>
-<script src="necropsy-owner-publish.js?v=20261120-followup-photo-v5"></script>
+<script src="necropsy-owner-publish.js?v=20261120-photo-zoom-v6"></script>
 <script src="pathology-inline-photos.js?v=20261118-multiphoto-textonly1"></script>
 <script src="pathology-foundations.js?v=20261120-owner-visible-edits1"></script>
 <script src="pathology-exam1-deep-learning.js?v=20261119-exam1-depth2"></script>
@@ -1062,7 +1071,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="necropsy-differential-bovine-congenital-cns-figure1.js?v=20261119-figure1-v1"></script>
 <script src="necropsy-differential-exam5-cardiac.js?v=20261119-exam5-cardiac8"></script>
 <script src="necropsy-differential-exam7-navle-cases.js?v=20261120-ancillary-audit-v4"></script>
-<script src="necropsy-differential-lab.js?v=20261120-clean-photo-edit-v12"></script>
+<script src="necropsy-differential-lab.js?v=20261120-large-image-v13"></script>
 <script src="pathology-exam4-l49-deep-dive.js?v=20261119-l49-deep-v1"></script>
 <script src="pathology-exams45-cabinet-bridge.js?v=20261120-exams45-linked1"></script>
 <script src="pathology-exam3-urinary-visual-patterns.js?v=20261119-urinary-visual1"></script>
