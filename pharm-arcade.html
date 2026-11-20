@@ -494,6 +494,51 @@ review=function(){
 };
 
 
+/* Unified learning bridge: preserve Arcade XP while connecting clinical practice to lecture review. */
+(function(){
+ const valid=new Set(['Lecture 1','Lecture 2','Lecture 3','Lecture 4','Lecture 5','Lectures 6–7','Lecture 8','Lecture 9','Lecture 10','Lecture 11','Lecture 12','Lecture 13','Lecture 14','Lecture 15','Lecture 16','Lecture 17','Lecture 18','Lecture 19','Lecture 20']);
+ const focus=window.VPQCurriculum?.getLectures?.()||[];
+ const label=id=>String(id)==='6'?'Lectures 6–7':'Lecture '+id;
+ const send=(action,lecture)=>{
+  const target=valid.has(lecture)?lecture:focus.find(x=>valid.has(x))||'Lecture 1';
+  if(window.parent!==window)window.parent.postMessage({type:'vpq-pharm-bridge',action,lecture:target},location.origin);
+  else if(action==='home'||action==='lesson'||action==='flashcards'||action==='cases')location.href='index.html';
+ };
+ const selection=focus.filter(x=>valid.has(x));
+ const exam1=selection.filter(x=>vpqExamLectureList310.some(l=>window.VPQCurriculum?.fromArcade?.(l[0])===x));
+ const active=exam1.length?exam1:selection;
+ const header=document.createElement('div');
+ header.className='vpqArcadeCourseBridge';
+ const detail=exam1.length?'Exam 1 mini-games use '+exam1.join(', '):'This Arcade contains Exam 1 question banks (L1–9). Your selected Exam 2 lecture uses its own clinical MCQs in the Learning Center.';
+ header.innerHTML='<div><strong>🕹️ Arcade · Part of your Pharmacology course</strong><small>'+safe(detail)+'</small></div>'+
+ '<div class="vpqArcadeCourseActions"><button type="button" data-vpqcourse="home">← Learning Center</button>'+
+ '<button type="button" data-vpqcourse="flashcards">🧠 Flashcards</button>'+
+ '<button type="button" data-vpqcourse="lesson">📖 Review lesson</button>'+
+ '<button type="button" data-vpqcourse="cases">🩺 Patient cases</button></div>';
+ const tabs=document.getElementById('tabs');tabs?.parentNode?.insertBefore(header,tabs);
+ header.addEventListener('click',e=>{const b=e.target.closest('[data-vpqcourse]');if(b)send(b.dataset.vpqcourse,selection[0]||'Lecture 1')});
+ // Keep Arcade's existing scoring and rewards; offer recall of the specific missed question's lecture.
+ const oldRecord=record;
+ record=function(q,index){
+  const correct=oldRecord(q,index);
+  if(!correct&&q&&q.l!=='onehealth'){
+   const lec=label(q.l);
+   if(valid.has(lec))queueMicrotask(()=>{
+    const feedback=document.getElementById('feedbackArea');
+    if(!feedback||feedback.querySelector('[data-vpqreviewlecture]'))return;
+    const button=document.createElement('button');
+    button.type='button';button.className='btn';button.dataset.vpqreviewlecture=lec;
+    button.textContent='🧠 Review '+lec+' flashcards';
+    button.addEventListener('click',()=>send('flashcards',lec));
+    feedback.appendChild(button);
+   });
+  }
+  return correct;
+ };
+ const st=document.createElement('style');
+ st.textContent='.vpqArcadeCourseBridge{padding:12px 15px;margin:12px 0;border-radius:14px;border:1px solid #b7cce8;background:#f1f7ff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}.vpqArcadeCourseBridge strong,.vpqArcadeCourseBridge small{display:block}.vpqArcadeCourseBridge strong{font-size:14px;color:#315884}.vpqArcadeCourseBridge small{font-size:12px;margin-top:5px;color:#546a83;line-height:1.45}.vpqArcadeCourseBridge>div:first-child{flex:1;min-width:220px}.vpqArcadeCourseActions{display:flex;flex-wrap:wrap;gap:7px}.vpqArcadeCourseActions button{border:1px solid #a4bfe1;background:white;border-radius:9px;padding:9px 11px;color:#29527f;font-weight:700;cursor:pointer;font-size:12px}@media(max-width:600px){.vpqArcadeCourseActions button{flex:1 1 45%}}';document.head.appendChild(st);
+})();
+
 render();
 
 </script><script src="pharm-carlson-186-ui.js?v=20261108-edit3"></script></body></html>
