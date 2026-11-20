@@ -442,7 +442,7 @@ function startFlash(scope='topic',review=false){
  flashView();
 }
 /* Format imported four-option Quizlet MCQs as scannable choices, not one long heading. */
-function flashPromptMarkup(prompt){
+function flashPromptMarkup(prompt,answer,reveal=false){
  const raw=String(prompt||'').trim();
  const lines=raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
  let question='',choices=[];
@@ -450,26 +450,49 @@ function flashPromptMarkup(prompt){
   const opts=lines.slice(-4);
   if(opts.every((v,i)=>new RegExp('^'+String.fromCharCode(65+i)+'\\.\\s+').test(v))){
    question=lines.slice(0,-4).join(' ');
-   choices=opts.map(x=>x.slice(3).trim());
+   choices=opts.map(x=>x.replace(/^[A-D]\.\s*/, '').trim());
   }
  }
  if(!choices.length){
-  const pattern=/\s([A-D])\.\s+(?=\S)/g;
-  const hits=[...raw.matchAll(pattern)];
+  const hits=[...raw.matchAll(/(?:^|\s)([A-D])\.\s+(?=\S)/g)];
   if(hits.length===4&&hits.every((m,i)=>m[1]===String.fromCharCode(65+i))){
    question=raw.slice(0,hits[0].index).trim();
    choices=hits.map((m,i)=>raw.slice(m.index+m[0].length,i<3?hits[i+1].index:raw.length).trim());
   }
  }
  if(choices.length===4&&question){
+  // Never guess the key: only highlight if the stored answer has a valid letter
+  // or matches one of the options exactly.
+  let correct=-1;
+  const value=String(answer||'').trim();
+  const keyed=value.match(/^([A-D])\s*[.):\-]\s*(.*)$/i);
+  const normalize=v=>String(v||'').toLowerCase().replace(/\s+/g,' ').replace(/[.\s]+$/,'').trim();
+  if(keyed){
+   const i=keyed[1].toUpperCase().charCodeAt(0)-65;
+   if(!keyed[2]||normalize(keyed[2])===normalize(choices[i]))correct=i;
+  }
+  if(correct<0){
+   const matches=choices.map((choice,i)=>normalize(choice)===normalize(value)?i:-1).filter(i=>i>=0);
+   if(matches.length===1)correct=matches[0];
+  }
+  const showKey=reveal&&correct>=0;
   return '<div style="width:100%;text-align:left;max-width:710px;margin:0 auto">'+
    '<div style="font-size:clamp(16px,2vw,20px);line-height:1.4;font-weight:800;color:#25385b;margin:4px 0 16px">'+safe(question)+'</div>'+
-   '<div style="display:grid;grid-template-columns:1fr;gap:9px">'+choices.map((choice,i)=>
-    '<div style="display:flex;align-items:flex-start;gap:12px;border:1px solid #d5dfed;background:#fff;border-radius:11px;padding:11px 13px;text-align:left">'+
-    '<span style="flex:0 0 28px;height:28px;border-radius:8px;background:#e9effa;color:#2d5188;display:flex;align-items:center;justify-content:center;font-weight:850;font-size:13px">'+String.fromCharCode(65+i)+'</span>'+
-    '<span style="flex:1;font-size:clamp(14px,1.7vw,16px);font-weight:550;line-height:1.42;color:#2e405e;padding-top:3px">'+safe(choice)+'</span></div>').join('')+'</div></div>';
+   '<div style="display:grid;grid-template-columns:1fr;gap:9px">'+choices.map((choice,i)=>{
+    const right=showKey&&i===correct,wrong=showKey&&i!==correct;
+    const border=right?'#72b78a':wrong?'#eab176':'#d5dfed';
+    const bg=right?'#e3f5e8':wrong?'#fff0df':'#ffffff';
+    const badgeBg=right?'#318657':wrong?'#b96524':'#e9effa';
+    const badgeColor=showKey?'#ffffff':'#2d5188';
+    return '<div style="display:flex;align-items:flex-start;gap:12px;border:1.5px solid '+border+';background:'+bg+';border-radius:11px;padding:11px 13px;text-align:left">'+
+     '<span style="flex:0 0 28px;height:28px;border-radius:8px;background:'+badgeBg+';color:'+badgeColor+';display:flex;align-items:center;justify-content:center;font-weight:850;font-size:13px">'+String.fromCharCode(65+i)+'</span>'+
+     '<span style="flex:1;font-size:clamp(14px,1.7vw,16px);font-weight:'+(right?'750':'550')+';line-height:1.42;color:#2e405e;padding-top:3px">'+safe(choice)+(showKey?'<small style="display:block;margin-top:5px;font-weight:750;color:'+(right?'#227341':'#a65a21')+'">'+(right?'✓ Correct answer':'Not correct')+'</small>':'')+'</span></div>';
+   }).join('')+'</div>'+
+   (reveal&&!showKey?'<p style="font-size:12px;margin:10px 0 0;color:#69778d">The saved answer could not be matched confidently to an option; the choices are left uncolored.</p>':'')+
+   '</div>';
  }
- return '<p style="font-size:clamp(16px,2vw,21px);line-height:1.45;font-weight:750;color:#263a5d;margin:8px 0;white-space:pre-line">'+safe(raw)+'</p>';
+ return reveal?'<p style="font-size:clamp(17px,2.5vw,21px);line-height:1.5;font-weight:750;color:#25385b">'+rich(answer||'')+'</p>':
+  '<p style="font-size:clamp(16px,2vw,21px);line-height:1.45;font-weight:750;color:#263a5d;margin:8px 0;white-space:pre-line">'+safe(raw)+'</p>';
 }
 
 function flashView(){
@@ -491,9 +514,9 @@ function flashView(){
  '<div style="color:#5a7296;font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:850">'+(flashFace?'ANSWER':'QUESTION')+' · '+(c.curated?'Focused recall':'Lecture concept')+'</div>'+
  '<div style="font-size:12px;color:#576c87">L'+safe(conditionLecture)+' · '+safe(c.title)+'</div>'+
  (flashFace?
-  '<p style="font-size:clamp(17px,2.5vw,21px);line-height:1.5;margin:4px 0;font-weight:750;color:#25385b">'+rich(c.answer)+'</p>'+
+  flashPromptMarkup(c.prompt,c.answer,true)+
   (c.why?'<div style="text-align:left;border-top:1px solid #cedbec;padding-top:12px;font-size:13px"><b>WHY it matters</b><p>'+rich(c.why)+'</p></div>':''):
-  flashPromptMarkup(c.prompt)+'<small style="color:#7887a1">Choose an answer mentally, then flip to check.</small>')+
+  flashPromptMarkup(c.prompt,c.answer,false)+'<small style="color:#7887a1">Choose an answer mentally, then flip to check.</small>')+
  '<small style="color:#65768c">Source · '+safe(c.slide)+'</small></div>'+
  '<div class="buttonrow">'+(flashFace?
  '<button data-pathdiff-flash-rate="again" style="background:#fff2e6">↺ Need practice</button><button data-pathdiff-flash-rate="know" style="background:#e7f5eb">✓ Got it</button>':
