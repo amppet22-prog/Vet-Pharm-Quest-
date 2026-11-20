@@ -29,3 +29,10 @@ Every eligible learning or practice activity **must participate in one shared ga
 - The first seven level-exclusive items are defined in `index.html`, at levels 3, 5, 7, 10, 12, 15 and 20. They use room-scoped decor so an item appears only in its intended location.
 - **Phase 1 presentation** uses lightweight decoration icons. Upgrading them to custom illustrated furniture and coordinated placement in the scene's actual art layer remains future visual polish.
 - Preserve historic XP, coins, levels, and existing purchases. Expand the room-specific catalogue later with user-approved designs. Avoid making avatars a reward category in future level plans.
+
+## Themed clinic collections (2026-11-20)
+- Added five collectable clinic themes: **Cozy Café**, **Enchanted Woodland**, **Cozy Winter**, **Space Clinic**, and **Rainbow & Joy**.
+- The themed reward collection includes 15 room-specific decorative items and 5 atmosphere palettes. Purchases require coins and the indicated level, are stored in the existing `state.upgrades`, and never gate learning.
+- Shop groups rewards under **Themed Sets** with named collections. Room accents are intentionally scoped to Reception, Treatment Ward, Cat Corner, or Dog Kennel; themes adjust the general clinic palette.
+- This is the first functional decoration layer with small themed accents; replacing them with illustrated furniture, rearrangeable placement, coordinated room layouts, and richer cat/dog enrichment art should be developed iteratively without destabilizing existing rooms.
+- Continue focusing progression on customizable clinic environments, **not avatar customization**.
