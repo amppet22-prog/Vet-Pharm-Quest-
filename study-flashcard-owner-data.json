@@ -30,6 +30,12 @@
       "answer": "It's a one-time test that avoids the stress response in cats. Provides an indirect measurement of blood glucose over 2-3 weeks.",
       "why": "One clinic glucose sample may be raised by stress. Typically, recurrent samples are needed to properly diagnose DM.",
       "slide": "Exam 2 lecture 11 · source-derived mechanism review"
+    },
+    "pharm-l10-quick-004": {
+      "prompt": "Why must insulin concentration and delivery device match?",
+      "answer": "U-40 and U-100 products require compatible dosing equipment to avoid dose errors.\nInsulin has a very narrow safety margin. Proper pens ensure that the correct dose and concentration is administered to avoid under or overdosing.",
+      "why": "Mismatched devices can cause dangerous under- or overdosing.",
+      "slide": "Diabetes I · safe administration"
     }
   },
   "custom": [
