@@ -46,6 +46,19 @@ function validSave(payload){
     payload.slots && typeof payload.slots==="object" && !Array.isArray(payload.slots) &&
     Object.keys(payload.slots).every(key=>KEYS.includes(key));
 }
+function progressSummary(payload){
+ const slots=payload?.slots||{};
+ const clinic=slots[PRIMARY]||{};
+ const arcade=slots["vet-pharm-quest-v1"]||{};
+ const xp=Math.max(0,Number(clinic.xp)||0),coins=Math.max(0,Number(clinic.coins)||0);
+ const arcadeXP=Math.max(0,Number(arcade.xp)||0);
+ const cases=Array.isArray(clinic.completed)?clinic.completed.length:0;
+ return {xp,coins,arcadeXP,cases,meaningful:xp>0||coins>0||arcadeXP>0||cases>0};
+}
+function progressLabel(payload){
+ const a=progressSummary(payload);
+ return "Clinic XP: "+a.xp+", coins: "+a.coins+", completed cases: "+a.cases+", Arcade XP: "+a.arcadeXP;
+}
 function validateLegacy(data){
   return data && typeof data==="object" && Number.isFinite(data.xp) &&
     Number.isFinite(data.coins) && Array.isArray(data.completed) && Array.isArray(data.upgrades);
@@ -97,6 +110,15 @@ async function upload({confirmed=false}={}){
    if(remote && !confirmed && remote.updated_at!==getRevision(owner)){
      conflict=true;optedIn=false;clearTimeout(timer);notify("A newer or unknown cloud save exists. Auto-backup paused. Choose Restore or Back up this browser after reviewing both saves.",true);render();return;
    }
+   if(remote){
+     const online=progressSummary(normalize(remote.save_data));
+     const here=progressSummary(payload);
+     if(online.meaningful&&!here.meaningful){
+       conflict=true;optedIn=false;clearTimeout(timer);timer=null;
+       notify("⚠️ PROTECTED: This browser has zero progress, but your cloud backup contains XP or coins. Online progress was NOT overwritten. Choose Restore cloud save.",true);
+       panel();render();return;
+     }
+   }
    if(owner!==userId||!optedIn)return;
    const {data,error}=await client.from("player_saves").upsert({user_id:owner,save_data:payload},{onConflict:"user_id"}).select("updated_at").single();
    if(error)throw error;
@@ -122,8 +144,16 @@ async function firstUpload(){
  if(dataSize(payload)>MAX_BYTES){notify("This save is too large for cloud backup. Local progress is safe.",true);return;}
  try{
   const existing=await fetchRemote(userId);
+  if(existing){
+    const online=progressSummary(normalize(existing.save_data));
+    const here=progressSummary(payload);
+    if(online.meaningful&&!here.meaningful){
+      notify("⚠️ This browser has no XP, but your cloud save does. Upload is blocked to protect your account. Choose Restore cloud save instead.",true);
+      return;
+    }
+  }
   const message=existing ?
-   "This account already has a cloud save. Uploading this browser's current progress will REPLACE that cloud save. Download a backup first if you are unsure. Continue?" :
+   "Your ONLINE save: "+progressLabel(normalize(existing.save_data))+"\\nThis BROWSER: "+progressLabel(payload)+"\\n\\nReplace your online save with this browser's progress? This cannot be automatically undone." :
    "Back up the progress currently on this browser to your account? Future progress will then save automatically while the game is open.";
   if(!confirm(message))return;
   optedIn=true;conflict=false;lastFingerprint="";
@@ -140,10 +170,11 @@ async function restore(){
   notify("Loading cloud backup…");
   const remote=await fetchRemote(owner);
   if(owner!==userId)return;
-  if(!remote){notify("This account has no cloud save yet.",true);return;}
+  if(!remote){notify("This account has no cloud save yet. Do NOT back up an empty browser if your original XP is on another device.",true);return;}
   const payload=normalize(remote.save_data);
   if(!payload.slots[PRIMARY]&&!payload.slots["vet-pharm-quest-v1"]){notify("Cloud backup has no supported game progress.",true);return;}
-  if(!confirm("Restore this account's cloud progress? A local recovery snapshot will let you undo this restore. Your browser progress will be replaced and the game will reload. No download is required."))return;
+  notify("Online save found: "+progressLabel(payload));
+  if(!confirm("ONLINE SAVE: "+progressLabel(payload)+"\\nCURRENT BROWSER: "+progressLabel(readSelected())+"\\n\\nRestore this online save to this browser? A local recovery snapshot will let you undo."))return;
   // A browser-local recovery snapshot is created; downloading is optional.
   // Take a second browser-local recovery snapshot before writing any keys.
   const recoveryKey="vpq-cloud-recovery-"+owner;
@@ -158,7 +189,7 @@ async function restore(){
   }catch(err){notify("Could not prepare cloud restore: "+err.message,true);return;}
   optedIn=true;conflict=false;
   location.reload();
- }catch(error){notify("Restore failed. Your previous browser save should be intact; use the downloaded recovery file if needed. "+(error.message||""),true);}
+ }catch(error){notify("Restore failed. Your previous browser save was not intentionally changed. "+(error.message||""),true);}
 }
 function render(){
  if(!$("vpqCloudSavePanel"))return;
