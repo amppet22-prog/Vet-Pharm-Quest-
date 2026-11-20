@@ -19,7 +19,7 @@ function start(api,chosen='all'){
 }
 function shuffleArray(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function caseSequence(){
- const filtered=allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(practiceMode==='all'||practiceMode==='DDx'&&x.sourceType!=='SBA'||practiceMode==='SBA'&&x.sourceType==='SBA'||practiceMode==='clinical'&&!x.sourceType)&&(filter==='all'||x.lecture===filter));
+ const filtered=allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(practiceMode==='all'||practiceMode==='DDx'&&x.sourceType!=='SBA'||practiceMode==='clinical'&&!x.sourceType)&&(filter==='all'||x.lecture===filter));
  // Start in a randomized order, rather than showing cases in source/best-first order.
  // Keep that order stable while reviewing an individual session.
  const ids=filtered.map(x=>x.id),existing=new Set(shuffledIds);
@@ -43,7 +43,7 @@ function menu(){
  '<button data-pathdiff-study-start="1" style="flex:2;min-width:170px;padding:13px 10px;background:#d5f0df;border:1px solid #7ebc96;border-radius:9px;font-size:14px;font-weight:850">▶ Start flashcards</button></div>'+
  '<small style="display:block;margin-top:7px;color:#486354">Flip → Got it / Need practice → Review difficult cards</small>'+
  (selectedStudy==='67'?'<button data-pathdiff-flash-foundations="1" style="display:block;margin-top:9px;font-size:12px">📚 Focus: brain barriers & neuropathology vocabulary</button>':'')+'</div>'+
- '<div style="padding:10px;border:1px solid #bcd2e5;background:#f4f8ff;border-radius:10px;margin:10px 0"><b>🩺 Path Exam 7 · Patient Rounds</b><p style="font-size:12px;margin:5px 0">49 original source-linked cases · 23 differential-building rounds and 26 NAVLE single-best-answer scenarios. Practice here, then review their lecture and specimen cards.</p><div class="buttonrow"><button data-pathdiff-exam7-rounds="all" style="font-weight:800">🩺 Open all 49 rounds</button><button data-pathdiff-all-rounds="1">All pathology cases</button></div><div class="buttonrow">'+['68','69','70','71','72','73','74','75','76','77','78','79'].map(n=>'<button data-pathdiff-exam7-rounds="'+n+'" style="font-size:12px">L'+n+'</button>').join('')+'</div><small>Photo slots are ready; no source photograph has been added by this import.</small></div>'+
+ '<div style="padding:10px;border:1px solid #bcd2e5;background:#f4f8ff;border-radius:10px;margin:10px 0"><b>🩺 Path Exam 7 · Patient Rounds</b><p style="font-size:12px;margin:5px 0">23 diagnostic differential cases only. The 26 five-choice NAVLE questions are in Quiz Practice and lecture flashcards, not in Differential Diagnosis.</p><div class="buttonrow"><button data-pathdiff-exam7-rounds="all" style="font-weight:800">🩺 Open 23 differential rounds</button><button data-pathdiff-navle-quiz="1">📝 NAVLE multiple-choice quiz</button><button data-pathdiff-all-rounds="1">All pathology cases</button></div><div class="buttonrow">'+['68','69','70','71','72','73','74','75','76','77','78','79'].map(n=>'<button data-pathdiff-exam7-rounds="'+n+'" style="font-size:12px">L'+n+'</button>').join('')+'</div><small>Photo slots are ready; no source photograph has been added by this import.</small></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin:10px 0">'+
  '<button data-pathdiff-return="1" style="padding:12px;min-height:56px;text-align:left;border-radius:10px"><b>🔬 Gross & histology atlas</b><small style="display:block">Recognize the lesion</small></button>'+
  '<button data-pathdiff-show-cases="1" style="padding:12px;min-height:56px;text-align:left;border-radius:10px"><b>🧩 Differential cases</b><small style="display:block">Compare possible causes</small></button></div>'+
@@ -57,7 +57,7 @@ function menu(){
  '<details id="vpq-necro-case-list" style="margin:12px 0"><summary style="font-size:14px;font-weight:800;cursor:pointer;padding:8px 0">🧩 Browse differential practice cases ('+matched.length+')</summary>'+
  '<label style="display:block;font-size:12px;margin-bottom:7px">Filter cases by lecture<select data-pathdiff-case-filter="1" style="display:block;width:100%;max-width:240px;font-size:13px;padding:8px;margin-top:4px;border:1px solid #bdcde1;border-radius:8px;background:white">'+
  ['all',...counts].map(n=>'<option value="'+n+'"'+(filter===n?' selected':'')+'>'+(n==='all'?'All lectures':'Lecture '+n)+'</option>').join('')+'</select></label>'+
- '<div style="display:flex;gap:7px;flex-wrap:wrap;margin:6px 0"><label style="flex:1;min-width:160px;font-size:12px">Exam<select data-pathdiff-case-exam="1" style="display:block;width:100%;padding:7px"><option value="all">All exams</option>'+EXAM_GROUPS.map(g=>'<option value="'+g.id+'"'+(caseExam===g.id?' selected':'')+'>'+safe(g.label)+'</option>').join('')+'</select></label><label style="flex:1;min-width:160px;font-size:12px">Question type<select data-pathdiff-practice-mode="1" style="display:block;width:100%;padding:7px">'+[['all','All case formats'],['DDx','Build differential list'],['SBA','NAVLE single-best answer'],['clinical','Other clinical case practice']].map(([id,label])=>'<option value="'+id+'"'+(practiceMode===id?' selected':'')+'>'+label+'</option>').join('')+'</select></label></div>'+ 
+ '<div style="display:flex;gap:7px;flex-wrap:wrap;margin:6px 0"><label style="flex:1;min-width:160px;font-size:12px">Exam<select data-pathdiff-case-exam="1" style="display:block;width:100%;padding:7px"><option value="all">All exams</option>'+EXAM_GROUPS.map(g=>'<option value="'+g.id+'"'+(caseExam===g.id?' selected':'')+'>'+safe(g.label)+'</option>').join('')+'</select></label><label style="flex:1;min-width:160px;font-size:12px">Question type<select data-pathdiff-practice-mode="1" style="display:block;width:100%;padding:7px">'+[['all','All case formats'],['DDx','Build differential list'],['clinical','Other clinical case practice']].map(([id,label])=>'<option value="'+id+'"'+(practiceMode===id?' selected':'')+'>'+label+'</option>').join('')+'</select></label></div>'+ 
  (matched.length?'':'<p style="font-size:12px;color:#78542d;padding:9px;border:1px solid #e4d3b2;border-radius:8px">No cases are currently linked to this lecture and format. This is a visible content gap, not an error. Switch to All exams or All case formats to explore other available practice.</p>')+
  '<p class="tiny" style="margin:6px 0">'+matched.length+' cases · Select one to compare signalment, gross findings, histology and etiologies.</p>'+
  '<div class="buttonrow"><button data-pathdiff-shuffle="1" style="background:#e9f3ff;font-weight:800">🔀 Shuffle cases</button><small>Cases are randomized automatically; shuffle again for a new order. Answer choices also change on restart. Rewards remain saved.</small></div>'+
@@ -476,6 +476,14 @@ function flashDeck(scope){
    deck.push({id,title:section.title,prompt,answer,slide:section.slides||'see source',topicIndex:globalIndex,curated:false});
   }
  }
+ // Single-answer questions become normal question/answer study cards, not diagnostic differential cases.
+ if(scope==='lecture'){
+  for(const c of (window.VPQ_PATH_EXAM7_SBA||[]).filter(c=>String(c.lecture)===String(conditionLecture))){
+   const prompt=[c.history,c.gross?'Gross: '+c.gross:'',c.originalQuestion].filter(Boolean).join(' ');
+   const answer=c.best+'. '+c.mechanism;
+   deck.push({id:'exam7-sba-'+c.sourceCaseId,title:c.title,prompt,answer,slide:c.ref,topicIndex:-1,curated:true});
+  }
+ }
  return window.VPQ_FLASHCARD_OWNER?.apply?.('pathology',conditionLecture,deck)||deck;
 }
 function startFlash(scope='topic',review=false){
@@ -703,6 +711,7 @@ function init(api){
  const button=ev.target.closest('[data-pathdiff-flash-flip],button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
+ if(d.pathdiffNavleQuiz!==undefined)return window.VPQ_NECROPSY_QUIZ?.start?.(d.pathdiffNavleQuiz==='1'?null:d.pathdiffNavleQuiz);
  if(d.pathdiffExam7Rounds!==undefined)return openExam7Rounds(d.pathdiffExam7Rounds==='all'?null:d.pathdiffExam7Rounds);
  if(d.pathdiffAllRounds!==undefined){roundsOnly=false;caseExam='all';practiceMode='all';filter='all';shuffledIds=[];return menu();}
  if(d.pathdiffExam7Lecture!==undefined)return openExam7Lecture(d.pathdiffExam7Lecture);
