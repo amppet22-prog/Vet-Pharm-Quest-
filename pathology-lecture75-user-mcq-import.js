@@ -9,7 +9,7 @@ const norm=s=>String(s||'').toLowerCase().trim().replace(/\s+/g,' ');
 const stats={imported:bank.length,added:0,already:0,missing:[]};
 for(const q of bank){const section=lesson.sections?.find(s=>s.title===q.topic);
  if(!section){stats.missing.push(q.id+': '+q.topic);continue;}
- const front=q.prompt+'\\n'+q.options.map((v,i)=>String.fromCharCode(65+i)+'. '+v).join('\\n');
+ const front=q.prompt+'\n'+q.options.map((v,i)=>String.fromCharCode(65+i)+'. '+v).join('\n');
  const back=String.fromCharCode(65+q.correctIndex)+'. '+q.answer;
  section.flashcards=section.flashcards||[];
  if(!section.flashcards.some(c=>norm(c[0])===norm(front))){section.flashcards.push([front,back]);stats.added++;}else stats.already++;
