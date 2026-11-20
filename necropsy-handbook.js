@@ -116,7 +116,7 @@ function exam6AtlasEntry(n,index){
  const previous=position>0?entries[position-1].index:null,next=position>=0&&position<entries.length-1?entries[position+1].index:null;
  const photos=window.VPQ_PATH_INLINE_PHOTOS;
  popup('🔬 L'+n+' · '+sec.title,nav()+exam6Style+(photos?photos.style:'')+
- '<div class="np-cover"><b>'+safe(sec.title)+'</b><p>Detailed Atlas reference · '+safe(sec.slides||'Lecture '+n)+'</p><small>Source: '+safe(lesson.source||'Lecture '+n)+' · '+safe(sec.sourceStatus||'Lecture-sourced disease record')+'</small></div>'+
+ '<div class="np-cover"><b>'+safe(sec.title)+'</b><p>Detailed Atlas reference · '+safe(sec.slides||'Lecture '+n)+'</p><small>Source: '+safe(sec.kind==='supplemental'?'External Merck Veterinary Manual study reference':lesson.source||'Lecture '+n)+' · '+safe(sec.sourceStatus||'Lecture-sourced disease record')+'</small></div>'+
  '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">← Disease list</button><button data-nplearn="'+safe(n)+'">📖 Lecture refresher</button><button data-npflashgi="'+safe(n)+'">🧠 Lecture flashcards</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button></div>'+
  fields.map(p=>'<div class="np-gi-atlas-section"><b>'+safe(p[0])+'</b><p>'+safe(p[1])+'</p></div>').join('')+
  '<h4>🖼️ Gross / histology images</h4><p class="tiny">Existing photos and owner-published captions stay associated with this original lecture topic. Only upload useful, credited diagnostic images here.</p>'+
@@ -136,7 +136,8 @@ function exam6QuickLearn(n){
   const gross=exam6Field(sec,['Gross recognition','Gross lesions']);
   const mechanism=exam6Field(sec,['Pathogenesis — why','Pathogenesis / why']);
   const distinction=exam6Field(sec,['Do not confuse with']);
-  return '<details class="np-gi-card" '+(i===0?'open':'')+'><summary>'+safe(sec.title)+'</summary>'+
+  return '<details class="np-gi-card" '+(i===0?'open':'')+'><summary>'+safe(sec.title)+(sec.kind==='supplemental'?' · External study supplement':'')+'</summary>'+
+  (sec.kind==='supplemental'?'<p style="font-weight:800;color:#80572c;font-size:12px">Supplemental Merck Veterinary Manual reference — not yet checked against professor slides.</p>':'')+
   (species?'<p><b>Species:</b> '+safe(species)+'</p>':'')+
   (gross?'<p><b>Recognize:</b> '+safe(gross)+'</p>':'')+
   (mechanism?'<p><b>Why:</b> '+safe(mechanism)+'</p>':'')+
@@ -147,7 +148,7 @@ function exam6QuickLearn(n){
  '<div class="np-cover"><h3>'+safe(lesson.title)+'</h3><p>Quick recall: recognize the lesion, understand why it occurs, and separate it from the closest differential. Full disease details and credited photos open in the existing editable Specimen Cabinet.</p><small>'+entries.length+' linked disease entries</small></div>'+
  '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">🔬 Disease Atlas</button><button data-npflashgi="'+safe(n)+'">🧠 Lecture flashcards</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button><button data-npchapter="'+safe(n)+'">← Lecture overview</button></div>'+
  outline+
- (indexed.length?'<details class="np-gi-card"><summary>Additional lecture overview topics ('+indexed.length+') · linked disease references</summary><p class="tiny">These are broad source-index topics, not individual validated disease cards. Where a verified detailed disease record is already present, you can open it below; unmatched topics still need a source-specific expansion.</p>'+
+ (indexed.length?'<details class="np-gi-card"><summary>Additional lecture overview topics ('+indexed.length+') · linked disease references</summary><p class="tiny">These are broad source-index topics, not individual validated disease cards. Open the linked disease references below. Entries labeled External supplement are reference-based additions and still require verification against the professor slides.</p>'+
  indexed.map(s=>{
   const matches=window.VPQ_PATH_EXAM6_INDEX_LINKS?.links?.(n,s.title)||[];
   return '<div style="padding:9px 0;border-bottom:1px solid #dbe5ef"><b>'+safe(s.title)+'</b>'+
