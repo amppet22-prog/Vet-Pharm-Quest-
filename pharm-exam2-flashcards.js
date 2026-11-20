@@ -36,7 +36,7 @@ function select(value){if(bank.some(c=>c.lecture===value))lecture=value;}
 function menu(){
  const lectures=(window.VPQCurriculum?.courses||[]).map(x=>x[0]).filter(l=>bank.some(c=>c.lecture===l));
  show('🧠 Pharmacology · Quick Recall Flashcards',
- '<p>Choose any pharmacology lecture: <b>Exam 1</b> uses existing foundational teaching concepts, <b>Lecture 10</b> has diabetes foundations, and <b>Exam 2</b> includes 122 additional focused quick-recall cards. Recall checks memory; patient MCQs test clinical decisions.</p>'+
+ '<div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button></div><p>Choose any pharmacology lecture: <b>Exam 1</b> uses existing foundational teaching concepts, <b>Lecture 10</b> has diabetes foundations, and <b>Exam 2</b> includes 122 additional focused quick-recall cards. Recall checks memory; patient MCQs test clinical decisions.</p>'+
  '<div style="border:1px solid #b7cbe4;border-radius:12px;background:#f5f9ff;padding:12px"><label style="display:block;font-weight:800">Lecture<select data-vpqpharmfc-lecture="1" style="display:block;margin-top:7px;padding:10px;width:100%;border:1px solid #b3c7dd;border-radius:9px">'+lectures.map(x=>'<option value="'+esc(x)+'"'+(lecture===x?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select></label>'+
  '<p class="tiny">'+cards().length+' focused questions available in this lecture · Practice at your own pace</p>'+
  '<div class="buttonrow"><button data-vpqpharmfc-start="1" style="background:#dff0ff;font-weight:850">▶ Start quick recall</button><button data-vpqpharmfc-missed="1">↺ Review missed</button><button data-vpqpharmfc-new="1">➕ Add flashcard</button></div></div>'+
@@ -50,7 +50,7 @@ function render(){
  '<div class="buttonrow"><button data-vpqpharmfc-missed="1">↺ Practice missed</button><button data-vpqpharmfc-start="1">New shuffled round</button><button data-vpqpharmfc-quiz="1">🩺 Clinical MCQs</button><button data-vpqpharmfc-menu="1">← Lectures</button></div>');
  const c=deck[at],pct=Math.round((at+1)/deck.length*100);
  show('🧠 '+lecture+' · Quick Recall',
- '<div class="buttonrow"><button data-vpqpharmfc-menu="1">← Flashcard lectures</button><button data-vpqpharmfc-edit="1">✏️ Edit / publish</button><button data-vpqpharmfc-new="1">➕ Add</button></div>'+
+ '<div class="buttonrow"><button data-vpqlfhome="1">← Learning Center</button><button data-vpqpharmfc-menu="1">← Flashcard lectures</button><button data-vpqpharmfc-edit="1">✏️ Edit / publish</button><button data-vpqpharmfc-new="1">➕ Add</button></div>'+
  '<p class="tiny"><b>Card '+(at+1)+' of '+deck.length+'</b> · '+(missedOnly?'Practice missed':'Drug & disease foundations')+'</p>'+
  '<div style="height:5px;background:#e0e9f5;border-radius:8px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:#739acb"></div></div>'+
  '<div role="button" tabindex="0" data-vpqpharmfc-flip="1" title="Flip flashcard" aria-label="Flip flashcard" style="cursor:pointer;padding:clamp(18px,4vw,32px);min-height:235px;border:1px solid #b8cce1;background:linear-gradient(145deg,#fff,#eef6ff);box-shadow:0 7px 20px rgba(52,79,128,.08);border-radius:18px;margin:12px 0;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;gap:13px">'+
