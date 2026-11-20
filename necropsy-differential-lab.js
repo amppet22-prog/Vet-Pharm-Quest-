@@ -352,15 +352,27 @@ function exam7Matches(lecture,title){
    (c.sourceCaseId==='F1'&&t.includes('pyometra'))
  ));
 }
+const EXAM7_SPECIMEN_ALIASES={
+ N1:'Listeriosis',N2:'Thrombotic meningoencephalitis',N9:'Cerebellar hypoplasia',N11:'Equine recurrent laryngeal neuropathy',
+ S1:'Endocrine alopecia',S3:'Contagious ecthyma (orf)',S7:'Demodicosis',S8:'Pemphigus foliaceus',
+ M1:'Sertoli cell tumor',F1:'Canine CEH–pyometra',F6:'Granulosa-theca cell tumor',F2:'Fetal mummification',
+ E2:'Glaucoma',E7:'Corneal sequestrum',A2:'Otitis externa',A3:'Auricular hematoma',
+ I3:'Cerebellar hypoplasia'
+};
 function exam7Specimen(x){
- const title=norm(x.best),cards=window.VPQ_PATH_EXAM7?.cards||[];
+ const title=norm(EXAM7_SPECIMEN_ALIASES[x.sourceCaseId]||x.best),cards=window.VPQ_PATH_EXAM7?.cards||[];
  return cards.find(c=>String(c.lecture)===String(x.lecture)&&!c.normal&&
  (norm(c.title)===title|| (norm(c.title).length>8&&title.includes(norm(c.title)))||
  (x.sourceCaseId==='N1'&&norm(c.title)==='listeriosis')||
  (x.sourceCaseId==='S8'&&norm(c.title)==='pemphigus foliaceus')||
  (x.sourceCaseId==='F1'&&norm(c.title).includes('pyometra'))))||null;
 }
-function openExam7Lecture(lecture){conditionLecture=String(lecture);conditionGap='all';conditionTopicMode='all';return conditionIndex();}
+function openExam7Lecture(idOrLecture){
+ const c=allCases().find(x=>x.id===idOrLecture),lecture=c?.lecture||idOrLecture;
+ conditionLecture=String(lecture);conditionGap='all';conditionTopicMode='all';
+ if(c){const possible=lectureConditions();const index=possible.findIndex(p=>exam7Matches(lecture,p.sourceTitle||p.title).some(hit=>hit.id===c.id));if(index>=0){conditionChosen=index;return conditionDetail()}}
+ return conditionIndex();
+}
 function openExam7Rounds(lecture){filter=lecture?String(lecture):'all';roundsOnly=true;shuffledIds=[];return menu();}
 function evidence(lecture,section){
  const linked=relatedCases(lecture,section.sourceTitle||section.title);
@@ -646,7 +658,7 @@ function view(){
  const opted=leading>=0?x.options[leading]:null;
  modal('🔬 Differential case · L'+safe(x.lecture)+' · '+(revealed?safe(x.title):'Mystery case '+String(position+1).padStart(2,'0')),
  '<div class="buttonrow"><button data-pathdiff-list="1">← All differential cases</button><button data-pathdiff-shuffle="1">🔀 Shuffle cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>← Previous case</button><span style="align-self:center;font-size:12px">Case '+(position+1)+' of '+sequence.length+'</span><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next case →</button><button data-pathdiff-reset="1">↺ Restart case</button></div>'+
-  (x.sourceCaseId?'<div style="border:1px solid #c7d9ea;padding:9px;border-radius:10px;margin:8px 0"><b>🩺 Exam 7 · '+safe(x.sourceCaseId)+'</b><div class="buttonrow"><button data-pathdiff-exam7-lecture="'+safe(x.lecture)+'">📖 Lecture '+safe(x.lecture)+' learning & diseases</button><button data-pathdiff-exam7-atlas="'+safe(x.id)+'">🔬 '+(exam7Specimen(x)?'Matching specimen card':'Browse lecture specimen atlas')+'</button><button data-pathdiff-exam7-rounds="'+safe(x.lecture)+'">🩺 More cases from this lecture</button></div>'+(revealed?'<small>Source: '+safe(x.ref)+' · Photo requested: '+safe(x.photoToAdd||'not specified')+'</small>':'<small>Answers stay hidden until you complete the differential comparison.</small>')+'</div>':'')+
+  (x.sourceCaseId?'<div style="border:1px solid #c7d9ea;padding:9px;border-radius:10px;margin:8px 0"><b>🩺 Exam 7 · '+safe(x.sourceCaseId)+'</b><div class="buttonrow"><button data-pathdiff-exam7-lecture="'+safe(x.id)+'">📖 Lecture '+safe(x.lecture)+' learning & diseases</button><button data-pathdiff-exam7-atlas="'+safe(x.id)+'">🔬 '+(exam7Specimen(x)?'Matching specimen card':'Browse lecture specimen atlas')+'</button><button data-pathdiff-exam7-rounds="'+safe(x.lecture)+'">🩺 More cases from this lecture</button></div>'+(revealed?'<small>Source: '+safe(x.ref)+' · Photo requested: '+safe(x.photoToAdd||'not specified')+'</small>':'<small>Answers stay hidden until you complete the differential comparison.</small>')+'</div>':'')+
 '<div style="background:#f1f7ff;border-left:4px solid #7798cb;padding:10px;border-radius:8px;margin:10px 0"><b>'+safe(x.species)+' — presenting history</b><p>'+rich(x.history)+'</p><b>Gross lesion / localization:</b> '+rich(x.gross)+'</div>'+
  '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:12px;align-items:start;max-width:100%;overflow-wrap:anywhere"><div>'+
  '<h4 style="margin:4px 0">1. Build your differential list</h4><p class="tiny">Select every reasonable possibility. More than one diagnosis may fit early findings.</p>'+
