@@ -4,14 +4,14 @@ window.VPQ_NECROPSY_DIFFERENTIAL_LAB=(function(){
 const data=window.VPQ_NECROPSY_DIFFERENTIAL_CASES?.cases||[];
 function allCases(){return [...data,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getCustomCases?.()||[])]}
 const KEY='vpq-necropsy-differential-local-images-v1';
-let ui=null,filter='all',current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false,caseReward=null,shuffledIds=[],optionOrder=[];
+let ui=null,filter='all',roundsOnly=false,current=null,phase=0,leading=-1,grossLeading=-1,leadHint=false,shortlist=[],showWhy=false,caseReward=null,shuffledIds=[],optionOrder=[];
 const rich=v=>window.VPQ_PATH_RICH_TEXT?.render?.(v)||safe(v);
 const safe=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function photoStore(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
 function updatePhoto(id,image){const state=photoStore();if(image)state[id]=image;else delete state[id];try{localStorage.setItem(KEY,JSON.stringify(state));return true}catch(e){return false}}
 function modal(title,body){ui?.showModal(title,body)}
 function start(api,chosen='all'){
- ui=api;filter=chosen;menu();
+ ui=api;filter=chosen;roundsOnly=false;menu();
  const owner=window.VPQ_NECROPSY_OWNER_PUBLISH;
  owner?.load?.().then(()=>{
   if(ui===api&&ui.body.querySelector('[data-pathdiff-filter]')&&!ui.body.querySelector('[data-necro-create-submit]'))menu();
@@ -19,7 +19,7 @@ function start(api,chosen='all'){
 }
 function shuffleArray(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function caseSequence(){
- const filtered=allCases().filter(x=>filter==='all'||x.lecture===filter);
+ const filtered=allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&(filter==='all'||x.lecture===filter));
  // Start in a randomized order, rather than showing cases in source/best-first order.
  // Keep that order stable while reviewing an individual session.
  const ids=filtered.map(x=>x.id),existing=new Set(shuffledIds);
@@ -43,7 +43,7 @@ function menu(){
  '<button data-pathdiff-study-start="1" style="flex:2;min-width:170px;padding:13px 10px;background:#d5f0df;border:1px solid #7ebc96;border-radius:9px;font-size:14px;font-weight:850">▶ Start flashcards</button></div>'+
  '<small style="display:block;margin-top:7px;color:#486354">Flip → Got it / Need practice → Review difficult cards</small>'+
  (selectedStudy==='67'?'<button data-pathdiff-flash-foundations="1" style="display:block;margin-top:9px;font-size:12px">📚 Focus: brain barriers & neuropathology vocabulary</button>':'')+'</div>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin:10px 0">'+
+ '<div style="padding:10px;border:1px solid #bcd2e5;background:#f4f8ff;border-radius:10px;margin:10px 0"><b>🩺 Path Exam 7 · Patient Rounds</b><p style="font-size:12px;margin:5px 0">49 original source-linked cases · 23 differential-building rounds and 26 NAVLE single-best-answer scenarios. Practice here, then review their lecture and specimen cards.</p><div class="buttonrow"><button data-pathdiff-exam7-rounds="all" style="font-weight:800">🩺 Open all 49 rounds</button><button data-pathdiff-all-rounds="1">All pathology cases</button></div><div class="buttonrow">'+['68','69','70','71','72','73','74','75','76','77','78','79'].map(n=>'<button data-pathdiff-exam7-rounds="'+n+'" style="font-size:12px">L'+n+'</button>').join('')+'</div><small>Photo slots are ready; no source photograph has been added by this import.</small></div>'+\n '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin:10px 0">'+
  '<button data-pathdiff-return="1" style="padding:12px;min-height:56px;text-align:left;border-radius:10px"><b>🔬 Gross & histology atlas</b><small style="display:block">Recognize the lesion</small></button>'+
  '<button data-pathdiff-show-cases="1" style="padding:12px;min-height:56px;text-align:left;border-radius:10px"><b>🧩 Differential cases</b><small style="display:block">Compare possible causes</small></button></div>'+
  '<details style="margin:8px 0 12px;border:1px solid #d0ddec;border-radius:10px;padding:9px 11px"><summary style="cursor:pointer;font-size:13px;font-weight:750">📚 More tools · lecture notes, patterns, photos & editing</summary>'+
@@ -339,6 +339,28 @@ function relatedCases(lecture,title){
  const t=norm(title);
  return allCases().filter(c=>c.lecture===lecture&&((CASE_MATCH[c.id]||[]).some(alias=>t.includes(norm(alias)))||((c.id.startsWith('custom-')||c.id.startsWith('n3'))&&((norm(c.title).includes(t)&&t.length>8)||(t.includes(norm(c.best))&&norm(c.best).length>8)||(norm(c.morph).includes(t)&&t.length>12)))));
 }
+/* Exam 7 patient-rounds links reuse the lecture and specimen objects already in the game. */
+function exam7Matches(lecture,title){
+ const t=norm(title);if(t.length<5)return [];
+ return allCases().filter(c=>c.sourceCaseId&&String(c.lecture)===String(lecture)&&(
+   norm(c.best)===t||norm(c.best).includes(t)&&t.length>8||t.includes(norm(c.best))&&norm(c.best).length>8||
+   (c.sourceCaseId==='N1'&&t.includes('listerio'))||
+   (c.sourceCaseId==='N2'&&t.includes('thrombotic meningoencephalitis'))||
+   (c.sourceCaseId==='S3'&&t.includes('contagious ecthyma'))||
+   (c.sourceCaseId==='S8'&&t.includes('pemphigus foliaceus'))||
+   (c.sourceCaseId==='F1'&&t.includes('pyometra'))
+ ));
+}
+function exam7Specimen(x){
+ const title=norm(x.best),cards=window.VPQ_PATH_EXAM7?.cards||[];
+ return cards.find(c=>String(c.lecture)===String(x.lecture)&&!c.normal&&
+ (norm(c.title)===title|| (norm(c.title).length>8&&title.includes(norm(c.title)))||
+ (x.sourceCaseId==='N1'&&norm(c.title)==='listeriosis')||
+ (x.sourceCaseId==='S8'&&norm(c.title)==='pemphigus foliaceus')||
+ (x.sourceCaseId==='F1'&&norm(c.title).includes('pyometra'))))||null;
+}
+function openExam7Lecture(lecture){conditionLecture=String(lecture);conditionGap='all';conditionTopicMode='all';return conditionIndex();}
+function openExam7Rounds(lecture){filter=lecture?String(lecture):'all';roundsOnly=true;shuffledIds=[];return menu();}
 function evidence(lecture,section){
  const linked=relatedCases(lecture,section.sourceTitle||section.title);
  const bank=window.VPQ_PATH_EXAM7_DATA||[];
@@ -623,7 +645,7 @@ function view(){
  const opted=leading>=0?x.options[leading]:null;
  modal('🔬 Differential case · L'+safe(x.lecture)+' · '+(revealed?safe(x.title):'Mystery case '+String(position+1).padStart(2,'0')),
  '<div class="buttonrow"><button data-pathdiff-list="1">← All differential cases</button><button data-pathdiff-shuffle="1">🔀 Shuffle cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>← Previous case</button><span style="align-self:center;font-size:12px">Case '+(position+1)+' of '+sequence.length+'</span><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next case →</button><button data-pathdiff-reset="1">↺ Restart case</button></div>'+
- '<div style="background:#f1f7ff;border-left:4px solid #7798cb;padding:10px;border-radius:8px;margin:10px 0"><b>'+safe(x.species)+' — presenting history</b><p>'+rich(x.history)+'</p><b>Gross lesion / localization:</b> '+rich(x.gross)+'</div>'+
+  (x.sourceCaseId?'<div style="border:1px solid #c7d9ea;padding:9px;border-radius:10px;margin:8px 0"><b>🩺 Exam 7 · '+safe(x.sourceCaseId)+'</b><div class="buttonrow"><button data-pathdiff-exam7-lecture="'+safe(x.lecture)+'">📖 Lecture '+safe(x.lecture)+' learning & diseases</button><button data-pathdiff-exam7-atlas="'+safe(x.id)+'">🔬 '+(exam7Specimen(x)?'Matching specimen card':'Browse lecture specimen atlas')+'</button><button data-pathdiff-exam7-rounds="'+safe(x.lecture)+'">🩺 More cases from this lecture</button></div>'+(revealed?'<small>Source: '+safe(x.ref)+' · Photo requested: '+safe(x.photoToAdd||'not specified')+'</small>':'<small>Answers stay hidden until you complete the differential comparison.</small>')+'</div>':'')+\n'<div style="background:#f1f7ff;border-left:4px solid #7798cb;padding:10px;border-radius:8px;margin:10px 0"><b>'+safe(x.species)+' — presenting history</b><p>'+rich(x.history)+'</p><b>Gross lesion / localization:</b> '+rich(x.gross)+'</div>'+
  '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);gap:12px;align-items:start;max-width:100%;overflow-wrap:anywhere"><div>'+
  '<h4 style="margin:4px 0">1. Build your differential list</h4><p class="tiny">Select every reasonable possibility. More than one diagnosis may fit early findings.</p>'+
  x.options.map((o,i)=>'<button data-pathdiff-toggle="'+i+'" aria-pressed="'+shortlist.includes(i)+'" style="display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border:2px solid '+(shortlist.includes(i)?'#4784b5':'#dbe4ef')+';background:'+(shortlist.includes(i)?'#ecf6ff':'#fff')+';border-radius:10px">'+(shortlist.includes(i)?'☑ ':'☐ ')+safe(o.name)+'</button>').join('')+
@@ -651,6 +673,10 @@ function init(api){
  const button=ev.target.closest('[data-pathdiff-flash-flip],button');if(!button||!Object.keys(button.dataset).some(k=>k.startsWith('pathdiff')))return;
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
+ if(d.pathdiffExam7Rounds!==undefined)return openExam7Rounds(d.pathdiffExam7Rounds==='all'?null:d.pathdiffExam7Rounds);
+ if(d.pathdiffAllRounds!==undefined){roundsOnly=false;filter='all';shuffledIds=[];return menu();}
+ if(d.pathdiffExam7Lecture!==undefined)return openExam7Lecture(d.pathdiffExam7Lecture);
+ if(d.pathdiffExam7Atlas!==undefined){const x=allCases().find(c=>c.id===d.pathdiffExam7Atlas);if(!x)return view();const specimen=exam7Specimen(x);return specimen?window.VPQ_PATH_EXAM7?.openCard?.(specimen.id):window.VPQ_PATH_EXAM7?.studyLecture?.(x.lecture);}
  if(d.pathdiffStudyStart!==undefined)return startFlash('lecture');
  if(d.pathdiffShowCases!==undefined){const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;section?.scrollIntoView?.({block:'start',behavior:'smooth'});return;}
  if(d.pathdiffLibrary!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.photoLibrary?.();
@@ -719,8 +745,8 @@ function init(api){
  reader.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,780/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*k));c.height=Math.max(1,Math.round(img.height*k));c.getContext('2d').drawImage(img,0,0,c.width,c.height);const ok=updatePhoto(d.pathdiffPhoto,c.toDataURL('image/jpeg',0.67));if(ok)view();else modal('Image too large','<p>Browser storage is full. Please resize the image and try again.</p><button data-pathdiff-list="1">Return to cases</button>')};img.src=String(reader.result)};reader.readAsDataURL(file);
  },true);
 }
-function openCase(id){if(allCases().some(x=>x.id===id)){current=id;return view()}return menu()}
+function openCase(id){if(allCases().some(x=>x.id===id)){current=id;return prepareCase(id)}return menu()}
 function draftPhoto(id){return photoStore()[id]||''}
 function draftText(id){return {}}
-return {init,start,cases:data,openCase,draftPhoto,draftText,openConditionInventory:conditionIndex,openLectureFlashcards:(api,lecture)=>{ui=api;conditionLecture=String(lecture);startFlash('lecture')},showConditions:(lecture)=>{if(lecture)conditionLecture=String(lecture);conditionIndex()}};
+return {init,start,cases:data,openCase,openExam7Rounds:(lecture)=>openExam7Rounds(lecture),exam7Matches,draftPhoto,draftText,openConditionInventory:conditionIndex,openLectureFlashcards:(api,lecture)=>{ui=api;conditionLecture=String(lecture);startFlash('lecture')},showConditions:(lecture)=>{if(lecture)conditionLecture=String(lecture);conditionIndex()}};
 })();
