@@ -338,7 +338,7 @@ function lectureConditions(){const owner=window.VPQ_NECROPSY_OWNER_PUBLISH;retur
 function norm(t){return String(t||'').toLowerCase().replace(/[–—-]/g,' ').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
 function relatedCases(lecture,title){
  const t=norm(title);
- return allCases().filter(c=>c.lecture===lecture&&((CASE_MATCH[c.id]||[]).some(alias=>t.includes(norm(alias)))||((c.id.startsWith('custom-')||c.id.startsWith('n3'))&&((norm(c.title).includes(t)&&t.length>8)||(t.includes(norm(c.best))&&norm(c.best).length>8)||(norm(c.morph).includes(t)&&t.length>12)))));
+ return [...new Map([...allCases().filter(c=>c.lecture===lecture&&((CASE_MATCH[c.id]||[]).some(alias=>t.includes(norm(alias)))||((c.id.startsWith('custom-')||c.id.startsWith('n3'))&&((norm(c.title).includes(t)&&t.length>8)||(t.includes(norm(c.best))&&norm(c.best).length>8)||(norm(c.morph).includes(t)&&t.length>12))))),...exam7Matches(lecture,title)].map(c=>[c.id,c])).values()];
 }
 /* Exam 7 patient-rounds links reuse the lecture and specimen objects already in the game. */
 function exam7Matches(lecture,title){
