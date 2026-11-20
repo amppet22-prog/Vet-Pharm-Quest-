@@ -826,7 +826,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="reception-modular-assets.js?v=20261111-cat-hides21"></script>
 <script src="reception-customization.js?v=20261120-unified-collection3"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
-<script src="reception-shadowbox-phase-a.js?v=20261120-logo-center-1"></script>
+<script src="reception-shadowbox-phase-a.js?v=20261120-sofa-slot2"></script>
 <script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
@@ -1686,6 +1686,7 @@ function vpqDrawFurniture(){
  const scene=$('scene');
  for(const u of vpqFurnitureItems){
   if(activeRoom!==u.levelRoom||!state.upgrades.includes(u.id)||state.furnitureHidden.includes(u.id)||(u.furnitureKind==='flag'&&state.activeFlag!==u.id))continue;
+  if(activeRoom==='reception'&&state.receptionView==='isometric'&&u.furnitureKind==='sofa')continue;
   const p=state.furniturePositions[u.id]||{x:u.furnitureX,y:u.furnitureY};
   const item=document.createElement('button');item.type='button';item.className='vpq-room-furniture vpq-furniture-'+u.furnitureKind;
   item.dataset.vpqFurnitureObject=u.id;if(u.flagType)item.dataset.flagType=u.flagType;item.title=u.label+' · open Furniture Studio';
@@ -1707,7 +1708,7 @@ function vpqOpenFurnitureStudio(room){
  const html='<div class="buttonrow"><button data-furniture-exit="1">← Return to room</button><button data-furniture-shop="1">🪙 Furniture shop</button></div><p>Choose a room. Earn the required level, buy furniture with coins, then arrange or hide your purchased pieces. Your layout is saved.</p><div class="buttonrow">'+buttons+'</div><p><b>⭐ Level '+level+' · '+state.coins+' coins</b></p>'+
  selected.map(u=>{
  const owned=state.upgrades.includes(u.id),hidden=state.furnitureHidden.includes(u.id);
- const action=owned?'<div class="buttonrow"><button data-furniture-move="'+u.id+'" data-furniture-direction="left">←</button><button data-furniture-move="'+u.id+'" data-furniture-direction="up">↑</button><button data-furniture-move="'+u.id+'" data-furniture-direction="down">↓</button><button data-furniture-move="'+u.id+'" data-furniture-direction="right">→</button><button data-furniture-toggle="'+u.id+'">'+(hidden?'Show':'Hide')+'</button><button data-furniture-reset="'+u.id+'">Reset position</button></div>':
+ const action=owned&&u.furnitureKind==='sofa'&&u.levelRoom==='reception'?'<div class="buttonrow"><button data-furniture-sofa="'+u.id+'">'+(state.activeReceptionLevelSofa===u.id?'✓ Equipped on Reception Couch':'🛋️ Equip on Reception Couch')+'</button></div>':owned?'<div class="buttonrow"><button data-furniture-move="'+u.id+'" data-furniture-direction="left">←</button><button data-furniture-move="'+u.id+'" data-furniture-direction="up">↑</button><button data-furniture-move="'+u.id+'" data-furniture-direction="down">↓</button><button data-furniture-move="'+u.id+'" data-furniture-direction="right">→</button><button data-furniture-toggle="'+u.id+'">'+(hidden?'Show':'Hide')+'</button><button data-furniture-reset="'+u.id+'">Reset position</button></div>':
  '<button data-furniture-buy="'+u.id+'" '+(level<u.levelRequired||state.coins<u.price?'disabled':'')+'>'+(level<u.levelRequired?'🔒 Level '+u.levelRequired:'Buy '+u.price+' 🪙')+'</button>';
  return '<article class="vpq-furniture-shoprow"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(u.themeGroup)+' · '+escapeHtml(u.levelRoom)+' · Level '+u.levelRequired+' · '+u.price+' 🪙</small>'+action+'</article>';
  }).join('');
@@ -1736,7 +1737,7 @@ function vpqRewardShowroom(theme){
  const heading='<h3 class="vpq-lvl-theme-title">'+escapeHtml(vpqRewardShowroomTheme)+'</h3>'+(flagSection?'<p>Flags are free and available at Level 1, regardless of study progress. Claim any flag and display one at a time in Reception.</p>':classicSection?'<p>These are the original level-up decorations plus selected existing shop items now marked as level exclusives. Previously purchased items stay owned.</p>':'<p>These are <strong>level-unlock exclusives</strong>, not ordinary shop furniture. Purchased items can be positioned in their designated room.</p>');
  const cards=group.map(u=>{
  const owned=state.upgrades.includes(u.id),locked=level<(u.levelRequired||1),short=state.coins<u.price,flag=u.furnitureKind==='flag';
- let action=owned?(flag?'<button data-vpqlvl-flag="'+u.id+'">'+(state.activeFlag===u.id?'✓ Displayed':'Display flag')+'</button>':u.furnitureKind?'<button data-vpqlvl-place="'+u.levelRoom+'">🛋️ Arrange room</button>':'<button disabled>✓ Owned · in your clinic</button>'):
+ let action=owned?(flag?'<button data-vpqlvl-flag="'+u.id+'">'+(state.activeFlag===u.id?'✓ Displayed':'Display flag')+'</button>':u.furnitureKind==='sofa'&&u.levelRoom==='reception'?'<button data-vpqlvl-sofa="'+u.id+'">'+(state.activeReceptionLevelSofa===u.id?'✓ On Reception Couch':'🛋️ Equip on Couch')+'</button>':u.furnitureKind?'<button data-vpqlvl-place="'+u.levelRoom+'">🛋️ Arrange room</button>':'<button disabled>✓ Owned · in your clinic</button>'):
  '<button data-vpqlvl-buy="'+u.id+'" '+(locked||short?'disabled':'')+'>'+(locked?'🔒 Reach Level '+u.levelRequired:short?'Earn '+u.price+' coins':u.price?'Unlock · '+u.price+' 🪙':'Claim free')+'</button>';
  const swatch=window.VPQ_REWARD_ART?.art(u)||'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.furnitureGlyph||'🎁')+'</span>';
  return '<article class="vpq-lvl-reward-card"><div class="vpq-lvl-thumb">'+swatch+'</div><div class="vpq-lvl-item-info"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(u.levelRoom?vpqRewardRoomLabel(u.levelRoom):'Clinic decoration')+' · '+(flag?'Free for everyone':'⭐ Level '+u.levelRequired+' exclusive · '+u.price+' 🪙')+'</small><small>'+(owned?'✅ Owned':locked?'🔒 Level locked':short?'🪙 Need more coins':'✨ Available to unlock')+'</small></div>'+action+'</article>';
@@ -1753,7 +1754,7 @@ function vpqUnifiedCollection(){
  const render=(u,isOriginal)=>{
   const path=window.VPQ_RECEPTION_MODULAR_ASSETS?.manifest?.[u.id]?.src;
   const visual=isOriginal?(path?'<img loading="lazy" src="'+escapeHtml(path)+'" alt="'+escapeHtml(u.name)+'">':'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.icon||'🎀')+'</span>'):(art?.art(u)||'<span class="vpq-lvl-item-emoji">'+escapeHtml(u.deco||'🎁')+'</span>');
-  const action=isOriginal?'<button data-vpqlvl-reception="1">🎨 Equip in Reception Studio</button>':u.furnitureKind==='flag'?'<button data-vpqlvl-flag="'+escapeHtml(u.id)+'">🏳️ Display flag</button>':u.furnitureKind?'<button data-vpqlvl-place="'+escapeHtml(u.levelRoom||'reception')+'">🛋️ Arrange room</button>':'<button data-vpqlvl-shop="1">View rewards</button>';
+  const action=isOriginal?'<button data-vpqlvl-reception="1">🎨 Equip in Reception Studio</button>':u.furnitureKind==='flag'?'<button data-vpqlvl-flag="'+escapeHtml(u.id)+'">🏳️ Display flag</button>':u.furnitureKind==='sofa'&&u.levelRoom==='reception'?'<button data-vpqlvl-sofa="'+escapeHtml(u.id)+'">'+(state.activeReceptionLevelSofa===u.id?'✓ On Couch':'🛋️ Equip on Couch')+'</button>':u.furnitureKind?'<button data-vpqlvl-place="'+escapeHtml(u.levelRoom||'reception')+'">🛋️ Arrange room</button>':'<button data-vpqlvl-shop="1">View rewards</button>';
   return '<article class="vpq-lvl-reward-card"><div class="vpq-lvl-thumb">'+visual+'</div><div class="vpq-lvl-item-info"><b>'+escapeHtml(u.name||u.label)+'</b><small>'+(isOriginal?'🎀 Reception Studio':u.furnitureKind?'⭐ '+escapeHtml(vpqRewardRoomLabel(u.levelRoom)):'🌿 Classic reward')+' · Owned ✓</small></div>'+action+'</article>';
  };
  const section=(title,array,originalType)=>'<h3 class="vpq-lvl-collection-heading">'+title+' ('+array.length+')</h3><div class="vpq-lvl-reward-grid">'+(array.map(u=>render(u,originalType)).join('')||'<p class="small">No items in this collection yet.</p>')+'</div>';
@@ -1778,6 +1779,7 @@ $('modalBody').addEventListener('click',e=>{
  if(d.vpqlvlPlace){vpqOpenFurnitureStudio(d.vpqlvlPlace);return}
  if(d.vpqlvlShop){closeModal();vpqRewardCategory='Level Rewards';renderUpgrades();$('upgradeList')?.closest('details')?.setAttribute('open','');return}
  if(d.vpqlvlBuy){const u=upgrades.find(u=>u.id===d.vpqlvlBuy);if(!u)return;buyUpgrade(u.id);if(u.furnitureKind==='flag'&&!state.activeFlag&&state.upgrades.includes(u.id)){state.activeFlag=u.id;persist();renderRoom()}vpqRewardShowroom();return}
+ if(d.vpqlvlSofa){if(state.upgrades.includes(d.vpqlvlSofa)){state.activeReceptionLevelSofa=d.vpqlvlSofa;state.furnitureHidden=state.furnitureHidden.filter(x=>x!==d.vpqlvlSofa);persist();renderRoom()}if($('modalTitle').textContent.includes('My Collection'))vpqUnifiedCollection();else vpqRewardShowroom();return}
  if(d.vpqlvlFlag){if(state.upgrades.includes(d.vpqlvlFlag)){state.activeFlag=d.vpqlvlFlag;persist();renderRoom()}if($('modalTitle').textContent.includes('My Collection'))vpqUnifiedCollection();else vpqRewardShowroom();return}
  if(d.vpqlvlUnflag){state.activeFlag='';persist();renderRoom();vpqRewardShowroom()}
 },true);
@@ -1800,10 +1802,11 @@ $('modalBody').addEventListener('click',ev=>{
  if(d.furnitureRoom)return vpqOpenFurnitureStudio(d.furnitureRoom);
  if(d.furnitureExit)return closeModal();
  if(d.furnitureShop){closeModal();vpqRewardCategory='Furniture';renderUpgrades();$('upgradeList')?.closest('details')?.setAttribute('open','');return}
- const id=d.furnitureMove||d.furnitureToggle||d.furnitureReset||d.furnitureBuy;
+ const id=d.furnitureSofa||d.furnitureMove||d.furnitureToggle||d.furnitureReset||d.furnitureBuy;
  const u=vpqFurnitureItems.find(x=>x.id===id);if(!u)return;
  if(d.furnitureBuy){buyUpgrade(id);return vpqOpenFurnitureStudio()}
  if(!state.upgrades.includes(id))return;
+ if(d.furnitureSofa){state.activeReceptionLevelSofa=id;state.furnitureHidden=state.furnitureHidden.filter(x=>x!==id);persist();renderRoom();return vpqOpenFurnitureStudio('reception')}
  if(d.furnitureToggle)state.furnitureHidden=state.furnitureHidden.includes(id)?state.furnitureHidden.filter(x=>x!==id):[...state.furnitureHidden,id];
  if(d.furnitureReset)delete state.furniturePositions[id];
  if(d.furnitureMove){const p=state.furniturePositions[id]||{x:u.furnitureX,y:u.furnitureY};const step=5;
