@@ -509,14 +509,43 @@ review=function(){
  const active=exam1.length?exam1:selection;
  const header=document.createElement('div');
  header.className='vpqArcadeCourseBridge';
- const detail=exam1.length?'Exam 1 mini-games use '+exam1.join(', '):'This Arcade contains Exam 1 question banks (L1–9). Your selected Exam 2 lecture uses its own clinical MCQs in the Learning Center.';
+ const detail=exam1.length?'Exam 1 mini-games use '+exam1.join(', '):'Exam 2 lectures use their own original patient-question bank in the new Arcade challenge; Exam 1-specific games remain available.';
  header.innerHTML='<div><strong>🕹️ Arcade · Part of your Pharmacology course</strong><small>'+safe(detail)+'</small></div>'+
  '<div class="vpqArcadeCourseActions"><button type="button" data-vpqcourse="home">← Learning Center</button>'+
  '<button type="button" data-vpqcourse="flashcards">🧠 Flashcards</button>'+
  '<button type="button" data-vpqcourse="lesson">📖 Review lesson</button>'+
- '<button type="button" data-vpqcourse="cases">🩺 Patient cases</button></div>';
+ '<button type="button" data-vpqcourse="cases">🩺 Patient cases</button>'+
+ '<button type="button" data-vpqcourse="exam2">🎮 Exam 2 Challenge</button></div>';
  const tabs=document.getElementById('tabs');tabs?.parentNode?.insertBefore(header,tabs);
- header.addEventListener('click',e=>{const b=e.target.closest('[data-vpqcourse]');if(b)send(b.dataset.vpqcourse,selection[0]||'Lecture 1')});
+ header.addEventListener('click',e=>{const b=e.target.closest('[data-vpqcourse]');if(!b)return;if(b.dataset.vpqcourse==='exam2')return vpqExam2Play();send(b.dataset.vpqcourse,selection[0]||'Lecture 1')});
+ // Exam 2 uses existing vetted-in-course question entries, with normal Arcade XP and shared attempts.
+ let p2Deck=[],p2Position=0,p2Correct=0;
+ function vpqExam2Play(){
+  const source=window.VPQ_PHARM_NEXT?.questions||[];
+  const selected=window.VPQCurriculum?.getLectures?.()||[];
+  const chosen=selected.filter(x=>/^Lecture (1[1-9]|20)$/.test(x));
+  const available=source.filter(x=>chosen.includes(x.lecture)&&x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
+  tab='exam2challenge';round=null;
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.remove('active'));
+  if(!available.length){
+   $('screen').innerHTML='<h2>🎮 Exam 2 Clinical Challenge</h2><p>Choose Lecture 11–20 in the main Learning Center to use its questions here. The original Exam 1 Arcade still works from its tabs.</p>'+
+   '<button class="btn" id="vpqP2Back">← Learning Center</button>';
+   $('vpqP2Back').onclick=()=>send('home',chosen[0]||'Lecture 11');return;
+  }
+  p2Deck=vpqShuffle40(available).slice(0,Math.min(8,available.length));
+  p2Position=0;p2Correct=0;vpqExam2Step();
+ }
+ function vpqExam2Step(){
+  if(p2Position>=p2Deck.length){
+   $('screen').innerHTML='<h2>🏆 Exam 2 Challenge Complete</h2><div class="summary"><b>'+p2Correct+' / '+p2Deck.length+' correct</b><p>Your Arcade XP and missed-item history are saved; use flashcards to revisit mechanisms.</p></div>'+
+   '<div class="buttonrow"><button class="btn primary" id="vpqP2Again">↺ Another challenge</button><button class="btn" id="vpqP2Flash">🧠 Review flashcards</button><button class="btn" id="vpqP2Home">← Learning Center</button></div>';
+   $('vpqP2Again').onclick=vpqExam2Play;$('vpqP2Flash').onclick=()=>send('flashcards',p2Deck[0]?.lecture||'Lecture 11');$('vpqP2Home').onclick=()=>send('home',p2Deck[0]?.lecture||'Lecture 11');return;
+  }
+  const x=p2Deck[p2Position],lec=Number((x.lecture||'').replace('Lecture ',''));
+  const q={id:x.id,l:lec,k:x.topic||'Clinical Pharmacology',q:x.q,a:x.options,c:x.answer,why:x.why,pearl:x.reviewFlag||'Review species, indication, mechanism, monitoring and patient risk.'};
+  buildQuestion(q,{label:'Next patient',fn:ok=>{if(ok)p2Correct++;p2Position++;vpqExam2Step()}},
+   '<div class="section-title"><h2>🎮 Exam 2 · Clinical Challenge</h2><span class="chip">'+(p2Position+1)+' / '+p2Deck.length+'</span></div><p class="muted">Original course-linked questions · '+safe(x.lecture)+' · earn normal Arcade XP</p>');
+ }
  // Keep Arcade's existing scoring and rewards; offer recall of the specific missed question's lecture.
  const oldRecord=record;
  record=function(q,index){
