@@ -2503,7 +2503,7 @@ function actionForFocus(action,lec){
    if(drugMatchCount(id)<3)return showModal('🧩 Drug Match','<p>This lecture needs at least three distinct matching pairs before a useful game can start.</p><button data-vpqlfhome="1">← Pharmacology Learning Center</button>');
    setPending([id]);saveSelection();return launchGame('match')
   }
-  if(action==='battle'){setPending([id]);saveSelection();return launchGame('battle')}
+  if(action==='battle'){if(!/^Lecture [2-5]$/.test(id))return showLearning();setPending([id]);saveSelection();return launchGame('battle')}
   if(action==='mastery'){setPending([id]);saveSelection();return masteryScreen()}
  }
  function focusPanel(){
@@ -2527,7 +2527,7 @@ function actionForFocus(action,lec){
   btn('case','🐾 Patient Cases','Work through clinical reasoning and decisions.')+
   btn('arcade','🕹️ Exam Arcade',e2?'Exam 2 clinical challenge with XP and explanations.':'Exam 1 Professor Guide and Exam Boss rounds.')+
   btn('match','🧩 Drug Match',drugMatchCount(focus)+' available drug or mechanism pairs · practice after flashcards.')+
-  btn('battle','🦠 Bug Battles','Antibiotic resistance and pathogen challenges.')+'</div></div>'+
+  (/^Lecture [2-5]$/.test(focus)?btn('battle','🦠 Bug Battles','Optional antimicrobial resistance and pathogen challenges.'):'')+'</div></div>'+
   '<div class="vpqPharmFlowReview"><b>🔁 Your review queues</b><p><strong>'+due+'</strong> missed flashcards in '+escapeHtml(focus)+' · <strong>'+arcadeWeak+'</strong> Arcade misses across your history · <strong>'+professorWeak+'</strong> self-rated Professor Guide cards to review.</p><small>These are separate saved records, not a combined exam grade. Review by lecture or enter Arcade Missed Concepts.</small><div class="buttonrow"><button data-vpqlfroute="flash">🧠 Review flashcards</button><button data-vpqlfgame="review">📒 Arcade missed concepts</button></div></div>'+
   '<p class="vpqPharmFlowHelp">Understand → Recall → Apply → Assess is the recommended sequence, not a requirement. Arcade games and cases reinforce the same lecture content. Exam 1 and Exam 2 share the flashcard interface.</p></section>';
  }
@@ -2618,6 +2618,7 @@ function actionForFocus(action,lec){
   if(action==='flashcards')return actionForFocus('flash',target);
   if(action==='lesson')return actionForFocus('learn',target);
   if(action==='cases')return actionForFocus('case',target);
+  if(action==='clinical')return actionForFocus('clinical',target);
  },false);
  // Replace route functions rather than layering another menu inside the prior menu.
  vpqLearningHub=function(){menuState.pending=null;showLearning()};
