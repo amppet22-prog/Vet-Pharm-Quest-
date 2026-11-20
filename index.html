@@ -3654,7 +3654,7 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  if(mode==='menu')return showModal('★ Exam 2 · High-Yield Review · Lectures 10–20',menu+'<div class="buttonrow"><button data-vpqnewpharm-menu="1">← All Exam 2 lectures</button></div>');
  const d=mode==='drugs'?priority:mode==='objectives'?objectives:questions;
  const at=Math.min(n,Math.max(d.length-1,0)),x=d[at];
- if(!x)return showModal('★ Exam 2 · High-Yield Review',selector+'<p>No matching '+(mode==='drugs'?'priority drug walkthroughs':mode==='objectives'?'instructor objectives':'practice questions')+' for '+escapeHtml(lecture==='all'?'this exam':lecture)+'. Try another lecture or return to the High-Yield menu.</p><button data-vpqhy-mode="menu">← High-Yield menu</button>');
+ if(!x)return showModal('★ Exam 2 · High-Yield Review',selector+'<p>No matching '+(mode==='drugs'?'priority drug walkthroughs':mode==='objectives'?'instructor objectives':'practice questions')+' for '+escapeHtml(lecture==='all'?'this exam':lecture)+'. Try another lecture or open its questions.</p>'+(mode!=='questions'?'<button data-vpqhy-mode="questions" data-vpqhy-lecture="'+escapeHtml(lecture)+'">🩺 Open '+escapeHtml(lecture==='all'?'all lectures':lecture)+' practice questions</button>':'')+'<button data-vpqhy-mode="menu">← High-Yield menu</button>');
  let html=selector+'<p class="vpq-case-meta">'+(at+1)+' / '+d.length+' · '+escapeHtml(lecture==='all'?'Lectures 10–20':lecture)+'</p>';
  if(mode==='drugs'){
  const t=x.teachingDepth||{},c=x.clinicalMicrocase||{};
