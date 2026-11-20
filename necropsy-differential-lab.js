@@ -29,7 +29,7 @@ function caseSequence(){
  return filtered.sort((a,b)=>(order.get(a.id)??Infinity)-(order.get(b.id)??Infinity));
 }
 function shuffleCases(){shuffledIds=shuffleArray(allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(filter==='all'||x.lecture===filter)).map(x=>x.id));current=null;phase=0;leading=-1;grossLeading=-1;shortlist=[];leadHint=false;caseReward=null;optionOrder=[];return menu();}
-function prepareCase(id){current=id;extraAnswer=-1;extraOpen=false;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
+function prepareCase(id){current=id;extraAnswer=-1;extraOpen=false;extraAnswer=-1;extraOpen=false;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
 function menu(){
  const group=EXAM_GROUPS.find(g=>g.id===(groupForLecture(conditionLecture)?.id||'7'))||EXAM_GROUPS[6];
  const lectures=Array.from({length:group.end-group.start+1},(_,i)=>String(group.start+i));
@@ -657,6 +657,20 @@ function openCaseAtlas(index){
  if(/^(59|60|61|62|63|64|65|66)$/.test(conditionLecture)&&window.VPQ_NECROPSY_HANDBOOK?.openExam6Disease){return window.VPQ_NECROPSY_HANDBOOK.openExam6Disease(conditionLecture,match.i)}
  return conditionDetail();
 }
+const EXTRA_QUESTION_LINKS={'n68-feedlot':'N2','n68-rabies':'N5','n69-cerebellar-hypo':'N9','n70-larynx':'N11','ear79-hematoma':'A3','r76-granulosa':'F6','r77-mummy':'F2','e78-glaucoma':'E2'};
+function extraQuestionFor(x){
+ const id=EXTRA_QUESTION_LINKS[x.id]||x.extraQuestionId;
+ return id?(window.VPQ_PATH_EXAM7_SBA||[]).find(q=>q.sourceCaseId===id)||null:null;
+}
+function extraQuestionHTML(x){
+ const q=extraQuestionFor(x);if(!q)return '';
+ const right=q.options.findIndex(o=>o.role==='best');
+ return '<details id="pathdiff-extra-question" '+(extraOpen?'open':'')+' style="margin:13px 0;border:1px solid #b8d4e9;border-radius:10px;padding:11px;background:#f8fbff"><summary style="cursor:pointer;font-weight:800">📝 Extra practice question <small style="font-weight:400">· Optional multiple choice</small></summary>'+
+ '<div style="margin-top:10px"><p><b>'+safe(q.originalQuestion||'Choose the best response.')+'</b></p><p class="tiny">Based on the patient and lesion findings above.</p>'+
+ q.options.map((o,i)=>'<button data-pathdiff-extra-answer="'+i+'" '+(extraAnswer>=0?'disabled':'')+' style="display:block;text-align:left;width:100%;margin:6px 0;padding:10px;border:2px solid '+(extraAnswer<0?'#cedbe9':i===right?'#65ae7b':i===extraAnswer?'#d58b3e':'#d3e0ec')+';border-radius:9px;background:'+(extraAnswer>=0&&i===right?'#e5f7e9':i===extraAnswer?'#fff0df':'white')+'">'+safe(String.fromCharCode(65+i)+'. '+o.name)+'</button>').join('')+
+ (extraAnswer>=0?'<div style="border:1px solid #bdd6c8;border-radius:8px;padding:10px"><b>'+(extraAnswer===right?'Correct ✓':'Not quite — review the correct answer')+'</b><p>'+safe(q.mechanism||'')+'</p></div><button data-pathdiff-extra-reset="1">↺ Try again</button>':'')+
+ '</div></details>';
+}
 function view(){
  const baseCase=allCases().find(v=>v.id===current);if(!baseCase)return menu();
  const source={...baseCase,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};
@@ -698,6 +712,9 @@ function init(api){
  const d=button.dataset;
  if(d.pathdiffListLecture!==undefined){filter=conditionLecture;caseExam=groupForLecture(conditionLecture)?.id||'all';roundsOnly=false;practiceMode='all';shuffledIds=[];return menu();}
  if(d.pathdiffListExam!==undefined){filter='all';caseExam=groupForLecture(conditionLecture)?.id||'all';roundsOnly=false;practiceMode='all';shuffledIds=[];return menu();}
+ if(d.pathdiffEditCase!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor?.('case',d.pathdiffEditCase);
+ if(d.pathdiffExtraAnswer!==undefined){if(extraAnswer<0){extraAnswer=Number(d.pathdiffExtraAnswer);extraOpen=true;return view()}return;}
+ if(d.pathdiffExtraReset!==undefined){extraAnswer=-1;extraOpen=true;return view();}
  if(d.pathdiffNavleQuiz!==undefined)return window.VPQ_NECROPSY_QUIZ?.start?.(d.pathdiffNavleQuiz==='1'?null:d.pathdiffNavleQuiz);
  if(d.pathdiffExam7Rounds!==undefined)return openExam7Rounds(d.pathdiffExam7Rounds==='all'?null:d.pathdiffExam7Rounds);
  if(d.pathdiffAllRounds!==undefined){roundsOnly=false;caseExam='all';practiceMode='all';filter='all';shuffledIds=[];return menu();}
@@ -757,7 +774,7 @@ function init(api){
  if(d.pathdiffFilter!==undefined){filter=d.pathdiffFilter;return menu()}
  if(d.pathdiffOpen!==undefined)return prepareCase(d.pathdiffOpen)
  if(d.pathdiffReturn!==undefined)return window.VPQ_PATH_EXAM7?.start('histo');
- if(d.pathdiffReset!==undefined){phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const currentRecord=allCases().find(x=>x.id===current);optionOrder=shuffleArray((currentRecord?.options||[]).map((_,i)=>i));return view()}
+ if(d.pathdiffReset!==undefined){extraAnswer=-1;extraOpen=false;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const currentRecord=allCases().find(x=>x.id===current);optionOrder=shuffleArray((currentRecord?.options||[]).map((_,i)=>i));return view()}
  if(d.pathdiffToggle!==undefined){const i=Number(d.pathdiffToggle);shortlist=shortlist.includes(i)?shortlist.filter(v=>v!==i):[...shortlist,i];return view()}
  if(d.pathdiffHisto!==undefined){if(phase===0)grossLeading=leading;phase=Math.max(phase,1);return view()}
  if(d.pathdiffCompare!==undefined){if(phase<1)return;const el=api.body.querySelector('#pathdiff-lead');if(el)leading=Number(el.value);if(leading<0){leadHint=true;return view()}leadHint=false;const base=allCases().find(v=>v.id===current);const record={...base,...(window.VPQ_NECROPSY_OWNER_PUBLISH?.getText?.('case',current)||{})};const originalChoice=record.options?.[optionOrder[leading]];const correct=originalChoice?.role==='best'||String(originalChoice?.name||'').trim().toLowerCase()===String(record.best||'').trim().toLowerCase();if(phase<2&&typeof ui?.awardQuestion==='function')caseReward=ui.awardQuestion('necropsy-differential',String(current),correct);phase=2;return view()}
