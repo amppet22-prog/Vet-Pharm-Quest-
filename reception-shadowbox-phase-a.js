@@ -144,7 +144,15 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    sofaVisual+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
    window.VPQ_RECEPTION_MODULAR_ASSETS.render(state,'isometric','nonrug')+
-   '<g aria-label="Reception sign"><rect x="377" y="16" width="246" height="47" rx="17" fill="#fff8fb" stroke="#aa8bbd" stroke-width="3"/><text x="500" y="36" text-anchor="middle" font-size="18" font-weight="900" font-family="sans-serif" fill="#405a80">VET PHARM QUEST</text><text x="500" y="52" text-anchor="middle" font-size="12" font-weight="800" font-family="sans-serif" fill="#a477a0">WELCOME TO RECEPTION</text></g>'+ 
+   '<g aria-label="Vet Pharm Quest cozy reception banner">'+
+   '<path d="M377 24Q377 13 391 13H609Q623 13 623 24V57Q623 65 612 65H388Q377 65 377 57Z" fill="#fff9f1" stroke="#ab91c4" stroke-width="3"/>'+
+   '<path d="M390 15Q418 4 445 15T500 15T555 15T610 15" fill="none" stroke="#f6bad0" stroke-width="5" stroke-linecap="round"/>'+
+   '<path d="M391 62Q419 72 446 62T500 62T555 62T608 62" fill="none" stroke="#a2dcc5" stroke-width="4" stroke-linecap="round"/>'+
+   '<circle cx="396" cy="38" r="15" fill="#fbe0ec"/><circle cx="604" cy="38" r="15" fill="#e2f5e7"/>'+
+   '<text x="396" y="44" text-anchor="middle" font-size="17">🐾</text><text x="604" y="44" text-anchor="middle" font-size="17">🐾</text>'+
+   '<text x="500" y="36" text-anchor="middle" font-size="17" font-weight="900" font-family="sans-serif" fill="#4b658a">VET PHARM QUEST</text>'+
+   '<text x="500" y="52" text-anchor="middle" font-size="11" font-weight="800" font-family="sans-serif" fill="#ad7e9f">♡ WELCOME, FUTURE VETS! ♡</text>'+
+   '<circle cx="379" cy="15" r="3" fill="#eeb7cf"/><circle cx="621" cy="15" r="3" fill="#eeb7cf"/></g>'+ 
 
    '</svg>';
  }
