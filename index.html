@@ -2464,7 +2464,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
 (function(){
  const curriculum=window.VPQCurriculum;
  if(!curriculum)return;
- const menuState={pending:null,notice:''};
+ const menuState={pending:null,notice:'',focus:null};
  const valid=new Set(curriculum.courses.map(x=>x[0]));
  function selected(){return curriculum.getLectures().filter(x=>valid.has(x))}
  function pending(){return Array.isArray(menuState.pending)?menuState.pending:selected()}
@@ -2479,6 +2479,40 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   master27.selected=curriculum.setLectures(pending());save27();menuState.notice='Selection saved.';
   renderCount();return true;
  }
+ function focusLecture(){
+  const list=curriculum.courses.map(x=>x[0]);
+  if(list.includes(menuState.focus))return menuState.focus;
+  const saved=selected().find(x=>list.includes(x));
+  return menuState.focus=saved||list[0];
+ }
+ function actionForFocus(action,lec){
+  const id=lec||focusLecture();
+  if(action==='flash'){vpqExam2QuickRecall?.select?.(id);return vpqExam2QuickRecall?.menu?.()}
+  if(action==='learn'){if(vpqPharmNext?.lectures?.some(x=>x.id===id))return vpqPharmNextLesson(id);return launch('learn',id)}
+  if(action==='clinical'){if(/^Lecture (1[1-9]|20)$/.test(id))return vpqExam2HighYield('questions',id);return launch('quiz',id)}
+  if(action==='prof'){if(/^Lecture (1[1-9]|20)$/.test(id))return vpqExam2HighYield('objectives',id);setPending([id]);saveSelection();return launchGame('guide')}
+  if(action==='case'){setPending([id]);saveSelection();return openCases('Pharmacology')}
+  if(action==='arcade'){setPending([id]);saveSelection();return launchGame('exam-center')}
+  if(action==='match'){return launchGame('match')}
+  if(action==='mastery'){setPending([id]);saveSelection();return masteryScreen()}
+ }
+ function focusPanel(){
+  const focus=focusLecture(),e2=/^Lecture (1[1-9]|20)$/.test(focus);
+  const n=vpqExam2QuickRecall?.bank?.filter(c=>c.lecture===focus).length||0;
+  const btn=(action,title,desc,cls='')=>'<button type="button" class="vpqPharmFlowTile '+cls+'" data-vpqlfroute="'+action+'"><b>'+title+'</b><small>'+desc+'</small></button>';
+  return '<section class="vpqPharmFlowHome"><div class="vpqPharmFlowHead"><div><b>💊 Pharmacology Learning Center</b><p>One lecture, one learning path. Choose a stage—or jump straight to the practice you need.</p></div>'+
+  '<label>Current lecture<select data-vpqlffocus="1" aria-label="Choose Pharmacology lecture">'+curriculum.courses.map(([name,,desc])=>'<option value="'+escapeHtml(name)+'" '+(name===focus?'selected':'')+'>'+escapeHtml(name+' · '+desc)+'</option>').join('')+'</select></label></div>'+
+  '<div class="vpqPharmFlowSteps">'+
+  btn('learn','1 · 📖 Understand','Lesson, physiology, drug actions and clinical WHY.')+
+  btn('flash','2 · 🧠 Remember',n+' focused flashcards, missed-card review.','vpqPharmFlowFeatured')+
+  btn('clinical','3 · 🩺 Apply','Patient-style questions with explanation.')+
+  btn('mastery','4 · 🎓 Assess','Independent mastery and tracked weak points.')+'</div>'+
+  '<div class="vpqPharmFlowLink"><b>More ways to practice this lecture</b><div>'+
+  btn('prof','📋 Professor Guide',e2?'Instructor objectives for this lecture.':'Course-style recall in the Arcade.')+
+  btn('case','🐾 Patient Cases','Work through clinical reasoning and decisions.')+
+  btn('arcade','🕹️ Exam Arcade','Selected-lecture Exam Center and challenges.')+'</div></div>'+
+  '<p class="vpqPharmFlowHelp">Understand → Recall → Apply → Assess is the recommended sequence, not a requirement. Arcade games and cases are practice extensions—not separate courses. Exam 1 and Exam 2 share the flashcard deck.</p></section>';
+ }
  function showLearning(){
   const cur=pending(),list=curriculum.courses.map(([lec,code,desc])=>{
     const q=dataStudy().filter(x=>x.lecture===lec).length;
@@ -2486,16 +2520,16 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
     const quick=vpqExam2QuickRecall?.bank?.filter(x=>x.lecture===lec).length||0;
     return '<div class="vpqLFrow"><label><input type="checkbox" data-vpqlfcheck="'+escapeHtml(lec)+'" '+(cur.includes(lec)?'checked':'')+'><span><b>'+escapeHtml(lec)+'</b><small>'+escapeHtml(desc)+' · '+quick+' quick cards · '+guided+' guided cards · '+q+' exam Q</small></span></label><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="learn">📖 Learn</button><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="flash">🧠 Flashcards</button><button data-vpqlfsingle="'+escapeHtml(lec)+'" data-vpqlfsinglemode="quiz">🩺 Test</button></div>';
   }).join('');
-  showModal('📖 Learning Lab · Select → Save → Start',
-   '<p>Choose a lecture, then use <b>Learn</b>, <b>Recall Cards</b>, or <b>Test</b> on that row. These shortcuts work immediately; Save Selection is for multi-lecture rounds.</p>'+vpqPharmUnifiedPath()+
-   '<div class="infobox"><div class="vpqLFhead"><b>Choose Pharmacology lectures</b><span id="vpqLFCount"></span></div><div class="vpqLFlist">'+list+'</div><p id="vpqLFStatus" role="status" aria-live="polite"></p><div class="buttonrow"><button id="vpqLFSave" data-vpqlfsave="1">💾 Save Selection</button><button data-vpqlfall="1">Select all</button><button data-vpqlfclear="1">Clear selections</button></div></div>'+
+  showModal('💊 Pharmacology · Learning Center',
+   focusPanel()+
+   '<details class="vpqPharmFlowDetails"><summary>📚 Multi-lecture study · select and save several lectures</summary><p class="tiny">Choose several lectures here only when you want one mixed study round or a multi-lecture Arcade session. The single-lecture selector above does not alter your saved collection.</p><div class="infobox"><div class="vpqLFhead"><b>Choose Pharmacology lectures</b><span id="vpqLFCount"></span></div><div class="vpqLFlist">'+list+'</div><p id="vpqLFStatus" role="status" aria-live="polite"></p><div class="buttonrow"><button id="vpqLFSave" data-vpqlfsave="1">💾 Save Selection</button><button data-vpqlfall="1">Select all</button><button data-vpqlfclear="1">Clear selections</button></div></div>'+
    '<div class="vpqLFsteps"><h3>Study selected lectures together</h3><p>These use your saved multi-lecture selection. <b>Guided recall</b> reveals the physiological WHY; <b>Learn + Apply</b> mixes concepts and questions; <b>Mastery</b> tests independently.</p><div class="buttonrow"><button data-vpqlflaunch="learn">▶ Guided recall</button><button data-vpqlflaunch="mixed">🩺 Learn + Apply</button><button data-vpqlfmastery="1">🏆 Mastery / Exam Testing</button><button data-vpqlfstudio="1">📖 Guided Learning Studio</button><button data-vpqlfexam2="1">📚 Detailed Exam 2 lessons</button></div></div>'+
    '<h3>Targeted games</h3><div class="vpq-gamegrid">'+[
      ['match','🧩 Drug Match','Learn class, name and target'],
      ['battle','🦠 Bug Battles','Reinforce antibiotic resistance and coverage'],
      ['guide','📚 Professor Guide','Course-style recall questions']
    ].map(([id,name,desc])=>'<button data-vpqlfgame="'+id+'"><b>'+name+'</b><small>'+desc+'</small></button>').join('')+'</div>'+
-   '<p class="tiny">Questions are finite and course alignment is still under audit. A saved lecture focus is shared with the Arcade. Some specialized games have narrower banks.</p>');
+   '<p class="tiny">Professor Guide, Drug Match and Bug Battles use specialized question banks; not all lectures have equal coverage. Your existing Arcade and case progress is preserved.</p></details>');
   renderCount();
  }
  function masteryScreen(){
@@ -2527,6 +2561,7 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   const d=b.dataset,ours=Object.keys(d).some(k=>k.startsWith('vpqlf'));
   if(!ours)return;e.preventDefault();e.stopImmediatePropagation();
   try{
+   if(d.vpqlfroute!==undefined){actionForFocus(d.vpqlfroute);return}
    if(d.vpqlfhome!==undefined){menuState.pending=null;showLearning();return}
    if(d.vpqlfstudio!==undefined){if(pending().length)saveSelection();master27.selected=selected();masteryMenu27();return}
    if(d.vpqlfexam2!==undefined){vpqPharmNextMenu();return}
@@ -2540,11 +2575,14 @@ const vpqGstyle=document.createElement('style');vpqGstyle.textContent='.vpqGlist
   }catch(error){showModal('Learning Lab error','<p>'+escapeHtml(error.message||String(error))+'</p><button data-vpqlfhome="1">Back to Learning Lab</button>')}
  },true);
  $('modalBody').addEventListener('change',e=>{
-  const element=e.target;if(!element.matches('[data-vpqlfcheck]'))return;
+  const element=e.target;if(element.matches('[data-vpqlffocus]')){menuState.focus=element.value;showLearning();return}
+  if(!element.matches('[data-vpqlfcheck]'))return;
   e.stopImmediatePropagation();
   const picked=[...$('modalBody').querySelectorAll('[data-vpqlfcheck]:checked')].map(x=>x.dataset.vpqlfcheck);
   setPending(picked);
  },true);
+ const pharmFlowStyle=document.createElement('style');
+ pharmFlowStyle.textContent='.vpqPharmFlowHome{border:1px solid #b7cde8;border-radius:15px;background:#f7faff;padding:16px;margin:0 0 13px}.vpqPharmFlowHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap}.vpqPharmFlowHead>div{flex:1;min-width:210px}.vpqPharmFlowHead b{font-size:18px;color:#23456f}.vpqPharmFlowHead p{margin:5px 0;font-size:12px;color:#506784}.vpqPharmFlowHead label{font-size:11px;font-weight:800;color:#476387;min-width:200px;flex:1;max-width:380px}.vpqPharmFlowHead select{display:block;width:100%;padding:10px;margin-top:5px;background:#fff;border:1px solid #a6c2e6;border-radius:9px;color:#243d60}.vpqPharmFlowSteps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:14px 0}.vpqPharmFlowTile{display:flex;flex-direction:column;align-items:flex-start;gap:7px;text-align:left;white-space:normal;border:1px solid #c5d6ea;border-radius:11px;background:white;padding:12px;min-width:0;min-height:105px}.vpqPharmFlowTile b{font-size:14px;color:#29476a}.vpqPharmFlowTile small{font-size:12px;line-height:1.4;color:#536a83}.vpqPharmFlowFeatured{background:#eaf3ff;border:2px solid #719bcf}.vpqPharmFlowLink{padding-top:12px;border-top:1px solid #d3dfed}.vpqPharmFlowLink>b{display:block;margin-bottom:9px;font-size:13px;color:#365578}.vpqPharmFlowLink>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.vpqPharmFlowLink .vpqPharmFlowTile{min-height:73px;padding:10px}.vpqPharmFlowHelp{font-size:12px;color:#536b86;line-height:1.5;margin:11px 0 0}.vpqPharmFlowDetails{border:1px solid #c9d6e8;background:#fbfcff;border-radius:13px;padding:12px;margin:12px 0}.vpqPharmFlowDetails>summary{cursor:pointer;font-size:14px;font-weight:800;color:#2e527c}.vpqPharmFlowDetails[open]>summary{margin-bottom:12px}@media(max-width:700px){.vpqPharmFlowSteps{grid-template-columns:repeat(2,minmax(0,1fr))}.vpqPharmFlowLink>div{grid-template-columns:1fr}.vpqPharmFlowTile{min-height:105px}.vpqPharmFlowHead label{max-width:none}}';document.head.appendChild(pharmFlowStyle);
  // Replace route functions rather than layering another menu inside the prior menu.
  vpqLearningHub=function(){menuState.pending=null;showLearning()};
  vpqGMastery=function(){masteryScreen()};
