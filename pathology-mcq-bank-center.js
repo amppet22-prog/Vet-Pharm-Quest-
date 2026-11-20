@@ -33,7 +33,11 @@ function totals(){
  const specs=window.VPQ_PATH_EXAM7?.cards||[];
  return Array.from({length:79},(_,i)=>String(i+1)).map(n=>{
   const l=lessons()[n],sections=l?.sections||[],base=foundationByNumber[n],mcq=collect(n);
-  const prelim=sections.filter(s=>/preliminary|source.index|objective.index|verification pending|foundation/i.test(String(s.sourceStatus||''))||/Exam 6 source.index/i.test(String(s.group||'')));
+  const coreFields=['Species / signalment','Etiology / cause','Gross recognition','Histopathology','Pathogenesis — why'];
+  const hasCore=s=>coreFields.every(name=>(s.points||[]).some(p=>String(p?.[0]||'').toLowerCase()===name.toLowerCase()&&String(p?.[1]||'').trim()));
+  // Some Exam 6 source-index topics were subsequently enriched in place. Only
+  // flag ones still missing the core lesion/mechanism fields as incomplete.
+  const prelim=sections.filter(s=>(/preliminary|source.index|objective.index|verification pending|foundation/i.test(String(s.sourceStatus||''))||/Exam 6 source.index/i.test(String(s.group||'')))&&!hasCore(s));
   const detailed=sections.filter(s=>s.diseaseAtlas||s.points?.some(p=>/gross|histo|pathogenesis|differential/i.test(String(p?.[0]||''))));
   const parts=sections.filter(s=>s.points?.length||s.flashcards?.length||s.practiceQuestions?.length).length;
   const entry={n,title:l?.title||titles.get(n)||base?.title?.replace(/^\d+\s*[·.\-]\s*/,'')||'Not indexed',
@@ -83,6 +87,16 @@ function start(size='10',singleID){
  quiz=eligible.slice();
  if(!singleID)quiz=quiz.map(q=>({q,k:Math.random()})).sort((a,b)=>a.k-b.k).map(x=>x.q);
  if(size!=='all'&&!singleID)quiz=quiz.slice(0,Math.max(1,Number(size)||10));
+ // Shuffle options for EACH attempt without changing the authored answer key,
+ // original question object, IDs, attribution, or persisted mastery history.
+ quiz=quiz.map(q=>{
+  const pairs=q.options.map((option,idx)=>({option,idx}));
+  for(let i=pairs.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [pairs[i],pairs[j]]=[pairs[j],pairs[i]];
+  }
+  return {...q,options:pairs.map(p=>p.option),correctIndex:pairs.findIndex(p=>p.idx===q.correctIndex)};
+ });
  index=0;answers={};mode='quiz';renderQuestion();
 }
 function renderQuestion(){
