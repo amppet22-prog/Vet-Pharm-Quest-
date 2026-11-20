@@ -40,17 +40,10 @@ function showCurrentUser(email){
  if(label){top.textContent="👤 "+label+" · Account";top.title="Signed in as "+email;dock.title="Signed in as "+email;dock.textContent="👤 "+label;}
  else{top.textContent="👤 Sign In / Create Account";top.title="Sign in or create account";dock.title="Sign in or create account";dock.textContent="👤 Sign In";}
 }
-function initAuth(){
- if(!window.supabase?.createClient)return;
- const client=window.supabase.createClient(PROJECT,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
- client.auth.getSession().then(({data})=>showCurrentUser(data?.session?.user?.email||null)).catch(()=>{});
- client.auth.onAuthStateChange((_event,session)=>showCurrentUser(session?.user?.email||null));
+function refreshAccountLabel(){
+ showCurrentUser(window.VPQ_PLAYER_ACCOUNT?.getUser?.()?.email||null);
 }
-if(window.supabase?.createClient){initAuth();}
-else{
- const s=document.createElement("script");
- s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js";
- s.defer=true;s.onload=initAuth;
- document.head.appendChild(s);
-}
+// The shared cloud auth bridge owns the one Supabase client for this page.
+window.addEventListener("vpq-player-auth-change",refreshAccountLabel);
+refreshAccountLabel();
 })();
