@@ -336,20 +336,24 @@
 .vpq-oh-exam-why{margin:12px 0;padding:12px;border-radius:11px;background:#f0e7fa;border-left:4px solid #8d6ca7}
 .vpq-oh-exam-status{font-size:12px;color:#715a83;margin:8px 0}
 
-/* Differential patient card hierarchy: strong legibility without oversized boxes */
-.vpq-ddx-patient{background:linear-gradient(135deg,#f2f7fe,#f8fbff)!important;border:1px solid #b8cde4!important;box-shadow:0 3px 12px rgba(31,72,118,.07)}
-.vpq-ddx-patient .vpq-ddx-profile-label{font-weight:850!important;font-size:12px!important}
-.vpq-ddx-patient .vpq-ddx-signalment{font-weight:850!important;font-size:17px!important;letter-spacing:-.15px;color:#183b65!important}
-.vpq-ddx-patient .vpq-ddx-info-card{box-shadow:0 2px 5px rgba(29,65,101,.035);border-color:#cbdbee!important}
-.vpq-ddx-patient .vpq-ddx-card-heading{font-size:13px!important;letter-spacing:.01em;font-weight:850!important;color:#234a76!important}
-.vpq-ddx-patient .vpq-ddx-card-body{font-size:14px!important;line-height:1.65!important;color:#273d5a!important;font-weight:550}
-.vpq-ddx-patient .vpq-ddx-signs-card{background:#f7fbff!important;border-left:4px solid #719dd0!important}
-.vpq-ddx-patient .vpq-ddx-signs-card .vpq-ddx-card-body{font-weight:620}
-.vpq-ddx-patient .vpq-ddx-gross-card{background:#edf5ff!important;border:1px solid #9abce1!important;border-left:4px solid #477fc0!important}
-.vpq-ddx-patient .vpq-ddx-gross-card .vpq-ddx-card-heading{color:#184a83!important}
-.vpq-ddx-patient .vpq-ddx-gross-card .vpq-ddx-card-body{font-weight:620}
-.vpq-ddx-patient .vpq-ddx-ancillary{background:#fdfdff!important}
-.vpq-ddx-patient .vpq-ddx-ancillary summary{font-weight:850!important}
+/* Differential patient card hierarchy — readable, bold, compact and consistent */
+.vpq-ddx-patient{background:linear-gradient(140deg,#f5f9ff,#fcfdff)!important;border:1px solid #bfd2e6!important;box-shadow:0 3px 12px rgba(30,67,110,.07);padding:16px!important}
+.vpq-ddx-patient .vpq-ddx-profile-label{display:inline-block;background:#dceafd;color:#194878!important;padding:5px 9px;border-radius:6px;font-weight:900!important;font-size:11px!important;letter-spacing:.095em!important}
+.vpq-ddx-patient .vpq-ddx-signalment{font-weight:900!important;font-size:18px!important;line-height:1.42!important;letter-spacing:-.18px;color:#17375c!important;margin:9px 0 12px!important}
+.vpq-ddx-patient .vpq-ddx-info-card{box-shadow:0 1px 5px rgba(29,65,101,.04);border:1px solid #c9d9ea!important;border-left:4px solid #9db9d8!important;background:#fff!important;padding:12px 14px!important;margin-top:9px!important}
+.vpq-ddx-patient .vpq-ddx-card-heading{display:block!important;font-size:14px!important;line-height:1.32!important;letter-spacing:.006em!important;font-weight:900!important;color:#173f70!important;margin:0 0 7px!important}
+.vpq-ddx-patient .vpq-ddx-card-body{font-size:14px!important;line-height:1.6!important;color:#233950!important;font-weight:650!important}
+.vpq-ddx-patient .vpq-ddx-card-body b,.vpq-ddx-patient .vpq-ddx-card-body strong{font-weight:900!important;color:#123c6b!important}
+.vpq-ddx-patient .vpq-ddx-card-body p{margin:0 0 7px!important;line-height:1.6!important}
+.vpq-ddx-patient .vpq-ddx-card-body p:last-child{margin-bottom:0!important}
+.vpq-ddx-patient .vpq-ddx-signs-card{background:#f6faff!important;border-left-color:#6098c7!important}
+.vpq-ddx-patient .vpq-ddx-gross-card{background:#eaf3ff!important;border-color:#a7c5e5!important;border-left:5px solid #3478b8!important}
+.vpq-ddx-patient .vpq-ddx-gross-card .vpq-ddx-card-heading{color:#164d86!important}
+.vpq-ddx-patient .vpq-ddx-gross-card .vpq-ddx-card-body{font-weight:720!important;color:#1b3653!important}
+.vpq-ddx-patient .vpq-ddx-ancillary{background:#f9fbff!important;border:1px solid #c9d9ea!important}
+.vpq-ddx-patient .vpq-ddx-ancillary summary{font-size:14px!important;font-weight:900!important;line-height:1.4!important;color:#204976!important}
+.vpq-ddx-patient .vpq-ddx-ancillary .vpq-ddx-card-body{margin-top:9px}
+@media(max-width:540px){.vpq-ddx-patient{padding:12px!important}.vpq-ddx-patient .vpq-ddx-signalment{font-size:17px!important}.vpq-ddx-patient .vpq-ddx-info-card{padding:10px 12px!important}}
 /* Differential cases: clean patient overview and readable image/decision panels */
 
 
