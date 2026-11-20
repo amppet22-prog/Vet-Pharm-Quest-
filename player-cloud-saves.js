@@ -85,7 +85,7 @@ function panel(){
  p=document.createElement("section");
  p.id="vpqCloudSavePanel";
  p.style.cssText="position:fixed;right:12px;bottom:12px;z-index:1000;width:min(365px,calc(100vw - 24px));background:white;padding:14px;border:2px solid #b9c9e8;border-radius:16px;box-shadow:0 8px 30px #263f5c33;color:#263f5c;font-size:12px";
- p.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;gap:7px"><strong>☁️ Game-wide Cloud Save</strong><button type="button" id="vpqCloudHide">✕</button></div><p id="vpqCloudSaveStatus" role="status" aria-live="polite"></p><div id="vpqCloudSaveButtons" style="display:flex;flex-wrap:wrap;gap:6px"></div><p style="font-size:11px;color:#61728a;margin:8px 0 0">Includes clinic, Arcade, lecture focus, mastery and supported specialty practice. Unpublished owner edits, images and publishing keys are excluded. Browser saves remain active.</p>';
+ p.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;gap:7px"><strong>☁️ Game-wide Cloud Save</strong><button type="button" id="vpqCloudHide">✕</button></div><p id="vpqCloudSaveStatus" role="status" aria-live="polite"></p><div id="vpqCloudComparison" style="display:none;gap:8px;margin:10px 0"></div><div id="vpqCloudSaveButtons" style="display:flex;flex-wrap:wrap;gap:6px"></div><p style="font-size:11px;color:#61728a;margin:8px 0 0">Includes clinic, Arcade, lecture focus, mastery and supported specialty practice. Unpublished owner edits, images and publishing keys are excluded. Browser saves remain active.</p>';
  document.body.appendChild(p);
  $("vpqCloudHide").onclick=()=>p.remove();
  return p;
@@ -178,6 +178,38 @@ async function firstUpload(){
   render();
  }catch(error){notify("Could not start cloud saving: "+(error.message||""),true);}
 }
+function showComparison(onlinePayload,browserPayload,updatedAt){
+ const area=$("vpqCloudComparison");
+ if(!area)return;
+ area.replaceChildren();area.style.display="grid";
+ function card(title,subtitle,payload,bg,border){
+   const data=progressSummary(payload);
+   const block=document.createElement("div");
+   block.style.cssText="background:"+bg+";border:1px solid "+border+";border-radius:12px;padding:10px 11px;line-height:1.5";
+   const heading=document.createElement("strong");
+   heading.style.cssText="display:block;font-size:13px;color:#3e3767;margin-bottom:2px";
+   heading.textContent=title;
+   const detail=document.createElement("div");
+   detail.style.cssText="font-size:10px;color:#60708a;margin-bottom:6px";
+   detail.textContent=subtitle;
+   const stats=document.createElement("div");
+   stats.style.cssText="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 8px;font-size:11px";
+   for(const [label,value] of [["Clinic XP",data.xp],["Coins",data.coins],["Cases",data.cases],["Arcade XP",data.arcadeXP]]){
+     const cell=document.createElement("div");
+     const key=document.createElement("strong");
+     key.textContent=label+": ";
+     cell.append(key,document.createTextNode(String(value)));
+     stats.appendChild(cell);
+   }
+   const customize=document.createElement("div");
+   customize.style.cssText="font-size:11px;margin-top:7px;padding-top:6px;border-top:1px solid "+border;
+   customize.textContent="Avatar: "+data.avatar+" · Wallpaper: "+data.wallpaper+" · Decorations: "+data.decor+" owned, "+data.placed+" placed"+(data.hasClinic?"":" · No clinic save");
+   block.append(heading,detail,stats,customize);
+   area.append(block);
+ }
+ card("☁️ CLOUD SAVE","Stored in your account · Other browsers can restore this · Updated "+new Date(updatedAt).toLocaleString(),onlinePayload,"#f5f1ff","#d9cdf4");
+ card("💻 THIS BROWSER","Progress stored on the browser you are using now",browserPayload,"#f0faf7","#c9e8de");
+}
 async function inspectSave(){
  if(!client||!userId)return;
  const owner=userId;
@@ -187,7 +219,8 @@ async function inspectSave(){
    if(owner!==userId)return;
    if(!remote){notify("No online save exists for this account. This browser's progress has not been replaced.",true);return;}
    const payload=normalize(remote.save_data);
-   notify("CLOUD SAVE (your account, available to other browsers; updated "+new Date(remote.updated_at).toLocaleString()+"): "+progressLabel(payload)+"\nTHIS BROWSER (the current device): "+progressLabel(readSelected()));
+   notify("Save comparison — cloud vs. this browser");
+   showComparison(payload,readSelected(),remote.updated_at);
  }catch(error){notify("Could not inspect online save: "+(error.message||""),true);}
 }
 async function restore(){
