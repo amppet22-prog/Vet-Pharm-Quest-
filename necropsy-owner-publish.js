@@ -188,7 +188,7 @@ function photoGrid(list){
  return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin:10px 0">'+
  list.map((p,i)=>'<figure style="padding:8px;border:1px solid #b6d3cf;border-radius:10px;background:#f3fcfa;margin:0"><img src="'+esc(p.url)+'" alt="'+esc(p.caption||'Published pathology photo')+'" loading="lazy" style="width:100%;height:165px;object-fit:contain"><figcaption style="font-size:11px"><b>'+esc(p.type||'Photo')+' '+(i+1)+'</b><p>'+esc(p.caption||'')+'</p><small>'+esc(p.credit||'')+'</small></figcaption></figure>').join('')+'</div>';
 }
-function casePhotoHTML(id){return photoGrid(photosOf(getCase(id)))}
+function casePhotoHTML(id,options={}){const items=photosOf(getCase(id));return photoGrid(items.filter(p=>options.onlyHistology?String(p.type||'').toLowerCase()==='histology':options.includeHistology===false?String(p.type||'').toLowerCase()!=='histology':true))}
 function specimenPhotoHTML(id){return photoGrid(photosOf(getSpecimen(id)))}
 /* Published-photo index: reuse references without duplicating images or changing their source diagnoses. */
 let photoLecture='all',photoSystem='all',photoSearch='';
