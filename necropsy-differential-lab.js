@@ -727,7 +727,7 @@ function view(){
   const bg=revealed?(best?'#e5f6e9':isLead?'#fff1e1':'white'):isLead?'#e9f2ff':chosen?'#f0f6ff':'white';
   return '<div style="display:flex;align-items:center;gap:6px;margin:6px 0"><button data-pathdiff-toggle="'+i+'" aria-pressed="'+chosen+'" style="flex:1;text-align:left;border:2px solid '+border+';background:'+bg+';border-radius:9px;padding:10px;font-weight:700">'+(chosen?'☑ ':'☐ ')+safe(o.name)+(revealed?(best?' · ✓ Supported diagnosis':isLead?' · Review alternative':''):'')+'</button><button data-pathdiff-set-lead="'+i+'" '+(revealed?'disabled':'')+' aria-label="Choose '+safe(o.name)+' as leading diagnosis" title="Set as leading diagnosis" style="white-space:nowrap;border:1px solid '+(isLead?'#6287ba':'#bfcfe1')+';border-radius:8px;padding:10px;background:'+(isLead?'#ddeafb':'white')+'">'+(isLead?'★ Lead':'☆ Lead')+'</button></div>';
  }).join('');
- const main='<section style="min-width:0">'+gross+morphology+
+ const main='<section style="min-width:0">'+morphology+
  '<h4 style="margin:13px 0 5px">1 · Compare possible causes</h4><p class="tiny" style="margin:5px 0">Check plausible alternatives, then select your leading diagnosis using ☆ Lead. Options stay neutral until you submit your answer.</p>'+opts+
  '<div style="border:1px solid '+(revealed?(leadCorrect?'#92c7a0':'#e6bb8b'):'#c0d2e7')+';background:'+(revealed?(leadCorrect?'#eaf8ee':'#fff2e4'):'#f1f6fd')+';padding:11px;border-radius:9px;margin:10px 0"><b>2 · Your leading diagnosis</b>'+
  '<p style="margin:6px 0;font-weight:700">'+(selected?safe(selected.name):'Not selected yet — choose ☆ Lead beside a diagnosis.')+'</p>'+
@@ -754,7 +754,7 @@ function view(){
  (x.photoToAdd?'<p class="tiny">Suggested photograph: '+safe(x.photoToAdd)+'</p>':'')+(x.sourceArticleUrl?'<p><a href="'+safe(x.sourceArticleUrl)+'" target="_blank" rel="noopener noreferrer">Read original case article</a></p>':'')+'<p><a href="https://slides.davisthompsonfoundation.org/arkive?image=4" target="_blank" rel="noopener noreferrer">Explore Davis–Thompson Noah’s Arkive</a></p><small>Check image attribution and reuse rights before publishing.</small><p><small>'+safe(x.ref||'Source reference not specified')+'</small></p></details>';
  modal('🩺 Patient case · Lecture '+safe(x.lecture),
  '<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:9px"><div class="buttonrow"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-prevcase="1" '+(position<=0?'disabled':'')+'>◀ Previous</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next ▶</button></div><div class="buttonrow"><button data-pathdiff-edit-case="'+safe(x.id)+'" style="font-weight:800;background:#e6f5e9;border:1px solid #7bb694">✏️ Edit & publish</button><button data-pathdiff-reset="1">↺ Restart</button></div></div>'+
- '<div style="display:grid;grid-template-columns:minmax(0,1.55fr) minmax(240px,0.95fr);gap:14px;align-items:start" class="vpq-case-dual"><div style="min-width:0">'+main+'</div>'+imagePanel+'</div>'+
+ gross+'<div style="display:grid;grid-template-columns:minmax(0,1.55fr) minmax(240px,0.95fr);gap:14px;align-items:start" class="vpq-case-dual"><div style="min-width:0">'+main+'</div>'+imagePanel+'</div>'+
  comparison+extraQuestionHTML(x)+resource+
  '<div class="buttonrow" style="margin-top:12px"><button data-pathdiff-list="1">← Back to cases</button><button data-pathdiff-nextcase="1" '+(position>=sequence.length-1?'disabled':'')+'>Next patient →</button></div>');
 }
