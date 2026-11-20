@@ -188,15 +188,15 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    sofaVisual+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
    flora+kids+decorations+holiday+rainbow+
    window.VPQ_RECEPTION_MODULAR_ASSETS.render(state,'isometric','nonrug')+
-   '<g aria-label="Vet Pharm Quest cozy reception banner">'+
-   '<path d="M377 24Q377 13 391 13H609Q623 13 623 24V57Q623 65 612 65H388Q377 65 377 57Z" fill="#fff9f1" stroke="#ab91c4" stroke-width="3"/>'+
-   '<path d="M390 15Q418 4 445 15T500 15T555 15T610 15" fill="none" stroke="#f6bad0" stroke-width="5" stroke-linecap="round"/>'+
-   '<path d="M391 62Q419 72 446 62T500 62T555 62T608 62" fill="none" stroke="#a2dcc5" stroke-width="4" stroke-linecap="round"/>'+
-   '<circle cx="396" cy="38" r="15" fill="#fbe0ec"/><circle cx="604" cy="38" r="15" fill="#e2f5e7"/>'+
-   '<text x="396" y="44" text-anchor="middle" font-size="17">🐾</text><text x="604" y="44" text-anchor="middle" font-size="17">🐾</text>'+
-   '<text x="500" y="36" text-anchor="middle" font-size="17" font-weight="900" font-family="sans-serif" fill="#4b658a">VET PHARM QUEST</text>'+
-   '<text x="500" y="52" text-anchor="middle" font-size="11" font-weight="800" font-family="sans-serif" fill="#ad7e9f">♡ WELCOME, FUTURE VETS! ♡</text>'+
-   '<circle cx="379" cy="15" r="3" fill="#eeb7cf"/><circle cx="621" cy="15" r="3" fill="#eeb7cf"/></g>'+ 
+   '<g aria-label="Vet Pharm Quest veterinary teaching hospital logo">'+
+   '<rect x="374" y="13" width="252" height="54" rx="17" fill="#f8f0fb" stroke="#a78bbe" stroke-width="3"/>'+
+   '<rect x="380" y="19" width="240" height="42" rx="13" fill="#fffdf8" stroke="#edd8e8" stroke-width="2"/>'+
+   '<path d="M389 20Q500 10 611 20" fill="none" stroke="#e8a8c7" stroke-width="3" stroke-linecap="round"/>'+
+   '<g transform="translate(399 40)"><circle r="15" fill="#d9f2e7" stroke="#97c8b9" stroke-width="1.5"/><path d="M-3 -10H3V-3H10V3H3V10H-3V3H-10V-3H-3Z" fill="#5a9c93"/><path d="M-7 9Q0 14 7 9" fill="none" stroke="#ffffff" stroke-width="1.5"/></g>'+
+   '<g transform="translate(601 40)"><circle r="15" fill="#fbe4ed" stroke="#e2b5cf" stroke-width="1.5"/><path d="M-8 1Q-8 -6 -2 -7Q2 -7 3 -2Q5 -7 9 -5Q14 2 3 10L0 12L-3 9Q-9 5 -8 1Z" fill="#d887ac"/><path d="M-2 2H2M0 0V4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></g>'+
+   '<text x="500" y="38" text-anchor="middle" font-size="19" font-weight="900" font-family="Trebuchet MS,Arial,sans-serif" letter-spacing=".45" fill="#405c81">VET PHARM QUEST</text>'+
+   '<path d="M435 44H565" stroke="#e6c7dd" stroke-width="1.3"/>'+
+   '<text x="500" y="55" text-anchor="middle" font-size="9.6" font-weight="800" font-family="Trebuchet MS,Arial,sans-serif" letter-spacing="1.1" fill="#98749f">TEACHING HOSPITAL</text></g>'+
 
    '</svg>';
  }
@@ -233,10 +233,10 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
  '#vpqShadowHotspots{position:absolute;inset:0;z-index:5;pointer-events:none}'+
  '.vpqShadowHotspot{position:absolute;display:block;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:12px;padding:0;color:#29445a;box-shadow:none;transform:none!important}'+
  '.vpqShadowHotspot span{position:absolute;left:50%;bottom:-2px;transform:translate(-50%,100%);white-space:nowrap;display:block;background:#fff9edeb;border:1px solid #b7c8d3;border-radius:15px;padding:3px 8px;font-size:10px;font-weight:800;box-shadow:0 3px 4px #384e5b22}'+
- '.vpqShadowHotspot:hover,.vpqShadowHotspot:focus-visible{border-color:#ffd980;background:#fff9d522;outline:2px solid #fff9ed;outline-offset:1px}'+
+ '.vpqShadowHotspot:hover,.vpqShadowHotspot:focus-visible{border-color:#e8bd65;background:#fff9d50c;outline:1px solid #fff9ed;outline-offset:0;box-shadow:0 0 6px #f5d98777}'+
  '.vpqShadow-front{left:5%;top:62%;width:32%;height:25%}.vpqShadow-front span{left:49%;bottom:3%;transform:translate(-50%,0)}'+
  
- '.vpqShadow-clinical{left:42%;top:23%;width:17%;height:37%}.vpqShadow-pharmacy{left:67%;top:23%;width:15%;height:33%}'+
+ '.vpqShadow-clinical{left:44%;top:26%;width:13%;height:32%;border-radius:9px}.vpqShadow-pharmacy{left:67%;top:23%;width:15%;height:33%}'+
  '.vpqShadow-clinical span,.vpqShadow-pharmacy span{bottom:7%;transform:translate(-50%,0)}'+
  '.vpqShadow-studio{right:1%;top:3%;width:16%;height:9%;border-radius:12px;background:#fff8edbb}.vpqShadow-studio span{bottom:0;transform:translate(-50%,0);font-size:11px}'+
  '@media(max-width:600px){.vpqShadowHotspot span{font-size:9px;padding:3px 5px}.vpqShadow-front span,.vpqShadow-patients span{bottom:15%}}';
