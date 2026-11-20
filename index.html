@@ -337,6 +337,21 @@
 .vpq-oh-exam-status{font-size:12px;color:#715a83;margin:8px 0}
 /* Differential cases: clean patient overview and readable image/decision panels */
 
+
+/* Pathology case owner editor — compact signalment and readable clinical sections */
+.vpq-case-edit-group{border:1px solid #cadcec;border-radius:12px;background:#f8fbff;padding:13px;margin:12px 0}
+.vpq-case-edit-group:nth-of-type(2){background:#fff}
+.vpq-case-edit-group h4{margin:0 0 5px;font-size:15px;color:#294870}
+.vpq-case-edit-group>small{display:block;color:#647b92;font-size:12px;margin-bottom:12px}
+.vpq-case-edit-group label{display:block;margin:10px 0;font-size:12px;color:#284b72}
+.vpq-case-edit-group label>b{display:block;margin-bottom:5px;font-weight:750}
+.vpq-case-edit-group input,.vpq-case-edit-group textarea,.vpq-case-edit-legacy textarea{display:block;box-sizing:border-box;width:100%;padding:9px;border:1px solid #b9cde0;border-radius:8px;background:white;font:inherit;color:#273f61;line-height:1.4}
+.vpq-case-edit-group textarea{font-size:13px;min-height:86px;resize:vertical}
+.vpq-case-edit-signalment{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:6px 12px}
+.vpq-case-edit-signalment input{font-size:13px}
+.vpq-case-edit-legacy{border:1px solid #d8e3ed;padding:11px;border-radius:9px;margin:10px 0}
+.vpq-case-edit-legacy summary{cursor:pointer;font-size:12px;font-weight:750}
+.vpq-case-edit-legacy textarea{margin-top:8px}
 /* Differential case photo gallery — larger images, focus-visible zoom */
 .vpq-ddx-images{background:#f7faff!important;border-color:#c8d9e9!important;box-shadow:0 2px 10px rgba(48,79,115,.07)}
 .vpq-ddx-images .vpq-case-photo-gallery{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important}
@@ -1025,7 +1040,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="pathology-exam3-pancreas-specimens-cases.js?v=20261119-pancreas-cases-v1"></script>
 <script src="necropsy-differential-exam4-cases.js?v=20261119-exam4-cases-v1"></script>
 <script src="necropsy-differential-l49-expanded.js?v=20261119-l49-expanded-v1"></script>
-<script src="necropsy-owner-publish.js?v=20261120-photo-zoom-v6"></script>
+<script src="necropsy-owner-publish.js?v=20261120-case-editor-sections-v7"></script>
 <script src="pathology-inline-photos.js?v=20261118-multiphoto-textonly1"></script>
 <script src="pathology-foundations.js?v=20261120-owner-visible-edits1"></script>
 <script src="pathology-exam1-deep-learning.js?v=20261119-exam1-depth2"></script>
