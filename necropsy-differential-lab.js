@@ -706,13 +706,13 @@ function view(){
   if(key==='clinical signs')signs+='<p style="margin:0;line-height:1.55">'+rich(v)+'</p>';
   else diagnostics+='<p style="margin:0 0 6px;line-height:1.5">'+rich(v)+'</p>';
  }
- const infoCard=(label,icon,content,style)=>content?'<div style="padding:11px 12px;border-radius:10px;background:#fff;border:1px solid '+(style||'#d4e0ec')+';margin-top:9px"><b style="display:block;font-size:12px;color:#315478;margin-bottom:6px">'+icon+' '+label+'</b><div style="font-size:13px;line-height:1.55">'+content+'</div></div>':'';
+ const infoCard=(label,icon,content,style)=>content?'<div class="vpq-ddx-info-card '+(label.startsWith('GROSS')?'vpq-ddx-gross-card':label==='Clinical signs'?'vpq-ddx-signs-card':'vpq-ddx-history-card')+'" style="padding:12px 14px;border-radius:10px;background:#fff;border:1px solid '+(style||'#d4e0ec')+';margin-top:10px"><b class="vpq-ddx-card-heading" style="display:block;font-size:13px;color:#24476f;margin-bottom:7px">'+icon+' '+label+'</b><div class="vpq-ddx-card-body" style="font-size:14px;line-height:1.65">'+content+'</div></div>':'';
  const gross='<section class="vpq-ddx-patient" style="border:1px solid #d0dfec;background:#f3f8fd;border-radius:13px;padding:13px;margin-bottom:11px">'+
- '<div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#617d9a">Patient profile</div>'+
- '<div style="font-size:15px;font-weight:800;line-height:1.35;margin-top:4px;color:#233f66">'+safe(signalment(x))+'</div>'+
+ '<div class="vpq-ddx-profile-label" style="font-size:12px;font-weight:850;letter-spacing:.07em;text-transform:uppercase;color:#45698f">PATIENT PROFILE</div>'+
+ '<div class="vpq-ddx-signalment" style="font-size:17px;font-weight:800;line-height:1.45;margin-top:7px;color:#1c3d66">'+safe(signalment(x))+'</div>'+
  infoCard('Presenting history','📋',narrative.trim()?rich(narrative):'')+
  infoCard('Clinical signs','🩺',signs)+
- (diagnostics?'<details class="vpq-ddx-ancillary" style="margin-top:9px;border-radius:10px;background:white;border:1px solid #d4e0ec;padding:11px 12px"><summary style="cursor:pointer;font-size:12px;font-weight:800;color:#315478">🧪 Ancillary diagnostics <span style="font-weight:400">· click to expand</span></summary><div style="font-size:13px;line-height:1.5;margin-top:9px">'+diagnostics+'</div></details>':'')+
+ (diagnostics?'<details class="vpq-ddx-ancillary" style="margin-top:9px;border-radius:10px;background:white;border:1px solid #d4e0ec;padding:11px 12px"><summary class="vpq-ddx-card-heading" style="cursor:pointer;font-size:13px;font-weight:800;color:#24476f">🧪 Ancillary diagnostics <span style="font-weight:500;font-size:11px">· view results</span></summary><div class="vpq-ddx-card-body" style="font-size:14px;line-height:1.65;margin-top:9px">'+diagnostics+'</div></details>':'')+
  infoCard('GROSS FINDINGS — OBSERVE FIRST','🔍',rich(x.gross),'#a9c5e5')+'</section>';
  const morphology='<details style="margin:9px 0;border:1px solid #b9d4e6;border-radius:10px;padding:10px;background:#f6fbfd"><summary style="font-weight:800;cursor:pointer">✍️ Pattern recognition · Build a morphologic diagnosis (optional)</summary>'+
  '<p class="tiny" style="margin:8px 0">Lecture 9: Describe the lesion objectively, then form a morphologic diagnosis. This is different from naming the organism or disease.</p>'+
