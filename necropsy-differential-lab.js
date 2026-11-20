@@ -798,7 +798,7 @@ function init(api){
  reader.onload=()=>{const img=new Image();img.onload=()=>{const k=Math.min(1,780/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*k));c.height=Math.max(1,Math.round(img.height*k));c.getContext('2d').drawImage(img,0,0,c.width,c.height);const ok=updatePhoto(d.pathdiffPhoto,c.toDataURL('image/jpeg',0.67));if(ok)view();else modal('Image too large','<p>Browser storage is full. Please resize the image and try again.</p><button data-pathdiff-list="1">Return to cases</button>')};img.src=String(reader.result)};reader.readAsDataURL(file);
  },true);
 }
-function openCase(id){if(allCases().some(x=>x.id===id)){current=id;return prepareCase(id)}return menu()}
+function openCase(id){const found=allCases().find(x=>x.id===id);if(found){conditionLecture=String(found.lecture);selectedExam=groupForLecture(found.lecture)?.id||'7';caseExam=selectedExam;filter=conditionLecture;practiceMode='all';roundsOnly=false;shuffledIds=[];return prepareCase(id)}return menu()}
 function draftPhoto(id){return photoStore()[id]||''}
 function draftText(id){return {}}
 return {init,start,cases:data,openCase,openExam7Rounds:(lecture)=>openExam7Rounds(lecture),exam7Matches,draftPhoto,draftText,openConditionInventory:conditionIndex,openLectureFlashcards:(api,lecture)=>{ui=api;conditionLecture=String(lecture);startFlash('lecture')},showConditions:(lecture)=>{if(lecture)conditionLecture=String(lecture);conditionIndex()}};
