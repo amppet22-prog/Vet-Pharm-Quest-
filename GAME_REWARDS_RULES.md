@@ -21,5 +21,11 @@ Every eligible learning or practice activity **must participate in one shared ga
 - Each cumulative **100 study EXP** earned under this program yields **10 coins**.
 - The game currently calculates a level from total EXP. The practical meaning of levels is **not designed/finalized yet**.
 
-## Level system to decide and build
-A level should have real gameplay meaning without gating essential learning content or punishing repeat learners. Candidate benefits: room themes, decorations, avatar cosmetics, companion enhancements, achievement titles, and optional clinic upgrades. Define level thresholds, unlock rewards, visuals, and a Level Rewards page with the owner before implementation. Existing EXP, coins, and levels must remain intact.
+## Level progression: clinic-only decoration unlocks (owner decision, 2026-11-20)
+- **No avatar-cosmetic rewards.** The game no longer uses customizable avatars as a progression reward.
+- Levels unlock **optional, cosmetic clinic-room accessories** for Reception, Treatment Ward, Reception Cat Corner and Dog Kennel / yard rooms.
+- Unlocks are a two-stage mechanism: reach the required level, then spend earned coins to purchase the item. Once purchased, it stays owned across refresh and save exports.
+- No clinical study material, questions, rooms, learning modes, or reference materials may be locked behind level or cosmetic purchases.
+- The first seven level-exclusive items are defined in `index.html`, at levels 3, 5, 7, 10, 12, 15 and 20. They use room-scoped decor so an item appears only in its intended location.
+- **Phase 1 presentation** uses lightweight decoration icons. Upgrading them to custom illustrated furniture and coordinated placement in the scene's actual art layer remains future visual polish.
+- Preserve historic XP, coins, levels, and existing purchases. Expand the room-specific catalogue later with user-approved designs. Avoid making avatars a reward category in future level plans.
