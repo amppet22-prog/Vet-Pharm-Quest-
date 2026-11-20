@@ -518,6 +518,15 @@ review=function(){
  '<button type="button" data-vpqcourse="exam2">🎮 Exam 2 Challenge</button></div>';
  const tabs=document.getElementById('tabs');tabs?.parentNode?.insertBefore(header,tabs);
  header.addEventListener('click',e=>{const b=e.target.closest('[data-vpqcourse]');if(!b)return;if(b.dataset.vpqcourse==='exam2')return vpqExam2Play();send(b.dataset.vpqcourse,selection[0]||'Lecture 1')});
+ // Make existing Exam 2 question IDs reviewable in Arcade Missed Concepts after a wrong answer.
+ const originalPick=pick;
+ pick=function(id){
+  const existing=originalPick(id);
+  if(existing)return existing;
+  const x=(window.VPQ_PHARM_NEXT?.questions||[]).find(q=>q.id===id);
+  if(!x||x.options?.length!==4||!Number.isInteger(x.answer))return undefined;
+  return {id:x.id,l:Number(x.lecture?.replace('Lecture ','')),k:x.topic||'Clinical Pharmacology',q:x.q,a:x.options,c:x.answer,why:x.why||'',pearl:x.reviewFlag||'Connect mechanism, patient risk and monitoring.'};
+ };
  // Exam 2 uses existing vetted-in-course question entries, with normal Arcade XP and shared attempts.
  let p2Deck=[],p2Position=0,p2Correct=0;
  function vpqExam2Play(){
