@@ -236,21 +236,21 @@ function showLesson(k){
 let fcDeck=[],fcIndex=0,fcFlipped=false,fcMissed=false;
 const fcStorageKey='vpq-path-foundations-missed-v1';
 function fcMarks(){try{return JSON.parse(localStorage.getItem(fcStorageKey)||'{}')||{}}catch(_){return {}}}
-function fcMark(id,miss){const m=fcMarks();if(miss)m[id]=true;else delete m[id];try{localStorage.setItem(fcStorageKey,JSON.stringify(m))}catch(_){}}
+function fcMark(id,rating){const m=fcMarks();if(rating==='miss')m[id]=true;else if(rating==='almost')m[id]='review';else delete m[id];try{localStorage.setItem(fcStorageKey,JSON.stringify(m))}catch(_){}}
 function fcSource(){const source=Array.isArray(window.VPQ_PATH_FOUNDATION_FLASHCARDS)?window.VPQ_PATH_FOUNDATION_FLASHCARDS:[];const key=lesson.startsWith('exam2Master_')?'exam2_'+lesson.slice('exam2Master_'.length):lesson;const cards=source.filter(x=>x.lecture===key);return window.VPQ_FLASHCARD_OWNER?.apply?.('pathology',key,cards)||cards}
 function fcStart(review=false){
  fcMissed=review;fcFlipped=false;fcIndex=0;
  let arr=fcSource().slice();
- if(review){const missed=fcMarks();arr=arr.filter(x=>missed[x.id])}
- else{const marks=fcMarks();arr=arr.map(x=>({x,random:Math.random()})).sort((a,b)=>Number(!!marks[b.x.id])-Number(!!marks[a.x.id])||a.random-b.random).map(v=>v.x)}
+ if(review){const missed=fcMarks();arr=arr.filter(x=>missed[x.id]===true||missed[x.id]==='review')}
+ else{const marks=fcMarks();arr=arr.map(x=>({x,random:Math.random()})).sort((a,b)=>(marks[b.x.id]===true?2:marks[b.x.id]==='review'?1:0)-(marks[a.x.id]===true?2:marks[a.x.id]==='review'?1:0)||a.random-b.random).map(v=>v.x)}
  fcDeck=arr;fcRender();
 }
 function fcRender(){
  const heading=pages[lesson]?.title||'Pathology Foundations';
  if(!fcDeck.length||fcIndex>=fcDeck.length){
-  shell('<h3>'+(fcDeck.length?'Review complete':'No missed flashcards yet')+'</h3>'+
+  shell('<h3>'+(fcDeck.length?'Review complete':'No cards marked for review')+'</h3>'+
    '<p>'+(fcDeck.length?'You finished '+fcDeck.length+' cards. Try a clinical question next.':'Use Start all cards to begin recalling the lecture facts.')+'</p>'+
-   '<div class="buttonrow"><button data-pathfound="fc-all">↺ Study all cards</button><button data-pathfound="fc-missed">Review missed</button><button data-pathfound="quiz">🩺 Clinical questions</button><button data-pathfound="'+esc(lesson)+'">← Lecture notes</button></div>','Flashcards');return}
+   '<div class="buttonrow"><button data-pathfound="fc-all">↺ Study all cards</button><button data-pathfound="fc-missed">Review missed & almost</button><button data-pathfound="quiz">🩺 Clinical questions</button><button data-pathfound="'+esc(lesson)+'">← Lecture notes</button></div>','Flashcards');return}
  const card=fcDeck[fcIndex],pct=Math.round(100*(fcIndex+1)/fcDeck.length);
  shell('<div style="display:flex;flex-wrap:wrap;gap:6px"><button data-pathfound="'+esc(lesson)+'">← Notes</button><button data-pathfound="fc-all">Shuffle all</button><button data-pathfound="fc-missed">Missed</button><button data-pathfound="fc-edit">✏️ Edit / publish</button><button data-pathfound="fc-new">➕ Add card</button></div>'+
  '<p style="margin:8px 0 5px;font-size:12px;color:#526984"><b>'+esc(heading)+'</b> · Card '+(fcIndex+1)+' of '+fcDeck.length+(fcMissed?' · missed review':'')+'</p>'+
@@ -261,7 +261,7 @@ function fcRender(){
  (fcFlipped&&card.why?'<span style="font-size:13px;max-width:620px;line-height:1.5;padding-top:11px;border-top:1px solid #c7d7e6;font-weight:500"><b>Why it matters:</b> '+esc(card.why)+'</span>':'')+
  '<span style="color:#68809b;font-size:12px">'+(fcFlipped?'Tap to see the question again':'Tap to reveal the answer')+'</span></button>'+
  '<p class="tiny" style="text-align:center">'+esc(card.slide||'Instructor lecture')+'</p>'+
- '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:11px 0">'+(fcFlipped?'<button data-pathfound="fc-again" style="background:#fff1e9">↺ Study again</button><button data-pathfound="fc-known" style="background:#e3f6e9">✓ Got it</button>':'<button data-pathfound="fc-flip" style="background:#dfedff">Flip card</button>')+'</div>'+
+ '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:11px 0">'+(fcFlipped?'<button data-pathfound="fc-again" style="background:#fff1e9">↺ Missed it</button><button data-pathfound="fc-almost" style="background:#fff4cf">◐ Almost got it · review</button><button data-pathfound="fc-known" style="background:#e3f6e9">✓ Got it</button>':'<button data-pathfound="fc-flip" style="background:#dfedff">Flip card</button>')+'</div>'+
  '<div class="buttonrow"><button data-pathfound="fc-prev" '+(fcIndex===0?'disabled':'')+'>← Previous</button><button data-pathfound="fc-skip">Skip →</button><button data-pathfound="quiz">🩺 Apply in clinical questions</button></div>','Flashcards');
 }
 function fcEdit(isNew){
@@ -295,8 +295,8 @@ function init(api){
   if(act==='fc-missed')return fcStart(true);
   if(act==='fc-flip'){fcFlipped=!fcFlipped;return fcRender()}
   if(act==='fc-prev'){fcIndex=Math.max(0,fcIndex-1);fcFlipped=false;return fcRender()}
-  if(act==='fc-skip'){if(fcDeck[fcIndex])fcMark(fcDeck[fcIndex].id,true);fcIndex++;fcFlipped=false;return fcRender()}
-  if(act==='fc-again'||act==='fc-known'){if(fcDeck[fcIndex])fcMark(fcDeck[fcIndex].id,act==='fc-again');fcIndex++;fcFlipped=false;return fcRender()}
+  if(act==='fc-skip'){if(fcDeck[fcIndex])fcMark(fcDeck[fcIndex].id,'miss');fcIndex++;fcFlipped=false;return fcRender()}
+  if(act==='fc-again'||act==='fc-almost'||act==='fc-known'){if(fcDeck[fcIndex])fcMark(fcDeck[fcIndex].id,act==='fc-again'?'miss':act==='fc-almost'?'almost':'know');fcIndex++;fcFlipped=false;return fcRender()}
   if(act==='fc-edit')return fcEdit(false);
   if(act==='fc-new')return fcEdit(true);
   if(pages[act]){qindex=0;revealed=false;choice=null;return showLesson(act)}
