@@ -42,6 +42,12 @@
       "answer": "Degludec. Up to 48 hours and possible to be used in cats.",
       "why": "Long duration does not automatically make it the best choice for each patient.\nIt is an insulin analog and fatty acid with muli hexamers. Comes in a pen only form. Very few glucose nadirs (only one low point)",
       "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
+    },
+    "pharm-e2-diabetes-10-021": {
+      "prompt": "What is the duration category of Vetsulin?",
+      "answer": "Intermediate-acting lente insulin.",
+      "why": "It contains amorphous and crystalline insulin zinc fractions.\nDogs first choice. Lente means slow, makes it longer acting.",
+      "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
     }
   },
   "custom": [
