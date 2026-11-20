@@ -44,7 +44,7 @@ async function menu(){
  '<div class="buttonrow"><button data-vpqpharmfc-start="1" style="background:#dff0ff;font-weight:850">🔀 Start shuffled recall</button><button data-vpqpharmfc-missed="1">↺ Review missed</button><button data-vpqpharmfc-new="1">➕ Add flashcard</button></div></div>'+
  '<p class="tiny">Instructor practice questions and existing high-yield MCQs remain in the next study stage. Owner-created and edited flashcards publish separately from the original lecture notes.</p>'+
  '<div class="vpqPharmRecallNext"><b>🎮 Next step: Drug Match</b><p>After learning the terms, match medications to their targets and clinical clues. Drug Match uses the same lecture focus and awards Arcade XP.</p><button data-vpqpharmfc-match="1">🧩 Play Drug Match · '+esc(lecture)+'</button></div>'+
- '<div class="buttonrow"><button data-vpqpharmfc-lesson="1">📖 Lecture & disease mechanisms</button><button data-vpqpharmfc-quiz="1" style="background:#d7eaff;border:2px solid #6c9bd7;font-weight:850">🩺 Clinical Multiple-Choice Practice · '+esc(lecture)+'</button></div>');
+ '<div class="buttonrow"><button data-vpqpharmfc-lesson="1">📖 Lecture & disease mechanisms</button><button data-vpqpharmfc-quiz="1" style="background:#d7eaff;border:2px solid #6c9bd7;font-weight:850">🩺 Clinical Multiple-Choice Practice · '+esc(lecture)+'</button>'+(/^Lecture (1[0-9]|20)$/.test(lecture)?'<button data-vpqpharmfc-cases="1" style="background:#e2f6e8;border:2px solid #88c59c;font-weight:850">🐾 NAVLE-style Patient Cases · '+esc(lecture)+'</button>':'')+'</div>');
 }
 let shuffleFeedback='';
 function shuffleRemaining(){
@@ -62,7 +62,7 @@ function render(){
  if(complete||!deck.length)return show('🧠 Pharmacology · '+(!deck.length?'No cards to review':'Recall session complete'),
  '<p>'+(deck.length?'You completed '+deck.length+' cards. Revisit what you missed, or apply the drug mechanisms in clinical cases.':'No cards marked Missed or Almost. Start a new recall session to build your review list.')+'</p>'+
  '<div class="vpqPharmRecallNext"><b>🧩 Ready for the next challenge?</b><p>Match this lecture’s drugs, mechanisms and clinical uses in the Arcade. This is optional—you can return to missed cards at any time.</p><button data-vpqpharmfc-match="1">▶ Play '+esc(lecture)+' Drug Match</button></div>'+
- '<div class="buttonrow"><button data-vpqpharmfc-missed="1">↺ Review missed & almost</button><button data-vpqpharmfc-start="1">New shuffled round</button><button data-vpqpharmfc-quiz="1" style="background:#d7eaff;border:2px solid #6c9bd7;font-weight:850">🩺 Clinical Multiple-Choice Practice · '+esc(lecture)+'</button><button data-vpqpharmfc-menu="1">← Lectures</button></div>');
+ '<div class="buttonrow"><button data-vpqpharmfc-missed="1">↺ Review missed & almost</button><button data-vpqpharmfc-start="1">New shuffled round</button><button data-vpqpharmfc-quiz="1" style="background:#d7eaff;border:2px solid #6c9bd7;font-weight:850">🩺 Clinical Multiple-Choice Practice · '+esc(lecture)+'</button>'+(/^Lecture (1[0-9]|20)$/.test(lecture)?'<button data-vpqpharmfc-cases="1" style="background:#e2f6e8;border:2px solid #88c59c;font-weight:850">🐾 NAVLE-style Patient Cases · '+esc(lecture)+'</button>':'')+'<button data-vpqpharmfc-menu="1">← Lectures</button></div>');
  const c=deck[at],pct=Math.round((at+1)/deck.length*100);
  show('🧠 '+lecture+' · Quick Recall',
  '<div class="buttonrow vpqRecallTools"><button data-vpqlfhome="1">← Learning Center</button><button data-vpqpharmfc-menu="1">← Lectures</button><button data-vpqpharmfc-shuffle="1" '+(at>=deck.length-2?'disabled title="Not enough upcoming cards to shuffle"':'')+'>🔀 Shuffle remaining ('+Math.max(0,deck.length-at-1)+')</button><button data-vpqpharmfc-edit="1">✏️ Edit</button><button data-vpqpharmfc-new="1">➕ Add</button></div>'+(shuffleFeedback?'<p class="vpq-recall-shuffle-msg" role="status">'+esc(shuffleFeedback)+'</p>':'')+
@@ -79,13 +79,14 @@ function init(body,modal,lesson,quiz,drugMatch){if(!body||body.__vpqPharmRecall)
  window.VPQ_FLASHCARD_OWNER?.init?.(body,modal);
  body.addEventListener('keydown',ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target?.dataset?.vpqpharmfcFlip!==undefined){ev.preventDefault();revealed=!revealed;render()}},true);
  body.addEventListener('change',ev=>{if(ev.target?.dataset?.vpqpharmfcLecture!==undefined){lecture=ev.target.value;menu()}},true);
- body.addEventListener('click',ev=>{const b=ev.target.closest('[data-vpqpharmfc-menu],[data-vpqpharmfc-start],[data-vpqpharmfc-missed],[data-vpqpharmfc-flip],[data-vpqpharmfc-rate],[data-vpqpharmfc-next],[data-vpqpharmfc-prev],[data-vpqpharmfc-edit],[data-vpqpharmfc-new],[data-vpqpharmfc-lesson],[data-vpqpharmfc-quiz],[data-vpqpharmfc-match],[data-vpqpharmfc-shuffle]');if(!b)return;ev.preventDefault();ev.stopImmediatePropagation();const d=b.dataset;
+ body.addEventListener('click',ev=>{const b=ev.target.closest('[data-vpqpharmfc-menu],[data-vpqpharmfc-start],[data-vpqpharmfc-missed],[data-vpqpharmfc-flip],[data-vpqpharmfc-rate],[data-vpqpharmfc-next],[data-vpqpharmfc-prev],[data-vpqpharmfc-edit],[data-vpqpharmfc-new],[data-vpqpharmfc-lesson],[data-vpqpharmfc-quiz],[data-vpqpharmfc-match],[data-vpqpharmfc-shuffle],[data-vpqpharmfc-cases]');if(!b)return;ev.preventDefault();ev.stopImmediatePropagation();const d=b.dataset;
  if(d.vpqpharmfcMenu!==undefined)return menu();
  if(d.vpqpharmfcShuffle!==undefined)return shuffleRemaining();
  if(d.vpqpharmfcStart!==undefined)return begin(false);
  if(d.vpqpharmfcMissed!==undefined)return begin(true);
  if(d.vpqpharmfcLesson!==undefined)return lesson?.(lecture);
  if(d.vpqpharmfcQuiz!==undefined)return quiz?.(lecture);
+ if(d.vpqpharmfcCases!==undefined)return window.VPQ_OPEN_EXAM2_PATIENT_CASES?.(lecture);
  if(d.vpqpharmfcMatch!==undefined)return drugMatch?.(lecture);
  if(d.vpqpharmfcEdit!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pharmacology',lecture,deck[at],()=>{deck=window.VPQ_FLASHCARD_OWNER?.refresh?.('pharmacology',lecture,deck)||deck;render()});
  if(d.vpqpharmfcNew!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pharmacology',lecture,null,()=>menu());
