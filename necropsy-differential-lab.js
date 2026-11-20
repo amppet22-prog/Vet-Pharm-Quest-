@@ -19,7 +19,7 @@ function start(api,chosen='all'){
 }
 function shuffleArray(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function caseSequence(){
- const filtered=allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&(filter==='all'||x.lecture===filter));
+ const filtered=allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(practiceMode==='all'||practiceMode==='DDx'&&x.sourceType==='DDx'||practiceMode==='SBA'&&x.sourceType==='SBA'||practiceMode==='clinical'&&!x.sourceType)&&(filter==='all'||x.lecture===filter));
  // Start in a randomized order, rather than showing cases in source/best-first order.
  // Keep that order stable while reviewing an individual session.
  const ids=filtered.map(x=>x.id),existing=new Set(shuffledIds);
@@ -28,7 +28,7 @@ function caseSequence(){
  const order=new Map(shuffledIds.map((id,i)=>[id,i]));
  return filtered.sort((a,b)=>(order.get(a.id)??Infinity)-(order.get(b.id)??Infinity));
 }
-function shuffleCases(){shuffledIds=shuffleArray(allCases().filter(x=>filter==='all'||x.lecture===filter).map(x=>x.id));current=null;phase=0;leading=-1;grossLeading=-1;shortlist=[];leadHint=false;caseReward=null;optionOrder=[];return menu();}
+function shuffleCases(){shuffledIds=shuffleArray(allCases().filter(x=>(!roundsOnly||!!x.sourceCaseId)&&caseInExam(x)&&(filter==='all'||x.lecture===filter)).map(x=>x.id));current=null;phase=0;leading=-1;grossLeading=-1;shortlist=[];leadHint=false;caseReward=null;optionOrder=[];return menu();}
 function prepareCase(id){current=id;phase=0;leading=-1;grossLeading=-1;leadHint=false;shortlist=[];caseReward=null;const found=allCases().find(x=>x.id===id);optionOrder=shuffleArray((found?.options||[]).map((_,i)=>i));return view();}
 function menu(){
  const matched=caseSequence();
@@ -57,6 +57,7 @@ function menu(){
  '<details id="vpq-necro-case-list" style="margin:12px 0"><summary style="font-size:14px;font-weight:800;cursor:pointer;padding:8px 0">🧩 Browse differential practice cases ('+matched.length+')</summary>'+
  '<label style="display:block;font-size:12px;margin-bottom:7px">Filter cases by lecture<select data-pathdiff-case-filter="1" style="display:block;width:100%;max-width:240px;font-size:13px;padding:8px;margin-top:4px;border:1px solid #bdcde1;border-radius:8px;background:white">'+
  ['all',...counts].map(n=>'<option value="'+n+'"'+(filter===n?' selected':'')+'>'+(n==='all'?'All lectures':'Lecture '+n)+'</option>').join('')+'</select></label>'+
+ '<div style="display:flex;gap:7px;flex-wrap:wrap;margin:6px 0"><label style="flex:1;min-width:160px;font-size:12px">Exam<select data-pathdiff-case-exam="1" style="display:block;width:100%;padding:7px"><option value="all">All exams</option>'+EXAM_GROUPS.map(g=>'<option value="'+g.id+'"'+(caseExam===g.id?' selected':'')+'>'+safe(g.label)+'</option>').join('')+'</select></label><label style="flex:1;min-width:160px;font-size:12px">Question type<select data-pathdiff-practice-mode="1" style="display:block;width:100%;padding:7px">'+[['all','All case formats'],['DDx','Build differential list'],['SBA','NAVLE single-best answer'],['clinical','Other clinical case practice']].map(([id,label])=>'<option value="'+id+'"'+(practiceMode===id?' selected':'')+'>'+label+'</option>').join('')+'</select></label></div>'+ 
  '<p class="tiny" style="margin:6px 0">'+matched.length+' cases · Select one to compare signalment, gross findings, histology and etiologies.</p>'+
  '<div class="buttonrow"><button data-pathdiff-shuffle="1" style="background:#e9f3ff;font-weight:800">🔀 Shuffle cases</button><small>Cases are randomized automatically; shuffle again for a new order. Answer choices also change on restart. Rewards remain saved.</small></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px">'+matched.map((x,i)=>'<button data-pathdiff-open="'+safe(x.id)+'" style="text-align:left;padding:10px;border:1px solid #b7cce5;border-radius:10px;background:#fff"><b>🔬 Mystery case '+String(i+1).padStart(2,'0')+'</b><small style="display:block;margin-top:5px">Lecture '+safe(x.lecture)+' · Open to review history and gross findings</small></button>').join('')+'</div></details>');
@@ -90,7 +91,20 @@ function umbrellaDetail(){
 
 /* Lecture coverage uses live lecture data, not a shortened list. */
 let conditionLecture='75',conditionChosen=-1,conditionGap='all',conditionTopicMode='all';
-const LECTURES=[...Array.from({length:36},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+const EXAM_GROUPS=[
+ {id:'1',label:'Exam 1 · Foundations',start:1,end:16,short:'Foundations & injury'},
+ {id:'2',label:'Exam 2 · Immunity & neoplasia',start:17,end:30,short:'Immune disease & tumors'},
+ {id:'3',label:'Exam 3 · Urinary, liver & pancreas',start:31,end:41,short:'Urinary · Hepatic · Pancreas'},
+ {id:'4',label:'Exam 4 · Endocrine, blood, muscle & bone',start:42,end:49,short:'Endocrine · Hemolymphatic · MSK'},
+ {id:'5',label:'Exam 5 · Heart & respiratory',start:50,end:58,short:'Cardiac · Nasal · Thoracic · Lung'},
+ {id:'6',label:'Exam 6 · Gastrointestinal',start:59,end:66,short:'Oral · GI · Stomach · Intestines'},
+ {id:'7',label:'Exam 7 · Neuro, skin, reproduction & sensory',start:67,end:79,short:'Neuro · Skin · Repro · Ears · Eyes'}
+];
+const LECTURES=Array.from({length:79},(_,i)=>String(i+1));
+let selectedExam='7',caseExam='all',practiceMode='all';
+const groupForLecture=lecture=>EXAM_GROUPS.find(g=>Number(lecture)>=g.start&&Number(lecture)<=g.end);
+const caseInExam=x=>caseExam==='all'||groupForLecture(x.lecture)?.id===caseExam;
+
 const CASE_MATCH={
 'gi6-l59-cat-ventral-tongue-mass':['Feline oral squamous cell carcinoma'],
 'gi6-l60-bovine-firm-tongue':['Actinobacillus lignieresii pyogranulomatous glossitis (wooden tongue)'],
@@ -369,11 +383,11 @@ function exam7Specimen(x){
 }
 function openExam7Lecture(idOrLecture){
  const c=allCases().find(x=>x.id===idOrLecture),lecture=c?.lecture||idOrLecture;
- conditionLecture=String(lecture);conditionGap='all';conditionTopicMode='all';
+ conditionLecture=String(lecture);selectedExam=groupForLecture(lecture)?.id||selectedExam;conditionGap='all';conditionTopicMode='all';
  if(c){const possible=lectureConditions();const index=possible.findIndex(p=>exam7Matches(lecture,p.sourceTitle||p.title).some(hit=>hit.id===c.id));if(index>=0){conditionChosen=index;return conditionDetail()}}
  return conditionIndex();
 }
-function openExam7Rounds(lecture){filter=lecture?String(lecture):'all';roundsOnly=true;shuffledIds=[];return menu();}
+function openExam7Rounds(lecture){filter=lecture?String(lecture):'all';caseExam='7';practiceMode='all';roundsOnly=true;shuffledIds=[];return menu();}
 function evidence(lecture,section){
  const linked=relatedCases(lecture,section.sourceTitle||section.title);
  const bank=window.VPQ_PATH_EXAM7_DATA||[];
@@ -403,11 +417,12 @@ function conditionIndex(){
  const row=summary.find(x=>x.lecture===conditionLecture);
  modal('📚 Complete pathology lecture inventory · L'+safe(conditionLecture),
  '<div class="buttonrow"><button data-pathdiff-list="1">← Differential cases</button><button data-pathdiff-add-condition="1" style="background:#e8f8ea">➕ Add condition to L'+safe(conditionLecture)+'</button></div>'+
- '<p class="tiny">Coverage audit: <b>'+total+' lecture topics</b> across available pathology lectures (including Exam 3 urinary L31–35 and hepatic L36–40). Topics include normal anatomy and general principles as well as individual diseases; they are not all distinct diagnoses. A lecture note does NOT imply a dedicated case or photograph.</p>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:5px;margin:9px 0">'+summary.map(v=>'<button data-pathdiff-condition-lecture="'+v.lecture+'" aria-pressed="'+(conditionLecture===v.lecture?'true':'false')+'" style="padding:7px 5px;font-size:12px">L'+v.lecture+'<small style="display:block;font-size:10px">'+v.teaching+' topics</small></button>').join('')+'</div>'+
- '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture)+'</b><p style="font-size:12px;margin:5px 0">Lecture topics: '+row.teaching+' · Matched specimen cards: '+row.specimens+' · Matched differential cases: '+row.cases+' · Attached image references: '+row.embedded+'</p><small>Counts are conservatively matched by case mapping/title, not a certified complete disease audit. External links without an embedded image are not counted as attached images.</small></div>'+
- '<div class="buttonrow"><button data-pathdiff-condition-lecture="31" style="background:#eaf6ef;font-weight:800">🫘 Urinary Exam 3 · L31–35</button><button data-pathdiff-condition-lecture="36" style="background:#f9eedd;font-weight:800">🫀 Hepatic Exam 3 · L36–40</button><button data-pathdiff-condition-lecture="41" style="background:#efe9ff;font-weight:800">🧪 Pancreas · L41</button></div>'+
- '<div class="buttonrow"><button data-pathdiff-condition-lecture="50" style="background:#eef6ff;font-weight:800">❤️ Exam 5 · Cardiac L50–53</button><button data-pathdiff-condition-lecture="54" style="background:#e8f5f8;font-weight:800">🫁 Exam 5 · Respiratory L54–58</button></div>'+
+ '<p class="tiny">Browse by exam and lecture. Topic count means a recorded note, not proof that a lecture is complete. Case and image counts reflect linked content, not verified curriculum coverage.</p>'+
+ '<div style="border:1px solid #c9d9eb;border-radius:11px;padding:10px;background:#f7faff;margin:9px 0"><b>1 · Choose an exam</b><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:7px;margin-top:8px">'+EXAM_GROUPS.map(g=>'<button data-pathdiff-select-exam="'+g.id+'" aria-pressed="'+(selectedExam===g.id)+'" style="padding:9px;text-align:left;border-radius:8px;border:2px solid '+(selectedExam===g.id?'#6895c8':'#cad8e8')+';background:'+(selectedExam===g.id?'#e7f1ff':'#fff')+'"><b>'+safe(g.label)+'</b><small style="display:block">'+safe(g.short)+' · L'+g.start+'–'+g.end+'</small></button>').join('')+'</div></div>'+
+ '<div style="padding:10px;border:1px solid #d2e0ed;border-radius:10px;margin:9px 0"><b>2 · Choose a lecture</b><p class="tiny" style="margin:5px 0">Only lectures for your selected exam appear here. Missing lecture notes stay visible as gaps, rather than disappearing.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(75px,1fr));gap:6px;margin-top:8px">'+summary.filter(v=>groupForLecture(v.lecture)?.id===selectedExam).map(v=>'<button data-pathdiff-condition-lecture="'+v.lecture+'" aria-pressed="'+(conditionLecture===v.lecture)+'" style="padding:8px 4px;border:2px solid '+(conditionLecture===v.lecture?'#7ca1cd':'#c5d6e8')+';background:'+(conditionLecture===v.lecture?'#e9f3ff':'#fff')+'"><b>L'+v.lecture+'</b><small style="display:block">'+v.teaching+' topics</small></button>').join('')+'</div></div>'+
+ '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture+' · source inventory incomplete')+'</b><p style="font-size:12px;margin:5px 0">Recorded topics: '+row.teaching+' · Matched specimens: '+row.specimens+' · Topics with case matches: '+row.cases+' · Attached case image references: '+row.embedded+'</p><small>Some early exam content lives in separate learning tools and is not yet indexed here. Counts do not certify completeness.</small></div>'+
+ '<div style="padding:10px;border:1px solid #cbdbea;border-radius:10px;margin:8px 0"><b>3 · Study or practice</b><div class="buttonrow" style="margin:8px 0"><button data-pathdiff-flash-lecture="1">🧠 Flashcards</button><button data-pathdiff-lecture-specimens="1">🔬 Specimen atlas</button><button data-pathdiff-lecture-cases="1">🩺 Patient cases</button><button data-pathdiff-lecture-ddx="1">🧩 Differential practice</button></div><small>Case modes use the same case bank, so uploaded questions remain connected to the lecture rather than duplicated.</small></div>'+
+ (row.teaching===0?'<p style="padding:10px;background:#fff7e6;border:1px solid #e4d2a3;border-radius:9px"><b>Lecture inventory gap:</b> This lecture has no entries in the unified lecture inventory. Existing learning material elsewhere in the game may still be available. This is not marked complete.</p>':'')+
  '<div class="buttonrow"><button data-pathdiff-flash-lecture="1" style="background:#e8f2ff">🧠 Study this lecture · flashcards</button></div>'+
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-topic-mode="disease" aria-pressed="'+(conditionTopicMode==='disease')+'" style="background:#f5edff">🩺 Diseases only</button><button data-pathdiff-topic-mode="all" aria-pressed="'+(conditionTopicMode==='all')+'">All topics / foundations</button></div>'+ 
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-gap="all" aria-pressed="'+(conditionGap==='all')+'">All '+sections.length+'</button><button data-pathdiff-gap="case" aria-pressed="'+(conditionGap==='case')+'">Needs differential case</button><button data-pathdiff-gap="photo" aria-pressed="'+(conditionGap==='photo')+'">Needs attached photo</button></div>'+
@@ -688,7 +703,7 @@ function init(api){
  ev.preventDefault();ev.stopImmediatePropagation();
  const d=button.dataset;
  if(d.pathdiffExam7Rounds!==undefined)return openExam7Rounds(d.pathdiffExam7Rounds==='all'?null:d.pathdiffExam7Rounds);
- if(d.pathdiffAllRounds!==undefined){roundsOnly=false;filter='all';shuffledIds=[];return menu();}
+ if(d.pathdiffAllRounds!==undefined){roundsOnly=false;caseExam='all';practiceMode='all';filter='all';shuffledIds=[];return menu();}
  if(d.pathdiffExam7Lecture!==undefined)return openExam7Lecture(d.pathdiffExam7Lecture);
  if(d.pathdiffExam7Atlas!==undefined){const x=allCases().find(c=>c.id===d.pathdiffExam7Atlas);if(!x)return view();const specimen=exam7Specimen(x);return specimen?window.VPQ_PATH_EXAM7?.openCard?.(specimen.id):window.VPQ_PATH_EXAM7?.studyLecture?.(x.lecture);}
  if(d.pathdiffStudyStart!==undefined)return startFlash('lecture');
@@ -705,8 +720,12 @@ function init(api){
   if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
   return;
  }
- if(d.pathdiffConditionIndex!==undefined){return conditionIndex()}
- if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;const hasDisease=((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]).some(x=>x.diseaseAtlas===true);conditionTopicMode=Number(conditionLecture)>=50&&Number(conditionLecture)<=66&&hasDisease?'disease':'all';return conditionIndex()}
+ if(d.pathdiffConditionIndex!==undefined){selectedExam=groupForLecture(conditionLecture)?.id||'7';return conditionIndex()}
+ if(d.pathdiffSelectExam!==undefined){selectedExam=d.pathdiffSelectExam;const group=EXAM_GROUPS.find(x=>x.id===selectedExam);if(group)conditionLecture=String(group.start);conditionGap='all';conditionTopicMode='all';return conditionIndex();}
+ if(d.pathdiffLectureSpecimens!==undefined)return window.VPQ_PATH_EXAM7?.studyLecture?.(conditionLecture);
+ if(d.pathdiffLectureCases!==undefined){roundsOnly=false;caseExam=groupForLecture(conditionLecture)?.id||'all';practiceMode='all';filter=conditionLecture;shuffledIds=[];return menu();}
+ if(d.pathdiffLectureDdx!==undefined){roundsOnly=false;caseExam=groupForLecture(conditionLecture)?.id||'all';practiceMode='DDx';filter=conditionLecture;shuffledIds=[];return menu();}
+ if(d.pathdiffConditionLecture!==undefined){conditionLecture=d.pathdiffConditionLecture;selectedExam=groupForLecture(conditionLecture)?.id||selectedExam;const hasDisease=((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.sections||[]).some(x=>x.diseaseAtlas===true);conditionTopicMode=Number(conditionLecture)>=50&&Number(conditionLecture)<=66&&hasDisease?'disease':'all';return conditionIndex()}
  if(d.pathdiffTopicMode!==undefined){conditionTopicMode=d.pathdiffTopicMode;return conditionIndex()}
  if(d.pathdiffGap!==undefined){conditionGap=d.pathdiffGap;return conditionIndex()}
  if(d.pathdiffConditionOpen!==undefined){conditionChosen=Number(d.pathdiffConditionOpen);return conditionDetail()}
@@ -752,6 +771,8 @@ function init(api){
  const d=ev.target?.dataset;
  if(d?.pathdiffLeadingSelect!==undefined){leading=Number(ev.target.value);leadHint=false;return;}
  if(d?.pathdiffStudyLecture!==undefined){conditionLecture=String(ev.target.value||'68');return menu();}
+ if(d?.pathdiffCaseExam!==undefined){caseExam=String(ev.target.value);roundsOnly=false;filter='all';shuffledIds=[];menu();api.body.querySelector('#vpq-necro-case-list')?.setAttribute('open','');return;}
+ if(d?.pathdiffPracticeMode!==undefined){practiceMode=String(ev.target.value);shuffledIds=[];menu();api.body.querySelector('#vpq-necro-case-list')?.setAttribute('open','');return;}
  if(d?.pathdiffCaseFilter!==undefined){filter=String(ev.target.value||'all');shuffledIds=[];optionOrder=[];menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
  if(!d||d.pathdiffPhoto===undefined)return;
  const input=ev.target,file=input.files?.[0];if(!file||!file.type.startsWith('image/'))return;
