@@ -600,6 +600,12 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <button class="full" id="goStudy">📚 Study Lounge · Choose lectures</button>
 <button class="full" id="vpqExamCenterBtn310">🎓 Exam Center · Practice questions</button>
 <button class="full" id="vpqToxDashboardBtn">☣️ Toxicology Atlas</button></details>
+<details class="vpq-shift-options"><summary>🔬 Pathology, Clinical Pathology &amp; Skills</summary>
+<p class="tiny">Explore lecture/exam-linked atlases, gross lesions, histology, microscope references, flashcards and cases. Filters are set inside their learning centers.</p>
+<button type="button" class="full" data-vpq-study-room="necropsy">🔬 Necropsy · Pathology atlas &amp; flashcards</button>
+<button type="button" class="full" data-vpq-study-room="clinpath">🩸 Clinical Pathology · CBC, chemistry, UA &amp; microscopy</button>
+<button type="button" class="full" data-vpq-study-room="imaging">🩻 Diagnostic Imaging · Radiology practice</button>
+<button type="button" class="full" data-vpq-study-room="skills">💉 Clinical Skills · Injection &amp; blood draw</button></details>
 <details class="vpq-shift-options"><summary>🕹️ Arcade &amp; minigames</summary>
 <p class="tiny">Learn by playing Drug Match, Bug Battles and other available practice games.</p>
 <div class="vpqArcadeSpotlight"><button class="full accent" id="pharmArcadeBtn">🕹️ Open Pharm Arcade</button></div></details>
@@ -613,7 +619,7 @@ body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),ra
 <div class="card"><h2>🎀 Make the clinic yours</h2><p class="small">Decorate with wallpapers, cat trees, cozy furniture and seasonal themes you already designed. Cosmetic purchases never lock clinical learning.</p><button class="full accent" id="vpqUpgradeStudioBtn">🎨 Browse reception themes & accessories</button><details class="vpqUpgradeHelp"><summary>⭐ How XP and coins work</summary><p>Each newly mastered study question earns <b>10 XP</b>. Every <b>100 study XP</b> earns <b>10 clinic coins</b>. Completing patient challenges can also award rewards. Repeating a previously mastered question helps learning but does not pay its first-time reward again.</p><p>Coins buy optional decorations; progress is kept in this browser unless exported.</p></details><details><summary>🧸 Classic clinic upgrades</summary><div id="upgradeList"></div></details></div>
 <button id="editorBtn" hidden type="button" aria-hidden="true">Legacy editor</button></aside></main>
 <div class="modalwrap hidden" id="modalWrap" role="dialog" aria-modal="true" aria-label="Game interaction"><div class="modal"><div class="modalhead"><h2 id="modalTitle">Clinic</h2><button id="closeModal" class="close" aria-label="Close">✕</button></div><div id="modalBody"></div></div></div>
-<footer>Vet Pharm Quest • v2.5 Clinic Guide, Companion Update & Physiology Hub • Offline study prototype • Original educational questions based on course review materials • No backend or shared accounts</footer>
+<footer>Vet Pharm Quest · Student-led, continuously developing veterinary educational game · <a href="#" id="vpqFooterSupportLink">Project disclaimer, source credits &amp; Request Center</a> · Learning only; verify clinical content with current references.</footer>
 <script src="curriculum.js?v=20261114-exam2-focus1"></script>
 <script src="drug-stewardship.js"></script>
 <script src="visual-pathway-data.js?v=20261108-pathways1"></script>
@@ -3789,5 +3795,19 @@ window.addEventListener('load',restoreVisibleRoom,{once:true});
    if(wrap&&heading&&target){heading.textContent=title;target.innerHTML=body;wrap.classList.remove('hidden');return}
    const dlg=document.createElement('dialog');dlg.style.cssText='max-width:690px;width:min(92vw,690px);border:2px solid #b9a9d3;border-radius:16px;padding:20px;background:#fff';dlg.innerHTML='<h2>'+title+'</h2>'+body+'<form method="dialog"><button>Close</button></form>';document.body.appendChild(dlg);dlg.addEventListener('close',()=>dlg.remove());dlg.showModal();
  });
+})();
+</script><script src="game-settings-support.js?v=20261120-student-project-1"></script><script id="vpq-support-navigation-links">
+(function(){
+  function openSupport(){var b=document.getElementById('vpqSupportOpen');if(b)b.click();}
+  var foot=document.getElementById('vpqFooterSupportLink');
+  if(foot)foot.addEventListener('click',function(e){e.preventDefault();openSupport()});
+  var card=document.getElementById('vpqShiftCard');
+  if(card)card.addEventListener('click',function(e){
+    var b=e.target.closest('[data-vpq-study-room]');if(!b)return;
+    var room=b.dataset.vpqStudyRoom;
+    var roomBtn=document.querySelector('#roomnav button[data-room="'+room+'"]');
+    if(roomBtn){roomBtn.click();return}
+    var floor=document.getElementById('vpqFloorplanTopBtn');if(floor)floor.click();
+  });
 })();
 </script></body></html>
