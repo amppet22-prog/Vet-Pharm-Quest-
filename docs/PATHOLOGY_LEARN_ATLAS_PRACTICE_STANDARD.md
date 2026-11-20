@@ -1,5 +1,16 @@
 # Pathology Learn → Atlas → Practice development standard
 
+## 2026-11-19 audit correction — single existing Specimen Cabinet
+
+The real photo-editable pathology atlas is `window.VPQ_PATH_EXAM7` (the **Necropsy Specimen Cabinet**), not a separate Handbook detail screen. For Exam 6, `pathology-exam6-cabinet-bridge.js` reads existing disease sections after L59–66 content scripts load and appends missing corresponding cards to `window.VPQ_PATH_EXAM7_DATA`. The Studio uses that shared array. Stable new IDs are `vpq-gi-l{lecture}-section-{originalIndex}`; exact lecture/title matches already in the Cabinet reuse their existing ID instead of duplicating a card.
+
+- Quick Learn links to the actual Cabinet card. Its lecture's Atlas button filters the actual Cabinet by lecture.
+- The Cabinet's original publish/edit interface remains the image authority. Existing owner-published lecture photo slots (`L{lecture}-S{originalIndex}-P0/P1`) are displayed as linked images where available, without copying their data.
+- The Handbook Gastrointestinal filter must use the exact system label `Gastrointestinal` (not `Gastrointestinal pathology`).
+- Source-index-only topics are *not* automatically promoted to specimen cards. The bridge adds only `diseaseAtlas: true` sections.
+- Editing a Cabinet card stores overrides in its existing editor; future work should reconcile authoring of Handbook source records and published specimen overrides rather than silently overwrite either.
+
+
 Effective 2026-11-19. First applied to Exam 6 gastrointestinal pathology (Lectures 59–66).
 
 ## One source of truth
