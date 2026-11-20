@@ -817,6 +817,20 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <footer>Vet Pharm Quest · Student-led, continuously developing veterinary educational game · <a href="#" id="vpqFooterSupportLink">Project disclaimer, source credits &amp; Request Center</a> · Learning only; verify clinical content with current references.</footer>
 <script src="level-themed-furniture.js?v=20261120-art-expanded3"></script>
 <script src="level-reward-art.js?v=20261120-storybook-custom4"></script>
+<script src="national-flag-art.js?v=20261120-national-flags2"></script>
+<script src="bespoke-theme-art.js?v=20261120-bespoke-v1"></script>
+<script>
+(function(){
+ var base=window.VPQ_REWARD_ART;
+ if(!base)return;
+ var old=base.art;
+ base.art=function(item){
+  return window.VPQ_NATIONAL_FLAG_ART?.art(item)||
+   window.VPQ_BESPOKE_THEME_ART?.art(item)||
+   old(item);
+ };
+})();
+</script>
 <script src="curriculum.js?v=20261114-exam2-focus1"></script>
 <script src="drug-stewardship.js"></script>
 <script src="visual-pathway-data.js?v=20261108-pathways1"></script>
