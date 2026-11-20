@@ -92,6 +92,8 @@ function exam6Field(sec,names){
 const exam6Style='<style>.np-gi-card{border:1px solid #cbdcec;border-radius:12px;background:#fff;padding:10px 12px;margin:7px 0}.np-gi-card summary{cursor:pointer;font-weight:800;color:#254a6b}.np-gi-card p{margin:6px 0;line-height:1.42}.np-gi-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.np-gi-actions button{font-size:12px;padding:7px 10px}.np-gi-atlas-section{border:1px solid #dae1ed;border-radius:12px;background:#f8fbff;margin:9px 0;padding:10px 12px}.np-gi-atlas-section b{color:#294b70}.np-gi-atlas-section p{margin:5px 0;line-height:1.5}</style>';
 function exam6AtlasIndex(n){
  if(!isExam6(n))return lecture(n);
+ const cabinet=window.VPQ_PATH_EXAM7;
+ if(cabinet?.studyLecture)return cabinet.studyLecture(n);
  chapter=n;rememberView('atlas',n);
  const lesson=window.VPQ_PATH_LECTURE_LEARN?.[n];if(!lesson)return lecture(n);
  const entries=exam6Sections(n);
@@ -103,6 +105,8 @@ function exam6AtlasIndex(n){
 }
 function exam6AtlasEntry(n,index){
  if(!isExam6(n))return lecture(n);
+ const cabinet=window.VPQ_PATH_EXAM7;
+ if(cabinet?.openLectureDisease)return cabinet.openLectureDisease(n,index);
  const lesson=window.VPQ_PATH_LECTURE_LEARN?.[n],sec=lesson?.sections?.[index];
  if(!sec?.diseaseAtlas)return exam6AtlasIndex(n);
  chapter=n;rememberView('atlas-entry',n,index);
@@ -139,7 +143,7 @@ function exam6QuickLearn(n){
   '<div class="np-gi-actions"><button data-npatlasentry="'+safe(n)+'" data-npatlasindex="'+index+'">🔬 Full Atlas · photos and histology</button></div></details>';
  }).join('');
  popup('📖 L'+n+' · Quick Learn',nav()+exam6Style+
- '<div class="np-cover"><h3>'+safe(lesson.title)+'</h3><p>Quick recall: recognize the lesion, understand why it occurs, and separate it from the closest differential. Full disease details and all diagnostic photos are kept in the Atlas.</p><small>'+entries.length+' linked disease entries</small></div>'+
+ '<div class="np-cover"><h3>'+safe(lesson.title)+'</h3><p>Quick recall: recognize the lesion, understand why it occurs, and separate it from the closest differential. Full disease details and credited photos open in the existing editable Specimen Cabinet.</p><small>'+entries.length+' linked disease entries</small></div>'+
  '<div class="np-gi-actions"><button data-npatlas="'+safe(n)+'">🔬 Disease Atlas</button><button data-npflashgi="'+safe(n)+'">🧠 Lecture flashcards</button><button data-nppracticegi="'+safe(n)+'">🩺 Practice differentials</button><button data-npchapter="'+safe(n)+'">← Lecture overview</button></div>'+
  outline+
  (indexed.length?'<details class="np-gi-card"><summary>Additional lecture objectives / topics still being developed ('+indexed.length+')</summary><p class="tiny">These are coverage reminders, not validated disease Atlas entries.</p>'+indexed.map(s=>'<p>• '+safe(s.title)+'</p>').join('')+'</details>':'')+
