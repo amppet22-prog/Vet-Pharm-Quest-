@@ -83,7 +83,12 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
     '<path d="M39 34q13 -10 26 0v14H39Z M127 34q12 -10 24 0v14H127Z" fill="'+sofa[2]+'" opacity=".88"/></g>';
   const sofaArt=window.VPQ_RECEPTION_MODULAR_ASSETS.manifest;
   const upgradedSofa=['seat-sofa-rose','seat-sofa-midnight','seat-sofa-linen'].find(id=>placed.includes(id));
-  const sofaVisual=upgradedSofa?'<image href="'+sofaArt[upgradedSofa].src+'" x="744" y="341" width="169" height="110" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>':couch;
+  // Level-up sofas occupy the existing illustrated couch slot, never a second floating object.
+  const levelSofas=(window.VPQ_EXPANDED_ROOM_FURNITURE||[]).filter(u=>u.levelRoom==='reception'&&u.furnitureKind==='sofa'&&(state.upgrades||[]).includes(u.id));
+  const selectedLevelSofa=levelSofas.find(u=>u.id===state.activeReceptionLevelSofa)||levelSofas[0];
+  const levelSofaArt=selectedLevelSofa&&window.VPQ_REWARD_ART?.art(selectedLevelSofa);
+  const sofaVisual=levelSofaArt?'<svg x="738" y="335" width="181" height="123" viewBox="0 0 240 165" overflow="visible" aria-label="'+esc(selectedLevelSofa.label)+'">'+levelSofaArt+'</svg>':
+    upgradedSofa?'<image href="'+sofaArt[upgradedSofa].src+'" x="744" y="341" width="169" height="110" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>':couch;
   const plant='';
   const plantPair=has('decor-plant-pair')?'<g><g transform="translate(642 328) scale(.78)"><path d="M0 22h49l-8 47H8Z" fill="#d8b396"/><path d="M24 25V-34M24 -3Q-3 -22 -22 -12M24 -23Q45 -49 65 -32" fill="none" stroke="#649b72" stroke-width="9"/><ellipse cx="-19" cy="-13" rx="17" ry="9" fill="#84bb94"/><ellipse cx="64" cy="-32" rx="18" ry="10" fill="#89c39c"/></g><g transform="translate(956 383) scale(.55)"><path d="M0 22h49l-8 47H8Z" fill="#e1c3ab"/><path d="M24 25V-34M24 -3Q-3 -22 -22 -12M24 -23Q45 -49 65 -32" fill="none" stroke="#649b72" stroke-width="9"/><ellipse cx="-19" cy="-13" rx="17" ry="9" fill="#84bb94"/><ellipse cx="64" cy="-32" rx="18" ry="10" fill="#89c39c"/></g></g>':'';
   const catTree='';
