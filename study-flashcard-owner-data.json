@@ -24,6 +24,12 @@
       "answer": "Sustained hyperinsulinemia can damage lamellar function.",
       "why": "The link is endocrinopathic laminitis, not always hyperglycemia.",
       "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
+    },
+    "pharm-e2-43": {
+      "prompt": "Why can fructosamine be useful in stressed cats?",
+      "answer": "It's a one-time test that avoids the stress response in cats. Provides an indirect measurement of blood glucose over 2-3 weeks.",
+      "why": "One clinic glucose sample may be raised by stress. Typically, recurrent samples are needed to properly diagnose DM.",
+      "slide": "Exam 2 lecture 11 · source-derived mechanism review"
     }
   },
   "custom": [
