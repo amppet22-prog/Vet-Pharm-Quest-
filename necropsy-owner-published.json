@@ -2915,7 +2915,7 @@
           "type": "gross",
           "external": false,
           "lectures": [
-            "78"
+            "79"
           ],
           "systems": [
             "Eye"
@@ -2931,7 +2931,7 @@
         "type": "gross",
         "external": false,
         "lectures": [
-          "78"
+          "79"
         ],
         "systems": [
           "Eye"
@@ -2967,7 +2967,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-20T14:07:12.279Z",
+      "updated": "2026-11-20T14:08:19.572Z",
       "approvedBy": "amppet22-prog"
     }
   },
