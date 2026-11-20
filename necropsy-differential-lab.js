@@ -699,7 +699,7 @@ function view(){
  (initialGallery?'<div style="margin-top:9px">'+initialGallery+'</div>':'<div style="display:grid;place-items:center;min-height:145px;border:1px dashed #c3d4e5;background:#fff;border-radius:10px;margin-top:10px;text-align:center;padding:12px;box-sizing:border-box"><div><span style="font-size:24px">🖼️</span><p style="font-size:12px;margin:6px 0;color:#526b84">Images not added yet</p><small>Clinical photographs and diagnostic images will appear here.</small></div></div>')+
  (initialSlots.length?'<details style="border-top:1px solid #dae5ee;margin-top:11px;padding-top:9px"><summary style="font-size:12px;cursor:pointer;font-weight:700">View planned images ('+initialSlots.length+')</summary><div style="display:grid;gap:5px;margin-top:8px">'+initialSlots.map(p=>'<div style="font-size:11px;padding:7px;border:1px solid #dce7f0;border-radius:7px;background:#fff">'+safe(p.label)+'</div>').join('')+'</div></details>':'')+
  '<button data-pathdiff-edit-case="'+safe(x.id)+'" style="display:block;width:100%;margin-top:10px;padding:9px;background:white;border:1px solid #bfd1e2;border-radius:9px;font-size:12px;font-weight:800">＋ Manage case photos</button></aside>';
- const patientParts=String(history||'').split(/\\b(Clinical signs|Bloodwork|Ancillary diagnostics|Laboratory findings|Diagnostic findings|Diagnostics):\\s*/i);
+ const patientParts=String(history||'').split(/\b(Clinical signs|Bloodwork|Ancillary diagnostics|Laboratory findings|Diagnostic findings|Diagnostics):\s*/i);
  const narrative=patientParts[0]||'';
  let signs='',diagnostics='';
  for(let i=1;i<patientParts.length-1;i+=2){
