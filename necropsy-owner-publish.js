@@ -380,7 +380,10 @@ async function github(path,token,method='GET',payload=null,missing=false){
  if(!r.ok){let detail='';try{detail=(await r.json())?.message||''}catch{}throw Error('GitHub rejected '+method+' ('+r.status+'). '+String(detail).slice(0,220)+' Check owner access, token expiry and Contents: Read/write.');}
  return r.json();
 }
-async function file(path,token,missing=false){return github(ROOT+path+'?ref=main',token,'GET',null,missing)}
+async function file(path,token,missing=false,fresh=false){
+ const suffix=fresh?'&verify='+Date.now()+'-'+Math.random().toString(36).slice(2):'';
+ return github(ROOT+path+'?ref=main'+suffix,token,'GET',null,missing);
+}
 async function put(path,contents,sha,token,msg){return github(ROOT+path,token,'PUT',{message:msg,content:contents,branch:'main',...(sha?{sha}:{})})}
 
 function readFields(){
@@ -496,15 +499,23 @@ async function publish(job,fields,token,update){
  const entry={...prev,title:newTitle,photos,photo:photos[0]||null,text:{...(prev.text||{}),...textEdits},updated:new Date().toISOString(),approvedBy:OWNER};
  manifest[dir][job.id]=entry;
  update('Publishing '+(incoming.length?incoming.length+' new image(s) and ':'')+'your edits…');
- await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\n'),old.sha,token,'Owner publish '+job.type+' '+job.id+' (photos/text)');
- update('Verifying published photo record on GitHub…');
- const verifiedFile=await file(MANIFEST,token),verified=JSON.parse(decode(verifiedFile.content));
- const saved=verified?.[dir]?.[job.id];
- if(!saved||!Array.isArray(saved.photos)||saved.photos.length!==photos.length||photos.some((p,i)=>saved.photos[i]?.url!==p.url)){
-  throw Error('Published record could not be verified. Reopen the card before retrying; some changes may already be saved.');
+ const accepted=await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\\n'),old.sha,token,'Owner publish '+job.type+' '+job.id+' (photos/text)');
+ const committedSHA=accepted?.commit?.sha||'',blobSHA=accepted?.content?.sha||'';
+ if(!committedSHA||!blobSHA)throw Error('GitHub did not return a confirmed commit. Check the repository before retrying.');
+ // A successful Contents API PUT is definitive acceptance. A branch GET may be stale.
+ published=manifest;
+ update('GitHub accepted commit '+committedSHA.slice(0,9)+'. Checking readback…');
+ let verified=false,verificationNote='';
+ try{
+  const check=await file(MANIFEST,token,false,true);
+  const latest=JSON.parse(decode(check.content)),saved=latest?.[dir]?.[job.id];
+  if(saved&&saved.title===newTitle&&Array.isArray(saved.photos)&&saved.photos.length===photos.length&&photos.every((p,i)=>saved.photos[i]?.url===p.url)){
+   verified=true;published=latest;
+  }else verificationNote='The branch readback is still showing an older version. Do not publish again; reload the card after GitHub updates.';
+ }catch(error){
+  verificationNote='Immediate readback is unavailable, but the GitHub commit succeeded. Do not publish again; reload the card shortly.';
  }
- published=verified;
- return {added:incoming.length,retained:photos.length-incoming.length,textFields:Object.keys(textEdits).length};
+ return {added:incoming.length,retained:photos.length-incoming.length,textFields:Object.keys(textEdits).length,verified,commit:committedSHA,verificationNote};
 }
 
 function init(context){
@@ -637,8 +648,9 @@ context.body.addEventListener('click',ev=>{
    const result=await publish(job,fields,token,update);
    if(job.type==='specimen')window.VPQ_PATH_EXAM7?.afterPublished?.(job.id);
    if(vault&&!vault.exists()&&password&&fields&&token){await vault.store(token,password);}
-   const details=result.added?'<p><b>'+result.added+' new photo(s)</b> saved in the verified GitHub record.</p>':'<p><b>No new photos were selected in this action.</b> Text or existing photo details were saved.</p>';
-   show('✓ GitHub publish verified',details+'<p>Existing photos were preserved unless explicitly removed or replaced. Refresh the game to see published images.</p><button data-necro-owner-close="1">← Return to card</button>');
+   const details=result.added?'<p><b>'+result.added+' new photo(s)</b> included in the accepted GitHub commit.</p>':'<p><b>No new photos selected.</b> Text or existing photo edits were committed.</p>';
+   const confirmation=result.verified?'<p>✅ GitHub readback confirmed the saved title and photo list.</p>':'<p style="color:#755126"><b>GitHub saved your changes.</b> '+esc(result.verificationNote)+'</p>';
+   show('✓ Published to GitHub',details+confirmation+'<p><small>Commit: '+esc(result.commit.slice(0,12))+'</small></p><p>Existing photos were preserved unless explicitly removed or replaced.</p><button data-necro-owner-close="1">← Return to card</button>');
   })().catch(e=>{inlineError('Could not publish: '+e.message+' Your selections remain in the editor; correct the issue and try again.');}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
 }
