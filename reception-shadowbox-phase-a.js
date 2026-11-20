@@ -235,12 +235,12 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
   if(stage.dataset.room!=='reception'||state.receptionView!=='isometric')return;
   const node=document.createElement('div');node.id='vpqShadowHotspots';
   const hotspots=[
-   ['front','Front desk · check in and view patients','queue'],
+   ['front','Open patient list on reception computer','queue'],
    ['clinical','Enter the main clinical hallway','vpqGoHallway'],
    ['pharmacy','Enter pharmacy and drug shelves','vpqGoPharmacy'],
    ['studio','Customize waiting room · Reception Studio','receptionStudio']
   ];
-  node.innerHTML=hotspots.map(([id,label,name])=>'<button type="button" class="vpqShadowHotspot vpqShadow-'+id+'" data-shadowaction="'+name+'" aria-label="'+label+'" title="'+label+'"><span>'+({front:'🛎️ Check in · Patients',clinical:'🚪 Hallway',pharmacy:'💊 Pharmacy',studio:'🎨 Decorate'}[id])+'</span></button>').join('');
+  node.innerHTML=hotspots.map(([id,label,name])=>'<button type="button" class="vpqShadowHotspot vpqShadow-'+id+'" data-shadowaction="'+name+'" aria-label="'+label+'" title="'+label+'"><span>'+({front:'↗',clinical:'🚪 Hallway',pharmacy:'💊 Pharmacy',studio:'🎨 Decorate'}[id])+'</span></button>').join('');
   node.addEventListener('click',ev=>{const button=ev.target.closest('[data-shadowaction]');if(button)action(button.dataset.shadowaction)});
   stage.appendChild(node);
  }
@@ -253,7 +253,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
  '.vpqShadowHotspot{position:absolute;display:block;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:12px;padding:0;color:#29445a;box-shadow:none;transform:none!important}'+
  '.vpqShadowHotspot span{position:absolute;left:50%;bottom:-2px;transform:translate(-50%,100%);white-space:nowrap;display:block;background:#fff9edeb;border:1px solid #b7c8d3;border-radius:15px;padding:3px 8px;font-size:10px;font-weight:800;box-shadow:0 3px 4px #384e5b22}'+
  '.vpqShadowHotspot:hover,.vpqShadowHotspot:focus-visible{border-color:#e8bd65;background:#fff9d50c;outline:1px solid #fff9ed;outline-offset:0;box-shadow:0 0 6px #f5d98777}'+
- '.vpqShadow-front{left:5%;top:62%;width:32%;height:25%}.vpqShadow-front span{left:49%;bottom:3%;transform:translate(-50%,0)}'+
+ '.vpqShadow-front{left:17%;top:52%;width:13%;height:18%;border-radius:9px}.vpqShadow-front span{position:absolute!important;left:auto!important;right:-7px!important;top:-8px!important;bottom:auto!important;transform:none!important;display:grid!important;place-items:center!important;width:20px!important;height:20px!important;padding:0!important;border-radius:50%!important;font-size:12px!important;line-height:1!important;color:#5e537c!important;background:#fffdf6f0!important;border:1px solid #ad9abe!important;box-shadow:0 2px 5px #51486d38!important}.vpqShadow-front:hover,.vpqShadow-front:focus-visible{border-color:#b2a2c7!important;outline:1px solid #fefdfc!important;background:#e7f5f510!important}.vpqShadow-front.vpqApproachNear{border-color:#b2a2c7!important;outline:none!important;box-shadow:0 0 4px #aea0c866!important;background:transparent!important}.vpqShadow-front.vpqApproachNear:after{display:none!important}' +
  
  '.vpqShadow-clinical{left:44%;top:26%;width:13%;height:32%;border-radius:9px}.vpqShadow-pharmacy{left:67%;top:23%;width:15%;height:33%}'+
  '.vpqShadow-clinical span,.vpqShadow-pharmacy span{bottom:7%;transform:translate(-50%,0)}'+
