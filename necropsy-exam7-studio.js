@@ -97,6 +97,8 @@ function card(i){
  modal((x.normal?'🌱 Normal reference · ':'Lecture '+h(x.lecture)+' · ')+h(x.title),
  nav+
  '<p class="tiny">'+photoStatus(x)+' · Photos optional; uploading is not the same as verifying.</p>'+ 
+ (x.normal?'':(function(){const diff=window.VPQ_NECROPSY_DIFFERENTIAL_LAB;const hit=diff?.exam7Matches?.(x.lecture,x.title)||[];return '<div style="border:1px solid #c4d7e9;border-radius:9px;padding:9px;margin:8px 0;background:#f5f9ff"><b>🩺 Related Exam 7 Patient Rounds</b><p style="font-size:12px;margin:4px 0">Practice clinical reasoning using these specimen findings.</p><div class="buttonrow">'+(hit.length?hit.map(c=>'<button data-path7-navle-case="'+h(c.id)+'">🧩 '+h(c.sourceCaseId)+' · Patient case</button>').join(''):'<small>No exact disease-linked case yet; browse cases for this lecture.</small>')+'<button data-path7-navle-lecture="'+h(x.lecture)+'">All L'+h(x.lecture)+' patient rounds</button></div></div>'})())+
+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"><div>'+media+'</div><div>'+(x.normal?'<p><b>System:</b> '+h(x.system)+' · <b>Species:</b> '+h(x.species)+'</p>':'')+'<p><b>'+(x.normal?'Normal gross appearance':'Gross description')+':</b> '+rich(x.gross)+' <button type="button" data-path7-why="gross" aria-label="Explain gross findings" title="Why does the lesion look this way?">?</button></p>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal identification':'Reveal morphologic diagnosis')+'</b> ❔</summary><p>'+rich(x.dx)+'</p></details>'+
  '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal histology':'Histology')+'</b> ❔</summary><p>'+rich(x.histo)+'</p></details>'+
@@ -232,6 +234,8 @@ function init(api){
  if(d.path7Hide!==undefined){const item=base[Number(d.path7Hide)];return item&&window.VPQ_NECROPSY_OWNER_PUBLISH?.hideSpecimenEditor?.(item.id,false)}
  if(d.path7Tab!==undefined){tab=d.path7Tab==='normals'?'normals':'lesions';search='';return menu()}
  if(d.path7Library!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.photoLibrary?.();
+ if(d.path7NavleCase!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(d.path7NavleCase);
+ if(d.path7NavleLecture!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openExam7Rounds?.(d.path7NavleLecture);
  if(d.path7Differentials!==undefined)return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.start(ui,filter);
  if(d.path7Mode!==undefined){tab='lesions';mode=d.path7Mode;return menu()}
   if(d.path7Page!==undefined){const n=Number(d.path7Page);if(Number.isInteger(n)&&n>=0){listPage=n;return menu()}return;}
