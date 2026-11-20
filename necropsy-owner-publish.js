@@ -245,6 +245,15 @@ function photoLibrary(){
 function getText(type,id){const r=type==='case'?getCase(id):type==='specimen'?getSpecimen(id):published.lectures?.[id];return r?.text||{}}
 function show(title,body){api?.showModal(title,body);window.VPQ_PATH_RICH_TEXT?.install?.(api?.body)}
 let draftState=null;
+
+function caseEditorFields(edits){
+ const groups=[
+ {title:'1 · Patient signalment',description:'Short fields used in the patient header.',keys:[['age','Age'],['speciesName','Species'],['breed','Breed'],['sex','Sex'],['reproductiveStatus','Reproductive status']]},
+ {title:'2 · Clinical presentation and pathology',description:'Edit the relevant clinical information without touching photos.',keys:[['history','History, signs and initial diagnostic findings'],['gross','Gross lesion description'],['histo','Microscopic / histology findings'],['morph','Morphologic diagnosis'],['mechanism','Pathogenesis and explanation'],['tests','Additional tests and confirmation']]}
+ ];
+ const parts=groups.map((g,section)=>'<section class="vpq-case-edit-group"><h4>'+g.title+'</h4><small>'+g.description+'</small><div class="'+(section===0?'vpq-case-edit-signalment':'')+'">'+g.keys.map(([k,label])=>'<label><b>'+label+'</b>'+(section===0?'<input data-np-text="'+k+'" value="'+esc(edits[k]||'')+'" placeholder="'+label+'">':'<textarea data-np-text="'+k+'" rows="'+(k==='history'?5:3)+'">'+esc(edits[k]||'')+'</textarea>')+'</label>').join('')+'</div></section>').join('');
+ return parts+'<details class="vpq-case-edit-legacy"><summary>Original signalment summary (legacy field)</summary><textarea data-np-text="species" rows="2">'+esc(edits.species||'')+'</textarea></details>';
+}
 async function editor(type,id){
  const lp=type==='lecture'?/^L(\d+)-S(\d+)-P([01])$/.exec(id):null;
  const lesson=lp?window.VPQ_PATH_LECTURE_LEARN?.[lp[1]]?.sections?.[Number(lp[2])]:null;
@@ -265,7 +274,7 @@ async function editor(type,id){
  show('✏️ Edit & publish · '+esc(base.title),
  '<p><b>Text-only updates are allowed.</b> Leave image inputs blank to preserve all published photos. Select multiple new images to append them. Existing photos are kept unless you check Remove or explicitly select Replace all.</p>'+
  (type!=='lecture'?'<label style="display:block;margin:9px 0"><b>✏️ Card name (editable)</b><input data-np-text="title" maxlength="180" style="width:100%;display:block;margin-top:4px" value="'+esc(edits.title||base.title)+'" placeholder="Condition or specimen name"></label><p class="tiny">Renaming keeps the existing card ID, photos, captions, species tags and case links. Publish your name change using the same password.</p>':'')+
- (fields.length?'<h4>📝 Teaching content (editable independently of photos)</h4>'+fields.map(k=>'<label style="display:block;margin:7px 0"><b>'+esc(k.replace(/^\w/,c=>c.toUpperCase()))+'</b><textarea data-np-text="'+k+'" rows="3" style="display:block;width:100%">'+esc(edits[k]||'')+'</textarea></label>').join(''):'')+
+ (type==='case'?caseEditorFields(edits):fields.length?'<h4>📝 Teaching content (editable independently of photos)</h4>'+fields.map(k=>'<label style="display:block;margin:7px 0"><b>'+esc(k.replace(/^\w/,c=>c.toUpperCase()))+'</b><textarea data-np-text="'+k+'" rows="3" style="display:block;width:100%">'+esc(edits[k]||'')+'</textarea></label>').join(''):'')+
  (type==='case'?'<h4>🧩 Diagnosis choices & reasoning</h4><p class="tiny">Edit each answer and its supporting evidence. Mark exactly one as the best-supported diagnosis. Changes will publish with the case.</p>'+((edits.options||[]).map((o,i)=>'<div style="border:1px solid #cad9e7;border-radius:9px;padding:9px;margin:8px 0"><label style="font-weight:800"><input type="radio" name="np-best-option" value="'+i+'" '+(o.role==='best'||o.name===edits.best?'checked':'')+'> Best diagnosis '+(i+1)+'</label><label style="display:block;margin:5px 0">Diagnosis<input data-np-option-name="'+i+'" value="'+esc(o.name||'')+'" style="display:block;width:100%;padding:7px"></label>'+[['supports','Why it fits'],['against','Why less likely'],['hist','Histology distinction']].map(([k,label])=>'<label style="display:block;margin:5px 0">'+label+'<textarea data-np-option-'+k+'="'+i+'" rows="2" style="display:block;width:100%">'+esc(o[k]||'')+'</textarea></label>').join('')+'</div>').join('')):'')+
  (type==='specimen'?'<h4>✅ Structured classifications — select from the options</h4>'+(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(edits)||'')+(window.VPQ_PATH_ATLAS_META?.editorHTML?.(edits)||''):'')+
  
