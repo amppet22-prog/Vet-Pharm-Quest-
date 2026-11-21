@@ -96,7 +96,7 @@ function speciesMatches(x,key,rank){
 function browseHTML(x){
  const d=data(x);
  const items=Object.entries(d.species).map(([key,level])=>'<span style="display:inline-block;margin:3px;padding:5px 8px;border-radius:12px;border:1px solid #cadce7;background:#f5faff;font-size:12px">'+esc(species[key])+': '+esc(frequency[level])+'</span>').join('');
- return '<details style="border-top:1px solid #d4dce8;padding-top:10px;margin-top:12px" open><summary><b>🐾 Species, One Health & condition classification</b></summary>'+
+ return '<details style="border-top:1px solid #d4dce8;padding-top:10px;margin-top:12px"><summary><b>🐾 Species, breeds & classification</b></summary>'+
  (d.hostScope==='multiple'||Object.keys(d.species).length>=2?'<p style="margin:5px 0"><b>🐾 Multiple species / broad host range</b> · Specific hosts should be listed when established.</p>':'')+
  (items?'<div style="margin:7px 0">'+items+'</div>':'<p class="tiny">Individual species frequencies not yet assessed. No occurrence is assumed.</p>')+
  (d.breedTags.length||d.breedSizes.length?'<div style="margin:8px 0"><b style="font-size:12px;color:#34476c">Breed predispositions:</b> '+[...d.breedSizes.map(k=>breedSizes[k]),...d.breedTags].map(label=>'<span style="display:inline-block;margin:3px;padding:4px 8px;border-radius:11px;border:1px solid #d6c8ee;background:#f7f1fc;color:#513d75;font-size:11px;font-weight:700">'+esc(label)+'</span>').join('')+(d.breedEvidence?'<p class="tiny" style="margin:5px 0">Association source: '+esc(d.breedEvidence)+'</p>':'')+'</div>':'')+
