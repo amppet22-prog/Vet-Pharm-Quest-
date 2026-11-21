@@ -123,7 +123,7 @@ function editorHTML(x){
  '<label>Evidence/source for frequency<textarea id="pathMetaEvidence" rows="2" style="width:100%">'+esc(d.evidence)+'</textarea></label>'+
  '<details style="margin:10px 0;border:1px solid #d6c8ee;border-radius:10px;padding:9px"><summary><b>🐕 Breed predispositions · optional</b></summary><p class="tiny">Add only documented associations, not automatic disease rules. Keep species tags separately. Unknown breeds are not assumed unaffected.</p>'+
  '<div style="display:flex;flex-wrap:wrap;gap:8px">'+Object.entries(breedSizes).map(([key,label])=>'<label style="font-size:12px"><input type="checkbox" data-path-breed-size="'+esc(key)+'"'+(d.breedSizes.includes(key)?' checked':'')+'> '+esc(label)+'</label>').join('')+'</div>'+
- '<label style="display:block;margin:7px 0">Key breeds (one per line)<textarea id="pathMetaBreedTags" rows="4" style="width:100%" placeholder="Siberian Husky&#10;Akita">'+esc(d.breedTags.join('\\n'))+'</textarea></label>'+
+ '<label style="display:block;margin:7px 0">Key breeds (one per line)<textarea id="pathMetaBreedTags" rows="4" style="width:100%" placeholder="Siberian Husky&#10;Akita">'+esc(d.breedTags.join('\n'))+'</textarea></label>'+
  '<label style="display:block;margin:7px 0">Evidence and strength of association<textarea id="pathMetaBreedEvidence" rows="2" style="width:100%" placeholder="Instructor slide, study or textbook; do not assume prevalence">'+esc(d.breedEvidence)+'</textarea></label></details>'+
  '<label>Condition type'+selectHTML(conditionTypes,'pathMetaType',d.conditionType,true)+'</label>'+
  '<label>Subtype / pathogen or neoplasm family'+selectHTML(subtypes,'pathMetaSubtype',d.conditionSubtype,true)+'</label>'+
@@ -144,7 +144,7 @@ function readEditor(root){
  root.querySelectorAll('[data-path-species]').forEach(el=>{if(species[el.dataset.pathSpecies]&&frequency[el.value])ranks[el.dataset.pathSpecies]=el.value});
  return {
  speciesOccurrence:JSON.stringify(ranks),hostScope:v('pathMetaHostScope'),speciesEvidence:v('pathMetaEvidence'),
- breedSizes:JSON.stringify(selectedBreedSizes),breedTags:JSON.stringify(parseBreedTags(v('pathMetaBreedTags').split(/\\n/))),breedEvidence:v('pathMetaBreedEvidence'),
+ breedSizes:JSON.stringify(selectedBreedSizes),breedTags:JSON.stringify(parseBreedTags(v('pathMetaBreedTags').split(/\n/))),breedEvidence:v('pathMetaBreedEvidence'),
  conditionType:v('pathMetaType'),conditionSubtype:v('pathMetaSubtype'),
  organSystem:v('pathMetaSystem'),affectedOrgan:v('pathMetaOrgan'),
  pathogenNames:v('pathMetaPathogen'),diseaseId:v('pathMetaDisease').toLowerCase().replace(/[^a-z0-9-]/g,''),
