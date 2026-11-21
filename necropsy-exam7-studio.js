@@ -41,7 +41,7 @@ const ATLAS_SYSTEMS={
  systemic:['🌎','Systemic / One Health','#DFEAF8','#607FA4'],
  other:['🔬','Other','#EDF0F5','#62748B']
 };
-const atlasExam=n=>{const k=Number(n);return k>=67&&k<=79?7:k>=59&&k<=66?6:k>=50&&k<=58?5:k>=42&&k<=49?4:k>=31&&k<=41?3:k>=16&&k<=30?2:k>=1&&k<=15?1:null};
+const atlasExam=n=>{const k=Number(n);return k>=67&&k<=79?7:k>=59&&k<=66?6:k>=50&&k<=58?5:k>=42&&k<=49?4:k>=31&&k<=41?3:k>=17&&k<=30?2:k>=1&&k<=16?1:null};
 const ATLAS_EXAMS={1:['#E5F0FF','#5B83B9'],2:['#EDE3FF','#8264C0'],3:['#DAF3ED','#3E9C8A'],4:['#FCECD8','#AD8658'],5:['#FCE3EB','#B25F80'],6:['#E6F3D7','#709A55'],7:['#F0E3FC','#8256B6']};
 function atlasSystem(x){
  const m=window.VPQ_PATH_ATLAS_META?.data?.(x)||{},n=Number(x.lecture),title=String(x.title||'');
@@ -370,7 +370,7 @@ function init(api){
 function openCard(id){refreshCustom();const i=base.findIndex(x=>x.id===id);if(i>=0){tab=base[i].normal?'normals':'lesions';return card(i)}return menu()}
 function openLectureDisease(lecture,section){const bridge=window.VPQ_PATH_EXAM6_CABINET_BRIDGE;const id=bridge?.get?.(lecture,section);if(!id)return studyLecture(lecture);tab='lesions';filter=String(lecture);search='';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';return openCard(id)}
 function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
-function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
-function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
+function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','breedSizes','breedTags','breedEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
+function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','breedSizes','breedTags','breedEvidence','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
 return {init,start,studyLecture,openLectureDisease,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
 })();
