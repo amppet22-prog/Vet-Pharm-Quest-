@@ -354,25 +354,25 @@ function menu(){
 '<div class="atlas-lectures">'+lectures.map(l=>{const c=ATLAS_EXAMS[atlasExam(l)]||['#F0ECF9','#8671B6'];return '<button data-path7-filter="'+h(l)+'" style="--lecture-bg:'+c[0]+';--lecture-ink:'+c[1]+'" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':l==='8'?'L8 · Cell Accumulations*':l==='9'?'L9 · Morphologic DX':'L'+h(l))+'</button>'}).join('')+'</div>'+
  '<p class="tiny"><b>'+selected.length+' matching atlas cards.</b> Showing '+(selected.length?listPage*pageSize+1:0)+'–'+Math.min(selected.length,(listPage+1)*pageSize)+'. *The uploaded Cell Accumulations PDF is file 8 but its title slide says Lecture 9. The separate file 9 teaches morphologic vs etiologic diagnosis. Photo slots are editable; instructor photographs are not copied into this public game.</p>'+ 
  '<label style="display:block;margin:8px 0">Find disease or lesion <input id="path7Search" data-path7-search="1" placeholder="e.g. pyometra, optic nerve, granuloma" value="'+h(search)+'" style="width:min(100%,430px);padding:9px;border:1px solid #bccbe0;border-radius:9px"></label>'+ 
- '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">'+alphaGrid(pageItems,x=>{const ex=x.catalogScope==='reference'?null:atlasExam(x.lecture),ec=ATLAS_EXAMS[ex]||['#EDF0F5','#708096'],sys=atlasSystem(x);return '<button class="atlas-index-card" style="text-align:left;--card-accent:'+sys[4]+';--card-bg:'+ec[0]+';--system-bg:'+sys[3]+';--system-ink:'+sys[4]+'" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong>'+(x.dermComparison?'<small style="font-weight:850;color:#6c4e9b">🔎 COMPARISON REFERENCE · photo-ready</small>':x.dermDiseaseInfo?'<small style="font-weight:850;color:#52738b">📖 DERM DISEASE INFO · photo-ready</small>':'')+'<small>Lecture '+h(x.lecture)+(ex?' · Exam '+ex:' · Reference')+'</small><small class="atlas-system-line">'+atlasIcon(ATLAS_ICON_KEYS[sys[0]],15)+' '+h(sys[2])+'</small></button>'})+'</div>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">'+alphaGrid(pageItems,x=>{const ex=x.catalogScope==='reference'?null:atlasExam(x.lecture),ec=ATLAS_EXAMS[ex]||['#EDF0F5','#708096'],sys=atlasSystem(x);return '<button class="atlas-index-card" style="text-align:left;--card-accent:'+sys[4]+';--card-bg:'+ec[0]+';--system-bg:'+sys[3]+';--system-ink:'+sys[4]+'" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong>'+(x.dermComparison||x.atlasComparison?'<small style="font-weight:850;color:#6c4e9b">🔎 COMPARISON REFERENCE · photo-ready</small>':x.dermDiseaseInfo?'<small style="font-weight:850;color:#52738b">📖 DERM DISEASE INFO · photo-ready</small>':'')+'<small>Lecture '+h(x.lecture)+(ex?' · Exam '+ex:' · Reference')+'</small><small class="atlas-system-line">'+atlasIcon(ATLAS_ICON_KEYS[sys[0]],15)+' '+h(sys[2])+'</small></button>'})+'</div>'+
  (maxPage?'<div class="buttonrow" style="justify-content:center;gap:10px;margin:14px 0"><button data-path7-page="'+(listPage-1)+'" '+(listPage===0?'disabled':'')+'>← Previous 48</button><span style="align-self:center;font-size:12px">Page '+(listPage+1)+' of '+(maxPage+1)+'</span><button data-path7-page="'+(listPage+1)+'" '+(listPage===maxPage?'disabled':'')+'>Next 48 →</button></div>':'') );
 }
 /* Dermatology morphology reference: photo captions can map to individual rows.
    Keeps all existing specimen/owner-publish buttons and rendering intact. */
 function dermComparisonHTML(x){
- if(!x.dermComparison||!Array.isArray(x.comparisonRows))return '';
+ if(!(x.dermComparison||x.atlasComparison)||!Array.isArray(x.comparisonRows))return '';
  const official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(x.id)||{};
  const photos=Array.isArray(official.photos)?official.photos:(official.photo?.url?[official.photo]:[]);
  const matchedPhoto=(label)=>photos.find(p=>p?.url&&String(p.caption||'').toLowerCase().includes(String(label).toLowerCase()));
  return '<section class="atlas-derm-comparison" aria-label="Dermatology side-by-side recognition">'+
- '<h4>🔬 Compare by morphology · species · location</h4>'+
+ '<h4>🔬 '+(x.atlasComparison?'Compare reproductive conditions · species · gross appearance':'Compare by morphology · species · location')+'</h4>'+ 
  '<p>These are comparative teaching patterns, not separate diagnoses. Attach several published pictures to this card and name the structure/condition in each photo caption.</p>'+
  '<div class="atlas-derm-rows">'+x.comparisonRows.map((row,i)=>(
  '<article class="atlas-derm-row"><div class="atlas-derm-photo" aria-label="Photo placeholder for '+h(row[0])+'">'+
  (matchedPhoto(row[0])?'<img src="'+h(matchedPhoto(row[0]).url)+'" alt="'+h(matchedPhoto(row[0]).caption||row[0])+'" loading="lazy" style="width:100%;max-height:120px;object-fit:contain;border-radius:7px">':'<span>📷</span><small>Photo '+(i+1)+'<br>'+h(row[0])+'</small>')+'</div>'+
  '<div class="atlas-derm-facts"><h5>'+h(row[0])+'</h5>'+
  '<div><b>Look:</b> '+h(row[1])+'</div>'+
- '<div><b>Depth / location:</b> '+h(row[2])+'</div>'+
+ '<div><b>'+(x.atlasComparison?'Tissue / origin':'Depth / location')+':</b> '+h(row[2])+'</div>'+ 
  '<div><b>Species / body site:</b> '+h(row[3])+'</div>'+
  '<div><b>Visual clue:</b> '+h(row[4])+'</div>'+
  '<div><b>Don’t confuse:</b> '+h(row[5])+'</div></div></article>'
@@ -398,7 +398,7 @@ function card(i){
  const related=x.normal?[]:diff?.exam7Matches?.(x.lecture,x.title)||[];
  const details=(title,content,open=false)=>'<details class="atlas-panel" style="--panel-bg:'+sys[3]+';--panel-ink:'+sys[4]+'" '+(open?'open':'')+'><summary>'+title+'</summary><div class="atlas-panel-body">'+content+'</div></details>';
  const hasKey=Boolean(!x.normal);
- const header='<div class="atlas-heading" style="--exam-bg:'+theme[0]+';--exam-ink:'+theme[1]+'"><h3>'+h(x.title)+'</h3>'+(x.dermComparison?'<p style="font-size:12px;font-weight:800;color:#5f467f;margin:0 0 7px">🔎 DERMATOLOGY COMPARISON · not a single-disease diagnosis</p>':x.dermDiseaseInfo?'<p style="font-size:12px;font-weight:800;color:#476980;margin:0 0 7px">📖 DERMATOLOGY DISEASE INFO · lecture-linked</p>':'')+'<div class="atlas-chipline"><span class="atlas-exam-tag">'+(exam?'Exam '+exam:'Reference Library')+' · L'+h(x.lecture)+'</span>'+atlasCardTags(x)+'</div></div>';
+ const header='<div class="atlas-heading" style="--exam-bg:'+theme[0]+';--exam-ink:'+theme[1]+'"><h3>'+h(x.title)+'</h3>'+(x.dermComparison||x.atlasComparison?'<p style="font-size:12px;font-weight:800;color:#5f467f;margin:0 0 7px">🔎 '+(x.atlasComparison?'REPRODUCTIVE PATHOLOGY':'DERMATOLOGY')+' COMPARISON · not a single-disease diagnosis</p>':x.dermDiseaseInfo?'<p style="font-size:12px;font-weight:800;color:#476980;margin:0 0 7px">📖 DERMATOLOGY DISEASE INFO · lecture-linked</p>':'')+'<div class="atlas-chipline"><span class="atlas-exam-tag">'+(exam?'Exam '+exam:'Reference Library')+' · L'+h(x.lecture)+'</span>'+atlasCardTags(x)+'</div></div>';
  const caseLinks=related.length?'<div class="atlas-small-links buttonrow">'+related.slice(0,4).map(c=>'<button data-path7-navle-case="'+h(c.id)+'">🩺 '+h(c.sourceCaseId||'Case')+'</button>').join('')+(related.length>4?'<span class="atlas-caption">+'+(related.length-4)+' cases</span>':'')+'</div>':'';
  const mediaHTML='<div class="atlas-media"><div class="atlas-caption" style="margin:0 0 8px">📷 '+photoStatus(x)+' · Gross, histology and causal-agent photos</div>'+media+'</div>';
  const grossCount=parseGrossSpecies(x.grossSpecies).length;
