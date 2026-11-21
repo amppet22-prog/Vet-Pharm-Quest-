@@ -293,7 +293,7 @@ async function editor(type,id){
  show(type==='case'?'✏️ Case editor · Lecture '+esc(base.lecture||''):'✏️ Edit & publish · '+esc(base.title),
  '<p style="padding:9px;background:#f3f8fd;border:1px solid #ccdeeb;border-radius:9px;font-size:12px"><b>Case editor:</b> Update only what you want. Existing photos stay unless you remove or replace them. Multiple image uploads are available in the photo section below.</p>'+
  (type!=='lecture'?'<label style="display:block;margin:9px 0"><b>Case title / editor label</b><input data-np-text="title" maxlength="180" style="width:100%;display:block;margin-top:4px" value="'+esc(edits.title||base.title)+'" placeholder="Condition or specimen name"></label><p class="tiny">Renaming keeps the existing card ID, photos, captions, species tags and case links. Publish your name change using the same password.</p>':'')+
- (type==='case'?caseEditorFields(edits):fields.length?'<h4>📝 Teaching content (editable independently of photos)</h4>'+fields.map(k=>'<label style="display:block;margin:7px 0"><b>'+esc(k.replace(/^\w/,c=>c.toUpperCase()))+'</b><textarea data-np-text="'+k+'" rows="3" style="display:block;width:100%">'+esc(edits[k]||'')+'</textarea></label>').join(''):'')+
+ (type==='case'?caseEditorFields(edits):fields.length?'<h4>📝 Teaching content (editable independently of photos)</h4>'+fields.map(k=>'<label style="display:block;margin:7px 0"><b>'+esc(k==='gross'?'General gross description (always visible)':k.replace(/^\w/,c=>c.toUpperCase()))+'</b><textarea data-np-text="'+k+'" rows="3" style="display:block;width:100%">'+esc(edits[k]||'')+'</textarea></label>').join('')+(type==='specimen'?(window.VPQ_PATH_EXAM7?.speciesGrossEditorHTML?.(edits)||''):''):'')+
  (type==='case'?'<h4>3 · Differential diagnoses & reasoning</h4><p class="tiny">Edit each answer and its supporting evidence. Mark exactly one as the best-supported diagnosis. Changes will publish with the case.</p>'+((edits.options||[]).map((o,i)=>'<div style="border:1px solid #cad9e7;border-radius:9px;padding:9px;margin:8px 0"><label style="font-weight:800"><input type="radio" name="np-best-option" value="'+i+'" '+(o.role==='best'||o.name===edits.best?'checked':'')+'> Best diagnosis '+(i+1)+'</label><label style="display:block;margin:5px 0">Diagnosis<input data-np-option-name="'+i+'" value="'+esc(o.name||'')+'" style="display:block;width:100%;padding:7px"></label>'+[['supports','Why it fits'],['against','Why less likely'],['hist','Histology distinction']].map(([k,label])=>'<label style="display:block;margin:5px 0">'+label+'<textarea data-np-option-'+k+'="'+i+'" rows="2" style="display:block;width:100%">'+esc(o[k]||'')+'</textarea></label>').join('')+'</div>').join('')):'')+
  (type==='specimen'?'<h4>✅ Structured classifications — select from the options</h4>'+(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(edits)||'')+(window.VPQ_PATH_ATLAS_META?.editorHTML?.(edits)||''):'')+
  
@@ -416,6 +416,7 @@ function readFields(){
   }
  }
  if(pending?.type==='specimen'){
+  if(root.querySelector('[data-path7-species-editor-rows]'))edits.grossSpecies=window.VPQ_PATH_EXAM7?.readGrossSpecies?.(root)||'[]';
   Object.assign(edits,window.VPQ_PATH_ETIOLOGY?.readEditor?.(root)||{},window.VPQ_PATH_ATLAS_META?.readEditor?.(root)||{});
  }
  if(pending?.type!=='lecture'){
@@ -503,7 +504,7 @@ async function publish(job,fields,token,update){
  const entry={...prev,title:newTitle,photos,photo:photos[0]||null,text:{...(prev.text||{}),...textEdits},updated:new Date().toISOString(),approvedBy:OWNER};
  manifest[dir][job.id]=entry;
  update('Publishing '+(incoming.length?incoming.length+' new image(s) and ':'')+'your edits…');
- const accepted=await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\\n'),old.sha,token,'Owner publish '+job.type+' '+job.id+' (photos/text)');
+ const accepted=await put(MANIFEST,encode(JSON.stringify(manifest,null,2)+'\n'),old.sha,token,'Owner publish '+job.type+' '+job.id+' (photos/text)');
  const committedSHA=accepted?.commit?.sha||'',blobSHA=accepted?.content?.sha||'';
  if(!committedSHA||!blobSHA)throw Error('GitHub did not return a confirmed commit. Check the repository before retrying.');
  // A successful Contents API PUT is definitive acceptance. A branch GET may be stale.
@@ -527,7 +528,8 @@ function init(context){
  if(context.body.__vpqNecroOwnerInit)return;
  context.body.__vpqNecroOwnerInit=true;
  load();
- context.body.addEventListener('click',ev=>{
+ context.body.addEventListener('click',ev=>{if(ev.target?.closest?.('[data-path7-add-species-row]')){ev.preventDefault();ev.stopImmediatePropagation();window.VPQ_PATH_EXAM7?.appendGrossSpeciesRow?.(context.body);return;}
+
  const caseCancel=ev.target.closest('[data-np-case-rename-cancel]');
  if(caseCancel){ev.preventDefault();ev.stopImmediatePropagation();return window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.openCase?.(pending?.id)}
  const b=ev.target.closest('[data-np-rename-save],[data-np-rename-cancel]');if(!b)return;
