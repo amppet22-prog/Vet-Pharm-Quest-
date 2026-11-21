@@ -119,6 +119,7 @@ function newSpecimenEditor(kind='normal',lecture='67'){
  '<label>Body system<input id="npSpecSystem" style="display:block;width:100%" placeholder="e.g. Nervous System"></label>'+
  '<label>Species / signalment<input id="npSpecSpecies" style="display:block;width:100%" placeholder="e.g. Dog / cat / horse"></label>'+
  [['Gross appearance','npSpecGross'],[normal?'Normal identification':'Morphologic diagnosis','npSpecDx'],['Histology','npSpecHisto'],[normal?'Normal vs abnormal comparison':'Why / pathogenesis','npSpecWhy']].map(([label,id])=>'<label style="display:block;margin:8px 0"><b>'+label+'</b><textarea id="'+id+'" style="width:100%" rows="3"></textarea></label>').join('')+
+ (window.VPQ_PATH_EXAM7?.speciesGrossEditorHTML?.({grossSpecies:'[]'})||'')+
  '<label>Source / lecture slide<input id="npSpecSource" style="display:block;width:100%" placeholder="Lecture 67 slide 10 / approved reference"></label>'+
  '<div style="padding:10px;border:1px solid #cbd9e8;border-radius:9px"><b>Owner publishing</b><p class="tiny">Unlock your saved GitHub publishing key with its password; a token is required only on first setup.</p><label>Password<input id="npSpecPassword" type="password" autocomplete="off" style="width:100%"></label>'+ownerTokenField('npSpecToken')+'</div>'+
  '<div class="buttonrow"><button data-np-spec-create="'+(normal?'normal':'lesion')+'" style="background:#e5f6eb">🚀 Publish new card</button><button data-np-spec-cancel="1">← Back to cabinet</button></div><p id="npSpecStatus" role="status"></p>');
@@ -558,7 +559,7 @@ function init(context){
   const root=context.body,v=id=>String(root.querySelector('#'+id)?.value||'').trim();
   const create=button.dataset.npSpecCreate!==undefined,hidden=button.dataset.npSpecVisibility==='hide';
   const kind=button.dataset.npSpecCreate;
-  const card=create?{title:v('npSpecTitle'),lecture:v('npSpecLecture'),system:v('npSpecSystem'),species:v('npSpecSpecies'),gross:v('npSpecGross'),dx:v('npSpecDx'),histo:v('npSpecHisto'),why:v('npSpecWhy'),source:v('npSpecSource'),normal:kind==='normal'}:null;
+  const card=create?{title:v('npSpecTitle'),lecture:v('npSpecLecture'),system:v('npSpecSystem'),species:v('npSpecSpecies'),gross:v('npSpecGross'),dx:v('npSpecDx'),histo:v('npSpecHisto'),why:v('npSpecWhy'),source:v('npSpecSource'),grossSpecies:window.VPQ_PATH_EXAM7?.readGrossSpecies?.(root)||'[]',normal:kind==='normal'}:null;
   const id=v('npSpecTarget'),status=root.querySelector('#npSpecStatus');
   if(create&&(!card.title||!card.system||!card.species||!card.gross||!card.dx||!card.histo||!card.why||!card.source)){if(status)status.textContent='Please fill in every teaching field. You can add photographs later.';return;}
   let token=v('npSpecToken'),password=v('npSpecPassword');
