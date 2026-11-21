@@ -8,6 +8,10 @@ const ROOT='https://api.github.com/repos/'+OWNER+'/'+REPO+'/contents/';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const encode=s=>{const arr=new TextEncoder().encode(s);let raw='';for(let i=0;i<arr.length;i+=8192)raw+=String.fromCharCode(...arr.subarray(i,i+8192));return btoa(raw)};
 const decode=s=>new TextDecoder().decode(Uint8Array.from(atob(String(s).replace(/\s/g,'')),c=>c.charCodeAt(0)));
+function ownerTokenField(id){
+ if(window.VPQ_OWNER_KEY_VAULT?.exists?.())return '';
+ return '<label style="display:block;margin-top:8px">GitHub token · first setup only<input id="'+esc(id)+'" type="password" autocomplete="off" style="display:block;width:100%;padding:8px;margin-top:5px"></label>';
+}
 const goodUrl=s=>{try{let u=new URL(s);return u.protocol==='https:'?u.href:''}catch{return ''}};
 let published={version:1,cases:{},specimens:{},lectures:{},customCases:{}},api=null,pending=null,loaded=false;
 async function load(){
@@ -39,7 +43,7 @@ function renameConditionEditor(lecture,index){
  '<p class="tiny">Original lecture name: '+esc(oldTitle)+' · L'+esc(lecture)+'</p>'+
  '<input id="npRenameRef" type="hidden" value="'+esc(ref)+'">'+
  '<label>Password for owner publishing<input id="npRenamePassword" type="password" autocomplete="off" style="width:100%"></label>'+
- '<label>Token (only on first setup)<input id="npRenameToken" type="password" autocomplete="off" style="width:100%"></label>'+
+ ''+ownerTokenField('npRenameToken')+''+
  '<div class="buttonrow"><button data-np-rename-save="1">💾 Publish new name</button><button data-np-rename-cancel="1">← Cancel</button></div>'+
  '<p role="status" id="npRenameStatus"></p>');
 }
@@ -82,7 +86,7 @@ function newConditionEditor(lecture='68'){
  '<label>Condition name<input id="npCondTitle" style="width:100%" placeholder="e.g. West Nile virus (WNV)"></label>'+
  '<label>Source slide / citation<input id="npCondSlides" style="width:100%" placeholder="Lecture 68 slide 20"></label>'+
  [['Gross description','npCondGross'],['Histopathology','npCondHisto'],['Why / mechanism','npCondMechanism'],['Differentials and confirmatory tests','npCondDifferentials']].map(([label,id])=>'<label style="display:block;margin:9px 0"><b>'+label+'</b><textarea id="'+id+'" rows="3" style="width:100%"></textarea></label>').join('')+
- '<div style="border:1px solid #cbd9e8;padding:10px;border-radius:10px"><b>Owner publishing</b><p style="font-size:12px">Enter your publishing password for the encrypted GitHub key; a token is needed only for first-time setup.</p><label>Password<input id="npCondPassword" type="password" autocomplete="off" style="width:100%"></label><label>Token (first setup only)<input id="npCondToken" type="password" autocomplete="off" style="width:100%"></label></div>'+
+ '<div style="border:1px solid #cbd9e8;padding:10px;border-radius:10px"><b>Owner publishing</b><p style="font-size:12px">Enter your publishing password for the encrypted GitHub key; a token is needed only for first-time setup.</p><label>Password<input id="npCondPassword" type="password" autocomplete="off" style="width:100%"></label>'+ownerTokenField('npCondToken')+'</div>'+
  '<div class="buttonrow"><button data-necro-condition-save="1">🚀 Publish condition</button><button data-necro-condition-cancel="1">← Back</button></div><p id="npCondStatus" role="status" aria-live="polite"></p>');
 }
 async function publishCondition(c,token){
@@ -116,7 +120,7 @@ function newSpecimenEditor(kind='normal',lecture='67'){
  '<label>Species / signalment<input id="npSpecSpecies" style="display:block;width:100%" placeholder="e.g. Dog / cat / horse"></label>'+
  [['Gross appearance','npSpecGross'],[normal?'Normal identification':'Morphologic diagnosis','npSpecDx'],['Histology','npSpecHisto'],[normal?'Normal vs abnormal comparison':'Why / pathogenesis','npSpecWhy']].map(([label,id])=>'<label style="display:block;margin:8px 0"><b>'+label+'</b><textarea id="'+id+'" style="width:100%" rows="3"></textarea></label>').join('')+
  '<label>Source / lecture slide<input id="npSpecSource" style="display:block;width:100%" placeholder="Lecture 67 slide 10 / approved reference"></label>'+
- '<div style="padding:10px;border:1px solid #cbd9e8;border-radius:9px"><b>Owner publishing</b><p class="tiny">Unlock your saved GitHub publishing key with its password; a token is required only on first setup.</p><label>Password<input id="npSpecPassword" type="password" autocomplete="off" style="width:100%"></label><label>GitHub token (first setup only)<input id="npSpecToken" type="password" autocomplete="off" style="width:100%"></label></div>'+
+ '<div style="padding:10px;border:1px solid #cbd9e8;border-radius:9px"><b>Owner publishing</b><p class="tiny">Unlock your saved GitHub publishing key with its password; a token is required only on first setup.</p><label>Password<input id="npSpecPassword" type="password" autocomplete="off" style="width:100%"></label>'+ownerTokenField('npSpecToken')+'</div>'+
  '<div class="buttonrow"><button data-np-spec-create="'+(normal?'normal':'lesion')+'" style="background:#e5f6eb">🚀 Publish new card</button><button data-np-spec-cancel="1">← Back to cabinet</button></div><p id="npSpecStatus" role="status"></p>');
 }
 function hideSpecimenEditor(id,restore=false){
@@ -126,7 +130,7 @@ function hideSpecimenEditor(id,restore=false){
  '<p><b>'+esc(card.title)+'</b></p>'+
  '<p>'+(restore?'Restoring this card will put it back in the Specimen Cabinet.':'This hides the card from the Specimen Cabinet and study unknowns. Original lecture notes and published photographs are preserved. You can restore it later from Manage hidden cards.')+'</p>'+
  '<input type="hidden" id="npSpecTarget" value="'+esc(id)+'">'+
- '<div style="padding:10px;border:1px solid #cbd9e8;border-radius:9px"><label>Publishing password<input id="npSpecPassword" type="password" autocomplete="off" style="width:100%"></label><label>GitHub token (first setup only)<input id="npSpecToken" type="password" autocomplete="off" style="width:100%"></label></div>'+
+ '<div style="padding:10px;border:1px solid #cbd9e8;border-radius:9px"><label>Publishing password<input id="npSpecPassword" type="password" autocomplete="off" style="width:100%"></label>'+ownerTokenField('npSpecToken')+'</div>'+
  '<div class="buttonrow"><button data-np-spec-visibility="'+(restore?'restore':'hide')+'" style="background:'+(restore?'#e5f6eb':'#fff0ed')+'">'+(restore?'↩ Restore card':'Hide this card')+'</button><button data-np-spec-cancel="1">Cancel</button></div><p id="npSpecStatus" role="status"></p>');
 }
 function hiddenSpecimenMenu(){
@@ -315,7 +319,7 @@ async function editor(type,id){
  '<label style="display:block;margin:9px 0"><input type="checkbox" id="npOwnerRights"> I have the rights or permission to publish these new images publicly</label>'+
  '<div style="padding:9px;border-radius:9px;background:#f1f6ff"><b>Owner publishing authentication</b><p style="font-size:12px">Uses the same encrypted GitHub key as your other atlases. '+(saved?'Enter your existing publishing password.':'If no key is saved, enter a fine-grained GitHub token for first-time setup (Contents: Read/write).')+'</p>'+
  '<label>Publishing password<input id="npOwnerPassword" type="password" autocomplete="off" style="width:100%;padding:8px"></label>'+
- '<label>GitHub token (only first setup / replacement)<input id="npOwnerToken" type="password" autocomplete="off" style="width:100%;padding:8px"></label></div>'+
+ ''+ownerTokenField('npOwnerToken')+'</div>'+
  '<div class="buttonrow" style="margin:12px 0"><button data-necro-owner-publish="1">🚀 Publish Now</button><button data-necro-owner-close="1">← Back</button></div>'+
  '<p id="npOwnerResult" role="status" aria-live="polite" style="font-size:12px"></p>');
 }
