@@ -364,17 +364,17 @@ function dermComparisonHTML(x){
  const official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(x.id)||{};
  const photos=Array.isArray(official.photos)?official.photos:(official.photo?.url?[official.photo]:[]);
  const matchedPhoto=(label)=>photos.find(p=>p?.url&&String(p.caption||'').toLowerCase().includes(String(label).toLowerCase()));
- return '<section class="atlas-derm-comparison" aria-label="Dermatology side-by-side recognition">'+
- '<h4>🔬 '+(x.atlasComparison?'Compare reproductive conditions · species · gross appearance':'Compare by morphology · species · location')+'</h4>'+ 
+ return '<section class="atlas-derm-comparison" aria-label="Side-by-side pathology concept comparison">'+
+ '<h4>🔬 '+(x.foundationComparison?'Compare foundations · mechanism · microscopic appearance':x.dermComparison?'Compare by morphology · species · location':'Compare conditions · organ · gross appearance')+'</h4>'+ 
  '<p>These are comparative teaching patterns, not separate diagnoses. Attach several published pictures to this card and name the structure/condition in each photo caption.</p>'+
  '<div class="atlas-derm-rows">'+x.comparisonRows.map((row,i)=>(
  '<article class="atlas-derm-row"><div class="atlas-derm-photo" aria-label="Photo placeholder for '+h(row[0])+'">'+
  (matchedPhoto(row[0])?'<img src="'+h(matchedPhoto(row[0]).url)+'" alt="'+h(matchedPhoto(row[0]).caption||row[0])+'" loading="lazy" style="width:100%;max-height:120px;object-fit:contain;border-radius:7px">':'<span>📷</span><small>Photo '+(i+1)+'<br>'+h(row[0])+'</small>')+'</div>'+
  '<div class="atlas-derm-facts"><h5>'+h(row[0])+'</h5>'+
  '<div><b>Look:</b> '+h(row[1])+'</div>'+
- '<div><b>'+(x.atlasComparison?'Tissue / origin':'Depth / location')+':</b> '+h(row[2])+'</div>'+ 
- '<div><b>Species / body site:</b> '+h(row[3])+'</div>'+
- '<div><b>Visual clue:</b> '+h(row[4])+'</div>'+
+ '<div><b>'+(x.foundationComparison?'Concept / location':x.atlasComparison?'Tissue / origin':'Depth / location')+':</b> '+h(row[2])+'</div>'+ 
+ '<div><b>'+(x.foundationComparison?'Context / example':'Species / body site')+':</b> '+h(row[3])+'</div>'+
+ '<div><b>'+(x.foundationComparison?'What it tells you':'Visual clue')+':</b> '+h(row[4])+'</div>'+
  '<div><b>Don’t confuse:</b> '+h(row[5])+'</div></div></article>'
  )).join('')+'</div>'+
  '<p class="atlas-caption">The photo slots are labels for your future images. Use Edit / Publish below to attach your own multiple photos with matching captions; the published gallery appears above.</p>'+
