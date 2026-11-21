@@ -853,7 +853,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 #modalBody .vpqPharmDrugFact p,#modalBody .vpqPharmDrugCase p,#modalBody .vpqPharmDrugSafety p{font-size:15px!important;line-height:1.62!important;margin:4px 0!important;color:#304660!important}
 #modalBody .vpqPharmDrugLesson details{padding:10px 12px;background:#f7f9ff;border:1px solid #d4dcf0;border-radius:10px;margin:8px 0}
 #modalBody .vpqPharmDrugLesson details summary{font-weight:850!important;font-size:14px!important}
-</style></head><body>
+</style><style id="vpq-pharm-reminder-fold-20261121">#modalBody .vpqPharmBasicsFold{margin:8px 0 12px;padding:0!important;min-height:0!important}#modalBody .vpqPharmBasicsFold:not([open]){background:#f7f5ff;border:1px solid #cbc7ef}#modalBody .vpqPharmBasicsFold>summary{cursor:pointer;list-style:none;margin:0;padding:10px 12px;display:flex;gap:10px;justify-content:space-between}#modalBody .vpqPharmBasicsFold>summary::-webkit-details-marker{display:none}#modalBody .vpqPharmBasicsFold>div{padding:0 13px 12px}#modalBody .vpqPharmBasicsFold:not([open])>summary b{font-size:13px}</style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqLevelTopBtn" class="mini" type="button" style="background:#fff2d6;border-color:#d2ad64">⭐ Level Themes</button><button id="vpqCollectionTopBtn" class="mini" type="button" style="background:#fff0f8;border-color:#d8a8c8">💝 My Collection</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><button id="vpqMeetTeamBtn" type="button" class="vpq-meet-team-button" aria-label="Meet the Vet Pharm Quest team">🐾 Meet the Team</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
 <main class="app"><section class="gamecol"><div class="banner"><div><span class="eyebrow">WELCOME TO THE TEACHING HOSPITAL</span><h1 id="roomTitle">Reception</h1><p id="roomHint">Move with A/D or ←/→. Press E near stations, or tap objects directly.</p></div><div class="statusbubble" id="mission">🩺 Your first shift</div></div>
@@ -4041,8 +4041,8 @@ const vpqPharmLearningBasics={
 };
 function vpqPharmBasicGuide(id,compact=false){
  const g=vpqPharmLearningBasics[id];if(!g)return '';
- return '<section class="vpqPharmBasics"><div class="vpqPharmBasicsHeader"><b>🧠 '+(compact?'Quick concept reminder':'Start here · the big picture')+'</b><span>'+escapeHtml(id)+'</span></div>'+
- '<p>'+escapeHtml(g.start)+'</p><details '+(compact?'':'open')+'><summary>Key terms, explained in plain language</summary><dl>'+g.terms.map(([term,definition])=>'<div><dt>'+escapeHtml(term)+'</dt><dd>'+escapeHtml(definition)+'</dd></div>').join('')+'</dl></details></section>';
+ return '<details class="vpqPharmBasics vpqPharmBasicsFold" '+(compact?'':'open')+'><summary class="vpqPharmBasicsHeader"><b>🧠 '+(compact?'Quick concept reminder (optional)':'Start here · the big picture')+'</b><span>'+escapeHtml(id)+' ▾</span></summary><div>'+
+ '<p>'+escapeHtml(g.start)+'</p><details><summary>Key terms, explained in plain language</summary><dl>'+g.terms.map(([term,definition])=>'<div><dt>'+escapeHtml(term)+'</dt><dd>'+escapeHtml(definition)+'</dd></div>').join('')+'</dl></details></div></details>';
 }
 function vpqPharmNextLesson(id){
  const l=vpqPharmNext?.lectures?.find(x=>x.id===id);if(!l)return vpqPharmNextMenu();
@@ -4091,6 +4091,40 @@ function vpqExam2CasePractice(lecture='all',position=0){
 }
 
 window.VPQ_OPEN_EXAM2_PATIENT_CASES=vpqExam2CasePractice;
+
+const vpqHyQuestionRounds=new Map();
+function vpqHyQuestions(lecture){
+ const all=[...(window.VPQ_PHARM_NEXT?.questions||[]),...(window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[])];
+ const eligible=x=>(/^Lecture (1[0-9]|20)$/.test(x.lecture)&&(lecture==='all'||x.lecture===lecture))||(x.lecture==='Lectures 18–20'&&(lecture==='all'||['Lecture 18','Lecture 19','Lecture 20'].includes(lecture)));
+ const items=all.filter(x=>eligible(x)&&x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
+ const old=vpqHyQuestionRounds.get(lecture);
+ if(old&&old.length===items.length&&old.every(x=>items.includes(x)))return old;
+ const shuffled=items.slice();
+ for(let i=shuffled.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]]}
+ vpqHyQuestionRounds.set(lecture,shuffled);return shuffled;
+}
+function vpqHyExplain(q){
+ const prompt=String(q.q||'').toLowerCase(),answer=String(q.options?.[q.answer]||'');
+ const raw=String(q.why||'').trim(),importOnly=/^uploaded answer key\s*:/i.test(raw);
+ const curated=[
+  [/methimazole|thyroperoxidase|thyroid peroxidase/, 'Methimazole blocks thyroid peroxidase-mediated iodide organification and coupling needed to synthesize new T3/T4. It does not immediately remove stored thyroid hormone. Thyroid-related tachycardia may persist early in therapy; if it persists after T4 normalizes, assess other cardiac or systemic causes.'],
+  [/(negative.feedback|suppression of trh|elevated circulating t4|circulating t4 concentrations)/, 'Elevated T4/T3 feeds back on hypothalamic TRH and pituitary TSH secretion, decreasing both. Autonomously functioning thyroid tissue can produce excess hormone despite low TSH.'],
+  [/(sodium.iodide symporter|\bnis\b|iodide uptake)/, 'The sodium-iodide symporter transports iodide into thyroid follicular cells. TPO later supports organification and coupling in the follicular colloid, so uptake and organification are distinct drug targets.'],
+  [/(glut4|insulin receptor|insulin binding)/, 'Insulin receptor signaling moves GLUT4 transporters toward muscle and adipose membranes, increasing facilitated glucose uptake. Glucose does not bind insulin to cross the membrane.'],
+  [/(diabetic ketoacidosis|\bdka\b|ketone)/, 'Inadequate effective insulin permits lipolysis and hepatic ketogenesis. Accumulating ketoacids cause metabolic acidosis; osmotic diuresis causes dehydration and total-body electrolyte depletion.'],
+  [/(loop diuretic|furosemide|nkcc2)/, 'Loop diuretics inhibit NKCC2 in the thick ascending limb, increasing renal NaCl and water losses and reducing medullary concentration gradient formation. Monitor electrolytes and volume.'],
+  [/(spironolactone|aldosterone antagonist)/, 'Mineralocorticoid receptor antagonism reduces aldosterone-dependent sodium retention and potassium secretion in the distal nephron; monitor serum potassium.'],
+  [/(ace inhibitor|angiotensin.converting|enalapril|benazepril)/, 'ACE inhibition reduces angiotensin II and aldosterone effects, decreasing vasoconstriction and sodium retention. Monitor blood pressure, kidney function and potassium.'],
+  [/(beta.block|atenolol|propranolol)/, 'Cardiac beta-1 blockade reduces adrenergic heart-rate and contractility responses; patient disease and beta selectivity affect drug choice.'],
+  [/(bronchodilator|albuterol|terbutaline|clenbuterol)/, 'Beta-2 agonists increase cAMP in airway smooth muscle to promote relaxation. Systemic adrenergic effects can cause tachycardia or tremor.'],
+  [/(omeprazole|pantoprazole|proton.pump)/, 'Proton pump inhibitors block the parietal cell H+/K+-ATPase, decreasing newly secreted gastric acid rather than directly neutralizing existing acid.'],
+  [/(maropitant|nk1 receptor)/, 'NK1 receptor blockade interrupts substance P-driven emetic signaling; controlling vomiting does not necessarily treat its underlying cause.']
+ ];
+ const matched=curated.find(([pattern])=>pattern.test(prompt));
+ if(matched)return '<p><b>Mechanism and clinical WHY:</b> '+escapeHtml(matched[1])+'</p>';
+ if(importOnly)return '<p><b>Uploaded answer key:</b> '+escapeHtml(answer)+'</p><p class="tiny">⚠ Full physiology explanation pending review. An answer key alone is not an explanation.</p>';
+ return '<p><b>Mechanism and clinical WHY:</b> '+escapeHtml(raw)+'</p>';
+}
 function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const db=window.VPQ_PHARM_NEXT||{drugs:[],questions:[]};
  const source=window.VPQ_PHARM_EXAM2_OBJECTIVE_CARDS||[];
@@ -4099,7 +4133,7 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const eligible=x=>(lectures.includes(x.lecture)&&(lecture==='all'||x.lecture===lecture))||(x.lecture==='Lectures 18–20'&&(lecture==='all'||['Lecture 18','Lecture 19','Lecture 20'].includes(lecture)));
  const priority=db.drugs.filter(x=>x.coursePriority&&eligible(x));
  const objectives=source.filter(eligible);
- const questions=[...db.questions.filter(eligible),...pdf.filter(eligible)].filter(x=>x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
+ const questions=vpqHyQuestions(lecture);
  const n=Math.max(0,Number(position)||0);
  const selector='<details class="vpqPharmLectureSelector"><summary>📚 '+escapeHtml(lecture==='all'?'All lectures 10–20':lecture)+' <span>Change lecture ▾</span></summary><div class="vpqPharmLectureOptions"><button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="all">All lectures</button>'+lectures.map(l=>'<button '+(l===lecture?'class="vpqPharmSelectedLecture" ':'')+'data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="'+escapeHtml(l)+'">'+escapeHtml(l)+'</button>').join('')+'</div></details>';
  const menu='<div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button></div><p><b>Start with the instructor-starred medications and big study-guide objectives.</b> Learn the mechanism and physiological WHY, recall the original faculty objective, then apply it to clinical questions.</p><p class="tiny">All drugs and questions below reuse the Exam 2 library; any caution attached to an instructor answer is shown separately. ★ refers to identified lecture stars and high-priority tables—not necessarily every bold-highlighted line.</p>'+
@@ -4122,7 +4156,7 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  }else if(mode==='objectives'){
  html+='<section class="vpq-patient-case" style="padding:14px"><p class="vpq-case-meta">Objective #'+escapeHtml(x.order)+' · '+escapeHtml(x.lecture)+'</p><h3>'+escapeHtml(x.q)+'</h3><details><summary>💡 Reveal professor-derived answer</summary><p>'+escapeHtml(x.answer)+'</p></details>'+(x.note?'<details class="vpqNewPharmOptional"><summary>⚠ Important clinical interpretation</summary><p>'+escapeHtml(x.note)+'</p></details>':'')+'</section>';
  }else{
- html+=vpqPharmBasicGuide(x.lecture,true)+'<section class="vpq-patient-case vpqPharmQuestionCard"><h3>'+escapeHtml(x.q)+'</h3>'+vpqPharmCaseReference(x.q)+'<p class="vpq-case-meta">'+escapeHtml(x.lecture)+' · '+escapeHtml(x.source||'Course-aligned clinical practice')+'</p>'+
+ html+='<div class="buttonrow"><button data-vpqhy-shuffle="'+escapeHtml(lecture)+'">🔀 Reshuffle questions</button><small>Randomized round · '+d.length+' questions</small></div>'+vpqPharmBasicGuide(x.lecture,true)+'<section class="vpq-patient-case vpqPharmQuestionCard"><h3>'+escapeHtml(x.q)+'</h3>'+vpqPharmCaseReference(x.q)+'<p class="vpq-case-meta">'+escapeHtml(x.lecture)+' · '+escapeHtml(x.source||'Course-aligned clinical practice')+'</p>'+
  x.options.map((opt,i)=>'<button style="display:block;width:100%;text-align:left;margin:7px 0" data-vpqhy-answer="'+i+'" data-vpqhy-position="'+at+'" data-vpqhy-lecture="'+escapeHtml(lecture)+'">'+String.fromCharCode(65+i)+'. '+escapeHtml(opt)+'</button>').join('')+
  '<div id="vpqhyExplanation" style="margin:9px 0" aria-live="polite"></div></section>';
  }
@@ -4158,12 +4192,13 @@ $('modalBody').addEventListener('click',ev=>{
   $('modalBody').querySelectorAll('[data-e2case-answer]').forEach(el=>{el.disabled=true;el.classList.toggle('vpq-e2cases-right',Number(el.dataset.e2caseAnswer)===c.correctIndex);el.classList.toggle('vpq-e2cases-wrong',Number(el.dataset.e2caseAnswer)===choice&&!correct)});
   return;
  }
+ if(d.vpqhyShuffle!==undefined){vpqHyQuestionRounds.delete(d.vpqhyShuffle);return vpqExam2HighYield('questions',d.vpqhyShuffle,0)}
  if(d.vpqhyMode!==undefined)return vpqExam2HighYield(d.vpqhyMode,d.vpqhyLecture||'all',d.vpqhyPosition||0);
  if(d.vpqhyAnswer!==undefined){
  const l=d.vpqhyLecture||'all',at=Number(d.vpqhyPosition||0);
  const lset=Array.from({length:11},(_,i)=>'Lecture '+(i+10));
  const eligible=x=>(lset.includes(x.lecture)&&(l==='all'||x.lecture===l))||(x.lecture==='Lectures 18–20'&&(l==='all'||['Lecture 18','Lecture 19','Lecture 20'].includes(l)));
- const qs=[...vpqPharmNext.questions.filter(eligible),...(window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[]).filter(eligible)].filter(x=>x.options?.length===4&&Number.isInteger(x.answer)&&x.why);
+ const qs=vpqHyQuestions(l);
  const q=qs[at],chosen=Number(d.vpqhyAnswer),area=$('vpqhyExplanation');
  if(!q||!area||area.dataset.answered)return;
  area.dataset.answered='true';
@@ -4173,7 +4208,7 @@ $('modalBody').addEventListener('click',ev=>{
  const reward=masterQuestion('study',String(q.id),correct);
  persist();updateHUD();
  const rewardText=correct?(reward.xp?'<p class="vpqMCQReward">✨ +'+reward.xp+' EXP'+(reward.coins?' · +'+reward.coins+' 🪙':'')+' · added to your clinic wallet!</p>': '<p class="tiny">✓ Correct · EXP for this question was already earned. Keep practicing!</p>'):'<p class="tiny">No EXP this time—review the explanation and try again in a later round.</p>';
- area.innerHTML='<div class="response '+(correct?'':'bad')+'"><b>'+(correct?'✅ Correct':'💡 Review this mechanism')+'</b><p><b>Correct answer:</b> '+escapeHtml(q.options[q.answer])+'</p><p><b>WHY:</b> '+escapeHtml(q.why)+'</p>'+rewardText+(q.reviewFlag?'<details><summary>⚠ Source caution</summary><p>'+escapeHtml(q.reviewFlag)+'</p></details>':'')+(q.sourceOriginal?'<details><summary>Original uploaded-guide question/answer</summary><p>'+escapeHtml(q.sourceOriginal.q||q.sourceOriginal.question||'')+'</p><p><b>Original answer:</b> '+escapeHtml(q.sourceOriginal.options?.[q.sourceOriginal.answer]||'')+'</p></details>':'')+'</div>';
+ area.innerHTML='<div class="response '+(correct?'':'bad')+'"><b>'+(correct?'✅ Correct':'💡 Review this mechanism')+'</b><p><b>Correct answer:</b> '+escapeHtml(q.options[q.answer])+'</p>'+vpqHyExplain(q)+rewardText+(q.reviewFlag?'<details><summary>⚠ Source caution</summary><p>'+escapeHtml(q.reviewFlag)+'</p></details>':'')+(q.sourceOriginal?'<details><summary>Original uploaded-guide question/answer</summary><p>'+escapeHtml(q.sourceOriginal.q||q.sourceOriginal.question||'')+'</p><p><b>Original answer:</b> '+escapeHtml(q.sourceOriginal.options?.[q.sourceOriginal.answer]||'')+'</p></details>':'')+'</div>';
  $('modalBody').querySelectorAll('[data-vpqhy-answer]').forEach(el=>{el.disabled=true;el.classList.remove('vpqHyRight','vpqHyWrong');if(Number(el.dataset.vpqhyAnswer)===q.answer)el.classList.add('vpqHyRight');if(Number(el.dataset.vpqhyAnswer)===chosen&&chosen!==q.answer)el.classList.add('vpqHyWrong')});
  return;
  }
