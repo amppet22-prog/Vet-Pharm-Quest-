@@ -184,6 +184,18 @@ function atlasCardTags(x){
  return '<span class="atlas-tag atlas-system" style="--tag-bg:'+sys[3]+';--tag-ink:'+sys[4]+'">'+atlasIcon(ATLAS_ICON_KEYS[sys[0]])+' '+h(sys[2])+'</span>'+tags.join('');
 }
 const atlasStyle=String.raw`<style>
+.atlas-derm-comparison{margin:13px 0;border:1px solid #d4c9ed;border-radius:14px;padding:12px;background:#fcfaff}
+.atlas-derm-comparison h4{font-size:15px;margin:1px 0 7px;color:#45336e}
+.atlas-derm-comparison p{font-size:12px;line-height:1.45;margin:7px 0}
+.atlas-derm-rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,315px),1fr));gap:9px}
+.atlas-derm-row{display:grid;grid-template-columns:75px minmax(0,1fr);gap:9px;padding:9px;border:1px solid #e4dcec;border-radius:12px;background:#fff;min-width:0}
+.atlas-derm-photo{border:1px dashed #b9accf;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:#f5f0fa;text-align:center;min-height:105px;padding:5px;color:#5d5180}
+.atlas-derm-photo span{font-size:22px}.atlas-derm-photo small{font-size:10px!important;line-height:1.3;overflow-wrap:anywhere}
+.atlas-derm-facts{font-size:12px;line-height:1.43;overflow-wrap:anywhere}
+.atlas-derm-facts h5{margin:0 0 6px;color:#523b74;font-size:14px;font-weight:900}
+.atlas-derm-facts div{margin:3px 0}.atlas-derm-facts b{color:#354f73}
+@media(max-width:520px){.atlas-derm-rows{grid-template-columns:1fr}.atlas-derm-row{grid-template-columns:65px minmax(0,1fr)}}
+
 .atlas-hub,.atlas-detail{--ink:#243753;--line:#d7dbea;color:var(--ink);font-family:inherit}
 .atlas-hub button,.atlas-detail button{transition:background .15s,border-color .15s}
 .atlas-hub .atlas-actions{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
@@ -345,6 +357,26 @@ function menu(){
  '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">'+alphaGrid(pageItems,x=>{const ex=x.catalogScope==='reference'?null:atlasExam(x.lecture),ec=ATLAS_EXAMS[ex]||['#EDF0F5','#708096'],sys=atlasSystem(x);return '<button class="atlas-index-card" style="text-align:left;--card-accent:'+sys[4]+';--card-bg:'+ec[0]+';--system-bg:'+sys[3]+';--system-ink:'+sys[4]+'" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small>Lecture '+h(x.lecture)+(ex?' · Exam '+ex:' · Reference')+'</small><small class="atlas-system-line">'+atlasIcon(ATLAS_ICON_KEYS[sys[0]],15)+' '+h(sys[2])+'</small></button>'})+'</div>'+
  (maxPage?'<div class="buttonrow" style="justify-content:center;gap:10px;margin:14px 0"><button data-path7-page="'+(listPage-1)+'" '+(listPage===0?'disabled':'')+'>← Previous 48</button><span style="align-self:center;font-size:12px">Page '+(listPage+1)+' of '+(maxPage+1)+'</span><button data-path7-page="'+(listPage+1)+'" '+(listPage===maxPage?'disabled':'')+'>Next 48 →</button></div>':'') );
 }
+/* Dermatology morphology reference: photo captions can map to individual rows.
+   Keeps all existing specimen/owner-publish buttons and rendering intact. */
+function dermComparisonHTML(x){
+ if(!x.dermComparison||!Array.isArray(x.comparisonRows))return '';
+ return '<section class="atlas-derm-comparison" aria-label="Dermatology side-by-side recognition">'+
+ '<h4>🔬 Compare by morphology · species · location</h4>'+
+ '<p>These are comparative teaching patterns, not separate diagnoses. Attach several published pictures to this card and name the structure/condition in each photo caption.</p>'+
+ '<div class="atlas-derm-rows">'+x.comparisonRows.map((row,i)=>(
+ '<article class="atlas-derm-row"><div class="atlas-derm-photo" aria-label="Photo placeholder for '+h(row[0])+'">'+
+ '<span>📷</span><small>Photo '+(i+1)+'<br>'+h(row[0])+'</small></div>'+
+ '<div class="atlas-derm-facts"><h5>'+h(row[0])+'</h5>'+
+ '<div><b>Look:</b> '+h(row[1])+'</div>'+
+ '<div><b>Depth / location:</b> '+h(row[2])+'</div>'+
+ '<div><b>Species / body site:</b> '+h(row[3])+'</div>'+
+ '<div><b>Visual clue:</b> '+h(row[4])+'</div>'+
+ '<div><b>Don’t confuse:</b> '+h(row[5])+'</div></div></article>'
+ )).join('')+'</div>'+
+ '<p class="atlas-caption">The photo slots are labels for your future images. Use Edit / Publish below to attach your own multiple photos with matching captions; the published gallery appears above.</p>'+
+ '</section>';
+}
 function card(i){
  current=i;const x=grossViewModel(record(i)),shelf=visible(),at=shelf.findIndex(v=>v.index===i);
  const previous=at>0?shelf[at-1]:null,next=at>=0&&at<shelf.length-1?shelf[at+1]:null;
@@ -397,6 +429,7 @@ function card(i){
  keyHTML+
  '<div class="atlas-split">'+mediaHTML+grossHTML+'</div>'+
  renderGrossSpecies(x,sys)+
+ dermComparisonHTML(x)+
  sectionHTML+studyNotes+speciesBreeds+
  (caseLinks?'<div class="atlas-small-links"><b style="font-size:12px">🩺 Exact linked cases</b>'+caseLinks+'</div>':'')+
  classification+source+crosslink+footer);
