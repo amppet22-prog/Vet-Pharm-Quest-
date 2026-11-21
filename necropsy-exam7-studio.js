@@ -245,7 +245,7 @@ const atlasStyle=String.raw`<style>
 .atlas-detail .atlas-classifications details summary{font-size:12px;font-weight:750}
 /* Specimen DETAIL only: readable typography and a slightly wider dialog.
    Deliberately never change the shared modal, game stage, other rooms or hub. */
-.modal:has(> #modalBody .atlas-detail){width:min(940px,calc(100vw - 24px));max-height:94vh}
+.modal:has(> #modalBody .atlas-detail){width:min(780px,100%);max-height:92vh}
 .modal:has(> #modalBody .atlas-detail) #modalBody{padding:14px 18px}
 .modal #modalBody .atlas-detail{font-size:15px!important;line-height:1.58}
 .modal #modalBody .atlas-detail .atlas-gross{font-size:15px!important;line-height:1.62!important;padding:15px}
