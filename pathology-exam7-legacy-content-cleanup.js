@@ -91,5 +91,15 @@ for(const card of bank){
  if(histo.length&&card.histo!==histo[0]){card.histo=histo.slice(0,2).join(' ');card.atlasNoSpecificHisto=false;fixes.histo++;}
  if(why.length&&card.why!==why[0]){card.why=why.slice(0,2).join(' ');card.atlasNoSpecificWhy=false;fixes.why++;}
 }
+/* A host description or differential is not a mechanism. For generated
+ * cards enhanced by a curated mechanism summary, prefer that mechanism over
+ * the old nonsensical host/exposure-only 'why' field. */
+for(const card of bank){
+ if(!/^pathx-/.test(card.id||''))continue;
+ const existing=String(card.why||'').trim(),summary=String(card.mechanismSummary||'').trim();
+ if(summary.length>60&&(/^(?:Host|Species(?:\/exposure)?|Compare|Differentiate|Clinical|Syndromes|Key feature \d+)\s*:/i.test(existing)||/\bDifferentiate:/.test(existing))){
+  card.why=summary;fixes.why++;
+ }
+}
 window.VPQ_EXAM7_LEGACY_CONTENT_CLEANUP=fixes;
 })();
