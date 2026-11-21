@@ -106,6 +106,9 @@ const atlasStyle=String.raw`<style>
 .atlas-detail .atlas-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding-top:9px;border-top:1px solid #e0deea}
 .atlas-detail .atlas-footer button{font-size:12px!important;padding:6px 9px!important;border-radius:10px!important}
 .atlas-detail .atlas-mini-meta{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}
+.atlas-detail .atlas-note-content{color:#36455e}
+.atlas-detail .atlas-empty-note{font-size:12px;color:#617089;font-style:italic}
+.atlas-detail .atlas-note-edit{font-size:11px!important;padding:5px 9px!important;margin-top:7px;background:#f5f0fb!important}
 .atlas-detail .atlas-caption{font-size:11px;color:#5c6980}
 .atlas-detail .atlas-classifications details{margin-top:6px;padding:8px 10px;border:1px solid #e4dfec;border-radius:11px;background:#fbfaff}
 .atlas-detail .atlas-classifications details summary{font-size:12px;font-weight:750}
@@ -205,11 +208,14 @@ function card(i){
  const grossHTML='<div class="atlas-gross"><h4>📋 '+(x.normal?'Normal appearance':'Gross description')+'</h4>'+rich(x.gross)+'</div>';
  const keyHTML=hasKey?'<div class="atlas-key"><span class="atlas-star" aria-hidden="true">☆</span><strong>Key distinction</strong><span>'+rich(compactKey)+'</span></div>':'';
  const sectionHTML=
-   details(x.normal?'Normal identification':'🔬 Morphologic diagnosis','<p>'+rich(x.dx)+'</p>',x.normal)+
-   details('🔬 '+(x.normal?'Normal histology':'Histology'),'<p>'+rich(x.histo)+'</p>',true)+
-   details('💡 '+(x.normal?'Normal vs abnormal':'Why it happens / pathogenesis'),'<p>'+rich(x.why)+'</p>',true)+
+   details(x.normal?'Normal identification':atlasIcon('flask')+' Morphologic diagnosis','<p>'+rich(x.dx)+'</p>',x.normal)+
+   details(atlasIcon('flask')+' '+(x.normal?'Normal histology':'Histology'),'<p>'+rich(x.histo)+'</p>',true)+
+   details(atlasIcon('brain')+' '+(x.normal?'Normal vs abnormal':'Why it happens / pathogenesis'),'<p>'+rich(x.why)+'</p>',true)+
    (x.compare&&x.compare!==quickClue?details('⚖️ Don’t confuse with','<p>'+rich(x.compare)+'</p>'): '')+
-   (x.notes?details('📝 Your annotations','<p>'+rich(x.notes)+'</p>'): '');
+   '';
+ const studyNotes=details(atlasIcon('notes')+' Study notes & annotations',
+  '<div class="atlas-note-content">'+(String(x.notes||'').trim()?rich(x.notes):'<p class="atlas-empty-note">No study notes added yet. Keep lecture pearls, mnemonics and personal observations here without repeating the main pathology explanation.</p>')+'</div>'+
+  '<button data-path7-edit="'+i+'" class="atlas-note-edit">'+atlasIcon('notes',14)+' Edit notes</button>',true);
  const speciesBreeds=x.normal?'':(meta.breedTags?.length||meta.breedSizes?.length?'<div class="atlas-mini-meta"><b style="font-size:12px">Breed associations:</b> '+[...(meta.breedSizes||[]).map(z=>window.VPQ_PATH_ATLAS_META?.breedSizes?.[z]||z),...(meta.breedTags||[])].map(z=>'<span class="atlas-tag">'+h(z)+'</span>').join('')+'</div>':'');
  const classification=x.normal?'':'<div class="atlas-classifications">'+(window.VPQ_PATH_ATLAS_META?.browseHTML?.(x)||'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')+'</div>';
  const source='<details class="atlas-panel"><summary>📖 Study source & details</summary><div class="atlas-panel-body">'+h(x.source||'Not recorded')+'</div></details>';
@@ -227,7 +233,7 @@ function card(i){
  nav+
  header+
  '<div class="atlas-split">'+mediaHTML+grossHTML+'</div>'+
- keyHTML+sectionHTML+speciesBreeds+
+ keyHTML+sectionHTML+studyNotes+speciesBreeds+
  (caseLinks?'<div class="atlas-small-links"><b style="font-size:12px">🩺 Exact linked cases</b>'+caseLinks+'</div>':'')+
  classification+source+crosslink+footer);
 
