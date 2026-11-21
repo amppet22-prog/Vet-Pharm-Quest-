@@ -25,6 +25,85 @@ function photoStatus(x){
  return '◻ Photo needed';
 }
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
+
+const ATLAS_SYSTEMS={
+ cns:['🧠','Neurology','#E8D9FB','#7A57B5'],pns:['🧠','Neurology','#E8D9FB','#7A57B5'],
+ integument:['🌸','Dermatology','#FFE0E5','#B95676'],ocular:['👁️','Eyes','#DBF5F9','#2A98AA'],
+ aural:['👂','Ears','#FFE6D3','#B97F4F'],cardiac:['❤️','Cardiovascular','#FFD2DE','#B84968'],
+ respiratory:['🫁','Respiratory','#BDEFE9','#218F90'],
+ musculoskeletal:['🦴','Skeletal','#F2E0CC','#9B704D'],
+ muscular:['💪','Muscular','#D6E8FF','#557FBC'],endocrine:['⚗️','Endocrine','#F6DEF3','#A45CA0'],
+ reproductive:['🌷','Reproductive','#FFE1F0','#B7648C'],
+ gastrointestinal:['🌿','Gastrointestinal','#DFEDC8','#6D9155'],
+ renal:['🫘','Urinary / Renal','#E8C6DE','#8F5475'],
+ hepatobiliary:['🍃','Liver / Biliary','#E8EDB9','#7F8947'],
+ lymphatic:['🩸','Hematolymphatic','#F5C9DE','#A84F77'],
+ systemic:['🌎','Systemic / One Health','#DFEAF8','#607FA4'],
+ other:['🔬','Other','#EDF0F5','#62748B']
+};
+const atlasExam=n=>{const k=Number(n);return k>=67&&k<=79?7:k>=59&&k<=66?6:k>=50&&k<=58?5:k>=42&&k<=49?4:k>=31&&k<=41?3:k>=16&&k<=30?2:k>=1&&k<=15?1:null};
+const ATLAS_EXAMS={1:['#E5F0FF','#5B83B9'],2:['#EDE3FF','#8264C0'],3:['#DAF3ED','#3E9C8A'],4:['#FCECD8','#AD8658'],5:['#FCE3EB','#B25F80'],6:['#E6F3D7','#709A55'],7:['#F0E3FC','#8256B6']};
+function atlasSystem(x){
+ const m=window.VPQ_PATH_ATLAS_META?.data?.(x)||{},n=Number(x.lecture),title=String(x.title||'');
+ let key=m.organSystem|| (n>=67&&n<=70?'cns':n>=71&&n<=74?'integument':n>=75&&n<=77?'reproductive':n===78?'aural':n===79?'ocular':n>=50&&n<=53?'cardiac':n>=54&&n<=58?'respiratory':n>=59&&n<=66?'gastrointestinal':'other');
+ if(key==='musculoskeletal'&&/myo|muscle|myopathy/i.test(title))key='muscular';
+ if(key==='renal'&&/hepatic|liver|biliary/i.test(title))key='hepatobiliary';
+ if(key==='cns'&&/skin|cutaneous|dermat/i.test(title))key='integument';
+ return [key,...(ATLAS_SYSTEMS[key]||ATLAS_SYSTEMS.other)];
+}
+const atlasEsc=h;
+function atlasCardTags(x){
+ const m=window.VPQ_PATH_ATLAS_META?.data?.(x)||{},sys=atlasSystem(x);
+ const species=Object.keys(m.species||{}).map(k=>window.VPQ_PATH_ATLAS_META?.species?.[k]||k);
+ const fallback=species.length?species:(String(x.species||'').trim()?[String(x.species).slice(0,55)]:[]);
+ const tags=[...fallback.slice(0,2).map(z=>'<span class="atlas-tag">🐾 '+h(z)+'</span>')];
+ if(m.breedTags?.length)tags.push('<span class="atlas-tag atlas-tag-breed">🐕 '+h(m.breedTags[0])+(m.breedTags.length>1?' +'+(m.breedTags.length-1):'')+'</span>');
+ const causes=window.VPQ_PATH_ETIOLOGY?.forCard?.(x)?.categories||[];
+ if(causes.length)tags.push('<span class="atlas-tag">'+h(causes[0])+'</span>');
+ return '<span class="atlas-tag atlas-system" style="--tag-bg:'+sys[2]+';--tag-ink:'+sys[3]+'">'+sys[1]+' '+h(sys[0])+'</span>'+tags.join('');
+}
+const atlasStyle=String.raw`<style>
+.atlas-hub,.atlas-detail{--ink:#243753;--line:#d7dbea;color:var(--ink);font-family:inherit}
+.atlas-hub button,.atlas-detail button{transition:background .15s,border-color .15s}
+.atlas-hub .atlas-actions{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.atlas-hub .atlas-actions button,.atlas-detail .atlas-small-links button{font-size:12px!important;padding:7px 11px!important;border-radius:12px!important}
+.atlas-hub .atlas-lectures{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
+.atlas-hub .atlas-lectures button{font-size:11px!important;padding:5px 7px!important;min-height:28px!important;border-radius:9px!important}
+.atlas-hub .atlas-lectures button[aria-pressed=true]{background:#e9dcf7!important;border-color:#986fc2!important;color:#56357d!important}
+.atlas-hub .atlas-index-card{background:#fff!important;border:1px solid #d8d2e8!important;border-left:4px solid var(--card-accent,#9571bf)!important;border-radius:13px!important;padding:11px!important;min-height:88px;box-shadow:0 2px 5px #27355209}
+.atlas-hub .atlas-index-card:hover{background:var(--card-bg,#f8f4ff)!important}
+.atlas-hub .atlas-index-card strong{display:block;color:#263b64;font-size:13px;line-height:1.35}
+.atlas-hub .atlas-index-card small{display:block;margin-top:4px;font-size:11px}
+.atlas-hub .atlas-index-card .atlas-system-line{color:var(--system-ink,#7862a8);font-weight:700}
+.atlas-detail .atlas-heading{background:var(--exam-bg,#f2e9fc);border:1px solid #dbc8ef;border-radius:14px;padding:11px 13px;margin:9px 0 12px}
+.atlas-detail .atlas-heading h3{font-size:17px!important;line-height:1.3;margin:0 0 8px;color:#312357}
+.atlas-detail .atlas-chipline{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.atlas-detail .atlas-exam-tag{background:var(--exam-ink,#8256b6);color:white;border-radius:9px;padding:4px 9px;font-size:12px;font-weight:800}
+.atlas-detail .atlas-tag{display:inline-block;background:#f4f6fa;border:1px solid #d9dfeb;color:#374863;border-radius:20px;padding:4px 9px;font-size:11px;font-weight:650}
+.atlas-detail .atlas-tag-breed{background:#f6eff8;border-color:#e9d5ea}
+.atlas-detail .atlas-tag.atlas-system{background:var(--tag-bg);color:var(--tag-ink);border-color:var(--tag-ink)}
+.atlas-detail .atlas-split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:12px;align-items:start}
+.atlas-detail .atlas-media{background:#fff;border:1px solid #dce3ee;border-radius:13px;padding:10px;min-width:0;overflow:hidden}
+.atlas-detail .atlas-media img{max-width:100%;height:auto;object-fit:contain;border-radius:9px}
+.atlas-detail .atlas-gross{background:#fff;border:1px solid #d6dbed;border-radius:13px;padding:12px;line-height:1.52;font-size:13px}
+.atlas-detail .atlas-gross h4{margin:0 0 7px;color:#384278;font-size:14px}
+.atlas-detail .atlas-key{display:flex;align-items:flex-start;gap:10px;background:#f5edfc;border:1px solid #e2d4f2;border-radius:12px;padding:9px 12px;margin:11px 0;font-size:13px}
+.atlas-detail .atlas-key .atlas-star{font-size:22px;color:#9965b9;line-height:1.1}
+.atlas-detail .atlas-key strong{font-size:14px;color:#4f3672;white-space:nowrap}
+.atlas-detail .atlas-panel{border:1px solid #ded6ed;border-radius:12px;margin:7px 0;overflow:hidden;background:#fff}
+.atlas-detail .atlas-panel summary{padding:10px 12px;background:#f6f1fb;color:#433569;font-weight:800;cursor:pointer;list-style-position:inside}
+.atlas-detail .atlas-panel .atlas-panel-body{padding:9px 13px;font-size:13px;line-height:1.5}
+.atlas-detail .atlas-panel .atlas-panel-body p{margin:2px 0 7px}
+.atlas-detail .atlas-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding-top:9px;border-top:1px solid #e0deea}
+.atlas-detail .atlas-footer button{font-size:12px!important;padding:6px 9px!important;border-radius:10px!important}
+.atlas-detail .atlas-mini-meta{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}
+.atlas-detail .atlas-caption{font-size:11px;color:#5c6980}
+.atlas-detail .atlas-classifications details{margin-top:6px;padding:8px 10px;border:1px solid #e4dfec;border-radius:11px;background:#fbfaff}
+.atlas-detail .atlas-classifications details summary{font-size:12px;font-weight:750}
+@media(max-width:610px){.atlas-detail .atlas-split{grid-template-columns:minmax(0,1fr)}.atlas-detail .atlas-heading h3{font-size:15px!important}.atlas-detail .atlas-key{flex-wrap:wrap}.atlas-detail .atlas-key strong{white-space:normal}}
+</style>`;
+function atlasShell(body,isDetail=false){return atlasStyle+'<div class="'+(isDetail?'atlas-detail':'atlas-hub')+'">'+body+'</div>'}
+
 function modal(title,body){if(ui)ui.showModal(title,body)}
 const nameSorter=new Intl.Collator(undefined,{sensitivity:'base',numeric:true,ignorePunctuation:true});
 function isUncustomizedDuplicate(x){
