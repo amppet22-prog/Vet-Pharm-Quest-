@@ -181,22 +181,46 @@ function card(i){
  const publicGallery=publicPhotos.length?'<div style="display:grid;gap:9px">'+publicPhotos.map(p=>'<figure style="margin:0;border:1px solid #d8ddea;border-radius:12px;padding:7px"><img alt="'+h(p.caption)+'" src="'+h(p.asset)+'" style="display:block;width:100%;max-height:430px;object-fit:contain"><figcaption style="font-size:12px;line-height:1.4;margin-top:5px"><b>'+h(p.caption)+'</b> · '+h(p.source)+'<div>'+h(p.studyPrompt)+'</div></figcaption></figure>').join('')+'</div>':'';
  const lectureGallery=Number.isInteger(x.lectureAtlasSection)?[0,1].flatMap(slot=>window.VPQ_NECROPSY_OWNER_PUBLISH?.getLecturePhotos?.('L'+x.lecture+'-S'+x.lectureAtlasSection+'-P'+slot)||[]).filter(p=>/^https:\/\//i.test(String(p.url||''))).map(p=>'<figure style="margin:5px 0 10px;border:1px solid #cbdbea;padding:8px;border-radius:10px"><img src="'+h(p.url)+'" alt="'+h(p.caption||'Published lecture photo')+'" loading="lazy" style="width:100%;max-height:430px;object-fit:contain"><figcaption style="font-size:12px;margin-top:7px"><b>'+h(p.type||'Lecture photograph')+'</b> · '+h(p.caption||'Owner-published lecture image')+'</figcaption></figure>').join(''):'';
  const media=gallery||publicGallery||lectureGallery||(x.image?'<img alt="Local pathology image" src="'+h(x.image)+'" style="max-width:100%;max-height:330px;object-fit:contain;border:1px solid #d8ddea;border-radius:12px">':'<div style="min-height:160px;display:grid;place-items:center;padding:16px;border:2px dashed #bbc4da;border-radius:12px;background:#fbf8ff;text-align:center">📷 Editable gross / H&E image slot</div>');
+ const exam=atlasExam(x.lecture),theme=ATLAS_EXAMS[exam]||['#e8edf5','#61758c'],sys=atlasSystem(x);
+ const meta=window.VPQ_PATH_ATLAS_META?.data?.(x)||{};
+ const quickClue=String(x.visualClue||x.compare||'').trim();
+ const compactKey=quickClue?quickClue.slice(0,310):'Identify the species, characteristic location and lesion pattern; use histology and history to distinguish look-alike conditions.';
+ const diff=window.VPQ_NECROPSY_DIFFERENTIAL_LAB;
+ const related=x.normal?[]:diff?.exam7Matches?.(x.lecture,x.title)||[];
+ const details=(title,content,open=false)=>'<details class="atlas-panel" '+(open?'open':'')+'><summary>'+title+'</summary><div class="atlas-panel-body">'+content+'</div></details>';
+ const hasKey=Boolean(!x.normal);
+ const header='<div class="atlas-heading" style="--exam-bg:'+theme[0]+';--exam-ink:'+theme[1]+'"><h3>'+h(x.title)+'</h3><div class="atlas-chipline"><span class="atlas-exam-tag">'+(exam?'Exam '+exam:'Reference Library')+' · L'+h(x.lecture)+'</span>'+atlasCardTags(x)+'</div></div>';
+ const caseLinks=related.length?'<div class="atlas-small-links buttonrow">'+related.slice(0,4).map(c=>'<button data-path7-navle-case="'+h(c.id)+'">🩺 '+h(c.sourceCaseId||'Case')+'</button>').join('')+(related.length>4?'<span class="atlas-caption">+'+(related.length-4)+' cases</span>':'')+'</div>':'';
+ const mediaHTML='<div class="atlas-media"><div class="atlas-caption" style="margin:0 0 8px">📷 '+photoStatus(x)+' · Gross, histology and causal-agent photos</div>'+media+'</div>';
+ const grossHTML='<div class="atlas-gross"><h4>📋 '+(x.normal?'Normal appearance':'Gross description')+'</h4>'+rich(x.gross)+'</div>';
+ const keyHTML=hasKey?'<div class="atlas-key"><span class="atlas-star" aria-hidden="true">☆</span><strong>Key distinction</strong><span>'+rich(compactKey)+'</span></div>':'';
+ const sectionHTML=
+   details(x.normal?'Normal identification':'🔬 Morphologic diagnosis','<p>'+rich(x.dx)+'</p>',x.normal)+
+   details('🔬 '+(x.normal?'Normal histology':'Histology'),'<p>'+rich(x.histo)+'</p>',true)+
+   details('💡 '+(x.normal?'Normal vs abnormal':'Why it happens / pathogenesis'),'<p>'+rich(x.why)+'</p>',true)+
+   (x.compare&&x.compare!==quickClue?details('⚖️ Don’t confuse with','<p>'+rich(x.compare)+'</p>'): '')+
+   (x.notes?details('📝 Your annotations','<p>'+rich(x.notes)+'</p>'): '');
+ const speciesBreeds=x.normal?'':(meta.breedTags?.length||meta.breedSizes?.length?'<div class="atlas-mini-meta"><b style="font-size:12px">Breed associations:</b> '+[...(meta.breedSizes||[]).map(z=>window.VPQ_PATH_ATLAS_META?.breedSizes?.[z]||z),...(meta.breedTags||[])].map(z=>'<span class="atlas-tag">'+h(z)+'</span>').join('')+'</div>':'');
+ const classification=x.normal?'':'<div class="atlas-classifications">'+(window.VPQ_PATH_ATLAS_META?.browseHTML?.(x)||'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')+'</div>';
+ const source='<details class="atlas-panel"><summary>📖 Study source & details</summary><div class="atlas-panel-body">'+h(x.source||'Not recorded')+'</div></details>';
+ const crosslink=x.normal?'':(window.VPQ_PATH_ATLAS_META?.relatedHTML?.(x,base.map((b,j)=>record(j)),id=>base.findIndex(c=>c.id===id))||'');
+ const master=window.VPQ_MASTER_DISEASE_LIBRARY?.diseaseForSpecimen?.(x.id);
+ const footer='<div class="atlas-footer">'+
+  '<button data-path7-back="1">← Atlas</button>'+
+  (x.normal?'':'<button data-path7-navle-lecture="'+h(x.lecture)+'">🩺 Related cases</button>')+
+  (Number.isInteger(x.lectureAtlasSection)?'<button data-path7-gi-learn="'+h(x.lecture)+'">📖 Lecture notes</button>':'')+
+  (master?'<button data-path7-master="'+h(x.id)+'">🔗 Related systems</button>':'')+
+  '<button data-path7-edit="'+i+'">✏️ Edit card</button>'+
+  '<button data-path7-owner-publish="'+i+'">🚀 Edit / Publish</button>'+
+  '<button data-path7-hide="'+i+'">🗂 Hide</button></div>';
  modal((x.normal?'🌱 Normal reference · ':'Lecture '+h(x.lecture)+' · ')+h(x.title),
  nav+
- '<p class="tiny">'+photoStatus(x)+' · Photos optional; uploading is not the same as verifying.</p>'+ 
- (x.normal?'':(function(){const diff=window.VPQ_NECROPSY_DIFFERENTIAL_LAB;const hit=diff?.exam7Matches?.(x.lecture,x.title)||[];return '<div style="border:1px solid #c4d7e9;border-radius:9px;padding:9px;margin:8px 0;background:#f5f9ff"><b>🩺 Related Exam 7 Patient Rounds</b><p style="font-size:12px;margin:4px 0">Practice clinical reasoning using these specimen findings.</p><div class="buttonrow">'+(hit.length?hit.map(c=>'<button data-path7-navle-case="'+h(c.id)+'">🧩 '+h(c.sourceCaseId)+' · Patient case</button>').join(''):'<small>No exact disease-linked case yet; browse cases for this lecture.</small>')+'<button data-path7-navle-lecture="'+h(x.lecture)+'">All L'+h(x.lecture)+' patient rounds</button></div></div>'})())+
+ header+
+ '<div class="atlas-split">'+mediaHTML+grossHTML+'</div>'+
+ keyHTML+sectionHTML+speciesBreeds+
+ (caseLinks?'<div class="atlas-small-links"><b style="font-size:12px">🩺 Exact linked cases</b>'+caseLinks+'</div>':'')+
+ classification+source+crosslink+footer);
 
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px"><div>'+media+'</div><div>'+(x.normal?'<p><b>System:</b> '+h(x.system)+' · <b>Species:</b> '+h(x.species)+'</p>':'')+'<p><b>'+(x.normal?'Normal gross appearance':'Gross description')+':</b> '+rich(x.gross)+' <button type="button" data-path7-why="gross" aria-label="Explain gross findings" title="Why does the lesion look this way?">?</button></p>'+
- '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal identification':'Reveal morphologic diagnosis')+'</b> ❔</summary><p>'+rich(x.dx)+'</p></details>'+
- '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal histology':'Histology')+'</b> ❔</summary><p>'+rich(x.histo)+'</p></details>'+
- '<details '+(x.normal||mode==='histo'?'open':'')+'><summary><b>'+(x.normal?'Normal vs abnormal · what to compare':'Why it happens / distinctive clues')+'</b> ❔</summary><p>'+rich(x.why)+'</p></details>'+
- (x.notes?'<p><b>Your annotation:</b> '+rich(x.notes)+'</p>':'')+
- (Number.isInteger(x.lectureAtlasSection)?'<div class="buttonrow"><button data-path7-gi-learn="'+h(x.lecture)+'">📖 Return to Lecture '+h(x.lecture)+' refresher</button></div>':'')+
- (x.normal?'':(window.VPQ_PATH_ATLAS_META?.browseHTML?.(x)||'')+(x.visualClue?'<p><b>🔎 Recognition clue:</b> '+rich(x.visualClue)+'</p>':'')+(x.compare?'<p><b>⚖️ Don’t confuse with:</b> '+rich(x.compare)+'</p>':'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')) +
- '<p class="tiny"><b>Study source:</b> '+h(x.source)+'</p></div></div>'+ (x.normal?'':window.VPQ_PATH_ATLAS_META?.relatedHTML?.(x,base.map((b,j)=>record(j)),id=>base.findIndex(c=>c.id===id))||'')+
- (x.normal?'':'<div class="buttonrow"><button data-path7-why="histo">❔ Histology & WHY</button><button data-path7-why="compare">❔ What distinguishes it?</button></div>')+ 
- (x.normal?'':(window.VPQ_MASTER_DISEASE_LIBRARY?.diseaseForSpecimen?.(x.id)?'<div class="buttonrow"><button data-path7-master="'+h(x.id)+'" style="background:#f0eaff;border:1px solid #b8a7db;font-weight:700">📚 View all manifestations · Master Disease Library</button></div>':'<p class="tiny">Master disease connection not classified yet. Add a shared disease ID in the atlas editor.</p>'))+
- '<div class="buttonrow"><button data-path7-edit="'+i+'">✏️ Edit text / images</button><button data-path7-owner-publish="'+i+'">🚀 Publish photos now</button><button data-path7-hide="'+i+'" style="font-size:12px">🗂 Hide card</button></div>');
 }
 function edit(i){
  current=i;const x=record(i);
