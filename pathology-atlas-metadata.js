@@ -3,6 +3,14 @@
 window.VPQ_PATH_ATLAS_META=(function(){
 'use strict';
 const species={dog:'Dog',cat:'Cat',horse:'Horse',cattle:'Cattle',sheep:'Sheep',goat:'Goat',pig:'Pig',poultry:'Poultry',other_bird:'Other birds',reptile:'Reptiles',small_mammal:'Small mammals',wildlife:'Wildlife / exotics',human:'Human'};
+const breedSizes={toy:'Toy',small:'Small breed',medium:'Medium breed',large:'Large breed',giant:'Giant breed'};
+function parseBreedTags(v){
+ let arr=Array.isArray(v)?v:null;
+ if(!arr){try{arr=JSON.parse(v||'[]')}catch{arr=String(v||'').split(/\n|;/).map(x=>x.trim()).filter(Boolean)}}
+ if(!Array.isArray(arr))arr=[];
+ return [...new Set(arr.map(x=>String(x||'').trim().slice(0,80)).filter(Boolean))].slice(0,24);
+}
+function parseBreedSizes(v){return parseBreedTags(v).filter(x=>Object.hasOwn(breedSizes,x))}
 const hostScopes={unspecified:'Not assessed',multiple:'Multiple species / broad host range'};
 const frequency={reported:'Reported; frequency unknown',common:'Commonly reported',occasional:'Occasionally reported',rare:'Rarely reported',exceptional:'Exceptionally rare'};
 const conditionTypes={infectious:'Infectious disease',congenital:'Congenital / developmental anomaly',malformation:'Structural anomaly',neoplasm:'Neoplasia / tumor',inflammatory:'Inflammatory / immune-mediated',degenerative:'Degenerative',vascular:'Vascular / ischemic',toxic:'Toxic / drug-induced',nutritional:'Nutritional / metabolic',endocrine:'Endocrine disorder',traumatic:'Traumatic',idiopathic:'Idiopathic / undetermined',adaptation:'Cell adaptation',artifact:'Artifact / non-lesion'};
@@ -48,8 +56,16 @@ const seeded=x=>{
 };
 function data(x){
  x=seeded(x||{});
+ // Seed instructor-listed breed associations only when the user has not
+ // published a different breed list. Association is NOT an incidence claim.
+ const isVKH=String(x.lecture)==='79'&&/uveodermatologic|vkh/i.test(x.title||'');
+ const seedBreeds=isVKH?['Siberian Husky','Akita','Samoyed','Australian Shepherd']:[];
+ const breedTags=x.breedTags!==undefined?parseBreedTags(x.breedTags):seedBreeds;
  return {
   species:parseSpecies(x?.speciesOccurrence),
+  breedTags,
+  breedSizes:parseBreedSizes(x?.breedSizes),
+  breedEvidence:String(x?.breedEvidence||(isVKH?'Instructor Lecture 79 slide 42, breed predisposition mentioned; frequency not quantified.':'')).trim(),
   hostScope:x?.hostScope==='multiple'?'multiple':'unspecified',
   conditionType:safeChoice(conditionTypes,x?.conditionType),
   conditionSubtype:safeChoice(subtypes,x?.conditionSubtype),
@@ -83,6 +99,7 @@ function browseHTML(x){
  return '<details style="border-top:1px solid #d4dce8;padding-top:10px;margin-top:12px" open><summary><b>🐾 Species, One Health & condition classification</b></summary>'+
  (d.hostScope==='multiple'||Object.keys(d.species).length>=2?'<p style="margin:5px 0"><b>🐾 Multiple species / broad host range</b> · Specific hosts should be listed when established.</p>':'')+
  (items?'<div style="margin:7px 0">'+items+'</div>':'<p class="tiny">Individual species frequencies not yet assessed. No occurrence is assumed.</p>')+
+ (d.breedTags.length||d.breedSizes.length?'<div style="margin:8px 0"><b style="font-size:12px;color:#34476c">Breed predispositions:</b> '+[...d.breedSizes.map(k=>breedSizes[k]),...d.breedTags].map(label=>'<span style="display:inline-block;margin:3px;padding:4px 8px;border-radius:11px;border:1px solid #d6c8ee;background:#f7f1fc;color:#513d75;font-size:11px;font-weight:700">'+esc(label)+'</span>').join('')+(d.breedEvidence?'<p class="tiny" style="margin:5px 0">Association source: '+esc(d.breedEvidence)+'</p>':'')+'</div>':'')+
  (d.conditionType?'<p><b>Condition type:</b> '+esc(conditionTypes[d.conditionType])+(d.conditionSubtype?' · '+esc(subtypes[d.conditionSubtype]):'')+'</p>':'')+
  (d.organSystem?'<p><b>Organ system:</b> '+esc(systems[d.organSystem])+(d.organ?' · '+esc(d.organ):'')+'</p>':'')+
  (d.pathogen?'<p><b>Pathogen(s) / causal agents:</b> '+esc(d.pathogen)+'</p>':'')+
@@ -104,6 +121,10 @@ function editorHTML(x){
  '<p class="tiny">Choose Multiple species for a broadly applicable disease, even before every host has been classified. Then assign individual species occurrence below when supported. This choice alone does not assert that all species are affected.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px">'+Object.entries(species).map(([key,label])=>'<label style="font-size:12px">'+esc(label)+'<select data-path-species="'+esc(key)+'" style="width:100%;padding:5px"><option value="">Not assessed</option>'+Object.entries(frequency).map(([f,v])=>'<option value="'+esc(f)+'"'+(d.species[key]===f?' selected':'')+'>'+esc(v)+'</option>').join('')+'</select></label>').join('')+'</div>'+
  '<label>Evidence/source for frequency<textarea id="pathMetaEvidence" rows="2" style="width:100%">'+esc(d.evidence)+'</textarea></label>'+
+ '<details style="margin:10px 0;border:1px solid #d6c8ee;border-radius:10px;padding:9px"><summary><b>🐕 Breed predispositions · optional</b></summary><p class="tiny">Add only documented associations, not automatic disease rules. Keep species tags separately. Unknown breeds are not assumed unaffected.</p>'+
+ '<div style="display:flex;flex-wrap:wrap;gap:8px">'+Object.entries(breedSizes).map(([key,label])=>'<label style="font-size:12px"><input type="checkbox" data-path-breed-size="'+esc(key)+'"'+(d.breedSizes.includes(key)?' checked':'')+'> '+esc(label)+'</label>').join('')+'</div>'+
+ '<label style="display:block;margin:7px 0">Key breeds (one per line)<textarea id="pathMetaBreedTags" rows="4" style="width:100%" placeholder="Siberian Husky&#10;Akita">'+esc(d.breedTags.join('\\n'))+'</textarea></label>'+
+ '<label style="display:block;margin:7px 0">Evidence and strength of association<textarea id="pathMetaBreedEvidence" rows="2" style="width:100%" placeholder="Instructor slide, study or textbook; do not assume prevalence">'+esc(d.breedEvidence)+'</textarea></label></details>'+
  '<label>Condition type'+selectHTML(conditionTypes,'pathMetaType',d.conditionType,true)+'</label>'+
  '<label>Subtype / pathogen or neoplasm family'+selectHTML(subtypes,'pathMetaSubtype',d.conditionSubtype,true)+'</label>'+
  '<label>Organ system'+selectHTML(systems,'pathMetaSystem',d.organSystem,true)+'</label>'+
@@ -118,9 +139,12 @@ function editorHTML(x){
 function readEditor(root){
  const v=id=>String(root.querySelector('#'+id)?.value||'').slice(0,1800);
  const ranks={};
+ const selectedBreedSizes=[];
+ root.querySelectorAll('[data-path-breed-size]:checked').forEach(el=>{if(breedSizes[el.dataset.pathBreedSize])selectedBreedSizes.push(el.dataset.pathBreedSize)});
  root.querySelectorAll('[data-path-species]').forEach(el=>{if(species[el.dataset.pathSpecies]&&frequency[el.value])ranks[el.dataset.pathSpecies]=el.value});
  return {
  speciesOccurrence:JSON.stringify(ranks),hostScope:v('pathMetaHostScope'),speciesEvidence:v('pathMetaEvidence'),
+ breedSizes:JSON.stringify(selectedBreedSizes),breedTags:JSON.stringify(parseBreedTags(v('pathMetaBreedTags').split(/\\n/))),breedEvidence:v('pathMetaBreedEvidence'),
  conditionType:v('pathMetaType'),conditionSubtype:v('pathMetaSubtype'),
  organSystem:v('pathMetaSystem'),affectedOrgan:v('pathMetaOrgan'),
  pathogenNames:v('pathMetaPathogen'),diseaseId:v('pathMetaDisease').toLowerCase().replace(/[^a-z0-9-]/g,''),
@@ -135,5 +159,5 @@ function relatedHTML(x,all,indexFor){
  return '<div style="border-top:1px solid #d9e1e8;padding-top:9px;margin-top:8px"><b>🔗 Other organ manifestations of this disease</b><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">'+
  matches.map(y=>'<button type="button" data-path7-view="'+indexFor(y.id)+'">'+esc(y.title)+' · '+esc(systems[data(y).organSystem]||data(y).organ||'Other site')+'</button>').join('')+'</div></div>';
 }
-return {species,hostScopes,frequency,conditionTypes,subtypes,systems,zoonotic,data,speciesMatches,browseHTML,editorHTML,readEditor,relatedHTML,lectureSeed,etiologyMatches};
+return {species,hostScopes,frequency,breedSizes,conditionTypes,subtypes,systems,zoonotic,data,speciesMatches,browseHTML,editorHTML,readEditor,relatedHTML,lectureSeed,etiologyMatches};
 })();
