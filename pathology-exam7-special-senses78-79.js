@@ -9,6 +9,17 @@ const rows=[["78","Otitis externa","Ear canal; dogs often with allergy, moisture
 const audit={updated:[],notFound:[],lectureHighlights:0,comparisons:[],byLecture:{}};
 const norm=s=>String(s||'').toLowerCase().trim();
 const alias={'Otitis externa':'Otitis externa','Auricular infarction':'Auricular infarction','Auricular hematoma':'Auricular hematoma','Glaucoma':'Glaucoma','Corneal sequestrum':'Corneal sequestrum','Diabetic cataract':'Diabetic cataract'};
+/* Restore a high-yield ocular condition omitted by the generic original card generator. */
+if(!bank.some(x=>String(x.lecture)==='79'&&/equine recurrent uveitis/i.test(x.title||''))){
+ bank.push({id:'special-info-79-equine-recurrent-uveitis',lecture:'79',title:'Equine recurrent uveitis (ERU)',system:'ocular',specialDiseaseInfo:true,
+ gross:'Horses: recurrent bouts of painful photophobic eye with blepharospasm, lacrimation, miosis and aqueous flare. Repeated episodes may leave synechiae, cataracts, vitreous changes, chorioretinal scarring and vision loss.',
+ dx:'Eye: recurrent uveitis, with anterior and/or posterior uveal inflammation and secondary ocular damage as observed.',
+ histo:'Lymphoplasmacytic and variable mixed uveal inflammation, blood–ocular barrier disruption and chronic scarring; findings vary by stage. Do not presume an organism based solely on inflammation.',
+ why:'Immune-mediated recurrent intraocular inflammation, sometimes associated with leptospiral infection, repeatedly injures uveal tissue and blood–ocular barriers; secondary cataract/glaucoma and blindness may follow.',
+ compare:'Corneal keratitis affects ocular surface, not primarily uvea; glaucoma is a high intraocular pressure syndrome that may be a consequence of uveitis.',
+ visualClue:'Horse + recurring painful eye, miosis/flare and cumulative synechiae or cataract; compare primary glaucoma.',
+ source:'Instructor Lecture 79 ERU section; disease-specific clinical morphology and mechanism summary.'});
+}
 for(const [lecture,title,look,why,contrast,slide] of rows){
  const card=bank.find(x=>String(x.lecture)===lecture&&norm(x.title)===norm(title));
  if(!card){audit.notFound.push('L'+lecture+' '+title);continue;}
