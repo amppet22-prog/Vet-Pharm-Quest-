@@ -8,7 +8,7 @@ const rows=[["71","Feline acne","Cats: chin > lower lip > upper lip","Black foll
 const report={targeted:[],notFound:[],sourceHighlights:0,byLecture:{}};
 const norm=s=>String(s||'').trim().toLowerCase();
 for(const [lecture,title,where,look,mechanism,differential] of rows){
- const c=bank.find(x=>String(x.lecture)===lecture&&norm(x.title)===norm(title));
+ const c=bank.find(x=>String(x.lecture)===lecture&&(norm(x.title)===norm(title)||(lecture==='72'&&title==='Orf / contagious ecthyma'&&norm(x.title)==='contagious ecthyma (orf)')));
  if(!c){report.notFound.push('L'+lecture+' '+title);continue}
  const note='**DERM · species + exact site:** '+where+'\n**VISUAL:** '+look+'\n**WHY:** '+mechanism+'\n**DON’T CONFUSE:** '+differential;
  if(!String(c.notes||'').includes('**DERM · species + exact site:**'))c.notes=(c.notes?c.notes+'\n\n':'')+note;
