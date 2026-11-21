@@ -32,7 +32,7 @@ const ATLAS_SYSTEMS={
  aural:['👂','Ears','#FFE6D3','#B97F4F'],cardiac:['❤️','Cardiovascular','#FFD2DE','#B84968'],
  respiratory:['🫁','Respiratory','#BDEFE9','#218F90'],
  musculoskeletal:['🦴','Skeletal','#F2E0CC','#9B704D'],
- muscular:['💪','Muscular','#D6E8FF','#557FBC'],endocrine:['⚗️','Endocrine','#F6DEF3','#A45CA0'],
+ muscular:['💪','Muscular','#D6E8FF','#557FBC'],endocrine:['⚗️','Endocrine','#FFE9CF','#B57C4A'],
  reproductive:['🌷','Reproductive','#FFE1F0','#B7648C'],
  gastrointestinal:['🌿','Gastrointestinal','#DFEDC8','#6D9155'],
  renal:['🫘','Urinary / Renal','#E8C6DE','#8F5475'],
