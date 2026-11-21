@@ -41,6 +41,13 @@ if(sertoliDuplicate&&!sertoliDuplicate.canonicalDuplicateOf){
  sertoliDuplicate.canonicalDuplicateOf='exam7-28';
  sertoliDuplicate.duplicateReason='Same Sertoli cell tumor disease; canonical lecture specimen exam7-28';
 }
+const foundationFixes=[["67","Neuronal necrosis","Neuronal injury may be grossly inapparent at first; regional softening and tissue loss become apparent after extensive cell death.","Irreversible injury produces shrunken intensely eosinophilic 'red neurons' with condensed or absent nuclei and later microglial clearance.","Severe ischemia/toxic/metabolic stress → energy failure → irreversible neuronal death and later macrophage cleanup."],["67","Microgliosis and neuronophagia","Often no distinct gross lesion; recognize the process histologically after neuronal death, including focal inflammatory brain disease.","Activated microglia enlarge and proliferate; cells cluster around injured neurons and may engulf neuronal bodies (neuronophagia).","CNS-resident phagocytes detect injured neurons → microgliosis and removal of damaged neuronal material."],["67","Primary demyelination","White-matter tracts may appear pale, softened or normal grossly early; interpretation usually requires microscopy and lesion distribution.","Myelin sheaths break down despite relative initial preservation of axons, with myelin debris and macrophage removal.","Primary oligodendrocyte/Schwann-cell or myelin injury → sheaths lost before significant axonal degeneration."],["67","Secondary demyelination","Distal nerve or spinal tract may initially look grossly normal after proximal axonal injury, then become pale or atrophic.","Axonal degeneration precedes myelin fragmentation; macrophages remove damaged myelin and axon material.","Primary axonal disruption → loss of distal axoplasmic support → Wallerian axonal degeneration → secondary myelin breakdown."],["67","Hydrocephalus from impaired CSF flow","Enlarged CSF-filled ventricles with compression/thinning of cerebral mantle; severe congenital cases may develop a domed calvarium.","Periventricular stretching and compression produce ependymal changes, white-matter injury and progressive parenchymal attenuation.","Obstructed CSF circulation or impaired resorption → progressive ventricular dilation → pressure atrophy of adjacent cerebral tissue."],["68","Canine distemper — old dog encephalitis","Older dogs may develop slowly progressive behavioral or neurologic changes; CNS gross lesions often subtle or absent.","Chronic nonsuppurative encephalitis with demyelination, reactive gliosis and possible intranuclear or intracytoplasmic viral inclusions.","Persistent or delayed distemper-associated CNS inflammation/virus-related injury → chronic encephalitis and neurologic dysfunction; distinguish aging-associated dysfunction."],["68","Canine herpesvirus 1 CNS infection","Neonatal puppies: systemic illness with often widespread petechiae and necrotic organ lesions; CNS changes may be poorly defined grossly.","Multifocal necrosis and hemorrhage with variable inflammation; widespread systemic necrotizing lesions support neonatal herpesvirus infection.","Immature neonatal thermoregulation and immune defenses permit disseminated virus replication → endothelial/parenchymal necrosis → severe multisystem disease."]];
+for(const [lecture,title,gross,histo,why] of foundationFixes){
+ const x=get(lecture,title);if(!x)continue;
+ if(String(x.gross||'').length<75)x.gross=gross;
+ if(String(x.histo||'').length<65)x.histo=histo;
+ if(String(x.why||'').length<75)x.why=why;
+}
 const labelsGross=/^(gross|gross lesion|gross lesions|gross recognition|placenta|gross fetus|gross fetal clue|clinical \/ lesion distinction|gross\/clinical distinction|recognition \/ don't confuse)$/i;
 const labelsHisto=/^(histology|histopathology|microscopic|microscopy|histologic features)$/i;
 const labelsWhy=/^(mechanism|pathogenesis|pathway|etiology \/ pathogenesis|why cns damage occurs|pathogenesis \/ why)$/i;
@@ -62,7 +69,7 @@ for(const x of bank){
 }
 const grouped=new Map();
 for(const x of bank){
- if(x.normal||x.atlasComparison||x.dermComparison)continue;
+ if(x.normal||x.atlasComparison||x.dermComparison||x.canonicalDuplicateOf)continue;
  const l=String(x.lecture);
  const key=l+'|'+norm(x.title).replace(/[^a-z0-9]+/g,' ').trim();
  const a=grouped.get(key)||[];a.push(x.id);grouped.set(key,a);
