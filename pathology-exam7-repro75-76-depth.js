@@ -48,5 +48,12 @@ for(const g of comparisons){
  source:g.source+' · Photo captions can match each comparison row.'});
  report.comparisons.push(g.id);
 }
+/* Compact expandable species differences, using the existing species-Gross editor.
+   This never modifies the detailed, already-user-approved uterine prolapse card. */
+const speciesNotes={"exam7-26":[{"name":"Dogs","clue":"Retained abdominal or inguinal testis","text":"Canine cryptorchid testes are frequently smaller/atrophic and retained in abdomen or inguinal canal. Retention raises risk of Sertoli-cell tumor and seminoma; high local temperature disrupts spermatogenesis."},{"name":"Cats","clue":"Missing scrotal testis; sometimes retained testis is not palpable","text":"In cats the retained gonad may be inguinal or abdominal. Avoid calling monorchidism until surgical/imaging/histologic evidence establishes true absence."}],"exam7-29":[{"name":"Dogs","clue":"Diestrus intact bitch; enlarged purulent horns","text":"Luteal progesterone promotes gland secretion and suppresses uterine clearance. E. coli is frequent, CEH may coexist, and closed cervix means no visible discharge despite severe infection."},{"name":"Cats","clue":"After induced ovulation and luteal phase","text":"Cats may develop uterine pus after ovulation and progesterone exposure, but the CEH-pyometra association is not as strong as in dogs."},{"name":"Cattle","clue":"Postpartum infection and persistent corpus luteum","text":"Postpartum infection, sometimes after retained membranes, with ongoing luteal progesterone supports chronic purulent uterine contents."},{"name":"Mares","clue":"Uterine clearance problem, often continues cycling","text":"Following difficult parturition or impaired drainage, mares may accumulate pus despite continued estrous cycles; a persistent CL is not required."}],"exam7-31":[{"name":"Mares","clue":"Unilateral ovarian tumor with opposite ovary small","text":"Tumor may be smooth, solid and cystic or polycystic, yellow-white on cut surface. Functional tumors produce inhibin/androgen/estrogen effects with anestrus, persistent estrus or male-like behavior."},{"name":"Dogs and other species","clue":"Solid/cystic ovarian sex-cord stromal tumor","text":"Hormonal effects are variable; diagnosis is by histologic sex-cord stromal pattern and clinical context, not simply a fluid-filled ovarian cavity."}]};
+for(const [id,rows] of Object.entries(speciesNotes)){
+ const x=bank.find(c=>c.id===id);
+ if(x&&!x.grossSpecies)x.grossSpecies=JSON.stringify(rows);
+}
 window.VPQ_REPRO_75_76_AUDIT=report;
 })();
