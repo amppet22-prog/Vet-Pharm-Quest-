@@ -60,6 +60,12 @@
       "answer": "Yes.",
       "why": "Do not rely only on observed symptoms to exclude low blood glucose.",
       "slide": "Course Lectures 10–11 (user notes), 2026 AAHA/FDA safety check"
+    },
+    "pharm-e2-thyroid12-025": {
+      "prompt": "Why is methimazole stopped before some I-131 treatments?",
+      "answer": "To allow appropriate iodine uptake and thyroid assessment. Also the patient cannot be touched for at least 3 days and needs to be stable.",
+      "why": "Withdrawal timing varies by treatment facility; follow its protocol.",
+      "slide": "Lecture 12 · user notes, reviewed alongside course treatment notes"
     }
   },
   "custom": [
