@@ -112,6 +112,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 10",
       "curated": true
+    },
+    {
+      "prompt": "What is the difference between amorphous and crystalline insulin?",
+      "answer": "Amorphous is regular insulin with no excipients--> fast absorption but short duration\nCrystallin contains an excipient --> slow absorption, longer duration",
+      "why": "Helps to determine action and duration. Experiments allow for slower absorption due to the binding of the cyrstals/ matrix",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwqvqhc3-ihsvu",
+      "domain": "pharmacology",
+      "lecture": "Lecture 10",
+      "curated": true
     }
   ],
   "hidden": []
