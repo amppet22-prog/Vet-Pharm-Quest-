@@ -22,5 +22,25 @@ for(const row of rows){
  audit.enhanced.push(id+' '+title);
  audit.byLecture[x.lecture]=(audit.byLecture[x.lecture]||0)+1;
 }
+/* Species-specific findings only where clinically distinct and lecture-relevant. */
+const species={
+ 'exam7-17':[
+  {name:'Sheep and goats',clue:'Crusted proliferative lip/muzzle papules',text:'Young animals often have thick scabby proliferative lesions at the oral commissures, muzzle and lips; teat/udder or distal limb lesions can occur. Mucosal erosion and superinfection may complicate nursing.'},
+  {name:'Humans (zoonotic exposure)',clue:'Localized inoculation nodule',text:'After direct contact with lesions, skin abrasions can develop a localized firm papule/nodule, often on the hands. Human lesions should not be confused with the animal’s extensive crusted mucocutaneous disease.'}],
+ 'exam7-20':[
+  {name:'Dogs',clue:'Follicular comedones and alopecia',text:'Localized patches can be mildly inflamed; generalized cases may have extensive alopecia, follicular casts, scaling, erythema, furunculosis and secondary bacterial infection.'},
+  {name:'Cats',clue:'Facial/neck alopecia varies with mite species',text:'Some feline Demodex species produce follicular lesions while superficial D. gatoi can cause marked pruritus and self-induced alopecia. Mite species and skin sampling strategy matter.'}],
+ 'exam7-33':[
+  {name:'Sows',clue:'One or more small dry fetuses among littermates',text:'Different conceptuses may die at different gestational ages; one or more dry dark shriveled fetuses can be present at parturition alongside normally developed piglets. Interpret fetal size and timing.'},
+  {name:'Mares',clue:'Retained mummy or mummified twin',text:'Uncommon but may follow one twin dying; intact dry compressed membranes and preserved fetal form help distinguish from infected maceration.'},
+  {name:'Cattle',clue:'Large brown leathery retained fetus',text:'Sterile retained fetal remains can dehydrate slowly for months, with persistent corpus luteum and prolonged gestation. A closed cervix and lack of infection are essential.'}],
+ 'exam7-40':[
+  {name:'Dogs',clue:'Rapid bilateral white lenses',text:'Diabetes commonly causes rapid bilateral cataract formation from marked lens sorbitol accumulation; secondary lens-induced uveitis may be present.'},
+  {name:'Cats',clue:'Diabetic cataract uncommon',text:'Diabetic cataracts are comparatively uncommon in cats; corneal opacity or lens opacity from unrelated causes should not automatically be attributed to hyperglycemia.'}]
+};
+for(const [id,details] of Object.entries(species)){
+ const x=bank.find(c=>c.id===id);
+ if(x&&!x.grossSpecies)x.grossSpecies=JSON.stringify(details);
+}
 window.VPQ_PATH_EXAM7_DEPTH_AUDIT=audit;
 })();
