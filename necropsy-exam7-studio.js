@@ -10,7 +10,7 @@ function refreshCustom(){
  return base;
 }
 const KEY='vpq-path-exam7-user-edits-v1';
-let ui=null,mode='gross',tab='lesions',normalSystem='all',scopeFilter='all',filter='all',etiologyFilter='all',speciesFilter='all',frequencyFilter='all',conditionFilter='all',subtypeFilter='all',systemFilter='all',zoonoticFilter='all',search='',listPage=0,current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
+let ui=null,mode='gross',tab='lesions',normalSystem='all',filtersOpen=false,scopeFilter='all',filter='all',etiologyFilter='all',speciesFilter='all',frequencyFilter='all',conditionFilter='all',subtypeFilter='all',systemFilter='all',zoonoticFilter='all',search='',listPage=0,current=-1,quiz=[],step=0,revealed=false,unknownDraft={};
 const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
@@ -70,6 +70,12 @@ const atlasStyle=String.raw`<style>
 .atlas-hub button,.atlas-detail button{transition:background .15s,border-color .15s}
 .atlas-hub .atlas-actions{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
 .atlas-hub .atlas-actions button,.atlas-detail .atlas-small-links button{font-size:12px!important;padding:7px 11px!important;border-radius:12px!important}
+.atlas-hub .atlas-filter-panel{margin:8px 0;padding:9px 11px;border:1px solid #cdd7e9;border-radius:12px;background:#faf9ff}
+.atlas-hub .atlas-filter-panel summary{cursor:pointer;color:#3f3767;font-size:13px;display:flex;align-items:center;gap:7px}
+.atlas-hub .atlas-filter-count{margin-left:auto;color:#69778b;font-size:11px}
+.atlas-hub .atlas-filter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:9px;margin-top:10px}
+.atlas-hub .atlas-filter-grid label{font-size:12px;font-weight:650}
+.atlas-hub .atlas-filter-grid select{display:block;width:100%;padding:8px;margin-top:4px;border-radius:8px;border:1px solid #bdcae0;background:white}
 .atlas-hub .atlas-lectures{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
 .atlas-hub .atlas-lectures button{font-size:11px!important;padding:5px 7px!important;min-height:28px!important;border-radius:9px!important}
 .atlas-hub .atlas-lectures button[aria-pressed=true]{background:#e9dcf7!important;border-color:#986fc2!important;color:#56357d!important}
@@ -163,10 +169,10 @@ function menu(){
  tabs+
  '<div class="buttonrow" style="margin:8px 0"><button data-path7-add="lesion" style="background:#e5f6eb;font-weight:800">➕ Add specimen card</button><button data-path7-manage-hidden="1">🗂 Hidden cards / restore</button></div>'+
  '<p><b>Gross photograph → lesion description → morphologic diagnosis → histology → pathogenesis.</b> This is an exam study bank built from the uploaded lectures, with original summaries and spaces for your editable images and annotations.</p>'+
- '<div class="atlas-actions"><button data-path7-scope="all" aria-pressed="'+(scopeFilter==='all')+'">All collections</button><button data-path7-scope="course" aria-pressed="'+(scopeFilter==='course')+'">📚 Course exams</button><button data-path7-scope="reference" aria-pressed="'+(scopeFilter==='reference')+'">✨ Beyond Exams</button></div>'+ 
- '<div class="atlas-actions"><button data-path7-library="1">📷 Published photos</button><button data-path7-differentials="1">🩺 Differential cases</button><button data-path7-test="all">🧠 Morphologic unknowns</button></div>'+
- '<label style="display:block;font-size:12px;margin:9px 0"><b>🧬 Browse by etiology</b><select data-path7-etiology-filter="1" style="display:block;padding:8px;max-width:390px;width:100%;margin-top:4px"><option value="all">All etiologies</option>'+Object.entries(window.VPQ_PATH_ETIOLOGY?.categories||{}).map(([k,v])=>'<option value="'+h(k)+'"'+(etiologyFilter===k?' selected':'')+'>'+h(v.label)+'</option>').join('')+'</select><small>Multiple tags may apply. Untagged cards appear under All etiologies.</small></label>'+
- '<details style="margin:9px 0;padding:9px;border:1px solid #d6e0ed;border-radius:12px" open><summary><b>🔍 Combine species, condition, pathogen family and organ filters</b></summary><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin-top:10px">'+
+ '<div class="atlas-actions atlas-utilities"><button data-path7-library="1">'+atlasIcon('camera')+' Published photos</button><button data-path7-differentials="1">'+atlasIcon('book')+' Differential cases</button><button data-path7-test="all">'+atlasIcon('brain')+' Morphologic unknowns</button></div>'+
+ '<details data-path7-filters="1" class="atlas-filter-panel" '+(filtersOpen?'open':'')+'><summary><b>'+atlasIcon('filter')+' Filter specimens</b><span class="atlas-filter-count">'+([scopeFilter!=='all',etiologyFilter!=='all',speciesFilter!=='all',frequencyFilter!=='all',conditionFilter!=='all',subtypeFilter!=='all',systemFilter!=='all',zoonoticFilter!=='all'].filter(Boolean).length||'All')+' selected</span></summary><div class="atlas-filter-grid">'+
+ '<label>Collection<select data-path7-collection-filter="1"><option value="all"'+(scopeFilter==='all'?' selected':'')+'>All collections</option><option value="course"'+(scopeFilter==='course'?' selected':'')+'>Course exams</option><option value="reference"'+(scopeFilter==='reference'?' selected':'')+'>Beyond Exams / Reference</option></select></label>'+
+ '<label>Etiology<select data-path7-etiology-filter="1"><option value="all">All etiologies</option>'+Object.entries(window.VPQ_PATH_ETIOLOGY?.categories||{}).map(([k,v])=>'<option value="'+h(k)+'"'+(etiologyFilter===k?' selected':'')+'>'+h(v.label)+'</option>').join('')+'</select></label>'+
  (function(){const m=window.VPQ_PATH_ATLAS_META;const choose=(name,value,items,placeholder)=>'<label style="font-size:12px">'+name+'<select data-path7-metadata-filter="'+name+'" style="display:block;width:100%;padding:7px;margin-top:4px"><option value="all">'+placeholder+'</option>'+Object.entries(items||{}).map(([k,label])=>'<option value="'+h(k)+'"'+(value===k?' selected':'')+'>'+h(label)+'</option>').join('')+'</select></label>';return choose('species',speciesFilter,{...m?.species,multiple:'Multiple species / broad host range'},'All species')+choose('frequency',frequencyFilter,m?.frequency,'Any occurrence')+choose('condition',conditionFilter,m?.conditionTypes,'All condition types')+choose('subtype',subtypeFilter,m?.subtypes,'All pathogen / tumor groups')+choose('system',systemFilter,m?.systems,'All organ systems')+choose('zoonotic',zoonoticFilter,m?.zoonotic,'All zoonotic statuses')})()+
  '</div><div class="buttonrow"><button data-path7-filter-reset="1" style="font-size:12px">↺ Clear all atlas filters</button></div><p class="tiny">Only verified or manually classified species appear in species-filtered results. Missing tags mean unassessed, not unaffected. Filters combine with the lecture and etiology selections.</p></details>'+ 
 '<div class="atlas-lectures">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':l==='8'?'L8 · Cell Accumulations*':l==='9'?'L9 · Morphologic DX':'L'+h(l))+'</button>').join('')+'</div>'+
@@ -326,7 +332,8 @@ function init(api){
  window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.init(api);
  window.VPQ_NECROPSY_OWNER_PUBLISH?.load?.().then(()=>{refreshCustom();if(ui===api&&api.body?.querySelector?.('[data-path7-tab]'))menu()}).catch(()=>{});
- api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7MetadataFilter!==undefined){listPage=0;const k=ev.target.dataset.path7MetadataFilter,v=ev.target.value||'all';if(k==='species')speciesFilter=v;else if(k==='frequency')frequencyFilter=v;else if(k==='condition')conditionFilter=v;else if(k==='subtype')subtypeFilter=v;else if(k==='system')systemFilter=v;else if(k==='zoonotic')zoonoticFilter=v;return menu()}if(ev.target?.dataset?.path7EtiologyFilter!==undefined){listPage=0;etiologyFilter=ev.target.value||'all';return menu()}if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){listPage=0;search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
+ api.body.addEventListener('change',ev=>{if(ev.target?.dataset?.path7CollectionFilter!==undefined){filtersOpen=true;listPage=0;scopeFilter=['all','course','reference'].includes(ev.target.value)?ev.target.value:'all';filter='all';return menu()}if(ev.target?.dataset?.path7MetadataFilter!==undefined){filtersOpen=true;listPage=0;const k=ev.target.dataset.path7MetadataFilter,v=ev.target.value||'all';if(k==='species')speciesFilter=v;else if(k==='frequency')frequencyFilter=v;else if(k==='condition')conditionFilter=v;else if(k==='subtype')subtypeFilter=v;else if(k==='system')systemFilter=v;else if(k==='zoonotic')zoonoticFilter=v;return menu()}if(ev.target?.dataset?.path7EtiologyFilter!==undefined){filtersOpen=true;listPage=0;etiologyFilter=ev.target.value||'all';return menu()}if(ev.target?.dataset?.path7NormalSystem!==undefined){normalSystem=String(ev.target.value||'all');return menu()}if(ev.target?.dataset?.path7Search!==undefined){listPage=0;search=String(ev.target.value||'').toLowerCase().trim();menu()}},true);
+ api.body.addEventListener('toggle',ev=>{if(ev.target?.dataset?.path7Filters!==undefined)filtersOpen=!!ev.target.open},true);
  api.body.addEventListener('click',ev=>{
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
   if(!Object.keys(d).some(k=>k.startsWith('path7')))return;
@@ -343,7 +350,7 @@ function init(api){
  }
  if(d.path7GiLearn!==undefined)return window.VPQ_NECROPSY_HANDBOOK?.openLecture?.(String(d.path7GiLearn));
  if(d.path7Master!==undefined)return window.VPQ_MASTER_DISEASE_LIBRARY?.openForSpecimen?.(d.path7Master);
- if(d.path7Scope!==undefined){listPage=0;scopeFilter=['all','course','reference'].includes(d.path7Scope)?d.path7Scope:'all';filter='all';return menu()}
+ if(d.path7Scope!==undefined){listPage=0;filtersOpen=true;scopeFilter=['all','course','reference'].includes(d.path7Scope)?d.path7Scope:'all';filter='all';return menu()}
  if(d.path7FilterReset!==undefined){listPage=0;filter='all';scopeFilter='all';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';search='';return menu()}
  if(d.path7Add!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.newSpecimenEditor?.(d.path7Add==='normal'?'normal':'lesion',tab==='normals'?'67':(filter==='all'?'68':filter));
  if(d.path7ManageHidden!==undefined)return window.VPQ_NECROPSY_OWNER_PUBLISH?.hiddenSpecimenMenu?.();
