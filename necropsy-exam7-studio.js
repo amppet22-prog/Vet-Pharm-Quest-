@@ -391,9 +391,10 @@ function card(i){
  modal((x.normal?'🌱 Normal reference · ':'Lecture '+h(x.lecture)+' · ')+h(x.title),
  nav+
  header+
+ keyHTML+
  '<div class="atlas-split">'+mediaHTML+grossHTML+'</div>'+
  renderGrossSpecies(x,sys)+
- keyHTML+sectionHTML+studyNotes+speciesBreeds+
+ sectionHTML+studyNotes+speciesBreeds+
  (caseLinks?'<div class="atlas-small-links"><b style="font-size:12px">🩺 Exact linked cases</b>'+caseLinks+'</div>':'')+
  classification+source+crosslink+footer);
 
