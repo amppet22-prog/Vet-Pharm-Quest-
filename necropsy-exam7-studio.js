@@ -243,6 +243,33 @@ const atlasStyle=String.raw`<style>
 .atlas-detail .atlas-caption{font-size:11px;color:#5c6980}
 .atlas-detail .atlas-classifications details{margin-top:6px;padding:8px 10px;border:1px solid #e4dfec;border-radius:11px;background:#fbfaff}
 .atlas-detail .atlas-classifications details summary{font-size:12px;font-weight:750}
+/* Specimen DETAIL only: readable typography and a slightly wider dialog.
+   Deliberately never change the shared modal, game stage, other rooms or hub. */
+.modal:has(> #modalBody .atlas-detail){width:min(940px,calc(100vw - 24px));max-height:94vh}
+.modal:has(> #modalBody .atlas-detail) #modalBody{padding:14px 18px}
+.modal #modalBody .atlas-detail{font-size:15px!important;line-height:1.58}
+.modal #modalBody .atlas-detail .atlas-gross{font-size:15px!important;line-height:1.62!important;padding:15px}
+.modal #modalBody .atlas-detail .atlas-gross h4{font-size:15px!important}
+.modal #modalBody .atlas-detail .atlas-species-gross-text{font-size:14.5px!important;line-height:1.65!important}
+.modal #modalBody .atlas-detail .atlas-species-label{font-size:14px!important}
+.modal #modalBody .atlas-detail .atlas-species-clue{font-size:12.5px!important}
+.modal #modalBody .atlas-detail .atlas-species-gross-title b{font-size:14px!important}
+.modal #modalBody .atlas-detail .atlas-panel .atlas-panel-body,
+.modal #modalBody .atlas-detail .atlas-note-content{font-size:14.5px!important;line-height:1.64!important}
+.modal #modalBody .atlas-detail .atlas-panel summary{font-size:15px!important;line-height:1.45!important}
+.modal #modalBody .atlas-detail .atlas-key{font-size:15px!important;line-height:1.53!important}
+.modal #modalBody .atlas-detail .atlas-key strong{font-size:16px!important}
+.modal #modalBody .atlas-detail .atlas-mechanism-strip>b{font-size:13.5px!important}
+.modal #modalBody .atlas-detail .atlas-mechanism-step{font-size:12.5px!important}
+.modal #modalBody .atlas-detail .atlas-mechanism-explanation{font-size:14.5px!important}
+.modal #modalBody .atlas-detail .atlas-heading h3{font-size:19px!important}
+.modal #modalBody .atlas-detail .atlas-caption{font-size:12.5px!important}
+@media(max-width:650px){
+ .modal:has(> #modalBody .atlas-detail){width:calc(100vw - 12px);max-height:96vh}
+ .modal:has(> #modalBody .atlas-detail) #modalBody{padding:10px 11px}
+ .atlas-detail .atlas-split{grid-template-columns:minmax(0,1fr)}
+ .atlas-detail .atlas-key{flex-wrap:wrap}
+}
 @media(max-width:610px){.atlas-detail .atlas-split{grid-template-columns:minmax(0,1fr)}.atlas-detail .atlas-heading h3{font-size:15px!important}.atlas-detail .atlas-key{flex-wrap:wrap}.atlas-detail .atlas-key strong{white-space:normal}}
 </style>`;
 function atlasShell(body,isDetail=false){return atlasStyle+'<div class="'+(isDetail?'atlas-detail':'atlas-hub')+'">'+body+'</div>'}
