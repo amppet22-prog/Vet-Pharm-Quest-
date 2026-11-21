@@ -27,10 +27,20 @@ function photoStatus(x){
 function save(i,part){let d=edits();d[base[i].id]=Object.assign({},d[base[i].id]||{},part);try{localStorage.setItem(KEY,JSON.stringify(d));return true}catch(e){return false}}
 function modal(title,body){if(ui)ui.showModal(title,body)}
 const nameSorter=new Intl.Collator(undefined,{sensitivity:'base',numeric:true,ignorePunctuation:true});
+function isUncustomizedDuplicate(x){
+ if(!x?.canonicalDuplicateOf)return false;
+ const owner=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(x.id);
+ const draft=edits()[x.id];
+ // Never suppress an older ID if it contains published text, photographs or local edits.
+ const hasPhotos=!!(owner?.photos?.length||owner?.photo?.url);
+ const hasText=!!(owner?.text&&Object.keys(owner.text).length);
+ const hasDraft=!!(draft&&Object.keys(draft).length);
+ return !(hasPhotos||hasText||hasDraft);
+}
 function visible(){
  refreshCustom();
  const hidden=new Set(window.VPQ_NECROPSY_OWNER_PUBLISH?.getHiddenSpecimens?.()||[]);
- const items=base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(etiologyFilter==='all'||window.VPQ_PATH_ATLAS_META?.etiologyMatches?.(x,etiologyFilter))&&(speciesFilter==='all'||window.VPQ_PATH_ATLAS_META?.speciesMatches?.(x,speciesFilter,frequencyFilter))&&(conditionFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionType===conditionFilter)&&(subtypeFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionSubtype===subtypeFilter)&&(systemFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.organSystem===systemFilter)&&(zoonoticFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.zoonotic===zoonoticFilter)&&(frequencyFilter==='all'||speciesFilter!=='all'||Object.values(window.VPQ_PATH_ATLAS_META?.data?.(x)?.species||{}).includes(frequencyFilter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why,x.pathogenNames,x.diseaseId,window.VPQ_PATH_ATLAS_META?.data?.(x)?.pathogen].join(' ').toLowerCase().includes(search)));
+ const items=base.map((v,i)=>Object.assign({index:i},record(i))).filter(x=>!hidden.has(x.id)&&!isUncustomizedDuplicate(x)&&((tab==='normals')===!!x.normal)&&(tab==='normals'?(normalSystem==='all'||x.system===normalSystem):(filter==='all'||x.lecture===filter))&&(etiologyFilter==='all'||window.VPQ_PATH_ATLAS_META?.etiologyMatches?.(x,etiologyFilter))&&(speciesFilter==='all'||window.VPQ_PATH_ATLAS_META?.speciesMatches?.(x,speciesFilter,frequencyFilter))&&(conditionFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionType===conditionFilter)&&(subtypeFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.conditionSubtype===subtypeFilter)&&(systemFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.organSystem===systemFilter)&&(zoonoticFilter==='all'||window.VPQ_PATH_ATLAS_META?.data?.(x)?.zoonotic===zoonoticFilter)&&(frequencyFilter==='all'||speciesFilter!=='all'||Object.values(window.VPQ_PATH_ATLAS_META?.data?.(x)?.species||{}).includes(frequencyFilter))&&(!search||[x.title,x.lecture,x.system,x.species,x.gross,x.histo,x.why,x.pathogenNames,x.diseaseId,window.VPQ_PATH_ATLAS_META?.data?.(x)?.pathogen].join(' ').toLowerCase().includes(search)));
  // Sort the displayed cards only. Their immutable IDs and original indices
  // remain unchanged so drafts, published images, and edit buttons still match.
  return items.sort((a,b)=>nameSorter.compare(a.title||'',b.title||'')||nameSorter.compare(String(a.lecture||''),String(b.lecture||''))||a.index-b.index);
