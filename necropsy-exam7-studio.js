@@ -405,14 +405,14 @@ function card(i){
  const grossHTML='<div class="atlas-gross"><h4>📋 '+(x.normal?'Normal appearance':'Gross description')+'</h4>'+rich(x.gross)+(grossCount?'<p class="atlas-gross-hint">'+atlasIcon('book',15)+' '+grossCount+' expandable species / comparison sections below ↓</p>':'')+'</div>';
  const keyHTML=hasKey?'<div class="atlas-key"><span class="atlas-star" aria-hidden="true">☆</span><strong>Key distinction</strong><span>'+rich(compactKey)+'</span></div>':'';
  const sectionHTML=
-   details(x.normal?'Normal identification':atlasIcon('flask')+' Morphologic diagnosis','<p>'+rich(x.dx)+'</p>',x.normal)+
-   details(atlasIcon('flask')+' '+(x.normal?'Normal histology':'Histology'),'<p>'+rich(x.histo)+'</p>',true)+
-   details(atlasIcon('brain')+' '+(x.normal?'Normal vs abnormal':'Why it happens / pathogenesis'),pathogenesisContent(x),true)+
+   (x.atlasUnconfirmedMorphology&&/^Working identification:/.test(String(x.dx||''))?'':details(x.normal?'Normal identification':atlasIcon('flask')+' Morphologic diagnosis','<p>'+rich(x.dx)+'</p>',x.normal))+
+   (x.atlasNoSpecificHisto&&/^No distinctive histologic pattern is specified/i.test(String(x.histo||''))?'':details(atlasIcon('flask')+' '+(x.normal?'Normal histology':'Histology'),'<p>'+rich(x.histo)+'</p>',true))+
+   (x.atlasNoSpecificWhy&&/^Use the lecture.s host/i.test(String(x.why||''))?'':details(atlasIcon('brain')+' '+(x.normal?'Normal vs abnormal':'Why it happens / pathogenesis'),pathogenesisContent(x),true))+
    (x.compare&&x.compare!==quickClue?details('⚖️ Don’t confuse with','<p>'+rich(x.compare)+'</p>'): '')+
    '';
  const studyNotes=details(atlasIcon('notes')+' Study notes & annotations',
   '<div class="atlas-note-content">'+(String(x.notes||'').trim()?rich(x.notes):'<p class="atlas-empty-note">No study notes added yet. Keep lecture pearls, mnemonics and personal observations here without repeating the main pathology explanation.</p>')+'</div>'+
-  '<button data-path7-edit="'+i+'" class="atlas-note-edit">'+atlasIcon('notes',14)+' Edit notes</button>',true);
+  '<button data-path7-edit="'+i+'" class="atlas-note-edit">'+atlasIcon('notes',14)+' Edit notes</button>',!!(edits()[x.id]?.notes||window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(x.id)?.text?.notes));
  const speciesBreeds=x.normal?'':(meta.breedTags?.length||meta.breedSizes?.length?'<div class="atlas-mini-meta"><b style="font-size:12px">Breed associations:</b> '+[...(meta.breedSizes||[]).map(z=>window.VPQ_PATH_ATLAS_META?.breedSizes?.[z]||z),...(meta.breedTags||[])].map(z=>'<span class="atlas-tag">'+h(z)+'</span>').join('')+'</div>':'');
  const classification=x.normal?'':'<div class="atlas-classifications">'+(window.VPQ_PATH_ATLAS_META?.browseHTML?.(x)||'')+(window.VPQ_PATH_ETIOLOGY?.cardHTML?.(x)||'')+'</div>';
  const source='<details class="atlas-panel"><summary>📖 Study source & details</summary><div class="atlas-panel-body">'+h(x.source||'Not recorded')+'</div></details>';
