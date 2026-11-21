@@ -76,5 +76,20 @@ for(const card of bank){
  if(histo&&(/\b(?:Pathway|Gross|Histology):/i.test(String(card.histo||''))||card.atlasNoSpecificHisto)){card.histo=histo;card.atlasNoSpecificHisto=false;fixes.histo++;}
  if(pathway&&(/\b(?:Gross|Histology|Pathway):/i.test(String(card.why||''))||card.atlasNoSpecificWhy)){card.why=pathway;card.atlasNoSpecificWhy=false;fixes.why++;}
 }
+/* Prefer explicitly labeled instructor Gross / Histology / Pathway fields.
+   The old bank used keyword matches across ALL labels and accidentally pasted
+   a Pathway under Histology or a Host history under Pathogenesis. */
+for(const card of bank){
+ if(!/^pathx-/.test(card.id||'')||!(/^(67|68|69|70|71|72|73|74|75|76|77|78|79)$/).test(String(card.lecture)))continue;
+ const sec=lessons[String(card.lecture)]?.sections?.find(x=>norm(x.title)===norm(card.title));if(!sec)continue;
+ const p=sec.points||[];
+ const exact=re=>p.filter(x=>Array.isArray(x)&&re.test(String(x[0]||''))).map(x=>String(x[1]||'').trim()).filter(x=>x.length>20);
+ const gross=exact(/^Gross(?: appearance| lesions?| findings?| fetal clue| fetus)?$/i);
+ const histo=exact(/^(?:Histology|Histopathology|Microscopy|Microscopic findings)$/i);
+ const why=exact(/^(?:Pathway|Pathogenesis|Mechanism|Why CNS damage occurs|Why)$/i);
+ if(gross.length&&card.gross!==gross[0]){card.gross=gross.slice(0,2).join(' ');fixes.gross++;}
+ if(histo.length&&card.histo!==histo[0]){card.histo=histo.slice(0,2).join(' ');card.atlasNoSpecificHisto=false;fixes.histo++;}
+ if(why.length&&card.why!==why[0]){card.why=why.slice(0,2).join(' ');card.atlasNoSpecificWhy=false;fixes.why++;}
+}
 window.VPQ_EXAM7_LEGACY_CONTENT_CLEANUP=fixes;
 })();
