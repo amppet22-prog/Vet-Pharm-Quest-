@@ -47,11 +47,33 @@ const ATLAS_ICON_KEYS={cns:'brain',pns:'brain',integument:'skin',ocular:'eye',au
 const atlasExam=n=>{const k=Number(n);return k>=67&&k<=79?7:k>=59&&k<=66?6:k>=50&&k<=58?5:k>=42&&k<=49?4:k>=31&&k<=41?3:k>=17&&k<=30?2:k>=1&&k<=16?1:null};
 const ATLAS_EXAMS={1:['#E5F0FF','#5B83B9'],2:['#EDE3FF','#8264C0'],3:['#DAF3ED','#3E9C8A'],4:['#FCECD8','#AD8658'],5:['#FCE3EB','#B25F80'],6:['#E6F3D7','#709A55'],7:['#F0E3FC','#8256B6']};
 function atlasSystem(x){
- const m=window.VPQ_PATH_ATLAS_META?.data?.(x)||{},n=Number(x.lecture),title=String(x.title||'');
- let key=m.organSystem|| (n>=67&&n<=70?'cns':n>=71&&n<=74?'integument':n>=75&&n<=77?'reproductive':n===78?'aural':n===79?'ocular':n>=50&&n<=53?'cardiac':n>=54&&n<=58?'respiratory':n>=59&&n<=66?'gastrointestinal':'other');
- if(key==='musculoskeletal'&&/myo|muscle|myopathy/i.test(title))key='muscular';
- if(key==='renal'&&/hepatic|liver|biliary/i.test(title))key='hepatobiliary';
- if(key==='cns'&&/skin|cutaneous|dermat/i.test(title))key='integument';
+ const m=window.VPQ_PATH_ATLAS_META?.data?.(x)||{},n=Number(x.lecture);
+ const title=String(x.title||''),origin=String(x.system||'');
+ // Published structured system wins; otherwise use the original specimen's stated system
+ // and a narrow set of high-confidence title/site clues. Never classify a lesion by color alone.
+ const named=[
+  ['ocular',/\b(eye|eyes|ocular|ophthal|cornea|retina|uvea|lens)\b/i],
+  ['aural',/\b(ear|ears|aural|otitis|pinna)\b/i],
+  ['renal',/\b(renal|urinary|kidney|bladder|ureter|urethra)\b/i],
+  ['hepatobiliary',/\b(hepat|liver|biliar|gallbladder)\b/i],
+  ['cardiac',/\b(cardiac|cardiovascular|heart|myocard|arterial|vascular)\b/i],
+  ['respiratory',/\b(respirat|pulmon|lung|bronch|alveol|trachea)\b/i],
+  ['lymphatic',/\b(hematolymph|hematolog|blood|lymph|leukemia|leukaemia)\b/i],
+  ['endocrine',/\b(endocrine|adrenal|thyroid|pituitary)\b/i],
+  ['integument',/\b(dermat|integument|skin|cutaneous)\b/i],
+  ['reproductive',/\b(reproduct|ovarian|uterine|placent|testic|prostat|mammar)\b/i],
+  ['muscular',/\b(muscul|myopath|myositis|skeletal muscle)\b/i],
+  ['musculoskeletal',/\b(skeletal|bone|joint|osteomyel|osteoarth|fracture)\b/i],
+  ['gastrointestinal',/\b(gastrointestinal|digestiv|intestin|colon|gastric|abomas|pancrea)\b/i],
+  ['cns',/\b(neuro|cns|brain|encephal|spinal cord|cerebell|mening)\b/i],
+  ['pns',/\b(peripheral nervous|pns|peripheral nerve)\b/i],
+  ['systemic',/\b(systemic|one health|multiorgan)\b/i]
+ ];
+ const explicit=ATLAS_SYSTEMS[m.organSystem]?m.organSystem:'';
+ const stated=named.find(([key,re])=>re.test(origin))?.[0]||'';
+ const narrowTitle=named.find(([key,re])=>re.test(title))?.[0]||'';
+ const fallback=n>=67&&n<=70?'cns':n>=71&&n<=74?'integument':n>=75&&n<=77?'reproductive':n===78?'aural':n===79?'ocular':n>=31&&n<=35?'renal':n>=36&&n<=41?'hepatobiliary':n>=42&&n<=49?'endocrine':n>=50&&n<=53?'cardiac':n>=54&&n<=58?'respiratory':n>=59&&n<=66?'gastrointestinal':'other';
+ const key=explicit||stated||narrowTitle||fallback;
  return [key,...(ATLAS_SYSTEMS[key]||ATLAS_SYSTEMS.other)];
 }
 const atlasEsc=h;
@@ -70,17 +92,17 @@ const atlasStyle=String.raw`<style>
 .atlas-hub button,.atlas-detail button{transition:background .15s,border-color .15s}
 .atlas-hub .atlas-actions{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
 .atlas-hub .atlas-actions button,.atlas-detail .atlas-small-links button{font-size:12px!important;padding:7px 11px!important;border-radius:12px!important}
-.atlas-hub .atlas-filter-panel{margin:8px 0;padding:9px 11px;border:1px solid #cdd7e9;border-radius:12px;background:#faf9ff}
-.atlas-hub .atlas-filter-panel summary{cursor:pointer;color:#3f3767;font-size:13px;display:flex;align-items:center;gap:7px}
+.atlas-hub .atlas-filter-panel{margin:8px 0;padding:9px 11px;border:1px solid #d3c0ed;border-radius:12px;background:linear-gradient(115deg,#f5edff,#edf7ff)}
+.atlas-hub .atlas-filter-panel summary{cursor:pointer;color:#49366e;font-size:13px;display:flex;align-items:center;gap:7px;font-weight:800}
 .atlas-hub .atlas-filter-count{margin-left:auto;color:#69778b;font-size:11px}
 .atlas-hub .atlas-filter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:9px;margin-top:10px}
 .atlas-hub .atlas-filter-grid label{font-size:12px;font-weight:650}
 .atlas-hub .atlas-filter-grid select{display:block;width:100%;padding:8px;margin-top:4px;border-radius:8px;border:1px solid #bdcae0;background:white}
-.atlas-hub .atlas-lectures{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
-.atlas-hub .atlas-lectures button{font-size:11px!important;padding:5px 7px!important;min-height:28px!important;border-radius:9px!important}
-.atlas-hub .atlas-lectures button[aria-pressed=true]{background:#e9dcf7!important;border-color:#986fc2!important;color:#56357d!important}
-.atlas-hub .atlas-index-card{background:#fff!important;border:1px solid #d8d2e8!important;border-left:4px solid var(--card-accent,#9571bf)!important;border-radius:13px!important;padding:11px!important;min-height:88px;box-shadow:0 2px 5px #27355209}
-.atlas-hub .atlas-index-card:hover{background:var(--card-bg,#f8f4ff)!important}
+.atlas-hub .atlas-lectures{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0;padding:7px;background:#faf7ff;border-radius:11px;border:1px solid #e5dcef}
+.atlas-hub .atlas-lectures button{font-size:10px!important;padding:4px 6px!important;min-height:25px!important;border-radius:8px!important;background:color-mix(in srgb,var(--lecture-bg,#f3edfb) 55%,white)!important;border:1px solid color-mix(in srgb,var(--lecture-ink,#8679a7) 35%,white)!important;color:#334566!important;font-weight:750!important;line-height:1.15!important}
+.atlas-hub .atlas-lectures button[aria-pressed=true]{background:var(--lecture-bg,#e9dcf7)!important;border-color:var(--lecture-ink,#986fc2)!important;color:#42315f!important;box-shadow:inset 0 0 0 1px var(--lecture-ink,#986fc2)}
+.atlas-hub .atlas-index-card{background:color-mix(in srgb,var(--system-bg,#eee7f7) 38%,white)!important;border:1px solid color-mix(in srgb,var(--card-accent,#9571bf) 30%,white)!important;border-left:4px solid var(--card-accent,#9571bf)!important;border-radius:13px!important;padding:11px!important;min-height:88px;box-shadow:0 2px 5px #27355209}
+.atlas-hub .atlas-index-card:hover,.atlas-hub .atlas-index-card:focus-visible{background:var(--system-bg,#f8f4ff)!important;outline-offset:2px}
 .atlas-hub .atlas-index-card strong{display:block;color:#263b64;font-size:13px;line-height:1.35}
 .atlas-hub .atlas-index-card small{display:block;margin-top:4px;font-size:11px}
 .atlas-hub .atlas-index-card .atlas-system-line{color:var(--system-ink,#7862a8);font-weight:700}
@@ -100,7 +122,7 @@ const atlasStyle=String.raw`<style>
 .atlas-detail .atlas-key .atlas-star{font-size:22px;color:#9965b9;line-height:1.1}
 .atlas-detail .atlas-key strong{font-size:14px;color:#4f3672;white-space:nowrap}
 .atlas-detail .atlas-panel{border:1px solid #ded6ed;border-radius:12px;margin:7px 0;overflow:hidden;background:#fff}
-.atlas-detail .atlas-panel summary{padding:10px 12px;background:#f6f1fb;color:#433569;font-weight:800;cursor:pointer;list-style-position:inside}
+.atlas-detail .atlas-panel summary{padding:10px 12px;background:color-mix(in srgb,var(--panel-bg,#f6f1fb) 42%,white);border-left:3px solid var(--panel-ink,#a98bc9);color:#3e3462;font-weight:800;cursor:pointer;list-style-position:inside}
 .atlas-detail .atlas-panel .atlas-panel-body{padding:9px 13px;font-size:13px;line-height:1.5}
 .atlas-detail .atlas-panel .atlas-panel-body p{margin:2px 0 7px}
 .atlas-detail .atlas-footer{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding-top:9px;border-top:1px solid #e0deea}
@@ -178,10 +200,10 @@ function menu(){
  '<label>Etiology<select data-path7-etiology-filter="1"><option value="all">All etiologies</option>'+Object.entries(window.VPQ_PATH_ETIOLOGY?.categories||{}).map(([k,v])=>'<option value="'+h(k)+'"'+(etiologyFilter===k?' selected':'')+'>'+h(v.label)+'</option>').join('')+'</select></label>'+
  (function(){const m=window.VPQ_PATH_ATLAS_META;const choose=(name,value,items,placeholder)=>'<label style="font-size:12px">'+name+'<select data-path7-metadata-filter="'+name+'" style="display:block;width:100%;padding:7px;margin-top:4px"><option value="all">'+placeholder+'</option>'+Object.entries(items||{}).map(([k,label])=>'<option value="'+h(k)+'"'+(value===k?' selected':'')+'>'+h(label)+'</option>').join('')+'</select></label>';return choose('species',speciesFilter,{...m?.species,multiple:'Multiple species / broad host range'},'All species')+choose('frequency',frequencyFilter,m?.frequency,'Any occurrence')+choose('condition',conditionFilter,m?.conditionTypes,'All condition types')+choose('subtype',subtypeFilter,m?.subtypes,'All pathogen / tumor groups')+choose('system',systemFilter,m?.systems,'All organ systems')+choose('zoonotic',zoonoticFilter,m?.zoonotic,'All zoonotic statuses')})()+
  '</div><div class="buttonrow"><button data-path7-filter-reset="1" style="font-size:12px">↺ Clear all atlas filters</button></div><p class="tiny">Only verified or manually classified species appear in species-filtered results. Missing tags mean unassessed, not unaffected. Filters combine with the lecture and etiology selections.</p></details>'+ 
-'<div class="atlas-lectures">'+lectures.map(l=>'<button data-path7-filter="'+h(l)+'" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':l==='8'?'L8 · Cell Accumulations*':l==='9'?'L9 · Morphologic DX':'L'+h(l))+'</button>').join('')+'</div>'+
+'<div class="atlas-lectures">'+lectures.map(l=>{const c=ATLAS_EXAMS[atlasExam(l)]||['#F0ECF9','#8671B6'];return '<button data-path7-filter="'+h(l)+'" style="--lecture-bg:'+c[0]+';--lecture-ink:'+c[1]+'" aria-pressed="'+(filter===l?'true':'false')+'">'+(l==='all'?'All lectures':l==='8'?'L8 · Cell Accumulations*':l==='9'?'L9 · Morphologic DX':'L'+h(l))+'</button>'}).join('')+'</div>'+
  '<p class="tiny"><b>'+selected.length+' matching atlas cards.</b> Showing '+(selected.length?listPage*pageSize+1:0)+'–'+Math.min(selected.length,(listPage+1)*pageSize)+'. *The uploaded Cell Accumulations PDF is file 8 but its title slide says Lecture 9. The separate file 9 teaches morphologic vs etiologic diagnosis. Photo slots are editable; instructor photographs are not copied into this public game.</p>'+ 
  '<label style="display:block;margin:8px 0">Find disease or lesion <input id="path7Search" data-path7-search="1" placeholder="e.g. pyometra, optic nerve, granuloma" value="'+h(search)+'" style="width:min(100%,430px);padding:9px;border:1px solid #bccbe0;border-radius:9px"></label>'+ 
- '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">'+alphaGrid(pageItems,x=>{const ex=x.catalogScope==='reference'?null:atlasExam(x.lecture),ec=ATLAS_EXAMS[ex]||['#EDF0F5','#708096'],sys=atlasSystem(x);return '<button class="atlas-index-card" style="text-align:left;--card-accent:'+sys[4]+';--card-bg:'+ec[0]+';--system-ink:'+sys[4]+'" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small>Lecture '+h(x.lecture)+(ex?' · Exam '+ex:' · Reference')+'</small><small class="atlas-system-line">'+atlasIcon(ATLAS_ICON_KEYS[sys[0]],15)+' '+h(sys[2])+'</small></button>'})+'</div>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px">'+alphaGrid(pageItems,x=>{const ex=x.catalogScope==='reference'?null:atlasExam(x.lecture),ec=ATLAS_EXAMS[ex]||['#EDF0F5','#708096'],sys=atlasSystem(x);return '<button class="atlas-index-card" style="text-align:left;--card-accent:'+sys[4]+';--card-bg:'+ec[0]+';--system-bg:'+sys[3]+';--system-ink:'+sys[4]+'" data-path7-card="'+x.index+'"><strong>'+h(x.title)+'</strong><small>Lecture '+h(x.lecture)+(ex?' · Exam '+ex:' · Reference')+'</small><small class="atlas-system-line">'+atlasIcon(ATLAS_ICON_KEYS[sys[0]],15)+' '+h(sys[2])+'</small></button>'})+'</div>'+
  (maxPage?'<div class="buttonrow" style="justify-content:center;gap:10px;margin:14px 0"><button data-path7-page="'+(listPage-1)+'" '+(listPage===0?'disabled':'')+'>← Previous 48</button><span style="align-self:center;font-size:12px">Page '+(listPage+1)+' of '+(maxPage+1)+'</span><button data-path7-page="'+(listPage+1)+'" '+(listPage===maxPage?'disabled':'')+'>Next 48 →</button></div>':'') );
 }
 function card(i){
@@ -200,7 +222,7 @@ function card(i){
  const compactKey=quickClue?quickClue.slice(0,310):'Identify the species, characteristic location and lesion pattern; use histology and history to distinguish look-alike conditions.';
  const diff=window.VPQ_NECROPSY_DIFFERENTIAL_LAB;
  const related=x.normal?[]:diff?.exam7Matches?.(x.lecture,x.title)||[];
- const details=(title,content,open=false)=>'<details class="atlas-panel" '+(open?'open':'')+'><summary>'+title+'</summary><div class="atlas-panel-body">'+content+'</div></details>';
+ const details=(title,content,open=false)=>'<details class="atlas-panel" style="--panel-bg:'+sys[3]+';--panel-ink:'+sys[4]+'" '+(open?'open':'')+'><summary>'+title+'</summary><div class="atlas-panel-body">'+content+'</div></details>';
  const hasKey=Boolean(!x.normal);
  const header='<div class="atlas-heading" style="--exam-bg:'+theme[0]+';--exam-ink:'+theme[1]+'"><h3>'+h(x.title)+'</h3><div class="atlas-chipline"><span class="atlas-exam-tag">'+(exam?'Exam '+exam:'Reference Library')+' · L'+h(x.lecture)+'</span>'+atlasCardTags(x)+'</div></div>';
  const caseLinks=related.length?'<div class="atlas-small-links buttonrow">'+related.slice(0,4).map(c=>'<button data-path7-navle-case="'+h(c.id)+'">🩺 '+h(c.sourceCaseId||'Case')+'</button>').join('')+(related.length>4?'<span class="atlas-caption">+'+(related.length-4)+' cases</span>':'')+'</div>':'';
