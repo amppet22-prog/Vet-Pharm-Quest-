@@ -90,5 +90,18 @@ for(let n=67;n<=79;n++){
   bank.push(card);existing.add(k);
  });
 }
+/* A condition-specific lecture headline should not create a second specimen when a
+ * lecture-level specimen already covers the same lesion. Keep the generated ID in
+ * memory to protect earlier owner photos/edits and permit restoration if customized. */
+const diabeticBase=bank.find(c=>c.id==='exam7-40');
+const diabeticLecture=bank.find(c=>c.lecture==='79'&&/^diabetic cataracts in dogs$/i.test(c.title||''));
+if(diabeticBase&&diabeticLecture){
+ diabeticLecture.canonicalDuplicateOf=diabeticBase.id;
+ diabeticLecture.duplicateReason='Same diabetic cataract process; breed/species differences belong on the canonical specimen.';
+ diabeticBase.species='Dog (commonly); cat (uncommonly)';
+ diabeticBase.gross='Dogs: often rapidly progressive bilateral white lens opacity, sometimes with intumescence. Cats: diabetic cataracts are uncommon; document any photographed feline lens opacity without assuming diabetes caused it.';
+ diabeticBase.why='Hyperglycemia supplies lens glucose for aldose reductase conversion to sorbitol. Sorbitol draws water into lens fibers, producing swelling, degeneration and opacity; lens-induced uveitis can follow. This is common and often rapid in diabetic dogs, but uncommon in diabetic cats (especially older cats, which tend to have lower lens aldose reductase activity). Cats can have cataracts from other causes; compare species-specific photographs within this single condition.';
+ diabeticBase.source+=' · Source comparison: Merck Veterinary Manual, The Lens in Animals; Kador et al., AJVR 2006 (aldose reductase species differences).';
+}
 window.VPQ_PATH_EXAM7_BANK_STATS=bank.reduce((o,x)=>(o[x.lecture]=(o[x.lecture]||0)+1,o),{});
 })();
