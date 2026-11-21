@@ -62,6 +62,35 @@ function appendGrossSpeciesRow(root){
  '<label style="display:block;margin-top:7px">Detailed gross pathology<textarea data-path7-species-text="'+i+'" rows="5" style="display:block;width:100%;padding:8px"></textarea></label>';
  container.appendChild(element);element.scrollIntoView?.({block:'nearest'});
 }
+function grossViewModel(x){
+ // Compatibility for a previously saved full uterine-prolapse gross description.
+ // Do not rewrite or delete owner content; only render the old text in the new layout.
+ if(x.id!=='exam7-30')return x;
+ const gross=String(x.gross||'');
+ const key='**RUMINANTS — CATTLE, SHEEP, GOATS**';
+ const end='**ALL SPECIES — COMPLICATIONS**';
+ const first=gross.indexOf(key);
+ if(first<0||gross.indexOf(end)<0)return x;
+ const headings=[
+  ['Ruminants — cattle, sheep, goats','Raised maternal caruncles',key],
+  ['Pigs / sows','Long uterine horns','**PIGS / SOWS**'],
+  ['Horses / mares','Diffuse microcotyledonary placentation','**HORSES / MARES**'],
+  ['Small animals — dogs & cats','Zonary placental sites','**SMALL ANIMALS — DOGS & CATS**'],
+  ['All species — complications','Hemorrhage, ischemia and trauma',end]
+ ];
+ const sections=[];
+ for(let i=0;i<headings.length;i++){
+  const start=gross.indexOf(headings[i][2]);
+  if(start<0)continue;
+  const until=i+1<headings.length?gross.indexOf(headings[i+1][2],start+headings[i][2].length):-1;
+  sections.push({name:headings[i][0],clue:headings[i][1],
+   text:gross.slice(start+headings[i][2].length,until<0?undefined:until).trim()});
+ }
+ if(!sections.length)return x;
+ const intro=gross.slice(0,first).replace(/^\*\*GENERAL — WHAT YOU SEE\*\*\s*/,'').trim();
+ return {...x,gross:intro,grossSpecies:JSON.stringify(sections)};
+}
+
 function renderGrossSpecies(x,sys){
  const items=parseGrossSpecies(x.grossSpecies);
  if(!items.length)return '';
@@ -195,6 +224,7 @@ const atlasStyle=String.raw`<style>
 .atlas-detail .atlas-species-gross-text{padding:11px 13px;font-size:12px;line-height:1.55;color:#30405a}
 .atlas-detail .atlas-species-gross-text strong{color:#49336c}
 .atlas-detail .atlas-gross{background:#fff;border:1px solid #d6dbed;border-radius:13px;padding:12px;line-height:1.52;font-size:13px}
+.atlas-detail .atlas-gross-hint{background:#f3e5f7;border:1px solid #d9b5e8;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:850;color:#643b7c;margin:10px 0 0}
 .atlas-detail .atlas-gross h4{margin:0 0 7px;color:#384278;font-size:14px}
 .atlas-detail .atlas-key{display:flex;align-items:flex-start;gap:10px;background:linear-gradient(105deg,#ecd6fa,#fbe7f1);border:2px solid #b477cb;border-left:5px solid #8a43af;border-radius:13px;padding:12px 14px;margin:13px 0;font-size:13px;box-shadow:0 3px 12px #72459316}
 .atlas-detail .atlas-key .atlas-star{font-size:24px;color:#7b379e;line-height:1.1}
@@ -286,7 +316,7 @@ function menu(){
  (maxPage?'<div class="buttonrow" style="justify-content:center;gap:10px;margin:14px 0"><button data-path7-page="'+(listPage-1)+'" '+(listPage===0?'disabled':'')+'>← Previous 48</button><span style="align-self:center;font-size:12px">Page '+(listPage+1)+' of '+(maxPage+1)+'</span><button data-path7-page="'+(listPage+1)+'" '+(listPage===maxPage?'disabled':'')+'>Next 48 →</button></div>':'') );
 }
 function card(i){
- current=i;const x=record(i),shelf=visible(),at=shelf.findIndex(v=>v.index===i);
+ current=i;const x=grossViewModel(record(i)),shelf=visible(),at=shelf.findIndex(v=>v.index===i);
  const previous=at>0?shelf[at-1]:null,next=at>=0&&at<shelf.length-1?shelf[at+1]:null;
  const nav='<div class="buttonrow" style="margin:0 0 10px"><button data-path7-back="1">← Back to '+(tab==='normals'?'Normals Atlas':'Disease Atlas')+'</button><button data-path7-view="'+(previous?.index??'')+'" '+(!previous?'disabled':'')+'>◀ Previous</button><button data-path7-view="'+(next?.index??'')+'" '+(!next?'disabled':'')+'>Next specimen ▶</button></div>'+
  '<p class="tiny">'+(at>=0?('Specimen '+(at+1)+' of '+shelf.length+' · '):'')+'Browse within your current tab, search and filter.</p>';
@@ -306,7 +336,8 @@ function card(i){
  const header='<div class="atlas-heading" style="--exam-bg:'+theme[0]+';--exam-ink:'+theme[1]+'"><h3>'+h(x.title)+'</h3><div class="atlas-chipline"><span class="atlas-exam-tag">'+(exam?'Exam '+exam:'Reference Library')+' · L'+h(x.lecture)+'</span>'+atlasCardTags(x)+'</div></div>';
  const caseLinks=related.length?'<div class="atlas-small-links buttonrow">'+related.slice(0,4).map(c=>'<button data-path7-navle-case="'+h(c.id)+'">🩺 '+h(c.sourceCaseId||'Case')+'</button>').join('')+(related.length>4?'<span class="atlas-caption">+'+(related.length-4)+' cases</span>':'')+'</div>':'';
  const mediaHTML='<div class="atlas-media"><div class="atlas-caption" style="margin:0 0 8px">📷 '+photoStatus(x)+' · Gross, histology and causal-agent photos</div>'+media+'</div>';
- const grossHTML='<div class="atlas-gross"><h4>📋 '+(x.normal?'Normal appearance':'Gross description')+'</h4>'+rich(x.gross)+'</div>';
+ const grossCount=parseGrossSpecies(x.grossSpecies).length;
+ const grossHTML='<div class="atlas-gross"><h4>📋 '+(x.normal?'Normal appearance':'Gross description')+'</h4>'+rich(x.gross)+(grossCount?'<p class="atlas-gross-hint">'+atlasIcon('book',15)+' '+grossCount+' expandable species / comparison sections below ↓</p>':'')+'</div>';
  const keyHTML=hasKey?'<div class="atlas-key"><span class="atlas-star" aria-hidden="true">☆</span><strong>Key distinction</strong><span>'+rich(compactKey)+'</span></div>':'';
  const sectionHTML=
    details(x.normal?'Normal identification':atlasIcon('flask')+' Morphologic diagnosis','<p>'+rich(x.dx)+'</p>',x.normal)+
