@@ -72,6 +72,12 @@
       "answer": "Bioavailability can differ among formulations.",
       "why": "Recheck thyroid values and clinical response after a formulation change. So always confirm with brand your clinic has.",
       "slide": "Lecture 12 · user notes, reviewed alongside course treatment notes"
+    },
+    "pharm-e2-51": {
+      "prompt": "Why might a sick dog have low T4 without hypothyroidism?",
+      "answer": "Nonthyroidal illness or drug effects can reduce measured hormone.",
+      "why": "Thyroid hormone sets the pace of metabolism, so lowering it during illness saves energy and protein when the animal is not eating, is catabolic, and needs its reserves to fight the problem. Fasting alone produces the same pattern, which supports this.\nSo always check after they have recovered.",
+      "slide": "Exam 2 lecture 12 · source-derived mechanism review"
     }
   },
   "custom": [
