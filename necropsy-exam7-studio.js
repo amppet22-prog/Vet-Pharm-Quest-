@@ -245,7 +245,7 @@ const atlasStyle=String.raw`<style>
 .atlas-detail .atlas-classifications details summary{font-size:12px;font-weight:750}
 /* Pathology Atlas main cabinet: restore the original compact modal footprint.
    Keep the updated atlas text hierarchy and all specimen-detail typography intact. */
-.modal:has(> #modalBody .atlas-hub){width:min(740px,calc(100vw - 28px));max-width:740px;max-height:92vh}
+.modal:has(> #modalBody .atlas-hub){width:min(900px,calc(100vw - 28px));max-width:900px;max-height:92vh}
 /* Specimen DETAIL only: readable typography and a slightly wider dialog.
    Deliberately never change the shared modal, game stage, other rooms or hub. */
 .modal:has(> #modalBody .atlas-detail){width:min(780px,100%);max-height:92vh}
