@@ -361,12 +361,15 @@ function menu(){
    Keeps all existing specimen/owner-publish buttons and rendering intact. */
 function dermComparisonHTML(x){
  if(!x.dermComparison||!Array.isArray(x.comparisonRows))return '';
+ const official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(x.id)||{};
+ const photos=Array.isArray(official.photos)?official.photos:(official.photo?.url?[official.photo]:[]);
+ const matchedPhoto=(label)=>photos.find(p=>p?.url&&String(p.caption||'').toLowerCase().includes(String(label).toLowerCase()));
  return '<section class="atlas-derm-comparison" aria-label="Dermatology side-by-side recognition">'+
  '<h4>🔬 Compare by morphology · species · location</h4>'+
  '<p>These are comparative teaching patterns, not separate diagnoses. Attach several published pictures to this card and name the structure/condition in each photo caption.</p>'+
  '<div class="atlas-derm-rows">'+x.comparisonRows.map((row,i)=>(
  '<article class="atlas-derm-row"><div class="atlas-derm-photo" aria-label="Photo placeholder for '+h(row[0])+'">'+
- '<span>📷</span><small>Photo '+(i+1)+'<br>'+h(row[0])+'</small></div>'+
+ (matchedPhoto(row[0])?'<img src="'+h(matchedPhoto(row[0]).url)+'" alt="'+h(matchedPhoto(row[0]).caption||row[0])+'" loading="lazy" style="width:100%;max-height:120px;object-fit:contain;border-radius:7px">':'<span>📷</span><small>Photo '+(i+1)+'<br>'+h(row[0])+'</small>')+'</div>'+
  '<div class="atlas-derm-facts"><h5>'+h(row[0])+'</h5>'+
  '<div><b>Look:</b> '+h(row[1])+'</div>'+
  '<div><b>Depth / location:</b> '+h(row[2])+'</div>'+
