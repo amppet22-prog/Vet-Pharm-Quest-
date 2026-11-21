@@ -4153,6 +4153,7 @@ function vpqHyQuestions(lecture){
 function vpqHyExplain(q){
  const prompt=String(q.q||'').toLowerCase(),answer=String(q.options?.[q.answer]||'');
  const raw=String(q.why||'').trim(),importOnly=/^uploaded answer key\s*:/i.test(raw);
+ if(!importOnly&&raw.length>70)return '<p><b>Mechanism and clinical WHY:</b> '+escapeHtml(raw)+'</p>';
  const curated=[
   [/methimazole|thyroperoxidase|thyroid peroxidase/, 'Methimazole blocks thyroid peroxidase-mediated iodide organification and coupling needed to synthesize new T3/T4. It does not immediately remove stored thyroid hormone. Thyroid-related tachycardia may persist early in therapy; if it persists after T4 normalizes, assess other cardiac or systemic causes.'],
   [/(negative.feedback|suppression of trh|elevated circulating t4|circulating t4 concentrations)/, 'Elevated T4/T3 feeds back on hypothalamic TRH and pituitary TSH secretion, decreasing both. Autonomously functioning thyroid tissue can produce excess hormone despite low TSH.'],
