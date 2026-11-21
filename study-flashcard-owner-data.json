@@ -66,6 +66,12 @@
       "answer": "To allow appropriate iodine uptake and thyroid assessment. Also the patient cannot be touched for at least 3 days and needs to be stable.",
       "why": "Withdrawal timing varies by treatment facility; follow its protocol.",
       "slide": "Lecture 12 · user notes, reviewed alongside course treatment notes"
+    },
+    "pharm-e2-thyroid12-016": {
+      "prompt": "Why avoid switching levothyroxine brands without monitoring?",
+      "answer": "Bioavailability can differ among formulations.",
+      "why": "Recheck thyroid values and clinical response after a formulation change. So always confirm with brand your clinic has.",
+      "slide": "Lecture 12 · user notes, reviewed alongside course treatment notes"
     }
   },
   "custom": [
