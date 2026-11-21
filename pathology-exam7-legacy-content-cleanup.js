@@ -48,5 +48,33 @@ for(const card of bank){
  // notes are supplementary, not a main description.
  if(card.compare&&card.visualClue&&norm(card.compare)===norm(card.visualClue)){card.compare='';fixes.duplicates++;}
 }
+/* Many instructor paragraphs embed Gross:, Histology: and Pathway: in one
+   point. The old automatic extractor copied the whole paragraph into multiple
+   fields. Split only at explicit section labels to avoid showing Pathway under
+   Gross or Gross under Histology. */
+const segmentLabels=/\b(?:Gross(?: appearance| lesions?| findings?| fetus)?|Histology|Histopathology|Microscopy|Pathway|Mechanism|Pathogenesis|Why|Clinical|Syndromes|Species|Host|Distribution|Differential|Compare|Caution)\s*:/ig;
+function labeledSegment(raw,desired){
+ const source=String(raw||''),matches=[...source.matchAll(segmentLabels)];
+ for(let i=0;i<matches.length;i++){
+  const key=matches[i][0].replace(/\s*:\s*$/,'').toLowerCase();
+  if(!desired.test(key))continue;
+  const start=matches[i].index+matches[i][0].length,end=i+1<matches.length?matches[i+1].index:source.length;
+  const value=source.slice(start,end).trim().replace(/^[.;,\s]+|[.;,\s]+$/g,'');
+  if(value.length>=24)return value.endsWith('.')?value:value+'.';
+ }
+ return '';
+}
+for(const card of bank){
+ if(!/^pathx-/.test(card.id||'')||card.id==='exam7-30'||!(/^(67|68|69|70|71|72|73|74|75|76|77|78|79)$/).test(String(card.lecture)))continue;
+ const sec=lessons[String(card.lecture)]?.sections?.find(x=>norm(x.title)===norm(card.title));
+ if(!sec)continue;
+ const source=(sec.points||[]).filter(x=>Array.isArray(x)).map(x=>String(x[1]||''));
+ const gross=source.map(x=>labeledSegment(x,/^gross/)).find(Boolean);
+ const histo=source.map(x=>labeledSegment(x,/^(histology|histopathology|microscopy)$/)).find(Boolean);
+ const pathway=source.map(x=>labeledSegment(x,/^(pathway|mechanism|pathogenesis|why)$/)).find(Boolean);
+ if(gross&&(/\b(?:Pathway|Histology|Mechanism|Gross):/i.test(String(card.gross||''))||String(card.gross||'').length<55)){card.gross=gross;fixes.gross++;}
+ if(histo&&(/\b(?:Pathway|Gross|Histology):/i.test(String(card.histo||''))||card.atlasNoSpecificHisto)){card.histo=histo;card.atlasNoSpecificHisto=false;fixes.histo++;}
+ if(pathway&&(/\b(?:Gross|Histology|Pathway):/i.test(String(card.why||''))||card.atlasNoSpecificWhy)){card.why=pathway;card.atlasNoSpecificWhy=false;fixes.why++;}
+}
 window.VPQ_EXAM7_LEGACY_CONTENT_CLEANUP=fixes;
 })();
