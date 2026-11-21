@@ -15,6 +15,61 @@ const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
 function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};const entry=Object.assign({},src,official.text||{},draft);const photos=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);if(photos.length)entry.image=photos[0].url;return entry}
+
+/* Reusable, source-preserving multi-species gross morphology. Independent entries
+   are optional; cards without entries retain their original gross paragraphs. */
+function parseGrossSpecies(value){
+ let arr=value;
+ if(typeof arr==='string'){try{arr=JSON.parse(arr||'[]')}catch{return []}}
+ if(!Array.isArray(arr))return [];
+ return arr.filter(v=>v&&typeof v==='object').slice(0,24).map(v=>({
+  name:String(v.name||'').slice(0,120),
+  clue:String(v.clue||'').slice(0,240),
+  text:String(v.text||'').slice(0,12000)
+ })).filter(v=>v.name||v.clue||v.text);
+}
+function speciesGrossEditorHTML(x){
+ const items=parseGrossSpecies(x.grossSpecies),visible=Math.max(3,items.length+2);
+ const block=(v,i)=>'<details class="atlas-species-edit" style="border:1px solid #decfe8;border-radius:10px;padding:9px;margin:7px 0;background:#fcf9ff" '+(i===0?'open':'')+'><summary style="font-weight:800;color:#64467e">Species group '+(i+1)+(v.name?' · '+h(v.name):' · New')+'</summary>'+
+ '<label style="display:block;margin-top:7px">Species/group name<input data-path7-species-name="'+i+'" style="display:block;width:100%;padding:8px" placeholder="e.g. Ruminants — cattle, sheep, goats" value="'+h(v.name)+'"></label>'+
+ '<label style="display:block;margin-top:7px">Quick identifying clue<input data-path7-species-clue="'+i+'" style="display:block;width:100%;padding:8px" placeholder="e.g. Raised caruncles" value="'+h(v.clue)+'"></label>'+
+ '<label style="display:block;margin-top:7px">Detailed gross pathology<textarea data-path7-species-text="'+i+'" rows="5" style="display:block;width:100%;padding:8px" placeholder="Species-specific gross lesions, variation and complications">'+h(v.text)+'</textarea></label></details>';
+ return '<details class="atlas-species-editor" style="padding:10px;margin:10px 0;border-radius:12px;border:1px solid #d4b8df;background:#fbf6ff" open>'+
+ '<summary style="font-weight:850;color:#5b3476">🐾 Expandable species gross descriptions</summary>'+
+ '<p style="font-size:12px;margin:8px 0">Keep the <b>general morphology and most characteristic presentation</b> in the main Gross field. Add full species-specific findings below. Leave blank groups empty; they will not be saved.</p>'+
+ '<div data-path7-species-editor-rows="1">'+Array.from({length:Math.min(24,visible)},(_,i)=>block(items[i]||{name:'',clue:'',text:''},i)).join('')+'</div>'+
+ '<button type="button" data-path7-add-species-row="1" style="padding:6px 10px;font-size:12px">+ Add another species group</button></details>';
+}
+function readGrossSpecies(root){
+ const names=Array.from(root?.querySelectorAll?.('[data-path7-species-name]')||[]);
+ const items=names.map(el=>{
+  const i=el.dataset.path7SpeciesName;
+  return {name:String(el.value||'').trim().slice(0,120),
+   clue:String(root.querySelector('[data-path7-species-clue="'+i+'"]')?.value||'').trim().slice(0,240),
+   text:String(root.querySelector('[data-path7-species-text="'+i+'"]')?.value||'').trim().slice(0,12000)};
+ }).filter(v=>v.name&&v.text);
+ return JSON.stringify(items.slice(0,24));
+}
+function appendGrossSpeciesRow(root){
+ const container=root?.querySelector?.('[data-path7-species-editor-rows]');
+ if(!container||container.children.length>=24)return;
+ const i=container.children.length,element=document.createElement('details');
+ element.className='atlas-species-edit';element.open=true;
+ element.style.cssText='border:1px solid #decfe8;border-radius:10px;padding:9px;margin:7px 0;background:#fcf9ff';
+ element.innerHTML='<summary style="font-weight:800;color:#64467e">Species group '+(i+1)+' · New</summary>'+
+ '<label style="display:block;margin-top:7px">Species/group name<input data-path7-species-name="'+i+'" style="display:block;width:100%;padding:8px" placeholder="e.g. Horses"></label>'+
+ '<label style="display:block;margin-top:7px">Quick identifying clue<input data-path7-species-clue="'+i+'" style="display:block;width:100%;padding:8px"></label>'+
+ '<label style="display:block;margin-top:7px">Detailed gross pathology<textarea data-path7-species-text="'+i+'" rows="5" style="display:block;width:100%;padding:8px"></textarea></label>';
+ container.appendChild(element);element.scrollIntoView?.({block:'nearest'});
+}
+function renderGrossSpecies(x,sys){
+ const items=parseGrossSpecies(x.grossSpecies);
+ if(!items.length)return '';
+ return '<section class="atlas-species-gross" style="--gross-species-bg:'+sys[3]+';--gross-species-ink:'+sys[4]+'"><div class="atlas-species-gross-title">'+atlasIcon('book',18)+' <b>Species-specific gross findings</b><small>Open a species for the full pathology details</small></div>'+
+ items.map((v,i)=>'<details class="atlas-species-gross-item" '+(i===0?'':'')+'><summary><span class="atlas-species-label">'+h(v.name)+'</span><span class="atlas-species-clue">'+h(v.clue)+'</span></summary><div class="atlas-species-gross-text">'+rich(v.text)+'</div></details>').join('')+
+ '</section>';
+}
+
 function photoStatus(x){
  const official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(x.id)||{};
  const pictures=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);
@@ -116,6 +171,17 @@ const atlasStyle=String.raw`<style>
 .atlas-detail .atlas-split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:12px;align-items:start}
 .atlas-detail .atlas-media{background:#fff;border:1px solid #dce3ee;border-radius:13px;padding:10px;min-width:0;overflow:hidden}
 .atlas-detail .atlas-media img{max-width:100%;height:auto;object-fit:contain;border-radius:9px}
+.atlas-detail .atlas-species-gross{margin:10px 0;border:1px solid color-mix(in srgb,var(--gross-species-ink) 37%,white);border-radius:13px;padding:10px;background:color-mix(in srgb,var(--gross-species-bg) 32%,white)}
+.atlas-detail .atlas-species-gross-title{display:flex;align-items:center;flex-wrap:wrap;gap:7px;color:#433961;margin:1px 3px 9px}
+.atlas-detail .atlas-species-gross-title b{font-size:13px}
+.atlas-detail .atlas-species-gross-title small{font-size:11px;color:#6b6b80}
+.atlas-detail .atlas-species-gross-item{border:1px solid color-mix(in srgb,var(--gross-species-ink) 30%,white);border-radius:9px;margin:6px 0;overflow:hidden;background:white}
+.atlas-detail .atlas-species-gross-item summary{cursor:pointer;padding:9px 12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:color-mix(in srgb,var(--gross-species-bg) 43%,white);color:#42345e;list-style-position:inside}
+.atlas-detail .atlas-species-gross-item[open] summary{border-bottom:1px solid #e7dfed}
+.atlas-detail .atlas-species-label{font-size:12px;font-weight:850}
+.atlas-detail .atlas-species-clue{font-size:11px;color:#687087;margin-left:auto}
+.atlas-detail .atlas-species-gross-text{padding:11px 13px;font-size:12px;line-height:1.55;color:#30405a}
+.atlas-detail .atlas-species-gross-text strong{color:#49336c}
 .atlas-detail .atlas-gross{background:#fff;border:1px solid #d6dbed;border-radius:13px;padding:12px;line-height:1.52;font-size:13px}
 .atlas-detail .atlas-gross h4{margin:0 0 7px;color:#384278;font-size:14px}
 .atlas-detail .atlas-key{display:flex;align-items:flex-start;gap:10px;background:#f5edfc;border:1px solid #e2d4f2;border-radius:12px;padding:9px 12px;margin:11px 0;font-size:13px}
@@ -255,6 +321,7 @@ function card(i){
  nav+
  header+
  '<div class="atlas-split">'+mediaHTML+grossHTML+'</div>'+
+ renderGrossSpecies(x,sys)+
  keyHTML+sectionHTML+studyNotes+speciesBreeds+
  (caseLinks?'<div class="atlas-small-links"><b style="font-size:12px">🩺 Exact linked cases</b>'+caseLinks+'</div>':'')+
  classification+source+crosslink+footer);
@@ -267,6 +334,7 @@ function edit(i){
  '<label>Image URL<input id="path7Url" style="width:100%" value="'+h(x.image||'')+'" placeholder="https://…"></label>'+
  '<label>Or choose a photo from your device<input id="path7File" type="file" accept="image/*"></label>'+
  '<label>'+(x.normal?'Normal gross anatomy':'Gross lesion')+'<textarea id="path7Gross" rows="3" style="width:100%">'+h(x.gross)+'</textarea></label>'+
+ speciesGrossEditorHTML(x)+
  '<label>'+(x.normal?'Normal identification':'Morphologic DX')+'<textarea id="path7Dx" rows="2" style="width:100%">'+h(x.dx)+'</textarea></label>'+
  '<label>'+(x.normal?'Normal histology':'Histology')+'<textarea id="path7Histo" rows="2" style="width:100%">'+h(x.histo)+'</textarea></label>'+
  '<label>Quick visual recognition clue<textarea id="path7VisualClue" rows="2" style="width:100%">'+h(x.visualClue||'')+'</textarea></label>'+ 
@@ -277,7 +345,7 @@ function edit(i){
 }
 function saveForm(i){
  const val=n=>ui.body.querySelector('#'+n)?.value||'';
- const part={image:val('path7Url').trim(),gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{}),...(window.VPQ_PATH_ATLAS_META?.readEditor?.(ui.body)||{})};
+ const part={image:val('path7Url').trim(),gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),grossSpecies:readGrossSpecies(ui.body),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{}),...(window.VPQ_PATH_ATLAS_META?.readEditor?.(ui.body)||{})};
  const finish=()=>{if(save(i,part))card(i);else modal('Local storage full','<p>This image is too large for your browser storage. Try a smaller image or a URL.</p><button data-path7-edit="'+i+'">Back to editor</button>')};
  const file=ui.body.querySelector('#path7File')?.files?.[0];
  if(!file)return finish();
@@ -366,6 +434,7 @@ function init(api){
   const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
   if(!Object.keys(d).some(k=>k.startsWith('path7')))return;
   ev.preventDefault();ev.stopImmediatePropagation();
+  if(d.path7AddSpeciesRow!==undefined){appendGrossSpeciesRow(api.body);return;}
   if(d.path7Why!==undefined){
   if(current<0||current>=base.length)return;
   const x=record(current),topic=d.path7Why;
@@ -398,7 +467,7 @@ function init(api){
   if(d.path7OwnerPublish!==undefined){const i=Number(d.path7OwnerPublish);
    const field=api.body.querySelector('#path7Gross');
    if(field){const val=n=>api.body.querySelector('#'+n)?.value||'';
-    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{}),...(window.VPQ_PATH_ATLAS_META?.readEditor?.(ui.body)||{})});}
+    save(i,{gross:val('path7Gross'),dx:val('path7Dx'),histo:val('path7Histo'),notes:val('path7Notes'),visualClue:val('path7VisualClue'),compare:val('path7Compare'),grossSpecies:readGrossSpecies(ui.body),...(window.VPQ_PATH_ETIOLOGY?.readEditor?.(ui.body)||{}),...(window.VPQ_PATH_ATLAS_META?.readEditor?.(ui.body)||{})});}
    return window.VPQ_NECROPSY_OWNER_PUBLISH?.editor('specimen',base[i]?.id)
   }
   if(d.path7Back!==undefined)return menu();
@@ -410,7 +479,7 @@ function init(api){
 function openCard(id){refreshCustom();const i=base.findIndex(x=>x.id===id);if(i>=0){tab=base[i].normal?'normals':'lesions';return card(i)}return menu()}
 function openLectureDisease(lecture,section){const bridge=window.VPQ_PATH_EXAM6_CABINET_BRIDGE;const id=bridge?.get?.(lecture,section);if(!id)return studyLecture(lecture);tab='lesions';filter=String(lecture);search='';etiologyFilter=speciesFilter=frequencyFilter=conditionFilter=subtypeFilter=systemFilter=zoonoticFilter='all';return openCard(id)}
 function draftPhoto(id){const d=edits()[id];return String(d?.image||'').startsWith('data:image/jpeg;base64,')?d.image:''}
-function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','breedSizes','breedTags','breedEvidence','catalogScope','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
-function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','breedSizes','breedTags','breedEvidence','catalogScope','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
-return {init,start,studyLecture,openLectureDisease,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
+function draftText(id){const d=edits()[id]||{};return Object.fromEntries(['gross','grossSpecies','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','breedSizes','breedTags','breedEvidence','catalogScope','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'].filter(k=>Object.prototype.hasOwnProperty.call(d,k)).map(k=>[k,d[k]]))}
+function afterPublished(id){const all=edits();if(!all[id])return;for(const k of ['gross','grossSpecies','dx','histo','why','notes','visualClue','compare','etiologyCategories','etiologyAgents','etiologyCertainty','speciesOccurrence','hostScope','speciesEvidence','breedSizes','breedTags','breedEvidence','catalogScope','conditionType','conditionSubtype','organSystem','affectedOrgan','pathogenNames','diseaseId','zoonoticStatus','zoonoticNotes','reportabilityNotes'])delete all[id][k];try{localStorage.setItem(KEY,JSON.stringify(all))}catch(e){}}
+return {speciesGrossEditorHTML,readGrossSpecies,appendGrossSpeciesRow,parseGrossSpecies,init,start,studyLecture,openLectureDisease,showTab,activeTab:()=>tab,cards:base,openCard,refreshCustom,draftPhoto,draftText,afterPublished};
 })();
