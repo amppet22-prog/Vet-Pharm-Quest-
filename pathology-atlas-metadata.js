@@ -62,6 +62,7 @@ function data(x){
  const seedBreeds=isVKH?['Siberian Husky','Akita','Samoyed','Australian Shepherd']:[];
  const breedTags=x.breedTags!==undefined?parseBreedTags(x.breedTags):seedBreeds;
  return {
+  catalogScope:x?.catalogScope==='reference'?'reference':'course',
   species:parseSpecies(x?.speciesOccurrence),
   breedTags,
   breedSizes:parseBreedSizes(x?.breedSizes),
@@ -117,7 +118,7 @@ function editorHTML(x){
  const d=data(x);
  return '<fieldset style="border:1px solid #bdd3e5;border-radius:12px;padding:10px;margin:12px 0"><legend><b>🐾 Species & disease connections</b></legend>'+
  '<p class="tiny">Only select species with documentation. Missing means unassessed, NOT unaffected. Common/rare describe reported frequency, not population prevalence.</p>'+
- '<label style="display:block;margin:7px 0">Host range'+selectHTML(hostScopes,'pathMetaHostScope',d.hostScope,false)+'</label>'+
+ '<label style="display:block;margin:8px 0">Atlas collection<select id="pathMetaCatalogScope" style="display:block;width:100%;padding:7px;margin-top:4px"><option value="course"'+(d.catalogScope==='course'?' selected':'')+'>Course / assigned exam</option><option value="reference"'+(d.catalogScope==='reference'?' selected':'')+'>Beyond Exams / Reference Library</option></select></label>'+'<label style="display:block;margin:7px 0">Host range'+selectHTML(hostScopes,'pathMetaHostScope',d.hostScope,false)+'</label>'+
  '<p class="tiny">Choose Multiple species for a broadly applicable disease, even before every host has been classified. Then assign individual species occurrence below when supported. This choice alone does not assert that all species are affected.</p>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px">'+Object.entries(species).map(([key,label])=>'<label style="font-size:12px">'+esc(label)+'<select data-path-species="'+esc(key)+'" style="width:100%;padding:5px"><option value="">Not assessed</option>'+Object.entries(frequency).map(([f,v])=>'<option value="'+esc(f)+'"'+(d.species[key]===f?' selected':'')+'>'+esc(v)+'</option>').join('')+'</select></label>').join('')+'</div>'+
  '<label>Evidence/source for frequency<textarea id="pathMetaEvidence" rows="2" style="width:100%">'+esc(d.evidence)+'</textarea></label>'+
@@ -143,6 +144,7 @@ function readEditor(root){
  root.querySelectorAll('[data-path-breed-size]:checked').forEach(el=>{if(breedSizes[el.dataset.pathBreedSize])selectedBreedSizes.push(el.dataset.pathBreedSize)});
  root.querySelectorAll('[data-path-species]').forEach(el=>{if(species[el.dataset.pathSpecies]&&frequency[el.value])ranks[el.dataset.pathSpecies]=el.value});
  return {
+ catalogScope:v('pathMetaCatalogScope')==='reference'?'reference':'course',
  speciesOccurrence:JSON.stringify(ranks),hostScope:v('pathMetaHostScope'),speciesEvidence:v('pathMetaEvidence'),
  breedSizes:JSON.stringify(selectedBreedSizes),breedTags:JSON.stringify(parseBreedTags(v('pathMetaBreedTags').split(/\n/))),breedEvidence:v('pathMetaBreedEvidence'),
  conditionType:v('pathMetaType'),conditionSubtype:v('pathMetaSubtype'),
