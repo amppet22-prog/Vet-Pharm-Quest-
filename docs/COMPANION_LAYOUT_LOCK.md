@@ -24,3 +24,8 @@
 - The previous independent petX interpolation in both `move()` and the animation loop is deliberately disabled; do not restore it. This separate lag caused the pet to drift far from the veterinarian.
 - Keep pet artwork and selection separate from this geometry; do not edit or override the anchor as part of companion imports.
 - Verified with headless Chromium in an isolated CSS/DOM fixture at x=18%,44%,72%,90%: pet right edge sits exactly 9px left of vet left edge, container background remains transparent. **This is not a live hosted-game end-to-end verification.**
+
+## Revised species-size contract (2026-11-22, later owner feedback)
+The earlier 9px *container* gap did not ensure apparent closeness because transparent cutout padding and the avatar illustration extend beyond their boxes. The CURRENT approved stage rule replaces it with a controlled 25px container overlap and the same 17% baseline as the veterinarian. Dogs: 146×150; cats and pocket pets: 112×116; horses and ruminants: 188×176; exotics/avians: 124×128; legendary: 158×160. Mobile sizes are smaller. All measurements are CSS pixels. Do NOT restore the older 9px gap or 19% pet baseline. The shop/creator art remains independent.
+
+An isolated Chromium fixture verified edge overlap and identical bottom baseline for five species at three horizontal positions (15 checks). The published full game still requires a visual smoke test after deployment.
