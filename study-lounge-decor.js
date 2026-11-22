@@ -73,8 +73,19 @@ function botanicals(){
  return s;
 }
 function habitat(){
- const del=chosen('habitat')==='lounge-reptile-deluxe';
- return '<g transform="translate(675 246)"><rect x="0" y="0" width="101" height="83" rx="9" fill="#6d9a85" stroke="#658374" stroke-width="5"/><rect x="7" y="6" width="87" height="61" rx="5" fill="#dff5dc" stroke="#a0c4a6" stroke-width="3"/><path d="M8 51q43 -20 85 0v16H8Z" fill="#bbac84"/><path d="M15 44q4 -22 22 -16m30 16q0 -26 13 -33" fill="none" stroke="#729b6d" stroke-width="5"/><path d="M30 57q19 -15 34 -2l10 2-9 9H40Z" fill="#89ab75" stroke="#51735e" stroke-width="2"/><circle cx="66" cy="55" r="2" fill="#314e3d"/><path d="M9 29h84M50 6v60" stroke="#a3c7b2" stroke-width="2" opacity=".6"/><text x="50" y="79" text-anchor="middle" font-family="Arial" font-weight="900" font-size="10" fill="#f9fff4">'+(del?'BIOACTIVE HABITAT':'REPTILE CORNER')+'</text></g>';
+ const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
+ // Mounted on a dedicated raised sidewall console, entirely behind the study table.
+ return '<g transform="translate(680 204)"><rect x="-5" y="0" width="102" height="82" rx="7" fill="#789488" stroke="#637a77" stroke-width="4"/>'+
+ '<rect x="2" y="6" width="88" height="66" rx="4" fill="#d4ede0" stroke="#9bbbaf" stroke-width="3"/>'+
+ '<path d="M4 59Q47 42 88 56V71H4Z" fill="#c9ac7e"/>'+
+ '<path d="M14 55q7 -19 22 -18m30 15q-1 -21 13 -25" fill="none" stroke="#6eaa76" stroke-width="4"/>'+
+ '<path d="M19 39l13 -21 19 3 11 26" fill="#bdad8b" stroke="#907e69" stroke-width="2"/>'+
+ '<path d="M27 52q15 -11 29 -3l13 -1 -7 7 -21 3Z" fill="#83ad70" stroke="#4f7962" stroke-width="2"/>'+
+ '<circle cx="62" cy="49" r="2" fill="#324b3e"/>'+
+ (deluxe?'<path d="M76 42q-5 -26 3 -30M17 45q-8 -24-2 -30" stroke="#629b6d" stroke-width="4" fill="none"/><circle cx="44" cy="15" r="6" fill="#e6c180"/>':'')+
+ '<path d="M4 28H88M47 7V71" stroke="#a9c3b5" stroke-width="2" opacity=".48"/>'+
+ '<rect x="-8" y="78" width="108" height="12" rx="3" fill="#b38e75"/><path d="M2 90v18M91 90v18" stroke="#967665" stroke-width="7"/>'+
+ '<text x="47" y="99" font-family="Arial" text-anchor="middle" font-size="8" font-weight="800" fill="#fff7df">'+(deluxe?'BIOACTIVE DISPLAY':'REPTILE NOOK')+'</text></g>';
 }
 function svgDecor(){
  let s='<g class="vpqLoungeDecorScenery">'+botanicals()+habitat();
@@ -86,10 +97,14 @@ function svgDecor(){
  if(chosen('stools')==='lounge-stools')for(const x of [408,592])s+='<g transform="translate('+x+' 385)"><ellipse cx="0" cy="0" rx="25" ry="11" fill="#a991c8" stroke="#786c96" stroke-width="4"/><path d="M-14 9l-8 48M14 9l8 48" stroke="#9c806e" stroke-width="6"/></g>';
  if(chosen('magazines')==='lounge-magazines')s+='<g transform="translate(398 351) rotate(-12)"><rect width="56" height="36" rx="3" fill="#bd9ac9" stroke="#8d77a6" stroke-width="2"/><rect x="7" y="6" width="42" height="24" rx="2" fill="#f4e9f4"/><text x="27" y="17" font-size="8" font-weight="900" text-anchor="middle" fill="#72558e">VET MED</text><text x="27" y="26" font-size="8" text-anchor="middle" fill="#72558e">JOURNAL</text></g>';
  if(chosen('table')==='lounge-coffee-table')s+='<g transform="translate(163 418)"><ellipse rx="72" ry="13" fill="#cfa884" stroke="#9b756e" stroke-width="5"/><path d="M-47 8v28M47 8v28" stroke="#96786e" stroke-width="7"/></g>';
- const plant=chosen('receptionPlants');if(plant!=='none'&&plantLibrary().includes(plant))s+=pic('assets/reception/'+plant+'.svg',628,315,83,108);
- const extra=chosen('plants')==='lounge-planter-pack';if(extra)s+='<g><text x="666" y="310" font-size="45">🪴</text><text x="231" y="313" font-size="39">🌿</text><text x="958" y="323" font-size="42">🌱</text></g>';
- if(!extra)s+='<g><text x="670" y="316" font-size="36">🪴</text><text x="960" y="323" font-size="31">🌿</text></g>';
- const plantPositions=[[248,315],[619,321],[965,321],[369,239],[917,211],[75,285]];const count=Math.min(6,Math.max(2,Number(bag().plantCount)||3));for(let i=0;i<count;i++){const [px,py]=plantPositions[i];s+='<text x="'+px+'" y="'+py+'" font-size="'+(i%2?31:37)+'" text-anchor="middle">'+(['🌿','🪴','🌱'][i%3])+'</text>'}
+ const plant=chosen('receptionPlants');if(plant!=='none'&&plantLibrary().includes(plant))s+=pic('assets/reception/'+plant+'.svg',16,232,74,92);
+ const extra=chosen('plants')==='lounge-planter-pack';if(extra)s+='<g><path d="M91 112Q124 142 92 169M944 112Q917 145 946 172" fill="none" stroke="#6d9a79" stroke-width="5"/><ellipse cx="93" cy="148" rx="16" ry="7" fill="#83b895"/><ellipse cx="944" cy="146" rx="17" ry="8" fill="#9bca99"/></g>';
+ 
+ // Botanical accents use actual illustrated planters, anchored to corners and furniture.
+ const plantPositions=[[61,289],[644,284],[964,294],[291,274],[733,206],[30,298]];
+ const count=Math.min(6,Math.max(2,Number(bag().plantCount)||3));
+ for(let i=0;i<count;i++){const [px,py]=plantPositions[i];const scale=i===3?.67:.85;
+ s+='<g transform="translate('+px+' '+py+') scale('+scale+')"><rect x="-14" y="0" width="28" height="27" rx="5" fill="'+(i%2?'#bf9cc2':'#c59c7d')+'" stroke="#96829c" stroke-width="2"/><path d="M0 4Q-32 -27 -15 -39M0 4Q31 -31 16 -42M0 4V-48" stroke="#628f76" stroke-width="3.5" fill="none"/><ellipse cx="-17" cy="-32" rx="13" ry="7" fill="#88b797" transform="rotate(24 -17 -32)"/><ellipse cx="17" cy="-35" rx="13" ry="7" fill="#76a98a" transform="rotate(-28 17 -35)"/><ellipse cx="1" cy="-46" rx="10" ry="6" fill="#aad2a5"/></g>'}
  const decor=chosen('receptionDecor');const src=window.VPQ_RECEPTION_MODULAR_ASSETS?.manifest?.[decor]?.src;if(src)s+=pic(src,559,313,88,68);
  const reward=levelArtItems().find(x=>x.id===chosen('levelReward'));if(reward){const glyph=reward.furnitureGlyph||'⭐';s+='<g transform="translate(573 349)"><rect width="67" height="56" rx="12" fill="#f2e5f7" stroke="#a18fbc" stroke-width="4"/><text x="33" y="39" font-size="34" text-anchor="middle">'+h(glyph)+'</text></g>'}
  return s+'</g>';
