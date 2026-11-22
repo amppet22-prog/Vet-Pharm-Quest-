@@ -4991,7 +4991,7 @@ function vpqCompanionAvatar(c){
   // Until that exact binary is present in this repository, use the original
   // illustrated starter rather than inventing a new Mera or showing a broken URL.
   if(window.VPQ_MERA_SHARK_IMAGE_READY===true){
-   return '<img class="vpq-companion-art" loading="eager" src="Mera%20in%20a%20Shark%20Costume-5(1).png" alt="Mera in her blue shark costume" draggable="false">';
+   return '<img class="vpq-companion-art" loading="eager" src="Mera%20in%20a%20Shark%20Costume-5.png" alt="Mera in her blue shark costume" draggable="false">';
   }
   return '<span class="vpq-companion-placeholder" role="img" aria-label="Mera shark costume artwork awaiting upload">🦈<small>Mera photo awaiting GitHub upload</small></span>';
  }
@@ -5015,7 +5015,7 @@ function vpqCompanionApply(c,form){
  * Never resize, restyle, reposition, substitute or reset the selected reception
  * companion during shop/gallery/batch import. #petSprite and avatarX/petX are
  * exclusively the walkable-scene presentation. The catalog only registers art.
- * Mera asset: Mera in a Shark Costume-5(1).png (transparent PNG supplied by owner).
+ * Mera asset: Mera in a Shark Costume-5.png (transparent PNG supplied by owner).
  * Presence check enables the real image only after it is actually uploaded.
  */
 window.VPQ_MERA_SHARK_IMAGE_READY=false;
@@ -5025,7 +5025,7 @@ window.VPQ_MERA_SHARK_IMAGE_READY=false;
   if(state.vpqCompanionId==='dog-mera')updateAvatar();
  };
  im.onerror=function(){window.VPQ_MERA_SHARK_IMAGE_READY=false};
- im.src='Mera%20in%20a%20Shark%20Costume-5(1).png';
+ im.src='Mera%20in%20a%20Shark%20Costume-5.png';
 })();
 const vpqCompanionLegacyArt=vpqPetIllustration;
 vpqPetIllustration=function(p){
