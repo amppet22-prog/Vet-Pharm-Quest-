@@ -4652,7 +4652,7 @@ window.VPQ_PATIENT_CASE_LIBRARY.init({
  getCompleted:()=>state.completed,
  getSelectedLectures:()=>window.VPQCurriculum?.getLectures?.()||[],
  openCase:id=>startCase(id),
- openMap:()=>doAction('map')
+ openMap:()=>doAction('map'),changeRoom:room=>changeRoom(room)
 });
 $('vpqFloorplanTopBtn').addEventListener('click',()=>vpqReceptionWings.map());
 $('vpqArcadeTopBtn').addEventListener('click',()=>$('pharmArcadeBtn').click());
