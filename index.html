@@ -4939,6 +4939,11 @@ let validationMessage='';
 let state=fresh();try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Array.isArray(v.ddx))state=Object.assign(fresh(),v)}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
 const h=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Add case-authored photographs here later: {src:'assets/...',title:'...',caption:'...',credit:'...'}.
+// No photographs were supplied for prototype 001; never imply a placeholder is patient evidence.
+const caseImages=[];
+const imageRail=()=>caseImages.length?'<aside class="refimagerail" aria-label="Patient image gallery"><h3>📷 Diagnostic photographs</h3><p class="refsmall">Select a photograph to expand it.</p>'+
+caseImages.map((im,i)=>'<details class="refimageitem"><summary><img src="'+h(im.src)+'" alt="'+h(im.title||'Case photograph')+'" loading="lazy"><span><b>'+h(im.title||'Patient image '+(i+1))+'</b><small>Tap to expand</small></span></summary><div class="refimagefull"><img src="'+h(im.src)+'" alt="'+h(im.title||'Case photograph')+'" loading="lazy"><p>'+h(im.caption||'')+'</p>'+(im.credit?'<p class="refsmall">Credit: '+h(im.credit)+'</p>':'')+'</div></details>').join('')+'</aside>':'';
 const reports={
 cbc:{title:'🩸 CBC & smear',rows:[['HCT','26 %','37–55 %','↓'],['RBC','3.75 ×10⁶/µL','5.5–8.5','↓'],['Hemoglobin','8.8 g/dL','12–18','↓'],['MCV','69 fL','60–77',''],['MCHC','33.8 g/dL','32–36',''],['Absolute reticulocytes','22 ×10³/µL','<60',''],['WBC','9.8 ×10³/µL','6–17',''],['Platelets','310 ×10³/µL','200–500','']],extra:'Blood smear: Normocytic normochromic RBCs, no polychromasia, spherocytes or agglutination. 📷 Reference photo slot: normal canine smear, not yet supplied.'},
 chem:{title:'🧪 Serum chemistry',rows:[['BUN','78 mg/dL','7–27','↑'],['Creatinine','4.1 mg/dL','0.5–1.5','↑'],['Phosphorus','9.2 mg/dL','2.5–6.8','↑'],['Calcium','9.8 mg/dL','9.4–11.3','']]},
@@ -5122,6 +5127,33 @@ style.textContent+=
 '#modalBody .refcase .refiqfeedback{margin-top:8px;padding:9px 11px;border-left:4px solid #6eaa90;background:#eef9f2;border-radius:8px}'+
 '#modalBody .refcase .refadvancedfeedback{padding:12px;background:#f4effb;border:2px solid #c5a5e1;border-radius:12px;margin-top:10px}'+
 '@media(max-width:760px){#modalBody .refcase .refresultsgrid,#modalBody .refcase .refiqchoices{grid-template-columns:1fr}}';
+
+/* Reading-column differential cards; optional expandable vertical image rail. */
+style.textContent+=
+'#modalBody .refcase .refpracticegrid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;align-items:start}'+
+'#modalBody .refcase .refpracticegrid.no-images .refpracticequestions{width:100%;max-width:735px;margin:0 auto}'+
+'#modalBody .refcase .refpracticegrid.has-images{grid-template-columns:minmax(0,1.6fr) minmax(220px,1fr)}'+
+'#modalBody .refcase .refpracticequestions{min-width:0}'+
+'#modalBody .refcase .refpracticequestions .reflevel{font-size:15px;line-height:1.35}'+
+'#modalBody .refcase .refpracticequestions .refguided{padding:11px 13px}'+
+'#modalBody .refcase .refpracticequestions .refguided>p{line-height:1.42;margin:6px 0}'+
+'#modalBody .refcase .refpracticequestions .refhintbox{line-height:1.38;font-size:14px;padding:8px 10px}'+
+'#modalBody .refcase .refpracticequestions .refoption{gap:5px;margin:0;border-radius:10px}'+
+'#modalBody .refcase .refpracticequestions .refoptions{gap:5px}'+
+'#modalBody .refcase .refpracticequestions .refoption .refoptionselect{font-size:15px;line-height:1.34;padding:6px 5px}'+
+'#modalBody .refcase .refpracticequestions .refoption .reflead{font-size:13px;min-width:71px;padding:6px}'+
+'#modalBody .refcase .refpracticequestions .refshortlist{padding:9px 10px}'+
+'#modalBody .refcase .refimagerail{min-width:0;padding:12px;border:2px solid #c3afe2;border-radius:13px;background:#faf6ff}'+
+'#modalBody .refcase .refimagerail h3{font-size:17px;color:#725398}'+
+'#modalBody .refcase .refimageitem{border:1px solid #c7badc;border-radius:10px;background:white;margin:7px 0;overflow:hidden}'+
+'#modalBody .refcase .refimageitem summary{display:flex;align-items:center;gap:9px;padding:7px;cursor:pointer;list-style:none}'+
+'#modalBody .refcase .refimageitem summary::-webkit-details-marker{display:none}'+
+'#modalBody .refcase .refimageitem summary img{width:86px;height:68px;object-fit:cover;border-radius:7px}'+
+'#modalBody .refcase .refimageitem summary span{display:grid;gap:3px;min-width:0}'+
+'#modalBody .refcase .refimageitem summary small{font-size:12px;color:#655280}'+
+'#modalBody .refcase .refimagefull{padding:9px;border-top:1px solid #ded2ed}'+
+'#modalBody .refcase .refimagefull img{display:block;max-width:100%;height:auto;margin:auto;border-radius:8px}'+
+'@media(max-width:790px){#modalBody .refcase .refpracticegrid.has-images{grid-template-columns:1fr}#modalBody .refcase .refpracticegrid.has-images .refimagerail{order:-1}#modalBody .refcase .refpracticegrid.no-images .refpracticequestions{max-width:735px}}';
 document.head.appendChild(style);
 }
 const report=id=>{const data=reports[id];return '<details class="refbox refsection" open><summary>'+data.title+' <span class="refhint">expand / collapse</span></summary><div class="refsectionbody"><table><thead><tr><th>Test</th><th>Patient</th><th>Reference interval</th></tr></thead><tbody>'+data.rows.map(r=>'<tr><td>'+h(r[0])+'</td><td><b>'+h(r[1])+'</b> <b style="color:#af6a32">'+h(r[3])+'</b></td><td>'+h(r[2])+'</td></tr>').join('')+'</tbody></table>'+(data.extra?'<p>'+h(data.extra)+'</p>':'')+'</div></details>'};
@@ -5210,9 +5242,9 @@ const content='<div class="refcase">'+
 '<details class="refbox refsection" open><summary>🐾 Patient history & physical examination</summary><div class="refsectionbody"><p><b>Signalment:</b> 9-year-old spayed female mixed-breed dog.</p><p><b>History:</b> Two months of increased drinking and urination, weight loss, and poor appetite. No medications.</p><p><b>Physical examination:</b> Thin body condition; pale mucous membranes; mild oral ulcers; approximately 5% dehydration; temperature 38.4 °C.</p></div></details>'+
 '<h3 class="refgroup">🧪 Ancillary testing · Minimum database</h3><p class="refsmall">Each laboratory section opens independently. Normal ranges are supplied next to patient values.</p>'+
 '<div class="refresultsgrid"><div class="refresultscbc">'+report('cbc')+'</div><div class="refresultsright">'+report('chem')+report('urine')+'</div></div>'+
-'<details class="refbox refsection refphotos"><summary>📷 Patient images & diagnostic photographs</summary><div class="refsectionbody"><div class="refphotogrid"><div class="refphotoplace"><span>🩸</span><b>Canine blood-smear photo</b><small>Image to add · normal-appearing RBCs, minimal polychromasia</small></div><div class="refphotoplace"><span>🔬</span><b>Microscopy / laboratory image</b><small>Reserved for supporting photos in future cases</small></div></div><p class="refsmall">No photograph was supplied with this invented patient. These are labeled placeholders, not fabricated findings.</p></div></details>'+
+'<details class="refbox refsection refphotos" '+(caseImages.length?'hidden':'')+'><summary>📷 Patient images & diagnostic photographs</summary><div class="refsectionbody"><div class="refphotogrid"><div class="refphotoplace"><span>🩸</span><b>Canine blood-smear photo</b><small>Image to add · normal-appearing RBCs, minimal polychromasia</small></div><div class="refphotoplace"><span>🔬</span><b>Microscopy / laboratory image</b><small>Reserved for supporting photos in future cases</small></div></div><p class="refsmall">No photograph was supplied with this invented patient. These are labeled placeholders, not fabricated findings.</p></div></details>'+
 interpretations()+
-'<div class="reflevel">🌱 <b>Guided Differential Practice</b> · Multiple choice + ranking</div>'+guided()+
+'<div class="refpracticegrid '+(caseImages.length?'has-images':'no-images')+'"><div class="refpracticequestions"><div class="reflevel">🌱 <b>Guided Differential Practice</b> · Multiple choice + ranking</div>'+guided()+'</div>'+imageRail()+'</div>'+
 (state.submitted||state.advancedComparison?comparison():'<div class="refprotected">🔒 The evidence comparison, leading diagnosis, rationale and follow-up tests remain hidden until you submit your ranked choices.</div>')+
 advanced()+
 '<div class="refbuttons"><button type="button" data-ref-legacy="1">Existing Clinical Pathology cases</button><button type="button" data-ref-reset="1">Restart prototype</button></div></div>';
