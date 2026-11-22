@@ -40,7 +40,7 @@ function addStudyLoungeShortcut(){
  link.type='button';link.id='vpqPNLearnInLounge';
  link.textContent='📚 Learn & practice Pharmacology + Toxicology → Student Study Lounge';
  link.style.cssText='display:block;width:100%;margin:8px 0 12px;padding:10px;border:2px solid #9b8ac7;border-radius:12px;background:#f5efff;color:#554573;font-size:13px;font-weight:900;cursor:pointer';
- link.addEventListener('click',()=>{if(modal)modal.classList.remove('open');changeRoom('study')});
+ link.addEventListener('click',()=>{document.getElementById('closeModal')?.click();changeRoom('study')});
  pharmModal.prepend(link);
 }
 new MutationObserver(addStudyLoungeShortcut).observe(pharmModal,{childList:true,subtree:false});
