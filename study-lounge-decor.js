@@ -83,10 +83,16 @@ function habitat(){
  const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
  // Tall, left-wall display, with visible lizard, climbing/basking surfaces and a real cabinet base.
  // Decorative illustration only; species-specific welfare requirements are not represented as a care guide.
- return '<g transform="translate(19 151) scale(.53 1.28)">'+
+ return '<g transform="translate(7 146) scale(.68 1.12)">'+
  '<rect x="0" y="0" width="140" height="155" rx="8" fill="#5f827a" stroke="#466e69" stroke-width="6"/>'+
  '<rect x="7" y="9" width="126" height="117" rx="4" fill="#dceacc" stroke="#92ac9e" stroke-width="3"/>'+
  '<rect x="8" y="11" width="124" height="12" rx="3" fill="#708e7f"/>'+
+ // Upper screened ventilation, two separate light fixtures, a thermometer readout.
+ '<path d="M13 15h114" stroke="#b9dac8" stroke-width="2" stroke-dasharray="2 3"/>'+
+ '<rect x="18" y="22" width="33" height="6" rx="2" fill="#5c766d"/><rect x="61" y="22" width="38" height="6" rx="2" fill="#768c7b"/>'+
+ '<path d="M26 28l-6 11h17l-7 -11M76 28l-4 11h14l-5 -11" fill="#ecd7a6" opacity=".65"/>'+
+ '<rect x="105" y="31" width="18" height="15" rx="3" fill="#f5f0d8" stroke="#8aa697" stroke-width="1.8"/>'+
+ '<text x="114" y="41" text-anchor="middle" font-family="Arial" font-weight="900" font-size="7" fill="#678778">TEMP</text>'+
  '<path d="M13 17h114" stroke="#b3d9c9" stroke-width="2" stroke-dasharray="3 3"/>'+
  '<path d="M10 105Q42 90 74 102T130 100V125H10Z" fill="#ccb28a"/>'+
  '<path d="M13 108L31 72L66 77L82 109Z" fill="#b5a185" stroke="#91846b" stroke-width="2"/>'+
@@ -96,6 +102,11 @@ function habitat(){
  '<ellipse cx="91" cy="68" rx="13" ry="5" fill="#91b587" transform="rotate(29 91 68)"/>'+
  '<path d="M14 51Q35 43 53 56" stroke="#9a826c" stroke-width="6" stroke-linecap="round" fill="none"/>'+
  '<ellipse cx="106" cy="112" rx="15" ry="4" fill="#b6cfd4" stroke="#88acb3" stroke-width="2"/>'+
+ '<ellipse cx="105" cy="112" rx="10" ry="2" fill="#d7edf3"/>'+
+ '<path d="M26 112q1 -17 14 -20q15 -2 20 20Z" fill="#8b7860" stroke="#6b645a" stroke-width="2"/>'+
+ '<path d="M35 112q4 -13 12 -10q6 2 7 10" fill="#4b5947"/>'+
+ '<path d="M16 61q23 -20 44 -19t28 8" stroke="#937e60" stroke-width="6" stroke-linecap="round" fill="none"/>'+
+ '<path d="M19 114l3 2m13 -2 3 2m25 -3 4 2m13 -2 3 2" stroke="#a39472" stroke-width="2"/>'+
  // Clinging lizard: long tail, back, head, four legs and visible eye.
  '<path d="M28 82Q44 88 50 79Q68 64 85 70L98 66Q113 61 119 72Q113 79 97 77L86 82Q62 94 48 84Q39 87 20 103Q27 88 28 82Z" fill="#7da568" stroke="#527956" stroke-width="2.5"/>'+
  '<path d="M60 80l-9 15 -9 2M80 80l11 14 10 0M98 72l9 12" stroke="#527956" stroke-width="3.2" stroke-linecap="round" fill="none"/>'+
@@ -106,7 +117,7 @@ function habitat(){
  '<rect x="-5" y="128" width="150" height="12" rx="3" fill="#b8957f" stroke="#866e69" stroke-width="3"/>'+
  '<rect x="4" y="140" width="132" height="25" rx="3" fill="#ad8c79" stroke="#88736c" stroke-width="3"/>'+
  '<path d="M69 143v20" stroke="#8b756a" stroke-width="2"/>'+
- '<text x="70" y="156" font-family="Arial" font-size="9" font-weight="900" text-anchor="middle" fill="#fff7ed">'+(deluxe?'BIOACTIVE HABITAT':'REPTILE HABITAT')+'</text>'+
+ '<text x="70" y="156" font-family="Arial" font-size="9" font-weight="900" text-anchor="middle" fill="#fff7ed">'+(deluxe?'BIOACTIVE DISPLAY':'LIZARD HABITAT')+'</text>'+
  '</g>';
 }
 function svgDecor(){
