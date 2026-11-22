@@ -4984,7 +4984,20 @@ const vpqCompanionOriginalUpdater=updateAvatar;
 updateAvatar=function(){
  vpqCompanionOriginalUpdater();
  const pet=$('petSprite');
- if(pet){pet.innerHTML=vpqPetIllustration(state);pet.dataset.companionCategory=vpqCompanionById(state.vpqCompanionId)?.category||'dog';}
+ if(pet){
+ pet.innerHTML=vpqPetIllustration(state);
+ pet.dataset.companionCategory=vpqCompanionById(state.vpqCompanionId)?.category||'dog';
+ // The game-world pet must never inherit full-size artwork dimensions.
+ pet.style.setProperty('width','76px','important');
+ pet.style.setProperty('height','76px','important');
+ pet.style.setProperty('min-width','0','important');
+ pet.style.setProperty('min-height','0','important');
+ pet.style.setProperty('max-width','76px','important');
+ pet.style.setProperty('max-height','76px','important');
+ pet.style.setProperty('overflow','hidden','important');
+ pet.style.setProperty('box-sizing','border-box','important');
+ pet.style.setProperty('padding','0','important');
+}
 };
 $('modalBody').addEventListener('click',function(e){
  const tab=e.target.closest('[data-vpqcomp-tab]');
@@ -5025,6 +5038,18 @@ vpqCompanionStyles.textContent=
  '.vpq-preview-pet .vpq-companion-art,.petSprite .vpq-companion-art{width:100%;height:100%;object-fit:contain}'+
  '.petSprite[data-companion-category="horse"] .vpq-companion-art,.petSprite[data-companion-category="ruminants"] .vpq-companion-art{transform:scale(1.22);transform-origin:center bottom}';
 document.head.appendChild(vpqCompanionStyles);
+
+/* Room-sprite safety: contain every companion rendering path, including older uploaded dog images. */
+const vpqPetSizeGuard=document.createElement('style');
+vpqPetSizeGuard.id='vpq-companion-room-size-guard';
+vpqPetSizeGuard.textContent=
+ '#petSprite.petSprite{width:76px!important;height:76px!important;min-width:0!important;min-height:0!important;max-width:76px!important;max-height:76px!important;overflow:hidden!important;box-sizing:border-box!important;padding:0!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;isolation:isolate!important}'+
+ '#petSprite.petSprite img,#petSprite.petSprite .vpq-companion-art,#petSprite.petSprite .vpq-batch-dog-image{display:block!important;position:static!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;transform:none!important;margin:0!important}'+
+ '#petSprite.petSprite .vpq-companion-placeholder{display:flex!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;min-height:0!important;font-size:37px!important;align-items:center!important;justify-content:center!important;line-height:1!important}'+
+ '#petSprite.petSprite .vpq-companion-placeholder small{display:none!important}'+
+ '@media(max-width:600px){#petSprite.petSprite{width:62px!important;height:62px!important;max-width:62px!important;max-height:62px!important}}';
+document.head.appendChild(vpqPetSizeGuard);
+
 
 })();
 
