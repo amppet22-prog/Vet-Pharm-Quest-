@@ -4405,6 +4405,12 @@ function vpqHyAuditView(){
  '<div class="buttonrow"><button data-vpqhy-mode="menu">★ High-Yield menu</button><button data-vpqlfhome="1">← Learning Center</button></div>');
 }
 
+const vpqStudyRoundSizes=[5,10,20,40,'all'];
+function vpqGetStudyRoundSize(){let v='20';try{v=localStorage.getItem('vpq-study-round-size-v1')||'20'}catch(e){}return vpqStudyRoundSizes.some(s=>String(s)===v)?v:'20'}
+function vpqSetStudyRoundSize(v){const size=vpqStudyRoundSizes.some(s=>String(s)===String(v))?String(v):'20';try{localStorage.setItem('vpq-study-round-size-v1',size)}catch(e){}return size}
+function vpqApplyStudyRoundSize(items){const n=vpqGetStudyRoundSize();return n==='all'?items:items.slice(0,Number(n))}
+window.VPQ_STUDY_ROUND_SIZE={get:vpqGetStudyRoundSize,set:vpqSetStudyRoundSize,apply:vpqApplyStudyRoundSize,options:vpqStudyRoundSizes};
+$('modalBody').addEventListener('change',event=>{if(event.target?.id!=='vpqHyRoundSize')return;vpqSetStudyRoundSize(event.target.value);const lecture=$('modalBody').querySelector('[data-vpqhy-shuffle]')?.dataset.vpqhyShuffle||'all';vpqExam2HighYield('questions',lecture,0)});
 const vpqHyQuestionRounds=new Map();
 function vpqHyQuestions(lecture){
  const all=[...(window.VPQ_PHARM_NEXT?.questions||[]),...(window.VPQ_PHARM_EXAM2_PDF_PRACTICE||[])];
@@ -4437,12 +4443,12 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const eligible=x=>(lectures.includes(x.lecture)&&(lecture==='all'||x.lecture===lecture))||(x.lecture==='Lectures 18–20'&&(lecture==='all'||['Lecture 18','Lecture 19','Lecture 20'].includes(lecture)));
  const priority=db.drugs.filter(x=>x.coursePriority&&eligible(x));
  const objectives=source.filter(eligible);
- const questions=vpqHyQuestions(lecture).slice(0,20);
+ const questions=vpqApplyStudyRoundSize(vpqHyQuestions(lecture));
  const n=Math.max(0,Number(position)||0);
  const selector='<details class="vpqPharmLectureSelector"><summary>📚 '+escapeHtml(lecture==='all'?'All lectures 10–20':lecture)+' <span>Change lecture ▾</span></summary><div class="vpqPharmLectureOptions"><button data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="all">All lectures</button>'+lectures.map(l=>'<button '+(l===lecture?'class="vpqPharmSelectedLecture" ':'')+'data-vpqhy-mode="'+mode+'" data-vpqhy-lecture="'+escapeHtml(l)+'">'+escapeHtml(l)+'</button>').join('')+'</div></details>';
  const menu='<div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button></div><p><b>Start with the instructor-starred medications and big study-guide objectives.</b> Learn the mechanism and physiological WHY, recall the original faculty objective, then apply it to clinical questions.</p><p class="tiny">All drugs and questions below reuse the Exam 2 library; any caution attached to an instructor answer is shown separately. ★ refers to identified lecture stars and high-priority tables—not necessarily every bold-highlighted line.</p>'+
  '<div class="buttonrow"><button data-vpqpharmfc-open="1" style="background:#e4f1ff;font-weight:800">🧠 Quick flashcards · Exam 2</button><button data-vpqhy-audit="1">🔒 Owner question library · audit all uploads</button></div>'+
- '<div class="vpqNewPharmCards"><button data-vpqhy-mode="drugs" data-vpqhy-lecture="all"><b>1 · ★ Priority Drug Walkthrough</b><small>'+priority.length+' priority drug entries · mechanism, monitoring and clinical application</small></button><button data-vpqhy-mode="objectives" data-vpqhy-lecture="all"><b>2 · Instructor Objectives</b><small>'+objectives.length+' instructor objective prompts</small></button><button data-vpqhy-mode="questions" data-vpqhy-lecture="all"><b>3 · 🩺 Clinical Multiple-Choice Practice</b><small>'+'Up to 20 shuffled questions per round · '+vpqHyQuestions('all').length+' available in the full bank, including uploads</small></button></div>';
+ '<div class="vpqNewPharmCards"><button data-vpqhy-mode="drugs" data-vpqhy-lecture="all"><b>1 · ★ Priority Drug Walkthrough</b><small>'+priority.length+' priority drug entries · mechanism, monitoring and clinical application</small></button><button data-vpqhy-mode="objectives" data-vpqhy-lecture="all"><b>2 · Instructor Objectives</b><small>'+objectives.length+' instructor objective prompts</small></button><button data-vpqhy-mode="questions" data-vpqhy-lecture="all"><b>3 · 🩺 Clinical Multiple-Choice Practice</b><small>'+'Choose 5, 10, 20, 40 or all shuffled questions per round · '+vpqHyQuestions('all').length+' available in the full bank, including uploads</small></button></div>';
  if(mode==='menu')return showModal('★ Exam 2 · High-Yield Review · Lectures 10–20',menu+'<div class="buttonrow"><button data-vpqnewpharm-menu="1">← All Exam 2 lectures</button></div>');
  const d=mode==='drugs'?priority:mode==='objectives'?objectives:questions;
  const at=Math.min(n,Math.max(d.length-1,0)),x=d[at];
@@ -4460,7 +4466,7 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  }else if(mode==='objectives'){
  html+='<section class="vpq-patient-case" style="padding:14px"><p class="vpq-case-meta">Objective #'+escapeHtml(x.order)+' · '+escapeHtml(x.lecture)+'</p><h3>'+escapeHtml(x.q)+'</h3><details class="vpqHyObjectiveReveal"><summary>💡 Reveal professor-derived answer</summary><div class="vpqHyAnswerGreen">'+escapeHtml(x.answer)+'</div>'+(x.why?'<div class="vpqHyWhySoft"><b>💡 WHY it happens · added explanation</b><p>'+escapeHtml(x.why)+'</p></div>':'<p class="tiny">Detailed WHY review has not yet been added to this objective. The original study-guide answer is preserved.</p>')+'</details>'+(x.note?'<details class="vpqNewPharmOptional"><summary>⚠ Important clinical interpretation</summary><p>'+escapeHtml(x.note)+'</p></details>':'')+'</section>';
  }else{
- html+='<div class="buttonrow"><button data-vpqhy-shuffle="'+escapeHtml(lecture)+'">🔀 Reshuffle questions</button><small>Short randomized round · '+d.length+' questions · reshuffle to see others</small></div>'+vpqPharmBasicGuide(x.lecture,true)+'<section class="vpq-patient-case vpqPharmQuestionCard"><h3>'+escapeHtml(x.q)+'</h3>'+vpqPharmCaseReference(x.q)+'<p class="vpq-case-meta">'+escapeHtml(x.lecture)+' · '+escapeHtml(x.source||'Course-aligned clinical practice')+'</p>'+
+ html+='<div class="vpqHyRoundSettings" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:9px 0;padding:10px;border:1px solid #b7c9e6;border-radius:12px;background:#f2f6fd"><label for="vpqHyRoundSize"><b>Questions per round</b></label><select id="vpqHyRoundSize" style="padding:7px;border:2px solid #9dbbe3;border-radius:9px;background:white">'+vpqStudyRoundSizes.map(size=>'<option value="'+size+'" '+(String(size)===vpqGetStudyRoundSize()?'selected':'')+'>'+(size==='all'?'All available ('+vpqHyQuestions(lecture).length+')':size+' questions')+'</option>').join('')+'</select><small>'+d.length+' / '+vpqHyQuestions(lecture).length+' questions</small></div><div class="buttonrow"><button data-vpqhy-shuffle="'+escapeHtml(lecture)+'">🔀 Reshuffle questions</button><small>'+(vpqGetStudyRoundSize()==='all'?'Complete question bank':'Randomized round')+' · '+d.length+' questions</small></div>'+vpqPharmBasicGuide(x.lecture,true)+'<section class="vpq-patient-case vpqPharmQuestionCard"><h3>'+escapeHtml(x.q)+'</h3>'+vpqPharmCaseReference(x.q)+'<p class="vpq-case-meta">'+escapeHtml(x.lecture)+' · '+escapeHtml(x.source||'Course-aligned clinical practice')+'</p>'+
  x.options.map((opt,i)=>'<button style="display:block;width:100%;text-align:left;margin:7px 0" data-vpqhy-answer="'+i+'" data-vpqhy-position="'+at+'" data-vpqhy-lecture="'+escapeHtml(lecture)+'">'+String.fromCharCode(65+i)+'. '+escapeHtml(opt)+'</button>').join('')+
  '<div id="vpqhyExplanation" style="margin:9px 0" aria-live="polite"></div></section>';
  }
@@ -4505,7 +4511,7 @@ $('modalBody').addEventListener('click',ev=>{
  const l=d.vpqhyLecture||'all',at=Number(d.vpqhyPosition||0);
  const lset=Array.from({length:11},(_,i)=>'Lecture '+(i+10));
  const eligible=x=>(lset.includes(x.lecture)&&(l==='all'||x.lecture===l))||(x.lecture==='Lectures 18–20'&&(l==='all'||['Lecture 18','Lecture 19','Lecture 20'].includes(l)));
- const qs=vpqHyQuestions(l).slice(0,20);
+ const qs=vpqApplyStudyRoundSize(vpqHyQuestions(l));
  const q=qs[at],chosen=Number(d.vpqhyAnswer),area=$('vpqhyExplanation');
  if(!q||!area||area.dataset.answered)return;
  area.dataset.answered='true';
