@@ -256,8 +256,9 @@ function detailedExtras(key){const rows=deepData[key]||[];return rows.length?
  '<details class="vra-deep"><summary>📖 Detailed workup · physiology, artifacts, and species differences ('+rows.length+')</summary>'+
  rows.map(x=>card(x[0],'<p>'+x[1]+'</p>')).join('')+'</details>':''}
 const views={start,pcv,cbc,leuko,platelets,chem,renal,acid,calcium,extra,practice};
+function ensureAcademyApi(){if(!api)api={body:document.getElementById('modalBody'),showModal:(title,html)=>window.VPQ_REFERRAL_MODAL?.show?.(title,html)};return api}
 function open(id='start'){
- if(!api)return false;
+ ensureAcademyApi();if(!api?.showModal)return false;
  current=views[id]?id:'start';
  const s=S.find(x=>x.id===current);
  api.showModal('🔬 Advanced Clinical Pathology · '+s.name,
@@ -268,6 +269,19 @@ function open(id='start'){
  '<div class="vra-btns">'+link('start','🧭 Overview')+'<button type="button" data-vpq-report-action="classic">🩸 CBC & Chemistry tests</button><button type="button" data-vpq-report-action="hybrid">⚡ In-house / Send-out analyzer</button><button type="button" data-vpq-report-action="cases">🐾 Referral patients</button></div></div>');
  return true;
 }
+function handleAcademyClick(event){
+ const target=event.target?.closest?.('[data-vpq-report],[data-vpq-report-answer],[data-vpq-report-action]');
+ if(!target||!target.closest('.vra'))return false;
+ event.preventDefault();event.stopImmediatePropagation();
+ if(target.dataset.vpqReport)return open(target.dataset.vpqReport);
+ if(target.dataset.vpqReportAnswer){const parts=target.dataset.vpqReportAnswer.split(':').map(Number);reveal[parts[0]]=parts[1];return open('practice')}
+ if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
+ if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
+ if(target.dataset.vpqReportAction==='cases')return window.VPQ_OPEN_REFERRAL_PATIENTS?.()||window.VPQ_CLINPATH_REFERRAL_PILOT?.home?.()||window.VPQ_ADVANCED_LAB?.home?.();
+ return false;
+}
+// Independent delegated navigation protects the teaching tabs if bulk game init is interrupted.
+window.addEventListener('click',handleAcademyClick,true);
 function init(context){
  api=context;
  api.body.addEventListener('click',event=>{
