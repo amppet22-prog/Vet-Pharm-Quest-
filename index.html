@@ -5084,6 +5084,26 @@ style.textContent+=
 '#modalBody .refcase .refoption .refoptionselect{font-size:16px;padding:6px}'+
 '#modalBody .refcase .refcompare td{padding:7px 9px}'+
 '@media(max-width:640px){.modal:has(#modalBody .refcase){width:calc(100vw - 8px);max-height:98dvh}.modal:has(#modalBody .refcase) #modalBody{padding:7px 9px}#modalBody .refcase{font-size:15px}#modalBody .refcase th,#modalBody .refcase td{padding:6px 5px}#modalBody .refcase .refsection summary{font-size:16px}}';
+
+/* Put clinically related panels in the same viewport instead of using width for empty table space. */
+style.textContent+=
+'#modalBody .refcase .refresultsgrid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:10px;align-items:start}'+
+'#modalBody .refcase .refresultsgrid>div{min-width:0}'+
+'#modalBody .refcase .refresultsgrid .refsection{margin:3px 0 7px}'+
+'#modalBody .refcase .refresultsgrid table{table-layout:fixed;width:100%;font-size:14px}'+
+'#modalBody .refcase .refresultsgrid td:first-child,#modalBody .refcase .refresultsgrid th:first-child{width:38%}'+
+'#modalBody .refcase .refresultsgrid td:nth-child(2),#modalBody .refcase .refresultsgrid th:nth-child(2){width:34%}'+
+'#modalBody .refcase .refresultsgrid td:nth-child(3),#modalBody .refcase .refresultsgrid th:nth-child(3){width:28%}'+
+'#modalBody .refcase .refresultsgrid td{overflow-wrap:anywhere;padding:5px 7px}'+
+'#modalBody .refcase .refresultsgrid th{padding:7px}'+
+'#modalBody .refcase .refresultsgrid .refsectionbody{padding:7px 9px}'+
+'#modalBody .refcase .refresultsgrid .refhint{font-size:10px}'+
+'#modalBody .refcase .refresultsgrid .refsection summary{font-size:16px;padding:8px 10px}'+
+'#modalBody .refcase .refresultsgrid p{font-size:13px;line-height:1.4;margin:7px 2px 3px}'+
+'#modalBody .refcase .refheader{display:grid;grid-template-columns:minmax(145px,190px) minmax(0,1fr);gap:5px 12px;align-items:center}'+
+'#modalBody .refcase .refheader .refsmall{grid-column:1/-1}'+
+'#modalBody .refcase .refheader .refselect{margin:0}'+
+'@media(max-width:760px){#modalBody .refcase .refresultsgrid{grid-template-columns:minmax(0,1fr)}#modalBody .refcase .refheader{grid-template-columns:1fr}#modalBody .refcase .refresultsgrid table{font-size:14px}}';
 document.head.appendChild(style);
 }
 const report=id=>{const data=reports[id];return '<details class="refbox refsection" open><summary>'+data.title+' <span class="refhint">expand / collapse</span></summary><div class="refsectionbody"><table><thead><tr><th>Test</th><th>Patient</th><th>Reference interval</th></tr></thead><tbody>'+data.rows.map(r=>'<tr><td>'+h(r[0])+'</td><td><b>'+h(r[1])+'</b> <b style="color:#af6a32">'+h(r[3])+'</b></td><td>'+h(r[2])+'</td></tr>').join('')+'</tbody></table>'+(data.extra?'<p>'+h(data.extra)+'</p>':'')+'</div></details>'};
@@ -5146,8 +5166,8 @@ const content='<div class="refcase">'+
 '<div class="refbox refheader"><label for="vpqReferralCasePick"><b>🩺 Referral patient</b></label><select id="vpqReferralCasePick" class="refselect" aria-label="Choose referral patient"><option value="001">Case 001 · Dog · PU/PD and weight loss</option></select><p class="refsmall">Clinical Pathology · Lecture 1 · DDx · Approval prototype 1 of 1.</p></div>'+
 '<details class="refbox refsection" open><summary>🐾 Patient history & physical examination</summary><div class="refsectionbody"><p><b>Signalment:</b> 9-year-old spayed female mixed-breed dog.</p><p><b>History:</b> Two months of increased drinking and urination, weight loss, and poor appetite. No medications.</p><p><b>Physical examination:</b> Thin body condition; pale mucous membranes; mild oral ulcers; approximately 5% dehydration; temperature 38.4 °C.</p></div></details>'+
 '<h3 class="refgroup">🧪 Ancillary testing · Minimum database</h3><p class="refsmall">Each laboratory section opens independently. Normal ranges are supplied next to patient values.</p>'+
-Object.keys(reports).map(report).join('')+
-'<details class="refbox refsection refphotos" open><summary>📷 Patient images & diagnostic photographs</summary><div class="refsectionbody"><div class="refphotogrid"><div class="refphotoplace"><span>🩸</span><b>Canine blood-smear photo</b><small>Image to add · normal-appearing RBCs, minimal polychromasia</small></div><div class="refphotoplace"><span>🔬</span><b>Microscopy / laboratory image</b><small>Reserved for supporting photos in future cases</small></div></div><p class="refsmall">No photograph was supplied with this invented patient. These are labeled placeholders, not fabricated findings.</p></div></details>'+
+'<div class="refresultsgrid"><div class="refresultscbc">'+report('cbc')+'</div><div class="refresultsright">'+report('chem')+report('urine')+'</div></div>'+
+'<details class="refbox refsection refphotos"><summary>📷 Patient images & diagnostic photographs</summary><div class="refsectionbody"><div class="refphotogrid"><div class="refphotoplace"><span>🩸</span><b>Canine blood-smear photo</b><small>Image to add · normal-appearing RBCs, minimal polychromasia</small></div><div class="refphotoplace"><span>🔬</span><b>Microscopy / laboratory image</b><small>Reserved for supporting photos in future cases</small></div></div><p class="refsmall">No photograph was supplied with this invented patient. These are labeled placeholders, not fabricated findings.</p></div></details>'+
 '<div class="reflevel">🌱 <b>Guided Differential Practice</b> · Multiple choice + ranking</div>'+guided()+
 (state.submitted?comparison():'<div class="refprotected">🔒 The evidence comparison, leading diagnosis, rationale and follow-up tests remain hidden until you submit your ranked choices.</div>')+
 advanced()+
