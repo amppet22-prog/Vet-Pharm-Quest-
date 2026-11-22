@@ -31,8 +31,8 @@ const configs={
  study:[
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="study"]',x:59,label:'💻 Study Computer'},
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="masteryTracker"]',x:35,label:'🏆 Mastery Tracker'},
-  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="skillsWing"]',x:76,label:'💉 Clinical Skills Arcade',max:9},
-  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="learningHub"]',x:87,label:'🕹️ Learning Arcade'}
+  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="skillsWing"]',x:75,label:'💉 Clinical Skills Arcade',max:8},
+  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="learningHub"]',x:90,label:'🕹️ Learning Arcade'}
  ],
  mechanism:[
   {selector:'#vpqMechanismHotspots [data-vpqmechgo="vpqMechReceptor"]',x:24,label:'🧬 Receptor Board'},
@@ -89,7 +89,9 @@ style.textContent=
  '.stage .prop:focus-visible{outline:3px solid #efbd63;border-radius:12px}'+
  '#vpqLoungeHotspots .vpqLoungeHot.vpqApproachNear{border:2px dashed #b4a1cf!important;background:#fffbe71a!important;outline:none!important;box-shadow:none!important;filter:none!important}'+
  '#vpqLoungeHotspots .vpqLoungeHot.vpqApproachNear:after{content:"Press E"!important;top:auto!important;bottom:100%!important;left:50%!important;font-size:9px!important;padding:2px 6px!important;border:1px solid #a6a5ca!important;background:#fffdf7!important;color:#645984!important;box-shadow:none!important}'+
- '#vpqLoungeHotspots .vpqLoungeHot.vpqApproachNear span{display:none!important}';
+ '#vpqLoungeHotspots .vpqLoungeHot.vpqApproachNear span{display:none!important}'+
+ '#vpqLoungeHotspots .vpqLoungeMastery.vpqApproachNear{border-color:transparent!important;background:transparent!important;outline:none!important}'+
+ '#vpqLoungeHotspots .vpqLoungeMastery.vpqApproachNear:after{left:auto!important;right:3%!important;top:2px!important;bottom:auto!important;transform:none!important}';
 document.head.appendChild(style);
 return {updateNearby,interactNearest,rooms:Object.keys(configs)};
 };
