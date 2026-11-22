@@ -150,6 +150,12 @@
       "answer": "β1 and β2 nonselective adrenergic receptors. (Class 2)",
       "why": "β1 blockade slows cardiac responses; β2 blockade may worsen bronchospasm.\nIt is used to treat a feline with hyperthyroidism-mediated hypertension",
       "slide": "Lecture 14 · user study cards, reconciled with lecture guide and veterinary references"
+    },
+    "pharm-e2-cardio14-008": {
+      "prompt": "What are pimobendan's two principal actions?",
+      "answer": "Ca²⁺ sensitization and PDE3 inhibition.",
+      "why": "It is an inodilator: increases contractility while producing vasodilation because it opens K+ channels in vascular smooth muscle.",
+      "slide": "Lecture 14 · user study cards, reconciled with lecture guide and veterinary references"
     }
   },
   "custom": [
