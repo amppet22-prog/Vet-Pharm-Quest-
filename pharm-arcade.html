@@ -16,6 +16,14 @@
 .vpq-exam-actions button{min-height:88px;border-radius:15px;border:2px solid #dcc4eb;padding:12px;background:linear-gradient(#fffafd,#f9effe);text-align:left;color:#604c79}
 .vpq-exam-actions strong{display:block;font-size:15px}.vpq-exam-actions small{display:block;margin-top:5px;color:#726780}
 .vpq-exam-tip{padding:10px 12px;background:#f3eff9;border-radius:11px;color:#655773;font-size:12px;margin:8px 0}
+
+/* Compact Drug Match board: readable clues, clearly emphasized drug names. */
+#screen .match-board{gap:7px;padding-bottom:3px}
+#screen .match-board .tile{min-height:58px;padding:8px 9px;border-radius:10px;font-size:12px;line-height:1.3;font-weight:650}
+#screen .match-board .tile.vpq-drug-name{font-weight:950;font-size:14px;letter-spacing:.05px;color:#183e70}
+#screen .match-board .tile.vpq-drug-clue{font-weight:650}
+#screen .match-board .tile.matched.vpq-drug-name{color:#245c49;opacity:.9}
+@media(max-width:600px){#screen .match-board{gap:6px}#screen .match-board .tile{min-height:58px;padding:7px 6px;font-size:11.5px}#screen .match-board .tile.vpq-drug-name{font-size:13px}}
 </style><link rel="stylesheet" href="question-feedback.css?v=20261119-unified-answers"><link rel="stylesheet" href="arcade-compact.css?v=20261119-compact-2">
 <style id="vpq-ipad-drugmatch-fixes">
 html,body{overflow-y:auto!important;-webkit-overflow-scrolling:touch;min-height:100%;height:auto}
@@ -395,7 +403,7 @@ function vpqMatchRender40(message=''){
  '<p class="muted">The <b>selected pharmacology lectures</b> control this round. Match each drug to '+(vpqMatchMode40==='clinical'?'its specific indication, target patients and safety consideration.':vpqMatchMode40==='className'?'its precise pharmacologic class or subclass.':'its molecular target or pharmacologic mechanism.')+' Different drug sets rotate across rounds.</p>'+
  '<div class="little"><button class="btn smallbtn" id="vpqMatchModeClass">🏷️ Drug class</button><button class="btn smallbtn" id="vpqMatchModeMechanism">⚙️ Drug target</button><button class="btn smallbtn" id="vpqMatchModeClinical">⚕️ Clinical caution</button><button class="btn smallbtn" id="vpqMatchNew">New drug set ↻</button></div>'+
  '<div class="meter" style="margin:12px 0"><div style="width:'+(matched.size/total*100)+'%"></div></div>'+
- '<div class="match-board">'+matchDeck.map((x,i)=>'<button class="tile '+(matched.has(x.id)?'matched':'')+' '+(selection===i?'selected':'')+'" data-vpqmatchtile="'+i+'" '+(matched.has(x.id)?'disabled':'')+'>'+safe(x.text)+'</button>').join('')+'</div>'+
+ '<div class="match-board">'+matchDeck.map((x,i)=>'<button class="tile '+(matched.has(x.id)?'matched':'')+' '+(selection===i?'selected':'')+' '+(x.side===0?'vpq-drug-name':'vpq-drug-clue')+'" data-vpqmatchtile="'+i+'" '+(matched.has(x.id)?'disabled':'')+'>'+safe(x.text)+'</button>').join('')+'</div>'+
  '<div class="feedback '+(message.startsWith('✓')?'good':'')+'" style="margin-top:12px">'+(message||'Choose a drug and its corresponding mechanism or clinical clue.')+'</div>'+
  (matched.size===total?'<div class="note"><b>🏆 Drug Match complete!</b><p>Excellent—now use those mechanisms in a clinical decision, or practice another matching set.</p><div class="buttonrow"><button class="btn primary" id="vpqMatchClinicalNext">🩺 Next: Clinical Questions</button><button class="btn" id="vpqMatchFlashReview">🧠 Review Flashcards</button></div></div>':'');
  vpqWireMatchLecturePicker40();
