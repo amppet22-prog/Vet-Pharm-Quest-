@@ -18,3 +18,9 @@
 - Import another batch of 20+ dogs; no change to the current equipped companion.
 - Check mobile and desktop viewport for containment without white squares.
 - Verify companions other than Mera retain their IDs and purchases.
+
+## Implemented anchor fix (Nov 22, 2026)
+- Main reception `updatePosition()` places pet at the exact veterinarian left-edge coordinate (`calc(${avatarX}% - 28px)`) and the protected pet CSS shifts its container left by its full width + 9px (`translateX(calc(-100% - 9px))`). This is a fixed edge-to-edge gap, independent of screen width or pet art width.
+- The previous independent petX interpolation in both `move()` and the animation loop is deliberately disabled; do not restore it. This separate lag caused the pet to drift far from the veterinarian.
+- Keep pet artwork and selection separate from this geometry; do not edit or override the anchor as part of companion imports.
+- Verified with headless Chromium in an isolated CSS/DOM fixture at x=18%,44%,72%,90%: pet right edge sits exactly 9px left of vet left edge, container background remains transparent. **This is not a live hosted-game end-to-end verification.**
