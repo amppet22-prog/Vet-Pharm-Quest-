@@ -18,7 +18,7 @@ const configs={
   {selector:'#vpqShadowHotspots [data-shadowaction="receptionStudio"]',x:96,label:'🎨 Reception Studio',max:4}
  ],
  exam:[
-  {selector:'#vpqExamHotspots [data-vpqexamaction="medicalCharts"]',x:34,label:'📋 Patient Charts'},
+  {selector:'#vpqExamHotspots [data-vpqexamaction="medicalCharts"]',x:42,label:'📋 Patient Charts'},
   {selector:'#vpqExamHotspots [data-vpqexamaction="patients"]',x:76,label:'🩺 Examination Table'},
   {selector:'#vpqExamHotspots [data-vpqexamaction="protocols"]',x:57,label:'📖 Clinical Protocols'}
  ],
