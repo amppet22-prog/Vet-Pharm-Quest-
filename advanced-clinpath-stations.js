@@ -86,7 +86,53 @@ const INTRO_STYLE=String.raw`
 .vpqintro .introactions .start{background:#2b6b59;color:white;border:1px solid #1e5042}
 .vpqintro .introactions .return{background:#e8edf6;color:#294365;border:1px solid #bccde2}
 @media(max-width:610px){.vpqintro .pathgrid,.vpqintro .exgrid{grid-template-columns:1fr}.vpqintro .steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.vpqintro .factor-scroll{max-height:390px;overflow:auto;border:1px solid #bfcee0;border-radius:11px;margin:9px 0}
+.vpqintro .factor-scroll .quicktable{margin:0;min-width:700px}
+.vpqintro .factor-scroll th{position:sticky;top:0;z-index:1}
+.vpqintro .coagkrow{background:#fff6d8}
+.vpqintro .coagkmark{display:inline-block;background:#9b6504;color:#fff;font-weight:900;padding:1px 5px;font-size:11px;border-radius:4px}
+.vpqintro .coaglivinggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.vpqintro .coaglivinggrid>div{padding:11px;border-radius:11px;border:1px solid #afc7df;background:#eaf4fc}
+.vpqintro .coaglivinggrid>div:nth-child(2){background:#fff1db;border-color:#e6be7b}
+.vpqintro .coaglivinggrid>div:nth-child(3){background:#edebff;border-color:#bfb1e8}
+.vpqintro .coaglivinggrid>div:nth-child(4){background:#e8f7ed;border-color:#a5cdb1}
+.vpqintro .coaglivinggrid p{margin:5px 0 0}
+.vpqintro .factoratlas,.vpqintro .coagliving{margin:14px 0}
+@media(max-width:610px){.vpqintro .coaglivinggrid{grid-template-columns:1fr}}
 </style>`;
+const COAG_FACTORS=[
+['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
+['II','Prothrombin','Common','Activated to IIa (thrombin) by Xa–Va prothrombinase','Yes','Common-pathway deficiency may prolong PT and aPTT'],
+['III','Tissue factor / thromboplastin','Extrinsic trigger','Membrane cofactor exposed after tissue injury; binds VII/VIIa to initiate coagulation','No','Tissue factor is supplied by the PT reagent, not measured as a patient factor deficiency'],
+['IV','Calcium (Ca²⁺)','Shared cofactor','Links vitamin K–carboxylated factors to phospholipid surfaces','No','Citrate binds calcium in collection tubes; assays restore calcium to test clotting'],
+['V','Proaccelerin / labile factor','Common','Activated Va supports Xa in prothrombinase; thrombin amplifies it','No','Significant deficiency may prolong both PT and aPTT'],
+['VII','Proconvertin / stable factor','Extrinsic','VIIa complexes with tissue factor to activate X (and IX)','Yes','Deficiency or early vitamin K antagonism often prolongs PT first'],
+['VIII','Antihemophilic factor A','Intrinsic cofactor','VIIIa partners with IXa in intrinsic tenase; carried by vWF in circulation','No','Hemophilia A: aPTT often prolonged; PT usually normal'],
+['IX','Christmas factor / antihemophilic B','Intrinsic','IXa teams with VIIIa + Ca²⁺ + phospholipid to activate X','Yes','Hemophilia B: aPTT often prolonged; PT usually normal'],
+['X','Stuart–Prower factor','Common','Xa + Va forms prothrombinase that generates thrombin','Yes','Deficiency may prolong both PT and aPTT'],
+['XI','Plasma thromboplastin antecedent','Intrinsic / amplification','XIa activates IX; thrombin can activate XI during amplification','No','Factor XI deficiency (hemophilia C): aPTT often prolonged; variable bleeding'],
+['XII','Hageman / contact factor','Contact-pathway test','XIIa starts contact activation in the test tube, upstream of XI','No','Can cause prolonged aPTT without typical spontaneous clinical bleeding'],
+['XIII','Fibrin-stabilizing factor','Clot stabilization','XIIIa cross-links fibrin strands into a durable clot','No','May cause delayed bleeding despite normal PT and aPTT']
+];
+function factorAtlas(){
+ const rows=COAG_FACTORS.map(f=>'<tr class="'+(f[4]==='Yes'?'coagkrow':'')+'"><td><b>'+esc(f[0])+'</b>'+(f[4]==='Yes'?' <span class="coagkmark">K</span>':'')+'</td><td><b>'+esc(f[1])+'</b></td><td>'+esc(f[2])+'</td><td>'+esc(f[3])+'</td><td>'+esc(f[5])+'</td></tr>').join('');
+ return '<section class="factoratlas"><h3>🧬 Complete factor atlas · names + function + expected assay</h3><p>Gold <b>K</b> tags mark vitamin K–dependent clotting factors. This table includes the classic factors <b>I–XIII, except VI</b> (obsolete; factor VI was activated V).</p>'+
+ '<div class="factor-scroll"><table class="quicktable"><thead><tr><th>Factor</th><th>Full name</th><th>Where it works</th><th>Job in clot formation</th><th>Deficiency / test clue</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+ '<div class="pathnote"><b>Mnemonic: 10 – 9 – 7 – 2</b> → X, IX, VII, II are the <b>four vitamin K–dependent procoagulant factors</b>. Also vitamin K dependent: <b>proteins C, S and Z</b> (anticoagulant/regulatory proteins). Factor V, factor VIII, fibrinogen and factor XIII are <b>not</b> vitamin K dependent.</div>'+
+ '<details open><summary>🍃 What does vitamin K actually DO?</summary><p>The liver makes clotting factor precursor proteins, but vitamin K is needed to <b>γ-carboxylate</b> glutamate residues on factors II, VII, IX and X. This permits <b>Ca²⁺-mediated attachment to negatively charged phospholipid surfaces</b>, allowing the proteins to work in coagulation complexes. Vitamin K <b>does not simply create a clot by itself</b>; it enables functioning clotting proteins.</p>'+
+ '<p><b>Anticoagulant rodenticides</b> such as warfarin, brodifacoum and bromadiolone inhibit vitamin K recycling (VKOR), so newly produced factors are inadequately carboxylated. <b>VII has a short half-life → PT often rises first</b>; later PT and aPTT may both be prolonged. <b>Bromethalin is a neurotoxic rodenticide, not a vitamin K antagonist.</b></p></details>'+
+ '<details><summary>🧱 Cofactors, natural brakes, and fibrin cleanup</summary><p><b>Platelet phospholipid / PF3:</b> negatively charged assembly surface for intrinsic tenase and prothrombinase. <b>Ca²⁺ (IV):</b> bridges vitamin K–dependent factors to that surface. <b>VIIIa:</b> cofactor for IXa (tenase). <b>Va:</b> cofactor for Xa (prothrombinase). <b>vWF:</b> platelet adhesion and carrier for factor VIII. <b>Antithrombin:</b> inhibits thrombin and Xa (also other serine proteases). <b>Activated protein C with S:</b> inactivates Va/VIIIa. <b>TFPI:</b> inhibits tissue-factor/VIIa–Xa initiation complexes. <b>Plasmin:</b> breaks down fibrin; D-dimers reflect degradation of cross-linked fibrin.</p></details>'+
+ '</section>';
+}
+function coagLivingSequence(){
+ return '<section class="coagliving"><h3>⚡ In a patient: START → AMPLIFY → STABILIZE</h3><div class="coaglivinggrid">'+
+ '<div><b>① START · Tissue injury</b><p>Exposed tissue factor (III) + VIIa activates a little X → Xa. Xa–Va forms a little IIa (thrombin).</p></div>'+
+ '<div><b>② AMPLIFY · Thrombin signal</b><p>Thrombin activates platelets and factors V, VIII and XI, building reactive phospholipid surfaces.</p></div>'+
+ '<div><b>③ PROPAGATE · Thrombin burst</b><p>IXa + VIIIa + calcium + phospholipid = <b>intrinsic tenase</b> → much more Xa. Xa + Va = <b>prothrombinase</b> → much more thrombin.</p></div>'+
+ '<div><b>④ STABILIZE · Fibrin mesh</b><p>Thrombin converts I → fibrin and activates XIII → XIIIa to cross-link fibrin, reinforcing the platelet plug.</p></div>'+
+ '</div><p class="tiny"><b>Key distinction:</b> The contact activation chain XII → XI → IX is a useful <b>aPTT lab model</b>, but tissue-factor initiation dominates physiological hemostasis; factor XII is not essential for normal bleeding control.</p></section>';
+}
+
 function coagIntro(){
  return '<div class="vpqintro">'+INTRO_STYLE+
  '<div class="introhero"><b>🩸 COAG CASCADE LAB · LEARN FIRST</b><p><strong>Platelets build the temporary plug. Coagulation factors reinforce it with fibrin.</strong> PT and aPTT are timed tests of different paths toward the same fibrin finish line. <b>PTT</b> usually refers to the partial thromboplastin time; <b>aPTT</b> is its activated version used routinely in modern screening.</p></div>'+
@@ -96,6 +142,7 @@ function coagIntro(){
  '</div>'+
  '<div class="pathcard"><h4>🟢 Shared finish line · common pathway (PT and aPTT)</h4><div class="node coagCommon"><b>Xa + Va + calcium + phospholipid</b><em>Prothrombinase complex</em></div><div class="arrow">↓</div><div class="node coagCommon"><b>II (prothrombin) → IIa (thrombin)</b></div><div class="arrow">↓</div><div class="node coagCommon"><b>I (fibrinogen) → fibrin → XIIIa cross-links</b><em>Stable clot!</em></div></div>'+
  '<div class="pathnote"><b>Remember:</b> The classic intrinsic/extrinsic diagram explains laboratory tests, not every step of coagulation inside the body. Tissue-factor initiation and thrombin amplification are central in vivo. Factor XII deficiency can markedly prolong aPTT without causing typical bleeding.</div>'+
+ coagLivingSequence()+factorAtlas()+
  '<h3>🔎 Read the coag panel like a detective</h3>'+
  '<table class="quicktable"><thead><tr><th>Result</th><th>What it screens</th><th>Think about…</th></tr></thead><tbody>'+
  '<tr><td><b>PT ↑</b><br>aPTT normal</td><td>Extrinsic + common</td><td>Factor VII, early vitamin K antagonist effect, assay/sample issues</td></tr>'+
