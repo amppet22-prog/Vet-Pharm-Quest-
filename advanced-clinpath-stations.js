@@ -204,6 +204,45 @@ const INTRO_STYLE=String.raw`
 .vpqintro.coag-theme .coagtestrow:nth-child(odd){background:#eff6ff}
 .vpqintro.coag-theme .coagtestrow:nth-child(even){background:#f2edff}
 .vpqintro.coag-theme .coagtestrow b{color:#354e90}
+
+/* Blood gas follows the vibrant coagulation learning language */
+.vpqintro.gas-theme .introhero{background:linear-gradient(110deg,#d7edff,#e4deff 58%,#d6f9e9);border:2px solid #83b6e2}
+.vpqintro.gas-theme .introhero b{color:#26538a}
+.vpqintro.gas-theme .steps .step{border-width:2px;min-height:94px;font-size:13px}
+.vpqintro.gas-theme .steps .step:nth-child(1){background:#dfedff;border-color:#88b7e7}
+.vpqintro.gas-theme .steps .step:nth-child(2){background:#def8ec;border-color:#87c9a8}
+.vpqintro.gas-theme .steps .step:nth-child(3){background:#eee3ff;border-color:#baa0e8}
+.vpqintro.gas-theme .steps .step:nth-child(4){background:#fff0d2;border-color:#e4ba78}
+.vpqintro.gas-theme .pathgrid>.pathcard:first-child{background:#e5efff;border:2px solid #86b1e8}
+.vpqintro.gas-theme .pathgrid>.pathcard:nth-child(2){background:#e4f8eb;border:2px solid #84c8a1}
+.vpqintro.gas-theme .pathcard h4{color:#325a95}
+.vpqintro.gas-theme .pathgrid>.pathcard:nth-child(2) h4{color:#27784b}
+.vpqintro.gas-theme .pathgrid .node{border-width:2px;background:#fff}
+.vpqintro.gas-theme .exgrid .ex{border-width:2px;border-radius:12px;padding:13px}
+.vpqintro.gas-theme .exgrid .ex:nth-child(1){background:#e5f1ff;border-color:#9bc3e9}
+.vpqintro.gas-theme .exgrid .ex:nth-child(2){background:#f1e7ff;border-color:#bba6de}
+.vpqintro.gas-theme .exgrid .ex:nth-child(3){background:#fff0d9;border-color:#e3bb81}
+.vpqintro.gas-theme .exgrid .ex:nth-child(4){background:#e4f8eb;border-color:#9ccfab}
+.vpqintro.gas-theme .exgrid .ex strong{margin-bottom:5px;color:#314576}
+.vpqintro.gas-theme .quicktable{border:2px solid #b5cceb;border-radius:12px;overflow:hidden}
+.vpqintro.gas-theme .quicktable th{background:#324f88;color:white}
+.vpqintro.gas-theme .quicktable tbody tr:nth-child(1){background:#e7f7ed}
+.vpqintro.gas-theme .quicktable tbody tr:nth-child(2){background:#fff1da}
+.vpqintro.gas-theme .quicktable tbody tr:nth-child(3){background:#e4f0ff}
+.vpqintro.gas-theme .quicktable tbody tr:nth-child(4){background:#f1e7ff}
+.vpqintro.gas-theme .gasimagecard{background:linear-gradient(145deg,#e8f2ff,#e9fffa);border-color:#89b6df}
+.vpqintro.gas-theme .gasconcept{border:2px solid #adc4e5;background:#f8fbff;padding:12px}
+.vpqintro .gasconceptgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.vpqintro .gasconceptitem{display:flex;flex-direction:column;gap:4px;border:1px solid #9cbce0;border-left:5px solid #5c93d1;padding:10px 12px;background:#eaf4ff;border-radius:10px}
+.vpqintro .gasconceptitem strong{font-size:12px;color:#325b8f}
+.vpqintro .gasconceptitem span{font-size:13px}
+.vpqintro .gasn1{background:#e3f7eb;border-color:#a1d2b5;border-left-color:#429d71}
+.vpqintro .gasn2{background:#f0e9ff;border-color:#c6b1e8;border-left-color:#9163d0}
+.vpqintro .gasn3{background:#fff1dd;border-color:#ead0a2;border-left-color:#c88a32}
+.vpqintro .gasminigrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:9px}
+.vpqintro .gasminigrid>div{padding:10px;background:#eaf3ff;border:1px solid #b5cde9;border-radius:10px}
+.vpqintro .gasminigrid>div:nth-child(even){background:#f3ecff;border-color:#d0bce8}
+@media(max-width:580px){.vpqintro .gasconceptgrid,.vpqintro .gasminigrid{grid-template-columns:1fr}}
 </style>`;
 const COAG_FACTORS=[
 ['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
@@ -295,8 +334,33 @@ function coagIntro(){
  '<div class="introactions"><button type="button" class="start" data-vpqadvanced="begin-coag">🎯 Start my existing coag questions</button><button type="button" class="return" data-vpqadvanced="home">← Back to lab</button></div>'+
  '</div>';
 }
+
+const GAS_IMAGE='blood-gas-acid-base-study-chart.svg';
+function gasImageCard(){
+ return '<section class="coagimagecard gasimagecard"><h3>🫧 Your downloadable blood gas pathway</h3><p>See the interpretation sequence at a glance. Expand to study or download the sharp vector version.</p>'+
+ '<button type="button" class="coagimagebutton" data-vpqadvanced="gas-enlarge"><img loading="lazy" alt="Colorful blood gas interpretation pathway with respiratory, metabolic and compensation patterns" src="'+GAS_IMAGE+'"><span>🔍 Expand blood gas chart</span></button>'+
+ '<div class="coagimageactions"><button type="button" data-vpqadvanced="gas-enlarge">🔍 Expand chart</button><a class="coagdownload" href="'+GAS_IMAGE+'" download="Vet-Pharm-Quest-Blood-Gas-Pathway.svg">⬇ Download pathway image</a></div></section>';
+}
+function gasExpanded(){run=null;modal('Blood Gas · Expanded Study Diagram','<div class="vpqintro gas-theme">'+INTRO_STYLE+'<div class="coagfull"><p>Vector image: enlarge without losing sharpness.</p><a href="'+GAS_IMAGE+'" target="_blank" rel="noopener">Open full-resolution chart</a><img class="coagfullimage" src="'+GAS_IMAGE+'" alt="Blood gas and acid-base interpretation chart"><div class="coagimageactions"><a class="coagdownload" href="'+GAS_IMAGE+'" download="Vet-Pharm-Quest-Blood-Gas-Pathway.svg">⬇ Download image</a><button data-vpqadvanced="gas-back">← Back to blood gas lesson</button></div></div></div>')}
+function gasExtraConcepts(){
+ const tests=[
+ ['pH','Net acid–base status','Acidemia vs alkalemia; a normal pH can still hide a mixed disorder.'],
+ ['pCO₂','Respiratory component','Ventilation controls retained CO₂. Arterial and venous pCO₂ differ.'],
+ ['HCO₃⁻ / TCO₂','Metabolic buffering','Calculated gas bicarbonate vs chemistry total CO₂ are related, not automatically interchangeable.'],
+ ['Base excess','Metabolic contribution','Negative suggests base deficit; consider species, method and other disturbances.'],
+ ['Anion gap','Unmeasured anions','Often Na − (Cl + HCO₃⁻); labs may include K. Hypoalbuminemia can obscure increased AG.'],
+ ['Corrected chloride','Relative chloride change','Separate chloride shifts associated with sodium/water from selective acid–base shifts.'],
+ ['Lactate','Production versus clearance','May rise from hypoperfusion, adrenergic stress or impaired clearance; trends matter.'],
+ ['PaO₂ / saturation','Oxygenation','Arterial sampling matters; venous pO₂ cannot replace arterial oxygenation assessment.'],
+ ['Ionized calcium','Biologically active calcium','pH affects albumin binding; alkalemia can decrease ionized calcium even when total calcium is unchanged.']
+ ];
+ return '<details open class="gasconcept"><summary>🧪 Blood gas cheat sheet · what does each number measure?</summary><div class="gasconceptgrid">'+tests.map((t,i)=>'<div class="gasconceptitem gasn'+i%4+'"><b>'+t[0]+'</b><strong>'+t[1]+'</strong><span>'+t[2]+'</span></div>').join('')+'</div></details>'+
+ '<details class="gasconcept"><summary>⚠️ Sample pitfalls and compensation traps</summary><div class="gasminigrid"><div><b>🫁 Arterial vs venous</b><p>Do not interpret venous pO₂ as an oxygenation test. Interpret pCO₂ with sampling site in mind.</p></div><div><b>🧪 Sample handling</b><p>Heparin dilution, delayed analysis, air exposure and patient temperature may alter values.</p></div><div><b>🔁 Mixed disorder</b><p>Unexpected pCO₂ or bicarbonate compensation warrants evaluation for a second simultaneous process.</p></div><div><b>📈 Follow trends</b><p>Compare with clinical perfusion, ventilation, glucose, electrolytes, ketones and lactate.</p></div></div></details>';
+}
+
 function gasIntro(){
- return '<div class="vpqintro">'+INTRO_STYLE+
+ return '<div class="vpqintro gas-theme">'+INTRO_STYLE+
+ gasImageCard()+
  '<div class="introhero"><b>🫧 BLOOD GAS DETECTIVE · LEARN FIRST</b><p><strong>pH = where you ended up, CO₂ = the lung control, HCO₃⁻ = the metabolic/kidney side.</strong> Find the primary disturbance, then ask whether the body is compensating appropriately.</p></div>'+
  '<div class="steps"><div class="step"><b>① pH</b>Acidemia ↓ or alkalemia ↑?</div><div class="step"><b>② Primary</b>Which of CO₂ or HCO₃⁻ explains pH?</div><div class="step"><b>③ Compensate</b>Does the other system respond as expected?</div><div class="step"><b>④ Cause</b>AG, chloride, lactate, ketones + patient</div></div>'+
  '<h3>🧭 Which direction do the numbers push pH?</h3><div class="pathgrid">'+
@@ -317,6 +381,7 @@ function gasIntro(){
  '</div>'+
  '<details open><summary>🔍 Additional blood gas and chemistry numbers</summary><p><b>Base excess:</b> summarizes the metabolic acid–base component (negative suggests base deficit). <b>Total CO₂:</b> chemistry-panel estimate mainly reflecting bicarbonate. <b>Anion gap:</b> Na − (Cl + HCO₃⁻) is a common formula; some laboratories add K. Elevated AG prompts investigation of lactate, ketones, uremic acids and toxicants. Low albumin can hide an increase. <b>Corrected chloride:</b> asks whether Cl changed beyond what the sodium/water change predicts. <b>Lactate:</b> interpret with perfusion, metabolism and trends, not as a diagnosis by itself. <b>PaO₂ / oxygen saturation:</b> oxygenation assessment requires arterial context; venous pO₂ is not interchangeable.</p></details>'+
  '<details><summary>🧮 Compensation: is there a second disorder?</summary><p>A low HCO₃⁻ with an unexpectedly normal or high pCO₂ may indicate a concurrent respiratory acidosis rather than appropriate compensation. Compensation should move pH toward normal, not overshoot to the opposite disorder. Use <b>species-, sample- and laboratory-appropriate expected compensation</b> before diagnosing a mixed disorder. A nearly normal pH can hide two simultaneous processes.</p><p><b>Sampling traps:</b> arterial versus venous, air bubbles, delayed analysis, temperature and excess liquid heparin can all matter.</p></details>'+
+ gasExtraConcepts()+
  '<div class="introactions"><button type="button" class="start" data-vpqadvanced="begin-gas">🎯 Start my existing blood gas questions</button><button type="button" class="return" data-vpqadvanced="home">← Back to lab</button></div>'+
  '</div>';
 }
@@ -333,6 +398,6 @@ function begin(mode){run={mode,pool:banks[mode].slice().sort(()=>Math.random()-.
 function start(mode){if(mode==='coag'||mode==='gas')return intro(mode);return begin(mode)}
 function show(){const s=run;if(!s)return;const q=s.pool[s.i];if(!q){modal('Advanced station complete','<h3>'+s.correct+' / '+s.pool.length+' correct</h3><p>Review how each laboratory finding changes the clinical decision. First correct mastery earns existing XP; replay is always available.</p>'+buttons(s.mode));return}if(!s.order)s.order=[0,1,2,3].sort(()=>Math.random()-.5);const done=s.chosen!==null;
 modal(({coag:'Coagulation Analyzer',gas:'Blood Gas Analyzer',urine:'Urinalysis Bench'})[s.mode]+' · '+(s.i+1)+'/'+s.pool.length,'<h3>'+esc(q.q)+'</h3>'+s.order.map(i=>'<button class="choice '+(done?(i===q.answer?'right':i===s.chosen?'wrong':''):'')+'" data-vpqadvanced-answer="'+i+'" '+(done?'disabled':'')+'>'+esc(q.choices[i])+'</button>').join('')+(done?'<div class="response '+(s.chosen===q.answer?'':'bad')+'"><b>'+(s.chosen===q.answer?'Correct':'Review the physiology')+'</b><p>'+esc(q.why)+'</p></div><button data-vpqadvanced="next">Next →</button>':'<p class="tiny">Interpret the physiology, patient context and assay limitations before choosing.</p>'))}
-function init(context){api=context;context.body.addEventListener('click',event=>{const b=event.target.closest('[data-vpqadvanced],[data-vpqadvanced-answer]');if(!b)return;if(b.hasAttribute('data-vpqadvanced-answer')){if(!run||run.chosen!==null)return;run.chosen=Number(b.dataset.vpqadvancedAnswer);const q=run.pool[run.i];if(run.chosen===q.answer){run.correct++;api.awardQuestion?.('advanced-clinpath-'+run.mode,q.id,true)}return show()}const key=b.dataset.vpqadvanced;if(key==='home')return home();if(key==='hub')return window.VPQ_CLINPATH_REFERENCE_HUB?.open?.();if(key==='cases'){const pilot=window.VPQ_CLINPATH_REFERRAL_PILOT;if(pilot&&typeof pilot.home==='function')return pilot.home();if(typeof window.VPQ_OPEN_REFERRAL_PATIENTS==='function')return window.VPQ_OPEN_REFERRAL_PATIENTS();return api.showModal('🔬 Referral Patients','Referral Patient 001 is unavailable. Reload the game and open Advanced Lab again.');}if(key==='fullrounds')return window.VPQ_CLINPATH_DIAGNOSTIC_ROUNDS?.home?.();if(key==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();if(key==='coag-enlarge')return coagExpanded();if(key==='coag-back')return intro('coag');if(key==='begin-coag')return begin('coag');if(key==='begin-gas')return begin('gas');if(key==='next'&&run){run.i++;run.chosen=null;run.order=null;return show()}if(banks[key])return start(key)})}
+function init(context){api=context;context.body.addEventListener('click',event=>{const b=event.target.closest('[data-vpqadvanced],[data-vpqadvanced-answer]');if(!b)return;if(b.hasAttribute('data-vpqadvanced-answer')){if(!run||run.chosen!==null)return;run.chosen=Number(b.dataset.vpqadvancedAnswer);const q=run.pool[run.i];if(run.chosen===q.answer){run.correct++;api.awardQuestion?.('advanced-clinpath-'+run.mode,q.id,true)}return show()}const key=b.dataset.vpqadvanced;if(key==='home')return home();if(key==='hub')return window.VPQ_CLINPATH_REFERENCE_HUB?.open?.();if(key==='cases'){const pilot=window.VPQ_CLINPATH_REFERRAL_PILOT;if(pilot&&typeof pilot.home==='function')return pilot.home();if(typeof window.VPQ_OPEN_REFERRAL_PATIENTS==='function')return window.VPQ_OPEN_REFERRAL_PATIENTS();return api.showModal('🔬 Referral Patients','Referral Patient 001 is unavailable. Reload the game and open Advanced Lab again.');}if(key==='fullrounds')return window.VPQ_CLINPATH_DIAGNOSTIC_ROUNDS?.home?.();if(key==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();if(key==='coag-enlarge')return coagExpanded();if(key==='gas-enlarge')return gasExpanded();if(key==='gas-back')return intro('gas');if(key==='coag-back')return intro('coag');if(key==='begin-coag')return begin('coag');if(key==='begin-gas')return begin('gas');if(key==='next'&&run){run.i++;run.chosen=null;run.order=null;return show()}if(banks[key])return start(key)})}
 return Object.freeze({init,home,start,intro,banks,cases});
 })();
