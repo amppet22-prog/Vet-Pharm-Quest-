@@ -7,8 +7,8 @@ if(!stage||!art||!body)return null;
 const h=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const items=[
 {id:'lounge-coffee-deluxe',slot:'coffee',min:3},{id:'lounge-microwave',slot:'microwave',min:2},
-{id:'lounge-snack-bin',slot:'snack',min:1},{id:'lounge-egg-chair',slot:'chair',min:4},
-{id:'lounge-hanging-chair',slot:'chair',min:6},{id:'lounge-stools',slot:'stools',min:3},
+{id:'lounge-snack-bin',slot:'snack',min:1},{id:'lounge-egg-chair',slot:'seating',min:4},
+{id:'lounge-hanging-chair',slot:'seating',min:6},{id:'lounge-stools',slot:'stools',min:3},
 {id:'lounge-vines',slot:'vines',min:2},{id:'lounge-planter-pack',slot:'plants',min:3},
 {id:'lounge-reptile-deluxe',slot:'habitat',min:5},{id:'lounge-magazines',slot:'magazines',min:1},
 {id:'lounge-coffee-table',slot:'table',min:2}
@@ -44,7 +44,7 @@ function cards(filter){
  .filter((x,i,a)=>a.findIndex(y=>y.id===x.id)===i);
 }
 function studio(filter='all'){
- const options=[['all','All'],['owned','Owned'],['plants','Greenery'],['chair','Chairs'],['coffee','Coffee bar'],['habitat','Reptiles'],['receptionDecor','Shared Reception'],['levelReward','Level rewards']];
+ const options=[['all','All'],['owned','Owned'],['plants','Greenery'],['seating','Seating swaps'],['coffee','Coffee bar'],['habitat','Reptiles'],['receptionDecor','Shared Reception'],['levelReward','Level rewards']];
  const links=options.map(([v,label])=>'<button data-vpqloungedecor-filter="'+v+'" style="padding:7px 10px;border-radius:10px;'+(filter===v?'background:#e2f4e8;border:2px solid #649e80;':'')+'">'+label+'</button>').join('');
  const list=cards(filter).map(x=>{
  const have=owned(x.id),required=level()<x.min,active=chosen(x.slot)===x.id;
@@ -80,26 +80,31 @@ function botanicals(){
 }
 function habitat(){
  const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
- // Mounted on a dedicated raised sidewall console, entirely behind the study table.
- return '<g transform="translate(680 204)"><rect x="-5" y="0" width="102" height="82" rx="7" fill="#789488" stroke="#637a77" stroke-width="4"/>'+
- '<rect x="2" y="6" width="88" height="66" rx="4" fill="#d4ede0" stroke="#9bbbaf" stroke-width="3"/>'+
- '<path d="M4 59Q47 42 88 56V71H4Z" fill="#c9ac7e"/>'+
- '<path d="M14 55q7 -19 22 -18m30 15q-1 -21 13 -25" fill="none" stroke="#6eaa76" stroke-width="4"/>'+
- '<path d="M19 39l13 -21 19 3 11 26" fill="#bdad8b" stroke="#907e69" stroke-width="2"/>'+
- '<path d="M27 52q15 -11 29 -3l13 -1 -7 7 -21 3Z" fill="#83ad70" stroke="#4f7962" stroke-width="2"/>'+
- '<circle cx="62" cy="49" r="2" fill="#324b3e"/>'+
- (deluxe?'<path d="M76 42q-5 -26 3 -30M17 45q-8 -24-2 -30" stroke="#629b6d" stroke-width="4" fill="none"/><circle cx="44" cy="15" r="6" fill="#e6c180"/>':'')+
- '<path d="M4 28H88M47 7V71" stroke="#a9c3b5" stroke-width="2" opacity=".48"/>'+
- '<rect x="-8" y="78" width="108" height="12" rx="3" fill="#b38e75"/><path d="M2 90v18M91 90v18" stroke="#967665" stroke-width="7"/>'+
- '<text x="47" y="99" font-family="Arial" text-anchor="middle" font-size="8" font-weight="800" fill="#fff7df">'+(deluxe?'BIOACTIVE DISPLAY':'REPTILE NOOK')+'</text></g>';
+ // Left wall, behind the couch: proper stand, shaded basking rock and visible lizard.
+ return '<g transform="translate(19 185)"><ellipse cx="69" cy="141" rx="64" ry="10" fill="#827884" opacity=".16"/>'+
+ '<rect x="7" y="4" width="128" height="108" rx="9" fill="#5e8079" stroke="#557a79" stroke-width="6"/>'+
+ '<rect x="15" y="12" width="112" height="84" rx="5" fill="#d6e7c6" stroke="#b5c9b0" stroke-width="3"/>'+
+ '<path d="M17 73Q72 60 125 76V95H17Z" fill="#d0b58a"/>'+
+ '<path d="M22 70Q43 56 64 62L84 43L110 51L121 71Z" fill="#aa9876" stroke="#938365" stroke-width="2"/>'+
+ '<path d="M25 67q-2 -23 13 -36M112 65q-5 -28 3 -41" stroke="#6d9b67" stroke-width="4" fill="none"/>'+
+ '<ellipse cx="43" cy="39" rx="9" ry="5" fill="#8fbf82"/><ellipse cx="112" cy="39" rx="12" ry="7" fill="#81af7f"/>'+
+ // Lizard silhouette: body, legs, tail, head and eye.
+ '<path d="M46 69Q61 54 83 61Q93 60 100 55Q108 53 111 60Q109 68 97 67L89 72Q71 81 57 73Q46 80 31 83Q43 73 46 69Z" fill="#74a46c" stroke="#47765a" stroke-width="2"/>'+
+ '<path d="M62 72l-8 11m27 -11 9 10M97 65l5 6" stroke="#47765a" stroke-width="3" stroke-linecap="round"/>'+
+ '<circle cx="106" cy="60" r="2" fill="#263e32"/>'+
+ (deluxe?'<path d="M17 24h108" stroke="#c2e6cd" stroke-width="4" opacity=".8"/><circle cx="72" cy="21" r="8" fill="#f3d99d"/><path d="M25 57q-10 -25 5 -35" stroke="#638e69" stroke-width="4" fill="none"/>':'')+
+ '<path d="M71 12v83" stroke="#aac8bb" stroke-width="3" opacity=".35"/>'+
+ '<rect x="1" y="112" width="142" height="13" rx="4" fill="#bc9a80" stroke="#9c7f70" stroke-width="3"/>'+
+ '<path d="M14 125v25M127 125v25" stroke="#997968" stroke-width="8"/>'+
+ '<text x="72" y="121" font-family="Arial" font-size="9" font-weight="900" text-anchor="middle" fill="#fff5e6">'+(deluxe?'BIOACTIVE LIZARD HABITAT':'LIZARD HABITAT')+'</text></g>';
 }
 function svgDecor(){
- let s='<g class="vpqLoungeDecorScenery">'+botanicals()+habitat();
+ let s='<g class="vpqLoungeDecorScenery">'+botanicals();
  if(chosen('coffee')==='lounge-coffee-deluxe')s+='<g transform="translate(271 219) scale(.58)"><rect width="58" height="40" rx="7" fill="#9bb6b7" stroke="#718e97" stroke-width="4"/><rect x="9" y="9" width="40" height="11" rx="5" fill="#f1ebee"/><path d="M27 21v12" stroke="#fff" stroke-width="5"/><text x="29" y="8" text-anchor="middle" font-size="8" font-weight="800" fill="#4b6174">BARISTA</text></g>';
  if(chosen('microwave')==='lounge-microwave')s+='<g transform="translate(312 222) scale(.7)"><rect width="53" height="33" rx="5" fill="#e5c9dd" stroke="#ae92b4" stroke-width="3"/><rect x="7" y="6" width="31" height="20" rx="3" fill="#adcfda"/><circle cx="45" cy="11" r="3" fill="#fff"/><circle cx="45" cy="22" r="3" fill="#fff"/></g>';
  if(chosen('snack')==='lounge-snack-bin')s+='<g transform="translate(391 286) scale(.7)"><path d="M0 6H47L40 43H7Z" fill="#ddab85" stroke="#ab7a6a" stroke-width="3"/><text x="23" y="27" font-family="Arial" font-size="10" text-anchor="middle" fill="#fff" font-weight="900">SNACKS</text><text x="8" y="6" font-size="21">🍎</text><text x="22" y="6" font-size="20">🥨</text></g>';
- if(chosen('chair')==='lounge-egg-chair')s+='<g transform="translate(34 221)"><path d="M80 0v33" stroke="#806d8d" stroke-width="6"/><ellipse cx="80" cy="118" rx="70" ry="83" fill="#c39d7d" stroke="#8a6f65" stroke-width="8"/><ellipse cx="80" cy="125" rx="51" ry="63" fill="#f7e7dd"/><ellipse cx="80" cy="150" rx="49" ry="31" fill="#d8bcd9"/><path d="M80 201v21" stroke="#876b77" stroke-width="6"/></g>';
- if(chosen('chair')==='lounge-hanging-chair')s+='<g transform="translate(43 234)"><path d="M78 0v50" stroke="#876f99" stroke-width="6"/><path d="M18 83Q78 182 138 83" stroke="#a57cbe" stroke-width="13" fill="none"/><path d="M27 82Q78 151 131 82" stroke="#e8cfe5" stroke-width="18" fill="none"/><path d="M40 82Q78 117 118 82" stroke="#fff1de" stroke-width="18" fill="none"/></g>';
+ if(chosen('seating')==='lounge-egg-chair')s+='<g transform="translate(125 333) scale(.63)"><path d="M80 0v33" stroke="#806d8d" stroke-width="6"/><ellipse cx="80" cy="118" rx="70" ry="83" fill="#c39d7d" stroke="#8a6f65" stroke-width="8"/><ellipse cx="80" cy="125" rx="51" ry="63" fill="#f7e7dd"/><ellipse cx="80" cy="150" rx="49" ry="31" fill="#d8bcd9"/><path d="M80 201v21" stroke="#876b77" stroke-width="6"/></g>';
+ if(chosen('seating')==='lounge-hanging-chair')s+='<g transform="translate(126 324) scale(.72)"><path d="M78 0v50" stroke="#876f99" stroke-width="6"/><path d="M18 83Q78 182 138 83" stroke="#a57cbe" stroke-width="13" fill="none"/><path d="M27 82Q78 151 131 82" stroke="#e8cfe5" stroke-width="18" fill="none"/><path d="M40 82Q78 117 118 82" stroke="#fff1de" stroke-width="18" fill="none"/></g>';
  if(chosen('stools')==='lounge-stools')for(const x of [415,650])s+='<g transform="translate('+x+' 385)"><ellipse cx="0" cy="0" rx="25" ry="11" fill="#a991c8" stroke="#786c96" stroke-width="4"/><path d="M-14 9l-8 48M14 9l8 48" stroke="#9c806e" stroke-width="6"/></g>';
  if(chosen('magazines')==='lounge-magazines')s+='<g transform="translate(430 335) rotate(-12) scale(.75)"><rect width="56" height="36" rx="3" fill="#bd9ac9" stroke="#8d77a6" stroke-width="2"/><rect x="7" y="6" width="42" height="24" rx="2" fill="#f4e9f4"/><text x="27" y="17" font-size="8" font-weight="900" text-anchor="middle" fill="#72558e">VET MED</text><text x="27" y="26" font-size="8" text-anchor="middle" fill="#72558e">JOURNAL</text></g>';
  if(chosen('table')==='lounge-coffee-table')s+='<g transform="translate(163 418)"><ellipse rx="72" ry="13" fill="#cfa884" stroke="#9b756e" stroke-width="5"/><path d="M-47 8v28M47 8v28" stroke="#96786e" stroke-width="7"/></g>';
@@ -120,7 +125,14 @@ function svgDecor(){
  return s+'</g>';
 }
 const oldArt=art.roomArt.bind(art);
-art.roomArt=function(k){const svg=oldArt(k);return k==='study'?svg.replace(/<\/svg>\s*$/,svgDecor()+'</svg>'):svg};
+art.roomArt=function(k){
+ const svg=oldArt(k);if(k!=='study')return svg;
+ // Layer the terrarium BEHIND the sofa and bookshelf instead of over them.
+ const couchAnchor='<ellipse cx="180" cy="444"';
+ let withHabitat=svg.includes(couchAnchor)?svg.replace(couchAnchor,habitat()+couchAnchor):svg;
+ if(['lounge-egg-chair','lounge-hanging-chair'].includes(chosen('seating')))withHabitat=withHabitat.replace(/<ellipse cx="180" cy="444"[\s\S]*?(?=<!-- Skills practice nook|<g><rect x="722" y="90")/,'');
+ return withHabitat.replace(/<\/svg>\s*$/,svgDecor()+'</svg>');
+};
 function buttons(){
  stage.querySelector('#vpqLoungeDecorButtons')?.remove();
  if(stage.dataset.room!=='study')return;
