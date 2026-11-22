@@ -239,7 +239,7 @@ window.addEventListener('click',event=>{
   if(typeof window.VPQ_CLINPATH_LAB?.intro==='function')return window.VPQ_CLINPATH_LAB.intro();
   return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
  }
- if(id==='coag-station')return window.VPQ_ADVANCED_LAB?.intro?.('coag');if(id==='species')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open?.('chem');
+ if(id==='coag-station')return window.VPQ_ADVANCED_LAB?.intro?.('coag');if(id==='species')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open?.(['acth','lddst','hddst','rest','thyroid','fruct'].includes(chosen)?'endocrine':chosen==='coag'?'cbc':'chem');
  if(id==='category-inhouse')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
  if(id==='category-sendout')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
  if(id==='home')return overviewModal();
