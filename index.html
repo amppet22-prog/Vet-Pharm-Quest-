@@ -5533,4 +5533,65 @@ window.VPQ_CLINPATH_REFERRAL_PILOT={home,open:render};
     openReferral();
   },true);
 })();
-</script></body></html>
+</script>
+<style id="vpq-global-pet-size-20261122">
+/* Last-resort stage sizing, independent of the avatar/shop rendering path. */
+#stage > #petSprite,
+#stage #petSprite.petSprite {
+  position:absolute!important;
+  width:72px!important;height:72px!important;
+  min-width:0!important;min-height:0!important;
+  max-width:72px!important;max-height:72px!important;
+  padding:0!important;margin:0!important;
+  overflow:hidden!important;contain:layout paint style!important;
+  box-sizing:border-box!important;
+  transform:none!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+}
+#stage #petSprite img,
+#stage #petSprite svg,
+#stage #petSprite picture,
+#stage #petSprite .vpq-pet-art,
+#stage #petSprite .vpq-companion-placeholder,
+#stage #petSprite .vpq-batch-dog-image,
+#stage #petSprite .vpq-companion-art{
+  display:block!important;position:static!important;
+  width:100%!important;height:100%!important;
+  max-width:100%!important;max-height:100%!important;
+  min-width:0!important;min-height:0!important;
+  object-fit:contain!important;object-position:center bottom!important;
+  transform:none!important;margin:0!important;padding:0!important;
+  background-size:contain!important;
+}
+#stage #petSprite .vpq-companion-placeholder{font-size:32px!important;line-height:1!important}
+#stage #petSprite .vpq-companion-placeholder small{display:none!important}
+@media(max-width:600px){
+ #stage > #petSprite,#stage #petSprite.petSprite{width:56px!important;height:56px!important;max-width:56px!important;max-height:56px!important}
+}
+</style>
+<script id="vpq-pet-size-runtime-20261122">
+(function(){
+ function constrainPet(){
+  const p=document.getElementById('petSprite');if(!p)return;
+  p.style.setProperty('width','72px','important');
+  p.style.setProperty('height','72px','important');
+  p.style.setProperty('max-width','72px','important');
+  p.style.setProperty('max-height','72px','important');
+  p.style.setProperty('overflow','hidden','important');
+  p.style.setProperty('contain','layout paint style','important');
+  for(const node of p.querySelectorAll('img,svg,picture,.vpq-pet-art,.vpq-companion-art,.vpq-batch-dog-image')){
+    node.style.setProperty('max-width','100%','important');
+    node.style.setProperty('max-height','100%','important');
+    node.style.setProperty('width','100%','important');
+    node.style.setProperty('height','100%','important');
+  }
+ }
+ document.addEventListener('DOMContentLoaded',function(){
+  constrainPet();
+  const p=document.getElementById('petSprite');
+  if(p)new MutationObserver(constrainPet).observe(p,{childList:true,subtree:true});
+ });
+})();
+</script>
+</body></html>
