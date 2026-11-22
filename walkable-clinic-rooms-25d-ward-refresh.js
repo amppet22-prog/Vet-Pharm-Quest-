@@ -135,28 +135,40 @@ function treatment(){
  '<rect x="218" y="151" width="83" height="16" rx="6" fill="#f4ffff" stroke="#abc8d0" stroke-width="2"/>'+
  '<text x="259" y="162" font-size="10" text-anchor="middle" font-family="Arial" font-weight="800" fill="#60858d">OCCUPIED</text>'+
  '</g>';
- // Overhead exam lamp, treatment table and IV
- s+='<path d="M457 81v86l-38 23" stroke="#99a3c5" stroke-width="12" fill="none"/>'+
- '<ellipse cx="419" cy="202" rx="47" ry="28" fill="#fff6d6" stroke="#a2acd1" stroke-width="11"/>'+
- [395,419,443].map(x=>'<circle cx="'+x+'" cy="202" r="10" fill="#fffefa"/>').join('')+
- '<g filter="url(#trt25-shadow)"><rect x="370" y="324" width="223" height="25" rx="12" fill="#b8ade1" stroke="#887caf" stroke-width="5"/>'+
- '<path d="M394 350l27 71M565 350l-27 71" stroke="#a7a1c6" stroke-width="12"/>'+
- '<rect x="385" y="310" width="190" height="21" rx="10" fill="#efdcf7"/></g>'+
- '<path d="M350 244v144M327 242h45" stroke="#9ca5bc" stroke-width="7" fill="none"/>'+
- '<rect x="339" y="263" width="23" height="43" rx="4" fill="#e5f6ff" stroke="#9bb2cb" stroke-width="3"/>';
+ // Two back-to-back stainless treatment tables in a compact island; walking remains in foreground.
+ // Rear table is higher in perspective, front table retains the main treatment surface.
+ s+='<path d="M457 81v86l-38 23" stroke="#99a3c5" stroke-width="10" fill="none"/>'+
+ '<ellipse cx="419" cy="202" rx="43" ry="26" fill="#fff6d6" stroke="#a2acd1" stroke-width="9"/>'+
+ [395,419,443].map(x=>'<circle cx="'+x+'" cy="202" r="9" fill="#fffefa"/>').join('')+
+ '<g filter="url(#trt25-shadow)">'+
+ // Rear treatment table, angled slightly upward into the room.
+ '<path d="M444 275l117 -10 37 21 -116 12z" fill="#f6f4fc" stroke="#9baac1" stroke-width="5"/>'+
+ '<path d="M468 299v31M573 291v34" stroke="#9ca9bc" stroke-width="8"/>'+
+ '<rect x="488" y="318" width="75" height="9" rx="4" fill="#c8c8de"/>'+
+ // Front treatment table
+ '<rect x="389" y="330" width="209" height="23" rx="10" fill="#e7e0f3" stroke="#8e9fb9" stroke-width="5"/>'+
+ '<rect x="404" y="324" width="177" height="11" rx="6" fill="#f9f9fd"/>'+
+ '<path d="M415 353l11 68M576 353l-11 68" stroke="#9da8bf" stroke-width="11"/>'+
+ '<path d="M431 399h129" stroke="#a8b4cb" stroke-width="7"/>'+
+ '<rect x="450" y="357" width="81" height="25" rx="5" fill="#e0e8f4" stroke="#b2bdd0" stroke-width="3"/>'+
+ '<text x="492" y="374" font-family="Arial" font-size="10" fill="#7485a4" text-anchor="middle" font-weight="800">TREATMENT</text>'+
+ '</g>'+
+ // IV stand placed to the LEFT of the tables, leaving the patient area open.
+ '<path d="M350 245v142M328 243h44" stroke="#9ca5bc" stroke-width="6" fill="none"/>'+
+ '<rect x="338" y="260" width="24" height="40" rx="4" fill="#eaf9fc" stroke="#9bb2cb" stroke-width="3"/>'+
+ '<path d="M349 300v23q0 12 14 13" stroke="#c0c5d3" stroke-width="2" fill="none"/>';
  // Patient monitor with convincing ECG
  s+='<g filter="url(#trt25-shadow)">'+round(593,178,133,104,'#34445b','#a9bad4')+
  '<path d="M608 231h18l8 -13 10 34 9 -41 11 26h46" stroke="#71e7bd" stroke-width="4" fill="none"/>'+
  '<text x="687" y="205" font-size="16" fill="#f4b7cb" font-weight="900" text-anchor="middle">♥ 128</text>'+
  '<rect x="647" y="281" width="15" height="26" fill="#a3b4ce"/>'+
  '<rect x="617" y="307" width="80" height="9" rx="4" fill="#99a3c1"/></g>';
- // Rolling treatment trolley and stocked wall cabinets
- s+='<g>'+round(286,279,78,100,'#f1ebfa','#aaa6c8')+
- '<path d="M292 305h66M292 337h66" stroke="#a3a8c5" stroke-width="4"/>'+
- '<circle cx="301" cy="386" r="9" fill="#7787a7"/><circle cx="353" cy="386" r="9" fill="#7787a7"/>'+
- round(734,173,155,83,'#eee8fb','#ac9ecb')+
- '<path d="M789 176v79M744 216h134" stroke="#c2b5db" stroke-width="5"/>'+
- [748,772,816,841,865].map((x,i)=>'<rect x="'+x+'" y="'+(i%2?193:185)+'" width="17" height="27" rx="3" fill="'+(i%2?'#9cd3d1':'#e6abd6')+'"/>').join('')+'</g>';
+ // Compact treatment-cart station. Wall cages will use the right upper panel instead of giant cabinets.
+ s+='<g>'+round(299,298,64,83,'#f1ebfa','#aaa6c8')+
+ '<path d="M306 327h50M306 350h50" stroke="#a3a8c5" stroke-width="3"/>'+
+ '<rect x="306" y="295" width="50" height="8" rx="4" fill="#dce8f3"/>'+
+ '<circle cx="313" cy="385" r="6" fill="#7787a7"/><circle cx="351" cy="385" r="6" fill="#7787a7"/>'+
+ '</g>';
  // In-house lab counter with two analyzers, tubes, microscope
  s+='<g filter="url(#trt25-shadow)"><rect x="720" y="327" width="227" height="18" rx="5" fill="#ded0eb" stroke="#b4a2cc" stroke-width="4"/>'+
  round(727,345,214,70,'#eee9f9','#a7a5c7')+
@@ -168,40 +180,79 @@ function treatment(){
  '<circle cx="902" cy="262" r="11" fill="#ddeafa" stroke="#8aa5c9" stroke-width="6"/>'+
  '<path d="M908 278l-20 35" stroke="#8898bd" stroke-width="8"/>'+
  [761,783,808].map((x,i)=>'<rect x="'+x+'" y="257" width="13" height="10" rx="3" fill="'+(i%2?'#d793b6':'#a58dd3')+'"/>').join('')+'</g>';
- // Realistic stocked treatment area: small patient on exam table, crash cart,
- // IV fluid bag, patient charts, sink and sharps disposal; not new click targets.
+ // Procedures and nursing equipment. Shapes intentionally stay off the interactive button labels.
+ // A little gray cat sits on the back table, with a blanket rather than an oversized silhouette.
  s+='<g aria-hidden="true">'+
- // Tucked-in feline patient on the worktable, positioned clear of the walking sprites.
- '<ellipse cx="495" cy="305" rx="36" ry="12" fill="#d9dbec" opacity=".6"/>'+
- '<ellipse cx="497" cy="298" rx="32" ry="15" fill="#a3a6ae"/>'+
- '<path d="M517 299q21 1 18 -20" fill="none" stroke="#8c919b" stroke-width="7" stroke-linecap="round"/>'+
- '<circle cx="472" cy="291" r="16" fill="#b5b5b5"/>'+
- '<path d="M460 283l2 -16 12 8 11 -10 4 18" fill="#b5b5b5" stroke="#898d97" stroke-width="2"/>'+
- '<path d="M465 291l5 2m12 -2l-5 2" stroke="#4f535f" stroke-width="2.5" stroke-linecap="round"/>'+
- '<path d="M470 299q4 2 7 -1" stroke="#77717b" stroke-width="2" fill="none"/>'+
- '<rect x="449" y="311" width="104" height="10" rx="5" fill="#fff3f8" opacity=".85"/>'+
- // Clean treatment tray and folded gauze, kept to side of the patient.
- '<rect x="561" y="301" width="31" height="9" rx="3" fill="#b8c5d9"/>'+
- '<rect x="565" y="296" width="17" height="7" rx="2" fill="#ffffff"/>'+
- '<rect x="578" y="295" width="6" height="9" rx="2" fill="#a7c5d3"/>'+
- // IV fluid bag on existing pole, marked drip line.
- '<rect x="339" y="248" width="22" height="44" rx="4" fill="#e8f6fc" stroke="#a9bfd0" stroke-width="2"/>'+
- '<path d="M350 251v-10M344 274h12" stroke="#97bbc6" stroke-width="2"/>'+
- '<path d="M350 292v21q0 16 15 16" stroke="#b3b9c9" stroke-width="2" fill="none"/>'+
- // Oxygen hookups, wall glove box, and color-coded clinical waste.
- '<rect x="558" y="152" width="62" height="26" rx="7" fill="#e6f4fa" stroke="#a4bfce" stroke-width="3"/>'+
- '<circle cx="572" cy="164" r="6" fill="#8acbb6"/><circle cx="591" cy="164" r="6" fill="#f1cf83"/>'+
- '<circle cx="610" cy="164" r="5" fill="#b3b6d2"/>'+
- '<rect x="545" y="202" width="36" height="25" rx="5" fill="#effbfd" stroke="#a3bdca" stroke-width="3"/>'+
- '<rect x="551" y="208" width="24" height="9" rx="2" fill="#c9e0e3"/>'+
- '<path d="M563 216l-6 12 6 -4 7 5 0 -12" fill="#fbfbff"/>'+
- '<rect x="667" y="342" width="33" height="42" rx="5" fill="#e6c5ce" stroke="#c693a8" stroke-width="3"/>'+
- '<rect x="663" y="338" width="41" height="8" rx="3" fill="#bb859f"/>'+
- '<path d="M679 357h10m-5 -5v11" stroke="#fff" stroke-width="4"/>'+
- // Clipboard and neatly arranged color-coded supply bins on lab counter.
- '<rect x="900" y="219" width="43" height="37" rx="5" fill="#f5f2fc" stroke="#ad9fc9" stroke-width="3"/>'+
- '<path d="M912 231h20M912 239h16M912 247h18" stroke="#9eaaca" stroke-width="2.2"/>'+
- '<rect x="915" y="214" width="13" height="9" rx="4" fill="#b7a6ce"/>'+
+ '<path d="M467 278l85 -8 21 11 -91 10z" fill="#dcebdc" stroke="#b3d1c6" stroke-width="2"/>'+
+ '<ellipse cx="516" cy="275" rx="21" ry="9" fill="#9da5b0"/>'+
+ '<path d="M530 273q13 3 13 -12" stroke="#9196a5" stroke-width="4" fill="none" stroke-linecap="round"/>'+
+ '<circle cx="500" cy="268" r="11" fill="#abb0b9"/>'+
+ '<path d="M491 264l1 -11 9 7 8 -8 3 12" fill="#abb0b9" stroke="#878fa1" stroke-width="1.5"/>'+
+ '<path d="M496 269h2m8 0h2" stroke="#495263" stroke-width="2" stroke-linecap="round"/>'+
+ '<path d="M500 274q2 3 4 0" fill="none" stroke="#74798c" stroke-width="1.5"/>'+
+ '<path d="M512 275l4 3" stroke="#858c9c" stroke-width="2"/>'+
+ // Exam tray on rear table and gauze.
+ '<rect x="551" y="271" width="26" height="8" rx="3" fill="#c3ccda"/>'+
+ '<rect x="554" y="266" width="12" height="6" rx="2" fill="#ffffff"/>'+
+ // Wall-mounted procedure supplies: examination gloves, clippers, IV catheter tape, gauze, wraps.
+ '<rect x="532" y="183" width="58" height="65" rx="7" fill="#e8eff9" stroke="#a6b7d4" stroke-width="3"/>'+
+ '<text x="561" y="193" font-size="8" fill="#647f9b" font-weight="900" text-anchor="middle" font-family="Arial">PROCEDURES</text>'+
+ '<rect x="537" y="199" width="24" height="18" rx="4" fill="#fcf9ff" stroke="#b5aacb" stroke-width="2"/>'+
+ '<path d="M542 215l3 -8 4 3 3 -3 4 8" fill="#f8fbff" stroke="#9fb9ce" stroke-width="1.3"/>'+
+ '<rect x="565" y="199" width="18" height="18" rx="4" fill="#d2e6e6" stroke="#97b9bb" stroke-width="2"/>'+
+ '<path d="M571 205v8m5 -9v8" stroke="#738e9d" stroke-width="2"/>'+
+ '<rect x="537" y="221" width="18" height="17" rx="4" fill="#f5e7fa" stroke="#b9a5cd" stroke-width="2"/>'+
+ '<circle cx="546" cy="230" r="6" fill="#f7f7fb" stroke="#c3a8d2" stroke-width="3"/>'+
+ '<rect x="560" y="221" width="22" height="17" rx="4" fill="#f9faff" stroke="#b6bfd5" stroke-width="2"/>'+
+ '<path d="M565 230h12" stroke="#92a3bf" stroke-width="3"/>'+
+ // Electric clipper, small nail trimmer and bandage roll set on rail.
+ '<path d="M532 248h59" stroke="#b3accb" stroke-width="4"/>'+
+ '<path d="M540 246v-8l6 -2 3 10" fill="#a5bfca" stroke="#6e93aa" stroke-width="2"/>'+
+ '<path d="M560 247l5 -10 4 10m-4 -10l7 10" stroke="#8799aa" stroke-width="2" fill="none"/>'+
+ '<circle cx="580" cy="243" r="5" fill="#f3f1fb" stroke="#b598d4" stroke-width="2"/>'+
+ // Small oxygen supply ports beside the procedure station.
+ '<rect x="604" y="157" width="62" height="22" rx="6" fill="#eaf7f8" stroke="#a4bfce" stroke-width="3"/>'+
+ '<circle cx="615" cy="168" r="5" fill="#81cbb6"/><circle cx="632" cy="168" r="5" fill="#efc57e"/>'+
+ '<circle cx="650" cy="168" r="5" fill="#b2b7d5"/>'+
+ // Separate red emergency cart beneath the ECG; readable mark at real game size.
+ '<rect x="636" y="320" width="67" height="60" rx="7" fill="#f7c6c7" stroke="#ca7c91" stroke-width="4"/>'+
+ '<rect x="632" y="314" width="75" height="11" rx="4" fill="#fff1f2" stroke="#ca7c91" stroke-width="3"/>'+
+ '<path d="M646 339h48M646 357h48" stroke="#d89caf" stroke-width="3"/>'+
+ '<path d="M665 329v16M657 337h16" stroke="#e66c85" stroke-width="5" stroke-linecap="round"/>'+
+ '<circle cx="646" cy="385" r="6" fill="#747b98"/><circle cx="691" cy="385" r="6" fill="#747b98"/>'+
+ '<text x="670" y="307" text-anchor="middle" fill="#a66e82" font-family="Arial" font-size="11" font-weight="900">CRASH</text>'+
+ // Cabinet for oxygen patient next to the in-house laboratory.
+ '<rect x="746" y="165" width="109" height="111" rx="11" fill="#e8f9fa" stroke="#92bdc9" stroke-width="5"/>'+
+ '<rect x="755" y="182" width="91" height="84" rx="6" fill="#f6ffff" stroke="#b2d4dc" stroke-width="3"/>'+
+ '<rect x="752" y="152" width="98" height="21" rx="9" fill="#fbffff" stroke="#9dbfc9" stroke-width="3"/>'+
+ '<text x="801" y="166" font-family="Arial" text-anchor="middle" font-size="11" font-weight="900" fill="#6291a0">OXYGEN • ICU</text>'+
+ '<rect x="765" y="243" width="71" height="13" rx="6" fill="#d6ebed"/>'+
+ // Quiet cat within the O2-enriched enclosure, with observation window.
+ '<ellipse cx="796" cy="237" rx="24" ry="11" fill="#d3bbb1"/>'+
+ '<circle cx="780" cy="228" r="11" fill="#e2c8b7"/>'+
+ '<path d="M770 222l1 -12 10 8 8 -8 3 12" fill="#e2c8b7" stroke="#b99283" stroke-width="1.5"/>'+
+ '<circle cx="776" cy="227" r="2" fill="#5d5859"/><circle cx="785" cy="227" r="2" fill="#5d5859"/>'+
+ '<path d="M799 237q19 0 17 -14" stroke="#b7958a" stroke-width="5" fill="none" stroke-linecap="round"/>'+
+ '<circle cx="826" cy="192" r="7" fill="#ffffff" stroke="#9fc4ca" stroke-width="2"/>'+
+ '<text x="826" y="195" font-family="Arial" font-size="7" fill="#6393a0" text-anchor="middle">O₂</text>'+
+ // Dedicated exotics recovery cage, compact and partly planted.
+ '<rect x="865" y="165" width="76" height="111" rx="9" fill="#e9f7eb" stroke="#a1c4ae" stroke-width="5"/>'+
+ '<rect x="871" y="183" width="64" height="82" rx="4" fill="#fbfff8" stroke="#c3d9b9" stroke-width="3"/>'+
+ '<rect x="860" y="152" width="84" height="21" rx="9" fill="#fffdf5" stroke="#b5cbb1" stroke-width="3"/>'+
+ '<text x="902" y="166" font-family="Arial" font-size="11" fill="#668d70" font-weight="900" text-anchor="middle">EXOTICS</text>'+
+ '<rect x="876" y="239" width="52" height="16" rx="7" fill="#e9dcc2"/>'+
+ // Rabbit facing right, standing near a hide box.
+ '<ellipse cx="898" cy="232" rx="17" ry="12" fill="#ece8de"/>'+
+ '<circle cx="911" cy="225" r="10" fill="#f4ede4"/>'+
+ '<ellipse cx="910" cy="208" rx="5" ry="18" fill="#eee9e1" stroke="#c4beb8" stroke-width="1.5"/>'+
+ '<ellipse cx="919" cy="211" rx="5" ry="18" fill="#eee9e1" stroke="#c4beb8" stroke-width="1.5"/>'+
+ '<ellipse cx="910" cy="211" rx="2" ry="12" fill="#e9c5d0"/>'+
+ '<circle cx="915" cy="225" r="2" fill="#5c5a62"/>'+
+ '<circle cx="882" cy="232" r="6" fill="#f8f5f2"/>'+
+ '<path d="M873 238v-13l8 -7 9 7v13" fill="#b2c7a4" stroke="#93b28c" stroke-width="2"/>'+
+ // Individual enclosure doors, windows and vents; labels remain outside main gameplay elements.
+ [757,780,803,826,845].map(x=>'<path d="M'+x+' 185v77" stroke="#c2dce0" stroke-width="1.5" opacity=".65"/>').join('')+
+ [873,890,907,925].map(x=>'<path d="M'+x+' 186v76" stroke="#d1dec9" stroke-width="1.5" opacity=".65"/>').join('')+
  '</g>';
  s+='<g font-family="Arial,sans-serif" font-weight="900">'+
  '<rect x="96" y="106" width="163" height="39" rx="18" fill="#fff5fc" stroke="#dda7d6" stroke-width="4"/>'+
