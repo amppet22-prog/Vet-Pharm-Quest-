@@ -67,7 +67,7 @@ function drawing(){
  '<rect x="175" y="96" width="47" height="43" rx="5" fill="#fffdf3" stroke="#acc9be" stroke-width="3"/><text x="198" y="121" font-size="12">Rx</text>'+
  '<rect x="242" y="97" width="48" height="42" rx="5" fill="#d6ece2" stroke="#8fb3a1" stroke-width="3"/><text x="266" y="123" font-size="12">Rx</text>'+
  '<rect x="27" y="167" width="109" height="50" rx="5" fill="#fff9ec" stroke="#b7bdab" stroke-width="4"/><text x="81" y="189" font-size="16">CLINIC</text><text x="81" y="207" font-size="13">SUPPLIES</text>'+
- '<rect x="176" y="166" width="108" height="50" rx="6" fill="#f5eee0" stroke="#bac2b7" stroke-width="4"/><text x="230" y="191" font-size="18">💊</text><text x="230" y="209" font-size="12">SUPPLIES</text></g>'+
+ '<rect x="176" y="166" width="108" height="50" rx="6" fill="#f5eee0" stroke="#bac2b7" stroke-width="4"/><text x="230" y="191" font-size="18">💊</text><text x="230" y="209" font-size="11">DISPENSING</text></g>'+
 
  // Clean medication packaging details, confined to each label (no lines across the bottles).
  '<g font-family="Arial" text-anchor="middle" font-weight="800">'+
