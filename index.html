@@ -4931,7 +4931,7 @@ for(const [id,name,image,category] of vpqUploadedCompanionManifest){
  category==='exotics'?[5,75]:[4,65];
  const pet=category==='horse'?'🐴':category==='cat'?'🐈':category==='dog'?'🐕':
  category==='pocket'?'🐹':category==='exotics'?'🦎':'✨';
- vpqCompanionCatalog.push({id,name,image,category,pet,level:tier[0],price:tier[1]});
+ vpqCompanionCatalog.push({id,name,image,category,pet,petBreed:category==='dog'?id:undefined,level:tier[0],price:tier[1]});
 }
 const vpqCompanionById=id=>vpqCompanionCatalog.find(c=>c.id===id);
 const vpqCompanionLv=()=>Math.floor(Math.max(0,Number(state.xp)||0)/LEVEL_THRESH)+1;
@@ -4994,7 +4994,7 @@ function vpqCompanionApply(c,form){
  state.vpqCompanionId=c.id;
  state.pet=c.pet;
  // Keep legacy pet fields synchronized so movement, preview and saves still work.
- if(c.category==='dog')state.petBreed=c.petBreed;
+ if(c.category==='dog')state.petBreed=c.petBreed||c.id;
  else if(c.category==='cat')state.catLook=c.id.replace(/^cat-/,'');
  if(form){
   if(form.elements.pet)form.elements.pet.value=state.pet;
@@ -5071,7 +5071,7 @@ $('modalBody').addEventListener('submit',function(e){
  if(!vpqCompanionOwned(c))return;
  const form=e.target;
  if(form.elements.pet)form.elements.pet.value=c.pet;
- if(c.category==='dog'&&form.elements.petBreed)form.elements.petBreed.value=c.petBreed;
+ if(c.category==='dog'&&form.elements.petBreed)form.elements.petBreed.value=c.petBreed||c.id;
 },true);
 const vpqCompanionStyles=document.createElement('style');
 vpqCompanionStyles.textContent=
