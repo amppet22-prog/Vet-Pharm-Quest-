@@ -120,6 +120,12 @@
       "answer": "Muscarinic antagonist; reduces detrusor overactivity.",
       "why": "It supports bladder storage and can worsen urinary retention if outflow is blocked.",
       "slide": "Lecture 13 · submitted course notes, clinically reviewed"
+    },
+    "pharm-e2-autonomic13-012": {
+      "prompt": "What is phenylpropanolamine's main urinary effect?",
+      "answer": "Increases urethral closure pressure through sympathomimetic action, thus causing urinary retention",
+      "why": "It is used for selected canine urethral sphincter mechanism incompetence.",
+      "slide": "Lecture 13 · submitted course notes, clinically reviewed"
     }
   },
   "custom": [
