@@ -27,7 +27,8 @@ chem:[
 };
 const art='<svg aria-label="Illustration of compact CBC analyzer, chemistry analyzer and microscope on veterinary treatment counter" role="img" viewBox="0 0 850 160" style="max-width:100%;width:100%;border-radius:14px;background:#e6f6f8"><rect x="25" y="118" width="800" height="15" rx="6" fill="#829caa"/><rect x="64" y="25" width="185" height="94" rx="14" fill="#b5d8eb" stroke="#4d839a" stroke-width="5"/><rect x="84" y="39" width="103" height="50" rx="6" fill="#244e69"/><path d="M99 76l18 -20 18 11 20 -21 17 21" stroke="#8ef1cc" stroke-width="4" fill="none"/><text x="151" y="110" text-anchor="middle" font-size="13" fill="#31586c">CBC</text><rect x="301" y="34" width="180" height="85" rx="12" fill="#e7e8fb" stroke="#8c9bc0" stroke-width="5"/><rect x="328" y="50" width="105" height="37" rx="5" fill="#364c79"/><path d="M342 65h75" stroke="#a6efd8" stroke-width="5"/><text x="390" y="109" text-anchor="middle" font-size="13" fill="#475c8b">CHEMISTRY</text><rect x="578" y="99" width="148" height="11" rx="4" fill="#7394a7"/><path d="M637 90V52q1 -15 17 -15h22V23h-30q-25 0 -25 30v37" fill="none" stroke="#5e80a5" stroke-width="14"/><circle cx="654" cy="66" r="18" fill="#e9f3fb" stroke="#567995" stroke-width="7"/><rect x="601" y="108" width="92" height="12" rx="3" fill="#486582"/><text x="652" y="147" font-size="13" text-anchor="middle" fill="#3a637a">MICROSCOPE</text></svg>';
 const btn=(a,s)=>'<button data-vpqward="'+a+'">'+s+'</button>';
-function out(title,html){api.showModal(title,html+'<div class="buttonrow">'+btn('labhome','← Clinical Pathology Lab')+'</div>')}
+function out(title,html){ensureApi();api.showModal(title,'<div class="vpqDiagnosticCounter" data-vpq-diagnostic-counter="1">'+html+'<div class="buttonrow">'+btn('labhome','← Clinical Pathology Lab')+'</div></div>')}
+function ensureApi(){if(!api){api={body:document.getElementById('modalBody'),showModal:(title,html)=>window.VPQ_REFERRAL_MODAL?.show?.(title,html),closeModal:()=>document.getElementById('modalClose')?.click(),changeRoom:room=>window.VPQ_CHANGE_ROOM?.(room)}}return api}
 
 const labSections={
 cbc:{name:'🩸 Complete Blood Count',sample:'Well-mixed EDTA whole blood; assess smear, platelet clumps and sample age.',intro:'Read the erythrogram, leukogram and platelets as three linked questions: oxygen carriage, inflammatory/immune response, and primary hemostasis.',tests:[
@@ -87,6 +88,40 @@ function legacyLabHome(){run=null;out('🩸 Clinical Pathology · CBC, Chemistry
 function home(){run=null;return api?.doAction?.('hospitalFollowup')||api?.showModal?.('🏥 Treatment Ward','<p>Choose a patient at the treatment bed to begin Assessment → Treatment → Monitoring → Outpatient care.</p>')}
 function start(mode){run={mode,i:0,score:0,order:null,chosen:null,pool:items[mode].slice().sort(()=>Math.random()-.5)};show()}
 function show(){const s=run;if(!s)return;const q=s.pool[s.i];if(!q){out('Lab bench complete','<h3>'+s.score+' / '+s.pool.length+' correct</h3><p>First-time correct answers award study XP through the shared reward ledger. Try again for practice, or move to a patient case.</p>'+btn(s.mode,'🔁 Restart this station'));return}if(!s.order)s.order=[0,1,2,3].sort(()=>Math.random()-.5);const done=s.chosen!==null;out((s.mode==='cbc'?'🩸 CBC Analyzer':'🧪 Chemistry Analyzer')+' · '+(s.i+1)+'/'+s.pool.length,'<p class="small">Specimen reasoning • '+(s.mode==='cbc'?'Hematology':'Clinical chemistry')+'</p><h3>'+e(q.q)+'</h3>'+s.order.map(i=>'<button class="choice '+(done?(i===q.a?'right':i===s.chosen?'wrong':''):'')+'" data-vpqward-answer="'+i+'" '+(done?'disabled':'')+'>'+e(q.opts[i])+'</button>').join('')+(done?'<div class="response '+(s.chosen===q.a?'':'bad')+'"><b>'+(s.chosen===q.a?'Correct':'Review the mechanism')+'</b><p>'+e(q.why)+'</p></div>'+btn('next','Next →'):'<p class="small">Decide what the finding means, why it happens, and what to verify.</p>'))}
+function handleNavigation(action){
+ ensureApi();
+ if(action==='reportacademy')return window.VPQ_CLINPATH_REPORT_ACADEMY?.open('start');
+ if(action?.startsWith('section-'))return labSection(action.slice(8));
+ if(action==='pcvpractice')return window.VPQ_ADVANCED_LAB?.hybridHome?.()||window.VPQ_CLINPATH_REPORT_ACADEMY?.open('pcv');
+ if(action==='sendpractice')return window.VPQ_ADVANCED_LAB?.hybridHome?.()||window.VPQ_CLINPATH_REPORT_ACADEMY?.open('extra');
+ if(action==='home')return home();
+ if(action==='labhome')return window.VPQ_ADVANCED_LAB?.home?.();
+ if(action==='next'&&run){run.i++;run.order=null;run.chosen=null;return show()}
+ if(action==='detective')return window.VPQ_MICROSCOPE_DETECTIVE?.home?.();
+ if(action==='smear')return window.VPQ_BLOOD_SMEAR_LAB?.menu?.();
+ if(action==='lab')return window.VPQ_CLINPATH_LAB?.intro?.();
+ if(action==='wing'){api.closeModal?.();return api.changeRoom?.('clinpath')}
+ if(action==='parasites')return window.VPQ_PATHOGEN_ATLAS?.menu?.();
+ if(action==='cases')return window.VPQ_OPEN_REFERRAL_PATIENTS?.()||window.VPQ_CLINPATH_REFERRAL_PILOT?.home?.()||api.openCases?.('Clinical Pathology');
+ if(action==='guidedrounds')return window.VPQ_CLINPATH_WARD_ROUNDS?.home?.();
+ if(items[action])return start(action);
+ return false;
+}
+// Independent click routing: survives interruptions in the game's bulk init chain.
+// Only intercepts controls belonging to this specific diagnostic counter.
+window.addEventListener('click',event=>{
+ const target=event.target?.closest?.('[data-vpqward],[data-vpqward-answer]');
+ if(!target||!target.closest('.vpqDiagnosticCounter'))return;
+ event.preventDefault();event.stopImmediatePropagation();
+ ensureApi();
+ if(target.hasAttribute('data-vpqward-answer')){
+  if(!run||run.chosen!==null)return;
+  run.chosen=Number(target.dataset.vpqwardAnswer);
+  const q=run.pool[run.i];if(run.chosen===q.a){run.score++;api.awardQuestion?.('treatment-'+run.mode,q.id,true)}
+  return show();
+ }
+ handleNavigation(target.dataset.vpqward);
+},true);
 function init(context){api=context;api.body.addEventListener('click',ev=>{const el=ev.target.closest('[data-vpqward],[data-vpqward-answer]');if(!el)return;if(el.hasAttribute('data-vpqward-answer')){if(!run||run.chosen!==null)return;run.chosen=Number(el.dataset.vpqwardAnswer);const q=run.pool[run.i];if(run.chosen===q.a){run.score++;api.awardQuestion?.('treatment-'+run.mode,q.id,true)}return show()}const action=el.dataset.vpqward;if(action==='reportacademy')return window.VPQ_CLINPATH_REPORT_ACADEMY?.open('start');if(action?.startsWith('section-'))return labSection(action.slice(8));if(action==='pcvpractice')return window.VPQ_ADVANCED_LAB?.hybridHome?.()||api.doAction?.('advancedHybrid');if(action==='sendpractice')return api.doAction?.('advancedHybrid');if(action==='home')return home();if(action==='labhome')return window.VPQ_ADVANCED_LAB?.home?.();if(action==='next'&&run){run.i++;run.order=null;run.chosen=null;return show()}if(action==='detective')return window.VPQ_MICROSCOPE_DETECTIVE.home();if(action==='smear')return window.VPQ_BLOOD_SMEAR_LAB.menu();if(action==='lab')return window.VPQ_CLINPATH_LAB.intro();if(action==='wing'){api.closeModal?.();return api.changeRoom?.('clinpath')}if(action==='parasites')return window.VPQ_PATHOGEN_ATLAS.menu();if(action==='cases')return api.openCases('Clinical Pathology');if(action==='guidedrounds')return window.VPQ_CLINPATH_WARD_ROUNDS?.home();if(items[action])return start(action)})}
-window.VPQ_TREATMENT_DIAGNOSTICS=Object.freeze({init,home,start,legacyLabHome,items});
+window.VPQ_TREATMENT_DIAGNOSTICS=Object.freeze({init,home,start,legacyLabHome,openSection:labSection,navigate:handleNavigation,items});
 })();
