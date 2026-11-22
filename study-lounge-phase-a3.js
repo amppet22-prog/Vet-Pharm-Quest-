@@ -80,7 +80,7 @@ css.textContent='.vpqStudyLoungeArt{position:absolute;inset:0;width:100%;height:
 '.vpqLoungeHot:hover,.vpqLoungeHot:focus-visible{border:2px dashed #d1a85d!important;background:#fff4c220!important;outline:none}'+
 '.vpqLoungeHot span{display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);min-width:120px;max-width:145px;text-align:center;background:#fffaf4;border:2px solid #9ba7bd;color:#303c64;border-radius:9px;padding:5px 7px;font-size:11px;font-weight:800;box-shadow:0 3px 7px #65728636;z-index:3}'+
 '.vpqLoungeHot:is(:hover,:focus-visible) span{display:block}.vpqLoungeHot b,.vpqLoungeHot small{display:block}.vpqLoungeHot small{font-size:10px;font-weight:600}'+
-'.vpqLoungeDesk{left:41%;top:53%;width:18%;height:22%}.vpqLoungeMastery{left:32%;top:16%;width:36%;height:34%}.vpqLoungeGames{left:80%;top:52%;width:13%;height:33%}'+
+'.vpqLoungeDesk{left:48%;top:51%;width:13%;height:24%}.vpqLoungeMastery{left:43%;top:18%;width:26%;height:32%}.vpqLoungeGames{left:80%;top:52%;width:13%;height:33%}'+
 '.vpqLoungeSkills{position:absolute;left:73%;top:24%;width:15%;height:17%;padding:0;pointer-events:auto;border:2px solid transparent;background:transparent;color:transparent;border-radius:10px;font-size:0;cursor:pointer;box-shadow:none}.vpqLoungeSkills:hover,.vpqLoungeSkills:focus-visible{border:2px dashed #e5b657;background:#fff4c522;outline:none}'+
 '.vpqLoungeExit{top:8%;right:2%;padding:6px 10px;border-radius:15px;background:#fffaf0ed;color:#584d70;font-size:11px;font-weight:800}'+
 '@media(max-width:600px){.vpqLoungeHot span{font-size:9px;padding:3px 5px}.vpqLoungeExit{font-size:9px;padding:5px}}';
