@@ -196,16 +196,16 @@ const challenges=[
  {id:'j',title:'Case J · early hemorrhage timing',species:'Dog after acute trauma',data:[['PCV immediately','45%','37–55% (illustrative)'],['TS immediately','6.8 g/dL','6.0–8.0 g/dL (illustrative)'],['PCV next day','31%','37–55% (illustrative)'],['TS next day','5.4 g/dL','6.0–8.0 g/dL (illustrative)']],q:'Why could immediate PCV and TS be within range after severe hemorrhage?',opts:['Whole blood loss initially removes RBCs and plasma together; fluid redistribution or treatment can then lower concentrations','Normal immediate PCV definitively excludes hemorrhage','Reticulocytes appear immediately within minutes','The centrifuge adds RBCs after trauma'],answer:0,why:'Immediately after bleeding, the RBC:plasma concentration may be little changed; later interstitial fluid shifts and treatment dilute both. Reticulocyte regeneration takes days. Trends, perfusion and exam are essential.'}
 ];
 function practice(){
- return card('🏥 Guided report interpretation','<p>For each patient, read species and <b>reference intervals</b> first, classify ↑/↓, then choose the strongest physiologic interpretation. Correct choices appear green; incorrect selections appear orange with the explanation.</p>')+
- challenges.map((c,i)=>card(c.title+' · '+c.species,table(['Value','Patient','Reference interval'],c.data)+
- '<div class="vra-btns"><b>'+c.q+'</b></div>'+
- c.opts.map((option,j)=>'<button class="vra-choice" type="button" data-vpq-report-answer="'+i+':'+j+'">'+String.fromCharCode(65+j)+'. '+option+'</button>').join('')+
+ const done=challenges.filter((c,i)=>reveal[i]!==undefined).length;
+ return card('🏥 Guided report interpretation','<p><b>'+done+' / '+challenges.length+' cases attempted.</b> Expand one patient at a time. Read species, reference intervals and sample quality; classify findings before selecting the strongest physiologic interpretation.</p>')+
+ challenges.map((c,i)=>'<details class="vra-case" '+(reveal[i]!==undefined?'open':'')+'><summary>🏥 '+c.title+' · '+c.species+(reveal[i]===undefined?' · Not attempted':reveal[i]===c.answer?' · ✓ Correct':' · Review')+'</summary>'+
+ table(['Value','Patient','Reference interval'],c.data)+
+ '<p><b>'+c.q+'</b></p>'+
+ c.opts.map((option,j)=>'<button class="vra-choice '+(reveal[i]!==undefined?(j===c.answer?'vra-good':j===reveal[i]?'vra-wrong':''):'')+'" type="button" data-vpq-report-answer="'+i+':'+j+'">'+String.fromCharCode(65+j)+'. '+option+'</button>').join('')+
  (reveal[i]!==undefined?'<div class="vra-result '+(reveal[i]===c.answer?'':'vra-wrong')+'"><b>'+(reveal[i]===c.answer?'✓ Correct interpretation':'Review the physiology')+'</b><p>'+c.why+'</p></div>':'')+
- '<p class="vra-small">Educational sample intervals only. Compare with the report’s own validated range.</p>'
- )).join('')+
+ '<p class="vra-small">Educational example intervals only; compare with the printed patient-specific range.</p></details>').join('')+
  '<div class="vra-btns">'+link('start','← Report-reading map')+'</div>';
 }
-
 const deepData={
  start:[
  ['Reading the minimum database','Review CBC + chemistry + UA (+ ancillary tests). A reliable assessment starts with sample quality, a concise problem list, and prioritized differentials; not a diagnosis from one highlighted value.'],
