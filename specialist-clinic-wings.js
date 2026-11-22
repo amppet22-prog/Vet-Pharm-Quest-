@@ -11,7 +11,7 @@ const data={
   {x:1.2,y:31,w:15.8,h:40,walk:9,label:'🩸 Coagulation Bench',subtitle:'Questions + interpretation',hint:'Practice PT / aPTT interpretation questions',kind:'practice',action:'advancedCoag'},
   {x:17.6,y:31,w:15.8,h:40,walk:25,label:'🫧 Blood Gas Station',subtitle:'Acid–base practice',hint:'Practice blood gas and acid–base interpretation',kind:'practice',action:'advancedGas'},
   {x:34,y:31,w:15.8,h:40,walk:41,label:'🧫 Urinalysis Bench',subtitle:'UA questions + sediment',hint:'Choose urinalysis questions or visual sediment references',kind:'practice',action:'advancedUrine'},
-  {x:50.4,y:31,w:15.8,h:40,walk:58,label:'🩸 CBC + Chemistry',subtitle:'PCV/TS + test menu',hint:'CBC, chemistry, PCV/TS, lactate, ionized calcium and send-out diagnostics',kind:'practice',action:'advancedHybrid'},
+  {x:50.4,y:31,w:15.8,h:40,walk:58,label:'🩸 CBC + Chemistry',subtitle:'Learn → test → practice',hint:'Start with CBC/chemistry, PCV/TS, rapid testing and send-out interpretive lessons',kind:'practice',action:'advancedHybrid'},
   {x:66.8,y:31,w:15.8,h:40,walk:74,label:'🐾 Referral Cases',subtitle:'Workup questions',hint:'Open patient differential and ancillary testing cases',kind:'practice',action:'advancedCases'},
   {x:83.2,y:31,w:15.6,h:40,walk:91,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
  ],
@@ -386,7 +386,7 @@ function refresh(){
  :'')+
  (room==='necropsy'?data.necropsy.filter(p=>necroHelp[p.action]).map(p=>'<button type="button" class="vpqNecroHelp" data-vpqnecro-help="'+p.action+'" style="left:'+Math.min(95,p.x+p.w-2)+'%;top:'+Math.max(3,p.y-3)+'%" title="About '+p.label+'" aria-label="What does '+p.label+' teach?">?</button>').join(''):'')+
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
- (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Learn First — open lecture study guides and references" aria-label="Learn First reference bookshelf — open study guides"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Lecture-based study guides">📖 Learn First</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
+ (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Start here — what CBC, chemistry and each diagnostic test measures" aria-label="Beginner Clinical Pathology report-reading guide"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Learn clinical pathology from the beginning">📖 Start Here</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
  div.addEventListener('click',e=>{
  const isoGuide=e.target.closest('[data-vpqisohelp]');
  if(isoGuide){e.preventDefault();e.stopPropagation();isoHelpModal(isoGuide.dataset.vpqisohelp);return}
@@ -404,7 +404,20 @@ function refresh(){
   '<b>🧼 Cleaning & PPE:</b> necropsy safety and sampling.</div>'+
   '<div style="margin-top:10px;padding:11px 13px;border:1px solid #d7c8e5;background:#f6f0fa;border-radius:10px;font-size:13px"><b>🔎 Future Veterinary Forensics Case Files</b><p style="margin:5px 0">Planned as a separate case library and station. It will focus on scene and history, documentation, injuries, postmortem changes, evidence handling, and defensible interpretations. No forensic cases are currently included.</p></div>'+
   '<p class="tiny">Click a station or walk up and press E. The stainless tables are scenery, not separate clickable stations.</p>');return}
- const guide=e.target.closest('[data-vpqbench-guide]');if(guide){if(guide.dataset.vpqbenchGuide==='hybrid')return api.doAction('advancedHybrid');window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b){if(b.dataset.vpqspecact==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){e.preventDefault();e.stopPropagation();return window.VPQ_CLINPATH_REFERRAL_PILOT.home()}return api.doAction(b.dataset.vpqspecact)}});
+ const guide=e.target.closest('[data-vpqbench-guide]');if(guide){if(guide.dataset.vpqbenchGuide==='hybrid')return api.doAction('advancedHybrid');window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b){
+ if(room==='clinpath'){
+  if(b.dataset.vpqspecact==='vpqClinpathGuided'){
+   e.preventDefault();e.stopPropagation();
+   return window.VPQ_CLINPATH_REPORT_ACADEMY?.open?.('start');
+  }
+  const guideByAction={advancedCoag:'coag',advancedGas:'gas',advancedUrine:'urine',advancedCases:'cases',vpqClassicSmear:'microscopy'};
+  const station=guideByAction[b.dataset.vpqspecact];
+  if(station){
+   e.preventDefault();e.stopPropagation();
+   return window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(station,api);
+  }
+ }
+if(b.dataset.vpqspecact==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){e.preventDefault();e.stopPropagation();return window.VPQ_CLINPATH_REFERRAL_PILOT.home()}return api.doAction(b.dataset.vpqspecact)}});
  stage.appendChild(div);
 }
 function updateNearby(room,x){
