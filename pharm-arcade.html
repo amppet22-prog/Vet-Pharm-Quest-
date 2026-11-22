@@ -598,4 +598,49 @@ review=function(){
 
 if(location.hash==='#exam2-challenge')window.VPQ_EXAM2_ARCADE_PLAY?.();else render();
 
-</script><script src="pharm-carlson-186-ui.js?v=20261108-edit3"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="game-cloud-auth-bridge.js" defer></script><script src="player-cloud-saves.js?v=20261120-compare-cards" defer></script></body></html>
+</script><script src="pharm-carlson-186-ui.js?v=20261108-edit3"></script><script id="vpq-arcade-games-only-20261122">
+/* Hard boundary between Arcade games and Learning Center study resources.
+ * Preserve original quiz/guide source and local progress for study-only reuse. */
+(function(){
+ const params=new URLSearchParams(location.search);
+ const study=params.get('study')==='1', allowed=study?['guide']:['battle','match'];
+ document.body.classList.add(study?'vpq-study-guide-only':'vpq-arcade-games-only');
+ const css=document.createElement('style');
+ css.textContent=[
+ '.vpq-arcade-games-only #tabs button:not([data-tab="battle"]):not([data-tab="match"]){display:none!important}',
+ '.vpq-study-guide-only #tabs{display:none!important}',
+ '.vpq-arcade-games-only .vpqArcadeCourseBridge,.vpq-study-guide-only .vpqArcadeCourseBridge{display:none!important}',
+ '.vpq-arcade-games-only #vpqGoExamCenter310,.vpq-study-guide-only #vpqGoExamCenter310{display:none!important}',
+ '.vpq-study-guide-only .side{display:none!important}',
+ '.vpq-study-guide-only .layout{grid-template-columns:minmax(0,1fr)!important}',
+ '.vpq-arcade-games-only .vpq-exam-intro,.vpq-study-guide-only .vpq-exam-intro{display:none!important}',
+ '.vpq-arcade-games-only #tabs{justify-content:center;gap:10px}',
+ '.vpq-arcade-games-only #tabs button[data-tab="battle"],.vpq-arcade-games-only #tabs button[data-tab="match"]{display:inline-flex!important}',
+ '.vpq-arcade-games-only [data-pg2old],.vpq-study-guide-only [data-pg2old]{display:none!important}'
+ ].join('');
+ document.head.appendChild(css);
+ const original=setTab;
+ setTab=function(next){
+   if(!allowed.includes(next))return original(study?'guide':'match');
+   return original(next);
+ };
+ const initial=study?'guide':(location.hash==='#battle'?'battle':'match');
+ setTab(initial);
+ // Prevent navigation to any legacy study mode even if a nested old menu draws
+ // a button into the iframe after a game round. The original data remains intact.
+ document.addEventListener('click',event=>{
+   if(study)return;
+   const b=event.target.closest('[data-tab],[data-go],[data-vpqexamstart],[data-pg2old]');
+   if(!b)return;
+   const requested=b.dataset.tab||b.dataset.go||b.dataset.vpqexamstart||(b.dataset.pg2old!==undefined?'guide':'');
+   if(requested&&!allowed.includes(requested)){
+     event.preventDefault();event.stopImmediatePropagation();
+     setTab('match');
+   }
+ },true);
+ window.addEventListener('hashchange',()=>{
+   const next=location.hash.replace(/^#/,'');
+   if(!allowed.includes(next))setTab(initial);
+ });
+})();
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="game-cloud-auth-bridge.js" defer></script><script src="player-cloud-saves.js?v=20261120-compare-cards" defer></script></body></html>
