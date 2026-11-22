@@ -99,6 +99,10 @@ const INTRO_STYLE=String.raw`
 .vpqintro .coaglivinggrid p{margin:5px 0 0}
 .vpqintro .factoratlas,.vpqintro .coagliving{margin:14px 0}
 @media(max-width:610px){.vpqintro .coaglivinggrid{grid-template-columns:1fr}}
+.vpqintro .coagtestlist{display:flex;flex-direction:column;gap:0;margin-top:9px;border:1px solid #d6e2ee;border-radius:10px;overflow:hidden;background:white}
+.vpqintro .coagtestrow{display:block;padding:10px 12px;line-height:1.48}
+.vpqintro .coagtestrow+.coagtestrow{border-top:1px solid #d6e2ee}
+.vpqintro .coagtestrow:nth-child(even){background:#f3f8ff}
 </style>`;
 const COAG_FACTORS=[
 ['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
@@ -151,7 +155,7 @@ function coagIntro(){
  '<tr><td><b>Both normal, bleeding present</b></td><td>Routine factor screens may be normal</td><td>Platelet number/function, vWF, factor XIII and vascular causes</td></tr>'+
  '</tbody></table>'+
  '<details open><summary>🧪 The other tests: what do they mean?</summary>'+
- '<p><b>Platelet count + smear:</b> plug-building cells; confirm clumping before calling thrombocytopenia. <b>vWF antigen/function:</b> platelet adhesion, especially mucosal bleeding. <b>Fibrinogen:</b> clot substrate; low with consumption/severe synthetic problems, sometimes high during inflammation. <b>Thrombin time (TT):</b> fibrinogen → fibrin after adding thrombin; affected by low/abnormal fibrinogen and certain anticoagulants. <b>D-dimer:</b> breakdown of cross-linked fibrin; evidence of clot formation and lysis, not specific for DIC. <b>FDPs:</b> fibrin(ogen) degradation products; less specific than D-dimer for cross-linked fibrin. <b>Antithrombin:</b> natural anticoagulant; may fall with consumption, protein loss or reduced synthesis.</p></details>'+
+ '<div class="coagtestlist"><div class="coagtestrow"><b>Platelet count + smear:</b> plug-building cells; confirm clumping before calling thrombocytopenia.</div><div class="coagtestrow"><b>vWF antigen/function:</b> platelet adhesion, especially mucosal bleeding.</div><div class="coagtestrow"><b>Fibrinogen:</b> clot substrate; low with consumption/severe synthetic problems, sometimes high during inflammation.</div><div class="coagtestrow"><b>Thrombin time (TT):</b> fibrinogen → fibrin after adding thrombin; affected by low/abnormal fibrinogen and certain anticoagulants.</div><div class="coagtestrow"><b>D-dimer:</b> breakdown of cross-linked fibrin; evidence of clot formation and lysis, not specific for DIC.</div><div class="coagtestrow"><b>FDPs:</b> fibrin(ogen) degradation products; less specific than D-dimer for cross-linked fibrin.</div><div class="coagtestrow"><b>Antithrombin:</b> natural anticoagulant; may fall with consumption, protein loss or reduced synthesis.</div></div></details>'+
   '<details open><summary>🧬 Hemophilia in veterinary patients · A, B and C</summary>'+
  '<p><b>Why it happens:</b> these inherited coagulation-factor deficiencies weaken secondary hemostasis. The platelet plug may form normally, but the fibrin reinforcement is inadequate. Signs include prolonged bleeding after surgery/trauma, deep muscle hematomas, internal hemorrhage or hemarthrosis, especially in severe cases. Severity varies with factor activity.</p>'+
  '<table class="quicktable"><thead><tr><th>Type</th><th>Missing / deficient</th><th>Inheritance and patients</th><th>Typical screening pattern</th></tr></thead><tbody>'+
