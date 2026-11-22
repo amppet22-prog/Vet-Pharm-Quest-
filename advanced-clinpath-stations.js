@@ -154,6 +154,56 @@ const INTRO_STYLE=String.raw`
 .vpqintro .coagfootersteps b{width:100%}
 .vpqintro .coagfootersteps span{font-size:12px;padding:6px 9px;border-radius:20px;background:#e8f0fa}
 @media(max-width:580px){.vpqintro .hemogrid,.vpqintro .coagminigrid,.vpqintro .coagmini{grid-template-columns:1fr}.vpqintro .hemocard.hemoc{grid-column:auto}.vpqintro .coaglessonlead{align-items:flex-start}}
+/* Color-coded coagulation story: vibrant chapter accents, contrast-safe light surfaces */
+.vpqintro.coag-theme .introhero{background:linear-gradient(115deg,#d8eaff 0%,#e7ddff 47%,#ffe6e9 100%);border:2px solid #83b0e4;box-shadow:0 3px 12px rgba(70,91,144,.12)}
+.vpqintro.coag-theme .introhero>b{color:#233b8a;letter-spacing:.035em}
+.vpqintro.coag-theme .pathgrid>.pathcard:first-child{background:linear-gradient(160deg,#ffe3ee,#fff5f8);border:2px solid #e88cab}
+.vpqintro.coag-theme .pathgrid>.pathcard:nth-child(2){background:linear-gradient(160deg,#d9edff,#f1f8ff);border:2px solid #7fb7e6}
+.vpqintro.coag-theme .pathgrid>.pathcard:first-child h4{color:#993755}
+.vpqintro.coag-theme .pathgrid>.pathcard:nth-child(2) h4{color:#175b98}
+.vpqintro.coag-theme .pathgrid+.pathcard{background:linear-gradient(115deg,#e1f7e5,#f4fff4);border:2px solid #86c79c}
+.vpqintro.coag-theme .pathgrid+.pathcard h4{color:#206e45}
+.vpqintro.coag-theme .pathgrid .node{border-width:2px}
+.vpqintro.coag-theme .pathgrid>.pathcard:first-child .node:not(.coagCommon){background:#fff1f6;border-color:#e8a3ba}
+.vpqintro.coag-theme .pathgrid>.pathcard:nth-child(2) .node:not(.coagCommon){background:#eef8ff;border-color:#99c1e5}
+.vpqintro.coag-theme .coaglivinggrid>div{border-width:2px;box-shadow:0 2px 7px rgba(41,74,112,.07)}
+.vpqintro.coag-theme .coaglivinggrid>div:nth-child(1){background:#dcecff;border-color:#75a9e0}
+.vpqintro.coag-theme .coaglivinggrid>div:nth-child(2){background:#fff0c9;border-color:#e8b951}
+.vpqintro.coag-theme .coaglivinggrid>div:nth-child(3){background:#e7dfff;border-color:#aa8ce3}
+.vpqintro.coag-theme .coaglivinggrid>div:nth-child(4){background:#d9f5e5;border-color:#74c195}
+.vpqintro.coag-theme .coaglivinggrid>div b{color:#243d76}
+.vpqintro.coag-theme .factoratlas{padding:13px;border:2px solid #b4b1ed;border-radius:14px;background:linear-gradient(140deg,#f0ecff,#fff 60%)}
+.vpqintro.coag-theme .factoratlas>h3{color:#503c92}
+.vpqintro.coag-theme .factor-scroll{border:2px solid #afa9d6;background:white}
+.vpqintro.coag-theme .factor-scroll th{background:#453e87!important;color:white}
+.vpqintro.coag-theme .factor-scroll tr.factor-extrinsic{background:#dff0ff}
+.vpqintro.coag-theme .factor-scroll tr.factor-intrinsic{background:#fbe5f1}
+.vpqintro.coag-theme .factor-scroll tr.factor-common{background:#e0f5e5}
+.vpqintro.coag-theme .factor-scroll tr.factor-cofactor{background:#f2edff}
+.vpqintro.coag-theme .factor-scroll tr.coagkrow td:first-child{background:#fff0ad;box-shadow:inset 4px 0 #d39b13}
+.vpqintro.coag-theme .factor-scroll td{border-bottom:1px solid #bfcce0}
+.vpqintro.coag-theme .coagprettydetails{border:2px solid #acc2e2;box-shadow:0 2px 9px rgba(43,69,101,.06)}
+.vpqintro.coag-theme .coagprettydetails:has(.coagformula){border-color:#7cb88b;background:linear-gradient(180deg,#e9f9e8,#fff 95px)}
+.vpqintro.coag-theme .coagprettydetails:has(.coagmechanismhead){border-color:#87b4eb;background:linear-gradient(180deg,#e6f1ff,#fff 95px)}
+.vpqintro.coag-theme .coagprettydetails:has(.hemogrid){border-color:#b2a0eb;background:linear-gradient(180deg,#eee6ff,#fff 95px)}
+.vpqintro.coag-theme .coagformula{background:#effbe9;border:1px solid #9fcd99}
+.vpqintro.coag-theme .coagformula span:nth-of-type(1){background:#d6efc5;color:#305a28}
+.vpqintro.coag-theme .coagformula span:nth-of-type(2){background:#ffe4a8;color:#754b12}
+.vpqintro.coag-theme .coagformula span:nth-of-type(3){background:#d7ebff;color:#204f80}
+.vpqintro.coag-theme .coagformula span:nth-of-type(4){background:#e8dfff;color:#503b88}
+.vpqintro.coag-theme .coagminicard{background:#dcedff;border:2px solid #9bc5eb}
+.vpqintro.coag-theme .coagbrakes .coagminicard{background:#ede3ff;border-color:#c1a4e7}
+.vpqintro.coag-theme .coagclean{background:#d9f4e4;border:2px solid #83c4a1}
+.vpqintro.coag-theme .hemocard{border-width:2px;border-top-width:6px;background:#ede7ff}
+.vpqintro.coag-theme .hemocard.hemob{background:#e0f1ff}
+.vpqintro.coag-theme .hemocard.hemoc{background:#e1f7e7}
+.vpqintro.coag-theme .hemotop span{background:#fff5d9;border-color:#e4c36e}
+.vpqintro.coag-theme .hemolab{border-top:2px solid #c3cfdf;color:#233c6c}
+.vpqintro.coag-theme .coagclinical{background:#fff0c9;border-left:5px solid #d69925}
+.vpqintro.coag-theme .coagdontconfuse{background:#e3edff;border-left:5px solid #617ecf}
+.vpqintro.coag-theme .coagtestrow:nth-child(odd){background:#eff6ff}
+.vpqintro.coag-theme .coagtestrow:nth-child(even){background:#f2edff}
+.vpqintro.coag-theme .coagtestrow b{color:#354e90}
 </style>`;
 const COAG_FACTORS=[
 ['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
@@ -170,7 +220,7 @@ const COAG_FACTORS=[
 ['XIII','Fibrin-stabilizing factor','Clot stabilization','XIIIa cross-links fibrin strands into a durable clot','No','May cause delayed bleeding despite normal PT and aPTT']
 ];
 function factorAtlas(){
- const rows=COAG_FACTORS.map(f=>'<tr class="'+(f[4]==='Yes'?'coagkrow':'')+'"><td><b>'+esc(f[0])+'</b>'+(f[4]==='Yes'?' <span class="coagkmark">K</span>':'')+'</td><td><b>'+esc(f[1])+'</b></td><td>'+esc(f[2])+'</td><td>'+esc(f[3])+'</td><td>'+esc(f[5])+'</td></tr>').join('');
+ const rows=COAG_FACTORS.map(f=>'<tr class="'+(f[4]==='Yes'?'coagkrow ':'')+(/Extrinsic/.test(f[2])?'factor-extrinsic':/Intrinsic|Contact/.test(f[2])?'factor-intrinsic':/Common|Clot/.test(f[2])?'factor-common':'factor-cofactor')+'"><td><b>'+esc(f[0])+'</b>'+(f[4]==='Yes'?' <span class="coagkmark">K</span>':'')+'</td><td><b>'+esc(f[1])+'</b></td><td>'+esc(f[2])+'</td><td>'+esc(f[3])+'</td><td>'+esc(f[5])+'</td></tr>').join('');
  return '<section class="factoratlas"><h3>🧬 Complete factor atlas · names + function + expected assay</h3><p>Gold <b>K</b> tags mark vitamin K–dependent clotting factors. This table includes the classic factors <b>I–XIII, except VI</b> (obsolete; factor VI was activated V).</p>'+
  '<div class="factor-scroll"><table class="quicktable"><thead><tr><th>Factor</th><th>Full name</th><th>Where it works</th><th>Job in clot formation</th><th>Deficiency / test clue</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
  '<div class="pathnote"><b>Mnemonic: 10 – 9 – 7 – 2</b> → X, IX, VII, II are the <b>four vitamin K–dependent procoagulant factors</b>. Also vitamin K dependent: <b>proteins C, S and Z</b> (anticoagulant/regulatory proteins). Factor V, factor VIII, fibrinogen and factor XIII are <b>not</b> vitamin K dependent.</div>'+
@@ -212,7 +262,7 @@ function coagExpanded(){
 }
 
 function coagIntro(){
- return '<div class="vpqintro">'+INTRO_STYLE+
+ return '<div class="vpqintro coag-theme">'+INTRO_STYLE+
  '<div class="introhero"><b>🩸 COAG CASCADE LAB · LEARN FIRST</b><p><strong>Platelets build the temporary plug. Coagulation factors reinforce it with fibrin.</strong> PT and aPTT are timed tests of different paths toward the same fibrin finish line. <b>PTT</b> usually refers to the partial thromboplastin time; <b>aPTT</b> is its activated version used routinely in modern screening.</p></div>'+
  coagImageCard()+
  '<div class="pathgrid">'+
