@@ -275,6 +275,21 @@ const INTRO_STYLE=String.raw`
 .vpqintro .gasexplainline p{margin:3px 0 0;line-height:1.5}
 .vpqintro .gasexplainnumber{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;border-radius:50%;background:#547fc2;color:#fff;font-weight:800}
 .vpqintro .gasexplainline:nth-child(3n) .gasexplainnumber{background:#8561bc}
+.vpqintro .gasphysiology{border:2px solid #9cb9e0;background:#f7fbff}
+.vpqintro .gasphintro{background:linear-gradient(110deg,#dff0ff,#e5f9eb);border:1px solid #a9c5da;border-radius:11px;padding:12px;margin:10px 0}
+.vpqintro .gasphintro p{margin:5px 0 0}
+.vpqintro .gasphyscards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.vpqintro .gasphyscard{border:2px solid #a7c5e8;background:#e7f2ff;border-radius:11px;padding:12px}
+.vpqintro .gasphyscard:nth-child(3n + 2){background:#e6f7ec;border-color:#9bcab0}
+.vpqintro .gasphyscard:nth-child(3n){background:#f0e8ff;border-color:#bfabe8}
+.vpqintro .gasphyscard>b{font-size:15px;color:#315386}
+.vpqintro .gasphyscard p{margin:6px 0 0}
+.vpqintro .gaspatientexamples{background:white;border:1px solid #adc6e1;border-radius:11px;padding:12px;margin-top:12px}
+.vpqintro .gaspatientexamples>b{display:block;color:#305986;margin-bottom:6px}
+.vpqintro .gaspatientexamples>div{padding:8px 2px}
+.vpqintro .gaspatientexamples>div+div{border-top:1px solid #d8e3ee}
+.vpqintro .gaspatientexamples p{margin:4px 0}
+@media(max-width:580px){.vpqintro .gasphyscards{grid-template-columns:1fr}}
 </style>`;
 const COAG_FACTORS=[
 ['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
@@ -395,6 +410,7 @@ function gasIntro(){
  gasImageCard()+
  '<div class="introhero"><b>🫧 BLOOD GAS DETECTIVE · LEARN FIRST</b><p><strong>pH = where you ended up, CO₂ = the lung control, HCO₃⁻ = the metabolic/kidney side.</strong> Find the primary disturbance, then ask whether the body is compensating appropriately.</p></div>'+
  '<div class="steps"><div class="step"><b>① pH</b>Acidemia ↓ or alkalemia ↑?</div><div class="step"><b>② Primary</b>Which of CO₂ or HCO₃⁻ explains pH?</div><div class="step"><b>③ Compensate</b>Does the other system respond as expected?</div><div class="step"><b>④ Cause</b>AG, chloride, lactate, ketones + patient</div></div>'+
+ '<details open class="gasconcept gasphysiology"><summary>🧠 What the body is doing · pH, chloride and compensation</summary>'+ '<div class="gasphintro"><b>pH follows the ratio of HCO₃⁻ to dissolved CO₂.</b><p>More bicarbonate relative to CO₂ → higher pH. More CO₂ relative to bicarbonate → lower pH. Read all three measurements together.</p></div>'+ '<div class="gasphyscards">'+ [['🫁 CO₂ · Lungs','CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻. Hypoventilation holds CO₂ in and lowers pH; hyperventilation removes CO₂ and raises pH. Lungs respond quickly.'],['🫘 Bicarbonate · Kidneys','HCO₃⁻ buffers H⁺. Kidneys reclaim filtered bicarbonate and generate new bicarbonate while excreting acid. Diarrhea can lose bicarbonate; renal compensation takes hours to days.'],['🧂 Chloride · Electroneutrality','Cl⁻ often shifts relative to HCO₃⁻ to preserve electrical balance. Bicarbonate loss commonly produces relative hyperchloremia and a normal-anion-gap acidosis; loss or sequestration of Cl⁻ can maintain metabolic alkalosis.'],['💧 Sodium · Water balance','Na⁺ varies with water as well as sodium balance. Na⁺ and Cl⁻ can move together during water shifts. Corrected chloride helps distinguish selective chloride changes from parallel sodium/water changes.'],['⚡ Potassium · Shifts and losses','K⁺ depends on insulin, pH, aldosterone, kidney handling and body stores. Acidosis does not always cause hyperkalemia. Serum K⁺ can look normal or high even with a major total-body deficit in DKA.'],['🧪 Anion gap · Unmeasured ions','AG is often Na⁺ − (Cl⁻ + HCO₃⁻). Unmeasured acids such as lactate, ketones or uremic acids can increase the gap. Low albumin may hide an increased gap.']] .map(x=>'<article class="gasphyscard"><b>'+x[0]+'</b><p>'+x[1]+'</p></article>').join('')+'</div>'+ '<div class="gaspatientexamples"><b>🏥 The same physiology in patients</b>'+ [['Diarrhea / renal tubular acidosis','Lose or cannot retain HCO₃⁻ → pH falls → compensatory faster breathing lowers pCO₂. Relative chloride is often higher.'],['Vomiting / abomasal sequestration','Loss or sequestration of H⁺ and Cl⁻ → metabolic alkalosis. Volume and chloride depletion promote renal sodium retention and K⁺/H⁺ loss; urine can become paradoxically acidic.'],['DKA / lactic acidosis','Unmeasured acids consume HCO₃⁻ and lower pH; the anion gap often rises. Compensatory hyperventilation lowers pCO₂. K⁺ concentration can mask a total-body deficit.'],['Hypoventilation','CO₂ retention lowers pH (respiratory acidosis). Over time kidneys retain/generate bicarbonate, pushing pH back toward normal.']] .map(x=>'<div><strong>'+x[0]+'</strong><p>'+x[1]+'</p></div>').join('')+'</div>'+ '<p class="tiny">These are patterns, not absolute rules. Check compensation, sample type, species-specific intervals, and mixed processes.</p></details>'+
  '<h3>🧭 Which direction do the numbers push pH?</h3><div class="pathgrid">'+
  '<div class="pathcard"><h4>🫁 Lungs · pCO₂</h4><div class="node"><b>Hypoventilate → CO₂ ↑ → pH ↓</b><em>Respiratory acidosis</em></div><div class="node"><b>Hyperventilate → CO₂ ↓ → pH ↑</b><em>Respiratory alkalosis</em></div><p>Breathing can change CO₂ rapidly.</p></div>'+
  '<div class="pathcard"><h4>🫘 Kidneys / metabolism · HCO₃⁻</h4><div class="node"><b>HCO₃⁻ ↓ → pH ↓</b><em>Metabolic acidosis</em></div><div class="node"><b>HCO₃⁻ ↑ → pH ↑</b><em>Metabolic alkalosis</em></div><p>Renal adjustments take longer; acids, GI losses and perfusion matter.</p></div>'+
