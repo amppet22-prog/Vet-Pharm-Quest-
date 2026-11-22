@@ -39,6 +39,13 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<rect x="27" y="209" width="25" height="15" rx="3" fill="#352e65"/><rect x="114" y="209" width="25" height="15" rx="3" fill="#352e65"/>'+
 '</g>'+ 
 '<ellipse cx="163" cy="433" rx="109" ry="25" fill="#dcbcd9"/><path d="M92 350q-8 -55 26 -68h106q32 19 20 67l-13 56H104Z" fill="#b5a5d1" stroke="#8c80b2" stroke-width="8"/><rect x="98" y="355" width="137" height="56" rx="20" fill="#d8c9ed" stroke="#9f91c2" stroke-width="7"/><path d="M118 413v24M215 413v24" stroke="#8b739e" stroke-width="11"/>'+
+// Skills practice nook on the right rear wall, away from the desk and arcade.
+'<g><rect x="722" y="90" width="169" height="112" rx="12" fill="#e8f4f9" stroke="#96b4c5" stroke-width="6"/>'+
+'<rect x="731" y="98" width="151" height="26" rx="9" fill="#fff9ff" stroke="#c8b4d2" stroke-width="2"/>'+
+'<text x="807" y="116" font-family="Arial" text-anchor="middle" font-size="14" font-weight="900" fill="#745d92">CLINICAL SKILLS</text>'+
+'<rect x="738" y="133" width="65" height="54" rx="6" fill="#f8fbff" stroke="#b3c6d3" stroke-width="3"/>'+
+'<rect x="808" y="133" width="65" height="54" rx="6" fill="#fff5fa" stroke="#c7adc7" stroke-width="3"/>'+
+'<text x="771" y="166" text-anchor="middle" font-size="24">💉</text><text x="840" y="166" text-anchor="middle" font-size="24">🩸</text></g>'+
 '<text x="117" y="94" font-family="sans-serif" font-size="14" font-weight="800" fill="#736589">STUDENT LOUNGE</text></svg>';
 }
 art.roomArt=function(k){return k==='study'?lounge():previous(k)};
@@ -53,7 +60,8 @@ function refresh(){
  node.innerHTML='<button type="button" class="vpqLoungeHot vpqLoungeDesk" data-vpqstudyaction="study" aria-label="Study Desk: choose a lecture and start structured review"><span><b>📖 Study Desk</b><small>Learn &amp; review</small></span></button>'+
  '<button type="button" class="vpqLoungeHot vpqLoungeMastery" data-vpqstudyaction="masteryTracker" aria-label="Mastery Tracker: revisit weak concepts"><span><b>🏆 Mastery</b><small>Review progress</small></span></button>'+
  '<button type="button" class="vpqLoungeHot vpqLoungeGames" data-vpqstudyaction="learningHub" aria-label="Play the arcade cabinet: Drug Match, Bug Battles and Exam Boss"><span><b>🕹️ Play Arcade</b><small>Games &amp; challenges</small></span></button>'+
- '<button type="button" class="vpqLoungeExit" data-vpqstudyreturn="1" aria-label="Return to reception">← Reception</button>';
+ '<button type="button" class="vpqLoungeSkills" data-vpqstudyaction="skillsWing" aria-label="Enter the Clinical Skills Wing to practice injections and blood collection">💉 Skills Wing</button>'+
+'<button type="button" class="vpqLoungeExit" data-vpqstudyreturn="1" aria-label="Return to reception">← Reception</button>';
  node.addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.vpqstudyreturn!==undefined)changeRoom('reception');else if(b.dataset.vpqstudyaction)doAction(b.dataset.vpqstudyaction)});
  stage.appendChild(node);
 }
@@ -65,6 +73,7 @@ css.textContent='.vpqStudyLoungeArt{position:absolute;inset:0;width:100%;height:
 '.vpqLoungeHot:hover,.vpqLoungeHot:focus-visible,.vpqLoungeExit:hover,.vpqLoungeExit:focus-visible{border:3px solid #f2b94e;background:#fff1b047;outline:2px solid #fff;box-shadow:0 0 0 3px #ffe1a469}'+
 '.vpqLoungeHot span{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);white-space:normal;min-width:115px;max-width:160px;text-align:center;background:#fffdf5;border:2px solid #687698;color:#303c64;border-radius:13px;padding:6px 8px;font-size:12px;font-weight:900;box-shadow:0 4px 0 #68769830}'+'.vpqLoungeHot b,.vpqLoungeHot small{display:block}.vpqLoungeHot small{font-size:10px;font-weight:700;line-height:1.25;margin-top:2px}'+
 '.vpqLoungeDesk{left:36%;top:53%;width:30%;height:33%}.vpqLoungeMastery{left:29%;top:15%;width:39%;height:36%}.vpqLoungeGames{left:75%;top:52%;width:19%;height:35%}'+
+'.vpqLoungeSkills{position:absolute;left:72%;top:27%;width:17%;padding:6px 7px;pointer-events:auto;border:2px solid #b29bcc;background:#fff9f5;color:#604c82;border-radius:13px;font-size:11px;font-weight:900;box-shadow:0 2px 5px #6a5b8f42;cursor:pointer}.vpqLoungeSkills:hover,.vpqLoungeSkills:focus-visible{background:#fff0cc;border-color:#e5b657}'+
 '.vpqLoungeExit{top:8%;right:2%;padding:6px 10px;border-radius:15px;background:#fffaf0ed;color:#584d70;font-size:11px;font-weight:800}'+
 '@media(max-width:600px){.vpqLoungeHot span{font-size:9px;padding:3px 5px}.vpqLoungeExit{font-size:9px;padding:5px}}';
 document.head.appendChild(css);
