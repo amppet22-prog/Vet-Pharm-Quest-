@@ -29,9 +29,21 @@ const style=document.createElement('style');style.id='vpqReferralStyle';style.te
 '#modalBody .refcase .refsmall{font-size:11px;color:#637a91}'+
 '#modalBody .refcase .refreview{background:#eef8f2;border:1px solid #89b79d}'+
 '@media(max-width:640px){#modalBody .refcase .refgrid{grid-template-columns:1fr}}';
+
+style.textContent+=
+'#modalBody .refcase .refheader{background:#edf5fc;padding:10px 12px}'+
+'#modalBody .refcase .refselect{display:block;width:100%;padding:9px;margin-top:5px;border:1px solid #8caecc;border-radius:8px;background:#fff;color:#294a69;font-size:13px;font-weight:750}'+
+'#modalBody .refcase .refsection{padding:0;overflow:hidden;margin:7px 0;background:#fff}'+
+'#modalBody .refcase .refsection summary{padding:10px 12px;cursor:pointer;font-size:13px;font-weight:900;color:#315b80;background:#f2f7fc;list-style-position:inside}'+
+'#modalBody .refcase .refsection[open]>summary{border-bottom:1px solid #d4e1ed}'+
+'#modalBody .refcase .refsectionbody{padding:10px 12px}'+
+'#modalBody .refcase .refhint{float:right;font-size:10px;color:#71849b;font-weight:500}'+
+'#modalBody .refcase .refgroup{margin:13px 0 2px;font-size:15px}'+
+'#modalBody .refcase .refprotected{padding:10px 12px;border:1px dashed #b4c9db;border-radius:9px;background:#f7fafc;color:#60758b;font-size:12px}'+
+'#modalBody .refcase .refsection .refbox{margin:0;border:0;background:transparent;padding:0}';
 document.head.appendChild(style);
 }
-const report=id=>{const data=reports[id];return '<div class="refbox"><h3>'+data.title+'</h3><table><thead><tr><th>Test</th><th>Patient</th><th>Reference interval</th></tr></thead><tbody>'+data.rows.map(r=>'<tr><td>'+h(r[0])+'</td><td><b>'+h(r[1])+'</b> <b style="color:#af6a32">'+h(r[3])+'</b></td><td>'+h(r[2])+'</td></tr>').join('')+'</tbody></table>'+(data.extra?'<p>'+h(data.extra)+'</p>':'')+'</div>'};
+const report=id=>{const data=reports[id];return '<details class="refbox refsection" open><summary>'+data.title+' <span class="refhint">expand / collapse</span></summary><div class="refsectionbody"><table><thead><tr><th>Test</th><th>Patient</th><th>Reference interval</th></tr></thead><tbody>'+data.rows.map(r=>'<tr><td>'+h(r[0])+'</td><td><b>'+h(r[1])+'</b> <b style="color:#af6a32">'+h(r[3])+'</b></td><td>'+h(r[2])+'</td></tr>').join('')+'</tbody></table>'+(data.extra?'<p>'+h(data.extra)+'</p>':'')+'</div></details>'};
 const work=()=>'<section class="refbox"><h3>Clinical interpretation worksheet</h3><p>After reviewing all laboratory reports, classify the anemia, then rank three differentials and specify the next test for each. Your answers stay editable until submission.</p>'+
 '<label>Anemia classification<textarea data-ref-text="anemia" rows="2" placeholder="Morphology and regeneration status">'+h(state.anemia)+'</textarea></label>'+
 '<div class="refgrid">'+state.ddx.map((d,i)=>'<label>'+(i+1)+'. Ranked differential<input data-ref-ddx="'+i+'" value="'+h(d)+'" placeholder="Your working differential"></label><label>Next diagnostic test / reason<input data-ref-next="'+i+'" value="'+h(state.next[i])+'" placeholder="How will you investigate?"></label>').join('')+'</div>'+
@@ -46,17 +58,19 @@ const review=()=>'<section class="refbox refreview"><h3>🔓 Teaching review —
 '<p><b>Next investigations:</b> Reassess renal values and urine concentration, measure blood pressure and UPC, evaluate the underlying kidney process. EPO physiology and UPC/BP work-up are marked as <em>Added</em> outside the lecture slides in the source.</p>'+
 '<p class="refsmall">Based on uploaded Cases Part 1, Case 1.1; CP1 slide 17 / Minimum Database template. Patient values are invented educational examples. A single encounter alone does not establish CKD chronicity or stage.</p></section>';
 function render(){
-const ready=Object.keys(reports).every(k=>state.opened.includes(k));
-const content='<div class="refcase"><p class="refsmall"><b>REFERRAL FILE 001 · CLINICAL PATHOLOGY · LECTURE 1 · DOG · DDx</b></p>'+
-'<div class="refbox"><h3>PU/PD and weight loss</h3><p><b>Patient:</b> 9-year-old spayed female mixed-breed dog. Two months of polyuria/polydipsia, weight loss and poor appetite; no medications.</p><p><b>Examination:</b> Thin, pale mucous membranes, mild oral ulcers, approximately 5% dehydrated; temperature 38.4 °C.</p></div>'+
-'<p>Open the CBC, chemistry and urinalysis reports in your preferred order. Use species-specific reference intervals; interpret the data yourself.</p>'+
-'<div class="refbuttons">'+Object.keys(reports).map(k=>'<button type="button" data-ref-panel="'+k+'" aria-pressed="'+(state.view===k)+'">'+reports[k].title+(state.opened.includes(k)?' ✓':'')+'</button>').join('')+'</div>'+
-(reports[state.view]?report(state.view):'')+
-(ready?(state.submitted?'<div class="refbox"><h3>Your assessment</h3><p>'+h(state.anemia)+'</p><ol>'+state.ddx.map((x,i)=>'<li>'+h(x)+' — next: '+h(state.next[i])+'</li>').join('')+'</ol><p>'+h(state.notes)+'</p></div>'+review():work()):'<p class="refsmall">Opened '+state.opened.length+'/3 diagnostic reports. Complete the minimum database to unlock your worksheet.</p>')+
-'<div class="refbuttons"><button data-ref-back="1">← Referral patients</button><button data-ref-reset="1">Restart prototype</button></div></div>';
-window.VPQ_REFERRAL_MODAL.show('🔬 Referral Patient — Prototype',content);
+const content='<div class="refcase">'+
+'<div class="refbox refheader"><label for="vpqReferralCasePick"><b>🩺 Referral patient</b></label><select id="vpqReferralCasePick" class="refselect" aria-label="Choose referral patient"><option value="001">Case 001 · Dog · PU/PD and weight loss</option></select><p class="refsmall">Clinical Pathology · Lecture 1 · DDx · Prototype 1 of 1. All source cases remain outside this preview until approved.</p></div>'+
+'<details class="refbox refsection" open><summary>🐾 Patient history & physical examination</summary><div class="refsectionbody"><p><b>Signalment:</b> 9-year-old spayed female mixed-breed dog.</p><p><b>History:</b> Two months of increased drinking and urination, weight loss, and poor appetite. No medications.</p><p><b>Physical examination:</b> Thin body condition; pale mucous membranes; mild oral ulcers; approximately 5% dehydration; temperature 38.4 °C.</p></div></details>'+
+'<h3 class="refgroup">🔬 Ancillary testing · Minimum database</h3><p class="refsmall">All available laboratory results are shown here together. Expand or collapse individual panels as needed. Patient values and reference intervals are preserved from the source case.</p>'+
+Object.keys(reports).map(report).join('')+
+'<details class="refbox refsection" open><summary>📝 Differential diagnosis & diagnostic plan</summary><div class="refsectionbody">'+
+(state.submitted?'<p class="refsmall">Submitted assessment · review is now unlocked.</p><p><b>Your anemia classification:</b> '+h(state.anemia)+'</p><ol>'+state.ddx.map((x,i)=>'<li>'+h(x)+' — <b>Next test:</b> '+h(state.next[i])+'</li>').join('')+'</ol><p>'+h(state.notes)+'</p>':work())+
+'</div></details>'+
+(state.submitted?'<details class="refbox refsection" open><summary>🔓 Interpretation & clinical reasoning</summary><div class="refsectionbody">'+review()+'</div></details>':'<div class="refprotected">🔒 Interpretation, prioritization and explanations unlock only after you submit your differential assessment.</div>')+
+'<div class="refbuttons"><button type="button" data-ref-legacy="1">Existing Clinical Pathology cases</button><button type="button" data-ref-reset="1">Restart prototype</button></div></div>';
+window.VPQ_REFERRAL_MODAL.show('🔬 Referral Patients · Clinical Pathology',content);
 }
-function home(){window.VPQ_REFERRAL_MODAL.show('🔬 Clinical Pathology · Referral Patients','<div class="refcase"><p><b>One approval prototype only.</b> The remainder of the uploaded cases have not been imported.</p><div class="refbox"><h3>Referral File 001 · PU/PD and weight loss</h3><p>Dog · Lecture 1 · Minimum database · DDx</p><div class="refbuttons"><button data-ref-open="1">Open referral →</button><button data-ref-legacy="1">Existing patient cases</button></div></div><p class="refsmall">The title contains no diagnosis. The case review is locked until submission.</p></div>')}
+function home(){render()}
 document.addEventListener('input',e=>{const n=e.target;if(!n.closest?.('.refcase'))return;if(n.hasAttribute('data-ref-text'))state[n.dataset.refText]=n.value;if(n.hasAttribute('data-ref-ddx'))state.ddx[+n.dataset.refDdx]=n.value;if(n.hasAttribute('data-ref-next'))state.next[+n.dataset.refNext]=n.value;save()});
 document.addEventListener('click',e=>{const n=e.target.closest?.('[data-ref-panel],[data-ref-open],[data-ref-back],[data-ref-reset],[data-ref-submit],[data-ref-legacy]');if(!n)return;e.preventDefault();if(n.hasAttribute('data-ref-open'))return render();if(n.hasAttribute('data-ref-back'))return home();if(n.hasAttribute('data-ref-legacy'))return window.VPQ_REFERRAL_MODAL.legacy();if(n.hasAttribute('data-ref-panel')){state.view=n.dataset.refPanel;if(!state.opened.includes(state.view))state.opened.push(state.view);save();return render()}if(n.hasAttribute('data-ref-reset')){if(!confirm('Restart and clear your local prototype answers?'))return;state=fresh();save();return render()}if(n.hasAttribute('data-ref-submit')){if(!state.anemia.trim()||state.ddx.some(x=>!x.trim())||state.next.some(x=>!x.trim()))return alert('Complete the anemia classification and all three differential/next-test pairs first.');state.submitted=true;save();return render()}});
 window.VPQ_CLINPATH_REFERRAL_PILOT={home,open:render};
