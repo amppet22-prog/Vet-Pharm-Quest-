@@ -13,3 +13,14 @@
 .vpq-hospital-l5 .h5-rank-line span{background:#efe5fc;color:#67498a;text-align:center;border-radius:7px;padding:5px;font-weight:900}
 .vpq-hospital-l5 .h5-rank-line b{font-size:13px;min-width:0;line-height:1.4}
 .vpq-hospital-l5 .h5-rank-line button{padding:5px 0;min-width:30px}
+
+/* Compact comparison strip · no extra modal zoom or oversized cards */
+.vpq-hospital-l5 .h5-quicktrend{background:#f6f3ff;border:1px solid #ded5ef;border-radius:11px;padding:9px 11px;margin:8px 0}
+.vpq-hospital-l5 .h5-quicktrend>b{font-size:13px;color:#554578}
+.vpq-hospital-l5 .h5-trend-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:6px;margin-top:7px}
+.vpq-hospital-l5 .h5-trend-items>div{background:#fff;border:1px solid #e2dded;border-radius:8px;padding:7px 8px;min-width:0}
+.vpq-hospital-l5 .h5-trend-items span{display:block;font-size:11px;font-weight:900;color:#685782}
+.vpq-hospital-l5 .h5-trend-items small{display:block;color:#344361;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.vpq-hospital-l5 .h5-trend-note{font-size:11px;color:#667188;display:block;margin-top:7px}
+.vpq-hospital-l5 .h5-case:focus-visible,.vpq-hospital-l5 .h5-choice:focus-visible{outline:3px solid #8f7ac8;outline-offset:2px}
+@media(max-width:560px){.vpq-hospital-l5 .h5-trend-items{grid-template-columns:minmax(0,1fr)}}
