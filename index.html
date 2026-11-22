@@ -933,7 +933,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="toxicology-study-game.js?v=20261108-why2"></script>
 <script src="mechanism-lab-atlas.js?v=20261108-toxlink2"></script>
 <script src="mechanism-lab-phase-a4.js?v=20261117-guideflow1"></script>
-<script src="exam-room-traditional.js?v=20261121-table-patient-help-7"></script>
+<script src="exam-room-traditional.js?v=20261121-universal-25d-8"></script>
 <script src="exam-case-library.js?v=20261110-livecase1"></script>
 <script src="pharmacology-visual-rounds.js?v=20261114-fixbuttons1"></script>
 <script src="pharmacy-nutrition-room.js?v=20261111-visual-rounds1"></script>
@@ -1392,7 +1392,7 @@ function changeRoom(room){
  $('stage').focus({preventScroll:true});
 }
 function renderRoom(){const r=ROOMS[activeRoom];
- const medCaseRoomBtn=$('vpqPharmRoomCaseBtn');if(medCaseRoomBtn)medCaseRoomBtn.hidden=!['exam','treatment'].includes(activeRoom);$('roomTitle').textContent=r.name;$('roomHint').textContent=activeRoom==='isolation'?'Investigate zoonoses, host roles, infection control and reportability.':activeRoom==='exam'?'Move A/D or ←/→ to walk, W/S or ↑/↓ for depth; E interacts near a station. Click equipment directly.':'Walk with A/D or ←/→; E interacts near a station. You can also click the station.';$('mission').textContent={reception:'🏥 Begin your shift',exam:'🐾 Choose a patient',pharmacy:'💊 Learn drug safety',treatment:'❤️ Clinical care',isolation:'🛡️ One Health response',study:'📚 Master your material',clinpath:'🩸 Read the smear'}[activeRoom];$('stage').style.background=r.color; $('stage').dataset.room=activeRoom;
+ const medCaseRoomBtn=$('vpqPharmRoomCaseBtn');if(medCaseRoomBtn)medCaseRoomBtn.hidden=!['exam','treatment'].includes(activeRoom);$('roomTitle').textContent=r.name;$('roomHint').textContent=activeRoom==='isolation'?'Investigate zoonoses, host roles, infection control and reportability.':'Move A/D or ←/→ to walk, W/S or ↑/↓ for depth; E interacts near a station. Click equipment directly.':'Walk with A/D or ←/→; E interacts near a station. You can also click the station.';$('mission').textContent={reception:'🏥 Begin your shift',exam:'🐾 Choose a patient',pharmacy:'💊 Learn drug safety',treatment:'❤️ Clinical care',isolation:'🛡️ One Health response',study:'📚 Master your material',clinpath:'🩸 Read the smear'}[activeRoom];$('stage').style.background=r.color; $('stage').dataset.room=activeRoom;
 let dec=r.decor.map(d=>`<span class="roomdecor" style="left:${d[1]};top:${d[2]}">${d[0]}</span>`).join('');if(activeRoom==='reception'&&state.upgrades.includes('garden'))dec+='<span class="roomdecor" style="left:5%;top:53%">🌷🌼</span>';if(activeRoom==='pharmacy'&&state.upgrades.includes('pharmDeco'))dec+='<span class="roomdecor" style="left:53%;top:22%">🧸</span>';if(activeRoom==='treatment'&&state.upgrades.includes('wardDeco'))dec+='<span class="roomdecor" style="left:68%;top:25%">🪴</span>';if(activeRoom==='reception'&&state.upgrades.includes('certificate'))dec+='<span class="roomdecor" style="left:46%;top:12%">🏆</span>';
 $('scene').innerHTML=window.VPQ_SCENERY.roomArt(activeRoom)+dec+`<div class="roomBanner">${r.name}</div>`+
 (activeRoom==='reception'?'<div class="vpqPatientQueueArt" aria-hidden="true"><span>🐕</span><span>🐈</span><span>🐇</span><small>Next patients</small></div>':'')+
@@ -4597,4 +4597,4 @@ window.addEventListener('load',restoreVisibleRoom,{once:true});
  var saved='normal';try{saved=localStorage.getItem('vpq-reading-size-v1')||'normal'}catch(e){}
  apply(saved==='large'?'large':'normal');
 })();
-</script></body></html>
+</script><script src="hospital-depth-movement.js?v=20261121-shared-depth-1"></script></body></html>
