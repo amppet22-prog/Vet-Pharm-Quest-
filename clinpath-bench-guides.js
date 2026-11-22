@@ -15,9 +15,9 @@ const benches={
  },
  gas:{
   name:'Blood Gas Station',icon:'🫧',sample:'Appropriately handled heparinized whole blood; arterial versus venous sampling matters',
-  method:'Interpret pH with pCO₂ and HCO₃⁻, then check the expected compensation and patient context. Lactate, electrolytes and anion gap add context.',
+  method:'Read pH FIRST: determine acidemia, alkalemia or pH within range. THEN compare pCO₂ and HCO₃⁻ to explain the net pH, check compensation and evaluate anion gap, chloride and patient context. A normal pH can mask mixed disorders.',
   why:'The respiratory system adjusts CO₂ quickly; the kidneys change bicarbonate and acid excretion more slowly. Compensation may move pH toward normal but does not erase the original disorder.',
-  trap:'Air bubbles, delayed analysis, excess liquid heparin and sample type can change results. Venous pO₂ must not be used as a substitute for arterial oxygenation.',
+  trap:'Air exposure: pCO₂ tends to fall and pH rise; pO₂ moves toward room-air tension and may rise OR fall. Delay: cells continue metabolism so pO₂ tends to fall, pCO₂ rise and pH fall. Excess liquid heparin may dilute analytes. Venous pO₂ does not test arterial oxygenation.',
   practice:'advancedGas',learn:'vpqClinpathGuided',learnLabel:'Study acid–base physiology'
  },
  urine:{
@@ -29,9 +29,9 @@ const benches={
  },
  cases:{
   name:'Referral Cases',icon:'📋',sample:'Patient history, physical examination, CBC/chemistry/UA and other indicated diagnostics',
-  method:'Identify the main problem, choose tests that answer a clinical question, then integrate trends, smear findings and species-specific differences.',
+  method:'Start with basic in-house PCV (packed cell volume = RBC fraction) and TS (refractometer total solids, mostly protein) alongside CBC and chemistry when indicated. PCV ↑ + TS ↑ supports hemoconcentration; both ↓ raises concern for blood/protein loss or dilution. Then integrate trends, smear findings and species-specific differences.',
   why:'Multiple laboratory changes often connect through the same physiological compensation or disease mechanism. Prioritize what changes patient care rather than isolated abnormal numbers.',
-  trap:'Do not equate one out-of-range value with a diagnosis; evaluate assay artifacts, sample quality, drugs, species, signalment and the whole patient.',
+  trap:'PCV ↓ with normal TS is nonspecific. Acute hemorrhage may initially have near-normal PCV/TS. Refractometer TS is not interchangeable with analyzer total protein; check plasma appearance, assay artifacts, sample quality and hydration.',
   practice:'advancedCases',learn:'vpqClinpathGuided',learnLabel:'Learn diagnostic foundations'
  },
  microscopy:{
