@@ -1,8 +1,8 @@
 /* Clinical Pathology Referral Patient — approval prototype, source Cases Part 1 Case 1.1 */
 (function(){
 'use strict';
-const KEY='vpq-clinpath-referral-001';
-const fresh=()=>({view:'',opened:[],anemia:'',ddx:['','',''],next:['','',''],notes:'',submitted:false});
+const KEY='vpq-clinpath-referral-001-guided-v2';
+const fresh=()=>({view:'',opened:[],anemia:'',ddx:['','',''],next:['','',''],notes:'',submitted:false,selected:[],lead:'',level:'guided',advancedSubmitted:false});
 let state=fresh();try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Array.isArray(v.ddx))state=Object.assign(fresh(),v)}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
 const h=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -41,13 +41,98 @@ style.textContent+=
 '#modalBody .refcase .refgroup{margin:13px 0 2px;font-size:15px}'+
 '#modalBody .refcase .refprotected{padding:10px 12px;border:1px dashed #b4c9db;border-radius:9px;background:#f7fafc;color:#60758b;font-size:12px}'+
 '#modalBody .refcase .refsection .refbox{margin:0;border:0;background:transparent;padding:0}';
+style.textContent+=
+'#modalBody .refcase{font-size:15px;line-height:1.58;color:#263b55}'+
+'#modalBody .refcase h3{font-size:17px;line-height:1.3}'+
+'#modalBody .refcase .refsmall{font-size:12px}'+
+'#modalBody .refcase .refsection summary{font-size:15px}'+
+'#modalBody .refcase .refgroup{font-size:18px;color:#2a607a}'+
+'#modalBody .refcase table{font-size:14px}'+
+'#modalBody .refcase button{font-size:14px}'+
+'#modalBody .refcase .refhintbox{background:#eaf3ff;border-left:4px solid #76a8db;padding:10px 12px;border-radius:8px;margin:8px 0 12px}'+
+'#modalBody .refcase .reflevel{background:linear-gradient(100deg,#daf5ed,#e7e5fa);border:1px solid #acd9cb;border-radius:10px;font-weight:800;color:#315c66;padding:10px;margin:14px 0 7px}'+
+'#modalBody .refcase .refguided{background:#fafcff;border:2px solid #9fb9d8}'+
+'#modalBody .refcase .refoptions{display:grid;gap:7px}'+
+'#modalBody .refcase .refoption{display:flex;gap:7px;align-items:stretch;border:2px solid #cad9e8;border-radius:10px;background:#fff;padding:6px}'+
+'#modalBody .refcase .refoption.is-selected{border-color:#6c96cf;background:#e9f2ff}'+
+'#modalBody .refcase .refoption.is-lead{box-shadow:inset 4px 0 #769ee3}'+
+'#modalBody .refcase .refoption.is-correct{border-color:#7fb695;background:#eaf7ee}'+
+'#modalBody .refcase .refoption.is-possible{border-color:#d9c470;background:#fff9dc}'+
+'#modalBody .refcase .refoption.is-low{border-color:#e5ad8c;background:#fff3e9}'+
+'#modalBody .refcase .refoption .refoptionselect{flex:1;text-align:left;background:transparent;border:0;padding:8px;min-width:0}'+
+'#modalBody .refcase .refoption .refcheck{font-size:20px;color:#467eb0}'+
+'#modalBody .refcase .refoption .reflead{min-width:85px;white-space:nowrap;background:#f6faff}'+
+'#modalBody .refcase .refshortlist{border-color:#bbceea;background:#f4f7ff}'+
+'#modalBody .refcase .refrank{margin:8px 0;padding-left:27px}'+
+'#modalBody .refcase .refrank li{padding:6px;border-bottom:1px solid #dbe5f1;display:list-item}'+
+'#modalBody .refcase .refrank li>div{display:inline-block;vertical-align:middle}'+
+'#modalBody .refcase .refrankbuttons{float:right;display:flex;gap:4px}'+
+'#modalBody .refcase .refrankbuttons button{padding:2px 9px}'+
+'#modalBody .refcase .refleader{color:#3e6593;font-size:12px}'+
+'#modalBody .refcase .refsubmit{background:#dcefe3;border:2px solid #78b693;color:#245c40;font-weight:900;padding:11px}'+
+'#modalBody .refcase .refphotos{border:2px solid #c9b8e8}'+
+'#modalBody .refcase .refphotos summary{background:#f1eafa}'+
+'#modalBody .refcase .refphotogrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}'+
+'#modalBody .refcase .refphotoplace{min-height:98px;background:#faf7ff;border:2px dashed #cbbada;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;gap:4px}'+
+'#modalBody .refcase .refphotoplace span{font-size:25px}'+
+'#modalBody .refcase .refphotoplace small{font-size:11px;color:#66768d}'+
+'#modalBody .refcase .refresult{border:2px solid #a4ccb5;background:#fafffb}'+
+'#modalBody .refcase .refresultlead{padding:10px 12px;border:2px solid #deb681;background:#fff3df;border-radius:9px}'+
+'#modalBody .refcase .refresultlead.refgood{background:#e7f7eb;border-color:#77b38a}'+
+'#modalBody .refcase .reftablescroll{overflow-x:auto;margin-top:9px;border:1px solid #cedde6;border-radius:9px}'+
+'#modalBody .refcase .refcompare{min-width:730px;font-size:13px}'+
+'#modalBody .refcase .refcompare th{background:#e6eef6;font-size:13px}'+
+'#modalBody .refcase .refcompare td{vertical-align:top;padding:10px}'+
+'#modalBody .refcase .refcompare-best{background:#e7f7ec;border-left:4px solid #6bae7b}'+
+'#modalBody .refcase .refcompare-possible{background:#fff9de;border-left:4px solid #c8a952}'+
+'#modalBody .refcase .refcompare-unlikely{background:#fff0e6;border-left:4px solid #d89a76}'+
+'#modalBody .refcase .refanswer{background:#f1f9f4;border-color:#a4ceaf}'+
+'#modalBody .refcase .refadvanced{border:2px solid #d7c0e7}'+
+'#modalBody .refcase .refadvanced summary{background:#f4edfc}'+
+'@media(max-width:620px){#modalBody .refcase .refphotogrid{grid-template-columns:1fr}#modalBody .refcase .refoption .reflead{min-width:70px}}';
 document.head.appendChild(style);
 }
 const report=id=>{const data=reports[id];return '<details class="refbox refsection" open><summary>'+data.title+' <span class="refhint">expand / collapse</span></summary><div class="refsectionbody"><table><thead><tr><th>Test</th><th>Patient</th><th>Reference interval</th></tr></thead><tbody>'+data.rows.map(r=>'<tr><td>'+h(r[0])+'</td><td><b>'+h(r[1])+'</b> <b style="color:#af6a32">'+h(r[3])+'</b></td><td>'+h(r[2])+'</td></tr>').join('')+'</tbody></table>'+(data.extra?'<p>'+h(data.extra)+'</p>':'')+'</div></details>'};
-const work=()=>'<section class="refbox"><h3>Clinical interpretation worksheet</h3><p>After reviewing all laboratory reports, classify the anemia, then rank three differentials and specify the next test for each. Your answers stay editable until submission.</p>'+
-'<label>Anemia classification<textarea data-ref-text="anemia" rows="2" placeholder="Morphology and regeneration status">'+h(state.anemia)+'</textarea></label>'+
+const candidates=[
+{id:'renal',name:'Anemia associated with chronic renal disease',tier:'best',supports:'Chronic PU/PD, weight loss, renal azotemia, increased phosphorus, and urine that is inadequately concentrated.',against:'A single minimum database cannot prove chronicity or identify the underlying kidney lesion.',test:'Serial renal measurements and USG; renal assessment, blood pressure and UPC.',why:'Renal erythropoietin production may decline with chronic functional renal tissue loss.'},
+{id:'inflammation',name:'Anemia of chronic inflammation',tier:'possible',supports:'Can produce normocytic, normochromic, non-regenerative anemia.',against:'No source of inflammation is identified, and the renal findings demand a more direct explanation.',test:'Review inflammatory history, leukogram and protein findings; investigate a suspected inflammatory source.',why:'Inflammatory mediators restrict iron availability and suppress erythropoiesis.'},
+{id:'marrow',name:'Primary bone marrow hypoplasia or infiltration',tier:'possible',supports:'A marrow disorder can suppress red cell production.',against:'Platelets and WBC are within their supplied intervals; isolated marrow disease is not the strongest explanation for the renal profile.',test:'Review serial CBC and blood film; consider bone marrow examination only if indicated by persistent unexplained findings.',why:'Reduced marrow precursor production can cause insufficient erythrocyte replacement.'},
+{id:'bloodloss',name:'Blood-loss anemia',tier:'unlikely',supports:'May produce low HCT, RBC and hemoglobin.',against:'No described bleeding; the reticulocyte count and smear do not support a regenerative response to substantial ongoing loss.',test:'Review bleeding history and examination; targeted fecal/urinary blood evaluation if clinically indicated.',why:'Blood loss ultimately drives compensatory reticulocytosis when marrow function and timing permit.'},
+{id:'hemolysis',name:'Hemolytic anemia',tier:'unlikely',supports:'Can reduce red cell mass and cause pallor.',against:'No spherocytes or agglutination, and no reticulocytosis or polychromasia in this case.',test:'Recheck smear and markers of hemolysis if suspicion persists.',why:'Accelerated RBC destruction generally provokes marrow regeneration after an appropriate response interval.'}
+];
+const chosen=()=>state.selected.map(id=>candidates.find(x=>x.id===id)).filter(Boolean);
+const guided=()=>{
+const done=!!state.submitted;
+const selected=chosen();
+return '<section class="refbox refguided"><h3>🩺 Differential diagnosis · Select and rank</h3>'+
+'<p>Like the Pathology Differential Center: choose your plausible causes, rank them, and mark one as the <b>★ leading diagnosis</b>. Nothing is graded or revealed until you submit.</p>'+
+'<div class="refhintbox">Choose <b>3 differentials</b> for your shortlist. You can change your selections and use ↑ / ↓ to rank them before submitting.</div>'+
+'<div class="refoptions">'+candidates.map(c=>{
+const active=state.selected.includes(c.id),lead=state.lead===c.id;
+return '<div class="refoption '+(active?'is-selected ':'')+(lead?'is-lead ':'')+(done?(c.tier==='best'?'is-correct':c.tier==='unlikely'?'is-low':'is-possible'):'')+'">'+
+'<button type="button" data-ref-toggle="'+c.id+'" aria-pressed="'+active+'" '+(done?'disabled':'')+' class="refoptionselect"><span class="refcheck">'+(active?'☑':'☐')+'</span> '+h(c.name)+'</button>'+
+'<button type="button" data-ref-lead="'+c.id+'" aria-pressed="'+lead+'" '+(done?'disabled':'')+' class="reflead">'+(lead?'★ Lead':'☆ Lead')+'</button></div>';
+}).join('')+'</div>'+
+'<div class="refbox refshortlist"><h3>📋 Your ranked shortlist</h3>'+
+(selected.length?'<ol class="refrank">'+selected.map((c,i)=>'<li><div><b>'+h(c.name)+'</b>'+(state.lead===c.id?' <span class="refleader">★ Lead</span>':'')+'</div><div class="refrankbuttons"><button type="button" data-ref-up="'+c.id+'" '+(done||i===0?'disabled':'')+' title="Move higher">↑</button><button type="button" data-ref-down="'+c.id+'" '+(done||i===selected.length-1?'disabled':'')+' title="Move lower">↓</button></div></li>').join('')+'</ol>':'<p>Choose options above to build your shortlist.</p>')+
+'<p class="refsmall">'+selected.length+'/3 shortlisted · '+(state.lead?'Leading diagnosis selected':'Set your leading diagnosis using ☆ Lead')+'</p></div>'+
+(!done?'<div class="refbuttons"><button class="refsubmit" type="button" data-ref-guided-submit="1">✓ Submit differential ranking · View comparisons</button></div><p class="refsmall">All options remain neutral before submission. You can attempt Advanced Mode separately afterward.</p>':'<p class="refsmall">Your differential ranking has been submitted. The case comparison appears below.</p>')+
+'</section>';
+};
+const comparison=()=>{
+const lead=candidates.find(c=>c.id===state.lead),good=state.lead==='renal';
+return '<section class="refbox refresult"><h3>📊 Compare your differentials</h3>'+
+'<p class="refsmall">Green = strongest support · Yellow = possible but less supported · Pale orange = evidence weighs against. Your selected lead is marked below.</p>'+
+'<div class="refresultlead '+(good?'refgood':'refreviewlead')+'"><b>Your leading diagnosis:</b> '+h(lead?.name||'Not selected')+'<p>'+(good?'✓ Strongest fit based on the supplied data.':'Review the evidence: another diagnosis better integrates the CBC, chemistry and USG.')+'</p></div>'+
+'<div class="reftablescroll"><table class="refcompare"><thead><tr><th>Differential / priority</th><th>Evidence supporting</th><th>Against / discriminators</th><th>Next test</th></tr></thead><tbody>'+
+candidates.map(c=>'<tr class="refcompare-'+c.tier+'"><td><b>'+(c.tier==='best'?'★ ':c.tier==='possible'?'◇ ':'△ ')+h(c.name)+'</b>'+(state.lead===c.id?'<div class="refsmall">Your lead</div>':'')+'</td><td>'+h(c.supports)+'</td><td>'+h(c.against)+'</td><td>'+h(c.test)+'</td></tr>').join('')+
+'</tbody></table></div><div class="refbox refanswer"><h3>✓ Best-supported diagnosis</h3><p><b>Anemia associated with chronic renal disease</b> is the leading interpretation in the uploaded case. This is a working diagnosis rather than proof of CKD from one time point.</p><h3>🧬 Why the body does this</h3><p>'+h(candidates[0].why)+' The erythrogram identifies the non-regenerative pattern; the renal chemistry and USG supply the physiologic context.</p><h3>🔬 Differential testing</h3><p>Recheck CBC, chemistry and USG, evaluate blood pressure, UPC, history and evidence of chronicity. Do not infer unprovided urine sediment or protein data.</p><p class="refsmall">Source: uploaded Cases Part 1, Case 1.1 · CP1 slide 17 / Minimum Database template. EPO physiology, BP and UPC follow-up were marked as Added beyond the lecture slides.</p></div></section>';
+};
+const advanced=()=>'<details class="refbox refsection refadvanced"><summary>🎓 Advanced Mode · Written differentials and testing plan <span class="refhint">optional challenge</span></summary><div class="refsectionbody"><p>This is the harder version of the case. Write your own anemia classification, ranked differential diagnoses and next diagnostic tests without relying on the multiple-choice options.</p>'+
+'<label>Anemia classification<textarea data-ref-text="anemia" rows="2" placeholder="Describe RBC indices and regenerative response">'+h(state.anemia)+'</textarea></label>'+
 '<div class="refgrid">'+state.ddx.map((d,i)=>'<label>'+(i+1)+'. Ranked differential<input data-ref-ddx="'+i+'" value="'+h(d)+'" placeholder="Your working differential"></label><label>Next diagnostic test / reason<input data-ref-next="'+i+'" value="'+h(state.next[i])+'" placeholder="How will you investigate?"></label>').join('')+'</div>'+
-'<label>Additional thoughts / limitations<textarea data-ref-text="notes" rows="3">'+h(state.notes)+'</textarea></label><div class="refbuttons"><button data-ref-submit="1">Submit assessment & unlock review</button></div><p class="refsmall">No correct diagnosis or rationale is displayed before you submit a complete assessment.</p></section>';
+'<label>Mechanism and uncertainty<textarea data-ref-text="notes" rows="3">'+h(state.notes)+'</textarea></label>'+
+'<p class="refsmall">Written responses are saved locally; this mode does not gate the beginner-level comparison.</p></div></details>';
 const review=()=>'<section class="refbox refreview"><h3>🔓 Teaching review — available after submission</h3>'+
 '<p><b>Source interpretation:</b> Normocytic, normochromic, non-regenerative anemia with azotemia, high phosphorus and inappropriately dilute urine; chronic renal disease is the leading concern.</p>'+
 '<p><b>1. Chronic renal disease-associated anemia:</b> PU/PD, renal biochemical abnormalities, USG 1.012 and non-regenerative anemia favor this interpretation.</p>'+
@@ -59,19 +144,30 @@ const review=()=>'<section class="refbox refreview"><h3>🔓 Teaching review —
 '<p class="refsmall">Based on uploaded Cases Part 1, Case 1.1; CP1 slide 17 / Minimum Database template. Patient values are invented educational examples. A single encounter alone does not establish CKD chronicity or stage.</p></section>';
 function render(){
 const content='<div class="refcase">'+
-'<div class="refbox refheader"><label for="vpqReferralCasePick"><b>🩺 Referral patient</b></label><select id="vpqReferralCasePick" class="refselect" aria-label="Choose referral patient"><option value="001">Case 001 · Dog · PU/PD and weight loss</option></select><p class="refsmall">Clinical Pathology · Lecture 1 · DDx · Prototype 1 of 1. All source cases remain outside this preview until approved.</p></div>'+
+'<div class="refbox refheader"><label for="vpqReferralCasePick"><b>🩺 Referral patient</b></label><select id="vpqReferralCasePick" class="refselect" aria-label="Choose referral patient"><option value="001">Case 001 · Dog · PU/PD and weight loss</option></select><p class="refsmall">Clinical Pathology · Lecture 1 · DDx · Approval prototype 1 of 1.</p></div>'+
 '<details class="refbox refsection" open><summary>🐾 Patient history & physical examination</summary><div class="refsectionbody"><p><b>Signalment:</b> 9-year-old spayed female mixed-breed dog.</p><p><b>History:</b> Two months of increased drinking and urination, weight loss, and poor appetite. No medications.</p><p><b>Physical examination:</b> Thin body condition; pale mucous membranes; mild oral ulcers; approximately 5% dehydration; temperature 38.4 °C.</p></div></details>'+
-'<h3 class="refgroup">🔬 Ancillary testing · Minimum database</h3><p class="refsmall">All available laboratory results are shown here together. Expand or collapse individual panels as needed. Patient values and reference intervals are preserved from the source case.</p>'+
+'<h3 class="refgroup">🧪 Ancillary testing · Minimum database</h3><p class="refsmall">Each laboratory section opens independently. Normal ranges are supplied next to patient values.</p>'+
 Object.keys(reports).map(report).join('')+
-'<details class="refbox refsection" open><summary>📝 Differential diagnosis & diagnostic plan</summary><div class="refsectionbody">'+
-(state.submitted?'<p class="refsmall">Submitted assessment · review is now unlocked.</p><p><b>Your anemia classification:</b> '+h(state.anemia)+'</p><ol>'+state.ddx.map((x,i)=>'<li>'+h(x)+' — <b>Next test:</b> '+h(state.next[i])+'</li>').join('')+'</ol><p>'+h(state.notes)+'</p>':work())+
-'</div></details>'+
-(state.submitted?'<details class="refbox refsection" open><summary>🔓 Interpretation & clinical reasoning</summary><div class="refsectionbody">'+review()+'</div></details>':'<div class="refprotected">🔒 Interpretation, prioritization and explanations unlock only after you submit your differential assessment.</div>')+
+'<details class="refbox refsection refphotos" open><summary>📷 Patient images & diagnostic photographs</summary><div class="refsectionbody"><div class="refphotogrid"><div class="refphotoplace"><span>🩸</span><b>Canine blood-smear photo</b><small>Image to add · normal-appearing RBCs, minimal polychromasia</small></div><div class="refphotoplace"><span>🔬</span><b>Microscopy / laboratory image</b><small>Reserved for supporting photos in future cases</small></div></div><p class="refsmall">No photograph was supplied with this invented patient. These are labeled placeholders, not fabricated findings.</p></div></details>'+
+'<div class="reflevel">🌱 <b>Guided Differential Practice</b> · Multiple choice + ranking</div>'+guided()+
+(state.submitted?comparison():'<div class="refprotected">🔒 The evidence comparison, leading diagnosis, rationale and follow-up tests remain hidden until you submit your ranked choices.</div>')+
+advanced()+
 '<div class="refbuttons"><button type="button" data-ref-legacy="1">Existing Clinical Pathology cases</button><button type="button" data-ref-reset="1">Restart prototype</button></div></div>';
 window.VPQ_REFERRAL_MODAL.show('🔬 Referral Patients · Clinical Pathology',content);
 }
 function home(){render()}
 document.addEventListener('input',e=>{const n=e.target;if(!n.closest?.('.refcase'))return;if(n.hasAttribute('data-ref-text'))state[n.dataset.refText]=n.value;if(n.hasAttribute('data-ref-ddx'))state.ddx[+n.dataset.refDdx]=n.value;if(n.hasAttribute('data-ref-next'))state.next[+n.dataset.refNext]=n.value;save()});
-document.addEventListener('click',e=>{const n=e.target.closest?.('[data-ref-panel],[data-ref-open],[data-ref-back],[data-ref-reset],[data-ref-submit],[data-ref-legacy]');if(!n)return;e.preventDefault();if(n.hasAttribute('data-ref-open'))return render();if(n.hasAttribute('data-ref-back'))return home();if(n.hasAttribute('data-ref-legacy'))return window.VPQ_REFERRAL_MODAL.legacy();if(n.hasAttribute('data-ref-panel')){state.view=n.dataset.refPanel;if(!state.opened.includes(state.view))state.opened.push(state.view);save();return render()}if(n.hasAttribute('data-ref-reset')){if(!confirm('Restart and clear your local prototype answers?'))return;state=fresh();save();return render()}if(n.hasAttribute('data-ref-submit')){if(!state.anemia.trim()||state.ddx.some(x=>!x.trim())||state.next.some(x=>!x.trim()))return alert('Complete the anemia classification and all three differential/next-test pairs first.');state.submitted=true;save();return render()}});
+document.addEventListener('click',e=>{
+const n=e.target.closest?.('[data-ref-toggle],[data-ref-lead],[data-ref-up],[data-ref-down],[data-ref-guided-submit],[data-ref-back],[data-ref-reset],[data-ref-legacy]');
+if(!n||!n.closest('.refcase'))return;e.preventDefault();
+const attr=x=>n.getAttribute(x);
+if(n.hasAttribute('data-ref-toggle')&&!state.submitted){const id=attr('data-ref-toggle');const pos=state.selected.indexOf(id);if(pos>=0){state.selected.splice(pos,1);if(state.lead===id)state.lead=''}else if(state.selected.length<3){state.selected.push(id)}else return alert('Choose up to three differentials. Deselect one to change the shortlist.');save();return render()}
+if(n.hasAttribute('data-ref-lead')&&!state.submitted){const id=attr('data-ref-lead');if(!state.selected.includes(id)){if(state.selected.length>=3)return alert('Choose only three differentials. Remove one before setting a new lead.');state.selected.push(id)}state.lead=id;save();return render()}
+if((n.hasAttribute('data-ref-up')||n.hasAttribute('data-ref-down'))&&!state.submitted){const id=attr(n.hasAttribute('data-ref-up')?'data-ref-up':'data-ref-down'),a=state.selected.indexOf(id),b=a+(n.hasAttribute('data-ref-up')?-1:1);if(a>=0&&b>=0&&b<state.selected.length){[state.selected[a],state.selected[b]]=[state.selected[b],state.selected[a]];save();render()}return}
+if(n.hasAttribute('data-ref-guided-submit')){if(state.selected.length!==3||!state.lead||!state.selected.includes(state.lead))return alert('Select three differentials, rank them, and mark one as ★ Lead before submitting.');state.submitted=true;save();return render()}
+if(n.hasAttribute('data-ref-back'))return home();
+if(n.hasAttribute('data-ref-legacy'))return window.VPQ_REFERRAL_MODAL.legacy();
+if(n.hasAttribute('data-ref-reset')){if(!confirm('Restart and clear the guided shortlist and advanced notes?'))return;state=fresh();save();return render()}
+});
 window.VPQ_CLINPATH_REFERRAL_PILOT={home,open:render};
 })();
