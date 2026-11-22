@@ -14,7 +14,21 @@ let ui=null,mode='gross',tab='lesions',normalSystem='all',filtersOpen=false,scop
 const rich=s=>window.VPQ_PATH_RICH_TEXT?.render?.(s)||h(s);
 const h=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 function edits(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
-function record(i){const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};const entry=Object.assign({},src,official.text||{},draft);const photos=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);if(photos.length)entry.image=photos[0].url;return entry}
+function record(i){
+ const src=base[i],official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(src.id)||{},draft=edits()[src.id]||{};
+ const entry=Object.assign({},src,official.text||{},draft);
+ const photos=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);
+ if(photos.length)entry.image=photos[0].url;
+ // Course curriculum: lecture 78 = ears; lecture 79 = eyes.
+ // This congenital ocular lesion was accidentally assigned to the ear lecture.
+ // Correct only its catalog placement; preserve ID, published content, photos, and drafts.
+ if(/\banophthalmia\b/i.test(String(entry.title||''))&&/\bmicrophthalmia\b/i.test(String(entry.title||''))){
+  entry.lecture='79';
+  entry.organSystem='ocular';
+  entry.system='Eye / Ocular Adnexa';
+ }
+ return entry;
+}
 
 /* Reusable, source-preserving multi-species gross morphology. Independent entries
    are optional; cards without entries retain their original gross paragraphs. */
