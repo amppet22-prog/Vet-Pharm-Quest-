@@ -49,6 +49,7 @@ main #message{font-size:11px;padding:8px;margin:8px 0}
 <h1>Vet Pharm Quest</h1>
 <p style="text-align:center;margin-top:0"><b>Veterinary Learning Hospital · Account Center</b></p>
 <p class="note">Welcome! Sign in, create a free account, or continue as a guest. Your existing game progress stays safe.</p>
+<p class="note" style="background:#f0f8ff;border-color:#bfd9e9;color:#31516d"><strong>📧 New account?</strong> Your confirmation email is sent through <strong>Supabase</strong>, our account sign-in provider. Check your inbox and spam/junk folder for the verification link before signing in.</p>
 <div id="loading" role="status">Connecting to account service…</div>
 <form id="authForm" hidden>
 <label for="email">Email address</label><input id="email" type="email" required autocomplete="email" placeholder="you@example.com">
@@ -105,7 +106,7 @@ $("authForm").onsubmit=async e=>{e.preventDefault();if(busy)return;setBusy(true)
 $("signup").onclick=async()=>{if(busy)return;if(!$("email").reportValidity()||!$("password").reportValidity())return;setBusy(true);try{
  const {data,error}=await client.auth.signUp({email:$("email").value.trim(),password:$("password").value,options:{emailRedirectTo:location.origin+location.pathname}});
  if(error)throw error;session=data.session||null;$("password").value="";
- say(data.session?"Account created! You are signed in.":"Check your email to confirm your account. After confirming, return to this page to sign in.");show();
+ say(data.session?"Account created! You are signed in.":"Check your email for a confirmation link sent by Supabase (our account provider). Check spam or junk too. After confirming, return here to sign in.");show();
 }catch(err){say(err.message||"Sign-up failed.",true);}finally{setBusy(false);}};
 $("forgot").onclick=async()=>{if(busy)return;if(!$("email").reportValidity())return;setBusy(true);try{
  const {error}=await client.auth.resetPasswordForEmail($("email").value.trim(),{redirectTo:location.origin+location.pathname});
