@@ -437,6 +437,12 @@ function hybridHome(){
  '<div class="introactions">'+hybridBtn('home','← Advanced lab')+'</div></div>');
 }
 function hybridCard(t){return '<button class="hybridtestcard '+t.kind+'" type="button" data-vpqadvanced="hybrid-'+t.id+'"><b>'+t.icon+' '+esc(t.name)+'</b><span>'+esc(t.learn)+'</span><small>'+ (t.kind==='inhouse'?'⚡ Point-of-care':'📦 Reference-lab order')+'</small></button>'}
+function hybridChoiceOrder(id,count){
+ const arr=Array.from({length:count},(_,i)=>i);let seed=0;
+ for(let i=0;i<id.length;i++)seed=(Math.imul(seed,31)+id.charCodeAt(i))>>>0;
+ for(let i=count-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[arr[i],arr[j]]=[arr[j],arr[i]];}
+ return arr;
+}
 function hybridTest(id){
  const t=hybridById(id);if(!t)return hybridHome();
  if(!hybrid||hybrid.id!==id)hybrid={id,stage:0,selected:null};
@@ -447,7 +453,7 @@ function hybridTest(id){
  '<details class="gasconcept"><summary>⚠️ Interpretation trap</summary><p>'+esc(t.pitfall)+'</p></details>'+
  '<div class="hybridpatient"><h3>🏥 Patient vignette</h3><p>'+esc(t.patient)+'</p>'+
  (h.stage===0?hybridBtn('hybrid-run',t.kind==='sendout'?'📦 Send sample · View lab return':'⚡ Run point-of-care analyzer'):'<div class="hybridresult"><b>'+(t.kind==='sendout'?'📨 Reference lab report':'📈 Analyzer reading')+'</b><p>'+esc(t.result)+'</p></div>')+
- (h.stage>0?'<h3>'+esc(t.q)+'</h3><div class="hybridanswers">'+t.options.map((o,i)=>'<button type="button" data-vpqadvanced="hybrid-answer-'+i+'" '+(h.stage===2?'disabled':'')+' class="'+(h.stage===2?(i===t.answer?'hybridcorrect':i===h.selected?'hybridwrong':''):'')+'">'+esc(o)+'</button>').join('')+'</div>':'')+
+ (h.stage>0?'<h3>'+esc(t.q)+'</h3><div class="hybridanswers">'+hybridChoiceOrder(t.id,t.options.length).map(i=>'<button type="button" data-vpqadvanced="hybrid-answer-'+i+'" '+(h.stage===2?'disabled':'')+' class="'+(h.stage===2?(i===t.answer?'hybridcorrect':i===h.selected?'hybridwrong':''):'')+'">'+esc(t.options[i])+'</button>').join('')+'</div>':'')+
  (h.stage===2?'<div class="hybridfeedback '+(h.selected===t.answer?'good':'bad')+'"><b>'+(h.selected===t.answer?'✓ Correct interpretation':'Review the physiology')+'</b><p>'+esc(t.explain)+'</p></div>':'')+'</div>'+
  '<div class="introactions">'+hybridBtn('hybrid-home','← Test menu')+(h.stage===2?hybridBtn('hybrid-next','Next diagnostic test →'):'')+'</div></div>';
  return modal(t.name+' · Patient Interpretation',panel);
