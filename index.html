@@ -947,7 +947,7 @@ body.vpq-reading-large .modal #modalBody select{font-size:15px!important}
 <script src="feline-enrichment-game.js?v=20261111-play-enrich1"></script>
 <script src="reception-hallway-and-habitats.js?v=20261120-object-windows-3"></script>
 <script src="clinic-image-backgrounds.js?v=20261118-necropsy-unmasked1"></script>
-<script src="companion-dogs-batch1.js?v=20261121-dogs-only-1"></script>
+<script src="companion-dogs-batch1.js?v=20261121-transparent-filter-2"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
 <script src="avatar-illustrated-choices.js?v=20261120-matched-gallery-1"></script>
 <script src="avatar-uploaded-manifest.js?v=20261121-batch-47-additive"></script>
@@ -2099,6 +2099,23 @@ function vpqCheckDogTransparency(dog){
  picture.src=vpqDogAssetURL(dog.path);
 }
 vpqBatch1Dogs.forEach(vpqCheckDogTransparency);
+// Briefly explain why an uploaded dog might not appear as a selection.
+const vpqOriginalDogGallery=vpqUpdatePetGallery;
+vpqUpdatePetGallery=function(){
+ vpqOriginalDogGallery();
+ const holder=document.getElementById('vpqPetGallery');
+ const form=document.getElementById('avatarForm');
+ if(!holder||!form||form.elements.pet?.value!=='🐕'||!vpqBatch1Dogs.length)return;
+ const hidden=vpqBatch1Dogs.filter(d=>vpqBatchDogStatus.get(d.id)==='opaque').length;
+ const pending=vpqBatch1Dogs.filter(d=>!vpqBatchDogStatus.has(d.id)).length;
+ const note=document.createElement('p');
+ note.className='tiny vpq-batch-transparent-note';
+ note.textContent=pending?
+  'Checking uploaded dog backgrounds… Only transparent companions will be listed.':
+  (hidden?hidden+' uploaded dog image'+(hidden===1?'':'s')+' hidden because their backgrounds are not transparent. Existing dogs remain available.':
+   'Only transparent-background uploaded dogs are displayed.');
+ holder.appendChild(note);
+};
 vpqPetIllustration=function(p){
  const dog=p?.pet==='🐕'&&vpqUsableDogIds.has(p.petBreed)?vpqBatch1Dogs.find(d=>d.id===p.petBreed):null;
  if(!dog)return vpqPreviousPetArtBatch1(p);
