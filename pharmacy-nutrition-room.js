@@ -143,9 +143,28 @@ function drawing(){
  '<g transform="translate(755 119)"><rect x="-12" y="167" width="177" height="14" rx="5" fill="#a6c5bf"/><rect x="4" y="23" width="135" height="144" rx="10" fill="#efd7c9" stroke="#a76b6e" stroke-width="7"/><rect x="15" y="32" width="109" height="126" rx="6" fill="#ffefd8" stroke="#d6a49a" stroke-width="4"/><rect x="26" y="45" width="88" height="30" rx="5" fill="#cc7074"/><text x="70" y="66" font-family="sans-serif" font-size="16" font-weight="900" text-anchor="middle" fill="#fff9f2">CAUTION</text><text x="70" y="116" text-anchor="middle" font-size="41">☣️</text><text x="70" y="143" font-family="sans-serif" text-anchor="middle" font-size="14" font-weight="900" fill="#9a565c">TOXICOLOGY</text><path d="M17 35V154" stroke="#c7928c" stroke-width="5"/></g>'+
  // Door into Mechanism Lab at far right, with vertical wall frame.
  '<g transform="translate(914 150)"><rect x="0" y="0" width="74" height="193" rx="6" fill="#7da5a6" stroke="#517f85" stroke-width="9"/><rect x="9" y="12" width="52" height="162" fill="#d3e9e8"/><text x="35" y="59" text-anchor="middle" font-size="25">🔬</text><text x="35" y="82" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="800" fill="#4a7a83">LAB</text><circle cx="17" cy="121" r="6" fill="#ebc77e"/></g>'+
- // Cute turtle terrarium on a low counter (decor only).
- '<g transform="translate(714 362)"><ellipse cx="90" cy="74" rx="93" ry="15" fill="#6b7a79" opacity=".16"/><rect x="8" y="10" width="155" height="76" rx="9" fill="#bde7e3" fill-opacity=".65" stroke="#7eaca9" stroke-width="7"/><path d="M13 71q69 -20 144 0v10H13Z" fill="#e7d5ad"/><ellipse cx="83" cy="58" rx="37" ry="25" fill="#81b89a" stroke="#568d75" stroke-width="5"/><ellipse cx="104" cy="51" rx="27" ry="21" fill="#6da889" stroke="#4d866c" stroke-width="4"/><circle cx="112" cy="45" r="3" fill="#355b56"/><ellipse cx="49" cy="79" rx="13" ry="6" fill="#669d80"/><ellipse cx="111" cy="77" rx="13" ry="6" fill="#669d80"/><path d="M29 40V17M139 41V15" stroke="#78a993" stroke-width="4"/><ellipse cx="26" cy="22" rx="15" ry="10" fill="#82bd9a"/><ellipse cx="141" cy="19" rx="17" ry="10" fill="#82bd9a"/><text x="87" y="103" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="900" fill="#4d7774">TURTLE ASSISTANT</text></g>'+
-
+ // Aquatic turtle enclosure: basking ramp, glass depth, filter and detailed friendly turtle.
+ '<g transform="translate(714 361)">'+
+ '<ellipse cx="92" cy="93" rx="97" ry="13" fill="#526a66" opacity=".18"/>'+
+ '<path d="M9 9L165 9L173 81L9 87Z" fill="#bdded8" fill-opacity=".48" stroke="#79a7a2" stroke-width="5"/>'+
+ '<path d="M13 60Q84 48 167 59L170 78L12 82Z" fill="#a5d7d4" fill-opacity=".7"/>'+
+ '<path d="M12 75Q75 62 169 74V85H12Z" fill="#e4d4b1"/>'+
+ '<path d="M17 68l29 -23h28l21 22Z" fill="#c9b699" stroke="#9d987e" stroke-width="3"/>'+
+ '<path d="M32 53h57M38 47h42" stroke="#b2a58d" stroke-width="2"/>'+
+ '<g transform="translate(82 37)"><ellipse cx="0" cy="24" rx="34" ry="21" fill="#79ae8e" stroke="#4f8e72" stroke-width="3"/>'+
+ '<path d="M-27 25q3 -20 26 -21q26 1 28 21q-24 17 -54 0" fill="#5e997b" stroke="#447d63" stroke-width="3"/>'+
+ '<path d="M-8 7L0 24L-22 30M6 8L1 24L21 31M-22 30L1 40L21 31" stroke="#91c29e" fill="none" stroke-width="2"/>'+
+ '<ellipse cx="33" cy="24" rx="18" ry="13" fill="#83b99a" stroke="#4a836b" stroke-width="3"/>'+
+ '<circle cx="41" cy="20" r="2.7" fill="#274a40"/><circle cx="42" cy="19" r=".85" fill="#fff"/>'+
+ '<ellipse cx="-26" cy="40" rx="11" ry="6" fill="#6ba684"/><ellipse cx="21" cy="42" rx="12" ry="6" fill="#6ba684"/>'+
+ '</g>'+
+ '<path d="M18 72l-4 -32m0 0q-5 -14 7 -20m144 45l6 -30m0 0q-2 -10 -8 -15" stroke="#67a890" stroke-width="3" fill="none"/>'+
+ '<ellipse cx="17" cy="24" rx="9" ry="6" fill="#7dbc91"/><ellipse cx="159" cy="27" rx="10" ry="7" fill="#7dbc91"/>'+
+ '<g transform="translate(128 -7)"><path d="M0 3v-21h17v21" fill="none" stroke="#809994" stroke-width="4"/><path d="M-2 5h23l-5 11H3Z" fill="#e4d2a8" stroke="#b69e82" stroke-width="2"/><path d="M8 18l-8 12h17Z" fill="#f8e6aa" opacity=".48"/></g>'+
+ '<rect x="19" y="11" width="39" height="9" rx="3" fill="#edf7f0" stroke="#a4bdae"/>'+
+ '<text x="38" y="18" font-size="6" text-anchor="middle" font-family="Arial" font-weight="900" fill="#60857b">AQUATIC</text>'+
+ '<text x="88" y="106" text-anchor="middle" font-family="Arial" font-size="12" font-weight="900" fill="#4d7774">TURTLE ASSISTANT</text>'+
+ '</g>'+
  // Finishing touches: wall chart, supply organizers and floor-level medicine restocking crate.
  '<g transform="translate(402 137)" opacity=".95"><rect x="0" y="0" width="24" height="103" rx="4" fill="#faf7ec" stroke="#aac5b8" stroke-width="2"/><text x="12" y="13" text-anchor="middle" font-family="Arial" font-weight="900" font-size="6" fill="#62847c">RX</text><path d="M4 22h16M4 41h16M4 60h16M4 79h16" stroke="#b9ccbd" stroke-width="2"/><circle cx="8" cy="31" r="3" fill="#edcfbc"/><circle cx="8" cy="50" r="3" fill="#b5cad8"/><circle cx="8" cy="69" r="3" fill="#d4c1da"/><circle cx="8" cy="88" r="3" fill="#aed5b7"/></g>'+
  '<g transform="translate(338 331)"><rect width="66" height="37" rx="4" fill="#cba987" stroke="#a68a77" stroke-width="3"/><path d="M4 8h58M7 21h52" stroke="#e5d2b9" stroke-width="2"/><rect x="10" y="9" width="15" height="11" rx="2" fill="#f8f5ea" stroke="#96afa6"/><rect x="29" y="9" width="12" height="11" rx="2" fill="#ebd5e9" stroke="#b39db7"/><rect x="45" y="9" width="11" height="11" rx="2" fill="#e4efdf" stroke="#9bad99"/><text x="33" y="32" text-anchor="middle" font-family="Arial" font-size="7" font-weight="800" fill="#665a4c">RESTOCK</text></g>'+
@@ -176,6 +195,7 @@ function refresh(){
  stage.querySelector('#vpqPNHotspots')?.remove();
  if(stage.dataset.room!=='pharmacy')return;
  const node=document.createElement('div');node.id='vpqPNHotspots';
+ node.dataset.roomBuild='20261122-v5';
  node.innerHTML='<button type="button" class="vpqPNHot vpqPNDrugs" data-vpqpnaction="pharmacy" aria-label="Open the medication cabinets and drug encyclopedia"><span>💊 Drug Shelves</span></button>'+
  '<button type="button" class="vpqPNStudyLink" data-vpqpn-study="1" aria-label="Go to Student Study Lounge for pharmacology and toxicology lessons, cases and practice">📚 Learn &amp; practice Pharm / Tox in Student Lounge →</button>'+ 
  '<button type="button" class="vpqPNHot vpqPNRounds" data-vpqpnaction="vpqPharmVisualRounds" aria-label="Open clinical pharmacology visual cases and testing"><span>🩺 Clinical Rounds</span></button>'+ 
@@ -186,6 +206,7 @@ function refresh(){
  '<button type="button" class="vpqPNHelp vpqPNHelpRounds" data-vpqpnhelp="rounds" aria-label="What are Clinical Rounds for?" title="About Clinical Rounds">?</button>'+
  '<button type="button" class="vpqPNHelp vpqPNHelpFood" data-vpqpnhelp="food" aria-label="What is Pet Nutrition for?" title="About Pet Nutrition">?</button>'+
  '<button type="button" class="vpqPNHelp vpqPNHelpTox" data-vpqpnhelp="tox" aria-label="What is the Caution Book for?" title="About the Caution Book">?</button>'+
+ '<span class="vpqPNVersion" aria-label="Pharmacy room version">Pharmacy room v5</span>'+ 
  '<button type="button" class="vpqPNHelp vpqPNHelpLab" data-vpqpnhelp="lab" aria-label="What is the Mechanism Lab for?" title="About the Mechanism Lab">?</button>';
  node.addEventListener('click',e=>{const help=e.target.closest('[data-vpqpnhelp]');if(help){e.preventDefault();e.stopPropagation();pharmacyHelp(help.dataset.vpqpnhelp);return}const go=e.target.closest('[data-vpqpn-study]');if(go){changeRoom('study');return}const b=e.target.closest('[data-vpqpnaction]');if(b)doAction(b.dataset.vpqpnaction)});
  stage.appendChild(node);
@@ -200,6 +221,7 @@ style.textContent='.vpqPharmNutritionArt{position:absolute;inset:0;width:100%;he
 '.vpqPNRounds{left:10%;top:68%;width:30%;height:20%;border:2px solid #e4aa91;background:#fff4da26}.vpqPNRounds span{bottom:6%;background:#fff5eb;border-color:#e4b6a8;color:#895568}'+
  '.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:44%;top:23%;width:23%;height:49%}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
 '.vpqPNStudyLink{position:absolute;z-index:6;left:9%;top:10%;width:38%;pointer-events:auto;border:2px solid #8a94c8;border-radius:12px;background:#fffdf2;color:#534c85;padding:7px 10px;font-size:11px;font-weight:900;box-shadow:0 3px 8px #35436633;cursor:pointer}.vpqPNStudyLink:hover,.vpqPNStudyLink:focus-visible{background:#fff2c7;outline:2px solid #f5c66f}'+
+'.vpqPNVersion{position:absolute;right:2%;bottom:2%;pointer-events:none;font-size:9px;font-weight:900;color:#416b65;background:#f2fff4dd;border:1px solid #9ebbb2;border-radius:6px;padding:2px 5px;z-index:8}'+
 '/* Small floating question marks explain each interactable section without blocking entry. */'+
 '.vpqPNHelp{position:absolute;pointer-events:auto;z-index:9;width:24px;height:24px;padding:0;display:grid;place-items:center;border:2px solid #79a7ac;border-radius:50%;background:#fcfffa;color:#276775;font-size:15px;font-weight:1000;box-shadow:0 2px 5px #254a4a30;transform:none!important;line-height:1;cursor:help}'+
 '.vpqPNHelp:hover,.vpqPNHelp:focus-visible{background:#d6f3ed;outline:2px solid #447f86;outline-offset:2px}'+
