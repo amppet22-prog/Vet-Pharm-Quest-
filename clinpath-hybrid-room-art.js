@@ -47,13 +47,31 @@ function vines(){
  [[29,23,-45],[49,28,52],[73,21,-46],[92,24,50],[115,20,-47],[971,22,46],[947,26,-53],[926,21,45],[900,25,-50],[882,19,48],[17,53,-43],[26,75,52],[16,101,-45],[981,53,43],[976,79,-52],[984,105,43]].forEach((v,i)=>s+=leaf(v[0],v[1],v[2],i%3===0?'#8ac7aa':i%3===1?'#b0dabb':'#9ccead'));
  return s+'</g>';
 }
+function hybridProps(){
+ let s='';
+ // Small hybrid diagnostic counter: one compact point-of-care unit and a
+ // distinct specimen shipping tray on the same bay.
+ s+=analyzer(510,245,67,83,['LAC 2.1','iCa 1.25'])+
+ R(581,245,52,75,'#fff6f1','#c8a6c0',8)+
+ R(588,253,39,28,'#ddccf6','#ae98ce',5)+
+ T(607,267,'SEND',11,'#624c89')+T(607,280,'OUT',10,'#624c89')+
+ R(587,289,41,21,'#f8fcff','#98b1ce',3)+T(607,303,'LAB',11,'#5b76a4')+
+ tubes(585,305,2,'#a983c7',.48)+
+ R(524,331,94,10,'#c7d7e9','#a0afc9',4)+
+ T(573,354,'LACTATE · iCa · T4',9,'#6d5b95');
+ return s;
+}
 function props(){
  let s='';
- // Credible, distinct instrument silhouettes, not branded copies
+ // Keep the original instruments recognizable; horizontally compress each
+ // bay independently so the sixth, hybrid bay has its own footprint.
+ s+='<g transform="translate(-10 0) scale(.82 1)">';
  s+=analyzer(38,238,89,88,['PT 12.4 s','aPTT 29 s'])+tubes(142,263,3,'#61a8e7',.86)+R(140,316,43,22,'#fffcfa','#c9b6c3',3)+T(161,330,'PT/aPTT',9);
+ s+='</g><g transform="translate(-8 0) scale(.82 1)">';
  s+=analyzer(235,237,110,97,['pH 7.32','pCO₂ 52','HCO₃ 26'])+R(356,255,18,60,'#f6f9fd','#92b9d5',5)+P('M346 330L389 330','#8eabd3',7);
  // Urinalysis: visually distinct analyzer, capped urine cup, DIP bottle and
  // multicolor test strip, compact centrifuge and SG handheld refractometer.
+ s+='</g><g transform="translate(-5 0) scale(.82 1)">';
  s+=analyzer(429,237,70,93,['UA','SCAN'])+
  R(504,285,28,43,'#fff6bd','#c4a88d',7)+R(502,281,32,10,'#f1d18d','#bd9f7e',4)+
  '<path d="M508 300H528V323H508Z" fill="#f1cc69" opacity=".76"/>'+
@@ -76,13 +94,19 @@ function props(){
  R(496,324,49,11,'#6694b9','#4f739b',6)+R(497,325,14,9,'#43587b','#3d4b73',4)+
  R(529,324,13,11,'#badbeb','#779ab9',3)+R(542,326,16,7,'#e4f3f4','#809bb6',2)+'</g>'+
  T(520,344,'SG',9,'#756c96');
+ s+='</g>';
+ s+=hybridProps();
+ s+='<g transform="translate(161 0) scale(.82 1)">';
  s+=R(630,237,114,76,'#e3ebf9','#839bc0',8)+R(639,245,96,55,'#f7fbff','#b6c8e2',5)+
  T(684,262,'PATIENT',12,'#6581ae')+P('M648 281L667 272L677 284L693 269L725 275','#a4b3ce',3)+
  R(680,313,22,9,'#98b5d4','#809ab8',3)+R(653,320,74,8,'#cddbea','#a9bad1',3)+
  R(747,254,25,66,'#fff0d1','#ceafd2',5)+T(760,272,'CASE',9,'#9b81ad');
+ s+='</g><g transform="translate(164 0) scale(.82 1)">';
  s+=scope(816,247,.88)+scope(910,260,.76)+R(868,323,41,20,'#eadff2','#b59fce',4)+T(888,337,'SLIDES',9)+tubes(950,295,2,'#b294d4',.67);
+ s+='</g>';
  return s;
 }
+
 function decor(){
  let s='';
  // Actual coded bookshelf with books and LEARN title, plus hanging plants
@@ -106,18 +130,19 @@ function decor(){
  return s;
 }
 function draw(){
- let s='<svg class="vpqSpecArt vpqHybridLabSvg" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Cozy veterinary referral lab with coagulation, blood gas, urinalysis, patient cases, microscopy, reference books and clinical equipment">'+
+ let s='<svg class="vpqSpecArt vpqHybridLabSvg" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Veterinary referral laboratory with six visible diagnostic benches including coagulation, blood gas, urinalysis, lactate and ionized calcium send-out counter, referral patients and microscopy">'+
  '<defs><linearGradient id="vpqHybridWall" x2="0" y2="1"><stop stop-color="#fbf6ff"/><stop offset="1" stop-color="#eaf6fc"/></linearGradient><linearGradient id="vpqHybridFloor" x2="0" y2="1"><stop stop-color="#e6ddeb"/><stop offset="1" stop-color="#c9c1e0"/></linearGradient><filter id="vpqHybridShadow"><feDropShadow dx="1" dy="3" stdDeviation="4" flood-color="#776a95" flood-opacity=".18"/></filter></defs>'+
  R(0,0,1000,500,'url(#vpqHybridWall)','none',0)+
  '<path d="M0 353H1000V500H0Z" fill="url(#vpqHybridFloor)"/>'+
  P('M0 353H1000M0 446H1000M140 353L87 500M325 353L303 500M500 353V500M675 353L700 500M860 353L915 500','#fff8ff',2)+
  '<g filter="url(#vpqHybridShadow)">'+R(168,12,664,63,'#fffafd','#b493d0',28)+T(500,52,'ADVANCED CLINICAL PATHOLOGY',29,'#684b8b')+'</g>'+
  decor()+'<g filter="url(#vpqHybridShadow)">'+
- frame(22,'Coagulation','PT/aPTT questions','#fce9f5','#c99ec4')+
- frame(219,'Blood Gas','Acid–base practice','#eaf7fb','#99c6de')+
- frame(416,'Urinalysis','UA + sediment cases','#fff4e7','#e1ba99')+
- frame(613,'Referral Cases','Diagnostic workups','#f1edfc','#bca6dc')+
- frame(810,'Microscopy','Smear image ID','#e9f8f3','#9bcdbb')+
+ '<g transform="translate(8 0) scale(.82 1)">'+frame(0,'Coagulation','PT/aPTT questions','#fce9f5','#c99ec4')+'</g>'+
+ '<g transform="translate(172 0) scale(.82 1)">'+frame(0,'Blood Gas','Acid–base practice','#eaf7fb','#99c6de')+'</g>'+
+ '<g transform="translate(336 0) scale(.82 1)">'+frame(0,'Urinalysis','UA + sediment cases','#fff4e7','#e1ba99')+'</g>'+
+ '<g transform="translate(500 0) scale(.82 1)">'+frame(0,'Hybrid Lab','Lactate · iCa · send-out','#ece8fc','#ad99d4')+'</g>'+
+ '<g transform="translate(664 0) scale(.82 1)">'+frame(0,'Referral Cases','Diagnostic workups','#f1edfc','#bca6dc')+'</g>'+
+ '<g transform="translate(828 0) scale(.82 1)">'+frame(0,'Microscopy','Smear image ID','#e9f8f3','#9bcdbb')+'</g>'+
  props()+'</g>'+
  '<ellipse cx="500" cy="411" rx="151" ry="13" fill="#e4cae4" opacity=".7"/>'+
  R(78,412,844,83,'#fffaff','#b6a2d5',19)+
