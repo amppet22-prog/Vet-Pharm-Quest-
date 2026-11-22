@@ -5132,18 +5132,27 @@ vpqUnifiedCompanionStyle.textContent=
  '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-pet-svg{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;flex:none!important;margin:0!important;transform:none!important}'+
  '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-companion-placeholder{width:100%!important;height:100%!important;min-height:0!important;font-size:68px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important}'+
  '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-companion-placeholder small{font-size:10px!important}'+
-/* LOCKED PET POSITION: anchor to veterinarian's LEFT EDGE. Do not reintroduce petX lag, pixel offsets, or shop-dependent movement. The 9px gap is measured between the companion container and avatar left edge. */
-/* Walkable hospital: stable, floor-anchored pet next to the veterinarian, never room-sized. */
- '#stage>#petSprite.petSprite{position:absolute!important;bottom:19%!important;transform:translateX(calc(-100% - 9px))!important;transform-origin:center bottom!important;width:104px!important;height:106px!important;max-width:104px!important;max-height:106px!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;box-sizing:border-box!important}'+
+/* OWNER APPROVED COMPANION SCALING / FLOOR CONTRACT, 2026-11-22
+ * IMPORTANT: Change these category sizes only on explicit user request.
+ * The companion is visually adjacent to the veterinarian, grounded on the SAME
+ * 17% floor line, without a card background. Artwork may have transparent
+ * padding: container edges are intentionally allowed to overlap 25px.
+ * These rules affect only the walkable stage, NOT selection, previews or shop.
+ */
+ '#stage>#petSprite.petSprite{--vpq-pet-w:146px;--vpq-pet-h:150px;position:absolute!important;bottom:17%!important;transform:translateX(calc(-100% + 25px))!important;transform-origin:center bottom!important;width:var(--vpq-pet-w)!important;height:var(--vpq-pet-h)!important;max-width:var(--vpq-pet-w)!important;max-height:var(--vpq-pet-h)!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;box-sizing:border-box!important;pointer-events:none!important;transition:left .08s linear!important}'+
+ '#stage>#petSprite.petSprite[data-companion-category="cat"],#stage>#petSprite.petSprite[data-companion-category="pocket"]{--vpq-pet-w:112px;--vpq-pet-h:116px}'+
+ '#stage>#petSprite.petSprite[data-companion-category="exotics"],#stage>#petSprite.petSprite[data-companion-category="avians"]{--vpq-pet-w:124px;--vpq-pet-h:128px}'+
+ '#stage>#petSprite.petSprite[data-companion-category="horse"],#stage>#petSprite.petSprite[data-companion-category="ruminants"]{--vpq-pet-w:188px;--vpq-pet-h:176px}'+
+ '#stage>#petSprite.petSprite[data-companion-category="legendary"]{--vpq-pet-w:158px;--vpq-pet-h:160px}'+
  '#stage>#petSprite.petSprite>.vpq-companion-art,'+
  '#stage>#petSprite.petSprite>.vpq-pet-art,'+
  '#stage>#petSprite.petSprite>.vpq-batch-dog-image,'+
- '#stage>#petSprite.petSprite>.vpq-pet-svg{display:block!important;position:static!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;flex:none!important;margin:0!important;transform:none!important}'+
+ '#stage>#petSprite.petSprite>.vpq-pet-svg{display:block!important;position:static!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;flex:none!important;margin:0!important;transform:none!important;background-color:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}'+
  '#stage>#petSprite.petSprite>.vpq-companion-placeholder{display:flex!important;width:100%!important;height:100%!important;min-height:0!important;justify-content:center!important;align-items:center!important;font-size:56px!important;line-height:1!important}'+
  '#stage>#petSprite.petSprite>.vpq-companion-placeholder small{display:none!important}'+
 /* Use the exact original atlas slicing when an old starter sprite is displayed. */
  '.vpq-companion-figure .vpq-pet-art,.vpq-story-stage .vpq-pet-art,#stage #petSprite .vpq-pet-art{background-size:800% 400%!important;background-repeat:no-repeat!important}'+
- '@media(max-width:650px){.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,.vpq-story-maker .vpq-story-stage>.vpq-matched-pet{width:115px!important;height:126px!important;max-width:42%!important}#stage>#petSprite.petSprite{width:84px!important;height:88px!important;max-width:84px!important;max-height:88px!important}}';
+ '@media(max-width:650px){.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,.vpq-story-maker .vpq-story-stage>.vpq-matched-pet{width:115px!important;height:126px!important;max-width:42%!important}#stage>#petSprite.petSprite{--vpq-pet-w:118px;--vpq-pet-h:121px;transform:translateX(calc(-100% + 18px))!important}#stage>#petSprite.petSprite[data-companion-category="cat"],#stage>#petSprite.petSprite[data-companion-category="pocket"]{--vpq-pet-w:90px;--vpq-pet-h:95px}#stage>#petSprite.petSprite[data-companion-category="horse"],#stage>#petSprite.petSprite[data-companion-category="ruminants"]{--vpq-pet-w:148px;--vpq-pet-h:148px}#stage>#petSprite.petSprite[data-companion-category="exotics"],#stage>#petSprite.petSprite[data-companion-category="avians"]{--vpq-pet-w:106px;--vpq-pet-h:111px}#stage>#petSprite.petSprite[data-companion-category="legendary"]{--vpq-pet-w:126px;--vpq-pet-h:133px}}';
 document.head.appendChild(vpqUnifiedCompanionStyle);
 
 /* Direct access to uploaded companion library. This intentionally does NOT
