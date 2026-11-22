@@ -4474,6 +4474,7 @@ function vpqPharmRoomCasesHub(lecture='all'){
   '<div class="vpqPharmMedCaseGrid">'+cards+'</div>'+
   '<div class="buttonrow"><button data-vpq-medcases-library="'+safe(chosen)+'">📋 Browse all patient charts</button><button data-vpqlfhome="1">← Learning Center</button></div>');
 }
+window.VPQ_PHARM_ROOM_CASES_HUB=vpqPharmRoomCasesHub;
 $('vpqPharmRoomCaseBtn')?.addEventListener('click',()=>vpqPharmRoomCasesHub());
 $('modalBody').addEventListener('click',event=>{
  const button=event.target.closest('[data-vpq-medcases-lecture],[data-vpq-medcases-start],[data-vpq-medcases-original],[data-vpq-medcases-library]');
