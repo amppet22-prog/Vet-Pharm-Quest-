@@ -245,6 +245,7 @@ const views={start,pcv,cbc,leuko,platelets,chem,renal,acid,calcium,extra,practic
 function ensureAcademyApi(){if(!api)api={body:document.getElementById('modalBody'),showModal:(title,html)=>window.VPQ_REFERRAL_MODAL?.show?.(title,html)};return api}
 function open(id='start'){
  ensureAcademyApi();if(!api?.showModal)return false;
+ if(id==='pcv')return window.VPQ_DIAGNOSTIC_MASTER?.open?.('pcv');
  current=views[id]?id:'start';
  const s=S.find(x=>x.id===current);
  api.showModal('🔬 Advanced Clinical Pathology · '+s.name,
@@ -252,7 +253,7 @@ function open(id='start'){
  '<div class="vra-tabs">'+S.map(x=>'<button type="button" data-vpq-report="'+x.id+'" aria-current="'+(current===x.id)+'">'+x.icon+' '+x.name+'</button>').join('')+'</div>'+
  '<div class="vra-kicker"><b>📚 Learn First → Interpret Trends → Why the Body Responds → Patient Workups.</b> Course-guided notes with compact expandable detail.</div>'+
  views[current]()+detailedExtras(current)+sources+
- '<div class="vra-btns"><button type="button" data-vpq-report-action="species-cbc">🐾 Species-specific CBC</button><button type="button" data-vpq-report-action="species-chem">🧪 Species-specific Chemistry</button><button type="button" data-vpq-report-action="multistage">🏥 Multistage Workups</button>'+link('start','🧭 Overview')+'<button type="button" data-vpq-report-action="classic">🩸 CBC & Chemistry tests</button><button type="button" data-vpq-report-action="hybrid">⚡ In-house / Send-out analyzer</button><button type="button" data-vpq-report-action="cases">🐾 Referral patients</button></div></div>');
+ '<div class="vra-btns"><button type="button" data-vpq-report-action="classic">← CBC & Chemistry workstation</button></div></div>');
  return true;
 }
 function handleAcademyClick(event){
@@ -291,5 +292,5 @@ function init(context){
  if(target.dataset.vpqReportAction==='cases')return window.VPQ_CLINPATH_REFERRAL_PILOT?.home?.()||window.VPQ_ADVANCED_LAB?.home?.();
  });
 }
-return Object.freeze({init,open});
+return Object.freeze({init,open,pcvMarkup:()=>css+'<div class="vra">'+pcv()+'</div>'});
 })();
