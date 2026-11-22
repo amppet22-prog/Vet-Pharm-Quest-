@@ -34,7 +34,6 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<rect x="677" y="327" width="21" height="24" rx="4" fill="#dfb1ce"/><path d="M698 333q14 -4 9 9 -2 6 -9 3" fill="none" stroke="#c69bbd" stroke-width="4"/>'+
 '</g>'+ 
 // Built-in small coffee maker atop the fitted kitchenette; upgraded by the studio.
-'<g transform="translate(352 223) scale(1.12)"><rect width="32" height="31" rx="5" fill="#a7c4c5" stroke="#879ea5" stroke-width="3"/><rect x="5" y="4" width="22" height="10" rx="3" fill="#eaf4f1"/><path d="M15 16v7" stroke="#fff" stroke-width="4"/><path d="M8 23h16l-3 6H11Z" fill="#f9eee7"/><circle cx="26" cy="18" r="2" fill="#e5c779"/></g>'+
 '<g transform="translate(771 228)">'+
 '<ellipse cx="88" cy="235" rx="92" ry="18" fill="#443d69" opacity=".23"/>'+
 '<path d="M17 23L49 4H159L175 25V208L156 229H16Z" fill="#56478d" stroke="#352f65" stroke-width="7"/>'+
@@ -105,6 +104,7 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<text x="94" y="51" font-family="Arial" font-size="10" font-weight="900" fill="#887083" text-anchor="middle">STORAGE</text></g>'+
 // A lit window and an actual sill for the player-selected plant collection.
 '<g><rect x="268" y="90" width="147" height="133" rx="12" fill="#faf6eb" stroke="#c5a6c8" stroke-width="6"/><rect x="276" y="99" width="132" height="107" rx="6" fill="#cde8f0"/><path d="M276 174q32 -20 67 1t65 -5v36H276Z" fill="#a2cdb7"/><path d="M341 99v108M276 151h132" stroke="#fffdf9" stroke-width="7"/><rect x="257" y="211" width="166" height="12" rx="5" fill="#cba89d" stroke="#aa8d94" stroke-width="3"/><text x="341" y="84" font-family="Arial" font-size="11" text-anchor="middle" font-weight="900" fill="#79658b">GREENHOUSE WINDOW</text></g>'+
+'<g transform="translate(352 223) scale(1.12)"><rect width="32" height="31" rx="5" fill="#a7c4c5" stroke="#879ea5" stroke-width="3"/><rect x="5" y="4" width="22" height="10" rx="3" fill="#eaf4f1"/><path d="M15 16v7" stroke="#fff" stroke-width="4"/><path d="M8 23h16l-3 6H11Z" fill="#f9eee7"/><circle cx="26" cy="18" r="2" fill="#e5c779"/></g>'+
 '<g font-family="Arial" font-weight="900" text-anchor="middle"><text x="572" y="77" font-size="12" fill="#735893">PHARMACOLOGY • TOXICOLOGY</text></g>'+
 '<text x="122" y="95" font-family="sans-serif" font-size="13" font-weight="800" fill="#736589">STUDENT LIBRARY</text></svg>';
 }
