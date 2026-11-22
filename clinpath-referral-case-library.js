@@ -60,14 +60,15 @@ const state=()=>progress[current]||(progress[current]={answers:{},selected:[],le
 
 const catalog=[
 {id:'001',title:'Dog · PU/PD and weight loss',kind:'DDx',lecture:1,exam:1,focus:'Non-regenerative anemia · renal interpretation',species:'🐶'},
-...cases.map(c=>({id:c.id,title:c.title,kind:c.kind,lecture:Number(c.id.split('.')[0]),exam:Number(c.id.split('.')[0])<=11?1:2,focus:c.kind==='DDx'?'Interpret labs · rank differentials':'Interpret labs · single best answer',species:c.title.startsWith('Horse')?'🐴':c.title.startsWith('Cat')?'🐱':'🐶'}))
+...cases.map(c=>({id:c.id,title:c.title,kind:c.kind,lecture:Number(c.id.split('.')[0]),exam:Number(c.id.split('.')[0])<=11?1:2,focus:c.kind==='DDx'?'Interpret labs · rank differentials':'Interpret labs · single best answer',species:c.title.startsWith('Horse')||c.title.startsWith('Foal')?'🐴':c.title.startsWith('Cat')?'🐱':'🐶'}))
 ];
 let examFilter='all';
 function home(){
  const counts={done:0};
  const grouped=examFilter==='all'?catalog:catalog.filter(c=>String(c.exam)===examFilter);
  const cards=grouped.map(c=>{
-  const p=c.id==='001'?null:progress[c.id];
+  let masterProgress=null;try{masterProgress=JSON.parse(localStorage.getItem('vpq-clinpath-referral-001-guided-v2')||'null')}catch(e){}
+  const p=c.id==='001'?(masterProgress?{answers:masterProgress.interpret||{},submitted:masterProgress.submitted,advanced:masterProgress.advancedSubmitted}:null):progress[c.id];
   const answered=p?Object.values(p.answers||{}).filter(a=>a?.checked).length:0;
   const status=p&&(p.submitted||p.advanced)?'Reviewed':answered?'In progress':'Not started';
   return '<button type="button" class="refcatalogcard" data-clp-open="'+h(c.id)+'" aria-label="Open Case '+h(c.id)+'">'+
