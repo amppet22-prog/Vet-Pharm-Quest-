@@ -238,6 +238,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 14",
       "curated": true
+    },
+    {
+      "prompt": "What is the MOA for hydralazine and why it is only used in emergency situations?",
+      "answer": "It decreases Ca release from the SR and increases NO sensitivity and opens K+ channgels in vascular smooth muscle. It causes so much hypotension that the baroreflex leads to tachycardia.",
+      "why": "Another anti-hypertensive drug is Sodium nitroprusside, as it is a NO donor activating the NANC pathway, so you get vasodilation, which is another emergency option.",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwrbhezi-x3qnp",
+      "domain": "pharmacology",
+      "lecture": "Lecture 14",
+      "curated": true
     }
   ],
   "hidden": []
