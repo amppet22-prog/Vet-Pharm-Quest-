@@ -22,8 +22,10 @@ function find(id){return tests.find(t=>t.id===id)}
 const css='<style>.vdt{font-size:15px;font-weight:600;line-height:1.48}.vdt *{box-sizing:border-box}.vdt h3{font-size:16px;font-weight:800;margin:7px 0}.vdt p{margin:6px 0}.vdt .vdt-hero{background:#e7f1fc;border-radius:10px;padding:12px}.vdt .vdt-row{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.vdt button{font-size:14px;font-weight:750;white-space:normal}.vdt .vdt-card{border:1px solid #c5d8eb;border-radius:10px;padding:11px;background:#fbfdff;margin:8px 0}.vdt .vdt-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:9px}.vdt .vdt-tile{display:block;text-align:left;min-height:95px;border:1px solid #bcd1ec;background:#f7faff;border-radius:10px;padding:9px}.vdt .vdt-tile b{font-size:14px}.vdt .vdt-tile small{font-size:12px;font-weight:600;display:block;margin-top:5px}.vdt table{border-collapse:collapse;width:100%;font-size:13px;font-weight:600}.vdt th,.vdt td{border-bottom:1px solid #d9e4f1;padding:8px;text-align:left;vertical-align:top}.vdt th{background:#e3effa}.vdt details{border:1px solid #cbddeb;border-radius:10px;padding:8px;margin:8px 0}.vdt summary{font-size:15px;font-weight:800;cursor:pointer}.vdt .vdt-increase{border-left:4px solid #e09e4d;background:#fff6e9}.vdt .vdt-decrease{border-left:4px solid #5899d0;background:#eef6fc}.vdt .vdt-answer{display:block;width:100%;text-align:left;margin:5px 0}.vdt .vdt-correct{background:#e9f7e9;border:2px solid #4baf7c}.vdt .vdt-wrong{background:#fff0d7;border:2px solid #e6a54b}.vdt .vdt-note{font-size:12px;font-weight:600;color:#59708a}.vdt .vdt-chart{width:100%;max-width:720px;height:auto;display:block}.vdt .vdt-catalog-intro{font-size:13px!important;font-weight:650!important;margin:3px 0 10px!important;color:#4c6582!important}.vdt .vdt-catalog-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;width:100%!important;align-items:stretch!important}.vdt .vdt-catalog-item{box-sizing:border-box!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;width:100%!important;min-width:0!important;min-height:70px!important;height:auto!important;padding:11px 12px!important;margin:0!important;background:#fbfcff!important;border:1.5px solid #bfd2e7!important;border-radius:11px!important;text-align:left!important;white-space:normal!important;line-height:1.32!important;box-shadow:none!important;overflow:hidden!important;transform:none!important}.vdt .vdt-catalog-item:hover,.vdt .vdt-catalog-item:focus-visible{border-color:#658bb9!important;background:#f0f6ff!important}.vdt .vdt-catalog-icon{flex:0 0 29px!important;width:29px!important;text-align:center!important;font-size:22px!important;line-height:1!important}.vdt .vdt-catalog-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important;flex:1 1 auto!important;min-width:0!important}.vdt .vdt-catalog-name{display:block!important;font-size:14px!important;line-height:1.26!important;font-weight:800!important;color:#254c7b!important;overflow-wrap:anywhere!important}.vdt .vdt-catalog-desc{display:block!important;font-size:12px!important;line-height:1.32!important;font-weight:550!important;color:#58718b!important;overflow-wrap:anywhere!important}.vdt .vdt-catalog-chevron{display:block!important;flex:0 0 12px!important;font-size:22px!important;color:#7c9ab8!important;font-weight:500!important}@media(max-width:600px){.vdt .vdt-catalog-grid{grid-template-columns:1fr!important}.vdt .vdt-catalog-item{min-height:61px!important;padding:9px 10px!important}}</style>';
 function button(id,label){return '<button type="button" data-vpqdiag="'+id+'">'+label+'</button>'}
 function tiles(group){
+ // PCV/TS belongs to the same main lab menu but has ONE complete illustrated lesson.
+
  const selected=tests.filter(t=>!group||t.group===group);
- return '<div class="vdt-catalog-grid">'+selected.map(t=>
+ return '<div class="vdt-catalog-grid">'+(group==='inhouse'?'<button type="button" class="vdt-catalog-item" data-vpqdiag="pcv"><span class="vdt-catalog-icon">🩸</span><span class="vdt-catalog-copy"><span class="vdt-catalog-name">PCV + Total Solids</span><span class="vdt-catalog-desc">One illustrated microhematocrit & refractometer reference</span></span><span class="vdt-catalog-chevron">›</span></button>':'')+selected.map(t=>
  '<button type="button" class="vdt-catalog-item" data-vpqdiag="'+t.id+'" aria-label="Open '+E(t.label)+' teaching guide">'+
  '<span class="vdt-catalog-icon" aria-hidden="true">'+t.icon+'</span>'+
  '<span class="vdt-catalog-copy"><span class="vdt-catalog-name">'+E(t.label)+'</span>'+
@@ -55,14 +57,33 @@ function chart(id){
  steps.forEach((st,i)=>{const x=12+i*170;svg+='<rect x="'+x+'" y="23" width="150" height="66" rx="9" fill="'+(['#e7f2fb','#ecf6ef','#fff4df','#f1eafd'][i])+'" stroke="#96b2cc"/><text x="'+(x+75)+'" y="44" font-size="17" font-weight="800" fill="#31547f" text-anchor="middle">'+st[0]+'</text><text x="'+(x+75)+'" y="64" font-size="12" font-weight="700" fill="#31547f" text-anchor="middle">'+st[1]+'</text>'+(i<3?'<path d="M '+(x+151)+' 56 h 15" stroke="#7499bc" stroke-width="2"/>':'')});
  return svg+'</svg>';
 }
+
+function speciesDetail(id){
+ const notes={
+ acth:'<b>Dogs:</b> this is the core course ACTH stimulation framework for suspected Addison disease. <b>Cats:</b> different post-ACTH reference intervals and protocols are used; do not transplant canine thresholds. <b>Horses:</b> PPID is evaluated with seasonally interpreted baseline ACTH and/or TRH stimulation, NOT this canine cortisol ACTH-stimulation curve. <b>Other species:</b> obtain an endocrine lab-validated protocol before interpreting.',
+ lddst:'<b>Dogs:</b> use canine LDDST protocol and laboratory suppression cutoff. <b>Cats:</b> feline HAC testing protocols and doses differ, and this canine curve is NOT an automatic feline reference. <b>Horses:</b> use the PPID workup appropriate to ACTH season and TRH response, not a canine HAC diagnosis from cortisol suppression.',
+ rest:'<b>Dogs:</b> basal cortisol >2 µg/dL is a useful rule-out threshold for typical suspected hypoadrenocorticism in appropriate context; values below need stimulation confirmation. <b>Cats:</b> canine screening cutoffs are not automatically transferable. <b>Horses:</b> PPID is a distinct ACTH-oriented disorder.',
+ thyroid:'<b>Dogs:</b> low tT4 + low free T4 + increased cTSH supports primary hypothyroidism with appropriate history. <b>Cats:</b> increased tT4 is the common first-line hyperthyroidism finding; severe illness can lower tT4, and increased free T4 alone can be nonspecific. <b>Horses, birds and reptiles:</b> the canine/feline interpretation algorithm does not apply to all taxa.',
+ fruct:'<b>Cats:</b> stress hyperglycemia is common and fructosamine can help evaluate chronicity; thyroid disease and protein turnover confound. <b>Dogs:</b> a persistent glucose/urine pattern and clinical history remain central. <b>Other species:</b> refer to validated reference lab.',
+ lactate:'<b>Dogs/cats:</b> serial lactate is often used for perfusion trends. <b>Horses:</b> blood and peritoneal lactate may support severity assessment in gastrointestinal disease but mean different things. <b>Exotics:</b> handling stress, species and validated portable analyzers influence results.',
+ ica:'<b>Dogs/cats:</b> assess ionized calcium alongside iCa-sensitive pH and PTH/PTHrP in relevant hypercalcemia workups. <b>Birds and reptiles:</b> reproductive vitellogenesis can raise total calcium greatly without equivalent pathological iCa change. <b>Other species:</b> method-specific iCa intervals are required.',
+ bile:'<b>Dogs:</b> paired bile acids are commonly used with appropriate laboratory protocol. <b>Horses:</b> horses have no gallbladder, so canine pre/post-meal gallbladder logic cannot be copied; fasting bile acids can be interpreted using equine intervals. <b>Birds:</b> bile acids can help assess liver function with species ranges.',
+ coag:'<b>Cats:</b> platelet clumping and other platelet artifacts need smear checking. <b>Horses/ruminants:</b> fibrinogen and other acute-phase proteins help document inflammation. <b>Birds/reptiles:</b> thrombocytes are nucleated; mammalian platelet methods and some coag tests may be invalid without validation.',
+ urine:'<b>Dogs:</b> dehydration with normal concentrating capacity often yields USG above 1.030. <b>Cats:</b> commonly expected above 1.035 in dehydration. <b>Horses/cattle:</b> lower concentration thresholds are normal, and ruminant urea handling differs. <b>Birds/reptiles:</b> renal excretion relies heavily on uric acid in many taxa; do not use mammalian USG/creatinine logic unchanged.',
+ ketones:'<b>Dogs/cats:</b> DKA requires diabetic physiology with ketones and acid–base evidence, not just positive urine ketones. <b>Ruminants:</b> ketosis and pregnancy toxemia can involve negative energy balance without canine diabetes. <b>Exotics:</b> choose taxon-validated diagnostic context.'
+ };
+ return '<p>'+ (notes[id]||'Select the appropriate species and assay-specific clinical context.')+'</p>'+
+ '<div class="vdt-row"><button type="button" data-vpqdiag="species">View full species CBC/Chemistry differences</button></div>';
+}
 function overview(){
  return '<div class="vdt">'+css+'<div class="vdt-hero"><b>🧪 Diagnostic Test Mastery · Tests at their own workstation</b><p>Choose a test below. Every entry contains sample handling, what it actually measures, high/low interpretation, numerical examples or assay-specific intervals, a diagnostic diagram, WHY the body changes, and a practice question.</p></div><h3>⚡ In-house diagnostics</h3>'+tiles('inhouse')+'<h3>📦 Send-out / reference-lab diagnostics</h3>'+tiles('sendout')+'<p class="vdt-note">Illustrative teaching numbers are not clinical universal thresholds; apply species and analyzer reference intervals. ACTH/LDDST curves are redrawings of course-described patterns, not copied artwork.</p></div>';
 }
 function open(id){
+ if(id==='pcv')return window.VPQ_CLINPATH_REPORT_ACADEMY?.open?.('pcv');
  const t=find(id);if(!t)return overviewModal();
  chosen=id;
  const show=picked[id]!==undefined;
- const panel='<div class="vdt">'+css+'<div class="vdt-row">'+button('home','← All diagnostic tests')+button('hybrid','🧪 Return to analyzer bench')+button('classic','🩸 CBC / Chemistry station')+'</div>'+
+ const panel='<div class="vdt">'+css+'<div class="vdt-row">'+button('category-'+t.group,'← Back to '+(t.group==='sendout'?'Send-Out Tests':'In-House Tests'))+'</div>'+
  '<div class="vdt-hero"><h3>'+t.icon+' '+E(t.label)+'</h3><p>'+E(t.summary)+'</p></div>'+
  '<div class="vdt-card"><b>📌 What is being tested?</b><p>'+E(t.measures)+'</p><p><b>Sample + timing:</b> '+E(t.sample)+'</p></div>'+
  '<div class="vdt-card"><h3>📈 Diagnostic diagram'+((id==='acth'||id==='lddst')?' · cortisol response curves':' · how the test works')+'</h3>'+chart(id)+'<p class="vdt-note">Educational schematic; not patient data or an instrument-generated graph.</p></div>'+
@@ -71,8 +92,9 @@ function open(id){
  '<details open><summary>🫀 WHY the body responds</summary><p>'+E(t.physiology)+'</p></details>'+
  '<details><summary>⚠️ Sample artifacts and confusing lookalikes</summary><p>'+E(t.artifact)+'</p></details>'+
  '<details open><summary>🐾 Worked patient example</summary><p>'+E(t.example)+'</p></details>'+
+ '<details><summary>🐕 🐈 Species-specific interpretation & test limitations</summary>'+speciesDetail(t.id)+'</details>'+
  '<div class="vdt-card"><h3>🎯 Check your interpretation</h3><p><b>'+E(t.question)+'</b></p>'+t.choices.map((v,i)=>'<button type="button" class="vdt-answer '+(show?(i===t.correct?'vdt-correct':i===picked[id]?'vdt-wrong':''):'')+'" data-vpqdiag-answer="'+id+':'+i+'">'+String.fromCharCode(65+i)+'. '+E(v)+'</button>').join('')+(show?'<div class="vdt-card '+(picked[id]===t.correct?'vdt-correct':'vdt-wrong')+'"><b>'+(picked[id]===t.correct?'✓ Correct':'Review interpretation')+'</b><p>'+E(t.rationale)+'</p></div>':'')+'</div>'+
- '<div class="vdt-row">'+button('home','All tests')+button('hybrid','Back to analyzer bench')+'</div></div>';
+ '</div></div>';
  modal('🔬 Diagnostic Mastery · '+t.label,panel);
 }
 function modal(title,body){
@@ -86,10 +108,13 @@ window.addEventListener('click',event=>{
  event.preventDefault();event.stopImmediatePropagation();
  if(t.hasAttribute('data-vpqdiag-answer')){let [id,n]=t.dataset.vpqdiagAnswer.split(':');if(find(id)){picked[id]=Number(n);open(id)}return}
  const id=t.dataset.vpqdiag;
+ if(id==='species')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open?.('chem');
+ if(id==='category-inhouse')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
+ if(id==='category-sendout')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
  if(id==='home')return overviewModal();
  if(id==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
  if(id==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
- if(find(id))return open(id);
+ if(id==='pcv')return open('pcv');if(find(id))return open(id);
 },true);
 return Object.freeze({init:context=>{ctx=context},open,home:overviewModal,cards,tests});
 })();
