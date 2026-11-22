@@ -5265,7 +5265,7 @@ if(root)priorDetails.forEach(x=>{const d=root.querySelectorAll('details')[x.i];i
 const body=document.getElementById('modalBody');if(body)body.scrollTop=oldScroll;
 }
 }
-function home(){return window.VPQ_CLINPATH_REFERRAL_LIBRARY?.home?.()||render()}
+function home(){if(typeof window.VPQ_CLINPATH_REFERRAL_LIBRARY?.home==='function')return window.VPQ_CLINPATH_REFERRAL_LIBRARY.home();return render()}
 document.addEventListener('change',e=>{
  if(e.target?.id==='vpqReferralCasePick'&&e.target.closest('.refcase')&&!e.target.closest('.refnewlibrary')&&e.target.value!=='001'){
   window.VPQ_CLINPATH_REFERRAL_LIBRARY?.open?.(e.target.value);
