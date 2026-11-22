@@ -315,7 +315,7 @@ const old=document.querySelector('#modalBody .refcase');
 const priorDetails=old?[...old.querySelectorAll('details')].map((el,i)=>({i,open:el.open})):[];
 const oldScroll=document.getElementById('modalBody')?.scrollTop||0;
 const content='<div class="refcase">'+
-'<div class="refbox refheader"><label for="vpqReferralCasePick"><b>🩺 Referral patient</b></label><select id="vpqReferralCasePick" class="refselect" aria-label="Choose referral patient"><option value="001">Case 001 · Dog · PU/PD and weight loss</option></select><p class="refsmall">Clinical Pathology · Lecture 1 · DDx · Approval prototype 1 of 1.</p></div>'+
+'<div class="refbox refheader"><label for="vpqReferralCasePick"><b>🩺 Referral patient</b></label><select id="vpqReferralCasePick" class="refselect" aria-label="Choose referral patient"><option value="001">Case 1.1 · Dog · PU/PD and weight loss</option>'+(window.VPQ_CLINPATH_REFERRAL_LIBRARY?.cases||[]).map(c=>'<option value="'+h(c.id)+'">Case '+h(c.id)+' · '+h(c.title)+'</option>').join('')+'</select><p class="refsmall">Clinical Pathology · Lecture 1 · Approved master format · Case 1.1.</p></div>'+
 '<details class="refbox refsection" open><summary>🐾 Patient history & physical examination</summary><div class="refsectionbody"><p><b>Signalment:</b> 9-year-old spayed female mixed-breed dog.</p><p><b>History:</b> Two months of increased drinking and urination, weight loss, and poor appetite. No medications.</p><p><b>Physical examination:</b> Thin body condition; pale mucous membranes; mild oral ulcers; approximately 5% dehydration; temperature 38.4 °C.</p></div></details>'+
 '<h3 class="refgroup">🧪 Ancillary testing · Minimum database</h3><p class="refsmall">Each laboratory section opens independently. Normal ranges are supplied next to patient values.</p>'+
 '<div class="refresultsgrid"><div class="refresultscbc">'+report('cbc')+'</div><div class="refresultsright">'+report('chem')+report('urine')+'</div></div>'+
@@ -333,6 +333,11 @@ const body=document.getElementById('modalBody');if(body)body.scrollTop=oldScroll
 }
 }
 function home(){render()}
+document.addEventListener('change',e=>{
+ if(e.target?.id==='vpqReferralCasePick'&&e.target.closest('.refcase')&&!e.target.closest('.refnewlibrary')&&e.target.value!=='001'){
+  window.VPQ_CLINPATH_REFERRAL_LIBRARY?.open?.(e.target.value);
+ }
+});
 document.addEventListener('input',e=>{const n=e.target;if(!n.closest?.('.refcase'))return;if(n.hasAttribute('data-ref-text')){state[n.dataset.refText]=n.value;state.advancedSubmitted=false;}if(n.hasAttribute('data-ref-ddx')){state.ddx[+n.dataset.refDdx]=n.value;state.advancedSubmitted=false;}if(n.hasAttribute('data-ref-next')){state.next[+n.dataset.refNext]=n.value;state.advancedSubmitted=false;}save()});
 document.addEventListener('click',e=>{
 const n=e.target.closest?.('[data-ref-toggle],[data-ref-lead],[data-ref-up],[data-ref-down],[data-ref-guided-submit],[data-ref-back],[data-ref-reset],[data-ref-legacy],[data-ref-iq],[data-ref-iq-check],[data-ref-iq-retry],[data-ref-advanced-submit],[data-ref-advanced-compare]');
