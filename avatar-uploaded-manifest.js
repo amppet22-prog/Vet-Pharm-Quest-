@@ -718,5 +718,26 @@ window.VPQ_UPLOADED_AVATARS=[
   "id": "uploaded-76e45e91a183",
   "path": "Smiling Veterinary Professional in Teal Scrubs-5.png",
   "color": "Teal & Green"
+ },
+ {
+  "id": "uploaded-85fbf6ecfd96",
+  "path": "Cheerful Paw Print Veterinary Nurse-2.png",
+  "color": "Pink & Burgundy",
+  "collection": "Alexandria",
+  "label": "Cheerful Paw Print Veterinary Nurse"
+ },
+ {
+  "id": "uploaded-caa39e9684dc",
+  "path": "Rainbow Paw Vet Sticker Character-3.png",
+  "color": "Rainbow & Patterns",
+  "collection": "Alexandria",
+  "label": "Rainbow Paw Vet Sticker Character"
+ },
+ {
+  "id": "uploaded-14de3491e14d",
+  "path": "Smiling Veterinarian with Clipboard.png",
+  "color": "More Colors",
+  "collection": "Alexandria",
+  "label": "Smiling Veterinarian with Clipboard"
  }
 ];
