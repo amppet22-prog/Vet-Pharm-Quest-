@@ -48,17 +48,19 @@ function vines(){
  return s+'</g>';
 }
 function hybridProps(){
+ // Dedicated CBC + chemistry bay within the existing six-bay footprint.
+ // PCV microcentrifuge/refractometer are visibly separate from both analyzers.
  let s='';
- // Small hybrid diagnostic counter: one compact point-of-care unit and a
- // distinct specimen shipping tray on the same bay.
- s+=analyzer(510,245,67,83,['LAC 2.1','iCa 1.25'])+
- R(581,245,52,75,'#fff6f1','#c8a6c0',8)+
- R(588,253,39,28,'#ddccf6','#ae98ce',5)+
- T(607,267,'SEND',11,'#624c89')+T(607,280,'OUT',10,'#624c89')+
- R(587,289,41,21,'#f8fcff','#98b1ce',3)+T(607,303,'LAB',11,'#5b76a4')+
- tubes(585,305,2,'#a983c7',.48)+
- R(524,331,94,10,'#c7d7e9','#a0afc9',4)+
- T(573,354,'LACTATE · iCa · T4',9,'#6d5b95');
+ s+=analyzer(508,247,45,72,['CBC','RBC'])+
+ analyzer(559,247,48,72,['CHEM','ALT'])+
+ R(613,280,24,38,'#f2e6f5','#a58db7',7)+
+ '<ellipse cx="625" cy="280" rx="12" ry="5" fill="#d4bfe6" stroke="#9d8db9" stroke-width="2"/>'+
+ '<circle cx="625" cy="288" r="7" fill="#8798bb"/>'+
+ '<circle cx="625" cy="288" r="3" fill="#eaf7ff"/>'+
+ R(612,254,27,15,'#dff2f9','#7e9fb9',5)+T(625,265,'TS',9,'#526e8e')+
+ R(613,249,26,5,'#658ead','#526f92',2)+
+ tubes(514,316,3,'#c38ab3',.45)+
+ T(542,346,'CBC · CHEM · PCV/TS',10,'#6b5891');
  return s;
 }
 function props(){
@@ -130,7 +132,7 @@ function decor(){
  return s;
 }
 function draw(){
- let s='<svg class="vpqSpecArt vpqHybridLabSvg" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Veterinary referral laboratory with six visible diagnostic benches including coagulation, blood gas, urinalysis, lactate and ionized calcium send-out counter, referral patients and microscopy">'+
+ let s='<svg class="vpqSpecArt vpqHybridLabSvg" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Veterinary referral laboratory with six visible diagnostic benches including coagulation, blood gas, urinalysis, CBC and chemistry analyzers, PCV and total solids instruments, referral patients and microscopy">'+
  '<defs><linearGradient id="vpqHybridWall" x2="0" y2="1"><stop stop-color="#fbf6ff"/><stop offset="1" stop-color="#eaf6fc"/></linearGradient><linearGradient id="vpqHybridFloor" x2="0" y2="1"><stop stop-color="#e6ddeb"/><stop offset="1" stop-color="#c9c1e0"/></linearGradient><filter id="vpqHybridShadow"><feDropShadow dx="1" dy="3" stdDeviation="4" flood-color="#776a95" flood-opacity=".18"/></filter></defs>'+
  R(0,0,1000,500,'url(#vpqHybridWall)','none',0)+
  '<path d="M0 353H1000V500H0Z" fill="url(#vpqHybridFloor)"/>'+
@@ -140,7 +142,7 @@ function draw(){
  '<g transform="translate(8 0) scale(.82 1)">'+frame(0,'Coagulation','PT/aPTT questions','#fce9f5','#c99ec4')+'</g>'+
  '<g transform="translate(172 0) scale(.82 1)">'+frame(0,'Blood Gas','Acid–base practice','#eaf7fb','#99c6de')+'</g>'+
  '<g transform="translate(336 0) scale(.82 1)">'+frame(0,'Urinalysis','UA + sediment cases','#fff4e7','#e1ba99')+'</g>'+
- '<g transform="translate(500 0) scale(.82 1)">'+frame(0,'Hybrid Lab','Lactate · iCa · send-out','#ece8fc','#ad99d4')+'</g>'+
+ '<g transform="translate(500 0) scale(.82 1)">'+frame(0,'CBC + Chem','PCV/TS · testing','#ece8fc','#ad99d4')+'</g>'+
  '<g transform="translate(664 0) scale(.82 1)">'+frame(0,'Referral Cases','Diagnostic workups','#f1edfc','#bca6dc')+'</g>'+
  '<g transform="translate(828 0) scale(.82 1)">'+frame(0,'Microscopy','Smear image ID','#e9f8f3','#9bcdbb')+'</g>'+
  props()+'</g>'+
