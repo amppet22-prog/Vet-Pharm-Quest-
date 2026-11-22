@@ -93,5 +93,16 @@ style.textContent=
  '#vpqLoungeHotspots .vpqLoungeMastery.vpqApproachNear{border-color:transparent!important;background:transparent!important;outline:none!important}'+
  '#vpqLoungeHotspots .vpqLoungeMastery.vpqApproachNear:after{left:auto!important;right:3%!important;top:2px!important;bottom:auto!important;transform:none!important}';
 document.head.appendChild(style);
+ /* Pharmacy uses subtle station focus, not a giant yellow proximity rectangle. */
+ const pharmFocus=document.createElement('style');
+ pharmFocus.id='vpq-pharmacy-approach-quiet';
+ pharmFocus.textContent=
+ '#vpqPNHotspots .vpqPNHot.vpqApproachNear{border:1.5px solid #79b0a5!important;background:transparent!important;outline:none!important;box-shadow:0 0 0 2px #aad7c444!important;filter:none!important;transition:border-color .15s!important}'+
+ '#vpqPNHotspots .vpqPNHot.vpqApproachNear:after{content:none!important;display:none!important}'+
+ '#vpqPNHotspots .vpqPNHot.vpqApproachNear span{background:#fffdf5!important;border:1.5px solid #8eb9ad!important;color:#345d59!important;box-shadow:0 2px 5px #234b3f20!important}'+
+ '#vpqPNHotspots .vpqPNFood.vpqApproachNear{border-color:transparent!important;box-shadow:none!important}'+
+ '#vpqPNHotspots .vpqPNFood.vpqApproachNear span{background:#fff9ee!important}';
+ document.head.appendChild(pharmFocus);
+
 return {updateNearby,interactNearest,rooms:Object.keys(configs)};
 };
