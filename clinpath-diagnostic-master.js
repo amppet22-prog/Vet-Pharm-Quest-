@@ -52,9 +52,29 @@ function chart(id){
  arr.forEach((a,j)=>{svg+='<polyline fill="none" stroke="'+a.color+'" stroke-width="3.5" points="'+a.v.map((v,i)=>xs[i]+','+y(v)).join(' ')+'"/>';a.v.forEach((v,i)=>{svg+='<circle cx="'+xs[i]+'" cy="'+y(v)+'" r="5" fill="'+a.color+'"/><text x="'+(xs[i]+7)+'" y="'+(y(v)-7)+'" font-size="10" fill="'+a.color+'">'+v+'</text>'});svg+='<line x1="'+(j<3?84:336)+'" y1="'+(240+(j%3)*13)+'" x2="'+(j<3?100:352)+'" y2="'+(240+(j%3)*13)+'" stroke="'+a.color+'" stroke-width="3"/><text x="'+(j<3?105:357)+'" y="'+(244+(j%3)*13)+'" font-size="11" font-weight="600" fill="#40526c">'+E(a.name)+'</text>'});
  return '<svg class="vdt-chart" role="img" aria-label="'+(acth?'ACTH stimulation cortisol response at baseline and 1 hour: flat, normal, exaggerated':'Dexamethasone suppression cortisol curves baseline 4 and 8 hours: normal suppression, flat high, partial no suppression, escape')+'" viewBox="0 0 680 280">'+svg+'<text x="16" y="22" font-size="12" font-weight="700" fill="#2f537c">Cortisol (µg/dL)</text></svg>';
  }
- const t=find(id),steps=[['1','Patient / question'],['2','Collect and protect sample'],['3','Measure + compare RI'],['4','Explain physiologic trend']];
- let svg='<svg class="vdt-chart" role="img" aria-label="Original four-step diagnostic test workflow" viewBox="0 0 680 128"><rect x="0" y="0" width="680" height="128" rx="12" fill="#f6faff"/>';
- steps.forEach((st,i)=>{const x=12+i*170;svg+='<rect x="'+x+'" y="23" width="150" height="66" rx="9" fill="'+(['#e7f2fb','#ecf6ef','#fff4df','#f1eafd'][i])+'" stroke="#96b2cc"/><text x="'+(x+75)+'" y="44" font-size="17" font-weight="800" fill="#31547f" text-anchor="middle">'+st[0]+'</text><text x="'+(x+75)+'" y="64" font-size="12" font-weight="700" fill="#31547f" text-anchor="middle">'+st[1]+'</text>'+(i<3?'<path d="M '+(x+151)+' 56 h 15" stroke="#7499bc" stroke-width="2"/>':'')});
+
+ // These are concept diagrams, not generic test-order flowcharts.
+ // Each uses physiologic cause → mechanism → assay signal → interpretation.
+ const maps={
+ rest:[['Cortisol pulse','varies with stress'],['Resting serum','screen only'],['Low < 2 µg/dL','NOT diagnostic'],['ACTH stim','confirm reserve']],
+ thyroid:[['Thyroid hormone','T4 / free T4'],['Pituitary drive','TSH feedback'],['Dog: T4 ↓','TSH often ↑'],['Cat: T4 ↑','hyperthyroid signs']],
+ fruct:[['Glucose stays ↑','days to weeks'],['Serum proteins','become glycated'],['Fructosamine ↑','reflects prior weeks'],['Protein turnover','can confound']],
+ lactate:[['Lactate produced','glycolytic flux'],['Liver + kidney','remove lactate'],['Measured lactate','production - loss'],['Serial trend','check perfusion']],
+ ica:[['Blood pH ↑','more alkaline'],['Albumin binds','more calcium'],['Free iCa ↓','active fraction'],['PTH / PTHrP','feedback vs tumor']],
+ bile:[['Gut bile acids','reabsorbed'],['Portal blood','to the liver'],['Hepatic extraction','clears bile acids'],['Shunt / disease','blood acids ↑']],
+ coag:[['Platelet plug','primary hemostasis'],['Factor cascade','secondary clotting'],['Fibrin clot','stabilizes plug'],['PT / aPTT','test pathways']],
+ urine:[['Patient urine','hydration + kidney'],['USG / refract.','water handling'],['Sediment','cells, casts'],['UPC','protein loss']],
+ ketones:[['Insulin effect ↓','fat mobilized'],['Liver produces','ketone bodies'],['BHB / dipstick','different ketones'],['pH + HCO₃','DKA vs ketosis']]
+ };
+ const steps=maps[id]||[['Clinical question','What is abnormal?'],['Collect specimen','Check handling'],['Compare to RI','Species and method'],['Apply result','Explain physiology']];
+ let svg='<svg class="vdt-chart" role="img" aria-label="'+E((find(id)?.label||'Diagnostic test')+' mechanism diagram: '+steps.map(x=>x.join(', ')).join('; '))+'" viewBox="0 0 680 136"><rect x="0" y="0" width="680" height="136" rx="12" fill="#f6faff"/>';
+ steps.forEach((st,i)=>{
+  const x=9+i*170,colors=['#e7f2fb','#e6f5ed','#fff2d9','#ede7fa'];
+  svg+='<rect x="'+x+'" y="19" width="151" height="88" rx="11" fill="'+colors[i]+'" stroke="#9cb7cf"/>'+
+  '<text x="'+(x+75)+'" y="52" font-size="13.5" font-weight="800" fill="#284b76" text-anchor="middle">'+E(st[0])+'</text>'+
+  '<text x="'+(x+75)+'" y="74" font-size="11.5" font-weight="650" fill="#355b7e" text-anchor="middle">'+E(st[1])+'</text>'+
+  (i<3?'<path d="M '+(x+152)+' 64 h 15" stroke="#6e9bc0" stroke-width="2.5"/><path d="M '+(x+165)+' 60 l 5 4 -5 4" fill="none" stroke="#6e9bc0" stroke-width="2"/>':'');
+ });
  return svg+'</svg>';
 }
 
