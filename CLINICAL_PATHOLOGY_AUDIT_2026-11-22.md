@@ -29,3 +29,28 @@ Would a learner who knows nothing about CBC, clinical chemistry, PCV/TS, blood g
 
 ## Clinical learning standard for next changes
 **Name the specimen and test → explain what is measured → compare patient value with the relevant RI and unit → describe increase/decrease/within RI → explain physiological mechanism → distinguish clinical differentials and artifacts → choose follow-up → reassess trends.** Use one canonical reference page per test, linked contextually from cases and atlas.
+
+## Follow-up clinical accuracy and mastery passes — same date
+
+### Pass A — lecture-grounded endocrinology and acid–base interpretation
+- Reopened `Clinical_Pathology_Review_Guide.docx` and checked the ACTH stimulation, LDDST, corrected chloride, low Na:K and ketosis case notes.
+- Clarified **LDDST 4-hour suppression followed by 8-hour rebound**: escape can fit pituitary-dependent HAC **or non-adrenal illness**; a curve alone is not definitive.
+- Kept the conflicting ACTH post-stimulation band at 18–22 µg/dL labeled as course-dependent/equivocal versus exaggerated, and noted all such thresholds are assay-specific.
+- Reaffirmed that **hyperglycemia + glucosuria + urine ketones** does not establish DKA when the case bicarbonate is at its RI lower bound and AG is within its printed interval. Read the patient's pH first.
+- Added course-derived clinical cases for **Amaryllis diabetes with ketosis/cholestatic changes** and a canine **hypoadrenocorticism workup**, with lab values and individual RI limits only where present in the course excerpt. These are labeled course-adapted examples rather than universal ranges.
+
+### Pass B — questions and clinical reasoning
+- Six patient workups now contain four guided interpretation stages apiece (24 stages total). The last two are course-derived.
+- Fixed single-test questions that formerly always had the correct content in choice index 0: shuffled display positions now distribute correct answers across A/B/C/D, without changing correctness. Answers lock after submitting and offer explicit Retry.
+- Manual in-memory event simulation confirmed clinical question incorrect-feedback → Retry and workup selection → Submit → Next-stage transitions.
+- All eleven diagnostic lesson pages now include explicit **what the result supports** vs **what it cannot prove / next step** teaching.
+
+### Pass C — urinalysis and microscopy learning coverage
+- Expanded the **canonical urine test page** with a full beginner reading sequence: sample collection, USG refractometer, 2026 lecture-specific isosthenuria/hyposthenuria categories, dipstick limitations, sediment, heme pigment differentiation, casts and crystals.
+- Included the course-stated dog/cat/horse/cattle adequate concentrating heuristics and species-related urine pH patterns with the proper hydration/assay caveats.
+- Linked the urine lesson to the existing visual urine-sediment atlas and the CBC lesson to existing blood-smear cell recognition without creating a second atlas or a duplicated full lesson.
+
+### Regressions and remaining blockers
+- 25/25 targeted updated-module checks passed in code-simulated runtime after changes, including all six patient pages, all 11 test lessons, atlas-link presence, ACTH/LDDST distinctions, and test/case interactions.
+- This is **NOT live browser verification**. The next necessary step is interactive checking of the deployed GitHub Pages visuals, responsive behavior, real DOM overlays and equipment art alignment.
+- This is not an exhaustive slide-by-slide, book-by-book certification. The reference intervals that the course excerpt did not specify remain explicitly identified; external verification and lecture comparison are required before making new clinical cutoffs.
