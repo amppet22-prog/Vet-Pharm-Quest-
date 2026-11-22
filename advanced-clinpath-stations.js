@@ -103,6 +103,16 @@ const INTRO_STYLE=String.raw`
 .vpqintro .coagtestrow{display:block;padding:10px 12px;line-height:1.48}
 .vpqintro .coagtestrow+.coagtestrow{border-top:1px solid #d6e2ee}
 .vpqintro .coagtestrow:nth-child(even){background:#f3f8ff}
+.vpqintro .coagimagecard{border-radius:14px;background:#f5f8ff;border:2px solid #a8c5ed;padding:13px;margin:13px 0}
+.vpqintro .coagimagecard h3{margin:0 0 5px}.vpqintro .coagimagecard p{margin:4px 0 10px}
+.vpqintro .coagimagebutton{display:block;width:100%;padding:7px;border:1px solid #abc4e5;border-radius:10px;background:white;cursor:zoom-in;text-align:center;color:#234b81;font-weight:800}
+.vpqintro .coagimagebutton img{display:block;width:100%;max-height:310px;object-fit:contain}
+.vpqintro .coagimagebutton span{display:block;padding-top:6px}
+.vpqintro .coagimageactions{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px}
+.vpqintro .coagimageactions button,.vpqintro .coagimageactions a{display:inline-flex;align-items:center;border:1px solid #abc2e0;border-radius:9px;background:white;padding:10px 13px;text-decoration:none;color:#244c83;font-size:14px;font-weight:800;cursor:pointer}
+.vpqintro .coagimageactions .coagdownload{background:#e1f7e8;border-color:#8bbd9b;color:#18583c}
+.vpqintro .coagfull{max-width:100%;overflow:auto}
+.vpqintro .coagfullimage{display:block;width:100%;min-width:550px;height:auto;margin:8px 0;border:1px solid #b8cde6;border-radius:10px;background:#fff}
 </style>`;
 const COAG_FACTORS=[
 ['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
@@ -137,9 +147,24 @@ function coagLivingSequence(){
  '</div><p class="tiny"><b>Key distinction:</b> The contact activation chain XII → XI → IX is a useful <b>aPTT lab model</b>, but tissue-factor initiation dominates physiological hemostasis; factor XII is not essential for normal bleeding control.</p></section>';
 }
 
+const COAG_IMAGE='coagulation-cascade-study-chart.svg';
+function coagImageCard(){
+ return '<section class="coagimagecard" aria-label="Coagulation pathway downloadable diagram">'+
+ '<h3>🖼️ Take the cascade with you!</h3>'+
+ '<p>Tap the picture to expand it. Download the high-resolution SVG to zoom in, print, or study offline.</p>'+
+ '<button type="button" class="coagimagebutton" data-vpqadvanced="coag-enlarge" aria-label="Expand coagulation cascade diagram"><img src="'+COAG_IMAGE+'" alt="Color-coded coagulation pathway: PT, aPTT, factors, vitamin K and fibrin stabilization" loading="lazy"><span>🔍 Click diagram to expand</span></button>'+
+ '<div class="coagimageactions"><button type="button" data-vpqadvanced="coag-enlarge">🔍 Expand diagram</button><a href="'+COAG_IMAGE+'" download="Vet-Pharm-Quest-Coagulation-Cascade.svg" class="coagdownload">⬇ Download pathway image (SVG)</a></div>'+
+ '</section>';
+}
+function coagExpanded(){
+ run=null;return modal('Coagulation Pathway · Expanded Diagram','<div class="vpqintro">'+INTRO_STYLE+
+ '<div class="coagfull"><p>Zoom your browser for finer detail. This vector image stays sharp at any size.</p><a href="'+COAG_IMAGE+'" target="_blank" rel="noopener">🔍 Open image in full tab</a><img src="'+COAG_IMAGE+'" alt="Full coagulation cascade and test guide" class="coagfullimage"><div class="coagimageactions"><a href="'+COAG_IMAGE+'" download="Vet-Pharm-Quest-Coagulation-Cascade.svg" class="coagdownload">⬇ Download pathway image</a><button type="button" data-vpqadvanced="coag-back">← Back to learn first</button></div></div></div>');
+}
+
 function coagIntro(){
  return '<div class="vpqintro">'+INTRO_STYLE+
  '<div class="introhero"><b>🩸 COAG CASCADE LAB · LEARN FIRST</b><p><strong>Platelets build the temporary plug. Coagulation factors reinforce it with fibrin.</strong> PT and aPTT are timed tests of different paths toward the same fibrin finish line. <b>PTT</b> usually refers to the partial thromboplastin time; <b>aPTT</b> is its activated version used routinely in modern screening.</p></div>'+
+ coagImageCard()+
  '<div class="pathgrid">'+
  '<div class="pathcard"><h4>🟠 Extrinsic pathway · PT</h4><div class="node"><b>Vessel injury → tissue factor (III)</b><em>exposed at injured tissue</em></div><div class="arrow">↓</div><div class="node"><b>VII → VIIa</b><em>Factor VII is sensitive to early vitamin K depletion</em></div><div class="arrow">↓</div><div class="node coagCommon"><b>X → Xa</b><em>Join common pathway</em></div></div>'+
  '<div class="pathcard"><h4>🔵 Intrinsic pathway · aPTT</h4><div class="node"><b>XII → XI → IX</b><em>Contact-activation test pathway</em></div><div class="arrow">↓</div><div class="node"><b>IXa + VIIIa</b><em>Intrinsic tenase activates X</em></div><div class="arrow">↓</div><div class="node coagCommon"><b>X → Xa</b><em>Join common pathway</em></div></div>'+
@@ -208,6 +233,6 @@ function begin(mode){run={mode,pool:banks[mode].slice().sort(()=>Math.random()-.
 function start(mode){if(mode==='coag'||mode==='gas')return intro(mode);return begin(mode)}
 function show(){const s=run;if(!s)return;const q=s.pool[s.i];if(!q){modal('Advanced station complete','<h3>'+s.correct+' / '+s.pool.length+' correct</h3><p>Review how each laboratory finding changes the clinical decision. First correct mastery earns existing XP; replay is always available.</p>'+buttons(s.mode));return}if(!s.order)s.order=[0,1,2,3].sort(()=>Math.random()-.5);const done=s.chosen!==null;
 modal(({coag:'Coagulation Analyzer',gas:'Blood Gas Analyzer',urine:'Urinalysis Bench'})[s.mode]+' · '+(s.i+1)+'/'+s.pool.length,'<h3>'+esc(q.q)+'</h3>'+s.order.map(i=>'<button class="choice '+(done?(i===q.answer?'right':i===s.chosen?'wrong':''):'')+'" data-vpqadvanced-answer="'+i+'" '+(done?'disabled':'')+'>'+esc(q.choices[i])+'</button>').join('')+(done?'<div class="response '+(s.chosen===q.answer?'':'bad')+'"><b>'+(s.chosen===q.answer?'Correct':'Review the physiology')+'</b><p>'+esc(q.why)+'</p></div><button data-vpqadvanced="next">Next →</button>':'<p class="tiny">Interpret the physiology, patient context and assay limitations before choosing.</p>'))}
-function init(context){api=context;context.body.addEventListener('click',event=>{const b=event.target.closest('[data-vpqadvanced],[data-vpqadvanced-answer]');if(!b)return;if(b.hasAttribute('data-vpqadvanced-answer')){if(!run||run.chosen!==null)return;run.chosen=Number(b.dataset.vpqadvancedAnswer);const q=run.pool[run.i];if(run.chosen===q.answer){run.correct++;api.awardQuestion?.('advanced-clinpath-'+run.mode,q.id,true)}return show()}const key=b.dataset.vpqadvanced;if(key==='home')return home();if(key==='hub')return window.VPQ_CLINPATH_REFERENCE_HUB?.open?.();if(key==='cases'){const pilot=window.VPQ_CLINPATH_REFERRAL_PILOT;if(pilot&&typeof pilot.home==='function')return pilot.home();if(typeof window.VPQ_OPEN_REFERRAL_PATIENTS==='function')return window.VPQ_OPEN_REFERRAL_PATIENTS();return api.showModal('🔬 Referral Patients','Referral Patient 001 is unavailable. Reload the game and open Advanced Lab again.');}if(key==='fullrounds')return window.VPQ_CLINPATH_DIAGNOSTIC_ROUNDS?.home?.();if(key==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();if(key==='begin-coag')return begin('coag');if(key==='begin-gas')return begin('gas');if(key==='next'&&run){run.i++;run.chosen=null;run.order=null;return show()}if(banks[key])return start(key)})}
+function init(context){api=context;context.body.addEventListener('click',event=>{const b=event.target.closest('[data-vpqadvanced],[data-vpqadvanced-answer]');if(!b)return;if(b.hasAttribute('data-vpqadvanced-answer')){if(!run||run.chosen!==null)return;run.chosen=Number(b.dataset.vpqadvancedAnswer);const q=run.pool[run.i];if(run.chosen===q.answer){run.correct++;api.awardQuestion?.('advanced-clinpath-'+run.mode,q.id,true)}return show()}const key=b.dataset.vpqadvanced;if(key==='home')return home();if(key==='hub')return window.VPQ_CLINPATH_REFERENCE_HUB?.open?.();if(key==='cases'){const pilot=window.VPQ_CLINPATH_REFERRAL_PILOT;if(pilot&&typeof pilot.home==='function')return pilot.home();if(typeof window.VPQ_OPEN_REFERRAL_PATIENTS==='function')return window.VPQ_OPEN_REFERRAL_PATIENTS();return api.showModal('🔬 Referral Patients','Referral Patient 001 is unavailable. Reload the game and open Advanced Lab again.');}if(key==='fullrounds')return window.VPQ_CLINPATH_DIAGNOSTIC_ROUNDS?.home?.();if(key==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();if(key==='coag-enlarge')return coagExpanded();if(key==='coag-back')return intro('coag');if(key==='begin-coag')return begin('coag');if(key==='begin-gas')return begin('gas');if(key==='next'&&run){run.i++;run.chosen=null;run.order=null;return show()}if(banks[key])return start(key)})}
 return Object.freeze({init,home,start,intro,banks,cases});
 })();
