@@ -19,7 +19,7 @@ const spec={
  treatment:[
   {x:9,y:33,w:18,h:41,label:'🐶 Patient',action:'hospitalFollowup'},
   {x:28,y:54,w:10,h:26,label:'💉 Cart',action:'hospitalAdjust'},
-  {x:37,y:29,w:13,h:23,label:'💉 Skills Wing',action:'skillsWing'},
+  {x:35,y:34,w:12,h:19,label:'💉 Skills Wing',action:'skillsWing'},
   {x:59,y:35,w:14,h:29,label:'💗 Monitor',action:'hospitalMonitor'},
   {x:88,y:49,w:9,h:22,label:'🧪 Send to Lab',action:'clinpathLabReferral'}]
 };
@@ -79,14 +79,19 @@ function imaging(){
 function treatment(){
  let s=base('treatment');
  // Distinct, walkable skills doorway behind the treatment cart.
- s+='<g filter="url(#trt25-shadow)">'+round(350,151,150,123,'#e2f0fa','#9bafcf')+
- '<rect x="363" y="177" width="124" height="82" rx="9" fill="#f9ecf7" stroke="#b8a0ca" stroke-width="4"/>'+
- '<path d="M424 180v78" stroke="#bfa8d3" stroke-width="5"/>'+
- '<circle cx="413" cy="229" r="5" fill="#c6a6d1"/><circle cx="437" cy="229" r="5" fill="#c6a6d1"/>'+
- '<rect x="355" y="155" width="142" height="29" rx="12" fill="#fff5fc" stroke="#b79aca" stroke-width="3"/>'+
- '<text x="426" y="175" font-family="Arial" text-anchor="middle" font-size="15" fill="#8e6297" font-weight="900">CLINICAL SKILLS</text>'+
- '<text x="395" y="219" font-size="25" text-anchor="middle">💉</text><text x="461" y="219" font-size="25" text-anchor="middle">🩸</text></g>';
-  // Two-level inpatient kennel bank: two upper recovery patients and a lower canine kennel.
+ s+='<g filter="url(#trt25-shadow)">'+round(352,158,124,113,'#e2f0fa','#9bafcf')+
+ '<rect x="363" y="183" width="102" height="77" rx="9" fill="#f9ecf7" stroke="#b8a0ca" stroke-width="4"/>'+
+ '<path d="M414 183v77" stroke="#bfa8d3" stroke-width="5"/>'+
+ '<circle cx="407" cy="232" r="5" fill="#c6a6d1"/><circle cx="424" cy="232" r="5" fill="#c6a6d1"/>'+
+ '<rect x="355" y="161" width="119" height="21" rx="12" fill="#fff5fc" stroke="#b79aca" stroke-width="3"/>'+
+ '<text x="414" y="176" font-family="Arial" text-anchor="middle" font-size="11" fill="#8e6297" font-weight="900">CLINICAL SKILLS</text>'+
+ '<text x="391" y="228" font-size="18" text-anchor="middle">💉</text><text x="443" y="228" font-size="18" text-anchor="middle">🩸</text></g>';
+  // Finishing touches: recovery charts and clean supply shelf, kept away from hotspots.
+ s+='<g aria-hidden="true"><path d="M95 141h208" stroke="#e4c6db" stroke-width="4" stroke-linecap="round"/>'+
+ '<rect x="111" y="129" width="48" height="8" rx="3" fill="#f7ffff" stroke="#a9c2cb" stroke-width="2"/>'+
+ '<rect x="120" y="124" width="12" height="5" rx="2" fill="#9fcdbb"/>'+
+ '<rect x="270" y="131" width="24" height="8" rx="3" fill="#b8d8cc"/></g>';
+ // Two-level inpatient kennel bank: two upper recovery patients and a lower canine kennel.
  // Decorative only: the original Hospital Patient hit target remains unchanged.
  s+='<g filter="url(#trt25-shadow)">'+
  '<rect x="83" y="157" width="226" height="209" rx="13" fill="#dce5f1" stroke="#9baec8" stroke-width="7"/>'+
@@ -137,9 +142,9 @@ function treatment(){
  '</g>';
  // Two back-to-back stainless treatment tables in a compact island; walking remains in foreground.
  // Rear table is higher in perspective, front table retains the main treatment surface.
- s+='<path d="M457 81v86l-38 23" stroke="#99a3c5" stroke-width="10" fill="none"/>'+
- '<ellipse cx="419" cy="202" rx="43" ry="26" fill="#fff6d6" stroke="#a2acd1" stroke-width="9"/>'+
- [395,419,443].map(x=>'<circle cx="'+x+'" cy="202" r="9" fill="#fffefa"/>').join('')+
+ s+='<path d="M527 82v94l-35 18" stroke="#99a3c5" stroke-width="10" fill="none"/>'+
+ '<ellipse cx="491" cy="202" rx="36" ry="23" fill="#fff6d6" stroke="#a2acd1" stroke-width="9"/>'+
+ [473,491,509].map(x=>'<circle cx="'+x+'" cy="202" r="9" fill="#fffefa"/>').join('')+
  '<g filter="url(#trt25-shadow)">'+
  // Rear treatment table, angled slightly upward into the room.
  '<path d="M444 275l117 -10 37 21 -116 12z" fill="#f6f4fc" stroke="#9baac1" stroke-width="5"/>'+
@@ -274,7 +279,7 @@ styles.textContent='.vpqWalkArt{position:absolute;inset:0;width:100%;height:100%
 '.stage[data-room="imaging"] .prop,.stage[data-room="treatment"] .prop,.stage[data-room="imaging"] .roomdecor,.stage[data-room="treatment"] .roomdecor,.stage[data-room="imaging"] .roomBanner,.stage[data-room="treatment"] .roomBanner{display:none!important}'+
 '.vpq25Hotspots{position:absolute;inset:0;z-index:5;pointer-events:none}.vpq25Hit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:15px;box-shadow:none;transform:none!important;padding:0;overflow:visible}'+
 '.vpq25Hit:hover,.vpq25Hit:focus-visible,.vpq25Hit.vpq25Near{background:linear-gradient(180deg,#fffbd017,#fff3a539);border:3px solid #ffc85c;box-shadow:0 0 0 5px #fff1b65c,0 0 24px #ffc96eaa;outline:none}'+
-'.vpq25Hit span{position:absolute;bottom:-9%;left:50%;transform:translateX(-50%);padding:6px 8px;border:3px solid #a98cd5;background:linear-gradient(#fff,#f9e9fa);color:#514779;border-radius:16px;font-size:clamp(11px,1.3vw,15px);font-weight:1000;white-space:nowrap;box-shadow:0 4px 0 #9473ac55,0 7px 15px #53678733}.vpq25Hit.vpq25Near span{background:linear-gradient(#fff8d8,#ffe8a5);border-color:#e4aa43;color:#714e2e;box-shadow:0 5px 0 #c78e3c60,0 0 15px #ffe89fb0}.vpq25Hit.vpq25Near:after{content:"E · INTERACT";position:absolute;top:2%;left:50%;transform:translateX(-50%);border-radius:13px;border:2px solid #e4ad53;background:#fff9de;color:#765321;font-size:11px;font-weight:900;padding:5px 9px;white-space:nowrap;box-shadow:0 3px 12px #d8b05955;pointer-events:none}'+
+'.vpq25Hit span{position:absolute;bottom:-4%;left:50%;transform:translateX(-50%);padding:4px 7px;border:2px solid #a98cd5;background:linear-gradient(#fff,#f9e9fa);color:#514779;border-radius:16px;font-size:clamp(10px,1.05vw,13px);font-weight:900;white-space:nowrap;box-shadow:0 2px 0 #9473ac44,0 4px 8px #53678722}.vpq25Hit.vpq25Near span{background:linear-gradient(#fff8d8,#ffe8a5);border-color:#e4aa43;color:#714e2e;box-shadow:0 5px 0 #c78e3c60,0 0 15px #ffe89fb0}.vpq25Hit.vpq25Near:after{content:"E · INTERACT";position:absolute;top:2%;left:50%;transform:translateX(-50%);border-radius:13px;border:2px solid #e4ad53;background:#fff9de;color:#765321;font-size:11px;font-weight:900;padding:5px 9px;white-space:nowrap;box-shadow:0 3px 12px #d8b05955;pointer-events:none}'+
 '@media(max-width:620px){.vpq25Hit span{font-size:10px;padding:5px 4px;white-space:normal;min-width:80%;line-height:1.1}}';
 document.head.appendChild(styles);
 function refresh(){
