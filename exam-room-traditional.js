@@ -111,21 +111,28 @@ function drawing(){
 
  // A familiar cute clinical protocol board: remains a distinct action target.
  '<g transform="translate(552 277)" filter="url(#exShadow)"><rect width="104" height="58" rx="12" fill="#fffdf6" stroke="#aac9be" stroke-width="5"/><path d="M15 19h75M15 31h65M15 43h53" stroke="#bed6d4" stroke-width="4"/><rect x="36" y="-7" width="32" height="13" rx="5" fill="#8bb7b3"/></g>',
- // Right-side authentic hydraulic exam table: base, lift column, broad steel top.
- '<g filter="url(#exShadow)"><ellipse cx="783" cy="421" rx="143" ry="25" fill="#a0b8b6" opacity=".35"/><rect x="745" y="354" width="74" height="62" rx="15" fill="#7199a4" stroke="#597d8b" stroke-width="6"/><path d="M755 414h-70m121 0h66" stroke="#5f8390" stroke-width="13" stroke-linecap="round"/><path d="M751 389h66" stroke="#bbd6d4" stroke-width="6"/>',
- '<path d="M607 318L770 272L940 313L769 370Z" fill="url(#exMetal)" stroke="#658c9a" stroke-width="8" stroke-linejoin="round"/>',
- '<path d="M607 318L769 370V389L607 338Z" fill="#91adb8" stroke="#688d9a" stroke-width="6"/><path d="M769 370L940 313V335L769 389Z" fill="#83a8b1" stroke="#688d9a" stroke-width="6"/>',
- '<path d="M638 319L769 284L910 314L772 354Z" fill="#fffaf3" stroke="#c1d9d8" stroke-width="3"/>',
- '<path d="M654 316l5-6 5 6m-3-3v9M891 321l4-6 4 6" stroke="#e4a2b4" stroke-width="2" fill="none" opacity=".8"/></g>',
+ // Space-saving veterinary examination table, firmly attached to the right-side wall.
+ // A full-height mounting rail, bolt heads, reinforced triangular braces, and folding
+ // stainless platform make the mechanical support visible instead of a floating table.
+ '<g filter="url(#exShadow)"><rect x="909" y="180" width="27" height="178" rx="9" fill="#789da4" stroke="#537b86" stroke-width="5"/><rect x="914" y="196" width="17" height="145" rx="5" fill="#c2d8d9"/><g fill="#5f7c86"><circle cx="923" cy="210" r="4"/><circle cx="923" cy="245" r="4"/><circle cx="923" cy="284" r="4"/><circle cx="923" cy="328" r="4"/></g>',
+ // A strong, two-point wall-supported swing arm and angled diagonal knee braces.
+ '<path d="M917 323L787 387L772 377L909 302Z" fill="#7397a4" stroke="#587c8b" stroke-width="5"/>',
+ '<path d="M916 336L848 395L823 389L912 307Z" fill="#b2cdd0" stroke="#6b909b" stroke-width="5"/>',
+ '<path d="M921 300L802 352L774 367L891 310Z" fill="#8bb5b9" stroke="#658d98" stroke-width="4"/>',
+ // Wide counter-height platform; its rear edge meets the wall mount.
+ '<path d="M610 317L765 271L939 313L771 365Z" fill="url(#exMetal)" stroke="#648b97" stroke-width="7" stroke-linejoin="round"/>',
+ '<path d="M610 317L771 365V382L610 335Z" fill="#a0bfc8" stroke="#6f919b" stroke-width="5"/>',
+ '<path d="M771 365L939 313V334L771 382Z" fill="#789ca9" stroke="#5e8691" stroke-width="5"/>',
+ '<path d="M636 315L766 281L910 314L772 348Z" fill="#fffbf7" stroke="#c9dddd" stroke-width="4"/>',
+ '<path d="M619 313L764 272M770 365L937 313" stroke="#f5ffff" stroke-width="3" opacity=".8"/>',
+ '<g fill="#789aa4" stroke="#5c7c86" stroke-width="2"><circle cx="916" cy="321" r="6"/><circle cx="885" cy="328" r="5"/></g></g>',
  // Keep all legacy patients visually on top of the table.
  '<g transform="translate(213 -11)">',examPatientArt(),'</g>',
- // Wipe dispenser and a small sensible waste bin.
- '<g filter="url(#exShadow)"><rect x="880" y="218" width="48" height="43" rx="8" fill="#e9f4ef" stroke="#adc9ca" stroke-width="4"/><path d="M889 235h30" stroke="#93b6b8" stroke-width="4"/><path d="M901 224h8v-13h-8" fill="#fff"/><rect x="918" y="404" width="42" height="51" rx="8" fill="#9cbac0" stroke="#688f99" stroke-width="4"/><path d="M914 404h50" stroke="#647f8b" stroke-width="6"/></g>',
- // Stool and visitor seating are detailed, but kept low and outside stations.
- '<g transform="translate(507 382)"><ellipse cx="36" cy="12" rx="42" ry="14" fill="#8cb2ae"/><ellipse cx="36" cy="8" rx="36" ry="9" fill="#f6d2d3"/><path d="M36 22v61M36 72L6 91M36 72l32 19" stroke="#728f9c" stroke-width="8" stroke-linecap="round" fill="none"/></g>',
- '<g transform="translate(104 423)"><rect x="0" y="-44" width="104" height="14" rx="7" fill="#d0b7b1"/><rect x="1" y="0" width="104" height="19" rx="8" fill="#e5b8c1"/><path d="M12 19v42m80-42v42M12-28v27m80-27v27" stroke="#8da9b4" stroke-width="9"/></g>',
- // Simple potted fern, muted paw-print runner. Less clutter than floating emojis.
- '<ellipse cx="540" cy="471" rx="124" ry="20" fill="#efd0d8" opacity=".85"/><ellipse cx="540" cy="471" rx="112" ry="14" fill="none" stroke="#fff9f5" stroke-width="4" stroke-dasharray="12 11"/>',
+ // Dedicated clean-wipe dispenser and a lidded clinical-waste bin against wall.
+ '<g filter="url(#exShadow)"><rect x="882" y="219" width="48" height="43" rx="8" fill="#e9f4ef" stroke="#adc9ca" stroke-width="4"/><path d="M889 235h30" stroke="#93b6b8" stroke-width="4"/><path d="M901 224h8v-13h-8" fill="#fff"/><rect x="944" y="390" width="36" height="59" rx="6" fill="#a7c6ca" stroke="#70949d" stroke-width="4"/><path d="M938 388h48" stroke="#657f8a" stroke-width="6"/></g>',
+ // The floor stays clear and washable: no rug and no stool in the walkway.
+ // Guest chair is tucked under the counter end, not blocking the exam approach.
+ '<g transform="translate(110 426)"><rect x="0" y="-40" width="96" height="13" rx="6" fill="#d5b8b0"/><rect x="0" y="-2" width="96" height="16" rx="7" fill="#dfb6bf"/><path d="M12 14v48m73-48v48M12-27v24m73-24v24" stroke="#8da9b4" stroke-width="8"/></g>',
  '<g transform="translate(360 402)"><path d="M8 9h39l-7 34H16Z" fill="#e7b0a3" stroke="#bc8b86" stroke-width="4"/><path d="M27 14q-26-30-13-49q24 7 13 49ZM27 8q18-38 43-34q-5 30-43 34ZM26 9q-2-48 13-60q17 23-13 60Z" fill="#87b59b" stroke="#6d9e87" stroke-width="3"/></g>',
  '</svg>'
  ];
