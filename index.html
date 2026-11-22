@@ -417,7 +417,8 @@
 .vpq-arcade-game-frame iframe{display:block;width:100%;height:100%!important;min-height:0!important;max-height:100%;border:0;border-radius:9px;background:#fff}
 .modal:has(.vpq-gamegrid [data-vpqsharedgame]){width:min(690px,94vw)}
 @media(max-width:650px){.modal:has(.vpq-arcade-game-frame){width:99vw;max-height:98dvh}.vpq-arcade-game-frame{height:calc(97dvh - 58px)}}
-/* Drug Match viewport build v5 / cache diagnostic */</style><style>
+/* Drug Match viewport build v5 / cache diagnostic */body:has(#stage[data-room="pharmacy"]) #mission:empty{display:none!important}
+</style><style>
 /* Vet Pharm Quest 2.3 — illustrated clinic expansion */
 :root{--ink:#34445b;--border:#cad9e7}
 body{background:radial-gradient(circle at 12% 12%,#ffe0e8 0%,transparent 35%),radial-gradient(circle at 91% 25%,#c6f3ec 0%,transparent 34%),#f6f4ff}
@@ -1009,7 +1010,7 @@ body.vpq-reading-large #modalBody .vpq-patient-case .response p{font-size:18px!i
 <script src="exam-room-traditional.js?v=20261121-left-protocol-pedestal-9"></script>
 <script src="exam-case-library.js?v=20261121-pharm-next-case6"></script>
 <script src="pharmacology-visual-rounds.js?v=20261114-fixbuttons1"></script>
-<script src="pharmacy-nutrition-room.js?v=20261122-pharmacy-v6-a1767d"></script>
+<script src="pharmacy-nutrition-room.js?v=20261122-pharmacy-v7-38525c"></script>
 <script src="walkable-clinic-rooms-treatment-v7.js?v=20261121-layout-posters-v10"></script>
 <script src="clinic-approach-interactions.js?v=20261122-pharmacy-quiet-183da8"></script>
 <script src="clinpath-hybrid-room-art.js?v=20261114-polish2"></script>
@@ -1468,7 +1469,7 @@ function changeRoom(room){
  $('stage').focus({preventScroll:true});
 }
 function renderRoom(){const r=ROOMS[activeRoom];
- const medCaseRoomBtn=$('vpqPharmRoomCaseBtn');if(medCaseRoomBtn)medCaseRoomBtn.hidden=!['exam','treatment'].includes(activeRoom);$('roomTitle').textContent=r.name;$('roomHint').textContent=activeRoom==='isolation'?'Investigate zoonoses, host roles, infection control and reportability.':'Walk with A/D or ←/→, W/S or ↑/↓ for depth; E interacts near a station. Click equipment directly.';$('mission').textContent={reception:'🏥 Begin your shift',exam:'🐾 Choose a patient',pharmacy:'💊 Learn drug safety',treatment:'❤️ Clinical care',isolation:'🛡️ One Health response',study:'📚 Master your material',clinpath:'🩸 Read the smear'}[activeRoom];$('stage').style.background=r.color; $('stage').dataset.room=activeRoom;
+ const medCaseRoomBtn=$('vpqPharmRoomCaseBtn');if(medCaseRoomBtn)medCaseRoomBtn.hidden=!['exam','treatment'].includes(activeRoom);$('roomTitle').textContent=r.name;$('roomHint').textContent=activeRoom==='isolation'?'Investigate zoonoses, host roles, infection control and reportability.':'Walk with A/D or ←/→, W/S or ↑/↓ for depth; E interacts near a station. Click equipment directly.';$('mission').textContent={reception:'🏥 Begin your shift',exam:'🐾 Choose a patient',pharmacy:'',treatment:'❤️ Clinical care',isolation:'🛡️ One Health response',study:'📚 Master your material',clinpath:'🩸 Read the smear'}[activeRoom];$('stage').style.background=r.color; $('stage').dataset.room=activeRoom;
 let dec=r.decor.map(d=>`<span class="roomdecor" style="left:${d[1]};top:${d[2]}">${d[0]}</span>`).join('');if(activeRoom==='reception'&&state.upgrades.includes('garden'))dec+='<span class="roomdecor" style="left:5%;top:53%">🌷🌼</span>';if(activeRoom==='pharmacy'&&state.upgrades.includes('pharmDeco'))dec+='<span class="roomdecor" style="left:53%;top:22%">🧸</span>';if(activeRoom==='treatment'&&state.upgrades.includes('wardDeco'))dec+='<span class="roomdecor" style="left:68%;top:25%">🪴</span>';if(activeRoom==='reception'&&state.upgrades.includes('certificate'))dec+='<span class="roomdecor" style="left:46%;top:12%">🏆</span>';
 $('scene').innerHTML=window.VPQ_SCENERY.roomArt(activeRoom)+dec+`<div class="roomBanner">${r.name}</div>`+
 (activeRoom==='reception'?'<div class="vpqPatientQueueArt" aria-hidden="true"><span>🐕</span><span>🐈</span><span>🐇</span><small>Next patients</small></div>':'')+
