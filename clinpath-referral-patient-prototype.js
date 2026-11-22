@@ -123,6 +123,35 @@ style.textContent+=
 '#modalBody .refcase .refanswer h3{color:#217452}'+
 '#modalBody .refcase .refsubmit{background:#d6f4e1;border-color:#4b9d70}'+
 '@media(max-width:640px){#modalBody .refcase{font-size:16px}#modalBody .refcase .refoption .refoptionselect{font-size:16px}#modalBody .refcase .refhint{float:none;display:block}#modalBody .refcase table{font-size:14px}}';
+
+// Compact, wide referral reading layout; only affects this prototype modal.
+style.textContent+=
+'.modal:has(#modalBody .refcase){width:min(1120px,calc(100vw - 28px));max-height:96dvh}'+
+'.modal:has(#modalBody .refcase) .modalhead{padding:9px 16px;gap:8px}'+
+'.modal:has(#modalBody .refcase) #modalBody{padding:10px 14px}'+
+'#modalBody .refcase{max-width:none;font-size:16px;line-height:1.42}'+
+'#modalBody .refcase .refbox{padding:10px 12px;margin:6px 0;border-radius:10px}'+
+'#modalBody .refcase .refheader{padding:9px 12px}'+
+'#modalBody .refcase .refheader label{margin-top:0}'+
+'#modalBody .refcase .refheader .refselect{padding:7px 10px;font-size:16px;margin-top:3px}'+
+'#modalBody .refcase .refheader .refsmall{margin:3px 0 0}'+
+'#modalBody .refcase .refsection{padding:0;margin:6px 0}'+
+'#modalBody .refcase .refsection summary{padding:8px 12px;font-size:17px}'+
+'#modalBody .refcase .refsectionbody{padding:8px 12px}'+
+'#modalBody .refcase h3{font-size:18px;margin:2px 0 5px}'+
+'#modalBody .refcase .refgroup{font-size:19px;margin:9px 0 2px}'+
+'#modalBody .refcase p{margin:4px 0 6px}'+
+'#modalBody .refcase table{font-size:15px;line-height:1.28}'+
+'#modalBody .refcase th,#modalBody .refcase td{padding:5px 9px}'+
+'#modalBody .refcase table thead th{padding:7px 9px}'+
+'#modalBody .refcase .refhint{font-size:11px}'+
+'#modalBody .refcase .refphotoplace{min-height:100px;padding:8px}'+
+'#modalBody .refcase .reflevel{margin:10px 0 5px;padding:8px 10px}'+
+'#modalBody .refcase .refhintbox{padding:8px 10px;font-size:15px}'+
+'#modalBody .refcase .refoption{padding:4px 6px}'+
+'#modalBody .refcase .refoption .refoptionselect{font-size:16px;padding:6px}'+
+'#modalBody .refcase .refcompare td{padding:7px 9px}'+
+'@media(max-width:640px){.modal:has(#modalBody .refcase){width:calc(100vw - 8px);max-height:98dvh}.modal:has(#modalBody .refcase) #modalBody{padding:7px 9px}#modalBody .refcase{font-size:15px}#modalBody .refcase th,#modalBody .refcase td{padding:6px 5px}#modalBody .refcase .refsection summary{font-size:16px}}';
 document.head.appendChild(style);
 }
 const report=id=>{const data=reports[id];return '<details class="refbox refsection" open><summary>'+data.title+' <span class="refhint">expand / collapse</span></summary><div class="refsectionbody"><table><thead><tr><th>Test</th><th>Patient</th><th>Reference interval</th></tr></thead><tbody>'+data.rows.map(r=>'<tr><td>'+h(r[0])+'</td><td><b>'+h(r[1])+'</b> <b style="color:#af6a32">'+h(r[3])+'</b></td><td>'+h(r[2])+'</td></tr>').join('')+'</tbody></table>'+(data.extra?'<p>'+h(data.extra)+'</p>':'')+'</div></details>'};
