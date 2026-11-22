@@ -3804,6 +3804,91 @@
       },
       "updated": "2026-11-22T06:35:35.594Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-78-9": {
+      "title": "Auricular dermatophilosis (Rain rot)",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-9-1795329694972-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-22 011938.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Skin / Integument"
+          ],
+          "conditionId": "pathx-78-9"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-9-1795329696110-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Dermatophilus congolensis · Screenshot 2026-11-22 011943.png",
+          "type": "clinical",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Skin / Integument"
+          ],
+          "conditionId": "pathx-78-9"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-9-1795329694972-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-22 011938.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "78"
+        ],
+        "systems": [
+          "Skin / Integument"
+        ],
+        "conditionId": "pathx-78-9"
+      },
+      "text": {
+        "title": "Auricular dermatophilosis (Rain rot)",
+        "gross": "Thick yellow-brown adherent crusts; removal reveals an ulcerated exudative surface",
+        "mechanismSummary": "Proliferates in moist areas where the skin barrier is compromised. ",
+        "dx": "Working identification: Auricular dermatophilosis. Specimen site: Auricle / ear canal / middle ear. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Extensive parakeratosis, degenerate neutrophils and gram-positive bacteria with the characteristic rail road tracks ",
+        "why": "Etiology / pathogenesis: Dermatophilus congolensis, a Gram-positive bacterium that thrives in moist skin with damaged barrier. Gross, histology and clinical differentiation: Thick yellow-brown adherent crusts; removal reveals ulcerated exudative surface; parakeratosis, degenerate neutrophils and bacteria on histology.",
+        "visualClue": "Crusts, erythema ",
+        "compare": "",
+        "notes": "**Instructor L78 · slides 12**\n**Etiology / pathogenesis:** ***Dermatophilus congolensis***, a Gram-positive bacterium that thrives in moist skin with damaged barrier.\n",
+        "grossSpecies": "[]",
+        "etiologyCategories": [
+          "bacterial"
+        ],
+        "etiologyAgents": "***Dermatophilus congolensis***",
+        "etiologyCertainty": "differential",
+        "catalogScope": "course",
+        "speciesOccurrence": "{\"human\":\"common\"}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "breedSizes": "[]",
+        "breedTags": "[]",
+        "breedEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "integument",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "dermatophilosiscongolensis",
+        "zoonoticStatus": "direct",
+        "zoonoticNotes": "Direct contact when handling. More likely to have animal-to-animal contact. Highly contagious. \nFomites. ",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-22T06:41:37.214Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
