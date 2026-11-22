@@ -1428,7 +1428,7 @@ const initialRoom=readRoomStorage(sessionStorage,SESSION_ROOM_KEY)||
  readRoomStorage(localStorage,LAST_ROOM_KEY)||
  (validRoom(state.room)?state.room:null)||
  roomFromAddress()||'reception';
-let avatarX=44,petX=37.5,hold=0,frame=0,modalVisible=false,activeRoom=initialRoom;
+let avatarX=44,petX=37.5,hold=0,depthHold=0,avatarDepth=0,frame=0,modalVisible=false,activeRoom=initialRoom;
 state.room=activeRoom;
 function bookmarkRoom(room){
  if(!validRoom(room))return;
@@ -1477,7 +1477,7 @@ function changeRoom(room){
  if(room===activeRoom){bookmarkRoom(room);return}
  roomBackStack.push(activeRoom);
  if(roomBackStack.length>20)roomBackStack.shift();
- activeRoom=room;state.room=room;avatarX=43;petX=36.5;hold=0;
+ activeRoom=room;state.room=room;avatarX=43;petX=36.5;hold=0;depthHold=0;avatarDepth=0;
  bookmarkRoom(room);persist();renderRoom();updateHUD();
  $('stage').focus({preventScroll:true});
 }
@@ -1498,8 +1498,8 @@ $('roomnav').innerHTML=
  orderedRooms.map(k=>'<button type="button" data-room="'+k+'" class="'+(k===activeRoom?'active':'')+'"'+(k===activeRoom?' aria-current="page"':'')+'>'+roomIcons[k]+' '+ROOMS[k].name.split(' & ')[0]+'</button>').join('')+
  (activeRoom==='necropsy'?'<button type="button" data-path-foundations="1" style="background:#eaf3ff;border-color:#a5c8e8">📘 Pathology Foundations · L1–7 + Accumulations</button>':'');
 updatePosition()}
-function updatePosition(){avatarX=Math.min(93,Math.max(7,avatarX));$('avatarSprite').style.left=`calc(${avatarX}% - 28px)`;$('petSprite').style.left=`calc(${avatarX}% - 28px)`;const nearest=ROOMS[activeRoom].props.reduce((a,p,i)=>Math.abs(p.x-avatarX)<a.dist?{idx:i,dist:Math.abs(p.x-avatarX)}:a,{idx:-1,dist:999});document.querySelectorAll('.prop').forEach((el,i)=>el.classList.toggle('near',i===nearest.idx&&nearest.dist<14));$('interactToast').textContent=nearest.dist<14?`Press E: ${ROOMS[activeRoom].props[nearest.idx].label}`:'Move near a station • WASD / arrows';}
-function move(delta){if(modalVisible)return;avatarX=Math.min(93,Math.max(7,avatarX+delta));/* Pet is anchored to the veterinarian; no independent lag. */$('avatarSprite').classList.toggle('left',delta<0);$('avatarSprite').classList.add('walking');updatePosition()}
+function updatePosition(){avatarX=Math.min(93,Math.max(7,avatarX));avatarDepth=Math.min(8,Math.max(-8,avatarDepth));$('avatarSprite').style.left=`calc(${avatarX}% - 28px)`;$('petSprite').style.left=`calc(${avatarX}% - 28px)`;const sharedFloor=`${17+avatarDepth}%`;$('avatarSprite').style.bottom=sharedFloor;$('petSprite').style.bottom=sharedFloor;const nearest=ROOMS[activeRoom].props.reduce((a,p,i)=>Math.abs(p.x-avatarX)<a.dist?{idx:i,dist:Math.abs(p.x-avatarX)}:a,{idx:-1,dist:999});document.querySelectorAll('.prop').forEach((el,i)=>el.classList.toggle('near',i===nearest.idx&&nearest.dist<14));$('interactToast').textContent=nearest.dist<14?`Press E: ${ROOMS[activeRoom].props[nearest.idx].label}`:'Move near a station • WASD / arrows';}
+function move(delta,depthDelta=0){if(modalVisible)return;avatarX=Math.min(93,Math.max(7,avatarX+delta));avatarDepth=Math.min(8,Math.max(-8,avatarDepth+depthDelta));/* Pet shares both coordinates; never reintroduce independent interpolation. */if(delta!==0)$('avatarSprite').classList.toggle('left',delta<0);$('avatarSprite').classList.add('walking');updatePosition()}
 function interact(){const props=ROOMS[activeRoom].props,nearest=props.reduce((a,p,i)=>Math.abs(p.x-avatarX)<a.dist?{idx:i,dist:Math.abs(p.x-avatarX)}:a,{idx:-1,dist:999});if(nearest.dist<17)doAction(props[nearest.idx].action);else showModal('Find a station',`<p>Move closer to one of the labeled clinic stations or tap the object to open it.</p>`)}
 function doAction(action){if(action==='masterDiseaseLibrary')return window.VPQ_MASTER_DISEASE_LIBRARY?.open?.();switch(action){case 'welcome':showModal('Welcome to your clinic',`<p>Welcome, Dr. ${escapeHtml(state.name)}! Explore the clinic with your companion ${escapeHtml(state.petName)}. Visit the exam room for pharmacology cases, the isolation unit for One Health challenges, or the pharmacy for drug reference cards.</p><p class="infobox">Earn XP and coins when you finish cases or study questions. Decorating the clinic is optional, and you can access the core learning material without grinding.</p><button data-modalaction="map">Show the clinic rooms</button>`);break;case 'unifiedPatientRecords':window.VPQ_UNIFIED_PATIENT_RECORDS?.home?.(activeRoom);break;case 'advancedPatientJourney':window.VPQ_ADVANCED_PATIENT_JOURNEY?.home?.();break;case 'queue':if(typeof vpqPatientQueue38==='function')vpqPatientQueue38();else openCases('Pharmacology');break;case 'casesList':openCases('Pharmacology');break;case 'patients':window.VPQ_UNIFIED_PATIENT_RECORDS?.home?.('exam');break;case 'treatmentDiagnostics':case 'hospitalFollowup':window.VPQ_TREATMENT_DIAGNOSTICS.home();break;case 'clinpathLabReferral':changeRoom('clinpath');window.VPQ_ADVANCED_LAB.home();break;case 'advancedCoag':window.VPQ_ADVANCED_LAB.start('coag');break;case 'advancedGas':window.VPQ_ADVANCED_LAB.start('gas');break;case 'advancedHybrid':window.VPQ_ADVANCED_LAB.hybridHome();break;case 'advancedUrine':showModal('🧫 Urinalysis & Sediment Microscopy','<p>Choose visual sediment identification, compare real veterinary reference photos, or practice interpretive urinalysis questions.</p><div class="buttonrow"><button data-modalaction="vpqClinpathAtlas">🔬 Microscope Atlas · Urine Cells / Crystals / Casts</button><button data-modalaction="vpqUrineExisting">🧪 Urinalysis Interpretation Questions</button><button data-modalaction="classicLabHub">📚 Full Clinical Pathology Lab</button></div>');break;case 'vpqUrineExisting':window.VPQ_ADVANCED_LAB.start('urine');break;case 'advancedCases':{
  const referral=window.VPQ_CLINPATH_REFERRAL_PILOT;
@@ -1655,7 +1655,7 @@ $('roomnav').addEventListener('click',e=>{
 });
 $('upgradeList').addEventListener('click',e=>{const b=e.target.closest('[data-upgrade]');if(b)buyUpgrade(b.dataset.upgrade)});
 $('ohLibraryBtn').onclick=()=>openOHLibrary();$('goExam').onclick=()=>changeRoom('exam');$('goIsol').onclick=()=>changeRoom('isolation');$('goStudy').onclick=()=>changeRoom('study');$('pharmArcadeBtn').onclick=()=>{window.location.href='pharm-arcade.html'};$('editorBtn').onclick=()=>openEditor();if($('saveBtn'))$('saveBtn').onclick=openSavePanel;$('avatarBtn').onclick=openAvatar;$('helpBtn').onclick=openHelp;$('closeModal').onclick=closeModal;/* Backdrop clicks intentionally do not dismiss an active study or game modal. Use the X. */
-function beginHold(dir){if(modalVisible)return;hold=dir;$('stage').focus({preventScroll:true})}function stopHold(){hold=0;$('avatarSprite').classList.remove('walking')}
+function beginHold(dir){if(modalVisible)return;hold=dir;$('stage').focus({preventScroll:true})}function stopHold(){hold=0;depthHold=0;$('avatarSprite').classList.remove('walking')}
 for(const [id,dir] of [['leftBtn',-1],['rightBtn',1]]){const el=$(id);el.addEventListener('pointerdown',e=>{e.preventDefault();beginHold(dir);el.setPointerCapture(e.pointerId)});['pointerup','pointercancel','lostpointercapture'].forEach(t=>el.addEventListener(t,stopHold))}
 $('interactBtn').onclick=interact;
 /* Space flips open recall flashcards instead of clicking the previously focused close button.
@@ -1671,9 +1671,9 @@ document.addEventListener('keydown',e=>{
  if(e.repeat)return;
  card.click();
 },true);
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modalVisible){e.preventDefault();return}const tag=document.activeElement?.tagName?.toLowerCase();if(modalVisible||tag==='input'||tag==='textarea'||tag==='select')return;if(['a','ArrowLeft'].includes(e.key)){e.preventDefault();hold=-1}if(['d','ArrowRight'].includes(e.key)){e.preventDefault();hold=1}if(e.key.toLowerCase()==='e'){e.preventDefault();interact()}});
-document.addEventListener('keyup',e=>{if(['a','d','ArrowLeft','ArrowRight'].includes(e.key))stopHold()});window.addEventListener('blur',stopHold);
-function loop(){if(hold&&!modalVisible)move(hold*.7);else $('avatarSprite').classList.remove('walking');frame++;if(frame%7===0)updatePosition();requestAnimationFrame(loop)}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modalVisible){e.preventDefault();return}const tag=document.activeElement?.tagName?.toLowerCase();if(modalVisible||tag==='input'||tag==='textarea'||tag==='select')return;if(['a','ArrowLeft'].includes(e.key)){e.preventDefault();hold=-1}if(['d','ArrowRight'].includes(e.key)){e.preventDefault();hold=1}if(['w','ArrowUp'].includes(e.key)){e.preventDefault();depthHold=1}if(['s','ArrowDown'].includes(e.key)){e.preventDefault();depthHold=-1}if(e.key.toLowerCase()==='e'){e.preventDefault();interact()}});
+document.addEventListener('keyup',e=>{if(['a','ArrowLeft'].includes(e.key)&&hold===-1)hold=0;if(['d','ArrowRight'].includes(e.key)&&hold===1)hold=0;if(['w','ArrowUp'].includes(e.key)&&depthHold===1)depthHold=0;if(['s','ArrowDown'].includes(e.key)&&depthHold===-1)depthHold=0;if(!hold&&!depthHold)$('avatarSprite').classList.remove('walking')});window.addEventListener('blur',stopHold);
+function loop(){if((hold||depthHold)&&!modalVisible)move(hold*.7,depthHold*.23);else $('avatarSprite').classList.remove('walking');frame++;if(frame%7===0)updatePosition();requestAnimationFrame(loop)}
 $('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.ohcard){openOHCard(b.dataset.ohcard);return}if(b.dataset.oh){const z=b.dataset.oh;if(z==='library')openOHLibrary();else if(z==='hub')openOHHub();else if(z==='cases')openCases('One Health');else startOHMode(z);return}if(b.dataset.case){startCase(b.dataset.case);return}if(b.dataset.caseanswer!==undefined){answerCase(Number(b.dataset.caseanswer));return}if(b.dataset.caseadvance){advanceCase();return}if(b.dataset.studycmd){handleStudyCommand(b.dataset.studycmd);return}if(b.dataset.savecmd){handleSaveCommand(b.dataset.savecmd);return}if(b.dataset.studyanswer!==undefined){answerStudy(Number(b.dataset.studyanswer));return}if(b.dataset.studynext){nextStudy();return}if(b.dataset.drug){selectedDrug=b.dataset.drug;const d=dataDrugs().find(x=>x.id===selectedDrug);$('drugDetail').innerHTML=drugCardHTML(d);document.querySelectorAll('#drugList button').forEach(x=>x.classList.toggle('active',x.dataset.drug===selectedDrug));return}if(b.dataset.drugtab){drugTab=b.dataset.drugtab;$('drugDetail').innerHTML=drugCardHTML(dataDrugs().find(x=>x.id===selectedDrug));return}if(b.dataset.room){changeRoom(b.dataset.room);closeModal();return}if(b.dataset.modalaction){doAction(b.dataset.modalaction);return}if(b.id==='restoreEntry'){if(confirm('Restore this entry to the original version?')){delete edits[editorType][editorId];persist();openEditor(editorType,editorId)}return}if(b.id==='exportEdits'){downloadJSON();return}if(b.id==='importEdits'){$('importFile').click();return}});
 $('modalBody').addEventListener('change',e=>{if(e.target.id==='editorType'){openEditor(e.target.value,'')}if(e.target.id==='editorId'){openEditor(editorType,e.target.value)}if(e.target.id==='importFile')importJSON(e.target.files[0]);if(e.target.id==='saveFileInput')importSave(e.target.files[0]);if(e.target.id==='studyFocus'){state.focus=e.target.value;persist();showStudyMenu()}});
 $('modalBody').addEventListener('input',e=>{if(e.target.id==='drugSearch')filterDrugs(e.target.value);if(e.target.id==='ohSearch')renderOHResults(e.target.value)});
@@ -4933,6 +4933,8 @@ for(const [id,name,image,category] of vpqUploadedCompanionManifest){
  category==='pocket'?'🐹':category==='exotics'?'🦎':'✨';
  vpqCompanionCatalog.push({id,name,image,category,pet,petBreed:category==='dog'?id:undefined,level:tier[0],price:tier[1]});
 }
+/* Illustrated, zero-cost starters for species testing. Existing selections and owned IDs are preserved. */
+for(const starterId of ['cat-siamese','pocket-rabbit-holland','exotic-beardie']){const starter=vpqCompanionCatalog.find(c=>c.id===starterId);if(starter){starter.level=1;starter.price=0;}}
 const vpqCompanionById=id=>vpqCompanionCatalog.find(c=>c.id===id);
 const vpqCompanionLv=()=>Math.floor(Math.max(0,Number(state.xp)||0)/LEVEL_THRESH)+1;
 if(!Array.isArray(state.vpqCompanionOwned))state.vpqCompanionOwned=[];
@@ -5139,11 +5141,12 @@ vpqUnifiedCompanionStyle.textContent=
  * padding: container edges are intentionally allowed to overlap 25px.
  * These rules affect only the walkable stage, NOT selection, previews or shop.
  */
- '#stage>#petSprite.petSprite{--vpq-pet-w:146px;--vpq-pet-h:150px;position:absolute!important;bottom:17%!important;transform:translateX(calc(-100% + 25px))!important;transform-origin:center bottom!important;width:var(--vpq-pet-w)!important;height:var(--vpq-pet-h)!important;max-width:var(--vpq-pet-w)!important;max-height:var(--vpq-pet-h)!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;box-sizing:border-box!important;pointer-events:none!important;transition:left .08s linear!important}'+
+ '#stage>#petSprite.petSprite{--vpq-pet-w:146px;--vpq-pet-h:150px;position:absolute!important;transform:translateX(calc(-100% + 25px))!important;transform-origin:center bottom!important;width:var(--vpq-pet-w)!important;height:var(--vpq-pet-h)!important;max-width:var(--vpq-pet-w)!important;max-height:var(--vpq-pet-h)!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;box-sizing:border-box!important;pointer-events:none!important;transition:left .08s linear!important}'+
  '#stage>#petSprite.petSprite[data-companion-category="cat"],#stage>#petSprite.petSprite[data-companion-category="pocket"]{--vpq-pet-w:112px;--vpq-pet-h:116px}'+
- '#stage>#petSprite.petSprite[data-companion-category="exotics"],#stage>#petSprite.petSprite[data-companion-category="avians"]{--vpq-pet-w:124px;--vpq-pet-h:128px}'+
- '#stage>#petSprite.petSprite[data-companion-category="horse"],#stage>#petSprite.petSprite[data-companion-category="ruminants"]{--vpq-pet-w:188px;--vpq-pet-h:176px}'+
+ '#stage>#petSprite.petSprite[data-companion-category="exotics"],#stage>#petSprite.petSprite[data-companion-category="avians"]{--vpq-pet-w:108px;--vpq-pet-h:112px}'+
+ '#stage>#petSprite.petSprite[data-companion-category="horse"],#stage>#petSprite.petSprite[data-companion-category="ruminants"]{--vpq-pet-w:226px;--vpq-pet-h:210px}'+
  '#stage>#petSprite.petSprite[data-companion-category="legendary"]{--vpq-pet-w:158px;--vpq-pet-h:160px}'+
+ '#stage>#petSprite.petSprite:has(>.vpq-companion-art[src*="Chibi%20Bearded%20Dragon"]){--vpq-pet-w:96px;--vpq-pet-h:100px}'+
  '#stage>#petSprite.petSprite>.vpq-companion-art,'+
  '#stage>#petSprite.petSprite>.vpq-pet-art,'+
  '#stage>#petSprite.petSprite>.vpq-batch-dog-image,'+
