@@ -69,10 +69,58 @@ function drawing(){
  '<rect x="27" y="167" width="109" height="50" rx="5" fill="#fff9ec" stroke="#b7bdab" stroke-width="4"/><text x="81" y="189" font-size="16">CLINIC</text><text x="81" y="207" font-size="13">SUPPLIES</text>'+
  '<rect x="176" y="166" width="108" height="50" rx="6" fill="#f5eee0" stroke="#bac2b7" stroke-width="4"/><text x="230" y="191" font-size="18">💊</text><text x="230" y="209" font-size="12">SHELVES</text></g>'+
  '<rect x="20" y="232" width="272" height="16" rx="4" fill="#77a49c"/></g>'+
- // Standing product display with stylized dog/cat food bags (not real brands).
- '<g transform="translate(445 129)"><rect x="-12" y="173" width="241" height="20" rx="5" fill="#a58165"/><path d="M0 192h219v107H0Z" fill="#c8ab8d" stroke="#9e806c" stroke-width="6"/><path d="M108 195v99" stroke="#aa8a72" stroke-width="5"/><path d="M88 227v31m43 -31v31" stroke="#8e7666" stroke-width="5" stroke-linecap="round"/>'+
- '<g><path d="M7 58L23 35H92L105 58V176H7Z" fill="#dfbd8c" stroke="#ad8c69" stroke-width="5"/><path d="M23 35l-6 -13h80l-6 13" fill="#c99a79"/><ellipse cx="56" cy="109" rx="36" ry="30" fill="#fff2dd"/><text x="56" y="118" text-anchor="middle" font-size="37">🐕</text><text x="56" y="153" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="900" fill="#775f4f">DOG FOOD</text></g>'+
- '<g><path d="M114 72L132 43H200L215 72V177H114Z" fill="#baa4cf" stroke="#9580ad" stroke-width="5"/><path d="M132 44l-6 -13h79l-5 13" fill="#a48cbb"/><ellipse cx="166" cy="115" rx="34" ry="30" fill="#f7eefb"/><text x="166" y="125" text-anchor="middle" font-size="37">🐈</text><text x="166" y="155" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="900" fill="#69557c">CAT FOOD</text></g></g>'+
+ // Nutrition shop fixtures: full food bags, canned-food tiers, and clear treat bins.
+ '<g transform="translate(431 107)">'+
+ '<rect x="-3" y="3" width="274" height="224" rx="9" fill="#c5ac91" stroke="#9a806f" stroke-width="5"/>'+
+ '<rect x="6" y="10" width="257" height="195" rx="5" fill="#fbf1df"/>'+
+ '<rect x="12" y="15" width="245" height="22" rx="5" fill="#8fbbb1"/>'+
+ '<text x="134" y="31" font-family="Arial" font-size="13" font-weight="900" text-anchor="middle" fill="#fffdf6">PET FOOD &amp; TREATS</text>'+
+ '<rect x="14" y="43" width="241" height="67" rx="5" fill="#e2f1e8" stroke="#b9d2c7" stroke-width="2"/>'+
+ '<text x="72" y="53" font-family="Arial" font-size="9" font-weight="900" fill="#65877c">CANNED FOOD</text>'+
+ '<text x="194" y="53" font-family="Arial" font-size="9" font-weight="900" fill="#65877c">TREATS</text>'+
+ // Cans stacked in clearly separated rows with small pet icons.
+ [0,1].map((row)=>[0,1,2,3].map((i)=>{const x=21+i*26,y=60+row*23;return '<g><rect x="'+x+'" y="'+y+'" width="21" height="19" rx="4" fill="'+(['#e5ac9c','#a5c7ce','#dbb9db','#a9c7a9'][(i+row)%4])+'" stroke="#9f9a93" stroke-width="1.8"/><ellipse cx="'+(x+10.5)+'" cy="'+y+'" rx="10.5" ry="3" fill="#f8f9f3" stroke="#a2aba9" stroke-width="1"/><text x="'+(x+10.5)+'" y="'+(y+14)+'" font-size="10" text-anchor="middle">'+(row?'🐈':'🐕')+'</text></g>'}).join('')).join('')+
+ // Treat containers; distinct from medication bottles.
+ [0,1,2].map((i)=>{const x=148+i*35;return '<g><rect x="'+x+'" y="63" width="29" height="39" rx="6" fill="'+(['#efd8b0','#ddc4da','#b9dbce'][i])+'" stroke="#a8a09f" stroke-width="2"/><rect x="'+(x+3)+'" y="59" width="23" height="8" rx="3" fill="#e9eee8" stroke="#a2b8b4" stroke-width="1.3"/><text x="'+(x+14)+'" y="84" font-size="12" text-anchor="middle">'+(['🦴','🐟','🥕'][i])+'</text><text x="'+(x+14)+'" y="97" font-family="Arial" font-size="6.5" text-anchor="middle" fill="#6d6571">TREATS</text></g>'}).join('')+
+ '<path d="M13 111h243" stroke="#a78d7b" stroke-width="7"/>'+
+ // Staggered front bags with readable DOG/CAT labels, below the supply shelves.
+ '<path d="M16 145l10 -22h67l12 22v63H16Z" fill="#e5c195" stroke="#b28f6f" stroke-width="4"/>'+
+ '<path d="M24 123l-5 -9h81l-6 9" fill="#cead8c"/><ellipse cx="61" cy="165" rx="32" ry="26" fill="#fff2e0"/>'+
+ '<text x="61" y="172" font-size="29" text-anchor="middle">🐕</text><text x="61" y="199" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle" fill="#75604d">DOG FOOD</text>'+
+ '<path d="M115 153l12 -29h65l13 29v55H115Z" fill="#c9b0d4" stroke="#a189b2" stroke-width="4"/>'+
+ '<path d="M126 124l-4 -10h79l-7 10" fill="#b49ac4"/><ellipse cx="160" cy="168" rx="30" ry="25" fill="#f8f0ff"/>'+
+ '<text x="160" y="175" font-size="27" text-anchor="middle">🐈</text><text x="160" y="201" font-family="Arial" font-size="12" font-weight="900" text-anchor="middle" fill="#6c567d">CAT FOOD</text>'+
+ '<path d="M212 165l6 -17h35l7 17v43h-48Z" fill="#afc9a3" stroke="#839f83" stroke-width="3"/>'+
+ '<text x="236" y="184" font-size="17" text-anchor="middle">🐇</text><text x="236" y="200" font-family="Arial" font-size="8" text-anchor="middle" fill="#567363">SMALL PET</text>'+
+ '<path d="M9 210h251" stroke="#9a7e6d" stroke-width="9"/>'+
+ '<path d="M5 221H267V328H5Z" fill="#c7aa8d" stroke="#a48670" stroke-width="5"/>'+
+ '<path d="M134 224v101M18 244h231" stroke="#ad8d75" stroke-width="3"/>'+
+ '<rect x="20" y="255" width="96" height="45" rx="5" fill="#ddc6aa"/><rect x="149" y="255" width="96" height="45" rx="5" fill="#e7d2b8"/>'+
+ '<text x="68" y="282" font-family="Arial" font-size="12" font-weight="800" text-anchor="middle" fill="#7d6559">STOCK</text>'+
+ '<text x="197" y="282" font-family="Arial" font-size="12" font-weight="800" text-anchor="middle" fill="#7d6559">NUTRITION</text></g>'+
+ // Side-wall equipment, safely outside the medication cabinet and food station hotspots.
+ '<g font-family="Arial" font-weight="800"><rect x="8" y="104" width="62" height="150" rx="5" fill="#eaf1e9" stroke="#81aa9f" stroke-width="4"/>'+
+ '<text x="39" y="117" text-anchor="middle" font-size="9" fill="#577d75">E-COLLARS</text>'+
+ '<path d="M16 127h47" stroke="#a8bcb5" stroke-width="3"/>'+
+ '<path d="M25 146q-13 -12 -13 10q6 19 20 6l9 -11Z" fill="#d8ebee" stroke="#8caeba" stroke-width="3"/>'+
+ '<path d="M50 177q-12 -8 -14 13q7 18 20 5l9 -10Z" fill="#eee0ed" stroke="#b5a3bf" stroke-width="3"/>'+
+ '<text x="39" y="238" font-size="9" text-anchor="middle" fill="#577d75">SIZES</text>'+
+ '<rect x="919" y="77" width="64" height="66" rx="5" fill="#f1ede5" stroke="#9ab6ac" stroke-width="4"/>'+
+ '<text x="950" y="90" text-anchor="middle" font-size="9" fill="#5a7778">LEASHES</text>'+
+ [0,1,2].map(i=>'<path d="M'+(931+i*18)+' 101v14q0 20 9 13q8 -5 0 -17" fill="none" stroke="'+(['#a6a6d3','#e8a7aa','#86baa7'][i])+'" stroke-width="5" stroke-linecap="round"/>').join('')+
+ '</g>'+
+ // Carrier storage above the drug shelves, with vents and doors.
+ '<g transform="translate(126 47)"><rect width="77" height="40" rx="8" fill="#e7d7c8" stroke="#a9aaa8" stroke-width="4"/>'+
+ '<path d="M20 1Q22 -10 38 -10Q53 -10 57 1" stroke="#b8a99d" stroke-width="5" fill="none"/>'+
+ '<rect x="24" y="11" width="30" height="25" rx="4" fill="#849ca6"/>'+
+ '<path d="M31 13v20M38 13v20M45 13v20" stroke="#d3e2dd" stroke-width="3"/>'+
+ '<path d="M6 14h11m-11 7h11m-11 7h11" stroke="#b8b3aa" stroke-width="2"/>'+
+ '<rect x="116" y="-2" width="74" height="42" rx="8" fill="#c6d9cf" stroke="#9bb4ac" stroke-width="4"/>'+
+ '<path d="M135 -2q3 -13 17 -13q16 0 20 13" stroke="#91aca7" stroke-width="5" fill="none"/>'+
+ '<rect x="140" y="9" width="29" height="27" rx="4" fill="#788e95"/>'+
+ '<path d="M147 11v23m8 -23v23m8 -23v23" stroke="#d7e7e0" stroke-width="3"/>'+
+ '<path d="M123 13h11m-11 8h11m-11 8h11" stroke="#a2b6ad" stroke-width="2"/>'+
+ '</g>'+
  // A small caution book on wall stand; unmistakable toxicology object.
  '<g transform="translate(755 119)"><rect x="-12" y="167" width="177" height="14" rx="5" fill="#a6c5bf"/><rect x="4" y="23" width="135" height="144" rx="10" fill="#efd7c9" stroke="#a76b6e" stroke-width="7"/><rect x="15" y="32" width="109" height="126" rx="6" fill="#ffefd8" stroke="#d6a49a" stroke-width="4"/><rect x="26" y="45" width="88" height="30" rx="5" fill="#cc7074"/><text x="70" y="66" font-family="sans-serif" font-size="16" font-weight="900" text-anchor="middle" fill="#fff9f2">CAUTION</text><text x="70" y="116" text-anchor="middle" font-size="41">☣️</text><text x="70" y="143" font-family="sans-serif" text-anchor="middle" font-size="14" font-weight="900" fill="#9a565c">TOXICOLOGY</text><path d="M17 35V154" stroke="#c7928c" stroke-width="5"/></g>'+
  // Door into Mechanism Lab at far right, with vertical wall frame.
