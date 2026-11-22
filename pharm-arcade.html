@@ -358,7 +358,7 @@ function vpqWireMatchLecturePicker40(){
   const shared=window.VPQCurriculum;
   if(el.value!=='__selected'&&shared){
    const course=shared.courses.find(x=>x[0]===el.value);
-   if(course){shared.setLectures([course[0]]);vpqExamLectures310=new Set([course[1]])}
+   if(course){shared.setLectures([course[0]]);vpqExamLectures310=new Set([course[1]]);if(window.parent!==window)window.parent.postMessage({type:'vpq-pharm-match-focus',lecture:course[0]},location.origin)}
   }
   matchDeck=[];matched=new Set();selection=null;vpqMatchInit40();
  };
