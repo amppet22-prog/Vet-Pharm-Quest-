@@ -83,7 +83,7 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<path d="M190 349Q218 345 235 352L250 379L237 390L186 386Z" fill="#9fceb9"/>'+
 '<path d="M110 428v12M278 428v11" stroke="#806b9a" stroke-width="9" stroke-linecap="round"/></g>'+ 
 // Smaller arcade-like clinical skills simulator sits farther back on the right wall.
-'<g transform="translate(708 169) scale(.72 .82)">'+
+'<g transform="translate(723 169) scale(.72 .82)">'+
 '<ellipse cx="84" cy="218" rx="86" ry="13" fill="#5d527d" opacity=".15"/>'+
 '<path d="M9 24L43 6H136L154 25V191L136 209H9Z" fill="#6b92a6" stroke="#486b87" stroke-width="7"/>'+
 '<path d="M9 24H133L136 6H43Z" fill="#add8d6" stroke="#6188a1" stroke-width="4"/>'+
@@ -144,7 +144,7 @@ css.textContent='.vpqStudyLoungeArt{position:absolute;inset:0;width:100%;height:
 '.vpqLoungeHot span{display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);min-width:120px;max-width:145px;text-align:center;background:#fffaf4;border:2px solid #9ba7bd;color:#303c64;border-radius:9px;padding:5px 7px;font-size:11px;font-weight:800;box-shadow:0 3px 7px #65728636;z-index:3}'+
 '.vpqLoungeHot:is(:hover,:focus-visible) span{display:block}.vpqLoungeHot b,.vpqLoungeHot small{display:block}.vpqLoungeHot small{font-size:10px;font-weight:600}'+
 '.vpqLoungeDesk{left:53%;top:45%;width:12%;height:23%}.vpqLoungeMastery{left:43%;top:18%;width:26%;height:26%}.vpqLoungeGames{left:84%;top:33%;width:13%;height:34%}'+
-'.vpqLoungeSkills{position:absolute;left:71%;top:33%;width:11%;height:35%;padding:0;pointer-events:auto;border:2px solid transparent;background:transparent;color:transparent;border-radius:10px;font-size:0;cursor:pointer;box-shadow:none}.vpqLoungeSkills:hover,.vpqLoungeSkills:focus-visible{border:2px dashed #e5b657;background:#fff4c522;outline:none}'+
+'.vpqLoungeSkills{position:absolute;left:72.5%;top:33%;width:11%;height:35%;padding:0;pointer-events:auto;border:2px solid transparent;background:transparent;color:transparent;border-radius:10px;font-size:0;cursor:pointer;box-shadow:none}.vpqLoungeSkills:hover,.vpqLoungeSkills:focus-visible{border:2px dashed #e5b657;background:#fff4c522;outline:none}'+
 '.vpqLoungeExit{top:8%;right:2%;padding:6px 10px;border-radius:15px;background:#fffaf0ed;color:#584d70;font-size:11px;font-weight:800}'+
 '@media(max-width:600px){.vpqLoungeHot span{font-size:9px;padding:3px 5px}.vpqLoungeExit{font-size:9px;padding:5px}}';
 document.head.appendChild(css);
