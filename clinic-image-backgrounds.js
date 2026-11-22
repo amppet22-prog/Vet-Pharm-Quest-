@@ -13,7 +13,8 @@ const assets={
  // Do not replace the live SVG with the retired necropsy-floor.svg image.
  // The specialist room SVG controller owns 'clinpath'. Do not override its
  // playable hybrid art with the older flat advanced-clinpath.svg image.
- isolation:'assets/rooms/isolation-one-health.svg',
+ // Isolation is owned by VPQ_SPECIALIST_ROOMS, which renders the newer detailed ward SVG.
+ // Do not replace it with the old three-panel isolation-one-health.svg asset.
  // Cat Corner is rendered by the richer walkable scene in reception-hallway-and-habitats.js.
  // Do not override it with the retired flat cat-corner image.
  // The updated dog yard is drawn by the walkable reception wings module.
