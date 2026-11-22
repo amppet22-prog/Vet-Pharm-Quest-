@@ -114,6 +114,12 @@
       "answer": "Alpha-1-mediated urethral smooth-muscle tone.",
       "why": "Outlet relaxation differs from stimulating the bladder wall. Nonselective so it can cause some cardiovascular side effects.",
       "slide": "Exam 2 lecture 13 · source-derived mechanism review"
+    },
+    "pharm-e2-autonomic13-014": {
+      "prompt": "What is oxybutynin's mechanism and clinical effect? Urine retention.",
+      "answer": "Muscarinic antagonist; reduces detrusor overactivity.",
+      "why": "It supports bladder storage and can worsen urinary retention if outflow is blocked.",
+      "slide": "Lecture 13 · submitted course notes, clinically reviewed"
     }
   },
   "custom": [
