@@ -2061,17 +2061,48 @@ vpqPetIllustration=function(p){
 };
 // Companion Batch 1: new dogs are appended, never substituted for previous breeds.
 const vpqBatch1Dogs=Array.isArray(window.VPQ_COMPANION_DOG_BATCH_1)?window.VPQ_COMPANION_DOG_BATCH_1:[];
-for(const dog of vpqBatch1Dogs){
- if(dog?.species!=='dog'||!/^dog-b1-[0-9a-f]{12}$/.test(dog.id))continue;
- if(!vpqBreeds.some(b=>b[0]===dog.id))vpqBreeds.push([dog.id,dog.label]);
-}
+// Do not expose a Batch 1 image until its PNG is verified to have genuinely
+// transparent pixels. Opaque-background uploads stay archived in GitHub.
+const vpqUsableDogIds=new Set();
+const vpqBatchDogStatus=new Map();
 const vpqPreviousPetArtBatch1=vpqPetIllustration;
+function vpqDogAssetURL(path){return String(path).split('/').map(encodeURIComponent).join('/')}
+function vpqCheckDogTransparency(dog){
+ if(dog?.species!=='dog'||!/^dog-b1-[0-9a-f]{12}$/.test(dog.id))return;
+ if(!/^[^/\\]+\.png$/i.test(String(dog.path||''))||dog.path.includes('..'))return;
+ const picture=new Image();
+ picture.onload=function(){
+  try{
+   const canvas=document.createElement('canvas');
+   canvas.width=72;canvas.height=72;
+   const context=canvas.getContext('2d',{willReadFrequently:true});
+   if(!context)throw Error('Canvas unavailable');
+   context.clearRect(0,0,72,72);
+   context.drawImage(picture,0,0,72,72);
+   const rgba=context.getImageData(0,0,72,72).data;
+   let transparent=0;
+   // Requiring visible transparency across multiple pixels avoids mistaking
+   // minor encoding artifacts for a genuinely cut-out companion.
+   for(let p=3;p<rgba.length;p+=4)if(rgba[p]<225)transparent++;
+   const valid=transparent>=25;
+   vpqBatchDogStatus.set(dog.id,valid?'transparent':'opaque');
+   if(valid){
+    vpqUsableDogIds.add(dog.id);
+    if(!vpqBreeds.some(b=>b[0]===dog.id))vpqBreeds.push([dog.id,dog.label]);
+   }
+   // Repaint currently open creator when certification finishes.
+   if(document.getElementById('avatarForm'))vpqRefreshPreview();
+   if(window.vpqDogBatchStatusListener)window.vpqDogBatchStatusListener(dog.id,valid);
+  }catch(err){vpqBatchDogStatus.set(dog.id,'unchecked');}
+ };
+ picture.onerror=function(){vpqBatchDogStatus.set(dog.id,'unavailable')};
+ picture.src=vpqDogAssetURL(dog.path);
+}
+vpqBatch1Dogs.forEach(vpqCheckDogTransparency);
 vpqPetIllustration=function(p){
- const dog= p?.pet==='🐕'?vpqBatch1Dogs.find(d=>d.id===p.petBreed):null;
+ const dog=p?.pet==='🐕'&&vpqUsableDogIds.has(p.petBreed)?vpqBatch1Dogs.find(d=>d.id===p.petBreed):null;
  if(!dog)return vpqPreviousPetArtBatch1(p);
- const path=String(dog.path||'');
- if(!/^[^/\\]+\.png$/i.test(path)||path.includes('..'))return vpqPreviousPetArtBatch1(p);
- const url=path.split('/').map(encodeURIComponent).join('/');
+ const url=vpqDogAssetURL(dog.path);
  return '<img class="vpq-batch-dog-image" src="'+url+'" alt="'+escapeHtml((p.petName||'Companion')+' — '+dog.label)+'" loading="lazy" draggable="false">';
 };
 const vpqBatchDogStyle=document.createElement('style');
