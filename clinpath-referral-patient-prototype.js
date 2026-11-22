@@ -150,7 +150,7 @@ return '<div class="refoption '+(active?'is-selected ':'')+(lead?'is-lead ':'')+
 '<div class="refbox refshortlist"><h3>📋 Your ranked shortlist</h3>'+
 (selected.length?'<ol class="refrank">'+selected.map((c,i)=>'<li><div><b>'+h(c.name)+'</b>'+(state.lead===c.id?' <span class="refleader">★ Lead</span>':'')+'</div><div class="refrankbuttons"><button type="button" data-ref-up="'+c.id+'" '+(done||i===0?'disabled':'')+' title="Move higher">↑</button><button type="button" data-ref-down="'+c.id+'" '+(done||i===selected.length-1?'disabled':'')+' title="Move lower">↓</button></div></li>').join('')+'</ol>':'<p>Choose options above to build your shortlist.</p>')+
 '<p class="refsmall">'+selected.length+'/3 shortlisted · '+(state.lead?'Leading diagnosis selected':'Set your leading diagnosis using ☆ Lead')+'</p>'+
-'<p class="refsmall">Ranking order matters: your first entry is your highest-priority differential. Your ★ Lead should match your top-ranked choice.</p></div>'
+'<p class="refsmall">Ranking order matters: your first entry is your highest-priority differential. Your ★ Lead should match your top-ranked choice.</p></div>'+
 (!done?'<div class="refbuttons"><button class="refsubmit" type="button" data-ref-guided-submit="1">✓ Submit differential ranking · View comparisons</button></div><p class="refsmall">All options remain neutral before submission. You can attempt Advanced Mode separately afterward.</p>':'<p class="refsmall">Your differential ranking has been submitted. The case comparison appears below.</p>')+
 '</section>';
 };
