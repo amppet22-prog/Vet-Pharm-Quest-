@@ -162,6 +162,12 @@
       "answer": "Zilpaterol is a beta-agonist that's approved in cattle, but can lead to lameness and health issues. It is highly toxic to equines.",
       "why": "U.S. cattle-feed labeling explicitly prohibits equine access. Voluntarily withdrawn from cattle.",
       "slide": "Lecture 15 · submitted recall notes + clinically reviewed guidance"
+    },
+    "pharm-e2-resp15-018": {
+      "prompt": "Why is clenbuterol species-specific?",
+      "answer": "It is used for selected equine airway disease, with food-animal and competition limits\n.",
+      "why": "β2 stimulation may cause sweating, tremors, tachycardia or excitement.\nLasts 6-8 hours and has been abused in racehorses but there is no cardiopulmonary advantage for this.",
+      "slide": "Lecture 15 · submitted recall notes + clinically reviewed guidance"
     }
   },
   "custom": [
