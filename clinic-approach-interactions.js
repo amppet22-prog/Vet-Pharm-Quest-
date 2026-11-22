@@ -29,7 +29,7 @@ const configs={
   {selector:'#vpqPNHotspots [data-vpqpnaction="vpqMechEnter"]',x:95,label:'🔬 Mechanism Lab',max:9}
  ],
  study:[
-  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="study"]',x:49,label:'💻 Study Computer'},
+  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="study"]',x:59,label:'💻 Study Computer'},
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="masteryTracker"]',x:35,label:'🏆 Mastery Tracker'},
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="learningHub"]',x:84,label:'🕹️ Learning Arcade'}
  ],
