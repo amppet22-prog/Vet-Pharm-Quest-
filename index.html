@@ -1523,7 +1523,24 @@ function vpqCaseMilestoneArt(m){
  '<p class="vpqCaseEncouragement">Every patient is building your clinical confidence. Keep it going! 🐾</p>'+
  '</div></section>';
 }
-function advanceCase(){if(!caseSession)return;const c=dataCases().find(x=>x.id===caseSession.id);if(caseSession.step<c.steps.length-1){caseSession.step++;renderCase();return}const isNew=!state.completed.includes(c.id);if(isNew){state.completed.push(c.id);award(45,20)}const correct=caseSession.answers.filter((a,i)=>a===c.steps[i].answer).length;const milestone=vpqCaseMilestone(c,isNew);showModal(milestone?'🎊 Congratulations!':'🎉 Case completed!',`${vpqCaseMilestoneArt(milestone)}<div class="preview success"><h3>${c.emoji} ${escapeHtml(c.name)} — case complete</h3><p>You answered <b>${correct}/${c.steps.length}</b> clinical decisions correctly. ${isNew?'You earned <b>45 XP and 20 coins</b>!':'Case already completed; replay is always available.'}</p><p>Review both the medication decision and the underlying physiology. This is a learning simulation, not a substitute for real patient care or reporting rules.</p></div><div class="buttonrow"><button data-modalaction="${c.track==='One Health'?'onehealth':'patients'}">Another case</button><button data-modalaction="pharmacy">Review drug cards</button></div>`)}
+function vpqPharmCaseLecture(c){
+ const selected=window.VPQCurriculum?.getLectures?.()||[];
+ const tags=[...(Array.isArray(c.lectureTags)?c.lectureTags:[]),c.lecture].filter(Boolean);
+ return selected.find(l=>tags.includes(l))||c.lecture||tags[0]||'';
+}
+function vpqNextPharmCase(current){
+ if(!current||current.track!=='Pharmacology')return null;
+ const lecture=vpqPharmCaseLecture(current);
+ const cases=dataCases().filter(c=>c.track==='Pharmacology'&&(lecture?
+  (c.lecture===lecture||(Array.isArray(c.lectureTags)&&c.lectureTags.includes(lecture))):
+  (!c.lecture&&!c.lectureTags?.length)));
+ const unique=cases.filter((c,i)=>cases.findIndex(x=>x.id===c.id)===i);
+ if(unique.length<=1)return null;
+ const idx=unique.findIndex(c=>c.id===current.id);
+ const remaining=unique.slice(idx+1).concat(unique.slice(0,Math.max(0,idx)));
+ return remaining.find(c=>!state.completed.includes(c.id))||remaining[0]||null;
+}
+function advanceCase(){if(!caseSession)return;const c=dataCases().find(x=>x.id===caseSession.id);if(caseSession.step<c.steps.length-1){caseSession.step++;renderCase();return}const isNew=!state.completed.includes(c.id);if(isNew){state.completed.push(c.id);award(45,20)}const correct=caseSession.answers.filter((a,i)=>a===c.steps[i].answer).length;const milestone=vpqCaseMilestone(c,isNew);const nextPharm=vpqNextPharmCase(c);showModal(milestone?'🎊 Congratulations!':'🎉 Case completed!',`${vpqCaseMilestoneArt(milestone)}<div class="preview success"><h3>${c.emoji} ${escapeHtml(c.name)} — case complete</h3><p>You answered <b>${correct}/${c.steps.length}</b> clinical decisions correctly. ${isNew?'You earned <b>45 XP and 20 coins</b>!':'Case already completed; replay is always available.'}</p><p>Review both the medication decision and the underlying physiology. This is a learning simulation, not a substitute for real patient care or reporting rules.</p></div><div class="buttonrow">${c.track==='Pharmacology'?(nextPharm?`<button data-vpqcase-next="${escapeHtml(nextPharm.id)}">Next case in ${escapeHtml(vpqPharmCaseLecture(c)||'this group')} →</button>`:`<button data-vpqcase-pharm-list="1">← Lecture patient cases</button>`)+`<button data-vpqcase-pharm-list="1">📋 Lecture cases</button><button data-vpqcase-pharm-home="1">← Pharmacology Learning Center</button>`:`<button data-modalaction="${c.track==='One Health'?'onehealth':'patients'}">Another case</button><button data-modalaction="pharmacy">Review drug cards</button>`}</div>`)}
 let selectedDrug='gentamicin',drugTab='overview';
 function openPharmacy(id=selectedDrug){selectedDrug=id;const drugs=dataDrugs(),d=drugs.find(x=>x.id===selectedDrug)||drugs[0];selectedDrug=d.id;showModal('💊 Pharmacy — Drug Encyclopedia',`<p class="small">Browse generic names, common brand examples, mechanism, route, adverse effects and species cautions. Verify specific brand/formulation and approved label before real use.</p><label class="field">Search medications<input class="input" id="drugSearch" placeholder="Drug, class, mechanism or clinical use…"></label><div class="twocol"><div class="druglist" id="drugList">${drugs.map(x=>`<button data-drug="${x.id}" class="${x.id===selectedDrug?'active':''}">${escapeHtml(x.name)}</button>`).join('')}</div><div id="drugDetail">${drugCardHTML(d)}</div></div><div class="buttonrow"><button data-modalaction="clinpath">🔬 Clinical Pathology Lab</button><button data-vpqpractice-open="drug">🎯 Drug indications & NAVLE cases</button><button data-modalaction="editor">✏️ Correct a drug card</button><button data-modalaction="study">Practice pharmacology</button></div>`)}
 function drugCardHTML(d){return `<div class="pills"><span class="pill">${escapeHtml(d.lecture)}</span><span class="pill">${escapeHtml(d.class)}</span></div><h2>${escapeHtml(d.name)}</h2><p class="small"><b>Common brand examples:</b> ${escapeHtml(d.brand)}</p><div class="tabs">${[['moa','Mechanism'],['uses','Uses & routes'],['effects','Side effects'],['why','Why / cautions']].map(([id,label])=>`<button data-drugtab="${id}" class="${drugTab===id?'active':''}">${label}</button>`).join('')}</div>${drugTab==='moa'?`<div class="infobox"><h3>How it works</h3>${escapeHtml(d.moa)}</div>`:drugTab==='uses'?`<div class="infobox"><h3>Clinical use</h3>${escapeHtml(d.uses)}<h3>Administration routes</h3>${escapeHtml(d.route)}</div>`:drugTab==='effects'?`<div class="infobox warning"><h3>Known adverse effects</h3>${escapeHtml(d.effects)}</div>`:`<div class="infobox"><h3>Physiology behind it</h3>${escapeHtml(d.why)}<h3>Species / safety</h3>${escapeHtml(d.species)}</div>`}<p class="tiny">Educational source: ${escapeHtml(d.lecture)} + clinical cautions where indicated.</p>`}
@@ -4722,13 +4739,24 @@ $('modalBody').addEventListener('click',event=>{
  if(d.vpqMedcasesLibrary!==undefined)return window.VPQ_PATIENT_CASE_LIBRARY?.focus?.('Pharmacology',d.vpqMedcasesLibrary==='all'?'':d.vpqMedcasesLibrary);
 },true);
 
+$('modalBody').addEventListener('click',event=>{
+ const button=event.target.closest('[data-vpqcase-next],[data-vpqcase-pharm-home],[data-vpqcase-pharm-list]');
+ if(!button)return;
+ event.preventDefault();event.stopImmediatePropagation();
+ if(button.dataset.vpqcaseNext)return startCase(button.dataset.vpqcaseNext);
+ if(button.dataset.vpqcasePharmHome!==undefined)return showLearning();
+ if(button.dataset.vpqcasePharmList!==undefined){
+  const current=caseSession&&dataCases().find(c=>c.id===caseSession.id);
+  return window.VPQ_PATIENT_CASE_LIBRARY.focus('Pharmacology',current?vpqPharmCaseLecture(current):'');
+ }
+},true);
 window.VPQ_PATIENT_CASE_LIBRARY.init({
  body:$('modalBody'),showModal,
  getCases:()=>dataCases(),
  getCompleted:()=>state.completed,
  getSelectedLectures:()=>window.VPQCurriculum?.getLectures?.()||[],
  openCase:id=>startCase(id),
- openMap:()=>doAction('map'),changeRoom:room=>changeRoom(room)
+ openMap:()=>doAction('map'),changeRoom:room=>changeRoom(room),openPharmLearning:()=>showLearning()
 });
 $('vpqFloorplanTopBtn').addEventListener('click',()=>vpqReceptionWings.map());
 $('vpqArcadeTopBtn').addEventListener('click',()=>$('pharmArcadeBtn').click());
