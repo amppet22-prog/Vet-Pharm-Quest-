@@ -300,6 +300,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 15",
       "curated": true
+    },
+    {
+      "prompt": "What are the methlxanthines listed in this lecture?",
+      "answer": "Theophylline and aminophylline",
+      "why": "",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwrcbofv-47gtx",
+      "domain": "pharmacology",
+      "lecture": "Lecture 15",
+      "curated": true
     }
   ],
   "hidden": []
