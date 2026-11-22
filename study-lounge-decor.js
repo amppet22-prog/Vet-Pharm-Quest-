@@ -106,6 +106,7 @@ function buttons(){
 const style=document.createElement('style');style.textContent='#vpqLoungeDecorButtons{position:absolute;inset:0;pointer-events:none;z-index:9}.vpqLoungeDecorBtn{pointer-events:auto;position:absolute;top:2.5%;left:19%;padding:7px 10px;border-radius:12px;border:2px solid #79a894;background:#fbfff2;color:#3e6f5b;font-size:12px;font-weight:900;box-shadow:0 3px 7px #53666544;cursor:pointer}.vpqLoungeDecorBtn:hover,.vpqLoungeDecorBtn:focus-visible{background:#e9f9df;border-color:#448d70}';document.head.appendChild(style);
 const observer=new MutationObserver(()=>{if((stage.dataset.room==='study')!==!!stage.querySelector('#vpqLoungeDecorButtons'))buttons()});observer.observe(stage,{childList:true,attributes:true,attributeFilter:['data-room']});
 body.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if(d.vpqloungedecorOpen!==undefined){e.preventDefault();studio()}
  if(d.vpqloungedecorFilter!==undefined){e.preventDefault();studio(d.vpqloungedecorFilter)}
  else if(d.vpqloungedecorEquip!==undefined){e.preventDefault();equip(d.vpqloungedecorEquip)}
  else if(d.vpqloungedecorBuy!==undefined){e.preventDefault();buy(d.vpqloungedecorBuy)}
