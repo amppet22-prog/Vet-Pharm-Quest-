@@ -90,6 +90,36 @@ style.textContent+=
 '#modalBody .refcase .refadvanced{border:2px solid #d7c0e7}'+
 '#modalBody .refcase .refadvanced summary{background:#f4edfc}'+
 '@media(max-width:620px){#modalBody .refcase .refphotogrid{grid-template-columns:1fr}#modalBody .refcase .refoption .reflead{min-width:70px}}';
+
+// Shared guided referral presentation: larger touch targets, clearer step colors, and a responsive chart.
+style.textContent+=
+'#modalBody .refcase{font-size:17px;line-height:1.62;max-width:1000px}'+
+'#modalBody .refcase h3{font-size:20px}'+
+'#modalBody .refcase .refsection summary{font-size:18px;padding:13px 15px}'+
+'#modalBody .refcase .refsectionbody{padding:13px 15px}'+
+'#modalBody .refcase .refsmall{font-size:14px}'+
+'#modalBody .refcase .refhintbox{font-size:16px}'+
+'#modalBody .refcase .refgroup{font-size:21px}'+
+'#modalBody .refcase table,#modalBody .refcase .refcompare{font-size:16px}'+
+'#modalBody .refcase .refcompare th{font-size:15px}'+
+'#modalBody .refcase th,#modalBody .refcase td{padding:10px}'+
+'#modalBody .refcase button{font-size:16px;min-height:42px}'+
+'#modalBody .refcase .refoption{border-radius:13px;padding:8px}'+
+'#modalBody .refcase .refoption .refoptionselect{text-align:left;font-size:17px;line-height:1.4}'+
+'#modalBody .refcase .refselect{font-size:17px;padding:12px}'+
+'#modalBody .refcase .refguided{background:#f6faff;border-color:#7195df}'+
+'#modalBody .refcase .refheader{background:linear-gradient(110deg,#d9ecff,#ede1ff);border-color:#aab7ec}'+
+'#modalBody .refcase .refsection:has(table) summary{background:#e6f4fa;color:#235f79}'+
+'#modalBody .refcase .refshortlist{background:#eaefff;border:2px solid #a6b4ed}'+
+'#modalBody .refcase .refshortlist h3{color:#404a98}'+
+'#modalBody .refcase .refphotos{border-color:#ad87d9;background:#fdfaff}'+
+'#modalBody .refcase .refphotoplace{min-height:170px;font-size:16px}'+
+'#modalBody .refcase .refphotoplace small{font-size:14px}'+
+'#modalBody .refcase .refadvanced{border-color:#b38cc9}'+
+'#modalBody .refcase .refresult{border-color:#71b998}'+
+'#modalBody .refcase .refanswer h3{color:#217452}'+
+'#modalBody .refcase .refsubmit{background:#d6f4e1;border-color:#4b9d70}'+
+'@media(max-width:640px){#modalBody .refcase{font-size:16px}#modalBody .refcase .refoption .refoptionselect{font-size:16px}#modalBody .refcase .refhint{float:none;display:block}#modalBody .refcase table{font-size:14px}}';
 document.head.appendChild(style);
 }
 const report=id=>{const data=reports[id];return '<details class="refbox refsection" open><summary>'+data.title+' <span class="refhint">expand / collapse</span></summary><div class="refsectionbody"><table><thead><tr><th>Test</th><th>Patient</th><th>Reference interval</th></tr></thead><tbody>'+data.rows.map(r=>'<tr><td>'+h(r[0])+'</td><td><b>'+h(r[1])+'</b> <b style="color:#af6a32">'+h(r[3])+'</b></td><td>'+h(r[2])+'</td></tr>').join('')+'</tbody></table>'+(data.extra?'<p>'+h(data.extra)+'</p>':'')+'</div></details>'};
