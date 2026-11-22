@@ -83,7 +83,7 @@ function habitat(){
  const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
  // Tall, left-wall display, with visible lizard, climbing/basking surfaces and a real cabinet base.
  // Decorative illustration only; species-specific welfare requirements are not represented as a care guide.
- return '<g transform="translate(7 146) scale(.68 1.12)">'+
+ return '<g transform="translate(7 152) skewY(-4) scale(.76 1.11)">'+
  '<rect x="0" y="0" width="140" height="155" rx="8" fill="#5f827a" stroke="#466e69" stroke-width="6"/>'+
  '<rect x="7" y="9" width="126" height="117" rx="4" fill="#dceacc" stroke="#92ac9e" stroke-width="3"/>'+
  '<rect x="8" y="11" width="124" height="12" rx="3" fill="#708e7f"/>'+
@@ -107,11 +107,18 @@ function habitat(){
  '<path d="M35 112q4 -13 12 -10q6 2 7 10" fill="#4b5947"/>'+
  '<path d="M16 61q23 -20 44 -19t28 8" stroke="#937e60" stroke-width="6" stroke-linecap="round" fill="none"/>'+
  '<path d="M19 114l3 2m13 -2 3 2m25 -3 4 2m13 -2 3 2" stroke="#a39472" stroke-width="2"/>'+
- // Clinging lizard: long tail, back, head, four legs and visible eye.
- '<path d="M28 82Q44 88 50 79Q68 64 85 70L98 66Q113 61 119 72Q113 79 97 77L86 82Q62 94 48 84Q39 87 20 103Q27 88 28 82Z" fill="#7da568" stroke="#527956" stroke-width="2.5"/>'+
- '<path d="M60 80l-9 15 -9 2M80 80l11 14 10 0M98 72l9 12" stroke="#527956" stroke-width="3.2" stroke-linecap="round" fill="none"/>'+
- '<path d="M57 77q17 -12 30 -5" fill="none" stroke="#a3c485" stroke-width="3"/>'+
- '<circle cx="112" cy="71" r="2.3" fill="#2f4436"/>'+
+ // A recognizable stylized bearded dragon: tapering banded tail, stocky torso, four feet, triangular head, ear opening, eye and beard scales.
+ '<path d="M31 91Q18 98 10 108Q18 105 31 101Q44 97 52 92Q62 87 77 85Q88 81 95 79L112 74Q119 71 127 78L124 88Q116 91 107 87L94 94Q76 104 56 99Q42 100 31 91Z" fill="#8ea86b" stroke="#536c4d" stroke-width="2.5"/>'+
+ '<path d="M48 94Q57 81 78 85Q90 82 102 82" fill="none" stroke="#b3c68b" stroke-width="4"/>'+
+ '<path d="M60 95L53 109l-10 3m15 -14 -2 10m27 -13 8 13 10 1m-11 -15 7 8" fill="none" stroke="#647c56" stroke-width="4" stroke-linecap="round"/>'+
+ '<path d="M43 111l-5 2m10 -1 -4 4m52 -7 3 4m-8 -4 -2 5" stroke="#536c4d" stroke-width="2" stroke-linecap="round"/>'+
+ '<path d="M106 87l6 7 3 -7 4 6 3 -7 4 4" fill="#758b5a" stroke="#536c4d" stroke-width="1.5"/>'+
+ '<path d="M44 94L35 96M40 96l-5 1M31 99l-4 2M24 103l-3 2" stroke="#5f764e" stroke-width="2.5"/>'+
+ '<path d="M52 89l-5 -3 8 1 1 -5 7 4 2 -6 7 5 3 -5 6 4" fill="#7b9161" stroke="#61764f" stroke-width="1.5"/>'+
+ '<circle cx="116" cy="79" r="2.8" fill="#403d2d"/><circle cx="116.7" cy="78.2" r=".8" fill="#fff5d8"/>'+
+ '<circle cx="104" cy="84" r="2" fill="#6e7954" stroke="#495c42" stroke-width=".7"/>'+
+ '<path d="M121 86q3 2 6 -1" stroke="#536c4d" stroke-width="1.2" fill="none"/>'+
+ '<path d="M65 89l7 3 9 -5M53 95l7 1m25 -3 8 -3" stroke="#657d56" stroke-width="1.8" fill="none"/>'+
  '<path d="M12 40h120M70 10v114" stroke="#c4dfd4" stroke-width="2" opacity=".34"/>'+
  (deluxe?'<path d="M15 55q-7 -19 2 -30M126 54q11 -18 1 -29" stroke="#5e9870" stroke-width="4" fill="none"/><ellipse cx="44" cy="40" rx="12" ry="7" fill="#81b18a"/><circle cx="42" cy="30" r="7" fill="#e7c685"/>':'')+
  '<rect x="-5" y="128" width="150" height="12" rx="3" fill="#b8957f" stroke="#866e69" stroke-width="3"/>'+
