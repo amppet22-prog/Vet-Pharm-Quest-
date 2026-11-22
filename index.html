@@ -4933,8 +4933,10 @@ function vpqCompanionValid(c){
 function vpqCompanionAvatar(c){
  if(!c)return '<span class="vpq-companion-placeholder">🐾</span>';
  if(c.image&&vpqCompanionValid(c))
-   return '<img class="vpq-companion-art" loading="lazy" src="'+vpqDogAssetURL(c.image)+'" alt="'+escapeHtml(c.name)+'">';
+   return '<img class="vpq-companion-art" loading="lazy" src="'+vpqDogAssetURL(c.image)+'" alt="'+escapeHtml(c.name)+'" draggable="false">';
  if(c.image)return '<span class="vpq-companion-placeholder">🐾<small>Image check pending</small></span>';
+ // Retain the recognizable pre-shop illustrated Mera instead of an emoji.
+ if(c.id==='dog-mera')return vpqCompanionLegacyArt({...state,pet:'🐕',petBreed:'husky-shepherd'});
  return '<span class="vpq-companion-placeholder">'+escapeHtml(c.pet)+'<small>Artwork coming soon</small></span>';
 }
 function vpqCompanionApply(c,form){
@@ -4953,7 +4955,7 @@ function vpqCompanionApply(c,form){
 }
 const vpqCompanionLegacyArt=vpqPetIllustration;
 vpqPetIllustration=function(p){
- const c=vpqCompanionById(p?.vpqCompanionId||((p?.pet===state.pet&&p?.petBreed===state.petBreed)?state.vpqCompanionId:null));
+ const c=vpqCompanionById(p?.vpqCompanionId||state.vpqCompanionId);
  if(c)return vpqCompanionAvatar(c);
  return '<span class="vpq-companion-placeholder">🐾<small>Choose a companion</small></span>';
 };
@@ -4985,11 +4987,10 @@ updateAvatar=function(){
  vpqCompanionOriginalUpdater();
  const pet=$('petSprite');
  if(pet){
-   // Use the pre-shop companion renderer for the walkable hospital room.
-   // Collection artwork stays full-resolution in the shop and avatar preview.
-   pet.innerHTML=vpqCompanionLegacyArt(state);
+   // All three contexts use the same companion identity and artwork.
+   pet.innerHTML=vpqPetIllustration(state);
    pet.dataset.companionCategory=vpqCompanionById(state.vpqCompanionId)?.category||'dog';
-   for(const prop of ['width','height','min-width','min-height','max-width','max-height','overflow','contain','box-sizing','padding'])
+   for(const prop of ['width','height','min-width','min-height','max-width','max-height','overflow','contain','box-sizing','padding','transform'])
      pet.style.removeProperty(prop);
  }
 };
@@ -5033,38 +5034,39 @@ vpqCompanionStyles.textContent=
  '.petSprite[data-companion-category="horse"] .vpq-companion-art,.petSprite[data-companion-category="ruminants"] .vpq-companion-art{transform:scale(1.22);transform-origin:center bottom}';
 document.head.appendChild(vpqCompanionStyles);
 
-// Restore the original modest walkable companion sprite dimensions.
-// This only affects the hospital floor, never the collectible shop images.
-const vpqOriginalFloorPetStyle=document.createElement('style');
-vpqOriginalFloorPetStyle.textContent=
- '#stage #petSprite.petSprite{width:76px!important;height:70px!important;max-width:76px!important;max-height:70px!important;min-width:0!important;min-height:0!important;overflow:visible!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;display:flex!important;align-items:flex-end!important;justify-content:center!important}'+
- '#stage #petSprite .vpq-pet-art{display:block!important;flex:none!important;width:70px!important;height:65px!important;max-width:70px!important;max-height:65px!important;background-size:800% 400%!important;transform:none!important}'+
- '#stage #petSprite .vpq-batch-dog-image{display:block!important;width:70px!important;height:65px!important;max-width:70px!important;max-height:65px!important;object-fit:contain!important;transform:none!important}'+
- '#stage #petSprite .vpq-dog-pending{font-size:20px!important;width:70px!important;height:65px!important;min-height:0!important}';
-document.head.appendChild(vpqOriginalFloorPetStyle);
 
-/* Companion scale reconciliation: separate creator preview and walkable-room sizes.
-   The collectible cards retain their own independent layout. */
-const vpqCompanionScaleCorrection=document.createElement('style');
-vpqCompanionScaleCorrection.id='vpq-companion-scale-reconciled';
-vpqCompanionScaleCorrection.textContent=
+/* VPQ COMPANION PRESENTATION v4.2 — one source of art, three explicitly sized contexts.
+   Keep these rules together: shop card, creator preview, walkable hospital. */
+const vpqUnifiedCompanionStyle=document.createElement('style');
+vpqUnifiedCompanionStyle.id='vpq-unified-companion-style';
+vpqUnifiedCompanionStyle.textContent=
+/* Shop cards: portrait stays fully visible and independent of the room. */
+ '.vpq-companion-figure{width:100%;height:125px!important;display:flex;align-items:center;justify-content:center;overflow:hidden}'+
+ '.vpq-companion-figure>.vpq-companion-art,.vpq-companion-figure>.vpq-pet-art{display:block;width:100%!important;height:120px!important;max-width:150px!important;max-height:120px!important;object-fit:contain!important}'+
+ '.vpq-companion-figure .vpq-companion-placeholder{font-size:50px;line-height:1}'+
+/* Creator: relative to the existing character; never nested in an 80x65 thumbnail. */
  '.vpq-story-maker .vpq-story-stage{position:relative!important;overflow:hidden!important}'+
- '.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,.vpq-story-maker .vpq-story-stage>.vpq-matched-pet,'+
- '.vpq-story-maker .vpq-story-stage .vpq-matched-pet .vpq-preview-pet{width:150px!important;height:165px!important;min-width:150px!important;min-height:165px!important;max-width:45%!important;max-height:55%!important;flex:none!important;margin:0!important;position:absolute!important;right:8px!important;bottom:0!important;z-index:5!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;overflow:visible!important}'+
- '.vpq-story-maker .vpq-story-stage .vpq-preview-pet .vpq-pet-art,'+
- '.vpq-story-maker .vpq-story-stage .vpq-preview-pet .vpq-companion-art,'+
- '.vpq-story-maker .vpq-story-stage .vpq-preview-pet .vpq-batch-dog-image,'+
- '.vpq-story-maker .vpq-story-stage .vpq-preview-pet .vpq-pet-svg{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;background-size:800% 400%;transform:none!important}'+
- '.vpq-story-maker .vpq-story-stage .vpq-companion-placeholder{font-size:72px!important;min-height:120px!important;display:flex!important;align-items:center!important;justify-content:center!important}'+
- '#stage #petSprite.petSprite{width:108px!important;height:100px!important;max-width:108px!important;max-height:100px!important;min-width:0!important;min-height:0!important;overflow:visible!important}'+
- '#stage #petSprite .vpq-pet-art{width:105px!important;height:96px!important;max-width:105px!important;max-height:96px!important;background-size:800% 400%!important}'+
- '#stage #petSprite .vpq-pet-svg{width:105px!important;height:96px!important;max-width:105px!important;max-height:96px!important}'+
- '#stage #petSprite .vpq-batch-dog-image{width:105px!important;height:96px!important;max-width:105px!important;max-height:96px!important;object-fit:contain!important}'+
- '@media(max-width:650px){.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,.vpq-story-maker .vpq-story-stage>.vpq-matched-pet,.vpq-story-maker .vpq-story-stage .vpq-matched-pet .vpq-preview-pet{width:112px!important;height:130px!important;min-width:112px!important;min-height:130px!important;right:3px!important}#stage #petSprite.petSprite{width:88px!important;height:82px!important;max-width:88px!important;max-height:82px!important}}';
-document.head.appendChild(vpqCompanionScaleCorrection);
-
-
-
+ '.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,'+
+ '.vpq-story-maker .vpq-story-stage>.vpq-matched-pet{position:absolute!important;right:7px!important;bottom:0!important;width:154px!important;height:168px!important;min-width:0!important;min-height:0!important;max-width:44%!important;max-height:60%!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;z-index:7!important;flex:none!important;margin:0!important;overflow:visible!important}'+
+ '.vpq-story-maker .vpq-story-stage .vpq-matched-pet>.vpq-preview-pet{position:static!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:100%!important;max-height:100%!important;flex:none!important;margin:0!important;padding:0!important;overflow:visible!important}'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-companion-art,'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-pet-art,'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-batch-dog-image,'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-pet-svg{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;flex:none!important;margin:0!important;transform:none!important}'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-companion-placeholder{width:100%!important;height:100%!important;min-height:0!important;font-size:68px!important;line-height:1!important;display:flex!important;align-items:center!important;justify-content:center!important}'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet>.vpq-companion-placeholder small{font-size:10px!important}'+
+/* Walkable hospital: stable, floor-anchored pet next to the veterinarian, never room-sized. */
+ '#stage>#petSprite.petSprite{position:absolute!important;bottom:19%!important;width:128px!important;height:118px!important;max-width:128px!important;max-height:118px!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;box-sizing:border-box!important}'+
+ '#stage>#petSprite.petSprite>.vpq-companion-art,'+
+ '#stage>#petSprite.petSprite>.vpq-pet-art,'+
+ '#stage>#petSprite.petSprite>.vpq-batch-dog-image,'+
+ '#stage>#petSprite.petSprite>.vpq-pet-svg{display:block!important;position:static!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;flex:none!important;margin:0!important;transform:none!important}'+
+ '#stage>#petSprite.petSprite>.vpq-companion-placeholder{display:flex!important;width:100%!important;height:100%!important;min-height:0!important;justify-content:center!important;align-items:center!important;font-size:56px!important;line-height:1!important}'+
+ '#stage>#petSprite.petSprite>.vpq-companion-placeholder small{display:none!important}'+
+/* Use the exact original atlas slicing when an old starter sprite is displayed. */
+ '.vpq-companion-figure .vpq-pet-art,.vpq-story-stage .vpq-pet-art,#stage #petSprite .vpq-pet-art{background-size:800% 400%!important;background-repeat:no-repeat!important}'+
+ '@media(max-width:650px){.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,.vpq-story-maker .vpq-story-stage>.vpq-matched-pet{width:115px!important;height:126px!important;max-width:42%!important}#stage>#petSprite.petSprite{width:96px!important;height:90px!important;max-width:96px!important;max-height:90px!important}}';
+document.head.appendChild(vpqUnifiedCompanionStyle);
 
 })();
 
