@@ -21,6 +21,7 @@ const icons={coffee:'☕',microwave:'🍲',snack:'🍪',chair:'🪑',stools:'�
 const defaults={coffee:'basic',habitat:'basic',vines:'basic',plants:'basic',plantCount:3};
 function bag(){
  if(!state.studyLoungeDecor||typeof state.studyLoungeDecor!=='object')state.studyLoungeDecor={...defaults};
+ if(!state.studyLoungeDecor.seating&&['lounge-egg-chair','lounge-hanging-chair'].includes(state.studyLoungeDecor.chair)){state.studyLoungeDecor.seating=state.studyLoungeDecor.chair;delete state.studyLoungeDecor.chair}
  return state.studyLoungeDecor;
 }
 const slots=[...new Set(items.map(x=>x.slot)), 'receptionPlants','receptionDecor','levelReward'];
