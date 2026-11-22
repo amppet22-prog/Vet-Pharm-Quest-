@@ -274,6 +274,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 14",
       "curated": true
+    },
+    {
+      "prompt": "What are the antihypertensive and resuscitative drugs? (How it was grouped)",
+      "answer": "Amlodipine, Hydralazine, Sodium nitroprusside, Telmisartan, Enalapril, Benazepril, Sildenafil, Epinephrine",
+      "why": "",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwrc3c30-506oh",
+      "domain": "pharmacology",
+      "lecture": "Lecture 14",
+      "curated": true
     }
   ],
   "hidden": []
