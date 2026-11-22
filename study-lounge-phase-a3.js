@@ -10,7 +10,24 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<rect width="1000" height="500" fill="#d7bce2"/><polygon points="0,0 1000,0 930,55 70,55" fill="#fff9ed"/><polygon points="0,0 70,55 70,320 0,391" fill="#c7b1d4"/><polygon points="930,55 1000,0 1000,391 930,320" fill="#c7b1d4"/><rect x="70" y="55" width="860" height="265" fill="#f7eefa"/>'+
 '<path d="M70 320H930L1000 500H0Z" fill="url(#vpqSLFloor)"/><path d="M70 320L0 500M930 320L1000 500M240 320L202 500M390 320L374 500M535 320V500M690 320L709 500M835 320L887 500M27 431H974M55 364H947" stroke="#fff8e9" stroke-width="3" fill="none" opacity=".7"/>'+
 '<path d="M70 55H930M70 320H930" stroke="#b69bbb" stroke-width="10" fill="none" opacity=".5"/>'+
-'<g transform="translate(95 104)"><rect width="155" height="209" rx="8" fill="#ad8c72" stroke="#846d63" stroke-width="8"/><rect x="10" y="12" width="135" height="185" fill="#f4dec6"/><path d="M10 82H145M10 142H145" stroke="#a6816b" stroke-width="9"/><rect x="21" y="28" width="18" height="51" rx="3" fill="#83afbe"/><rect x="45" y="21" width="18" height="58" rx="3" fill="#c6a3d9"/><rect x="68" y="30" width="20" height="49" rx="3" fill="#dfa882"/><rect x="93" y="24" width="21" height="55" rx="3" fill="#91bbac"/><rect x="25" y="94" width="19" height="45" rx="3" fill="#ca94aa"/><rect x="49" y="90" width="20" height="49" rx="3" fill="#89aacf"/><rect x="75" y="96" width="18" height="43" rx="3" fill="#8ab9a5"/><text x="39" y="184" font-size="32">📚</text><text x="100" y="185" font-size="29">🐾</text></g>'+
+// A single cohesive bookcase; spine lettering is limited to shelf tags, not stacked duplicates.
+'<g><rect x="96" y="112" width="165" height="214" rx="12" fill="#9c7967" stroke="#806553" stroke-width="6"/>'+
+'<rect x="107" y="124" width="143" height="184" rx="5" fill="#f1dcc5"/>'+
+'<path d="M108 183H249M108 247H249M108 300H249" stroke="#a17c67" stroke-width="9"/>'+
+'<rect x="117" y="139" width="18" height="39" rx="2" fill="#7ca9bc"/><rect x="138" y="133" width="20" height="45" rx="2" fill="#c7a4d7"/>'+
+'<rect x="161" y="143" width="18" height="35" rx="2" fill="#e0ae93"/><rect x="182" y="137" width="20" height="41" rx="2" fill="#91bbaa"/>'+
+'<rect x="205" y="133" width="19" height="45" rx="2" fill="#bd97b7"/><rect x="227" y="143" width="14" height="35" rx="2" fill="#90a5cc"/>'+
+'<path d="M120 150v18M143 144v24M166 152v16M187 147v21M210 145v23M232 153v15" stroke="#fff8e9" stroke-width="2" opacity=".8"/>'+
+'<rect x="117" y="194" width="19" height="47" rx="2" fill="#d699a6"/><rect x="139" y="203" width="17" height="38" rx="2" fill="#94b5c7"/>'+
+'<rect x="159" y="196" width="17" height="45" rx="2" fill="#9cbd9f"/><rect x="179" y="200" width="20" height="41" rx="2" fill="#d9b28c"/>'+
+'<rect x="203" y="195" width="17" height="46" rx="2" fill="#bda4d1"/><rect x="223" y="202" width="17" height="39" rx="2" fill="#90bdb1"/>'+
+'<path d="M123 205v25M145 212v20M165 206v25M185 209v22M209 205v24M229 211v20" stroke="#fdf4ec" stroke-width="2"/>'+
+'<rect x="117" y="259" width="58" height="14" rx="3" fill="#8da5c0"/><rect x="120" y="276" width="54" height="13" rx="3" fill="#d4a3b7"/>'+
+'<rect x="190" y="259" width="20" height="33" rx="2" fill="#a9baa1"/><rect x="212" y="263" width="25" height="29" rx="2" fill="#d4b496"/>'+
+'<text x="145" y="269" text-anchor="middle" font-family="Arial" font-size="8" font-weight="900" fill="white">VET JOURNAL</text>'+
+'<text x="147" y="286" text-anchor="middle" font-family="Arial" font-size="8" font-weight="900" fill="white">CASE FILES</text>'+
+'<rect x="110" y="306" width="136" height="15" rx="4" fill="#fff7ee" stroke="#a77d70" stroke-width="2"/>'+
+'<text x="178" y="317" font-family="Arial" font-size="10" font-weight="900" text-anchor="middle" fill="#745d74">VET STUDY LIBRARY</text></g>'+ 
 '<g transform="translate(426 88) scale(.77 1)"><rect width="360" height="170" rx="13" fill="#fffefc" stroke="#a79ac7" stroke-width="9"/><rect x="13" y="14" width="335" height="135" rx="5" fill="#f8fcfd"/><text x="180" y="39" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="800" fill="#4b6f85">TODAY\'S STUDY PLAN</text><circle cx="60" cy="80" r="13" fill="#87baa4"/><path d="M52 80l6 7l11 -16" stroke="white" stroke-width="4" fill="none"/><text x="88" y="85" font-family="sans-serif" font-size="17" fill="#536e85">Understand the WHY</text><circle cx="60" cy="122" r="13" fill="#d3b0d9"/><text x="88" y="127" font-family="sans-serif" font-size="17" fill="#536e85">Practice • Apply • Review</text><rect x="9" y="156" width="343" height="8" rx="4" fill="#acb7c5"/></g>'+
 '<g transform="translate(725 91)"><rect width="163" height="131" rx="7" fill="#b1dceb" stroke="#91abc4" stroke-width="9"/><path d="M8 113Q55 55 101 104T155 80V123H8Z" fill="#a4cbb4"/><path d="M80 4V127M5 66H157" stroke="#f3fbff" stroke-width="7"/><path d="M-8 132H172" stroke="#f2eadf" stroke-width="13"/></g>'+
 '<ellipse cx="507" cy="421" rx="256" ry="32" fill="#59465a" opacity=".23" filter="url(#vpqSLShade)"/>'+
@@ -55,17 +72,16 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<text x="82" y="197" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="800" fill="#faf4ff">MINIGAMES</text>'+
 '<rect x="27" y="209" width="25" height="15" rx="3" fill="#352e65"/><rect x="114" y="209" width="25" height="15" rx="3" fill="#352e65"/>'+
 '</g>'+ 
-// True sideways three-quarter couch perspective (no rotated flat rectangle).
-'<ellipse cx="180" cy="444" rx="130" ry="25" fill="#ddc3e8"/>'+
-'<g><path d="M89 349L117 329H270L294 348V410L265 434H113L88 416Z" fill="#987fb7" stroke="#786595" stroke-width="6"/>'+
-'<path d="M111 341L135 325H265L278 343L253 378H128Z" fill="#d9c8e9" stroke="#9983b9" stroke-width="5"/>'+
-'<path d="M107 378L129 360H259L277 380L251 420H124Z" fill="#c4aeda" stroke="#8e77af" stroke-width="5"/>'+
-'<path d="M82 364L106 350L125 368V420L108 432L80 411Z" fill="#ad99ca" stroke="#816eaa" stroke-width="5"/>'+
-'<path d="M254 367L276 349L308 362V409L278 430L251 414Z" fill="#a28abd" stroke="#816b9c" stroke-width="5"/>'+
-'<path d="M127 383L151 362H191L176 402H135Z" fill="#f0b7ad" stroke="#c998a2" stroke-width="2"/>'+
-'<path d="M196 363H236L254 383L234 405H181Z" fill="#a5d2be" stroke="#8bb8aa" stroke-width="2"/>'+
-'<path d="M113 426v14M280 420v13" stroke="#786389" stroke-width="10"/>'+
-'</g>'+ 
+// Side-facing lounge sofa, softened by rounded arm cushions and an oblique seat edge.
+'<ellipse cx="178" cy="449" rx="122" ry="24" fill="#dfcbe8"/>'+
+'<g><path d="M98 350Q99 330 123 325L247 320Q276 320 287 346L291 402Q291 421 269 433L120 437Q89 428 85 410Z" fill="#a792c5" stroke="#806a9f" stroke-width="6"/>'+
+'<path d="M119 344Q130 331 151 331L252 329Q275 330 276 352L264 382L123 383Q104 373 119 344Z" fill="#ded0ef" stroke="#a08abc" stroke-width="4"/>'+
+'<path d="M117 376Q145 365 187 368L255 368Q276 369 277 385L255 419Q211 428 140 425Q104 415 108 391Z" fill="#cbb8e3" stroke="#9780b9" stroke-width="5"/>'+
+'<path d="M94 361Q80 355 73 371L69 407Q71 429 95 433L119 425Q105 402 115 383Q114 364 94 361Z" fill="#b7a4d2" stroke="#8a77a7" stroke-width="5"/>'+
+'<path d="M265 358Q287 343 302 360Q316 378 306 406Q299 421 276 432L253 420Q274 390 265 358Z" fill="#b29bcf" stroke="#8a76aa" stroke-width="5"/>'+
+'<path d="M133 362Q144 348 166 348Q181 352 183 368L177 388L135 387Q121 379 133 362Z" fill="#f0b9b0"/>'+
+'<path d="M190 349Q218 345 235 352L250 379L237 390L186 386Z" fill="#9fceb9"/>'+
+'<path d="M110 428v12M278 428v11" stroke="#806b9a" stroke-width="9" stroke-linecap="round"/></g>'+ 
 // Skills practice nook on the right rear wall, away from the desk and arcade.
 '<g><rect x="722" y="90" width="169" height="112" rx="12" fill="#e8f4f9" stroke="#96b4c5" stroke-width="6"/>'+
 '<rect x="731" y="98" width="151" height="26" rx="9" fill="#fff9ff" stroke="#c8b4d2" stroke-width="2"/>'+
@@ -73,23 +89,6 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<rect x="738" y="133" width="65" height="54" rx="6" fill="#f8fbff" stroke="#b3c6d3" stroke-width="3"/>'+
 '<rect x="808" y="133" width="65" height="54" rx="6" fill="#fff5fa" stroke="#c7adc7" stroke-width="3"/>'+
 '<text x="771" y="166" text-anchor="middle" font-size="24">💉</text><text x="840" y="166" text-anchor="middle" font-size="24">🩸</text></g>'+
-'<g font-family="Arial" font-weight="800"><rect x="111" y="226" width="20" height="50" rx="2" fill="#789dbe"/><rect x="134" y="219" width="20" height="57" rx="2" fill="#d296a8"/><rect x="157" y="224" width="20" height="52" rx="2" fill="#a6bda7"/><rect x="181" y="220" width="20" height="56" rx="2" fill="#b59ad0"/><rect x="205" y="225" width="20" height="51" rx="2" fill="#e0aa80"/><text transform="translate(125 268) rotate(-90)" font-size="9" fill="white">PHARM</text><text transform="translate(148 268) rotate(-90)" font-size="9" fill="white">TOX</text><text transform="translate(171 268) rotate(-90)" font-size="9" fill="white">PATH</text><text transform="translate(195 268) rotate(-90)" font-size="9" fill="white">CLIN</text><text x="111" y="306" font-size="10" fill="#765f78">TEXTBOOK LIBRARY</text></g>'+
-// Bookshelf detail: course-specific volumes, journals, binders and shelf decor.
-'<g font-family="Arial" font-weight="800">'+
-'<rect x="116" y="164" width="130" height="4" fill="#9f796d"/>'+
-'<rect x="123" y="175" width="12" height="43" rx="2" fill="#9babc6"/>'+
-'<rect x="138" y="171" width="15" height="47" rx="2" fill="#e7a8ab"/>'+
-'<rect x="156" y="178" width="13" height="40" rx="2" fill="#c5b0db"/>'+
-'<rect x="173" y="168" width="16" height="50" rx="2" fill="#7fb5ac"/>'+
-'<rect x="193" y="174" width="15" height="44" rx="2" fill="#c7ac84"/>'+
-'<rect x="212" y="181" width="19" height="37" rx="3" fill="#e0c2e3"/>'+
-'<g font-size="8" fill="#fffaf5"><text transform="translate(132 213) rotate(-90)">ANATOMY</text><text transform="translate(150 211) rotate(-90)">PHARM</text><text transform="translate(167 212) rotate(-90)">TOX</text><text transform="translate(185 212) rotate(-90)">CLIN PATH</text><text transform="translate(205 211) rotate(-90)">MICRO</text></g>'+
-'<path d="M117 232h125" stroke="#a78172" stroke-width="5"/>'+
-'<rect x="120" y="236" width="36" height="11" rx="2" fill="#f1ddca"/><text x="138" y="244" font-size="6.8" text-anchor="middle" fill="#806b73">CASE FILES</text>'+
-'<rect x="161" y="233" width="14" height="26" rx="3" fill="#7b9eb1"/><rect x="180" y="232" width="15" height="27" rx="3" fill="#d5a6bd"/>'+
-'<rect x="200" y="236" width="25" height="22" rx="4" fill="#f1dfca"/><text x="212" y="249" text-anchor="middle" font-size="10" fill="#9d7d87">✦</text>'+
-'<rect x="121" y="282" width="113" height="15" rx="4" fill="#f5ebdc" stroke="#bb9c91" stroke-width="2"/>'+
-'<text x="177" y="292" text-anchor="middle" fill="#775e72" font-size="9">VETERINARY LIBRARY</text></g>'+
 // The kitchenette is a single fitted cabinet, not floating unrelated objects.
 // Expanded kitchenette beneath window: independent fridge, usable counter, sink and coffee-machine space.
 '<g transform="translate(279 267)"><rect x="0" y="0" width="172" height="84" rx="6" fill="#d3b6a8" stroke="#aa9088" stroke-width="4"/>'+
