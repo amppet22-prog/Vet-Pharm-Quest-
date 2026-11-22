@@ -284,6 +284,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 14",
       "curated": true
+    },
+    {
+      "prompt": "What are the Bronchodilators (Beta agnosits) mentioned in the lecture?",
+      "answer": "Epinephrine, ephedrine, isoproterenol, Terbutaline, Albuterol (salbuterol), Clenbuterol, and Zilpaterol",
+      "why": "B2 causes bronchodilation, B1 tachycardia, alpha activity is non selective and can cause hypertension",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwrc6vd0-opr2m",
+      "domain": "pharmacology",
+      "lecture": "Lecture 15",
+      "curated": true
     }
   ],
   "hidden": []
