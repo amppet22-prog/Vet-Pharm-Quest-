@@ -20,7 +20,7 @@ const configs={
  exam:[
   {selector:'#vpqExamHotspots [data-vpqexamaction="medicalCharts"]',x:42,label:'📋 Patient Charts'},
   {selector:'#vpqExamHotspots [data-vpqexamaction="patients"]',x:76,label:'🩺 Examination Table'},
-  {selector:'#vpqExamHotspots [data-vpqexamaction="protocols"]',x:57,label:'📖 Clinical Protocols'}
+  {selector:'#vpqExamHotspots [data-vpqexamaction="protocols"]',x:34,label:'📖 Clinical Protocols'}
  ],
  pharmacy:[
   {selector:'#vpqPNHotspots [data-vpqpnaction="pharmacy"]',x:21,label:'💊 Drug Shelves'},
