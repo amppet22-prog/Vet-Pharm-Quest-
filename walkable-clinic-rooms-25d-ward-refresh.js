@@ -259,6 +259,38 @@ function treatment(){
  [757,780,803,826,845].map(x=>'<path d="M'+x+' 185v77" stroke="#c2dce0" stroke-width="1.5" opacity=".65"/>').join('')+
  [873,890,907,925].map(x=>'<path d="M'+x+' 186v76" stroke="#d1dec9" stroke-width="1.5" opacity=".65"/>').join('')+
  '</g>';
+ // Carefully scaled details added after core equipment: facial markings, chart tabs,
+ // patient IV monitoring, exotics enrichment and stocked tray. Nothing changes hit targets.
+ s+='<g aria-hidden="true">'+
+ // Ginger tabby whiskers, stripes, and pink ear linings.
+ '<path d="M122 187l4 -8 5 7m8 0l5 -8 2 11" fill="#f5c0a4"/>'+
+ '<path d="M129 190l3 5m5 -6l-2 6" stroke="#bb7c58" stroke-width="1.5"/>'+
+ '<path d="M122 205l-13 0m13 4l-14 5m29 -8l12 -2m-11 6l12 4" fill="none" stroke="#b77b5d" stroke-width="1.5" stroke-linecap="round"/>'+
+ '<path d="M156 205l5 5m-14 -7l7 6m11 -8l5 7" stroke="#b67b59" stroke-width="2.5" fill="none"/>'+
+ // Small dog patch, belly and front paws.
+ '<ellipse cx="237" cy="200" rx="9" ry="11" fill="#b98b76" opacity=".6"/>'+
+ '<path d="M226 222q19 8 38 0" stroke="#f9f1e9" stroke-width="8" fill="none" stroke-linecap="round"/>'+
+ '<ellipse cx="245" cy="225" rx="6" ry="3" fill="#f8eee6"/><ellipse cx="264" cy="225" rx="7" ry="3" fill="#f8eee6"/>'+
+ '<path d="M227 209q5 5 10 0" fill="none" stroke="#8d736f" stroke-width="1.5"/>'+
+ // Big dog muzzle, blaze and depth to coat.
+ '<path d="M174 296q19 -11 41 -3t23 24" fill="none" stroke="#b98766" stroke-width="6" opacity=".55"/>'+
+ '<path d="M132 287q11 0 13 10l-11 6" fill="#f7dcc2" opacity=".8"/>'+
+ '<path d="M131 309q5 6 13 0" fill="none" stroke="#87665f" stroke-width="2"/>'+
+ '<path d="M119 324l-11 2m19 -5l-12 9m34 -10l10 7" fill="none" stroke="#bd8a73" stroke-width="1.6" stroke-linecap="round"/>'+
+ // Oxygen-monitoring connection with a visible flow selector, not a giant cable.
+ '<rect x="814" y="176" width="22" height="12" rx="4" fill="#f8ffff" stroke="#9fc7c9" stroke-width="1.5"/>'+
+ '<circle cx="820" cy="182" r="3" fill="#9fdcc8"/><circle cx="830" cy="182" r="3" fill="#e5cf94"/>'+
+ '<path d="M823 188v11q-10 5 -9 19" stroke="#abd7d3" stroke-width="2" fill="none"/>'+
+ // Exotics: short enrichment branch, natural hay and securely placed water dish.
+ '<path d="M881 247l-5 -16m7 14l5 -14" stroke="#88af86" stroke-width="2.2"/>'+
+ '<path d="M895 246l-3 -8m4 7l6 -9" stroke="#c3ab79" stroke-width="1.5"/>'+
+ '<ellipse cx="924" cy="247" rx="7" ry="3" fill="#b2d8e1" stroke="#8bbaca" stroke-width="1.3"/>'+
+ // Small color-coded drawers, procedure supplies and label strip under wall rack.
+ '<rect x="587" y="251" width="51" height="19" rx="5" fill="#f9fbfe" stroke="#a9bac9" stroke-width="2"/>'+
+ '<rect x="591" y="254" width="11" height="11" rx="2" fill="#b9d8d3"/>'+
+ '<rect x="605" y="254" width="11" height="11" rx="2" fill="#ead0da"/>'+
+ '<rect x="619" y="254" width="11" height="11" rx="2" fill="#d1c7ea"/>'+
+ '</g>';
  s+='<g font-family="Arial,sans-serif" font-weight="900">'+
  '<rect x="96" y="106" width="163" height="39" rx="18" fill="#fff5fc" stroke="#dda7d6" stroke-width="4"/>'+
  '<text x="177" y="132" font-size="17" fill="#935c8d" text-anchor="middle">PATIENT CARE</text>'+
