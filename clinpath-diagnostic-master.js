@@ -150,6 +150,29 @@ function decisionPanel(id){
  rows.map(r=>'<tr>'+r.map(v=>'<td>'+E(v)+'</td>').join('')+'</tr>').join('')+
  '</tbody></table></div></details>';
 }
+
+function urinalysisFoundation(id){
+ if(id!=='urine')return '';
+ return '<details open><summary>🔬 Learn the complete urinalysis · not just UPC/USG</summary>'+
+ '<p><b>Read in this order:</b> collection method and timing → color/clarity → refractometer USG → dipstick pH/protein/glucose/ketones/heme/bilirubin → sediment RBC/WBC/epithelial cells/casts/crystals/microorganisms → clinical mechanism and next test.</p>'+
+ '<div style="overflow-x:auto"><table><thead><tr><th>Finding</th><th>What it ACTUALLY represents</th><th>What it means / what it DOES NOT prove</th></tr></thead><tbody>'+
+ [
+ ['USG','Water concentration on a refractometer','Course adequate concentration heuristics if dehydration: dog ≥1.030, cat ≥1.035, horse/cattle ≥1.025. Values need hydration context; glucose and protein can elevate USG. Never trust the dipstick USG pad.'],
+ ['Hyposthenuria','USG below ~1.008 (2026 slides)','Tubules can dilute urine; diabetes insipidus or related physiology possible. NOT the same as isosthenuria.'],
+ ['Isosthenuria','USG 1.008–1.013 (2026 slides)','Urine approaches filtrate concentration; inadequate in a dehydrated azotemic patient. Prior fluids/diuretics modify interpretation.'],
+ ['pH','Urine acid/base on a dipstick','Course reference: dogs/cats ~6.0–7.5; horses/cattle ~7.5–8.5. Diet and collection matter; alkaline urine alone does not prove a UTI.'],
+ ['Protein pad','Most sensitive to urine albumin','Read relative to USG and active sediment. High protein with pyuria/bleeding does NOT automatically indicate glomerular disease. Persistent protein on inactive sediment → UPC.'],
+ ['Heme pad + sediment','Detects heme pigments, not specifically intact red cells','Intact RBCs sediment as a pellet (hematuria); hemoglobin/myoglobin remain in supernatant. Markedly ↑ CK with pigmenturia supports myoglobin as a possibility.'],
+ ['WBCs / bacteria','Pyuria and bacteriuria on microscopy','Free-catch contamination and delayed processing can mislead. Pyuria is inflammatory, not automatically infectious; culture when indicated.'],
+ ['Hyaline / granular / cellular casts','Molds originating in renal tubules','Few hyaline casts can be normal; granular or epithelial casts support tubular injury; leukocyte casts can support renal inflammation. Absence does not rule out disease in old/alkaline/dilute urine.'],
+ ['Crystals','Mineral precipitation related to pH, temperature and solute concentration','Crystals ≠ stones. Struvite, Ca oxalate and Ca carbonate vary by species and storage; oxalate monohydrate may prompt toxin evaluation in context.'],
+ ['Bilirubin','Mostly conjugated bilirubin in urine','Trace/1+ may occur in concentrated canine urine; much less expected in cats and other mammals. Protect samples from light.'],
+ ['Ketones','Dipstick primarily detects acetoacetate (± acetone), NOT BHB','Positive indicates ketosis; DKA requires compatible diabetes plus supported metabolic acidosis, not ketones alone.']
+ ].map(r=>'<tr>'+r.map(v=>'<td>'+E(v)+'</td>').join('')+'</tr>').join('')+
+ '</tbody></table></div>'+
+ '<p><b>Collection matters:</b> Cystocentesis is preferred for sterile culture but can produce iatrogenic RBCs; catheterization can add epithelial cells; free-catch bacteria may be contamination. Process promptly, generally within ~1 hour for fresh sediment when feasible.</p>'+
+ '<div class="vdt-row">'+button('urineatlas','🔬 Open the urine sediment image atlas')+'</div></details>';
+}
 function definitionsPanel(){
  return '<details><summary>📖 New to these tests? Terms explained</summary>'+
  '<p><b>Reference interval (RI):</b> expected range for a comparable healthy population using that assay; not an absolute disease threshold. <b>Assay:</b> the laboratory measurement method. <b>Stimulation:</b> administer a signal and check the organ response. <b>Suppression:</b> administer a feedback signal and check whether hormone output falls. <b>Clearance:</b> removal of a substance from blood. <b>Sensitivity/specificity:</b> how often a test detects illness/how often it excludes healthy patients, respectively. <b>Artifact:</b> a false change caused by collection, processing or measurement.</p></details>';
@@ -187,7 +210,7 @@ function open(id){
  '<div class="vdt-card"><h3>📈 Diagnostic diagram'+((id==='acth'||id==='lddst')?' · cortisol response curves':' · how the test works')+'</h3>'+chart(id)+'<p class="vdt-note">Educational schematic; not patient data or an instrument-generated graph.</p></div>'+
  '<div class="vdt-row" style="align-items:stretch"><div class="vdt-card vdt-increase" style="flex:1;min-width:240px"><b>↑ INCREASED / EXAGGERATED</b><p>'+E(t.increased)+'</p></div><div class="vdt-card vdt-decrease" style="flex:1;min-width:240px"><b>↓ DECREASED / BLUNTED</b><p>'+E(t.decreased)+'</p></div></div>'+
  '<details open><summary>📊 Values, units and interpretation thresholds</summary><div style="overflow-x:auto"><table><tr><th>Measurement</th><th>Value / pattern</th><th>Interpretation</th></tr>'+t.intervals.map(r=>'<tr>'+r.map(z=>'<td>'+E(z)+'</td>').join('')+'</tr>').join('')+'</table></div><p class="vdt-note">Course-provided example thresholds and ranges only. Reference-lab protocols and assay cutoffs take precedence.</p></details>'+
- decisionPanel(id)+
+ decisionPanel(id)+urinalysisFoundation(id)+
  '<details open><summary>🫀 WHY the body responds</summary><p>'+E(t.physiology)+'</p></details>'+definitionsPanel()+
  '<details><summary>⚠️ Sample artifacts and confusing lookalikes</summary><p>'+E(t.artifact)+'</p></details>'+
  '<details open><summary>🐾 Worked patient example</summary><p>'+E(t.example)+'</p></details>'+
@@ -208,6 +231,11 @@ window.addEventListener('click',event=>{
  if(t.hasAttribute('data-vpqdiag-answer')){let [id,n]=t.dataset.vpqdiagAnswer.split(':');if(find(id)&&picked[id]===undefined){picked[id]=Number(n);open(id)}return}
  const id=t.dataset.vpqdiag;
  if(id?.startsWith('retry-')&&find(id.slice(6))){delete picked[id.slice(6)];return open(id.slice(6))}
+ if(id==='urineatlas'){
+  if(typeof window.VPQ_CLINPATH_VISUAL_ATLAS?.menu==='function')return window.VPQ_CLINPATH_VISUAL_ATLAS.menu();
+  if(typeof window.VPQ_CLINPATH_LAB?.intro==='function')return window.VPQ_CLINPATH_LAB.intro();
+  return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
+ }
  if(id==='species')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open?.('chem');
  if(id==='category-inhouse')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
  if(id==='category-sendout')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
