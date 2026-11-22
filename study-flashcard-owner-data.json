@@ -90,6 +90,12 @@
       "answer": "Direct muscarinic agonism produces miosis.",
       "why": "May aid aqueous outflow in selected glaucoma patients; consider lens status.\nSimilar drugs: Demecarium bromide.",
       "slide": "Lecture 13 · submitted course notes, clinically reviewed"
+    },
+    "pharm-e2-autonomic13-006": {
+      "prompt": "Which ANS receptor relaxes detrusor m. during filling?",
+      "answer": "β3 adrenergic receptors.",
+      "why": "β3 activation supports storage by reducing detrusor tone.",
+      "slide": "Lecture 13 · submitted course notes, clinically reviewed"
     }
   },
   "custom": [
