@@ -68,6 +68,21 @@ function drawing(){
  '<rect x="242" y="97" width="48" height="42" rx="5" fill="#d6ece2" stroke="#8fb3a1" stroke-width="3"/><text x="266" y="123" font-size="12">Rx</text>'+
  '<rect x="27" y="167" width="109" height="50" rx="5" fill="#fff9ec" stroke="#b7bdab" stroke-width="4"/><text x="81" y="189" font-size="16">CLINIC</text><text x="81" y="207" font-size="13">SUPPLIES</text>'+
  '<rect x="176" y="166" width="108" height="50" rx="6" fill="#f5eee0" stroke="#bac2b7" stroke-width="4"/><text x="230" y="191" font-size="18">💊</text><text x="230" y="209" font-size="12">SHELVES</text></g>'+
+
+ // Pharmacy detail pass: illustrated dosage markings, labeled bins, blister strips, dispensing tools and stock tags.
+ '<g font-family="Arial" text-anchor="middle" font-weight="800">'+
+ '<rect x="23" y="4" width="74" height="13" rx="3" fill="#fffaf0" stroke="#8faeaa" stroke-width="1"/><text x="60" y="14" font-size="8" fill="#4c7774">ORAL MEDS</text>'+
+ '<rect x="174" y="4" width="113" height="13" rx="3" fill="#fffaf0" stroke="#8faeaa" stroke-width="1"/><text x="230" y="14" font-size="8" fill="#4c7774">STOCK · CHECK LOT</text>'+
+ '<path d="M29 58h29M97 58h27M181 61h32M244 58h36" stroke="#91a7a1" stroke-width="1.4"/>'+
+ '<g fill="#fff" stroke="#b3c5c0" stroke-width="1"><rect x="33" y="31" width="23" height="7" rx="2"/><rect x="183" y="30" width="25" height="7" rx="2"/></g>'+
+ '<text x="44" y="37" font-size="5.5" fill="#5b8781">10 mg</text><text x="195" y="36" font-size="5.5" fill="#5b8781">5 mL</text>'+
+ '<g fill="none" stroke-width="1.2"><path d="M87 109h44m-42 6h37" stroke="#a88d99"/><path d="M181 108h31m-30 7h30" stroke="#91b0a4"/><path d="M247 108h35m-33 7h31" stroke="#88afa4"/></g>'+
+ '<rect x="27" y="159" width="100" height="5" rx="2" fill="#90b4a9"/><rect x="179" y="159" width="99" height="5" rx="2" fill="#90b4a9"/>'+
+ '<g transform="translate(35 174)"><rect width="25" height="11" rx="2" fill="#fafcfc" stroke="#96ada6"/><circle cx="6" cy="5.5" r="2.2" fill="#f4d4bd"/><circle cx="13" cy="5.5" r="2.2" fill="#f4d4bd"/><circle cx="20" cy="5.5" r="2.2" fill="#f4d4bd"/></g>'+
+ '<g transform="translate(107 179) rotate(-24)"><rect width="20" height="3" rx="1.5" fill="#d4eeed" stroke="#729ca4"/><path d="M4 -3v9M18 -2v7" stroke="#668ba2"/><rect x="20" y="-1" width="8" height="5" fill="#eff5f0" stroke="#9db8b1"/></g>'+
+ '<g transform="translate(191 176)"><rect width="20" height="14" rx="2" fill="#f8ede3" stroke="#b9aaa2"/><rect x="5" y="-4" width="10" height="5" rx="1.2" fill="#9db9af"/><rect x="3" y="5" width="14" height="5" fill="#fffefa"/><text x="10" y="9" font-size="5" fill="#6e8a85">Rx</text></g>'+
+ '<g transform="translate(239 178)"><rect width="28" height="11" rx="2" fill="#f6f4ee" stroke="#b5b0a1"/><path d="M5 4h17M5 7h14" stroke="#94b8ab" stroke-width="1.2"/></g>'+
+ '</g>'+
  '<rect x="20" y="232" width="272" height="16" rx="4" fill="#77a49c"/></g>'+
  // Nutrition shop fixtures: full food bags, canned-food tiers, and clear treat bins.
  '<g transform="translate(431 107)">'+
@@ -130,6 +145,11 @@ function drawing(){
  '<g transform="translate(914 150)"><rect x="0" y="0" width="74" height="193" rx="6" fill="#7da5a6" stroke="#517f85" stroke-width="9"/><rect x="9" y="12" width="52" height="162" fill="#d3e9e8"/><text x="35" y="59" text-anchor="middle" font-size="25">🔬</text><text x="35" y="82" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="800" fill="#4a7a83">LAB</text><circle cx="17" cy="121" r="6" fill="#ebc77e"/></g>'+
  // Cute turtle terrarium on a low counter (decor only).
  '<g transform="translate(714 362)"><ellipse cx="90" cy="74" rx="93" ry="15" fill="#6b7a79" opacity=".16"/><rect x="8" y="10" width="155" height="76" rx="9" fill="#bde7e3" fill-opacity=".65" stroke="#7eaca9" stroke-width="7"/><path d="M13 71q69 -20 144 0v10H13Z" fill="#e7d5ad"/><ellipse cx="83" cy="58" rx="37" ry="25" fill="#81b89a" stroke="#568d75" stroke-width="5"/><ellipse cx="104" cy="51" rx="27" ry="21" fill="#6da889" stroke="#4d866c" stroke-width="4"/><circle cx="112" cy="45" r="3" fill="#355b56"/><ellipse cx="49" cy="79" rx="13" ry="6" fill="#669d80"/><ellipse cx="111" cy="77" rx="13" ry="6" fill="#669d80"/><path d="M29 40V17M139 41V15" stroke="#78a993" stroke-width="4"/><ellipse cx="26" cy="22" rx="15" ry="10" fill="#82bd9a"/><ellipse cx="141" cy="19" rx="17" ry="10" fill="#82bd9a"/><text x="87" y="103" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="900" fill="#4d7774">TURTLE ASSISTANT</text></g>'+
+
+ // Finishing touches: wall chart, supply organizers and floor-level medicine restocking crate.
+ '<g transform="translate(402 137)" opacity=".95"><rect x="0" y="0" width="24" height="103" rx="4" fill="#faf7ec" stroke="#aac5b8" stroke-width="2"/><text x="12" y="13" text-anchor="middle" font-family="Arial" font-weight="900" font-size="6" fill="#62847c">RX</text><path d="M4 22h16M4 41h16M4 60h16M4 79h16" stroke="#b9ccbd" stroke-width="2"/><circle cx="8" cy="31" r="3" fill="#edcfbc"/><circle cx="8" cy="50" r="3" fill="#b5cad8"/><circle cx="8" cy="69" r="3" fill="#d4c1da"/><circle cx="8" cy="88" r="3" fill="#aed5b7"/></g>'+
+ '<g transform="translate(338 331)"><rect width="66" height="37" rx="4" fill="#cba987" stroke="#a68a77" stroke-width="3"/><path d="M4 8h58M7 21h52" stroke="#e5d2b9" stroke-width="2"/><rect x="10" y="9" width="15" height="11" rx="2" fill="#f8f5ea" stroke="#96afa6"/><rect x="29" y="9" width="12" height="11" rx="2" fill="#ebd5e9" stroke="#b39db7"/><rect x="45" y="9" width="11" height="11" rx="2" fill="#e4efdf" stroke="#9bad99"/><text x="33" y="32" text-anchor="middle" font-family="Arial" font-size="7" font-weight="800" fill="#665a4c">RESTOCK</text></g>'+
+ '<g transform="translate(716 80)"><rect width="70" height="33" rx="5" fill="#fdfbf2" stroke="#b6d0c2" stroke-width="2"/><text x="35" y="11" font-family="Arial" font-size="8" font-weight="900" text-anchor="middle" fill="#66867c">SAFETY FIRST</text><path d="M9 19h51M9 25h36" stroke="#acc7b6" stroke-width="2"/><circle cx="56" cy="25" r="4" fill="#e9c8ae"/></g>'+
  '<text x="500" y="34" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="900" fill="#507973">PHARMACY &amp; NUTRITION</text></svg>';
 }
 
