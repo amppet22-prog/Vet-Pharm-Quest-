@@ -2070,16 +2070,19 @@ vpqPetIllustration=function(p){
  const dog= p?.pet==='🐕'?vpqBatch1Dogs.find(d=>d.id===p.petBreed):null;
  if(!dog)return vpqPreviousPetArtBatch1(p);
  const path=String(dog.path||'');
- if(!/^[^/\\]+\\.png$/i.test(path)||path.includes('..'))return vpqPreviousPetArtBatch1(p);
+ if(!/^[^/\\]+\.png$/i.test(path)||path.includes('..'))return vpqPreviousPetArtBatch1(p);
  const url=path.split('/').map(encodeURIComponent).join('/');
  return '<img class="vpq-batch-dog-image" src="'+url+'" alt="'+escapeHtml((p.petName||'Companion')+' — '+dog.label)+'" loading="lazy" draggable="false">';
 };
 const vpqBatchDogStyle=document.createElement('style');
 vpqBatchDogStyle.textContent=
- '.vpq-pet-choice .vpq-batch-dog-image{display:block;width:100%;height:100px;max-width:120px;object-fit:contain;object-position:center bottom;margin:auto}'+
- '.vpq-preview-pet .vpq-batch-dog-image,.vpq-matched-pet .vpq-batch-dog-image{display:block;width:100%;height:100%;max-height:115px;object-fit:contain;object-position:center bottom}'+
- '#petSprite .vpq-batch-dog-image{width:100%;height:100%;max-height:100%;object-fit:contain;object-position:center bottom;pointer-events:none}'+
- '.vpq-pet-choice:has(.vpq-batch-dog-image){background:#fffaf5}';
+ '.vpq-pet-choice:has(.vpq-batch-dog-image){background:linear-gradient(155deg,#fffdfd,#f5ecff 55%,#e8f6f2);border:2px solid #d9bfdd;border-radius:13px;overflow:hidden;isolation:isolate;min-width:0;box-shadow:0 2px 6px #826b9433}'+
+ '.vpq-pet-choice .vpq-batch-dog-image{display:block;width:100%;max-width:136px;height:115px;object-fit:contain;object-position:center center;margin:0 auto;background:#fffdfb;border:1px solid #e7d9e5;border-radius:9px;padding:3px;box-sizing:border-box}'+
+ '.vpq-pet-choice:has(.vpq-batch-dog-image) span{display:block;position:relative;z-index:1;line-height:1.25;max-width:100%;overflow-wrap:anywhere}'+
+ '.vpq-preview-pet:has(.vpq-batch-dog-image),.vpq-matched-pet:has(.vpq-batch-dog-image){background:linear-gradient(#fffdfd,#f5edfc)!important;border:2px solid #dac6e4;border-radius:15px;overflow:hidden;isolation:isolate;display:flex;align-items:center;justify-content:center;padding:5px;box-sizing:border-box}'+
+ '.vpq-preview-pet .vpq-batch-dog-image,.vpq-matched-pet .vpq-batch-dog-image{display:block;width:100%;height:100%;max-height:145px;object-fit:contain;object-position:center;background:#fffdfb;border-radius:8px}'+
+ '#petSprite:has(.vpq-batch-dog-image){width:clamp(56px,6vw,85px);height:clamp(51px,6vw,79px);overflow:hidden;isolation:isolate;display:flex;align-items:center;justify-content:center;padding:3px;border:2px solid #d8c2d9!important;border-radius:50% 50% 40% 40%!important;background:#fff9f5!important;box-shadow:0 3px 9px #314a5640!important}'+
+ '#petSprite .vpq-batch-dog-image{display:block;width:100%;height:100%;min-width:0;max-height:100%;object-fit:contain;object-position:center center;border-radius:50%;pointer-events:none}';
 document.head.appendChild(vpqBatchDogStyle);
 const vpqOldPreview29=vpqRefreshPreview;
 vpqRefreshPreview=function(){vpqOldPreview29();const old=$('vpqCoatHelp');if(old)old.remove();const coat=document.querySelector('#avatarForm input[name="petCoat"]');if(coat){const note=document.createElement('span');note.id='vpqCoatHelp';note.className='tiny';note.textContent='Illustrated pet portraits use their original colors; custom coat recoloring will be added later.';coat.parentElement.appendChild(note)}};
