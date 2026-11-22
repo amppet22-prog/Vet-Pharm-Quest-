@@ -159,6 +159,9 @@ catalog.push(
 {"id":"lounge-magazines","name":"Veterinary journals and magazines","type":"decor","price":26,"icon":"📚","detail":"Study table magazines and clinical journals."},
 {"id":"lounge-coffee-table","name":"Lounge coffee table","type":"decor","price":52,"icon":"🫖","detail":"A small coffee table for the reading nook."}
 );
+const loungeLevels={'lounge-coffee-deluxe':3,'lounge-microwave':2,'lounge-snack-bin':1,'lounge-egg-chair':4,'lounge-hanging-chair':6,'lounge-stools':3,'lounge-vines':2,'lounge-planter-pack':3,'lounge-reptile-deluxe':5,'lounge-magazines':1,'lounge-coffee-table':2};
+for(const item of catalog)if(loungeLevels[item.id])item.levelRequired=loungeLevels[item.id];
+const loungeLocked=item=>!!(item?.levelRequired&&Math.floor((Number(state.xp)||0)/130)+1<item.levelRequired);
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
 const singleSlotTypes=new Set(['catHide','catAccess','catBridge','catTunnel','catPuzzle','catWand','catHammock','catScratch','catCompanion','catRoomToy','catRoomWindow','catRoomBasket','floorLamp','tableLamp','ottoman','dogBed','catBed','tableTop','coffeeTable','furniture','rug','deskAccent','hanging','catAccent','themeDisplay','plantFloor']);
@@ -189,14 +192,14 @@ function persistLocal(){persist();updateHUD();if(['reception','catcorner'].inclu
 function appendTransaction(item){bag.transactions.unshift({id:item.id,price:item.price,kind:'purchase',date:new Date().toISOString()});bag.transactions=bag.transactions.slice(0,100);persistLocal()}
 let vpqLastCatalogFilter='all';
 function preview(id){const item=find(id);if(!item)return;
-const owned=bag.owned.includes(id),active=equipped(id),able=state.coins>=item.price;
+const owned=bag.owned.includes(id),active=equipped(id),able=state.coins>=item.price&&!loungeLocked(item);
 const asset=itemArt[id]?.src;
 const scene=asset?'<div class="vpqRPreview" style="background:#fff8fc"><img src="'+asset+'" alt="'+first(item.name)+'" style="height:170px;width:95%;object-fit:contain"><small>Exact purchasable artwork · appears in its corresponding room when placed</small></div>':wallpaperArt[id]?'<div class="vpqRPreview" style="background:#fff7f5"><img src="'+wallpaperArt[id]+'" alt="'+first(item.name)+' pattern" style="width:100%;max-height:215px;object-fit:cover;border-radius:9px"><small>Actual wallpaper pattern · will appear behind the reception furniture and doors</small></div>':'<div class="vpqRPreview" style="background:'+first(item.color||'#f5e9da')+'"><div class="vpqRPreviewIcons">'+first(item.icon)+' <span>🛎️ 🐕</span> 🪑</div><small>Conceptual room/item preview</small></div>';
 showModal('🎨 Preview · '+first(item.name),'<p>'+first(item.detail||'Choose a color or theme for your waiting room.')+'</p>'+scene+
 '<p><b>'+ (owned?'Already owned':item.price+' 🪙')+'</b> · Current coin balance: '+state.coins+'</p>'+
 '<div class="buttonrow">'+(owned?'<button data-vpqr-equip="'+item.id+'">'+(active?(item.type==='wall'?'Currently equipped':item.type==='furniture'?'Current sofa':singleSlotTypes.has(item.type)?'Remove from room':'Remove from room'):(item.type==='wall'?'Apply wallpaper':item.type==='furniture'?'Use this sofa':singleSlotTypes.has(item.type)?'Place / swap in reception':'Place in reception'))+'</button>': '<button data-vpqr-buy="'+item.id+'" '+(!able?'disabled':'')+'>Confirm purchase · '+item.price+' 🪙</button>')+
 '<button data-vpqr-menu="1">← Back to '+(vpqLastCatalogFilter==='owned'?'My Collection':'Shop / Collection')+'</button><button data-vpqr-owned="1">📦 My Collection</button></div>'+
-(!owned&&!able?'<p class="small">Not enough earned coins yet. Play learning rounds to earn more; no real-money purchases.</p>':''));
+(!owned&&!able?'<p class="small">'+(loungeLocked(item)?'Unlock this furniture at Level '+item.levelRequired+' by earning study EXP.':'Not enough earned coins yet. Play learning rounds to earn more; no real-money purchases.')+'</p>':''));
 }
 function claimTestCoins(){
  // 500 coins one time per existing browser save. Does not alter study rewards.
@@ -239,7 +242,7 @@ else if(catTreeIds.includes(id))bag.placed=bag.placed.includes(id)?bag.placed.fi
 else if(bag.placed.includes(id))bag.placed=bag.placed.filter(v=>v!==id);else bag.placed.push(id);
 persistLocal();preview(id);
 }
-function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.price<=0||state.coins<item.price)return;
+function buy(id){const item=find(id);if(!item||bag.owned.includes(id)||item.price<=0||state.coins<item.price||loungeLocked(item))return;
 state.coins-=item.price;bag.owned.push(id);
 if(item.type==='wall')bag.equippedWall=id;
 else if(floorPlantIds.includes(id))bag.placed=[...bag.placed.filter(v=>!floorPlantIds.includes(v)),id];
