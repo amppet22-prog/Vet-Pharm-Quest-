@@ -3634,6 +3634,91 @@
       },
       "updated": "2026-11-22T06:18:23.879Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-78-6": {
+      "title": "Acute auricular hematoma",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-6-1795328764885-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Blood filled space and enlarged cartilage · Screenshot 2026-11-22 011921.png",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Ear"
+          ],
+          "conditionId": "pathx-78-6"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-6-1795328765955-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-22 011926.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [
+            "Ear"
+          ],
+          "conditionId": "pathx-78-6"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-6-1795328764885-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Blood filled space and enlarged cartilage · Screenshot 2026-11-22 011921.png",
+        "type": "histology",
+        "external": false,
+        "lectures": [
+          "78"
+        ],
+        "systems": [
+          "Ear"
+        ],
+        "conditionId": "pathx-78-6"
+      },
+      "text": {
+        "title": "Acute auricular hematoma",
+        "gross": "**Acute: ** Auricle appears swollen, often droops. Discolored, distended by dark red, partially coagulated to coagulated fluid. \n**Chronic: ** Aurical heals by fibrosis, becomes firml thickened, and malformed. ",
+        "mechanismSummary": "Most common cause is from tramuatic head shaking secondary to otitis media or externa ",
+        "dx": "Working identification: Acute auricular hematoma. Specimen site: Auricle / ear canal / middle ear. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "**Acute:** Fissuring/fracture of auricular cartilage with intracartilaginous fluid accumulation, hemorrhage, and fibrin.\n**Inflammation**: Variable neutrophils and macrophages; hemosiderin-laden macrophages may develop.\n**Chronic**: Fibrovascular granulation tissue, collagen deposition, fibrosis, and cartilage remodeling.",
+        "why": "Cartilage heals poorly → granulation tissue and fibrosis → scar contraction → permanent pinna thickening and deformation (cauliflower ear).",
+        "visualClue": "Swollen pinna ",
+        "compare": "Auricular chondritis, which features more prominent cartilage-centered inflammation.",
+        "notes": "**Instructor L78 · slides 10**\n**Etiology / pathogenesis:** Head shaking from otitis externa/media tears blood vessels; dogs, pigs and cats emphasized.\n**Gross, histology and clinical differentiation:** Swollen often drooping pinna distended by dark-red partially clotted blood.\n**🔎 Master chart · visual recognition:** Fluctuant swollen pinna distended with dark red blood following head shaking.\n**↔ Master chart · distinguish from:** A blood pocket differs from a discrete neoplastic solid mass.",
+        "grossSpecies": "[]",
+        "etiologyCategories": [
+          "traumatic"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "catalogScope": "course",
+        "speciesOccurrence": "{\"dog\":\"common\",\"cat\":\"common\",\"pig\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "breedSizes": "[]",
+        "breedTags": "[]",
+        "breedEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-22T06:26:06.999Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
