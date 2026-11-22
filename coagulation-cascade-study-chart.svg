@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1190" viewBox="0 0 1600 1190" role="img" aria-labelledby="ttl desc"><title id="ttl">Coagulation cascade: initiation, amplification, propagation, and fibrin clot</title><desc id="desc">Comprehensive veterinary hemostasis overview, factor names, PT and aPTT pathways, and vitamin K factors.</desc>
+<defs><style>
+text{font-family:Arial,'DejaVu Sans',sans-serif;fill:#243451}.head{font-size:24px;font-weight:800}.sub{font-size:17px}.small{font-size:15px}.mini{font-size:14px}.heavy{font-weight:800}.white{fill:#fff}.link{fill:none;stroke:#405776;stroke-width:3;marker-end:url(#ar)}.box{stroke-width:2}.label{font-size:17px;font-weight:700}
+</style><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#405776"/></marker></defs>
+<rect width="1600" height="1190" fill="#fafcfe"/><rect x="220" y="16" width="1160" height="74" rx="20" fill="#d9eaff" stroke="#8bbdf8" stroke-width="2"/>
+<text x="800" y="45" text-anchor="middle" font-size="31" font-weight="800">COAGULATION CASCADE</text><text x="800" y="74" text-anchor="middle" font-size="20">Initiation → Amplification → Propagation → Fibrin clot</text>
+<rect x="20" y="112" width="498" height="415" rx="15" fill="#fff0f5" stroke="#f29ab4" stroke-width="2"/>
+<rect x="532" y="112" width="500" height="415" rx="15" fill="#eaf5ff" stroke="#8fbee9" stroke-width="2"/>
+<rect x="1045" y="112" width="535" height="415" rx="15" fill="#fff8e4" stroke="#eac778" stroke-width="2"/>
+<text x="269" y="149" text-anchor="middle" font-size="23" font-weight="800" >INTRINSIC PATHWAY</text>
+<text x="269" y="174" text-anchor="middle" font-size="17"  >Contact activation · aPTT</text>
+<text x="780" y="149" text-anchor="middle" font-size="23" font-weight="800" >EXTRINSIC PATHWAY</text>
+<text x="780" y="174" text-anchor="middle" font-size="17"  >Tissue factor · PT</text>
+<text x="1311" y="149" text-anchor="middle" font-size="23" font-weight="800" >AMPLIFICATION</text>
+<text x="1311" y="174" text-anchor="middle" font-size="17"  >Thrombin turns on more factors</text>
+<rect x="68" y="194" width="150" height="52" rx="10" fill="#ffe2eb" stroke="#ed91b1" stroke-width="2"/>
+<text x="143" y="225.4" text-anchor="middle" font-size="18" font-weight="800" >XII → XIIa</text>
+<path d="M143 246 L143 278" class="link"/>
+<rect x="68" y="282" width="150" height="52" rx="10" fill="#ffe2eb" stroke="#ed91b1" stroke-width="2"/>
+<text x="143" y="313.4" text-anchor="middle" font-size="18" font-weight="800" >XI → XIa</text>
+<path d="M143 334 L143 366" class="link"/>
+<rect x="68" y="370" width="150" height="52" rx="10" fill="#ffe2eb" stroke="#ed91b1" stroke-width="2"/>
+<text x="143" y="401.4" text-anchor="middle" font-size="18" font-weight="800" >IX → IXa</text>
+<rect x="249" y="335" width="236" height="84" rx="10" fill="#ffdde8" stroke="#ed91b1" stroke-width="2"/>
+<text x="367" y="382.1" text-anchor="middle" font-size="17" font-weight="800" >IXa + VIIIa + Ca²⁺</text>
+<text x="367" y="394" text-anchor="middle" font-size="15"  >+ phospholipid = tenase</text>
+<path d="M218 397 L247 397" class="link"/>
+<rect x="150" y="455" width="235" height="47" rx="10" fill="#def2e3" stroke="#8ac6a2" stroke-width="2"/>
+<text x="267.5" y="484.8" text-anchor="middle" font-size="21" font-weight="800" >X → Xa</text>
+<path d="M367 420 L300 455" class="link"/>
+<text x="271" y="508" text-anchor="middle" font-size="16" font-weight="800" >Lab: aPTT · XII, XI, IX, VIII</text>
+<rect x="675" y="197" width="206" height="48" rx="10" fill="#daf5e5" stroke="#77bd9d" stroke-width="2"/>
+<text x="778" y="226.4" text-anchor="middle" font-size="18" font-weight="800" >Tissue injury</text>
+<path d="M779 245 L779 273" class="link"/>
+<rect x="580" y="277" width="165" height="56" rx="10" fill="#d9edff" stroke="#8cb7ed" stroke-width="2"/>
+<text x="662.5" y="310.1" text-anchor="middle" font-size="17" font-weight="800" >Tissue factor (III)</text>
+<rect x="811" y="277" width="170" height="56" rx="10" fill="#ffe2eb" stroke="#e79bb8" stroke-width="2"/>
+<text x="896" y="310.4" text-anchor="middle" font-size="18" font-weight="800" >VII → VIIa</text>
+<text x="781" y="312" text-anchor="middle" font-size="27" font-weight="800" >+</text>
+<path d="M668 333 L668 361" class="link"/>
+<path d="M886 333 L886 361" class="link"/>
+<rect x="649" y="365" width="265" height="76" rx="10" fill="#e0edff" stroke="#83afd8" stroke-width="2"/>
+<text x="781.5" y="408.4" text-anchor="middle" font-size="18" font-weight="800" >TF–VIIa + Ca²⁺</text>
+<text x="781" y="428" text-anchor="middle" font-size="15"  >initiates factor X activation</text>
+<path d="M781 441 L781 461" class="link"/>
+<rect x="673" y="462" width="216" height="47" rx="10" fill="#def2e3" stroke="#8ac6a2" stroke-width="2"/>
+<text x="781" y="491.8" text-anchor="middle" font-size="21" font-weight="800" >X → Xa</text>
+<text x="782" y="519" text-anchor="middle" font-size="16" font-weight="800" >Lab: PT · VII + common factors</text>
+<rect x="1208" y="196" width="202" height="53" rx="10" fill="#ffdae0" stroke="#e8848d" stroke-width="2"/>
+<text x="1309" y="227.9" text-anchor="middle" font-size="18" font-weight="800" >Thrombin (IIa)</text>
+<path d="M1308 249 L1308 280" class="link"/>
+<rect x="1090" y="292" width="193" height="67" rx="10" fill="#fff2d0" stroke="#e5ba54" stroke-width="2"/>
+<text x="1186.5" y="330.9" text-anchor="middle" font-size="18" font-weight="800" >V → Va</text>
+<rect x="1315" y="292" width="213" height="67" rx="10" fill="#fff2d0" stroke="#e5ba54" stroke-width="2"/>
+<text x="1421.5" y="330.9" text-anchor="middle" font-size="18" font-weight="800" >VIII → VIIIa</text>
+<path d="M1300 275 L1190 290" class="link"/>
+<path d="M1310 274 L1420 290" class="link"/>
+<rect x="1090" y="381" width="193" height="66" rx="10" fill="#fff2d0" stroke="#e5ba54" stroke-width="2"/>
+<text x="1186.5" y="419.4" text-anchor="middle" font-size="18" font-weight="800" >XI → XIa</text>
+<rect x="1315" y="381" width="213" height="66" rx="10" fill="#fff2d0" stroke="#e5ba54" stroke-width="2"/>
+<text x="1421.5" y="419.1" text-anchor="middle" font-size="17" font-weight="800" >Platelet activation</text>
+<text x="1308" y="481" text-anchor="middle" font-size="16"  >Activated platelets expose</text>
+<text x="1308" y="500" text-anchor="middle" font-size="16"  >procoagulant phospholipids</text>
+<text x="1308" y="519" text-anchor="middle" font-size="16"  >→ major thrombin burst</text>
+<rect x="22" y="544" width="1558" height="238" rx="15" fill="#eaf8ec" stroke="#83c8a2" stroke-width="2"/>
+<text x="800" y="578" text-anchor="middle" font-size="24" font-weight="800" >COMMON PATHWAY  ·  BOTH PT AND aPTT</text>
+<rect x="62" y="617" width="252" height="70" rx="10" fill="#ede4ff" stroke="#b8a4e4" stroke-width="2"/>
+<text x="188" y="658.6" text-anchor="middle" font-size="22" font-weight="800" >X → Xa</text>
+<path d="M314 652 L368 652" class="link"/>
+<rect x="380" y="617" width="385" height="70" rx="10" fill="#dbf5e5" stroke="#76bb9b" stroke-width="2"/>
+<text x="572.5" y="658.6" text-anchor="middle" font-size="22" font-weight="800" >Xa + Va + Ca²⁺ + PL</text>
+<text x="572" y="710" text-anchor="middle" font-size="18" font-weight="800" >Prothrombinase complex</text>
+<path d="M765 652 L805 652" class="link"/>
+<rect x="816" y="617" width="324" height="70" rx="10" fill="#ffe1e8" stroke="#eaa2af" stroke-width="2"/>
+<text x="978" y="658" text-anchor="middle" font-size="20" font-weight="800" >II → IIa (Thrombin)</text>
+<path d="M1140 650 L1191 650" class="link"/>
+<rect x="1200" y="617" width="330" height="70" rx="10" fill="#d9ecff" stroke="#8cb7ed" stroke-width="2"/>
+<text x="1365" y="658.6" text-anchor="middle" font-size="22" font-weight="800" >I → Fibrin</text>
+<text x="800" y="755" text-anchor="middle" font-size="20" font-weight="800" >Thrombin activates XIII → XIIIa → cross-linked, stable fibrin clot</text>
+<rect x="20" y="802" width="505" height="355" rx="15" fill="#ebf4ff" stroke="#a3c9e9" stroke-width="2"/>
+<rect x="540" y="802" width="504" height="355" rx="15" fill="#fff1f4" stroke="#eeb5c5" stroke-width="2"/>
+<rect x="1059" y="802" width="521" height="355" rx="15" fill="#f0ebff" stroke="#bdb1e8" stroke-width="2"/>
+<text x="272" y="840" text-anchor="middle" font-size="23" font-weight="800" >KEY FACTOR NAMES</text>
+<text x="790" y="840" text-anchor="middle" font-size="23" font-weight="800" >COFACTORS AND VITAMIN K</text>
+<text x="1321" y="840" text-anchor="middle" font-size="23" font-weight="800" >CLINICAL TEST GUIDE</text>
+<text x="45" y="875" text-anchor="start" font-size="15"  >I  Fibrinogen → fibrin</text>
+<text x="45" y="897" text-anchor="start" font-size="15"  >II  Prothrombin → thrombin</text>
+<text x="45" y="919" text-anchor="start" font-size="15"  >III  Tissue factor (TF)</text>
+<text x="45" y="941" text-anchor="start" font-size="15"  >IV  Calcium (Ca²⁺)</text>
+<text x="45" y="963" text-anchor="start" font-size="15"  >V  Proaccelerin (labile factor)</text>
+<text x="45" y="985" text-anchor="start" font-size="15"  >VII  Proconvertin (stable factor)</text>
+<text x="45" y="1007" text-anchor="start" font-size="15"  >VIII  Antihemophilic A</text>
+<text x="45" y="1029" text-anchor="start" font-size="15"  >IX  Christmas / antihemophilic B</text>
+<text x="45" y="1051" text-anchor="start" font-size="15"  >X  Stuart–Prower factor</text>
+<text x="45" y="1073" text-anchor="start" font-size="15"  >XI  Plasma thromboplastin antecedent</text>
+<text x="45" y="1095" text-anchor="start" font-size="15"  >XII  Hageman factor</text>
+<text x="45" y="1117" text-anchor="start" font-size="15"  >XIII  Fibrin-stabilizing factor</text>
+<rect x="569" y="861" width="438" height="72" rx="15" fill="#fff6d6" stroke="#e2b65e" stroke-width="2"/>
+<text x="787" y="889" text-anchor="middle" font-size="20" font-weight="800" >VITAMIN K: 10 – 9 – 7 – 2</text>
+<text x="787" y="915" text-anchor="middle" font-size="17"  >X, IX, VII, II + proteins C, S, Z</text>
+<text x="571" y="965" text-anchor="start" font-size="15"  >Ca²⁺ bridges factors to platelet phospholipid (PF3)</text>
+<text x="571" y="990" text-anchor="start" font-size="15"  >VIIIa + IXa → intrinsic tenase</text>
+<text x="571" y="1015" text-anchor="start" font-size="15"  >Va + Xa → prothrombinase</text>
+<text x="571" y="1040" text-anchor="start" font-size="15"  >Thrombin activates V, VIII, XI, platelets, XIII</text>
+<text x="571" y="1065" text-anchor="start" font-size="15"  >Antithrombin blocks IIa and Xa</text>
+<text x="571" y="1090" text-anchor="start" font-size="15"  >Protein C + S inactivate Va and VIIIa</text>
+<text x="571" y="1115" text-anchor="start" font-size="15"  >Factor XII deficiency may ↑ aPTT without bleeding</text>
+<text x="1085" y="875" text-anchor="start" font-size="16"  >PT ↑; aPTT normal:</text>
+<text x="1085" y="900" text-anchor="start" font-size="16"  >Factor VII or early vitamin K antagonist effect</text>
+<text x="1085" y="925" text-anchor="start" font-size="16"  >aPTT ↑; PT normal:</text>
+<text x="1085" y="950" text-anchor="start" font-size="16"  >VIII (hemophilia A), IX (B), XI (C), XII</text>
+<text x="1085" y="975" text-anchor="start" font-size="16"  >Both PT and aPTT ↑:</text>
+<text x="1085" y="1000" text-anchor="start" font-size="16"  >II, V, X, I deficiency; DIC; severe liver disease</text>
+<text x="1085" y="1025" text-anchor="start" font-size="16"  >Normal PT/aPTT with bleeding:</text>
+<text x="1085" y="1050" text-anchor="start" font-size="16"  >Platelets, vWF, factor XIII, vascular causes</text>
+<text x="1085" y="1075" text-anchor="start" font-size="16"  ></text>
+<text x="1085" y="1100" text-anchor="start" font-size="16"  >PT/aPTT do not measure all bleeding disorders.</text>
+<text x="800" y="1180" text-anchor="middle" font-size="15"  >Veterinary teaching reference · sample handling, species, assay and clinical context modify interpretation</text>
+</svg>
