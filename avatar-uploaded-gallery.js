@@ -43,15 +43,17 @@ window.VPQ_UPLOADED_AVATAR_GALLERY=function(api){
   const wrap=document.createElement('section');wrap.id='vpqUploadedGallery';wrap.className='vpq-uploaded-gallery';
   wrap.innerHTML='<h3>🐾 Choose Your Veterinarian</h3>'+
    '<p class="tiny">Select a standing character by scrub color. The same illustration appears in the gallery, preview, and hospital. Alexandria and Gary are preserved.</p>'+
-   '<div class="vpq-uploaded-special"><button type="button" data-vpqportrait="roster-28">🌷 Alexandria · Original</button><button type="button" data-vpqportrait="roster-29">🧢 Gary</button></div>'+
-   (ownerItems.length?'<section class="vpq-owner-collection"><h4>👑 Alexandria Collection</h4><p class="tiny">Additional personal character designs. Original characters and the full public roster are preserved.</p><div class="vpq-owner-grid">'+ownerItems.map(v=>'<button type="button" class="vpq-uploaded-card vpq-owner-card" data-vpqportrait="'+escape(v.id)+'" aria-label="Choose '+escape(v.label||'Alexandria character')+'">'+img(v.id,'tile')+'<span>'+escape(v.label||'Alexandria character')+'</span></button>').join('')+'</div></section>':'')+
+   '<div class="vpq-uploaded-special"><button type="button" data-vpqportrait="roster-29">🧢 Gary</button></div>'+
    '<div class="vpq-uploaded-filters" role="group" aria-label="Scrub color">'+cats.map((c,i)=>'<button type="button" class="'+(i===0?'active':'')+'" data-vpqcolor="'+escape(c)+'">'+escape(c)+'</button>').join('')+'</div>'+
-   '<p class="tiny" id="vpqUploadedCount"></p><div class="vpq-uploaded-grid" id="vpqUploadedGrid"></div>';
+   '<p class="tiny" id="vpqUploadedCount"></p><div class="vpq-uploaded-grid" id="vpqUploadedGrid"></div>'+
+   '<section class="vpq-owner-collection"><h4>🌷 Alexandria Characters</h4><p class="tiny">A few personal character options, alongside the original. All other characters remain available above.</p><div class="vpq-uploaded-special"><button type="button" data-vpqportrait="roster-28">Alexandria · Original</button></div>'+
+   (ownerItems.length?'<div class="vpq-owner-grid">'+ownerItems.map(v=>'<button type="button" class="vpq-uploaded-card vpq-owner-card" data-vpqportrait="'+escape(v.id)+'" aria-label="Choose '+escape(v.label||'Alexandria character')+'">'+img(v.id,'tile')+'<span>'+escape(v.label||'Alexandria character')+'</span></button>').join('')+'</div>':'')+'</section>';
   section.prepend(wrap);
   let currentColor='All Characters';
   const draw=()=>{
    const chosen=f.elements.portraitId?.value;
-   const filtered=currentColor==='All Characters'?items:items.filter(v=>v.color===currentColor);
+   const publicItems=items.filter(v=>v.collection!=='Alexandria');
+   const filtered=currentColor==='All Characters'?publicItems:publicItems.filter(v=>v.color===currentColor);
    const grid=wrap.querySelector('#vpqUploadedGrid');
    grid.innerHTML=filtered.map((v,i)=>'<button type="button" class="vpq-uploaded-card'+(v.id===chosen?' chosen':'')+'" data-vpqportrait="'+escape(v.id)+'" aria-label="Choose veterinarian '+(i+1)+'">'+img(v.id,'tile')+'<span>Vet '+String(i+1).padStart(3,'0')+'</span><span class="vpq-avatar-zoom" data-vpq-avatar-zoom="'+escape(v.id)+'" role="button" tabindex="0" aria-label="Enlarge Vet '+String(i+1).padStart(3,'0')+'">🔎</span></button>').join('');
    wrap.querySelector('#vpqUploadedCount').textContent=filtered.length+' characters shown';
