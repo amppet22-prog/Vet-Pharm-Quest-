@@ -15,9 +15,9 @@ const data={
   {x:81.1,y:31,w:17.4,h:43,walk:87,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
  ],
  isolation:[
-  {x:9,y:37,w:22,h:39,walk:23,label:'🐶 Isolation patient',action:'onehealth'},
-  {x:38,y:37,w:25,h:37,walk:52,label:'📚 Disease library',action:'ohLibrary'},
-  {x:69,y:36,w:24,h:38,walk:81,label:'🛡️ Public health',action:'ohHub'}
+  {x:9,y:38,w:23,h:33,walk:23,label:'🐶 Isolation Patient',action:'onehealth'},
+  {x:39,y:38,w:23,h:32,walk:52,label:'📚 Disease Library',action:'ohLibrary'},
+  {x:71,y:38,w:22,h:32,walk:81,label:'🛡️ Public Health',action:'ohHub'}
  ],
  necropsy:[
   {x:3,y:25,w:20,h:45,walk:14,label:'🦴 Specimen Cabinet',subtitle:'Identify gross lesions',hint:'Gross pathology: recognize the organ, describe the lesion and practice gross diagnoses',action:'necroGross'},
@@ -322,6 +322,17 @@ function necroHelpModal(action){
  '<p class="tiny">The question mark provides information only. Click the actual station or walk nearby and press E to enter.</p>');
 }
 
+const isoHelp={
+ onehealth:['🐶 Isolation patient','Assess the patient, identify plausible transmission routes, and choose appropriate precautions based on the suspected or confirmed pathogen. Separate contaminated equipment and clean/disinfect between patients.'],
+ ohLibrary:['📚 Disease library','Review pathogen reservoir, zoonotic potential, exposure routes, susceptible species, environmental persistence, infection-control guidance, and reporting considerations.'],
+ ohHub:['🛡️ Public health','Explore surveillance, case reporting, source investigation and risk communication. Reporting requirements depend on disease and jurisdiction.']
+};
+function isoHelpModal(action){
+ const info=isoHelp[action];if(!info)return;
+ api.showModal(info[0]+' · Station guide','<div class="infobox"><b>What this station does</b><p>'+info[1]+'</p></div>'+
+ '<div class="infobox"><b>Clean-to-dirty workflow</b><p>Check the required isolation category; perform hand hygiene; don indicated PPE; use dedicated equipment; clean and disinfect with the correct product and contact time; remove PPE and perform hand hygiene when leaving. Adjust the sequence to the actual pathogen, facility protocol and exposure risk.</p></div>'+
+ '<p class="tiny">The question mark opens this explanation only. Select the corresponding station to enter the activity.</p>');
+}
 function refresh(){
  const room=stage.dataset.room,old=stage.querySelector('#vpqSpecHits');
  if(!data[room]){old?.remove();return}
@@ -329,10 +340,13 @@ function refresh(){
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
  div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" data-vpqspec-kind="'+(p.kind||'practice')+'" title="'+(p.hint||p.label)+'" aria-label="'+p.label+(p.subtitle?' — '+p.subtitle:'')+'"><span>'+p.label+(p.subtitle?'<small>'+p.subtitle+'</small>':'')+'</span></button>').join('')+
  (room==='clinpath'?['coag','gas','urine','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([16.3,36.0,55.7,75.4,92.5][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
+ (room==='isolation'?data.isolation.map(p=>'<button type="button" class="vpqIsoHelp" style="left:'+Math.min(94,p.x+p.w-1)+'%;top:'+Math.max(3,p.y-4)+'%" data-vpqisohelp="'+p.action+'" title="About '+p.label+'" aria-label="Explain '+p.label+'">?</button>').join(''):'')+
  (room==='necropsy'?data.necropsy.filter(p=>necroHelp[p.action]).map(p=>'<button type="button" class="vpqNecroHelp" data-vpqnecro-help="'+p.action+'" style="left:'+Math.min(95,p.x+p.w-2)+'%;top:'+Math.max(3,p.y-3)+'%" title="About '+p.label+'" aria-label="What does '+p.label+' teach?">?</button>').join(''):'')+
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
  (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Learn First — open lecture study guides and references" aria-label="Learn First reference bookshelf — open study guides"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Lecture-based study guides">📖 Learn First</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
  div.addEventListener('click',e=>{
+ const isoGuide=e.target.closest('[data-vpqisohelp]');
+ if(isoGuide){e.preventDefault();e.stopPropagation();isoHelpModal(isoGuide.dataset.vpqisohelp);return}
  const help=e.target.closest('[data-vpqnecro-help]');
  if(help){e.preventDefault();e.stopPropagation();necroHelpModal(help.dataset.vpqnecroHelp);return}
  if(e.target.closest('[data-vpqnecro-guide]')){
