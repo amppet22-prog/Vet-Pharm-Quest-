@@ -31,7 +31,7 @@ const configs={
  study:[
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="study"]',x:59,label:'💻 Study Computer'},
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="masteryTracker"]',x:35,label:'🏆 Mastery Tracker'},
-  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="skillsWing"]',x:75,label:'💉 Clinical Skills Arcade',max:8},
+  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="skillsWing"]',x:77,label:'💉 Clinical Skills Arcade',max:8},
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="learningHub"]',x:90,label:'🕹️ Learning Arcade'}
  ],
  mechanism:[
