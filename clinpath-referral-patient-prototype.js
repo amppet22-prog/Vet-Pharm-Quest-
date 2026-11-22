@@ -196,6 +196,15 @@ style.textContent+=
 '#modalBody .refcase .refadvancedfeedback{padding:12px;background:#f4effb;border:2px solid #c5a5e1;border-radius:12px;margin-top:10px}'+
 '@media(max-width:760px){#modalBody .refcase .refresultsgrid,#modalBody .refcase .refiqchoices{grid-template-columns:1fr}}';
 
+/* Match interpretation and differential worksheets to one comfortable reading column.
+   Diagnostic reports retain their wider side-by-side layout. */
+style.textContent+=
+'#modalBody .refcase .refinterpret{box-sizing:border-box;width:100%;max-width:735px;margin:10px auto;padding:12px 14px}'+
+'#modalBody .refcase .refinterpret>.refiq{margin:8px 0;padding:10px 12px}'+
+'#modalBody .refcase .refinterpret>.refiq:last-child{margin-bottom:2px}'+
+'#modalBody .refcase .refinterpret .refiqchoices{gap:6px}'+
+'#modalBody .refcase .refinterpret .refiqchoices button{font-size:15px;line-height:1.32;padding:7px 9px}'+
+'@media(max-width:790px){#modalBody .refcase .refinterpret{max-width:735px;margin:8px auto;padding:10px}#modalBody .refcase .refinterpret .refiqchoices{grid-template-columns:1fr}}';
 /* Reading-column differential cards; optional expandable vertical image rail. */
 style.textContent+=
 '#modalBody .refcase .refpracticegrid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;align-items:start}'+
