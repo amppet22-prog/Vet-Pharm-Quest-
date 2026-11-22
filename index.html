@@ -4121,7 +4121,9 @@ function vpqExam2CasePractice(lecture='all',position=0){
  showModal('🐾 Exam 2 · Patient Cases',back+selector+question+controls+'<p class="tiny">Uploaded teaching notes; treatment and safety claims have not been independently validated. Refer to current veterinary references for actual patients.</p>');
 }
 
-window.VPQ_OPEN_EXAM2_PATIENT_CASES=vpqExam2CasePractice;
+window.VPQ_OPEN_EXAM2_PATIENT_CASES=function(lecture){return window.VPQ_PATIENT_CASE_LIBRARY?.focus?.('Pharmacology',lecture==='all'?'':lecture)};
+// Legacy source quiz remains in code for reference, but its public launcher routes
+// to canonical tracked patient charts and their available follow-up stages.
 
 
 let vpqHyAuditVerified=false,vpqHyAuditFilter='all',vpqHyAuditPage=0;
@@ -4163,8 +4165,8 @@ function vpqHyAuditView(){
  const counts={all:all.length,repeat:all.filter(q=>freq.get(normalize(q.q))>1).length,missing:all.filter(q=>/^uploaded answer key\s*:/i.test(q.why||'')).length};
  const rows=subset.map(({q,i})=>'<details class="vpqHyAuditItem"><summary><b>#'+(i+1)+' · '+escapeHtml(q.lecture)+'</b> '+escapeHtml(q.q)+' '+(freq.get(normalize(q.q))>1?' · 🔁 repeated':'')+(/^uploaded answer key\s*:/i.test(q.why||'')?' · ⚠ explanation needed':'')+'</summary><p><b>Correct:</b> '+escapeHtml(String.fromCharCode(65+Number(q.answer)))+'. '+escapeHtml(q.options[q.answer]||'')+'</p><p><b>Stored WHY:</b> '+escapeHtml(q.why||'Not supplied')+'</p><p><b>Source:</b> '+escapeHtml(q.source||'Course question')+'</p><p class="tiny">ID: '+escapeHtml(q.id||String(i))+'</p></details>').join('');
  showModal('🔐 Exam 2 · Owner Question Library','<p>Original uploads are preserved. Browse all MCQs in groups of 25; repeated stems and answer-key-only explanations are flagged rather than deleted.</p>'+
- '<p class="vpq-case-meta"><b>'+all.length+' total questions</b> · '+counts.repeat+' repeated-stem entries · '+counts.missing+' answer-key-only explanations</p>'+
- '<label>Show <select id="vpqHyAuditFilter" style="width:100%;margin:5px 0">'+selector.map(x=>'<option value="'+escapeHtml(x)+'" '+(vpqHyAuditFilter===x?'selected':'')+'>'+escapeHtml(x==='repeat'?'Repeated question stems':x==='missing'?'Needs WHY explanation':x==='all'?'All questions':x)+'</option>').join('')+'</select></label>'+
+ '<p class="vpq-case-meta"><b>'+all.length+' total questions</b> · '+counts.repeat+' repeated-stem entries · '+counts.missing+' direct recall answer keys</p>'+
+ '<label>Show <select id="vpqHyAuditFilter" style="width:100%;margin:5px 0">'+selector.map(x=>'<option value="'+escapeHtml(x)+'" '+(vpqHyAuditFilter===x?'selected':'')+'>'+escapeHtml(x==='repeat'?'Repeated question stems':x==='missing'?'Direct recall · answer key only':x==='all'?'All questions':x)+'</option>').join('')+'</select></label>'+
  '<p>'+filtered.length+' matching · page '+(vpqHyAuditPage+1)+' of '+pages+'</p>'+rows+
  '<div class="buttonrow"><button data-vpqhy-audit-page="'+(vpqHyAuditPage-1)+'" '+(vpqHyAuditPage===0?'disabled':'')+'>← Previous 25</button><button data-vpqhy-audit-page="'+(vpqHyAuditPage+1)+'" '+(vpqHyAuditPage>=pages-1?'disabled':'')+'>Next 25 →</button></div>'+
  '<div class="buttonrow"><button data-vpqhy-mode="menu">★ High-Yield menu</button><button data-vpqlfhome="1">← Learning Center</button></div>');
@@ -4484,7 +4486,7 @@ function vpqPharmRoomCasesHub(lecture='all'){
  }).join('');
  showModal('💊 Pharmacology · Patient Case Rounds',
   '<p>Choose a medication decision to practice in the clinic. These are <b>the existing uploaded Exam 2 patient cases</b>—not a new duplicate bank. The full charts keep their original multiple-choice answers, explanations and case progress.</p>'+
-  '<div class="vpqPharmRoomCaseLinks"><button data-vpq-medcases-original="'+safe(chosen)+'">📖 Full Exam 2 case practice ('+eligible.length+')</button><button data-vpq-medcases-library="'+safe(chosen)+'">🩺 All Pharmacy patient charts</button></div>'+
+  '<div class="vpqPharmRoomCaseLinks"><button data-vpq-medcases-original="'+safe(chosen)+'">📖 Browse Exam 2 patient charts ('+eligible.length+')</button><button data-vpq-medcases-library="'+safe(chosen)+'">🩺 Pharmacology Patient Library</button></div>'+
   '<p class="tiny">Uploaded teaching scenarios are not individualized prescribing instructions. Some historical dosing and treatment statements need independent clinical verification.</p>'+
   '<h3>Choose a lecture</h3>'+lectureBtns+
   '<h3>'+safe(chosen==='all'?'Featured medication patients':'Medication patients · '+chosen)+'</h3>'+
@@ -4500,7 +4502,7 @@ $('modalBody').addEventListener('click',event=>{
  const d=button.dataset;
  if(d.vpqMedcasesLecture!==undefined)return vpqPharmRoomCasesHub(d.vpqMedcasesLecture);
  if(d.vpqMedcasesStart!==undefined){if(d.vpqMedcasesStart)return startCase(d.vpqMedcasesStart);return vpqPharmRoomCasesHub()}
- if(d.vpqMedcasesOriginal!==undefined)return window.VPQ_OPEN_EXAM2_PATIENT_CASES?.(d.vpqMedcasesOriginal||'all');
+ if(d.vpqMedcasesOriginal!==undefined)return window.VPQ_PATIENT_CASE_LIBRARY?.focus?.('Pharmacology',d.vpqMedcasesOriginal==='all'?'':d.vpqMedcasesOriginal);
  if(d.vpqMedcasesLibrary!==undefined)return window.VPQ_PATIENT_CASE_LIBRARY?.focus?.('Pharmacology',d.vpqMedcasesLibrary==='all'?'':d.vpqMedcasesLibrary);
 },true);
 
