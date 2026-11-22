@@ -19,10 +19,11 @@ function record(i){
  const entry=Object.assign({},src,official.text||{},draft);
  const photos=official.photos?.length?official.photos:(official.photo?.url?[official.photo]:[]);
  if(photos.length)entry.image=photos[0].url;
- // Course curriculum: lecture 78 = ears; lecture 79 = eyes.
- // This congenital ocular lesion was accidentally assigned to the ear lecture.
- // Correct only its catalog placement; preserve ID, published content, photos, and drafts.
- if(/\banophthalmia\b/i.test(String(entry.title||''))&&/\bmicrophthalmia\b/i.test(String(entry.title||''))){
+ // Verified course organization: Lecture 78 covers Ears, Lecture 79 covers Eyes.
+ // Override only catalog placement for the misfiled ocular cards; immutable IDs,
+ // owner-published text, photos, and local drafts are retained unchanged.
+ const ocularMisfiled=/^(?:anophthalmia and microphthalmia|corneal dermoid|ectropion|entropion)$/i.test(String(entry.title||'').trim());
+ if(ocularMisfiled){
   entry.lecture='79';
   entry.organSystem='ocular';
   entry.system='Eye / Ocular Adnexa';
