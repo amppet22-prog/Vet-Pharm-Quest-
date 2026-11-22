@@ -102,12 +102,15 @@ function drawing(){
  '<g font-family="Arial" font-weight="800"><rect x="8" y="104" width="62" height="150" rx="5" fill="#eaf1e9" stroke="#81aa9f" stroke-width="4"/>'+
  '<text x="39" y="117" text-anchor="middle" font-size="9" fill="#577d75">E-COLLARS</text>'+
  '<path d="M16 127h47" stroke="#a8bcb5" stroke-width="3"/>'+
- '<path d="M25 146q-13 -12 -13 10q6 19 20 6l9 -11Z" fill="#d8ebee" stroke="#8caeba" stroke-width="3"/>'+
- '<path d="M50 177q-12 -8 -14 13q7 18 20 5l9 -10Z" fill="#eee0ed" stroke="#b5a3bf" stroke-width="3"/>'+
- '<text x="39" y="238" font-size="9" text-anchor="middle" fill="#577d75">SIZES</text>'+
+ // Three tapered veterinary recovery cones, with neck openings, stitched edging and fastening tabs.
+ '<g transform="translate(11 126)"><path d="M5 16L28 4Q49 16 49 35L25 49Q5 38 5 16Z" fill="#e4f6fb" stroke="#79a4b4" stroke-width="2.5"/><ellipse cx="30" cy="26" rx="10" ry="8" fill="#b9d7d8" stroke="#76a5ad" stroke-width="2"/><path d="M6 17Q18 20 26 43" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 3"/><rect x="41" y="20" width="7" height="7" rx="2" fill="#fff5e6" stroke="#90adae"/></g>'+
+ '<g transform="translate(20 175) rotate(-13 22 24)"><path d="M3 11L28 1Q46 13 46 29L24 45Q5 35 3 11Z" fill="#f0e3f4" stroke="#b19bbd" stroke-width="2.5"/><ellipse cx="26" cy="22" rx="9" ry="7" fill="#d9c4df" stroke="#aa90b8" stroke-width="2"/><path d="M5 12L23 40" stroke="#fff" stroke-width="2" stroke-dasharray="3 3"/><rect x="38" y="14" width="7" height="7" rx="2" fill="#fbfaf6" stroke="#aa90b8"/></g>'+
+ '<g transform="translate(14 211) scale(.65)"><path d="M3 10L34 2Q56 17 55 39L26 58Q4 42 3 10Z" fill="#e5efda" stroke="#86aa93" stroke-width="3"/><ellipse cx="31" cy="29" rx="11" ry="9" fill="#c4d8bb" stroke="#7caa90" stroke-width="2.5"/></g>'+
+ '<text x="39" y="244" font-size="8" text-anchor="middle" fill="#577d75">XS • S • M • L</text>'+
  '<rect x="919" y="77" width="64" height="66" rx="5" fill="#f1ede5" stroke="#9ab6ac" stroke-width="4"/>'+
  '<text x="950" y="90" text-anchor="middle" font-size="9" fill="#5a7778">LEASHES</text>'+
- [0,1,2].map(i=>'<path d="M'+(931+i*18)+' 101v14q0 20 9 13q8 -5 0 -17" fill="none" stroke="'+(['#a6a6d3','#e8a7aa','#86baa7'][i])+'" stroke-width="5" stroke-linecap="round"/>').join('')+
+ // Individual leash hooks, looped nylon leads, metal D-rings and matching collars.
+ [0,1,2].map(i=>{const x=931+i*19,c=['#8e94cd','#d990a2','#78aa95'][i];return '<g><circle cx="'+x+'" cy="99" r="3.4" fill="#8b9f9b"/><path d="M'+x+' 102q-12 10 -7 28q8 11 13 -1v-15q-1 -11 -6 -12" fill="none" stroke="'+c+'" stroke-width="5" stroke-linecap="round"/><path d="M'+(x-8)+' 130q9 14 18 0" fill="none" stroke="'+c+'" stroke-width="3"/><rect x="'+(x+6)+'" y="126" width="5" height="9" rx="2" fill="#e7eeea" stroke="#879d99"/><ellipse cx="'+x+'" cy="141" rx="10" ry="4" fill="none" stroke="'+c+'" stroke-width="3"/></g>'}).join('')+
  '</g>'+
  // Carrier storage above the drug shelves, with vents and doors.
  '<g transform="translate(126 47)"><rect width="77" height="40" rx="8" fill="#e7d7c8" stroke="#a9aaa8" stroke-width="4"/>'+
