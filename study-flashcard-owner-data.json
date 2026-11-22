@@ -254,6 +254,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 14",
       "curated": true
+    },
+    {
+      "prompt": "What are the antiarrhythmics that we discussed in lecture?",
+      "answer": "Lidocaine, Mexiletine, Procainamide, Propranolol, Amiodarone, Verapamil, and Diltiazem",
+      "why": "",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwrc00il-id7dm",
+      "domain": "pharmacology",
+      "lecture": "Lecture 14",
+      "curated": true
     }
   ],
   "hidden": []
