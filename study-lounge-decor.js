@@ -18,7 +18,7 @@ const inventory=()=>state.receptionCollection||(state.receptionCollection={owned
 const owned=id=>(inventory().owned||[]).includes(id)||(state.upgrades||[]).includes(id);
 const level=()=>Math.floor((Number(state.xp)||0)/130)+1;
 const icons={coffee:'☕',microwave:'🍲',snack:'🍪',chair:'🪑',stools:'🪑',vines:'🌿',plants:'🪴',habitat:'🦎',magazines:'📚',table:'🫖'};
-const defaults={coffee:'basic',habitat:'basic',vines:'basic',plants:'basic'};
+const defaults={coffee:'basic',habitat:'basic',vines:'basic',plants:'basic',plantCount:3};
 function bag(){
  if(!state.studyLoungeDecor||typeof state.studyLoungeDecor!=='object')state.studyLoungeDecor={...defaults};
  return state.studyLoungeDecor;
@@ -50,7 +50,7 @@ function studio(filter='all'){
  const have=owned(x.id),required=level()<x.min,active=chosen(x.slot)===x.id;
  return '<article style="border:1px solid #c6d3df;border-radius:13px;background:#fff;padding:11px;min-width:0"><div style="font-size:28px">'+h(x.icon)+'</div><b>'+h(x.name)+'</b><p class="tiny">'+(have?'✓ In your collection':required?'🔒 Unlock at Level '+x.min:'🪙 '+x.price+' coins')+'</p><button '+(required||(!have&&state.coins<x.price)?'disabled':'')+' data-vpqloungedecor-'+(have?'equip':'buy')+'="'+h(x.id)+'" style="width:100%;padding:8px;border-radius:9px">'+(have?(active?'✓ Placed — remove':'Place in Lounge'):'Buy & place · '+x.price+' 🪙')+'</button></article>'
  }).join('');
- showModal('🌿 Student Lounge · Decorate & Collect','<p><b>Make this space your own!</b> Your Reception purchases and level rewards are shared. Lounge placements are independent; nothing is removed from the Reception, cat study or dog kennel.</p><p class="small">Level '+level()+' · '+state.coins+' coins · Base coffee maker, plants, and reptile habitat included. Upgrades use the same coins and unlock progress as the rest of the clinic.</p><div class="buttonrow"><button data-vpqloungedecor-collection="1">💝 My collection</button><button data-vpqloungedecor-shop="1">🎨 Reception Shop</button><button data-vpqloungedecor-reset="1">↺ Reset Lounge placement</button></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin:11px 0">'+links+'</div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px">'+(list||'<p>No items in this category yet. Explore the Reception shop or level rewards to unlock more.</p>')+'</div>');
+ showModal('🌿 Student Lounge · Decorate & Collect','<p><b>Make this space your own!</b> Your Reception purchases and level rewards are shared. Lounge placements are independent; nothing is removed from the Reception, cat study or dog kennel.</p><p class="small">Level '+level()+' · '+state.coins+' coins · Base coffee maker, plants, and reptile habitat included. Upgrades use the same coins and unlock progress as the rest of the clinic.</p><div class="buttonrow"><button data-vpqloungedecor-collection="1">💝 My collection</button><button data-vpqloungedecor-shop="1">🎨 Reception Shop</button><button data-vpqloungedecor-reset="1">↺ Reset Lounge placement</button></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin:11px 0">'+links+'</div><div style="border:1px solid #b5d9bc;background:#f1fbf2;padding:10px;border-radius:10px;margin:9px 0"><b>🌿 Botanical corners</b><p class="tiny">Choose how many decorative planters appear here. Your plants and purchases remain available in Reception, too.</p><div class="buttonrow">'+[2,3,4,5,6].map(n=>'<button data-vpqloungedecor-plants="'+n+'" '+((Number(bag().plantCount)||3)===n?'style="background:#d6efdd;border:2px solid #5e9a76"':'')+'>'+n+' plants</button>').join('')+'</div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px">'+(list||'<p>No items in this category yet. Explore the Reception shop or level rewards to unlock more.</p>')+'</div>');
 }
 function equip(id){
  const x=info(id);if(!x||!owned(id))return;
@@ -89,6 +89,7 @@ function svgDecor(){
  const plant=chosen('receptionPlants');if(plant!=='none'&&plantLibrary().includes(plant))s+=pic('assets/reception/'+plant+'.svg',628,315,83,108);
  const extra=chosen('plants')==='lounge-planter-pack';if(extra)s+='<g><text x="666" y="310" font-size="45">🪴</text><text x="231" y="313" font-size="39">🌿</text><text x="958" y="323" font-size="42">🌱</text></g>';
  if(!extra)s+='<g><text x="670" y="316" font-size="36">🪴</text><text x="960" y="323" font-size="31">🌿</text></g>';
+ const plantPositions=[[248,315],[619,321],[965,321],[369,239],[917,211],[75,285]];const count=Math.min(6,Math.max(2,Number(bag().plantCount)||3));for(let i=0;i<count;i++){const [px,py]=plantPositions[i];s+='<text x="'+px+'" y="'+py+'" font-size="'+(i%2?31:37)+'" text-anchor="middle">'+(['🌿','🪴','🌱'][i%3])+'</text>'}
  const decor=chosen('receptionDecor');const src=window.VPQ_RECEPTION_MODULAR_ASSETS?.manifest?.[decor]?.src;if(src)s+=pic(src,559,313,88,68);
  const reward=levelArtItems().find(x=>x.id===chosen('levelReward'));if(reward){const glyph=reward.furnitureGlyph||'⭐';s+='<g transform="translate(573 349)"><rect width="67" height="56" rx="12" fill="#f2e5f7" stroke="#a18fbc" stroke-width="4"/><text x="33" y="39" font-size="34" text-anchor="middle">'+h(glyph)+'</text></g>'}
  return s+'</g>';
@@ -110,6 +111,7 @@ body.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)retur
  if(d.vpqloungedecorFilter!==undefined){e.preventDefault();studio(d.vpqloungedecorFilter)}
  else if(d.vpqloungedecorEquip!==undefined){e.preventDefault();equip(d.vpqloungedecorEquip)}
  else if(d.vpqloungedecorBuy!==undefined){e.preventDefault();buy(d.vpqloungedecorBuy)}
+ else if(d.vpqloungedecorPlants!==undefined){e.preventDefault();bag().plantCount=Math.min(6,Math.max(2,Number(d.vpqloungedecorPlants)||3));save();studio('plants')}
  else if(d.vpqloungedecorReset!==undefined){e.preventDefault();state.studyLoungeDecor={...defaults};save();studio('owned')}
  else if(d.vpqloungedecorCollection!==undefined){e.preventDefault();window.VPQ_OPEN_MY_COLLECTION?.()}
  else if(d.vpqloungedecorShop!==undefined){e.preventDefault();changeRoom('reception');api.doAction('receptionStudio')}
