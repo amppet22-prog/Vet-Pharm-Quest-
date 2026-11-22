@@ -82,13 +82,24 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<path d="M133 362Q144 348 166 348Q181 352 183 368L177 388L135 387Q121 379 133 362Z" fill="#f0b9b0"/>'+
 '<path d="M190 349Q218 345 235 352L250 379L237 390L186 386Z" fill="#9fceb9"/>'+
 '<path d="M110 428v12M278 428v11" stroke="#806b9a" stroke-width="9" stroke-linecap="round"/></g>'+ 
-// Skills practice nook on the right rear wall, away from the desk and arcade.
-'<g><rect x="722" y="90" width="169" height="112" rx="12" fill="#e8f4f9" stroke="#96b4c5" stroke-width="6"/>'+
-'<rect x="731" y="98" width="151" height="26" rx="9" fill="#fff9ff" stroke="#c8b4d2" stroke-width="2"/>'+
-'<text x="807" y="116" font-family="Arial" text-anchor="middle" font-size="14" font-weight="900" fill="#745d92">CLINICAL SKILLS</text>'+
-'<rect x="738" y="133" width="65" height="54" rx="6" fill="#f8fbff" stroke="#b3c6d3" stroke-width="3"/>'+
-'<rect x="808" y="133" width="65" height="54" rx="6" fill="#fff5fa" stroke="#c7adc7" stroke-width="3"/>'+
-'<text x="771" y="166" text-anchor="middle" font-size="24">💉</text><text x="840" y="166" text-anchor="middle" font-size="24">🩸</text></g>'+
+// Smaller arcade-like clinical skills simulator sits farther back on the right wall.
+'<g transform="translate(727 176) scale(.72)">'+
+'<ellipse cx="84" cy="218" rx="86" ry="13" fill="#5d527d" opacity=".15"/>'+
+'<path d="M9 24L43 6H136L154 25V191L136 209H9Z" fill="#6b92a6" stroke="#486b87" stroke-width="7"/>'+
+'<path d="M9 24H133L136 6H43Z" fill="#add8d6" stroke="#6188a1" stroke-width="4"/>'+
+'<path d="M133 24L154 25V191L136 209L133 185Z" fill="#4f718e"/>'+
+'<rect x="18" y="29" width="114" height="158" rx="6" fill="#9dd1d1" stroke="#577f9c" stroke-width="4"/>'+
+'<rect x="24" y="35" width="102" height="38" rx="8" fill="#fbe5c3" stroke="#fff8e3" stroke-width="3"/>'+
+'<text x="75" y="49" text-anchor="middle" font-family="Arial" font-weight="900" font-size="13" fill="#536388">CLINICAL</text>'+
+'<text x="75" y="65" text-anchor="middle" font-family="Arial" font-weight="900" font-size="14" fill="#536388">SKILLS</text>'+
+'<rect x="25" y="84" width="100" height="66" rx="8" fill="#496c90" stroke="#e5eff3" stroke-width="4"/>'+
+'<rect x="32" y="91" width="86" height="51" rx="5" fill="#d1f0e8"/>'+
+'<text x="75" y="117" text-anchor="middle" font-size="25">💉</text>'+
+'<text x="75" y="134" text-anchor="middle" font-size="20">🩸</text>'+
+'<path d="M17 157H134L143 176H9Z" fill="#d4b4d9" stroke="#6186a1" stroke-width="4"/>'+
+'<circle cx="48" cy="164" r="7" fill="#7ca3c8"/><circle cx="95" cy="164" r="7" fill="#f3b1a9"/>'+
+'<path d="M18 180H132V194H18Z" fill="#547c99"/>'+
+'<text x="75" y="191" font-family="Arial" font-size="10" text-anchor="middle" fill="#fff9ee" font-weight="900">PRACTICE LAB</text></g>'+
 // The kitchenette is a single fitted cabinet, not floating unrelated objects.
 // Expanded kitchenette beneath window: independent fridge, usable counter, sink and coffee-machine space.
 '<g transform="translate(279 267)"><rect x="0" y="0" width="172" height="84" rx="6" fill="#d3b6a8" stroke="#aa9088" stroke-width="4"/>'+
@@ -133,7 +144,7 @@ css.textContent='.vpqStudyLoungeArt{position:absolute;inset:0;width:100%;height:
 '.vpqLoungeHot span{display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);min-width:120px;max-width:145px;text-align:center;background:#fffaf4;border:2px solid #9ba7bd;color:#303c64;border-radius:9px;padding:5px 7px;font-size:11px;font-weight:800;box-shadow:0 3px 7px #65728636;z-index:3}'+
 '.vpqLoungeHot:is(:hover,:focus-visible) span{display:block}.vpqLoungeHot b,.vpqLoungeHot small{display:block}.vpqLoungeHot small{font-size:10px;font-weight:600}'+
 '.vpqLoungeDesk{left:53%;top:45%;width:12%;height:23%}.vpqLoungeMastery{left:43%;top:18%;width:26%;height:26%}.vpqLoungeGames{left:80%;top:52%;width:13%;height:33%}'+
-'.vpqLoungeSkills{position:absolute;left:73%;top:24%;width:15%;height:17%;padding:0;pointer-events:auto;border:2px solid transparent;background:transparent;color:transparent;border-radius:10px;font-size:0;cursor:pointer;box-shadow:none}.vpqLoungeSkills:hover,.vpqLoungeSkills:focus-visible{border:2px dashed #e5b657;background:#fff4c522;outline:none}'+
+'.vpqLoungeSkills{position:absolute;left:73%;top:36%;width:11%;height:31%;padding:0;pointer-events:auto;border:2px solid transparent;background:transparent;color:transparent;border-radius:10px;font-size:0;cursor:pointer;box-shadow:none}.vpqLoungeSkills:hover,.vpqLoungeSkills:focus-visible{border:2px dashed #e5b657;background:#fff4c522;outline:none}'+
 '.vpqLoungeExit{top:8%;right:2%;padding:6px 10px;border-radius:15px;background:#fffaf0ed;color:#584d70;font-size:11px;font-weight:800}'+
 '@media(max-width:600px){.vpqLoungeHot span{font-size:9px;padding:3px 5px}.vpqLoungeExit{font-size:9px;padding:5px}}';
 document.head.appendChild(css);
