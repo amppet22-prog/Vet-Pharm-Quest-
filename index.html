@@ -2100,6 +2100,7 @@ function vpqCheckDogTransparency(dog){
    }
    // Repaint currently open creator when certification finishes.
    if(document.getElementById('avatarForm'))vpqRefreshPreview();
+   if(state.pet==='🐕'&&state.petBreed===dog.id)updateAvatar();
    if(window.vpqDogBatchStatusListener)window.vpqDogBatchStatusListener(dog.id,valid);
   }catch(err){vpqBatchDogStatus.set(dog.id,'unchecked');}
  };
