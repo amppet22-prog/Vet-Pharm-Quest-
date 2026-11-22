@@ -138,6 +138,12 @@
       "answer": "Digoxin, dopamine, dobutamine, amrinone and pimobendan.",
       "why": "They differ in acute versus chronic use and their hemodynamic effects.\nMemory trick that's silly \"PADDD\"",
       "slide": "Lecture 14 · user study cards, reconciled with lecture guide and veterinary references"
+    },
+    "pharm-e2-cardio14-011": {
+      "prompt": "What cardiac adverse effect can positive inotropes cause?",
+      "answer": "Tachyarrhythmias or other rhythm disturbances.",
+      "why": "Higher intracellular calcium or altered excitability may provoke abnormal rhythms.\nThese drugs are working to treat congestive heart failure by increasing intra-myocytic calcium to improve contractility.",
+      "slide": "Lecture 14 · user study cards, reconciled with lecture guide and veterinary references"
     }
   },
   "custom": [
