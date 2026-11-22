@@ -79,7 +79,9 @@ function overview(){
  return '<div class="vdt">'+css+'<div class="vdt-hero"><b>🧪 Diagnostic Test Mastery · Tests at their own workstation</b><p>Choose a test below. Every entry contains sample handling, what it actually measures, high/low interpretation, numerical examples or assay-specific intervals, a diagnostic diagram, WHY the body changes, and a practice question.</p></div><h3>⚡ In-house diagnostics</h3>'+tiles('inhouse')+'<h3>📦 Send-out / reference-lab diagnostics</h3>'+tiles('sendout')+'<p class="vdt-note">Illustrative teaching numbers are not clinical universal thresholds; apply species and analyzer reference intervals. ACTH/LDDST curves are redrawings of course-described patterns, not copied artwork.</p></div>';
 }
 function open(id){
- if(id==='pcv')return window.VPQ_CLINPATH_REPORT_ACADEMY?.open?.('pcv');
+ if(id==='pcv')return modal('🩸 PCV/TS · Microhematocrit and Refractometer',
+ '<div class="vdt">'+css+'<div class="vdt-row">'+button('category-inhouse','← Back to In-House Tests')+'</div>'+
+ (window.VPQ_CLINPATH_REPORT_ACADEMY?.pcvMarkup?.()||'<p>The PCV/TS lesson needs the report-reading guide script.</p>')+'</div>');
  const t=find(id);if(!t)return overviewModal();
  chosen=id;
  const show=picked[id]!==undefined;
