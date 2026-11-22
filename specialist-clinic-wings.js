@@ -402,7 +402,7 @@ function refresh(){
   '<b>🧼 Cleaning & PPE:</b> necropsy safety and sampling.</div>'+
   '<div style="margin-top:10px;padding:11px 13px;border:1px solid #d7c8e5;background:#f6f0fa;border-radius:10px;font-size:13px"><b>🔎 Future Veterinary Forensics Case Files</b><p style="margin:5px 0">Planned as a separate case library and station. It will focus on scene and history, documentation, injuries, postmortem changes, evidence handling, and defensible interpretations. No forensic cases are currently included.</p></div>'+
   '<p class="tiny">Click a station or walk up and press E. The stainless tables are scenery, not separate clickable stations.</p>');return}
- const guide=e.target.closest('[data-vpqbench-guide]');if(guide){window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b)api.doAction(b.dataset.vpqspecact)});
+ const guide=e.target.closest('[data-vpqbench-guide]');if(guide){window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b){if(b.dataset.vpqspecact==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){e.preventDefault();e.stopPropagation();return window.VPQ_CLINPATH_REFERRAL_PILOT.home()}return api.doAction(b.dataset.vpqspecact)}});
  stage.appendChild(div);
 }
 function updateNearby(room,x){
@@ -417,7 +417,7 @@ function updateNearby(room,x){
 }
 function interactNearest(room,x){
  const best=updateNearby(room,x);if(!best)return false;
- api.doAction(best.action);return true;
+ if(best.action==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){window.VPQ_CLINPATH_REFERRAL_PILOT.home();return true}api.doAction(best.action);return true;
 }
 const observer=new MutationObserver(()=>{const room=stage.dataset.room,present=stage.querySelector('#vpqSpecHits');if(!!data[room]!==!!present||(present&&present.dataset.room!==room))refresh()});
 observer.observe(stage,{attributes:true,attributeFilter:['data-room'],childList:true});
