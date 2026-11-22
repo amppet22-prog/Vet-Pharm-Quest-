@@ -30,6 +30,21 @@ function nutritionCard(i){
  '<button type="button" data-vpqpn-card="'+Math.max(0,i-1)+'" '+(i===0?'disabled':'')+'>← Previous</button>'+
  '<button type="button" data-vpqpn-card="'+Math.min(foodCards.length-1,i+1)+'" '+(i===foodCards.length-1?'disabled':'')+'>Next →</button></div>');
 }
+const pharmModal=document.getElementById('modalBody');
+function addStudyLoungeShortcut(){
+ if(!pharmModal||pharmModal.querySelector('#vpqPNLearnInLounge'))return;
+ const content=pharmModal.textContent||'';
+ const modal=document.getElementById('modal');
+ if(!/Search medications|Drug Encyclopedia|Drug indications & NAVLE cases/.test(content))return;
+ const link=document.createElement('button');
+ link.type='button';link.id='vpqPNLearnInLounge';
+ link.textContent='📚 Learn & practice Pharmacology + Toxicology → Student Study Lounge';
+ link.style.cssText='display:block;width:100%;margin:8px 0 12px;padding:10px;border:2px solid #9b8ac7;border-radius:12px;background:#f5efff;color:#554573;font-size:13px;font-weight:900;cursor:pointer';
+ link.addEventListener('click',()=>{if(modal)modal.classList.remove('open');changeRoom('study')});
+ pharmModal.prepend(link);
+}
+new MutationObserver(addStudyLoungeShortcut).observe(pharmModal,{childList:true,subtree:false});
+addStudyLoungeShortcut();
 document.getElementById('modalBody').addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
  if(b.dataset.vpqpnBack!==undefined){e.preventDefault();nutritionMenu();}
@@ -79,11 +94,12 @@ function refresh(){
  if(stage.dataset.room!=='pharmacy')return;
  const node=document.createElement('div');node.id='vpqPNHotspots';
  node.innerHTML='<button type="button" class="vpqPNHot vpqPNDrugs" data-vpqpnaction="pharmacy" aria-label="Open the medication cabinets and drug encyclopedia"><span>💊 Drug Shelves</span></button>'+
+ '<button type="button" class="vpqPNStudyLink" data-vpqpn-study="1" aria-label="Go to Student Study Lounge for pharmacology and toxicology lessons, cases and practice">📚 Learn &amp; practice Pharm / Tox in Student Lounge →</button>'+ 
  '<button type="button" class="vpqPNHot vpqPNRounds" data-vpqpnaction="vpqPharmVisualRounds" aria-label="Open clinical pharmacology visual cases and testing"><span>🩺 Clinical Rounds</span></button>'+ 
  '<button type="button" class="vpqPNHot vpqPNFood" data-vpqpnaction="vpqNutritionGuide" aria-label="Open the pet nutrition corner and reference cards"><span>🥣 Pet Nutrition</span></button>'+
  '<button type="button" class="vpqPNHot vpqPNTox" data-vpqpnaction="vpqToxPreview" aria-label="Open the toxicology caution book reference preview"><span>☣️ Caution Book</span></button>'+
  '<button type="button" class="vpqPNHot vpqPNLab" data-vpqpnaction="vpqMechEnter" aria-label="Enter the mechanism lab"><span>🔬 Lab</span></button>';
- node.addEventListener('click',e=>{const b=e.target.closest('[data-vpqpnaction]');if(b)doAction(b.dataset.vpqpnaction)});
+ node.addEventListener('click',e=>{const go=e.target.closest('[data-vpqpn-study]');if(go){changeRoom('study');return}const b=e.target.closest('[data-vpqpnaction]');if(b)doAction(b.dataset.vpqpnaction)});
  stage.appendChild(node);
 }
 const style=document.createElement('style');
@@ -95,6 +111,7 @@ style.textContent='.vpqPharmNutritionArt{position:absolute;inset:0;width:100%;he
 '.vpqPNHot span{position:absolute;bottom:3%;left:50%;transform:translate(-50%,0);white-space:nowrap;border:2px solid #7ea9a6;background:#fffdf5;color:#375f68;font-size:11px;font-weight:900;padding:5px 8px;border-radius:13px;box-shadow:0 3px 0 #567f8030}'+
 '.vpqPNRounds{left:10%;top:68%;width:30%;height:20%;border:2px solid #e4aa91;background:#fff4da26}.vpqPNRounds span{bottom:6%;background:#fff5eb;border-color:#e4b6a8;color:#895568}'+
  '.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:44%;top:23%;width:23%;height:49%}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
+'.vpqPNStudyLink{position:absolute;z-index:6;left:9%;top:10%;width:38%;pointer-events:auto;border:2px solid #8a94c8;border-radius:12px;background:#fffdf2;color:#534c85;padding:7px 10px;font-size:11px;font-weight:900;box-shadow:0 3px 8px #35436633;cursor:pointer}.vpqPNStudyLink:hover,.vpqPNStudyLink:focus-visible{background:#fff2c7;outline:2px solid #f5c66f}'+
 '.vpqPNFoodCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin:12px 0}.vpqPNFoodCards button{display:block;text-align:left;background:#f6fcf7;border:2px solid #b9d7c8;border-radius:13px;padding:13px}.vpqPNFoodCards b,.vpqPNFoodCards small{display:block}.vpqPNFoodCards small{color:#617e75;font-size:12px;margin-top:6px}'+
 '@media(max-width:620px){.vpqPNHot span{font-size:9px;padding:3px 4px}.vpqPNLab span{right:0}.vpqPNTox span{bottom:12%}}';
 document.head.appendChild(style);
