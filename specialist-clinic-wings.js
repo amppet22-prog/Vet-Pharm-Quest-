@@ -92,6 +92,8 @@ function scene(key){
    '<path d="M115 209v119M309 209v119" stroke="#d4e8df" stroke-width="5"/>'+
    '<path d="M306 215v108" stroke="#78a89b" stroke-width="3"/>'+
    '<circle cx="306" cy="267" r="4" fill="#e0c589"/>'+
+   // Patient scaled to leave a proper visible kennel interior and washable bedding.
+   '<g transform="translate(63 79) scale(.70)">'+
    '<path d="M258 278q27 -24 31 1" stroke="#b68464" stroke-width="10" fill="none" stroke-linecap="round"/>'+
    '<path d="M178 289v25M238 289v25" stroke="#b78669" stroke-width="11" stroke-linecap="round"/>'+
    '<ellipse cx="218" cy="286" rx="52" ry="27" fill="#dfae83" stroke="#b98869" stroke-width="3"/>'+
@@ -103,8 +105,16 @@ function scene(key){
    '<circle cx="165" cy="265" r="4.5" fill="#44373f"/><circle cx="166" cy="263" r="1.4" fill="#fff"/>'+
    '<path d="M137 291q13 8 21 -2" stroke="#bd8677" stroke-width="2" fill="none"/>'+
    '<ellipse cx="180" cy="313" rx="12" ry="5" fill="#f4d4b3"/><ellipse cx="240" cy="313" rx="12" ry="5" fill="#f4d4b3"/>'+
+   '</g>'+
    '<rect x="102" y="199" width="95" height="19" rx="5" fill="#fffdf2" stroke="#99c7b8" stroke-width="2"/>'+
    '<text x="150" y="212" font-size="10" font-weight="900" fill="#57877b" text-anchor="middle">ISOLATION KENNEL</text>'+
+   // Dedicated patient bedding, water bowl and kennel-status tag.
+   '<rect x="126" y="302" width="165" height="16" rx="7" fill="#b5d8d0" stroke="#94bfb4" stroke-width="1.5"/>'+
+   '<ellipse cx="281" cy="311" rx="14" ry="5" fill="#d6ebee" stroke="#7ca8b5" stroke-width="2"/>'+
+   '<path d="M270 310q12 8 23 0" fill="#a2d4e2" stroke="#78afbe" stroke-width="1.5"/>'+
+   '<rect x="203" y="203" width="78" height="16" rx="3" fill="#fffdf7" stroke="#b2c8bc" stroke-width="1.5"/>'+
+   '<text x="242" y="214" text-anchor="middle" font-size="8" font-weight="900" fill="#567f75">DEDICATED CARE</text>'+
+   '<path d="M110 207h199M110 324h199" stroke="#d0e4de" stroke-width="2" fill="none"/>'+
    // Library work surface, shelving and reference files.
    '<rect x="393" y="188" width="222" height="154" rx="14" fill="#d2e9df" stroke="#86b4a5" stroke-width="6"/>'+
    '<rect x="408" y="202" width="194" height="125" rx="8" fill="#fbfff9" stroke="#c1d8c8" stroke-width="3"/>'+
@@ -123,6 +133,19 @@ function scene(key){
    '<rect x="747" y="288" width="145" height="6" rx="3" fill="#7397ac"/>'+
    '<rect x="753" y="316" width="129" height="15" rx="4" fill="#f7fffa" stroke="#a2c6cc" stroke-width="2"/>'+
    '<text x="818" y="327" text-anchor="middle" font-size="9" font-weight="900" fill="#608c94">SURVEILLANCE · REPORTING</text>'+
+   // Service details: sealed wall surfaces, ventilation grille, observation window and entry threshold.
+   '<g transform="translate(625 96)"><rect width="110" height="47" rx="6" fill="#e8f5f4" stroke="#9bbfbf" stroke-width="3"/>'+
+   '<text x="55" y="13" text-anchor="middle" font-size="9" font-weight="900" fill="#578481">AIRFLOW CHECK</text>'+
+   [0,1,2,3].map(i=>'<path d="M12 '+(20+i*6)+'h85" stroke="#a8c8c7" stroke-width="3"/>').join('')+
+   '<circle cx="100" cy="11" r="3" fill="#7cb799"/></g>'+
+   '<g transform="translate(947 202)"><rect width="42" height="136" rx="6" fill="#d4e9e7" stroke="#7da9a3" stroke-width="3"/>'+
+   '<rect x="7" y="15" width="28" height="72" rx="3" fill="#afd9df" fill-opacity=".68" stroke="#9bc0c1" stroke-width="2"/>'+
+   '<path d="M9 33h24m-24 24h24" stroke="#e0f3f1" stroke-width="2"/>'+
+   '<circle cx="9" cy="101" r="3" fill="#e1c887"/>'+
+   '<text x="21" y="123" text-anchor="middle" font-size="7" font-weight="900" fill="#537e7d">ENTRY</text></g>'+
+   '<rect x="899" y="351" width="86" height="17" rx="4" fill="#e4f6ee" stroke="#9dc9b2" stroke-width="2"/>'+
+   '<text x="942" y="363" text-anchor="middle" font-size="9" font-weight="900" fill="#578979">DON PPE</text>'+
+   '<path d="M932 373v30m0 0 -8 -10m8 10 8 -10" stroke="#83ab9f" stroke-width="3" fill="none"/>'+
    // Signage: meaningful precautions instead of decor only.
    '<rect x="93" y="114" width="191" height="54" rx="10" fill="#fff3d7" stroke="#dcb276" stroke-width="3"/>'+
    '<text x="188" y="135" text-anchor="middle" font-size="16" font-weight="900" fill="#936b2e">☣ BIOHAZARD</text>'+
@@ -155,6 +178,15 @@ function scene(key){
    '<rect x="8" y="55" width="50" height="11" rx="3" fill="#ecf6f0"/>'+
    '<text x="33" y="63" text-anchor="middle" font-size="8" font-weight="900" fill="#5c8b7f">DISINFECT</text>'+
    '<circle cx="13" cy="92" r="7" fill="#627f84"/><circle cx="55" cy="92" r="7" fill="#627f84"/></g>'+
+   // Dedicated isolation supplies near the clean cart: towel rolls, contact-time chart and reusable equipment bin.
+   '<g transform="translate(618 164)"><rect width="97" height="48" rx="6" fill="#f9fff9" stroke="#a6c9b8" stroke-width="2.5"/>'+
+   '<text x="48" y="12" text-anchor="middle" font-size="9" font-weight="900" fill="#5b8878">CLEANING LOG</text>'+
+   '<path d="M8 20h80M8 29h80M8 38h56" stroke="#b2d0c0" stroke-width="2"/>'+
+   '<path d="M75 36l4 4 8 -10" stroke="#7aaf91" stroke-width="2.5" fill="none"/></g>'+
+   '<g transform="translate(702 274)"><rect width="34" height="46" rx="5" fill="#dfebf0" stroke="#a8bec7" stroke-width="2.5"/>'+
+   '<path d="M6 10h23m-22 7h20" stroke="#b2c7d0" stroke-width="2"/>'+
+   '<rect x="3" y="-7" width="28" height="12" rx="5" fill="#f9fff9" stroke="#aac5bd" stroke-width="2"/>'+
+   '<text x="17" y="36" font-size="6" text-anchor="middle" fill="#7397a5">CLEAN</text></g>'+
    // PPE dispensing station left edge, biohazard waste adjacent to isolation kennel.
    '<g transform="translate(17 201)"><rect width="60" height="117" rx="7" fill="#e8f5ed" stroke="#95bdb0" stroke-width="3"/>'+
    '<text x="30" y="13" text-anchor="middle" font-size="9" font-weight="900" fill="#5e8d80">PPE</text>'+
@@ -172,7 +204,7 @@ function scene(key){
    '<rect x="314" y="383" width="65" height="29" rx="5" fill="#99bcb1" stroke="#6f9c90" stroke-width="3"/>'+
    '<path d="M322 388h49m-49 7h49m-49 7h49" stroke="#d8e9df" stroke-width="2"/>'+
    '<text x="346" y="422" text-anchor="middle" font-size="8" font-weight="900" fill="#568078">BOOT MAT</text>'+
-   '<text x="960" y="485" text-anchor="end" font-size="9" font-family="Arial" font-weight="900" fill="#6b8a85">Isolation room v2</text>'+
+   '<text x="960" y="485" text-anchor="end" font-size="9" font-family="Arial" font-weight="900" fill="#6b8a85">Isolation room v3</text>'+
    '</g>';
  }else if(key==='skills'){
    // Three identifiable work areas: syringe training, venous collection, specimen tubes.
