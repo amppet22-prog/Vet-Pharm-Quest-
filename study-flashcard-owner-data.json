@@ -144,6 +144,12 @@
       "answer": "Tachyarrhythmias or other rhythm disturbances.",
       "why": "Higher intracellular calcium or altered excitability may provoke abnormal rhythms.\nThese drugs are working to treat congestive heart failure by increasing intra-myocytic calcium to improve contractility.",
       "slide": "Lecture 14 · user study cards, reconciled with lecture guide and veterinary references"
+    },
+    "pharm-e2-cardio14-020": {
+      "prompt": "What does propranolol block?",
+      "answer": "β1 and β2 nonselective adrenergic receptors. (Class 2)",
+      "why": "β1 blockade slows cardiac responses; β2 blockade may worsen bronchospasm.\nIt is used to treat a feline with hyperthyroidism-mediated hypertension",
+      "slide": "Lecture 14 · user study cards, reconciled with lecture guide and veterinary references"
     }
   },
   "custom": [
