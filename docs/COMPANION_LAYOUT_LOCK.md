@@ -29,3 +29,12 @@
 The earlier 9px *container* gap did not ensure apparent closeness because transparent cutout padding and the avatar illustration extend beyond their boxes. The CURRENT approved stage rule replaces it with a controlled 25px container overlap and the same 17% baseline as the veterinarian. Dogs: 146×150; cats and pocket pets: 112×116; horses and ruminants: 188×176; exotics/avians: 124×128; legendary: 158×160. Mobile sizes are smaller. All measurements are CSS pixels. Do NOT restore the older 9px gap or 19% pet baseline. The shop/creator art remains independent.
 
 An isolated Chromium fixture verified edge overlap and identical bottom baseline for five species at three horizontal positions (15 checks). The published full game still requires a visual smoke test after deployment.
+
+## Shared depth movement implementation — 2026-11-22
+- Both `#avatarSprite` and `#petSprite` use the same computed horizontal coordinate and floor depth (`17 + avatarDepth` percent).
+- W / ArrowUp move both toward the back of the room; S / ArrowDown move both toward the foreground. A/D and left/right retain side-to-side movement. Depth is clamped to -8..+8 relative to the baseline, and resets when entering another room.
+- The W/S behavior is intentionally separate from equipment interaction proximity (still horizontal) and does not change the shop/preview layout.
+- Dog artwork, Mera's equipped identity and purchase state must not be rewritten by positioning changes.
+- Tested starters: illustrated Siamese cat, illustrated Holland Lop rabbit, and bearded dragon have price 0 / level 1. Existing catalog IDs remain stable.
+- Reception sizes: dog 146×150; horse/ruminant 226×210; exotics 108×112, with bearded dragon at 96×100. Mobile category overrides still apply.
+- Source checked for syntactic errors and references; final visual behavior needs user smoke test after GitHub Pages deployment.
