@@ -4928,4 +4928,33 @@ window.addEventListener('load',restoreVisibleRoom,{once:true});
   openGamesMenu();
  },true);
 })();
-</script><script src="clinpath-referral-patient-prototype.js?v=20261122-guided-ranking-9a63df3"></script><script id="vpq-referral-launcher-direct">document.addEventListener("click",function(e){const n=e.target.closest?.("#vpqSpecHits [data-vpqspecact=\"advancedCases\"]");if(!n)return;const pilot=window.VPQ_CLINPATH_REFERRAL_PILOT;if(pilot&&typeof pilot.home==="function"){e.preventDefault();e.stopImmediatePropagation();pilot.home()}},true);</script></body></html>
+</script><script src="clinpath-referral-patient-prototype.js?v=20261122-referral-launch-fix-7b65c6"></script>
+<script id="vpq-referral-launcher-direct">
+(function(){
+  let loading=false;
+  function openReferral(){
+    const pilot=window.VPQ_CLINPATH_REFERRAL_PILOT;
+    if(pilot&&typeof pilot.home==='function'){pilot.home();return;}
+    if(loading)return;
+    loading=true;
+    const script=document.createElement('script');
+    script.src='clinpath-referral-patient-prototype.js?v=20261122-referral-launch-fix-7b65c6-retry';
+    script.onload=function(){
+      loading=false;
+      if(window.VPQ_CLINPATH_REFERRAL_PILOT?.home)window.VPQ_CLINPATH_REFERRAL_PILOT.home();
+      else if(window.VPQ_REFERRAL_MODAL?.show)window.VPQ_REFERRAL_MODAL.show('Referral Patients','The prototype could not initialize. Please refresh the game and try again.');
+    };
+    script.onerror=function(){loading=false;if(window.VPQ_REFERRAL_MODAL?.show)window.VPQ_REFERRAL_MODAL.show('Referral Patients','The referral case file did not load. Please refresh and try again.');};
+    document.body.appendChild(script);
+  }
+  window.VPQ_OPEN_REFERRAL_PATIENTS=openReferral;
+  // Capture ahead of document-level menu delegates, and support both launch paths.
+  window.addEventListener('click',function(e){
+    const target=e.target instanceof Element?e.target.closest('[data-modalaction="advancedCases"],[data-vpqspecact="advancedCases"],#vpqReferralRetry'):null;
+    if(!target)return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    openReferral();
+  },true);
+})();
+</script></body></html>
