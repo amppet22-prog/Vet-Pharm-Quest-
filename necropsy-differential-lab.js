@@ -629,7 +629,7 @@ function zoomCaseImage(raw){
 }
 function sourcedPhotos(x){
  const d=window.VPQ_NECROPSY_DIFFERENTIAL_IMAGES?.[x.id];
- if(!d)return '';
+ if(!d||(!(d.images||[]).length&&(!(d.links||[]).length||phase<2)))return '';
  const pics=(d.images||[]).map(p=>{
   const filename=String(p.file||'');
   const url=p.url||'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(filename);
