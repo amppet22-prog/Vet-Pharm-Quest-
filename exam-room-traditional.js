@@ -84,7 +84,7 @@ function drawing(){
  // Soft paper towels, glove box and clinical consumables.
  '<g><rect x="96" y="224" width="35" height="15" rx="4" fill="#b3d3ce"/><rect x="315" y="234" width="54" height="21" rx="5" fill="#f3d3df" stroke="#cba5b7" stroke-width="3"/><path d="M323 245h38" stroke="#fffaf8" stroke-width="3"/><text x="342" y="248" text-anchor="middle" font-size="9" font-family="Arial" fill="#8e6785">GLOVES</text></g>',
  // SOAP note clipboard on a fixed standing chart board, chart hotspot unchanged.
- '<g transform="translate(383 294) rotate(5)" filter="url(#exShadow)"><rect width="80" height="100" rx="10" fill="#f9f3df" stroke="#b99381" stroke-width="5"/><rect x="26" y="-5" width="28" height="15" rx="5" fill="#8dabaf"/><path d="M14 29h52M14 45h52M14 61h37" stroke="#b8cbd0" stroke-width="4"/><text x="40" y="88" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#73969c">SOAP</text></g>',
+ '<g transform="translate(331 278) rotate(-6)" filter="url(#exShadow)"><rect width="80" height="100" rx="10" fill="#f9f3df" stroke="#b99381" stroke-width="5"/><rect x="26" y="-5" width="28" height="15" rx="5" fill="#8dabaf"/><path d="M14 29h52M14 45h52M14 61h37" stroke="#b8cbd0" stroke-width="4"/><text x="40" y="88" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#73969c">SOAP</text></g>',
  // Caring framed illustration and wall art (not giant emoji decoration).
  '<g filter="url(#exShadow)"><rect x="370" y="222" width="108" height="62" rx="12" fill="#fffdf6" stroke="#d2a9bb" stroke-width="5"/><path d="M393 249q10-18 19 0q9-18 19 0q-5 15-19 23q-14-8-19-23Z" fill="#e4a6ba"/><text x="454" y="250" font-family="Arial" font-size="11" font-weight="800" text-anchor="middle" fill="#7c7883">GENTLE</text><text x="454" y="265" font-family="Arial" font-size="11" font-weight="800" text-anchor="middle" fill="#7c7883">CARE</text></g>',
  // A familiar cute clinical protocol board: remains a distinct action target.
@@ -112,9 +112,9 @@ function drawing(){
 
 art.roomArt=function(k){return k==='exam'?drawing():previous(k)};
 const p=rooms.exam.props;
-p[0].x=26;p[0].label='Patient Charts';
-p[1].x=76;p[1].label='Examine Patient';
-p[2].x=54;p[2].label='Clinical Protocols';
+p[0].x=36;p[0].label='Patient Charts';
+p[1].x=78;p[1].label='Examine Patient';
+p[2].x=61;p[2].label='Clinical Protocols';
 function refresh(){
  stage.querySelector('#vpqExamHotspots')?.remove();
  if(stage.dataset.room!=='exam')return;
@@ -131,12 +131,14 @@ function refresh(){
 }
 const style=document.createElement('style');style.textContent=
 '.vpqExamRoomArt{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}'+
+'.stage[data-room="exam"] #avatarSprite{width:86px;height:162px;bottom:14%;margin-left:-14px;filter:drop-shadow(3px 6px 3px #54647655)}'+
+'.stage[data-room="exam"] #avatarSprite .vpq-game-avatar{width:100%;height:100%}'+
 '.stage[data-room="exam"] .roomdecor,.stage[data-room="exam"] .prop{display:none!important}'+
 '#vpqExamHotspots{position:absolute;inset:0;z-index:5;pointer-events:none}'+
 '.vpqExamHot,.vpqExamExit{pointer-events:auto;position:absolute;border:2px solid #99bbc2bb;border-radius:12px;background:#ffffff15;box-shadow:none;transform:none!important}'+
 '.vpqExamHot:hover,.vpqExamHot:focus-visible,.vpqExamExit:hover,.vpqExamExit:focus-visible{border:3px solid #f1c66d;outline:2px solid #fff;background:#fff6ba48}'+
-'.vpqExamHot span{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fffdf5;color:#355a70;border:2px solid #83acb5;border-radius:14px;padding:5px 9px;font-size:12px;font-weight:900;box-shadow:0 3px 0 #708c962e}.vpqExamCharts span{bottom:-16%}.vpqExamProtocol span{bottom:-8%}'+
-'.vpqExamCharts{left:29%;top:50%;width:13%;height:24%}.vpqExamPatient{left:59%;top:42%;width:33%;height:39%}.vpqExamProtocol{left:51%;top:20%;width:14%;height:33%}'+
+'.vpqExamHot span{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fffdf5;color:#355a70;border:2px solid #83acb5;border-radius:14px;padding:5px 9px;font-size:12px;font-weight:900;box-shadow:0 3px 0 #708c962e}.vpqExamCharts span{bottom:-23%}.vpqExamProtocol span{bottom:-38%}'+
+'.vpqExamCharts{left:32%;top:54%;width:11%;height:22%}.vpqExamPatient{left:62%;top:48%;width:30%;height:31%}.vpqExamProtocol{left:55%;top:55%;width:11%;height:12%}'+
 '.vpqExamSkills{pointer-events:auto;position:absolute;left:3%;top:8%;background:#fff4fadd;border:3px solid #b79bda;border-radius:14px;color:#745588;padding:9px 12px;font-size:13px;font-weight:900;box-shadow:0 5px 0 #bfa8d455;cursor:pointer;z-index:3}.vpqExamSkills:hover,.vpqExamSkills:focus-visible{background:#fff1bd;border-color:#eab65c;outline:2px solid #fff9dd}'+
 '.vpqExamPatientPicker{pointer-events:auto;position:absolute;bottom:3%;right:2%;z-index:8;background:#fffaf8f2;color:#684b6d;border:2px solid #cda7c8;border-radius:13px;padding:7px;font-size:11px;font-weight:900;box-shadow:0 3px 0 #b49ab044}.vpqExamPatientPicker select{font:inherit;max-width:160px;color:#435f68;background:transparent;border:0;cursor:pointer}.vpqExamExit{top:8%;right:2%;background:#fffdf5ed;color:#365e66;font-size:11px;padding:6px 9px}'+
 '@media(max-width:600px){.vpqExamHot span{font-size:10px;padding:3px 5px}.vpqExamPatientPicker{font-size:9px}.vpqExamPatientPicker select{max-width:105px}.vpqExamExit{font-size:10px}}';
