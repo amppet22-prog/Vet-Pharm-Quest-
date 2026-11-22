@@ -985,7 +985,7 @@ body.vpq-reading-large #modalBody .vpq-patient-case .response p{font-size:18px!i
 <script src="reception-customization.js?v=20261120-unified-collection3"></script>
 <script src="reception-hall-25d.js?v=20261108-firsthall"></script>
 <script src="reception-shadowbox-phase-a.js?v=20261120-sofa-slot2"></script>
-<script src="study-lounge-phase-a3.js?v=20261108-arcade"></script>
+<script src="study-lounge-phase-a3.js?v=20261121-skills-lounge-v2"></script>
 <script src="toxicology-expanded-cards.js?v=20261108-toxexpand1"></script>
 <script src="toxicology-lecture-supplements.js?v=20261108-toxlecture1"></script>
 <script src="toxicology-lecture-links.js?v=20261108-toxcrosswalk1"></script>
@@ -999,7 +999,7 @@ body.vpq-reading-large #modalBody .vpq-patient-case .response p{font-size:18px!i
 <script src="exam-case-library.js?v=20261121-pharm-lecture-only5"></script>
 <script src="pharmacology-visual-rounds.js?v=20261114-fixbuttons1"></script>
 <script src="pharmacy-nutrition-room.js?v=20261111-visual-rounds1"></script>
-<script src="walkable-clinic-rooms-treatment-v7.js?v=20261121-steel-tables-crash-v9"></script>
+<script src="walkable-clinic-rooms-treatment-v7.js?v=20261121-layout-posters-v10"></script>
 <script src="clinic-approach-interactions.js?v=20261121-left-protocol-2"></script>
 <script src="clinpath-hybrid-room-art.js?v=20261114-polish2"></script>
 <script src="clinpath-bench-guides.js?v=20261114-phaseC2"></script>
@@ -1355,7 +1355,7 @@ const ROOMS={
  reception:{name:'Reception & Waiting Room',color:'#fff0df',banner:'RECEPTION',decor:[['🪟','9%','15%'],['🖼️','75%','18%'],['🪴','88%','56%']],props:[{x:33,emoji:'🐕 🐈',label:'Front Desk · Patient Check-in',action:'queue',bubble:'See waiting patients'},{x:73,emoji:'🎨',label:'Reception Studio',action:'receptionStudio',bubble:'Decorate'}]},
  exam:{name:'Examination Room',color:'#fff3e8',banner:'EXAM ROOM • PATIENT ROUNDS',decor:[['🩻','9%','15%'],['🖼️','80%','18%'],['🧼','85%','57%']],props:[{x:22,emoji:'📋',label:'Medical Chart',action:'medicalCharts',bubble:'Review history'},{x:52,emoji:'🩺',label:'Exam Table',action:'patients',bubble:'Treat a case'},{x:81,emoji:'📚',label:'Protocols',action:'protocols',bubble:'Clinical steps'}]},
  pharmacy:{name:'Pharmacy & Medication Library',color:'#eaf7ed',banner:'PHARMACY • DRUG REFERENCE',decor:[['🌿','8%','17%'],['🪟','78%','15%']],props:[{x:24,emoji:'💊',label:'Drug Shelves',action:'pharmacy',bubble:'Search drugs'},{x:52,emoji:'❔',label:'Mechanism Lab · WHY',action:'vpqMechEnter',bubble:'Targets → patient decisions'},{x:81,emoji:'☣️',label:'Toxicology Reference',action:'vpqToxPreview',bubble:'Toxicant guide'}]},
- treatment:{name:'Treatment Ward',color:'#f0eafa',banner:'TREATMENT • PATIENT CARE & IN-HOUSE LAB',decor:[['🩹','8%','17%'],['🫀','83%','16%'],['🧪','73%','38%']],props:[{x:18,emoji:'🐴',label:'Hospital Patient',action:'hospitalFollowup',bubble:'Patient rounds'},{x:33,emoji:'💉',label:'Treatment Cart',action:'hospitalAdjust',bubble:'Adjust care'},{x:65,emoji:'📈',label:'Monitoring',action:'hospitalMonitor',bubble:'Vitals & trends'},{x:43,emoji:'💉',label:'Clinical Skills Door',action:'skillsWing',bubble:'Injection & Blood Draw'},{x:80,emoji:'🩸',label:'CBC & Chemistry',action:'treatmentDiagnostics',bubble:'In-house analyzers'},{x:92,emoji:'🔬',label:'Microscope Counter',action:'microscopeDetective',bubble:'Photo detective'}]},
+ treatment:{name:'Treatment Ward',color:'#f0eafa',banner:'TREATMENT • PATIENT CARE & IN-HOUSE LAB',decor:[['🩹','8%','17%'],['🫀','83%','16%'],['🧪','73%','38%']],props:[{x:18,emoji:'🐴',label:'Hospital Patient',action:'hospitalFollowup',bubble:'Patient rounds'},{x:67,emoji:'🚨',label:'Emergency Crash Cart',action:'hospitalAdjust',bubble:'Adjust care'},{x:73,emoji:'📈',label:'Monitoring',action:'hospitalMonitor',bubble:'Vitals & trends'},{x:80,emoji:'🩸',label:'CBC & Chemistry',action:'treatmentDiagnostics',bubble:'In-house analyzers'},{x:92,emoji:'🔬',label:'Microscope Counter',action:'microscopeDetective',bubble:'Photo detective'}]},
  isolation:{name:'One Health & Isolation',color:'#e6f8f1',banner:'ONE HEALTH • PROTECT THE COMMUNITY',decor:[['🧤','11%','17%'],['☣️','83%','16%'],['🧴','90%','57%']],props:[{x:23,emoji:'🐮',label:'Isolation Patient',action:'onehealth',bubble:'Zoonosis case'},{x:52,emoji:'📚',label:'Disease Library',action:'ohLibrary',bubble:'38 disease cards'},{x:81,emoji:'🛡️',label:'Public Health Desk',action:'ohHub',bubble:'Roles & reporting'}]},
  study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'📖',label:'Guided Learning',action:'learningHub',bubble:'Select & start'},{x:44,emoji:'🏆',label:'Mastery Tracker',action:'masteryTracker',bubble:'Test yourself'},{x:65,emoji:'📚',label:'Master Disease Library',action:'masterDiseaseLibrary',bubble:'NAVLE disease index'},{x:86,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Short practice'}]}
 };
