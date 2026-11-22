@@ -4986,7 +4986,15 @@ function vpqCompanionAvatar(c){
   return '<img class="vpq-companion-art" loading="lazy" src="'+vpqDogAssetURL(c.image)+'" alt="'+escapeHtml(c.name)+(status==='opaque'?' — image background needs transparency':'')+'" draggable="false">';
  }
  // Retain the recognizable pre-shop illustrated Mera instead of an emoji.
- if(c.id==='dog-mera')return vpqCompanionLegacyArt({...state,pet:'🐕',petBreed:'husky-shepherd'});
+ if(c.id==='dog-mera'){
+  // COMPANION CONTRACT: Mera's real artwork is the owner's shark-costume PNG.
+  // Until that exact binary is present in this repository, use the original
+  // illustrated starter rather than inventing a new Mera or showing a broken URL.
+  if(window.VPQ_MERA_SHARK_IMAGE_READY===true){
+   return '<img class="vpq-companion-art" loading="eager" src="Mera%20in%20a%20Shark%20Costume-5(1).png" alt="Mera in her blue shark costume" draggable="false">';
+  }
+  return vpqCompanionLegacyArt({...state,pet:'🐕',petBreed:'husky-shepherd'});
+ }
  return '<span class="vpq-companion-placeholder">'+escapeHtml(c.pet)+'<small>Artwork coming soon</small></span>';
 }
 function vpqCompanionApply(c,form){
@@ -5003,6 +5011,22 @@ function vpqCompanionApply(c,form){
  }
  persist();updateAvatar();updateHUD();
 }
+/* COMPANION LAYOUT LOCK — DO NOT MODIFY WITHOUT USER REQUEST
+ * Never resize, restyle, reposition, substitute or reset the selected reception
+ * companion during shop/gallery/batch import. #petSprite and avatarX/petX are
+ * exclusively the walkable-scene presentation. The catalog only registers art.
+ * Mera asset: Mera in a Shark Costume-5(1).png (transparent PNG supplied by owner).
+ * Presence check enables the real image only after it is actually uploaded.
+ */
+window.VPQ_MERA_SHARK_IMAGE_READY=false;
+(function checkOfficialMeraImage(){
+ const im=new Image();
+ im.onload=function(){window.VPQ_MERA_SHARK_IMAGE_READY=true;
+  if(state.vpqCompanionId==='dog-mera')updateAvatar();
+ };
+ im.onerror=function(){window.VPQ_MERA_SHARK_IMAGE_READY=false};
+ im.src='Mera%20in%20a%20Shark%20Costume-5(1).png';
+})();
 const vpqCompanionLegacyArt=vpqPetIllustration;
 vpqPetIllustration=function(p){
  const c=vpqCompanionById(p?.vpqCompanionId||state.vpqCompanionId);
