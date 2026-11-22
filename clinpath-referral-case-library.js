@@ -87,9 +87,10 @@ const catalog=[
 ...cases.map(c=>({id:c.id,title:c.title,kind:c.kind,lecture:Number(c.id.split('.')[0]),exam:Number(c.id.split('.')[0])<=11?1:2,focus:c.kind==='DDx'?'Interpret labs · rank differentials':'Interpret labs · single best answer',species:c.title.startsWith('Horse')||c.title.startsWith('Foal')?'🐴':c.title.startsWith('Cat')||c.title.startsWith('Kitten')?'🐱':c.title.startsWith('Cow')?'🐮':c.title.startsWith('Sheep')?'🐑':'🐶'}))
 ];
 let examFilter='all';
+let lectureFilter='all';
 function home(){
  const counts={done:0};
- const grouped=examFilter==='all'?catalog:catalog.filter(c=>String(c.exam)===examFilter);
+ const grouped=catalog.filter(c=>(examFilter==='all'||String(c.exam)===examFilter)&&(lectureFilter==='all'||String(c.lecture)===lectureFilter));
  const cards=grouped.map(c=>{
   let masterProgress=null;try{masterProgress=JSON.parse(localStorage.getItem('vpq-clinpath-referral-001-guided-v2')||'null')}catch(e){}
   const p=c.id==='001'?(masterProgress?{answers:masterProgress.interpret||{},submitted:masterProgress.submitted,advanced:masterProgress.advancedSubmitted}:null):progress[c.id];
@@ -103,7 +104,7 @@ function home(){
  }).join('');
  const html='<div class="refcase refcatalog"><div class="refcataloghero"><div><p class="refsmall">ADVANCED CLINICAL PATHOLOGY · REFERRAL PATIENTS</p><h2>🐾 Referral Case Files</h2><p>Read the patient, interpret CBC and chemistry, prioritize differential diagnoses, then choose tests that distinguish competing explanations.</p></div><div class="refcatalogcount"><b>'+catalog.length+'</b><span>Available patient cases</span></div></div>'+
  '<div class="refcatalogcontrols"><div class="refcatalogfilters" role="group" aria-label="Filter cases by exam">'+
- [['all','All cases'],['1','Exam 1'],['2','Exam 2']].map(([value,label])=>'<button type="button" data-clp-filter="'+value+'" aria-pressed="'+(examFilter===value)+'">'+label+'</button>').join('')+'</div><p class="refsmall">Case 1.1 is the approved master. Currently built: Lectures 1–11 from Cases Part 1. Additional lectures will follow.</p></div>'+
+ [['all','All cases'],['1','Exam 1'],['2','Exam 2']].map(([value,label])=>'<button type="button" data-clp-filter="'+value+'" aria-pressed="'+(examFilter===value)+'">'+label+'</button>').join('')+'</div><label class="refsmall" for="vpqReferralLectureFilter" style="display:inline-flex;align-items:center;gap:8px;margin-top:9px"><b>Lecture:</b> <select id="vpqReferralLectureFilter" style="padding:7px 10px;border:2px solid #a3bee7;border-radius:10px;background:white;font-size:15px"><option value="all">All lectures</option>'+Array.from({length:11},(_,i)=>'<option value="'+(i+1)+'" '+(lectureFilter===String(i+1)?'selected':'')+'>Lecture '+(i+1)+'</option>').join('')+'</select></label><p class="refsmall">Showing '+grouped.length+' of '+catalog.length+' cases. Case 1.1 is the approved master. Currently built: Lectures 1–11 from Cases Part 1. Additional lectures will follow.</p></div>'+
  '<div class="refcataloggrid">'+cards+'</div><div class="refcatalogfooter"><button type="button" data-clp-lab="1">← Back to Advanced Clinical Pathology Lab</button></div></div>';
  window.VPQ_REFERRAL_MODAL.show('🔬 Referral Cases · Choose a Patient',html);
 }
@@ -129,7 +130,7 @@ document.addEventListener('click',e=>{
  if(b.hasAttribute('data-clp-home'))return home();
  if(b.hasAttribute('data-clp-lab'))return window.VPQ_ADVANCED_LAB?.home?.();
 });
-document.addEventListener('change',e=>{if(e.target?.id==='vpqReferralCasePick'&&e.target.closest('.refnewlibrary'))open(e.target.value)});
+document.addEventListener('change',e=>{if(e.target?.id==='vpqReferralLectureFilter'){lectureFilter=e.target.value;return home()}if(e.target?.id==='vpqReferralCasePick'&&e.target.closest('.refnewlibrary'))open(e.target.value)});
 document.addEventListener('input',e=>{if(e.target?.matches?.('[data-clp-note]')&&e.target.closest('.refnewlibrary')){state().notes=e.target.value;save()}});
 document.addEventListener('click',e=>{const b=e.target.closest?.('[data-clp-pick],[data-clp-check],[data-clp-retry],[data-clp-ddx],[data-clp-lead],[data-clp-move],[data-clp-ddx-submit],[data-clp-advanced],[data-clp-reset]');if(!b||!b.closest('.refnewlibrary'))return;e.preventDefault();const d=b.dataset,st=state();
  if(d.clpPick){const [i,j]=d.clpPick.split(':').map(Number);st.answers[i]={selected:j,checked:false};save();return render()}
