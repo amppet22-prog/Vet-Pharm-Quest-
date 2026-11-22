@@ -267,6 +267,7 @@ function detailedExtras(key){const rows=deepData[key]||[];return rows.length?
 const views={start,pcv,cbc,leuko,platelets,chem,renal,acid,calcium,extra,practice};
 function ensureAcademyApi(){if(!api)api={body:document.getElementById('modalBody'),showModal:(title,html)=>window.VPQ_REFERRAL_MODAL?.show?.(title,html)};return api}
 function open(id='start'){
+ if(id==='extra')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
  ensureAcademyApi();if(!api?.showModal)return false;
  if(id==='pcv')return window.VPQ_DIAGNOSTIC_MASTER?.open?.('pcv');
  current=views[id]?id:'start';
