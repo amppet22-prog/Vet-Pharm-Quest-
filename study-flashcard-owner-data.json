@@ -174,6 +174,12 @@
       "answer": "An endogenous protein-disulfide reductase.",
       "why": "It can alter redox signaling and mucosal inflammatory responses.\nIndicated for BRD and heaves (horses). \nCan activate Beta defensins--> antibacterial.\nNeeds a specific lung analog because this does NOT penetrate cells.",
       "slide": "Lecture 15 · submitted recall notes + clinically reviewed guidance"
+    },
+    "pharm-e2-resp15-017": {
+      "prompt": "What makes ipratropium useful as an inhaled bronchodilator?",
+      "answer": "Local muscarinic blockade with relatively limited systemic absorption. So fewer side effects and a better dilator than atropine.",
+      "why": "Its quaternary structure limits CNS penetration.\nDoesn't cross the BBB, so it is poorly absorbed after aerosolization (which is better since that means the fewer side effects).",
+      "slide": "Lecture 15 · submitted recall notes + clinically reviewed guidance"
     }
   },
   "custom": [
