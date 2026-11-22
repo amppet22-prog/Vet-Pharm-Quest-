@@ -47,7 +47,7 @@ function openTeaching(key){
  if(key==='acid')return window.VPQ_CLINPATH_REPORT_ACADEMY?.open?.('acid');
  if(key==='urine')return window.VPQ_DIAGNOSTIC_MASTER?.open?.('urine');
  if(key==='start')return window.VPQ_CLINPATH_REPORT_ACADEMY?.open?.('start');
- if(key==='microscopy')return window.VPQ_BLOOD_SMEAR_LAB?.reference?.()||window.VPQ_CLINPATH_REPORT_ACADEMY?.open?.('leuko');
+ if(key==='microscopy'){if(typeof window.VPQ_BLOOD_SMEAR_LAB?.reference==='function')return window.VPQ_BLOOD_SMEAR_LAB.reference();return window.VPQ_CLINPATH_REPORT_ACADEMY?.open?.('leuko');}
  return false;
 }
 function html(key){
