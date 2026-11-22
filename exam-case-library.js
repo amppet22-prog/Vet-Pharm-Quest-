@@ -52,7 +52,7 @@ function draw(){
  return '<button type="button" class="quest" data-case="'+e(c.id)+'" style="text-align:left;min-height:155px"><div style="font-size:28px">'+e(c.emoji||'🐾')+'</div><b>'+e(c.name||'Patient case')+'</b><p class="small">'+e(species(c))+' · '+e(course(c))+(c.lecture?' · '+e(c.lecture):'')+'</p><p>'+e(String(c.intro||'Review this patient case.').slice(0,145))+'</p><p class="small">'+e(categories.slice(0,3).join(' · '))+'</p><span class="badge">'+(finished?'✓ Completed':'Start patient')+'</span></button>'
  }).join('');
  api.showModal(venue==='pharm'?'💊 Pharmacology · Patient Case Library':venue==='reception'?'🏠 Reception · Patient Check-In':venue==='treatment'?'❤️ Treatment Ward · Clinical Rounds':'🩺 Exam Room · Patient Cases', '<p>'+(venue==='pharm'?'Medication-focused patient questions and pharmacology clinical decisions.':'Shared hospital patient records; Reception checks in patients, Exam evaluates them, and Treatment follows longer inpatient rounds.')+' Completion and rewards stay linked across rooms.</p>'+
- (venue==='pharm'?'<div class="infobox"><b>💊 Pharmacology only</b><p>Use the medication patient cases and extended pharmacology rounds here. Other clinical patients live in Reception, Exam and Treatment.</p></div>':'<div class="buttonrow"><button data-vpqcaselib="reception">🏠 Reception</button><button data-vpqcaselib="exam">🩺 Exam</button><button data-vpqcaselib="treatment">❤️ Treatment</button><button data-vpqcaselib="pharm">💊 Pharm cases</button></div>')+
+ (venue==='pharm'?'<div class="infobox"><b>💊 Pharmacology only</b><p>Use the medication patient cases and extended pharmacology rounds here. Other clinical patients live in Reception, Exam and Treatment.</p><button type="button" data-vpqcaselib="reception">🏠 Go to Reception patients →</button></div>':'<div class="buttonrow"><button data-vpqcaselib="reception">🏠 Reception</button><button data-vpqcaselib="exam">🩺 Exam</button><button data-vpqcaselib="treatment">❤️ Treatment</button><button data-vpqcaselib="pharm">💊 Pharm cases</button></div>')+
  '<div class="infobox"><b>'+all.length+' available case records · '+count+' completed</b><p>Clinical specialty tags are suggested from existing case descriptions; some cases fit several specialties. Course labels remain original. Pharmacology respects the selected lectures unless you explicitly choose all.</p></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:12px 0">'+
  '<label>Specialty<select class="input" data-vpqcasefilter="specialty">'+opts(specialtyNames,filters.specialty)+'</select></label>'+
@@ -74,7 +74,7 @@ function init(ctx){api=ctx;ctx.body.addEventListener('change',ev=>{const t=ev.ta
  ctx.body.addEventListener('click',ev=>{const b=ev.target.closest('[data-vpqcaselib]');if(!b)return;
  const action=b.dataset.vpqcaselib,field=ctx.body.querySelector('#vpqCaseLibQuery');
  if(field)filters.query=field.value;
- if(['pharm','reception','exam','treatment'].includes(action))return home(action);
+ if(['pharm','reception','exam','treatment'].includes(action)){if(action!=='pharm')api.changeRoom?.(action);return home(action)}
  if(action==='pharmexam2')return window.VPQ_PHARM_ROOM_CASES_HUB?.();
  if(action==='search'){page=0;return draw()}
  if(action==='alllectures'){filters.lectureFocus='';page=0;return draw()}
