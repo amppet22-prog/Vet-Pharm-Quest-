@@ -4872,4 +4872,25 @@ window.addEventListener('load',restoreVisibleRoom,{once:true});
  var saved='normal';try{saved=localStorage.getItem('vpq-reading-size-v1')||'normal'}catch(e){}
  apply(saved==='large'?'large':'normal');
 })();
-</script><script src="hospital-depth-movement.js?v=20261121-avatar-reception-fix-2"></script></body></html>
+</script><script src="hospital-depth-movement.js?v=20261121-avatar-reception-fix-2"></script><script id="vpq-arcade-launcher-fix-20261122">
+(function(){
+ "use strict";
+ function openGamesMenu(){
+  if(typeof window.VPQ_OPEN_GAMES_ONLY==="function")return window.VPQ_OPEN_GAMES_ONLY();
+  const wrap=document.getElementById("modalWrap"),title=document.getElementById("modalTitle"),body=document.getElementById("modalBody");
+  if(!wrap||!title||!body)return;
+  title.textContent="🎮 Pharmacology Arcade · Games Only";
+  body.innerHTML='<p>Select a minigame:</p><div class="vpq-gamegrid"><button data-vpqsharedgame="battle"><strong>🦠 Bug Battles</strong></button><button data-vpqsharedgame="match"><strong>🧩 Drug Match</strong></button></div>';
+  wrap.classList.remove("hidden");
+ }
+ document.addEventListener("click",function(event){
+  const target=event.target.closest("#pharmArcadeBtn,#vpqArcadeTopBtn,[data-vpqopenarcade]");
+  if(!target)return;
+  event.preventDefault();event.stopImmediatePropagation();
+  openGamesMenu();
+ },true);
+ const direct=document.getElementById("pharmArcadeBtn");
+ if(direct)direct.onclick=null;
+ window.VPQ_ARCADE_GAMES_MENU=openGamesMenu;
+})();
+</script></body></html>
