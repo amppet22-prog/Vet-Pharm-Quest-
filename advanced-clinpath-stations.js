@@ -113,6 +113,47 @@ const INTRO_STYLE=String.raw`
 .vpqintro .coagimageactions .coagdownload{background:#e1f7e8;border-color:#8bbd9b;color:#18583c}
 .vpqintro .coagfull{max-width:100%;overflow:auto}
 .vpqintro .coagfullimage{display:block;width:100%;min-width:550px;height:auto;margin:8px 0;border:1px solid #b8cde6;border-radius:10px;background:#fff}
+
+.vpqintro .coagprettydetails{background:#fff;border:1px solid #cfdaeb;padding:13px;margin:12px 0;border-radius:14px}
+.vpqintro .coagprettydetails>summary{font-size:15px;color:#294777;padding:3px 1px 9px}
+.vpqintro .coaglessonlead{display:flex;gap:12px;align-items:center;padding:13px;background:linear-gradient(115deg,#eef9e9,#f7fbf2);border:1px solid #bed8ae;border-radius:12px;margin:7px 0 12px}
+.vpqintro .coaglessonlead.coagpurple{background:linear-gradient(115deg,#f2efff,#f9f5ff);border-color:#c8b8e6}
+.vpqintro .coaglessonicon{display:grid;place-items:center;flex:0 0 49px;width:49px;height:49px;border-radius:13px;background:#d8eabb;color:#385923;font-weight:900;font-size:23px}
+.vpqintro .coagpurple .coaglessonicon{background:#d9ceff;color:#483784;font-size:18px}
+.vpqintro .coaglessonlead strong{display:block;font-size:16px;margin-bottom:4px}
+.vpqintro .coaglessonlead p,.vpqintro .hemocard p{margin:3px 0;line-height:1.5}
+.vpqintro .coagformula{display:flex;gap:5px;align-items:center;justify-content:center;flex-wrap:wrap;margin:10px 0;padding:10px;border:1px dashed #bdd0e2;border-radius:10px;background:#f9fcff}
+.vpqintro .coagformula span{padding:7px 9px;background:#edf4ff;border-radius:8px;font-size:12px;font-weight:750}
+.vpqintro .coagformula b{color:#6387a5}
+.vpqintro .coagminigrid,.vpqintro .hemogrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.vpqintro .coagminiamber,.vpqintro .coagminired{padding:12px;border-radius:11px;border:1px solid #e3c783;background:#fff7e4}
+.vpqintro .coagminired{border-color:#ebb9b0;background:#fff2ef}
+.vpqintro .coagminigrid p{margin:5px 0 0}
+.vpqintro .coagfootnote{font-size:12px;color:#50657a;margin:12px 0 2px}
+.vpqintro .coagmechanismhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:14px 0 7px;padding-bottom:6px;border-bottom:2px solid #c8d9e9}
+.vpqintro .coagmechanismhead span{font-size:12px;color:#62778f}
+.vpqintro .coagmini{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.vpqintro .coagminicard{background:#edf5ff;border:1px solid #c1d6ed;padding:10px;border-radius:10px}
+.vpqintro .coagminicard strong{display:block;margin-bottom:4px;color:#254f78}
+.vpqintro .coagminicard span{display:block;font-size:13px;line-height:1.45}
+.vpqintro .coagbrakes .coagminicard{background:#f3effd;border-color:#d1c6ec}
+.vpqintro .coagbrakes .coagminicard strong{color:#60468a}
+.vpqintro .coagclean{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#eaf8ee;border:1px solid #b7dabc;border-radius:10px;padding:12px}
+.vpqintro .coagclean span{color:#42694d}
+.vpqintro .hemocard{padding:12px;border:1px solid #c5b5e9;border-top:4px solid #7560cb;border-radius:12px;background:#f8f6ff}
+.vpqintro .hemocard.hemob{background:#eff7ff;border-color:#a8cce7;border-top-color:#3280b8}
+.vpqintro .hemocard.hemoc{background:#f0fbf3;border-color:#b9dcc4;border-top-color:#48a366;grid-column:1/-1}
+.vpqintro .hemotop{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-bottom:8px}
+.vpqintro .hemotop b{font-size:16px}
+.vpqintro .hemotop span{background:#fff;border:1px solid #bcc9e6;border-radius:20px;padding:5px 9px;font-weight:800;font-size:12px;white-space:nowrap}
+.vpqintro .hemolab{border-top:1px solid #cbd6e6;padding-top:8px;margin-top:10px;font-size:13px;font-weight:650}
+.vpqintro .coagclinical,.vpqintro .coagdontconfuse{padding:12px 13px;border-radius:11px;background:#fff7e7;border-left:4px solid #e3ab48;margin-top:11px}
+.vpqintro .coagdontconfuse{background:#eef5ff;border-left-color:#7199db}
+.vpqintro .coagclinical p,.vpqintro .coagdontconfuse p{margin:6px 0 0}
+.vpqintro .coagfootersteps{display:flex;flex-wrap:wrap;gap:7px;padding:12px;border:1px solid #d2e0eb;border-radius:10px;margin-top:11px}
+.vpqintro .coagfootersteps b{width:100%}
+.vpqintro .coagfootersteps span{font-size:12px;padding:6px 9px;border-radius:20px;background:#e8f0fa}
+@media(max-width:580px){.vpqintro .hemogrid,.vpqintro .coagminigrid,.vpqintro .coagmini{grid-template-columns:1fr}.vpqintro .hemocard.hemoc{grid-column:auto}.vpqintro .coaglessonlead{align-items:flex-start}}
 </style>`;
 const COAG_FACTORS=[
 ['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
@@ -133,9 +174,18 @@ function factorAtlas(){
  return '<section class="factoratlas"><h3>🧬 Complete factor atlas · names + function + expected assay</h3><p>Gold <b>K</b> tags mark vitamin K–dependent clotting factors. This table includes the classic factors <b>I–XIII, except VI</b> (obsolete; factor VI was activated V).</p>'+
  '<div class="factor-scroll"><table class="quicktable"><thead><tr><th>Factor</th><th>Full name</th><th>Where it works</th><th>Job in clot formation</th><th>Deficiency / test clue</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
  '<div class="pathnote"><b>Mnemonic: 10 – 9 – 7 – 2</b> → X, IX, VII, II are the <b>four vitamin K–dependent procoagulant factors</b>. Also vitamin K dependent: <b>proteins C, S and Z</b> (anticoagulant/regulatory proteins). Factor V, factor VIII, fibrinogen and factor XIII are <b>not</b> vitamin K dependent.</div>'+
- '<details open><summary>🍃 What does vitamin K actually DO?</summary><p>The liver makes clotting factor precursor proteins, but vitamin K is needed to <b>γ-carboxylate</b> glutamate residues on factors II, VII, IX and X. This permits <b>Ca²⁺-mediated attachment to negatively charged phospholipid surfaces</b>, allowing the proteins to work in coagulation complexes. Vitamin K <b>does not simply create a clot by itself</b>; it enables functioning clotting proteins.</p>'+
- '<p><b>Anticoagulant rodenticides</b> such as warfarin, brodifacoum and bromadiolone inhibit vitamin K recycling (VKOR), so newly produced factors are inadequately carboxylated. <b>VII has a short half-life → PT often rises first</b>; later PT and aPTT may both be prolonged. <b>Bromethalin is a neurotoxic rodenticide, not a vitamin K antagonist.</b></p></details>'+
- '<details><summary>🧱 Cofactors, natural brakes, and fibrin cleanup</summary><p><b>Platelet phospholipid / PF3:</b> negatively charged assembly surface for intrinsic tenase and prothrombinase. <b>Ca²⁺ (IV):</b> bridges vitamin K–dependent factors to that surface. <b>VIIIa:</b> cofactor for IXa (tenase). <b>Va:</b> cofactor for Xa (prothrombinase). <b>vWF:</b> platelet adhesion and carrier for factor VIII. <b>Antithrombin:</b> inhibits thrombin and Xa (also other serine proteases). <b>Activated protein C with S:</b> inactivates Va/VIIIa. <b>TFPI:</b> inhibits tissue-factor/VIIa–Xa initiation complexes. <b>Plasmin:</b> breaks down fibrin; D-dimers reflect degradation of cross-linked fibrin.</p></details>'+
+ '<details open class="coagprettydetails"><summary>🍃 What does vitamin K actually DO?</summary>'+
+ '<div class="coaglessonlead"><span class="coaglessonicon">K</span><div><strong>Vitamin K activates the clotting machinery</strong><p>Hepatocytes make the proteins. Vitamin K supports <b>γ-carboxylation</b> of factors II, VII, IX and X so they bind Ca²⁺ and assemble on negatively charged platelet phospholipid surfaces.</p></div></div>'+
+ '<div class="coagformula"><span>Vitamin K recycling</span><b>→</b><span>Functional factors II · VII · IX · X</span><b>→</b><span>Ca²⁺ + platelet surface</span><b>→</b><span>Fibrin generation</span></div>'+
+ '<div class="coagminigrid"><div class="coagminiamber"><b>🧠 Why PT changes first</b><p>Factor VII has a short half-life. With reduced vitamin K activity, <strong>PT often rises first</strong>; aPTT may lengthen later as other factor activities fall.</p></div><div class="coagminired"><b>🐀 Anticoagulant rodenticide alert</b><p>Warfarin, brodifacoum and bromadiolone block vitamin K recycling (VKOR). <strong>Bromethalin is neurotoxic—not a vitamin K antagonist.</strong></p></div></div>'+
+ '<p class="coagfootnote">Remember: vitamin K does not directly create the clot; it enables functional clotting proteins. Proteins C, S and Z also depend on vitamin K.</p></details>'+
+ '<details class="coagprettydetails"><summary>🧱 Cofactors, natural brakes, and fibrin cleanup</summary>'+
+ '<div class="coagmechanismhead"><b>⚙️ BUILD THE CLOT</b><span>Platforms and accelerators</span></div>'+
+ '<div class="coagmini"><div class="coagminicard"><strong>PF3 · Platelet surface</strong><span>Negatively charged phospholipid platform for tenase and prothrombinase.</span></div><div class="coagminicard"><strong>Calcium · Factor IV</strong><span>Links vitamin K–dependent factors to platelet phospholipids.</span></div><div class="coagminicard"><strong>VIIIa · Tenase cofactor</strong><span>Works with IXa to activate X.</span></div><div class="coagminicard"><strong>Va · Prothrombinase cofactor</strong><span>Works with Xa to generate thrombin.</span></div><div class="coagminicard"><strong>vWF · Platelet adhesion</strong><span>Helps platelets stick and carries factor VIII in circulation.</span></div></div>'+
+ '<div class="coagmechanismhead"><b>🛑 APPLY THE BRAKES</b><span>Prevent excess clotting</span></div>'+
+ '<div class="coagmini coagbrakes"><div class="coagminicard"><strong>Antithrombin</strong><span>Inhibits thrombin (IIa), Xa and other serine proteases.</span></div><div class="coagminicard"><strong>Activated protein C + S</strong><span>Inactivates cofactors Va and VIIIa.</span></div><div class="coagminicard"><strong>TFPI</strong><span>Limits tissue-factor/VIIa–Xa initiation complexes.</span></div></div>'+
+ '<div class="coagmechanismhead"><b>🧹 CLEANUP CREW</b><span>Fibrinolysis after clot formation</span></div>'+
+ '<div class="coagclean"><b>Plasmin</b><span>breaks down fibrin</span><b>→</b><b>D-dimers</b><span>reflect degradation of cross-linked fibrin</span></div></details>'+
  '</section>';
 }
 function coagLivingSequence(){
@@ -181,17 +231,17 @@ function coagIntro(){
  '</tbody></table>'+
  '<details open><summary>🧪 The other tests: what do they mean?</summary>'+
  '<div class="coagtestlist"><div class="coagtestrow"><b>Platelet count + smear:</b> plug-building cells; confirm clumping before calling thrombocytopenia.</div><div class="coagtestrow"><b>vWF antigen/function:</b> platelet adhesion, especially mucosal bleeding.</div><div class="coagtestrow"><b>Fibrinogen:</b> clot substrate; low with consumption/severe synthetic problems, sometimes high during inflammation.</div><div class="coagtestrow"><b>Thrombin time (TT):</b> fibrinogen → fibrin after adding thrombin; affected by low/abnormal fibrinogen and certain anticoagulants.</div><div class="coagtestrow"><b>D-dimer:</b> breakdown of cross-linked fibrin; evidence of clot formation and lysis, not specific for DIC.</div><div class="coagtestrow"><b>FDPs:</b> fibrin(ogen) degradation products; less specific than D-dimer for cross-linked fibrin.</div><div class="coagtestrow"><b>Antithrombin:</b> natural anticoagulant; may fall with consumption, protein loss or reduced synthesis.</div></div></details>'+
-  '<details open><summary>🧬 Hemophilia in veterinary patients · A, B and C</summary>'+
- '<p><b>Why it happens:</b> these inherited coagulation-factor deficiencies weaken secondary hemostasis. The platelet plug may form normally, but the fibrin reinforcement is inadequate. Signs include prolonged bleeding after surgery/trauma, deep muscle hematomas, internal hemorrhage or hemarthrosis, especially in severe cases. Severity varies with factor activity.</p>'+
- '<table class="quicktable"><thead><tr><th>Type</th><th>Missing / deficient</th><th>Inheritance and patients</th><th>Typical screening pattern</th></tr></thead><tbody>'+
- '<tr><td><b>Hemophilia A</b><br>Classic hemophilia</td><td><b>Factor VIII</b> (intrinsic tenase cofactor)</td><td>Usually X-linked recessive: affected males, carrier females; described in dogs, cats and other species</td><td><b>aPTT ↑</b>, PT usually normal; platelet count usually normal</td></tr>'+
- '<tr><td><b>Hemophilia B</b><br>Christmas disease</td><td><b>Factor IX</b> (intrinsic tenase enzyme)</td><td>Usually X-linked recessive; affected males more common; reported in dogs and cats</td><td><b>aPTT ↑</b>, PT usually normal; platelet count usually normal</td></tr>'+
- '<tr><td><b>Hemophilia C</b><br>Factor XI deficiency</td><td><b>Factor XI</b></td><td>Autosomal inheritance; can affect either sex; recognized particularly in some cattle breeds and other species</td><td><b>aPTT often ↑</b>, PT usually normal; bleeding is variable and may be milder</td></tr>'+
- '</tbody></table>'+
- '<div class="pathnote"><b>Patient clue:</b> a young male dog with repeated deep bleeding, normal platelet count and PT, but prolonged aPTT → investigate <b>VIII (A) or IX (B)</b>, with XI (C) and other intrinsic defects in the differential. The tests screen pathways: <b>factor-specific activity assays</b> confirm which factor is deficient.</div>'+
- '<p><b>Do not confuse:</b> <b>von Willebrand disease</b> primarily disrupts platelet adhesion and often causes mucosal bleeding; PT/aPTT can be normal (aPTT can increase if factor VIII is secondarily low). <b>Factor XII deficiency</b> may markedly prolong aPTT without typical clinical bleeding. Mild hemophilia may have a normal screening aPTT depending on assay sensitivity, so normal tests do not definitively exclude a suspected factor defect.</p>'+
- '<p><b>Clinical next steps:</b> verify properly collected citrated sample and bleeding history, obtain factor VIII/IX/XI activities as indicated, and distinguish inherited disease from inhibitors or acquired factor consumption. Handle active bleeding as a veterinary emergency.</p></details>'+
-'<details><summary>🩹 Bleeding clue game: where is the problem?</summary><p><b>Petechiae, epistaxis, gingival oozing:</b> start with primary hemostasis, platelets and vWF. <b>Hemarthrosis, deep hematomas or delayed rebleeding:</b> consider secondary hemostatic factor deficiencies. <b>Both patterns + systemic illness:</b> mixed processes such as DIC can occur.</p><p><b>Preanalytics:</b> correctly filled light-blue-top citrate tube; underfilling, clots, heparin contamination, high HCT or improper processing can invalidate interpretation.</p></details>'+
+ '<details open class="coagprettydetails"><summary>🧬 Hemophilia in veterinary patients · A, B and C</summary>'+
+ '<div class="coaglessonlead coagpurple"><span class="coaglessonicon">VIII</span><div><strong>Why these patients bleed</strong><p>Inherited factor deficiencies weaken secondary hemostasis: the platelet plug forms, but <b>fibrin reinforcement is inadequate</b>. Severe patients may have deep hematomas, hemarthrosis, internal hemorrhage or prolonged bleeding after trauma/surgery.</p></div></div>'+
+ '<div class="hemogrid">'+
+ '<article class="hemocard hemoa"><div class="hemotop"><b>Hemophilia A</b><span>Factor VIII</span></div><strong>Classic hemophilia</strong><p>Intrinsic tenase cofactor. Usually <b>X-linked recessive</b>; affected males, carrier females. Described in dogs, cats and other species.</p><div class="hemolab"><b>aPTT ↑</b> · PT usually normal · platelets usually normal</div></article>'+
+ '<article class="hemocard hemob"><div class="hemotop"><b>Hemophilia B</b><span>Factor IX</span></div><strong>Christmas disease</strong><p>Intrinsic tenase enzyme. Usually <b>X-linked recessive</b>; affected males more common. Reported in dogs and cats.</p><div class="hemolab"><b>aPTT ↑</b> · PT usually normal · platelets usually normal</div></article>'+
+ '<article class="hemocard hemoc"><div class="hemotop"><b>Hemophilia C</b><span>Factor XI</span></div><strong>Factor XI deficiency</strong><p><b>Autosomal inheritance</b>; either sex may be affected. Recognized in some cattle breeds and other species; bleeding can be variable or milder.</p><div class="hemolab"><b>aPTT often ↑</b> · PT usually normal</div></article>'+
+ '</div>'+
+ '<div class="coagclinical"><b>🐕 Patient clue → next diagnostic step</b><p>Young male dog + recurring deep bleeding + normal platelets/PT + prolonged aPTT → consider <b>VIII (A), IX (B), or XI (C)</b>. Confirm with <b>factor-specific activity assays</b> after verifying properly handled citrated plasma.</p></div>'+
+ '<div class="coagdontconfuse"><b>⚖️ Do not confuse</b><p><b>von Willebrand disease:</b> platelet adhesion and mucosal bleeding; PT/aPTT may be normal, though aPTT can rise with secondary factor VIII reduction.</p><p><b>Factor XII deficiency:</b> often greatly prolongs aPTT <i>without</i> typical clinical bleeding. Mild hemophilia may also escape a screening aPTT, depending on the assay.</p></div>'+
+ '<div class="coagfootersteps"><b>Clinical workflow</b><span>1 · History + bleeding pattern</span><span>2 · Proper citrate sample + PT/aPTT</span><span>3 · VIII / IX / XI activity assays</span><span>4 · Assess inherited vs acquired causes</span></div><p class="coagfootnote">Treat active bleeding as a veterinary emergency; test selection and interpretation depend on species, method and severity.</p></details>'+
+ '<details><summary>🩹 Bleeding clue game: where is the problem?</summary><p><b>Petechiae, epistaxis, gingival oozing:</b> start with primary hemostasis, platelets and vWF. <b>Hemarthrosis, deep hematomas or delayed rebleeding:</b> consider secondary hemostatic factor deficiencies. <b>Both patterns + systemic illness:</b> mixed processes such as DIC can occur.</p><p><b>Preanalytics:</b> correctly filled light-blue-top citrate tube; underfilling, clots, heparin contamination, high HCT or improper processing can invalidate interpretation.</p></details>'+
  '<div class="introactions"><button type="button" class="start" data-vpqadvanced="begin-coag">🎯 Start my existing coag questions</button><button type="button" class="return" data-vpqadvanced="home">← Back to lab</button></div>'+
  '</div>';
 }
