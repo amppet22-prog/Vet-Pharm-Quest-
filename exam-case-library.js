@@ -37,12 +37,12 @@ function filterItems(items){
  (filters.species==='All species'||species(c)===filters.species)&&
  (filters.status==='All patients'||(filters.status==='Completed'?completed.includes(c.id):!completed.includes(c.id)))&&
  (filters.level==='All levels'||(filters.level==='Advanced referral'?!!c.advanced:!c.advanced))&&
- (filters.lectureScope==='All Pharmacology lectures'||course(c)!=='Pharmacology'||!c.lecture||selected.length===0||(Array.isArray(c.lectureTags)&&c.lectureTags.length?c.lectureTags.some(l=>selected.includes(l)):selected.includes(c.lecture)))&&
+ (course(c)!=='Pharmacology'||(selected.length===0&&!filters.lectureFocus)||(!c.lecture&&!Array.isArray(c.lectureTags))||(Array.isArray(c.lectureTags)&&c.lectureTags.length?c.lectureTags.some(l=>selected.includes(l)):selected.includes(c.lecture)))&&
  (!filters.lectureFocus||course(c)!=='Pharmacology'||c.lecture===filters.lectureFocus||(Array.isArray(c.lectureTags)&&c.lectureTags.includes(filters.lectureFocus)))&&
  (!q||[c.name,c.intro,c.clues,c.protocol,c.track,c.lecture,c.species,...specialties(c)].join(' ').toLowerCase().includes(q)));
 }
 function opts(values,current){return values.map(v=>'<option value="'+e(v)+'" '+(current===v?'selected':'')+'>'+e(v)+'</option>').join('')}
-function home(nextVenue='pharm'){venue=['pharm','reception','exam','treatment'].includes(nextVenue)?nextVenue:'pharm';filters.course=venue==='pharm'?'Pharmacology':'All courses';filters.specialty='All specialties';filters.species='All species';filters.status='All patients';filters.level='All levels';filters.lectureFocus='';filters.query='';filters.lectureScope=venue==='pharm'?'All Pharmacology lectures':'Selected Pharmacology lectures';page=0;draw()}
+function home(nextVenue='pharm'){venue=['pharm','reception','exam','treatment'].includes(nextVenue)?nextVenue:'pharm';filters.course=venue==='pharm'?'Pharmacology':'All courses';filters.specialty='All specialties';filters.species='All species';filters.status='All patients';filters.level='All levels';filters.lectureFocus='';filters.query='';filters.lectureScope='Selected Pharmacology lectures';page=0;draw()}
 function draw(){
  const all=allCases().filter(c=>venue==='pharm'?course(c)==='Pharmacology':venue==='treatment'?(!!c.journeyRooms||c.steps.length>1||c.advanced||c.location==='treatment'):venue==='exam'?true:(!!c.journeyRooms||c.steps.length<=2&&!c.advanced)).sort((a,b)=>Number(!!b.journeyRooms)-Number(!!a.journeyRooms)),result=filterItems(all),sp=['All species',...new Set(all.map(species))].sort((a,b)=>a==='All species'?-1:b==='All species'?1:a.localeCompare(b));
  const completed=api.getCompleted(),count=all.filter(c=>completed.includes(c.id)).length;
@@ -53,8 +53,8 @@ function draw(){
  }).join('');
  api.showModal(venue==='pharm'?'💊 Pharmacology · Patient Case Library':venue==='reception'?'🏠 Reception · Patient Check-In':venue==='treatment'?'❤️ Treatment Ward · Clinical Rounds':'🩺 Exam Room · Patient Cases', '<p>'+(venue==='pharm'?'Medication-focused patient questions and pharmacology clinical decisions.':'Shared hospital patient records; Reception checks in patients, Exam evaluates them, and Treatment follows longer inpatient rounds.')+' Completion and rewards stay linked across rooms.</p>'+
  (venue==='pharm'?'<div class="infobox"><b>💊 Pharmacology only</b><p>Use the medication patient cases and extended pharmacology rounds here. Other clinical patients live in Reception, Exam and Treatment.</p><button type="button" data-vpqcaselib="reception">🏠 Go to Reception patients →</button></div>':'<div class="buttonrow"><button data-vpqcaselib="reception">🏠 Reception</button><button data-vpqcaselib="exam">🩺 Exam</button><button data-vpqcaselib="treatment">❤️ Treatment</button><button data-vpqcaselib="pharm">💊 Pharm cases</button></div>')+
- '<div class="infobox"><b>'+all.length+' available case records · '+count+' completed</b><p>Clinical specialty tags are suggested from existing case descriptions; some cases fit several specialties. Course labels remain original. Pharmacology respects the selected lectures unless you explicitly choose all.</p></div>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:12px 0">'+
+ (venue==='pharm'?'<p class="small" style="margin:9px 0 6px"><b>📚 Current lecture:</b> '+e(filters.lectureFocus||((api.getSelectedLectures?.()||[]).join(', ')||'No lecture selected — displaying all Pharmacology cases'))+'</p><p class="small">'+result.length+' matching medication patient cases · '+result.filter(c=>completed.includes(c.id)).length+' completed. Change lectures in the Pharmacology Learning Center.</p>':'<div class="infobox"><b>'+all.length+' available case records · '+count+' completed</b><p>Choose a patient or narrow the list by specialty, species, or course.</p></div>')+
+ (venue==='pharm'?'':('<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:12px 0">'+
  '<label>Specialty<select class="input" data-vpqcasefilter="specialty">'+opts(specialtyNames,filters.specialty)+'</select></label>'+
  (venue==='pharm'?'':'<label>Course<select class="input" data-vpqcasefilter="course">'+opts(courseNames,filters.course)+'</select></label>')+
  '<label>Species<select class="input" data-vpqcasefilter="species">'+opts(sp,filters.species)+'</select></label>'+
@@ -63,11 +63,11 @@ function draw(){
  (venue==='pharm'?'<label>Pharmacology lecture scope<select class="input" data-vpqcasefilter="lectureScope">'+opts(['Selected Pharmacology lectures','All Pharmacology lectures'],filters.lectureScope)+'</select></label>':'')+'</div>'+
  '<label>Search names, signs, and topics<input id="vpqCaseLibQuery" class="input" type="search" placeholder="e.g. Addison, Giardia, neoplasia..." value="'+e(filters.query)+'"></label>'+
  '<div class="buttonrow"><button data-vpqcaselib="search">🔎 Search</button><button data-vpqcaselib="reset">Reset filters</button><button data-vpqcaselib="surprise" '+(!result.length?'disabled':'')+'>🎲 Surprise patient from '+result.length+' matches</button><button data-vpqcaselib="map">🗺️ Hospital map</button></div>'+
- (filters.lectureFocus?'<p class="small">Focused on '+e(filters.lectureFocus)+' · <button data-vpqcaselib="alllectures">Show all Pharmacology lectures</button></p>':'')+
- '<h3>'+(venue==='pharm'?'Pharmacology cases':'Hospital patient records')+' ('+result.length+' matches)</h3>'+
+ (filters.lectureFocus?'<p class="small">Focused on '+e(filters.lectureFocus)+' · <button data-vpqcaselib="alllectures">Show all Pharmacology lectures</button></p>':'')))+
+ '<h3>'+(venue==='pharm'?'Lecture patient cases':'Hospital patient records')+' ('+result.length+')</h3>'+
  (cards?'<div class="twocol">'+cards+'</div>':'<div class="infobox"><b>No matching case is currently available.</b><p>Try another specialty or reset filters. This does not mean the course topic is unimportant; it means no matching patient record has been entered yet.</p></div>')+
  '<div class="buttonrow"><button data-vpqcaselib="previous" '+(page===0?'disabled':'')+'>← Previous</button><span class="small">Page '+(page+1)+' of '+pageCount+'</span><button data-vpqcaselib="next" '+(page>=pageCount-1?'disabled':'')+'>Next →</button></div>'+ 
- '<p class="tiny">All views reuse the same underlying patient IDs. Short encounters are available at reception; longer cases are highlighted in Treatment.</p>');
+ (venue==='pharm'?'<p class="tiny">These are lecture-linked pharmacology practice cases. For connected clinical journeys, use Go to Reception patients.</p>':'<p class="tiny">All rooms reuse the same patient IDs; connected cases progress from Reception to Exam to Treatment.</p>'));
 }
 function init(ctx){api=ctx;ctx.body.addEventListener('change',ev=>{const t=ev.target.closest('[data-vpqcasefilter]');if(!t)return;filters[t.dataset.vpqcasefilter]=t.value;page=0;const input=ctx.body.querySelector('#vpqCaseLibQuery');if(input)filters.query=input.value;draw()});
  ctx.body.addEventListener('keydown',ev=>{if(ev.key==='Enter'&&ev.target.id==='vpqCaseLibQuery'){ev.preventDefault();filters.query=ev.target.value;page=0;draw()}});
@@ -89,7 +89,7 @@ function focus(courseName,lecture){
  filters.course=courseNames.includes(courseName)?courseName:'All courses';
  filters.specialty='All specialties';filters.species='All species';
  filters.status='All patients';filters.level='All levels';
- filters.lectureScope='All Pharmacology lectures';
+ filters.lectureScope='Selected Pharmacology lectures';
  filters.query='';
  page=0;
  // Filter to a selected lecture, including cases shared across multiple lectures.
