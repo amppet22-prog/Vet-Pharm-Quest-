@@ -260,7 +260,12 @@ if(vpqArcadeModes.includes(vpqArcadeRequested)){
 
 
 /* VPQ Arcade 4.0 — Purposeful matching, shared lecture focus, One Health Bug Battles and professor source disclosure. */
-const vpqArcadeFocus40=()=>[...vpqExamLectures310].map(String);
+// Use the Pharmacology Learning Center's shared lecture focus, not legacy Exam 1 setup.
+const vpqArcadeFocus40=()=>{
+ const shared=window.VPQCurriculum;
+ const selected=(shared?.getLectures?.()||[]).map(x=>shared.toArcade(x)).filter(Boolean);
+ return selected.length?selected:[...vpqExamLectures310].map(String);
+};
 const vpqShuffle40=a=>{const copy=[...a];for(let i=copy.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]]}return copy};
 const vpqMatchBank40=[
  ['1','EC50','Drug concentration producing half-maximal effect','Potency metric; does not equal Emax'],
@@ -334,18 +339,46 @@ vpqMatchBank40.push(...vpqExam2MatchCards);
 let vpqMatchMode40='mechanism',vpqMatchInfo40={},vpqMatchRecent40=[];
 try{vpqMatchRecent40=JSON.parse(localStorage.getItem('vpq-match-recent-v1')||'[]')||[]}catch(e){}
 function vpqMatchPool40(){return vpqMatchBank40.filter(x=>vpqArcadeFocus40().includes(x.lecture))}
+function vpqMatchLecturePicker40(){
+ const shared=window.VPQCurriculum,selected=shared?.getLectures?.()||[],courses=shared?.courses||[];
+ const counts={};for(const item of vpqMatchBank40)counts[item.lecture]=(counts[item.lecture]||0)+1;
+ const summary=selected.length===1?selected[0]:selected.length+' lecture groups';
+ return '<div style="margin:9px 0 14px;padding:12px;border:2px solid #b4c7e4;border-radius:13px;background:#f0f6ff">'+
+ '<label for="vpqMatchLecture40" style="display:block;font-weight:900;margin:0 0 6px">📚 Drug Match · Select pharmacology lecture</label>'+
+ '<select id="vpqMatchLecture40" aria-label="Drug Match pharmacology lecture" style="width:100%;max-width:100%;padding:9px 10px;border:2px solid #8eadcf;border-radius:9px;background:white;color:#244363;font-weight:750">'+
+ '<option value="__selected">Use Learning Center selection ('+safe(summary)+')</option>'+
+ courses.map(([id,num,title])=>'<option value="'+safe(id)+'" '+(selected.length===1&&selected[0]===id?'selected':'')+'>'+safe(id+' · '+title)+' ('+(counts[num]||0)+' cards)</option>').join('')+
+ '</select>'+
+ '<small style="display:block;margin-top:7px;color:#4f6680">Choosing a lecture updates the Pharmacology Learning Center selection. Match cards will be taken from that lecture only. To combine lectures, select several in the Learning Center.</small>'+
+ '<div style="font-size:12px;margin-top:7px;color:#42658a">Current matching pool: <b>'+vpqMatchPool40().length+' cards</b></div></div>';
+}
+function vpqWireMatchLecturePicker40(){
+ const el=$('vpqMatchLecture40');if(!el)return;
+ el.onchange=()=>{
+  const shared=window.VPQCurriculum;
+  if(el.value!=='__selected'&&shared){
+   const course=shared.courses.find(x=>x[0]===el.value);
+   if(course){shared.setLectures([course[0]]);vpqExamLectures310=new Set([course[1]])}
+  }
+  matchDeck=[];matched=new Set();selection=null;vpqMatchInit40();
+ };
+}
+
 function vpqMatchInit40(){
  const key=vpqMatchMode40,pool=vpqMatchPool40().filter(x=>typeof x[key]==='string'&&x[key].trim());
  if(pool.length<3){
-   matchDeck=[];round=null;
-   $('screen').innerHTML='<h2>🧩 Drug Match · No matching cards yet</h2><p>Your selected lecture set contains '+pool.length+' available '+(vpqMatchMode40==='clinical'?'clinical indication':vpqMatchMode40==='className'?'drug class':'mechanism')+' pairs. Choose more matching lecture content in the Learning Lab. The dedicated drug-class mode uses the classified Exam 2 shelves (Lectures 10–20); Exam 1 still supports mechanism and clinical clues.</p><button class="btn" id="vpqMatchToExam">Lecture selection</button>';
-   $('vpqMatchToExam').onclick=()=>setTab('examcenter');return;
+  matchDeck=[];round=null;
+  $('screen').innerHTML='<h2>🧩 Drug Match · Not enough cards</h2>'+vpqMatchLecturePicker40()+
+  '<p>This lecture has '+pool.length+' available '+(vpqMatchMode40==='clinical'?'clinical-use':vpqMatchMode40==='className'?'drug-class':'mechanism')+' pairs in the selected mode. A useful round needs at least three distinct answers. Choose another lecture or a different match mode.</p>'+
+  '<button class="btn" id="vpqMatchTryMechanism">⚙️ Try mechanisms</button>';
+  vpqWireMatchLecturePicker40();$('vpqMatchTryMechanism').onclick=()=>{vpqMatchMode40='mechanism';vpqMatchInit40()};
+  return;
  }
  const candidates=pool.filter(x=>!vpqMatchRecent40.includes(x.id));
  const eligible=vpqShuffle40([...candidates,...vpqShuffle40(pool.filter(x=>vpqMatchRecent40.includes(x.id)))]);
  const picks=[],seen=new Set();
  for(const x of eligible){const answer=x[key];if(seen.has(answer))continue;seen.add(answer);picks.push(x);if(picks.length===Math.min(6,pool.length))break}
- if(picks.length<3){$('screen').innerHTML='<h2>Not enough distinct cards</h2><p>Choose other lectures to create a meaningful round.</p>';return}
+ if(picks.length<3){$('screen').innerHTML='<h2>Not enough distinct cards</h2>'+vpqMatchLecturePicker40()+'<p>This lecture has fewer than three distinct answers in this mode. Select another lecture or try mechanism matching.</p><button class="btn" id="vpqMatchTryMechanism">⚙️ Try mechanisms</button>';vpqWireMatchLecturePicker40();$('vpqMatchTryMechanism').onclick=()=>{vpqMatchMode40='mechanism';vpqMatchInit40()};return}
  vpqMatchRecent40=[...picks.map(x=>x.id),...vpqMatchRecent40.filter(id=>!picks.some(x=>x.id===id))].slice(0,Math.max(12,pool.length-3));
  try{localStorage.setItem('vpq-match-recent-v1',JSON.stringify(vpqMatchRecent40))}catch(e){}
  matched=new Set();selection=null;vpqMatchInfo40=Object.fromEntries(picks.map((x,i)=>[i,x]));
@@ -358,12 +391,14 @@ function vpqMatchRender40(message=''){
  const total=Object.keys(vpqMatchInfo40).length;
  $('screen').innerHTML='<div class="section-title"><h2>🧩 '+(vpqMatchMode40==='clinical'?'Clinical Use & Safety Match':vpqMatchMode40==='className'?'Drug Classification Match':'Drug & Mechanism Match')+'</h2><span class="chip">'+matched.size+'/'+total+' pairs</span></div>'+
  '<p class="muted"><b>XP:</b> +12 Arcade XP for a first-time correct drug and category pair. Repeated matches are practice only. Check ☁️ Save status before switching devices.</p>'+
- '<p class="muted">Your <b>saved pharmacology lectures</b> control the question pool. Match each drug to '+(vpqMatchMode40==='clinical'?'its specific indication, target patients and safety consideration.':vpqMatchMode40==='className'?'its precise pharmacologic class or subclass.':'its molecular target or pharmacologic mechanism.')+' Different drug sets rotate across rounds.</p>'+
+ vpqMatchLecturePicker40()+
+ '<p class="muted">The <b>selected pharmacology lectures</b> control this round. Match each drug to +(vpqMatchMode40==='clinical'?'its specific indication, target patients and safety consideration.':vpqMatchMode40==='className'?'its precise pharmacologic class or subclass.':'its molecular target or pharmacologic mechanism.')+' Different drug sets rotate across rounds.</p>'+
  '<div class="little"><button class="btn smallbtn" id="vpqMatchModeClass">🏷️ Drug class</button><button class="btn smallbtn" id="vpqMatchModeMechanism">⚙️ Drug target</button><button class="btn smallbtn" id="vpqMatchModeClinical">⚕️ Clinical caution</button><button class="btn smallbtn" id="vpqMatchNew">New drug set ↻</button></div>'+
  '<div class="meter" style="margin:12px 0"><div style="width:'+(matched.size/total*100)+'%"></div></div>'+
  '<div class="match-board">'+matchDeck.map((x,i)=>'<button class="tile '+(matched.has(x.id)?'matched':'')+' '+(selection===i?'selected':'')+'" data-vpqmatchtile="'+i+'" '+(matched.has(x.id)?'disabled':'')+'>'+safe(x.text)+'</button>').join('')+'</div>'+
  '<div class="feedback '+(message.startsWith('✓')?'good':'')+'" style="margin-top:12px">'+(message||'Choose a drug and its corresponding mechanism or clinical clue.')+'</div>'+
  (matched.size===total?'<div class="note"><b>🏆 Drug Match complete!</b><p>Excellent—now use those mechanisms in a clinical decision, or practice another matching set.</p><div class="buttonrow"><button class="btn primary" id="vpqMatchClinicalNext">🩺 Next: Clinical Questions</button><button class="btn" id="vpqMatchFlashReview">🧠 Review Flashcards</button></div></div>':'');
+ vpqWireMatchLecturePicker40();
  $('vpqMatchModeClass').onclick=()=>{vpqMatchMode40='className';vpqMatchInit40()};
  $('vpqMatchModeMechanism').onclick=()=>{vpqMatchMode40='mechanism';vpqMatchInit40()};
  $('vpqMatchModeClinical').onclick=()=>{vpqMatchMode40='clinical';vpqMatchInit40()};
