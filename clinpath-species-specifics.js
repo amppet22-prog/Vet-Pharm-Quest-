@@ -1,0 +1,126 @@
+/* VPQ species-specific CBC and clinical chemistry: expanded course-guided teaching. */
+window.VPQ_CLINPATH_SPECIES_GUIDE=(function(){
+'use strict';
+let api=null,focus='cbc',species='dog';
+const groups=[
+{id:'dog',name:'Dogs',emoji:'🐕'},
+{id:'cat',name:'Cats',emoji:'🐈'},
+{id:'horse',name:'Horses',emoji:'🐎'},
+{id:'cattle',name:'Cattle',emoji:'🐄'},
+{id:'sheepgoat',name:'Sheep & Goats',emoji:'🐑'},
+{id:'pig',name:'Pigs',emoji:'🐖'},
+{id:'camelid',name:'Camelids',emoji:'🦙'}];
+const data={
+dog:{
+cbc:[
+['RBC/PCV and breeds','Average healthy canine HCT in the course guide is roughly 45%, but breed, age and method matter. Greyhounds/sighthounds commonly have higher HCT; a high HCT alone is not automatically dehydration. Some Asian breeds (Akita, Shiba, Shar-Pei) have physiologically smaller RBCs and lower MCV without anemia. Some Poodles may show macrocytosis without anemia.','When PCV ↑, compare TS/TP and clinical hydration. PCV ↑ with TS normal can suggest splenic contraction or breed-related high RBC mass; both ↑ favors hemoconcentration.'],
+['Reticulocytes and anemia','Dogs release detectable reticulocytes after a marrow response, typically after ~3–4 days. Use ABSOLUTE reticulocytes, not the percentage alone. Polychromasia supports regeneration; classify MCV/MCHC after confirming the anemia.','Bleeding and RBC destruction are principal causes of regenerative anemia; early acute hemorrhage or hemolysis may initially look poorly regenerative.'],
+['Leukogram and stress','Cortisol pattern: mature neutrophilia, lymphopenia, eosinopenia and often monocytosis in dogs; usually no meaningful left shift or toxic change. Epinephrine may increase circulating neutrophils by demargination.','Bands and toxic cytoplasm in an ill dog favor inflammation more strongly than isolated mature neutrophilia. Absolute cell counts are required.'],
+['Platelet count','Low automated platelet numbers need blood-film confirmation. Platelet clumping and macroplatelets may cause undercounting; reactive thrombocytosis can accompany inflammation/iron deficiency.','Do not infer immune-mediated thrombocytopenia from a single machine value. Scan the feathered edge.']
+],
+chem:[
+['ALT and AST','ALT is a useful canine hepatocellular leakage marker. In the course notes, dog ALT persists ~2–3 days, whereas AST has a shorter half-life (<1 day); AST also comes from skeletal muscle.','ALT ↑ signals hepatocellular injury, NOT automatically impaired hepatic function. AST ↑ + CK ↑ suggests muscle contribution; compare SDH or other markers if needed.'],
+['ALP / GGT / bilirubin','ALP is generally a sensitive canine cholestatic/induction marker. Dogs have a glucocorticoid-associated ALP isoenzyme; endogenous/exogenous steroids and some anticonvulsants may induce elevation.','ALP ↑ does not by itself prove extrahepatic obstruction. Evaluate bilirubin, imaging, GGT, drugs and other results.'],
+['Liver function and PSS','Low BUN, glucose, albumin or cholesterol plus elevated bile acids/ammonia may suggest reduced hepatic functional capacity or portosystemic circulation. Young dogs with portosystemic shunts can also have microcytosis.','Separately report injury (ALT/AST), cholestasis (ALP/GGT) and function (synthesis/clearance).'],
+['Electrolytes and glucose','Dogs with hypoadrenocorticism may have low Na and high K, but this pattern is not diagnostic by itself. Species/breed differences in erythrocyte potassium can influence apparent K after hemolysis.','Use corrected Cl when sodium is abnormal; sample contamination or hemolysis can mimic electrolyte disease.'],
+['Muscle','CK is the preferred marker of skeletal muscle leakage. CK ↑ with AST ↑ favors muscle injury; CK can normalize sooner than AST.','Always interpret CK magnitude in the species and recent injection/exertion context.']
+]},
+cat:{
+cbc:[
+['Reticulocyte types','Cats have two reticulocyte morphologies: aggregate reticulocytes (reflect recent marrow output) and punctate reticulocytes (persist ~a week or longer). Automated analyzers generally emphasize aggregate counts.','A high punctate count with low aggregates can reflect earlier rather than current regeneration. Ask which type the laboratory reports.'],
+['Platelet artifact','Feline platelets clump frequently, often at the feathered edge. Larger cat platelets can overlap RBC size on impedance analyzers and cause spurious thrombocytopenia. Fluorescence methods may separate them better.','A severely low automated count in a clinically well cat MUST prompt smear review before diagnosis.'],
+['RBC morphology','Up to a few percent Heinz bodies can occur in normal feline blood in the course review, and cats develop oxidative Heinz body changes more readily than dogs. Howell–Jolly bodies can be present in small numbers in healthy cats.','Do not diagnose oxidant toxicity from an occasional feline Heinz body; assess quantity, anemia, smear and exposures.'],
+['Leukogram','Excitement/epinephrine commonly causes transient neutrophilia with lymphocytosis, especially in young cats. Cortisol has the opposite lymphocyte trend.','N ↑ with L ↑ and no bands/toxicity suggests physiological response; N ↑ with L ↓ could be stress or inflammation; always use absolute counts.'],
+['Anemia and species RI','Feline RBCs have less central pallor than canine cells, making spherocytes harder to identify. FeLV and marrow disorders can cause macrocytosis without regeneration.','A smear feature reliable in dogs may not be reliable in cats. Check aggregate reticulocytes, infectious disease and species-specific differentials.']
+],
+chem:[
+['ALT and hyperthyroidism','ALT is a useful hepatocellular leakage marker in cats. Mild liver enzyme elevations can occur with feline hyperthyroidism without primary hepatic disease.','Interpret ALT relative to thyroid status, appetite, bilirubin and other clinical findings.'],
+['ALP/GGT with hepatic lipidosis','Cats do not show the same steroid ALP induction as dogs. Feline hepatic lipidosis often produces ALP elevation out of proportion to GGT; GGT is informative in many other feline cholestatic disorders.','ALP ↑ with relatively low GGT in an anorexic obese cat increases concern for hepatic lipidosis; this pattern is not diagnostic alone.'],
+['Stress glucose / diabetes','Catecholamine-associated stress hyperglycemia can be substantial in cats; a single high glucose does not establish diabetes. Persistent hyperglycemia, glucosuria, clinical signs and possibly fructosamine clarify.','Fructosamine is influenced by protein turnover and reflects preceding glycemia; it is not a replacement for the patient history.'],
+['Renal / K / phosphorus','Polyuric cats with chronic renal disease may lose potassium and develop hypokalemia. Oliguric/anuric cats can develop hyperkalemia from inadequate renal excretion. Phosphorus may rise with reduced filtration.','K trends depend on urine production, intake, medications and acid–base status; avoid an automatic all-CKD-is-high-K rule.'],
+['Pancreatic tests','Routine serum amylase and lipase are less useful for diagnosing feline pancreatitis. Pancreas-specific feline pancreatic lipase tests can be more informative in context.','Interpret fPLI with clinical signs and imaging; no isolated assay establishes the entire diagnosis.']
+]},
+horse:{
+cbc:[
+['Reticulocytes','Adult horses generally do NOT release appreciable reticulocytes into peripheral blood even during anemia; a normal/zero circulating retic count does not prove marrow failure.','Use history, serial PCV, RBC indices, plasma proteins and occasionally marrow erythroid response rather than canine retic cutoffs.'],
+['Splenic contraction','Excitement and exercise can markedly raise equine PCV because the spleen stores a large RBC reserve and releases it in response to catecholamines.','An isolated PCV ↑ after exercise with stable TS does not necessarily mean dehydration or true erythrocytosis. Recheck after settling.'],
+['Inflammatory bloodwork','The equine inflammatory leukogram may be less dramatic than the canine response. Fibrinogen and serum amyloid A can help assess inflammation and trends.','Read absolute cell counts, bands and toxic change together with plasma proteins/acute-phase proteins and clinical history.'],
+['Howell–Jolly and morphology','Low numbers of Howell–Jolly bodies may be physiologic in horses. Strong regenerative anemia may be reflected in marrow rather than peripheral reticulocytosis.','Do not apply feline/dog reticulocyte rules to an anemic horse.']
+],
+chem:[
+['ALT not a liver test','Equine hepatocytes have little diagnostically useful ALT activity; ALT ↑ is NOT the preferred equine liver injury marker. Use SDH and/or GLDH, plus AST interpreted with CK.','This is a fundamental contrast with dogs/cats. AST alone cannot separate liver from muscle.'],
+['AST versus CK','Equine AST can stay elevated for days (course guide ~7–8 days), while CK rises/falls more rapidly with muscle injury. CK ↑+AST ↑ suggests recent/ongoing muscle injury.','CK falling while AST stays ↑ can indicate resolving muscle injury; SDH/GLDH distinguish hepatic origin if AST remains high.'],
+['GGT and bilirubin','GGT is a useful equine cholestatic marker. Anorexia/fasting can cause predominantly unconjugated hyperbilirubinemia in horses without major hepatocellular injury.','Do not equate a hungry horse with high bilirubin to biliary obstruction; examine other enzymes, bile acids, feeding and clinical signs.'],
+['Muscle interpretation','CK values need species context: even 2,000 U/L may have a different clinical magnitude in horses than in cats. Severe rhabdomyolysis can produce myoglobinuria and renal complications.','Assess exercise/recumbency, CK, AST, urine pigments, creatinine and clinical progression.']
+]},
+cattle:{
+cbc:[
+['Lymphocyte predominance','Healthy adult cattle and many other ruminants often have lymphocytes as the predominant WBC, unlike carnivores. Percentages alone mislead.','Interpret absolute neutrophil and lymphocyte counts using bovine reference intervals. A human/dog “normal percentage” is not bovine normal.'],
+['Small marrow neutrophil reserve','Cattle have a comparatively limited mature neutrophil storage pool and may develop neutropenia/left shift early during severe inflammatory demand; the total WBC may change only modestly.','Normal or low WBC DOES NOT rule out severe inflammation. Bands, toxic change, clinical signs and fibrinogen/SAA/haptoglobin matter.'],
+['Regeneration','Ruminants may show a slower or less robust peripheral reticulocyte response than dogs; basophilic stippling can accompany regenerative anemia but also occurs in lead toxicosis.','Use RBC indices, polychromasia, morphology, plasma appearance, bleeding and herd/toxic exposure history.'],
+['Inflammatory markers','Fibrinogen, haptoglobin and SAA are particularly useful because classic leukocytosis may be minimal.','Trend acute-phase proteins with the examination rather than diagnosing from WBC alone.']
+],
+chem:[
+['ALT poor marker','ALT lacks useful hepatic specificity in cattle. Use liver-specific SDH and/or GLDH for hepatocellular injury; AST can arise from liver or muscle.','AST ↑ with CK ↑ favors muscle; AST ↑ alone requires liver-specific markers and context.'],
+['GGT and bile ducts','GGT is a useful large-animal cholestatic/biliary marker; interpret bilirubin and ALP with age and clinical evidence.','Jaundice can follow hemolysis, hepatocellular dysfunction or cholestasis: localize before labeling.'],
+['BUN / diet / rumen','Ruminant protein and nitrogen handling involves ruminal ammonia use and urea recycling; dietary protein and liver function can alter circulating BUN independently of renal filtration.','Do not interpret a bovine BUN result using a canine diet/physiology model.'],
+['Muscle and electrolytes','AST and CK can rise with muscle damage from recumbency, exertion or trauma. Reduced renal excretion can produce hyperkalemia; urine output and clinical context matter.','Pair enzyme trends with recumbency, liver-specific tests and urine findings.']
+]},
+sheepgoat:{
+cbc:[
+['Ruminant leukogram','Healthy sheep and goats often have substantial lymphocyte predominance. During inflammation, total WBC responses may be subtle and neutrophil demand can exceed reserve.','Do not use canine percentage rules. Bands, toxic change and acute phase proteins can be more valuable than a modest WBC change.'],
+['RBC size and anemia','Goats and sheep have small erythrocytes compared with dogs. Typical mean MCV figures in the supplied course review are ~28 fL (goat) and ~33 fL (sheep), as comparisons rather than ranges.','Small ruminant RBCs are normal—do not diagnose iron deficiency just because cells are smaller than canine RBCs.'],
+['Anemia / parasites','Blood loss and parasitism are key differential categories in small ruminants. Regenerative response can be sluggish; interpret PCV/TS and exam/fecal findings over time.','With low PCV and TS, consider loss; compare with hydration and sample timing.'],
+['Oxidative disease','Sheep can experience copper-associated hemolytic crises; oxidant injury may produce hemoglobinemia, icterus and abnormal red cell morphology.','Link severe anemia and pigment changes to diet/toxin exposure, not just infectious causes.']
+],
+chem:[
+['Liver enzymes','ALT is not a useful small-ruminant hepatocellular marker. SDH/GLDH are more specific; AST needs CK to separate liver from muscle. GGT supports cholestasis.','Species-specific enzyme sources take precedence over a generic “ALT high = liver” rule.'],
+['Minerals / metabolism','Calcium, phosphorus, magnesium and energy metabolism differ by production stage, pregnancy and lactation; total Ca is influenced by albumin.','Assess iCa when clinically indicated and interpret with diet, stage and endocrine physiology.'],
+['Rumen nitrogen handling','Urea recycling and diet change BUN, and severe reduced hepatic synthesis can lower it.','Azotemia still requires hydration/urinalysis/renal assessment rather than BUN alone.']
+]},
+pig:{
+cbc:[
+['RBC / iron deficiency','Neonatal piglets are particularly susceptible to iron deficiency because milk provides little iron and growth is fast. Iron restriction causes microcytic, hypochromic anemia.','Use age-specific reference intervals; assess iron supplementation, diet, growth and RBC morphology.'],
+['Reticulocytes and young animals','Reticulocyte/hematocrit patterns change with age and physiologic development; compare to pigs of similar age and production stage.','Adult canine retic cutoffs should not be applied to neonatal pigs.'],
+['Leukogram','Assess absolute leukocyte types with swine-specific reference intervals; husbandry, stress and inflammatory disease may affect distribution.','Do not treat a WBC percentage change alone as proof of infection.']
+],
+chem:[
+['ALT not useful for liver','As for other large animals, ALT is generally not a reliable marker of hepatic injury in pigs. SDH/GLDH and other species-appropriate tests plus AST/CK may help.','Use analytes validated for swine; interpret by age and laboratory.'],
+['Muscle enzymes','CK and AST can reflect muscle damage, restraint and handling, so timing and collection circumstances matter.','Avoid labeling an isolated AST increase as liver disease without considering CK and history.'],
+['Metabolism','Glucose, proteins and mineral reference intervals vary with neonatal status, weaning and diet.','Use age-appropriate method-specific intervals rather than adult companion-animal values.']
+]},
+camelid:{
+cbc:[
+['RBC morphology','Camelids have distinctive elliptic/oval erythrocytes; this is normal species morphology, not automatically elliptocytosis. RBC size/count and analyzer method require camelid validation.','Do not interpret a camelid blood smear against a dog image atlas without species labels.'],
+['Hematocrit and regeneration','Interpret PCV, plasma protein and smear with camelid-specific reference intervals. Canine reticulocyte thresholds should not be copied into camelids.','Hydration and collection artifacts must still be considered.'],
+['Inflammatory disease','Use absolute differential counts, toxic change and species-appropriate inflammatory markers, not dog leukogram percentages.','An apparent “normal” WBC does not exclude serious disease.']
+],
+chem:[
+['ALT and liver','For camelid hepatic disease, use species-validated liver enzymes including SDH/GLDH where available, and interpret AST with CK. Do not rely on ALT as a canine-equivalent marker.','Choose analytes based on laboratory’s camelid validation.'],
+['Muscle injury','CK is helpful for muscle leakage. Very high CK+AST after downer/trauma/heat illness can coexist with AKI from pigment nephropathy.','Assess urine, creatinine, muscle injury and clinical perfusion.'],
+['Metabolic tests','Protein, glucose, minerals, phosphorus and renal values require age, species and analyzer-specific intervals; feeding and production status affect interpretation.','A dog/cat chemistry reference interval should never be silently reused.']
+]}};
+const e=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const css='<style>.vpsc{font-size:14px;line-height:1.5}.vpsc *{box-sizing:border-box}.vpsc-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}.vpsc button{font-size:13px;white-space:normal;padding:8px 10px}.vpsc button[aria-current=true]{background:#dceafb;border-color:#648dcc}.vpsc article{border:1px solid #cbdced;border-radius:10px;padding:10px;margin:9px 0;background:#fbfdff}.vpsc article h3{margin:0 0 5px;font-size:15px}.vpsc p{margin:5px 0}.vpsc .vpsc-note{background:#fff4df;padding:8px;border-radius:8px;font-size:12px}.vpsc .vpsc-why{background:#e6f3e9;border-left:3px solid #4a996b;padding:8px;margin-top:6px}.vpsc .vpsc-label{font-size:12px;color:#486381}.vpsc details{border:1px solid #cedbeb;padding:8px;border-radius:10px;margin:8px 0}.vpsc summary{font-weight:800;cursor:pointer}.vpsc-compare{width:100%;border-collapse:collapse;font-size:12px}.vpsc-compare td,.vpsc-compare th{border-bottom:1px solid #d8e4ee;text-align:left;padding:8px;vertical-align:top}.vpsc-compare th{background:#e6effa}</style>';
+function button(a,label){return '<button type="button" data-vpqspecies="'+a+'">'+label+'</button>'}
+function compare(){
+ if(focus==='cbc')return [['Dog','Sighthound HCT may be high; Asian dog microcytosis; canine cortisol monocytosis'],['Cat','Aggregate vs punctate retics; clumped platelets; physiologic Heinz bodies; epinephrine lymphocytosis'],['Horse','No useful circulating reticulocytes; splenic contraction raises PCV'],['Cattle','Lymphocyte-predominant normal CBC; often subtle WBC inflammatory response'],['Sheep/goat','Small RBCs, ruminant leukogram, slow regeneration'],['Pig','Piglets prone to iron deficiency'],['Camelid','Oval RBCs are normal']];
+ return [['Dog','ALT liver; ALP sensitive cholestasis/steroid induction; CK + AST muscle'],['Cat','ALT liver; ALP disproportionate to GGT in hepatic lipidosis; stress hyperglycemia'],['Horse','ALT not useful; SDH/GLDH liver, CK+AST muscle; anorexia bilirubin ↑'],['Cattle','ALT not useful; SDH/GLDH liver, GGT cholestasis; rumen urea handling'],['Sheep/goat','ALT not useful; SDH/GLDH liver, GGT cholestasis; production-stage minerals'],['Pig','ALT weak liver specificity; CK/AST muscle; neonatal metabolic ranges'],['Camelid','Check validated SDH/GLDH/CK tests and camelid-specific intervals']];
+}
+function modal(title,html){if(!api)api={showModal:(a,b)=>window.VPQ_REFERRAL_MODAL?.show?.(a,b)};api.showModal(title,html)}
+function show(){
+ const current=groups.find(x=>x.id===species)||groups[0];const a=data[species]?.[focus]||[];
+ modal('🔬 Species Differences · '+(focus==='cbc'?'CBC':'Chemistry')+' · '+current.name,css+'<div class="vpsc">'+
+ '<div class="vpsc-tabs">'+button('focus-cbc','🩸 CBC & Hematology')+button('focus-chem','🧪 Clinical Chemistry')+'</div>'+
+ '<div class="vpsc-tabs">'+groups.map(g=>'<button aria-current="'+(species===g.id)+'" data-vpqspecies="animal-'+g.id+'">'+g.emoji+' '+g.name+'</button>').join('')+'</div>'+
+ '<p class="vpsc-note"><b>Read first:</b> Results must be interpreted against the <b>species, breed, age and analyzer-specific interval</b>. The course-review notes below give patterns and illustrative mean comparisons, not universal RIs. “↑/↓” means relative to the applicable interval, not the dog’s range.</p>'+
+ '<div>'+a.map(x=>'<article><h3>'+e(x[0])+'</h3><p>'+e(x[1])+'</p><div class="vpsc-why"><b>How to interpret / WHY:</b> '+e(x[2])+'</div></article>').join('')+'</div>'+
+ '<details><summary>📊 Compare all species at a glance</summary><div style="overflow-x:auto"><table class="vpsc-compare"><tr><th>Species</th><th>Interpretation pearls</th></tr>'+compare().map(x=>'<tr><td><b>'+e(x[0])+'</b></td><td>'+e(x[1])+'</td></tr>').join('')+'</table></div></details>'+
+ '<details><summary>📘 Course-specific comparisons and numbers</summary><p><b>Typical mean HCT in course notes:</b> Dog ~45%, cat ~37%, horse hotblood ~43% / coldblood ~34%, cattle ~35%, sheep ~38%, goat ~28%, pig ~42%. These are species means, NOT reference intervals.</p><p><b>Mean MCV in course comparison:</b> Dog ~70 fL, cat ~45 fL, horse ~45 fL, cattle ~52 fL, sheep ~33 fL, goat ~28 fL, pig ~63 fL. Again: not clinical reference intervals.</p><p><b>Classroom corticosteroid WBC upper examples (×10³/µL):</b> dog 40, cat 30, horse 20, cattle 18. These are lecture-derived teaching heuristics, not diagnostic cutoffs; inflammation or neoplasia and the patient can alter any response.</p><p><b>For chemistry:</b> ALT preferred for dog/cat liver, not for large-animal liver; SDH/GLDH are useful large-animal hepatocellular markers, but SDH can be unstable during shipment. Dog cholestasis often ALP-sensitive; cat/large animal cholestasis commonly uses GGT. Pair AST with CK.</p></details>'+
+ '<div class="vpsc-tabs">'+button('report','📘 Return to Report Guide')+button('station','🩸 CBC + Chemistry Station')+button('cases','🏥 Clinical Workups')+'</div>'+
+ '<p class="vpsc-label">Source: uploaded Clinical Pathology Review Guide (course notes), including its marked “Added” material. Supplementary mechanisms are teaching context, not independently verified lecture quotes. Recheck method/species-specific reference intervals for clinical use.</p></div>');
+}
+function init(context){api=context}
+window.addEventListener('click',event=>{let b=event.target?.closest?.('[data-vpqspecies]');if(!b||!b.closest('.vpsc'))return;event.preventDefault();event.stopImmediatePropagation();const a=b.dataset.vpqspecies;if(a.startsWith('focus-'))focus=a.slice(6);else if(a.startsWith('animal-'))species=a.slice(7);else if(a==='report')return window.VPQ_CLINPATH_REPORT_ACADEMY?.open?.(focus==='cbc'?'cbc':'chem');else if(a==='station')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();else if(a==='cases')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();show()},true);
+return Object.freeze({init,open:(f='cbc',sp='dog')=>{focus=f==='chem'?'chem':'cbc';species=data[sp]?sp:'dog';show()},data});
+})();
