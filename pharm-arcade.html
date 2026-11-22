@@ -65,6 +65,8 @@ body.vpq-match-active #screen .match-board .tile.vpq-drug-name{font-size:14px;fo
 #screen .vpq-match-feedback-label{display:block;font-size:12px;font-weight:950;letter-spacing:.015em;margin-bottom:3px;color:#174d42}
 #screen .vpq-match-feedback-value{display:block;font-size:13px;line-height:1.45;white-space:normal}
 #screen .vpq-match-feedback-heading{margin-bottom:7px}
+
+#screen .vpq-match-build{display:inline-block;font-size:10px;color:#6a7f9d;margin:0 0 5px;font-weight:800}
 </style><link rel="stylesheet" href="question-feedback.css?v=20261119-unified-answers"><link rel="stylesheet" href="arcade-compact.css?v=20261119-compact-2">
 <style id="vpq-ipad-drugmatch-fixes">
 html,body{overflow-y:auto!important;-webkit-overflow-scrolling:touch;min-height:100%;height:auto}
@@ -437,12 +439,12 @@ function vpqMatchFeedback40(message){
   // Keep original clinical wording but separate embedded headings into distinct readable facts.
   const detailRows=(value,initialLabel,warning=false)=>{
    if(!value)return '';
-   const raw=String(value).replace(/\\s+/g,' ').trim();
-   const sections=raw.split(/\\s*(?=(?:CLINICAL TARGET|CLINICAL PEARL|SOURCE-VS-CLINIC mismatch|Watch|WATCH|Use|Species|Monitoring|Contraindications|Caution|Primarily livestock)\\s*:)/i);
+   const raw=String(value).replace(/\s+/g,' ').trim();
+   const sections=raw.split(/\s*(?=(?:CLINICAL TARGET|CLINICAL PEARL|SOURCE-VS-CLINIC mismatch|Watch|WATCH|Use|Species|Monitoring|Contraindications|Caution|Primarily livestock)\s*:)/i);
    const rows=[];
    for(const fragment of sections){
     if(!fragment.trim())continue;
-    const match=fragment.match(/^(CLINICAL TARGET|CLINICAL PEARL|SOURCE-VS-CLINIC mismatch|Watch|Use|Species|Monitoring|Contraindications|Caution|Primarily livestock)\\s*:\\s*/i);
+    const match=fragment.match(/^(CLINICAL TARGET|CLINICAL PEARL|SOURCE-VS-CLINIC mismatch|Watch|Use|Species|Monitoring|Contraindications|Caution|Primarily livestock)\s*:\s*/i);
     const name=match?match[1]:initialLabel;
     const detail=match?fragment.slice(match[0].length):fragment;
     if(detail.trim())rows.push('<div class="vpq-match-feedback-row'+(warning||/watch|caution|contraindication|mismatch/i.test(name)?' vpq-match-warning':'')+'"><strong class="vpq-match-feedback-label">'+safe(name.replace(/^watch$/i,'Watch for'))+'</strong><div class="vpq-match-feedback-value">'+safe(detail.trim())+'</div></div>');
@@ -464,6 +466,7 @@ function vpqMatchRender40(message=''){
  const total=Object.keys(vpqMatchInfo40).length;
  $('screen').innerHTML='<div class="section-title"><h2>🧩 '+(vpqMatchMode40==='clinical'?'Clinical Use & Safety Match':vpqMatchMode40==='className'?'Drug Classification Match':'Drug & Mechanism Match')+'</h2><span class="chip">'+matched.size+'/'+total+' pairs</span></div>'+
  vpqMatchLecturePicker40()+
+ '<p class="vpq-match-build">Drug Match layout v5 · 22 Nov</p>'+ 
  '<p class="vpq-match-one-line">Match each drug to '+(vpqMatchMode40==='clinical'?'its clinical use and caution.':vpqMatchMode40==='className'?'its drug class.':'its mechanism or target.')+' First-time correct pairs earn +12 XP.</p>'+
  '<div class="little"><button class="btn smallbtn" id="vpqMatchModeClass">🏷️ Drug class</button><button class="btn smallbtn" id="vpqMatchModeMechanism">⚙️ Drug target</button><button class="btn smallbtn" id="vpqMatchModeClinical">⚕️ Clinical caution</button><button class="btn smallbtn" id="vpqMatchNew">New drug set ↻</button></div>'+
  '<div class="meter" style="margin:12px 0"><div style="width:'+(matched.size/total*100)+'%"></div></div>'+
