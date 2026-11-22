@@ -290,6 +290,39 @@ const INTRO_STYLE=String.raw`
 .vpqintro .gaspatientexamples>div+div{border-top:1px solid #d8e3ee}
 .vpqintro .gaspatientexamples p{margin:4px 0}
 @media(max-width:580px){.vpqintro .gasphyscards{grid-template-columns:1fr}}
+
+/* Readable learning screens, not patient-question or diagnostic station panels */
+.vpqintro.coag-theme,.vpqintro.gas-theme{font-size:16px;line-height:1.58}
+.vpqintro.coag-theme h3,.vpqintro.gas-theme h3{font-size:19px;line-height:1.35}
+.vpqintro.coag-theme .introhero,.vpqintro.gas-theme .introhero{font-size:16px}
+.vpqintro.coag-theme .pathcard h4,.vpqintro.gas-theme .pathcard h4{font-size:17px}
+.vpqintro.coag-theme .node em,.vpqintro.gas-theme .node em{font-size:14px}
+.vpqintro.coag-theme .quicktable,.vpqintro.gas-theme .quicktable{font-size:15px;line-height:1.45}
+.vpqintro.coag-theme .coagprettydetails>summary,.vpqintro.gas-theme details>summary{font-size:17px;line-height:1.45}
+.vpqintro.coag-theme .coagminicard span,.vpqintro.gas-theme .gasconceptitem span,.vpqintro.gas-theme .gasexplainline p{font-size:15px;line-height:1.55}
+.vpqintro.gas-theme .step,.vpqintro.gas-theme .steps .step{font-size:15px;line-height:1.45}
+.vpqintro.gas-theme .step b{font-size:17px}
+.vpqintro.coag-theme .coagfootnote,.vpqintro.gas-theme .tiny{font-size:13px}
+.vpqintro .gasformulalesson{margin:15px 0;padding:15px;border-radius:15px;background:linear-gradient(135deg,#e9f3ff,#f1ecff);border:2px solid #91acd9}
+.vpqintro .gasformulalesson>h3{margin:0 0 8px;color:#314f88}
+.vpqintro .gasformulalesson>p{margin:0 0 12px}
+.vpqintro .gasformulagrid{display:grid;grid-template-columns:1fr;gap:12px}
+.vpqintro .gasformulacard{padding:14px 15px;border:2px solid #a1bde6;border-radius:13px;background:#eff6ff}
+.vpqintro .gasformulacard.formula1{background:#edfaee;border-color:#9ccbaf}
+.vpqintro .gasformulacard.formula2{background:#fff4e3;border-color:#deb882}
+.vpqintro .gasformulacard h4{font-size:18px;margin:0 0 9px;color:#2d548c}
+.vpqintro .gasformulacard.formula1 h4{color:#286e48}
+.vpqintro .gasformulacard.formula2 h4{color:#845114}
+.vpqintro .gasformulaeq{font-size:clamp(16px,2.4vw,21px);font-weight:850;line-height:1.5;text-align:center;background:white;border:2px solid #c1d2e8;border-radius:10px;padding:11px 7px;overflow-wrap:anywhere;margin-bottom:9px}
+.vpqintro .gasformulaexample{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;border-radius:9px;background:#ffffffb8;padding:9px 10px;margin-bottom:10px}
+.vpqintro .gasformulaexample b{color:#2d598c}
+.vpqintro .gasformulaexample span{font-size:17px;font-weight:750}
+.vpqintro .gasformulacard p{margin:8px 0;line-height:1.55}
+.vpqintro .gasformulanote{font-size:14px;line-height:1.5;padding:9px 10px;border-left:4px solid #ddad57;border-radius:7px;background:#fff9e9}
+.vpqintro .gasformulaworkflow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:12px}
+.vpqintro .gasformulaworkflow b{width:100%;color:#314e85}
+.vpqintro .gasformulaworkflow span{padding:7px 10px;background:white;border:1px solid #b3c3e2;border-radius:18px;font-size:14px;font-weight:700}
+@media(max-width:580px){.vpqintro .gasformulalesson{padding:10px}.vpqintro .gasformulacard{padding:11px}.vpqintro .gasformulaeq{font-size:16px}}
 </style>`;
 const COAG_FACTORS=[
 ['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
@@ -405,12 +438,26 @@ function gasExtraConcepts(){
  '<details class="gasconcept"><summary>⚠️ Sample pitfalls and compensation traps</summary><div class="gasminigrid"><div><b>🫁 Arterial vs venous</b><p>Do not interpret venous pO₂ as an oxygenation test. Interpret pCO₂ with sampling site in mind.</p></div><div><b>🧪 Sample handling</b><p>Heparin dilution, delayed analysis, air exposure and patient temperature may alter values.</p></div><div><b>🔁 Mixed disorder</b><p>Unexpected pCO₂ or bicarbonate compensation warrants evaluation for a second simultaneous process.</p></div><div><b>📈 Follow trends</b><p>Compare with clinical perfusion, ventilation, glucose, electrolytes, ketones and lactate.</p></div></div></details>';
 }
 
+
+function gasFormulaPanel(){
+ const items=[
+ {title:'🧪 Anion gap (AG)',formula:'AG = Na⁺ − (Cl⁻ + HCO₃⁻)',example:'145 − (110 + 14) = 21 mmol/L',why:'Estimates unmeasured anions. A higher AG may reflect lactate, ketones, uremic acids or toxic metabolites. Low albumin can hide an increased gap.',note:'Some veterinary laboratories use (Na⁺ + K⁺) − (Cl⁻ + HCO₃⁻). Choose the formula matching the reporting laboratory reference interval.'},
+ {title:'🧂 Corrected chloride (Cl⁻)',formula:'Corrected Cl⁻ = measured Cl⁻ × (normal Na⁺ ÷ measured Na⁺)',example:'100 × (148 ÷ 140) = 105.7 mmol/L',why:'Adjusts chloride for sodium/water changes. Increased corrected Cl⁻ suggests relative chloride excess (often associated with metabolic acidosis); decreased corrected Cl⁻ suggests selective chloride depletion (often metabolic alkalosis).',note:'Example uses a dog with a chosen normal sodium midpoint of 148 mmol/L. The normal Na⁺ value must match species and analyzer; do not substitute a universal midpoint.'},
+ {title:'⚖️ pH · Henderson–Hasselbalch',formula:'pH = 6.1 + log₁₀ [HCO₃⁻ ÷ (0.03 × pCO₂)]',example:'6.1 + log₁₀ [24 ÷ (0.03 × 40)] ≈ 7.40',why:'pH reflects bicarbonate relative to dissolved CO₂. When bicarbonate falls compared with CO₂, pH falls. When CO₂ rises compared with bicarbonate, pH also falls.',note:'HCO₃⁻ in mmol/L and pCO₂ in mmHg, at approximately 37 °C. CO₂ solubility and pK vary slightly with temperature/analyzer. Blood gas HCO₃⁻ is usually calculated from pH and pCO₂.'}
+ ];
+ return '<section class="gasformulalesson" aria-label="Blood gas formulas and worked examples"><h3>🧮 Essential calculations · See the math AND the physiology</h3>'+
+ '<p>Use the same patient sample and units for each calculation. Formulas help reveal patterns, but the patient and method-specific reference intervals determine their meaning.</p>'+
+ '<div class="gasformulagrid">'+items.map((x,i)=>'<article class="gasformulacard formula'+i+'"><h4>'+x.title+'</h4><div class="gasformulaeq">'+x.formula+'</div><div class="gasformulaexample"><b>Worked example</b><span>'+x.example+'</span></div><p><b>What is happening in the body?</b> '+x.why+'</p><div class="gasformulanote"><b>Watch out:</b> '+x.note+'</div></article>').join('')+'</div>'+
+ '<div class="gasformulaworkflow"><b>🔍 Patient interpretation sequence</b><span>① Check pH</span><span>② Identify pCO₂ / HCO₃⁻ driver</span><span>③ Evaluate compensation</span><span>④ Calculate AG and corrected Cl⁻</span><span>⑤ Explain the physiology and patient cause</span></div></section>';
+}
+
 function gasIntro(){
  return '<div class="vpqintro gas-theme">'+INTRO_STYLE+
  gasImageCard()+
  '<div class="introhero"><b>🫧 BLOOD GAS DETECTIVE · LEARN FIRST</b><p><strong>pH = where you ended up, CO₂ = the lung control, HCO₃⁻ = the metabolic/kidney side.</strong> Find the primary disturbance, then ask whether the body is compensating appropriately.</p></div>'+
  '<div class="steps"><div class="step"><b>① pH</b>Acidemia ↓ or alkalemia ↑?</div><div class="step"><b>② Primary</b>Which of CO₂ or HCO₃⁻ explains pH?</div><div class="step"><b>③ Compensate</b>Does the other system respond as expected?</div><div class="step"><b>④ Cause</b>AG, chloride, lactate, ketones + patient</div></div>'+
  '<details open class="gasconcept gasphysiology"><summary>🧠 What the body is doing · pH, chloride and compensation</summary>'+ '<div class="gasphintro"><b>pH follows the ratio of HCO₃⁻ to dissolved CO₂.</b><p>More bicarbonate relative to CO₂ → higher pH. More CO₂ relative to bicarbonate → lower pH. Read all three measurements together.</p></div>'+ '<div class="gasphyscards">'+ [['🫁 CO₂ · Lungs','CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻. Hypoventilation holds CO₂ in and lowers pH; hyperventilation removes CO₂ and raises pH. Lungs respond quickly.'],['🫘 Bicarbonate · Kidneys','HCO₃⁻ buffers H⁺. Kidneys reclaim filtered bicarbonate and generate new bicarbonate while excreting acid. Diarrhea can lose bicarbonate; renal compensation takes hours to days.'],['🧂 Chloride · Electroneutrality','Cl⁻ often shifts relative to HCO₃⁻ to preserve electrical balance. Bicarbonate loss commonly produces relative hyperchloremia and a normal-anion-gap acidosis; loss or sequestration of Cl⁻ can maintain metabolic alkalosis.'],['💧 Sodium · Water balance','Na⁺ varies with water as well as sodium balance. Na⁺ and Cl⁻ can move together during water shifts. Corrected chloride helps distinguish selective chloride changes from parallel sodium/water changes.'],['⚡ Potassium · Shifts and losses','K⁺ depends on insulin, pH, aldosterone, kidney handling and body stores. Acidosis does not always cause hyperkalemia. Serum K⁺ can look normal or high even with a major total-body deficit in DKA.'],['🧪 Anion gap · Unmeasured ions','AG is often Na⁺ − (Cl⁻ + HCO₃⁻). Unmeasured acids such as lactate, ketones or uremic acids can increase the gap. Low albumin may hide an increased gap.']] .map(x=>'<article class="gasphyscard"><b>'+x[0]+'</b><p>'+x[1]+'</p></article>').join('')+'</div>'+ '<div class="gaspatientexamples"><b>🏥 The same physiology in patients</b>'+ [['Diarrhea / renal tubular acidosis','Lose or cannot retain HCO₃⁻ → pH falls → compensatory faster breathing lowers pCO₂. Relative chloride is often higher.'],['Vomiting / abomasal sequestration','Loss or sequestration of H⁺ and Cl⁻ → metabolic alkalosis. Volume and chloride depletion promote renal sodium retention and K⁺/H⁺ loss; urine can become paradoxically acidic.'],['DKA / lactic acidosis','Unmeasured acids consume HCO₃⁻ and lower pH; the anion gap often rises. Compensatory hyperventilation lowers pCO₂. K⁺ concentration can mask a total-body deficit.'],['Hypoventilation','CO₂ retention lowers pH (respiratory acidosis). Over time kidneys retain/generate bicarbonate, pushing pH back toward normal.']] .map(x=>'<div><strong>'+x[0]+'</strong><p>'+x[1]+'</p></div>').join('')+'</div>'+ '<p class="tiny">These are patterns, not absolute rules. Check compensation, sample type, species-specific intervals, and mixed processes.</p></details>'+
+ gasFormulaPanel()+
  '<h3>🧭 Which direction do the numbers push pH?</h3><div class="pathgrid">'+
  '<div class="pathcard"><h4>🫁 Lungs · pCO₂</h4><div class="node"><b>Hypoventilate → CO₂ ↑ → pH ↓</b><em>Respiratory acidosis</em></div><div class="node"><b>Hyperventilate → CO₂ ↓ → pH ↑</b><em>Respiratory alkalosis</em></div><p>Breathing can change CO₂ rapidly.</p></div>'+
  '<div class="pathcard"><h4>🫘 Kidneys / metabolism · HCO₃⁻</h4><div class="node"><b>HCO₃⁻ ↓ → pH ↓</b><em>Metabolic acidosis</em></div><div class="node"><b>HCO₃⁻ ↑ → pH ↑</b><em>Metabolic alkalosis</em></div><p>Renal adjustments take longer; acids, GI losses and perfusion matter.</p></div>'+
