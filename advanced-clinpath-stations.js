@@ -527,9 +527,9 @@ const hybridById=id=>HYBRID_TESTS.find(t=>t.id===id);
 function hybridBtn(id,label){return '<button type="button" data-vpqadvanced="'+id+'">'+label+'</button>'}
 function hybridHome(){
  hybrid=null;run=null;
- return modal('Hybrid Diagnostics · In-House & Send-Out','<div class="vpqintro hybrid-theme">'+INTRO_STYLE+
- '<div class="introhero"><b>🧬 HYBRID DIAGNOSTIC STATION</b><p>Choose the right test, handle the sample, then interpret a patient result. In-house devices return immediate simulated results; the send-out counter represents a reference-laboratory report. <b>PCV/TS belongs with routine CBC and chemistry testing; no extra full-sized bench is required.</b></p></div>'+PCV_TS_LEARN+
- '<div class="hybridtwo"><section><h3>⚡ In-house rapid testing</h3>'+HYBRID_TESTS.filter(t=>t.kind==='inhouse').map(hybridCard).join('')+'</section><section><h3>📦 Send-Out Laboratory counter</h3>'+HYBRID_TESTS.filter(t=>t.kind==='sendout').map(hybridCard).join('')+'</section></div>'+
+ return modal('CBC + Chemistry · In-House and Send-Out','<div class="vpqintro hybrid-theme">'+INTRO_STYLE+
+ '<div class="introhero"><b>🩸 CBC + CHEMISTRY WORKSTATION</b><p>Start with routine hematology, chemistry and PCV/TS, then use point-of-care or send-out diagnostics as needed. The room has a dedicated CBC/chemistry analyzer bench with PCV centrifuge and refractometer. Choose a test below to learn sample collection, physiology and interpretation.</p></div>'+PCV_TS_LEARN+
+ '<div class="hybridtwo"><section><h3>🩸 CBC / Chemistry / In-house tests</h3>'+HYBRID_TESTS.filter(t=>t.kind==='inhouse').map(hybridCard).join('')+'</section><section><h3>📦 Send-Out Laboratory counter</h3>'+HYBRID_TESTS.filter(t=>t.kind==='sendout').map(hybridCard).join('')+'</section></div>'+
  '<p class="tiny">Illustrative simulated patient data. Reference intervals vary by species, testing platform and laboratory. This station does not replace the existing lecture-based thyroid or diabetes questions.</p>'+
  '<div class="introactions">'+hybridBtn('home','← Advanced lab')+'</div></div>');
 }
