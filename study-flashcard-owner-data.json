@@ -216,6 +216,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 14",
       "curated": true
+    },
+    {
+      "prompt": "What two drugs and class are useful for treating ventricular dysrhythmias (not atrial problems), and what is the MOA?",
+      "answer": "Lidocaine and mexiletine\nNa+ channel blockers that bind rapidly and selectively to refractory channels. (Fast on and off)",
+      "why": "Lidocaine is IV for severe acute ventricular arrhythmias, and mexiletine is an oral syrup for long-term use. \n(Compare to class IV: Verampill and diltizaem)",
+      "slide": "Pharm LMU Lecture n my brain",
+      "id": "owner-pharmacology-mwra0qpt-7hrxa",
+      "domain": "pharmacology",
+      "lecture": "Lecture 14",
+      "curated": true
     }
   ],
   "hidden": []
