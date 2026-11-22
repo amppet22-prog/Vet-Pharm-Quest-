@@ -23,6 +23,32 @@ const spec={
   {x:59,y:35,w:14,h:29,label:'💗 Monitor',action:'hospitalMonitor'},
   {x:88,y:49,w:9,h:22,label:'🧪 Send to Lab',action:'clinpathLabReferral'}]
 };
+
+/* Small informational ? targets, separate from the playable stations (Necropsy-style). */
+const wardHelp={
+ kennels:{title:'🐾 Inpatient Recovery Kennels',tag:'PATIENT CARE · HOUSING',opens:'Recovery kennels for patients requiring observation and nursing care.',learn:'Check patient identity, comfort, bedding, hydration, appetite, elimination, catheter sites and pain at each scheduled nursing round.',different:'Kennel patients are not automatically stable: use individualized vitals and stress-minimizing handling. Cats and dogs need appropriate separate housing.',next:'Use the Patient station for a clinical case and document changes before transferring to treatment.'},
+ skills:{title:'💉 Clinical Skills Wing',tag:'PROCEDURES · PRACTICE',opens:'Opens practical injection, blood-draw and handling exercises.',learn:'Use species-appropriate restraint, asepsis, sharps safety, correct sample tubes and safe injection landmarks.',different:'This doorway leads to skills practice, rather than the treatment table itself.',next:'Choose the Skills Wing button or walk to the doorway and press E.'},
+ tables:{title:'🩺 Treatment Tables',tag:'PATIENT CARE · PROCEDURES',opens:'Two treatment surfaces for examination, catheter placement, sample collection and supervised nursing procedures.',learn:'Keep a clean work surface, verify patient identity, apply appropriate restraint and monitor comfort, perfusion and temperature.',different:'Clean between patients and do not leave an animal unattended on a raised table.',next:'Review the patient presentation, then choose monitoring or diagnostics based on findings.'},
+ supplies:{title:'🧤 Procedure Supply Station',tag:'TOOLS · ASEPSIS',opens:'Gloves, electric hair clippers, nail trimmers, catheter tape, gauze, wraps and specimen supplies.',learn:'Clip rather than razor-shave catheter sites where possible; prepare skin aseptically, choose secure but nonconstricting tape and inspect catheter sites regularly.',different:'Nail trimmers are for nail care, not vascular access. Sharps and contaminated materials need appropriate disposal.',next:'Use the Clinical Skills Wing to practice safe blood collection and catheter-related steps.'},
+ monitor:{title:'💗 Patient Monitor',tag:'VITAL SIGNS · TRENDS',opens:'Displays an example ECG and heart rate as a visual monitoring station.',learn:'Interpret heart rate and ECG alongside pulse quality, respiratory effort, temperature, blood pressure, oxygenation and the species-specific patient assessment.',different:'The displayed 128 is illustrative, not a real vital sign from your selected patient; an ECG trace alone does not establish adequate perfusion.',next:'Open Monitor to practice trend-based reassessment.'},
+ crash:{title:'🚨 Emergency Crash Cart',tag:'EMERGENCY · PREPAREDNESS',opens:'A dedicated, organized emergency response cart.',learn:'Know where oxygen delivery supplies, airway equipment, IV access materials, emergency medications and CPR supplies are stored; use current RECOVER guidance and team roles.',different:'Medication choices and doses vary by species, body mass, arrest rhythm and current protocol. Recheck expiry dates and restock after use.',next:'Start with recognition, call for help, and assign roles during a simulated emergency.'},
+ oxygen:{title:'🫧 Oxygen / ICU Cage',tag:'RESPIRATORY · CRITICAL CARE',opens:'A controlled oxygen-enriched recovery enclosure for selected respiratory patients.',learn:'Minimize stress, monitor respiratory effort and oxygenation, maintain appropriate temperature and humidity, and document oxygen delivery and weaning.',different:'Oxygen concentration and temperature require monitoring. An oxygen cage does not replace emergency drainage of a significant pleural effusion.',next:'Follow the respiratory patient case through diagnostics, stabilization and monitoring.'},
+ exotics:{title:'🐇 Exotics Recovery Enclosure',tag:'EXOTICS · SPECIES CARE',opens:'A quiet enclosure with suitable hiding space, bedding, food and water for an exotic patient.',learn:'Assess species-specific temperature needs, stress, appetite, fecal output, analgesia and husbandry. Rabbits require attentive GI monitoring.',different:'Housing and nutrition must match species: rabbit, reptile and avian patients do not share the same requirements.',next:'Try a rabbit GI case and follow its intake, imaging and treatment.'},
+ lab:{title:'🧪 In-House Laboratory',tag:'DIAGNOSTICS · SAMPLE QUALITY',opens:'In-house analyzers and sampling workspace for initial diagnostic testing.',learn:'Correct sample identity, anticoagulant, collection technique, analyzer quality control and species-specific reference intervals all affect interpretation.',different:'An in-house value may need smear review, repeat testing, urinalysis or send-out confirmation; interpret results with the patient.',next:'Choose Send to Lab for advanced clinical pathology work.'}
+};
+const wardHelpPins=[
+ {key:'kennels',x:29,y:27},{key:'skills',x:47,y:45},{key:'tables',x:54,y:63},
+ {key:'supplies',x:59,y:30},{key:'monitor',x:69,y:28},{key:'crash',x:69,y:67},
+ {key:'oxygen',x:79,y:45},{key:'exotics',x:90,y:45},{key:'lab',x:90,y:73}
+];
+function wardHelpModal(key){
+ const h=wardHelp[key];if(!h||typeof api.showModal!=='function')return;
+ const card=(title,body)=>'<div class="vpqWardHelpCard"><b>'+title+'</b><p>'+body+'</p></div>';
+ api.showModal(h.title,'<section class="vpqWardHelpModal"><div class="vpqWardHelpIntro"><small>'+h.tag+'</small><p>'+h.opens+'</p></div>'+
+ card('What this station teaches',h.learn)+card('Important clinical distinction',h.different)+card('Where to go next',h.next)+
+ '<p class="tiny">This ? is information only. Use the labeled station or E to interact with equipment.</p></section>');
+}
+
 const round=(x,y,w,h,fill,stroke='#aaa9ce')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="12" fill="'+fill+'" stroke="'+stroke+'" stroke-width="5"/>';
 function base(type){
  const t=type==='imaging',prefix=t?'img25':'trt25',label=t?'DIAGNOSTIC IMAGING':'TREATMENT WARD';
@@ -337,8 +363,8 @@ function treatment(){
  '</g>'+
  '<g><circle cx="950" cy="122" r="18" fill="#ffecf3" stroke="#d899b8" stroke-width="4"/>'+
  '<path d="M940 122h20M950 112v20" stroke="#e56e98" stroke-width="6" stroke-linecap="round"/>'+
- '<path d="M300 157l5 10 11 1-8 8 2 11-10-5-10 5 2-11-8-8 11-1z" fill="#ffd49b" stroke="#e7a772" stroke-width="2"/>'+
- '<path d="M725 154l5 10 11 1-8 8 2 11-10-5-10 5 2-11-8-8 11-1z" fill="#ffd49b" stroke="#e7a772" stroke-width="2"/>'+
+ ''+
+ ''+
  '<circle cx="305" cy="129" r="4" fill="#ffffff"/><circle cx="312" cy="118" r="4" fill="#ffffff"/><circle cx="320" cy="128" r="4" fill="#ffffff"/>'+
  '</g>';
  return s+'</svg>';
@@ -347,8 +373,11 @@ window.VPQ_SCENERY.roomArt=k=>k==='imaging'?imaging():k==='treatment'?treatment(
 const styles=document.createElement('style');
 styles.textContent='.vpqWalkArt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}'+
 '.stage[data-room="imaging"] .prop,.stage[data-room="treatment"] .prop,.stage[data-room="imaging"] .roomdecor,.stage[data-room="treatment"] .roomdecor,.stage[data-room="imaging"] .roomBanner,.stage[data-room="treatment"] .roomBanner{display:none!important}'+
+'.vpqWardHelpPin{position:absolute;z-index:8;width:24px;height:24px;padding:0;display:grid;place-items:center;pointer-events:auto;border-radius:50%;background:#fffaf0;color:#674c9e;border:2px solid #a58bcc;box-shadow:0 2px 4px #51437438;font-size:15px;line-height:1;font-weight:900;transform:translate(-50%,-50%)}'+
+'.vpqWardHelpPin:hover,.vpqWardHelpPin:focus-visible{background:#fff0bd;border-color:#e4aa55;outline:2px solid #ffe7a6;outline-offset:1px}'+
+'.vpqWardHelpModal{font-size:15px;line-height:1.45}.vpqWardHelpIntro{background:#edf6fc;border-left:4px solid #83adc8;padding:10px 12px;border-radius:10px}.vpqWardHelpIntro small{font-size:11px;font-weight:900;color:#477495;letter-spacing:.04em}.vpqWardHelpIntro p{margin:5px 0}.vpqWardHelpCard{background:white;border:1px solid #d6e3ef;border-radius:10px;padding:9px 12px;margin-top:8px}.vpqWardHelpCard b{font-size:15px;color:#274f7a}.vpqWardHelpCard p{font-size:15px;line-height:1.45;margin:4px 0 0}'+
 '.vpq25Hotspots{position:absolute;inset:0;z-index:5;pointer-events:none}.vpq25Hit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:15px;box-shadow:none;transform:none!important;padding:0;overflow:visible}'+
-'.vpq25Hit:hover,.vpq25Hit:focus-visible,.vpq25Hit.vpq25Near{background:linear-gradient(180deg,#fffbd017,#fff3a539);border:3px solid #ffc85c;box-shadow:0 0 0 5px #fff1b65c,0 0 24px #ffc96eaa;outline:none}'+
+'.vpq25Hit:hover,.vpq25Hit:focus-visible,.vpq25Hit.vpq25Near{background:linear-gradient(180deg,#fffbd017,#fff3a539);border:2px solid #f0c770;box-shadow:0 0 0 2px #fff1b63f;outline:none}'+
 '.vpq25Hit span{position:absolute;bottom:-4%;left:50%;transform:translateX(-50%);padding:4px 7px;border:2px solid #a98cd5;background:linear-gradient(#fff,#f9e9fa);color:#514779;border-radius:16px;font-size:clamp(10px,1.05vw,13px);font-weight:900;white-space:nowrap;box-shadow:0 2px 0 #9473ac44,0 4px 8px #53678722}.vpq25Hit.vpq25Near span{background:linear-gradient(#fff8d8,#ffe8a5);border-color:#e4aa43;color:#714e2e;box-shadow:0 5px 0 #c78e3c60,0 0 15px #ffe89fb0}.vpq25Hit.vpq25Near:after{content:"E · INTERACT";position:absolute;top:2%;left:50%;transform:translateX(-50%);border-radius:13px;border:2px solid #e4ad53;background:#fff9de;color:#765321;font-size:11px;font-weight:900;padding:5px 9px;white-space:nowrap;box-shadow:0 3px 12px #d8b05955;pointer-events:none}'+
 '@media(max-width:620px){.vpq25Hit span{font-size:10px;padding:5px 4px;white-space:normal;min-width:80%;line-height:1.1}}';
 document.head.appendChild(styles);
@@ -359,8 +388,9 @@ function refresh(){
  if(old?.dataset.room===room)return;
  old?.remove();
  const div=document.createElement('div');div.id='vpq25Hotspots';div.className='vpq25Hotspots';div.dataset.room=room;
- div.innerHTML=spec[room].map(p=>'<button type="button" class="vpq25Hit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpq25act="'+p.action+'" aria-label="Open '+p.label+'"><span>'+p.label+'</span></button>').join('');
- div.addEventListener('click',event=>{const b=event.target.closest('[data-vpq25act]');if(b)api.doAction(b.dataset.vpq25act)});
+ div.innerHTML=spec[room].map(p=>'<button type="button" class="vpq25Hit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpq25act="'+p.action+'" aria-label="Open '+p.label+'"><span>'+p.label+'</span></button>').join('')
+ if(room==='treatment')div.innerHTML+=wardHelpPins.map(p=>'<button type="button" class="vpqWardHelpPin" style="left:'+p.x+'%;top:'+p.y+'%" data-vpqward-help="'+p.key+'" title="About '+wardHelp[p.key].title+'" aria-label="About '+wardHelp[p.key].title+'">?</button>').join('');
+ div.addEventListener('click',event=>{const help=event.target.closest('[data-vpqward-help]');if(help){event.preventDefault();event.stopPropagation();wardHelpModal(help.dataset.vpqwardHelp);return}const b=event.target.closest('[data-vpq25act]');if(b)api.doAction(b.dataset.vpq25act)});
  stage.appendChild(div);
 }
 function nearest(room,x){
