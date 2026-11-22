@@ -201,7 +201,7 @@ function practice(){
  challenges.map((c,i)=>'<details class="vra-case" '+(reveal[i]!==undefined?'open':'')+'><summary>🏥 '+c.title+' · '+c.species+(reveal[i]===undefined?' · Not attempted':reveal[i]===c.answer?' · ✓ Correct':' · Review')+'</summary>'+
  table(['Value','Patient','Reference interval'],c.data)+
  '<p><b>'+c.q+'</b></p>'+
- c.opts.map((option,j)=>'<button class="vra-choice '+(reveal[i]!==undefined?(j===c.answer?'vra-good':j===reveal[i]?'vra-wrong':''):'')+'" type="button" data-vpq-report-answer="'+i+':'+j+'">'+String.fromCharCode(65+j)+'. '+option+'</button>').join('')+
+ c.opts.map((option,j)=>(j+i*3+1)%c.opts.length).map(j=>'<button class="vra-choice '+(reveal[i]!==undefined?(j===c.answer?'vra-good':j===reveal[i]?'vra-wrong':''):'')+'" type="button" data-vpq-report-answer="'+i+':'+j+'">'+String.fromCharCode(65+((j-i*3-1+c.opts.length*10)%c.opts.length))+'. '+c.opts[j]+'</button>').join('')+
  (reveal[i]!==undefined?'<div class="vra-result '+(reveal[i]===c.answer?'':'vra-wrong')+'"><b>'+(reveal[i]===c.answer?'✓ Correct interpretation':'Review the physiology')+'</b><p>'+c.why+'</p></div>':'')+
  '<p class="vra-small">Educational example intervals only; compare with the printed patient-specific range.</p></details>').join('')+
  '<div class="vra-btns">'+link('start','← Report-reading map')+'</div>';
