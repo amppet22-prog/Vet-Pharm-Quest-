@@ -78,6 +78,12 @@
       "answer": "Nonthyroidal illness or drug effects can reduce measured hormone.",
       "why": "Thyroid hormone sets the pace of metabolism, so lowering it during illness saves energy and protein when the animal is not eating, is catabolic, and needs its reserves to fight the problem. Fasting alone produces the same pattern, which supports this.\nSo always check after they have recovered.",
       "slide": "Exam 2 lecture 12 · source-derived mechanism review"
+    },
+    "pharm-e2-autonomic13-015": {
+      "prompt": "What is prazosin's mechanism and urinary indication?",
+      "answer": "α1 antagonist; reduces urethral smooth-muscle tone thus promoting urination",
+      "why": "It may help functional urethral outflow resistance; it cannot remove a urethral stone.",
+      "slide": "Lecture 13 · submitted course notes, clinically reviewed"
     }
   },
   "custom": [
