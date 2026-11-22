@@ -48,7 +48,7 @@ function chart(kind,id){
  '<div class="vpq-unified-two">'+panel('Presenting concern / history',c.history)+panel('Signalment',c.signalment)+'</div>'+panel('Examination & supplied findings',c.exam)+
  (kind==='pharm'?'<p class="vpq-unified-note">This is an original pharmacology case. The course case provides only the information shown; the Treatment Ward’s general lab games are not this patient’s actual results.</p>':'')+
  (kind==='hospital'?'<p class="vpq-unified-note">Laboratory timepoints and branching outcomes are available inside this specific simulated hospitalization case.</p>':'')+
- '<div class="vpq-unified-actions">'+button(kind,id,kind==='pharm'?'🩺 Begin / replay patient decisions':kind==='journey'?'🐾 Begin / replay complete patient journey':'⭐ Begin / replay hospitalization','start')+
+ '<div class="vpq-unified-actions">'+button(kind,id,kind==='pharm'?'🩺 Start / replay exam decisions':kind==='journey'?'🐾 Resume / begin patient journey':'⭐ Resume / begin hospitalization','start')+
  button(kind,id,'🏥 View chart in Treatment Ward','treatment')+
  button(kind,id,'🩺 View chart in Exam Room','exam')+
  '<button data-vpq-unified="back">← All patient records</button><button data-vpq-unified="ward">🧪 Open general Treatment diagnostics</button></div>'+
@@ -58,8 +58,8 @@ function begin(kind,id){
  if(!get(kind,id))return home();
  sync(kind,id,kind==='pharm'?'Exam decisions':'Clinical journey begun');
  if(kind==='pharm'){api.changeRoom?.('exam');return api.startCase?.(id)}
- if(kind==='journey')return window.VPQ_ADVANCED_PATIENT_JOURNEY?.start?.(id);
- if(kind==='hospital')return window.VPQ_ADVANCED_HOSPITALIZATION?.start?.(id);
+ if(kind==='journey')return (window.VPQ_ADVANCED_PATIENT_JOURNEY?.resume||window.VPQ_ADVANCED_PATIENT_JOURNEY?.start)?.(id);
+ if(kind==='hospital')return (window.VPQ_ADVANCED_HOSPITALIZATION?.resume||window.VPQ_ADVANCED_HOSPITALIZATION?.start)?.(id);
 }
 function go(kind,id,room){if(!get(kind,id))return home();sync(kind,id,'Chart reviewed');api.changeRoom?.(room);chart(kind,id)}
 function init(context){
