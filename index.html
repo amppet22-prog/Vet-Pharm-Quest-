@@ -4182,27 +4182,17 @@ function vpqHyQuestions(lecture){
  vpqHyQuestionRounds.set(lecture,shuffled);return shuffled;
 }
 function vpqHyExplain(q){
- const prompt=String(q.q||'').toLowerCase(),answer=String(q.options?.[q.answer]||'');
- const raw=String(q.why||'').trim(),importOnly=/^uploaded answer key\s*:/i.test(raw);
- if(!importOnly&&raw.length>70)return '<div class="vpqHyWhySoft"><b>💡 Mechanism and clinical WHY</b><p>'+escapeHtml(raw)+'</p></div>';
- const curated=[
-  [/methimazole|thyroperoxidase|thyroid peroxidase/, 'Methimazole blocks thyroid peroxidase-mediated iodide organification and coupling needed to synthesize new T3/T4. It does not immediately remove stored thyroid hormone. Thyroid-related tachycardia may persist early in therapy; if it persists after T4 normalizes, assess other cardiac or systemic causes.'],
-  [/(negative.feedback|suppression of trh|elevated circulating t4|circulating t4 concentrations)/, 'Elevated T4/T3 feeds back on hypothalamic TRH and pituitary TSH secretion, decreasing both. Autonomously functioning thyroid tissue can produce excess hormone despite low TSH.'],
-  [/(sodium.iodide symporter|\bnis\b|iodide uptake)/, 'The sodium-iodide symporter transports iodide into thyroid follicular cells. TPO later supports organification and coupling in the follicular colloid, so uptake and organification are distinct drug targets.'],
-  [/(glut4|insulin receptor|insulin binding)/, 'Insulin receptor signaling moves GLUT4 transporters toward muscle and adipose membranes, increasing facilitated glucose uptake. Glucose does not bind insulin to cross the membrane.'],
-  [/(diabetic ketoacidosis|\bdka\b|ketone)/, 'Inadequate effective insulin permits lipolysis and hepatic ketogenesis. Accumulating ketoacids cause metabolic acidosis; osmotic diuresis causes dehydration and total-body electrolyte depletion.'],
-  [/(loop diuretic|furosemide|nkcc2)/, 'Loop diuretics inhibit NKCC2 in the thick ascending limb, increasing renal NaCl and water losses and reducing medullary concentration gradient formation. Monitor electrolytes and volume.'],
-  [/(spironolactone|aldosterone antagonist)/, 'Mineralocorticoid receptor antagonism reduces aldosterone-dependent sodium retention and potassium secretion in the distal nephron; monitor serum potassium.'],
-  [/(ace inhibitor|angiotensin.converting|enalapril|benazepril)/, 'ACE inhibition reduces angiotensin II and aldosterone effects, decreasing vasoconstriction and sodium retention. Monitor blood pressure, kidney function and potassium.'],
-  [/(beta.block|atenolol|propranolol)/, 'Cardiac beta-1 blockade reduces adrenergic heart-rate and contractility responses; patient disease and beta selectivity affect drug choice.'],
-  [/(bronchodilator|albuterol|terbutaline|clenbuterol)/, 'Beta-2 agonists increase cAMP in airway smooth muscle to promote relaxation. Systemic adrenergic effects can cause tachycardia or tremor.'],
-  [/(omeprazole|pantoprazole|proton.pump)/, 'Proton pump inhibitors block the parietal cell H+/K+-ATPase, decreasing newly secreted gastric acid rather than directly neutralizing existing acid.'],
-  [/(maropitant|nk1 receptor)/, 'NK1 receptor blockade interrupts substance P-driven emetic signaling; controlling vomiting does not necessarily treat its underlying cause.']
- ];
- const matched=curated.find(([pattern])=>pattern.test(prompt));
- if(matched)return '<div class="vpqHyWhySoft"><b>💡 Mechanism and clinical WHY</b><p>'+escapeHtml(matched[1])+'</p></div>';
- if(importOnly)return '<div class="vpqHyWhySoft"><b>💡 Explanation review</b><p>⚠ Full physiology explanation is still pending review. The uploaded answer key alone is not a rationale.</p></div>';
- return '<div class="vpqHyWhySoft"><b>💡 Mechanism and clinical WHY</b><p>'+escapeHtml(raw)+'</p></div>';
+ // Imported answer keys are not rationales. For direct recall cards, the
+ // green correct-answer panel is complete feedback; omit a redundant WHY box.
+ // The audited mechanistic/clinical cards carry their own reviewed explanation.
+ const raw=String(q.why||'').trim();
+ if(!raw||/^uploaded answer key\s*:/i.test(raw))return '';
+ const answer=String(q.options?.[q.answer]||'').trim();
+ const normalized=text=>String(text||'').replace(/^[a-d][.\s]+/i,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+ if(normalized(raw)===normalized(answer)||normalized(raw)==='correct answer '+normalized(answer))return '';
+ // Very short lines that simply restate a receptor/drug name are answer keys.
+ if(raw.length<36&&!/[.!?].+/.test(raw))return '';
+ return '<div class="vpqHyWhySoft"><b>💡 '+(q.rationaleStatus==='reviewed-mechanism'?'Clinical reasoning · WHY':'Mechanism and clinical WHY')+'</b><p>'+escapeHtml(raw)+'</p></div>';
 }
 function vpqExam2HighYield(mode='menu',lecture='all',position=0){
  const db=window.VPQ_PHARM_NEXT||{drugs:[],questions:[]};
@@ -4290,7 +4280,7 @@ $('modalBody').addEventListener('click',ev=>{
  const reward=masterQuestion('study',String(q.id),correct);
  persist();updateHUD();
  const rewardText=correct?(reward.xp?'<p class="vpqMCQReward">✨ +'+reward.xp+' EXP'+(reward.coins?' · +'+reward.coins+' 🪙':'')+' · added to your clinic wallet!</p>': '<p class="tiny">✓ Correct · EXP for this question was already earned. Keep practicing!</p>'):'<p class="tiny">No EXP this time—review the explanation and try again in a later round.</p>';
- area.innerHTML='<div class="response '+(correct?'':'bad')+'"><b>'+(correct?'✅ Correct':'💡 Review this mechanism')+'</b><div class="vpqHyAnswerGreen"><b>Correct answer:</b> '+escapeHtml(q.options[q.answer])+'</div>'+vpqHyExplain(q)+rewardText+(q.reviewFlag?'<details><summary>⚠ Source caution</summary><p>'+escapeHtml(q.reviewFlag)+'</p></details>':'')+(q.sourceOriginal?'<details><summary>Original uploaded-guide question/answer</summary><p>'+escapeHtml(q.sourceOriginal.q||q.sourceOriginal.question||'')+'</p><p><b>Original answer:</b> '+escapeHtml(q.sourceOriginal.options?.[q.sourceOriginal.answer]||'')+'</p></details>':'')+'</div>';
+ area.innerHTML='<div class="response '+(correct?'':'bad')+'"><b>'+(correct?'✅ Correct':'💡 Review this mechanism')+'</b><div class="vpqHyAnswerGreen"><b>Correct answer:</b> '+escapeHtml(q.options[q.answer])+'</div>'+vpqHyExplain(q)+rewardText+(q.reviewFlag&&!/^(course-specific wording|clinical or receptor-specific interpretation|course-specific clinical assertion|course-specific wording or treatment recommendation)/i.test(q.reviewFlag)?'<details class="vpqHySourceCaution"><summary>⚠ Important source/clinical caution</summary><p>'+escapeHtml(q.reviewFlag)+'</p></details>':'')+(q.sourceOriginal?'<details><summary>Original uploaded-guide question/answer</summary><p>'+escapeHtml(q.sourceOriginal.q||q.sourceOriginal.question||'')+'</p><p><b>Original answer:</b> '+escapeHtml(q.sourceOriginal.options?.[q.sourceOriginal.answer]||'')+'</p></details>':'')+'</div>';
  $('modalBody').querySelectorAll('[data-vpqhy-answer]').forEach(el=>{el.disabled=true;el.classList.remove('vpqHyRight','vpqHyWrong');if(Number(el.dataset.vpqhyAnswer)===q.answer)el.classList.add('vpqHyRight');if(Number(el.dataset.vpqhyAnswer)===chosen&&chosen!==q.answer)el.classList.add('vpqHyWrong')});
  return;
  }
