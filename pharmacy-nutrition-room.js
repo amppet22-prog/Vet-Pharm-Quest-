@@ -125,8 +125,8 @@ function drawing(){
  '</g>'}).join('')+
  '<path d="M11 238h63" stroke="#9bb3ad" stroke-width="2"/><text x="42" y="251" text-anchor="middle" font-size="8" fill="#577d75">XS · S · M · L</text>'+
  '</g>'+
-// Lower-wall leash organizer at accessible reach, away from the lab sign and top wall.
- '<g font-family="Arial" font-weight="800">'+
+// Lower-wall leash organizer fully inside the right frame.
+ '<g transform="translate(-15 0)" font-family="Arial" font-weight="800">'+
  '<rect x="900" y="358" width="94" height="83" rx="7" fill="#eef6ec" stroke="#91b8a8" stroke-width="3"/>'+
  '<rect x="907" y="365" width="80" height="11" rx="4" fill="#a1bcae" stroke="#779b8d" stroke-width="1.3"/>'+
  '<text x="946" y="374" font-size="8" text-anchor="middle" fill="#3e7166">LEADS &amp; COLLARS</text>'+
@@ -157,7 +157,7 @@ function drawing(){
  // Door into Mechanism Lab at far right, with vertical wall frame.
  '<g transform="translate(914 150)"><rect x="0" y="0" width="74" height="193" rx="6" fill="#7da5a6" stroke="#517f85" stroke-width="9"/><rect x="9" y="12" width="52" height="162" fill="#d3e9e8"/><text x="35" y="59" text-anchor="middle" font-size="25">🔬</text><text x="35" y="82" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="800" fill="#4a7a83">LAB</text><circle cx="17" cy="121" r="6" fill="#ebc77e"/></g>'+
  // Aquatic turtle enclosure: basking ramp, glass depth, filter and detailed friendly turtle.
- '<g transform="translate(714 361)">'+
+ '<g transform="translate(675 343)">'+
  '<ellipse cx="92" cy="93" rx="97" ry="13" fill="#526a66" opacity=".18"/>'+
  '<path d="M9 9L165 9L173 81L9 87Z" fill="#bdded8" fill-opacity=".48" stroke="#79a7a2" stroke-width="5"/>'+
  '<path d="M13 60Q84 48 167 59L170 78L12 82Z" fill="#a5d7d4" fill-opacity=".7"/>'+
@@ -208,18 +208,18 @@ function refresh(){
  stage.querySelector('#vpqPNHotspots')?.remove();
  if(stage.dataset.room!=='pharmacy')return;
  const node=document.createElement('div');node.id='vpqPNHotspots';
- node.dataset.roomBuild='20261122-v6';
+ node.dataset.roomBuild='20261122-v7';
  node.innerHTML='<button type="button" class="vpqPNHot vpqPNDrugs" data-vpqpnaction="pharmacy" aria-label="Open the medication cabinets and drug encyclopedia"></button>'+
- '<button type="button" class="vpqPNStudyLink" data-vpqpn-study="1" aria-label="Go to Student Study Lounge for pharmacology and toxicology lessons, cases and practice">📚 Learn &amp; practice Pharm / Tox in Student Lounge →</button>'+ 
+ '<button type="button" class="vpqPNStudyLink" data-vpqpn-study="1" aria-label="Go to Student Study Lounge for pharmacology and toxicology lessons, cases and practice">📚 Student Lounge →</button>'+ 
  '<button type="button" class="vpqPNHot vpqPNRounds" data-vpqpnaction="vpqPharmVisualRounds" aria-label="Open clinical pharmacology visual cases and testing"><span>🩺 Clinical Rounds</span></button>'+ 
- '<button type="button" class="vpqPNHot vpqPNFood" data-vpqpnaction="vpqNutritionGuide" aria-label="Open the pet nutrition corner and reference cards"><span>🥣 Pet Nutrition</span></button>'+
+ '<button type="button" class="vpqPNHot vpqPNFood" data-vpqpnaction="vpqNutritionGuide" aria-label="Open the pet nutrition corner and reference cards"></button>'+
  '<button type="button" class="vpqPNHot vpqPNTox" data-vpqpnaction="vpqToxPreview" aria-label="Open the toxicology caution book reference preview"><span>☣️ Caution Book</span></button>'+
  '<button type="button" class="vpqPNHot vpqPNLab" data-vpqpnaction="vpqMechEnter" aria-label="Enter the mechanism lab"><span>🔬 Lab</span></button>'+
  '<button type="button" class="vpqPNHelp vpqPNHelpDrugs" data-vpqpnhelp="drugs" aria-label="What are the Drug Shelves for?" title="About Drug Shelves">?</button>'+
  '<button type="button" class="vpqPNHelp vpqPNHelpRounds" data-vpqpnhelp="rounds" aria-label="What are Clinical Rounds for?" title="About Clinical Rounds">?</button>'+
  '<button type="button" class="vpqPNHelp vpqPNHelpFood" data-vpqpnhelp="food" aria-label="What is Pet Nutrition for?" title="About Pet Nutrition">?</button>'+
  '<button type="button" class="vpqPNHelp vpqPNHelpTox" data-vpqpnhelp="tox" aria-label="What is the Caution Book for?" title="About the Caution Book">?</button>'+
- '<span class="vpqPNVersion" aria-label="Pharmacy room version">Pharmacy room v6</span>'+ 
+ '<span class="vpqPNVersion" aria-label="Pharmacy room version">Pharmacy room v7</span>'+ 
  '<button type="button" class="vpqPNHelp vpqPNHelpLab" data-vpqpnhelp="lab" aria-label="What is the Mechanism Lab for?" title="About the Mechanism Lab">?</button>';
  node.addEventListener('click',e=>{const help=e.target.closest('[data-vpqpnhelp]');if(help){e.preventDefault();e.stopPropagation();pharmacyHelp(help.dataset.vpqpnhelp);return}const go=e.target.closest('[data-vpqpn-study]');if(go){changeRoom('study');return}const b=e.target.closest('[data-vpqpnaction]');if(b)doAction(b.dataset.vpqpnaction)});
  stage.appendChild(node);
@@ -233,12 +233,13 @@ style.textContent='.vpqPharmNutritionArt{position:absolute;inset:0;width:100%;he
 '.vpqPNHot span{position:absolute;bottom:3%;left:50%;transform:translate(-50%,0);white-space:nowrap;border:2px solid #7ea9a6;background:#fffdf5;color:#375f68;font-size:11px;font-weight:900;padding:5px 8px;border-radius:13px;box-shadow:0 3px 0 #567f8030}'+
 '.vpqPNRounds{left:10%;top:68%;width:30%;height:20%;border:1px solid transparent;background:transparent}.vpqPNRounds span{bottom:6%;background:#fff5eb;border-color:#e4b6a8;color:#895568}'+
  '.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:45%;top:14%;width:25%;height:49%}.vpqPNFood span{bottom:0%;font-size:10px;padding:3px 7px}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
-'.vpqPNStudyLink{position:absolute;z-index:6;left:9%;top:10%;width:38%;pointer-events:auto;border:2px solid #8a94c8;border-radius:12px;background:#fffdf2;color:#534c85;padding:7px 10px;font-size:11px;font-weight:900;box-shadow:0 3px 8px #35436633;cursor:pointer}.vpqPNStudyLink:hover,.vpqPNStudyLink:focus-visible{background:#fff2c7;outline:2px solid #f5c66f}'+
+'.vpqPNStudyLink{position:absolute;z-index:6;left:4%;top:83%;width:17%;pointer-events:auto;border:1.5px solid #a6a7c8;border-radius:10px;background:#fffdf6e8;color:#534c85;padding:5px 6px;font-size:10px;font-weight:850;box-shadow:0 2px 5px #3543661c;cursor:pointer}.vpqPNStudyLink:hover,.vpqPNStudyLink:focus-visible{background:#fff2c7;outline:2px solid #f5c66f}'+
+'.vpqPNFood span{display:none!important}'+
 '.vpqPNVersion{position:absolute;right:2%;bottom:2%;pointer-events:none;font-size:9px;font-weight:900;color:#416b65;background:#f2fff4dd;border:1px solid #9ebbb2;border-radius:6px;padding:2px 5px;z-index:8}'+
 '/* Small floating question marks explain each interactable section without blocking entry. */'+
 '.vpqPNHelp{position:absolute;pointer-events:auto;z-index:9;width:24px;height:24px;padding:0;display:grid;place-items:center;border:2px solid #79a7ac;border-radius:50%;background:#fcfffa;color:#276775;font-size:15px;font-weight:1000;box-shadow:0 2px 5px #254a4a30;transform:none!important;line-height:1;cursor:help}'+
 '.vpqPNHelp:hover,.vpqPNHelp:focus-visible{background:#d6f3ed;outline:2px solid #447f86;outline-offset:2px}'+
-'.vpqPNHelpDrugs{left:37%;top:19%}.vpqPNHelpRounds{left:36%;top:70%}.vpqPNHelpFood{left:65%;top:16%}.vpqPNHelpTox{left:87%;top:24%}.vpqPNHelpLab{left:96%;top:27%}'+
+'.vpqPNHelpDrugs{left:37%;top:19%}.vpqPNHelpRounds{left:37%;top:76%}.vpqPNHelpFood{left:68%;top:17%}.vpqPNHelpTox{left:88%;top:28%}.vpqPNHelpLab{left:96%;top:30%}'+
 '.vpqPNFoodCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin:12px 0}.vpqPNFoodCards button{display:block;text-align:left;background:#f6fcf7;border:2px solid #b9d7c8;border-radius:13px;padding:13px}.vpqPNFoodCards b,.vpqPNFoodCards small{display:block}.vpqPNFoodCards small{color:#617e75;font-size:12px;margin-top:6px}'+
 '@media(max-width:620px){.vpqPNHot span{font-size:9px;padding:3px 4px}.vpqPNLab span{right:0}.vpqPNTox span{bottom:12%}}';
 document.head.appendChild(style);
