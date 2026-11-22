@@ -67,7 +67,7 @@ function drawing(){
  '<rect x="175" y="96" width="47" height="43" rx="5" fill="#fffdf3" stroke="#acc9be" stroke-width="3"/><text x="198" y="121" font-size="12">Rx</text>'+
  '<rect x="242" y="97" width="48" height="42" rx="5" fill="#d6ece2" stroke="#8fb3a1" stroke-width="3"/><text x="266" y="123" font-size="12">Rx</text>'+
  '<rect x="27" y="167" width="109" height="50" rx="5" fill="#fff9ec" stroke="#b7bdab" stroke-width="4"/><text x="81" y="189" font-size="16">CLINIC</text><text x="81" y="207" font-size="13">SUPPLIES</text>'+
- '<rect x="176" y="166" width="108" height="50" rx="6" fill="#f5eee0" stroke="#bac2b7" stroke-width="4"/><text x="230" y="191" font-size="18">💊</text><text x="230" y="209" font-size="12">SHELVES</text></g>'+
+ '<rect x="176" y="166" width="108" height="50" rx="6" fill="#f5eee0" stroke="#bac2b7" stroke-width="4"/><text x="230" y="191" font-size="18">💊</text><text x="230" y="209" font-size="12">SUPPLIES</text></g>'+
 
  // Clean medication packaging details, confined to each label (no lines across the bottles).
  '<g font-family="Arial" text-anchor="middle" font-weight="800">'+
@@ -124,6 +124,21 @@ function drawing(){
  '<path d="M'+(lx+5)+' '+(y+23)+'Q42 '+(y+29)+' '+(rx-5)+' '+(y+23)+'" fill="none" stroke="#a4c4c0" stroke-width="1.3"/>'+
  '</g>'}).join('')+
  '<path d="M11 238h63" stroke="#9bb3ad" stroke-width="2"/><text x="42" y="251" text-anchor="middle" font-size="8" fill="#577d75">XS · S · M · L</text>'+
+ '</g>'+
+// Lower-wall leash organizer at accessible reach, away from the lab sign and top wall.
+ '<g font-family="Arial" font-weight="800">'+
+ '<rect x="900" y="358" width="94" height="83" rx="7" fill="#eef6ec" stroke="#91b8a8" stroke-width="3"/>'+
+ '<rect x="907" y="365" width="80" height="11" rx="4" fill="#a1bcae" stroke="#779b8d" stroke-width="1.3"/>'+
+ '<text x="946" y="374" font-size="8" text-anchor="middle" fill="#3e7166">LEADS &amp; COLLARS</text>'+
+ '<path d="M906 382H986" stroke="#789d93" stroke-width="3"/>'+
+ [0,1,2].map(i=>{const x=919+i*26,c=['#7c92be','#dc97a8','#77a992'][i];return '<g>'+
+ '<circle cx="'+x+'" cy="382" r="3.5" fill="#d5e1dc" stroke="#65877e" stroke-width="1.5"/>'+
+ '<path d="M'+x+' 385Q'+(x-11)+' 399 '+(x-8)+' 414Q'+x+' 425 '+(x+8)+' 414L'+(x+6)+' 391" fill="none" stroke="'+c+'" stroke-width="4.2" stroke-linecap="round"/>'+
+ '<path d="M'+(x-8)+' 414Q'+x+' 426 '+(x+8)+' 414" fill="none" stroke="#f2faf6" stroke-width="1"/>'+
+ '<rect x="'+(x+3)+'" y="392" width="7" height="7" rx="2" fill="#e9efec" stroke="#8daba3"/>'+
+ '<ellipse cx="'+x+'" cy="428" rx="10" ry="4.5" fill="none" stroke="'+c+'" stroke-width="3.5"/>'+
+ '<rect x="'+(x+7)+'" y="424" width="4" height="7" rx="1" fill="#e6eceb" stroke="#8da5a2"/>'+
+ '</g>'}).join('')+
  '</g>'+
 // Carrier storage above the drug shelves, with vents and doors.
  '<g transform="translate(126 47)"><rect width="77" height="40" rx="8" fill="#e7d7c8" stroke="#a9aaa8" stroke-width="4"/>'+
@@ -193,7 +208,7 @@ function refresh(){
  stage.querySelector('#vpqPNHotspots')?.remove();
  if(stage.dataset.room!=='pharmacy')return;
  const node=document.createElement('div');node.id='vpqPNHotspots';
- node.dataset.roomBuild='20261122-v5';
+ node.dataset.roomBuild='20261122-v6';
  node.innerHTML='<button type="button" class="vpqPNHot vpqPNDrugs" data-vpqpnaction="pharmacy" aria-label="Open the medication cabinets and drug encyclopedia"></button>'+
  '<button type="button" class="vpqPNStudyLink" data-vpqpn-study="1" aria-label="Go to Student Study Lounge for pharmacology and toxicology lessons, cases and practice">📚 Learn &amp; practice Pharm / Tox in Student Lounge →</button>'+ 
  '<button type="button" class="vpqPNHot vpqPNRounds" data-vpqpnaction="vpqPharmVisualRounds" aria-label="Open clinical pharmacology visual cases and testing"><span>🩺 Clinical Rounds</span></button>'+ 
@@ -204,7 +219,7 @@ function refresh(){
  '<button type="button" class="vpqPNHelp vpqPNHelpRounds" data-vpqpnhelp="rounds" aria-label="What are Clinical Rounds for?" title="About Clinical Rounds">?</button>'+
  '<button type="button" class="vpqPNHelp vpqPNHelpFood" data-vpqpnhelp="food" aria-label="What is Pet Nutrition for?" title="About Pet Nutrition">?</button>'+
  '<button type="button" class="vpqPNHelp vpqPNHelpTox" data-vpqpnhelp="tox" aria-label="What is the Caution Book for?" title="About the Caution Book">?</button>'+
- '<span class="vpqPNVersion" aria-label="Pharmacy room version">Pharmacy room v5</span>'+ 
+ '<span class="vpqPNVersion" aria-label="Pharmacy room version">Pharmacy room v6</span>'+ 
  '<button type="button" class="vpqPNHelp vpqPNHelpLab" data-vpqpnhelp="lab" aria-label="What is the Mechanism Lab for?" title="About the Mechanism Lab">?</button>';
  node.addEventListener('click',e=>{const help=e.target.closest('[data-vpqpnhelp]');if(help){e.preventDefault();e.stopPropagation();pharmacyHelp(help.dataset.vpqpnhelp);return}const go=e.target.closest('[data-vpqpn-study]');if(go){changeRoom('study');return}const b=e.target.closest('[data-vpqpnaction]');if(b)doAction(b.dataset.vpqpnaction)});
  stage.appendChild(node);
@@ -213,17 +228,17 @@ const style=document.createElement('style');
 style.textContent='.vpqPharmNutritionArt{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}'+
 '.stage[data-room="pharmacy"] .prop,.stage[data-room="pharmacy"] .roomdecor{display:none!important}'+
 '#vpqPNHotspots{position:absolute;inset:0;z-index:5;pointer-events:none}'+
-'.vpqPNHot{position:absolute;pointer-events:auto;border:2px solid #87a9a955;border-radius:12px;box-shadow:none;transform:none!important;background:#ffffff0d}'+
+'.vpqPNHot{position:absolute;pointer-events:auto;border:1px solid transparent;border-radius:12px;box-shadow:none;transform:none!important;background:transparent}'+
 '.vpqPNHot:hover{border-color:#78aeb6;background:#e1f5ef16;outline:none}.vpqPNHot:focus-visible{border-color:#5f99a8;background:#e1f5ef16;outline:2px solid #568ea4;outline-offset:2px}'+
 '.vpqPNHot span{position:absolute;bottom:3%;left:50%;transform:translate(-50%,0);white-space:nowrap;border:2px solid #7ea9a6;background:#fffdf5;color:#375f68;font-size:11px;font-weight:900;padding:5px 8px;border-radius:13px;box-shadow:0 3px 0 #567f8030}'+
-'.vpqPNRounds{left:10%;top:68%;width:30%;height:20%;border:2px solid #e4aa91;background:#fff4da26}.vpqPNRounds span{bottom:6%;background:#fff5eb;border-color:#e4b6a8;color:#895568}'+
+'.vpqPNRounds{left:10%;top:68%;width:30%;height:20%;border:1px solid transparent;background:transparent}.vpqPNRounds span{bottom:6%;background:#fff5eb;border-color:#e4b6a8;color:#895568}'+
  '.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:45%;top:14%;width:25%;height:49%}.vpqPNFood span{bottom:0%;font-size:10px;padding:3px 7px}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
 '.vpqPNStudyLink{position:absolute;z-index:6;left:9%;top:10%;width:38%;pointer-events:auto;border:2px solid #8a94c8;border-radius:12px;background:#fffdf2;color:#534c85;padding:7px 10px;font-size:11px;font-weight:900;box-shadow:0 3px 8px #35436633;cursor:pointer}.vpqPNStudyLink:hover,.vpqPNStudyLink:focus-visible{background:#fff2c7;outline:2px solid #f5c66f}'+
 '.vpqPNVersion{position:absolute;right:2%;bottom:2%;pointer-events:none;font-size:9px;font-weight:900;color:#416b65;background:#f2fff4dd;border:1px solid #9ebbb2;border-radius:6px;padding:2px 5px;z-index:8}'+
 '/* Small floating question marks explain each interactable section without blocking entry. */'+
 '.vpqPNHelp{position:absolute;pointer-events:auto;z-index:9;width:24px;height:24px;padding:0;display:grid;place-items:center;border:2px solid #79a7ac;border-radius:50%;background:#fcfffa;color:#276775;font-size:15px;font-weight:1000;box-shadow:0 2px 5px #254a4a30;transform:none!important;line-height:1;cursor:help}'+
 '.vpqPNHelp:hover,.vpqPNHelp:focus-visible{background:#d6f3ed;outline:2px solid #447f86;outline-offset:2px}'+
-'.vpqPNHelpDrugs{left:37%;top:19%}.vpqPNHelpRounds{left:36%;top:70%}.vpqPNHelpFood{left:65%;top:16%}.vpqPNHelpTox{left:87%;top:24%}.vpqPNHelpLab{left:96%;top:29%}'+
+'.vpqPNHelpDrugs{left:37%;top:19%}.vpqPNHelpRounds{left:36%;top:70%}.vpqPNHelpFood{left:65%;top:16%}.vpqPNHelpTox{left:87%;top:24%}.vpqPNHelpLab{left:96%;top:27%}'+
 '.vpqPNFoodCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin:12px 0}.vpqPNFoodCards button{display:block;text-align:left;background:#f6fcf7;border:2px solid #b9d7c8;border-radius:13px;padding:13px}.vpqPNFoodCards b,.vpqPNFoodCards small{display:block}.vpqPNFoodCards small{color:#617e75;font-size:12px;margin-top:6px}'+
 '@media(max-width:620px){.vpqPNHot span{font-size:9px;padding:3px 4px}.vpqPNLab span{right:0}.vpqPNTox span{bottom:12%}}';
 document.head.appendChild(style);
