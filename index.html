@@ -1000,6 +1000,7 @@ body.vpq-reading-large #modalBody .vpqImportedFeedbackHeading{font-size:20px!imp
 <script src="pharm-exam2-gastrointestinal-lecture17-user-mcq.js?v=20261121-pharm-comprehensive-audit2"></script>
 <script src="pharm-exam2-behavior-neurology-lectures18-20-user-mcq.js?v=20261121-pharm-comprehensive-audit2"></script>
 <script src="pharm-exam2-patient-cases-uploaded.js?v=20261121-pharm-comprehensive-audit2"></script>
+<script src="multistep-clinical-rounds-v1.js?v=20261121-clinical-rounds8"></script>
 <script src="pharm-exam2-objective-cards.js?v=20261117-clinical-flags24"></script>
 <script src="navle-pharm-expansion.js?v=20261109-navle1"></script>
 <script src="clinpath-reference-hub.js?v=20261114-phaseC3-6a"></script>
@@ -1336,7 +1337,7 @@ if(!state.questionHistory||typeof state.questionHistory!=='object')state.questio
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));localStorage.setItem(EDITS_KEY,JSON.stringify(edits))}catch{}}
 function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function patch(obj,type){return {...obj,...(edits[type]?.[obj.id]||{})}}
-function dataCases(){return D.cases.concat(window.VPQ_CLINICAL_PRACTICE?.caseFiles||[],window.VPQ_NAVLE_EXPANSION?.caseFiles||[],window.VPQ_CLINPATH_LAB?.cases||[],window.VPQ_ADVANCED_LAB?.cases||[],window.VPQ_SURGERY_NECROPSY?.caseFiles||[],window.VPQ_BLOOD_SMEAR_LAB?.cases||[],window.VPQ_PATHOGEN_ATLAS?.cases||[],window.VPQ_PHARM_EXAM2_PATIENT_FILES||[]).map(x=>patch(x,'cases'))} function dataDrugs(){return D.drugs.map(x=>patch(x,'drugs'))} function dataStudy(){return D.study.map(x=>patch(x,'study'))}
+function dataCases(){return D.cases.concat(window.VPQ_CLINICAL_PRACTICE?.caseFiles||[],window.VPQ_NAVLE_EXPANSION?.caseFiles||[],window.VPQ_CLINPATH_LAB?.cases||[],window.VPQ_ADVANCED_LAB?.cases||[],window.VPQ_SURGERY_NECROPSY?.caseFiles||[],window.VPQ_BLOOD_SMEAR_LAB?.cases||[],window.VPQ_PATHOGEN_ATLAS?.cases||[],window.VPQ_PHARM_EXAM2_PATIENT_FILES||[],window.VPQ_MULTISTEP_CLINICAL_ROUNDS?.caseFiles||[]).map(x=>patch(x,'cases'))} function dataDrugs(){return D.drugs.map(x=>patch(x,'drugs'))} function dataStudy(){return D.study.map(x=>patch(x,'study'))}
 // Keep the last visited room independently of large save-state objects.
 const LAST_ROOM_KEY='vpq-v2-last-visited-room';
 const SESSION_ROOM_KEY='vpq-v2-session-room';
