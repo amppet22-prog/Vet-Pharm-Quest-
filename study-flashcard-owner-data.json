@@ -310,6 +310,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 15",
       "curated": true
+    },
+    {
+      "prompt": "What is the difference between theophylline and aminophylline?",
+      "answer": "They are fairly similar; the major difference is that aminophylline is often used for bronchodilation in small animals.",
+      "why": "Both are PDE inhibitors that raise cAMP --> interfere with Ca2+ mobilization --> bronchodilation.\nThey are also an adenosine receptor antagonsits which can cause alertness and bronchodilation.\nDecrease mast cell degranulation, increase mucociliary clearance, and can decrease diaphragm function, increase pulmonary artery pressure, and increase CNS sensitivity to PaCO2.",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwrcg6e9-k605u",
+      "domain": "pharmacology",
+      "lecture": "Lecture 15",
+      "curated": true
     }
   ],
   "hidden": []
