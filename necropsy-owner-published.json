@@ -3540,6 +3540,100 @@
       },
       "updated": "2026-11-20T23:16:45.158Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-78-2": {
+      "title": "Acute otitis externa",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-2-1795328300246-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-22 010927.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [],
+          "conditionId": "pathx-78-2"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-2-1795328301512-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "External ear canal can see ceruminous gland hyperplasia · Screenshot 2026-11-22 011523.png",
+          "type": "histology",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [],
+          "conditionId": "pathx-78-2"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-2-1795328302724-2.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-22 011528.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "78"
+          ],
+          "systems": [],
+          "conditionId": "pathx-78-2"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-78-2-1795328300246-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-22 010927.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "78"
+        ],
+        "systems": [],
+        "conditionId": "pathx-78-2"
+      },
+      "text": {
+        "title": "Acute otitis externa",
+        "gross": "**Acute:**\n• Auricles are red, warm and edematous\n• +/- purulent material\n**Chronic:**\n• Thickened, bosselated, hyperpigmented epidermis\n• May have stenosis of the external ear canal\n• Auricular cartilage becomes less pliable",
+        "mechanismSummary": "Rarely a primary condition as there is an underlying condition. \n**Predisposing factors: **\nConformation\n• Auricular phenotype\n• Breed\n• External ear moisture\n",
+        "dx": "**important term**Working identification: Acute otitis externa. Specimen site: Auricle / ear canal / middle ear. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "Mixed inflammation (neutrophils,macrophages, lymphocytes, plasma cells) with ceruminous gland hyperplasia (subacute to chronic) and fibrosis which effaces the dermal adnexa (chronic)",
+        "why": "Discharge (otorrhea), bleeding (otorrhagia), pain (otalgia). Acute auricle is red, warm and edematous, sometimes purulent. Gross, histology and clinical differentiation: Distinguish canal inflammation from swollen pinna hematoma.",
+        "visualClue": "",
+        "compare": "",
+        "notes": "**Instructor L78 · slides 7**\n**Etiology / pathogenesis:** Discharge (otorrhea), bleeding (otorrhagia), pain (otalgia).\n**Clinical differentiation:** Distinguish canal inflammation from swollen pinna hematoma.\nIf a primary case:\n Ectoparasites\n• Keratinization defects\n• Foreign bodies\n• Hypersensitivity reactions\n• Systemic immune mediated disorders\n• Endocrinopathies",
+        "grossSpecies": "[]",
+        "etiologyCategories": [
+          "bacterial",
+          "fungal",
+          "arthropod"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "catalogScope": "course",
+        "speciesOccurrence": "{\"dog\":\"common\",\"cat\":\"common\"}",
+        "hostScope": "unspecified",
+        "speciesEvidence": "",
+        "breedSizes": "[]",
+        "breedTags": "[]",
+        "breedEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-22T06:18:23.879Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
