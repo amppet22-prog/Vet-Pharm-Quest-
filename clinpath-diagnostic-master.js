@@ -78,6 +78,77 @@ function chart(id){
  return svg+'</svg>';
 }
 
+
+const clinicalDecisions={
+acth:[
+ ['Post-ACTH cortisol remains very low/flat','Adrenal cortisol reserve is inadequate; Addison disease or iatrogenic suppression possible','Electrolytes, steroid history, clinical condition; distinguish primary from secondary causes'],
+ ['Post-ACTH rises into normal lab interval','Adrenal glands respond; primary Addison disease less likely','Does NOT rule out HAC; interpret alongside clinical suspicion and other endocrine tests'],
+ ['Exaggerated response','HAC is a possibility, but different disease/nonadrenal illness can overlap','Review validated assay and use appropriate HAC testing']
+],
+lddst:[
+ ['4 h and 8 h suppressed','Negative feedback is intact under test conditions','HAC less likely in suitable dog; context and drugs matter'],
+ ['No suppression at 4 h or 8 h','Cortisol remains high despite dexamethasone feedback','HAC possible; this pattern alone does not distinguish PDH vs adrenal tumor'],
+ ['Suppressed at 4 h but high at 8 h','Escape response; suppression is not sustained','PDH possible; integrate signs and additional tests']
+],
+rest:[
+ ['Resting dog cortisol above 2 µg/dL','Typical spontaneous Addison disease is unlikely','It does not rule out all endocrine disorders'],
+ ['Resting cortisol below 2 µg/dL','The screening test cannot rule Addison out','Do ACTH stimulation before diagnosing; healthy dogs can also screen low'],
+ ['UCCR elevated','Urine cortisol burden can rise with HAC, stress or other illness','Do not diagnose HAC from a positive screen']
+],
+thyroid:[
+ ['Dog: ↓ tT4 + ↓ fT4 + ↑ TSH','Compatible with primary hypothyroidism if signs fit','Confirm meds/illness and laboratory method'],
+ ['Cat: ↑ tT4 with weight loss, tachycardia','Supports hyperthyroidism','Check blood pressure/renal function; thyroid correction may unmask CKD'],
+ ['Normal cat tT4 with suspicious signs','Mild thyroid disease can be obscured by illness','Repeat tT4 and consider further testing; high free T4 alone is not definitive']
+],
+fruct:[
+ ['Single glucose high, fructosamine within RI','Short-lived stress hyperglycemia becomes more likely','Do not use one result to exclude early diabetes'],
+ ['Glucose persistently high with glucosuria and fructosamine ↑','Supports sustained hyperglycemia / diabetes with appropriate signs','Interpret ketones and acid–base status to assess DKA'],
+ ['Fructosamine unexpectedly low with hypoalbuminemia','Protein turnover can lower fructosamine','Do not infer good glycemic control from the number alone']
+],
+lactate:[
+ ['Lactate ↑ on first sample','Net production exceeds clearance','Hypoperfusion is one possibility, not proof of septic shock'],
+ ['Serial lactate ↓ with treatment','Net lactate balance is improving','Does not replace perfusion, blood pressure and clinical assessment'],
+ ['Lactate ↑ with difficult restraint/delayed sample','Potential preanalytical or stress contribution','Repeat properly collected sample before attributing all change to tissue hypoxia']
+],
+ica:[
+ ['Total calcium ↑ but ionized calcium normal','Protein-associated/complexed fractions may explain discrepancy','Do not diagnose biologically active hypercalcemia from total calcium alone'],
+ ['Ionized calcium ↑ with PTH appropriately suppressed','PTH-independent hypercalcemia is possible','PTHrP, malignancy, renal causes and other differentials require confirmation'],
+ ['Ionized calcium ↑ with PTH inappropriately normal/high','Primary hyperparathyroidism moves up list','Assess kidney function, imaging and assay-specific hormone results']
+],
+bile:[
+ ['Bile acids ↑ with bilirubin/cholestasis ↑','Bile flow disruption can elevate the test','Bile acids may add little independent functional information'],
+ ['Bile acids ↑ with low BUN/albumin/glucose in young dog','Functional impairment or portosystemic blood flow abnormality possible','Investigate with clinical signs and targeted imaging'],
+ ['Ammonia ↑ in improperly handled sample','Artifact from processing delay is possible','Repeat using strict chilled/rapid handling as lab requires']
+],
+coag:[
+ ['PT prolonged, aPTT within RI','Extrinsic/common pathway abnormality possible, particularly factor VII pathway','Check anticoagulants, vitamin K status, citrate fill and repeat'],
+ ['aPTT prolonged, PT within RI','Intrinsic/common pathway abnormality possible','Factor VIII/IX deficiency vs factor XII effect, anticoagulant or artifact; clinical bleeding matters'],
+ ['PT and aPTT prolonged','Common pathway/multiple factor defect, consumption, severe liver dysfunction or anticoagulant effect','Review platelets, fibrinogen, smear, clinical signs, DIC evidence and specimen'],
+ ['Platelets ↓ but PT/aPTT normal','Primary hemostasis defect is plausible','Check clumping; cannot infer DIC from platelets alone']
+],
+urine:[
+ ['Azotemic dehydrated dog, USG 1.012','Kidney is not concentrating urine appropriately for water deficit','Assess prior fluids, diuretics, obstruction and renal pathology'],
+ ['UPC high with active inflammatory sediment','Protein may arise from urinary inflammation/bleeding','Treat or investigate sediment before concluding glomerular protein loss'],
+ ['Persistent protein loss on inactive sediment','Renal protein loss deserves further evaluation','Quantify and stage with species-specific UPC guidance plus blood pressure'],
+],
+ketones:[
+ ['Glucose ↑ and ketones positive, normal net acid–base','Ketosis with hyperglycemia possible','DKA not established without appropriate metabolic acidosis'],
+ ['Glucose ↑, ketones/BHB ↑, pH and HCO₃⁻ ↓','Diabetic ketoacidosis is a serious possibility','Evaluate anion gap, fluid deficit and K before/during therapy'],
+ ['Dipstick weak ketones but patient clinically acidotic','Urine stick may miss beta-hydroxybutyrate','Measure blood BHB and blood gas as indicated']
+]
+};
+function decisionPanel(id){
+ const rows=clinicalDecisions[id];
+ if(!rows)return '';
+ return '<details open><summary>🧠 Interpret the pattern, not just the number</summary>'+
+ '<div style="overflow-x:auto"><table><thead><tr><th>Result or pattern</th><th>What it SUPPORTS</th><th>What it CANNOT prove / next step</th></tr></thead><tbody>'+
+ rows.map(r=>'<tr>'+r.map(v=>'<td>'+E(v)+'</td>').join('')+'</tr>').join('')+
+ '</tbody></table></div></details>';
+}
+function definitionsPanel(){
+ return '<details><summary>📖 New to these tests? Terms explained</summary>'+
+ '<p><b>Reference interval (RI):</b> expected range for a comparable healthy population using that assay; not an absolute disease threshold. <b>Assay:</b> the laboratory measurement method. <b>Stimulation:</b> administer a signal and check the organ response. <b>Suppression:</b> administer a feedback signal and check whether hormone output falls. <b>Clearance:</b> removal of a substance from blood. <b>Sensitivity/specificity:</b> how often a test detects illness/how often it excludes healthy patients, respectively. <b>Artifact:</b> a false change caused by collection, processing or measurement.</p></details>';
+}
 function speciesDetail(id){
  const notes={
  acth:'<b>Dogs:</b> this is the core course ACTH stimulation framework for suspected Addison disease. <b>Cats:</b> different post-ACTH reference intervals and protocols are used; do not transplant canine thresholds. <b>Horses:</b> PPID is evaluated with seasonally interpreted baseline ACTH and/or TRH stimulation, NOT this canine cortisol ACTH-stimulation curve. <b>Other species:</b> obtain an endocrine lab-validated protocol before interpreting.',
@@ -111,7 +182,8 @@ function open(id){
  '<div class="vdt-card"><h3>📈 Diagnostic diagram'+((id==='acth'||id==='lddst')?' · cortisol response curves':' · how the test works')+'</h3>'+chart(id)+'<p class="vdt-note">Educational schematic; not patient data or an instrument-generated graph.</p></div>'+
  '<div class="vdt-row" style="align-items:stretch"><div class="vdt-card vdt-increase" style="flex:1;min-width:240px"><b>↑ INCREASED / EXAGGERATED</b><p>'+E(t.increased)+'</p></div><div class="vdt-card vdt-decrease" style="flex:1;min-width:240px"><b>↓ DECREASED / BLUNTED</b><p>'+E(t.decreased)+'</p></div></div>'+
  '<details open><summary>📊 Values, units and interpretation thresholds</summary><div style="overflow-x:auto"><table><tr><th>Measurement</th><th>Value / pattern</th><th>Interpretation</th></tr>'+t.intervals.map(r=>'<tr>'+r.map(z=>'<td>'+E(z)+'</td>').join('')+'</tr>').join('')+'</table></div><p class="vdt-note">Course-provided example thresholds and ranges only. Reference-lab protocols and assay cutoffs take precedence.</p></details>'+
- '<details open><summary>🫀 WHY the body responds</summary><p>'+E(t.physiology)+'</p></details>'+
+ decisionPanel(id)+
+ '<details open><summary>🫀 WHY the body responds</summary><p>'+E(t.physiology)+'</p></details>'+definitionsPanel()+
  '<details><summary>⚠️ Sample artifacts and confusing lookalikes</summary><p>'+E(t.artifact)+'</p></details>'+
  '<details open><summary>🐾 Worked patient example</summary><p>'+E(t.example)+'</p></details>'+
  '<details><summary>🐕 🐈 Species-specific interpretation & test limitations</summary>'+speciesDetail(t.id)+'</details>'+
