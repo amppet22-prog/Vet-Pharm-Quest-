@@ -166,28 +166,53 @@ function treatment(){
  '<rect x="218" y="151" width="83" height="16" rx="6" fill="#f4ffff" stroke="#abc8d0" stroke-width="2"/>'+
  '<text x="259" y="162" font-size="10" text-anchor="middle" font-family="Arial" font-weight="800" fill="#60858d">OCCUPIED</text>'+
  '</g>';
- // Two back-to-back stainless treatment tables in a compact island; walking remains in foreground.
- // Rear table is higher in perspective, front table retains the main treatment surface.
- s+='<path d="M527 82v94l-35 18" stroke="#99a3c5" stroke-width="10" fill="none"/>'+
- '<ellipse cx="491" cy="202" rx="36" ry="23" fill="#fff6d6" stroke="#a2acd1" stroke-width="9"/>'+
+ // Stainless-steel treatment island: rear preparation table, front patient table,
+ // true perspective top faces, reflected steel, strengthened cross-bracing and under-table storage.
+ s+='<g aria-hidden="true">'+
+ // Contact shadows under the treatment island give depth without using walkable floor space.
+ '<ellipse cx="500" cy="416" rx="119" ry="18" fill="#776b93" opacity=".15"/>'+
+ '<ellipse cx="514" cy="338" rx="84" ry="10" fill="#726c90" opacity=".10"/>'+
+ '</g>'+
+ // Adjustable ceiling-mounted examination light
+ '<path d="M527 82v94l-35 18" stroke="#99a3b5" stroke-width="10" fill="none"/>'+
+ '<path d="M530 87v82" stroke="#e0e8f0" stroke-width="3" opacity=".85"/>'+
+ '<ellipse cx="491" cy="202" rx="36" ry="23" fill="#fff7d8" stroke="#8ea3b9" stroke-width="8"/>'+
  [473,491,509].map(x=>'<circle cx="'+x+'" cy="202" r="9" fill="#fffefa"/>').join('')+
  '<g filter="url(#trt25-shadow)">'+
- // Rear treatment table, angled slightly upward into the room.
- '<path d="M444 275l117 -10 37 21 -116 12z" fill="#f6f4fc" stroke="#9baac1" stroke-width="5"/>'+
- '<path d="M468 299v31M573 291v34" stroke="#9ca9bc" stroke-width="8"/>'+
- '<rect x="488" y="318" width="75" height="9" rx="4" fill="#c8c8de"/>'+
- // Front treatment table
- '<rect x="389" y="330" width="209" height="23" rx="10" fill="#e7e0f3" stroke="#8e9fb9" stroke-width="5"/>'+
- '<rect x="404" y="324" width="177" height="11" rx="6" fill="#f9f9fd"/>'+
- '<path d="M415 353l11 68M576 353l-11 68" stroke="#9da8bf" stroke-width="11"/>'+
- '<path d="M431 399h129" stroke="#a8b4cb" stroke-width="7"/>'+
- '<rect x="450" y="357" width="81" height="25" rx="5" fill="#e0e8f4" stroke="#b2bdd0" stroke-width="3"/>'+
- '<text x="492" y="374" font-family="Arial" font-size="10" fill="#7485a4" text-anchor="middle" font-weight="800">TREATMENT</text>'+
+ // Rear exam/prep table: polished working surface with outer stainless lip and raised edge.
+ '<path d="M438 276l123 -12 38 23 -122 14z" fill="#dce7eb" stroke="#899eac" stroke-width="5" stroke-linejoin="round"/>'+
+ '<path d="M445 275l116 -9 27 16 -113 12z" fill="#f9fdff" stroke="#b7cbd3" stroke-width="2"/>'+
+ '<path d="M477 301l122 -14v9l-122 14z" fill="#a1b6bf" stroke="#819ba8" stroke-width="2"/>'+
+ '<path d="M460 298v37M580 297v38" stroke="#91aab7" stroke-width="9"/>'+
+ '<path d="M461 299v35M580 297v36" stroke="#d2e5eb" stroke-width="3"/>'+
+ '<path d="M463 325l111 -1" stroke="#97b0bc" stroke-width="6"/>'+
+ // Lower shelf with clean supply drawer under preparation table
+ '<path d="M483 314l88 -6 10 6 -87 8z" fill="#d4e0e7" stroke="#9bafbc" stroke-width="2"/>'+
+ '<rect x="507" y="314" width="44" height="9" rx="2" fill="#edf5f8" stroke="#b2c3cd" stroke-width="1.5"/>'+
+ '<path d="M526 319h10" stroke="#829fae" stroke-width="2"/>'+
+ // Front treatment table with shaped steel edge and washable pale patient pad
+ '<path d="M391 322h206l10 12 -9 17H390l-10 -12z" fill="#9db4c2" stroke="#7f97a8" stroke-width="4" stroke-linejoin="round"/>'+
+ '<path d="M394 319h199l7 12H389z" fill="#f4fafb" stroke="#a8bec9" stroke-width="2"/>'+
+ '<path d="M414 322h164l5 7H406z" fill="#e2eef2" opacity=".82"/>'+
+ '<path d="M394 345h202" stroke="#dcebef" stroke-width="3" opacity=".8"/>'+
+ '<path d="M413 351l12 69M576 350l-11 70" stroke="#869eac" stroke-width="11" stroke-linecap="round"/>'+
+ '<path d="M416 354l12 64M573 353l-10 62" stroke="#d0e1e8" stroke-width="3"/>'+
+ '<path d="M433 400h127" stroke="#91aab7" stroke-width="8"/>'+
+ '<path d="M441 400h110" stroke="#d6e5ea" stroke-width="2"/>'+
+ '<rect x="455" y="358" width="72" height="25" rx="5" fill="#e6f0f5" stroke="#9eb5c5" stroke-width="2"/>'+
+ '<rect x="460" y="363" width="62" height="15" rx="3" fill="#f8fbfd"/>'+
+ '<text x="491" y="374" font-family="Arial" font-size="10" fill="#607d8d" text-anchor="middle" font-weight="800">TREATMENT</text>'+
  '</g>'+
- // IV stand placed to the LEFT of the tables, leaving the patient area open.
- '<path d="M350 245v142M328 243h44" stroke="#9ca5bc" stroke-width="6" fill="none"/>'+
- '<rect x="338" y="260" width="24" height="40" rx="4" fill="#eaf9fc" stroke="#9bb2cb" stroke-width="3"/>'+
- '<path d="M349 300v23q0 12 14 13" stroke="#c0c5d3" stroke-width="2" fill="none"/>';
+ // Adjustable IV pole, transparent bag, drip chamber and base.
+ '<path d="M350 243v145M329 242h43" stroke="#879eac" stroke-width="6" fill="none"/>'+
+ '<path d="M353 247v140" stroke="#d9e9ed" stroke-width="2" opacity=".9"/>'+
+ '<path d="M350 242v-8m-21 8v7m43 -7v7" stroke="#829bad" stroke-width="3" fill="none"/>'+
+ '<rect x="338" y="260" width="24" height="42" rx="4" fill="#edfafd" stroke="#9db9c9" stroke-width="2.5"/>'+
+ '<path d="M340 286h20" stroke="#badfe7" stroke-width="2"/>'+
+ '<rect x="346" y="303" width="8" height="14" rx="3" fill="#ecf9fc" stroke="#99b7c7" stroke-width="1.5"/>'+
+ '<path d="M350 317v13q0 14 16 14" stroke="#a8c9d2" stroke-width="2" fill="none"/>'+
+ '<path d="M350 387l-16 10m16 -10l18 10" stroke="#839dab" stroke-width="5" stroke-linecap="round"/>'+
+ '<circle cx="335" cy="400" r="4" fill="#657f90"/><circle cx="370" cy="400" r="4" fill="#657f90"/>';
  // Patient monitor with convincing ECG
  s+='<g filter="url(#trt25-shadow)">'+round(593,178,133,104,'#34445b','#a9bad4')+
  '<path d="M608 231h18l8 -13 10 34 9 -41 11 26h46" stroke="#71e7bd" stroke-width="4" fill="none"/>'+
@@ -245,13 +270,31 @@ function treatment(){
  '<rect x="604" y="157" width="62" height="22" rx="6" fill="#eaf7f8" stroke="#a4bfce" stroke-width="3"/>'+
  '<circle cx="615" cy="168" r="5" fill="#81cbb6"/><circle cx="632" cy="168" r="5" fill="#efc57e"/>'+
  '<circle cx="650" cy="168" r="5" fill="#b2b7d5"/>'+
- // Separate red emergency cart beneath the ECG; readable mark at real game size.
- '<rect x="636" y="320" width="67" height="60" rx="7" fill="#f7c6c7" stroke="#ca7c91" stroke-width="4"/>'+
- '<rect x="632" y="314" width="75" height="11" rx="4" fill="#fff1f2" stroke="#ca7c91" stroke-width="3"/>'+
- '<path d="M646 339h48M646 357h48" stroke="#d89caf" stroke-width="3"/>'+
- '<path d="M665 329v16M657 337h16" stroke="#e66c85" stroke-width="5" stroke-linecap="round"/>'+
- '<circle cx="646" cy="385" r="6" fill="#747b98"/><circle cx="691" cy="385" r="6" fill="#747b98"/>'+
- '<text x="670" y="307" text-anchor="middle" fill="#a66e82" font-family="Arial" font-size="11" font-weight="900">CRASH</text>'+
+ // Compact but functional emergency crash cart: dedicated defibrillator/monitor
+ // shelf, sealed supplies, distinct medicine drawers, side oxygen accessories and locking wheels.
+ '<ellipse cx="672" cy="392" rx="43" ry="9" fill="#857897" opacity=".17"/>'+
+ '<rect x="639" y="310" width="69" height="69" rx="7" fill="#e7aab9" stroke="#b97791" stroke-width="4"/>'+
+ '<path d="M639 316h69v12h-69z" fill="#f8d6dd"/>'+
+ '<rect x="645" y="333" width="56" height="14" rx="3" fill="#fbdfe5" stroke="#c4859b" stroke-width="1.5"/>'+
+ '<rect x="645" y="351" width="56" height="14" rx="3" fill="#fbdfe5" stroke="#c4859b" stroke-width="1.5"/>'+
+ '<path d="M663 340h18m-18 18h18" stroke="#ae7188" stroke-width="2.5" stroke-linecap="round"/>'+
+ '<path d="M675 333v14m-7 -7h14" stroke="#d46382" stroke-width="3" stroke-linecap="round"/>'+
+ '<path d="M636 317h-9v35" stroke="#879cab" stroke-width="4" fill="none" stroke-linecap="round"/>'+
+ '<path d="M630 352h11" stroke="#879cab" stroke-width="4"/>'+
+ // Defibrillator unit and neatly coiled leads on top
+ '<rect x="643" y="291" width="48" height="21" rx="5" fill="#e3edf3" stroke="#819bac" stroke-width="2.5"/>'+
+ '<rect x="648" y="295" width="23" height="13" rx="2.5" fill="#324f67"/>'+
+ '<path d="M650 302h5l2 -3 4 6 3 -4h6" stroke="#78e8c3" stroke-width="1.8" fill="none"/>'+
+ '<rect x="676" y="295" width="10" height="11" rx="2" fill="#c0a1bc"/>'+
+ '<path d="M688 307q8 -2 8 7" fill="none" stroke="#8296a6" stroke-width="2"/>'+
+ '<rect x="637" y="307" width="70" height="6" rx="2.5" fill="#f8e7ee" stroke="#c48aa0" stroke-width="2"/>'+
+ // Sterile sealed accessory box at side and wheel casters
+ '<rect x="704" y="330" width="11" height="22" rx="3" fill="#e8eef6" stroke="#9caabf" stroke-width="2"/>'+
+ '<path d="M706 338h7" stroke="#d3a1be" stroke-width="2"/>'+
+ '<path d="M652 379v8m44 -8v8" stroke="#7d889d" stroke-width="4"/>'+
+ '<circle cx="650" cy="388" r="7" fill="#6f7c91" stroke="#b4c3d2" stroke-width="2"/>'+
+ '<circle cx="697" cy="388" r="7" fill="#6f7c91" stroke="#b4c3d2" stroke-width="2"/>'+
+ '<text x="674" y="285" font-family="Arial" font-size="11" font-weight="900" text-anchor="middle" fill="#95516d">EMERGENCY</text>'+
  // Cabinet for oxygen patient next to the in-house laboratory.
  '<rect x="746" y="165" width="109" height="111" rx="11" fill="#e8f9fa" stroke="#92bdc9" stroke-width="5"/>'+
  '<rect x="755" y="182" width="91" height="84" rx="6" fill="#f6ffff" stroke="#b2d4dc" stroke-width="3"/>'+
@@ -343,11 +386,6 @@ function treatment(){
  '<path d="M877 249v-17l12 -10 12 10v17" fill="#c5dcb9" stroke="#89ad86" stroke-width="2"/>'+
  '<path d="M883 250v-11q6 -7 12 0v11" fill="#a2bc93"/>'+
  '<ellipse cx="923" cy="255" rx="10" ry="4" fill="#a8d9e3" stroke="#83b4c7" stroke-width="2"/>'+
- // Emergency cart top defibrillator kit, clearly separated from monitor station.
- '<rect x="641" y="300" width="45" height="16" rx="4" fill="#f2f6fb" stroke="#a6b4cb" stroke-width="2"/>'+
- '<rect x="647" y="303" width="19" height="9" rx="2" fill="#40566d"/>'+
- '<path d="M650 308h4l2 -2 2 4 3 -2h3" stroke="#70dcc4" stroke-width="1.3" fill="none"/>'+
- '<rect x="671" y="303" width="9" height="9" rx="2" fill="#d5a6b2"/>'+
  // Handwash dispenser station between sterile prep and treatment monitor.
  '<rect x="606" y="184" width="36" height="48" rx="6" fill="#eff9fb" stroke="#9fc3cc" stroke-width="3"/>'+
  '<rect x="610" y="190" width="28" height="24" rx="4" fill="#d0e9e9"/>'+
