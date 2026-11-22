@@ -3290,7 +3290,7 @@ const style27=document.createElement('style');style27.textContent='.vpq27grid{di
  function vpqOpenGame(mode){
    const item=modes.find(x=>x[0]===mode&&['battle','match'].includes(x[0]));if(!item)return vpqOpenArcadeGamesHub();
    shared.setLectures(shared.getLectures());
-   const src='pharm-arcade.html?embedded=1&v=20261122-games-only#'+encodeURIComponent(mode);
+   const src='pharm-arcade.html?embedded=1&v=20261122-drugmatch-lecture-picker#'+encodeURIComponent(mode);
    showModal('🎮 '+item[2],'<div class="vpq-sharedheader"><b>'+item[1]+' '+item[2]+'</b><span>'+item[4]+'</span></div><p>'+item[3]+'</p><div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button><button data-vpqsharedlearn="1">📖 Guided Learn</button></div><div class="vpq-sharedframe"><iframe src="'+src+'" title="Vet Pharm Quest — '+item[2]+'" loading="eager" allow="fullscreen"></iframe></div><p class="tiny">Exam/guide selections follow the shared focus. For specialized games, the playable content depends on the drug or organism bank.</p>');
  }
  $('modalBody').addEventListener('click',e=>{
@@ -3574,9 +3574,14 @@ const pharmFlowStyle=document.createElement('style');
  };
 // Only receive navigation from the same-origin Arcade iframe currently opened in this modal.
  window.addEventListener('message',event=>{
-  if(event.origin!==location.origin||!event.data||event.data.type!=='vpq-pharm-bridge')return;
+  if(event.origin!==location.origin||!event.data||!['vpq-pharm-bridge','vpq-pharm-match-focus'].includes(event.data.type))return;
   const frame=$('modalBody')?.querySelector('iframe[src*="pharm-arcade.html"]');
   if(!frame||event.source!==frame.contentWindow)return;
+  if(event.data.type==='vpq-pharm-match-focus'){
+   const lecture=event.data.lecture;
+   if(valid.has(lecture)){menuState.focus=lecture;menuState.pending=null;master27.selected=[lecture]}
+   return;
+  }
   const action=event.data.action;
   const target=curriculum.courses.some(x=>x[0]===event.data.lecture)?event.data.lecture:focusLecture();
   menuState.focus=target;
