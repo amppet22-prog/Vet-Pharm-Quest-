@@ -7,22 +7,40 @@ if(!stage||!art||!rooms.exam)return null;
 const previous=art.roomArt.bind(art);
 let examAnimal='dog';
 const escExam=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dogNames=['Husky / Shepherd','German Shepherd','Husky','Corgi','Dachshund','Greyhound','Border Collie','Australian Shepherd','Labrador','Golden Retriever','Mixed Breed','Other Dog'];
+const catNames=['Tabby','Black','Orange','Tuxedo','Calico','Longhair','Siamese','Other Cat'];
+const catalog=[...dogNames.map((label,i)=>({id:'dog-'+i,label:'Dog · '+label,species:'dog',atlas:i})),...catNames.map((label,i)=>({id:'cat-'+i,label:'Cat · '+label,species:'cat',atlas:i+12})),...['Rabbit','Lizard','Snake','Turtle'].map((label,i)=>({id:label.toLowerCase(),label,species:label.toLowerCase(),atlas:i+22}))];
+const allowed={dog:'🐕',cat:'🐈',rabbit:'🐇',lizard:'🦎',snake:'🐍',turtle:'🐢'};
 function examPatients(){
- const options=[{id:'dog',label:'Funky original dog',species:'dog'},{id:'cat',label:'Cartoon cat',species:'cat'}];
- try{const pet=JSON.parse(localStorage.getItem('vpq-v2-clinic-state')||'{}');
- if(pet.pet)options.push({id:'saved',label:(pet.petName||'My companion')+' · my companion',emoji:pet.pet,species:pet.pet==='🐈'?'cat':pet.pet==='🐇'?'rabbit':'dog'});}catch(e){}
+ const options=[{id:'dog',label:'Funky original dog',species:'dog'},{id:'cat',label:'Original cartoon cat',species:'cat'},...catalog];
+ try{
+ const pet=JSON.parse(localStorage.getItem('vpq-v2-clinic-state')||'{}');
+ const species=Object.keys(allowed).find(k=>allowed[k]===pet.pet);
+ if(species){
+  const names=species==='dog'?['husky-shepherd','german-shepherd','husky','corgi','dachshund','greyhound','border-collie','australian-shepherd','labrador','golden-retriever','mixed','other-dog']:['tabby','black','orange','tuxedo','calico','longhair','siamese','other-cat'];
+  const i=species==='dog'?Math.max(0,names.indexOf(pet.petBreed)):species==='cat'?12+Math.max(0,names.indexOf(pet.catLook)):catalog.find(x=>x.species===species)?.atlas;
+  options.splice(2,0,{id:'saved',label:String(pet.petName||'My companion').slice(0,30)+' · my companion',species,atlas:i});
+ }
+ }catch(e){}
  (Array.isArray(window.VPQ_EXAM_PATIENTS)?window.VPQ_EXAM_PATIENTS:[]).forEach(p=>{
- if(p&&/^[a-z0-9_-]{1,50}$/i.test(p.id||'')&&!options.some(q=>q.id===p.id))
- options.push({id:p.id,label:String(p.label||p.id).slice(0,50),image:p.image,emoji:p.emoji,species:p.species||'dog'});});
+  const species=String(p?.species||'').toLowerCase();
+  if(p&&Object.prototype.hasOwnProperty.call(allowed,species)&&/^[a-z0-9_-]{1,50}$/i.test(p.id||'')&&!options.some(q=>q.id===p.id))
+   options.push({id:p.id,label:String(p.label||p.id).slice(0,50),image:p.image,species,atlas:p.atlas});
+ });
  return options;
 }
 function examPatientArt(){
  const p=examPatients().find(x=>x.id===examAnimal)||examPatients()[0];
  if(p.id==='dog'||p.id==='cat')return animalArt();
- if(typeof p.image==='string'&&/^(assets|companions)\/[a-z0-9_./%() -]+\.(png|jpg|jpeg|webp)$/i.test(p.image)&&!p.image.includes('..'))
- return '<image href="'+escExam(p.image)+'" x="410" y="180" width="260" height="175" preserveAspectRatio="xMidYMax meet"/>';
- return '<text x="545" y="313" text-anchor="middle" font-size="98">'+escExam(p.emoji||'🐾')+'</text>';
+ if(typeof p.image==='string'&&p.image.startsWith('assets/')&&!p.image.includes('..')&&/\.(png|jpg|jpeg|webp)$/i.test(p.image))
+   return '<image href="'+escExam(p.image)+'" x="442" y="208" width="190" height="130" preserveAspectRatio="xMidYMax meet"/>';
+ if(Number.isInteger(p.atlas)&&p.atlas>=0&&p.atlas<32){
+  const c=p.atlas%8,r=Math.floor(p.atlas/8);
+  return '<svg x="446" y="196" width="185" height="139" viewBox="'+c*100+' '+r*100+' 100 100"><image href="assets/vpq-illustrated-pets.webp" x="0" y="0" width="800" height="400" preserveAspectRatio="none"/></svg>';
+ }
+ return '<text x="535" y="304" text-anchor="middle" font-size="96">'+escExam(allowed[p.species]||'🐾')+'</text>';
 }
+
 const animalArt=()=>examAnimal==='cat'
  ? '<g transform="translate(0 0)"><path d="M521 312q-37 -26 -5 -44q22 -9 37 10q14 -13 32 -6q24 7 25 33q-6 27 -43 30l-31 0Z" fill="#d8ac86" stroke="#926c63" stroke-width="6"/><path d="M578 275q18 -31 37 -13l20 34l-12 16" fill="none" stroke="#926c63" stroke-width="10" stroke-linecap="round"/><path d="M496 284l-9 -32l26 17l22 -22l5 35" fill="#d8ac86" stroke="#926c63" stroke-width="6"/><ellipse cx="517" cy="288" rx="29" ry="29" fill="#d8ac86" stroke="#926c63" stroke-width="5"/><path d="M502 285h8m17 0h8" stroke="#584d55" stroke-width="5" stroke-linecap="round"/><path d="M519 290l5 5l-5 3l-5 -3Z" fill="#bb7f89"/><path d="M519 299q-11 7 -18 0m18 0q11 7 19 0" stroke="#795b5d" stroke-width="2" fill="none"/><path d="M548 325v17m33 -14v16" stroke="#926c63" stroke-width="9" stroke-linecap="round"/></g>'
  : '<g><path d="M497 307q19 -35 64 -33q51 1 67 33l-9 24h-114Z" fill="#c59b73" stroke="#8e6b58" stroke-width="6"/><path d="M612 281q40 -45 50 -8" fill="none" stroke="#8e6b58" stroke-width="12" stroke-linecap="round"/><path d="M499 307q-31 4 -43 -17q-13 -24 3 -44q21 -19 46 2l16 33" fill="#c59b73" stroke="#8e6b58" stroke-width="6"/><path d="M456 261l-12 -29q-14 30 -3 47" fill="#a77862" stroke="#8e6b58" stroke-width="5"/><path d="M502 256l20 -23q4 30 -12 48" fill="#a77862" stroke="#8e6b58" stroke-width="5"/><ellipse cx="457" cy="293" rx="27" ry="18" fill="#ead6b5"/><circle cx="475" cy="268" r="4" fill="#3d3b44"/><circle cx="444" cy="289" r="5" fill="#544c52"/><path d="M501 320v21m45 -14v20m39 -19v19" stroke="#8e6b58" stroke-width="10" stroke-linecap="round"/><path d="M485 276q17 -8 26 7" fill="none" stroke="#fff9e9" stroke-width="6"/></g>';
