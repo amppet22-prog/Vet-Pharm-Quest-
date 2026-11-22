@@ -95,7 +95,7 @@ function labSection(key){
   workedPanel(key)+
   '<div class="buttonrow">'+btn(key==='chem'?'specieschem':'speciescbc','🐾 Species differences')+
   btn('reportacademy','📘 How to read the full report')+btn('multistage','🏥 Clinical workups')+
-  btn('section-pcv','🩸 PCV/TS reference')+'</div>'+
+  btn('section-pcv','🩸 PCV/TS reference')+(key==='cbc'?btn('smear','🔬 Open blood smear atlas / cell recognition'):'')+'</div>'+
   '<details><summary style="font-weight:800;padding:9px;background:#fff1dc;border-radius:8px">📏 Reference intervals, sample quality & interpretation</summary><p>Use the species-, age- and analyzer-specific reference intervals printed with the patient results. Describe abnormalities as increased, decreased, or within the reference interval before building a differential. Investigate production, leakage, destruction, fluid shifts or artifacts.</p></details></div>');
 }
 function legacyLabHome(){
