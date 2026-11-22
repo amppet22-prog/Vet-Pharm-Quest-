@@ -165,22 +165,8 @@ function calcium(){
  '<div class="vra-btns">'+link('extra','Send-out tests →')+'</div>';
 }
 function extra(){
- return card('⚡ In-house and 📦 send-out both belong to this workstation','<p>Choose what question the test answers, how to collect it, how to read high/low results, and which confirmation you need. A rapid test is not automatically definitive and a send-out result is only as good as its sample and indication.</p>')+
- table(['Test','Sample / clinical question','Interpretation and WHY'],[
- ['PCV/TS','EDTA whole blood + plasma refractometry','RBC fraction vs plasma solutes; pair with hydration and CBC.'],
- ['Lactate','Fresh processed whole blood','↑ reflects net production vs clearance; serial trend and perfusion matter.'],
- ['iCa','Anaerobic prompt analysis, validated tube','Biologically active calcium; ↑ pH increases albumin binding and lowers measured iCa.'],
- ['Blood gas','Appropriate heparinized arterial or venous blood','pH FIRST; distinguish oxygenation from acid–base; avoid air/delay.'],
- ['Ketones / β-hydroxybutyrate','Validated fresh sample','↑ with pathologic ketosis; interpret with glucose and pH in DKA.'],
- ['Fructosamine','Reference-lab serum / plasma as specified','Reflects glycemia over preceding weeks; protein turnover affects interpretation.'],
- ['Total T4, fT4, TSH','Specified reference-lab serum','Illness and drugs change values; species-dependent endocrine diagnosis.'],
- ['PTH / PTHrP','Lab-specific preanalytical instructions','PTH regulation vs tumor-derived PTHrP; interpret with iCa and phosphorus.'],
- ['ACTH / dex suppression','Protocol-specific timed samples','Dynamic endocrine feedback, confounded by drugs/timing.'],
- ['Bile acids, ammonia','Specialized liver function samples','Assess uptake/clearance and hepatic functional/portal circulation; handling matters.'],
- ['Coagulation tests','Correctly filled citrate tubes','PT/aPTT evaluate factor pathways, not platelet number/function.']
- ])+
- card('📋 Sample decision checklist','<p>Patient species → intended question → correct tube → collection conditions / timing → storage and shipping instruction → assay/species-specific RI → how the finding changes your differential or next step.</p>')+
- '<div class="vra-btns">'+link('practice','Use a patient workup →')+'</div>';
+ return card('⚡ Additional diagnostics · One location for every test','<p>The <b>CBC/Chemistry workstation</b> contains the single full reference for ACTH stimulation, dexamethasone suppression, thyroid testing, lactate, ionized calcium, urinalysis, coagulation and send-outs. Open the relevant category there rather than studying another abbreviated version here.</p>')+
+ '<div class="vra-btns"><button data-vpq-report-action="inhouse">⚡ Go to In-house Tests</button><button data-vpq-report-action="sendout">📦 Go to Send-Out Tests</button><button data-vpq-report-action="classic">← CBC/Chemistry Workstation</button></div>';
 }
 const challenges=[
  {id:'a',title:'Case A · anemia or sample artifact?',species:'Dog',data:[['HCT','24%','37–55%'],['Reticulocytes','220 × 10³/µL','Use lab-specific interval'],['TS','6.8 g/dL','6.0–8.0 g/dL'],['Bilirubin','2.4 mg/dL','0.1–0.5 mg/dL']],q:'Which interpretation should lead your problem list?',opts:['Regenerative anemia; investigate RBC destruction vs blood loss','Healthy CBC; no problem','Primary thrombocytopenia proven','Pure renal failure established'],answer:0,why:'Low HCT = anemia, increased absolute reticulocytes supports marrow response, normal TS and elevated bilirubin raise suspicion for hemolysis. Verify smear, sample hemolysis, bleeding and causes; bilirubin is not specific.'},
@@ -278,6 +264,8 @@ function handleAcademyClick(event){
  if(target.dataset.vpqReportAction==='species-cbc')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('cbc');
  if(target.dataset.vpqReportAction==='species-chem')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('chem');
  if(target.dataset.vpqReportAction==='multistage')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();
+ if(target.dataset.vpqReportAction==='inhouse')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
+ if(target.dataset.vpqReportAction==='sendout')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
  if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
  if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
  if(target.dataset.vpqReportAction==='cases')return window.VPQ_OPEN_REFERRAL_PATIENTS?.()||window.VPQ_CLINPATH_REFERRAL_PILOT?.home?.()||window.VPQ_ADVANCED_LAB?.home?.();
@@ -296,6 +284,8 @@ function init(context){
  if(target.dataset.vpqReportAction==='species-cbc')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('cbc');
  if(target.dataset.vpqReportAction==='species-chem')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('chem');
  if(target.dataset.vpqReportAction==='multistage')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();
+ if(target.dataset.vpqReportAction==='inhouse')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
+ if(target.dataset.vpqReportAction==='sendout')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
  if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
  if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
  if(target.dataset.vpqReportAction==='cases')return window.VPQ_CLINPATH_REFERRAL_PILOT?.home?.()||window.VPQ_ADVANCED_LAB?.home?.();
