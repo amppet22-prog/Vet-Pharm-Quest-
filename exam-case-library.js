@@ -44,7 +44,7 @@ function filterItems(items){
 function opts(values,current){return values.map(v=>'<option value="'+e(v)+'" '+(current===v?'selected':'')+'>'+e(v)+'</option>').join('')}
 function home(nextVenue='pharm'){venue=['pharm','reception','exam','treatment'].includes(nextVenue)?nextVenue:'pharm';filters.course=venue==='pharm'?'Pharmacology':'All courses';filters.specialty='All specialties';filters.species='All species';filters.status='All patients';filters.level='All levels';filters.lectureFocus='';filters.query='';filters.lectureScope=venue==='pharm'?'All Pharmacology lectures':'Selected Pharmacology lectures';page=0;draw()}
 function draw(){
- const all=allCases().filter(c=>venue==='pharm'?course(c)==='Pharmacology':venue==='treatment'?(c.steps.length>1||c.advanced||c.location==='treatment'):venue==='exam'?true:(c.steps.length<=2&&!c.advanced)),result=filterItems(all),sp=['All species',...new Set(all.map(species))].sort((a,b)=>a==='All species'?-1:b==='All species'?1:a.localeCompare(b));
+ const all=allCases().filter(c=>venue==='pharm'?course(c)==='Pharmacology':venue==='treatment'?(!!c.journeyRooms||c.steps.length>1||c.advanced||c.location==='treatment'):venue==='exam'?true:(!!c.journeyRooms||c.steps.length<=2&&!c.advanced)).sort((a,b)=>Number(!!b.journeyRooms)-Number(!!a.journeyRooms)),result=filterItems(all),sp=['All species',...new Set(all.map(species))].sort((a,b)=>a==='All species'?-1:b==='All species'?1:a.localeCompare(b));
  const completed=api.getCompleted(),count=all.filter(c=>completed.includes(c.id)).length;
  const pageCount=Math.max(1,Math.ceil(result.length/24));page=Math.min(Math.max(0,page),pageCount-1);
  const cards=result.slice(page*24,page*24+24).map(c=>{
@@ -64,7 +64,7 @@ function draw(){
  '<label>Search names, signs, and topics<input id="vpqCaseLibQuery" class="input" type="search" placeholder="e.g. Addison, Giardia, neoplasia..." value="'+e(filters.query)+'"></label>'+
  '<div class="buttonrow"><button data-vpqcaselib="search">🔎 Search</button><button data-vpqcaselib="reset">Reset filters</button><button data-vpqcaselib="surprise" '+(!result.length?'disabled':'')+'>🎲 Surprise patient from '+result.length+' matches</button><button data-vpqcaselib="map">🗺️ Hospital map</button></div>'+
  (filters.lectureFocus?'<p class="small">Focused on '+e(filters.lectureFocus)+' · <button data-vpqcaselib="alllectures">Show all Pharmacology lectures</button></p>':'')+
- '<h3>Patient records ('+result.length+' matches)</h3>'+
+ '<h3>'+(venue==='pharm'?'Pharmacology cases':'Hospital patient records')+' ('+result.length+' matches)</h3>'+
  (cards?'<div class="twocol">'+cards+'</div>':'<div class="infobox"><b>No matching case is currently available.</b><p>Try another specialty or reset filters. This does not mean the course topic is unimportant; it means no matching patient record has been entered yet.</p></div>')+
  '<div class="buttonrow"><button data-vpqcaselib="previous" '+(page===0?'disabled':'')+'>← Previous</button><span class="small">Page '+(page+1)+' of '+pageCount+'</span><button data-vpqcaselib="next" '+(page>=pageCount-1?'disabled':'')+'>Next →</button></div>'+ 
  '<p class="tiny">All views reuse the same underlying patient IDs. Short encounters are available at reception; longer cases are highlighted in Treatment.</p>');
@@ -81,7 +81,7 @@ function init(ctx){api=ctx;ctx.body.addEventListener('change',ev=>{const t=ev.ta
  if(action==='previous'){page=Math.max(0,page-1);return draw()}
  if(action==='next'){page++;return draw()}
  if(action==='reset'){filters={specialty:'All specialties',course:'All courses',species:'All species',status:'All patients',level:'All levels',lectureScope:'Selected Pharmacology lectures',lectureFocus:'',query:''};page=0;return home(venue)}
- if(action==='surprise'){const pool=filterItems(allCases().filter(c=>venue==='pharm'?course(c)==='Pharmacology':venue==='treatment'?(c.steps.length>1||c.advanced||c.location==='treatment'):venue==='exam'?true:(c.steps.length<=2&&!c.advanced)));if(pool.length)return ctx.openCase(pool[Math.floor(Math.random()*pool.length)].id)}
+ if(action==='surprise'){const pool=filterItems(allCases().filter(c=>venue==='pharm'?course(c)==='Pharmacology':venue==='treatment'?(!!c.journeyRooms||c.steps.length>1||c.advanced||c.location==='treatment'):venue==='exam'?true:(!!c.journeyRooms||c.steps.length<=2&&!c.advanced)));if(pool.length)return ctx.openCase(pool[Math.floor(Math.random()*pool.length)].id)}
  if(action==='map'){ctx.openMap?.()}
  }) }
 function focus(courseName,lecture){
