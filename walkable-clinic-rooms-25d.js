@@ -86,24 +86,55 @@ function treatment(){
  '<rect x="355" y="155" width="142" height="29" rx="12" fill="#fff5fc" stroke="#b79aca" stroke-width="3"/>'+
  '<text x="426" y="175" font-family="Arial" text-anchor="middle" font-size="15" fill="#8e6297" font-weight="900">CLINICAL SKILLS</text>'+
  '<text x="395" y="219" font-size="25" text-anchor="middle">💉</text><text x="461" y="219" font-size="25" text-anchor="middle">🩸</text></g>';
-  // Patient kennel with vertical metal bars and sleepy dog
- s+='<g filter="url(#trt25-shadow)">'+round(92,167,185,192,'#e2eafa','#a4a7cb')+
- '<rect x="106" y="303" width="157" height="41" rx="8" fill="#b9b3e5"/>'+
- '<rect x="107" y="310" width="154" height="26" rx="13" fill="#e8c9ea" stroke="#bca4ce" stroke-width="3"/>'+
- // A distinctly canine patient, resting on the cushion: paws, curled tail, floppy ear, happy muzzle.
- '<path d="M212 284q34 -40 49 -3" stroke="#bb8055" stroke-width="13" fill="none" stroke-linecap="round"/>'+
- '<ellipse cx="189" cy="286" rx="62" ry="31" fill="#d8a06e" stroke="#a77561" stroke-width="4"/>'+
- '<path d="M153 267q27 -15 57 2l12 36h-65z" fill="#f3d5b7"/>'+
- '<ellipse cx="153" cy="308" rx="18" ry="9" fill="#f3d5b7"/><ellipse cx="211" cy="308" rx="20" ry="9" fill="#f3d5b7"/>'+
- '<circle cx="133" cy="264" r="32" fill="#e2ac79" stroke="#b98161" stroke-width="4"/>'+
- '<path d="M107 248q-24 1 -13 35l21 -7" fill="#9c694f" stroke="#885f53" stroke-width="3"/>'+
- '<path d="M151 245q17 -8 12 22l-15 -2" fill="#9c694f" stroke="#885f53" stroke-width="3"/>'+
- '<ellipse cx="111" cy="282" rx="22" ry="14" fill="#fff0df"/><ellipse cx="102" cy="278" rx="8" ry="6" fill="#544d56"/>'+
- '<circle cx="130" cy="258" r="4.7" fill="#3e4253"/><circle cx="132" cy="256" r="1.6" fill="#fff"/>'+
- '<path d="M126 287q10 8 20 -1" fill="none" stroke="#865b57" stroke-width="3"/>'+
- '<path d="M133 237q10 -9 21 1" fill="none" stroke="#f6e5cd" stroke-width="5" stroke-linecap="round"/>'+
- [120,148,176,204,232,260].map(x=>'<path d="M'+x+' 174V351" stroke="#a8b3ce" stroke-width="4"/>').join('')+
- '<path d="M99 219H270M99 266H270M99 311H270" stroke="#a8b3ce" stroke-width="4"/></g>';
+  // Two-level inpatient kennel bank: two upper recovery patients and a lower canine kennel.
+ // Decorative only: the original Hospital Patient hit target remains unchanged.
+ s+='<g filter="url(#trt25-shadow)">'+
+ '<rect x="83" y="157" width="226" height="209" rx="13" fill="#dce5f1" stroke="#9baec8" stroke-width="7"/>'+
+ '<rect x="93" y="170" width="101" height="80" rx="7" fill="#f7f0fc" stroke="#9eabc7" stroke-width="4"/>'+
+ '<rect x="199" y="170" width="100" height="80" rx="7" fill="#f2f9fc" stroke="#9eabc7" stroke-width="4"/>'+
+ '<rect x="93" y="256" width="206" height="98" rx="7" fill="#f7f1fa" stroke="#9eabc7" stroke-width="4"/>'+
+ '<rect x="104" y="227" width="79" height="13" rx="7" fill="#e7bfda"/>'+
+ '<rect x="209" y="227" width="79" height="13" rx="7" fill="#b9deda"/>'+
+ '<rect x="106" y="334" width="180" height="12" rx="6" fill="#e0c6e9"/>'+
+ // Upper left kennel: curled ginger cat with pointy ears and stripe details.
+ '<ellipse cx="146" cy="212" rx="30" ry="15" fill="#d89968"/>'+
+ '<path d="M164 214q28 2 19 -19" fill="none" stroke="#c6825d" stroke-width="8" stroke-linecap="round"/>'+
+ '<circle cx="132" cy="200" r="16" fill="#e1a475"/>'+
+ '<path d="M120 190l1 -16 12 10 10 -10 5 16" fill="#e1a475" stroke="#bc805f" stroke-width="2"/>'+
+ '<path d="M125 197h3m11 0h3" stroke="#534752" stroke-width="3" stroke-linecap="round"/>'+
+ '<path d="M130 204q3 4 6 0" stroke="#a56d62" stroke-width="2" fill="none"/>'+
+ '<path d="M151 202l7 8m-2 -15l8 8" stroke="#b97859" stroke-width="3"/>'+
+ // Upper right kennel: small white-and-brown recovering dog.
+ '<ellipse cx="254" cy="216" rx="28" ry="15" fill="#e9e3d9"/>'+
+ '<circle cx="233" cy="201" r="16" fill="#eee7db"/>'+
+ '<path d="M221 193q-10 -2 -7 15l11 -2M240 191q13 -3 12 14l-11 0" fill="#a87962"/>'+
+ '<ellipse cx="223" cy="205" rx="7" ry="5" fill="#fff6e7"/>'+
+ '<circle cx="220" cy="204" r="3" fill="#464754"/>'+
+ '<circle cx="236" cy="200" r="2.5" fill="#464754"/>'+
+ '<path d="M265 209q15 -8 18 4" fill="none" stroke="#a87962" stroke-width="6" stroke-linecap="round"/>'+
+ // Lower kennel: reclining tan dog on washable pastel bed.
+ '<path d="M248 311q26 -23 33 2" stroke="#b88159" stroke-width="10" fill="none" stroke-linecap="round"/>'+
+ '<ellipse cx="202" cy="318" rx="65" ry="24" fill="#cf9a6d" stroke="#b88159" stroke-width="3"/>'+
+ '<path d="M163 305q28 -7 58 0l15 28h-80z" fill="#f3dbc0"/>'+
+ '<ellipse cx="171" cy="331" rx="19" ry="7" fill="#f3dbc0"/><ellipse cx="233" cy="332" rx="20" ry="7" fill="#f3dbc0"/>'+
+ '<circle cx="142" cy="305" r="25" fill="#dfac7f"/>'+
+ '<path d="M123 293q-20 -2 -15 24l20 -4M157 289q15 -7 9 19l-11 -3" fill="#a4785d"/>'+
+ '<ellipse cx="125" cy="318" rx="17" ry="10" fill="#fff0df"/>'+
+ '<ellipse cx="113" cy="316" rx="6" ry="4" fill="#4b4952"/>'+
+ '<circle cx="140" cy="301" r="3.5" fill="#404453"/>'+
+ // Proper stainless cage grids and latch handles.
+ [116,139,163,185].map(x=>'<path d="M'+x+' 173V247" stroke="#a6b5c7" stroke-width="2.7"/>').join('')+
+ [220,243,266,288].map(x=>'<path d="M'+x+' 173V247" stroke="#a6b5c7" stroke-width="2.7"/>').join('')+
+ [113,141,169,197,225,253,281].map(x=>'<path d="M'+x+' 260V351" stroke="#a6b5c7" stroke-width="3"/>').join('')+
+ '<path d="M94 208h104M200 208h98M94 302h203" stroke="#a6b5c7" stroke-width="3"/>'+
+ '<rect x="184" y="209" width="9" height="13" rx="3" fill="#d1a6b7"/>'+
+ '<rect x="291" y="209" width="8" height="13" rx="3" fill="#d1a6b7"/>'+
+ '<rect x="288" y="300" width="9" height="16" rx="3" fill="#d1a6b7"/>'+
+ '<rect x="103" y="151" width="94" height="16" rx="6" fill="#fff9fe" stroke="#c2b7d2" stroke-width="2"/>'+
+ '<text x="150" y="162" font-size="10" text-anchor="middle" font-family="Arial" font-weight="800" fill="#74678a">RECOVERY A / B</text>'+
+ '<rect x="218" y="151" width="83" height="16" rx="6" fill="#f4ffff" stroke="#abc8d0" stroke-width="2"/>'+
+ '<text x="259" y="162" font-size="10" text-anchor="middle" font-family="Arial" font-weight="800" fill="#60858d">OCCUPIED</text>'+
+ '</g>';
  // Overhead exam lamp, treatment table and IV
  s+='<path d="M457 81v86l-38 23" stroke="#99a3c5" stroke-width="12" fill="none"/>'+
  '<ellipse cx="419" cy="202" rx="47" ry="28" fill="#fff6d6" stroke="#a2acd1" stroke-width="11"/>'+
@@ -137,6 +168,41 @@ function treatment(){
  '<circle cx="902" cy="262" r="11" fill="#ddeafa" stroke="#8aa5c9" stroke-width="6"/>'+
  '<path d="M908 278l-20 35" stroke="#8898bd" stroke-width="8"/>'+
  [761,783,808].map((x,i)=>'<rect x="'+x+'" y="257" width="13" height="10" rx="3" fill="'+(i%2?'#d793b6':'#a58dd3')+'"/>').join('')+'</g>';
+ // Realistic stocked treatment area: small patient on exam table, crash cart,
+ // IV fluid bag, patient charts, sink and sharps disposal; not new click targets.
+ s+='<g aria-hidden="true">'+
+ // Tucked-in feline patient on the worktable, positioned clear of the walking sprites.
+ '<ellipse cx="495" cy="305" rx="36" ry="12" fill="#d9dbec" opacity=".6"/>'+
+ '<ellipse cx="497" cy="298" rx="32" ry="15" fill="#a3a6ae"/>'+
+ '<path d="M517 299q21 1 18 -20" fill="none" stroke="#8c919b" stroke-width="7" stroke-linecap="round"/>'+
+ '<circle cx="472" cy="291" r="16" fill="#b5b5b5"/>'+
+ '<path d="M460 283l2 -16 12 8 11 -10 4 18" fill="#b5b5b5" stroke="#898d97" stroke-width="2"/>'+
+ '<path d="M465 291l5 2m12 -2l-5 2" stroke="#4f535f" stroke-width="2.5" stroke-linecap="round"/>'+
+ '<path d="M470 299q4 2 7 -1" stroke="#77717b" stroke-width="2" fill="none"/>'+
+ '<rect x="449" y="311" width="104" height="10" rx="5" fill="#fff3f8" opacity=".85"/>'+
+ // Clean treatment tray and folded gauze, kept to side of the patient.
+ '<rect x="561" y="301" width="31" height="9" rx="3" fill="#b8c5d9"/>'+
+ '<rect x="565" y="296" width="17" height="7" rx="2" fill="#ffffff"/>'+
+ '<rect x="578" y="295" width="6" height="9" rx="2" fill="#a7c5d3"/>'+
+ // IV fluid bag on existing pole, marked drip line.
+ '<rect x="339" y="248" width="22" height="44" rx="4" fill="#e8f6fc" stroke="#a9bfd0" stroke-width="2"/>'+
+ '<path d="M350 251v-10M344 274h12" stroke="#97bbc6" stroke-width="2"/>'+
+ '<path d="M350 292v21q0 16 15 16" stroke="#b3b9c9" stroke-width="2" fill="none"/>'+
+ // Oxygen hookups, wall glove box, and color-coded clinical waste.
+ '<rect x="558" y="152" width="62" height="26" rx="7" fill="#e6f4fa" stroke="#a4bfce" stroke-width="3"/>'+
+ '<circle cx="572" cy="164" r="6" fill="#8acbb6"/><circle cx="591" cy="164" r="6" fill="#f1cf83"/>'+
+ '<circle cx="610" cy="164" r="5" fill="#b3b6d2"/>'+
+ '<rect x="545" y="202" width="36" height="25" rx="5" fill="#effbfd" stroke="#a3bdca" stroke-width="3"/>'+
+ '<rect x="551" y="208" width="24" height="9" rx="2" fill="#c9e0e3"/>'+
+ '<path d="M563 216l-6 12 6 -4 7 5 0 -12" fill="#fbfbff"/>'+
+ '<rect x="667" y="342" width="33" height="42" rx="5" fill="#e6c5ce" stroke="#c693a8" stroke-width="3"/>'+
+ '<rect x="663" y="338" width="41" height="8" rx="3" fill="#bb859f"/>'+
+ '<path d="M679 357h10m-5 -5v11" stroke="#fff" stroke-width="4"/>'+
+ // Clipboard and neatly arranged color-coded supply bins on lab counter.
+ '<rect x="900" y="219" width="43" height="37" rx="5" fill="#f5f2fc" stroke="#ad9fc9" stroke-width="3"/>'+
+ '<path d="M912 231h20M912 239h16M912 247h18" stroke="#9eaaca" stroke-width="2.2"/>'+
+ '<rect x="915" y="214" width="13" height="9" rx="4" fill="#b7a6ce"/>'+
+ '</g>';
  s+='<g font-family="Arial,sans-serif" font-weight="900">'+
  '<rect x="96" y="106" width="163" height="39" rx="18" fill="#fff5fc" stroke="#dda7d6" stroke-width="4"/>'+
  '<text x="177" y="132" font-size="17" fill="#935c8d" text-anchor="middle">PATIENT CARE</text>'+
