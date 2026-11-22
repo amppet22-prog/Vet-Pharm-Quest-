@@ -18,16 +18,14 @@ const spec={
   {x:77,y:35,w:19,h:34,label:'📋 Reading desk',action:'radiologyDesk'}],
  treatment:[
   {x:9,y:33,w:18,h:41,label:'🐶 Patient',action:'hospitalFollowup'},
-  {x:28,y:54,w:10,h:26,label:'💉 Cart',action:'hospitalAdjust'},
-  {x:35,y:34,w:12,h:19,label:'💉 Skills Wing',action:'skillsWing'},
-  {x:59,y:35,w:14,h:29,label:'💗 Monitor',action:'hospitalMonitor'},
+  {x:63,y:57,w:9,h:22,label:'🚨 Crash Cart',action:'hospitalAdjust'},
+  {x:59,y:34,w:14,h:22,label:'💗 Monitor',action:'hospitalMonitor'},
   {x:88,y:49,w:9,h:22,label:'🧪 Send to Lab',action:'clinpathLabReferral'}]
 };
 
 /* Small informational ? targets, separate from the playable stations (Necropsy-style). */
 const wardHelp={
  kennels:{title:'🐾 Inpatient Recovery Kennels',tag:'PATIENT CARE · HOUSING',opens:'Recovery kennels for patients requiring observation and nursing care.',learn:'Check patient identity, comfort, bedding, hydration, appetite, elimination, catheter sites and pain at each scheduled nursing round.',different:'Kennel patients are not automatically stable: use individualized vitals and stress-minimizing handling. Cats and dogs need appropriate separate housing.',next:'Use the Patient station for a clinical case and document changes before transferring to treatment.'},
- skills:{title:'💉 Clinical Skills Wing',tag:'PROCEDURES · PRACTICE',opens:'Opens practical injection, blood-draw and handling exercises.',learn:'Use species-appropriate restraint, asepsis, sharps safety, correct sample tubes and safe injection landmarks.',different:'This doorway leads to skills practice, rather than the treatment table itself.',next:'Choose the Skills Wing button or walk to the doorway and press E.'},
  tables:{title:'🩺 Treatment Tables',tag:'PATIENT CARE · PROCEDURES',opens:'Two treatment surfaces for examination, catheter placement, sample collection and supervised nursing procedures.',learn:'Keep a clean work surface, verify patient identity, apply appropriate restraint and monitor comfort, perfusion and temperature.',different:'Clean between patients and do not leave an animal unattended on a raised table.',next:'Review the patient presentation, then choose monitoring or diagnostics based on findings.'},
  supplies:{title:'🧤 Procedure Supply Station',tag:'TOOLS · ASEPSIS',opens:'Gloves, electric hair clippers, nail trimmers, catheter tape, gauze, wraps and specimen supplies.',learn:'Clip rather than razor-shave catheter sites where possible; prepare skin aseptically, choose secure but nonconstricting tape and inspect catheter sites regularly.',different:'Nail trimmers are for nail care, not vascular access. Sharps and contaminated materials need appropriate disposal.',next:'Use the Clinical Skills Wing to practice safe blood collection and catheter-related steps.'},
  monitor:{title:'💗 Patient Monitor',tag:'VITAL SIGNS · TRENDS',opens:'Displays an example ECG and heart rate as a visual monitoring station.',learn:'Interpret heart rate and ECG alongside pulse quality, respiratory effort, temperature, blood pressure, oxygenation and the species-specific patient assessment.',different:'The displayed 128 is illustrative, not a real vital sign from your selected patient; an ECG trace alone does not establish adequate perfusion.',next:'Open Monitor to practice trend-based reassessment.'},
@@ -37,9 +35,9 @@ const wardHelp={
  lab:{title:'🧪 In-House Laboratory',tag:'DIAGNOSTICS · SAMPLE QUALITY',opens:'In-house analyzers and sampling workspace for initial diagnostic testing.',learn:'Correct sample identity, anticoagulant, collection technique, analyzer quality control and species-specific reference intervals all affect interpretation.',different:'An in-house value may need smear review, repeat testing, urinalysis or send-out confirmation; interpret results with the patient.',next:'Choose Send to Lab for advanced clinical pathology work.'}
 };
 const wardHelpPins=[
- {key:'kennels',x:29,y:27},{key:'skills',x:47,y:45},{key:'tables',x:54,y:63},
- {key:'supplies',x:59,y:30},{key:'monitor',x:69,y:28},{key:'crash',x:69,y:67},
- {key:'oxygen',x:79,y:45},{key:'exotics',x:90,y:45},{key:'lab',x:90,y:73}
+ {key:'kennels',x:31.5,y:29},{key:'tables',x:60,y:59},
+ {key:'supplies',x:59,y:33},{key:'monitor',x:73.5,y:34},{key:'crash',x:71,y:61},
+ {key:'oxygen',x:85,y:33},{key:'exotics',x:96,y:33},{key:'lab',x:96,y:59}
 ];
 function wardHelpModal(key){
  const h=wardHelp[key];if(!h||typeof api.showModal!=='function')return;
@@ -104,14 +102,37 @@ function imaging(){
 }
 function treatment(){
  let s=base('treatment');
- // Distinct, walkable skills doorway behind the treatment cart.
- s+='<g filter="url(#trt25-shadow)">'+round(352,158,124,113,'#e2f0fa','#9bafcf')+
- '<rect x="363" y="183" width="102" height="77" rx="9" fill="#f9ecf7" stroke="#b8a0ca" stroke-width="4"/>'+
- '<path d="M414 183v77" stroke="#bfa8d3" stroke-width="5"/>'+
- '<circle cx="407" cy="232" r="5" fill="#c6a6d1"/><circle cx="424" cy="232" r="5" fill="#c6a6d1"/>'+
- '<rect x="355" y="161" width="119" height="21" rx="12" fill="#fff5fc" stroke="#b79aca" stroke-width="3"/>'+
- '<text x="414" y="176" font-family="Arial" text-anchor="middle" font-size="11" fill="#8e6297" font-weight="900">CLINICAL SKILLS</text>'+
- '<text x="391" y="228" font-size="18" text-anchor="middle">💉</text><text x="443" y="228" font-size="18" text-anchor="middle">🩸</text></g>';
+ // Compact treatment-preparation cabinet replaces the Skills doorway.
+ s+='<g filter="url(#trt25-shadow)">'+
+ '<rect x="350" y="155" width="128" height="116" rx="8" fill="#e0edf4" stroke="#a2b6c8" stroke-width="5"/>'+
+ '<rect x="358" y="164" width="112" height="20" rx="7" fill="#fffdfa" stroke="#bed2dc" stroke-width="2"/>'+
+ '<text x="414" y="178" text-anchor="middle" font-family="Arial" font-size="11" font-weight="900" fill="#547d90">TREATMENT PREP</text>'+
+ '<rect x="359" y="191" width="45" height="58" rx="5" fill="#fafcff" stroke="#a8becb" stroke-width="3"/>'+
+ '<rect x="408" y="191" width="59" height="58" rx="5" fill="#f6faff" stroke="#b3c4d3" stroke-width="3"/>'+
+ '<rect x="366" y="198" width="31" height="20" rx="3" fill="#d6eced"/>'+
+ '<path d="M372 206h20m-20 6h13" stroke="#8dbbbf" stroke-width="2"/>'+
+ '<rect x="416" y="199" width="15" height="29" rx="3" fill="#ccdfeb"/>'+
+ '<rect x="435" y="199" width="12" height="29" rx="3" fill="#ead8e9"/>'+
+ '<rect x="451" y="199" width="10" height="29" rx="3" fill="#d5eacf"/>'+
+ '<path d="M358 251h112" stroke="#93a9bd" stroke-width="5"/></g>';
+ // Side-wall recovery and medication safety posters.
+ s+='<g font-family="Arial" aria-hidden="true">'+
+ '<path d="M14 152l52 6v122l-52 22z" fill="#fffdfa" stroke="#7c9db9" stroke-width="4"/>'+
+ '<path d="M20 166l40 4v22l-40 -3z" fill="#d4e9e6"/>'+
+ '<text x="40" y="181" text-anchor="middle" font-size="9" font-weight="900" fill="#426f6a">RECOVERY</text>'+
+ '<text x="20" y="214" font-size="8" font-weight="800" fill="#58758b">PAIN • HR</text>'+
+ '<text x="20" y="229" font-size="8" font-weight="800" fill="#58758b">RR • TEMP</text>'+
+ '<text x="20" y="244" font-size="8" font-weight="800" fill="#58758b">EAT / PEE</text>'+
+ '<path d="M20 251h35M20 264h31" stroke="#aac6c9" stroke-width="3"/>'+
+ '<path d="M939 164l47 -8v140l-47 -20z" fill="#fffefa" stroke="#9ba5c7" stroke-width="4"/>'+
+ '<path d="M945 174l35 -4v26l-35 3z" fill="#f6e1eb"/>'+
+ '<text x="963" y="183" font-size="8" text-anchor="middle" font-weight="900" fill="#915a78">DRUG</text>'+
+ '<text x="963" y="192" font-size="8" text-anchor="middle" font-weight="900" fill="#915a78">CHECK</text>'+
+ '<text x="946" y="215" font-size="7.4" font-weight="800" fill="#64758d">PATIENT</text>'+
+ '<text x="946" y="230" font-size="7.4" font-weight="800" fill="#64758d">DRUG / DOSE</text>'+
+ '<text x="946" y="245" font-size="7.4" font-weight="800" fill="#64758d">ROUTE</text>'+
+ '<text x="946" y="260" font-size="7.4" font-weight="800" fill="#64758d">RECHECK</text>'+
+ '</g>';
   // Finishing touches: recovery charts and clean supply shelf, kept away from hotspots.
  s+='<g aria-hidden="true"><path d="M95 141h208" stroke="#e4c6db" stroke-width="4" stroke-linecap="round"/>'+
  '<rect x="111" y="129" width="48" height="8" rx="3" fill="#f7ffff" stroke="#a9c2cb" stroke-width="2"/>'+
@@ -173,11 +194,13 @@ function treatment(){
  '<ellipse cx="500" cy="416" rx="119" ry="18" fill="#776b93" opacity=".15"/>'+
  '<ellipse cx="514" cy="338" rx="84" ry="10" fill="#726c90" opacity=".10"/>'+
  '</g>'+
- // Adjustable ceiling-mounted examination light
- '<path d="M527 82v94l-35 18" stroke="#99a3b5" stroke-width="10" fill="none"/>'+
- '<path d="M530 87v82" stroke="#e0e8f0" stroke-width="3" opacity=".85"/>'+
- '<ellipse cx="491" cy="202" rx="36" ry="23" fill="#fff7d8" stroke="#8ea3b9" stroke-width="8"/>'+
- [473,491,509].map(x=>'<circle cx="'+x+'" cy="202" r="9" fill="#fffefa"/>').join('')+
+ // Jointed wall-mounted exam lamp, brought forward without crossing the Treatment Ward sign.
+ '<path d="M730 167h-46l-55 37 -44 16" stroke="#8198aa" stroke-width="8" fill="none" stroke-linecap="round"/>'+
+ '<path d="M727 164h-41l-57 36" stroke="#deebf0" stroke-width="2" fill="none"/>'+
+ '<circle cx="682" cy="168" r="7" fill="#b6cbd5" stroke="#879eab" stroke-width="2"/>'+
+ '<circle cx="628" cy="204" r="7" fill="#b6cbd5" stroke="#879eab" stroke-width="2"/>'+
+ '<ellipse cx="572" cy="225" rx="35" ry="22" fill="#fff5d7" stroke="#91a7b8" stroke-width="8"/>'+
+ [554,572,590].map(x=>'<circle cx="'+x+'" cy="225" r="8" fill="#fffdfa"/>').join('')+
  '<g filter="url(#trt25-shadow)">'+
  // Rear exam/prep table: polished working surface with outer stainless lip and raised edge.
  '<path d="M438 276l123 -12 38 23 -122 14z" fill="#dce7eb" stroke="#899eac" stroke-width="5" stroke-linejoin="round"/>'+
@@ -219,12 +242,7 @@ function treatment(){
  '<text x="687" y="205" font-size="16" fill="#f4b7cb" font-weight="900" text-anchor="middle">♥ 128</text>'+
  '<rect x="647" y="281" width="15" height="26" fill="#a3b4ce"/>'+
  '<rect x="617" y="307" width="80" height="9" rx="4" fill="#99a3c1"/></g>';
- // Compact treatment-cart station. Wall cages will use the right upper panel instead of giant cabinets.
- s+='<g>'+round(299,298,64,83,'#f1ebfa','#aaa6c8')+
- '<path d="M306 327h50M306 350h50" stroke="#a3a8c5" stroke-width="3"/>'+
- '<rect x="306" y="295" width="50" height="8" rx="4" fill="#dce8f3"/>'+
- '<circle cx="313" cy="385" r="6" fill="#7787a7"/><circle cx="351" cy="385" r="6" fill="#7787a7"/>'+
- '</g>';
+ // Crash cart at right is now the single treatment cart.
  // In-house lab counter with two analyzers, tubes, microscope
  s+='<g filter="url(#trt25-shadow)"><rect x="720" y="327" width="227" height="18" rx="5" fill="#ded0eb" stroke="#b4a2cc" stroke-width="4"/>'+
  round(727,345,214,70,'#eee9f9','#a7a5c7')+
@@ -411,7 +429,7 @@ window.VPQ_SCENERY.roomArt=k=>k==='imaging'?imaging():k==='treatment'?treatment(
 const styles=document.createElement('style');
 styles.textContent='.vpqWalkArt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}'+
 '.stage[data-room="imaging"] .prop,.stage[data-room="treatment"] .prop,.stage[data-room="imaging"] .roomdecor,.stage[data-room="treatment"] .roomdecor,.stage[data-room="imaging"] .roomBanner,.stage[data-room="treatment"] .roomBanner{display:none!important}'+
-'.vpqWardHelpPin{position:absolute;z-index:8;width:24px;height:24px;padding:0;display:grid;place-items:center;pointer-events:auto;border-radius:50%;background:#fffaf0;color:#674c9e;border:2px solid #a58bcc;box-shadow:0 2px 4px #51437438;font-size:15px;line-height:1;font-weight:900;transform:translate(-50%,-50%)}'+
+'.vpqWardHelpPin{position:absolute;z-index:8;width:21px;height:21px;padding:0;display:grid;place-items:center;pointer-events:auto;border-radius:50%;background:#fffaf0;color:#674c9e;border:2px solid #a58bcc;box-shadow:0 2px 4px #51437438;font-size:15px;line-height:1;font-weight:900;transform:translate(-50%,-50%)}'+
 '.vpqWardHelpPin:hover,.vpqWardHelpPin:focus-visible{background:#fff0bd;border-color:#e4aa55;outline:2px solid #ffe7a6;outline-offset:1px}'+
 '.vpqWardHelpModal{font-size:15px;line-height:1.45}.vpqWardHelpIntro{background:#edf6fc;border-left:4px solid #83adc8;padding:10px 12px;border-radius:10px}.vpqWardHelpIntro small{font-size:11px;font-weight:900;color:#477495;letter-spacing:.04em}.vpqWardHelpIntro p{margin:5px 0}.vpqWardHelpCard{background:white;border:1px solid #d6e3ef;border-radius:10px;padding:9px 12px;margin-top:8px}.vpqWardHelpCard b{font-size:15px;color:#274f7a}.vpqWardHelpCard p{font-size:15px;line-height:1.45;margin:4px 0 0}'+
 '.vpq25Hotspots{position:absolute;inset:0;z-index:5;pointer-events:none}.vpq25Hit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:15px;box-shadow:none;transform:none!important;padding:0;overflow:visible}'+
