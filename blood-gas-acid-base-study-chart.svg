@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1550" height="1110" viewBox="0 0 1550 1110"><title>Veterinary blood gas and acid-base interpretation pathway</title><desc>Stepwise pH, pCO2, bicarbonate, compensation, anion gap, lactate, ionized calcium, and sample pitfalls.</desc><rect width="1550" height="1110" fill="#f9fcff"/><rect x="185" y="16" width="1180" height="80" rx="20" fill="#dceaff" stroke="#92afe7" stroke-width="2"/>
+<text x="775" y="49" text-anchor="middle" font-size="34" font-weight="800" fill="#284674">BLOOD GAS DETECTIVE</text>
+<text x="775" y="78" text-anchor="middle" font-size="20" font-weight="500" fill="#243650">pH → Primary disorder → Compensation → Cause → Clinical decision</text>
+<rect x="21" y="118" width="370" height="115" rx="16" fill="#dfe9ff" stroke="#a5bdd7" stroke-width="2"/>
+<text x="56" y="157" text-anchor="middle" font-size="30" font-weight="800" fill="#324b7a">1</text>
+<text x="216" y="155" text-anchor="middle" font-size="19" font-weight="800" fill="#233952">CHECK pH</text>
+<text x="216" y="192" text-anchor="middle" font-size="16" font-weight="500" fill="#243650">Acidemia / alkalemia</text>
+<rect x="406" y="118" width="370" height="115" rx="16" fill="#e2f8ed" stroke="#a5bdd7" stroke-width="2"/>
+<text x="441" y="157" text-anchor="middle" font-size="30" font-weight="800" fill="#324b7a">2</text>
+<text x="601" y="155" text-anchor="middle" font-size="19" font-weight="800" fill="#233952">FIND THE DRIVER</text>
+<text x="601" y="192" text-anchor="middle" font-size="16" font-weight="500" fill="#243650">pCO₂ (lungs) or HCO₃⁻ (metabolic)</text>
+<rect x="791" y="118" width="370" height="115" rx="16" fill="#f1e6ff" stroke="#a5bdd7" stroke-width="2"/>
+<text x="826" y="157" text-anchor="middle" font-size="30" font-weight="800" fill="#324b7a">3</text>
+<text x="986" y="155" text-anchor="middle" font-size="19" font-weight="800" fill="#233952">CHECK COMPENSATION</text>
+<text x="986" y="192" text-anchor="middle" font-size="16" font-weight="500" fill="#243650">Appropriate or mixed?</text>
+<rect x="1176" y="118" width="370" height="115" rx="16" fill="#fff1d7" stroke="#a5bdd7" stroke-width="2"/>
+<text x="1211" y="157" text-anchor="middle" font-size="30" font-weight="800" fill="#324b7a">4</text>
+<text x="1371" y="155" text-anchor="middle" font-size="19" font-weight="800" fill="#233952">FIND THE CAUSE</text>
+<text x="1371" y="192" text-anchor="middle" font-size="16" font-weight="500" fill="#243650">AG, chloride, lactate, patient</text>
+<rect x="20" y="260" width="742" height="425" rx="16" fill="#e9f3ff" stroke="#7eb0ea" stroke-width="2"/>
+<rect x="780" y="260" width="750" height="425" rx="16" fill="#edfbf0" stroke="#83c6a1" stroke-width="2"/>
+<text x="390" y="300" text-anchor="middle" font-size="25" font-weight="800" fill="#245b9f">RESPIRATORY SIDE · pCO₂</text>
+<text x="1155" y="300" text-anchor="middle" font-size="25" font-weight="800" fill="#278254">METABOLIC SIDE · HCO₃⁻</text>
+<rect x="46" y="333" width="690" height="127" rx="16" fill="#d8e8ff" stroke="#89b4ed" stroke-width="2"/>
+<text x="390" y="373" text-anchor="middle" font-size="23" font-weight="800" fill="#184b87">Hypoventilation → CO₂ ↑ → pH ↓</text>
+<text x="390" y="413" text-anchor="middle" font-size="22" font-weight="700" fill="#184b87">PRIMARY RESPIRATORY ACIDOSIS</text>
+<rect x="46" y="483" width="690" height="127" rx="16" fill="#e9e2ff" stroke="#b5a0e9" stroke-width="2"/>
+<text x="390" y="523" text-anchor="middle" font-size="23" font-weight="800" fill="#5b478e">Hyperventilation → CO₂ ↓ → pH ↑</text>
+<text x="390" y="563" text-anchor="middle" font-size="22" font-weight="700" fill="#5b478e">PRIMARY RESPIRATORY ALKALOSIS</text>
+<rect x="805" y="333" width="700" height="127" rx="16" fill="#dbf6e5" stroke="#92c9ab" stroke-width="2"/>
+<text x="1155" y="373" text-anchor="middle" font-size="23" font-weight="800" fill="#207c52">HCO₃⁻ loss / acid gain → pH ↓</text>
+<text x="1155" y="413" text-anchor="middle" font-size="22" font-weight="700" fill="#207c52">PRIMARY METABOLIC ACIDOSIS</text>
+<rect x="805" y="483" width="700" height="127" rx="16" fill="#fff1d8" stroke="#e6b960" stroke-width="2"/>
+<text x="1155" y="523" text-anchor="middle" font-size="23" font-weight="800" fill="#995c0a">H⁺ loss / HCO₃⁻ ↑ → pH ↑</text>
+<text x="1155" y="563" text-anchor="middle" font-size="22" font-weight="700" fill="#995c0a">PRIMARY METABOLIC ALKALOSIS</text>
+<text x="390" y="653" text-anchor="middle" font-size="16" font-weight="500" fill="#243650">Lungs change CO₂ quickly · arterial ≠ venous oxygenation</text>
+<text x="1155" y="653" text-anchor="middle" font-size="16" font-weight="500" fill="#243650">Kidney compensation is slower · GI loss, kidney, perfusion</text>
+<rect x="20" y="709" width="1510" height="168" rx="16" fill="#f2ecff" stroke="#b8a6e8" stroke-width="2"/>
+<text x="775" y="748" text-anchor="middle" font-size="25" font-weight="800" fill="#55438a">WHY THE OTHER NUMBER MOVES: COMPENSATION</text>
+<text x="70" y="790" text-anchor="start" font-size="19" font-weight="600" fill="#37435f">Metabolic acidosis → breathe faster → pCO₂ falls</text>
+<text x="70" y="830" text-anchor="start" font-size="19" font-weight="600" fill="#37435f">Metabolic alkalosis → breathe slower (limited) → pCO₂ rises</text>
+<text x="825" y="790" text-anchor="start" font-size="19" font-weight="600" fill="#37435f">Respiratory acidosis → kidneys retain HCO₃⁻ over time</text>
+<text x="825" y="830" text-anchor="start" font-size="19" font-weight="600" fill="#37435f">Respiratory alkalosis → kidneys excrete HCO₃⁻ over time</text>
+<rect x="20" y="902" width="484" height="171" rx="16" fill="#fff2df" stroke="#e2b77f" stroke-width="2"/>
+<rect x="532" y="902" width="489" height="171" rx="16" fill="#e9f7ef" stroke="#9acbad" stroke-width="2"/>
+<rect x="1050" y="902" width="480" height="171" rx="16" fill="#e6f1ff" stroke="#9ebfe5" stroke-width="2"/>
+<text x="262" y="944" text-anchor="middle" font-size="23" font-weight="800" fill="#925814">ANION GAP</text>
+<text x="262" y="982" text-anchor="middle" font-size="22" font-weight="800" fill="#925814">Na⁺ − (Cl⁻ + HCO₃⁻)</text>
+<text x="262" y="1022" text-anchor="middle" font-size="16" font-weight="500" fill="#243650">High: lactate, ketones, uremic acids, toxins</text>
+<text x="777" y="944" text-anchor="middle" font-size="23" font-weight="800" fill="#22704c">CLINICAL TEST TIES</text>
+<text x="777" y="981" text-anchor="middle" font-size="18" font-weight="500" fill="#243650">Lactate = perfusion / metabolism</text>
+<text x="777" y="1019" text-anchor="middle" font-size="17" font-weight="500" fill="#243650">Ionized Ca = biologically active calcium</text>
+<text x="1290" y="944" text-anchor="middle" font-size="23" font-weight="800" fill="#295d93">SAMPLE PITFALLS</text>
+<text x="1290" y="981" text-anchor="middle" font-size="17" font-weight="500" fill="#243650">Air bubbles · delay · heparin · temperature</text>
+<text x="1290" y="1019" text-anchor="middle" font-size="17" font-weight="500" fill="#243650">Use arterial blood for PaO₂ assessment</text>
+<text x="775" y="1096" text-anchor="middle" font-size="15" font-weight="500" fill="#243650">Educational overview: use species-, analyzer- and sample-specific intervals; evaluate mixed disorders and patient context.</text>
+</svg>
