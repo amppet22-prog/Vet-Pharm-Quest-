@@ -1,0 +1,90 @@
+/* Clinical Pathology — structured multi-stage CBC/Chem workups.
+ * Case values and intervals are educational examples, never universal clinical RI.
+ * Keeps case interpretation separate from the reference and microscope atlas.
+ */
+window.VPQ_CLINPATH_MULTISTAGE=(function(){
+'use strict';
+let api=null, active=0, stage=0, selected={}, submitted={}, order={};
+const STORE='vpq-cp-multistage-v1';
+const clean=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\x27':'&#39;'}[c]));
+const cases=[
+{id:'cpms01',title:'Anemia & plasma protein',species:'Dog · 6 years',story:'Weakness and dark urine after 4 days of progressive lethargy. Mucous membranes are pale and mildly icteric. No known trauma.',labs:[
+['PCV','19%','37–55%'],['TS','7.2 g/dL','6.0–8.0 g/dL'],['Reticulocytes','245 × 10³/µL','Lab-specific; evaluate with anemia'],['MCV','78 fL','60–77 fL'],['MCHC','31 g/dL','32–36 g/dL'],['Total bilirubin','3.2 mg/dL','0.1–0.5 mg/dL'],['Platelets','210 × 10³/µL','200–500 × 10³/µL']],
+notes:'Blood film: moderate polychromasia; suspected spherocytes. Plasma is yellow, not visibly hemolyzed.',stages:[
+{title:'Identify the erythrogram',q:'Which classification best summarizes this CBC?',choices:['Marked macrocytic, mildly hypochromic regenerative anemia','Normal RBC mass, physiologic erythrocytosis','Microcytic nonregenerative anemia','Isolated thrombocytopenia'],correct:0,why:'PCV ↓ establishes anemia. Increased absolute reticulocytes and polychromasia support regeneration; mildly ↑ MCV and ↓ MCHC fit a reticulocyte-rich erythrogram. Regeneration takes time.'},
+{title:'Rank the leading mechanism',q:'What belongs at the top of the differential ranking?',choices:['RBC destruction / hemolysis, including an immune-mediated cause','Uncomplicated dehydration as the sole cause','Absolute erythrocytosis','Normal age-related change'],correct:0,why:'Regenerative anemia with maintained TS and hyperbilirubinemia raises hemolysis as a leading mechanism. Blood loss remains possible; spherocytes support (but do not prove) IMHA in dogs.'},
+{title:'Choose the discriminating follow-up',q:'Which next investigation best helps support or challenge the leading mechanism?',choices:['Careful smear review, saline agglutination testing and targeted hemolysis workup','Repeat ALP alone without checking RBCs','Ignore plasma color and ask only for urinalysis pH','Diagnose definitively from the bilirubin alone'],correct:0,why:'Smear features, saline agglutination, RBC parasites and clinical evaluation distinguish immune and nonimmune hemolysis; bilirubin alone cannot localize intravascular versus extravascular destruction.'},
+{title:'Reassess the whole patient',q:'Which interpretation is most appropriately cautious?',choices:['Evidence favors regeneration and likely hemolysis, but confirm its cause and monitor perfusion/PCV trends','Spherocytes always prove primary IMHA','The normal TS rules out bleeding in every case','A high MCV proves marrow cancer'],correct:0,why:'The pattern is meaningful but etiologies need confirmation. Classify the process first, then prioritize and verify the mechanism with the patient and sample.'}
+],takeaway:'Anemia → response → possible loss versus destruction → discriminating test. PCV + TS + smear improve a CBC diagnosis.'},
+{id:'cpms02',title:'Azotemia & potassium',species:'Cat · 12 years',story:'Several weeks of weight loss and PU/PD. Today dehydrated, dull and anorexic. Urine was collected before fluid therapy.',labs:[
+['BUN','68 mg/dL','16–36 mg/dL'],['Creatinine','3.4 mg/dL','0.8–2.4 mg/dL'],['USG','1.012','No universal RI: consider hydration/azotemia'],['K⁺','3.0 mmol/L','3.5–5.1 mmol/L'],['Phosphorus','8.1 mg/dL','3.1–7.5 mg/dL'],['PCV','27%','30–45%'],['TS','8.4 g/dL','6.0–8.0 g/dL']],
+notes:'Urinalysis: inactive sediment. Patient is dehydrated on examination. No obstruction noted on initial physical exam.',stages:[
+{title:'Classify the abnormalities',q:'Which combined statement is correct?',choices:['Azotemia with inappropriately low urine concentration, hypokalemia and mild anemia','Azotemia with maximally appropriate urine concentration','Normal renal values with isolated high potassium','High PCV and normal TS'],correct:0,why:'BUN/creatinine ↑; dehydrated cats would generally concentrate urine more than 1.012 when able. K ↓ may reflect urinary loss or poor intake; PCV is low despite hemoconcentration.'},
+{title:'Rank the mechanisms',q:'Which explanation most plausibly connects the findings?',choices:['Renal dysfunction with impaired concentration and possible urinary K loss; determine chronicity','Obstruction confirmed because potassium is low','Hemoconcentration fully explains every measured value','Primary erythrocytosis'],correct:0,why:'Low urine concentration with azotemia raises renal dysfunction. Low potassium can accompany polyuria and inadequate intake; anemia could reflect chronic EPO deficiency, but chronicity requires history/trends or other evidence.'},
+{title:'Choose the next workup',q:'What should be included before labeling or staging kidney disease?',choices:['Assess hydration/perfusion, blood pressure, urine output, UPC, imaging and repeat kidney trends','Infer a definitive stage from dehydrated creatinine alone','Never recheck potassium','Use TS to prove kidney chronicity'],correct:0,why:'Correct reversible contributors and evaluate proteinuria/BP, urine output, obstruction and imaging. Stable values are necessary for meaningful staging; recheck electrolytes during treatment.'},
+{title:'Explain potassium physiology',q:'Which statement best explains the low K in this particular polyuric cat?',choices:['Urinary K loss and poor intake can deplete total-body potassium','Low K always proves no kidney disease','Reduced urine output necessarily lowers serum K','BUN directly converts into K'],correct:0,why:'Polyuric renal disorders can waste K and anorexia reduces intake. Anuric/oliguric states can produce hyperkalemia from reduced excretion instead. Both are trends, not universal patterns.'}
+],takeaway:'Read BUN/creatinine with hydration and USG. Renal patients can be hypokalemic or hyperkalemic depending on output, intake and physiology.'},
+{id:'cpms03',title:'Inflammation vs cortisol',species:'Dog · 4 years',story:'Fever, painful draining wound and lethargy. An EDTA sample is fresh; manual smear differential is available.',labs:[
+['WBC','25.0 × 10³/µL','6.0–17.0 × 10³/µL'],['Segmented neutrophils','15.0 × 10³/µL','3.0–11.5 × 10³/µL'],['Bands','5.5 × 10³/µL','0–0.3 × 10³/µL'],['Lymphocytes','1.0 × 10³/µL','1.0–4.8 × 10³/µL'],['Monocytes','2.8 × 10³/µL','0.2–1.4 × 10³/µL'],['Platelets','185 × 10³/µL','200–500 × 10³/µL']],
+notes:'Neutrophils have Döhle bodies and basophilic/foamy cytoplasm. Smear: no platelet clumps seen.',stages:[
+{title:'Read WBC absolute counts',q:'Which primary WBC pattern is present?',choices:['Neutrophilic leukocytosis with pronounced left shift and toxic change','Isolated physiologic lymphocytosis','No evidence of inflammation because segmented cells are high','Pure pancytopenia'],correct:0,why:'Both mature and immature neutrophils are increased. Bands 5.5 are increased, and toxic features indicate accelerated granulopoiesis/inflammatory demand.'},
+{title:'Interpret the left shift',q:'With bands 5.5 and segmented neutrophils 15.0, how should the nuclear shift be described?',choices:['Regenerative-type left shift (mature > immature), with strong inflammatory features','Degenerative shift because any band cell is present','Right shift; bands are old neutrophils','No shift if mature neutrophils rise'],correct:0,why:'Here segmented neutrophils outnumber bands, consistent with a regenerative-type left shift. Marked toxicity and clinical illness still indicate potentially significant inflammation.'},
+{title:'Separate cortisol from inflammation',q:'What most strongly favors inflammatory neutrophilia over a simple steroid leukogram?',choices:['Marked bands and toxic change in a febrile patient','A mature neutrophilia by itself','A mild lymphopenia by itself','Normal RBC morphology'],correct:0,why:'Cortisol can cause mature neutrophilia and lymphopenia but substantial left shift and toxicity point to inflammatory demand. Clinical examination helps confirm.'},
+{title:'Select the next step',q:'What test or action best identifies the cause?',choices:['Sample the wound for appropriate cytology and culture when indicated; assess the source clinically','Treat the neutrophil percentage as a pathogen ID','Diagnose leukemia from WBC ↑ alone','Skip smear review'],correct:0,why:'CBC defines host response but rarely identifies a causative organism. Appropriate sampling, source evaluation, and patient monitoring answer that question.'}
+],takeaway:'Total WBC → absolute differential → bands → toxic change → patient. Regenerative left shift does not mean benign inflammation.'},
+{id:'cpms04',title:'Hypercalcemia & send-out reasoning',species:'Dog · 10 years',story:'PU/PD, decreased appetite and peripheral lymphadenopathy. Serum hypercalcemia prompted ionized calcium testing.',labs:[
+['Total Ca','13.8 mg/dL','9.0–11.5 mg/dL'],['Ionized Ca','1.70 mmol/L','1.15–1.33 mmol/L'],['Phosphorus','2.2 mg/dL','2.5–5.5 mg/dL'],['Albumin','3.2 g/dL','2.6–4.0 g/dL'],['PTH','Suppressed','Assay-specific; interpret with iCa'],['PTHrP','Detected','Assay-specific']],
+notes:'Palpable enlarged peripheral lymph nodes. Other findings are not yet diagnostic of a tumor subtype.',stages:[
+{title:'Determine whether hypercalcemia is real',q:'What is supported by these results?',choices:['True ionized hypercalcemia is present; total Ca is also elevated','Low active calcium due to albumin','Normal biologically active Ca','Hypocalcemia requiring PTH increase'],correct:0,why:'Ionized Ca represents physiologically active Ca and is increased. Total calcium can vary with albumin, but iCa confirms the active fraction is elevated.'},
+{title:'Read the feedback loop',q:'Why is PTH suppressed?',choices:['High iCa normally inhibits parathyroid PTH secretion through negative feedback','The kidney necessarily stops making PTH','PTH must rise in every hypercalcemic patient','High albumin permanently destroys PTH'],correct:0,why:'Elevated iCa should suppress endogenous PTH. Normal PTH rises when iCa is low, not when high.'},
+{title:'Choose the most supported mechanism',q:'Which differential is strengthened by PTHrP detected with high iCa and suppressed PTH?',choices:['PTH-independent, potentially malignancy-associated hypercalcemia','Primary parathyroid overproduction definitively proven','Physiologic response to low calcium','Hypoproteinemic pseudohypercalcemia'],correct:0,why:'Tumor-produced PTHrP can activate PTH receptors to increase calcium despite PTH feedback suppression. Clinical evaluation and tissue diagnosis are still necessary.'},
+{title:'Select the confirmatory direction',q:'What is a rational next diagnostic step?',choices:['Fine-needle aspirate/evaluate accessible lymph nodes and investigate neoplasia','Assume PTHrP specifies the exact tumor type','Ignore renal status and hydration','Treat PTHrP as a replacement for all imaging/cytology'],correct:0,why:'PTHrP strengthens a mechanism; cytology, imaging, renal status and staging determine the underlying disease and management.'}
+],takeaway:'Total calcium → ionized calcium → feedback (PTH) → PTHrP → underlying cause. Hormone changes are mechanisms, not a final tissue diagnosis.'}
+];
+function save(){try{sessionStorage.setItem(STORE,JSON.stringify({active,stage,selected,submitted}))}catch(_){}}
+function restore(){try{const x=JSON.parse(sessionStorage.getItem(STORE)||'null');if(x){active=Number.isInteger(x.active)&&x.active>=0&&x.active<cases.length?x.active:0;stage=Number.isInteger(x.stage)&&x.stage>=0&&x.stage<4?x.stage:0;selected=x.selected||{};submitted=x.submitted||{}}}catch(_){}}
+function modal(title,html){if(!api)api={showModal:(a,b)=>window.VPQ_REFERRAL_MODAL?.show?.(a,b)};return api.showModal(title,html)}
+function choiceOrder(c,s){const n=c.stages[s].choices.length;return Array.from({length:n},(_,i)=>(i+(active*3+s*2+1))%n)}
+function button(a,label){return '<button type="button" data-vpqms="'+a+'">'+label+'</button>'}
+function render(){
+ const c=cases[active],q=c.stages[stage],k=c.id+'-'+stage,answer=selected[k],done=!!submitted[k];
+ const css='<style>.vpqms{font-size:14px;line-height:1.5}.vpqms *{box-sizing:border-box}.vpqms .msbar{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}.vpqms button{font-size:13px;white-space:normal}.vpqms .mschoices{display:grid;grid-template-columns:1fr 1fr;gap:7px}.vpqms .mschoice{text-align:left;padding:10px;border-radius:9px;background:#f5f8fe;border:2px solid #c7d8ef}.vpqms .mspick{border-color:#648dd1;background:#e3efff}.vpqms .mscorrect{border-color:#39a974;background:#e5f7e9}.vpqms .mswrong{border-color:#e1a13b;background:#fff0d3}.vpqms table{width:100%;border-collapse:collapse;font-size:13px}.vpqms th,.vpqms td{padding:6px;border-bottom:1px solid #e2e6ed;text-align:left}.vpqms th{background:#e2eefa}.vpqms .msbox{padding:12px;border:1px solid #c7d6ee;border-radius:11px;margin:8px 0}.vpqms .msstep{background:#e4f0ff;border-radius:9px;padding:9px;font-weight:700}.vpqms .msfeedback{padding:10px;border-radius:9px;margin-top:10px}.vpqms .mscompact{font-size:12px;color:#52647d}.vpqms details{margin:9px 0;border:1px solid #d0dce9;padding:8px;border-radius:10px}.vpqms summary{cursor:pointer;font-weight:700}@media(max-width:560px){.vpqms .mschoices{grid-template-columns:1fr}}</style>';
+ const count=Object.keys(submitted).filter(key=>key.startsWith(c.id+'-')&&submitted[key]).length;
+ let html=css+'<div class="vpqms"><div class="msbar">'+button('home','📋 All workups')+button('learn','📘 Learn guide')+button('lab','🩸 CBC/Chem station')+'</div>'+
+ '<div class="msbox"><b>🐾 '+clean(c.species)+' · '+clean(c.title)+'</b><p>'+clean(c.story)+'</p><p class="mscompact"><b>Patient sample quality:</b> '+clean(c.notes)+'</p></div>'+
+ '<details open><summary>🧪 CBC / chemistry / ancillary testing · with reference intervals</summary><div style="overflow-x:auto"><table><thead><tr><th>Test</th><th>Patient</th><th>Example RI</th></tr></thead><tbody>'+c.labs.map(r=>'<tr>'+r.map(v=>'<td>'+clean(v)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div></details>'+
+ '<p class="mscompact">Reference intervals are illustrative for the specified species and can differ by age, analyzer and laboratory. Some hormone values need method-specific interpretation.</p>'+
+ '<div class="msstep">Stage '+(stage+1)+' of '+c.stages.length+' · '+clean(q.title)+' · '+count+'/'+c.stages.length+' completed</div>'+
+ '<p><b>'+clean(q.q)+'</b></p><div class="mschoices">'+choiceOrder(c,stage).map((i,pos)=>'<button type="button" class="mschoice '+(answer===i?'mspick ':'')+(done?(i===q.correct?'mscorrect':i===answer?'mswrong':''):'')+'" data-vpqms-choice="'+i+'" '+(done?'disabled':'')+'><b>'+String.fromCharCode(65+pos)+'.</b> '+clean(q.choices[i])+'</button>').join('')+'</div>'+
+ (done?'<div class="msfeedback '+(answer===q.correct?'mscorrect':'mswrong')+'"><b>'+(answer===q.correct?'✓ Correct':'Review this finding')+'</b><p>'+clean(q.why)+'</p></div>':'<div class="msbar">'+button('submit','Submit interpretation')+'</div>')+
+ '<div class="msbar">'+(stage>0?button('previous','← Previous stage'):'')+(done?stage<c.stages.length-1?button('next','Next stage →'):button('finished','Review case conclusion →'):'')+'</div>'+
+ (stage===c.stages.length-1&&done?'<div class="msbox mscorrect"><b>🎉 Case synthesis</b><p>'+clean(c.takeaway)+'</p>'+button('nextcase','Try next patient →')+'</div>':'')+
+ '<div class="msbar">'+button('restart','↻ Reset this patient')+'</div></div>';
+ modal('🏥 Multistage Diagnostic Workup · '+c.title,html);
+}
+function home(){
+ const html='<div class="vpqms"><p><b>Clinical Pathology · Multistage CBC & Chemistry</b></p><p>Each patient has 4 stages: classify values → rank differentials → choose testing → explain physiology. Each example includes reported reference intervals.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px">'+cases.map((c,i)=>'<button type="button" data-vpqms="case-'+i+'" style="padding:12px;white-space:normal;text-align:left"><b>'+clean(c.title)+'</b><small style="display:block">'+clean(c.species)+'</small></button>').join('')+'</div><p class="mscompact">Patient cases use illustrative, not universal, reference intervals. Incorrect answers show orange feedback; correct answers are green.</p>'+button('learn','📘 Return to Learn guide')+'</div>';
+ modal('🏥 CBC + Chemistry · Multistage Workups',html);
+}
+function handle(event){
+ const t=event.target?.closest?.('[data-vpqms],[data-vpqms-choice]');
+ if(!t||!document.getElementById('modalBody')?.contains(t))return;
+ event.preventDefault();event.stopImmediatePropagation();
+ if(t.hasAttribute('data-vpqms-choice')){const c=cases[active],k=c.id+'-'+stage;if(submitted[k])return;selected[k]=Number(t.dataset.vpqmsChoice);save();return render()}
+ const v=t.dataset.vpqms;
+ if(v==='home')return home();
+ if(v==='learn')return window.VPQ_CLINPATH_REPORT_ACADEMY?.open('start');
+ if(v==='lab')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
+ if(v.startsWith('case-')){active=Number(v.slice(5));stage=0;save();return render()}
+ if(v==='previous'){stage=Math.max(0,stage-1);save();return render()}
+ if(v==='next'){stage=Math.min(3,stage+1);save();return render()}
+ if(v==='finished')return render();
+ if(v==='submit'){const k=cases[active].id+'-'+stage;if(selected[k]===undefined)return;submitted[k]=true;save();return render()}
+ if(v==='nextcase'){active=(active+1)%cases.length;stage=0;save();return render()}
+ if(v==='restart'){const c=cases[active];for(let i=0;i<4;i++){delete selected[c.id+'-'+i];delete submitted[c.id+'-'+i]}stage=0;save();return render()}
+}
+window.addEventListener('click',handle,true);
+function init(context){api=context;restore()}
+restore();
+return Object.freeze({init,home,open:(index=0)=>{active=index>=0&&index<cases.length?index:0;stage=0;save();render()},cases});
+})();
