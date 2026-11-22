@@ -482,6 +482,7 @@ renderMatch=vpqMatchRender40;
 const vpqOriginalSetTab40=setTab;
 setTab=function(t){
  if(t==='cases')t='home';
+ if(t!=='match')document.body.classList.remove('vpq-match-active');
  if(t==='match')matchDeck=[];
  if(t==='battle'){battleStep=0;round=null}
  if(t==='boss'){bossIds=[];bossDone=false}
