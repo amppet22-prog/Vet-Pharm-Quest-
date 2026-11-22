@@ -3098,7 +3098,7 @@ function vpqGMastery(){
    const recent=p.recent.filter(x=>x.lecture===lec),right=recent.filter(x=>x.correct).length,flags=Object.values(p.weak).filter(x=>x.lecture===lec).length;
    return '<div class="vpqGlecture"><span><b>'+escapeHtml(lec)+'</b><small>'+recent.length+' attempts · '+(recent.length?Math.round(100*right/recent.length)+'% correct':'Not yet tested')+' · '+flags+' flagged</small></span><button data-vpqglecture="'+escapeHtml(lec)+'" data-vpqgmode="quiz">Test</button></div>';
  }).join('');
- showModal('🏆 Mastery · Prove what you know','<p><b>Mastery is assessment and remediation.</b> Unlike Learning, it tests answers without hints, identifies weak concepts, and sends you back to review.</p><div class="vpq-sharedstats"><div><b>'+p.attempts+'</b><small>Attempts</small></div><div><b>'+p.correct+'</b><small>Correct</small></div><div><b>'+Object.keys(p.weak).length+'</b><small>Flagged</small></div><div><b>'+chosen.length+'</b><small>Lectures</small></div></div><h3>Selected lecture performance</h3><div class="vpqGlist">'+(rows||'<p>Select lectures in Learning Lab first.</p>')+'</div><div class="buttonrow"><button data-vpqgtrain="quiz">🎓 Exam challenge</button><button data-vpqgtrain="missed">🔁 Weak teaching concepts</button><button data-vpqsharedgame="review">📒 Arcade missed questions</button></div><p class="tiny">New progress tracking does not retroactively include every older session. These metrics reflect practice, not official exam certification.</p><button data-vpqghub="1">← Learning Lab</button>');
+ showModal('🏆 Mastery · Prove what you know','<p><b>Mastery is assessment and remediation.</b> Unlike Learning, it tests answers without hints, identifies weak concepts, and sends you back to review.</p><div class="vpq-sharedstats"><div><b>'+p.attempts+'</b><small>Attempts</small></div><div><b>'+p.correct+'</b><small>Correct</small></div><div><b>'+Object.keys(p.weak).length+'</b><small>Flagged</small></div><div><b>'+chosen.length+'</b><small>Lectures</small></div></div><h3>Selected lecture performance</h3><div class="vpqGlist">'+(rows||'<p>Select lectures in Learning Lab first.</p>')+'</div><div class="buttonrow"><button data-vpqgtrain="quiz">🎓 Exam challenge</button><button data-vpqgtrain="missed">🔁 Weak teaching concepts</button><button data-vpqgtrain="missed">🔁 Review weak concepts</button></div><p class="tiny">New progress tracking does not retroactively include every older session. These metrics reflect practice, not official exam certification.</p><button data-vpqghub="1">← Learning Lab</button>');
 }
 $('modalBody').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
  if(b.dataset.vpqghub!==undefined){vpqLearningHub();return}
@@ -3287,7 +3287,7 @@ function actionForFocus(action,lec){
    '<p>Learning teaches you. Mastery tests you <b>without hints</b>, tracks missed concepts, and provides focused review. These are different stages of the same lecture curriculum.</p>'+
    '<div class="vpq-sharedstats"><div><b>'+p.attempts+'</b><small>Recorded attempts</small></div><div><b>'+p.correct+'</b><small>Correct</small></div><div><b>'+Object.keys(p.weak).length+'</b><small>Flagged for review</small></div><div><b>'+chosen.length+'</b><small>Active lectures</small></div></div>'+
    '<div class="vpqLFlist">'+(rows||'<p>Choose lectures in Learning Lab first.</p>')+'</div>'+
-   '<div class="buttonrow"><button data-vpqlfhome="1">← Learning Center</button><button data-vpqlfroute="clinical" data-vpqlflecture="'+escapeHtml(focusLecture())+'">🩺 '+escapeHtml(focusLecture())+' clinical questions</button><button data-vpqlflaunch="quiz">🧠 Test selected lectures</button><button data-vpqlflaunch="missed">🔁 Review flagged teaching cards</button><button data-vpqlfgame="review">📒 Arcade missed questions</button></div>');
+   '<div class="buttonrow"><button data-vpqlfhome="1">← Learning Center</button><button data-vpqlfroute="clinical" data-vpqlflecture="'+escapeHtml(focusLecture())+'">🩺 '+escapeHtml(focusLecture())+' clinical questions</button><button data-vpqlflaunch="quiz">🧠 Test selected lectures</button><button data-vpqlflaunch="missed">🔁 Review flagged teaching cards</button><button data-vpqlfroute="prof">📚 Review professor guide</button></div>');
  }
  function launch(mode,one){
   let chosen=one?[one]:pending();
@@ -3353,10 +3353,15 @@ const pharmFlowStyle=document.createElement('style');
  },false);
  // Replace route functions rather than layering another menu inside the prior menu.
  vpqLearningHub=function(){menuState.pending=null;showLearning()};
+ vpqOpenPharmArcade=vpqOpenArcadeGamesHub;
+ vpqOpenExamCenter310=showLearning;
+ if($('pharmArcadeBtn'))$('pharmArcadeBtn').onclick=vpqOpenArcadeGamesHub;
+ if($('vpqExamCenterBtn310'))$('vpqExamCenterBtn310').onclick=showLearning;
  vpqGMastery=function(){masteryScreen()};
  const formerDoAction=doAction;
  doAction=function(action){
-  if(['pharmArcade','pharmExamCenter'].includes(action))return vpqOpenArcadeGamesHub();
+  if(action==='pharmArcade')return vpqOpenArcadeGamesHub();
+  if(action==='pharmExamCenter')return showLearning();
   if(['study','learningHub'].includes(action))return vpqLearningHub();
   if(action==='masteryTracker')return masteryScreen();
   if(action==='hospitalFollowup'||action==='inpatientWard'||action==='treatmentDiagnostics')return caseMenu();
