@@ -156,6 +156,12 @@
       "answer": "Ca²⁺ sensitization and PDE3 inhibition.",
       "why": "It is an inodilator: increases contractility while producing vasodilation because it opens K+ channels in vascular smooth muscle.",
       "slide": "Lecture 14 · user study cards, reconciled with lecture guide and veterinary references"
+    },
+    "pharm-e2-resp15-020": {
+      "prompt": "Why must horses not receive zilpaterol-containing feed?",
+      "answer": "Zilpaterol is a beta-agonist that's approved in cattle, but can lead to lameness and health issues. It is highly toxic to equines.",
+      "why": "U.S. cattle-feed labeling explicitly prohibits equine access. Voluntarily withdrawn from cattle.",
+      "slide": "Lecture 15 · submitted recall notes + clinically reviewed guidance"
     }
   },
   "custom": [
