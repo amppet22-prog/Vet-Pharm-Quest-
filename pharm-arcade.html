@@ -24,6 +24,17 @@
 #screen .match-board .tile.vpq-drug-clue{font-weight:650}
 #screen .match-board .tile.matched.vpq-drug-name{color:#245c49;opacity:.9}
 @media(max-width:600px){#screen .match-board{gap:6px}#screen .match-board .tile{min-height:58px;padding:7px 6px;font-size:11.5px}#screen .match-board .tile.vpq-drug-name{font-size:13px}}
+
+/* Drug Match clinical feedback: readable separated rows. */
+#screen .vpq-match-feedback-card{margin-top:12px;padding:12px 14px;border:2px solid #38ae79;border-radius:13px;background:#e4f8ed;color:#214b43;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+#screen .vpq-match-feedback-heading{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:13px;font-weight:850;margin-bottom:9px;color:#176c51}
+#screen .vpq-match-feedback-heading strong{font-size:16px;font-weight:950;color:#164f43}
+#screen .vpq-match-feedback-row{display:grid;grid-template-columns:minmax(105px,145px) minmax(0,1fr);gap:10px;padding:7px 0;border-top:1px solid #b9e5cf}
+#screen .vpq-match-feedback-label{font-weight:900;color:#245c50}
+#screen .vpq-match-warning{color:#77541f}
+#screen .vpq-match-warning .vpq-match-feedback-label{color:#865b1c}
+#screen .vpq-match-feedback-xp{border-top:1px solid #b9e5cf;margin-top:3px;padding-top:9px;font-size:12px;font-weight:900;color:#177353}
+@media(max-width:620px){#screen .vpq-match-feedback-row{grid-template-columns:1fr;gap:3px;padding:8px 0}#screen .vpq-match-feedback-card{padding:10px 12px}}
 </style><link rel="stylesheet" href="question-feedback.css?v=20261119-unified-answers"><link rel="stylesheet" href="arcade-compact.css?v=20261119-compact-2">
 <style id="vpq-ipad-drugmatch-fixes">
 html,body{overflow-y:auto!important;-webkit-overflow-scrolling:touch;min-height:100%;height:auto}
@@ -393,6 +404,17 @@ function vpqMatchInit40(){
  const deck=[];picks.forEach((x,i)=>{deck.push({id:i,side:0,text:x.drug},{id:i,side:1,text:x[key]})});
  matchDeck=vpqShuffle40(deck);vpqMatchRender40();
 }
+function vpqMatchFeedback40(message){
+ if(message&&typeof message==='object'&&message.drug){
+  const line=(label,value,extra='')=>value?'<div class="vpq-match-feedback-row '+extra+'"><span class="vpq-match-feedback-label">'+label+'</span><span>'+safe(String(value))+'</span></div>':'';
+  return '<div class="vpq-match-feedback-card" role="status"><div class="vpq-match-feedback-heading">✓ Correct match <strong>'+safe(String(message.drug))+'</strong></div>'+
+   line('Class / mechanism',message.mechanism)+
+   line('Clinical pearl',message.clinical)+
+   line('Watch for',message.safety,'vpq-match-warning')+
+   '<div class="vpq-match-feedback-xp">'+(message.firstMastery?'✦ First match · +12 XP':'✓ Previously mastered · practice only')+'</div></div>';
+ }
+ return '<div class="feedback" style="margin-top:12px" role="status">'+(message||'Choose a drug and its corresponding mechanism or clinical clue.')+'</div>';
+}
 function vpqMatchRender40(message=''){
  round=null;
  if(!matchDeck.length)return vpqMatchInit40();
@@ -404,7 +426,7 @@ function vpqMatchRender40(message=''){
  '<div class="little"><button class="btn smallbtn" id="vpqMatchModeClass">🏷️ Drug class</button><button class="btn smallbtn" id="vpqMatchModeMechanism">⚙️ Drug target</button><button class="btn smallbtn" id="vpqMatchModeClinical">⚕️ Clinical caution</button><button class="btn smallbtn" id="vpqMatchNew">New drug set ↻</button></div>'+
  '<div class="meter" style="margin:12px 0"><div style="width:'+(matched.size/total*100)+'%"></div></div>'+
  '<div class="match-board">'+matchDeck.map((x,i)=>'<button class="tile '+(matched.has(x.id)?'matched':'')+' '+(selection===i?'selected':'')+' '+(x.side===0?'vpq-drug-name':'vpq-drug-clue')+'" data-vpqmatchtile="'+i+'" '+(matched.has(x.id)?'disabled':'')+'>'+safe(x.text)+'</button>').join('')+'</div>'+
- '<div class="feedback '+(message.startsWith('✓')?'good':'')+'" style="margin-top:12px">'+(message||'Choose a drug and its corresponding mechanism or clinical clue.')+'</div>'+
+ vpqMatchFeedback40(message)+
  (matched.size===total?'<div class="note"><b>🏆 Drug Match complete!</b><p>Excellent—now use those mechanisms in a clinical decision, or practice another matching set.</p><div class="buttonrow"><button class="btn primary" id="vpqMatchClinicalNext">🩺 Next: Clinical Questions</button><button class="btn" id="vpqMatchFlashReview">🧠 Review Flashcards</button></div></div>':'');
  vpqWireMatchLecturePicker40();
  $('vpqMatchModeClass').onclick=()=>{vpqMatchMode40='className';vpqMatchInit40()};
@@ -430,7 +452,7 @@ function vpqMatchRender40(message=''){
    const firstMastery=!save.matchMastery40[masteryKey];
    if(firstMastery){save.matchMastery40[masteryKey]=true;save.xp+=12;}
    persist();stats();
-   vpqMatchRender40('✓ '+safe(d.drug)+' — '+safe(d.mechanism)+'. Clinical pearl: '+safe(d.clinical)+(d.safety?' · Watch: '+safe(d.safety):'')+(firstMastery?' · First match +12 XP.':' · Previously mastered; practice only.'));
+   vpqMatchRender40({drug:d.drug,mechanism:d.mechanism,clinical:d.clinical,safety:d.safety,firstMastery}); practice only.'));
   }else vpqMatchRender40('Not yet. Match the particular agent to its mechanism or clinically distinctive caution, not simply another drug in the same class.');
  });
 }
