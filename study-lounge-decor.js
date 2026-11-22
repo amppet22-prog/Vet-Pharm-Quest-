@@ -83,7 +83,7 @@ function habitat(){
  const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
  // Tall, left-wall display, with visible lizard, climbing/basking surfaces and a real cabinet base.
  // Decorative illustration only; species-specific welfare requirements are not represented as a care guide.
- return '<g transform="translate(7 152) skewY(-4) scale(.76 1.11)">'+
+ return '<g transform="translate(3 151) skewY(-3) scale(.69 1.13)">'+
  '<rect x="0" y="0" width="140" height="155" rx="8" fill="#5f827a" stroke="#466e69" stroke-width="6"/>'+
  '<rect x="7" y="9" width="126" height="117" rx="4" fill="#dceacc" stroke="#92ac9e" stroke-width="3"/>'+
  '<rect x="8" y="11" width="124" height="12" rx="3" fill="#708e7f"/>'+
@@ -156,11 +156,12 @@ function svgDecor(){
 const oldArt=art.roomArt.bind(art);
 art.roomArt=function(k){
  const svg=oldArt(k);if(k!=='study')return svg;
- // Layer the terrarium BEHIND the sofa and bookshelf instead of over them.
- const wallAnchor='<g><rect x="96" y="112"';
- let withHabitat=svg.includes(wallAnchor)?svg.replace(wallAnchor,habitat()+wallAnchor):svg;
+ // Place the terrarium AFTER the bookshelf, before the study-board and sofa.
+ // Drawing it before the bookshelf covered the animal and almost all of the glass.
+ const afterBooks='<g transform="translate(426 88) scale(.77 1)">';
+ let withHabitat=svg.includes(afterBooks)?svg.replace(afterBooks,habitat()+afterBooks):svg;
  if(chosen('coffee')==='lounge-coffee-deluxe')withHabitat=withHabitat.replace(/<g transform="translate\(352 223\) scale\(1\.12\)">[\s\S]*?<\/g>/,'');
- if(['lounge-egg-chair','lounge-hanging-chair'].includes(chosen('seating')))withHabitat=withHabitat.replace(/<ellipse cx="178" cy="449"[\s\S]*?(?=<g transform="translate(697 190) scale(.70)">)/,'');
+ if(['lounge-egg-chair','lounge-hanging-chair'].includes(chosen('seating')))withHabitat=withHabitat.replace(/<ellipse cx="178" cy="449"[\s\S]*?(?=<g transform="translate(723 169) scale(.72 .82)">)/,'');
  return withHabitat.replace(/<\/svg>\s*$/,svgDecor()+'</svg>');
 };
 function buttons(){
