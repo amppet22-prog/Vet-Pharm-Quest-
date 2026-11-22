@@ -48,7 +48,7 @@ function animateExamDepth(now){
 }
 requestAnimationFrame(animateExamDepth);
 
-let examAnimal='dog';
+let examAnimal=''; // Blank exam table until the user chooses a patient.
 const escExam=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const dogNames=['Husky / Shepherd','German Shepherd','Husky','Corgi','Dachshund','Greyhound','Border Collie','Australian Shepherd','Labrador','Golden Retriever','Mixed Breed','Other Dog'];
 const catNames=['Tabby','Black','Orange','Tuxedo','Calico','Longhair','Siamese','Other Cat'];
@@ -73,7 +73,9 @@ function examPatients(){
  return options;
 }
 function examPatientArt(){
- const p=examPatients().find(x=>x.id===examAnimal)||examPatients()[0];
+ if(!examAnimal)return '';
+ const p=examPatients().find(x=>x.id===examAnimal);
+ if(!p)return '';
  if(p.id==='dog'||p.id==='cat')return animalArt();
  if(typeof p.image==='string'&&p.image.startsWith('assets/')&&!p.image.includes('..')&&/\.(png|jpg|jpeg|webp)$/i.test(p.image))
    return '<image href="'+escExam(p.image)+'" x="442" y="208" width="190" height="130" preserveAspectRatio="xMidYMax meet"/>';
@@ -156,23 +158,18 @@ function drawing(){
 
  // A familiar cute clinical protocol board: remains a distinct action target.
  '<g transform="translate(552 277)" filter="url(#exShadow)"><rect width="104" height="58" rx="12" fill="#fffdf6" stroke="#aac9be" stroke-width="5"/><path d="M15 19h75M15 31h65M15 43h53" stroke="#bed6d4" stroke-width="4"/><rect x="36" y="-7" width="32" height="13" rx="5" fill="#8bb7b3"/></g>',
- // Space-saving veterinary examination table, firmly attached to the right-side wall.
- // A full-height mounting rail, bolt heads, reinforced triangular braces, and folding
- // stainless platform make the mechanical support visible instead of a floating table.
- '<g filter="url(#exShadow)"><rect x="909" y="180" width="27" height="178" rx="9" fill="#789da4" stroke="#537b86" stroke-width="5"/><rect x="914" y="196" width="17" height="145" rx="5" fill="#c2d8d9"/><g fill="#5f7c86"><circle cx="923" cy="210" r="4"/><circle cx="923" cy="245" r="4"/><circle cx="923" cy="284" r="4"/><circle cx="923" cy="328" r="4"/></g>',
- // A strong, two-point wall-supported swing arm and angled diagonal knee braces.
- '<path d="M917 323L787 387L772 377L909 302Z" fill="#7397a4" stroke="#587c8b" stroke-width="5"/>',
- '<path d="M916 336L848 395L823 389L912 307Z" fill="#b2cdd0" stroke="#6b909b" stroke-width="5"/>',
- '<path d="M921 300L802 352L774 367L891 310Z" fill="#8bb5b9" stroke="#658d98" stroke-width="4"/>',
- // Wide counter-height platform; its rear edge meets the wall mount.
- '<path d="M610 317L765 271L939 313L771 365Z" fill="url(#exMetal)" stroke="#648b97" stroke-width="7" stroke-linejoin="round"/>',
- '<path d="M610 317L771 365V382L610 335Z" fill="#a0bfc8" stroke="#6f919b" stroke-width="5"/>',
- '<path d="M771 365L939 313V334L771 382Z" fill="#789ca9" stroke="#5e8691" stroke-width="5"/>',
- '<path d="M636 315L766 281L910 314L772 348Z" fill="#fffbf7" stroke="#c9dddd" stroke-width="4"/>',
- '<path d="M619 313L764 272M770 365L937 313" stroke="#f5ffff" stroke-width="3" opacity=".8"/>',
- '<g fill="#789aa4" stroke="#5c7c86" stroke-width="2"><circle cx="916" cy="321" r="6"/><circle cx="885" cy="328" r="5"/></g></g>',
- // Keep all legacy patients visually on top of the table.
- '<g transform="translate(213 -11)">',examPatientArt(),'</g>',
+ // Patient table is a realistic-height anchored clinical fixture, not a floating prop.
+ // A contemporary, lower exam platform with rounded corners and a full-height
+ // structural wall column. Rear mounting bolts and two braces support the slab.
+ // The patient is centered on a washable nonslip pad above the table surface.
+ '<g filter="url(#exShadow)"><rect x="913" y="203" width="29" height="198" rx="9" fill="#759da7" stroke="#557c89" stroke-width="5"/><rect x="922" y="216" width="11" height="174" rx="5" fill="#d1e2e4"/><g fill="#597c88"><circle cx="927" cy="226" r="4"/><circle cx="927" cy="273" r="4"/><circle cx="927" cy="322" r="4"/><circle cx="927" cy="370" r="4"/></g>',
+ '<path d="M926 342L791 418L769 410L909 323Z" fill="#7c9fa8" stroke="#577f8b" stroke-width="6"/><path d="M925 357L834 425L804 420L913 328Z" fill="#b2cdd0" stroke="#6f94a0" stroke-width="5"/>',
+ '<path d="M611 345Q611 337 622 334L765 294Q774 292 784 296L935 342Q949 347 936 354L782 404Q774 408 765 404L618 361Q610 357 611 345Z" fill="url(#exMetal)" stroke="#608894" stroke-width="8"/>',
+ '<path d="M613 353L775 401V421L613 372Z" fill="#a4c4ca" stroke="#638894" stroke-width="5"/><path d="M775 401L938 350V370L775 421Z" fill="#86a8b2" stroke="#638894" stroke-width="5"/>',
+ '<path d="M643 344L772 308L908 347L776 385Z" fill="#fff9f4" stroke="#c6dbd9" stroke-width="4"/><path d="M661 346L772 317L890 349" fill="none" stroke="#f5d4de" stroke-width="3" opacity=".75"/>',
+ '<circle cx="915" cy="352" r="5" fill="#647e8a"/><circle cx="885" cy="368" r="5" fill="#647e8a"/></g>',
+ // Art occupies the pad, not the upper wall; blank table is valid before selection.
+ '<g transform="translate(213 17)">',examPatientArt(),'</g>',
  // Dedicated clean-wipe dispenser and a lidded clinical-waste bin against wall.
  '<g filter="url(#exShadow)"><rect x="882" y="219" width="48" height="43" rx="8" fill="#e9f4ef" stroke="#adc9ca" stroke-width="4"/><path d="M889 235h30" stroke="#93b6b8" stroke-width="4"/><path d="M901 224h8v-13h-8" fill="#fff"/><rect x="944" y="390" width="36" height="59" rx="6" fill="#a7c6ca" stroke="#70949d" stroke-width="4"/><path d="M938 388h48" stroke="#657f8a" stroke-width="6"/></g>',
  // The floor stays clear and washable: no rug and no stool in the walkway.
@@ -196,11 +193,36 @@ function refresh(){
  el.innerHTML='<button type="button" class="vpqExamHot vpqExamCharts" data-vpqexamaction="medicalCharts" aria-label="Open patient medical charts"><span>📋 Patient Charts</span></button>'+
  '<button type="button" class="vpqExamHot vpqExamPatient" data-vpqexamaction="patients" aria-label="Examine patient and start patient cases"><span>🩺 Examine Patient</span></button>'+
  '<button type="button" class="vpqExamHot vpqExamProtocol" data-vpqexamaction="protocols" aria-label="Open clinical protocols"><span>📖 Protocols</span></button>'+
- '<label class="vpqExamPatientPicker">🐾 Patient <select data-vpqexamanimal="1" aria-label="Choose exam patient">'+examPatients().map(p=>'<option value="'+escExam(p.id)+'"'+(p.id===examAnimal?' selected':'')+'>'+escExam(p.label)+'</option>').join('')+'</select></label>'+
+ '<button type="button" class="vpqExamHelp vpqExamHelpCharts" data-examhelp="charts" aria-label="What are patient charts?">?</button>'+
+ '<button type="button" class="vpqExamHelp vpqExamHelpProtocol" data-examhelp="protocols" aria-label="What are clinical protocols?">?</button>'+
+ '<button type="button" class="vpqExamHelp vpqExamHelpPatient" data-examhelp="patients" aria-label="What happens when I examine a patient?">?</button>'+
+ '<button type="button" class="vpqExamHelp vpqExamHelpSkills" data-examhelp="skills" aria-label="What is the clinical skills area?">?</button>'+
+ '<button type="button" class="vpqExamHelp vpqExamHelpPicker" data-examhelp="picker" aria-label="How do I select an exam-room patient?">?</button>'+
+ '<div class="vpqExamHelpPopover" id="vpqExamHelpPopover" hidden role="status" aria-live="polite"></div>'+
+ '<label class="vpqExamPatientPicker">🐾 Patient <select data-vpqexamanimal="1" aria-label="Choose exam patient"><option value=""'+(!examAnimal?' selected':'')+'>Select a patient…</option>'+examPatients().map(p=>'<option value="'+escExam(p.id)+'"'+(p.id===examAnimal?' selected':'')+'>'+escExam(p.label)+'</option>').join('')+'</select></label>'+
  '<button type="button" class="vpqExamSkills" data-vpqexamaction="skillsWing" aria-label="Walk into Clinical Skills for injection and blood draw">💉 🩸 Clinical Skills · Injection / Blood Draw</button>'+ 
  '<button type="button" class="vpqExamExit" data-vpqexamreturn="1">← Reception</button>';
  el.addEventListener('change',e=>{if(e.target.matches('[data-vpqexamanimal]')){examAnimal=e.target.value;const svg=document.getElementById('scene')?.querySelector('.vpqExamRoomArt');if(svg)svg.outerHTML=drawing();}});
- el.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.vpqexamreturn!==undefined)return changeRoom('reception');if(b.dataset.vpqexamaction)return doAction(b.dataset.vpqexamaction)});
+ el.addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.examhelp){
+  const notes={
+   charts:'Patient Charts: open the SOAP notes and medical chart for your practice cases.',
+   protocols:'Clinical Protocols: review clinical checklists, safety steps, and patient workflows.',
+   patients:'Examine Patient: start clinical cases and apply what you learned to the patient.',
+   skills:'Clinical Skills: practice injections, venipuncture, and sample handling.',
+   picker:'Patient selector: pick any small companion to display on this table. Your equipped companion will not change. Large animals belong in the future barn.'
+  };
+  const pop=el.querySelector('#vpqExamHelpPopover');
+  const active=pop.dataset.open===b.dataset.examhelp&&!pop.hidden;
+  el.querySelectorAll('.vpqExamHelp').forEach(x=>x.setAttribute('aria-expanded',String(!active&&x===b)));
+  if(active){pop.hidden=true;pop.dataset.open='';}
+  else{pop.textContent=notes[b.dataset.examhelp]||'';pop.dataset.open=b.dataset.examhelp;pop.hidden=false;}
+  return;
+ }
+ if(b.dataset.vpqexamreturn!==undefined)return changeRoom('reception');
+ if(b.dataset.vpqexamaction)return doAction(b.dataset.vpqexamaction);
+});
  stage.appendChild(el);
 }
 const style=document.createElement('style');style.textContent=
@@ -216,7 +238,8 @@ const style=document.createElement('style');style.textContent=
 '.vpqExamHot,.vpqExamExit{pointer-events:auto;position:absolute;border:2px solid #99bbc2bb;border-radius:12px;background:#ffffff15;box-shadow:none;transform:none!important}'+
 '.vpqExamHot:hover,.vpqExamHot:focus-visible,.vpqExamExit:hover,.vpqExamExit:focus-visible{border:3px solid #f1c66d;outline:2px solid #fff;background:#fff6ba48}'+
 '.vpqExamHot span{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fffdf5;color:#355a70;border:2px solid #83acb5;border-radius:14px;padding:5px 9px;font-size:12px;font-weight:900;box-shadow:0 3px 0 #708c962e}.vpqExamCharts span{bottom:-23%}.vpqExamProtocol span{bottom:-38%}'+
-'.vpqExamCharts{left:37.5%;top:43%;width:10%;height:18%}.vpqExamPatient{left:62%;top:48%;width:30%;height:31%}.vpqExamProtocol{left:55%;top:55%;width:11%;height:12%}'+
+'.vpqExamCharts{left:37.5%;top:43%;width:10%;height:18%}.vpqExamPatient{left:62%;top:53%;width:30%;height:30%}.vpqExamProtocol{left:55%;top:55%;width:11%;height:12%}'+
+'.vpqExamHelp{position:absolute;pointer-events:auto;z-index:9;width:24px;height:24px;min-height:24px;min-width:24px;padding:0;border:2px solid #a99ac6;border-radius:50%;background:#fffaf4;color:#7a608e;font:900 14px Arial;box-shadow:0 2px 4px #5c507a2d;cursor:pointer}.vpqExamHelp:hover,.vpqExamHelp:focus-visible{background:#f2e6ff;outline:2px solid #fff}.vpqExamHelpCharts{left:45.5%;top:42%}.vpqExamHelpProtocol{left:64%;top:54%}.vpqExamHelpPatient{left:88%;top:77%}.vpqExamHelpSkills{left:28%;top:7%}.vpqExamHelpPicker{right:2%;bottom:17%}.vpqExamHelpPopover{pointer-events:auto;position:absolute;z-index:12;right:18%;bottom:8%;width:min(310px,58%);background:#fffdf9;border:2px solid #c3a9cb;border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.45;font-weight:700;color:#584c6c;box-shadow:0 5px 16px #55486933}.vpqExamHelpPopover[hidden]{display:none!important}'+
 '.vpqExamSkills{pointer-events:auto;position:absolute;left:3%;top:8%;background:#fff4fadd;border:3px solid #b79bda;border-radius:14px;color:#745588;padding:9px 12px;font-size:13px;font-weight:900;box-shadow:0 5px 0 #bfa8d455;cursor:pointer;z-index:3}.vpqExamSkills:hover,.vpqExamSkills:focus-visible{background:#fff1bd;border-color:#eab65c;outline:2px solid #fff9dd}'+
 '.vpqExamPatientPicker{pointer-events:auto;position:absolute;bottom:3%;right:2%;z-index:8;background:#fffaf8f2;color:#684b6d;border:2px solid #cda7c8;border-radius:13px;padding:7px;font-size:11px;font-weight:900;box-shadow:0 3px 0 #b49ab044}.vpqExamPatientPicker select{font:inherit;max-width:160px;color:#435f68;background:transparent;border:0;cursor:pointer}.vpqExamExit{top:8%;right:2%;background:#fffdf5ed;color:#365e66;font-size:11px;padding:6px 9px}'+
 '@media(max-width:600px){.vpqExamHot span{font-size:10px;padding:3px 5px}.vpqExamPatientPicker{font-size:9px}.vpqExamPatientPicker select{max-width:105px}.vpqExamExit{font-size:10px}}';
