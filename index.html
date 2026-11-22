@@ -4236,9 +4236,9 @@ function vpqExam2HighYield(mode='menu',lecture='all',position=0){
 }
 
 function vpqPharmNextMenu(){
- const data=vpqPharmNext; const examLectures=(data?.lectures||[]).filter(x=>/^Lecture (1[1-9]|20)$/.test(x.id));const startLecture=(window.VPQCurriculum?.getLectures?.()||[]).find(x=>/^Lecture (1[1-9]|20)$/.test(x))||'Lecture 11';
- showModal('📚 Pharmacology · Exam 2 · Lectures 11–20',
- '<p><b>Exam 2 includes Lectures 11–20.</b> Choose your lecture below. The study shortcuts use your saved Exam 2 lecture when available.</p><div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button></div>'+vpqPharmStudyPath(startLecture)+
+ const data=vpqPharmNext; const examLectures=(data?.lectures||[]).filter(x=>/^Lecture (1[0-9]|20)$/.test(x.id));const startLecture=(window.VPQCurriculum?.getLectures?.()||[]).find(x=>/^Lecture (1[0-9]|20)$/.test(x))||'Lecture 10';
+ showModal('📚 Pharmacology · Exam 2 · Lectures 10–20',
+ '<p><b>Exam 2 includes Lectures 10–20.</b> Choose your lecture below. The study shortcuts use your saved Exam 2 lecture when available.</p><div class="buttonrow"><button data-vpqlfhome="1">← Pharmacology Learning Center</button></div>'+vpqPharmStudyPath(startLecture)+
  
  '<div class="vpqNewPharmCards">'+examLectures.map(x=>'<button data-vpqnewpharm-lesson="'+escapeHtml(x.id)+'"><b>'+escapeHtml(x.id)+' · '+escapeHtml(x.title)+'</b><small>'+escapeHtml(x.focus||x.summary)+'</small><em>'+data.questions.filter(q=>q.lecture===x.id).length+' initial questions · browse lesson</em></button>').join('')+'</div>'+
  '<p><b>📋 Source-authored Exam 2 practice:</b> 96 questions from the uploaded answer/practice guide, including explanations. Select Lecture 10–20 in the Study Desk question filter. These are practice items, not Dr. Carlson\'s verbatim objective prompts.</p>'+
