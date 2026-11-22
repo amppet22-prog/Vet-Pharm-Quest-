@@ -83,7 +83,10 @@ function habitat(){
  const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
  // Tall, left-wall display, with visible lizard, climbing/basking surfaces and a real cabinet base.
  // Decorative illustration only; species-specific welfare requirements are not represented as a care guide.
- return '<g transform="translate(3 151) skewY(-3) scale(.69 1.13)">'+
+ return '<g transform="matrix(.55 -.09 .075 1.04 3 163)">'+
+ // Angled right-hand depth, top rim, and a slim visible side panel make the case follow the left wall.
+ '<path d="M140 0l19 -12v155l-19 12Z" fill="#486e69" stroke="#385e5a" stroke-width="4"/>'+
+ '<path d="M0 0L19 -12H159L140 0Z" fill="#819d8d" stroke="#4e6d65" stroke-width="4"/>'+
  '<rect x="0" y="0" width="140" height="155" rx="8" fill="#5f827a" stroke="#466e69" stroke-width="6"/>'+
  '<rect x="7" y="9" width="126" height="117" rx="4" fill="#dceacc" stroke="#92ac9e" stroke-width="3"/>'+
  '<rect x="8" y="11" width="124" height="12" rx="3" fill="#708e7f"/>'+
