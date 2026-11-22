@@ -3776,7 +3776,7 @@
         "dx": "Working identification: Auricular chondritis. Specimen site: Auricle / ear canal / middle ear. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
         "histo": "Auricular cartilage is distorted with transformation of the normally basophilic cartilaginous matrix to an eosinophilic matrix\n• Infiltration of the ear and cartilage by mixed lymphoplasmacytic to granulomatous inflammation",
         "why": "Etiology / pathogenesis: Usually cats <3 years; bilateral painful pruritic red, swollen, curled, sometimes alopecic pinnae. Gross, histology and clinical differentiation: Histology: cartilage matrix shifts from basophilic to eosinophilic, with lymphoplasmacytic-to-granulomatous infiltrates.",
-        "visualClue": "Bilaterally swollen auricles with curled ears",
+        "visualClue": "Bilaterally swollen auricles with curled ears. Cats less than 3 years of age. ",
         "compare": "Hematoma creates a blood pocket; infarction produces focal ischemic black tissue.",
         "notes": "**L78 · EXAM PHOTO RECOGNITION (L78 slide 12)**\n**Species, site and gross lesion:** Pinna: thickened painful cartilage, distorted stiff flap; inflammatory process can be bilateral.\n**WHY / pathogenesis:** Cartilage-associated immune/inflammatory injury → chondrocyte damage and fibrosis → distorted pinna.\n**Distinguish from:** Hematoma creates a blood pocket; infarction produces focal ischemic black tissue.\n\n**Instructor L78 · slides 11**\n**Etiology / pathogenesis:** Usually cats <3 years; bilateral painful pruritic red, swollen, curled, sometimes alopecic pinnae.\n**Gross, histology and clinical differentiation:** Histology: cartilage matrix shifts from basophilic to eosinophilic, with lymphoplasmacytic-to-granulomatous infiltrates.\n**Species / signalment:** Usually young cats (<3 years)\n**Etiology / cause:** Inflammatory injury to auricular cartilage; etiology uncertain",
         "grossSpecies": "[]",
@@ -3802,7 +3802,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-22T06:34:28.711Z",
+      "updated": "2026-11-22T06:35:35.594Z",
       "approvedBy": "amppet22-prog"
     }
   },
