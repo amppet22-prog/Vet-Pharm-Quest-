@@ -204,7 +204,7 @@ function practice(){
  c.opts.map((option,j)=>(j+i*3+1)%c.opts.length).map((j,k)=>'<button class="vra-choice '+(reveal[i]!==undefined?(j===c.answer?'vra-good':j===reveal[i]?'vra-wrong':''):'')+'" type="button" data-vpq-report-answer="'+i+':'+j+'">'+String.fromCharCode(65+k)+'. '+c.opts[j]+'</button>').join('')+
  (reveal[i]!==undefined?'<div class="vra-result '+(reveal[i]===c.answer?'':'vra-wrong')+'"><b>'+(reveal[i]===c.answer?'✓ Correct interpretation':'Review the physiology')+'</b><p>'+c.why+'</p></div>':'')+
  '<p class="vra-small">Educational example intervals only; compare with the printed patient-specific range.</p></details>').join('')+
- '<div class="vra-btns">'+link('start','← Report-reading map')+'</div>';
+ '<div class="vra-btns"><button type="button" data-vpq-report-action="multistage">🏥 Open workups</button>'+link('start','← Report-reading map')+'</div>';
 }
 const deepData={
  start:[
@@ -266,7 +266,7 @@ function open(id='start'){
  '<div class="vra-tabs">'+S.map(x=>'<button type="button" data-vpq-report="'+x.id+'" aria-current="'+(current===x.id)+'">'+x.icon+' '+x.name+'</button>').join('')+'</div>'+
  '<div class="vra-kicker"><b>📚 Learn First → Interpret Trends → Why the Body Responds → Patient Workups.</b> Course-guided notes with compact expandable detail.</div>'+
  views[current]()+detailedExtras(current)+sources+
- '<div class="vra-btns">'+link('start','🧭 Overview')+'<button type="button" data-vpq-report-action="classic">🩸 CBC & Chemistry tests</button><button type="button" data-vpq-report-action="hybrid">⚡ In-house / Send-out analyzer</button><button type="button" data-vpq-report-action="cases">🐾 Referral patients</button></div></div>');
+ '<div class="vra-btns"><button type="button" data-vpq-report-action="multistage">🏥 Multistage Workups</button>'+link('start','🧭 Overview')+'<button type="button" data-vpq-report-action="classic">🩸 CBC & Chemistry tests</button><button type="button" data-vpq-report-action="hybrid">⚡ In-house / Send-out analyzer</button><button type="button" data-vpq-report-action="cases">🐾 Referral patients</button></div></div>');
  return true;
 }
 function handleAcademyClick(event){
@@ -275,6 +275,7 @@ function handleAcademyClick(event){
  event.preventDefault();event.stopImmediatePropagation();
  if(target.dataset.vpqReport)return open(target.dataset.vpqReport);
  if(target.dataset.vpqReportAnswer){const parts=target.dataset.vpqReportAnswer.split(':').map(Number);reveal[parts[0]]=parts[1];return open('practice')}
+ if(target.dataset.vpqReportAction==='multistage')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();
  if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
  if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
  if(target.dataset.vpqReportAction==='cases')return window.VPQ_OPEN_REFERRAL_PATIENTS?.()||window.VPQ_CLINPATH_REFERRAL_PILOT?.home?.()||window.VPQ_ADVANCED_LAB?.home?.();
@@ -290,6 +291,7 @@ function init(context){
  event.preventDefault();
  if(target.dataset.vpqReport)return open(target.dataset.vpqReport);
  if(target.dataset.vpqReportAnswer){const parts=target.dataset.vpqReportAnswer.split(':').map(Number);reveal[parts[0]]=parts[1];return open('practice')}
+ if(target.dataset.vpqReportAction==='multistage')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();
  if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
  if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
  if(target.dataset.vpqReportAction==='cases')return window.VPQ_CLINPATH_REFERRAL_PILOT?.home?.()||window.VPQ_ADVANCED_LAB?.home?.();
