@@ -5,49 +5,6 @@ window.VPQ_EXAM_ROOM_A5=function(api){
 const {rooms,doAction,changeRoom}=api,stage=document.getElementById('stage'),art=window.VPQ_SCENERY;
 if(!stage||!art||!rooms.exam)return null;
 const previous=art.roomArt.bind(art);
-let examDepth=0.83; // 0 = far side of walkable floor, 1 = near viewer
-let examDepthDirection=0;
-function examDepthPosition(){
- if(stage.dataset.room!=='exam')return;
- const avatar=document.getElementById('avatarSprite');
- const pet=document.getElementById('petSprite');
- if(!avatar)return;
- // Size changes with perspective. Keep the character's feet on the floor
- // rather than enlarging toward the medical instruments on the wall.
- const avatarHeight=145+Math.round(examDepth*73);
- avatar.style.setProperty('--vpq-exam-height',avatarHeight+'px');
- avatar.style.setProperty('--vpq-exam-width',Math.round(avatarHeight*.54)+'px');
- avatar.style.setProperty('--vpq-exam-bottom',(20.5-examDepth*18)+'%');
- if(pet){
-  pet.style.setProperty('--vpq-exam-pet-bottom',(19-examDepth*17)+'%');
-  pet.style.setProperty('--vpq-exam-pet-scale',(0.75+examDepth*.36).toFixed(3));
- }
-}
-function examDepthKey(e,down){
- if(stage.dataset.room!=='exam')return;
- if(e.target?.closest?.('input,textarea,select,[contenteditable="true"],[role="textbox"]'))return;
- if(document.querySelector('dialog[open],.modal[open],.modal.show,.modal.visible'))return;
- const key=String(e.key).toLowerCase();
- if(key==='w'||key==='arrowup'){e.preventDefault();if(down)examDepthDirection=-1;else if(examDepthDirection===-1)examDepthDirection=0;}
- if(key==='s'||key==='arrowdown'){e.preventDefault();if(down)examDepthDirection=1;else if(examDepthDirection===1)examDepthDirection=0;}
-}
-document.addEventListener('keydown',e=>examDepthKey(e,true),true);
-document.addEventListener('keyup',e=>examDepthKey(e,false),true);
-window.addEventListener('blur',()=>{examDepthDirection=0});
-let lastDepthFrame=0;
-function animateExamDepth(now){
- if(stage.dataset.room==='exam'){
-  if(examDepthDirection){
-   const dt=lastDepthFrame?Math.min(45,now-lastDepthFrame):16;
-   examDepth=Math.max(0,Math.min(1,examDepth+examDepthDirection*dt*.0008));
-  }
-  examDepthPosition();
- }
- lastDepthFrame=now;
- requestAnimationFrame(animateExamDepth);
-}
-requestAnimationFrame(animateExamDepth);
-
 let examAnimal=''; // Blank exam table until the user chooses a patient.
 const escExam=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const dogNames=['Husky / Shepherd','German Shepherd','Husky','Corgi','Dachshund','Greyhound','Border Collie','Australian Shepherd','Labrador','Golden Retriever','Mixed Breed','Other Dog'];
@@ -227,8 +184,6 @@ function refresh(){
 }
 const style=document.createElement('style');style.textContent=
 '.vpqExamRoomArt{display:block;position:absolute;inset:0;width:100%;height:100%;pointer-events:none}'+
-'.stage[data-room="exam"] #avatarSprite{width:var(--vpq-exam-width,108px)!important;height:var(--vpq-exam-height,202px)!important;bottom:var(--vpq-exam-bottom,5%)!important;margin-left:-26px;filter:drop-shadow(2px 5px 3px #54647640);z-index:7;transition:bottom .10s linear,height .10s linear,width .10s linear}'+
-'.stage[data-room="exam"] #petSprite{bottom:var(--vpq-exam-pet-bottom,4%)!important;transform:scale(var(--vpq-exam-pet-scale,1.05));transform-origin:center bottom;transition:bottom .12s linear,transform .12s linear}'+
 '.stage[data-room="exam"] #avatarSprite .vpq-game-avatar{width:100%;height:100%}'+
 '.stage[data-room="exam"] #vpqExamHotspots .vpqExamHot.vpqApproachNear{background:transparent!important;outline:none!important;border:2px solid #b8a7ba!important;box-shadow:none!important;filter:none!important}'+
 '.stage[data-room="exam"] #vpqExamHotspots .vpqExamHot.vpqApproachNear:after{content:"E"!important;top:0!important;left:auto!important;right:0!important;transform:translateY(-50%)!important;padding:2px 5px!important;font-size:9px!important;border:1px solid #b7a2bd!important;background:#fff9f5!important;color:#6c5872!important}'+
@@ -247,5 +202,5 @@ document.head.appendChild(style);
 const observer=new MutationObserver(()=>{if((stage.dataset.room==='exam')!==!!stage.querySelector('#vpqExamHotspots'))refresh()});
 observer.observe(stage,{childList:true,attributes:true,attributeFilter:['data-room']});
 refresh();
-return {refresh,drawing,examDepthPosition};
+return {refresh,drawing};
 };
