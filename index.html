@@ -1013,10 +1013,10 @@ body.vpq-reading-large #modalBody .vpq-patient-case .response p{font-size:18px!i
 <script src="pharmacy-nutrition-room.js?v=20261122-pharmacy-v7-38525c"></script>
 <script src="walkable-clinic-rooms-treatment-v7.js?v=20261121-layout-posters-v10"></script>
 <script src="clinic-approach-interactions.js?v=20261122-pharmacy-quiet-183da8"></script>
-<script src="clinpath-hybrid-room-art.js?v=20261122-six-bay-hybrid-bench"></script>
-<script src="clinpath-bench-guides.js?v=20261114-phaseC2"></script>
+<script src="clinpath-hybrid-room-art.js?v=20261122-cbc-chem-station1"></script>
+<script src="clinpath-bench-guides.js?v=20261122-pcvts-gas-sampling1"></script>
 <script src="necropsy-room-art.js?v=20261120-skull-comparison-v13"></script>
-<script src="specialist-clinic-wings.js?v=20261122-six-aligned-hitboxes"></script>
+<script src="specialist-clinic-wings.js?v=20261122-cbc-chem-station1"></script>
 <script src="feline-behavior-game.js?v=20261111-cuter-cats3"></script>
 <script src="feline-enrichment-game.js?v=20261111-play-enrich1"></script>
 <script src="reception-hallway-and-habitats.js?v=20261120-object-windows-3"></script>
@@ -1091,7 +1091,7 @@ body.vpq-reading-large #modalBody .vpq-patient-case .response p{font-size:18px!i
 <script src="treatment-ward-case-expansion.js?v=20261114-clinical-differentials1"></script>
 <script src="treatment-ward-advanced-rounds.js?v=20261114-differential-why1"></script>
 <script src="treatment-diagnostics.js?v=20261114-treatment-journey1"></script>
-<script src="advanced-clinpath-stations.js?v=20261122-course-ag-na-k-trends"></script>
+<script src="advanced-clinpath-stations.js?v=20261122-cbc-chem-pcvts1"></script>
 <script src="surgery-necropsy-learning.js?v=20261110-newwings1"></script>
 <script src="necropsy-rich-text.js?v=20261118-format1"></script>
 <script src="necropsy-exam7-data.js?v=20261121-species-pathogenesis-flow-v4"></script>
@@ -1371,7 +1371,7 @@ const ROOMS={
  isolation:{name:'One Health & Isolation',color:'#e6f8f1',banner:'ONE HEALTH • PROTECT THE COMMUNITY',decor:[['🧤','11%','17%'],['☣️','83%','16%'],['🧴','90%','57%']],props:[{x:23,emoji:'🐮',label:'Isolation Patient',action:'onehealth',bubble:'Zoonosis case'},{x:52,emoji:'📚',label:'Disease Library',action:'ohLibrary',bubble:'38 disease cards'},{x:81,emoji:'🛡️',label:'Public Health Desk',action:'ohHub',bubble:'Roles & reporting'}]},
  study:{name:'Student Study Lounge',color:'#f4edff',banner:'STUDY LOUNGE • PRACTICE & REVIEW',decor:[['📚','9%','15%'],['🪴','80%','17%']],props:[{x:22,emoji:'📖',label:'Guided Learning',action:'learningHub',bubble:'Select & start'},{x:44,emoji:'🏆',label:'Mastery Tracker',action:'masteryTracker',bubble:'Test yourself'},{x:65,emoji:'📚',label:'Master Disease Library',action:'masterDiseaseLibrary',bubble:'NAVLE disease index'},{x:86,emoji:'🎮',label:'Learning Games',action:'learningHub',bubble:'Short practice'}]}
 };
-ROOMS.clinpath={name:'Advanced Clinical Pathology · Referral Lab',color:'#e8f4fc',banner:'ADVANCED DIAGNOSTICS & MICROSCOPY',decor:[],props:[{x:9,emoji:'🩸',label:'Coagulation Analyzer',action:'advancedCoag',bubble:'PT / aPTT / DIC'},{x:25,emoji:'🫧',label:'Blood Gas Analyzer',action:'advancedGas',bubble:'Acid–base'},{x:41,emoji:'🧫',label:'Urinalysis Workbench',action:'advancedUrine',bubble:'Sediment & renal'},{x:58,emoji:'🧬',label:'Hybrid Diagnostic Bench',action:'advancedHybrid',bubble:'Lactate / iCa / send-out'},{x:74,emoji:'🐾',label:'Advanced Case Board',action:'advancedCases',bubble:'Referral patients'},{x:90,emoji:'🔬',label:'Microscopy & Classic Lab',action:'classicLabHub',bubble:'Smears, cytology, sample handling'}]};
+ROOMS.clinpath={name:'Advanced Clinical Pathology · Referral Lab',color:'#e8f4fc',banner:'ADVANCED DIAGNOSTICS & MICROSCOPY',decor:[],props:[{x:9,emoji:'🩸',label:'Coagulation Analyzer',action:'advancedCoag',bubble:'PT / aPTT / DIC'},{x:25,emoji:'🫧',label:'Blood Gas Analyzer',action:'advancedGas',bubble:'Acid–base'},{x:41,emoji:'🧫',label:'Urinalysis Workbench',action:'advancedUrine',bubble:'Sediment & renal'},{x:58,emoji:'🧬',label:'CBC + Chemistry / PCV-TS',action:'advancedHybrid',bubble:'CBC · Chem · PCV/TS · rapid tests'},{x:74,emoji:'🐾',label:'Advanced Case Board',action:'advancedCases',bubble:'Referral patients'},{x:90,emoji:'🔬',label:'Microscopy & Classic Lab',action:'classicLabHub',bubble:'Smears, cytology, sample handling'}]};
 // Register reception annex room keys before restoring the saved active room.
 for(const [key,name] of [['hallway','Clinical Hallway · East Wing'],['catcorner','Reception Cat Corner'],['yardview','Dog Kennel & Play Yard Window']]){
  ROOMS[key]={name,color:'#f4eafa',banner:'RECEPTION ANNEX',decor:[],props:[{x:50,emoji:'🚪',label:'Reception',action:'vpqWingLobby',bubble:'Return to lobby'}]};
