@@ -27,38 +27,87 @@ const animalArt=()=>examAnimal==='cat'
  ? '<g transform="translate(0 0)"><path d="M521 312q-37 -26 -5 -44q22 -9 37 10q14 -13 32 -6q24 7 25 33q-6 27 -43 30l-31 0Z" fill="#d8ac86" stroke="#926c63" stroke-width="6"/><path d="M578 275q18 -31 37 -13l20 34l-12 16" fill="none" stroke="#926c63" stroke-width="10" stroke-linecap="round"/><path d="M496 284l-9 -32l26 17l22 -22l5 35" fill="#d8ac86" stroke="#926c63" stroke-width="6"/><ellipse cx="517" cy="288" rx="29" ry="29" fill="#d8ac86" stroke="#926c63" stroke-width="5"/><path d="M502 285h8m17 0h8" stroke="#584d55" stroke-width="5" stroke-linecap="round"/><path d="M519 290l5 5l-5 3l-5 -3Z" fill="#bb7f89"/><path d="M519 299q-11 7 -18 0m18 0q11 7 19 0" stroke="#795b5d" stroke-width="2" fill="none"/><path d="M548 325v17m33 -14v16" stroke="#926c63" stroke-width="9" stroke-linecap="round"/></g>'
  : '<g><path d="M497 307q19 -35 64 -33q51 1 67 33l-9 24h-114Z" fill="#c59b73" stroke="#8e6b58" stroke-width="6"/><path d="M612 281q40 -45 50 -8" fill="none" stroke="#8e6b58" stroke-width="12" stroke-linecap="round"/><path d="M499 307q-31 4 -43 -17q-13 -24 3 -44q21 -19 46 2l16 33" fill="#c59b73" stroke="#8e6b58" stroke-width="6"/><path d="M456 261l-12 -29q-14 30 -3 47" fill="#a77862" stroke="#8e6b58" stroke-width="5"/><path d="M502 256l20 -23q4 30 -12 48" fill="#a77862" stroke="#8e6b58" stroke-width="5"/><ellipse cx="457" cy="293" rx="27" ry="18" fill="#ead6b5"/><circle cx="475" cy="268" r="4" fill="#3d3b44"/><circle cx="444" cy="289" r="5" fill="#544c52"/><path d="M501 320v21m45 -14v20m39 -19v19" stroke="#8e6b58" stroke-width="10" stroke-linecap="round"/><path d="M485 276q17 -8 26 7" fill="none" stroke="#fff9e9" stroke-width="6"/></g>';
 function drawing(){
- // Small-animal exam room: fixed wall exam table on right, worktop on left,
- // and open floor in the middle. The little cartoon patient is intentional.
- return '<svg class="vpqExamRoomArt" viewBox="0 0 1000 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cozy small animal exam room, left cabinet and sink counter, right wall-mounted folding exam table with goofy '+examAnimal+' patient">'+
- '<defs><linearGradient id="vpqExamWalls" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e8f4f5"/><stop offset="1" stop-color="#d0e5e9"/></linearGradient><linearGradient id="vpqExamSteel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fbfb"/><stop offset=".54" stop-color="#a5b7bf"/><stop offset="1" stop-color="#dfe9e9"/></linearGradient></defs>'+
- // shallow shadow-box shell
- '<rect width="1000" height="500" fill="#9ab9c4"/><polygon points="0,0 1000,0 932,48 68,48" fill="#fffaf4"/><polygon points="0,0 68,48 68,328 0,397" fill="#91b4bf"/><polygon points="932,48 1000,0 1000,397 932,328" fill="#91b4bf"/><rect x="68" y="48" width="864" height="280" fill="url(#vpqExamWalls)"/><path d="M68 328H932L1000 500H0Z" fill="#d6c8b7"/><path d="M68 328L0 500M932 328L1000 500M258 328L222 500M498 328V500M744 328L779 500M24 431H976M55 370H945" stroke="#f6efe5" stroke-width="3" opacity=".75" fill="none"/><path d="M68 328H932" stroke="#95b3bd" stroke-width="10"/>'+
- // left upper cabinetry and open shelves
- '<g transform="translate(93 75)"><rect width="244" height="93" rx="7" fill="#fcfaf5" stroke="#8cabb5" stroke-width="7"/><path d="M122 0v92" stroke="#9ab7bc" stroke-width="5"/><path d="M103 35v19m37 -19v19" stroke="#849ca6" stroke-width="6" stroke-linecap="round"/><rect x="2" y="100" width="245" height="8" rx="4" fill="#99b4b8"/><rect x="8" y="115" width="226" height="43" rx="5" fill="#f6f1e8" stroke="#a6bbb8" stroke-width="4"/><text x="26" y="145" font-size="23">🧻</text><text x="96" y="146" font-size="22">🧴</text><text x="158" y="146" font-size="21">🩺</text></g>'+
- // counter, inset basin, faucet, cabinet doors
- '<g><path d="M83 294L357 294L394 321H83Z" fill="url(#vpqExamSteel)" stroke="#90aab0" stroke-width="6"/><path d="M83 321H394V413H83Z" fill="#b7a093" stroke="#8e807d" stroke-width="6"/><path d="M235 324v85" stroke="#927c77" stroke-width="6"/><path d="M209 358v21m56 -21v21" stroke="#e7dbcf" stroke-width="6" stroke-linecap="round"/><rect x="94" y="330" width="100" height="70" rx="6" fill="#c8b5a8" stroke="#968479" stroke-width="5"/><path d="M120 366h48" stroke="#998579" stroke-width="6"/><ellipse cx="284" cy="304" rx="55" ry="11" fill="#829da8"/><ellipse cx="284" cy="302" rx="45" ry="7" fill="#d3e6e8"/><path d="M282 294v-41q2 -16 23 -16h19" fill="none" stroke="#779eaa" stroke-width="9"/><path d="M321 239v14" stroke="#789fa9" stroke-width="7"/></g>'+
- // paper dispenser, cute pet photo, clinical poster
- '<g><rect x="91" y="202" width="78" height="62" rx="9" fill="#f8f9f4" stroke="#8eaab5" stroke-width="6"/><path d="M105 236h48" stroke="#89a8b2" stroke-width="7"/><path d="M116 250h29v24h-29Z" fill="#fffefa"/><rect x="373" y="84" width="118" height="97" rx="8" fill="#fffaf2" stroke="#a3b9ba" stroke-width="6"/><text x="432" y="127" text-anchor="middle" font-size="38">🐶</text><text x="432" y="158" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#64818a" font-weight="800">GOOD PATIENT</text></g>'+
- // patient chart clipboard in plain view on left worktop
- '<g transform="translate(337 258) rotate(7)"><rect width="69" height="84" rx="7" fill="#fffdf1" stroke="#7194a2" stroke-width="5"/><rect x="21" y="-5" width="26" height="12" rx="4" fill="#839aa4"/><path d="M13 24h44M13 40h44M13 56h31" stroke="#a6bdc3" stroke-width="4"/><text x="35" y="75" font-family="sans-serif" font-size="13" text-anchor="middle" fill="#4a7480">SOAP</text></g>'+
- // wall chart and binder for clinical protocols, separate from exam table
- '<g><rect x="508" y="96" width="140" height="160" rx="9" fill="#fffefa" stroke="#98b3b8" stroke-width="7"/><rect x="523" y="111" width="110" height="30" rx="5" fill="#d6e7e6"/><text x="577" y="132" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="900" fill="#557c85">PROTOCOLS</text><path d="M526 159h99M526 180h99M526 201h87" stroke="#aac5c9" stroke-width="6"/><text x="578" y="239" text-anchor="middle" font-size="22">📋</text></g>'+
- // right wall attachment: no central pedestal legs
- '<g><rect x="838" y="190" width="78" height="164" rx="12" fill="#60747b" stroke="#485f68" stroke-width="8"/><circle cx="874" cy="229" r="11" fill="#8db9c2"/><path d="M867 279h15M867 311h15" stroke="#b8d1d3" stroke-width="8"/><path d="M843 290L713 362L727 383L850 326Z" fill="#778f99" stroke="#627e88" stroke-width="7"/><path d="M843 326L749 382" stroke="#cadbdf" stroke-width="9"/>'+
- // stainless fold-down top sits at right, open floor left
- '<path d="M585 320L776 278L923 316L721 367Z" fill="url(#vpqExamSteel)" stroke="#79949d" stroke-width="8"/><path d="M585 320L721 367V386L585 339Z" fill="#9fb5bc" stroke="#7c959e" stroke-width="6"/><path d="M721 367L923 316V336L721 386Z" fill="#8ba8b1" stroke="#7c959e" stroke-width="6"/>'+
- // removable pad, paw prints; animal is sitting ON the table
- '<path d="M612 318L779 290L887 318L721 356Z" fill="#fffaf4" opacity=".93" stroke="#aec6c8" stroke-width="3"/><text x="788" y="325" font-size="19" opacity=".5">🐾</text><text x="692" y="332" font-size="15" opacity=".5">🐾</text></g>'+
- '<g transform="translate(213 -11)">'+examPatientArt()+'</g>'+
- // colorful and cozy, without covering any clinical interaction station
- '<g><rect x="685" y="69" width="152" height="114" rx="17" fill="#fffbf7" stroke="#f3bdcb" stroke-width="9"/><rect x="698" y="82" width="126" height="88" rx="10" fill="#d7eef1"/><circle cx="792" cy="104" r="18" fill="#ffe6ad"/><path d="M698 156Q736 118 767 150Q801 127 824 155V170H698Z" fill="#9bc6aa"/><path d="M681 84q-18 21 0 43M841 89q17 20 4 45" stroke="#83b89c" fill="none" stroke-width="6"/><ellipse cx="682" cy="104" rx="9" ry="14" fill="#a6cea3"/><ellipse cx="846" cy="109" rx="9" ry="14" fill="#a6cea3"/></g>'+
- '<g><ellipse cx="537" cy="446" rx="127" ry="28" fill="#f8dce6"/><ellipse cx="537" cy="446" rx="111" ry="21" fill="none" stroke="#fffaf5" stroke-width="5" stroke-dasharray="10 9"/><text x="535" y="454" font-size="26" text-anchor="middle">🐾</text></g>'+
- '<g><rect x="262" y="394" width="85" height="49" rx="11" fill="#eac3af" stroke="#cd9a91" stroke-width="5"/><ellipse cx="304" cy="395" rx="43" ry="9" fill="#f6d9c4"/><text x="302" y="426" text-anchor="middle" font-size="25">🧸🦴</text><text x="195" y="281" font-size="30">🪴</text><text x="367" y="103" font-size="19">💗</text></g>'+
- // small clinical stool and client seating; central floor remains walkable
- '<g transform="translate(437 369)"><ellipse cx="45" cy="14" rx="47" ry="12" fill="#78969e"/><ellipse cx="45" cy="8" rx="41" ry="8" fill="#b5d6dc"/><path d="M45 20v54M45 68L9 87M45 68l36 19M45 68v19" stroke="#617e89" stroke-width="8" stroke-linecap="round"/></g>'+
- '<g transform="translate(102 418)"><rect x="0" y="0" width="100" height="17" rx="7" fill="#9db2c1"/><path d="M12 18v40M87 18v40M7 -42v41M93 -42v41" stroke="#7c9aa8" stroke-width="9"/><rect x="0" y="-49" width="100" height="13" rx="6" fill="#a1bdc5"/></g>'+
- '<text x="500" y="31" font-family="sans-serif" font-size="21" font-weight="900" text-anchor="middle" fill="#4a7281">SMALL ANIMAL EXAM ROOM</text>'+
- '</svg>';
+ // Fully illustrated small animal examination room. Equipment is drawn as SVG,
+ // not emoji: treat jar, stethoscope rack, wall-mounted otoscope/ophthalmoscope,
+ // neonatal/small-pet scale, exam table, wash station and patient chart.
+ const fragments=[
+ '<svg class="vpqExamRoomArt" viewBox="0 0 1000 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated cozy veterinary examination room with a small pet scale, treats, stethoscopes, otoscope and ophthalmoscope, plus a patient on the exam table">',
+ '<defs>',
+ '<linearGradient id="exWall" x2="0" y2="1"><stop stop-color="#fff9f2"/><stop offset="1" stop-color="#dff3ed"/></linearGradient>',
+ '<linearGradient id="exFloor" x2="0" y2="1"><stop stop-color="#f3e6d5"/><stop offset="1" stop-color="#d7bdac"/></linearGradient>',
+ '<linearGradient id="exWood" x2=".8" y2="1"><stop stop-color="#ead6c8"/><stop offset="1" stop-color="#bf9d8e"/></linearGradient>',
+ '<linearGradient id="exMetal" x2=".7" y2="1"><stop stop-color="#fafffd"/><stop offset=".48" stop-color="#c0d8da"/><stop offset="1" stop-color="#8daeb7"/></linearGradient>',
+ '<linearGradient id="exGlass" x2="0" y2="1"><stop stop-color="#f9ffff" stop-opacity=".88"/><stop offset="1" stop-color="#c4e9e1" stop-opacity=".78"/></linearGradient>',
+ '<filter id="exShadow" x="-35%" y="-35%" width="170%" height="180%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#57727a" flood-opacity=".21"/></filter>',
+ '<pattern id="exFloorDots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.8" fill="#fff8ed" opacity=".55"/></pattern>',
+ '</defs>',
+ // Architecture: a genuine bright clinical room with softened shapes and depth.
+ '<rect x="0" y="0" width="1000" height="500" fill="#9cbfc4"/>',
+ '<path d="M0 0H1000L937 48H65Z" fill="#fff7ed"/>',
+ '<path d="M0 0L65 48V333L0 399Z" fill="#97bfc2"/>',
+ '<path d="M1000 0L937 48V333L1000 399Z" fill="#90b8b9"/>',
+ '<rect x="65" y="48" width="872" height="286" fill="url(#exWall)"/>',
+ '<rect x="65" y="315" width="872" height="19" fill="#a4c8bf"/>',
+ '<path d="M65 334H937L1000 500H0Z" fill="url(#exFloor)"/>',
+ '<path d="M65 334H937L1000 500H0Z" fill="url(#exFloorDots)"/>',
+ '<g stroke="#fffaf1" stroke-width="3" opacity=".65"><path d="M65 379H937M33 434H970M227 334L170 500M467 334L442 500M700 334L749 500M937 334L1000 500"/></g>',
+ '<path d="M67 50H935" stroke="#c1dfd8" stroke-width="9"/>',
+ // Top cornice and cozy hand-lettered clinic plaque.
+ '<rect x="345" y="9" width="308" height="48" rx="22" fill="#fffcf7" stroke="#b4d5cd" stroke-width="5" filter="url(#exShadow)"/>',
+ '<text x="499" y="39" text-anchor="middle" font-family="Trebuchet MS,Arial,sans-serif" font-size="20" font-weight="900" fill="#497580">✦ SMALL ANIMAL EXAM ✦</text>',
+ // Window to add warmth, drawn rather than a generic flat wall rectangle.
+ '<g filter="url(#exShadow)"><rect x="695" y="72" width="173" height="123" rx="18" fill="#fef9ee" stroke="#c6a5ab" stroke-width="7"/><rect x="707" y="85" width="149" height="96" rx="10" fill="#d5eff2"/><circle cx="824" cy="114" r="21" fill="#fff1bb"/><path d="M707 164Q740 123 775 158Q814 132 856 155V181H707Z" fill="#95c8ad"/><path d="M707 172Q744 148 782 173Q824 143 856 166V181H707Z" fill="#73b5a4"/><path d="M781 85v96" stroke="#fffaf1" stroke-width="7"/><path d="M707 136H856" stroke="#fffaf1" stroke-width="6"/></g>',
+ '<g fill="#88bfa7"><path d="M694 76q-24 12-17 38q24-10 17-38ZM868 84q24 12 13 38q-23-10-13-38Z"/><path d="M681 105q-12 22 7 32q13-20-7-32Z"/></g>',
+ // Left upper cabinetry and feature shelf.
+ '<g filter="url(#exShadow)"><rect x="96" y="93" width="245" height="105" rx="12" fill="#fffcf5" stroke="#8bb3b4" stroke-width="6"/><path d="M219 94v102" stroke="#a8c7c5" stroke-width="6"/><path d="M204 132v27m31-27v27" stroke="#8eacae" stroke-width="7" stroke-linecap="round"/><rect x="96" y="203" width="245" height="9" rx="4" fill="#b9d7cf"/></g>',
+ '<path d="M112 220h218" stroke="#f6fffa" stroke-width="3" opacity=".8"/>',
+ // Dedicated hanging stethoscope station (three actual illustrated instruments).
+ '<g transform="translate(366 100)" filter="url(#exShadow)"><rect x="-3" y="-4" width="118" height="110" rx="13" fill="#fffdf8" stroke="#a5c7be" stroke-width="5"/><rect x="8" y="7" width="97" height="22" rx="8" fill="#f8e4ea"/><text x="56" y="23" font-family="Arial" font-size="12" font-weight="800" text-anchor="middle" fill="#806b83">STETHOSCOPES</text>',
+ '<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M25 43v18q0 24 18 24t17-22V43" stroke="#6c9fb0" stroke-width="5"/><path d="M66 43v22q0 19 15 19t14-23V43" stroke="#ba8ab2" stroke-width="5"/><path d="M43 85v10m38-11v11" stroke="#61677b" stroke-width="4"/></g>',
+ '<g fill="#dfecee" stroke="#687e90" stroke-width="2"><circle cx="25" cy="42" r="5"/><circle cx="60" cy="42" r="5"/><circle cx="66" cy="42" r="5"/><circle cx="95" cy="42" r="5"/><circle cx="43" cy="97" r="7"/><circle cx="81" cy="97" r="7"/></g></g>',
+ // Wall diagnostic station: two secured cordless charging holders, real distinct heads.
+ '<g transform="translate(502 96)" filter="url(#exShadow)"><rect width="148" height="173" rx="15" fill="#fffef9" stroke="#97babb" stroke-width="6"/><rect x="13" y="12" width="122" height="27" rx="8" fill="#dceceb"/><text x="74" y="30" font-family="Arial" font-size="14" font-weight="900" text-anchor="middle" fill="#537987">DIAGNOSTICS</text>',
+ '<rect x="17" y="50" width="53" height="102" rx="12" fill="#e5f0ed" stroke="#bad0d2" stroke-width="3"/><rect x="79" y="50" width="53" height="102" rx="12" fill="#f3e8ed" stroke="#d9c7d3" stroke-width="3"/>',
+ '<g fill="#556b7b" stroke="#44576d" stroke-width="2"><rect x="37" y="88" width="15" height="46" rx="6"/><rect x="99" y="87" width="15" height="47" rx="6"/><path d="M42 88v-14h10v14Z"/><path d="M104 87v-13h8v13Z"/></g>',
+ '<path d="M38 75l-8-8q12-14 23 0l-4 12Z" fill="#4c5e71"/><circle cx="106" cy="68" r="13" fill="#526a7f"/><circle cx="106" cy="68" r="6" fill="#f9ecca"/><circle cx="106" cy="68" r="2.5" fill="#3f5067"/>',
+ '<text x="43" y="146" text-anchor="middle" font-family="Arial" font-size="9" font-weight="800" fill="#576a7a">OTOSCOPE</text><text x="106" y="146" text-anchor="middle" font-family="Arial" font-size="8" font-weight="800" fill="#576a7a">OPHTHALMO</text></g>',
+ // Counter and wash station, round-corner hardware.
+ '<g filter="url(#exShadow)"><path d="M87 314H377L405 339H87Z" fill="url(#exMetal)" stroke="#7b9fa9" stroke-width="6"/><path d="M88 338H390V432Q388 444 376 444H103Q89 444 89 431Z" fill="url(#exWood)" stroke="#9d8790" stroke-width="6"/><path d="M245 338v104" stroke="#aa9796" stroke-width="5"/><path d="M314 338v104" stroke="#aa9796" stroke-width="5"/><rect x="103" y="349" width="124" height="80" rx="9" fill="#e5d3c5" stroke="#b79c98" stroke-width="4"/><rect x="116" y="361" width="98" height="54" rx="6" fill="#fff4e7"/><path d="M254 380v21m70-21v21" stroke="#f8f4ea" stroke-width="7" stroke-linecap="round"/></g>',
+ '<ellipse cx="291" cy="318" rx="49" ry="12" fill="#85a8b1"/><ellipse cx="291" cy="316" rx="42" ry="8" fill="#e4f5f4"/><path d="M288 304v-32q1-15 17-15h18v12" fill="none" stroke="#6d9da9" stroke-width="9" stroke-linecap="round"/>',
+ // Treat jar: illustrated glass jar with cookies, heart label and a secure lid.
+ '<g transform="translate(114 237)" filter="url(#exShadow)"><rect x="4" y="13" width="63" height="65" rx="13" fill="url(#exGlass)" stroke="#77b7b0" stroke-width="4"/><rect x="0" y="8" width="71" height="12" rx="6" fill="#e6a4bb" stroke="#b77d9b" stroke-width="3"/><rect x="8" y="2" width="55" height="10" rx="5" fill="#f3c4cf"/>',
+ '<g fill="#bd8c5e" stroke="#a87d60" stroke-width="2"><circle cx="19" cy="52" r="9"/><circle cx="45" cy="57" r="10"/><circle cx="33" cy="38" r="9"/><circle cx="56" cy="42" r="7"/></g><g fill="#7b584b"><circle cx="18" cy="50" r="2"/><circle cx="31" cy="40" r="2"/><circle cx="47" cy="56" r="2"/></g>',
+ '<rect x="9" y="62" width="54" height="12" rx="5" fill="#fffbec"/><text x="36" y="71" text-anchor="middle" font-family="Arial" font-weight="900" font-size="10" fill="#ac6483">TREATS ♡</text></g>',
+ // Small-patient baby scale on left counter, complete weighing tray and display.
+ '<g transform="translate(190 269)" filter="url(#exShadow)"><path d="M0 16q23-19 62 0l-9 19H9Z" fill="#fffdf8" stroke="#93babb" stroke-width="4"/><ellipse cx="30" cy="15" rx="33" ry="9" fill="#f2fcfc" stroke="#9dc7c8" stroke-width="3"/><rect x="6" y="34" width="52" height="25" rx="8" fill="#7eacb4" stroke="#507e8c" stroke-width="3"/><rect x="16" y="41" width="32" height="12" rx="3" fill="#e8f6d9"/><text x="32" y="50" font-family="monospace" font-size="10" text-anchor="middle" fill="#476b70">0.00</text></g>',
+ '<text x="215" y="260" text-anchor="middle" font-family="Arial" font-size="10" font-weight="800" fill="#607d80">SMALL PET SCALE</text>',
+ // Soft paper towels, glove box and clinical consumables.
+ '<g><rect x="96" y="224" width="35" height="15" rx="4" fill="#b3d3ce"/><rect x="315" y="234" width="54" height="21" rx="5" fill="#f3d3df" stroke="#cba5b7" stroke-width="3"/><path d="M323 245h38" stroke="#fffaf8" stroke-width="3"/><text x="342" y="248" text-anchor="middle" font-size="9" font-family="Arial" fill="#8e6785">GLOVES</text></g>',
+ // SOAP note clipboard on a fixed standing chart board, chart hotspot unchanged.
+ '<g transform="translate(383 294) rotate(5)" filter="url(#exShadow)"><rect width="80" height="100" rx="10" fill="#f9f3df" stroke="#b99381" stroke-width="5"/><rect x="26" y="-5" width="28" height="15" rx="5" fill="#8dabaf"/><path d="M14 29h52M14 45h52M14 61h37" stroke="#b8cbd0" stroke-width="4"/><text x="40" y="88" text-anchor="middle" font-family="Arial" font-size="14" font-weight="800" fill="#73969c">SOAP</text></g>',
+ // Caring framed illustration and wall art (not giant emoji decoration).
+ '<g filter="url(#exShadow)"><rect x="370" y="222" width="108" height="62" rx="12" fill="#fffdf6" stroke="#d2a9bb" stroke-width="5"/><path d="M393 249q10-18 19 0q9-18 19 0q-5 15-19 23q-14-8-19-23Z" fill="#e4a6ba"/><text x="454" y="250" font-family="Arial" font-size="11" font-weight="800" text-anchor="middle" fill="#7c7883">GENTLE</text><text x="454" y="265" font-family="Arial" font-size="11" font-weight="800" text-anchor="middle" fill="#7c7883">CARE</text></g>',
+ // A familiar cute clinical protocol board: remains a distinct action target.
+ '<g transform="translate(552 277)" filter="url(#exShadow)"><rect width="104" height="58" rx="12" fill="#fffdf6" stroke="#aac9be" stroke-width="5"/><path d="M15 19h75M15 31h65M15 43h53" stroke="#bed6d4" stroke-width="4"/><rect x="36" y="-7" width="32" height="13" rx="5" fill="#8bb7b3"/></g>',
+ // Right-side authentic hydraulic exam table: base, lift column, broad steel top.
+ '<g filter="url(#exShadow)"><ellipse cx="783" cy="421" rx="143" ry="25" fill="#a0b8b6" opacity=".35"/><rect x="745" y="354" width="74" height="62" rx="15" fill="#7199a4" stroke="#597d8b" stroke-width="6"/><path d="M755 414h-70m121 0h66" stroke="#5f8390" stroke-width="13" stroke-linecap="round"/><path d="M751 389h66" stroke="#bbd6d4" stroke-width="6"/>',
+ '<path d="M607 318L770 272L940 313L769 370Z" fill="url(#exMetal)" stroke="#658c9a" stroke-width="8" stroke-linejoin="round"/>',
+ '<path d="M607 318L769 370V389L607 338Z" fill="#91adb8" stroke="#688d9a" stroke-width="6"/><path d="M769 370L940 313V335L769 389Z" fill="#83a8b1" stroke="#688d9a" stroke-width="6"/>',
+ '<path d="M638 319L769 284L910 314L772 354Z" fill="#fffaf3" stroke="#c1d9d8" stroke-width="3"/>',
+ '<path d="M654 316l5-6 5 6m-3-3v9M891 321l4-6 4 6" stroke="#e4a2b4" stroke-width="2" fill="none" opacity=".8"/></g>',
+ // Keep all legacy patients visually on top of the table.
+ '<g transform="translate(213 -11)">',examPatientArt(),'</g>',
+ // Wipe dispenser and a small sensible waste bin.
+ '<g filter="url(#exShadow)"><rect x="880" y="218" width="48" height="43" rx="8" fill="#e9f4ef" stroke="#adc9ca" stroke-width="4"/><path d="M889 235h30" stroke="#93b6b8" stroke-width="4"/><path d="M901 224h8v-13h-8" fill="#fff"/><rect x="918" y="404" width="42" height="51" rx="8" fill="#9cbac0" stroke="#688f99" stroke-width="4"/><path d="M914 404h50" stroke="#647f8b" stroke-width="6"/></g>',
+ // Stool and visitor seating are detailed, but kept low and outside stations.
+ '<g transform="translate(507 382)"><ellipse cx="36" cy="12" rx="42" ry="14" fill="#8cb2ae"/><ellipse cx="36" cy="8" rx="36" ry="9" fill="#f6d2d3"/><path d="M36 22v61M36 72L6 91M36 72l32 19" stroke="#728f9c" stroke-width="8" stroke-linecap="round" fill="none"/></g>',
+ '<g transform="translate(104 423)"><rect x="0" y="-44" width="104" height="14" rx="7" fill="#d0b7b1"/><rect x="1" y="0" width="104" height="19" rx="8" fill="#e5b8c1"/><path d="M12 19v42m80-42v42M12-28v27m80-27v27" stroke="#8da9b4" stroke-width="9"/></g>',
+ // Simple potted fern, muted paw-print runner. Less clutter than floating emojis.
+ '<ellipse cx="540" cy="471" rx="124" ry="20" fill="#efd0d8" opacity=".85"/><ellipse cx="540" cy="471" rx="112" ry="14" fill="none" stroke="#fff9f5" stroke-width="4" stroke-dasharray="12 11"/>',
+ '<g transform="translate(360 402)"><path d="M8 9h39l-7 34H16Z" fill="#e7b0a3" stroke="#bc8b86" stroke-width="4"/><path d="M27 14q-26-30-13-49q24 7 13 49ZM27 8q18-38 43-34q-5 30-43 34ZM26 9q-2-48 13-60q17 23-13 60Z" fill="#87b59b" stroke="#6d9e87" stroke-width="3"/></g>',
+ '</svg>'
+ ];
+ return fragments.join('');
 }
 
 art.roomArt=function(k){return k==='exam'?drawing():previous(k)};
