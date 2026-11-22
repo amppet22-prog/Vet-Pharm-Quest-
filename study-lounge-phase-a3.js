@@ -75,6 +75,22 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 '<rect x="808" y="133" width="65" height="54" rx="6" fill="#fff5fa" stroke="#c7adc7" stroke-width="3"/>'+
 '<text x="771" y="166" text-anchor="middle" font-size="24">💉</text><text x="840" y="166" text-anchor="middle" font-size="24">🩸</text></g>'+
 '<g font-family="Arial" font-weight="800"><rect x="111" y="226" width="20" height="50" rx="2" fill="#789dbe"/><rect x="134" y="219" width="20" height="57" rx="2" fill="#d296a8"/><rect x="157" y="224" width="20" height="52" rx="2" fill="#a6bda7"/><rect x="181" y="220" width="20" height="56" rx="2" fill="#b59ad0"/><rect x="205" y="225" width="20" height="51" rx="2" fill="#e0aa80"/><text transform="translate(125 268) rotate(-90)" font-size="9" fill="white">PHARM</text><text transform="translate(148 268) rotate(-90)" font-size="9" fill="white">TOX</text><text transform="translate(171 268) rotate(-90)" font-size="9" fill="white">PATH</text><text transform="translate(195 268) rotate(-90)" font-size="9" fill="white">CLIN</text><text x="111" y="306" font-size="10" fill="#765f78">TEXTBOOK LIBRARY</text></g>'+
+// Bookshelf detail: course-specific volumes, journals, binders and shelf decor.
+'<g font-family="Arial" font-weight="800">'+
+'<rect x="116" y="164" width="130" height="4" fill="#9f796d"/>'+
+'<rect x="123" y="175" width="12" height="43" rx="2" fill="#9babc6"/>'+
+'<rect x="138" y="171" width="15" height="47" rx="2" fill="#e7a8ab"/>'+
+'<rect x="156" y="178" width="13" height="40" rx="2" fill="#c5b0db"/>'+
+'<rect x="173" y="168" width="16" height="50" rx="2" fill="#7fb5ac"/>'+
+'<rect x="193" y="174" width="15" height="44" rx="2" fill="#c7ac84"/>'+
+'<rect x="212" y="181" width="19" height="37" rx="3" fill="#e0c2e3"/>'+
+'<g font-size="8" fill="#fffaf5"><text transform="translate(132 213) rotate(-90)">ANATOMY</text><text transform="translate(150 211) rotate(-90)">PHARM</text><text transform="translate(167 212) rotate(-90)">TOX</text><text transform="translate(185 212) rotate(-90)">CLIN PATH</text><text transform="translate(205 211) rotate(-90)">MICRO</text></g>'+
+'<path d="M117 232h125" stroke="#a78172" stroke-width="5"/>'+
+'<rect x="120" y="236" width="36" height="11" rx="2" fill="#f1ddca"/><text x="138" y="244" font-size="6.8" text-anchor="middle" fill="#806b73">CASE FILES</text>'+
+'<rect x="161" y="233" width="14" height="26" rx="3" fill="#7b9eb1"/><rect x="180" y="232" width="15" height="27" rx="3" fill="#d5a6bd"/>'+
+'<rect x="200" y="236" width="25" height="22" rx="4" fill="#f1dfca"/><text x="212" y="249" text-anchor="middle" font-size="10" fill="#9d7d87">✦</text>'+
+'<rect x="121" y="282" width="113" height="15" rx="4" fill="#f5ebdc" stroke="#bb9c91" stroke-width="2"/>'+
+'<text x="177" y="292" text-anchor="middle" fill="#775e72" font-size="9">VETERINARY LIBRARY</text></g>'+
 // The kitchenette is a single fitted cabinet, not floating unrelated objects.
 // Expanded kitchenette beneath window: independent fridge, usable counter, sink and coffee-machine space.
 '<g transform="translate(279 267)"><rect x="0" y="0" width="172" height="84" rx="6" fill="#d3b6a8" stroke="#aa9088" stroke-width="4"/>'+
@@ -90,7 +106,7 @@ return '<svg class="vpqStudyLoungeArt" viewBox="0 0 1000 500" preserveAspectRati
 // A lit window and an actual sill for the player-selected plant collection.
 '<g><rect x="268" y="90" width="147" height="133" rx="12" fill="#faf6eb" stroke="#c5a6c8" stroke-width="6"/><rect x="276" y="99" width="132" height="107" rx="6" fill="#cde8f0"/><path d="M276 174q32 -20 67 1t65 -5v36H276Z" fill="#a2cdb7"/><path d="M341 99v108M276 151h132" stroke="#fffdf9" stroke-width="7"/><rect x="257" y="211" width="166" height="12" rx="5" fill="#cba89d" stroke="#aa8d94" stroke-width="3"/><text x="341" y="84" font-family="Arial" font-size="11" text-anchor="middle" font-weight="900" fill="#79658b">GREENHOUSE WINDOW</text></g>'+
 '<g font-family="Arial" font-weight="900" text-anchor="middle"><text x="572" y="77" font-size="12" fill="#735893">PHARMACOLOGY • TOXICOLOGY</text></g>'+
-'<text x="117" y="94" font-family="sans-serif" font-size="14" font-weight="800" fill="#736589">STUDENT LOUNGE</text></svg>';
+'<text x="122" y="95" font-family="sans-serif" font-size="13" font-weight="800" fill="#736589">STUDENT LIBRARY</text></svg>';
 }
 art.roomArt=function(k){return k==='study'?lounge():previous(k)};
 const p=rooms.study.props;
