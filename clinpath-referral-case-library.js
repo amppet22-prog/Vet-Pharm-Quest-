@@ -91,7 +91,7 @@ function home(){
  }).join('');
  const html='<div class="refcase refcatalog"><div class="refcataloghero"><div><p class="refsmall">ADVANCED CLINICAL PATHOLOGY · REFERRAL PATIENTS</p><h2>🐾 Referral Case Files</h2><p>Read the patient, interpret CBC and chemistry, prioritize differential diagnoses, then choose tests that distinguish competing explanations.</p></div><div class="refcatalogcount"><b>'+catalog.length+'</b><span>Available patient cases</span></div></div>'+
  '<div class="refcatalogcontrols"><div class="refcatalogfilters" role="group" aria-label="Filter cases by exam">'+
- [['all','All cases'],['1','Exam 1'],['2','Exam 2']].map(([value,label])=>'<button type="button" data-clp-filter="'+value+'" aria-pressed="'+(examFilter===value)+'">'+label+'</button>').join('')+'</div><p class="refsmall">Case 1.1 is the approved master. Currently built: Lectures 1–4 (source Cases Part 1). Additional lectures will be added in later batches.</p></div>'+
+ [['all','All cases'],['1','Exam 1'],['2','Exam 2']].map(([value,label])=>'<button type="button" data-clp-filter="'+value+'" aria-pressed="'+(examFilter===value)+'">'+label+'</button>').join('')+'</div><p class="refsmall">Case 1.1 is the approved master. Currently built: Lectures 1–5 from Cases Part 1. More lectures will be added in later batches. Additional lectures will be added in later batches.</p></div>'+
  '<div class="refcataloggrid">'+cards+'</div><div class="refcatalogfooter"><button type="button" data-clp-lab="1">← Back to Advanced Clinical Pathology Lab</button></div></div>';
  window.VPQ_REFERRAL_MODAL.show('🔬 Referral Cases · Choose a Patient',html);
 }
