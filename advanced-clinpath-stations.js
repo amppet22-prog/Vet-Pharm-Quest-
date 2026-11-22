@@ -89,7 +89,7 @@ const INTRO_STYLE=String.raw`
 </style>`;
 function coagIntro(){
  return '<div class="vpqintro">'+INTRO_STYLE+
- '<div class="introhero"><b>🩸 COAG CASCADE LAB · LEARN FIRST</b><p><strong>Platelets build the temporary plug. Coagulation factors reinforce it with fibrin.</strong> PT and aPTT are timed tests of different paths toward the same fibrin finish line.</p></div>'+
+ '<div class="introhero"><b>🩸 COAG CASCADE LAB · LEARN FIRST</b><p><strong>Platelets build the temporary plug. Coagulation factors reinforce it with fibrin.</strong> PT and aPTT are timed tests of different paths toward the same fibrin finish line. <b>PTT</b> usually refers to the partial thromboplastin time; <b>aPTT</b> is its activated version used routinely in modern screening.</p></div>'+
  '<div class="pathgrid">'+
  '<div class="pathcard"><h4>🟠 Extrinsic pathway · PT</h4><div class="node"><b>Vessel injury → tissue factor (III)</b><em>exposed at injured tissue</em></div><div class="arrow">↓</div><div class="node"><b>VII → VIIa</b><em>Factor VII is sensitive to early vitamin K depletion</em></div><div class="arrow">↓</div><div class="node coagCommon"><b>X → Xa</b><em>Join common pathway</em></div></div>'+
  '<div class="pathcard"><h4>🔵 Intrinsic pathway · aPTT</h4><div class="node"><b>XII → XI → IX</b><em>Contact-activation test pathway</em></div><div class="arrow">↓</div><div class="node"><b>IXa + VIIIa</b><em>Intrinsic tenase activates X</em></div><div class="arrow">↓</div><div class="node coagCommon"><b>X → Xa</b><em>Join common pathway</em></div></div>'+
