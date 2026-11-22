@@ -31,7 +31,7 @@ function specialties(c){
 function course(c){return courseNames.includes(c.track)?c.track:'Other'}
 function species(c){return String(c.species||'Unspecified').trim()||'Unspecified'}
 function filterItems(items){
- const q=filters.query.trim().toLowerCase(),completed=api.getCompleted(),selected=api.getSelectedLectures?.()||[];
+ const q=filters.query.trim().toLowerCase(),completed=api.getCompleted(),selected=filters.lectureFocus?[filters.lectureFocus]:(api.getSelectedLectures?.()||[]);
  return items.filter(c=>(filters.specialty==='All specialties'||specialties(c).includes(filters.specialty))&&
  (filters.course==='All courses'||course(c)===filters.course)&&
  (filters.species==='All species'||species(c)===filters.species)&&
@@ -65,7 +65,7 @@ function draw(){
  '<div class="buttonrow"><button data-vpqcaselib="search">🔎 Search</button><button data-vpqcaselib="reset">Reset filters</button><button data-vpqcaselib="surprise" '+(!result.length?'disabled':'')+'>🎲 Surprise patient from '+result.length+' matches</button><button data-vpqcaselib="map">🗺️ Hospital map</button></div>'+
  (filters.lectureFocus?'<p class="small">Focused on '+e(filters.lectureFocus)+' · <button data-vpqcaselib="alllectures">Show all Pharmacology lectures</button></p>':'')))+
  '<h3>'+(venue==='pharm'?'Lecture patient cases':'Hospital patient records')+' ('+result.length+')</h3>'+
- (cards?'<div class="twocol">'+cards+'</div>':'<div class="infobox"><b>No matching case is currently available.</b><p>Try another specialty or reset filters. This does not mean the course topic is unimportant; it means no matching patient record has been entered yet.</p></div>')+
+ (cards?'<div class="twocol">'+cards+'</div>':venue==='pharm'?'<div class="infobox"><b>No patient case is available for this lecture yet.</b><p>Choose another lecture in the Pharmacology Learning Center, or visit Reception for hospital clinical cases.</p></div>':'<div class="infobox"><b>No matching case is currently available.</b><p>Try another specialty or reset filters. This does not mean the course topic is unimportant; it means no matching patient record has been entered yet.</p></div>')+
  '<div class="buttonrow"><button data-vpqcaselib="previous" '+(page===0?'disabled':'')+'>← Previous</button><span class="small">Page '+(page+1)+' of '+pageCount+'</span><button data-vpqcaselib="next" '+(page>=pageCount-1?'disabled':'')+'>Next →</button></div>'+ 
  (venue==='pharm'?'<p class="tiny">These are lecture-linked pharmacology practice cases. For connected clinical journeys, use Go to Reception patients.</p>':'<p class="tiny">All rooms reuse the same patient IDs; connected cases progress from Reception to Exam to Treatment.</p>'));
 }
