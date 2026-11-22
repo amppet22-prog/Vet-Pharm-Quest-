@@ -83,12 +83,7 @@ function scene(key){
    '<rect x="68" y="72" width="864" height="18" fill="#cce7df"/>'+
    '<path d="M69 345H931" stroke="#fff" stroke-width="3"/>'+
    '<path d="M354 343L308 493M674 343L700 493" fill="none" stroke="#f4f9f6" stroke-width="4" stroke-dasharray="12 9"/>'+
-   '<rect x="115" y="364" width="155" height="20" rx="10" fill="#ffe6d8" stroke="#e6aa99" stroke-width="2"/>'+
-   '<text x="192" y="379" font-size="10" font-weight="900" fill="#955e53" text-anchor="middle">ISOLATION PATIENT ZONE</text>'+
-   '<rect x="386" y="363" width="213" height="20" rx="10" fill="#e1f6ee" stroke="#9acbb9" stroke-width="2"/>'+
-   '<text x="493" y="378" font-size="10" font-weight="900" fill="#487b70" text-anchor="middle">CLEAN HANDS · CLEAN EQUIPMENT</text>'+
-   '<rect x="747" y="364" width="145" height="20" rx="10" fill="#e9f0fb" stroke="#b4c8df" stroke-width="2"/>'+
-   '<text x="820" y="379" font-size="10" font-weight="900" fill="#58778e" text-anchor="middle">PUBLIC HEALTH DESK</text>'+
+   // Clear circulation space in front of all three interactive stations.
    // Isolation kennel and recognizable canine patient.
    '<rect x="94" y="192" width="230" height="155" rx="14" fill="#c6e7de" stroke="#79aaa0" stroke-width="7"/>'+
    '<rect x="109" y="208" width="200" height="121" rx="9" fill="#ecf8f3" stroke="#aacdc2" stroke-width="3"/>'+
@@ -135,6 +130,10 @@ function scene(key){
    '<rect x="753" y="112" width="183" height="55" rx="10" fill="#edf9f3" stroke="#9dc6b0" stroke-width="3"/>'+
    '<text x="844" y="132" text-anchor="middle" font-size="12" font-weight="900" fill="#467c70">PPE BEFORE ENTRY</text>'+
    '<text x="844" y="151" text-anchor="middle" font-size="10" font-weight="800" fill="#467c70">GOWN · GLOVES · HAND HYGIENE</text>'+
+   // Small, readable cleaning workflow card in the clear wall space.
+   '<g transform="translate(404 156)"><rect width="202" height="27" rx="5" fill="#f9fffb" stroke="#a8cfc1" stroke-width="2"/>'+
+   '<text x="101" y="11" text-anchor="middle" font-size="9" font-weight="900" fill="#508675">CLEAN → DISINFECT → CONTACT TIME</text>'+
+   '<text x="101" y="22" text-anchor="middle" font-size="8" fill="#709d8e">DEDICATED EQUIPMENT • HAND HYGIENE</text></g>'+
    // Handwash sink left of library: tap, basin, soap, paper towels.
    '<g transform="translate(334 248)"><rect x="1" y="30" width="44" height="48" rx="5" fill="#bedbd8" stroke="#83aeb0" stroke-width="3"/>'+
    '<path d="M5 37Q22 47 41 37L35 56Q22 66 10 56Z" fill="#faffff" stroke="#92bdc2" stroke-width="2.5"/>'+
@@ -173,6 +172,7 @@ function scene(key){
    '<rect x="314" y="383" width="65" height="29" rx="5" fill="#99bcb1" stroke="#6f9c90" stroke-width="3"/>'+
    '<path d="M322 388h49m-49 7h49m-49 7h49" stroke="#d8e9df" stroke-width="2"/>'+
    '<text x="346" y="422" text-anchor="middle" font-size="8" font-weight="900" fill="#568078">BOOT MAT</text>'+
+   '<text x="960" y="485" text-anchor="end" font-size="9" font-family="Arial" font-weight="900" fill="#6b8a85">Isolation room v2</text>'+
    '</g>';
  }else if(key==='skills'){
    // Three identifiable work areas: syringe training, venous collection, specimen tubes.
@@ -269,7 +269,7 @@ isolationPolish.id='vpq-isolation-room-polish';
 isolationPolish.textContent=
  '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit{border:1px solid transparent;background:transparent;box-shadow:none}'+
  '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit:hover,.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit:focus-visible,.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit.vpqSpecNear{border:1.5px solid #74b0a8!important;background:#c9eee514!important;outline:none!important;box-shadow:0 0 0 2px #c7e9df66!important}'+
- '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit span{font-size:11px;min-width:0;width:max-content;max-width:100%;bottom:-10%;padding:5px 9px;border:1.5px solid #9ebcb5;background:#fffdf7;color:#466a6b;box-shadow:0 2px 5px #2f555324}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit span{font-size:11px;min-width:0;width:max-content;max-width:100%;top:-12%;bottom:auto;padding:4px 8px;border:1.5px solid #9ebcb5;background:#fffdf7;color:#466a6b;box-shadow:0 2px 5px #2f555324}'+
  '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit.vpqSpecNear span{background:#edf8ef!important;border-color:#8cb9aa!important}'+
  '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp{position:absolute;pointer-events:auto;width:25px;height:25px;padding:0;border-radius:50%;background:#f7fffb;color:#336b73;border:2px solid #78a6a5;z-index:9;font-size:15px;font-weight:900;transform:none!important;box-shadow:0 2px 6px #39545238}'+
  '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp:hover{background:#e0f6ee}';
