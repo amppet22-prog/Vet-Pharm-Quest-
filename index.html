@@ -4969,7 +4969,7 @@ function vpqVerifyUploadedCompanion(c){
   }catch(e){status='unchecked'}
   vpqUploadedImageStatus.set(c.id,status);
   if(document.getElementById('vpqPetGallery'))vpqUpdatePetGallery();
-  if(state.vpqCompanionId===c.id)updateAvatar();
+  // Room pet is updated only when a player explicitly equips a companion.
  };
  img.onerror=function(){
   vpqUploadedImageStatus.set(c.id,'missing');
@@ -5120,6 +5120,38 @@ vpqUnifiedCompanionStyle.textContent=
  '.vpq-companion-figure .vpq-pet-art,.vpq-story-stage .vpq-pet-art,#stage #petSprite .vpq-pet-art{background-size:800% 400%!important;background-repeat:no-repeat!important}'+
  '@media(max-width:650px){.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,.vpq-story-maker .vpq-story-stage>.vpq-matched-pet{width:115px!important;height:126px!important;max-width:42%!important}#stage>#petSprite.petSprite{width:96px!important;height:90px!important;max-width:96px!important;max-height:90px!important}}';
 document.head.appendChild(vpqUnifiedCompanionStyle);
+
+/* Direct access to uploaded companion library. This intentionally does NOT
+   write to or resize #petSprite, the active avatar, or current companion. */
+const vpqLibraryTopButton=document.createElement('button');
+vpqLibraryTopButton.type='button';
+vpqLibraryTopButton.id='vpqCompanionLibraryBtn';
+vpqLibraryTopButton.className='mini';
+vpqLibraryTopButton.textContent='🐾 Companions · '+vpqUploadedCompanionManifest.length+' new';
+vpqLibraryTopButton.title='Browse the newly uploaded cat, horse, pocket pet, exotic and legendary companions';
+vpqLibraryTopButton.style.background='#f2ecff';
+vpqLibraryTopButton.style.borderColor='#b8a1d5';
+const vpqLibraryHeader=document.querySelector('header .hud');
+if(vpqLibraryHeader){
+ const customize=document.getElementById('avatarBtn');
+ if(customize)customize.after(vpqLibraryTopButton);
+ else vpqLibraryHeader.appendChild(vpqLibraryTopButton);
+}
+vpqLibraryTopButton.addEventListener('click',function(){
+ vpqCompanionTab='cat';
+ openAvatar();
+ vpqActivateStoryTab('pet');
+ vpqUpdatePetGallery();
+ const gallery=document.getElementById('vpqPetGallery');
+ if(gallery)gallery.scrollIntoView({block:'nearest',behavior:'smooth'});
+});
+window.VPQ_COMPANION_LIBRARY_STATUS=function(){
+ const counts={};
+ for(const c of vpqCompanionCatalog)counts[c.category]=(counts[c.category]||0)+1;
+ return {uploads:vpqUploadedCompanionManifest.length,total:vpqCompanionCatalog.length,byCategory:counts,
+  ready:vpqUploadedCompanionManifest.filter(d=>vpqUploadedImageStatus.get(d[0])==='ready').length};
+};
+
 
 })();
 
