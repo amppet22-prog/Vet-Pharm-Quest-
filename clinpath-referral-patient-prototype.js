@@ -324,7 +324,7 @@ interpretations()+
 '<div class="refpracticegrid '+(caseImages.length?'has-images':'no-images')+'"><div class="refpracticequestions"><div class="reflevel">🌱 <b>Guided Differential Practice</b> · Multiple choice + ranking</div>'+guided()+'</div>'+imageRail()+'</div>'+
 (state.submitted||state.advancedComparison?comparison():'<div class="refprotected">🔒 The evidence comparison, leading diagnosis, rationale and follow-up tests remain hidden until you submit your ranked choices.</div>')+
 advanced()+
-'<div class="refbuttons"><button type="button" data-ref-legacy="1">Existing Clinical Pathology cases</button><button type="button" data-ref-reset="1">Restart prototype</button></div></div>';
+'<div class="refbuttons"><button type="button" data-ref-back="1">← All Referral Cases</button><button type="button" data-ref-legacy="1">Existing Clinical Pathology cases</button><button type="button" data-ref-reset="1">Restart prototype</button></div></div>';
 window.VPQ_REFERRAL_MODAL.show('🔬 Referral Patients · Clinical Pathology',content);
 if(old){
 const root=document.querySelector('#modalBody .refcase');
@@ -332,7 +332,7 @@ if(root)priorDetails.forEach(x=>{const d=root.querySelectorAll('details')[x.i];i
 const body=document.getElementById('modalBody');if(body)body.scrollTop=oldScroll;
 }
 }
-function home(){render()}
+function home(){return window.VPQ_CLINPATH_REFERRAL_LIBRARY?.home?.()||render()}
 document.addEventListener('change',e=>{
  if(e.target?.id==='vpqReferralCasePick'&&e.target.closest('.refcase')&&!e.target.closest('.refnewlibrary')&&e.target.value!=='001'){
   window.VPQ_CLINPATH_REFERRAL_LIBRARY?.open?.(e.target.value);
