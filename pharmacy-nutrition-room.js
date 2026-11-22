@@ -132,6 +132,18 @@ function drawing(){
  '<g transform="translate(714 362)"><ellipse cx="90" cy="74" rx="93" ry="15" fill="#6b7a79" opacity=".16"/><rect x="8" y="10" width="155" height="76" rx="9" fill="#bde7e3" fill-opacity=".65" stroke="#7eaca9" stroke-width="7"/><path d="M13 71q69 -20 144 0v10H13Z" fill="#e7d5ad"/><ellipse cx="83" cy="58" rx="37" ry="25" fill="#81b89a" stroke="#568d75" stroke-width="5"/><ellipse cx="104" cy="51" rx="27" ry="21" fill="#6da889" stroke="#4d866c" stroke-width="4"/><circle cx="112" cy="45" r="3" fill="#355b56"/><ellipse cx="49" cy="79" rx="13" ry="6" fill="#669d80"/><ellipse cx="111" cy="77" rx="13" ry="6" fill="#669d80"/><path d="M29 40V17M139 41V15" stroke="#78a993" stroke-width="4"/><ellipse cx="26" cy="22" rx="15" ry="10" fill="#82bd9a"/><ellipse cx="141" cy="19" rx="17" ry="10" fill="#82bd9a"/><text x="87" y="103" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="900" fill="#4d7774">TURTLE ASSISTANT</text></g>'+
  '<text x="500" y="34" text-anchor="middle" font-family="sans-serif" font-size="21" font-weight="900" fill="#507973">PHARMACY &amp; NUTRITION</text></svg>';
 }
+
+function pharmacyHelp(topic){
+ const help={
+  drugs:['💊 Drug Shelves','Look up medication classes, mechanisms of action, species considerations, contraindications, adverse effects and clinical monitoring. This station is the drug reference, not the exam or quiz area.'],
+  rounds:['🩺 Clinical Rounds','Practice using drug mechanisms in veterinary patient scenarios: choose treatments, explain your reasoning and monitor adverse effects. Pharmacology learning by lecture is in the Student Study Lounge.'],
+  food:['🥣 Pet Nutrition','Review body condition, nutrition assessment, food labels, species-specific nutrient needs, energy requirements and therapeutic diet considerations.'],
+  tox:['☣️ Caution Book','Study toxic exposures, clinical signs, target organs, species risks, emergency priorities, and monitoring. Always verify protocols and doses with current clinical references.'],
+  lab:['🔬 Mechanism Lab','Enter the Mechanism Lab to examine pharmacologic targets, mechanisms and why treatments produce physiologic effects.']
+ };
+ const x=help[topic];if(!x)return;
+ showModal(x[0]+' · What is this?', '<div class="infobox"><b>What this section does</b><p>'+x[1]+'</p></div><p class="tiny">Close this explanation, then select the station label to open it.</p>');
+}
 art.roomArt=function(k){return k==='pharmacy'?drawing():previous(k)};
 rooms.pharmacy.name='Pharmacy & Pet Nutrition';
 rooms.pharmacy.props=[
@@ -149,8 +161,13 @@ function refresh(){
  '<button type="button" class="vpqPNHot vpqPNRounds" data-vpqpnaction="vpqPharmVisualRounds" aria-label="Open clinical pharmacology visual cases and testing"><span>🩺 Clinical Rounds</span></button>'+ 
  '<button type="button" class="vpqPNHot vpqPNFood" data-vpqpnaction="vpqNutritionGuide" aria-label="Open the pet nutrition corner and reference cards"><span>🥣 Pet Nutrition</span></button>'+
  '<button type="button" class="vpqPNHot vpqPNTox" data-vpqpnaction="vpqToxPreview" aria-label="Open the toxicology caution book reference preview"><span>☣️ Caution Book</span></button>'+
- '<button type="button" class="vpqPNHot vpqPNLab" data-vpqpnaction="vpqMechEnter" aria-label="Enter the mechanism lab"><span>🔬 Lab</span></button>';
- node.addEventListener('click',e=>{const go=e.target.closest('[data-vpqpn-study]');if(go){changeRoom('study');return}const b=e.target.closest('[data-vpqpnaction]');if(b)doAction(b.dataset.vpqpnaction)});
+ '<button type="button" class="vpqPNHot vpqPNLab" data-vpqpnaction="vpqMechEnter" aria-label="Enter the mechanism lab"><span>🔬 Lab</span></button>'+
+ '<button type="button" class="vpqPNHelp vpqPNHelpDrugs" data-vpqpnhelp="drugs" aria-label="What are the Drug Shelves for?" title="About Drug Shelves">?</button>'+
+ '<button type="button" class="vpqPNHelp vpqPNHelpRounds" data-vpqpnhelp="rounds" aria-label="What are Clinical Rounds for?" title="About Clinical Rounds">?</button>'+
+ '<button type="button" class="vpqPNHelp vpqPNHelpFood" data-vpqpnhelp="food" aria-label="What is Pet Nutrition for?" title="About Pet Nutrition">?</button>'+
+ '<button type="button" class="vpqPNHelp vpqPNHelpTox" data-vpqpnhelp="tox" aria-label="What is the Caution Book for?" title="About the Caution Book">?</button>'+
+ '<button type="button" class="vpqPNHelp vpqPNHelpLab" data-vpqpnhelp="lab" aria-label="What is the Mechanism Lab for?" title="About the Mechanism Lab">?</button>';
+ node.addEventListener('click',e=>{const help=e.target.closest('[data-vpqpnhelp]');if(help){e.preventDefault();e.stopPropagation();pharmacyHelp(help.dataset.vpqpnhelp);return}const go=e.target.closest('[data-vpqpn-study]');if(go){changeRoom('study');return}const b=e.target.closest('[data-vpqpnaction]');if(b)doAction(b.dataset.vpqpnaction)});
  stage.appendChild(node);
 }
 const style=document.createElement('style');
@@ -158,11 +175,15 @@ style.textContent='.vpqPharmNutritionArt{position:absolute;inset:0;width:100%;he
 '.stage[data-room="pharmacy"] .prop,.stage[data-room="pharmacy"] .roomdecor{display:none!important}'+
 '#vpqPNHotspots{position:absolute;inset:0;z-index:5;pointer-events:none}'+
 '.vpqPNHot{position:absolute;pointer-events:auto;border:2px solid #87a9a955;border-radius:12px;box-shadow:none;transform:none!important;background:#ffffff0d}'+
-'.vpqPNHot:hover,.vpqPNHot:focus-visible{border:3px solid #f0bf68;background:#ffedbb40;outline:2px solid #ffffff}'+
+'.vpqPNHot:hover{border-color:#78aeb6;background:#e1f5ef16;outline:none}.vpqPNHot:focus-visible{border-color:#5f99a8;background:#e1f5ef16;outline:2px solid #568ea4;outline-offset:2px}'+
 '.vpqPNHot span{position:absolute;bottom:3%;left:50%;transform:translate(-50%,0);white-space:nowrap;border:2px solid #7ea9a6;background:#fffdf5;color:#375f68;font-size:11px;font-weight:900;padding:5px 8px;border-radius:13px;box-shadow:0 3px 0 #567f8030}'+
 '.vpqPNRounds{left:10%;top:68%;width:30%;height:20%;border:2px solid #e4aa91;background:#fff4da26}.vpqPNRounds span{bottom:6%;background:#fff5eb;border-color:#e4b6a8;color:#895568}'+
  '.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:44%;top:23%;width:23%;height:49%}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
 '.vpqPNStudyLink{position:absolute;z-index:6;left:9%;top:10%;width:38%;pointer-events:auto;border:2px solid #8a94c8;border-radius:12px;background:#fffdf2;color:#534c85;padding:7px 10px;font-size:11px;font-weight:900;box-shadow:0 3px 8px #35436633;cursor:pointer}.vpqPNStudyLink:hover,.vpqPNStudyLink:focus-visible{background:#fff2c7;outline:2px solid #f5c66f}'+
+'/* Small floating question marks explain each interactable section without blocking entry. */'+
+'.vpqPNHelp{position:absolute;pointer-events:auto;z-index:9;width:24px;height:24px;padding:0;display:grid;place-items:center;border:2px solid #79a7ac;border-radius:50%;background:#fcfffa;color:#276775;font-size:15px;font-weight:1000;box-shadow:0 2px 5px #254a4a30;transform:none!important;line-height:1;cursor:help}'+
+'.vpqPNHelp:hover,.vpqPNHelp:focus-visible{background:#d6f3ed;outline:2px solid #447f86;outline-offset:2px}'+
+'.vpqPNHelpDrugs{left:36%;top:20%}.vpqPNHelpRounds{left:36%;top:70%}.vpqPNHelpFood{left:65%;top:25%}.vpqPNHelpTox{left:87%;top:24%}.vpqPNHelpLab{left:96%;top:29%}'+
 '.vpqPNFoodCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin:12px 0}.vpqPNFoodCards button{display:block;text-align:left;background:#f6fcf7;border:2px solid #b9d7c8;border-radius:13px;padding:13px}.vpqPNFoodCards b,.vpqPNFoodCards small{display:block}.vpqPNFoodCards small{color:#617e75;font-size:12px;margin-top:6px}'+
 '@media(max-width:620px){.vpqPNHot span{font-size:9px;padding:3px 4px}.vpqPNLab span{right:0}.vpqPNTox span{bottom:12%}}';
 document.head.appendChild(style);
