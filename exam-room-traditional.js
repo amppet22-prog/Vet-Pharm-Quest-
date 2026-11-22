@@ -114,17 +114,22 @@ function drawing(){
  '<g fill="#d7a6b7" opacity=".65"><g transform="translate(128 73) scale(.56)"><ellipse cx="0" cy="15" rx="14" ry="11"/><circle cx="-17" cy="-2" r="6"/><circle cx="-5" cy="-10" r="6"/><circle cx="9" cy="-10" r="6"/><circle cx="21" cy="-2" r="6"/></g><g transform="translate(164 72) rotate(19) scale(.4)"><ellipse cy="15" rx="14" ry="11"/><circle cx="-17" cy="-2" r="6"/><circle cx="-5" cy="-10" r="6"/><circle cx="9" cy="-10" r="6"/><circle cx="21" cy="-2" r="6"/></g><g transform="translate(902 119) rotate(-18) scale(.8)"><ellipse cy="15" rx="14" ry="11"/><circle cx="-17" cy="-2" r="6"/><circle cx="-5" cy="-10" r="6"/><circle cx="9" cy="-10" r="6"/><circle cx="21" cy="-2" r="6"/></g><g transform="translate(917 160) rotate(20) scale(.55)"><ellipse cy="15" rx="14" ry="11"/><circle cx="-17" cy="-2" r="6"/><circle cx="-5" cy="-10" r="6"/><circle cx="9" cy="-10" r="6"/><circle cx="21" cy="-2" r="6"/></g></g>',
 
  // A familiar cute clinical protocol board: remains a distinct action target.
- '<g transform="translate(552 277)" filter="url(#exShadow)"><rect width="104" height="58" rx="12" fill="#fffdf6" stroke="#aac9be" stroke-width="5"/><path d="M15 19h75M15 31h65M15 43h53" stroke="#bed6d4" stroke-width="4"/><rect x="36" y="-7" width="32" height="13" rx="5" fill="#8bb7b3"/></g>',
+ '<g transform="translate(284 209)" filter="url(#exShadow)"><rect width="104" height="58" rx="12" fill="#fffdf6" stroke="#aac9be" stroke-width="5"/><path d="M15 19h75M15 31h65M15 43h53" stroke="#bed6d4" stroke-width="4"/><rect x="36" y="-7" width="32" height="13" rx="5" fill="#8bb7b3"/></g>',
+ // Patient table now has a grounded pedestal cabinet and a safer working height.
  // Patient table is a realistic-height anchored clinical fixture, not a floating prop.
- // A contemporary, lower exam platform with rounded corners and a full-height
- // structural wall column. Rear mounting bolts and two braces support the slab.
- // The patient is centered on a washable nonslip pad above the table surface.
- '<g filter="url(#exShadow)"><rect x="913" y="203" width="29" height="198" rx="9" fill="#759da7" stroke="#557c89" stroke-width="5"/><rect x="922" y="216" width="11" height="174" rx="5" fill="#d1e2e4"/><g fill="#597c88"><circle cx="927" cy="226" r="4"/><circle cx="927" cy="273" r="4"/><circle cx="927" cy="322" r="4"/><circle cx="927" cy="370" r="4"/></g>',
- '<path d="M926 342L791 418L769 410L909 323Z" fill="#7c9fa8" stroke="#577f8b" stroke-width="6"/><path d="M925 357L834 425L804 420L913 328Z" fill="#b2cdd0" stroke="#6f94a0" stroke-width="5"/>',
- '<path d="M611 345Q611 337 622 334L765 294Q774 292 784 296L935 342Q949 347 936 354L782 404Q774 408 765 404L618 361Q610 357 611 345Z" fill="url(#exMetal)" stroke="#608894" stroke-width="8"/>',
- '<path d="M613 353L775 401V421L613 372Z" fill="#a4c4ca" stroke="#638894" stroke-width="5"/><path d="M775 401L938 350V370L775 421Z" fill="#86a8b2" stroke="#638894" stroke-width="5"/>',
- '<path d="M643 344L772 308L908 347L776 385Z" fill="#fff9f4" stroke="#c6dbd9" stroke-width="4"/><path d="M661 346L772 317L890 349" fill="none" stroke="#f5d4de" stroke-width="3" opacity=".75"/>',
- '<circle cx="915" cy="352" r="5" fill="#647e8a"/><circle cx="885" cy="368" r="5" fill="#647e8a"/></g>',
+ // Compact non-floating stainless examination table: a strong pedestal with
+ // a floor-contacting footplate, drawers, and rounded tray at the veterinarian's waist.
+ '<g filter="url(#exShadow)"><ellipse cx="790" cy="454" rx="109" ry="13" fill="#89a6a9" opacity=".32"/>',
+ '<path d="M728 425L850 425L878 451L699 451Z" fill="#819fa9" stroke="#64848e" stroke-width="5"/>',
+ '<path d="M744 356L851 354V439L744 439Z" fill="#c7dfe0" stroke="#7598a3" stroke-width="6"/>',
+ '<path d="M759 374H832V405H759Z" fill="#f3f9f7" stroke="#9ab9bb" stroke-width="3" rx="6"/><path d="M773 388h46" stroke="#849faa" stroke-width="5" stroke-linecap="round"/>',
+ '<path d="M761 414H832V431H761Z" fill="#e0efed" stroke="#9ab9bb" stroke-width="3"/><path d="M786 421h21" stroke="#7e9aa3" stroke-width="4" stroke-linecap="round"/>',
+ '<path d="M618 323L775 278L941 319L782 366Z" fill="url(#exMetal)" stroke="#658d9c" stroke-width="8" stroke-linejoin="round"/>',
+ '<path d="M618 323L782 366V382L618 341Z" fill="#a6c4ca" stroke="#668d9a" stroke-width="5"/>',
+ '<path d="M782 366L941 319V337L782 382Z" fill="#84a7b2" stroke="#658a98" stroke-width="5"/>',
+ '<path d="M647 319L777 291L908 321L783 352Z" fill="#fffaf5" stroke="#c3d6d5" stroke-width="4"/>',
+ '<path d="M653 318L774 291" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>',
+ '<g fill="#7c969d"><circle cx="910" cy="337" r="4"/><circle cx="886" cy="344" r="4"/></g></g>',
  // Art occupies the pad, not the upper wall; blank table is valid before selection.
  '<g transform="translate(213 17)">',examPatientArt(),'</g>',
  // Dedicated clean-wipe dispenser and a lidded clinical-waste bin against wall.
@@ -140,9 +145,9 @@ function drawing(){
 
 art.roomArt=function(k){return k==='exam'?drawing():previous(k)};
 const p=rooms.exam.props;
-p[0].x=42;p[0].label='Patient Charts';
+p[0].x=43;p[0].label='Patient Charts';
 p[1].x=78;p[1].label='Examine Patient';
-p[2].x=61;p[2].label='Clinical Protocols';
+p[2].x=34;p[2].label='Clinical Protocols';
 function refresh(){
  stage.querySelector('#vpqExamHotspots')?.remove();
  if(stage.dataset.room!=='exam')return;
@@ -192,9 +197,9 @@ const style=document.createElement('style');style.textContent=
 '#vpqExamHotspots{position:absolute;inset:0;z-index:5;pointer-events:none}'+
 '.vpqExamHot,.vpqExamExit{pointer-events:auto;position:absolute;border:2px solid #99bbc2bb;border-radius:12px;background:#ffffff15;box-shadow:none;transform:none!important}'+
 '.vpqExamHot:hover,.vpqExamHot:focus-visible,.vpqExamExit:hover,.vpqExamExit:focus-visible{border:3px solid #f1c66d;outline:2px solid #fff;background:#fff6ba48}'+
-'.vpqExamHot span{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fffdf5;color:#355a70;border:2px solid #83acb5;border-radius:14px;padding:5px 9px;font-size:12px;font-weight:900;box-shadow:0 3px 0 #708c962e}.vpqExamCharts span{bottom:-23%}.vpqExamProtocol span{bottom:-38%}'+
-'.vpqExamCharts{left:37.5%;top:43%;width:10%;height:18%}.vpqExamPatient{left:62%;top:53%;width:30%;height:30%}.vpqExamProtocol{left:55%;top:55%;width:11%;height:12%}'+
-'.vpqExamHelp{position:absolute;pointer-events:auto;z-index:9;width:24px;height:24px;min-height:24px;min-width:24px;padding:0;border:2px solid #a99ac6;border-radius:50%;background:#fffaf4;color:#7a608e;font:900 14px Arial;box-shadow:0 2px 4px #5c507a2d;cursor:pointer}.vpqExamHelp:hover,.vpqExamHelp:focus-visible{background:#f2e6ff;outline:2px solid #fff}.vpqExamHelpCharts{left:45.5%;top:42%}.vpqExamHelpProtocol{left:64%;top:54%}.vpqExamHelpPatient{left:88%;top:77%}.vpqExamHelpSkills{left:28%;top:7%}.vpqExamHelpPicker{right:2%;bottom:17%}.vpqExamHelpPopover{pointer-events:auto;position:absolute;z-index:12;right:18%;bottom:8%;width:min(310px,58%);background:#fffdf9;border:2px solid #c3a9cb;border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.45;font-weight:700;color:#584c6c;box-shadow:0 5px 16px #55486933}.vpqExamHelpPopover[hidden]{display:none!important}'+
+'.vpqExamHot span{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);white-space:nowrap;background:#fffdf5;color:#355a70;border:2px solid #83acb5;border-radius:14px;padding:5px 9px;font-size:12px;font-weight:900;box-shadow:0 3px 0 #708c962e}.vpqExamCharts span{bottom:-23%}.vpqExamProtocol span{bottom:-30%}'+
+'.vpqExamCharts{left:38%;top:43%;width:10%;height:18%}.vpqExamPatient{left:62%;top:51%;width:31%;height:32%}.vpqExamProtocol{left:28%;top:42%;width:11%;height:13%}'+
+'.vpqExamHelp{position:absolute;pointer-events:auto;z-index:9;width:24px;height:24px;min-height:24px;min-width:24px;padding:0;border:2px solid #a99ac6;border-radius:50%;background:#fffaf4;color:#7a608e;font:900 14px Arial;box-shadow:0 2px 4px #5c507a2d;cursor:pointer}.vpqExamHelp:hover,.vpqExamHelp:focus-visible{background:#f2e6ff;outline:2px solid #fff}.vpqExamHelpCharts{left:45.5%;top:42%}.vpqExamHelpProtocol{left:37.5%;top:40%}.vpqExamHelpPatient{left:88%;top:77%}.vpqExamHelpSkills{left:28%;top:7%}.vpqExamHelpPicker{right:2%;bottom:17%}.vpqExamHelpPopover{pointer-events:auto;position:absolute;z-index:12;right:18%;bottom:8%;width:min(310px,58%);background:#fffdf9;border:2px solid #c3a9cb;border-radius:12px;padding:12px 14px;font-size:12px;line-height:1.45;font-weight:700;color:#584c6c;box-shadow:0 5px 16px #55486933}.vpqExamHelpPopover[hidden]{display:none!important}'+
 '.vpqExamSkills{pointer-events:auto;position:absolute;left:3%;top:8%;background:#fff4fadd;border:3px solid #b79bda;border-radius:14px;color:#745588;padding:9px 12px;font-size:13px;font-weight:900;box-shadow:0 5px 0 #bfa8d455;cursor:pointer;z-index:3}.vpqExamSkills:hover,.vpqExamSkills:focus-visible{background:#fff1bd;border-color:#eab65c;outline:2px solid #fff9dd}'+
 '.vpqExamPatientPicker{pointer-events:auto;position:absolute;bottom:3%;right:2%;z-index:8;background:#fffaf8f2;color:#684b6d;border:2px solid #cda7c8;border-radius:13px;padding:7px;font-size:11px;font-weight:900;box-shadow:0 3px 0 #b49ab044}.vpqExamPatientPicker select{font:inherit;max-width:160px;color:#435f68;background:transparent;border:0;cursor:pointer}.vpqExamExit{top:8%;right:2%;background:#fffdf5ed;color:#365e66;font-size:11px;padding:6px 9px}'+
 '@media(max-width:600px){.vpqExamHot span{font-size:10px;padding:3px 5px}.vpqExamPatientPicker{font-size:9px}.vpqExamPatientPicker select{max-width:105px}.vpqExamExit{font-size:10px}}';
