@@ -51,7 +51,7 @@ const cases=[
 /* Concept-first introductions for existing hemostasis / blood-gas banks.
  * These are reference views only; the original question objects are not changed.
  */
-const INTRO_STYLE=String.raw\`
+const INTRO_STYLE=String.raw`
 <style>
 .vpqintro{font-size:14px;line-height:1.45;color:#263650;max-width:100%}
 .vpqintro *{box-sizing:border-box}
@@ -86,7 +86,7 @@ const INTRO_STYLE=String.raw\`
 .vpqintro .introactions .start{background:#2b6b59;color:white;border:1px solid #1e5042}
 .vpqintro .introactions .return{background:#e8edf6;color:#294365;border:1px solid #bccde2}
 @media(max-width:610px){.vpqintro .pathgrid,.vpqintro .exgrid{grid-template-columns:1fr}.vpqintro .steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-</style>\`;
+</style>`;
 function coagIntro(){
  return '<div class="vpqintro">'+INTRO_STYLE+
  '<div class="introhero"><b>🩸 COAG CASCADE LAB · LEARN FIRST</b><p><strong>Platelets build the temporary plug. Coagulation factors reinforce it with fibrin.</strong> PT and aPTT are timed tests of different paths toward the same fibrin finish line.</p></div>'+
