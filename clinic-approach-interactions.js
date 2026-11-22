@@ -29,7 +29,7 @@ const configs={
   {selector:'#vpqPNHotspots [data-vpqpnaction="vpqMechEnter"]',x:95,label:'🔬 Mechanism Lab',max:9}
  ],
  study:[
-  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="study"]',x:51,label:'📖 Study Desk'},
+  {selector:'#vpqLoungeHotspots [data-vpqstudyaction="study"]',x:49,label:'💻 Study Computer'},
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="masteryTracker"]',x:35,label:'🏆 Mastery Tracker'},
   {selector:'#vpqLoungeHotspots [data-vpqstudyaction="learningHub"]',x:84,label:'🕹️ Learning Arcade'}
  ],
@@ -85,7 +85,10 @@ style.textContent=
  '#vpqShadowHotspots .vpqShadowHotspot.vpqApproachNear{border:2px solid #e7c987!important;background:#fff9ed0d!important;outline:none!important;box-shadow:0 0 5px #e7c98755!important;filter:none!important}'+
  '#vpqShadowHotspots .vpqShadowHotspot.vpqApproachNear:after{top:-12px!important;font-size:9px!important;padding:2px 5px!important;border-width:1px!important;box-shadow:none!important}'+
  '.stage .prop.near .sign{background:#fff4c9!important;border-color:#e6ae54!important;box-shadow:0 4px 12px #edc56895!important}'+
- '.stage .prop:focus-visible{outline:3px solid #efbd63;border-radius:12px}';
+ '.stage .prop:focus-visible{outline:3px solid #efbd63;border-radius:12px}'+
+ '#vpqLoungeHotspots .vpqLoungeHot.vpqApproachNear{border:2px dashed #b4a1cf!important;background:#fffbe71a!important;outline:none!important;box-shadow:none!important;filter:none!important}'+
+ '#vpqLoungeHotspots .vpqLoungeHot.vpqApproachNear:after{content:"Press E"!important;top:auto!important;bottom:100%!important;left:50%!important;font-size:9px!important;padding:2px 6px!important;border:1px solid #a6a5ca!important;background:#fffdf7!important;color:#645984!important;box-shadow:none!important}'+
+ '#vpqLoungeHotspots .vpqLoungeHot.vpqApproachNear span{display:none!important}';
 document.head.appendChild(style);
 return {updateNearby,interactNearest,rooms:Object.keys(configs)};
 };
