@@ -34,7 +34,31 @@ function pcvDiagram(){
  return s+'</svg>';
 }
 function start(){
- return card('🧭 The routine EVERY time','<p>Before guessing a disease, read the data in the same order used in your course: <b>quality → erythrogram → platelets → leukogram → protein → chemistry/urine → mechanisms → prioritized differential and plan.</b></p>','vra-good')+
+ return card('👩‍⚕️ Start from ZERO · What is clinical pathology?',
+ '<p><b>Clinical pathology</b> means using samples—blood, urine and other fluids—to answer what is happening inside a patient. You are not memorizing a disease from a single number. You are learning to identify abnormal patterns, explain the mechanism and choose a next test.</p>'+
+ '<div class="vra-grid">'+
+ card('🩸 CBC = WHO is in the blood?','<p><b>RBC / HCT / hemoglobin:</b> oxygen delivery and anemia. <b>WBC + differential:</b> inflammation, immune or stress response. <b>Platelets:</b> primary clot formation. A smear checks cell shape and machine errors.</p>')+
+ card('🧪 Chemistry = WHAT are organs doing?','<p>Kidney waste markers, liver leakage/cholestasis, proteins, glucose and electrolytes. <b>ALT ↑ means injury signal, not proof the liver has stopped working.</b> Combine values, organ physiology and urine results.</p>')+
+ card('🩸 PCV/TS = FAST check','<p><b>PCV</b> = fraction of blood made up of red cells after spinning. <b>TS</b> = total dissolved solids (mostly protein) measured in separated plasma. Their combined trends help distinguish concentration, loss and dilution.</p>')+
+ card('🔬 Follow-up tests = WHAT question remains?','<p>Blood gas: acid–base status; lactate: production/clearance; ACTH stimulation: adrenal cortisol reserve; thyroid testing: endocrine feedback; UA: urine concentration, sediment and protein loss. Choose based on your differential.</p>')+
+ '</div>'+
+ '<div class="vra-btns">'+link('cbc','Read your first CBC')+link('chem','Read chemistry')+'<button type="button" data-vpq-report-action="inhouse">Choose in-house tests</button><button type="button" data-vpq-report-action="sendout">Choose send-out tests</button></div>','vra-good')+
+ detail('🧴 Sample tubes and WHY handling changes your interpretation',
+ table(['Specimen','Common use','What can go wrong'],[
+ ['EDTA whole blood (purple)','CBC, blood smear, spun PCV','Clots remove cells; delay distorts morphology; EDTA contamination can falsely ↑ K and ↓ calcium in chemistry.'],
+ ['Serum (red/gold as validated)','Many chemistry and hormone send-outs','Allow appropriate clotting, then separate; delay can lower glucose; lipemia/hemolysis can interfere.'],
+ ['Heparinized blood / plasma','Point-of-care gases/chemistry as validated','Air exposure changes CO₂ and pH; too much liquid heparin dilutes some analytes.'],
+ ['Citrate (blue; correct fill)','PT/aPTT and coagulation testing','Underfilling adds excess citrate relative to blood, falsely prolonging clot times.'],
+ ['Fresh urine','USG, dipstick, sediment, UPC if appropriate','Delay creates artifacts; collection method and active sediment change protein/bacteria interpretation.']
+ ]),true)+
+ detail('📏 How to read ANY numerical result: a beginner example',
+ '<p><b>Step 1:</b> identify patient species and the printed reference interval (RI). <b>Step 2:</b> compare with the SAME units. <b>Step 3:</b> call it increased (↑), decreased (↓) or within range. <b>Step 4:</b> explain the organ/cell mechanism and decide what would confirm it.</p>'+
+ '<p><b>Illustrative dog:</b> PCV <b>25%</b>, lab RI <b>37–55%</b> → <b>DECREASED</b> → anemia. Is the marrow responding? Look at <b>absolute reticulocytes</b>. Does TS decrease too? Consider blood/protein loss and hydration. One low PCV does not reveal the cause.</p>'+
+ '<p><b>Important:</b> even if the result is within the RI, a large change from the patient’s baseline can be meaningful. Different species, breeds and analyzer methods have different ranges.</p>',true)+
+ card('🔁 The workflow you will repeat on every patient',
+ '<p><b>Patient + sample quality → find ↑/↓ → classify CBC/chemistry patterns → WHY the body produced them → rank competing diagnoses → pick ancillary test → reassess.</b></p>'+
+ '<p>Example: low PCV + high absolute reticulocytes = regenerative anemia; the next question is bleeding or destruction, not “which random drug?”</p>')+
+ card('🧭 The routine EVERY time','<p>Before guessing a disease, read the data in the same order used in your course: <b>quality → erythrogram → platelets → leukogram → protein → chemistry/urine → mechanisms → prioritized differential and plan.</b></p>','vra-good')+
  '<div class="vra-grid">'+[
  ['1','Check sample first','Species, age, collection tube, timing, hemolysis, lipemia, icterus, platelet clumps and lab reference ranges.'],
  ['2','Erythrogram','Anemia vs erythrocytosis; MCV and MCHC; absolute reticulocytes; RBC morphology.'],
