@@ -81,23 +81,33 @@ function botanicals(){
 }
 function habitat(){
  const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
- // Left wall, behind the couch: proper stand, shaded basking rock and visible lizard.
- return '<g transform="translate(9 193) scale(.60)"><ellipse cx="69" cy="141" rx="64" ry="10" fill="#827884" opacity=".16"/>'+
- '<rect x="7" y="4" width="128" height="108" rx="9" fill="#5e8079" stroke="#557a79" stroke-width="6"/>'+
- '<rect x="15" y="12" width="112" height="84" rx="5" fill="#d6e7c6" stroke="#b5c9b0" stroke-width="3"/>'+
- '<path d="M17 73Q72 60 125 76V95H17Z" fill="#d0b58a"/>'+
- '<path d="M22 70Q43 56 64 62L84 43L110 51L121 71Z" fill="#aa9876" stroke="#938365" stroke-width="2"/>'+
- '<path d="M25 67q-2 -23 13 -36M112 65q-5 -28 3 -41" stroke="#6d9b67" stroke-width="4" fill="none"/>'+
- '<ellipse cx="43" cy="39" rx="9" ry="5" fill="#8fbf82"/><ellipse cx="112" cy="39" rx="12" ry="7" fill="#81af7f"/>'+
- // Lizard silhouette: body, legs, tail, head and eye.
- '<path d="M46 69Q61 54 83 61Q93 60 100 55Q108 53 111 60Q109 68 97 67L89 72Q71 81 57 73Q46 80 31 83Q43 73 46 69Z" fill="#74a46c" stroke="#47765a" stroke-width="2"/>'+
- '<path d="M62 72l-8 11m27 -11 9 10M97 65l5 6" stroke="#47765a" stroke-width="3" stroke-linecap="round"/>'+
- '<circle cx="106" cy="60" r="2" fill="#263e32"/>'+
- (deluxe?'<path d="M17 24h108" stroke="#c2e6cd" stroke-width="4" opacity=".8"/><circle cx="72" cy="21" r="8" fill="#f3d99d"/><path d="M25 57q-10 -25 5 -35" stroke="#638e69" stroke-width="4" fill="none"/>':'')+
- '<path d="M71 12v83" stroke="#aac8bb" stroke-width="3" opacity=".35"/>'+
- '<rect x="1" y="112" width="142" height="13" rx="4" fill="#bc9a80" stroke="#9c7f70" stroke-width="3"/>'+
- '<path d="M14 125v25M127 125v25" stroke="#997968" stroke-width="8"/>'+
- '<text x="72" y="121" font-family="Arial" font-size="9" font-weight="900" text-anchor="middle" fill="#fff5e6">'+(deluxe?'BIOACTIVE LIZARD HABITAT':'LIZARD HABITAT')+'</text></g>';
+ // Tall, left-wall display, with visible lizard, climbing/basking surfaces and a real cabinet base.
+ // Decorative illustration only; species-specific welfare requirements are not represented as a care guide.
+ return '<g transform="translate(5 151) scale(.69 1.28)">'+
+ '<rect x="0" y="0" width="140" height="155" rx="8" fill="#5f827a" stroke="#466e69" stroke-width="6"/>'+
+ '<rect x="7" y="9" width="126" height="117" rx="4" fill="#dceacc" stroke="#92ac9e" stroke-width="3"/>'+
+ '<rect x="8" y="11" width="124" height="12" rx="3" fill="#708e7f"/>'+
+ '<path d="M13 17h114" stroke="#b3d9c9" stroke-width="2" stroke-dasharray="3 3"/>'+
+ '<path d="M10 105Q42 90 74 102T130 100V125H10Z" fill="#ccb28a"/>'+
+ '<path d="M13 108L31 72L66 77L82 109Z" fill="#b5a185" stroke="#91846b" stroke-width="2"/>'+
+ '<path d="M23 97Q40 82 58 96" fill="#6d775a" opacity=".42"/>'+
+ '<path d="M112 110Q110 78 119 53M110 93q-26 -18 -24 -39" stroke="#64876b" stroke-width="5" fill="none"/>'+
+ '<ellipse cx="116" cy="73" rx="14" ry="6" fill="#83ab7c" transform="rotate(-24 116 73)"/>'+
+ '<ellipse cx="91" cy="68" rx="13" ry="5" fill="#91b587" transform="rotate(29 91 68)"/>'+
+ '<path d="M14 51Q35 43 53 56" stroke="#9a826c" stroke-width="6" stroke-linecap="round" fill="none"/>'+
+ '<ellipse cx="106" cy="112" rx="15" ry="4" fill="#b6cfd4" stroke="#88acb3" stroke-width="2"/>'+
+ // Clinging lizard: long tail, back, head, four legs and visible eye.
+ '<path d="M28 82Q44 88 50 79Q68 64 85 70L98 66Q113 61 119 72Q113 79 97 77L86 82Q62 94 48 84Q39 87 20 103Q27 88 28 82Z" fill="#7da568" stroke="#527956" stroke-width="2.5"/>'+
+ '<path d="M60 80l-9 15 -9 2M80 80l11 14 10 0M98 72l9 12" stroke="#527956" stroke-width="3.2" stroke-linecap="round" fill="none"/>'+
+ '<path d="M57 77q17 -12 30 -5" fill="none" stroke="#a3c485" stroke-width="3"/>'+
+ '<circle cx="112" cy="71" r="2.3" fill="#2f4436"/>'+
+ '<path d="M12 40h120M70 10v114" stroke="#c4dfd4" stroke-width="2" opacity=".34"/>'+
+ (deluxe?'<path d="M15 55q-7 -19 2 -30M126 54q11 -18 1 -29" stroke="#5e9870" stroke-width="4" fill="none"/><ellipse cx="44" cy="40" rx="12" ry="7" fill="#81b18a"/><circle cx="42" cy="30" r="7" fill="#e7c685"/>':'')+
+ '<rect x="-5" y="128" width="150" height="12" rx="3" fill="#b8957f" stroke="#866e69" stroke-width="3"/>'+
+ '<rect x="4" y="140" width="132" height="25" rx="3" fill="#ad8c79" stroke="#88736c" stroke-width="3"/>'+
+ '<path d="M69 143v20" stroke="#8b756a" stroke-width="2"/>'+
+ '<text x="70" y="156" font-family="Arial" font-size="9" font-weight="900" text-anchor="middle" fill="#fff7ed">'+(deluxe?'BIOACTIVE HABITAT':'REPTILE HABITAT')+'</text>'+
+ '</g>';
 }
 function svgDecor(){
  let s='<g class="vpqLoungeDecorScenery">'+botanicals();
@@ -129,8 +139,8 @@ const oldArt=art.roomArt.bind(art);
 art.roomArt=function(k){
  const svg=oldArt(k);if(k!=='study')return svg;
  // Layer the terrarium BEHIND the sofa and bookshelf instead of over them.
- const couchAnchor='<ellipse cx="178" cy="449"';
- let withHabitat=svg.includes(couchAnchor)?svg.replace(couchAnchor,habitat()+couchAnchor):svg;
+ const wallAnchor='<g><rect x="96" y="112"';
+ let withHabitat=svg.includes(wallAnchor)?svg.replace(wallAnchor,habitat()+wallAnchor):svg;
  if(chosen('coffee')==='lounge-coffee-deluxe')withHabitat=withHabitat.replace(/<g transform="translate\(352 223\) scale\(1\.12\)">[\s\S]*?<\/g>/,'');
  if(['lounge-egg-chair','lounge-hanging-chair'].includes(chosen('seating')))withHabitat=withHabitat.replace(/<ellipse cx="178" cy="449"[\s\S]*?(?=<g><rect x="722" y="90")/,'');
  return withHabitat.replace(/<\/svg>\s*$/,svgDecor()+'</svg>');
