@@ -2,7 +2,7 @@
 (function(){
 'use strict';
 const KEY='vpq-clinpath-referral-001-guided-v2';
-const fresh=()=>({view:'',opened:[],anemia:'',ddx:['','',''],next:['','',''],notes:'',submitted:false,selected:[],lead:'',level:'guided',advancedSubmitted:false});
+const fresh=()=>({view:'',opened:[],anemia:'',ddx:['','',''],next:['','',''],notes:'',submitted:false,selected:[],lead:'',level:'guided',advancedSubmitted:false,interpret:{},advancedFeedback:null});
 let validationMessage='';
 let state=fresh();try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Array.isArray(v.ddx))state=Object.assign(fresh(),v)}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
@@ -182,6 +182,29 @@ const candidates=[
 {id:'bloodloss',name:'Blood-loss anemia',tier:'unlikely',supports:'May produce low HCT, RBC and hemoglobin.',against:'No described bleeding; the reticulocyte count and smear do not support a regenerative response to substantial ongoing loss.',test:'Review bleeding history and examination; targeted fecal/urinary blood evaluation if clinically indicated.',why:'Blood loss ultimately drives compensatory reticulocytosis when marrow function and timing permit.'},
 {id:'hemolysis',name:'Hemolytic anemia',tier:'unlikely',supports:'Can reduce red cell mass and cause pallor.',against:'No spherocytes or agglutination, and no reticulocytosis or polychromasia in this case.',test:'Recheck smear and markers of hemolysis if suspicion persists.',why:'Accelerated RBC destruction generally provokes marrow regeneration after an appropriate response interval.'}
 ];
+
+// Result interpretation precedes diagnosis; choices are neutral until checked.
+const interpretationQuestions=[
+{id:'eryth',title:'🩸 Explain this erythrogram',prompt:'Which interpretation best integrates the HCT, indices, and absolute reticulocytes?',choices:['Normocytic, normochromic, non-regenerative anemia','Macrocytic, hypochromic, regenerative anemia','Microcytic, hypochromic regenerative anemia','Normal erythrogram'],answer:0,why:'HCT 26%, RBC 3.75 ×10⁶/µL and hemoglobin 8.8 g/dL are reduced. MCV 69 fL and MCHC 33.8 g/dL are within the provided canine ranges. Absolute reticulocytes 22 ×10³/µL indicate an inadequate regenerative response for this degree of anemia. The observed pattern is non-regenerative, normocytic and normochromic.'},
+{id:'chem',title:'🧪 Explain this chemistry panel',prompt:'Which set of abnormalities is present?',choices:['Azotemia with hyperphosphatemia','Hypoglycemia with hypocalcemia','Isolated hypercalcemia','Normal renal biochemical results'],answer:0,why:'BUN 78 mg/dL and creatinine 4.1 mg/dL are elevated, indicating azotemia; phosphorus 9.2 mg/dL is increased. Calcium 9.8 mg/dL lies within this supplied interval. Azotemia alone does not distinguish prerenal, renal and postrenal causes.'},
+{id:'urine',title:'🧫 Interpret urine concentration',prompt:'In this ~5% dehydrated dog with azotemia, how should a USG of 1.012 be interpreted?',choices:['Inappropriately low concentration, raising concern for impaired renal concentrating ability','Appropriately concentrated for dehydration','Proof of urinary infection','Proof of chronic renal disease from one sample'],answer:0,why:'Dehydration ordinarily promotes urine concentration. A USG of 1.012 is near the isosthenuric range and is inappropriate in a dehydrated azotemic patient. This strengthens concern for renal dysfunction, without establishing disease chronicity or ruling out other contributors.'}
+];
+const interpretations=()=>'<section class="refbox refinterpret"><h3>🔍 Interpret the laboratory findings first</h3><p class="refsmall">Answer each panel question before building differentials. You can check answers independently; no diagnosis is revealed by this step.</p>'+
+interpretationQuestions.map(q=>{const entry=state.interpret?.[q.id]||{},checked=!!entry.checked;return '<div class="refiq"><h3>'+q.title+'</h3><p>'+q.prompt+'</p><div class="refiqchoices">'+q.choices.map((choice,i)=>'<button type="button" data-ref-iq="'+q.id+'" data-ref-iq-option="'+i+'" '+(checked?'disabled':'')+' class="'+(entry.selected===i?'refiqpicked ':'')+(checked?(i===q.answer?'refiqright':i===entry.selected?'refiqwrong':''):'')+'">'+String.fromCharCode(65+i)+'. '+h(choice)+'</button>').join('')+'</div>'+(checked?'<div class="refiqfeedback"><b>'+(entry.selected===q.answer?'✓ Correct interpretation':'Review the evidence')+'</b><p>'+h(q.why)+'</p><button type="button" data-ref-iq-retry="'+q.id+'">Try again</button></div>':'<button type="button" class="refsubmit" data-ref-iq-check="'+q.id+'">Check interpretation</button>')+'</div>'}).join('')+'</section>';
+function advancedCheck(){
+ const normalized=x=>String(x||'').toLowerCase().replace(/[‐‑–—]/g,'-');
+ const anemia=normalized(state.anemia), notes=normalized(state.notes);
+ const tests=state.next.map(normalized).join(' ');
+ const dx=state.ddx.map(normalized);
+ const checks=[
+ {label:'Anemia correctly classified',pass:/non.?regenerat/.test(anemia)&&/normocytic/.test(anemia)&&/normochromic/.test(anemia),tip:'Include non-regenerative, normocytic and normochromic.'},
+ {label:'Renal-associated anemia identified among differentials',pass:dx.some(x=>/renal|kidney|ckd/.test(x)&&/anemi|erythropoietin|epo/.test(x)),tip:'Consider an anemia associated with kidney disease or reduced EPO.'},
+ {label:'Additional plausible differential included',pass:dx.some(x=>/inflamm|marrow|blood.?loss|hemoly/.test(x)),tip:'Include an alternative such as chronic inflammation or marrow disease.'},
+ {label:'Relevant follow-up investigation',pass:/repeat|serial|trend|blood pressure|\bbp\b|\bupc\b|urine|ultrasound|imaging|renal|creatinine|cbc/.test(tests),tip:'Include repeat renal/CBC/USG measurements, blood pressure, UPC or targeted imaging.'},
+ {label:'Mechanism or limitation explained',pass:/epo|erythropoietin|reticul|chronic|kidney|renal|cannot|uncertain|single/.test(notes),tip:'Discuss reduced EPO or why one time point cannot confirm chronic kidney disease.'}
+ ];
+ return checks;
+}
 const chosen=()=>state.selected.map(id=>candidates.find(x=>x.id===id)).filter(Boolean);
 const guided=()=>{
 const done=!!state.submitted;
@@ -212,11 +235,13 @@ return '<section class="refbox refresult"><h3>📊 Compare your differentials</h
 candidates.map(c=>'<tr class="refcompare-'+c.tier+'"><td><b>'+(c.tier==='best'?'★ ':c.tier==='possible'?'◇ ':'△ ')+h(c.name)+'</b>'+(state.lead===c.id?'<div class="refsmall">Your lead</div>':'')+'</td><td>'+h(c.supports)+'</td><td>'+h(c.against)+'</td><td>'+h(c.test)+'</td></tr>').join('')+
 '</tbody></table></div><div class="refbox refanswer"><h3>✓ Best-supported diagnosis</h3><p><b>Anemia associated with chronic renal disease</b> is the leading interpretation in the uploaded case. This is a working diagnosis rather than proof of CKD from one time point.</p><h3>🧬 Why the body does this</h3><p>'+h(candidates[0].why)+' The erythrogram identifies the non-regenerative pattern; the renal chemistry and USG supply the physiologic context.</p><h3>🔬 Differential testing</h3><p>Recheck CBC, chemistry and USG, evaluate blood pressure, UPC, history and evidence of chronicity. Do not infer unprovided urine sediment or protein data.</p><p class="refsmall">Source: uploaded Cases Part 1, Case 1.1 · CP1 slide 17 / Minimum Database template. EPO physiology, BP and UPC follow-up were marked as Added beyond the lecture slides.</p></div></section>';
 };
-const advanced=()=>'<details class="refbox refsection refadvanced"><summary>🎓 Advanced Mode · Written differentials and testing plan <span class="refhint">optional challenge</span></summary><div class="refsectionbody"><p>This is the harder version of the case. Write your own anemia classification, ranked differential diagnoses and next diagnostic tests without relying on the multiple-choice options.</p>'+
+const advanced=()=>'<details class="refbox refsection refadvanced"><summary>🎓 Advanced Mode · Written differentials and testing plan <span class="refhint">optional challenge</span></summary><div class="refsectionbody"><p>This optional written challenge gives <b>keyword-guided feedback</b>, not exact-text grading. Equivalent clinical phrases may need manual review; your responses are never rejected simply for different wording.</p>'+
 '<label>Anemia classification<textarea data-ref-text="anemia" rows="2" placeholder="Describe RBC indices and regenerative response">'+h(state.anemia)+'</textarea></label>'+
 '<div class="refgrid">'+state.ddx.map((d,i)=>'<label>'+(i+1)+'. Ranked differential<input data-ref-ddx="'+i+'" value="'+h(d)+'" placeholder="Your working differential"></label><label>Next diagnostic test / reason<input data-ref-next="'+i+'" value="'+h(state.next[i])+'" placeholder="How will you investigate?"></label>').join('')+'</div>'+
 '<label>Mechanism and uncertainty<textarea data-ref-text="notes" rows="3">'+h(state.notes)+'</textarea></label>'+
-'<p class="refsmall">Written responses are saved locally; this mode does not gate the beginner-level comparison.</p></div></details>';
+'<button type="button" class="refsubmit" data-ref-advanced-submit="1">✓ Submit written challenge · Get feedback</button>'+
+(state.advancedSubmitted?'<div class="refadvancedfeedback"><h3>📝 Written challenge feedback</h3><p>This checks for key concepts, not exact wording or clinical correctness in every case.</p>'+advancedCheck().map(c=>'<p><b>'+(c.pass?'✓ Recognized: ':'◇ Review: ')+h(c.label)+'</b>'+(c.pass?'':' — '+h(c.tip))+'</p>').join('')+'<button type="button" data-ref-advanced-compare="1">📊 Open diagnostic comparison chart</button></div>':'')+
+'<p class="refsmall">The chart can be opened from this challenge after submission. Completing the guided mode separately will not overwrite your written work.</p></div></details>';
 const review=()=>'<section class="refbox refreview"><h3>🔓 Teaching review — available after submission</h3>'+
 '<p><b>Source interpretation:</b> Normocytic, normochromic, non-regenerative anemia with azotemia, high phosphorus and inappropriately dilute urine; chronic renal disease is the leading concern.</p>'+
 '<p><b>1. Chronic renal disease-associated anemia:</b> PU/PD, renal biochemical abnormalities, USG 1.012 and non-regenerative anemia favor this interpretation.</p>'+
@@ -236,6 +261,7 @@ const content='<div class="refcase">'+
 '<h3 class="refgroup">🧪 Ancillary testing · Minimum database</h3><p class="refsmall">Each laboratory section opens independently. Normal ranges are supplied next to patient values.</p>'+
 '<div class="refresultsgrid"><div class="refresultscbc">'+report('cbc')+'</div><div class="refresultsright">'+report('chem')+report('urine')+'</div></div>'+
 '<details class="refbox refsection refphotos"><summary>📷 Patient images & diagnostic photographs</summary><div class="refsectionbody"><div class="refphotogrid"><div class="refphotoplace"><span>🩸</span><b>Canine blood-smear photo</b><small>Image to add · normal-appearing RBCs, minimal polychromasia</small></div><div class="refphotoplace"><span>🔬</span><b>Microscopy / laboratory image</b><small>Reserved for supporting photos in future cases</small></div></div><p class="refsmall">No photograph was supplied with this invented patient. These are labeled placeholders, not fabricated findings.</p></div></details>'+
+interpretations()+
 '<div class="reflevel">🌱 <b>Guided Differential Practice</b> · Multiple choice + ranking</div>'+guided()+
 (state.submitted?comparison():'<div class="refprotected">🔒 The evidence comparison, leading diagnosis, rationale and follow-up tests remain hidden until you submit your ranked choices.</div>')+
 advanced()+
@@ -248,11 +274,17 @@ const body=document.getElementById('modalBody');if(body)body.scrollTop=oldScroll
 }
 }
 function home(){render()}
-document.addEventListener('input',e=>{const n=e.target;if(!n.closest?.('.refcase'))return;if(n.hasAttribute('data-ref-text'))state[n.dataset.refText]=n.value;if(n.hasAttribute('data-ref-ddx'))state.ddx[+n.dataset.refDdx]=n.value;if(n.hasAttribute('data-ref-next'))state.next[+n.dataset.refNext]=n.value;save()});
+document.addEventListener('input',e=>{const n=e.target;if(!n.closest?.('.refcase'))return;if(n.hasAttribute('data-ref-text')){state[n.dataset.refText]=n.value;state.advancedSubmitted=false;}if(n.hasAttribute('data-ref-ddx')){state.ddx[+n.dataset.refDdx]=n.value;state.advancedSubmitted=false;}if(n.hasAttribute('data-ref-next')){state.next[+n.dataset.refNext]=n.value;state.advancedSubmitted=false;}save()});
 document.addEventListener('click',e=>{
-const n=e.target.closest?.('[data-ref-toggle],[data-ref-lead],[data-ref-up],[data-ref-down],[data-ref-guided-submit],[data-ref-back],[data-ref-reset],[data-ref-legacy]');
+const n=e.target.closest?.('[data-ref-toggle],[data-ref-lead],[data-ref-up],[data-ref-down],[data-ref-guided-submit],[data-ref-back],[data-ref-reset],[data-ref-legacy],[data-ref-iq],[data-ref-iq-check],[data-ref-iq-retry],[data-ref-advanced-submit],[data-ref-advanced-compare]');
 if(!n||!n.closest('.refcase'))return;e.preventDefault();
 const attr=x=>n.getAttribute(x);
+if(n.hasAttribute('data-ref-iq')&&!state.interpret?.[attr('data-ref-iq')]?.checked){const id=attr('data-ref-iq');state.interpret=state.interpret||{};state.interpret[id]={selected:Number(attr('data-ref-iq-option')),checked:false};save();return render()}
+if(n.hasAttribute('data-ref-iq-check')){const id=attr('data-ref-iq'),entry=state.interpret?.[id];if(!entry||entry.selected===undefined){validationMessage='Select an interpretation before checking it.';return render()}entry.checked=true;save();return render()}
+if(n.hasAttribute('data-ref-iq-retry')){state.interpret=state.interpret||{};delete state.interpret[attr('data-ref-iq-retry')];save();return render()}
+if(n.hasAttribute('data-ref-advanced-submit')){state.advancedSubmitted=true;save();return render()}
+if(n.hasAttribute('data-ref-advanced-compare')){state.advancedSubmitted=true;state.submitted=true;state.selected=state.selected.length===3?state.selected:['renal','inflammation','marrow'];state.lead=state.lead||state.selected[0];save();return render()}
+
 if(n.hasAttribute('data-ref-toggle')&&!state.submitted){validationMessage='';const id=attr('data-ref-toggle');const pos=state.selected.indexOf(id);if(pos>=0){state.selected.splice(pos,1);if(state.lead===id)state.lead=''}else if(state.selected.length<3){state.selected.push(id)}else {validationMessage='You already have three choices. Deselect one before choosing another.';return render()}save();return render()}
 if(n.hasAttribute('data-ref-lead')&&!state.submitted){validationMessage='';const id=attr('data-ref-lead');if(!state.selected.includes(id)){if(state.selected.length>=3){validationMessage='Select this diagnosis as one of your three before marking it as the lead.';return render()}state.selected.push(id)}state.lead=id;save();return render()}
 if((n.hasAttribute('data-ref-up')||n.hasAttribute('data-ref-down'))&&!state.submitted){const id=attr(n.hasAttribute('data-ref-up')?'data-ref-up':'data-ref-down'),a=state.selected.indexOf(id),b=a+(n.hasAttribute('data-ref-up')?-1:1);if(a>=0&&b>=0&&b<state.selected.length){[state.selected[a],state.selected[b]]=[state.selected[b],state.selected[a]];save();render()}return}
