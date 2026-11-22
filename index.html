@@ -4942,14 +4942,49 @@ if(!state.vpqCompanionId || !vpqCompanionById(state.vpqCompanionId)){
 }
 // Free starters never need an explicit purchase record.
 function vpqCompanionOwned(c){return !!c&&(c.price===0||state.vpqCompanionOwned.includes(c.id))}
+const vpqUploadedImageStatus=new Map();
 function vpqCompanionValid(c){
- return !!c&&(!c.image||(c.category==='dog'&&vpqUsableDogIds.has(c.id)));
+ if(!c)return false;
+ if(!c.image)return true;
+ if(/^dog-b1-[0-9a-f]{12}$/.test(c.id))return vpqUsableDogIds.has(c.id);
+ return vpqUploadedImageStatus.get(c.id)==='ready';
 }
+function vpqVerifyUploadedCompanion(c){
+ if(!c.image||/^dog-b1-[0-9a-f]{12}$/.test(c.id))return;
+ if(vpqUploadedImageStatus.has(c.id))return;
+ vpqUploadedImageStatus.set(c.id,'checking');
+ const img=new Image();
+ img.onload=function(){
+  let status='unchecked';
+  try{
+   const canvas=document.createElement('canvas');
+   canvas.width=64;canvas.height=64;
+   const context=canvas.getContext('2d',{willReadFrequently:true});
+   context.clearRect(0,0,64,64);
+   context.drawImage(img,0,0,64,64);
+   const data=context.getImageData(0,0,64,64).data;
+   let transparent=0;
+   for(let i=3;i<data.length;i+=4)if(data[i]<225)transparent++;
+   status=transparent>=24?'ready':'opaque';
+  }catch(e){status='unchecked'}
+  vpqUploadedImageStatus.set(c.id,status);
+  if(document.getElementById('vpqPetGallery'))vpqUpdatePetGallery();
+  if(state.vpqCompanionId===c.id)updateAvatar();
+ };
+ img.onerror=function(){
+  vpqUploadedImageStatus.set(c.id,'missing');
+  if(document.getElementById('vpqPetGallery'))vpqUpdatePetGallery();
+ };
+ img.src=vpqDogAssetURL(c.image);
+}
+vpqCompanionCatalog.forEach(vpqVerifyUploadedCompanion);
 function vpqCompanionAvatar(c){
  if(!c)return '<span class="vpq-companion-placeholder">🐾</span>';
- if(c.image&&vpqCompanionValid(c))
-   return '<img class="vpq-companion-art" loading="lazy" src="'+vpqDogAssetURL(c.image)+'" alt="'+escapeHtml(c.name)+'" draggable="false">';
- if(c.image)return '<span class="vpq-companion-placeholder">🐾<small>Image check pending</small></span>';
+ if(c.image){
+  const status=/^dog-b1-[0-9a-f]{12}$/.test(c.id)?(vpqUsableDogIds.has(c.id)?'ready':vpqBatchDogStatus.get(c.id)||'checking'):vpqUploadedImageStatus.get(c.id)||'checking';
+  if(status==='missing')return '<span class="vpq-companion-placeholder">⚠️<small>Image missing</small></span>';
+  return '<img class="vpq-companion-art" loading="lazy" src="'+vpqDogAssetURL(c.image)+'" alt="'+escapeHtml(c.name)+(status==='opaque'?' — image background needs transparency':'')+'" draggable="false">';
+ }
  // Retain the recognizable pre-shop illustrated Mera instead of an emoji.
  if(c.id==='dog-mera')return vpqCompanionLegacyArt({...state,pet:'🐕',petBreed:'husky-shepherd'});
  return '<span class="vpq-companion-placeholder">'+escapeHtml(c.pet)+'<small>Artwork coming soon</small></span>';
@@ -4984,7 +5019,10 @@ vpqUpdatePetGallery=function(){
   const owned=vpqCompanionOwned(c),levelOK=vpqCompanionLv()>=c.level;
   const selected=state.vpqCompanionId===c.id;
   const afford=Number(state.coins)>=c.price;
-  const status=!vpqCompanionValid(c)?'Image check pending':selected?'✓ Equipped':owned?'Equip':!levelOK?'🔒 Level '+c.level:!afford?'🪙 '+c.price:'🪙 Buy '+c.price;
+  const imageState=c.image?(/^dog-b1-[0-9a-f]{12}$/.test(c.id)?vpqBatchDogStatus.get(c.id):vpqUploadedImageStatus.get(c.id)):'ready';
+  const status=imageState==='opaque'?'Needs transparent PNG':imageState==='missing'?'Image missing':
+   imageState==='unchecked'?'Could not verify PNG':!vpqCompanionValid(c)?'Checking artwork…':
+   selected?'✓ Equipped':owned?'Equip':!levelOK?'🔒 Level '+c.level:!afford?'🪙 '+c.price:'🪙 Buy '+c.price;
   const disabled=selected||!vpqCompanionValid(c)||(!owned&&(!levelOK||!afford));
   return '<article class="vpq-companion-card '+(selected?'chosen':'')+'">'+
     '<div class="vpq-companion-figure">'+vpqCompanionAvatar(c)+'</div>'+
