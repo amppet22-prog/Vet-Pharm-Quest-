@@ -4864,6 +4864,160 @@ function restoreVisibleRoom(){
 window.addEventListener('pagehide',()=>{if(validRoom(activeRoom)){bookmarkRoom(activeRoom);persist()}});
 window.addEventListener('pageshow',restoreVisibleRoom);
 window.addEventListener('load',restoreVisibleRoom,{once:true});
+
+/* VPQ COMPANION SHOP V4 - category registry and progression */
+const vpqCompanionCategories=[
+ ['horse','🐴','Horse'],['dog','🐕','Dog'],['cat','🐈','Cat'],
+ ['pocket','🐹','Pocket Pets'],['exotics','🦎','Exotics'],
+ ['avians','🦜','Avians'],['ruminants','🐄','Ruminants'],
+ ['legendary','✨','Legendary']
+];
+let vpqCompanionTab='dog';
+const vpqCompanionCatalog=[
+ ...vpqBatch1Dogs.filter(d=>d&&d.species==='dog'&&/^dog-b1-[0-9a-f]{12}$/.test(d.id)).map((d,i)=>({
+   id:d.id,category:'dog',name:d.label,pet:'🐕',petBreed:d.id,
+   level:i<4?1:i<12?3:i<24?6:i<36?10:15,
+   price:i<4?0:i<12?45:i<24?80:i<36?125:190,
+   image:d.path
+ })),
+ ...[
+ ['cat-tuxedo','Tuxedo Cat',1,0],['cat-tabby','Tabby Cat',1,0],['cat-black','Black Cat',1,0],
+ ['cat-ragdoll','Ragdoll',4,60],['cat-persian','Persian',6,90],['cat-korat','Korat',8,110],
+ ['cat-bengal','Bengal',10,135],['cat-sphynx','Sphynx',12,150],['cat-maine','Maine Coon',14,165],
+ ['horse-bay','Bay Horse',1,0],['horse-chestnut','Chestnut Horse',1,0],['horse-grey','Gray Horse',1,0],
+ ['horse-thoroughbred','Thoroughbred',5,85],['horse-clydesdale','Clydesdale',9,135],['horse-appaloosa','Appaloosa',12,160],['horse-friesian','Friesian',15,200],
+ ['pocket-rabbit','Rabbit',1,0],['pocket-guinea','Guinea Pig',3,45],['pocket-hamster','Hamster',3,45],
+ ['pocket-ferret','Ferret',6,85],['pocket-rat','Pet Rat',5,70],['pocket-mouse','Mouse',4,55],
+ ['pocket-hedgehog','Hedgehog',8,115],['pocket-glider','Sugar Glider',10,140],
+ ['exotic-beardie','Bearded Dragon',1,0],['exotic-crestie','Crested Gecko',5,70],
+ ['exotic-leopard','Leopard Gecko',5,70],['exotic-ball','Ball Python',7,95],
+ ['exotic-corn','Corn Snake',7,95],['exotic-iguana','Iguana',10,140],['exotic-monitor','Monitor Lizard',14,190],
+ ['avian-budgie','Budgie',1,0],['avian-cockatiel','Cockatiel',3,45],['avian-conure','Conure',7,95],
+ ['avian-grey','African Grey',11,145],['avian-macaw','Macaw',15,200],
+ ['ruminant-holstein','Holstein Cow',1,0],['ruminant-jersey','Jersey Cow',3,45],
+ ['ruminant-highland','Highland Cow',8,115],['ruminant-goat','Goat',4,60],
+ ['ruminant-sheep','Sheep',4,60],['ruminant-boer','Boer Goat',9,125],
+ ['legend-rainbow-shepherd','Rainbow Shepherd',15,225],['legend-rainbow-husky','Rainbow Husky',15,225],
+ ['legend-sun-cat','Sun Cat',17,250],['legend-night-cat','Night Cat',17,250],
+ ['legend-pegasus','Pegasus',20,325],['legend-unicorn','Unicorn',20,325],
+ ['legend-fire-horse','Fire Horse',23,400],['legend-night-horse','Night Horse',23,400]
+ ].map(([id,name,level,price])=>{
+   const category=id.split('-')[0]==='cat'?'cat':id.split('-')[0]==='horse'?'horse':
+   id.startsWith('pocket-')?'pocket':id.startsWith('exotic-')?'exotics':
+   id.startsWith('avian-')?'avians':id.startsWith('ruminant-')?'ruminants':'legendary';
+   const pet=category==='cat'?'🐈':category==='horse'?'🐴':category==='pocket'?'🐹':
+   category==='exotics'?'🦎':category==='avians'?'🦜':category==='ruminants'?'🐄':'✨';
+   return {id,name,category,pet,level,price,image:null};
+ })
+];
+const vpqCompanionById=id=>vpqCompanionCatalog.find(c=>c.id===id);
+const vpqCompanionLv=()=>Math.floor(Math.max(0,Number(state.xp)||0)/LEVEL_THRESH)+1;
+if(!Array.isArray(state.vpqCompanionOwned))state.vpqCompanionOwned=[];
+if(!state.vpqCompanionId || !vpqCompanionById(state.vpqCompanionId)){
+ const oldDog=vpqCompanionCatalog.find(c=>c.category==='dog'&&c.petBreed===state.petBreed);
+ state.vpqCompanionId=oldDog?.id||'cat-tuxedo';
+}
+// Free starters never need an explicit purchase record.
+function vpqCompanionOwned(c){return !!c&&(c.price===0||state.vpqCompanionOwned.includes(c.id))}
+function vpqCompanionValid(c){
+ return !!c&&(!c.image||(c.category==='dog'&&vpqUsableDogIds.has(c.id)));
+}
+function vpqCompanionAvatar(c){
+ if(!c)return '<span class="vpq-companion-placeholder">🐾</span>';
+ if(c.image&&vpqCompanionValid(c))
+   return '<img class="vpq-companion-art" loading="lazy" src="'+vpqDogAssetURL(c.image)+'" alt="'+escapeHtml(c.name)+'">';
+ if(c.image)return '<span class="vpq-companion-placeholder">🐾<small>Image check pending</small></span>';
+ return '<span class="vpq-companion-placeholder">'+escapeHtml(c.pet)+'<small>Artwork coming soon</small></span>';
+}
+function vpqCompanionApply(c,form){
+ if(!c)return;
+ state.vpqCompanionId=c.id;
+ state.pet=c.pet;
+ // Keep legacy pet fields synchronized so movement, preview and saves still work.
+ if(c.category==='dog')state.petBreed=c.petBreed;
+ else if(c.category==='cat')state.catLook=c.id.replace(/^cat-/,'');
+ if(form){
+  if(form.elements.pet)form.elements.pet.value=state.pet;
+  if(form.elements.petBreed)form.elements.petBreed.value=state.petBreed||'husky-shepherd';
+  if(form.elements.catLook)form.elements.catLook.value=state.catLook||'tabby';
+ }
+ persist();updateAvatar();updateHUD();
+}
+const vpqCompanionLegacyArt=vpqPetIllustration;
+vpqPetIllustration=function(p){
+ const c=vpqCompanionById(p?.vpqCompanionId||((p?.pet===state.pet&&p?.petBreed===state.petBreed)?state.vpqCompanionId:null));
+ if(c)return vpqCompanionAvatar(c);
+ return '<span class="vpq-companion-placeholder">🐾<small>Choose a companion</small></span>';
+};
+vpqUpdatePetGallery=function(){
+ const holder=$('vpqPetGallery');
+ if(!holder)return;
+ const tabs=vpqCompanionCategories.map(([id,emoji,label])=>
+  '<button type="button" data-vpqcomp-tab="'+id+'" class="'+(vpqCompanionTab===id?'chosen':'')+'">'+emoji+' '+label+'</button>').join('');
+ const list=vpqCompanionCatalog.filter(c=>c.category===vpqCompanionTab && (!c.image||vpqCompanionValid(c)));
+ const cards=list.map(c=>{
+  const owned=vpqCompanionOwned(c),levelOK=vpqCompanionLv()>=c.level;
+  const selected=state.vpqCompanionId===c.id;
+  const afford=Number(state.coins)>=c.price;
+  const status=selected?'✓ Equipped':owned?'Equip':!levelOK?'🔒 Level '+c.level:!afford?'🪙 '+c.price:'🪙 Buy '+c.price;
+  const disabled=selected||(!owned&&(!levelOK||!afford));
+  return '<article class="vpq-companion-card '+(selected?'chosen':'')+'">'+
+    '<div class="vpq-companion-figure">'+vpqCompanionAvatar(c)+'</div>'+
+    '<strong>'+escapeHtml(c.name)+'</strong>'+
+    '<span class="vpq-companion-meta">'+(c.price===0?'Free starter':'Level '+c.level+' · '+c.price+' coins')+'</span>'+
+    '<button type="button" data-vpqcomp-act="'+escapeHtml(c.id)+'" '+(disabled?'disabled':'')+'>'+status+'</button></article>';
+ }).join('');
+ holder.innerHTML='<div class="vpq-companion-heading"><h3>🐾 Companion Collection</h3><span>Level '+vpqCompanionLv()+' · '+state.coins+' 🪙</span></div>'+
+  '<p class="tiny">Earn XP in lessons, cases and arcade games to unlock companions; spend the coins you already earn. Purchased companions stay yours.</p>'+
+  '<div class="vpq-pet-tabs vpq-companion-tabs">'+tabs+'</div>'+
+  '<div class="vpq-companion-grid">'+(cards||'<p class="small">No game-ready art in this group yet. More companions coming soon.</p>')+'</div>';
+};
+const vpqCompanionOriginalUpdater=updateAvatar;
+updateAvatar=function(){
+ vpqCompanionOriginalUpdater();
+ const pet=$('petSprite');
+ if(pet){pet.innerHTML=vpqPetIllustration(state);pet.dataset.companionCategory=vpqCompanionById(state.vpqCompanionId)?.category||'dog';}
+};
+$('modalBody').addEventListener('click',function(e){
+ const tab=e.target.closest('[data-vpqcomp-tab]');
+ const btn=e.target.closest('[data-vpqcomp-act]');
+ if(!tab&&!btn)return;
+ e.preventDefault();e.stopImmediatePropagation();
+ if(tab){vpqCompanionTab=tab.dataset.vpqcompTab;vpqUpdatePetGallery();return;}
+ const c=vpqCompanionById(btn.dataset.vpqcompAct);
+ if(!c||!vpqCompanionValid(c)||vpqCompanionLv()<c.level)return;
+ if(!vpqCompanionOwned(c)){
+   if(Number(state.coins)<c.price)return;
+   state.coins-=c.price;
+   state.vpqCompanionOwned.push(c.id);
+ }
+ vpqCompanionApply(c,$('avatarForm'));
+ if($('avatarForm'))vpqRenderStoryPreview();
+ vpqUpdatePetGallery();
+},true);
+// Preserve the exact purchased companion after the avatar form writes legacy fields.
+$('modalBody').addEventListener('submit',function(e){
+ if(e.target.id!=='avatarForm')return;
+ const c=vpqCompanionById(state.vpqCompanionId);
+ if(!vpqCompanionOwned(c))return;
+ const form=e.target;
+ if(form.elements.pet)form.elements.pet.value=c.pet;
+ if(c.category==='dog'&&form.elements.petBreed)form.elements.petBreed.value=c.petBreed;
+},true);
+const vpqCompanionStyles=document.createElement('style');
+vpqCompanionStyles.textContent=
+ '.vpq-companion-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px}.vpq-companion-heading h3{margin:5px 0}.vpq-companion-heading span{font-weight:800;color:#71509b}'+
+ '.vpq-companion-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.vpq-companion-tabs button{font-size:13px;padding:7px 10px;border-radius:22px}'+
+ '.vpq-companion-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:9px;margin:8px 0}'+
+ '.vpq-companion-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;border:2px solid #ead9e4;background:#fff9f5;border-radius:14px;padding:9px 6px;min-width:0}'+
+ '.vpq-companion-card.chosen{border-color:#a57ad6;background:#f3eaff}.vpq-companion-card strong{font-size:13px;min-height:30px;line-height:1.2}'+
+ '.vpq-companion-figure{display:grid;place-items:center;width:100%;height:112px}.vpq-companion-art{width:100%;height:105px;object-fit:contain;filter:drop-shadow(0 3px 3px #394b4826)}'+
+ '.vpq-companion-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:49px;min-height:80px}.vpq-companion-placeholder small{font-size:10px;color:#755d7c;font-weight:700}'+
+ '.vpq-companion-meta{font-size:11px;color:#735f75;min-height:18px}.vpq-companion-card button{width:100%;padding:7px 4px;font-size:12px;border-radius:10px}'+
+ '.vpq-preview-pet .vpq-companion-art,.petSprite .vpq-companion-art{width:100%;height:100%;object-fit:contain}'+
+ '.petSprite[data-companion-category="horse"] .vpq-companion-art,.petSprite[data-companion-category="ruminants"] .vpq-companion-art{transform:scale(1.22);transform-origin:center bottom}';
+document.head.appendChild(vpqCompanionStyles);
+
 })();
 
 </script><script src="oh3-final-review.js"></script><script src="game-account-link.js" defer></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="game-cloud-auth-bridge.js" defer></script><script src="player-cloud-saves.js?v=20261120-compare-cards" defer></script><script id="vpq-welcome-team-script">
