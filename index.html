@@ -4988,12 +4988,12 @@ updateAvatar=function(){
  pet.innerHTML=vpqPetIllustration(state);
  pet.dataset.companionCategory=vpqCompanionById(state.vpqCompanionId)?.category||'dog';
  // The game-world pet must never inherit full-size artwork dimensions.
- pet.style.setProperty('width','76px','important');
- pet.style.setProperty('height','76px','important');
+ pet.style.setProperty('width','108px','important');
+ pet.style.setProperty('height','108px','important');
  pet.style.setProperty('min-width','0','important');
  pet.style.setProperty('min-height','0','important');
- pet.style.setProperty('max-width','76px','important');
- pet.style.setProperty('max-height','76px','important');
+ pet.style.setProperty('max-width','108px','important');
+ pet.style.setProperty('max-height','108px','important');
  pet.style.setProperty('overflow','hidden','important');
  pet.style.setProperty('box-sizing','border-box','important');
  pet.style.setProperty('padding','0','important');
@@ -5539,9 +5539,9 @@ window.VPQ_CLINPATH_REFERRAL_PILOT={home,open:render};
 #stage > #petSprite,
 #stage #petSprite.petSprite {
   position:absolute!important;
-  width:72px!important;height:72px!important;
+  width:108px!important;height:108px!important;
   min-width:0!important;min-height:0!important;
-  max-width:72px!important;max-height:72px!important;
+  max-width:108px!important;max-height:108px!important;
   padding:0!important;margin:0!important;
   overflow:hidden!important;contain:layout paint style!important;
   box-sizing:border-box!important;
@@ -5564,20 +5564,20 @@ window.VPQ_CLINPATH_REFERRAL_PILOT={home,open:render};
   transform:none!important;margin:0!important;padding:0!important;
   background-size:contain!important;
 }
-#stage #petSprite .vpq-companion-placeholder{font-size:32px!important;line-height:1!important}
+#stage #petSprite .vpq-companion-placeholder{font-size:44px!important;line-height:1!important}
 #stage #petSprite .vpq-companion-placeholder small{display:none!important}
 @media(max-width:600px){
- #stage > #petSprite,#stage #petSprite.petSprite{width:56px!important;height:56px!important;max-width:56px!important;max-height:56px!important}
+ #stage > #petSprite,#stage #petSprite.petSprite{width:78px!important;height:78px!important;max-width:78px!important;max-height:78px!important}
 }
 </style>
 <script id="vpq-pet-size-runtime-20261122">
 (function(){
  function constrainPet(){
   const p=document.getElementById('petSprite');if(!p)return;
-  p.style.setProperty('width','72px','important');
-  p.style.setProperty('height','72px','important');
-  p.style.setProperty('max-width','72px','important');
-  p.style.setProperty('max-height','72px','important');
+  p.style.setProperty('width','108px','important');
+  p.style.setProperty('height','108px','important');
+  p.style.setProperty('max-width','108px','important');
+  p.style.setProperty('max-height','108px','important');
   p.style.setProperty('overflow','hidden','important');
   p.style.setProperty('contain','layout paint style','important');
   for(const node of p.querySelectorAll('img,svg,picture,.vpq-pet-art,.vpq-companion-art,.vpq-batch-dog-image')){
