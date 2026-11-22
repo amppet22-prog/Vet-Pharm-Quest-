@@ -4875,22 +4875,34 @@ window.addEventListener('load',restoreVisibleRoom,{once:true});
 </script><script src="hospital-depth-movement.js?v=20261121-avatar-reception-fix-2"></script><script id="vpq-arcade-launcher-fix-20261122">
 (function(){
  "use strict";
+ /* Single, self-contained Arcade launcher. No dependency on legacy
+    Learning Center routes or earlier reassigned functions. */
  function openGamesMenu(){
-  if(typeof window.VPQ_OPEN_GAMES_ONLY==="function")return window.VPQ_OPEN_GAMES_ONLY();
-  const wrap=document.getElementById("modalWrap"),title=document.getElementById("modalTitle"),body=document.getElementById("modalBody");
+  const wrap=document.getElementById("modalWrap");
+  const title=document.getElementById("modalTitle");
+  const body=document.getElementById("modalBody");
   if(!wrap||!title||!body)return;
   title.textContent="🎮 Pharmacology Arcade · Games Only";
-  body.innerHTML='<p>Select a minigame:</p><div class="vpq-gamegrid"><button data-vpqsharedgame="battle"><strong>🦠 Bug Battles</strong></button><button data-vpqsharedgame="match"><strong>🧩 Drug Match</strong></button></div>';
+  body.innerHTML=
+    '<p>The Arcade is for <b>minigames only</b>. Professor guides, flashcards, clinical MCQs, mastery and patient cases are in the Pharmacology Learning Center, organized by exam.</p>'+
+    '<div class="vpq-gamegrid">'+
+    '<button type="button" data-vpqsharedgame="battle"><strong>🦠 Bug Battles</strong><small>Antimicrobials, bacteria and resistance challenges.</small></button>'+
+    '<button type="button" data-vpqsharedgame="match"><strong>🧩 Drug Match</strong><small>Match medication names, classes, targets and mechanisms.</small></button>'+
+    '</div><div class="buttonrow"><button type="button" data-vpqlfhome="1">← Pharmacology Learning Center</button></div>';
   wrap.classList.remove("hidden");
+  if(typeof modalVisible!=="undefined")modalVisible=true;
+  body.focus({preventScroll:true});
  }
- document.addEventListener("click",function(event){
-  const target=event.target.closest("#pharmArcadeBtn,#vpqArcadeTopBtn,[data-vpqopenarcade]");
+ window.VPQ_ARCADE_GAMES_MENU=openGamesMenu;
+ window.VPQ_OPEN_GAMES_ONLY=openGamesMenu;
+ /* Window capture runs before document click delegates, even if older
+    handlers were registered first at document-level capture. */
+ window.addEventListener("click",function(event){
+  const target=event.target instanceof Element&&event.target.closest("#pharmArcadeBtn,#vpqArcadeTopBtn,[data-vpqopenarcade]");
   if(!target)return;
-  event.preventDefault();event.stopImmediatePropagation();
+  event.preventDefault();
+  event.stopImmediatePropagation();
   openGamesMenu();
  },true);
- const direct=document.getElementById("pharmArcadeBtn");
- if(direct)direct.onclick=null;
- window.VPQ_ARCADE_GAMES_MENU=openGamesMenu;
 })();
 </script></body></html>
