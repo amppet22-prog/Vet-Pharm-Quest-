@@ -5,7 +5,7 @@
 window.VPQ_CLINPATH_MULTISTAGE=(function(){
 'use strict';
 let api=null, active=0, stage=0, selected={}, submitted={}, order={};
-const STORE='vpq-cp-multistage-v1';
+const STORE='vpq-cp-multistage-v2';
 const clean=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\x27':'&#39;'}[c]));
 const cases=[
 {id:'cpms01',title:'Anemia & plasma protein',species:'Dog · 6 years',story:'Weakness and dark urine after 4 days of progressive lethargy. Mucous membranes are pale and mildly icteric. No known trauma.',labs:[
@@ -39,7 +39,41 @@ notes:'Palpable enlarged peripheral lymph nodes. Other findings are not yet diag
 {title:'Read the feedback loop',q:'Why is PTH suppressed?',choices:['High iCa normally inhibits parathyroid PTH secretion through negative feedback','The kidney necessarily stops making PTH','PTH must rise in every hypercalcemic patient','High albumin permanently destroys PTH'],correct:0,why:'Elevated iCa should suppress endogenous PTH. Normal PTH rises when iCa is low, not when high.'},
 {title:'Choose the most supported mechanism',q:'Which differential is strengthened by PTHrP detected with high iCa and suppressed PTH?',choices:['PTH-independent, potentially malignancy-associated hypercalcemia','Primary parathyroid overproduction definitively proven','Physiologic response to low calcium','Hypoproteinemic pseudohypercalcemia'],correct:0,why:'Tumor-produced PTHrP can activate PTH receptors to increase calcium despite PTH feedback suppression. Clinical evaluation and tissue diagnosis are still necessary.'},
 {title:'Select the confirmatory direction',q:'What is a rational next diagnostic step?',choices:['Fine-needle aspirate/evaluate accessible lymph nodes and investigate neoplasia','Assume PTHrP specifies the exact tumor type','Ignore renal status and hydration','Treat PTHrP as a replacement for all imaging/cytology'],correct:0,why:'PTHrP strengthens a mechanism; cytology, imaging, renal status and staging determine the underlying disease and management.'}
-],takeaway:'Total calcium → ionized calcium → feedback (PTH) → PTHrP → underlying cause. Hormone changes are mechanisms, not a final tissue diagnosis.'}
+],takeaway:'Total calcium → ionized calcium → feedback (PTH) → PTHrP → underlying cause. Hormone changes are mechanisms, not a final tissue diagnosis.'},
+{id:'cpms05',title:'Diabetes with ketosis ≠ DKA',species:'Dog · 7 years · adapted from course case Amaryllis',story:'Weight loss, vomiting, diarrhea and reduced appetite. Chemistry and urinalysis from the course case are provided; your job is to distinguish established abnormalities from assumptions.',labs:[
+['Glucose','272 mg/dL','↑ in lecture case; numeric lab RI not supplied'],
+['Urine glucose','2+','Normally negative'],
+['Urine ketones','1+','Normally negative'],
+['HCO₃⁻','15 mmol/L','15–28 mmol/L (course case RI)'],
+['Anion gap','19.3 mmol/L','Within case RI (numeric limits not provided in excerpt)'],
+['Potassium','3.3 mmol/L','↓ in course case; numeric lab RI not supplied'],
+['ALP','1,752 U/L','↑ in course case; numeric lab RI not supplied'],
+['GGT','51 U/L','↑ in course case; numeric lab RI not supplied'],
+['Total bilirubin','8.6 mg/dL','↑ in course case; numeric lab RI not supplied'],
+['ALT','Within interval','Lab-specific']],
+notes:'Source: Clinical Pathology Review Guide, endocrine case Amaryllis. HCO₃⁻ at the low end of its RI and AG within the stated RI; blood pH is not provided. The guide marks added pancreatitis context separately.',stages:[
+{title:'Classify the supported findings',q:'What is established from the supplied laboratory values?',choices:['Hyperglycemia with glucosuria and ketonuria; assess concurrent illness','Diabetic ketoacidosis is established by 1+ urine ketones','Anion gap acidosis is established because AG is 19.3','No endocrine/metabolic abnormalities'],correct:0,why:'Glucose is increased with glucosuria and ketonuria. K is low. These observations alone do not establish DKA.'},
+{title:'Ask whether this is DKA',q:'The course lists HCO₃⁻ 15 at the lower reference limit and AG 19.3 within the case interval. What can you conclude?',choices:['Diabetes with ketosis is supported; clear titrational metabolic acidosis has NOT been demonstrated','A normal AG automatically proves DKA','All ketonuric patients have DKA','HCO₃⁻ within the printed interval proves respiratory acidosis'],correct:0,why:'The course specifically labels this as diabetes with ketosis, not yet confirmed DKA. Assess blood gas pH first, bicarbonate, AG and the clinical context before applying the ketoacidosis label.'},
+{title:'Interpret liver chemistry without shortcuts',q:'ALP, GGT and bilirubin are increased despite normal ALT. What pattern requires investigation?',choices:['Cholestatic/bile handling changes; assess gallbladder and possible pancreatitis-related obstruction','Normal hepatobiliary chemistry because ALT is normal','ALT is the only canine liver test','High bilirubin proves intravascular hemolysis'],correct:0,why:'Canine ALP, GGT and bilirubin support a cholestatic pattern; normal ALT does not exclude it. The lecture includes pancreatitis, gallbladder disease and steroid effects among possibilities.'},
+{title:'Choose the next useful tests',q:'What would help separate ketosis, DKA and hepatobiliary disease?',choices:['Blood gas, repeat electrolytes and ketones/BHB, plus focused imaging/clinical assessment','Diagnose DKA solely from urine ketone color','Ignore potassium because glucose is high','Conclude PDH based only on ALP'],correct:0,why:'Blood pH and bicarbonate determine net acid-base status; BHB better represents the dominant ketone in many DKA cases. Serial electrolytes, including K, and biliary evaluation address concurrent illness.'}
+],takeaway:'Use the patient-specific RI. Ketonuria ≠ ketoacidosis. Classify metabolic status using pH FIRST, HCO₃⁻ and AG; do not discard cholestatic findings because ALT is normal.'},
+{id:'cpms06',title:'Addison pattern + confirmatory testing',species:'Dog · adapted from course hypoadrenocorticism case',story:'Vomiting, lethargy and dehydration in a sick dog. The CBC lacks the expected cortisol-associated stress leukogram. Chemistry and endocrine testing follow.',labs:[
+['Sodium','137 mmol/L','↓ in case; numeric RI not given in excerpt'],
+['Potassium','5.6 mmol/L','↑ in case; numeric RI not given in excerpt'],
+['Na:K ratio','24.5','Calculated: 137 ÷ 5.6 ≈ 24.5; course reports ~24'],
+['Chloride','105 mmol/L','↓ in case before Na correction'],
+['Corrected chloride','116.5 mmol/L','105 × 152 ÷ 137; course says within RI'],
+['BUN','39 mg/dL','↑ in course case'],
+['Creatinine','2.3 mg/dL','↑ in course case'],
+['Phosphorus','7.8 mg/dL','↑ in course case'],
+['Resting cortisol','<0.5 µg/dL','Dog rule-out cutoff >2 µg/dL'],
+['Post-ACTH cortisol','0.2 µg/dL','Very low/flat response']],
+notes:'Source: Clinical Pathology Review Guide, hypoadrenocorticism case. No lymphopenia with eosinophilia is an unexpected absence of stress leukogram. The correction uses case sodium midpoint 152, distinct from other examples.',stages:[
+{title:'Recognize the electrolyte pattern',q:'Which interpretation best describes Na 137, K 5.6 and Na:K around 24?',choices:['Hyponatremia, hyperkalemia, low ratio: hypoadrenocorticism is a differential, not confirmed by ratio alone','Na:K less than 27 is unique to Addison disease','This proves Conn syndrome','Normal electrolytes with physiologic Na:K ratio'],correct:0,why:'Na loss and K retention can reflect mineralocorticoid deficiency. The course mnemonic RAGU for low Na:K includes renal, Addison, gastrointestinal and uroabdomen causes.'},
+{title:'Apply corrected chloride properly',q:'Measured Cl is low, but corrected Cl (105 × 152/137) is 116.5 and within the case lab RI. What does this mean?',choices:['Chloride mostly follows low sodium; the low measured chloride does not independently establish an acid-base process','Selective chloride deficit and metabolic alkalosis are conclusively proven','Chloride should never be sodium-corrected','Corrected chloride establishes DKA'],correct:0,why:'Measured chloride tracks sodium/water. Correcting compares chloride relative to sodium; within-interval corrected Cl weakens the inference of independent selective chloride loss.'},
+{title:'Interpret the resting cortisol',q:'Resting cortisol is below 0.5 µg/dL. What is the next evidence needed?',choices:['ACTH stimulation to confirm impaired adrenal cortisol reserve','Hypoadrenocorticism can be confirmed by a low screening cortisol alone','Low cortisol always proves pituitary tumor','Normal cortisol reserve has been established'],correct:0,why:'The dog resting cortisol rule-out threshold is >2 µg/dL. Below it is a nonspecific screen and requires ACTH stimulation.'},
+{title:'Explain the flat ACTH response',q:'Post-ACTH cortisol is 0.2 µg/dL with minimal change from a low baseline. Which mechanism is most supported?',choices:['Impaired adrenal cortisol response consistent with hypoadrenocorticism; classify primary versus iatrogenic with history and electrolytes','Typical healthy stimulated response','A definitive diagnosis of canine hyperadrenocorticism','A high cortisol response from stress'],correct:0,why:'Failure to increase cortisol after synthetic ACTH supports adrenal insufficiency; hyponatremia/hyperkalemia and absent stress pattern fit classic primary disease. Drug history and further mineralocorticoid evaluation can clarify subtype.'}
+],takeaway:'Low Na:K is a pattern and a differential clue, not a final diagnosis. The resting cortisol screens; ACTH stimulation confirms lack of cortisol reserve. Correct chloride against sodium before assigning a second acid-base process.'}
 ];
 function save(){try{sessionStorage.setItem(STORE,JSON.stringify({active,stage,selected,submitted}))}catch(_){}}
 function restore(){try{const x=JSON.parse(sessionStorage.getItem(STORE)||'null');if(x){active=Number.isInteger(x.active)&&x.active>=0&&x.active<cases.length?x.active:0;stage=Number.isInteger(x.stage)&&x.stage>=0&&x.stage<4?x.stage:0;selected=x.selected||{};submitted=x.submitted||{}}}catch(_){}}
@@ -63,7 +97,7 @@ function render(){
  modal('🏥 Multistage Diagnostic Workup · '+c.title,html);
 }
 function home(){
- const html='<div class="vpqms"><p><b>Clinical Pathology · Multistage CBC & Chemistry</b></p><p>Each patient has 4 stages: classify values → rank differentials → choose testing → explain physiology. Each example includes reported reference intervals.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px">'+cases.map((c,i)=>'<button type="button" data-vpqms="case-'+i+'" style="padding:12px;white-space:normal;text-align:left"><b>'+clean(c.title)+'</b><small style="display:block">'+clean(c.species)+'</small></button>').join('')+'</div><p class="mscompact">Patient cases use illustrative, not universal, reference intervals. Incorrect answers show orange feedback; correct answers are green.</p>'+button('learn','📘 Return to Learn guide')+'</div>';
+ const html='<div class="vpqms"><p><b>Clinical Pathology · Multistage CBC & Chemistry</b></p><p>Each patient has 4 stages: classify values → rank differentials → select confirmatory testing → explain the physiology. Two cases follow the course guide directly. Each example includes reported reference intervals.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px">'+cases.map((c,i)=>'<button type="button" data-vpqms="case-'+i+'" style="padding:12px;white-space:normal;text-align:left"><b>'+clean(c.title)+'</b><small style="display:block">'+clean(c.species)+'</small></button>').join('')+'</div><p class="mscompact">Patient cases use illustrative, not universal, reference intervals. Incorrect answers show orange feedback; correct answers are green.</p>'+button('learn','📘 Return to Learn guide')+'</div>';
  modal('🏥 CBC + Chemistry · Multistage Workups',html);
 }
 function handle(event){
