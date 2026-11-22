@@ -3,6 +3,7 @@
 'use strict';
 const KEY='vpq-clinpath-referral-001-guided-v2';
 const fresh=()=>({view:'',opened:[],anemia:'',ddx:['','',''],next:['','',''],notes:'',submitted:false,selected:[],lead:'',level:'guided',advancedSubmitted:false});
+let validationMessage='';
 let state=fresh();try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Array.isArray(v.ddx))state=Object.assign(fresh(),v)}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
 const h=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -93,6 +94,8 @@ style.textContent+=
 
 // Shared guided referral presentation: larger touch targets, clearer step colors, and a responsive chart.
 style.textContent+=
+'#modalBody .refcase .refvalidation{padding:12px 14px;background:#fff0e5;border:2px solid #e4a373;border-radius:10px;color:#874a23;font-size:16px;font-weight:800}'+
+'#modalBody .refcase .refphotoplace{border-style:dashed}'+
 '#modalBody .refcase{font-size:17px;line-height:1.62;max-width:1000px}'+
 '#modalBody .refcase h3{font-size:20px}'+
 '#modalBody .refcase .refsection summary{font-size:18px;padding:13px 15px}'+
@@ -136,7 +139,8 @@ const done=!!state.submitted;
 const selected=chosen();
 return '<section class="refbox refguided"><h3>🩺 Differential diagnosis · Select and rank</h3>'+
 '<p>Like the Pathology Differential Center: choose your plausible causes, rank them, and mark one as the <b>★ leading diagnosis</b>. Nothing is graded or revealed until you submit.</p>'+
-'<div class="refhintbox">Choose <b>3 differentials</b> for your shortlist. You can change your selections and use ↑ / ↓ to rank them before submitting.</div>'+
+'<div class="refhintbox"><b>Step 1:</b> Select exactly three plausible causes. <b>Step 2:</b> Use ↑ / ↓ to rank them from most to least likely. <b>Step 3:</b> Mark your leading diagnosis with ☆ Lead. <b>Step 4:</b> Submit to compare the evidence.</div>'+
+(validationMessage?'<p class="refvalidation" role="alert">'+h(validationMessage)+'</p>':'')+
 '<div class="refoptions">'+candidates.map(c=>{
 const active=state.selected.includes(c.id),lead=state.lead===c.id;
 return '<div class="refoption '+(active?'is-selected ':'')+(lead?'is-lead ':'')+(done?(c.tier==='best'?'is-correct':c.tier==='unlikely'?'is-low':'is-possible'):'')+'">'+
@@ -145,7 +149,8 @@ return '<div class="refoption '+(active?'is-selected ':'')+(lead?'is-lead ':'')+
 }).join('')+'</div>'+
 '<div class="refbox refshortlist"><h3>📋 Your ranked shortlist</h3>'+
 (selected.length?'<ol class="refrank">'+selected.map((c,i)=>'<li><div><b>'+h(c.name)+'</b>'+(state.lead===c.id?' <span class="refleader">★ Lead</span>':'')+'</div><div class="refrankbuttons"><button type="button" data-ref-up="'+c.id+'" '+(done||i===0?'disabled':'')+' title="Move higher">↑</button><button type="button" data-ref-down="'+c.id+'" '+(done||i===selected.length-1?'disabled':'')+' title="Move lower">↓</button></div></li>').join('')+'</ol>':'<p>Choose options above to build your shortlist.</p>')+
-'<p class="refsmall">'+selected.length+'/3 shortlisted · '+(state.lead?'Leading diagnosis selected':'Set your leading diagnosis using ☆ Lead')+'</p></div>'+
+'<p class="refsmall">'+selected.length+'/3 shortlisted · '+(state.lead?'Leading diagnosis selected':'Set your leading diagnosis using ☆ Lead')+'</p>'+
+'<p class="refsmall">Ranking order matters: your first entry is your highest-priority differential. Your ★ Lead should match your top-ranked choice.</p></div>'
 (!done?'<div class="refbuttons"><button class="refsubmit" type="button" data-ref-guided-submit="1">✓ Submit differential ranking · View comparisons</button></div><p class="refsmall">All options remain neutral before submission. You can attempt Advanced Mode separately afterward.</p>':'<p class="refsmall">Your differential ranking has been submitted. The case comparison appears below.</p>')+
 '</section>';
 };
@@ -173,6 +178,9 @@ const review=()=>'<section class="refbox refreview"><h3>🔓 Teaching review —
 '<p><b>Next investigations:</b> Reassess renal values and urine concentration, measure blood pressure and UPC, evaluate the underlying kidney process. EPO physiology and UPC/BP work-up are marked as <em>Added</em> outside the lecture slides in the source.</p>'+
 '<p class="refsmall">Based on uploaded Cases Part 1, Case 1.1; CP1 slide 17 / Minimum Database template. Patient values are invented educational examples. A single encounter alone does not establish CKD chronicity or stage.</p></section>';
 function render(){
+const old=document.querySelector('#modalBody .refcase');
+const priorDetails=old?[...old.querySelectorAll('details')].map((el,i)=>({i,open:el.open})):[];
+const oldScroll=document.getElementById('modalBody')?.scrollTop||0;
 const content='<div class="refcase">'+
 '<div class="refbox refheader"><label for="vpqReferralCasePick"><b>🩺 Referral patient</b></label><select id="vpqReferralCasePick" class="refselect" aria-label="Choose referral patient"><option value="001">Case 001 · Dog · PU/PD and weight loss</option></select><p class="refsmall">Clinical Pathology · Lecture 1 · DDx · Approval prototype 1 of 1.</p></div>'+
 '<details class="refbox refsection" open><summary>🐾 Patient history & physical examination</summary><div class="refsectionbody"><p><b>Signalment:</b> 9-year-old spayed female mixed-breed dog.</p><p><b>History:</b> Two months of increased drinking and urination, weight loss, and poor appetite. No medications.</p><p><b>Physical examination:</b> Thin body condition; pale mucous membranes; mild oral ulcers; approximately 5% dehydration; temperature 38.4 °C.</p></div></details>'+
@@ -184,6 +192,11 @@ Object.keys(reports).map(report).join('')+
 advanced()+
 '<div class="refbuttons"><button type="button" data-ref-legacy="1">Existing Clinical Pathology cases</button><button type="button" data-ref-reset="1">Restart prototype</button></div></div>';
 window.VPQ_REFERRAL_MODAL.show('🔬 Referral Patients · Clinical Pathology',content);
+if(old){
+const root=document.querySelector('#modalBody .refcase');
+if(root)priorDetails.forEach(x=>{const d=root.querySelectorAll('details')[x.i];if(d)d.open=x.open});
+const body=document.getElementById('modalBody');if(body)body.scrollTop=oldScroll;
+}
 }
 function home(){render()}
 document.addEventListener('input',e=>{const n=e.target;if(!n.closest?.('.refcase'))return;if(n.hasAttribute('data-ref-text'))state[n.dataset.refText]=n.value;if(n.hasAttribute('data-ref-ddx'))state.ddx[+n.dataset.refDdx]=n.value;if(n.hasAttribute('data-ref-next'))state.next[+n.dataset.refNext]=n.value;save()});
@@ -191,13 +204,13 @@ document.addEventListener('click',e=>{
 const n=e.target.closest?.('[data-ref-toggle],[data-ref-lead],[data-ref-up],[data-ref-down],[data-ref-guided-submit],[data-ref-back],[data-ref-reset],[data-ref-legacy]');
 if(!n||!n.closest('.refcase'))return;e.preventDefault();
 const attr=x=>n.getAttribute(x);
-if(n.hasAttribute('data-ref-toggle')&&!state.submitted){const id=attr('data-ref-toggle');const pos=state.selected.indexOf(id);if(pos>=0){state.selected.splice(pos,1);if(state.lead===id)state.lead=''}else if(state.selected.length<3){state.selected.push(id)}else return alert('Choose up to three differentials. Deselect one to change the shortlist.');save();return render()}
-if(n.hasAttribute('data-ref-lead')&&!state.submitted){const id=attr('data-ref-lead');if(!state.selected.includes(id)){if(state.selected.length>=3)return alert('Choose only three differentials. Remove one before setting a new lead.');state.selected.push(id)}state.lead=id;save();return render()}
+if(n.hasAttribute('data-ref-toggle')&&!state.submitted){validationMessage='';const id=attr('data-ref-toggle');const pos=state.selected.indexOf(id);if(pos>=0){state.selected.splice(pos,1);if(state.lead===id)state.lead=''}else if(state.selected.length<3){state.selected.push(id)}else {validationMessage='You already have three choices. Deselect one before choosing another.';return render()}save();return render()}
+if(n.hasAttribute('data-ref-lead')&&!state.submitted){validationMessage='';const id=attr('data-ref-lead');if(!state.selected.includes(id)){if(state.selected.length>=3){validationMessage='Select this diagnosis as one of your three before marking it as the lead.';return render()}state.selected.push(id)}state.lead=id;save();return render()}
 if((n.hasAttribute('data-ref-up')||n.hasAttribute('data-ref-down'))&&!state.submitted){const id=attr(n.hasAttribute('data-ref-up')?'data-ref-up':'data-ref-down'),a=state.selected.indexOf(id),b=a+(n.hasAttribute('data-ref-up')?-1:1);if(a>=0&&b>=0&&b<state.selected.length){[state.selected[a],state.selected[b]]=[state.selected[b],state.selected[a]];save();render()}return}
-if(n.hasAttribute('data-ref-guided-submit')){if(state.selected.length!==3||!state.lead||!state.selected.includes(state.lead))return alert('Select three differentials, rank them, and mark one as ★ Lead before submitting.');state.submitted=true;save();return render()}
+if(n.hasAttribute('data-ref-guided-submit')){if(state.selected.length!==3||!state.lead||!state.selected.includes(state.lead)){validationMessage='Select exactly three differentials and mark one as ★ Lead before submitting.';return render()}if(state.selected[0]!==state.lead){validationMessage='Move your ★ leading diagnosis to rank #1 with the ↑ button before submitting.';return render()}validationMessage='';state.submitted=true;save();return render()}
 if(n.hasAttribute('data-ref-back'))return home();
 if(n.hasAttribute('data-ref-legacy'))return window.VPQ_REFERRAL_MODAL.legacy();
-if(n.hasAttribute('data-ref-reset')){if(!confirm('Restart and clear the guided shortlist and advanced notes?'))return;state=fresh();save();return render()}
+if(n.hasAttribute('data-ref-reset')){if(!confirm('Restart and clear the guided shortlist and advanced notes?'))return;state=fresh();validationMessage='';save();return render()}
 });
 window.VPQ_CLINPATH_REFERRAL_PILOT={home,open:render};
 })();
