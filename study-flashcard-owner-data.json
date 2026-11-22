@@ -108,6 +108,12 @@
       "answer": "Phenoxybenzamine is an irreversible, nonselective α blockade versus prazosins reversible α1 blockade.",
       "why": "Phenoxybenzamine may be used in pheochromocytoma hypotension",
       "slide": "Lecture 13 · submitted course notes, clinically reviewed"
+    },
+    "pharm-e2-59": {
+      "prompt": "What does prazosin reduce in urinary outflow?",
+      "answer": "Alpha-1-mediated urethral smooth-muscle tone.",
+      "why": "Outlet relaxation differs from stimulating the bladder wall. Nonselective so it can cause some cardiovascular side effects.",
+      "slide": "Exam 2 lecture 13 · source-derived mechanism review"
     }
   },
   "custom": [
