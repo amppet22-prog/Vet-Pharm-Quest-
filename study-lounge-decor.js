@@ -83,7 +83,7 @@ function habitat(){
  const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
  // Tall, left-wall display, with visible lizard, climbing/basking surfaces and a real cabinet base.
  // Decorative illustration only; species-specific welfare requirements are not represented as a care guide.
- return '<g transform="translate(5 151) scale(.69 1.28)">'+
+ return '<g transform="translate(19 151) scale(.53 1.28)">'+
  '<rect x="0" y="0" width="140" height="155" rx="8" fill="#5f827a" stroke="#466e69" stroke-width="6"/>'+
  '<rect x="7" y="9" width="126" height="117" rx="4" fill="#dceacc" stroke="#92ac9e" stroke-width="3"/>'+
  '<rect x="8" y="11" width="124" height="12" rx="3" fill="#708e7f"/>'+
@@ -142,7 +142,7 @@ art.roomArt=function(k){
  const wallAnchor='<g><rect x="96" y="112"';
  let withHabitat=svg.includes(wallAnchor)?svg.replace(wallAnchor,habitat()+wallAnchor):svg;
  if(chosen('coffee')==='lounge-coffee-deluxe')withHabitat=withHabitat.replace(/<g transform="translate\(352 223\) scale\(1\.12\)">[\s\S]*?<\/g>/,'');
- if(['lounge-egg-chair','lounge-hanging-chair'].includes(chosen('seating')))withHabitat=withHabitat.replace(/<ellipse cx="178" cy="449"[\s\S]*?(?=<g><rect x="722" y="90")/,'');
+ if(['lounge-egg-chair','lounge-hanging-chair'].includes(chosen('seating')))withHabitat=withHabitat.replace(/<ellipse cx="178" cy="449"[\s\S]*?(?=<g transform="translate(697 190) scale(.70)">)/,'');
  return withHabitat.replace(/<\/svg>\s*$/,svgDecor()+'</svg>');
 };
 function buttons(){
