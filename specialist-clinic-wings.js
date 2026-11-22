@@ -8,11 +8,12 @@ const stage=document.getElementById('stage');if(!stage||!window.VPQ_SCENERY)retu
 const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const data={
  clinpath:[
-  {x:2.2,y:31,w:17.4,h:43,walk:12,label:'🩸 Coagulation Bench',subtitle:'Questions + interpretation',hint:'Practice PT / aPTT interpretation questions',kind:'practice',action:'advancedCoag'},
-  {x:22,y:31,w:17.4,h:43,walk:29,label:'🫧 Blood Gas Station',subtitle:'Acid–base practice',hint:'Practice blood gas and acid–base interpretation',kind:'practice',action:'advancedGas'},
-  {x:41.8,y:31,w:17.4,h:43,walk:48,label:'🧫 Urinalysis Bench',subtitle:'UA questions + sediment',hint:'Choose urinalysis questions or visual sediment references',kind:'practice',action:'advancedUrine'},
-  {x:61.5,y:3,w:17.4,h:79,walk:66,label:'🐾 Referral Cases',subtitle:'Workup questions',hint:'Open the guided Referral Patient 001 prototype',kind:'practice',action:'advancedCases'},
-  {x:81.1,y:31,w:17.4,h:43,walk:87,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
+  {x:1.2,y:31,w:15.8,h:40,walk:9,label:'🩸 Coagulation Bench',subtitle:'Questions + interpretation',hint:'Practice PT / aPTT interpretation questions',kind:'practice',action:'advancedCoag'},
+  {x:17.6,y:31,w:15.8,h:40,walk:25,label:'🫧 Blood Gas Station',subtitle:'Acid–base practice',hint:'Practice blood gas and acid–base interpretation',kind:'practice',action:'advancedGas'},
+  {x:34,y:31,w:15.8,h:40,walk:41,label:'🧫 Urinalysis Bench',subtitle:'UA questions + sediment',hint:'Choose urinalysis questions or visual sediment references',kind:'practice',action:'advancedUrine'},
+  {x:50.4,y:31,w:15.8,h:40,walk:58,label:'🧬 Hybrid Diagnostic Bench',subtitle:'Lactate · iCa · send-outs',hint:'In-house lactate/ionized calcium and reference laboratory thyroid/fructosamine testing',kind:'practice',action:'advancedHybrid'},
+  {x:66.8,y:31,w:15.8,h:40,walk:74,label:'🐾 Referral Cases',subtitle:'Workup questions',hint:'Open patient differential and ancillary testing cases',kind:'practice',action:'advancedCases'},
+  {x:83.2,y:31,w:15.6,h:40,walk:91,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
  ],
  isolation:[
   {x:9,y:38,w:23,h:33,walk:23,label:'🐶 Isolation Patient',action:'onehealth'},
