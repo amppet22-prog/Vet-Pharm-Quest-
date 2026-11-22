@@ -5043,6 +5043,27 @@ vpqOriginalFloorPetStyle.textContent=
  '#stage #petSprite .vpq-dog-pending{font-size:20px!important;width:70px!important;height:65px!important;min-height:0!important}';
 document.head.appendChild(vpqOriginalFloorPetStyle);
 
+/* Companion scale reconciliation: separate creator preview and walkable-room sizes.
+   The collectible cards retain their own independent layout. */
+const vpqCompanionScaleCorrection=document.createElement('style');
+vpqCompanionScaleCorrection.id='vpq-companion-scale-reconciled';
+vpqCompanionScaleCorrection.textContent=
+ '.vpq-story-maker .vpq-story-stage{position:relative!important;overflow:hidden!important}'+
+ '.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,.vpq-story-maker .vpq-story-stage>.vpq-matched-pet,'+
+ '.vpq-story-maker .vpq-story-stage .vpq-matched-pet .vpq-preview-pet{width:150px!important;height:165px!important;min-width:150px!important;min-height:165px!important;max-width:45%!important;max-height:55%!important;flex:none!important;margin:0!important;position:absolute!important;right:8px!important;bottom:0!important;z-index:5!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;overflow:visible!important}'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet .vpq-pet-art,'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet .vpq-companion-art,'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet .vpq-batch-dog-image,'+
+ '.vpq-story-maker .vpq-story-stage .vpq-preview-pet .vpq-pet-svg{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;background-size:800% 400%;transform:none!important}'+
+ '.vpq-story-maker .vpq-story-stage .vpq-companion-placeholder{font-size:72px!important;min-height:120px!important;display:flex!important;align-items:center!important;justify-content:center!important}'+
+ '#stage #petSprite.petSprite{width:108px!important;height:100px!important;max-width:108px!important;max-height:100px!important;min-width:0!important;min-height:0!important;overflow:visible!important}'+
+ '#stage #petSprite .vpq-pet-art{width:105px!important;height:96px!important;max-width:105px!important;max-height:96px!important;background-size:800% 400%!important}'+
+ '#stage #petSprite .vpq-pet-svg{width:105px!important;height:96px!important;max-width:105px!important;max-height:96px!important}'+
+ '#stage #petSprite .vpq-batch-dog-image{width:105px!important;height:96px!important;max-width:105px!important;max-height:96px!important;object-fit:contain!important}'+
+ '@media(max-width:650px){.vpq-story-maker .vpq-story-stage>.vpq-preview-pet,.vpq-story-maker .vpq-story-stage>.vpq-matched-pet,.vpq-story-maker .vpq-story-stage .vpq-matched-pet .vpq-preview-pet{width:112px!important;height:130px!important;min-width:112px!important;min-height:130px!important;right:3px!important}#stage #petSprite.petSprite{width:88px!important;height:82px!important;max-width:88px!important;max-height:82px!important}}';
+document.head.appendChild(vpqCompanionScaleCorrection);
+
+
 
 
 })();
