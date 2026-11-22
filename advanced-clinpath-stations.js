@@ -292,37 +292,48 @@ const INTRO_STYLE=String.raw`
 @media(max-width:580px){.vpqintro .gasphyscards{grid-template-columns:1fr}}
 
 /* Readable learning screens, not patient-question or diagnostic station panels */
-.vpqintro.coag-theme,.vpqintro.gas-theme{font-size:16px;line-height:1.58}
-.vpqintro.coag-theme h3,.vpqintro.gas-theme h3{font-size:19px;line-height:1.35}
-.vpqintro.coag-theme .introhero,.vpqintro.gas-theme .introhero{font-size:16px}
-.vpqintro.coag-theme .pathcard h4,.vpqintro.gas-theme .pathcard h4{font-size:17px}
+.vpqintro.coag-theme,.vpqintro.gas-theme{font-size:14px;line-height:1.47}
+.vpqintro.coag-theme h3,.vpqintro.gas-theme h3{font-size:17px;line-height:1.35}
+.vpqintro.coag-theme .introhero,.vpqintro.gas-theme .introhero{font-size:15px}
+.vpqintro.coag-theme .pathcard h4,.vpqintro.gas-theme .pathcard h4{font-size:16px}
 .vpqintro.coag-theme .node em,.vpqintro.gas-theme .node em{font-size:14px}
-.vpqintro.coag-theme .quicktable,.vpqintro.gas-theme .quicktable{font-size:15px;line-height:1.45}
-.vpqintro.coag-theme .coagprettydetails>summary,.vpqintro.gas-theme details>summary{font-size:17px;line-height:1.45}
+.vpqintro.coag-theme .quicktable,.vpqintro.gas-theme .quicktable{font-size:14px;line-height:1.45}
+.vpqintro.coag-theme .coagprettydetails>summary,.vpqintro.gas-theme details>summary{font-size:16px;line-height:1.45}
 .vpqintro.coag-theme .coagminicard span,.vpqintro.gas-theme .gasconceptitem span,.vpqintro.gas-theme .gasexplainline p{font-size:15px;line-height:1.55}
 .vpqintro.gas-theme .step,.vpqintro.gas-theme .steps .step{font-size:15px;line-height:1.45}
-.vpqintro.gas-theme .step b{font-size:17px}
+.vpqintro.gas-theme .step b{font-size:16px}
 .vpqintro.coag-theme .coagfootnote,.vpqintro.gas-theme .tiny{font-size:13px}
-.vpqintro .gasformulalesson{margin:15px 0;padding:15px;border-radius:15px;background:linear-gradient(135deg,#e9f3ff,#f1ecff);border:2px solid #91acd9}
+.vpqintro .gasformulalesson{margin:10px 0;padding:10px;border-radius:12px;background:linear-gradient(135deg,#e9f3ff,#f1ecff);border:2px solid #91acd9}
 .vpqintro .gasformulalesson>h3{margin:0 0 8px;color:#314f88}
 .vpqintro .gasformulalesson>p{margin:0 0 12px}
-.vpqintro .gasformulagrid{display:grid;grid-template-columns:1fr;gap:12px}
-.vpqintro .gasformulacard{padding:14px 15px;border:2px solid #a1bde6;border-radius:13px;background:#eff6ff}
+.vpqintro .gasformulagrid{display:grid;grid-template-columns:1fr;gap:7px}
+.vpqintro .gasformulacard{padding:0;border:2px solid #a1bde6;border-radius:13px;background:#eff6ff}
 .vpqintro .gasformulacard.formula1{background:#edfaee;border-color:#9ccbaf}
 .vpqintro .gasformulacard.formula2{background:#fff4e3;border-color:#deb882}
-.vpqintro .gasformulacard h4{font-size:18px;margin:0 0 9px;color:#2d548c}
-.vpqintro .gasformulacard.formula1 h4{color:#286e48}
-.vpqintro .gasformulacard.formula2 h4{color:#845114}
-.vpqintro .gasformulaeq{font-size:clamp(16px,2.4vw,21px);font-weight:850;line-height:1.5;text-align:center;background:white;border:2px solid #c1d2e8;border-radius:10px;padding:11px 7px;overflow-wrap:anywhere;margin-bottom:9px}
+.vpqintro .gasformulacard>summary{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;cursor:pointer;padding:10px 12px;font-size:16px;font-weight:800;color:#2d548c;list-style:revert}
+.vpqintro .gasformulacard>summary small{font-size:12px;color:#516d91;font-weight:600}
+.vpqintro .gasformulabody{padding:0 11px 12px;border-top:1px solid #c4d7e9}
+.vpqintro .gasformulacard[open]>summary{margin-bottom:10px}
+.vpqintro .gasformulacard.formula1>summary{color:#286e48}
+.vpqintro .gasformulacard.formula2>summary{color:#845114}
+.vpqintro .gasformulaeq{font-size:16px;font-weight:850;line-height:1.5;text-align:center;background:white;border:2px solid #c1d2e8;border-radius:10px;padding:8px 6px;overflow-wrap:anywhere;margin-bottom:7px}
 .vpqintro .gasformulaexample{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;border-radius:9px;background:#ffffffb8;padding:9px 10px;margin-bottom:10px}
 .vpqintro .gasformulaexample b{color:#2d598c}
-.vpqintro .gasformulaexample span{font-size:17px;font-weight:750}
+.vpqintro .gasformulaexample span{font-size:15px;font-weight:750}
 .vpqintro .gasformulacard p{margin:8px 0;line-height:1.55}
-.vpqintro .gasformulanote{font-size:14px;line-height:1.5;padding:9px 10px;border-left:4px solid #ddad57;border-radius:7px;background:#fff9e9}
+.vpqintro .gasformulanote{font-size:14px;line-height:1.5;padding:7px 9px;border-left:4px solid #ddad57;border-radius:7px;background:#fff9e9}
 .vpqintro .gasformulaworkflow{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:12px}
 .vpqintro .gasformulaworkflow b{width:100%;color:#314e85}
 .vpqintro .gasformulaworkflow span{padding:7px 10px;background:white;border:1px solid #b3c3e2;border-radius:18px;font-size:14px;font-weight:700}
 @media(max-width:580px){.vpqintro .gasformulalesson{padding:10px}.vpqintro .gasformulacard{padding:11px}.vpqintro .gasformulaeq{font-size:16px}}
+
+/* Keep panels compact: enlarge the small text itself, not the entire layout */
+.vpqintro.coag-theme .coagminicard span,.vpqintro.gas-theme .gasconceptitem span,.vpqintro.gas-theme .gasexplainline p,.vpqintro.gas-theme .gasphyscard p,.vpqintro.coag-theme .hemocard p{font-size:15px;line-height:1.45}
+.vpqintro.coag-theme .coagmini,.vpqintro.gas-theme .gasconceptgrid,.vpqintro.gas-theme .gasphyscards{gap:7px}
+.vpqintro.coag-theme .coagminicard,.vpqintro.gas-theme .gasconceptitem,.vpqintro.gas-theme .gasphyscard{padding:9px 10px}
+.vpqintro.coag-theme .introhero,.vpqintro.gas-theme .introhero{padding:10px 12px}
+.vpqintro.coag-theme .pathgrid,.vpqintro.gas-theme .pathgrid{gap:8px}
+.vpqintro.coag-theme .coagprettydetails,.vpqintro.gas-theme .gasconcept{padding:9px 10px}
 </style>`;
 const COAG_FACTORS=[
 ['I','Fibrinogen','Common','Thrombin cleaves fibrinogen to soluble fibrin monomers; XIIIa cross-links fibrin','No','Low/abnormal functional fibrinogen may prolong TT, then PT/aPTT when severe'],
@@ -447,7 +458,7 @@ function gasFormulaPanel(){
  ];
  return '<section class="gasformulalesson" aria-label="Blood gas formulas and worked examples"><h3>🧮 Essential calculations · See the math AND the physiology</h3>'+
  '<p>Use the same patient sample and units for each calculation. Formulas help reveal patterns, but the patient and method-specific reference intervals determine their meaning.</p>'+
- '<div class="gasformulagrid">'+items.map((x,i)=>'<article class="gasformulacard formula'+i+'"><h4>'+x.title+'</h4><div class="gasformulaeq">'+x.formula+'</div><div class="gasformulaexample"><b>Worked example</b><span>'+x.example+'</span></div><p><b>What is happening in the body?</b> '+x.why+'</p><div class="gasformulanote"><b>Watch out:</b> '+x.note+'</div></article>').join('')+'</div>'+
+ '<div class="gasformulagrid">'+items.map((x,i)=>'<details class="gasformulacard formula'+i+'"><summary><span>'+x.title+'</span><small>View formula &amp; worked example</small></summary><div class="gasformulabody"><div class="gasformulaeq">'+x.formula+'</div><div class="gasformulaexample"><b>Worked example</b><span>'+x.example+'</span></div><p><b>What is happening in the body?</b> '+x.why+'</p><div class="gasformulanote"><b>Watch out:</b> '+x.note+'</div></div></details>').join('')+'</div>'+
  '<div class="gasformulaworkflow"><b>🔍 Patient interpretation sequence</b><span>① Check pH</span><span>② Identify pCO₂ / HCO₃⁻ driver</span><span>③ Evaluate compensation</span><span>④ Calculate AG and corrected Cl⁻</span><span>⑤ Explain the physiology and patient cause</span></div></section>';
 }
 
