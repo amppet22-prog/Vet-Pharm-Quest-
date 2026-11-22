@@ -146,6 +146,19 @@ const wallpaperArt={
 };
 const modularArt=window.VPQ_RECEPTION_MODULAR_ASSETS;
 const itemArt={...modularArt.manifest};
+catalog.push(
+{"id":"lounge-coffee-deluxe","name":"Barista espresso machine","type":"decor","price":65,"icon":"☕","detail":"Study Lounge coffee counter upgrade; reusable alongside Reception pieces."},
+{"id":"lounge-microwave","name":"Pastel microwave","type":"decor","price":35,"icon":"🍲","detail":"An extra study lounge kitchen appliance."},
+{"id":"lounge-snack-bin","name":"Veterinary study snack basket","type":"decor","price":28,"icon":"🍪","detail":"A cozy snacks bin for long study sessions."},
+{"id":"lounge-egg-chair","name":"Woven egg basket chair","type":"decor","price":85,"icon":"🪺","detail":"Hanging basket-style chair with plush cushions for the lounge."},
+{"id":"lounge-hanging-chair","name":"Pastel hammock swing chair","type":"decor","price":95,"icon":"🪑","detail":"Comfortable ceiling-suspended lounge chair."},
+{"id":"lounge-stools","name":"Study desk stools","type":"decor","price":42,"icon":"🪑","detail":"Two stylish stools around the main study table."},
+{"id":"lounge-vines","name":"Trailing botanical wall vines","type":"decor","price":36,"icon":"🌿","detail":"Extra green hanging vines along the lounge walls."},
+{"id":"lounge-planter-pack","name":"Botanical planter collection","type":"decor","price":50,"icon":"🪴","detail":"More greenery for the lounge and reception collection."},
+{"id":"lounge-reptile-deluxe","name":"Deluxe reptile habitat","type":"decor","price":110,"icon":"🦎","detail":"Decorative secure bioactive reptile enclosure for the lounge."},
+{"id":"lounge-magazines","name":"Veterinary journals and magazines","type":"decor","price":26,"icon":"📚","detail":"Study table magazines and clinical journals."},
+{"id":"lounge-coffee-table","name":"Lounge coffee table","type":"decor","price":52,"icon":"🫖","detail":"A small coffee table for the reading nook."}
+);
 const free=catalog.filter(x=>x.price===0).map(x=>x.id);
 const sofaIds=catalog.filter(x=>x.type==='furniture').map(x=>x.id);
 const singleSlotTypes=new Set(['catHide','catAccess','catBridge','catTunnel','catPuzzle','catWand','catHammock','catScratch','catCompanion','catRoomToy','catRoomWindow','catRoomBasket','floorLamp','tableLamp','ottoman','dogBed','catBed','tableTop','coffeeTable','furniture','rug','deskAccent','hanging','catAccent','themeDisplay','plantFloor']);
