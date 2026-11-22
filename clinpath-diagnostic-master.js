@@ -213,7 +213,7 @@ function open(id){
  '<div class="vdt-card"><h3>📈 Diagnostic diagram'+((id==='acth'||id==='lddst'||id==='hddst')?' · cortisol response curves':' · how the test works')+'</h3>'+chart(id)+'<p class="vdt-note">Educational schematic, not patient data. HDDST intermediate 6 h time denotes Cornell canine protocol; feline protocols use 4 h and lab schedules differ.</p></div>'+
  '<div class="vdt-row" style="align-items:stretch"><div class="vdt-card vdt-increase" style="flex:1;min-width:240px"><b>↑ INCREASED / EXAGGERATED</b><p>'+E(t.increased)+'</p></div><div class="vdt-card vdt-decrease" style="flex:1;min-width:240px"><b>↓ DECREASED / BLUNTED</b><p>'+E(t.decreased)+'</p></div></div>'+
  '<details open><summary>📊 Values, units and interpretation thresholds</summary><div style="overflow-x:auto"><table><tr><th>Measurement</th><th>Value / pattern</th><th>Interpretation</th></tr>'+t.intervals.map(r=>'<tr>'+r.map(z=>'<td>'+E(z)+'</td>').join('')+'</tr>').join('')+'</table></div><p class="vdt-note">Course-provided example thresholds and ranges only. Reference-lab protocols and assay cutoffs take precedence.</p></details>'+
- decisionPanel(id)+urinalysisFoundation(id)+
+ (id==='coag'?'<div class="vdt-card"><h3>🩸 Continue at the physical Coagulation Analyzer</h3><p>This is the comprehensive send-out test reference. The dedicated advanced station teaches the entire clotting cascade, factor atlas, vitamin K, bleeding patterns and interactive questions. Both share the same coagulation concepts; no need to hunt for two different explanations.</p><div class="vdt-row">'+button('coag-station','🩸 Open Coagulation Cascade & Analyzer')+'</div></div>':'')+decisionPanel(id)+urinalysisFoundation(id)+
  '<details open><summary>🫀 WHY the body responds</summary><p>'+E(t.physiology)+'</p></details>'+definitionsPanel()+
  '<details><summary>⚠️ Sample artifacts and confusing lookalikes</summary><p>'+E(t.artifact)+'</p></details>'+
  '<details open><summary>🐾 Worked patient example</summary><p>'+E(t.example)+'</p></details>'+
@@ -239,7 +239,7 @@ window.addEventListener('click',event=>{
   if(typeof window.VPQ_CLINPATH_LAB?.intro==='function')return window.VPQ_CLINPATH_LAB.intro();
   return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
  }
- if(id==='species')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open?.('chem');
+ if(id==='coag-station')return window.VPQ_ADVANCED_LAB?.intro?.('coag');if(id==='species')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open?.('chem');
  if(id==='category-inhouse')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
  if(id==='category-sendout')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
  if(id==='home')return overviewModal();
