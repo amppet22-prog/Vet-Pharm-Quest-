@@ -52,6 +52,7 @@ function draw(){
  return '<button type="button" class="quest" data-case="'+e(c.id)+'" style="text-align:left;min-height:155px"><div style="font-size:28px">'+e(c.emoji||'🐾')+'</div><b>'+e(c.name||'Patient case')+'</b><p class="small">'+e(species(c))+' · '+e(course(c))+(c.lecture?' · '+e(c.lecture):'')+'</p><p>'+e(String(c.intro||'Review this patient case.').slice(0,145))+'</p><p class="small">'+e(categories.slice(0,3).join(' · '))+'</p><span class="badge">'+(finished?'✓ Completed':'Start patient')+'</span></button>'
  }).join('');
  api.showModal('🩺 Exam Room · Patient Case Library','<p>Choose a specialty, course or species. <b>All listed patients use the same underlying cases and rewards</b> as the rest of the clinic—nothing has been duplicated.</p>'+
+ '<div style="margin:12px 0;padding:11px;border:1px solid #b4d9bf;border-radius:11px;background:#f1fbf4"><b>💊 Exam 2 Medication Patient Rounds</b><p style="margin:5px 0 9px;font-size:12px">Use the existing 47 Pharmacology cases for insulin, antithyroid drugs, cardiac medications, anticonvulsants and more—without copying any patients.</p><button type="button" data-vpqcaselib="pharmexam2" style="background:#d9f1e2;border:1px solid #8cc5a4;border-radius:9px;padding:9px 12px;font-weight:800;color:#285b3f">🐾 Open medication cases →</button></div>'+ 
  '<div class="infobox"><b>'+all.length+' available case records · '+count+' completed</b><p>Clinical specialty tags are suggested from existing case descriptions; some cases fit several specialties. Course labels remain original. Pharmacology respects the selected lectures unless you explicitly choose all.</p></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:12px 0">'+
  '<label>Specialty<select class="input" data-vpqcasefilter="specialty">'+opts(specialtyNames,filters.specialty)+'</select></label>'+
@@ -73,6 +74,7 @@ function init(ctx){api=ctx;ctx.body.addEventListener('change',ev=>{const t=ev.ta
  ctx.body.addEventListener('click',ev=>{const b=ev.target.closest('[data-vpqcaselib]');if(!b)return;
  const action=b.dataset.vpqcaselib,field=ctx.body.querySelector('#vpqCaseLibQuery');
  if(field)filters.query=field.value;
+ if(action==='pharmexam2')return window.VPQ_PHARM_ROOM_CASES_HUB?.();
  if(action==='search'){page=0;return draw()}
  if(action==='alllectures'){filters.lectureFocus='';page=0;return draw()}
  if(action==='previous'){page=Math.max(0,page-1);return draw()}
