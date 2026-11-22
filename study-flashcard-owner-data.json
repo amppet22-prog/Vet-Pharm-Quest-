@@ -264,6 +264,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 14",
       "curated": true
+    },
+    {
+      "prompt": "What are the anti CHF drugs?",
+      "answer": "Digoxin, Dopamine, Dobutamine, Amrinone, Pimobendan",
+      "why": "",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwrc1g6g-6hrsy",
+      "domain": "pharmacology",
+      "lecture": "Lecture 14",
+      "curated": true
     }
   ],
   "hidden": []
