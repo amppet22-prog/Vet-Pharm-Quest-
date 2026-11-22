@@ -529,7 +529,8 @@ function hybridHome(){
  hybrid=null;run=null;
  return modal('CBC + Chemistry · In-House and Send-Out','<div class="vpqintro hybrid-theme">'+INTRO_STYLE+
  '<div class="introhero"><b>🩸 CBC + CHEMISTRY WORKSTATION</b><p>Start with routine hematology, chemistry and PCV/TS, then use point-of-care or send-out diagnostics as needed. The room has a dedicated CBC/chemistry analyzer bench with PCV centrifuge and refractometer. Choose a test below to learn sample collection, physiology and interpretation.</p></div>'+PCV_TS_LEARN+
- '<div class="introactions"><button type="button" data-vpqadvanced="reportacademy">📘 Learn · How to Read Every Report</button><button type="button" data-vpqadvanced="classic">🧪 Open CBC + Chemistry Practice</button></div>'+ '<div class="hybridtwo"><section><h3>🩸 PCV/TS + In-house tests</h3>'+HYBRID_TESTS.filter(t=>t.kind==='inhouse').map(hybridCard).join('')+'</section><section><h3>📦 Send-Out Laboratory counter</h3>'+HYBRID_TESTS.filter(t=>t.kind==='sendout').map(hybridCard).join('')+'</section></div>'+
+ '<div class="introactions"><button type="button" data-vpqadvanced="reportacademy">📘 Learn · How to Read Every Report</button><button type="button" data-vpqadvanced="classic">🧪 Open CBC + Chemistry Practice</button></div>'+ '<details open class="gasconcept"><summary>📊 Test-specific charts, values and clinical interpretation</summary>'+window.VPQ_DIAGNOSTIC_MASTER?.cards?.()+'</details>'+
+ '<div class="hybridtwo"><section><h3>🩸 PCV/TS + In-house tests</h3>'+HYBRID_TESTS.filter(t=>t.kind==='inhouse').map(hybridCard).join('')+'</section><section><h3>📦 Send-Out Laboratory counter</h3>'+HYBRID_TESTS.filter(t=>t.kind==='sendout').map(hybridCard).join('')+'</section></div>'+
  '<p class="tiny">Illustrative simulated patient data. Reference intervals vary by species, testing platform and laboratory. This station does not replace the existing lecture-based thyroid or diabetes questions.</p>'+
  '<div class="introactions">'+hybridBtn('home','← Advanced lab')+'</div></div>');
 }
@@ -547,6 +548,7 @@ function hybridTest(id){
  const panel='<div class="vpqintro hybrid-theme">'+INTRO_STYLE+
  '<div class="introhero"><b>'+t.icon+' '+esc(t.name)+'</b><p>'+esc(t.learn)+'</p></div>'+(id==='pcvts'?PCV_TS_LEARN:'')+
  '<div class="hybridtwo"><div class="hybridpanel"><b>🧪 Sample and handling</b><p>'+esc(t.sample)+'</p></div><div class="hybridpanel"><b>🔬 Why the body does this</b><p>'+esc(t.why)+'</p></div></div>'+
+ '<div style="font-size:15px;font-weight:700"><b>📘 Additional reference interpretation</b>'+window.VPQ_DIAGNOSTIC_MASTER?.cards?.(t.kind)+'</div>'+
  '<details class="gasconcept"><summary>⚠️ Interpretation trap</summary><p>'+esc(t.pitfall)+'</p></details>'+
  '<div class="hybridpatient"><h3>🏥 Patient vignette</h3><p>'+esc(t.patient)+'</p>'+
  (h.stage===0?hybridBtn('hybrid-run',t.kind==='sendout'?'📦 Send sample · View lab return':'⚡ Run point-of-care analyzer'):'<div class="hybridresult"><b>'+(t.kind==='sendout'?'📨 Reference lab report':'📈 Analyzer reading')+'</b><p>'+esc(t.result)+'</p></div>')+
