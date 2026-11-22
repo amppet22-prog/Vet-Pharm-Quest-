@@ -206,6 +206,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 10",
       "curated": true
+    },
+    {
+      "prompt": "Which two drugs address ventricular ectopic beats (PVC's) and what is their MOA?",
+      "answer": "Verapamill and diltiazem\nClass IV: Ca2+ channel blockers",
+      "why": "Verapamil is IV for short-term use and diltiazem is oral for long-term use.",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwr9pekc-jgnm6",
+      "domain": "pharmacology",
+      "lecture": "Lecture 14",
+      "curated": true
     }
   ],
   "hidden": []
