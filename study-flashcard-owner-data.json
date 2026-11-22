@@ -168,6 +168,12 @@
       "answer": "It is used for selected equine airway disease, with food-animal and competition limits\n.",
       "why": "β2 stimulation may cause sweating, tremors, tachycardia or excitement.\nLasts 6-8 hours and has been abused in racehorses but there is no cardiopulmonary advantage for this.",
       "slide": "Lecture 15 · submitted recall notes + clinically reviewed guidance"
+    },
+    "pharm-e2-resp15-030": {
+      "prompt": "What is thioredoxin?",
+      "answer": "An endogenous protein-disulfide reductase.",
+      "why": "It can alter redox signaling and mucosal inflammatory responses.\nIndicated for BRD and heaves (horses). \nCan activate Beta defensins--> antibacterial.\nNeeds a specific lung analog because this does NOT penetrate cells.",
+      "slide": "Lecture 15 · submitted recall notes + clinically reviewed guidance"
     }
   },
   "custom": [
