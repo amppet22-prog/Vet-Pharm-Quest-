@@ -4881,6 +4881,7 @@ const vpqCompanionCategories=[
 ];
 let vpqCompanionTab='dog';
 const vpqCompanionCatalog=[
+ {id:'dog-mera',name:'Mera · Husky × Shepherd',category:'dog',pet:'🐕',petBreed:'husky-shepherd',level:1,price:0,image:null},
  ...vpqBatch1Dogs.filter(d=>d&&d.species==='dog'&&/^dog-b1-[0-9a-f]{12}$/.test(d.id)).map((d,i)=>({
    id:d.id,category:'dog',name:d.label,pet:'🐕',petBreed:d.id,
    level:i<4?1:i<12?3:i<24?6:i<36?10:15,
@@ -4922,7 +4923,7 @@ const vpqCompanionLv=()=>Math.floor(Math.max(0,Number(state.xp)||0)/LEVEL_THRESH
 if(!Array.isArray(state.vpqCompanionOwned))state.vpqCompanionOwned=[];
 if(!state.vpqCompanionId || !vpqCompanionById(state.vpqCompanionId)){
  const oldDog=vpqCompanionCatalog.find(c=>c.category==='dog'&&c.petBreed===state.petBreed);
- state.vpqCompanionId=oldDog?.id||'cat-tuxedo';
+ state.vpqCompanionId=oldDog?.id||(state.pet==='🐈'?'cat-tuxedo':'dog-mera');
 }
 // Free starters never need an explicit purchase record.
 function vpqCompanionOwned(c){return !!c&&(c.price===0||state.vpqCompanionOwned.includes(c.id))}
@@ -4961,20 +4962,20 @@ vpqUpdatePetGallery=function(){
  if(!holder)return;
  const tabs=vpqCompanionCategories.map(([id,emoji,label])=>
   '<button type="button" data-vpqcomp-tab="'+id+'" class="'+(vpqCompanionTab===id?'chosen':'')+'">'+emoji+' '+label+'</button>').join('');
- const list=vpqCompanionCatalog.filter(c=>c.category===vpqCompanionTab && (!c.image||vpqCompanionValid(c)));
+ const list=vpqCompanionCatalog.filter(c=>c.category===vpqCompanionTab);
  const cards=list.map(c=>{
   const owned=vpqCompanionOwned(c),levelOK=vpqCompanionLv()>=c.level;
   const selected=state.vpqCompanionId===c.id;
   const afford=Number(state.coins)>=c.price;
-  const status=selected?'✓ Equipped':owned?'Equip':!levelOK?'🔒 Level '+c.level:!afford?'🪙 '+c.price:'🪙 Buy '+c.price;
-  const disabled=selected||(!owned&&(!levelOK||!afford));
+  const status=!vpqCompanionValid(c)?'Image check pending':selected?'✓ Equipped':owned?'Equip':!levelOK?'🔒 Level '+c.level:!afford?'🪙 '+c.price:'🪙 Buy '+c.price;
+  const disabled=selected||!vpqCompanionValid(c)||(!owned&&(!levelOK||!afford));
   return '<article class="vpq-companion-card '+(selected?'chosen':'')+'">'+
     '<div class="vpq-companion-figure">'+vpqCompanionAvatar(c)+'</div>'+
     '<strong>'+escapeHtml(c.name)+'</strong>'+
     '<span class="vpq-companion-meta">'+(c.price===0?'Free starter':'Level '+c.level+' · '+c.price+' coins')+'</span>'+
     '<button type="button" data-vpqcomp-act="'+escapeHtml(c.id)+'" '+(disabled?'disabled':'')+'>'+status+'</button></article>';
  }).join('');
- holder.innerHTML='<div class="vpq-companion-heading"><h3>🐾 Companion Collection</h3><span>Level '+vpqCompanionLv()+' · '+state.coins+' 🪙</span></div>'+
+ holder.innerHTML='<div class="vpq-companion-heading"><h3>🐾 Companion Collection · Shop v4.1</h3><span>Level '+vpqCompanionLv()+' · '+state.coins+' 🪙</span></div>'+
   '<p class="tiny">Earn XP in lessons, cases and arcade games to unlock companions; spend the coins you already earn. Purchased companions stay yours.</p>'+
   '<div class="vpq-pet-tabs vpq-companion-tabs">'+tabs+'</div>'+
   '<div class="vpq-companion-grid">'+(cards||'<p class="small">No game-ready art in this group yet. More companions coming soon.</p>')+'</div>';
