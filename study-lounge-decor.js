@@ -82,7 +82,7 @@ function botanicals(){
 function habitat(){
  const deluxe=chosen('habitat')==='lounge-reptile-deluxe';
  // Left wall, behind the couch: proper stand, shaded basking rock and visible lizard.
- return '<g transform="translate(19 185)"><ellipse cx="69" cy="141" rx="64" ry="10" fill="#827884" opacity=".16"/>'+
+ return '<g transform="translate(9 193) scale(.60)"><ellipse cx="69" cy="141" rx="64" ry="10" fill="#827884" opacity=".16"/>'+
  '<rect x="7" y="4" width="128" height="108" rx="9" fill="#5e8079" stroke="#557a79" stroke-width="6"/>'+
  '<rect x="15" y="12" width="112" height="84" rx="5" fill="#d6e7c6" stroke="#b5c9b0" stroke-width="3"/>'+
  '<path d="M17 73Q72 60 125 76V95H17Z" fill="#d0b58a"/>'+
@@ -129,10 +129,10 @@ const oldArt=art.roomArt.bind(art);
 art.roomArt=function(k){
  const svg=oldArt(k);if(k!=='study')return svg;
  // Layer the terrarium BEHIND the sofa and bookshelf instead of over them.
- const couchAnchor='<ellipse cx="180" cy="444"';
+ const couchAnchor='<ellipse cx="178" cy="449"';
  let withHabitat=svg.includes(couchAnchor)?svg.replace(couchAnchor,habitat()+couchAnchor):svg;
  if(chosen('coffee')==='lounge-coffee-deluxe')withHabitat=withHabitat.replace(/<g transform="translate\(352 223\) scale\(1\.12\)">[\s\S]*?<\/g>/,'');
- if(['lounge-egg-chair','lounge-hanging-chair'].includes(chosen('seating')))withHabitat=withHabitat.replace(/<ellipse cx="180" cy="444"[\s\S]*?(?=<!-- Skills practice nook|<g><rect x="722" y="90")/,'');
+ if(['lounge-egg-chair','lounge-hanging-chair'].includes(chosen('seating')))withHabitat=withHabitat.replace(/<ellipse cx="178" cy="449"[\s\S]*?(?=<g><rect x="722" y="90")/,'');
  return withHabitat.replace(/<\/svg>\s*$/,svgDecor()+'</svg>');
 };
 function buttons(){
