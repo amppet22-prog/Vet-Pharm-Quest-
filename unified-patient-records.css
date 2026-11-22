@@ -1,0 +1,28 @@
+
+/* Shared patient chart across Reception, Exam, Treatment. Compact pastel UI. */
+.vpq-unified{font-size:14px;line-height:1.5;color:#354967;max-width:100%;overflow-wrap:anywhere}
+.vpq-unified *{box-sizing:border-box}
+.vpq-unified .vpq-unified-hero{background:linear-gradient(120deg,#f2eafd,#e9f8f1);border:1px solid #d9cfea;border-radius:12px;padding:12px;margin:4px 0 10px}
+.vpq-unified .vpq-unified-hero>b{font-size:16px;color:#574b7b}
+.vpq-unified p{margin:5px 0 8px}
+.vpq-unified .vpq-unified-active{background:#fff4e5;border:1px solid #ebd4b2;border-radius:11px;padding:10px 12px;margin:9px 0}
+.vpq-unified .vpq-unified-active b{font-size:14px}
+.vpq-unified .vpq-unified-status{font-size:12px;color:#557277;font-weight:850}
+.vpq-unified .vpq-unified-group{background:#faf8ff;border:1px solid #dfd5ed;border-radius:12px;margin:8px 0;overflow:hidden}
+.vpq-unified .vpq-unified-group:nth-of-type(3){background:#f3fbf7;border-color:#cbe6d4}
+.vpq-unified .vpq-unified-group summary{cursor:pointer;padding:11px;font-size:14px;font-weight:850;color:#584a77}
+.vpq-unified .vpq-unified-group summary small{font-size:11px;color:#798197}
+.vpq-unified .vpq-unified-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:7px;padding:4px 10px 11px}
+.vpq-unified .vpq-unified-case{display:flex;flex-direction:column;gap:4px;text-align:left;background:#fff;border:1px solid #d8dfe9;border-radius:10px;padding:10px;min-height:65px}
+.vpq-unified .vpq-unified-case b{font-size:13px;color:#405574}
+.vpq-unified .vpq-unified-case small{font-size:11px;color:#6e7f90;font-weight:650}
+.vpq-unified .vpq-unified-panel{background:#fff;border:1px solid #d9e2ed;border-radius:10px;padding:10px 12px;margin:8px 0}
+.vpq-unified .vpq-unified-panel:nth-of-type(even){background:#f7f4ff}
+.vpq-unified .vpq-unified-panel b{font-size:13px;color:#60517e}
+.vpq-unified .vpq-unified-two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vpq-unified .vpq-unified-two .vpq-unified-panel{margin:4px 0}
+.vpq-unified .vpq-unified-actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.vpq-unified .vpq-unified-actions button,.vpq-unified .vpq-unified-active button{font-size:12px;padding:8px 11px;border-color:#c6cae1;background:#f6f2ff}
+.vpq-unified .vpq-unified-note{font-size:11px;color:#6b7791;padding:7px 0}
+.vpq-unified button:focus-visible,.vpq-unified summary:focus-visible{outline:3px solid #a38aca;outline-offset:2px}
+@media(max-width:640px){.vpq-unified .vpq-unified-grid,.vpq-unified .vpq-unified-two{grid-template-columns:1fr}}
