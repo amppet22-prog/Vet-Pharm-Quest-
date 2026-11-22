@@ -266,7 +266,7 @@ function open(id='start'){
  '<div class="vra-tabs">'+S.map(x=>'<button type="button" data-vpq-report="'+x.id+'" aria-current="'+(current===x.id)+'">'+x.icon+' '+x.name+'</button>').join('')+'</div>'+
  '<div class="vra-kicker"><b>📚 Learn First → Interpret Trends → Why the Body Responds → Patient Workups.</b> Course-guided notes with compact expandable detail.</div>'+
  views[current]()+detailedExtras(current)+sources+
- '<div class="vra-btns"><button type="button" data-vpq-report-action="multistage">🏥 Multistage Workups</button>'+link('start','🧭 Overview')+'<button type="button" data-vpq-report-action="classic">🩸 CBC & Chemistry tests</button><button type="button" data-vpq-report-action="hybrid">⚡ In-house / Send-out analyzer</button><button type="button" data-vpq-report-action="cases">🐾 Referral patients</button></div></div>');
+ '<div class="vra-btns"><button type="button" data-vpq-report-action="species-cbc">🐾 Species-specific CBC</button><button type="button" data-vpq-report-action="species-chem">🧪 Species-specific Chemistry</button><button type="button" data-vpq-report-action="multistage">🏥 Multistage Workups</button>'+link('start','🧭 Overview')+'<button type="button" data-vpq-report-action="classic">🩸 CBC & Chemistry tests</button><button type="button" data-vpq-report-action="hybrid">⚡ In-house / Send-out analyzer</button><button type="button" data-vpq-report-action="cases">🐾 Referral patients</button></div></div>');
  return true;
 }
 function handleAcademyClick(event){
@@ -275,6 +275,8 @@ function handleAcademyClick(event){
  event.preventDefault();event.stopImmediatePropagation();
  if(target.dataset.vpqReport)return open(target.dataset.vpqReport);
  if(target.dataset.vpqReportAnswer){const parts=target.dataset.vpqReportAnswer.split(':').map(Number);reveal[parts[0]]=parts[1];return open('practice')}
+ if(target.dataset.vpqReportAction==='species-cbc')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('cbc');
+ if(target.dataset.vpqReportAction==='species-chem')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('chem');
  if(target.dataset.vpqReportAction==='multistage')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();
  if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
  if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
@@ -291,6 +293,8 @@ function init(context){
  event.preventDefault();
  if(target.dataset.vpqReport)return open(target.dataset.vpqReport);
  if(target.dataset.vpqReportAnswer){const parts=target.dataset.vpqReportAnswer.split(':').map(Number);reveal[parts[0]]=parts[1];return open('practice')}
+ if(target.dataset.vpqReportAction==='species-cbc')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('cbc');
+ if(target.dataset.vpqReportAction==='species-chem')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('chem');
  if(target.dataset.vpqReportAction==='multistage')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();
  if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
  if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
