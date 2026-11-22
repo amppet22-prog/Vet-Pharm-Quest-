@@ -76,43 +76,104 @@ function scene(key){
    ).join('')+'</g><path d="M65 338h868" stroke="#c4b2cf" stroke-width="14"/>'+
    '<g><circle cx="151" cy="181" r="7" fill="#ebafd3"/><circle cx="854" cy="181" r="7" fill="#b6ddcd"/><path d="M152 155l5 10 11 2 -8 8 2 11 -10-5 -10 5 3-11 -8-8 10-2z" fill="#f9d7a3"/></g>';
  }else if(iso){
-   s+='<g filter="url(#vpqSpecShadow)">'+rect(95,193,230,145,'#e0f7f2','#8cbab0')+
-   '<rect x="115" y="300" width="184" height="23" rx="10" fill="#a8d1c5"/>'+
-   // A friendly spaniel-style isolation patient, fully inside the kennel illustration.
-   '<path d="M261 279q28 -32 36 -1" stroke="#b68464" stroke-width="12" stroke-linecap="round" fill="none"/>'+
-   '<path d="M177 293v29M242 294v28" stroke="#b78669" stroke-width="13" stroke-linecap="round"/>'+
-   '<ellipse cx="222" cy="286" rx="58" ry="29" fill="#dfae83" stroke="#b98869" stroke-width="4"/>'+
-   '<path d="M191 269q22 -16 47 4l13 31h-65z" fill="#f5ddc4"/>'+
-   '<circle cx="162" cy="267" r="32" fill="#e8b88c" stroke="#be8f70" stroke-width="3"/>'+
-   '<path d="M141 251q-20 -15 -21 4q-3 19 11 25l19 -13" fill="#aa785e" stroke="#966c59" stroke-width="3"/>'+
-   '<path d="M178 252q18 -17 17 7q0 12 -17 15" fill="#aa785e" stroke="#966c59" stroke-width="3"/>'+
-   '<ellipse cx="143" cy="281" rx="24" ry="14" fill="#fff3df"/>'+
-   '<ellipse cx="128" cy="278" rx="7" ry="5" fill="#58454b"/>'+
-   '<circle cx="163" cy="264" r="5" fill="#44373f"/><circle cx="165" cy="262" r="1.6" fill="#fff"/>'+
-   '<path d="M135 291q14 10 23 -3" stroke="#bd8677" stroke-width="2" fill="none"/>'+
-   '<ellipse cx="175" cy="315" rx="14" ry="7" fill="#f4d4b3"/><ellipse cx="246" cy="315" rx="14" ry="7" fill="#f4d4b3"/>'+
-   rect(399,186,205,154,'#f8fefa','#a0c7b5')+
-   '<path d="M415 219h170M415 251h170M415 282h170" stroke="#b4d8cb" stroke-width="6"/>'+
-   '<text x="502" y="214" text-anchor="middle" font-size="16" font-weight="900" fill="#568b77">DISEASE LIBRARY</text>'+
-   [430,465,500,535,570].map((x,i)=>'<rect x="'+x+'" y="295" width="21" height="32" fill="'+(i%2?'#b8a9dd':'#e7acc7')+'"/>').join('')+
-   rect(711,195,210,144,'#e9f5f6','#a1bfc9')+
-   '<rect x="743" y="216" width="149" height="83" rx="6" fill="#385b73"/>'+
-   '<path d="M763 259h29l12 -23 14 36 12 -27 12 14h33" stroke="#85d9bb" stroke-width="5" fill="none"/>'+
-   '<text x="817" y="323" text-anchor="middle" fill="#587b8b" font-size="15" font-weight="900">PUBLIC HEALTH</text></g>'+
-   // Infection-control environment: visible risk sign, PPE storage, handwashing and cleaning cart.
-   '<g font-family="Arial,sans-serif" font-weight="900">'+
-   '<rect x="109" y="111" width="171" height="52" rx="12" fill="#fff2cc" stroke="#e6b56a" stroke-width="4"/>'+
-   '<text x="194" y="134" text-anchor="middle" font-size="16" fill="#936b2e">☣ BIOHAZARD</text>'+
-   '<text x="194" y="152" text-anchor="middle" font-size="12" fill="#936b2e">CHECK ISOLATION PPE</text>'+
-   '<rect x="715" y="104" width="194" height="59" rx="12" fill="#e0f5f4" stroke="#8fbdc4" stroke-width="4"/>'+
-   '<text x="810" y="128" text-anchor="middle" font-size="15" fill="#467c82">🧤 GLOVES · 🥼 GOWN</text>'+
-   '<text x="810" y="148" text-anchor="middle" font-size="13" fill="#467c82">MASK · HAND HYGIENE</text></g>'+
-   '<g><rect x="324" y="272" width="56" height="77" rx="9" fill="#bad4e0" stroke="#8bb1be" stroke-width="4"/>'+
-   '<path d="M345 268h23M355 267v-15M349 285h15" fill="none" stroke="#709daa" stroke-width="7"/>'+
-   '<rect x="608" y="290" width="76" height="61" rx="9" fill="#b6d6d1" stroke="#82ada8" stroke-width="4"/>'+
-   '<rect x="622" y="275" width="22" height="29" rx="5" fill="#d5eaf6" stroke="#9bbccc" stroke-width="3"/>'+
-   '<rect x="651" y="278" width="16" height="28" rx="4" fill="#f0dde8" stroke="#c8adc2" stroke-width="3"/>'+
-   '<text x="646" y="331" text-anchor="middle" font-size="12" font-family="Arial" font-weight="900" fill="#4e8987">CLEAN</text></g>';
+   // One Health ward: washable work surfaces, dedicated kennel, clean-to-dirty workflow and supplies.
+   s+='<g font-family="Arial,sans-serif">'+
+   // Wall hygiene infrastructure and clean/dirty zoning.
+   '<path d="M67 333H933" stroke="#89bdb9" stroke-width="10"/>'+
+   '<rect x="68" y="72" width="864" height="18" fill="#cce7df"/>'+
+   '<path d="M69 345H931" stroke="#fff" stroke-width="3"/>'+
+   '<path d="M354 343L308 493M674 343L700 493" fill="none" stroke="#f4f9f6" stroke-width="4" stroke-dasharray="12 9"/>'+
+   '<rect x="115" y="364" width="155" height="20" rx="10" fill="#ffe6d8" stroke="#e6aa99" stroke-width="2"/>'+
+   '<text x="192" y="379" font-size="10" font-weight="900" fill="#955e53" text-anchor="middle">ISOLATION PATIENT ZONE</text>'+
+   '<rect x="386" y="363" width="213" height="20" rx="10" fill="#e1f6ee" stroke="#9acbb9" stroke-width="2"/>'+
+   '<text x="493" y="378" font-size="10" font-weight="900" fill="#487b70" text-anchor="middle">CLEAN HANDS · CLEAN EQUIPMENT</text>'+
+   '<rect x="747" y="364" width="145" height="20" rx="10" fill="#e9f0fb" stroke="#b4c8df" stroke-width="2"/>'+
+   '<text x="820" y="379" font-size="10" font-weight="900" fill="#58778e" text-anchor="middle">PUBLIC HEALTH DESK</text>'+
+   // Isolation kennel and recognizable canine patient.
+   '<rect x="94" y="192" width="230" height="155" rx="14" fill="#c6e7de" stroke="#79aaa0" stroke-width="7"/>'+
+   '<rect x="109" y="208" width="200" height="121" rx="9" fill="#ecf8f3" stroke="#aacdc2" stroke-width="3"/>'+
+   '<rect x="115" y="292" width="187" height="27" rx="8" fill="#c3d4c6"/>'+
+   '<rect x="120" y="310" width="174" height="7" rx="3" fill="#9dbbaf"/>'+
+   '<path d="M115 209v119M309 209v119" stroke="#d4e8df" stroke-width="5"/>'+
+   '<path d="M306 215v108" stroke="#78a89b" stroke-width="3"/>'+
+   '<circle cx="306" cy="267" r="4" fill="#e0c589"/>'+
+   '<path d="M258 278q27 -24 31 1" stroke="#b68464" stroke-width="10" fill="none" stroke-linecap="round"/>'+
+   '<path d="M178 289v25M238 289v25" stroke="#b78669" stroke-width="11" stroke-linecap="round"/>'+
+   '<ellipse cx="218" cy="286" rx="52" ry="27" fill="#dfae83" stroke="#b98869" stroke-width="3"/>'+
+   '<path d="M189 268q21 -14 46 3l10 29h-62z" fill="#f5ddc4"/>'+
+   '<circle cx="164" cy="269" r="29" fill="#e8b88c" stroke="#be8f70" stroke-width="3"/>'+
+   '<path d="M142 253q-18 -13 -19 5q-2 16 10 23l19 -12M179 252q17 -14 16 8q0 10 -17 14" fill="#aa785e" stroke="#966c59" stroke-width="3"/>'+
+   '<ellipse cx="145" cy="282" rx="21" ry="11" fill="#fff3df"/>'+
+   '<ellipse cx="130" cy="280" rx="6" ry="4" fill="#58454b"/>'+
+   '<circle cx="165" cy="265" r="4.5" fill="#44373f"/><circle cx="166" cy="263" r="1.4" fill="#fff"/>'+
+   '<path d="M137 291q13 8 21 -2" stroke="#bd8677" stroke-width="2" fill="none"/>'+
+   '<ellipse cx="180" cy="313" rx="12" ry="5" fill="#f4d4b3"/><ellipse cx="240" cy="313" rx="12" ry="5" fill="#f4d4b3"/>'+
+   '<rect x="102" y="199" width="95" height="19" rx="5" fill="#fffdf2" stroke="#99c7b8" stroke-width="2"/>'+
+   '<text x="150" y="212" font-size="10" font-weight="900" fill="#57877b" text-anchor="middle">ISOLATION KENNEL</text>'+
+   // Library work surface, shelving and reference files.
+   '<rect x="393" y="188" width="222" height="154" rx="14" fill="#d2e9df" stroke="#86b4a5" stroke-width="6"/>'+
+   '<rect x="408" y="202" width="194" height="125" rx="8" fill="#fbfff9" stroke="#c1d8c8" stroke-width="3"/>'+
+   '<text x="505" y="219" text-anchor="middle" font-size="14" font-weight="900" fill="#4b8a78">DISEASE LIBRARY</text>'+
+   '<path d="M420 234H591M420 295H591" stroke="#b8d5c9" stroke-width="5"/>'+
+   [0,1,2,3,4,5,6].map((n)=>{const x=425+n*23;return '<rect x="'+x+'" y="'+(245+(n%2)*5)+'" width="17" height="'+(42-(n%2)*5)+'" rx="2" fill="'+['#ceb6d9','#a7d5c6','#ebc4b8','#a8c6dd'][n%4]+'" stroke="#ffffff" stroke-width="1.4"/>'}).join('')+
+   '<rect x="429" y="301" width="133" height="20" rx="3" fill="#fff5e8" stroke="#bdcfc1" stroke-width="2"/>'+
+   '<path d="M441 306h87m-87 5h112m-112 5h73" stroke="#a2bdae" stroke-width="2"/>'+
+   '<rect x="570" y="300" width="22" height="22" rx="3" fill="#d2e7e0" stroke="#98bdb0"/>'+
+   '<text x="581" y="316" font-size="13" text-anchor="middle">🔬</text>'+
+   // Public-health reporting terminal with status display.
+   '<rect x="712" y="190" width="218" height="155" rx="14" fill="#cce5ed" stroke="#8cb7c7" stroke-width="7"/>'+
+   '<rect x="730" y="206" width="180" height="101" rx="10" fill="#365c77" stroke="#83acbc" stroke-width="4"/>'+
+   '<text x="819" y="224" text-anchor="middle" font-size="14" font-weight="900" fill="#f3faff">PUBLIC HEALTH</text>'+
+   '<path d="M747 266h31l11 -19 12 33 13 -24 11 11h60" stroke="#83dcbf" stroke-width="5" fill="none"/>'+
+   '<rect x="747" y="288" width="145" height="6" rx="3" fill="#7397ac"/>'+
+   '<rect x="753" y="316" width="129" height="15" rx="4" fill="#f7fffa" stroke="#a2c6cc" stroke-width="2"/>'+
+   '<text x="818" y="327" text-anchor="middle" font-size="9" font-weight="900" fill="#608c94">SURVEILLANCE · REPORTING</text>'+
+   // Signage: meaningful precautions instead of decor only.
+   '<rect x="93" y="114" width="191" height="54" rx="10" fill="#fff3d7" stroke="#dcb276" stroke-width="3"/>'+
+   '<text x="188" y="135" text-anchor="middle" font-size="16" font-weight="900" fill="#936b2e">☣ BIOHAZARD</text>'+
+   '<text x="188" y="153" text-anchor="middle" font-size="11" font-weight="900" fill="#936b2e">VERIFY ISOLATION PRECAUTIONS</text>'+
+   '<rect x="753" y="112" width="183" height="55" rx="10" fill="#edf9f3" stroke="#9dc6b0" stroke-width="3"/>'+
+   '<text x="844" y="132" text-anchor="middle" font-size="12" font-weight="900" fill="#467c70">PPE BEFORE ENTRY</text>'+
+   '<text x="844" y="151" text-anchor="middle" font-size="10" font-weight="800" fill="#467c70">GOWN · GLOVES · HAND HYGIENE</text>'+
+   // Handwash sink left of library: tap, basin, soap, paper towels.
+   '<g transform="translate(334 248)"><rect x="1" y="30" width="44" height="48" rx="5" fill="#bedbd8" stroke="#83aeb0" stroke-width="3"/>'+
+   '<path d="M5 37Q22 47 41 37L35 56Q22 66 10 56Z" fill="#faffff" stroke="#92bdc2" stroke-width="2.5"/>'+
+   '<path d="M22 37V13q0 -9 10 -9h8" stroke="#7a9fa9" stroke-width="5" fill="none"/>'+
+   '<path d="M27 41v9" stroke="#8ccfe8" stroke-width="2" stroke-dasharray="3 3"/>'+
+   '<rect x="0" y="2" width="12" height="22" rx="3" fill="#b6d9d4" stroke="#7eaca7" stroke-width="2"/>'+
+   '<rect x="3" y="0" width="6" height="5" rx="1" fill="#f6fbf8"/>'+
+   '<rect x="42" y="7" width="18" height="19" rx="3" fill="#f8f9ed" stroke="#acc3b3" stroke-width="2"/>'+
+   '<path d="M47 11h8m-8 5h8" stroke="#b0c6bc" stroke-width="2"/>'+
+   '<text x="25" y="91" text-anchor="middle" font-size="9" font-weight="900" fill="#527e7d">WASH</text></g>'+
+   // Cleaning/terminal-dedicated supply cart; nothing shared with non-isolation zones.
+   '<g transform="translate(631 269)"><rect x="0" y="28" width="67" height="63" rx="5" fill="#bbd7d1" stroke="#88afa9" stroke-width="3"/>'+
+   '<path d="M0 47h67M7 71h53" stroke="#8aaea4" stroke-width="3"/>'+
+   '<rect x="7" y="2" width="17" height="30" rx="4" fill="#cce9ed" stroke="#92b3c2" stroke-width="2"/>'+
+   '<rect x="11" y="-2" width="9" height="7" rx="2" fill="#a6c4d0"/>'+
+   '<rect x="29" y="9" width="15" height="22" rx="3" fill="#f6d9df" stroke="#beabb4" stroke-width="2"/>'+
+   '<path d="M34 8v-6h12" stroke="#a3b6b6" stroke-width="2" fill="none"/>'+
+   '<rect x="47" y="15" width="13" height="16" rx="2" fill="#f4f7ed" stroke="#b0c4b5"/>'+
+   '<rect x="8" y="55" width="50" height="11" rx="3" fill="#ecf6f0"/>'+
+   '<text x="33" y="63" text-anchor="middle" font-size="8" font-weight="900" fill="#5c8b7f">DISINFECT</text>'+
+   '<circle cx="13" cy="92" r="7" fill="#627f84"/><circle cx="55" cy="92" r="7" fill="#627f84"/></g>'+
+   // PPE dispensing station left edge, biohazard waste adjacent to isolation kennel.
+   '<g transform="translate(17 201)"><rect width="60" height="117" rx="7" fill="#e8f5ed" stroke="#95bdb0" stroke-width="3"/>'+
+   '<text x="30" y="13" text-anchor="middle" font-size="9" font-weight="900" fill="#5e8d80">PPE</text>'+
+   '<rect x="7" y="21" width="46" height="28" rx="4" fill="#fdfefd" stroke="#b7cec3"/>'+
+   '<path d="M14 35l7 -8h18l8 8 -6 12H20Z" fill="#b8d7e5" stroke="#95b9c5" stroke-width="1.5"/>'+
+   '<rect x="7" y="54" width="46" height="23" rx="3" fill="#fffefa" stroke="#b7cec3"/>'+
+   '<text x="30" y="70" text-anchor="middle" font-size="10">🧤</text>'+
+   '<rect x="7" y="82" width="46" height="28" rx="3" fill="#fef9f2" stroke="#b7cec3"/>'+
+   '<text x="30" y="100" text-anchor="middle" font-size="10">😷</text></g>'+
+   '<g transform="translate(82 353)"><rect width="30" height="57" rx="4" fill="#e7acac" stroke="#ad808b" stroke-width="3"/>'+
+   '<rect x="-3" y="-5" width="36" height="8" rx="3" fill="#b97f83"/>'+
+   '<text x="15" y="32" text-anchor="middle" font-size="14">☣</text>'+
+   '<text x="15" y="45" text-anchor="middle" font-size="6.5" font-weight="900" fill="#743c4b">WASTE</text></g>'+
+   // Boot sole disinfecting mat at the clean-to-dirty threshold.
+   '<rect x="314" y="383" width="65" height="29" rx="5" fill="#99bcb1" stroke="#6f9c90" stroke-width="3"/>'+
+   '<path d="M322 388h49m-49 7h49m-49 7h49" stroke="#d8e9df" stroke-width="2"/>'+
+   '<text x="346" y="422" text-anchor="middle" font-size="8" font-weight="900" fill="#568078">BOOT MAT</text>'+
+   '</g>';
  }else if(key==='skills'){
    // Three identifiable work areas: syringe training, venous collection, specimen tubes.
    s+='<g filter="url(#vpqSpecShadow)">'+
@@ -202,6 +263,18 @@ style.textContent='.vpqSpecArt{position:absolute;inset:0;width:100%;height:100%;
 '.vpqSpecHit.vpqSpecNear:after{content:"E · INTERACT";position:absolute;top:1%;left:50%;transform:translateX(-50%);font-size:11px;font-weight:900;color:#744d22;background:#fff8dd;border:2px solid #e9bf76;border-radius:12px;padding:4px 8px;white-space:nowrap}'+
 '@media(max-width:650px){.vpqSpecHit span{font-size:10px;padding:4px 5px;white-space:normal;min-width:80%}}';
 document.head.appendChild(style);
+
+const isolationPolish=document.createElement('style');
+isolationPolish.id='vpq-isolation-room-polish';
+isolationPolish.textContent=
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit{border:1px solid transparent;background:transparent;box-shadow:none}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit:hover,.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit:focus-visible,.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit.vpqSpecNear{border:1.5px solid #74b0a8!important;background:#c9eee514!important;outline:none!important;box-shadow:0 0 0 2px #c7e9df66!important}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit span{font-size:11px;min-width:0;width:max-content;max-width:100%;bottom:-10%;padding:5px 9px;border:1.5px solid #9ebcb5;background:#fffdf7;color:#466a6b;box-shadow:0 2px 5px #2f555324}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit.vpqSpecNear span{background:#edf8ef!important;border-color:#8cb9aa!important}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp{position:absolute;pointer-events:auto;width:25px;height:25px;padding:0;border-radius:50%;background:#f7fffb;color:#336b73;border:2px solid #78a6a5;z-index:9;font-size:15px;font-weight:900;transform:none!important;box-shadow:0 2px 6px #39545238}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp:hover{background:#e0f6ee}';
+document.head.appendChild(isolationPolish);
+
 // Necropsy labels should not cover the illustrated tables, specimens, or player.
 const necroStyle=document.createElement('style');
 necroStyle.textContent='.stage[data-room="necropsy"] .vpqSpecHit span{bottom:-1%;min-width:0;width:max-content;max-width:125px;white-space:normal;font-size:10px;line-height:1.15;padding:3px 6px;border-width:1px;border-radius:9px;background:#fffdf4e8;box-shadow:0 2px 5px #60718d27;opacity:.68;transition:opacity .15s,transform .15s}'+
