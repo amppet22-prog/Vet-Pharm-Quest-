@@ -11,7 +11,7 @@ const data={
   {x:1.2,y:31,w:15.8,h:40,walk:9,label:'🩸 Coagulation Bench',subtitle:'Questions + interpretation',hint:'Practice PT / aPTT interpretation questions',kind:'practice',action:'advancedCoag'},
   {x:17.6,y:31,w:15.8,h:40,walk:25,label:'🫧 Blood Gas Station',subtitle:'Acid–base practice',hint:'Practice blood gas and acid–base interpretation',kind:'practice',action:'advancedGas'},
   {x:34,y:31,w:15.8,h:40,walk:41,label:'🧫 Urinalysis Bench',subtitle:'UA questions + sediment',hint:'Choose urinalysis questions or visual sediment references',kind:'practice',action:'advancedUrine'},
-  {x:50.4,y:31,w:15.8,h:40,walk:58,label:'🧬 Hybrid Diagnostic Bench',subtitle:'Lactate · iCa · send-outs',hint:'In-house lactate/ionized calcium and reference laboratory thyroid/fructosamine testing',kind:'practice',action:'advancedHybrid'},
+  {x:50.4,y:31,w:15.8,h:40,walk:58,label:'🩸 CBC + Chemistry',subtitle:'PCV/TS + test menu',hint:'CBC, chemistry, PCV/TS, lactate, ionized calcium and send-out diagnostics',kind:'practice',action:'advancedHybrid'},
   {x:66.8,y:31,w:15.8,h:40,walk:74,label:'🐾 Referral Cases',subtitle:'Workup questions',hint:'Open patient differential and ancillary testing cases',kind:'practice',action:'advancedCases'},
   {x:83.2,y:31,w:15.6,h:40,walk:91,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
  ],
