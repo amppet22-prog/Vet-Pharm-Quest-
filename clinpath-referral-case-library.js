@@ -8,11 +8,69 @@ const cases=[
 {id:'2.1',kind:'DDx',title:'Cat · Platelet clumps versus true thrombocytopenia',source:'Cases_Part1.docx · Case 2.1 · CP2 slides 15, 57–59, 62',signal:'6-year-old neutered male domestic shorthair',history:'Indoor-only cat at annual exam and vaccination. Eating normally, no bleeding. Traumatic, slow venipuncture.',exam:'Bright, normal mucous membranes, no petechiae or ecchymoses, temperature 38.6 °C.',panels:[{name:'CBC',rows:[['Platelets (impedance)','38 ×10³/µL','300–800'],['MPV','19.6 fL','11.0–18.1'],['WBC','20.8 ×10³/µL','5.5–19.5'],['HCT','36 %','30–45'],['Hemoglobin','12.1 g/dL','10–15']]}],smear:'Large platelet clumps at feathered edge; platelets elsewhere appear adequate. RBC and WBC morphology normal.',photos:['Cat smear with platelet aggregates','RBC-platelet dot plot with clump cluster (CP2 slide 59)'],questions:[{q:'What explains the apparent severe thrombocytopenia?',options:['Platelet aggregation causing pseudothrombocytopenia','Confirmed immune-mediated destruction','Severe global marrow failure','Proven disseminated intravascular coagulation'],answer:0,why:'Marked platelet clumps on the film and traumatic collection undermine the impedance platelet count. Verify by manual blood-film estimate and appropriate recollection.'}],differentials:[{name:'Platelet clumping / pseudothrombocytopenia',tier:'best',support:'Platelet aggregates at feathered edge, normal appearance and no bleeding',against:'Must verify a reliable platelet estimate',test:'Manual smear estimate; gentle recollection and recheck'},{name:'Feline impedance-count artifact',tier:'possible',support:'Feline platelet size may overlap RBC size in impedance counts',against:'Aggregation is directly documented and is more immediate',test:'Film and alternative counting method if available'},{name:'True thrombocytopenia (consumption, immune-mediated, infectious or marrow)',tier:'unlikely',support:'Could cause a genuinely reduced platelet count',against:'Film suggests platelets are adequate and patient lacks hemorrhagic findings',test:'Confirm true reduction before investigating underlying causes'},{name:'Macroplatelet effect alone',tier:'unlikely',support:'High MPV and large feline platelets can affect analyzer results',against:'Large clumps, not only macroplatelets, were seen',test:'Review platelet distribution on smear'}]}
 ];
 const h=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+if(!document.getElementById('vpqReferralCatalogStyle')){
+ const style=document.createElement('style');
+ style.id='vpqReferralCatalogStyle';
+ style.textContent=
+ '.modal:has(.refcatalog){width:min(1030px,calc(100vw - 24px));max-height:95dvh}'+
+ '#modalBody .refcatalog{max-width:none;font-size:16px}'+
+ '#modalBody .refcataloghero{background:linear-gradient(115deg,#dceaff,#eee1ff 70%,#fce7f3);border:2px solid #b8bce8;border-radius:17px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}'+
+ '#modalBody .refcataloghero h2{font-size:25px;margin:2px 0 6px;color:#31578c}'+
+ '#modalBody .refcataloghero p{margin:4px 0;font-size:15px;line-height:1.5}'+
+ '#modalBody .refcatalogcount{flex:0 0 135px;display:flex;flex-direction:column;align-items:center;padding:12px;background:#ffffffb8;border-radius:13px;text-align:center;color:#435b8d}'+
+ '#modalBody .refcatalogcount b{font-size:35px}'+
+ '#modalBody .refcatalogcount span{font-size:12px;font-weight:800}'+
+ '#modalBody .refcatalogcontrols{margin:13px 0}'+
+ '#modalBody .refcatalogfilters{display:flex;gap:7px;flex-wrap:wrap}'+
+ '#modalBody .refcatalogfilters button{font-size:14px;padding:7px 15px;min-height:38px}'+
+ '#modalBody .refcatalogfilters button[aria-pressed=true]{background:#dceaff;border-color:#6d97d3;color:#274b80}'+
+ '#modalBody .refcataloggrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}'+
+ '#modalBody .refcatalogcard{display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:7px;padding:15px;border:2px solid #c8d7eb;background:#fbfdff;border-radius:15px;min-height:175px;white-space:normal}'+
+ '#modalBody .refcatalogcard:nth-child(3n + 2){background:#fcf8ff;border-color:#d3c2ed}'+
+ '#modalBody .refcatalogcard:nth-child(3n){background:#f5fcf9;border-color:#b6dfce}'+
+ '#modalBody .refcatalogcard:hover,#modalBody .refcatalogcard:focus-visible{border-color:#6594d7;box-shadow:0 5px 14px #365b8a24;transform:translateY(-2px)}'+
+ '#modalBody .refcataloghead{display:flex;justify-content:space-between;gap:8px;align-items:center;color:#44668d}'+
+ '#modalBody .refcataloghead small{background:#fff;border:1px solid #d8e1ed;border-radius:30px;padding:3px 8px;color:#657b91;font-size:11px}'+
+ '#modalBody .refcatalogcard strong{font-size:18px;color:#293e66}'+
+ '#modalBody .refcatalogmeta{display:flex;flex-wrap:wrap;gap:6px}'+
+ '#modalBody .refcatalogmeta em{font-size:12px;font-style:normal;background:#e9f0fb;border-radius:7px;padding:4px 7px;color:#445e8b;font-weight:800}'+
+ '#modalBody .refcatalogfocus{font-size:13px;color:#5d6b83}'+
+ '#modalBody .refcatalogcta{margin-top:auto;font-weight:900;color:#345da0}'+
+ '#modalBody .refcatalogfooter{margin-top:14px}'+
+ '@media(max-width:690px){#modalBody .refcataloggrid{grid-template-columns:1fr}#modalBody .refcataloghero{padding:12px;align-items:flex-start}#modalBody .refcataloghero h2{font-size:21px}#modalBody .refcatalogcount{flex-basis:80px;padding:8px}#modalBody .refcatalogcount b{font-size:25px}}';
+ document.head.appendChild(style);
+}
 const storeKey='vpq-referrals-approved-library-v1';
 let progress={};try{progress=JSON.parse(localStorage.getItem(storeKey)||'{}')||{}}catch(e){}
 let current='1.2';
 const save=()=>{try{localStorage.setItem(storeKey,JSON.stringify(progress))}catch(e){}};
 const state=()=>progress[current]||(progress[current]={answers:{},selected:[],lead:'',submitted:false});
+
+const catalog=[
+{id:'001',title:'Dog · PU/PD and weight loss',kind:'DDx',lecture:1,exam:1,focus:'Non-regenerative anemia · renal interpretation',species:'🐶'},
+...cases.map(c=>({id:c.id,title:c.title,kind:c.kind,lecture:Number(c.id.split('.')[0]),exam:Number(c.id.split('.')[0])<=11?1:2,focus:c.kind==='DDx'?'Interpret labs · rank differentials':'Interpret labs · single best answer',species:c.title.startsWith('Horse')?'🐴':c.title.startsWith('Cat')?'🐱':'🐶'}))
+];
+let examFilter='all';
+function home(){
+ const counts={done:0};
+ const grouped=examFilter==='all'?catalog:catalog.filter(c=>String(c.exam)===examFilter);
+ const cards=grouped.map(c=>{
+  const p=c.id==='001'?null:progress[c.id];
+  const answered=p?Object.values(p.answers||{}).filter(a=>a?.checked).length:0;
+  const status=p&&(p.submitted||p.advanced)?'Reviewed':answered?'In progress':'Not started';
+  return '<button type="button" class="refcatalogcard" data-clp-open="'+h(c.id)+'" aria-label="Open Case '+h(c.id)+'">'+
+   '<span class="refcataloghead"><b>'+h(c.species)+' Case '+h(c.id)+'</b><small>'+h(status)+'</small></span>'+
+   '<strong>'+h(c.title)+'</strong>'+
+   '<span class="refcatalogmeta"><em>'+h(c.kind==='DDx'?'🧩 Differential ranking':'🎯 Single best answer')+'</em><em>Lecture '+c.lecture+'</em></span>'+
+   '<span class="refcatalogfocus">'+h(c.focus)+'</span><span class="refcatalogcta">Open patient chart →</span></button>';
+ }).join('');
+ const html='<div class="refcase refcatalog"><div class="refcataloghero"><div><p class="refsmall">ADVANCED CLINICAL PATHOLOGY · REFERRAL PATIENTS</p><h2>🐾 Referral Case Files</h2><p>Read the patient, interpret CBC and chemistry, prioritize differential diagnoses, then choose tests that distinguish competing explanations.</p></div><div class="refcatalogcount"><b>'+catalog.length+'</b><span>Available patient cases</span></div></div>'+
+ '<div class="refcatalogcontrols"><div class="refcatalogfilters" role="group" aria-label="Filter cases by exam">'+
+ [['all','All cases'],['1','Exam 1'],['2','Exam 2']].map(([value,label])=>'<button type="button" data-clp-filter="'+value+'" aria-pressed="'+(examFilter===value)+'">'+label+'</button>').join('')+'</div><p class="refsmall">Case 1.1 is the approved master. Cases 1.2–2.1 are the first published expansion; more are being added from the uploaded case documents.</p></div>'+
+ '<div class="refcataloggrid">'+cards+'</div><div class="refcatalogfooter"><button type="button" data-clp-lab="1">← Back to Advanced Clinical Pathology Lab</button></div></div>';
+ window.VPQ_REFERRAL_MODAL.show('🔬 Referral Cases · Choose a Patient',html);
+}
 const table=p=>'<details class="refbox refsection" open><summary>'+h(p.name)+'</summary><div class="refsectionbody"><table><thead><tr><th>Test</th><th>Patient</th><th>Reference</th></tr></thead><tbody>'+p.rows.map(r=>'<tr><td>'+h(r[0])+'</td><td><b>'+h(r[1])+'</b></td><td>'+h(r[2])+'</td></tr>').join('')+'</tbody></table></div></details>';
 function render(){
  const c=cases.find(x=>x.id===current);if(!c)return;
@@ -25,7 +83,16 @@ function render(){
  const html='<div class="refcase refnewlibrary"><div class="refbox refheader"><label for="vpqReferralCasePick">🐾 Referral patient</label><select class="refselect" id="vpqReferralCasePick">'+options+'</select><p class="refsmall">'+h(c.kind)+' · '+h(c.source)+'</p></div><details class="refbox refsection" open><summary>🐾 History and physical examination</summary><div class="refsectionbody"><p><b>Signalment:</b> '+h(c.signal)+'</p><p><b>History:</b> '+h(c.history)+'</p><p><b>Exam:</b> '+h(c.exam)+'</p></div></details><h3>🧪 Ancillary testing</h3><div class="refresultsgrid"><div>'+c.panels.filter((p,i)=>i===0).map(table).join('')+'</div><div>'+c.panels.filter((p,i)=>i>0).map(table).join('')+'</div></div><details class="refbox refsection"><summary>📷 Photos to add · '+c.photos.length+'</summary><div class="refsectionbody">'+c.photos.map(t=>'<p>📷 '+h(t)+' — image not yet supplied</p>').join('')+'</div></details><p class="refsmall"><b>Smear / specimen:</b> '+h(c.smear)+'</p><section class="refbox refinterpret"><h3>🔎 Interpret the laboratory findings first</h3>'+answers+'</section><div class="refpracticegrid no-images"><div class="refpracticequestions">'+ddx+'</div></div><details class="refbox refsection"><summary>🎓 Advanced written challenge</summary><div class="refsectionbody"><p>Explain the key laboratory pattern, differential reasoning, limitations, and next tests in your own words.</p><textarea data-clp-note="1" rows="5" placeholder="Your clinical reasoning…">'+h(st.notes||'')+'</textarea><button type="button" data-clp-advanced="1">Submit notes · Open teaching comparison</button>'+(st.advanced?'<div class="refiqfeedback"><b>Teaching review</b><p>'+h(c.questions.map(q=>q.why).join(' '))+'</p>'+(c.differentials.length?'<p>'+h(c.differentials.map(x=>x.name+': '+x.test).join('; '))+'</p>':'')+'</div>':'')+'</div></details><div class="refbuttons"><button type="button" data-clp-reset="1">Restart this case</button></div></div>';
  window.VPQ_REFERRAL_MODAL.show('🔬 Referral Patients · Clinical Pathology',html);
 }
-function open(id){if(id==='001')return window.VPQ_CLINPATH_REFERRAL_PILOT?.home();if(!cases.some(x=>x.id===id))return;current=id;render()}
+function open(id){if(id==='001')return window.VPQ_CLINPATH_REFERRAL_PILOT?.open?.();if(!cases.some(x=>x.id===id))return;current=id;render()}
+document.addEventListener('click',e=>{
+ const b=e.target.closest?.('[data-clp-open],[data-clp-filter],[data-clp-home],[data-clp-lab]');
+ if(!b)return;
+ e.preventDefault();
+ if(b.hasAttribute('data-clp-open'))return open(b.dataset.clpOpen);
+ if(b.hasAttribute('data-clp-filter')){examFilter=b.dataset.clpFilter;return home()}
+ if(b.hasAttribute('data-clp-home'))return home();
+ if(b.hasAttribute('data-clp-lab'))return window.VPQ_ADVANCED_LAB?.home?.();
+});
 document.addEventListener('change',e=>{if(e.target?.id==='vpqReferralCasePick'&&e.target.closest('.refnewlibrary'))open(e.target.value)});
 document.addEventListener('input',e=>{if(e.target?.matches?.('[data-clp-note]')&&e.target.closest('.refnewlibrary')){state().notes=e.target.value;save()}});
 document.addEventListener('click',e=>{const b=e.target.closest?.('[data-clp-pick],[data-clp-check],[data-clp-retry],[data-clp-ddx],[data-clp-lead],[data-clp-move],[data-clp-ddx-submit],[data-clp-advanced],[data-clp-reset]');if(!b||!b.closest('.refnewlibrary'))return;e.preventDefault();const d=b.dataset,st=state();
@@ -39,5 +106,5 @@ document.addEventListener('click',e=>{const b=e.target.closest?.('[data-clp-pick
  if(d.clpAdvanced){st.advanced=true;save();return render()}
  if(d.clpReset){progress[current]={answers:{},selected:[],lead:'',submitted:false};save();return render()}
 });
-window.VPQ_CLINPATH_REFERRAL_LIBRARY={open,cases:cases.map(c=>({id:c.id,title:c.title,kind:c.kind}))};
+window.VPQ_CLINPATH_REFERRAL_LIBRARY={home,open,cases:cases.map(c=>({id:c.id,title:c.title,kind:c.kind}))};
 })();
