@@ -4881,7 +4881,7 @@ const vpqCompanionCategories=[
 ];
 let vpqCompanionTab='dog';
 const vpqCompanionCatalog=[
- {id:'dog-mera',name:'Mera · Husky × Shepherd',category:'dog',pet:'🐕',petBreed:'husky-shepherd',level:1,price:0,image:null},
+ {id:'dog-mera',name:'Mera · Shark Costume',category:'dog',pet:'🐕',petBreed:'husky-shepherd',level:1,price:0,image:null},
  ...vpqBatch1Dogs.filter(d=>d&&d.species==='dog'&&/^dog-b1-[0-9a-f]{12}$/.test(d.id)).map((d,i)=>({
    id:d.id,category:'dog',name:d.label,pet:'🐕',petBreed:d.id,
    level:i<4?1:i<12?3:i<24?6:i<36?10:15,
@@ -4993,7 +4993,7 @@ function vpqCompanionAvatar(c){
   if(window.VPQ_MERA_SHARK_IMAGE_READY===true){
    return '<img class="vpq-companion-art" loading="eager" src="Mera%20in%20a%20Shark%20Costume-5(1).png" alt="Mera in her blue shark costume" draggable="false">';
   }
-  return vpqCompanionLegacyArt({...state,pet:'🐕',petBreed:'husky-shepherd'});
+  return '<span class="vpq-companion-placeholder" role="img" aria-label="Mera shark costume artwork awaiting upload">🦈<small>Mera photo awaiting GitHub upload</small></span>';
  }
  return '<span class="vpq-companion-placeholder">'+escapeHtml(c.pet)+'<small>Artwork coming soon</small></span>';
 }
