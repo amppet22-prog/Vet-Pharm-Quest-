@@ -69,15 +69,12 @@ function drawing(){
  '<rect x="27" y="167" width="109" height="50" rx="5" fill="#fff9ec" stroke="#b7bdab" stroke-width="4"/><text x="81" y="189" font-size="16">CLINIC</text><text x="81" y="207" font-size="13">SUPPLIES</text>'+
  '<rect x="176" y="166" width="108" height="50" rx="6" fill="#f5eee0" stroke="#bac2b7" stroke-width="4"/><text x="230" y="191" font-size="18">💊</text><text x="230" y="209" font-size="12">SHELVES</text></g>'+
 
- // Pharmacy detail pass: illustrated dosage markings, labeled bins, blister strips, dispensing tools and stock tags.
+ // Clean medication packaging details, confined to each label (no lines across the bottles).
  '<g font-family="Arial" text-anchor="middle" font-weight="800">'+
  '<rect x="23" y="4" width="74" height="13" rx="3" fill="#fffaf0" stroke="#8faeaa" stroke-width="1"/><text x="60" y="14" font-size="8" fill="#4c7774">ORAL MEDS</text>'+
  '<rect x="174" y="4" width="113" height="13" rx="3" fill="#fffaf0" stroke="#8faeaa" stroke-width="1"/><text x="230" y="14" font-size="8" fill="#4c7774">STOCK · CHECK LOT</text>'+
- '<path d="M29 58h29M97 58h27M181 61h32M244 58h36" stroke="#91a7a1" stroke-width="1.4"/>'+
  '<g fill="#fff" stroke="#b3c5c0" stroke-width="1"><rect x="33" y="31" width="23" height="7" rx="2"/><rect x="183" y="30" width="25" height="7" rx="2"/></g>'+
  '<text x="44" y="37" font-size="5.5" fill="#5b8781">10 mg</text><text x="195" y="36" font-size="5.5" fill="#5b8781">5 mL</text>'+
- '<g fill="none" stroke-width="1.2"><path d="M87 109h44m-42 6h37" stroke="#a88d99"/><path d="M181 108h31m-30 7h30" stroke="#91b0a4"/><path d="M247 108h35m-33 7h31" stroke="#88afa4"/></g>'+
- '<rect x="27" y="159" width="100" height="5" rx="2" fill="#90b4a9"/><rect x="179" y="159" width="99" height="5" rx="2" fill="#90b4a9"/>'+
  '<g transform="translate(35 174)"><rect width="25" height="11" rx="2" fill="#fafcfc" stroke="#96ada6"/><circle cx="6" cy="5.5" r="2.2" fill="#f4d4bd"/><circle cx="13" cy="5.5" r="2.2" fill="#f4d4bd"/><circle cx="20" cy="5.5" r="2.2" fill="#f4d4bd"/></g>'+
  '<g transform="translate(107 179) rotate(-24)"><rect width="20" height="3" rx="1.5" fill="#d4eeed" stroke="#729ca4"/><path d="M4 -3v9M18 -2v7" stroke="#668ba2"/><rect x="20" y="-1" width="8" height="5" fill="#eff5f0" stroke="#9db8b1"/></g>'+
  '<g transform="translate(191 176)"><rect width="20" height="14" rx="2" fill="#f8ede3" stroke="#b9aaa2"/><rect x="5" y="-4" width="10" height="5" rx="1.2" fill="#9db9af"/><rect x="3" y="5" width="14" height="5" fill="#fffefa"/><text x="10" y="9" font-size="5" fill="#6e8a85">Rx</text></g>'+
@@ -85,7 +82,7 @@ function drawing(){
  '</g>'+
  '<rect x="20" y="232" width="272" height="16" rx="4" fill="#77a49c"/></g>'+
  // Nutrition shop fixtures: full food bags, canned-food tiers, and clear treat bins.
- '<g transform="translate(431 107)">'+
+ '<g transform="translate(431 64)">'+
  '<rect x="-3" y="3" width="274" height="224" rx="9" fill="#c5ac91" stroke="#9a806f" stroke-width="5"/>'+
  '<rect x="6" y="10" width="257" height="195" rx="5" fill="#fbf1df"/>'+
  '<rect x="12" y="15" width="245" height="22" rx="5" fill="#8fbbb1"/>'+
@@ -108,26 +105,27 @@ function drawing(){
  '<path d="M212 165l6 -17h35l7 17v43h-48Z" fill="#afc9a3" stroke="#839f83" stroke-width="3"/>'+
  '<text x="236" y="184" font-size="17" text-anchor="middle">🐇</text><text x="236" y="200" font-family="Arial" font-size="8" text-anchor="middle" fill="#567363">SMALL PET</text>'+
  '<path d="M9 210h251" stroke="#9a7e6d" stroke-width="9"/>'+
- '<path d="M5 221H267V328H5Z" fill="#c7aa8d" stroke="#a48670" stroke-width="5"/>'+
- '<path d="M134 224v101M18 244h231" stroke="#ad8d75" stroke-width="3"/>'+
- '<rect x="20" y="255" width="96" height="45" rx="5" fill="#ddc6aa"/><rect x="149" y="255" width="96" height="45" rx="5" fill="#e7d2b8"/>'+
- '<text x="68" y="282" font-family="Arial" font-size="12" font-weight="800" text-anchor="middle" fill="#7d6559">STOCK</text>'+
- '<text x="197" y="282" font-family="Arial" font-size="12" font-weight="800" text-anchor="middle" fill="#7d6559">NUTRITION</text></g>'+
- // Side-wall equipment, safely outside the medication cabinet and food station hotspots.
- '<g font-family="Arial" font-weight="800"><rect x="8" y="104" width="62" height="150" rx="5" fill="#eaf1e9" stroke="#81aa9f" stroke-width="4"/>'+
- '<text x="39" y="117" text-anchor="middle" font-size="9" fill="#577d75">E-COLLARS</text>'+
- '<path d="M16 127h47" stroke="#a8bcb5" stroke-width="3"/>'+
- // Three tapered veterinary recovery cones, with neck openings, stitched edging and fastening tabs.
- '<g transform="translate(11 126)"><path d="M5 16L28 4Q49 16 49 35L25 49Q5 38 5 16Z" fill="#e4f6fb" stroke="#79a4b4" stroke-width="2.5"/><ellipse cx="30" cy="26" rx="10" ry="8" fill="#b9d7d8" stroke="#76a5ad" stroke-width="2"/><path d="M6 17Q18 20 26 43" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 3"/><rect x="41" y="20" width="7" height="7" rx="2" fill="#fff5e6" stroke="#90adae"/></g>'+
- '<g transform="translate(20 175) rotate(-13 22 24)"><path d="M3 11L28 1Q46 13 46 29L24 45Q5 35 3 11Z" fill="#f0e3f4" stroke="#b19bbd" stroke-width="2.5"/><ellipse cx="26" cy="22" rx="9" ry="7" fill="#d9c4df" stroke="#aa90b8" stroke-width="2"/><path d="M5 12L23 40" stroke="#fff" stroke-width="2" stroke-dasharray="3 3"/><rect x="38" y="14" width="7" height="7" rx="2" fill="#fbfaf6" stroke="#aa90b8"/></g>'+
- '<g transform="translate(14 211) scale(.65)"><path d="M3 10L34 2Q56 17 55 39L26 58Q4 42 3 10Z" fill="#e5efda" stroke="#86aa93" stroke-width="3"/><ellipse cx="31" cy="29" rx="11" ry="9" fill="#c4d8bb" stroke="#7caa90" stroke-width="2.5"/></g>'+
- '<text x="39" y="244" font-size="8" text-anchor="middle" fill="#577d75">XS • S • M • L</text>'+
- '<rect x="919" y="77" width="64" height="66" rx="5" fill="#f1ede5" stroke="#9ab6ac" stroke-width="4"/>'+
- '<text x="950" y="90" text-anchor="middle" font-size="9" fill="#5a7778">LEASHES</text>'+
- // Individual leash hooks, looped nylon leads, metal D-rings and matching collars.
- [0,1,2].map(i=>{const x=931+i*19,c=['#8e94cd','#d990a2','#78aa95'][i];return '<g><circle cx="'+x+'" cy="99" r="3.4" fill="#8b9f9b"/><path d="M'+x+' 102q-12 10 -7 28q8 11 13 -1v-15q-1 -11 -6 -12" fill="none" stroke="'+c+'" stroke-width="5" stroke-linecap="round"/><path d="M'+(x-8)+' 130q9 14 18 0" fill="none" stroke="'+c+'" stroke-width="3"/><rect x="'+(x+6)+'" y="126" width="5" height="9" rx="2" fill="#e7eeea" stroke="#879d99"/><ellipse cx="'+x+'" cy="141" rx="10" ry="4" fill="none" stroke="'+c+'" stroke-width="3"/></g>'}).join('')+
+ '<path d="M5 221H267V268H5Z" fill="#c7aa8d" stroke="#a48670" stroke-width="5"/>'+
+ '<path d="M134 224v41M18 240h231" stroke="#ad8d75" stroke-width="2.5"/>'+
+ '<rect x="20" y="245" width="96" height="18" rx="3" fill="#ddc6aa"/><rect x="149" y="245" width="96" height="18" rx="3" fill="#e7d2b8"/>'+
+ '<text x="68" y="258" font-family="Arial" font-size="10" font-weight="800" text-anchor="middle" fill="#7d6559">STOCK</text>'+
+ '<text x="197" y="258" font-family="Arial" font-size="10" font-weight="800" text-anchor="middle" fill="#7d6559">NUTRITION</text></g>'+
+ // Wall-mounted transparent Elizabethan collars: stacked curved cones in a horizontal keeper rack.
+ '<g font-family="Arial" font-weight="800">'+
+ '<rect x="7" y="104" width="71" height="164" rx="5" fill="#eff5ee" stroke="#81aa9f" stroke-width="3"/>'+
+ '<text x="42" y="118" text-anchor="middle" font-size="9" fill="#577d75">E-COLLARS</text>'+
+ '<path d="M12 128h61" stroke="#668b86" stroke-width="3.5"/>'+
+ '<circle cx="20" cy="129" r="3" fill="#87a9a2"/><circle cx="64" cy="129" r="3" fill="#87a9a2"/>'+
+ // Shallow view into open transparent cone (outer rim, narrowing toward inner neck opening).
+ [0,1,2].map((i)=>{const y=139+i*34, width=55-i*5, lx=42-width/2, rx=42+width/2;return '<g>'+
+ '<path d="M'+lx+' '+y+' Q42 '+(y-9)+' '+rx+' '+y+' L'+(rx-5)+' '+(y+25)+' Q42 '+(y+32)+' '+(lx+5)+' '+(y+25)+' Z" fill="'+(['#e1f2ee','#e1eefa','#f0e6f1'][i])+'" fill-opacity=".78" stroke="'+(['#799c9c','#8da8b5','#ae9fb2'][i])+'" stroke-width="2"/>'+
+ '<path d="M'+lx+' '+y+' Q42 '+(y-12)+' '+rx+' '+y+'" fill="none" stroke="#557d83" stroke-width="3.2"/>'+
+ '<ellipse cx="42" cy="'+(y+17)+'" rx="'+(8-i)+'" ry="4" fill="#b9d6d1" fill-opacity=".75" stroke="#86a9a3" stroke-width="1.4"/>'+
+ '<path d="M'+(lx+5)+' '+(y+23)+'Q42 '+(y+29)+' '+(rx-5)+' '+(y+23)+'" fill="none" stroke="#a4c4c0" stroke-width="1.3"/>'+
+ '</g>'}).join('')+
+ '<path d="M11 238h63" stroke="#9bb3ad" stroke-width="2"/><text x="42" y="251" text-anchor="middle" font-size="8" fill="#577d75">XS · S · M · L</text>'+
  '</g>'+
- // Carrier storage above the drug shelves, with vents and doors.
+// Carrier storage above the drug shelves, with vents and doors.
  '<g transform="translate(126 47)"><rect width="77" height="40" rx="8" fill="#e7d7c8" stroke="#a9aaa8" stroke-width="4"/>'+
  '<path d="M20 1Q22 -10 38 -10Q53 -10 57 1" stroke="#b8a99d" stroke-width="5" fill="none"/>'+
  '<rect x="24" y="11" width="30" height="25" rx="4" fill="#849ca6"/>'+
@@ -196,7 +194,7 @@ function refresh(){
  if(stage.dataset.room!=='pharmacy')return;
  const node=document.createElement('div');node.id='vpqPNHotspots';
  node.dataset.roomBuild='20261122-v5';
- node.innerHTML='<button type="button" class="vpqPNHot vpqPNDrugs" data-vpqpnaction="pharmacy" aria-label="Open the medication cabinets and drug encyclopedia"><span>💊 Drug Shelves</span></button>'+
+ node.innerHTML='<button type="button" class="vpqPNHot vpqPNDrugs" data-vpqpnaction="pharmacy" aria-label="Open the medication cabinets and drug encyclopedia"></button>'+
  '<button type="button" class="vpqPNStudyLink" data-vpqpn-study="1" aria-label="Go to Student Study Lounge for pharmacology and toxicology lessons, cases and practice">📚 Learn &amp; practice Pharm / Tox in Student Lounge →</button>'+ 
  '<button type="button" class="vpqPNHot vpqPNRounds" data-vpqpnaction="vpqPharmVisualRounds" aria-label="Open clinical pharmacology visual cases and testing"><span>🩺 Clinical Rounds</span></button>'+ 
  '<button type="button" class="vpqPNHot vpqPNFood" data-vpqpnaction="vpqNutritionGuide" aria-label="Open the pet nutrition corner and reference cards"><span>🥣 Pet Nutrition</span></button>'+
@@ -219,13 +217,13 @@ style.textContent='.vpqPharmNutritionArt{position:absolute;inset:0;width:100%;he
 '.vpqPNHot:hover{border-color:#78aeb6;background:#e1f5ef16;outline:none}.vpqPNHot:focus-visible{border-color:#5f99a8;background:#e1f5ef16;outline:2px solid #568ea4;outline-offset:2px}'+
 '.vpqPNHot span{position:absolute;bottom:3%;left:50%;transform:translate(-50%,0);white-space:nowrap;border:2px solid #7ea9a6;background:#fffdf5;color:#375f68;font-size:11px;font-weight:900;padding:5px 8px;border-radius:13px;box-shadow:0 3px 0 #567f8030}'+
 '.vpqPNRounds{left:10%;top:68%;width:30%;height:20%;border:2px solid #e4aa91;background:#fff4da26}.vpqPNRounds span{bottom:6%;background:#fff5eb;border-color:#e4b6a8;color:#895568}'+
- '.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:44%;top:23%;width:23%;height:49%}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
+ '.vpqPNDrugs{left:9%;top:18%;width:30%;height:49%}.vpqPNFood{left:45%;top:14%;width:25%;height:49%}.vpqPNFood span{bottom:0%;font-size:10px;padding:3px 7px}.vpqPNTox{left:75%;top:22%;width:15%;height:39%}.vpqPNLab{left:92%;top:28%;width:7%;height:38%}.vpqPNLab span{left:auto;right:0;transform:none}'+
 '.vpqPNStudyLink{position:absolute;z-index:6;left:9%;top:10%;width:38%;pointer-events:auto;border:2px solid #8a94c8;border-radius:12px;background:#fffdf2;color:#534c85;padding:7px 10px;font-size:11px;font-weight:900;box-shadow:0 3px 8px #35436633;cursor:pointer}.vpqPNStudyLink:hover,.vpqPNStudyLink:focus-visible{background:#fff2c7;outline:2px solid #f5c66f}'+
 '.vpqPNVersion{position:absolute;right:2%;bottom:2%;pointer-events:none;font-size:9px;font-weight:900;color:#416b65;background:#f2fff4dd;border:1px solid #9ebbb2;border-radius:6px;padding:2px 5px;z-index:8}'+
 '/* Small floating question marks explain each interactable section without blocking entry. */'+
 '.vpqPNHelp{position:absolute;pointer-events:auto;z-index:9;width:24px;height:24px;padding:0;display:grid;place-items:center;border:2px solid #79a7ac;border-radius:50%;background:#fcfffa;color:#276775;font-size:15px;font-weight:1000;box-shadow:0 2px 5px #254a4a30;transform:none!important;line-height:1;cursor:help}'+
 '.vpqPNHelp:hover,.vpqPNHelp:focus-visible{background:#d6f3ed;outline:2px solid #447f86;outline-offset:2px}'+
-'.vpqPNHelpDrugs{left:36%;top:20%}.vpqPNHelpRounds{left:36%;top:70%}.vpqPNHelpFood{left:65%;top:25%}.vpqPNHelpTox{left:87%;top:24%}.vpqPNHelpLab{left:96%;top:29%}'+
+'.vpqPNHelpDrugs{left:37%;top:19%}.vpqPNHelpRounds{left:36%;top:70%}.vpqPNHelpFood{left:65%;top:16%}.vpqPNHelpTox{left:87%;top:24%}.vpqPNHelpLab{left:96%;top:29%}'+
 '.vpqPNFoodCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin:12px 0}.vpqPNFoodCards button{display:block;text-align:left;background:#f6fcf7;border:2px solid #b9d7c8;border-radius:13px;padding:13px}.vpqPNFoodCards b,.vpqPNFoodCards small{display:block}.vpqPNFoodCards small{color:#617e75;font-size:12px;margin-top:6px}'+
 '@media(max-width:620px){.vpqPNHot span{font-size:9px;padding:3px 4px}.vpqPNLab span{right:0}.vpqPNTox span{bottom:12%}}';
 document.head.appendChild(style);
