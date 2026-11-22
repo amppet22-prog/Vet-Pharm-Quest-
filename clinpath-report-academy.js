@@ -130,7 +130,7 @@ function platelets(){
  ['Deep hematomas/cavitary bleeding','Often coagulation factor disorders','PT, aPTT, fibrinogen and other directed tests']
  ])+
  card('📘 PT vs aPTT','<p>PT evaluates extrinsic/common pathway; aPTT intrinsic/common pathway. Citrate sample must have correct fill volume; underfill can falsely prolong results. Neither evaluates all platelet disorders.</p>')+
- '<div class="vra-btns">'+link('extra','Additional tests →')+'</div>';
+ '<div class="vra-btns"><button type="button" data-vpq-report-action="coagmaster">📦 Full Coagulation Test Reference</button><button type="button" data-vpq-report-action="coagstation">🩸 Coagulation Analyzer & Cascade</button>'+link('extra','Additional tests →')+'</div>';
 }
 function chem(){
  return card('🧪 Chemistry: read by BODY SYSTEM','<p>Organ enzymes are often indicators of <b>cell injury, leakage or enzyme induction</b>. They are not interchangeable with <b>functional capacity</b>. Combine chemistry with urinalysis, CBC, PCV/TS, physical exam and medications.</p>')+
@@ -290,6 +290,8 @@ function handleAcademyClick(event){
  if(target.dataset.vpqReportAction==='species-chem')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('chem');
  if(target.dataset.vpqReportAction==='multistage')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();
  if(target.dataset.vpqReportAction==='inhouse')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
+ if(target.dataset.vpqReportAction==='coagmaster')return window.VPQ_DIAGNOSTIC_MASTER?.open?.('coag');
+ if(target.dataset.vpqReportAction==='coagstation')return window.VPQ_ADVANCED_LAB?.intro?.('coag');
  if(target.dataset.vpqReportAction==='sendout')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
  if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
  if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
@@ -317,6 +319,8 @@ function init(context){
  if(target.dataset.vpqReportAction==='species-chem')return window.VPQ_CLINPATH_SPECIES_GUIDE?.open('chem');
  if(target.dataset.vpqReportAction==='multistage')return window.VPQ_CLINPATH_MULTISTAGE?.home?.();
  if(target.dataset.vpqReportAction==='inhouse')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('inhouse');
+ if(target.dataset.vpqReportAction==='coagmaster')return window.VPQ_DIAGNOSTIC_MASTER?.open?.('coag');
+ if(target.dataset.vpqReportAction==='coagstation')return window.VPQ_ADVANCED_LAB?.intro?.('coag');
  if(target.dataset.vpqReportAction==='sendout')return window.VPQ_TREATMENT_DIAGNOSTICS?.openSection?.('sendout');
  if(target.dataset.vpqReportAction==='classic')return window.VPQ_TREATMENT_DIAGNOSTICS?.legacyLabHome?.();
  if(target.dataset.vpqReportAction==='hybrid')return window.VPQ_ADVANCED_LAB?.hybridHome?.();
