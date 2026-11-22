@@ -21,7 +21,7 @@ function sync(kind,id,stage,completed){
  if(!get(kind,id))return false;
  const s=store(),k=key(kind,id),old=s.records[k]||{};
  s.active={kind,id:String(id)};
- s.records[k]={...old,stage:stage||old.stage||'Chart opened',completed:!!(completed||old.completed)};
+ s.records[k]={...old,stage:(stage==='Chart reviewed'&&old.stage)?old.stage:(stage||old.stage||'Chart opened'),completed:!!(completed||old.completed)};
  api.persist?.();return true;
 }
 function status(patient){
@@ -37,7 +37,7 @@ function home(room='reception'){
  modal('🐾 Hospital Patient Records','<div class="vpq-unified-hero"><b>One patient record · three connected rooms</b><p>Open the same chart from Reception, Examination or Treatment. Case-specific progress is tracked here; clinical teaching data stays with its original case.</p></div>'+
  (chosen?'<div class="vpq-unified-active"><b>📌 Active patient: '+esc(chosen.name)+'</b><p>'+esc(kinds[chosen.kind])+' · '+esc(status(chosen).stage)+'</p>'+button(chosen.kind,chosen.id,'Open active chart','chart')+'</div>':'')+
  sections.map(([kind,label])=>{const group=items.filter(x=>x.kind===kind);return '<details class="vpq-unified-group" '+(kind!=='pharm'?'open':'')+'><summary>'+label+' <small>('+group.length+')</small></summary><div class="vpq-unified-grid">'+group.map(x=>{const st=status(x);return '<button class="vpq-unified-case" data-vpq-unified="chart" data-vpq-kind="'+esc(kind)+'" data-vpq-id="'+esc(x.id)+'"><b>'+esc(x.emoji)+' '+esc(x.name)+'</b><small>'+esc(x.species)+' · '+(st.done?'✓ Completed':esc(st.stage))+'</small></button>'}).join('')+'</div></details>'}).join('')+
- '<p class="vpq-unified-note">Advanced and original pharmacology cases remain separate teaching patients. No clinical values are copied between them.</p>')
+ '<div class="vpq-unified-actions"><button data-vpq-unified="ward">🧪 Original Treatment Ward diagnostics</button></div><p class="vpq-unified-note">Advanced and original pharmacology cases remain separate teaching patients. No clinical values are copied between them.</p>')
 }
 function chart(kind,id){
  const c=get(kind,id);if(!c)return home();
@@ -51,7 +51,7 @@ function chart(kind,id){
  '<div class="vpq-unified-actions">'+button(kind,id,kind==='pharm'?'🩺 Begin / replay patient decisions':kind==='journey'?'🐾 Begin / replay complete patient journey':'⭐ Begin / replay hospitalization','start')+
  button(kind,id,'🏥 View chart in Treatment Ward','treatment')+
  button(kind,id,'🩺 View chart in Exam Room','exam')+
- '<button data-vpq-unified="back">← All patient records</button></div>'+
+ '<button data-vpq-unified="back">← All patient records</button><button data-vpq-unified="ward">🧪 Open general Treatment diagnostics</button></div>'+
  '<p class="vpq-unified-note">Replaying a completed case does not erase the completion record. Shared hospital navigation does not add undocumented test results.</p>')
 }
 function begin(kind,id){
@@ -67,7 +67,7 @@ function init(context){
  if(!api.body||api.body.dataset?.vpqUnifiedBound)return;
  if(api.body.dataset)api.body.dataset.vpqUnifiedBound='1';
  api.body.addEventListener('click',e=>{const t=e.target?.closest?.('[data-vpq-unified]');if(!t||!api.body.contains(t))return;e.preventDefault();const op=t.dataset.vpqUnified,kind=t.dataset.vpqKind,id=t.dataset.vpqId;
- if(op==='back')return home();if(op==='chart')return chart(kind,id);if(op==='start')return begin(kind,id);if(op==='treatment'||op==='exam')return go(kind,id,op);
+ if(op==='ward')return api.openWardDiagnostics?.();if(op==='back')return home();if(op==='chart')return chart(kind,id);if(op==='start')return begin(kind,id);if(op==='treatment'||op==='exam')return go(kind,id,op);
  },true);
 }
 return {init,home,chart,sync,begin,get,catalog,status,active:()=>store().active};
