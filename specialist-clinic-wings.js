@@ -379,7 +379,7 @@ function refresh(){
  if(old?.dataset.room===room)return;
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
  div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" data-vpqspec-kind="'+(p.kind||'practice')+'" title="'+(p.hint||p.label)+'" aria-label="'+p.label+(p.subtitle?' — '+p.subtitle:'')+'"><span>'+p.label+(p.subtitle?'<small>'+p.subtitle+'</small>':'')+'</span></button>').join('')+
- (room==='clinpath'?['coag','gas','urine','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([16.3,36.0,55.7,75.4,92.5][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
+ (room==='clinpath'?['coag','gas','urine','hybrid','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([13.7,30.1,46.5,62.9,79.3,95.2][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
  (room==='isolation'?
  data.isolation.map(p=>'<button type="button" class="vpqIsoHelp" style="left:'+Math.min(94,p.x+p.w-1)+'%;top:'+Math.max(3,p.y-4)+'%" data-vpqisohelp="'+p.action+'" title="About '+p.label+'" aria-label="Explain '+p.label+'">?</button>').join('')+
  [['ppe',8,36],['wash',37,49],['clean',65,50],['waste',11,76],['boot',34,80]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp vpqIsoEquipmentHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="Explain '+key+'" aria-label="Explain '+key+' station">?</button>').join('')
@@ -404,7 +404,7 @@ function refresh(){
   '<b>🧼 Cleaning & PPE:</b> necropsy safety and sampling.</div>'+
   '<div style="margin-top:10px;padding:11px 13px;border:1px solid #d7c8e5;background:#f6f0fa;border-radius:10px;font-size:13px"><b>🔎 Future Veterinary Forensics Case Files</b><p style="margin:5px 0">Planned as a separate case library and station. It will focus on scene and history, documentation, injuries, postmortem changes, evidence handling, and defensible interpretations. No forensic cases are currently included.</p></div>'+
   '<p class="tiny">Click a station or walk up and press E. The stainless tables are scenery, not separate clickable stations.</p>');return}
- const guide=e.target.closest('[data-vpqbench-guide]');if(guide){window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b){if(b.dataset.vpqspecact==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){e.preventDefault();e.stopPropagation();return window.VPQ_CLINPATH_REFERRAL_PILOT.home()}return api.doAction(b.dataset.vpqspecact)}});
+ const guide=e.target.closest('[data-vpqbench-guide]');if(guide){if(guide.dataset.vpqbenchGuide==='hybrid')return api.doAction('advancedHybrid');window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(guide.dataset.vpqbenchGuide,api);return}const b=e.target.closest('[data-vpqspecact]');if(b){if(b.dataset.vpqspecact==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){e.preventDefault();e.stopPropagation();return window.VPQ_CLINPATH_REFERRAL_PILOT.home()}return api.doAction(b.dataset.vpqspecact)}});
  stage.appendChild(div);
 }
 function updateNearby(room,x){
