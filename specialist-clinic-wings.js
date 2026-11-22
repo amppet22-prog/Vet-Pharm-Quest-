@@ -304,7 +304,8 @@ isolationPolish.textContent=
  '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit span{font-size:11px;min-width:0;width:max-content;max-width:100%;top:-12%;bottom:auto;padding:4px 8px;border:1.5px solid #9ebcb5;background:#fffdf7;color:#466a6b;box-shadow:0 2px 5px #2f555324}'+
  '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit.vpqSpecNear span{background:#edf8ef!important;border-color:#8cb9aa!important}'+
  '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp{position:absolute;pointer-events:auto;width:25px;height:25px;padding:0;border-radius:50%;background:#f7fffb;color:#336b73;border:2px solid #78a6a5;z-index:9;font-size:15px;font-weight:900;transform:none!important;box-shadow:0 2px 6px #39545238}'+
- '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp:hover{background:#e0f6ee}';
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp:hover{background:#e0f6ee}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoEquipmentHelp{width:22px;height:22px;font-size:13px;background:#f8fffbf2;border-color:#9ac5b8}';
 document.head.appendChild(isolationPolish);
 
 // Necropsy labels should not cover the illustrated tables, specimens, or player.
@@ -357,7 +358,12 @@ function necroHelpModal(action){
 const isoHelp={
  onehealth:['🐶 Isolation patient','Assess the patient, identify plausible transmission routes, and choose appropriate precautions based on the suspected or confirmed pathogen. Separate contaminated equipment and clean/disinfect between patients.'],
  ohLibrary:['📚 Disease library','Review pathogen reservoir, zoonotic potential, exposure routes, susceptible species, environmental persistence, infection-control guidance, and reporting considerations.'],
- ohHub:['🛡️ Public health','Explore surveillance, case reporting, source investigation and risk communication. Reporting requirements depend on disease and jurisdiction.']
+ ohHub:['🛡️ Public health','Explore surveillance, case reporting, source investigation and risk communication. Reporting requirements depend on disease and jurisdiction.'],
+ ppe:['🧤 PPE & entry','Use the isolation precautions appropriate to the suspected pathogen. Choose and don PPE before entering, and doff according to facility protocol while preventing contamination. Hand hygiene remains essential.'],
+ wash:['🧼 Handwashing station','Perform hand hygiene at required points of care, especially after glove removal. Use soap and water when specifically required for a pathogen or when hands are visibly soiled.'],
+ clean:['🧽 Disinfection cart','Use patient-dedicated equipment. Clean organic material first, then apply a disinfectant effective against the suspected agent at its labeled dilution and wet contact time.'],
+ waste:['☣️ Waste handling','Segregate contaminated materials into appropriate designated containers based on facility policy and local rules. Do not assume all infectious waste requires identical disposal.'],
+ boot:['👢 Entry threshold','Keep isolation-zone footwear and equipment from spreading contamination. Follow the facility-specific clean-to-dirty workflow; a floor mat does not replace cleaning, PPE or hand hygiene.']
 };
 function isoHelpModal(action){
  const info=isoHelp[action];if(!info)return;
@@ -372,7 +378,10 @@ function refresh(){
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
  div.innerHTML=data[room].map(p=>'<button type="button" class="vpqSpecHit" style="left:'+p.x+'%;top:'+p.y+'%;width:'+p.w+'%;height:'+p.h+'%" data-vpqspecact="'+p.action+'" data-vpqspec-kind="'+(p.kind||'practice')+'" title="'+(p.hint||p.label)+'" aria-label="'+p.label+(p.subtitle?' — '+p.subtitle:'')+'"><span>'+p.label+(p.subtitle?'<small>'+p.subtitle+'</small>':'')+'</span></button>').join('')+
  (room==='clinpath'?['coag','gas','urine','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([16.3,36.0,55.7,75.4,92.5][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
- (room==='isolation'?data.isolation.map(p=>'<button type="button" class="vpqIsoHelp" style="left:'+Math.min(94,p.x+p.w-1)+'%;top:'+Math.max(3,p.y-4)+'%" data-vpqisohelp="'+p.action+'" title="About '+p.label+'" aria-label="Explain '+p.label+'">?</button>').join(''):'')+
+ (room==='isolation'?
+ data.isolation.map(p=>'<button type="button" class="vpqIsoHelp" style="left:'+Math.min(94,p.x+p.w-1)+'%;top:'+Math.max(3,p.y-4)+'%" data-vpqisohelp="'+p.action+'" title="About '+p.label+'" aria-label="Explain '+p.label+'">?</button>').join('')+
+ [['ppe',8,36],['wash',37,49],['clean',65,50],['waste',11,76],['boot',34,80]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp vpqIsoEquipmentHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="Explain '+key+'" aria-label="Explain '+key+' station">?</button>').join('')
+ :'')+
  (room==='necropsy'?data.necropsy.filter(p=>necroHelp[p.action]).map(p=>'<button type="button" class="vpqNecroHelp" data-vpqnecro-help="'+p.action+'" style="left:'+Math.min(95,p.x+p.w-2)+'%;top:'+Math.max(3,p.y-3)+'%" title="About '+p.label+'" aria-label="What does '+p.label+' teach?">?</button>').join(''):'')+
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
  (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Learn First — open lecture study guides and references" aria-label="Learn First reference bookshelf — open study guides"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Lecture-based study guides">📖 Learn First</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
