@@ -366,6 +366,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 17",
       "curated": true
+    },
+    {
+      "prompt": "What are the three main anti emetics?",
+      "answer": "Metoclopramide (Reglan), Maropitant (Cerenia), and Ondansetron.",
+      "why": "Metoclopramide is a D2 antagonist (also helps with gut motility)\nMaripitant is an NK1 antagonist\nOndansetron is a 5-HT3 antagonist.",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwsj8pz3-afnjr",
+      "domain": "pharmacology",
+      "lecture": "Lecture 17",
+      "curated": true
     }
   ],
   "hidden": [
