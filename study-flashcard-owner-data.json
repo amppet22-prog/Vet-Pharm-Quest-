@@ -192,6 +192,12 @@
       "answer": "A poorly absorbed intestinal antimicrobial adjunct to reduce bacterial ammonia production.",
       "why": "It addresses a gut contribution to neurologic disease, not the underlying hepatic defect.\nWith non-absorbed antibiotics, it decreases urease and bacteria, so less ammonia. Usually given with another ABX.",
       "slide": "Lecture 17 · GI/hepatic deep lesson audit, 2026-11-20"
+    },
+    "pharm-e2-gi17-audit-004": {
+      "prompt": "How does n-butylscopolammonium (Buscopan) affect equine spasmodic colic?",
+      "answer": "It blocks muscarinic signaling, relaxing GI smooth muscle.",
+      "why": "Short-term reduction in spasm does not rule out impaction, ischemia, or surgical disease.",
+      "slide": "Lecture 17 · GI/hepatic deep lesson audit, 2026-11-20"
     }
   },
   "custom": [
