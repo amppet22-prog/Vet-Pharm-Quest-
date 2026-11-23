@@ -128,6 +128,19 @@ function imaging(){
  '<text x="402" y="183" text-anchor="middle" font-size="9" font-weight="900" fill="#7c658c">✓ MARKER  ✓ COLLIMATE</text>'+
  '<text x="402" y="193" text-anchor="middle" font-size="9" font-weight="800" fill="#7c658c">✓ CHECK POSITION</text>'+
  '</g>';
+ // Compact visual reference wall: the five classic radiographic opacities.
+ // This is a decorative primer, not an image atlas or a click target.
+ s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
+ '<rect x="108" y="94" width="174" height="58" rx="10" fill="#fffdfa" stroke="#b3c8db" stroke-width="3"/>'+
+ '<text x="195" y="108" text-anchor="middle" font-size="11" font-weight="900" fill="#676389">RADIOGRAPHIC OPACITY</text>'+
+ ['#252c38','#86888b','#bcbfc3','#e2e4e8','#fbfcff'].map((shade,i)=>'<rect x="'+(119+i*32)+'" y="114" width="28" height="19" rx="4" fill="'+shade+'" stroke="#9faabe" stroke-width="1"/>').join('')+
+ ['GAS','FAT','SOFT','BONE','METAL'].map((label,i)=>'<text x="'+(133+i*32)+'" y="144" text-anchor="middle" font-size="8" font-weight="900" fill="#65718b">'+label+'</text>').join('')+
+ // Small report-writing reminder above the reading station.
+ '<rect x="781" y="95" width="130" height="44" rx="9" fill="#fffafc" stroke="#b6aecf" stroke-width="3"/>'+
+ '<text x="846" y="110" text-anchor="middle" font-size="10" font-weight="900" fill="#76628e">READ THE IMAGE</text>'+
+ '<text x="846" y="121" text-anchor="middle" font-size="8.3" fill="#6e7792">Look · Describe · Localize</text>'+
+ '<text x="846" y="132" text-anchor="middle" font-size="8.3" fill="#6e7792">Interpret · Recommend</text>'+
+ '</g>';
  // Cozy details throughout the imaging suite, kept behind / outside interactive equipment.
  s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
  // Subtle pastel bunting along the back wall, above all workstation monitors.
