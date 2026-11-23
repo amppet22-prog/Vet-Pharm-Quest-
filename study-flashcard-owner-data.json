@@ -228,6 +228,12 @@
       "answer": "Local mucosal protection at damaged surfaces.",
       "why": "It does not inhibit acid secretion like a proton-pump inhibitor. Instead it provides a cyto-adherent coating on an ucler and increases GI prostaglandins.",
       "slide": "Exam 2 lecture 17 · source-derived mechanism review"
+    },
+    "pharm-e2-92": {
+      "prompt": "How can low-dose erythromycin stimulate GI movement?",
+      "answer": "It activates motilin receptors.",
+      "why": "Motility therapy must be tailored to the underlying syndrome. At its regular dose, it does not have any GI motility advantage.",
+      "slide": "Exam 2 lecture 17 · source-derived mechanism review"
     }
   },
   "custom": [
