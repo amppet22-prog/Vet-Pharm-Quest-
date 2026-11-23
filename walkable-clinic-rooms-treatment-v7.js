@@ -91,6 +91,13 @@ function imaging(){
  '<text x="106" y="263" fill="#aebfcd" font-size="7" font-family="Arial" font-weight="700">THORAX · LAT</text>'+
  '<text x="192" y="263" fill="#aebfcd" font-size="7" font-family="Arial" font-weight="700">BONE · LAT</text>'+
  '</g>';
+ // Subtle grayscale grain makes the schematic panels resemble backlit films,
+ // while keeping the content explicitly illustrative (not a diagnostic radiograph).
+ s+='<defs><clipPath id="vpqImgFilmLeft"><rect x="103" y="183" width="72" height="84" rx="7"/></clipPath>'+
+ '<clipPath id="vpqImgFilmRight"><rect x="186" y="183" width="70" height="84" rx="7"/></clipPath>'+
+ '<filter id="vpqImgGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".34" numOctaves="2" seed="17" stitchTiles="stitch"/></filter></defs>'+
+ '<g clip-path="url(#vpqImgFilmLeft)" opacity=".10"><rect x="103" y="183" width="72" height="84" filter="url(#vpqImgGrain)"/></g>'+
+ '<g clip-path="url(#vpqImgFilmRight)" opacity=".09"><rect x="186" y="183" width="70" height="84" filter="url(#vpqImgGrain)"/></g>';
  // Positioning table and overhead tube
  s+='<g filter="url(#img25-shadow)"><rect x="114" y="342" width="175" height="18" rx="9" fill="#8ebade" stroke="#6288ac" stroke-width="5"/>'+
  round(136,360,130,54,'#eaf2ff','#96afcb')+'<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
@@ -99,7 +106,12 @@ function imaging(){
  // Ultrasound cart with grayscale original ultrasound sector
  s+='<g filter="url(#img25-shadow)">'+round(333,210,145,116,'#edf4fd','#92a7c7')+round(350,224,113,85,'#253347','#7d99bc')+
  '<path d="M391 238L365 286Q402 303 449 286L424 238Z" fill="#8795a8" stroke="#dce8f2" stroke-width="3"/>'+
- '<path d="M391 251q20 20 33 0M380 276q30 17 58 0" stroke="#d3e3ec" stroke-width="3" opacity=".7" fill="none"/>'+
+ '<path d="M391 251q20 20 33 0M380 276q30 17 58 0" stroke="#d3e3ec" stroke-width="2.2" opacity=".7" fill="none"/>'+
+ '<g opacity=".48" fill="#cdd9e1">'+
+ Array.from({length:45},(_,i)=>{const x=389+(i*13)%39,y=252+(i*17)%31;return '<circle cx="'+x+'" cy="'+y+'" r="'+(.45+(i%4)*.18)+'"/>'}).join('')+
+ '</g>'+
+ '<path d="M397 262q10-7 20 1q-10 7-20-1" fill="#4b6072" opacity=".5"/>'+
+
  round(343,326,125,35,'#d8e0f0','#9aabc8')+
  [366,390,414,438].map(x=>'<circle cx="'+x+'" cy="344" r="5" fill="#a3b4d1"/>').join('')+
  round(359,361,94,45,'#edf2fb','#9caccb')+
@@ -123,7 +135,7 @@ function imaging(){
  '</g>').join('')+
  [790,863].map(x=>'<g><circle cx="'+x+'" cy="273" r="16" fill="#8fa0b5"/><circle cx="'+x+'" cy="273" r="11" fill="#3c4d64"/><path d="M'+(x-7)+' 273q7-11 14 0q-7 10-14 0" fill="#b3c1cd" opacity=".7"/></g>').join('')+
  '<rect x="754" y="187" width="158" height="5" rx="2" fill="#27364c"/>'+
- '<text x="757" y="196" fill="#c5d3df" font-family="Arial" font-size="6">AXIAL STUDY  •  WINDOW / LEVEL</text>'+
+ '<text x="757" y="196" fill="#c5d3df" font-family="Arial" font-size="6">CT AXIAL  •  WINDOW / LEVEL</text>'+
  '<rect x="746" y="321" width="185" height="16" rx="5" fill="#f3d6be" stroke="#af9abb" stroke-width="4"/>'+
  '<path d="M762 337v77M914 337v77" stroke="#9a8fb7" stroke-width="10"/>'+
  '<rect x="797" y="344" width="78" height="8" rx="4" fill="#9ca6bd"/></g>';
@@ -179,7 +191,7 @@ function imaging(){
  // Cozy details throughout the imaging suite, kept behind / outside interactive equipment.
  s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
  // Subtle pastel bunting along the back wall, above all workstation monitors.
- '<path d="M89 155Q205 160 320 155M670 155Q802 162 916 155" stroke="#d8a9c5" stroke-width="2.5" fill="none"/>'+
+ '<path d="M89 158Q205 159 320 158M670 158Q802 159 916 158" stroke="#d8a9c5" stroke-width="2" fill="none"/>'+
  '<path d="M115 157l10 0-5 9zM150 158l10 0-5 9zM185 158l10 0-5 9zM220 157l10 0-5 9zM730 157l10 0-5 9zM765 158l10 0-5 9zM800 158l10 0-5 9zM835 157l10 0-5 9zM870 157l10 0-5 9z" fill="#f5c5d4" opacity=".95"/>'+
  // Tiny gold sparkle accents around the imaging department logo.
  '<path d="M329 114l5 0m-2.5-2.5v5M670 114l5 0m-2.5-2.5v5M320 141l4 0m-2-2v4M678 141l4 0m-2-2v4" stroke="#e6b979" stroke-width="2.5" stroke-linecap="round"/>'+
