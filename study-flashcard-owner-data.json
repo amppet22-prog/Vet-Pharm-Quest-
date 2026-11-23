@@ -426,6 +426,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 17",
       "curated": true
+    },
+    {
+      "prompt": "What do you give after morphine in surgery post op?",
+      "answer": "Morphine",
+      "why": "",
+      "slide": "Pathology lecture LMU",
+      "id": "owner-pharmacology-mwtj5b6t-ew9t1",
+      "domain": "pharmacology",
+      "lecture": "Lecture 20",
+      "curated": true
     }
   ],
   "hidden": [
