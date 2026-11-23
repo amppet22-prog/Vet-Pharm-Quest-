@@ -234,6 +234,12 @@
       "answer": "It activates motilin receptors.",
       "why": "Motility therapy must be tailored to the underlying syndrome. At its regular dose, it does not have any GI motility advantage.",
       "slide": "Exam 2 lecture 17 · source-derived mechanism review"
+    },
+    "76|endometrial polyp|focus-0": {
+      "prompt": "Which animals commonly develop endometrial polyps?",
+      "answer": "Dogs and cats.",
+      "why": "",
+      "slide": "19"
     }
   },
   "custom": [
