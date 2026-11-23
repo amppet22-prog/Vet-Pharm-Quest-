@@ -204,6 +204,12 @@
       "answer": "As a prostaglandin E1 analogue supporting mucosal defenses. The PGE 1 receptor agonist decreases acid and increases bicarbonate and stomach mucus.",
       "why": "Pregnancy and reproductive risks require caution. It is an abortifacient. Must wear gloves! Can also get rid of IUDs (depending on the brand!)",
       "slide": "Exam 2 lecture 17 · source-derived mechanism review"
+    },
+    "pharm-e2-96": {
+      "prompt": "What molecular target does fuzapladib (Panoquell CA-1) affect?",
+      "answer": "It is a LFA-1 Inhibitor- which decreases neutrophil migration into the pancreas to help reduce inflammation.",
+      "why": "It is not an anti-NGF monoclonal antibody which it is often confused for. \nUsed for recurrent pancreatitis as it destroys the islet cells, which can predispose to diabetes mellitus. So this helps prevent it. \n(I have also seen DVM's in practice give it to help with less hospitalization and they APPEAR to work but there is not enough published data to utilize this atm)",
+      "slide": "Exam 2 lecture 17 · source-derived mechanism review"
     }
   },
   "custom": [
