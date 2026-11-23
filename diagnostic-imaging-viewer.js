@@ -32,7 +32,7 @@ function render(){
  '<div style="display:flex;gap:7px;flex-wrap:wrap;margin:10px 0">'+button('minus','− Zoom')+button('plus','+ Zoom')+button('brightness-down','− Brightness')+button('brightness-up','+ Brightness')+button('contrast-down','− Contrast')+button('contrast-up','+ Contrast')+button('rotate','↻ Rotate display')+button('reset','Reset controls')+button('compare',sideBySide?'Single view':'Compare views')+'</div>'+
  '<small style="display:block;color:#526c89;margin:4px 0 10px">Zoom '+zoom+'% · Brightness '+brightness+'% · Contrast '+contrast+'% · Display rotation '+rotation+'°. Display rotation does not change acquisition orientation or correct an inaccurate marker.</small>'+
  '<div style="display:flex;gap:9px;flex-wrap:wrap;align-items:stretch">'+(sideBySide?images.filter(i=>i.url).length?images.map((i,index)=>i.url?imageBox(i,index):'').join(''):imageBox(image,active):imageBox(image,active))+'</div>'+
- '<div class="buttonrow" style="margin:12px 0">'+button('interpret','📝 Structured interpretation')+button('reading','📚 Radiology Reading Desk')+button('clear','Clear images')+'</div>'+
+ '<div class="buttonrow" style="margin:12px 0">'+button('spotter','🎯 Spot the Abnormality')+button('interpret','📝 Structured interpretation')+button('reading','📚 Radiology Reading Desk')+button('clear','Clear images')+'</div>'+
  '<p class="tiny">Viewing unsupported file types or DICOM requires a dedicated validated viewer; this workspace accepts JPEG, PNG and WebP. No lesion identification or diagnosis is automatically generated.</p>');
 }
 function interpret(){
@@ -66,6 +66,7 @@ function init(context){
   else if(action==='reset')defaults();
   else if(action==='compare')sideBySide=!sideBySide;
   else if(action==='clear'){release();defaults();}
+  else if(action==='spotter')return window.VPQ_IMAGING_SPOTTER?.open?.();
   else if(action==='interpret')return interpret();
   else if(action==='copy')return copyReport();
   else if(action==='clear-report'){report={species:'',region:'',history:'',quality:'',normal:'Undetermined',findings:'',assessment:'',next:''};return interpret()}
@@ -90,5 +91,5 @@ function init(context){
   if(t.dataset?.vpqviewerField)images[active][t.dataset.vpqviewerField]=String(t.value||'').slice(0,150);
  },true);
 }
-window.VPQ_DIAGNOSTIC_IMAGING_VIEWER=Object.freeze({init,open:render,report:interpret,reset:()=>{release();defaults()}});
+window.VPQ_DIAGNOSTIC_IMAGING_VIEWER=Object.freeze({init,open:render,report:interpret,getViews:()=>images.map(({url,name,view,region})=>({url,name,view,region})),reset:()=>{release();defaults()}});
 })();
