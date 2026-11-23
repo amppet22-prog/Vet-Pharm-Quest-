@@ -222,6 +222,12 @@
       "answer": "It is a small-molecule LFA-1 inhibitor, not a monoclonal antibody.",
       "why": "The mechanism alters leukocyte adhesion; do not claim established prevention of recurrent pancreatitis.",
       "slide": "Lecture 17 · GI/hepatic deep lesson audit, 2026-11-20"
+    },
+    "pharm-e2-93": {
+      "prompt": "What is sucralfate's main role?",
+      "answer": "Local mucosal protection at damaged surfaces.",
+      "why": "It does not inhibit acid secretion like a proton-pump inhibitor. Instead it provides a cyto-adherent coating on an ucler and increases GI prostaglandins.",
+      "slide": "Exam 2 lecture 17 · source-derived mechanism review"
     }
   },
   "custom": [
