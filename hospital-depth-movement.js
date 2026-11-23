@@ -62,7 +62,7 @@ function start(){
   '.stage #avatarSprite.vpq-portrait-walk .vpq-game-avatar{width:100%!important;height:100%!important;left:0!important;bottom:0!important;position:absolute!important;display:block!important;overflow:visible!important}'+
   '.stage #avatarSprite .vpq-game-avatar img,.stage #avatarSprite .vpq-game-avatar svg,.stage #avatarSprite .vpq-game-avatar .vpq-standing-art,.stage #avatarSprite .vpq-game-avatar .vpq-art-sprite{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important}'+
   '.stage #petSprite{bottom:var(--vpq-depth-pet-bottom,7%)!important;transform:scale(var(--vpq-depth-pet-scale,1))!important;transform-origin:center bottom;transition:bottom .11s linear,transform .11s linear;z-index:8!important}'+
-  '.stage #avatarSprite.left{transform:scaleX(-1)}'+
+  '.stage #avatarSprite{transform:none!important}.stage #avatarSprite.left{transform:scaleX(-1)!important}'+
   '#stage[data-room="reception"][data-reception-view="isometric"] #avatarSprite{transform:none!important;bottom:var(--vpq-depth-bottom,8%)!important}'+
   '#stage[data-room="reception"][data-reception-view="isometric"] #avatarSprite.left{transform:scaleX(-1)!important}'+
   '@media(max-width:600px){.stage #avatarSprite{width:calc(var(--vpq-depth-width,230px) * .83)!important;height:calc(var(--vpq-depth-height,230px) * .83)!important}}';
