@@ -35,7 +35,7 @@ function start(){
   syncRoom();
   // A character near the back wall is smaller. A near character is full size.
   // The foot position follows the floor, keeping the wall apparatus visible.
-  const h=Math.round(161+depth*91);
+  const h=Math.round(181+depth*102);
   avatar.style.setProperty('--vpq-depth-height',h+'px');
   avatar.style.setProperty('--vpq-depth-width',Math.round(h*.55)+'px');
   avatar.style.setProperty('--vpq-depth-bottom',(27-depth*24)+'%');
