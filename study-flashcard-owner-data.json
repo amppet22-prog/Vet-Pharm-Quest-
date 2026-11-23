@@ -334,5 +334,7 @@
       "curated": true
     }
   ],
-  "hidden": []
+  "hidden": [
+    "pharm-e2-gi17-audit-002"
+  ]
 }
