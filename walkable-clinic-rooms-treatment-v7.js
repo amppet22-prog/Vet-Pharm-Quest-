@@ -79,24 +79,23 @@ function imaging(){
  '<clipPath id="vpqRadR"><rect x="186" y="183" width="70" height="84" rx="7"/></clipPath></defs>'+
  '<g filter="url(#img25-shadow)">'+round(88,169,184,112,'#d8ecfb','#96b7d0')+
  round(101,181,76,88,'#111923','#7c9cb9')+round(184,181,74,88,'#111923','#7c9cb9')+'</g>'+
- // Lateral thorax: spine, scapular border, ribs, pulmonary lucency, cardiac shadow.
+ // Thoracic panel: layered canine lateral silhouette with curving ribs, cardiac
+ // soft tissue and subtle lung markings (illustration, not a diagnostic radiograph).
  '<g clip-path="url(#vpqRadL)">'+
  '<rect x="103" y="183" width="72" height="84" fill="url(#vpqRadFilm)"/>'+
- '<path d="M102 202Q124 190 160 195L180 209L176 249Q150 258 119 249L100 239Z" fill="url(#vpqRadSoft)" opacity=".73" filter="url(#vpqRadBlur)"/>'+
- '<path d="M107 206Q127 198 166 201L170 238Q158 249 135 246L112 236Z" fill="#121d29" opacity=".91"/>'+
- '<path d="M105 193Q139 186 173 196" stroke="#e0e6eb" stroke-width="5" opacity=".5" fill="none" filter="url(#vpqRadBlur)"/>'+
- '<path d="M105 194Q139 187 173 197" stroke="#c9d2db" stroke-width="2.5" opacity=".78" fill="none"/>'+
- '<g stroke="#adbcc7" stroke-width="1.7" opacity=".65" fill="none">'+
- [0,1,2,3,4,5,6].map(i=>'<path d="M'+(111+i*8)+' '+(195+i*.4)+' C'+(98+i*8)+' '+(210+i*1.1)+' '+(110+i*7)+' '+(236+i*.8)+' '+(122+i*6)+' '+(249+i*.4)+'"/>').join('')+
- '</g>'+
- '<g stroke="#d5dfe6" stroke-width="2" opacity=".56" fill="none">'+
- '<path d="M107 207Q138 199 170 210M108 216Q139 207 171 218M110 227Q140 220 171 229M112 237Q139 232 169 238"/>'+
- '</g>'+
- '<path d="M139 215Q127 213 125 226Q123 242 140 247Q153 247 153 232Q151 218 139 215Z" fill="#8896a1" opacity=".79" filter="url(#vpqRadBlur)"/>'+
- '<path d="M142 215Q131 215 131 225Q127 237 142 241Q151 242 149 230Z" fill="#a2acb5" opacity=".49"/>'+
- '<path d="M108 240Q141 230 171 244" fill="none" stroke="#bac8d3" stroke-width="2" opacity=".75"/>'+
- '<path d="M117 206Q121 225 114 239" stroke="#c4ced6" stroke-width="3" opacity=".5" fill="none"/>'+
- '<rect x="103" y="183" width="72" height="84" fill="#fff" filter="url(#vpqRadGrain)" opacity=".075"/>'+
+ '<path d="M101 209Q119 191 148 196Q169 196 180 215L178 251Q147 259 114 246Q102 235 101 209Z" fill="#798894" opacity=".38" filter="url(#vpqRadBlur)"/>'+
+ '<path d="M108 208Q135 196 165 208L166 240Q142 250 115 236Z" fill="#0b1721" opacity=".88"/>'+
+ '<path d="M104 195Q133 185 172 196" stroke="#c6d0d8" stroke-width="5" opacity=".35" fill="none" filter="url(#vpqRadBlur)"/>'+
+ '<path d="M104 195Q134 186 174 197" stroke="#c2d0da" stroke-width="2.3" opacity=".78" fill="none"/>'+
+ '<g fill="#c9d5df" opacity=".62">'+[109,118,127,136,145,154,163].map((x,i)=>'<rect x="'+x+'" y="'+(194+(i%2))+'" width="7" height="3" rx="1.2"/>').join('')+'</g>'+
+ '<g fill="none" stroke="#bfccd5" stroke-linecap="round" opacity=".71">'+
+ [0,1,2,3,4,5,6].map(i=>{const x=110+i*8;return '<path d="M'+x+' 201 C'+(x-4)+' 211 '+(x-8)+' 226 '+(x+5)+' 242" stroke-width="'+(1.2+(i%2)*.3)+'"/>'}).join('')+'</g>'+
+ '<path d="M106 242Q138 232 169 243" fill="none" stroke="#d3dce3" stroke-width="2.1" opacity=".78"/>'+
+ '<path d="M140 214Q128 213 126 225Q125 238 137 242Q150 246 155 234Q156 221 140 214Z" fill="#98a5ae" opacity=".71" filter="url(#vpqRadBlur)"/>'+
+ '<path d="M139 219Q132 220 132 229Q131 237 142 238Q150 235 148 227Z" fill="#bcc6cd" opacity=".3"/>'+
+ '<path d="M116 212L123 234M162 215L158 235" stroke="#647988" stroke-width="1.4" opacity=".48"/>'+
+ '<path d="M117 226Q125 220 132 227M145 206Q153 212 160 209M153 238Q161 233 165 232" fill="none" stroke="#9dafbd" stroke-width=".85" opacity=".45"/>'+
+ '<rect x="103" y="183" width="72" height="84" fill="#fff" filter="url(#vpqRadGrain)" opacity=".065"/>'+
  '</g>'+
  // Lateral stifle: overlapping femoral condyles, tibial plateau and proximal tibia.
  '<g clip-path="url(#vpqRadR)">'+
@@ -116,11 +115,30 @@ function imaging(){
  '<text x="163" y="192">R</text><text x="246" y="192">L</text></g>'+
  '<rect x="104" y="184" width="70" height="81" rx="6" fill="none" stroke="#8c9dac" stroke-width=".65" opacity=".45"/>'+
  '<rect x="187" y="184" width="68" height="81" rx="6" fill="none" stroke="#8c9dac" stroke-width=".65" opacity=".45"/>';
- // Positioning table and overhead tube
- s+='<g filter="url(#img25-shadow)"><rect x="114" y="342" width="175" height="18" rx="9" fill="#8ebade" stroke="#6288ac" stroke-width="5"/>'+
- round(136,360,130,54,'#eaf2ff','#96afcb')+'<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
- '<path d="M146 251v83M146 252h73v25" stroke="#829dbd" stroke-width="14" fill="none"/>'+round(199,277,50,31,'#e2effc','#8caacc')+
- '<ellipse cx="225" cy="310" rx="19" ry="8" fill="#b5dcf9"/></g>';
+ // Radiography table: washable radiolucent top, under-table drawer, positioning
+ // V-trough and separate R/L markers. The trough is decorative, not a restraint.
+ s+='<g filter="url(#img25-shadow)">'+
+ '<rect x="114" y="342" width="175" height="18" rx="9" fill="#a1c3d4" stroke="#6288ac" stroke-width="4"/>'+
+ '<path d="M126 345H277" stroke="#ecf6ff" opacity=".9" stroke-width="3" stroke-linecap="round"/>'+
+ round(136,360,130,54,'#eaf2ff','#96afcb')+
+ '<rect x="150" y="370" width="102" height="19" rx="6" fill="#d5e5ed" stroke="#a6bacb" stroke-width="2"/>'+
+ '<path d="M171 378h59" stroke="#8fa7bd" stroke-width="3" stroke-linecap="round"/>'+
+ '<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
+ // Side walls of the padded foam V-trough.
+ '<path d="M146 334L165 318L195 335L210 339L231 319L251 336L236 348L164 348Z" fill="#a7c5c9" stroke="#719ba8" stroke-width="2.6"/>'+
+ '<path d="M166 332L195 340L210 343L231 331L240 337L212 351L188 351L156 337Z" fill="#e4f1e9" stroke="#a1c7b7" stroke-width="1.5"/>'+
+ '<path d="M160 335L194 346L212 346L241 334" stroke="#799da7" stroke-width="2" fill="none"/>'+
+ // Upright tube arm and collimator.
+ '<path d="M146 251v83M146 252h73v25" stroke="#829dbd" stroke-width="14" fill="none"/>'+
+ round(199,277,50,31,'#e2effc','#8caacc')+
+ '<rect x="209" y="284" width="29" height="6" rx="2" fill="#b0c8de"/>'+
+ '<ellipse cx="225" cy="310" rx="19" ry="8" fill="#b5dcf9"/>'+
+ // Small physical laterality marker tray at edge of table.
+ '<rect x="273" y="330" width="26" height="19" rx="5" fill="#f9faff" stroke="#a2b2c8" stroke-width="2"/>'+
+ '<rect x="277" y="334" width="9" height="11" rx="2" fill="#d3e7f2"/>'+
+ '<rect x="287" y="334" width="9" height="11" rx="2" fill="#f3dae4"/>'+
+ '<g font-family="Arial" font-size="7" font-weight="900" text-anchor="middle"><text x="281.5" y="342" fill="#3d6d91">R</text><text x="291.5" y="342" fill="#98647a">L</text></g>'+
+ '</g>';
  // Modern compact ultrasound cart: articulated screen, B-mode image, console,
  // trackball, transducer cradle, probe head and hanging cable. Decorative only.
  s+='<g filter="url(#img25-shadow)">'+
@@ -197,13 +215,25 @@ function imaging(){
  '<text x="19" y="247" font-size="7.5" font-weight="800" fill="#6e6480">TIME</text>'+
  '<text x="19" y="261" font-size="7.5" font-weight="800" fill="#6e6480">DISTANCE</text>'+
  '<text x="19" y="275" font-size="7.2" font-weight="800" fill="#6e6480">SHIELDING</text>'+
- // PPE rail and lead protective apron on the rear wall between the x-ray and ultrasound.
- '<rect x="285" y="192" width="43" height="89" rx="6" fill="#fff8fc" stroke="#c8b5d9" stroke-width="3"/>'+
- '<rect x="288" y="198" width="37" height="16" rx="4" fill="#e9d8f1"/>'+
- '<text x="306" y="209" font-size="9" text-anchor="middle" fill="#765e8b" font-weight="900">PPE</text>'+
- '<path d="M298 222h18l7 12-8 6v28h-17v-28l-7-6z" fill="#9cb7d5" stroke="#6383a7" stroke-width="2"/>'+
- '<path d="M301 221q5-8 11 0" stroke="#6383a7" stroke-width="3" fill="none"/>'+
- '<path d="M294 253l-4 7 4 4 4-6M321 253l4 7-4 4-4-6" fill="#f6d8e8" stroke="#a57b9d" stroke-width="1.7"/>'+
+ // Compact radiation-safety rack: apron, thyroid collar, leaded glasses,
+ // protective gloves and R/L markers. Kept between X-ray and ultrasound.
+ '<rect x="277" y="186" width="55" height="116" rx="8" fill="#fff9ff" stroke="#c6afd8" stroke-width="3"/>'+
+ '<rect x="280" y="190" width="49" height="17" rx="5" fill="#eadcf4"/>'+
+ '<text x="304.5" y="201.5" font-size="9" text-anchor="middle" fill="#735c91" font-weight="900">XRAY PPE</text>'+
+ // Lead apron hanging in the center.
+ '<path d="M299 218h13l8 11-7 6v29h-16v-29l-7-6z" fill="#9cb9d3" stroke="#6789aa" stroke-width="2"/>'+
+ '<path d="M303 218q2-5 6 0" stroke="#6789aa" stroke-width="2" fill="none"/>'+
+ // Thyroid shield collar (separate accessory on upper rail).
+ '<path d="M296 211q9-7 17 0l-3 7q-6-5-11 0z" fill="#d8aed1" stroke="#af80a4" stroke-width="1.5"/>'+
+ // Lead glasses displayed above apron, not conventional eyewear promise.
+ '<path d="M281 222h6q4 0 4 5q-1 4-5 4h-2q-4 0-4-4q0-5 4-5h3m4 3h2" fill="none" stroke="#6d7995" stroke-width="1.8"/>'+
+ '<path d="M320 222h6q4 0 4 5q-1 4-5 4h-2q-4 0-4-4q0-5 4-5h3" fill="none" stroke="#6d7995" stroke-width="1.8"/>'+
+ // Hanging gloves on hooks under apron.
+ '<path d="M291 270l-3-9-2-1-1 6-3-7-2 2 3 12 4 4zM318 270l4-9 2-1 1 6 3-7 2 2-3 12-4 4z" fill="#e8c7df" stroke="#a989aa" stroke-width="1.4"/>'+
+ '<path d="M279 280h51" stroke="#d9c4e1" stroke-width="2"/>'+
+ // Marker box inside rack as reminder, in addition to the physical table tray.
+ '<rect x="286" y="284" width="38" height="13" rx="4" fill="#edf4fa" stroke="#a8b7ce" stroke-width="1.4"/>'+
+ '<text x="305" y="293" font-size="8" text-anchor="middle" font-weight="900" fill="#627c9c">R  /  L</text>'+
  // Pastel accents and a quiet workstation reminder above the reading desk.
  '<rect x="875" y="307" width="32" height="14" rx="5" fill="#fff6e9" stroke="#d9b9c9" stroke-width="2"/>'+
  '<path d="M885 308q-8-11 0-18m8 18q10-11 1-19" stroke="#6fae97" stroke-width="3" fill="none"/>'+
