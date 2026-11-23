@@ -3889,6 +3889,76 @@
       },
       "updated": "2026-11-22T06:41:37.214Z",
       "approvedBy": "amppet22-prog"
+    },
+    "exam7-33": {
+      "title": "Fetal mummification",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-33-1795458398007-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "77"
+          ],
+          "systems": [
+            "Female reproduction / Mammary",
+            "Placenta / Fetus"
+          ],
+          "conditionId": "exam7-33"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/exam7-33-1795458398007-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "77"
+        ],
+        "systems": [
+          "Female reproduction / Mammary",
+          "Placenta / Fetus"
+        ],
+        "conditionId": "exam7-33"
+      },
+      "text": {
+        "title": "Fetal mummification",
+        "gross": "Retained fetus is dry, flattened or shriveled, leathery brown-black and largely retains recognizable form; usually no foul-smelling purulent fluid. May coexist with live littermates in pigs.",
+        "mechanismSummary": "Fetal death after skin formation → sterile uterine retention → fluid resorption → desiccation and mummification",
+        "dx": "Uterus: fetal mummification, with retained desiccated fetal remains.",
+        "histo": "Gross pattern is usually more diagnostic than histology; autolysis and dehydration occur without bacterial suppuration.",
+        "why": "Fetus dies after skin develops while cervix remains closed and uterine contents stay sterile; fetal fluids are resorbed and membranes contract around preserved tissue.",
+        "visualClue": "Dry leathery recognizable fetus with little or no putrid exudate.",
+        "compare": "Maceration involves bacterial infection with fragmented soft tissues, bone remnants and pus; emphysematous fetus has gas and putrefaction.",
+        "notes": "**L77 · EXAM HIGHLIGHT (Fetus retained, no bacterial decomposition; mare twin and sow examples)** Most commonly seen in multiparous species.\n**SPECIES + GROSS:** Swine is the most common, cattle and occasionally mare twin; preserved, dry brown-black leathery fetal outline and little/no purulence.\n**WHY / PATHOGENESIS:** Sterile retained fetal death after skin differentiation → resorption of fluids → dehydration and retained preserved form.\n**DON’T CONFUSE WITH:** Maceration means bacterial breakdown with soft-tissue loss and bones/pus; gas-distended fetus is emphysematous.\n\n**L77 · instructor speaker notes (PPT slide 18 (speaker notes))**\n**Essential condition**: Fetal death with NO bacterial infection, retained fetus and sufficiently mature fetal skin; retained CL may maintain gestation.\n**Gross**: Dehydrated brown/black leathery fetus, sticky mucus, intact recognizable form; lack of foul odor/pus.\n**Species**: Especially sow and one twin in mare; large mummified bovine fetus may take months to fully desiccate.\n**Comparison**: Mummification preserves shape; maceration destroys soft tissue due to infection.",
+        "grossSpecies": "[{\"name\":\"Sows\",\"clue\":\"One or more small dry fetuses among littermates\",\"text\":\"Different conceptuses may die at different gestational ages; one or more dry dark shriveled fetuses can be present at parturition alongside normally developed piglets. Interpret fetal size and timing.\"},{\"name\":\"Mares\",\"clue\":\"Retained mummy or mummified twin\",\"text\":\"Uncommon but may follow one twin dying; intact dry compressed membranes and preserved fetal form help distinguish from infected maceration.\"},{\"name\":\"Cattle\",\"clue\":\"Large brown leathery retained fetus\",\"text\":\"Sterile retained fetal remains can dehydrate slowly for months, with persistent corpus luteum and prolonged gestation. A closed cervix and lack of infection are essential.\"}]",
+        "etiologyCategories": [],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "catalogScope": "course",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "breedSizes": "[]",
+        "breedTags": "[]",
+        "breedEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-23T18:26:39.286Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
