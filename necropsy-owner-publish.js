@@ -279,7 +279,7 @@ async function renameCaseEditor(id){
  '<div class="buttonrow"><button data-necro-owner-publish="1">💾 Publish title</button><button data-np-case-rename-cancel="1">← Cancel</button></div>'+
  '<p id="npOwnerResult" role="status" style="font-size:12px"></p>');
 }
-async function editor(type,id){
+async function editor(type,id,formMode=null){
  const lp=type==='lecture'?/^L(\d+)-S(\d+)-P([01])$/.exec(id):null;
  const lesson=lp?window.VPQ_PATH_LECTURE_LEARN?.[lp[1]]?.sections?.[Number(lp[2])]:null;
  const base=type==='lecture'&&lesson?{id,title:'L'+lp[1]+' · '+lesson.title+' · image slot '+(Number(lp[3])+1)}:
@@ -306,7 +306,7 @@ async function editor(type,id){
  '<section style="padding:12px;background:#f6fcf9;border:1px solid #d4eadd;border-radius:14px;margin:12px 0"><h4 style="margin:0 0 7px">⚖️ 4 · Differentials & additional notes</h4>'+['compare','notes'].map(specimenFieldHTML).join('')+'</section>'+
  '<section style="padding:12px;background:#fffaf3;border:1px solid #e9dcc4;border-radius:14px;margin:12px 0"><h4 style="margin:0 0 7px">🐾 5 · Species-specific gross findings</h4><p class="tiny">These optional sections are separate from the general gross description. Edit each named species section here.</p>'+(window.VPQ_PATH_EXAM7?.speciesGrossEditorHTML?.(edits)||'')+'</section>';
 
- const currentComparison=type==='specimen'&&(edits.atlasComparison===true||edits.dermComparison===true||Array.isArray(edits.comparisonRows));
+ const currentComparison=type==='specimen'&&(formMode?formMode==='comparison':(edits.atlasComparison===true||edits.dermComparison===true||Array.isArray(edits.comparisonRows)));
  const comparisonRowsEditor=()=>'<section style="padding:12px;background:#faf5ff;border:1px solid #dcc9ec;border-radius:12px;margin:10px 0"><b>⚖️ Comparison entries</b><p class="tiny">Each named row is a side-by-side condition. The matching photo slot uses this name.</p>'+
  (comparisonRowsCurrent.length?comparisonRowsCurrent:[[ '', '', '', '', '', '' ],[ '', '', '', '', '', '' ]]).map((row,i)=>'<div style="background:white;border:1px solid #e2d8eb;border-radius:9px;padding:10px;margin:8px 0"><b>Row '+(i+1)+' · '+esc(row[0]||'New condition')+'</b>'+[['Condition name',0],['Gross look',1],['Tissue / location',2],['Species / site',3],['Visual clue',4],['Don’t confuse with',5]].map(([label,j])=>'<label style="display:block;font-size:12px;margin:6px 0">'+label+'<textarea data-np-compare-row="'+i+'" data-np-compare-col="'+j+'" rows="'+(j===0?1:2)+'" style="display:block;width:100%;padding:7px;border:1px solid #d9cfdf;border-radius:6px">'+esc(row[j]||'')+'</textarea></label>').join('')+'</div>').join('')+'</section>'+
  '<div style="padding:10px;background:#f7faff;border:1px solid #d9e4f1;border-radius:10px"><b>Extra context</b>'+['gross','why','compare','notes'].map(specimenFieldHTML).join('')+'</div>';
@@ -329,7 +329,7 @@ async function editor(type,id){
  '<p style="font-size:12px;color:#675878;margin:9px 0 0"><b>Already uploaded the photo?</b> Keep it—scroll to “Currently published” and select its matching Photo 1, Photo 2, etc. No need to upload twice. The assignment saves when you choose Publish Now.</p></section>';
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  draftState={};
- show(type==='case'?'✏️ Case editor · Lecture '+esc(base.lecture||''):'✏️ Edit & publish · '+esc(base.title),
+ show(type==='case'?'✏️ Case editor · Lecture '+esc(base.lecture||''):type==='specimen'?'✏️ Edit / Publish · '+(currentComparison?'Comparison Card':'Disease Card'):'✏️ Edit / Publish · Lecture image',
  '<div style="padding:7px 10px;background:#f7f5fa;border:1px solid #e0d7eb;border-radius:9px;font-size:12px;color:#655775">L'+esc(base.lecture||lp?.[1]||'—')+' · '+esc(base.title)+'</div>'+
  formChoice()+(type==='specimen'?'<input type="hidden" data-np-selected-form value="'+(currentComparison?'comparison':'disease')+'">':'')+
  (type!=='lecture'?'<h4 style="margin:12px 0 5px">✏️ 1 · Display title / name</h4><label style="display:block;margin:9px 0"><b>Title visible in the atlas</b><input data-np-text="title" maxlength="180" style="width:100%;display:block;margin-top:4px" value="'+esc(edits.title||base.title)+'" placeholder="Condition or specimen name"></label><p class="tiny">Renaming keeps the existing card ID, photos, captions, species tags and case links. Publish your name change using the same password.</p>':'')+
@@ -606,6 +606,13 @@ function init(context){
  })().catch(e=>{if(stat)stat.textContent='Rename failed: '+e.message+' Your original name is unchanged.'}).finally(()=>{password='';token='';if(b.isConnected)b.disabled=false});
  },true);
  context.body.addEventListener('click',ev=>{
+  const mode=ev.target.closest('[data-np-edit-form]');
+  if(mode){
+   ev.preventDefault();ev.stopImmediatePropagation();
+   const selection=mode.dataset.npEditForm;
+   if(context.body.querySelector('[data-np-selected-form]')?.value===selection)return;
+   return editor('specimen',pending.id,selection);
+  }
   const switcher=ev.target.closest('[data-np-add-kind]');
   if(switcher){ev.preventDefault();ev.stopImmediatePropagation();return newSpecimenEditor(switcher.dataset.npAddKind,context.body.querySelector('#npSpecLecture')?.value||'77')}
   const button=ev.target.closest('[data-np-spec-create],[data-np-spec-visibility],[data-np-spec-cancel],[data-np-spec-restore]');
