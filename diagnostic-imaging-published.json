@@ -173,6 +173,151 @@
       "differentials": "Other causes of hoof pain or altered phalangeal alignment require clinical and radiographic correlation.",
       "why": "Damage to the lamellar suspension of P3 can allow its position within the hoof capsule to change.",
       "next": "Interpret with lameness findings and standardized farriery/radiographic measurements; assess urgent support and treatment."
+    },
+    "verified-feline-struvite-cystolith": {
+      "id": "verified-feline-struvite-cystolith",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Feline Cystolith · Source-Labeled Struvite Stone",
+      "species": "Cat",
+      "region": "Caudal abdomen / urinary bladder",
+      "lecture": "Diagnostic Imaging · Small Animal Abdomen / Urology",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/BladderStone.jpg",
+          "view": "Feline urinary bladder radiograph · projection not stated",
+          "caption": "Source explicitly labels a struvite bladder stone in a cat. Stone composition cannot be reliably identified by radiographic opacity alone."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:BladderStone.jpg",
+      "credit": "Bludwar · Public-domain dedication on Wikimedia Commons",
+      "history": "Wikimedia source identifies a feline struvite bladder stone; signalment and diagnostic confirmation method are not supplied.",
+      "lookFor": "Find the urinary bladder region; look for a mineral-opaque focus within its expected lumen. Ask whether location is confirmed on an orthogonal projection.",
+      "quality": "Original source does not establish the projection name. Confirm correct anatomical positioning and projection marker before interpreting.",
+      "findings": "Source-labeled mineral opacity compatible with a bladder calculus; verify the position relative to the expected urinary bladder and surrounding pelvis.",
+      "interpretation": "Source-reported feline cystolith, described by its author as struvite. Radiography alone is not sufficient to establish stone composition.",
+      "differentials": "Radiopaque urolith, mineralized soft tissue outside the bladder, or superimposed fecal/other mineral opacity; localization from orthogonal images is important.",
+      "why": "Calcium-containing and some magnesium-ammonium-phosphate calculi can be radiopaque. Opacity, shape and position inform the workup but do not confirm chemistry.",
+      "next": "Urinalysis, urine culture when indicated, imaging in another plane, and composition analysis where available.",
+      "reviewStatus": "Source-described finding; chemical composition is attributed to original uploader, not independently proven by X-ray.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Original Commons file linked, rights and description verified"
+    },
+    "verified-canine-cystolith-overview": {
+      "id": "verified-canine-cystolith-overview",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Canine Urinary Bladder Stones · Abdominal Study",
+      "species": "Dog",
+      "region": "Urinary bladder / caudal abdomen",
+      "lecture": "Diagnostic Imaging · Small Animal Abdomen / Urology",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bladder%20stones%20x-ray.JPG",
+          "view": "Canine abdominal radiograph · projection unspecified",
+          "caption": "Joel Mills original photograph of a canine radiograph showing bladder stones."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Bladder_stones_x-ray.JPG",
+      "credit": "Joel Mills (Joelmills) · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "Original image described as a canine radiograph showing bladder stones; no age, breed or clinical complaint supplied.",
+      "lookFor": "Identify the bladder silhouette/expected location; count mineral opacities, describe margins, and note whether the urethra is fully included.",
+      "quality": "The source does not specify projection or diagnostic technique, and this is a photograph of a displayed radiograph.",
+      "findings": "Original photographer identifies urinary bladder stones. Describe number, size, mineral opacity and location rather than assuming composition.",
+      "interpretation": "Source-identified canine cystoliths; size/composition should not be inferred without further examination.",
+      "differentials": "Bladder calculi versus extravesical mineral opacity or superposition. Consider possible urethral urolithiasis if clinical obstruction is suspected.",
+      "why": "Urinary calculi result from crystallization/aggregation under permissive urinary conditions. Some are radiopaque and some may be radiolucent.",
+      "next": "Combine with urinalysis, culture when indicated and urinary ultrasound or complementary projections; evaluate urinary outflow urgently if obstructed.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Original Commons file linked, rights and description verified",
+      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
+    },
+    "verified-canine-gdv-second-source": {
+      "id": "verified-canine-gdv-second-source",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Canine GDV · Compartmentalization and Pyloric Displacement",
+      "species": "Dog",
+      "region": "Cranial abdomen / stomach",
+      "lecture": "Diagnostic Imaging · Small Animal Abdomen / Emergency",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/GDV%20x-ray.JPG",
+          "view": "Canine abdominal radiograph · GDV",
+          "caption": "Original source notes abnormal cranial positioning of pylorus/duodenum and gastric double-bubble compartmentalization."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:GDV_x-ray.JPG",
+      "credit": "Joel Mills · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "Large mixed-breed dog; original photographer describes gastric dilatation–volvulus.",
+      "lookFor": "Identify the distended gas-filled stomach, then look for separation into gas compartments and abnormal pyloric location. How does this differ from simple gastric dilation?",
+      "quality": "Check cranial abdominal coverage. This is a photograph of a radiograph; projection side is not established in source.",
+      "findings": "Original source: trapped gas distends stomach; displaced pylorus and duodenum appear cranial to stomach, with a separating gastric fold ('double bubble').",
+      "interpretation": "Source-confirmed canine GDV image, demonstrating compartmentalization and abnormal pyloric position.",
+      "differentials": "Simple gastric dilatation without volvulus; other causes of distension or gastric outflow dysfunction.",
+      "why": "Rotation obstructs normal gastric transit and may compromise venous drainage, leading to rapid gastric distension, ischemia and cardiovascular compromise.",
+      "next": "Immediate stabilization and surgical assessment; do not delay emergency treatment for unnecessary additional imaging.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Original Commons file linked, rights and description verified",
+      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
+    },
+    "verified-equine-laminitis-radiographic-measurements": {
+      "id": "verified-equine-laminitis-radiographic-measurements",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Equine Laminitis · Radiographic Measurement Guide",
+      "species": "Horse",
+      "region": "Distal digit / hoof",
+      "lecture": "Diagnostic Imaging · Equine Musculoskeletal",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/LaminiticRadiographicMeasurements.jpg",
+          "view": "Annotated lateral equine foot",
+          "caption": "Source annotation labels CE, HL, SD, DB, and PA radiographic measurement concepts."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:LaminiticRadiographicMeasurements.jpg",
+      "credit": "Eventer · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "history": "Original creator presents annotated measurements relevant to assessing laminitis; individual patient signalment is not specified.",
+      "lookFor": "Find P3, the dorsal hoof wall, the solar surface and the coronary band. What each line measures is more important than memorizing a value from this single image.",
+      "quality": "Annotated educational reference, not an independent clinical measurement from a supplied case history.",
+      "findings": "CE = coronary extensor distance; HL = horn–lamellar distance; SD = sole depth; DB = digital breakover; PA = palmar angle, per original figure description.",
+      "interpretation": "Radiographic measurement teaching guide for monitoring structural effects of laminitis. Annotations do not alone establish individual severity.",
+      "differentials": "Differentiate hoof capsule conformation and positioning effects from actual distal phalanx displacement using standardized technique and clinical context.",
+      "why": "Loss of integrity of the suspensory lamellae can permit displacement of P3, alter sole depth and change the relationship between dorsal hoof wall and bone.",
+      "next": "Use standardized marker placement and consistent limb positioning; compare serial radiographs with veterinary and farrier findings.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Original Commons file linked, rights and description verified",
+      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
+    },
+    "verified-feline-thorax-source-reference": {
+      "id": "verified-feline-thorax-source-reference",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Feline Thorax · Projection & Anatomy Reference",
+      "species": "Cat",
+      "region": "Thorax",
+      "lecture": "Diagnostic Imaging · Small Animal Thorax",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Radiographie%20thoracique%20chez%20un%20chat.jpg",
+          "view": "Feline thoracic radiograph · source does not specify projection",
+          "caption": "Source caption states feline thoracic radiograph without a diagnosis or projection label."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Radiographie_thoracique_chez_un_chat.jpg",
+      "credit": "Dr Tissier · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "history": "No clinical history or radiographic diagnosis provided by the original uploader.",
+      "lookFor": "Identify cardiac silhouette, trachea, diaphragm, ribs and visible lungs. Before naming a view, check the actual orientation and side markers.",
+      "quality": "Projection and inspiration/rotation must be assessed from the image; original uploader does not specify diagnostic quality.",
+      "findings": "Study anatomy and the region included. Do not assume that the image is disease-free because the uploader provided no diagnosis.",
+      "interpretation": "Anatomy and projection-recognition exercise; NOT independently verified as a normal feline thorax.",
+      "differentials": "No confirmed source diagnosis; if abnormalities are suspected, describe them objectively and consult an appropriately qualified interpreter.",
+      "why": "Feline thoracic conformation differs from dogs, and projection, respiratory phase and positioning can all change radiographic appearance.",
+      "next": "Practice comparing the image with annotated feline thoracic anatomy from approved course sources.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Original Commons file linked, rights and description verified",
+      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
     }
   }
 }
