@@ -78,7 +78,8 @@ function toggleDialog(c){
 }
 function captureFromPage(){
  const root=el('modalBody');const selected=String(window.getSelection?.()?.toString()||'').trim();
- let candidate=current;
+ const isStudyQuestion=!!root?.querySelector('[data-vpq-star-study]');
+ let candidate=isStudyQuestion?current:null;
  const pharm=root?.querySelector('[data-vpqpharmfc-flip]')&&window.VPQ_PHARM_EXAM2_FLASHCARDS?.bank;
  if(pharm){
   const q=(root.querySelector('.vpqRecallQuestion')?.textContent||'').trim();
