@@ -240,6 +240,12 @@
       "answer": "Dogs and cats.",
       "why": "",
       "slide": "19"
+    },
+    "76|summer mastitis of dry dairy cows|focus-0": {
+      "prompt": "What types of cattle are susceptible to summer mastitis?",
+      "answer": "dry cows/heifers.",
+      "why": "",
+      "slide": "41"
     }
   },
   "custom": [
