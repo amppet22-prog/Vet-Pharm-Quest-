@@ -4036,6 +4036,94 @@
       },
       "updated": "2026-11-23T18:34:42.079Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-77-11": {
+      "title": "Emphysematous fetus",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-77-11-1795459826595-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-23 135008.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "77"
+          ],
+          "systems": [
+            "Female reproduction / Mammary",
+            "Placenta / Fetus"
+          ],
+          "conditionId": "pathx-77-11"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-77-11-1795459827873-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-23 135011.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "77"
+          ],
+          "systems": [
+            "Female reproduction / Mammary",
+            "Placenta / Fetus"
+          ],
+          "conditionId": "pathx-77-11"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-77-11-1795459826595-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-23 135008.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "77"
+        ],
+        "systems": [
+          "Female reproduction / Mammary",
+          "Placenta / Fetus"
+        ],
+        "conditionId": "pathx-77-11"
+      },
+      "text": {
+        "title": "Emphysematous fetus",
+        "gross": "Fetus grossly swollen, distended with foul gas, crepitant on palpation; can deflate with incision.",
+        "mechanismSummary": "Gas-forming bacterial invasion → fetal putrefaction → tissue gas → dam risks toxemia, metritis and dystocia.",
+        "dx": "Working identification: Emphysematous fetus. Specimen site: Placenta / fetus / uterus. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "why": "Distended crepitant fetuses with putrid gas after prolonged obstetric complication or open cervix.",
+        "visualClue": "Distended crepitant fetuses with putrid gas after prolonged obstetric complication or open cervix.",
+        "compare": "Mummy is dry sterile and shrunken; maceration produces soft tissue dissolution and loose bones.",
+        "notes": "**Requirement**: Putrefactive GAS-PRODUCING bacterial invasion through patent cervix, often dystocia or incomplete abortion.\n**Course**: May lead to maceration and foul suppurative metritis, with thick uterine wall and severe maternal disease.\n",
+        "grossSpecies": "[]",
+        "etiologyCategories": [
+          "bacterial"
+        ],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "catalogScope": "course",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "breedSizes": "[]",
+        "breedTags": "[]",
+        "breedEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-23T18:50:28.860Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
