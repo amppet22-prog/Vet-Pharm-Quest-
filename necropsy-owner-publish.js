@@ -311,7 +311,7 @@ async function editor(type,id){
  '<b style="display:block;font-size:13px;color:#573f6c">PHOTO '+(i+1)+' · '+esc(label)+'</b>'+
  '<small style="display:block;color:#68768b;margin:5px 0">This is the '+esc(label)+' position in the comparison sheet.</small>'+
  (matched?'<img src="'+esc(matched.url)+'" alt="Currently assigned photo for '+esc(label)+'" style="width:100%;height:132px;object-fit:contain;background:#f7f4fb;border:1px solid #e4d8ec;border-radius:9px"><small style="display:block;color:#3b755b">✓ Currently matched · Published photo '+(matched.photoIndex+1)+'</small>':'<div style="height:132px;display:grid;place-items:center;border:1px dashed #ccbbdc;background:#faf7fd;border-radius:9px;color:#8c769c;font-size:12px">📷 No photo matched yet</div>')+
- '<label style="display:block;font-size:12px;font-weight:850;margin:9px 0 3px">Add photo for '+esc(label)+'<input data-np-comparison-file="'+i+'" type="file" accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:5px 0"></label>'+
+ '<label style="display:block;font-size:12px;font-weight:850;margin:9px 0 3px">Add photo for '+esc(label)+'<input data-np-comparison-file="'+i+'" data-np-comparison-label="'+esc(label)+'" type="file" accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:5px 0"></label>'+
  '<div data-np-comparison-preview="'+i+'" style="font-size:11px;color:#5f6a82"></div>'+
  '<label style="display:block;font-size:12px;margin:7px 0 0">Caption (optional)<input data-np-comparison-caption="'+i+'" placeholder="Gross finding / tissue / species" style="width:100%;padding:7px;margin-top:4px"></label>'+
  '</div>';
@@ -427,7 +427,7 @@ function readFields(){
  const bulkFiles=Array.from(el('npOwnerFiles')?.files||[]);
  const comparisonInputs=Array.from(root.querySelectorAll('[data-np-comparison-file]')).filter(x=>x.files?.length);
  const files=bulkFiles.concat(comparisonInputs.map(x=>x.files[0]));
- const filesMeta=bulkFiles.map((file,i)=>({name:file.name,caption:String(root.querySelector('[data-np-file-caption="'+i+'"]')?.value||'').trim(),kind:root.querySelector('[data-np-file-kind="'+i+'"]')?.value||'gross',comparisonLabel:root.querySelector('[data-np-file-match="'+i+'"]')?.value||''})).concat(comparisonInputs.map(x=>({name:x.files[0].name,caption:String(root.querySelector('[data-np-comparison-caption="'+x.dataset.npComparisonFile+'"]')?.value||'').trim(),kind:'gross',comparisonLabel:String(root.querySelectorAll('#npComparisonPhotoManager [data-np-comparison-file]')[Number(x.dataset.npComparisonFile)]?.closest('div')?.querySelector('b')?.textContent||'').replace(/^PHOTO \d+ · /,'').trim()})));
+ const filesMeta=bulkFiles.map((file,i)=>({name:file.name,caption:String(root.querySelector('[data-np-file-caption="'+i+'"]')?.value||'').trim(),kind:root.querySelector('[data-np-file-kind="'+i+'"]')?.value||'gross',comparisonLabel:root.querySelector('[data-np-file-match="'+i+'"]')?.value||''})).concat(comparisonInputs.map(x=>({name:x.files[0].name,caption:String(root.querySelector('[data-np-comparison-caption="'+x.dataset.npComparisonFile+'"]')?.value||'').trim(),kind:'gross',comparisonLabel:String(x.dataset.npComparisonLabel||'').trim()})));
 
  const draftData=el('npOwnerUseDraft')?.checked&&pending?.localPhoto?pending.localPhoto:'';
  const external=String(el('npOwnerImageUrl')?.value||'').trim();
@@ -664,6 +664,11 @@ context.body.addEventListener('click',ev=>{
  })().catch(e=>{if(status())status().textContent='Publish failed: '+e.message+' Your text remains in the editor.'}).finally(()=>{token='';password='';if(b.isConnected)b.disabled=false});
  },true);
  context.body.addEventListener('change',ev=>{
+  if(ev.target?.dataset?.npComparisonFile!==undefined){
+   const preview=context.body.querySelector('[data-np-comparison-preview="'+ev.target.dataset.npComparisonFile+'"]');
+   if(preview)preview.textContent=ev.target.files?.[0]?'✓ Ready to publish: '+ev.target.files[0].name+' → '+ev.target.dataset.npComparisonLabel:'No replacement selected. Existing photo stays in place.';
+   return;
+  }
   if(ev.target?.id!=='npOwnerFiles')return;
   const files=Array.from(ev.target.files||[]);
   const target=context.body.querySelector('#npOwnerFileDetails');
