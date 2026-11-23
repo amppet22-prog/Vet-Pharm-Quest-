@@ -87,6 +87,7 @@ function open(id,showAnswer=false,showAnnotations=false){
  '<label style="font-size:12px">Your observations<textarea id="vpqiSelfNotes" rows="3" placeholder="Where? Opacity? Distribution? What does the pattern suggest?" style="width:100%;display:block;padding:9px"></textarea></label></div>'+
  (showAnswer?'<div style="padding:13px;background:#f4edfc;border:1px solid #d8caed;border-radius:11px"><b>Published teaching interpretation</b>'+[['History',c.history],['Image quality',c.quality],['Objective findings',c.findings],['Interpretation',c.interpretation],['Differentials',c.differentials],['Why / mechanism',c.why],['Recommendations',c.next],['Credit',c.credit]].filter(x=>x[1]).map(([k,v])=>'<p style="white-space:pre-wrap"><b>'+E(k)+':</b> '+E(v)+'</p>').join('')+
  (c.source?'<p><b>Image source:</b> '+E(c.source)+'</p>':'')+'</div>':button('reveal:'+E(id),'🔍 Reveal interpretation'))+
+ (c.source&&/^https:\/\//i.test(c.source)?'<p style="margin:11px 0 4px;font-size:12px"><a href="'+E(c.source.split(/\s+·\s+/)[0])+'" target="_blank" rel="noopener noreferrer">🔗 Original image source / license details</a></p>':'')+
  '<p style="font-size:11px;color:#6f7d8a">Source-linked educational images and owner-authored teaching notes. Clinical findings are not independently validated by the game. Source and license details are shown after revealing the answer.</p>');
 }
 function imageBase64(file){
