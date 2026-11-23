@@ -121,19 +121,47 @@ function imaging(){
  round(136,360,130,54,'#eaf2ff','#96afcb')+'<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
  '<path d="M146 251v83M146 252h73v25" stroke="#829dbd" stroke-width="14" fill="none"/>'+round(199,277,50,31,'#e2effc','#8caacc')+
  '<ellipse cx="225" cy="310" rx="19" ry="8" fill="#b5dcf9"/></g>';
- // Ultrasound cart with grayscale original ultrasound sector
- s+='<g filter="url(#img25-shadow)">'+round(333,210,145,116,'#edf4fd','#92a7c7')+round(350,224,113,85,'#253347','#7d99bc')+
- '<path d="M391 238L365 286Q402 303 449 286L424 238Z" fill="#8795a8" stroke="#dce8f2" stroke-width="3"/>'+
- '<path d="M391 251q20 20 33 0M380 276q30 17 58 0" stroke="#d3e3ec" stroke-width="2.2" opacity=".7" fill="none"/>'+
- '<g opacity=".48" fill="#cdd9e1">'+
- Array.from({length:45},(_,i)=>{const x=389+(i*13)%39,y=252+(i*17)%31;return '<circle cx="'+x+'" cy="'+y+'" r="'+(.45+(i%4)*.18)+'"/>'}).join('')+
+ // Modern compact ultrasound cart: articulated screen, B-mode image, console,
+ // trackball, transducer cradle, probe head and hanging cable. Decorative only.
+ s+='<g filter="url(#img25-shadow)">'+
+ // Monitor casing + matte screen.
+ round(333,206,145,121,'#e9eef6','#94aac6')+
+ round(347,218,117,91,'#141e2c','#7088a7')+
+ '<path d="M351 222h108v83H351Z" fill="#0b131c"/>'+
+ // B-mode sector, tissue layers and ultrasound-style fine speckle.
+ '<path d="M397 232L359 296Q404 310 452 296L416 232Z" fill="#65727d" stroke="#b2c3ce" stroke-width="1.5"/>'+
+ '<path d="M396 237L366 293Q408 303 446 292L417 237Z" fill="#89939b" opacity=".65"/>'+
+ '<path d="M375 267Q397 253 432 266M369 280Q408 264 443 280M365 291Q407 278 448 291" stroke="#c6d0d5" opacity=".6" stroke-width="1.8" fill="none"/>'+
+ '<path d="M387 277q15-12 31-4q10 6 19 2" stroke="#e1e7e9" opacity=".45" stroke-width="2.5" fill="none"/>'+
+ '<ellipse cx="409" cy="280" rx="13" ry="7" fill="#485560" opacity=".69"/>'+
+ '<g opacity=".45" fill="#d8e1e5">'+
+ Array.from({length:70},(_,i)=>{const x=373+(i*17)%64,y=246+(i*11)%44;return '<circle cx="'+x+'" cy="'+y+'" r="'+(.35+(i%4)*.22)+'"/>'}).join('')+
  '</g>'+
- '<path d="M397 262q10-7 20 1q-10 7-20-1" fill="#4b6072" opacity=".5"/>'+
-
- round(343,326,125,35,'#d8e0f0','#9aabc8')+
- [366,390,414,438].map(x=>'<circle cx="'+x+'" cy="344" r="5" fill="#a3b4d1"/>').join('')+
- round(359,361,94,45,'#edf2fb','#9caccb')+
- '<path d="M367 408v13M449 408v13" stroke="#869bb8" stroke-width="9"/></g>';
+ '<path d="M356 226h27M355 231h14" stroke="#9eb3c2" stroke-width="1" opacity=".7"/>'+
+ '<text x="355" y="303" font-family="Arial" font-size="5.8" fill="#c5d3da">B MODE   7.5 MHz</text>'+
+ // Tilted control deck with functional-looking clustered buttons and trackball.
+ '<path d="M344 326L467 326L478 358Q409 370 338 358Z" fill="#d7dfec" stroke="#91a6c0" stroke-width="4"/>'+
+ '<path d="M354 333h103" stroke="#f9fbff" stroke-width="2" opacity=".8"/>'+
+ [358,369,380,391,422,433,444,455].map(x=>'<rect x="'+x+'" y="339" width="7" height="4" rx="1.5" fill="#9aacc5"/>').join('')+
+ [360,374,388,427,441].map(x=>'<circle cx="'+x+'" cy="351" r="3" fill="#a2b5ca" stroke="#f5f9ff" stroke-width=".8"/>').join('')+
+ '<circle cx="408" cy="348" r="9" fill="#acbbca" stroke="#879db8" stroke-width="2.3"/>'+
+ '<circle cx="408" cy="348" r="5.3" fill="#edf7fc"/>'+
+ '<rect x="399" y="314" width="17" height="11" rx="4" fill="#b2c4d8"/>'+
+ // Wheeled pedestal, fixed to the existing placement.
+ round(361,365,89,40,'#e9eff8','#9dacc7')+
+ '<path d="M368 403v17M447 403v17" stroke="#839bb6" stroke-width="9"/>'+
+ '<circle cx="370" cy="421" r="5" fill="#637993"/><circle cx="447" cy="421" r="5" fill="#637993"/>'+
+ // Probe holder fitted to the right side of the console.
+ '<path d="M468 339h19v7h-19" fill="none" stroke="#859db8" stroke-width="4" stroke-linejoin="round"/>'+
+ '<ellipse cx="486" cy="339" rx="6" ry="3" fill="#a2b4ca" stroke="#758ba5" stroke-width="1.5"/>'+
+ // Transducer handle, neck and curved scanning surface, clearly separate from cable.
+ '<path d="M480 311q5-4 10 0l-1 19q-4 5-8 0z" fill="#eef2f7" stroke="#8099b2" stroke-width="2"/>'+
+ '<path d="M480 310q5-8 11 0l3 5q-9 5-17 0z" fill="#c5d4e3" stroke="#7893ad" stroke-width="2"/>'+
+ '<path d="M482 331q4 4 7 0" stroke="#7c93aa" stroke-width="2" fill="none"/>'+
+ // Flexible cable curves down to machine side: no extra interaction target.
+ '<path d="M485 332C502 351 492 376 482 381C471 389 464 378 468 363" fill="none" stroke="#e1e9f1" stroke-width="4.4" stroke-linecap="round"/>'+
+ '<path d="M485 332C502 351 492 376 482 381C471 389 464 378 468 363" fill="none" stroke="#8599b2" stroke-width="1.4" stroke-linecap="round" opacity=".85"/>'+
+ '</g>';
  // CT gantry behind window
  s+='<g>'+round(513,175,216,170,'#d5e7f7','#9cbed8')+
  '<ellipse cx="621" cy="254" rx="85" ry="75" fill="#eef7ff" stroke="#93b6d4" stroke-width="13"/>'+
