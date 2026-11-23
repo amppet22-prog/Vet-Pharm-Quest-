@@ -2780,8 +2780,35 @@ const vpqDrugGroups36=[
  ['Autonomic nervous system','Adrenergic drugs','Ophthalmic alpha-1 agonists',['phenylephrine-ophthalmic']]
 ];
 function vpqDrugCategory36(d){
+ // Classify by canonical ID before keyword heuristics. Brand names and partial
+ // substrings must not override the actual indication or mechanism.
+ const id=String(d.id||'').toLowerCase();
+ const exact={
+  'fuzapladib':['GI & respiratory','Pancreatitis therapeutics','LFA-1 inhibitors (pancreatitis)'],
+  'famotidine':['GI & respiratory','Gastric acid suppression','H2 receptor antagonists'],
+  'ranitidine':['GI & respiratory','Gastric acid suppression','H2 receptor antagonists'],
+  'nizatidine':['GI & respiratory','Gastric acid suppression','H2 receptor antagonists'],
+  'cimetidine':['GI & respiratory','Gastric acid suppression','H2 receptor antagonists'],
+  'loperamide':['GI & respiratory','Antidiarrheals','Peripheral opioid receptor agonists'],
+  'ropinirole':['GI & respiratory','Emetics','Dopamine agonist emetics (ophthalmic route)'],
+  'apomorphine':['GI & respiratory','Emetics','Dopamine agonist emetics'],
+  'erythromycin-prokinetic':['GI & respiratory','Prokinetics','Motilin receptor agonists'],
+  'xylazine':['Neuropharmacology','Sedatives and reversals','Alpha-2 agonist sedatives'],
+  'dexmedetomidine':['Neuropharmacology','Sedatives and reversals','Alpha-2 agonist sedatives'],
+  'medetomidine':['Neuropharmacology','Sedatives and reversals','Alpha-2 agonist sedatives'],
+  'medetomidine-vatinoxan':['Neuropharmacology','Sedatives and reversals','Alpha-2 sedation combinations'],
+  'romifidine':['Neuropharmacology','Sedatives and reversals','Alpha-2 agonist sedatives'],
+  'detomidine':['Neuropharmacology','Sedatives and reversals','Alpha-2 agonist sedatives'],
+  'atipamezole':['Neuropharmacology','Sedatives and reversals','Alpha-2 antagonists / reversal'],
+  'yohimbine':['Neuropharmacology','Sedatives and reversals','Alpha-2 antagonists / reversal'],
+  'tolazoline':['Neuropharmacology','Sedatives and reversals','Alpha receptor antagonists / reversal'],
+  'vatinoxan':['Neuropharmacology','Sedatives and reversals','Peripheral alpha-2 antagonists']
+ };
+ if(exact[id]){const [branch,family,group]=exact[id];return {branch,family,group}}
  const look=[d.id,d.name].join(' ').toLowerCase();
- for(const [branch,family,group,names] of vpqDrugGroups36){if(names.some(n=>look.includes(n)))return {branch,family,group}};
+ for(const [branch,family,group,names] of vpqDrugGroups36){
+  if(names.some(n=>id===n||id.startsWith(n+'-')||look.split(/[^a-z0-9]+/).includes(n)))return {branch,family,group}
+ }
  const cl=String(d.class||'').toLowerCase(),lecture=String(d.lecture||'');
  if(d.id==='acetaminophen'||/acetaminophen/.test(cl))return {branch:'Pain & inflammation',family:'Other analgesic / anti-inflammatory drugs',group:'Non-NSAID analgesics'};
  if(/anti.?ngf|monoclonal antibody/.test(cl))return {branch:'Pain & inflammation',family:'Monoclonal antibodies',group:'Anti-NGF biologics'};
@@ -2801,7 +2828,7 @@ function vpqDrugCategory36(d){
  [/antiarrhythmic|calcium channel|calcium channel|diuretic|vasodilator|nitric oxide|ace inhibitor|at1 receptor|cardiac glycoside|inodilator|pde3|pde5|aldosterone|inotrope|vasopressor/i,'Cardiovascular & renal','Cardiovascular / renal agents'],
  [/antimicrobial|antibiotic|sulfonamide|nitroimidazole|macrolide/i,'Antibiotics','Antimicrobial agents'],
  [/prokinetic|laxative|antidiarrheal|gi adsorbent|adsorbent|mucosal|bile acid|antispasmodic|motilin|proton pump|h2 receptor|expectorant|mucolytic/i,'GI & respiratory','Gastrointestinal / respiratory agents'],
- [/ophthalmic|miotic|lfa-1/i,'Ophthalmology','Ophthalmic agents'],
+ [/ophthalmic|miotic/i,'Ophthalmology','Ophthalmic agents'],
  [/antineoplastic|alkylating|chelator|antidote|oxime|copper absorption/i,'Specialty & toxicology','Specialty therapeutics / antidotes']
  ];
  for(const [pattern,branch,family] of mapping)if(pattern.test(title))return {branch,family,group:title||'Class pending source verification'};
