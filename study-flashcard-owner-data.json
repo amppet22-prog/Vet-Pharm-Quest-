@@ -376,6 +376,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 17",
       "curated": true
+    },
+    {
+      "prompt": "What is benthanechol used for in terms of GI and what is its other function?",
+      "answer": "It is a muscarinic agnoist, so it causes urination and helps as an equine prokinetic",
+      "why": "Helpful to remember multiple drug functions to understand side effects",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwsjbrxc-mwlda",
+      "domain": "pharmacology",
+      "lecture": "Lecture 17",
+      "curated": true
     }
   ],
   "hidden": [
