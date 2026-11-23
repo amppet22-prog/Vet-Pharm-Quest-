@@ -997,6 +997,39 @@ body.vpq-reading-large #modalBody .vpq-patient-case .response p{font-size:18px!i
 #modalBody .vpqQuickHero h3{font-size:19px}
 #modalBody .vpqQuickSteps{gap:8px;margin-bottom:10px}
 #modalBody .vpqQuickSteps>div{padding:9px 11px}
+</style><style id="vpq-howto-playful-v3">
+/* How to Play only: visual personality without changing navigation, text, or gameplay. */
+#modalBody .vpqQuickHero{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(115deg,#f3e9ff 0%,#e9f8fb 60%,#fff2e6 100%);border:2px solid #dbc8ef;border-radius:22px;padding:18px 105px 18px 20px;box-shadow:0 5px 0 #d7c9ed42}
+#modalBody .vpqQuickHero:before{content:"🐈";position:absolute;right:26px;bottom:6px;font-size:58px;line-height:1;filter:drop-shadow(1px 4px 0 #b6a6ca54);transform:rotate(-8deg);z-index:-1}
+#modalBody .vpqQuickHero:after{content:"✦  ✧  ✦";position:absolute;right:14px;top:8px;color:#bc99d5;font-size:16px;letter-spacing:4px;z-index:-1}
+#modalBody .vpqQuickHeroBadge{display:inline-block;background:#fff9ffcf;border:1px solid #dcc7e8;border-radius:30px;padding:4px 10px;color:#825a9e;font-size:10px}
+#modalBody .vpqQuickHero h3{font-size:21px;line-height:1.2;color:#5b4a87}
+#modalBody .vpqQuickHero p{font-size:13px;line-height:1.5;max-width:560px}
+#modalBody .vpqQuickSteps>div{border:2px solid #d5e4f4;border-radius:15px;background:#f5faff;box-shadow:0 3px 0 #c8d7e56b;transition:transform .15s}
+#modalBody .vpqQuickSteps>div:nth-child(2){background:#fff6f9;border-color:#f0d6e8;box-shadow:0 3px 0 #ead4e56b}
+#modalBody .vpqQuickSteps b{font-size:13px;color:#4b6087}
+#modalBody .vpqQuickFeaturedCompact{position:relative;overflow:hidden;border:2px solid #c7b3e9;background:linear-gradient(115deg,#f7eaff,#fff8fc);border-radius:18px;box-shadow:0 4px 0 #d5c4e651;padding:15px}
+#modalBody .vpqQuickFeaturedCompact:after{content:"✦";color:#d4a5e1;position:absolute;right:14px;top:8px;font-size:19px}
+#modalBody .vpqQuickFeaturedCompact .vpqQuickFeaturedIcon{display:flex;align-items:center;justify-content:center;min-width:57px;min-height:57px;background:linear-gradient(140deg,#e4d4ff,#fbe6f1);border:2px solid #eadcf8;border-radius:17px;box-shadow:0 3px 0 #d4c2e6}
+#modalBody .vpqQuickFeaturedCompact h3{color:#604684;font-size:17px}
+#modalBody .vpqQuickSectionTitle{background:linear-gradient(90deg,#eee8ff,#eefbfb);padding:10px 13px;border-left:5px solid #aa89cf;border-radius:12px;color:#5a568c}
+#modalBody .vpqQuickDetailsSimple{gap:8px}
+#modalBody .vpqQuickDetailsSimple details{border:2px solid #e0e3f1;border-radius:14px;background:#fdfcff;overflow:hidden;padding:0;box-shadow:0 2px 0 #d8ddec55}
+#modalBody .vpqQuickDetailsSimple details:nth-child(5n+1){border-color:#d9c8ed;background:#fcf8ff}
+#modalBody .vpqQuickDetailsSimple details:nth-child(5n+2){border-color:#c8e6de;background:#f8fffd}
+#modalBody .vpqQuickDetailsSimple details:nth-child(5n+3){border-color:#c8dff2;background:#f8fcff}
+#modalBody .vpqQuickDetailsSimple details:nth-child(5n+4){border-color:#f0dfba;background:#fffdf6}
+#modalBody .vpqQuickDetailsSimple details:nth-child(5n+5){border-color:#f0d2dc;background:#fff9fb}
+#modalBody .vpqQuickDetailsSimple details[open]{box-shadow:0 4px 0 #d6d5e75e}
+#modalBody .vpqQuickDetailsSimple summary{display:list-item;list-style-position:inside;padding:11px 14px;font-size:13px;color:#4c5e83;cursor:pointer}
+#modalBody .vpqQuickDetailsSimple summary:hover{background:#ffffff88}
+#modalBody .vpqQuickDetailsSimple p{padding:0 16px 13px;margin:0;line-height:1.6;color:#485774}
+#modalBody .vpqQuickNoteCompact{border:2px solid #e3d1ed;border-left:5px solid #b394d4;background:linear-gradient(110deg,#fcf4ff,#fff9fd);border-radius:16px;box-shadow:0 3px 0 #e6d9ee54}
+#modalBody .vpqQuickNoteCompact h3{color:#73528d}
+#modalBody .vpqQuickNoteCompact small{display:block;color:#79738c}
+#modalBody .vpqQuickNoteCompact + .buttonrow button{border-radius:13px;border-color:#d5c6e9;background:#fffafd;box-shadow:0 3px 0 #d9cde76b}
+@media(max-width:590px){#modalBody .vpqQuickHero{padding:14px 72px 14px 14px}#modalBody .vpqQuickHero:before{font-size:43px;right:12px}#modalBody .vpqQuickHero h3{font-size:18px}#modalBody .vpqQuickHeroBadge{font-size:9px}#modalBody .vpqQuickFeaturedCompact .vpqQuickFeaturedIcon{min-width:42px;min-height:42px}#modalBody .vpqQuickFeaturedCompact h3{font-size:16px}}
+@media(prefers-reduced-motion:reduce){#modalBody .vpqQuickSteps>div{transition:none}}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqLevelTopBtn" class="mini" type="button" style="background:#fff2d6;border-color:#d2ad64">⭐ Level Themes</button><button id="vpqCollectionTopBtn" class="mini" type="button" style="background:#fff0f8;border-color:#d8a8c8">💝 My Collection</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><p class="vpq-welcome-small" style="display:block;margin:5px 0 10px;line-height:1.45">📧 Creating an account? The confirmation email is sent through <strong>Supabase</strong>, our sign-in provider. Please check your inbox or spam/junk folder for the verification link.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><button id="vpqMeetTeamBtn" type="button" class="vpq-meet-team-button" aria-label="Meet the Vet Pharm Quest team">🐾 Meet the Team</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
