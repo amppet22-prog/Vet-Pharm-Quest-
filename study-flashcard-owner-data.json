@@ -436,6 +436,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 20",
       "curated": true
+    },
+    {
+      "prompt": "What antibiotic do you give cows for BRD?",
+      "answer": "Cetifor aerosolized.",
+      "why": "",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwtj6qet-s3fik",
+      "domain": "pharmacology",
+      "lecture": "Lecture 14",
+      "curated": true
     }
   ],
   "hidden": [
