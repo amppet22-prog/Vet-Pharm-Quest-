@@ -499,7 +499,7 @@ function vpqMatchRender40(message=''){
    const firstMastery=!save.matchMastery40[masteryKey];
    if(firstMastery){save.matchMastery40[masteryKey]=true;save.xp+=12;}
    persist();stats();
-   vpqMatchRender40({drug:d.drug,mechanism:d.mechanism,clinical:d.clinical,safety:d.safety,firstMastery}); practice only.'));
+   vpqMatchRender40({drug:d.drug,mechanism:d.mechanism,clinical:d.clinical,safety:d.safety,contraindications:d.contraindications,firstMastery}); practice only.'));
   }else vpqMatchRender40('Not yet. Match the particular agent to its mechanism or clinically distinctive caution, not simply another drug in the same class.');
  });
 }
