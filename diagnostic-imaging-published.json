@@ -32,7 +32,17 @@
       "interpretation": "Anatomy and VHS technique reference. A vertebral heart score should be interpreted with breed, age, projection and clinical context.",
       "differentials": "Not assigned; source does not establish a disease.",
       "why": "The VHS method expresses long- and short-axis heart silhouette dimensions relative to thoracic vertebral length; interpretation depends on species/breed and acquisition.",
-      "next": "Practice identifying measurement axes on the original view, then check the annotated derivative. Correlate a measured score with patient context."
+      "next": "Practice identifying measurement axes on the original view, then check the annotated derivative. Correlate a measured score with patient context.",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-canine-thorax-vd": {
       "modality": "X-ray",
@@ -60,7 +70,17 @@
       "interpretation": "Projection recognition reference; radiographic normality is not independently confirmed.",
       "differentials": "No source-confirmed diagnosis; avoid inventing one.",
       "why": "VD beam travel is ventral to dorsal. Rotation distorts the appearance of bilateral thoracic structures.",
-      "next": "Use alongside a true patient-matched lateral view whenever making clinical interpretations."
+      "next": "Use alongside a true patient-matched lateral view whenever making clinical interpretations.",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-feline-thorax-lateral": {
       "modality": "X-ray",
@@ -88,7 +108,17 @@
       "interpretation": "Source-reported bronchial wall calcification; no radiographic metastatic pattern reported. This is not equivalent to excluding all lung disease.",
       "differentials": "Bronchial mineralization may be age-related; assess for concurrent inflammatory airway patterns with clinical correlation.",
       "why": "Mineralized bronchial walls can create conspicuous ring/tram-line opacities; recognize chronic or age-related changes without automatically diagnosing active bronchitis.",
-      "next": "Correlate with respiratory history, prior imaging and orthogonal views."
+      "next": "Correlate with respiratory history, prior imaging and orthogonal views.",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-feline-abdomen-right-lateral": {
       "modality": "X-ray",
@@ -116,7 +146,17 @@
       "interpretation": "No obvious GI finding described in this source image; T13–L1 spondylosis is a distinct radiographic finding.",
       "differentials": "Clinical gastrointestinal obstruction may still warrant further evaluation; spondylosis may be incidental.",
       "why": "Spondylosis involves degenerative osseous bridging/osteophytes, which may be unrelated to the presenting digestive complaint.",
-      "next": "Correlate with examination and additional imaging if clinical concern persists."
+      "next": "Correlate with examination and additional imaging if clinical concern persists.",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-canine-gdv-lateral": {
       "modality": "X-ray",
@@ -144,7 +184,17 @@
       "interpretation": "Source-labeled example of canine gastric dilatation–volvulus.",
       "differentials": "Simple gastric distension and alternative gastric outflow problems; interpret with clinical status.",
       "why": "Gastric torsion can occlude venous outflow and compromise perfusion; time-critical shock and tissue injury can develop.",
-      "next": "Emergency stabilization and immediate veterinary surgical assessment; do not delay lifesaving care for additional views."
+      "next": "Emergency stabilization and immediate veterinary surgical assessment; do not delay lifesaving care for additional views.",
+      "studyImageReview": {
+        "priority": "projection-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Confirm projection and full-resolution diagnostic quality before testing specific side-dependent findings."
+      }
     },
     "verified-equine-laminitis-annotated": {
       "modality": "X-ray",
@@ -172,7 +222,17 @@
       "interpretation": "Annotated source-identified laminitis with distal phalanx rotation relative to the hoof wall.",
       "differentials": "Other causes of hoof pain or altered phalangeal alignment require clinical and radiographic correlation.",
       "why": "Damage to the lamellar suspension of P3 can allow its position within the hoof capsule to change.",
-      "next": "Interpret with lameness findings and standardized farriery/radiographic measurements; assess urgent support and treatment."
+      "next": "Interpret with lameness findings and standardized farriery/radiographic measurements; assess urgent support and treatment.",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-feline-struvite-cystolith": {
       "id": "verified-feline-struvite-cystolith",
@@ -201,7 +261,17 @@
       "next": "Urinalysis, urine culture when indicated, imaging in another plane, and composition analysis where available.",
       "reviewStatus": "Source-described finding; chemical composition is attributed to original uploader, not independently proven by X-ray.",
       "updated": "2026-11-23T00:00:00Z",
-      "imageStatus": "Original Commons file linked, rights and description verified"
+      "imageStatus": "Original Commons file linked, rights and description verified",
+      "studyImageReview": {
+        "priority": "projection-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Confirm projection and full-resolution diagnostic quality before testing specific side-dependent findings."
+      }
     },
     "verified-canine-cystolith-overview": {
       "id": "verified-canine-cystolith-overview",
@@ -230,7 +300,17 @@
       "next": "Combine with urinalysis, culture when indicated and urinary ultrasound or complementary projections; evaluate urinary outflow urgently if obstructed.",
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Original Commons file linked, rights and description verified",
-      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
+      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis",
+      "studyImageReview": {
+        "priority": "replacement-preferred",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Displayed-film photograph: replace with original high-resolution DICOM/export if available; not appropriate for fine detail or measurements."
+      }
     },
     "verified-canine-gdv-second-source": {
       "id": "verified-canine-gdv-second-source",
@@ -259,7 +339,17 @@
       "next": "Immediate stabilization and surgical assessment; do not delay emergency treatment for unnecessary additional imaging.",
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Original Commons file linked, rights and description verified",
-      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
+      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis",
+      "studyImageReview": {
+        "priority": "replacement-preferred",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Displayed-film photograph: replace with original high-resolution DICOM/export if available; not appropriate for fine detail or measurements."
+      }
     },
     "verified-equine-laminitis-radiographic-measurements": {
       "id": "verified-equine-laminitis-radiographic-measurements",
@@ -288,7 +378,17 @@
       "next": "Use standardized marker placement and consistent limb positioning; compare serial radiographs with veterinary and farrier findings.",
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Original Commons file linked, rights and description verified",
-      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
+      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-feline-thorax-source-reference": {
       "id": "verified-feline-thorax-source-reference",
@@ -317,7 +417,17 @@
       "next": "Practice comparing the image with annotated feline thoracic anatomy from approved course sources.",
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Original Commons file linked, rights and description verified",
-      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
+      "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-canine-medial-patellar-luxation": {
       "id": "verified-canine-medial-patellar-luxation",
@@ -346,7 +456,17 @@
       "next": "Correlate with orthopedic exam and clinical lameness; evaluate incidental cystoliths if clinically indicated.",
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Verified Commons file description",
-      "reviewStatus": "Based on uploader report; not independently graded by radiologist"
+      "reviewStatus": "Based on uploader report; not independently graded by radiologist",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-canine-ununited-anconeal-process": {
       "id": "verified-canine-ununited-anconeal-process",
@@ -375,7 +495,17 @@
       "next": "Clinical orthopedic evaluation, additional standard elbow projections, and surgical consultation where clinically indicated.",
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Verified Commons file description",
-      "reviewStatus": "Based on uploader report; not independently graded by radiologist"
+      "reviewStatus": "Based on uploader report; not independently graded by radiologist",
+      "studyImageReview": {
+        "priority": "projection-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Confirm projection and full-resolution diagnostic quality before testing specific side-dependent findings."
+      }
     },
     "verified-feline-tooth-resorption-307": {
       "id": "verified-feline-tooth-resorption-307",
@@ -404,7 +534,17 @@
       "next": "Complete oral exam and full-mouth dental radiographic evaluation as indicated; dental treatment guided by lesion type and clinician.",
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Verified Commons file description",
-      "reviewStatus": "Based on uploader report; not independently graded by radiologist"
+      "reviewStatus": "Based on uploader report; not independently graded by radiologist",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Source and rights are listed, but full diagnostic resolution and specialist interpretation have not been independently validated."
+      }
     },
     "verified-canine-normal-hips": {
       "id": "verified-canine-normal-hips",
@@ -433,7 +573,17 @@
       "next": "Use standardized dedicated hip projections for clinical screening or diagnosis.",
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Verified Commons file description",
-      "reviewStatus": "Based on uploader report; not independently graded by radiologist"
+      "reviewStatus": "Based on uploader report; not independently graded by radiologist",
+      "studyImageReview": {
+        "priority": "replacement-preferred",
+        "clinicalQualityVerified": false,
+        "preferredSources": [
+          "Uploaded CVM 743 lecture originals (with publication permission)",
+          "Authorized textbook image at diagnostic resolution",
+          "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
+        ],
+        "note": "Displayed-film photograph: replace with original high-resolution DICOM/export if available; not appropriate for fine detail or measurements."
+      }
     }
   }
 }
