@@ -26,6 +26,7 @@ const data={
   {x:42,y:30,w:16,h:42,walk:50,label:'📋 Diagnosis Board',subtitle:'Write a morphologic DX',hint:'Morphologic diagnosis: organ, distribution, process and severity',action:'necroDx'},
   {x:59,y:31,w:17,h:42,walk:68,label:'🔬 Microscope',subtitle:'Histology & WHY',hint:'Histology atlas: microscopic features, tissue changes and pathogenesis',action:'necroHisto'},
   {x:78,y:25,w:19,h:44,walk:82,label:'🐾 Case Board',subtitle:'Apply clinical findings',hint:'Patient cases: combine gross lesions, clinical findings and diagnostic reasoning',action:'necroCases'},
+  {x:4,y:72,w:20,h:22,walk:13,label:'🧪 Specimen Prep',subtitle:'Collection & handling',hint:'What to collect, when, sample selection, fixation, storage and submission',action:'necroSpecPrep'},
   {x:79,y:71,w:18,h:23,walk:93,label:'🧼 Boot Wash & PPE',subtitle:'Biosecurity & sampling',hint:'Biosecurity: PPE, cleaning and specimen handling',action:'necroBio'}
  ],
  skills:[
@@ -347,6 +348,7 @@ const necroHelp={
  necroDx:{title:'📋 Diagnosis Board',tag:'MORPHOLOGY · PRACTICE',opens:'Currently opens the same gross Specimen Cabinet page as the gross-lesion station.',learn:'Write a supported morphologic diagnosis: organ/tissue, process, distribution and relevant modifiers.',different:'The focus is precise lesion description, not guessing a specific etiology.',next:'Select the guided morphologic-diagnosis activity within the shared atlas.'},
  necroHisto:{title:'🔬 Microscope',tag:'HISTOLOGY · EXPLAIN WHY',opens:'Opens the shared Specimen Cabinet with histology-focused study selected.',learn:'Identify microscopic patterns of cellular injury, inflammation, degeneration, neoplasia and repair.',different:'Focuses on microscopic evidence and why it produces the gross lesion.',next:'Compare the corresponding gross lesion and related diagnosis.'},
  necroCases:{title:'📋 Patient Cases',tag:'CLINICAL · DIFFERENTIALS',opens:'Opens the dedicated Differential Diagnosis Case Center.',learn:'Use signalment, history, gross lesions, histology and testing to rank and distinguish diagnoses.',different:'Multispecies patient-based clinical reasoning instead of a specimen-only reference.',next:'Review the linked lecture and atlas sources when available.'},
+ necroSpecPrep:{title:'🧪 Specimen Prep',tag:'COLLECT · HANDLE · SUBMIT',opens:'Opens the necropsy specimen collection and submission learning station.',learn:'Learn which specimens to collect, when to collect them, how to select samples, avoid contamination, preserve tissue and submit to a diagnostic laboratory.',different:'Covers collection workflow rather than morphologic diagnosis or differential identification.',next:'Practice separate PPE and biosecurity questions at the Boot Wash station.'},
  necroBio:{title:'🧼 Cleaning & PPE',tag:'SAFETY · SAMPLING',opens:'Opens the necropsy biosecurity and sampling activity.',learn:'Review PPE, clean/dirty workflow, sample handling, contamination and decontamination.',different:'Protects staff and sample integrity; it is not a diagnostic case center.',next:'Apply precautions to necropsy scenarios and sample collection.'}
 };
 function necroHelpModal(action){
