@@ -26,6 +26,7 @@ function save(c){
  persist();updateCounts();return true;
 }
 function setCurrent(c){current=normalize(c)}
+function has(id){return cards.some(c=>c.id===String(id))}
 function getPharm(id){
  const bank=window.VPQ_PHARM_EXAM2_FLASHCARDS?.bank||[];
  const c=bank.find(x=>String(x.id)===String(id));
@@ -98,6 +99,8 @@ function captureFromPage(){
    back:box?.querySelector('.vpqRecallAnswer,.answer,[class*="answer"]')?.textContent?.trim()||root?.querySelector('.response')?.textContent?.trim()||'',
    subject:canonicalSubject(title),origin:title};
  }
+ // Existing, complete Q/A cards are starred immediately. Only incomplete or manually created cards need the editor.
+ if(candidate?.front&&candidate?.back){if(save(candidate)){const button=el('vpqStarModalCapture');if(button)button.textContent='★ Saved for review';}return;}
  toggleDialog(candidate);
 }
 /* Department-wide integration: one saved deck, department-specific entry points.
@@ -127,7 +130,9 @@ function captureBlock(button){
  const q=container?.querySelector('.vpq-case-question-label,.vpqRecallQuestion,.question,h3,[class*="question"]')?.textContent?.trim()
    ||container?.textContent?.trim()?.slice(0,800)||'';
  const a=container?.querySelector('.vpqRecallAnswer,.answer,.response,[class*="explanation"]')?.textContent?.trim()||'';
- toggleDialog({front:q,back:a,subject:canonicalSubject(title),origin:title});
+ const candidate={front:q,back:a,subject:canonicalSubject(title),origin:title};
+ if(candidate.front&&candidate.back){if(save(candidate))button.textContent='★ Saved for review';return}
+ toggleDialog(candidate);
 }
 document.addEventListener('click',e=>{
  const b=e.target.closest('[data-vpq-star-action],[data-vpq-star-pharm],[data-vpq-star-study],[data-vpq-star-edit],[data-vpq-star-remove],[data-vpq-star-capture-block]');
@@ -169,5 +174,5 @@ function init(){
  updateCounts();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-window.VPQ_STARRED=Object.freeze({save,open,setCurrent,add:toggleDialog,count:()=>cards.length,exportForOwner:()=>cards.map(c=>({...c}))});
+window.VPQ_STARRED=Object.freeze({save,has,open,setCurrent,add:toggleDialog,count:()=>cards.length,exportForOwner:()=>cards.map(c=>({...c}))});
 })();
