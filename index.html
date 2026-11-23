@@ -3013,7 +3013,7 @@ function vpqSharedExam2Source20261123(id){
 }
 function vpqSharedExam2Lecture20261123(d){
  const newer=vpqSharedExam2Source20261123(d.id);
- return newer?{...d,lecture:[...new Set([...(String(d.lecture||'').split(/\\s*[,;]\\s*/)),newer.lecture].filter(Boolean))].join(', ')}:d;
+ return newer?{...d,lecture:[...new Set([...(String(d.lecture||'').split(/\s*[,;]\s*/)),newer.lecture].filter(Boolean))].join(', ')}:d;
 }
 function vpqPharmRender36(){
  const holder=$('vpqPharmLayout36');if(!holder)return;
