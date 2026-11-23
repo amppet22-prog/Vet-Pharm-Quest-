@@ -128,6 +128,11 @@ function imaging(){
  '<path d="M146 334L165 318L195 335L210 339L231 319L251 336L236 348L164 348Z" fill="#a7c5c9" stroke="#719ba8" stroke-width="2.6"/>'+
  '<path d="M166 332L195 340L210 343L231 331L240 337L212 351L188 351L156 337Z" fill="#e4f1e9" stroke="#a1c7b7" stroke-width="1.5"/>'+
  '<path d="M160 335L194 346L212 346L241 334" stroke="#799da7" stroke-width="2" fill="none"/>'+
+ // Higher-contrast foam trough top: visible above the tabletop from room view.
+ '<path d="M164 318L190 335L205 340L231 319" stroke="#5c9294" stroke-width="3.5" fill="none" stroke-linejoin="round"/>'+
+ '<path d="M165 320L191 338L206 343L231 321" stroke="#d7f3e5" stroke-width="7" fill="none" opacity=".8" stroke-linejoin="round"/>'+
+ '<rect x="169" y="356" width="67" height="14" rx="5" fill="#f0fbf6" stroke="#6b9c9e" stroke-width="1.7"/>'+
+ '<text x="202" y="366" text-anchor="middle" font-family="Arial" font-size="9" font-weight="900" fill="#39787b">V-TROUGH</text>'+
  // Upright tube arm and collimator.
  '<path d="M146 251v83M146 252h73v25" stroke="#829dbd" stroke-width="14" fill="none"/>'+
  round(199,277,50,31,'#e2effc','#8caacc')+
@@ -186,6 +191,15 @@ function imaging(){
  '<ellipse cx="621" cy="254" rx="47" ry="47" fill="#3a5671" stroke="#9dd3eb" stroke-width="9"/>'+
  '<rect x="572" y="296" width="107" height="14" rx="6" fill="#eef9ff"/>'+
  '<rect x="543" y="323" width="161" height="16" rx="7" fill="#f4faff" stroke="#8ea9c6" stroke-width="4"/></g>';
+ // Radiography control area: lead-glass viewing panel and marked protective
+ // partition, drawn beside the desk without obstructing the study monitor.
+ s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
+ '<rect x="733" y="177" width="13" height="158" rx="3" fill="#e3f3f8" fill-opacity=".52" stroke="#7b9fb9" stroke-width="3"/>'+
+ '<path d="M736 181v151" stroke="#f9feff" stroke-width="2.5" opacity=".83"/>'+
+ '<rect x="738" y="329" width="8" height="15" fill="#8da6bd" opacity=".95"/>'+
+ '<rect x="752" y="159" width="155" height="19" rx="7" fill="#fff7e9" stroke="#b99fbc" stroke-width="2"/>'+
+ '<text x="829" y="172" text-anchor="middle" font-size="10" font-weight="900" fill="#77618a">SHIELDED CONTROL AREA</text>'+
+ '</g>';
  // Reading desk now displays two grayscale axial cross-sectional study illustrations.
  s+='<g filter="url(#img25-shadow)">'+round(750,182,170,116,'#3c516b','#91a8c9')+
  [790,863].map((x,i)=>'<g>'+
