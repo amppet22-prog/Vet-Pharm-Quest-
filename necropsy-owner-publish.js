@@ -284,6 +284,8 @@ async function editor(type,id){
  pending={type,id,title:base.title};
  const cur=type==='case'?getCase(id):type==='specimen'?getSpecimen(id):published.lectures?.[id]||{};
  const existing=photosOf(cur);
+ const comparisonLabels=type==='specimen'&&Array.isArray(base.comparisonRows)?base.comparisonRows.map(row=>String(row[0]||'').trim()).filter(Boolean):[];
+ const matchSelect=(attr,chosen='')=>comparisonLabels.length?'<label style="display:block;margin:6px 0;font-weight:800;color:#604985">📌 Comparison sheet position<select '+attr+' style="display:block;width:100%;padding:8px;margin-top:4px"><option value="">Unassigned / general gallery only</option>'+comparisonLabels.map((label,i)=>'<option value="'+esc(label)+'"'+(chosen===label?' selected':'')+'>Photo '+(i+1)+' — '+esc(label)+'</option>').join('')+'</select></label>':'';
  const draft=type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftPhoto?.(id):type==='lecture'?await window.VPQ_PATH_INLINE_PHOTOS?.draftPhoto?.(lp[1],lp[2],lp[3]):window.VPQ_PATH_EXAM7?.draftPhoto?.(id);
  pending.localPhoto=String(draft||'').startsWith('data:image/jpeg;base64,')?draft:'';
  const localText=type==='specimen'?window.VPQ_PATH_EXAM7?.draftText?.(id):type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftText?.(id):null;
@@ -302,6 +304,7 @@ async function editor(type,id){
  '<h4>4 · Photos · Currently published ('+existing.length+')</h4>'+
  (existing.length?'<p class="tiny"><b>Edit any existing photo below.</b> Change its caption, credit, source, or type without adding a new image. All other photos and your teaching text stay in place unless you explicitly remove or replace them.</p>':'')+
  (existing.length?existing.map((p,i)=>'<div style="display:flex;gap:9px;align-items:start;padding:8px;border:1px solid #cdd9e6;border-radius:9px;margin:6px 0"><img src="'+esc(p.url)+'" style="width:90px;height:85px;object-fit:contain" alt="'+esc(p.caption||'Published pathology photo')+'"><div style="flex:1;min-width:0;font-size:12px"><b>Published photo '+(i+1)+'</b>'+
+ matchSelect('data-np-photo-match="'+i+'"',p.comparisonLabel||comparisonLabels.find(label=>String(p.caption||'').toLowerCase().includes(label.toLowerCase()))||'')+
  '<label style="display:block;margin:5px 0">Caption for this photo<textarea rows="2" data-np-photo-caption="'+i+'" style="display:block;width:100%">'+esc(p.caption||'')+'</textarea></label>'+
  '<label style="display:block;margin:5px 0">Photo credit / license<input data-np-photo-credit="'+i+'" style="display:block;width:100%;padding:6px" value="'+esc(p.credit||'')+'"></label>'+
  '<label style="display:block;margin:5px 0">Original source URL<input data-np-photo-source="'+i+'" data-np-original-source="'+esc(p.source||'')+'" style="display:block;width:100%;padding:6px" placeholder="https://… (if applicable)" value="'+esc(p.source||'')+'"></label>'+
@@ -309,11 +312,12 @@ async function editor(type,id){
  photoTagsHTML('existing-'+i,p.lectures||[],p.systems||[])+
  '<label style="display:block;margin-top:7px"><input type="checkbox" data-np-remove="'+i+'"> Remove this published photo</label></div></div>').join(''):'<p>No published photos yet.</p>')+
  (existing.length?'<label style="display:block;margin:8px 0"><input type="checkbox" id="npOwnerReplaceAll"> Replace all published photos with new uploads (intentional)</label>':'')+
- '<h4>Add photos (optional)</h4>'+photoTagsHTML('new',[String(base.lecture||lp?.[1]||'68')],base.system?[String(base.system)]:[])+ '<p style="font-size:12px">For local image files, just select photos, confirm publishing permission, and enter your publishing password. Captions, photo credit and source are optional. External image links still need the source page.</p>'+
+ '<h4>Add photos (optional)</h4>'+(comparisonLabels.length?'<p style="padding:10px;background:#f2ecfa;border:1px solid #d8c6ea;border-radius:10px;font-size:12px"><b>📌 Match each image to the comparison sheet.</b> Select its named position (e.g. Photo 1 — Mummification) in the fields below. Photos without a match remain in the regular gallery. You can change these assignments later without re-uploading.</p>':'')+photoTagsHTML('new',[String(base.lecture||lp?.[1]||'68')],base.system?[String(base.system)]:[])+ '<p style="font-size:12px">For local image files, just select photos, confirm publishing permission, and enter your publishing password. Captions, photo credit and source are optional. External image links still need the source page.</p>'+
  (pending.localPhoto?'<label style="display:block"><input type="checkbox" id="npOwnerUseDraft"> Include my saved local draft photo</label><img src="'+esc(pending.localPhoto)+'" alt="Local photo draft" style="max-width:100%;max-height:110px;object-fit:contain">':'')+
  '<label style="display:block">Select one or several images<input id="npOwnerFiles" type="file" multiple accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:6px 0"></label>'+
  '<div id="npOwnerFileDetails" style="margin:8px 0"></div>'+
  '<label style="display:block">Or add a direct HTTPS image URL<input id="npOwnerImageUrl" type="url" placeholder="https://example.org/image.jpg" style="width:100%;padding:8px"></label>'+
+ matchSelect('id="npOwnerImageMatch"')+
  '<label style="display:block">Type of new photos<select id="npOwnerKind" style="display:block;width:100%;padding:8px"><option value="gross">Gross</option><option value="histology">Histology / H&E</option><option value="clinical">Clinical</option><option value="illustration">Illustration</option><option value="followup">Follow-up / outcome (hidden until comparison)</option></select></label>'+
  '<label style="display:block">Caption (optional)<textarea id="npOwnerCaption" rows="2" style="width:100%" placeholder="Species, tissue, lesion and stain"></textarea></label>'+
  '<label style="display:block">Source URL (required only for an external image link)<input id="npOwnerSource" type="url" style="width:100%;padding:8px" placeholder="https://..."></label>'+
@@ -395,12 +399,13 @@ async function put(path,contents,sha,token,msg){return github(ROOT+path,token,'P
 function readFields(){
  const root=api.body,el=id=>root.querySelector('#'+id);
  const files=Array.from(el('npOwnerFiles')?.files||[]);
- const filesMeta=files.map((file,i)=>({name:file.name,caption:String(root.querySelector('[data-np-file-caption="'+i+'"]')?.value||'').trim(),kind:root.querySelector('[data-np-file-kind="'+i+'"]')?.value||'gross'}));
+ const filesMeta=files.map((file,i)=>({name:file.name,caption:String(root.querySelector('[data-np-file-caption="'+i+'"]')?.value||'').trim(),kind:root.querySelector('[data-np-file-kind="'+i+'"]')?.value||'gross',comparisonLabel:root.querySelector('[data-np-file-match="'+i+'"]')?.value||''}));
  const draftData=el('npOwnerUseDraft')?.checked&&pending?.localPhoto?pending.localPhoto:'';
  const external=String(el('npOwnerImageUrl')?.value||'').trim();
  const source=String(el('npOwnerSource')?.value||'').trim();
  const credit=String(el('npOwnerCredit')?.value||'').trim();
  const caption=String(el('npOwnerCaption')?.value||'').trim();
+ const comparisonLabel=el('npOwnerImageMatch')?.value||'';
  const kind=el('npOwnerKind')?.value||'gross',replaceAll=!!el('npOwnerReplaceAll')?.checked;
  const remove=Array.from(root.querySelectorAll('[data-np-remove]:checked')).map(x=>Number(x.dataset.npRemove));
  const edits={};root.querySelectorAll('[data-np-text]').forEach(x=>{edits[x.dataset.npText]=String(x.value||'').slice(0,9000)});
@@ -432,7 +437,8 @@ function readFields(){
   caption:String(x.value||'').trim().slice(0,1000),
   credit:String(root.querySelector('[data-np-photo-credit="'+i+'"]')?.value||'').trim().slice(0,500),
   source:String(root.querySelector('[data-np-photo-source="'+i+'"]')?.value||'').trim().slice(0,1200),
-  type:String(root.querySelector('[data-np-photo-type="'+i+'"]')?.value||'gross')
+  type:String(root.querySelector('[data-np-photo-type="'+i+'"]')?.value||'gross'),
+  ...(root.querySelector('[data-np-photo-match="'+i+'"]')?{comparisonLabel:String(root.querySelector('[data-np-photo-match="'+i+'"]')?.value||'')}: {})
  }));
  for(const p of existingPhotoEdits){
   const original=root.querySelector('[data-np-photo-source="'+existingPhotoEdits.indexOf(p)+'"]')?.dataset.npOriginalSource||'';
@@ -454,7 +460,7 @@ function readFields(){
  return {files,filesMeta,draftData,external:goodUrl(external),source:goodUrl(source),
   credit:(credit||'Owner-supplied image; publication rights confirmed').slice(0,500),
   caption:(caption||'Pathology study reference').slice(0,1000),
-  kind,replaceAll,remove,edits,newCount,tags,existingTags,existingPhotoEdits};
+  comparisonLabel,kind,replaceAll,remove,edits,newCount,tags,existingTags,existingPhotoEdits};
 }
 
 async function imageBase64(f){
@@ -478,7 +484,7 @@ async function publish(job,fields,token,update){
  const dir=job.type==='case'?'cases':job.type==='lecture'?'lectures':'specimens';
  const prev=manifest[dir][job.id]||{},oldPhotos=photosOf(prev);
  let photos=fields.replaceAll?[]:oldPhotos.map((p,i)=>({...p,...(fields.existingTags?.[i]||{}),...(fields.existingPhotoEdits?.[i]||{})})).filter((p,i)=>!fields.remove.includes(i));
- const incoming=[...fields.files.map((f,i)=>({file:f,name:f.name,caption:fields.filesMeta[i]?.caption||'',kind:fields.filesMeta[i]?.kind||fields.kind})),...(fields.draftData?[{data:fields.draftData,name:'saved-local-draft.jpg'}]:[]),...(fields.external?[{url:fields.external,name:'linked-photo'}]:[])];
+ const incoming=[...fields.files.map((f,i)=>({file:f,name:f.name,caption:fields.filesMeta[i]?.caption||'',kind:fields.filesMeta[i]?.kind||fields.kind,comparisonLabel:fields.filesMeta[i]?.comparisonLabel||''})),...(fields.draftData?[{data:fields.draftData,name:'saved-local-draft.jpg',comparisonLabel:fields.comparisonLabel}]:[]),...(fields.external?[{url:fields.external,name:'linked-photo',comparisonLabel:fields.comparisonLabel}]:[])];
  if(photos.length+incoming.length>30)throw Error('This condition can hold up to 30 published photos; remove some first.');
  for(let i=0;i<incoming.length;i++){
   const item=incoming[i];let url=item.url;
@@ -490,7 +496,7 @@ async function publish(job,fields,token,update){
    url='https://raw.githubusercontent.com/'+OWNER+'/'+REPO+'/main/'+target;
   }
   photos.push({url,source:fields.source,credit:fields.credit,
-   caption:(item.caption||fields.caption)+(incoming.length>1?' · '+item.name:''),type:item.kind||fields.kind,external:!!item.url,lectures:fields.tags.lectures,systems:fields.tags.systems,conditionId:job.id});
+   caption:(item.caption||fields.caption)+(incoming.length>1?' · '+item.name:''),comparisonLabel:item.comparisonLabel||'',type:item.kind||fields.kind,external:!!item.url,lectures:fields.tags.lectures,systems:fields.tags.systems,conditionId:job.id});
  }
  const textEdits=fields.edits||{};
  const newTitle=job.type==='lecture'?job.title:String(textEdits.title||prev?.text?.title||prev.title||job.title).trim();
@@ -633,8 +639,11 @@ context.body.addEventListener('click',ev=>{
   const files=Array.from(ev.target.files||[]);
   const target=context.body.querySelector('#npOwnerFileDetails');
   if(!target)return;
+  const specimen= pending?.type==='specimen'?[...(window.VPQ_PATH_EXAM7_DATA||[]),...getCustomSpecimens()].find(x=>x.id===pending.id):null;
+  const labels=Array.isArray(specimen?.comparisonRows)?specimen.comparisonRows.map(row=>String(row[0]||'').trim()).filter(Boolean):[];
   target.innerHTML=files.map((file,i)=>'<div style="padding:8px;border:1px solid #bed2e4;border-radius:9px;margin:7px 0"><b>Photo '+(i+1)+': '+esc(file.name)+'</b>'+
     '<label style="display:block">Image type<select data-np-file-kind="'+i+'" style="width:100%;padding:7px"><option value="gross">Gross</option><option value="histology">Histology / H&E</option><option value="clinical">Clinical</option><option value="illustration">Illustration</option></select></label>'+
+    (labels.length?'<label style="display:block;font-weight:800;color:#604985">📌 Assign photo to comparison position<select data-np-file-match="'+i+'" style="display:block;width:100%;padding:7px"><option value="">Unassigned / gallery</option>'+labels.map((label,n)=>'<option value="'+esc(label)+'">Photo '+(n+1)+' — '+esc(label)+'</option>').join('')+'</select></label>':'')+
     '<label style="display:block">Individual caption (optional; defaults to shared caption)<input data-np-file-caption="'+i+'" style="width:100%;padding:7px" placeholder="Species, tissue and lesion"></label></div>').join('');
  },true);
  context.body.addEventListener('click',ev=>{
