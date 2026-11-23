@@ -111,19 +111,23 @@ async function publishCondition(c,token){
 function getCustomSpecimens(){return Object.values(published.customSpecimens||{}).filter(c=>c&&c.id&&c.title);}
 function getHiddenSpecimens(){return Array.isArray(published.hiddenSpecimens)?published.hiddenSpecimens:[];}
 function newSpecimenEditor(kind='normal',lecture='67'){
- const normal=kind==='normal',lectures=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
- show('➕ Add '+(normal?'normal reference':'pathology specimen')+' card',
- '<p>Publish a permanent '+(normal?'healthy anatomy/histology reference':'gross and histology study specimen')+' to the <b>Specimen Cabinet</b>. A photo is optional: add gross and H&E images later using Edit / Publish Photos. Existing cards are never overwritten.</p>'+
+ const normal=kind==='normal',comparison=kind==='comparison',lectures=[...Array.from({length:28},(_,i)=>String(i+31)),...Array.from({length:13},(_,i)=>String(i+67))];
+ show('➕ '+(normal?'Normal Reference':comparison?'Comparison Card':'Disease Card'),
+ '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px"><button data-np-add-kind="lesion" style="background:'+(!normal&&!comparison?'#e7def6':'white')+'">🩺 Disease Card</button><button data-np-add-kind="comparison" style="background:'+(comparison?'#e7def6':'white')+'">⚖️ Comparison Card</button>'+(normal?'<span>Normal reference</span>':'')+'</div>'+
  '<label>Card name<input id="npSpecTitle" style="display:block;width:100%" placeholder="e.g. Normal feline liver"></label>'+
  '<label>Lecture<select id="npSpecLecture" style="width:100%">'+lectures.map(n=>'<option value="'+n+'"'+(n===String(lecture)?' selected':'')+'>Lecture '+n+'</option>').join('')+'</select></label>'+
  '<label>Body system<input id="npSpecSystem" style="display:block;width:100%" placeholder="e.g. Nervous System"></label>'+
  '<label>Species / signalment<input id="npSpecSpecies" style="display:block;width:100%" placeholder="e.g. Dog / cat / horse"></label>'+
- [['Gross appearance','npSpecGross'],[normal?'Normal identification':'Morphologic diagnosis','npSpecDx'],['Histology','npSpecHisto'],[normal?'Normal vs abnormal comparison':'Why / pathogenesis','npSpecWhy']].map(([label,id])=>'<label style="display:block;margin:8px 0"><b>'+label+'</b><textarea id="'+id+'" style="width:100%" rows="3"></textarea></label>').join('')+
- (window.VPQ_PATH_EXAM7?.speciesGrossEditorHTML?.({grossSpecies:'[]'})||'')+
+ (comparison?'<p style="font-weight:800;color:#594577">Comparison entries · name each condition and complete its key visual differences.</p>'+
+ [0,1,2].map(i=>'<div style="padding:10px;border:1px solid #ded0e9;background:#faf6fd;border-radius:10px;margin:7px 0"><b>Comparison '+(i+1)+'</b>'+
+ [['Name / condition','name'],['Gross look','look'],['Tissue / location','tissue'],['Species / site','species'],['Visual clue','clue'],['Do not confuse with','different']].map(([label,key])=>'<label style="display:block;font-size:12px;margin:5px 0">'+label+'<input data-np-new-compare="'+i+'" data-np-new-compare-field="'+key+'" style="display:block;width:100%;padding:7px"></label>').join('')+'</div>').join(''):
+ [['Gross appearance','npSpecGross'],[normal?'Normal identification':'Morphologic diagnosis','npSpecDx'],['Histology','npSpecHisto'],[normal?'Normal vs abnormal comparison':'Why / pathogenesis','npSpecWhy']].map(([label,id])=>'<label style="display:block;margin:8px 0"><b>'+label+'</b><textarea id="'+id+'" style="width:100%" rows="3"></textarea></label>').join(''))+
+
+ (comparison?'':(window.VPQ_PATH_EXAM7?.speciesGrossEditorHTML?.({grossSpecies:'[]'})||''))+
  '<label>Pathogenesis sequence (optional; separate with → arrows)<input id="npSpecMechanismSummary" style="display:block;width:100%" placeholder="Uterine atony → eversion → venous congestion → edema → ischemic injury"></label>'+
  '<label>Source / lecture slide<input id="npSpecSource" style="display:block;width:100%" placeholder="Lecture 67 slide 10 / approved reference"></label>'+
  '<div style="padding:10px;border:1px solid #cbd9e8;border-radius:9px"><b>Owner publishing</b><p class="tiny">Unlock your saved GitHub publishing key with its password; a token is required only on first setup.</p><label>Password<input id="npSpecPassword" type="password" autocomplete="off" style="width:100%"></label>'+ownerTokenField('npSpecToken')+'</div>'+
- '<div class="buttonrow"><button data-np-spec-create="'+(normal?'normal':'lesion')+'" style="background:#e5f6eb">🚀 Publish new card</button><button data-np-spec-cancel="1">← Back to cabinet</button></div><p id="npSpecStatus" role="status"></p>');
+ '<div class="buttonrow"><button data-np-spec-create="'+(normal?'normal':comparison?'comparison':'lesion')+'" style="background:#e5f6eb">🚀 Publish new card</button><button data-np-spec-cancel="1">← Back to cabinet</button></div><p id="npSpecStatus" role="status"></p>');
 }
 function hideSpecimenEditor(id,restore=false){
  const built=(window.VPQ_PATH_EXAM7_DATA||[]).find(x=>x.id===id),custom=getCustomSpecimens().find(x=>x.id===id);
@@ -586,6 +590,8 @@ function init(context){
  })().catch(e=>{if(stat)stat.textContent='Rename failed: '+e.message+' Your original name is unchanged.'}).finally(()=>{password='';token='';if(b.isConnected)b.disabled=false});
  },true);
  context.body.addEventListener('click',ev=>{
+  const switcher=ev.target.closest('[data-np-add-kind]');
+  if(switcher){ev.preventDefault();ev.stopImmediatePropagation();return newSpecimenEditor(switcher.dataset.npAddKind,context.body.querySelector('#npSpecLecture')?.value||'77')}
   const button=ev.target.closest('[data-np-spec-create],[data-np-spec-visibility],[data-np-spec-cancel],[data-np-spec-restore]');
   if(!button)return;
   ev.preventDefault();ev.stopImmediatePropagation();
@@ -595,9 +601,10 @@ function init(context){
   const root=context.body,v=id=>String(root.querySelector('#'+id)?.value||'').trim();
   const create=button.dataset.npSpecCreate!==undefined,hidden=button.dataset.npSpecVisibility==='hide';
   const kind=button.dataset.npSpecCreate;
-  const card=create?{title:v('npSpecTitle'),lecture:v('npSpecLecture'),system:v('npSpecSystem'),species:v('npSpecSpecies'),gross:v('npSpecGross'),dx:v('npSpecDx'),histo:v('npSpecHisto'),why:v('npSpecWhy'),source:v('npSpecSource'),mechanismSummary:v('npSpecMechanismSummary'),grossSpecies:window.VPQ_PATH_EXAM7?.readGrossSpecies?.(root)||'[]',normal:kind==='normal'}:null;
+  const comparisonRows=kind==='comparison'?[0,1,2].map(i=>['name','look','tissue','species','clue','different'].map(key=>String(root.querySelector('[data-np-new-compare="'+i+'"][data-np-new-compare-field="'+key+'"]')?.value||'').trim())) .filter(row=>row[0]):[];
+  const card=create?{title:v('npSpecTitle'),lecture:v('npSpecLecture'),system:v('npSpecSystem'),species:v('npSpecSpecies'),gross:v('npSpecGross'),dx:v('npSpecDx'),histo:v('npSpecHisto'),why:v('npSpecWhy'),source:v('npSpecSource'),mechanismSummary:v('npSpecMechanismSummary'),grossSpecies:window.VPQ_PATH_EXAM7?.readGrossSpecies?.(root)||'[]',normal:kind==='normal',...(kind==='comparison'?{atlasComparison:true,comparisonRows,gross:v('npSpecGross')||'Compare the named conditions by gross appearance, location, species and high-yield differences.',dx:v('npSpecDx')||'Comparison reference; individual diagnoses require appropriate evidence.',histo:v('npSpecHisto')||'Review relevant histopathology and confirmatory testing.',why:v('npSpecWhy')||'Differences depend on affected tissue and underlying mechanism.'}:{})}:null;
   const id=v('npSpecTarget'),status=root.querySelector('#npSpecStatus');
-  if(create&&(!card.title||!card.system||!card.species||!card.gross||!card.dx||!card.histo||!card.why||!card.source)){if(status)status.textContent='Please fill in every teaching field. You can add photographs later.';return;}
+  if(create&&(kind==='comparison'?(!card.title||!card.system||!card.species||!card.source||comparisonRows.length<2):(!card.title||!card.system||!card.species||!card.gross||!card.dx||!card.histo||!card.why||!card.source))){if(status)status.textContent='Please fill in every teaching field. You can add photographs later.';return;}
   let token=v('npSpecToken'),password=v('npSpecPassword');
   if(root.querySelector('#npSpecToken'))root.querySelector('#npSpecToken').value='';
   if(root.querySelector('#npSpecPassword'))root.querySelector('#npSpecPassword').value='';
