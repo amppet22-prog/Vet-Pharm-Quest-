@@ -68,10 +68,24 @@ function base(type){
 }
 function imaging(){
  let s=base('imaging');
- // Backlit radiology display with original stylized diagnostic linework
+ // Original grayscale radiograph-style drawings, not diagnostic patient images.
+ // Display 1: lateral thorax, with rib arches / vertebrae / cardiac silhouette.
+ // Display 2: lateral appendicular long bone and stifle region.
  s+='<g filter="url(#img25-shadow)">'+round(88,169,184,112,'#d8ecfb','#96b7d0')+
- round(101,181,76,88,'#27394f','#7c9cb9')+round(184,181,74,88,'#27394f','#7c9cb9')+
- '<g opacity=".35" stroke="#a3b8cc" fill="none" stroke-width="1.2"><path d="M112 195q25-12 54 0M111 200q26-11 55 4M112 211q27-8 53 7M111 224q28-8 54 7M114 236q26-5 49 6"/><path d="M194 218h46M198 227h39M202 237h31M206 247h24"/></g>'+'<g fill="none" stroke="#c2eafa" stroke-width="3"><path d="M112 206q24 -19 54 3M112 214q24 -12 54 9M113 224q24 -8 53 10M118 234q23 -6 48 10M137 190v57"/><path d="M218 190v65M201 202l17 11 17 -11M207 249h23M218 248l-11 13M218 248l12 13"/></g></g>';
+ round(101,181,76,88,'#1d2938','#7c9cb9')+round(184,181,74,88,'#1d2938','#7c9cb9')+
+ '<g opacity=".78" fill="none" stroke="#d0dce7" stroke-width="1.8">'+
+ '<path d="M108 202q27-13 60-3M109 211q27-11 59-3M110 221q29-10 58-2M110 231q29-7 57 0M112 240q27-5 53 4"/>'+
+ '<path d="M108 199q23 11 21 45M118 195q27 11 23 54M128 194q26 11 25 53M139 194q24 12 25 45"/>'+
+ '<path d="M107 194q26-9 60-2M110 247q28 8 54-1"/></g>'+
+ '<path d="M132 207q-11 5-9 19q2 18 15 18q11 0 12-12q1-20-18-25" fill="#899bab" opacity=".54"/>'+
+ '<path d="M111 203q-1 20 5 38M165 203q3 18 0 34" stroke="#bfcfdd" opacity=".5" stroke-width="3" fill="none"/>'+
+ '<g opacity=".85" fill="none" stroke="#dce5ed" stroke-width="3.5">'+
+ '<path d="M220 192L220 251M219 205l-18 13M221 204l18 13M220 251l-12 12M220 251l13 12"/>'+
+ '<path d="M203 218q-7 0-7 7t7 7h34q7 0 7-7t-7-7M210 239h20"/></g>'+
+ '<g fill="#b7c7d6" opacity=".73">'+[196,205,214,223,232,241].map(y=>'<rect x="213" y="'+y+'" width="14" height="4" rx="2"/>').join('')+'</g>'+
+ '<text x="105" y="263" fill="#a9bdca" font-size="7" font-family="Arial">LAT THORAX</text>'+
+ '<text x="189" y="263" fill="#a9bdca" font-size="7" font-family="Arial">LIMB</text>'+
+ '</g>';
  // Positioning table and overhead tube
  s+='<g filter="url(#img25-shadow)"><rect x="114" y="342" width="175" height="18" rx="9" fill="#8ebade" stroke="#6288ac" stroke-width="5"/>'+
  round(136,360,130,54,'#eaf2ff','#96afcb')+'<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
@@ -91,10 +105,20 @@ function imaging(){
  '<ellipse cx="621" cy="254" rx="47" ry="47" fill="#3a5671" stroke="#9dd3eb" stroke-width="9"/>'+
  '<rect x="572" y="296" width="107" height="14" rx="6" fill="#eef9ff"/>'+
  '<rect x="543" y="323" width="161" height="16" rx="7" fill="#f4faff" stroke="#8ea9c6" stroke-width="4"/></g>';
- // CT workstation with axial displays, desk
+ // Reading desk now displays two grayscale axial cross-sectional study illustrations.
  s+='<g filter="url(#img25-shadow)">'+round(750,182,170,116,'#3c516b','#91a8c9')+
- [790,863].map(x=>'<circle cx="'+x+'" cy="222" r="28" fill="#aabed6"/><ellipse cx="'+(x-9)+'" cy="223" rx="10" ry="18" fill="#34465e"/><ellipse cx="'+(x+9)+'" cy="223" rx="10" ry="18" fill="#34465e"/>').join('')+
- [790,863].map(x=>'<circle cx="'+x+'" cy="273" r="16" fill="#879eb9"/>').join('')+
+ [790,863].map((x,i)=>'<g>'+
+ '<ellipse cx="'+x+'" cy="223" rx="29" ry="27" fill="#9cabbc"/>'+
+ '<ellipse cx="'+x+'" cy="223" rx="24" ry="23" fill="#4a596e"/>'+
+ '<ellipse cx="'+x+'" cy="223" rx="19" ry="20" fill="#778899" opacity=".8"/>'+
+ '<ellipse cx="'+(x-9)+'" cy="223" rx="9" ry="15" fill="#2b394e"/>'+
+ '<ellipse cx="'+(x+9)+'" cy="223" rx="9" ry="15" fill="#2b394e"/>'+
+ '<circle cx="'+x+'" cy="'+(i?229:232)+'" r="4" fill="#d4dbe2" opacity=".85"/>'+
+ '<path d="M'+(x-19)+' 216q19-9 38 0" stroke="#becad7" stroke-width="1.4" fill="none" opacity=".6"/>'+
+ '</g>').join('')+
+ [790,863].map(x=>'<g><circle cx="'+x+'" cy="273" r="16" fill="#8fa0b5"/><circle cx="'+x+'" cy="273" r="11" fill="#3c4d64"/><path d="M'+(x-7)+' 273q7-11 14 0q-7 10-14 0" fill="#b3c1cd" opacity=".7"/></g>').join('')+
+ '<rect x="754" y="187" width="158" height="5" rx="2" fill="#27364c"/>'+
+ '<text x="757" y="196" fill="#c5d3df" font-family="Arial" font-size="6">AXIAL STUDY  •  WINDOW / LEVEL</text>'+
  '<rect x="746" y="321" width="185" height="16" rx="5" fill="#f3d6be" stroke="#af9abb" stroke-width="4"/>'+
  '<path d="M762 337v77M914 337v77" stroke="#9a8fb7" stroke-width="10"/>'+
  '<rect x="797" y="344" width="78" height="8" rx="4" fill="#9ca6bd"/></g>';
