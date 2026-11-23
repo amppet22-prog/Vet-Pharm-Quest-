@@ -68,23 +68,28 @@ function base(type){
 }
 function imaging(){
  let s=base('imaging');
- // Original grayscale radiograph-style drawings, not diagnostic patient images.
- // Display 1: lateral thorax, with rib arches / vertebrae / cardiac silhouette.
- // Display 2: lateral appendicular long bone and stifle region.
+ // Original grayscale radiograph-style vignettes. These are decorative SVGs,
+ // not clinical studies; the real image viewer will use separately verified scans.
  s+='<g filter="url(#img25-shadow)">'+round(88,169,184,112,'#d8ecfb','#96b7d0')+
- round(101,181,76,88,'#1d2938','#7c9cb9')+round(184,181,74,88,'#1d2938','#7c9cb9')+
- '<g opacity=".78" fill="none" stroke="#d0dce7" stroke-width="1.8">'+
- '<path d="M108 202q27-13 60-3M109 211q27-11 59-3M110 221q29-10 58-2M110 231q29-7 57 0M112 240q27-5 53 4"/>'+
- '<path d="M108 199q23 11 21 45M118 195q27 11 23 54M128 194q26 11 25 53M139 194q24 12 25 45"/>'+
- '<path d="M107 194q26-9 60-2M110 247q28 8 54-1"/></g>'+
- '<path d="M132 207q-11 5-9 19q2 18 15 18q11 0 12-12q1-20-18-25" fill="#899bab" opacity=".54"/>'+
- '<path d="M111 203q-1 20 5 38M165 203q3 18 0 34" stroke="#bfcfdd" opacity=".5" stroke-width="3" fill="none"/>'+
- '<g opacity=".85" fill="none" stroke="#dce5ed" stroke-width="3.5">'+
- '<path d="M220 192L220 251M219 205l-18 13M221 204l18 13M220 251l-12 12M220 251l13 12"/>'+
- '<path d="M203 218q-7 0-7 7t7 7h34q7 0 7-7t-7-7M210 239h20"/></g>'+
- '<g fill="#b7c7d6" opacity=".73">'+[196,205,214,223,232,241].map(y=>'<rect x="213" y="'+y+'" width="14" height="4" rx="2"/>').join('')+'</g>'+
- '<text x="105" y="263" fill="#a9bdca" font-size="7" font-family="Arial">LAT THORAX</text>'+
- '<text x="189" y="263" fill="#a9bdca" font-size="7" font-family="Arial">LIMB</text>'+
+ round(101,181,76,88,'#141e2b','#7c9cb9')+round(184,181,74,88,'#141e2b','#7c9cb9')+
+ // Left screen: more cohesive lateral canine thorax with thoracic cage, spine, heart and diaphragm.
+ '<g opacity=".86" fill="none" stroke-linecap="round">'+
+ '<path d="M107 200Q135 188 170 200M108 207Q136 197 170 209M108 216Q136 207 170 219M109 225Q138 217 169 229M111 235Q138 228 168 240" stroke="#c4d4e2" stroke-width="1.9"/>'+
+ '<path d="M112 202q7 22 6 38M121 200q9 25 6 43M132 198q10 28 7 48M143 198q10 25 10 46M154 199q9 19 10 38" stroke="#bbcbd9" stroke-width="1.3"/>'+
+ '<path d="M109 194Q138 186 170 194M111 248Q140 254 166 244" stroke="#dce7ef" stroke-width="2.5"/>'+
+ '<path d="M119 209Q113 229 125 245M159 207Q170 223 164 241" stroke="#829daf" stroke-width="2"/></g>'+
+ '<path d="M137 215C127 210 123 224 125 232C127 242 140 245 148 236C155 226 145 215 137 215Z" fill="#9aaab8" opacity=".64"/>'+
+ '<path d="M113 243Q137 236 166 245" stroke="#dce6f0" stroke-width="2" fill="none"/>'+
+ '<g fill="#cedae5" opacity=".55">'+[191,197,203,209].map(y=>'<rect x="132" y="'+y+'" width="11" height="3" rx="1.5"/>').join('')+'</g>'+
+ // Right screen: long bone / joint radiographic study with two cortical outlines.
+ '<g fill="none" stroke-linecap="round">'+
+ '<path d="M205 188Q201 203 207 216L211 232Q208 241 206 245Q209 252 216 250L218 235L216 217Q220 201 217 189" stroke="#d8e3ee" stroke-width="3.2"/>'+
+ '<path d="M225 188Q229 202 224 218L221 232Q224 242 229 247Q234 251 240 246L236 232L234 218Q238 202 234 189" stroke="#c3d2df" stroke-width="3"/>'+
+ '<path d="M205 241Q217 236 228 239M207 251Q224 258 239 247M202 219Q224 214 241 220" stroke="#b2c4d4" stroke-width="2"/>'+
+ '<path d="M213 196L214 224M230 196L227 222" stroke="#8c9faf" stroke-width="1.5"/></g>'+
+ '<path d="M208 244q7 3 13 1q8 5 15-1" fill="none" stroke="#ecf2f7" stroke-width="3"/>'+
+ '<text x="106" y="263" fill="#aebfcd" font-size="7" font-family="Arial" font-weight="700">THORAX · LAT</text>'+
+ '<text x="192" y="263" fill="#aebfcd" font-size="7" font-family="Arial" font-weight="700">BONE · LAT</text>'+
  '</g>';
  // Positioning table and overhead tube
  s+='<g filter="url(#img25-shadow)"><rect x="114" y="342" width="175" height="18" rx="9" fill="#8ebade" stroke="#6288ac" stroke-width="5"/>'+
@@ -174,8 +179,8 @@ function imaging(){
  // Cozy details throughout the imaging suite, kept behind / outside interactive equipment.
  s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
  // Subtle pastel bunting along the back wall, above all workstation monitors.
- '<path d="M89 157Q205 176 320 157M670 157Q802 179 916 157" stroke="#d8a9c5" stroke-width="2.5" fill="none"/>'+
- '<path d="M115 163l10 0-5 14zM150 166l10 0-5 14zM185 166l10 0-5 14zM220 163l10 0-5 14zM730 166l10 0-5 14zM765 167l10 0-5 14zM800 167l10 0-5 14zM835 166l10 0-5 14zM870 162l10 0-5 14z" fill="#f5c5d4" opacity=".95"/>'+
+ '<path d="M89 155Q205 160 320 155M670 155Q802 162 916 155" stroke="#d8a9c5" stroke-width="2.5" fill="none"/>'+
+ '<path d="M115 157l10 0-5 9zM150 158l10 0-5 9zM185 158l10 0-5 9zM220 157l10 0-5 9zM730 157l10 0-5 9zM765 158l10 0-5 9zM800 158l10 0-5 9zM835 157l10 0-5 9zM870 157l10 0-5 9z" fill="#f5c5d4" opacity=".95"/>'+
  // Tiny gold sparkle accents around the imaging department logo.
  '<path d="M329 114l5 0m-2.5-2.5v5M670 114l5 0m-2.5-2.5v5M320 141l4 0m-2-2v4M678 141l4 0m-2-2v4" stroke="#e6b979" stroke-width="2.5" stroke-linecap="round"/>'+
  // Ultrasound label: a small pastel wall plaque, not a new workstation/hotspot.
