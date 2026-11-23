@@ -419,6 +419,7 @@
     }
   ],
   "hidden": [
-    "pharm-e2-gi17-audit-002"
+    "pharm-e2-gi17-audit-002",
+    "pharm-e2-gi17-audit-008"
   ]
 }
