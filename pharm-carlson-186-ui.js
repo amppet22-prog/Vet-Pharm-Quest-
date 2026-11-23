@@ -28,13 +28,21 @@ const pool=()=>every().filter(x=>chosen.has(x.lecture));
 const shuffle=items=>{const a=items.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const inline=x=>esc(x).replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
 function answerHTML(value){
- const s=String(value||'').trim();if(!s)return '<p>Answer not entered.</p>';
- let parts=s.replace(/\s+(?=\*\*(?:\d+\.|Additional clinical|Clinical cautions|Species differences|Monitoring))/gi,'\n').split(/\n+/);
- if(parts.length===1&&s.length>110)parts=s.split(/(?:;\s+|\.\s+)(?=[A-Z][\w/-]{2,25}(?:\s+[\w/-]{2,25}){0,4}:)/);
- if(parts.length===1&&s.length>300)parts=s.split(/(?<=[.!?])\s+(?=[A-Z])/);
- return parts.filter(Boolean).map(p=>{
-  let content=inline(p.trim());
-  content=content.replace(/^([^<>]{2,55}):\s/,'<strong>$1:</strong> ');
+ const s=String(value||'').trim();
+ if(!s)return '<p>Answer not entered.</p>';
+ // Preserve instructor wording and the user's bold markup. Break at existing
+ // line boundaries, topical labels, and sentence ends for easier recall.
+ // Protect common abbreviations so "Dr. Carlson" and "e.g." stay together.
+ const masked=s.replace(/\b(Dr|Mr|Mrs|Ms|Prof|vs|etc)\./gi,'$1§')
+  .replace(/\be\.g\./gi,'e§g§').replace(/\bi\.e\./gi,'i§e§');
+ const blocks=masked
+  .replace(/\s+(?=\*\*(?:\d+\.|Additional clinical|Clinical cautions|Species differences|Monitoring))/gi,'\n')
+  .split(/\n+/).flatMap(block=>block.split(/(?<=[.!?])\s+(?=(?:[A-Z][a-z]|[A-Z]{2,}|⚠|➕|\*\*))/u))
+  .map(p=>p.replace(/§/g,'.').trim()).filter(Boolean);
+ return blocks.map(part=>{
+  let content=inline(part);
+  // Highlight a topical lead-in without overwriting source language.
+  content=content.replace(/^((?:⚠\s*)?[A-Z][^<>:.!?]{1,53}):\s/,'<strong>$1:</strong> ');
   return '<p class="pg2-answer-line">'+content+'</p>';
  }).join('');
 }
@@ -152,6 +160,6 @@ screen.addEventListener('submit',e=>{if(e.target.id==='pg2Form'){e.preventDefaul
 screen.addEventListener('input',e=>{if(e.target.id!=='pg2Search')return;const q=e.target.value.toLowerCase();screen.querySelectorAll('.pg2-list').forEach(b=>b.hidden=!b.textContent.toLowerCase().includes(q))});
 try{if(typeof tab!=='undefined'&&tab==='guide')home()}catch(e){}
 const style=document.createElement('style');
-style.textContent='.pg2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px;margin:12px 0}.pg2-grid label{display:flex;gap:9px;align-items:center;padding:11px;background:#fff;border:1px solid #cbd9ea;border-radius:11px;cursor:pointer}.pg2-grid small,.pg2-grid b{display:block}.pg2-grid small{font-size:11px}.pg2-actions{display:flex;flex-wrap:wrap;gap:9px;margin:13px 0}.pg2-question,.pg2-answer{margin:15px 0;padding:18px;border-radius:14px}.pg2-question{background:#fff;border:2px solid #bea5ed}.pg2-answer{background:#eef9f1;border:2px solid #a7d8b8;line-height:1.55}.pg2-answer-line{margin:0 0 10px;padding:0 0 9px;border-bottom:1px solid #c5dfcc}.pg2-answer-line:last-child{border:0}.pg2-editor-menu{background:#f7f3fc;padding:15px;border-radius:13px;border:1px solid #d6c5e8}.pg2-form{display:grid;gap:15px}.pg2-form label{display:grid;gap:5px;font-weight:700}.pg2-form select,.pg2-form textarea,.pg2-form input,#pg2Search{padding:10px;width:100%;border:1px solid #b4c6d9;border-radius:8px;background:white;color:#233c57}.pg2-list{display:block;width:100%;text-align:left;padding:10px;margin:6px 0;background:white;border:1px solid #ccd8e6;border-radius:9px}.pg2-list[hidden]{display:none}';
+style.textContent='.pg2-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:8px;margin:12px 0}.pg2-grid label{display:flex;gap:9px;align-items:center;padding:11px;background:#fff;border:1px solid #cbd9ea;border-radius:11px;cursor:pointer}.pg2-grid small,.pg2-grid b{display:block}.pg2-grid small{font-size:11px}.pg2-actions{display:flex;flex-wrap:wrap;gap:9px;margin:13px 0}.pg2-question,.pg2-answer{margin:15px 0;padding:18px;border-radius:14px}.pg2-question{background:#fff;border:2px solid #bea5ed}.pg2-answer{background:#eef9f1;border:2px solid #a7d8b8;line-height:1.55}.pg2-answer-line{margin:0 0 12px;padding:0 0 10px;border-bottom:1px solid #c5dfcc;font-size:15px;line-height:1.65;font-weight:550}.pg2-answer-line strong{font-weight:900;color:#205d48}.pg2-answer-line:last-child{border:0}.pg2-editor-menu{background:#f7f3fc;padding:15px;border-radius:13px;border:1px solid #d6c5e8}.pg2-form{display:grid;gap:15px}.pg2-form label{display:grid;gap:5px;font-weight:700}.pg2-form select,.pg2-form textarea,.pg2-form input,#pg2Search{padding:10px;width:100%;border:1px solid #b4c6d9;border-radius:8px;background:white;color:#233c57}.pg2-list{display:block;width:100%;text-align:left;padding:10px;margin:6px 0;background:white;border:1px solid #ccd8e6;border-radius:9px}.pg2-list[hidden]{display:none}';
 document.head.appendChild(style);
 })();
