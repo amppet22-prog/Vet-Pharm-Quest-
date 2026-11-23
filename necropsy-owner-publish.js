@@ -301,6 +301,22 @@ async function editor(type,id){
  '<section style="padding:12px;background:#f6fcf9;border:1px solid #d4eadd;border-radius:14px;margin:12px 0"><h4 style="margin:0 0 7px">⚖️ 4 · Differentials & additional notes</h4>'+['compare','notes'].map(specimenFieldHTML).join('')+'</section>'+
  '<section style="padding:12px;background:#fffaf3;border:1px solid #e9dcc4;border-radius:14px;margin:12px 0"><h4 style="margin:0 0 7px">🐾 5 · Species-specific gross findings</h4><p class="tiny">These optional sections are separate from the general gross description. Edit each named species section here.</p>'+(window.VPQ_PATH_EXAM7?.speciesGrossEditorHTML?.(edits)||'')+'</section>';
 
+ const comparisonPhotoEditor=()=>!comparisonLabels.length?'':'<section id="npComparisonPhotoManager" style="padding:13px;margin:14px 0;border:2px solid #bfa7dc;border-radius:14px;background:linear-gradient(135deg,#fbf6ff,#fff9fc)">'+
+ '<h4 style="margin:0 0 5px;color:#58416c">📷 Comparison Photos · Match each named condition</h4>'+
+ '<p style="font-size:12px;line-height:1.55;margin:5px 0 12px">Each box below corresponds to <b>one specific position</b> in the side-by-side comparison sheet. Choose a picture directly in its box. You can also assign existing published pictures in the photo library further down. Uploading here does not delete other photos.</p>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:10px">'+comparisonLabels.map((label,i)=>{
+ const matched=existing.map((p,j)=>({...p,photoIndex:j})).find(p=>p.comparisonLabel===label)||
+ existing.map((p,j)=>({...p,photoIndex:j})).find(p=>!p.comparisonLabel&&String(p.caption||'').toLowerCase().includes(label.toLowerCase()));
+ return '<div style="padding:11px;background:#fff;border:1px solid #dfcce8;border-left:4px solid #b783b4;border-radius:12px;min-width:0">'+
+ '<b style="display:block;font-size:13px;color:#573f6c">PHOTO '+(i+1)+' · '+esc(label)+'</b>'+
+ '<small style="display:block;color:#68768b;margin:5px 0">This is the '+esc(label)+' position in the comparison sheet.</small>'+
+ (matched?'<img src="'+esc(matched.url)+'" alt="Currently assigned photo for '+esc(label)+'" style="width:100%;height:132px;object-fit:contain;background:#f7f4fb;border:1px solid #e4d8ec;border-radius:9px"><small style="display:block;color:#3b755b">✓ Currently matched · Published photo '+(matched.photoIndex+1)+'</small>':'<div style="height:132px;display:grid;place-items:center;border:1px dashed #ccbbdc;background:#faf7fd;border-radius:9px;color:#8c769c;font-size:12px">📷 No photo matched yet</div>')+
+ '<label style="display:block;font-size:12px;font-weight:850;margin:9px 0 3px">Add photo for '+esc(label)+'<input data-np-comparison-file="'+i+'" type="file" accept="image/jpeg,image/png,image/webp" style="display:block;width:100%;margin:5px 0"></label>'+
+ '<div data-np-comparison-preview="'+i+'" style="font-size:11px;color:#5f6a82"></div>'+
+ '<label style="display:block;font-size:12px;margin:7px 0 0">Caption (optional)<input data-np-comparison-caption="'+i+'" placeholder="Gross finding / tissue / species" style="width:100%;padding:7px;margin-top:4px"></label>'+
+ '</div>';
+ }).join('')+'</div>'+
+ '<p style="font-size:12px;color:#675878;margin:9px 0 0"><b>Already uploaded the photo?</b> Keep it—scroll to “Currently published” and select its matching Photo 1, Photo 2, etc. No need to upload twice. The assignment saves when you choose Publish Now.</p></section>';
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  draftState={};
  show(type==='case'?'✏️ Case editor · Lecture '+esc(base.lecture||''):'✏️ Edit & publish · '+esc(base.title),
@@ -309,6 +325,7 @@ async function editor(type,id){
  (type==='case'?caseEditorFields(edits):type==='specimen'?specimenSections():'')+
  (type==='case'?'<h4>3 · Differential diagnoses & reasoning</h4><p class="tiny">Edit each answer and its supporting evidence. Mark exactly one as the best-supported diagnosis. Changes will publish with the case.</p>'+((edits.options||[]).map((o,i)=>'<div style="border:1px solid #cad9e7;border-radius:9px;padding:9px;margin:8px 0"><label style="font-weight:800"><input type="radio" name="np-best-option" value="'+i+'" '+(o.role==='best'||o.name===edits.best?'checked':'')+'> Best diagnosis '+(i+1)+'</label><label style="display:block;margin:5px 0">Diagnosis<input data-np-option-name="'+i+'" value="'+esc(o.name||'')+'" style="display:block;width:100%;padding:7px"></label>'+[['supports','Why it fits'],['against','Why less likely'],['hist','Histology distinction']].map(([k,label])=>'<label style="display:block;margin:5px 0">'+label+'<textarea data-np-option-'+k+'="'+i+'" rows="2" style="display:block;width:100%">'+esc(o[k]||'')+'</textarea></label>').join('')+'</div>').join('')):'')+
  (type==='specimen'?'<h4>✅ Structured classifications — select from the options</h4>'+(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(edits)||'')+(window.VPQ_PATH_ATLAS_META?.editorHTML?.(edits)||''):'')+
+ comparisonPhotoEditor()+
  
  '<h4 style="padding:10px 12px;border-radius:10px;background:#f2ecfa;color:#5d487a">📷 '+(type==='specimen'?'6':'4')+' · Photo library · '+existing.length+' published</h4>'+
  (existing.length?'<p class="tiny"><b>Edit any existing photo below.</b> Change its caption, credit, source, or type without adding a new image. All other photos and your teaching text stay in place unless you explicitly remove or replace them.</p>':'')+
@@ -407,8 +424,11 @@ async function put(path,contents,sha,token,msg){return github(ROOT+path,token,'P
 
 function readFields(){
  const root=api.body,el=id=>root.querySelector('#'+id);
- const files=Array.from(el('npOwnerFiles')?.files||[]);
- const filesMeta=files.map((file,i)=>({name:file.name,caption:String(root.querySelector('[data-np-file-caption="'+i+'"]')?.value||'').trim(),kind:root.querySelector('[data-np-file-kind="'+i+'"]')?.value||'gross',comparisonLabel:root.querySelector('[data-np-file-match="'+i+'"]')?.value||''}));
+ const bulkFiles=Array.from(el('npOwnerFiles')?.files||[]);
+ const comparisonInputs=Array.from(root.querySelectorAll('[data-np-comparison-file]')).filter(x=>x.files?.length);
+ const files=bulkFiles.concat(comparisonInputs.map(x=>x.files[0]));
+ const filesMeta=bulkFiles.map((file,i)=>({name:file.name,caption:String(root.querySelector('[data-np-file-caption="'+i+'"]')?.value||'').trim(),kind:root.querySelector('[data-np-file-kind="'+i+'"]')?.value||'gross',comparisonLabel:root.querySelector('[data-np-file-match="'+i+'"]')?.value||''})).concat(comparisonInputs.map(x=>({name:x.files[0].name,caption:String(root.querySelector('[data-np-comparison-caption="'+x.dataset.npComparisonFile+'"]')?.value||'').trim(),kind:'gross',comparisonLabel:String(root.querySelectorAll('#npComparisonPhotoManager [data-np-comparison-file]')[Number(x.dataset.npComparisonFile)]?.closest('div')?.querySelector('b')?.textContent||'').replace(/^PHOTO \d+ · /,'').trim()})));
+
  const draftData=el('npOwnerUseDraft')?.checked&&pending?.localPhoto?pending.localPhoto:'';
  const external=String(el('npOwnerImageUrl')?.value||'').trim();
  const source=String(el('npOwnerSource')?.value||'').trim();
