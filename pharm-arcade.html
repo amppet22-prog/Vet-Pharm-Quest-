@@ -381,6 +381,7 @@ const vpqExam2MatchCards=(window.VPQ_PHARM_NEXT?.drugs||[])
   mechanism:d.class+' — '+d.moa,
   clinical:'Use: '+d.uses+' · '+(d.species||'Species/formulation dependent'),
   safety:d.effects||'',
+  contraindications:d.contraindications||'',
   group:d.class,
   indication:d.uses,
   className:d.class,
@@ -454,7 +455,8 @@ function vpqMatchFeedback40(message){
   return '<div class="vpq-match-feedback-card" role="status"><div class="vpq-match-feedback-heading">✓ Correct match <strong>'+safe(String(message.drug))+'</strong></div>'+
    detailRows(message.mechanism,'Class / mechanism')+
    detailRows(message.clinical,'Clinical pearl')+
-   detailRows(message.safety,'Safety / cautions',true)+
+   detailRows(message.safety,'Adverse effects',true)+
+   detailRows(message.contraindications,'Contraindications / monitoring',true)+
    '<div class="vpq-match-feedback-xp">'+(message.firstMastery?'✦ First match · +12 XP':'✓ Previously mastered · practice only')+'</div></div>';
  }
  return '<div class="feedback" style="margin-top:9px" role="status">'+(message||'Choose a drug and its corresponding mechanism or clinical clue.')+'</div>';
