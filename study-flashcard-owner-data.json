@@ -180,6 +180,12 @@
       "answer": "Local muscarinic blockade with relatively limited systemic absorption. So fewer side effects and a better dilator than atropine.",
       "why": "Its quaternary structure limits CNS penetration.\nDoesn't cross the BBB, so it is poorly absorbed after aerosolization (which is better since that means the fewer side effects).",
       "slide": "Lecture 15 · submitted recall notes + clinically reviewed guidance"
+    },
+    "pharm-e2-gi17-audit-002": {
+      "prompt": "Ropinirole is a pro emesis drug, what is it and its MOA?",
+      "answer": "It is a dopamine agonist used to induce vomiting in appropriately selected dogs. (Clevor) it is an eye drop form.",
+      "why": "Inducing and suppressing emesis are opposite treatment goals; patient and ingestion safety must be assessed.",
+      "slide": "Lecture 17 · GI/hepatic deep lesson audit, 2026-11-20"
     }
   },
   "custom": [
