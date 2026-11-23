@@ -111,9 +111,11 @@ function imaging(){
  '<ellipse cx="219" cy="220" rx="17" ry="9" fill="#becbd5" opacity=".18"/>'+
  '<rect x="186" y="183" width="70" height="84" fill="#fff" filter="url(#vpqRadGrain)" opacity=".075"/>'+
  '</g>'+
- // Small acquisition-style legends inside the display, visually quiet.
- '<g font-family="Arial" font-size="6.3" font-weight="700" fill="#d7e0e7" opacity=".87">'+
- '<text x="106" y="263">THORAX  RL</text><text x="190" y="263">STIFLE  LAT</text></g>';
+ // Tiny image markers, away from the positioning arm and X-ray tube.
+ '<g font-family="Arial" font-size="7" font-weight="800" fill="#e2e7eb" opacity=".9">'+
+ '<text x="163" y="192">R</text><text x="246" y="192">L</text></g>'+
+ '<rect x="104" y="184" width="70" height="81" rx="6" fill="none" stroke="#8c9dac" stroke-width=".65" opacity=".45"/>'+
+ '<rect x="187" y="184" width="68" height="81" rx="6" fill="none" stroke="#8c9dac" stroke-width=".65" opacity=".45"/>';
  // Positioning table and overhead tube
  s+='<g filter="url(#img25-shadow)"><rect x="114" y="342" width="175" height="18" rx="9" fill="#8ebade" stroke="#6288ac" stroke-width="5"/>'+
  round(136,360,130,54,'#eaf2ff','#96afcb')+'<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
@@ -206,17 +208,15 @@ function imaging(){
  }).join('')+'</g>';
  // Cozy details throughout the imaging suite, kept behind / outside interactive equipment.
  s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
- // Subtle pastel bunting along the back wall, above all workstation monitors.
- '<path d="M89 158Q205 159 320 158M670 158Q802 159 916 158" stroke="#d8a9c5" stroke-width="2" fill="none"/>'+
- '<path d="M115 157l10 0-5 9zM150 158l10 0-5 9zM185 158l10 0-5 9zM220 157l10 0-5 9zM730 157l10 0-5 9zM765 158l10 0-5 9zM800 158l10 0-5 9zM835 157l10 0-5 9zM870 157l10 0-5 9z" fill="#f5c5d4" opacity=".95"/>'+
+ // Keep the wall below the modality gallery clear of dangling decorations.
  // Tiny gold sparkle accents around the imaging department logo.
  '<path d="M329 114l5 0m-2.5-2.5v5M670 114l5 0m-2.5-2.5v5M320 141l4 0m-2-2v4M678 141l4 0m-2-2v4" stroke="#e6b979" stroke-width="2.5" stroke-linecap="round"/>'+
  // Ultrasound label: a small pastel wall plaque, not a new workstation/hotspot.
- '<rect x="349" y="153" width="105" height="17" rx="8" fill="#e3f5ee" stroke="#9ecdbf" stroke-width="2"/>'+
- '<text x="401" y="165" text-anchor="middle" font-size="10" fill="#547e76" font-weight="900">ULTRASOUND</text>'+
+ '<rect x="349" y="158" width="105" height="17" rx="8" fill="#e3f5ee" stroke="#9ecdbf" stroke-width="2"/>'+
+ '<text x="401" y="170" text-anchor="middle" font-size="10" fill="#547e76" font-weight="900">ULTRASOUND</text>'+
  // CT region: compact sign on rear wall, clear of gantry.
- '<rect x="546" y="151" width="132" height="18" rx="8" fill="#e9e5fb" stroke="#b9abd9" stroke-width="2"/>'+
- '<text x="612" y="164" text-anchor="middle" font-size="10" fill="#74669e" font-weight="900">CROSS-SECTIONAL</text>'+
+ '<rect x="546" y="158" width="132" height="17" rx="8" fill="#e9e5fb" stroke="#b9abd9" stroke-width="2"/>'+
+ '<text x="612" y="170" text-anchor="middle" font-size="10" fill="#74669e" font-weight="900">CROSS-SECTIONAL</text>'+
  // Reading desk cozy tea coaster + pencil cup, kept on far right corner.
  '<ellipse cx="916" cy="317" rx="13" ry="4" fill="#d7b3b3" opacity=".8"/>'+
  '<path d="M903 297h19l-2 19h-15z" fill="#f5d1d9" stroke="#b58d9e" stroke-width="2"/>'+
