@@ -3959,6 +3959,83 @@
       },
       "updated": "2026-11-23T18:29:55.363Z",
       "approvedBy": "amppet22-prog"
+    },
+    "pathx-77-10": {
+      "title": "Fetal maceration",
+      "photos": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-77-10-1795458879663-0.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-23 133010.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "77"
+          ],
+          "systems": [],
+          "conditionId": "pathx-77-10"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-77-10-1795458880900-1.jpg",
+          "source": "",
+          "credit": "Pathology lecture LMU",
+          "caption": "Pathology study reference · Screenshot 2026-11-23 133015.png",
+          "type": "gross",
+          "external": false,
+          "lectures": [
+            "77"
+          ],
+          "systems": [],
+          "conditionId": "pathx-77-10"
+        }
+      ],
+      "photo": {
+        "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/necropsy-photos/specimens/pathx-77-10-1795458879663-0.jpg",
+        "source": "",
+        "credit": "Pathology lecture LMU",
+        "caption": "Pathology study reference · Screenshot 2026-11-23 133010.png",
+        "type": "gross",
+        "external": false,
+        "lectures": [
+          "77"
+        ],
+        "systems": [],
+        "conditionId": "pathx-77-10"
+      },
+      "text": {
+        "title": "Fetal maceration",
+        "gross": "Disintegrating fetal tissue/bones with purulent exudate, severe endometritis or pyometra; less preserved than mummy.",
+        "mechanismSummary": "Fetal death plus bacterial invasion → autolysis/putrefaction → soft tissue breakdown and suppurative endometritis.",
+        "dx": "Working identification: Fetal maceration. Specimen site: Placenta / fetus / uterus. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "why": "Microbial decay aggravates dam's uterine pathology. ↔ Master chart · distinguish from: Presence of pus/debris separates from sterile dry mummification.",
+        "visualClue": "Infected uterine contents with disintegrated fetal soft tissue, bones and often purulent foul exudate. Retained fetal bones amid purulent liquefied tissue, indicating bacterial contamination.",
+        "compare": "**important term**Mummy maintains recognizable dehydrated shape without pus; emphysematous fetus is distended by gas.",
+        "notes": "Requires the presence of an infection in the uterus. \nIf the early embryo succumbs to uterine or embryonic infection, maceration is usually followed by resorption within the uterus or expulsion along with a small amount of purulent exudate ex. Pyometra, Acutre endometritis. \n\nThe presence of bacteria basically causes destruction of fetal tissue, making the infection worse. \n",
+        "grossSpecies": "[]",
+        "etiologyCategories": [],
+        "etiologyAgents": "",
+        "etiologyCertainty": "differential",
+        "catalogScope": "course",
+        "speciesOccurrence": "{}",
+        "hostScope": "multiple",
+        "speciesEvidence": "",
+        "breedSizes": "[]",
+        "breedTags": "[]",
+        "breedEvidence": "",
+        "conditionType": "",
+        "conditionSubtype": "",
+        "organSystem": "",
+        "affectedOrgan": "",
+        "pathogenNames": "",
+        "diseaseId": "",
+        "zoonoticStatus": "unknown",
+        "zoonoticNotes": "",
+        "reportabilityNotes": ""
+      },
+      "updated": "2026-11-23T18:34:42.079Z",
+      "approvedBy": "amppet22-prog"
     }
   },
   "lectures": {},
