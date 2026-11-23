@@ -72,16 +72,22 @@ function list(){
  (lastStatus?'<p style="color:#a86229;font-size:12px">Latest refresh: '+E(lastStatus)+'</p>':'')+
  (all.length?'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px">'+all.map(c=>'<button data-vpqipub="open:'+E(c.id)+'" style="text-align:left;padding:12px;background:#fff;border:1px solid #d5ddeb;border-radius:12px"><b>'+E(c.title)+'</b><small style="display:block;margin:7px 0;color:#6e7890">'+E(c.kind==='normal'?'Normal reference':'Clinical case')+' · '+E(c.species)+' · '+E(c.modality)+' · '+E(c.region)+'</small><small style="display:block">'+(c.images||[]).length+' view(s) · '+E(c.lecture)+'</small></button>').join('')+'</div>':'<p style="font-size:13px;padding:14px;background:#f9fbff;border:1px dashed #ccdbe9;border-radius:10px">No cases published yet. Use <b>Add / Publish Imaging Case</b> to add the first permanent teaching case.</p>'));
 }
-function open(id,showAnswer=false){
+function open(id,showAnswer=false,showAnnotations=false){
  const c=data.cases[id];if(!c)return list();selected=id;
+ const all=c.images||[];
+ const annotated=v=>/\bannotat(?:ed|ion)\b/i.test([v.view,v.caption].join(' '));
+ const hasPair=all.some(annotated)&&all.some(v=>!annotated(v));
+ const visible=hasPair&&!showAnnotations?all.filter(v=>!annotated(v)):all;
  screen(c.title,
  '<div class="buttonrow">'+button('library','← Imaging library')+button('edit:'+E(id),'✏️ Edit / Publish')+button('viewer','🖼️ Personal image viewer')+'</div>'+
  '<p style="font-size:12px;color:#65758b">'+E(c.species)+' · '+E(c.region)+' · '+E(c.modality)+' · '+E(c.lecture)+'</p>'+
- '<div style="display:flex;flex-wrap:wrap;gap:9px">'+(c.images||[]).map((v,i)=>'<figure style="flex:1 1 260px;margin:0;border:1px solid #cfdaea;background:#263242;border-radius:11px;overflow:hidden"><img loading="lazy" src="'+E(v.url)+'" alt="'+E(v.view||'Imaging view')+'" style="width:100%;height:clamp(180px,35vw,440px);object-fit:contain"><figcaption style="padding:8px;background:#eef3fa;color:#394e69;font-size:12px"><b>View '+(i+1)+' · '+E(v.view)+'</b> · '+E(v.caption||'')+'</figcaption></figure>').join('')+'</div>'+
+ (hasPair?'<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0;padding:9px 11px;background:#f4f0fc;border-radius:10px"><b style="font-size:12px">Study images:</b>'+button(showAnnotations?'plain:'+E(id):'annotate:'+E(id),showAnnotations?'🖼️ Hide annotation key':'✨ Show annotated teaching version')+'<small style="color:#6c5b81">Original image first · teaching annotations optional</small></div>':'')+
+ '<div style="display:flex;flex-wrap:wrap;gap:9px">'+visible.map((v,i)=>'<figure style="flex:1 1 260px;margin:0;border:1px solid #cfdaea;background:#263242;border-radius:11px;overflow:hidden"><img loading="lazy" src="'+E(v.url)+'" alt="'+E(v.view||'Imaging view')+'" style="width:100%;height:clamp(180px,35vw,440px);object-fit:contain"><figcaption style="padding:8px;background:#eef3fa;color:#394e69;font-size:12px"><b>'+E(v.view||'Radiograph')+'</b>'+(showAnswer?' · '+E(v.caption||''):' · '+(annotated(v)?'Annotated teaching radiograph':'Describe findings before revealing the key'))+'</figcaption></figure>').join('')+'</div>'+
  '<div style="padding:12px;background:#f3f8ff;border-radius:10px;margin:12px 0"><b>Work up the images first</b><p style="font-size:12px">Judge technical quality, identify objective findings and write your differential before revealing the published interpretation.</p>'+
  '<label style="font-size:12px">Your observations<textarea id="vpqiSelfNotes" rows="3" placeholder="Where? Opacity? Distribution? What does the pattern suggest?" style="width:100%;display:block;padding:9px"></textarea></label></div>'+
- (showAnswer?'<div style="padding:13px;background:#f4edfc;border:1px solid #d8caed;border-radius:11px"><b>Published teaching interpretation</b>'+[['History',c.history],['Image quality',c.quality],['Objective findings',c.findings],['Interpretation',c.interpretation],['Differentials',c.differentials],['Why / mechanism',c.why],['Recommendations',c.next],['Source',c.source],['Credit',c.credit]].filter(x=>x[1]).map(([k,v])=>'<p style="white-space:pre-wrap"><b>'+E(k)+':</b> '+E(v)+'</p>').join('')+'</div>':button('reveal:'+E(id),'🔍 Reveal interpretation'))+
- '<p style="font-size:11px;color:#6f7d8a">Owner-authored teaching content; review findings against the original lecture and an interpreting veterinarian.</p>');
+ (showAnswer?'<div style="padding:13px;background:#f4edfc;border:1px solid #d8caed;border-radius:11px"><b>Published teaching interpretation</b>'+[['History',c.history],['Image quality',c.quality],['Objective findings',c.findings],['Interpretation',c.interpretation],['Differentials',c.differentials],['Why / mechanism',c.why],['Recommendations',c.next],['Credit',c.credit]].filter(x=>x[1]).map(([k,v])=>'<p style="white-space:pre-wrap"><b>'+E(k)+':</b> '+E(v)+'</p>').join('')+
+ (c.source?'<p><b>Image source:</b> '+E(c.source)+'</p>':'')+'</div>':button('reveal:'+E(id),'🔍 Reveal interpretation'))+
+ '<p style="font-size:11px;color:#6f7d8a">Source-linked educational images and owner-authored teaching notes. Clinical findings are not independently validated by the game. Source and license details are shown after revealing the answer.</p>');
 }
 function imageBase64(file){
  return new Promise((resolve,reject)=>{
@@ -158,6 +164,8 @@ function init(context){
   if(act==='viewer')return window.VPQ_DIAGNOSTIC_IMAGING_VIEWER?.open?.();
   if(act.startsWith('edit:'))return edit(act.slice(5));
   if(act.startsWith('open:'))return open(act.slice(5));
+  if(act.startsWith('annotate:'))return open(act.slice(9),false,true);
+  if(act.startsWith('plain:'))return open(act.slice(6),false,false);
   if(act.startsWith('reveal:'))return open(act.slice(7),true);
   if(act==='publish'){
    if(btn.disabled)return;btn.disabled=true;
