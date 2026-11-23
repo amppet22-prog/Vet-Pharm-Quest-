@@ -480,8 +480,16 @@ function startFlash(scope='topic',review=false){
  flashScope=scope;flashReview=review;flashFace=false;flashComplete=false;
  const all=flashDeck(scope),progress=flashProgress();
  // Lecture-wide sessions prioritize authored cards; generic note prompts remain available when opening individual topics.
- const clean=scope==='lecture'&&all.some(c=>c.curated)?all.filter(c=>c.curated):all;
- const tier=c=>{const q=String(c.prompt||'');return /(?:^|\n|\s)A\.\s+/.test(q)&&/(?:^|\n|\s)D\.\s+/.test(q)?'intermediate':(/differential|interpret|pathogenesis|mechanism|explain why|most likely|based on|which diagnosis|describe the sequence|compare/i.test(q)||q.length>200)?'advanced':'beginner'};
+ const clean=all; // Keep all lecture cards accessible at each appropriate level; don't discard noncurated study cards.
+ // Levels are learning modes, not automatically graded mastery. Preserve the instructor text and answer.
+ // Multi-choice and moderately detailed questions belong to Intermediate; mechanism/case reasoning to Advanced.
+ const tier=c=>{
+  const q=String(c.prompt||''),a=String(c.answer||'');
+  const mc=/(?:^|\n|\s)A\.\s+/.test(q)&&/(?:^|\n|\s)D\.\s+/.test(q);
+  if(/differential|interpret|pathogenesis|mechanism|explain why|most likely|based on|which diagnosis|describe the sequence|compare|prioritiz|justify|clinical case/i.test(q)||q.length>245)return 'advanced';
+  if(mc||/how|why|distinguish|what changes|which features|what would|relationship|identify/i.test(q)||a.length>=90)return 'intermediate';
+  return 'beginner';
+ };
  const eligible=flashDifficulty==='all'?clean:clean.filter(c=>tier(c)===flashDifficulty);
  flashCards=(review?eligible.filter(c=>progress[c.id]):eligible);
  // Limit a lecture session to a manageable size. Cards missed in earlier rounds
@@ -548,6 +556,7 @@ function flashPromptMarkup(prompt,answer,reveal=false){
 
 function flashView(){
  const progress=flashProgress(),c=flashCards[flashIndex],pending=flashCards.filter(x=>progress[x.id]).length;
+ const levelButtons='<div role="group" aria-label="Flashcard difficulty" style="display:flex;flex-wrap:wrap;gap:7px;margin:12px 0">'+[['beginner','🌱 Beginner'],['intermediate','🧠 Intermediate'],['advanced','🩺 Advanced'],['all','🔀 Mixed']].map(([value,label])=>'<button data-pathdiff-flash-level="'+value+'" aria-pressed="'+(flashDifficulty===value)+'" style="flex:1;min-width:115px;padding:11px 8px;border-radius:10px;font-weight:850;border:2px solid '+(flashDifficulty===value?'#9272c4':'#d3c6e6')+';background:'+(flashDifficulty===value?'#e8defb':'#fff')+'">'+label+'</button>').join('')+'</div>';
  const flashControls='<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:end;padding:10px;margin:8px 0;background:#f8f3ff;border:1px solid #ded1ee;border-radius:12px">'+
  '<label style="font-size:12px;font-weight:800;flex:1;min-width:145px">Practice level<select data-pathdiff-flash-pick-difficulty="1" style="display:block;width:100%;padding:8px;border-radius:8px">'+[['all','Mixed / all levels'],['beginner','Beginner · direct recall'],['intermediate','Intermediate · multiple choice'],['advanced','Advanced · reasoning']].map(([v,label])=>'<option value="'+v+'"'+(flashDifficulty===v?' selected':'')+'>'+label+'</option>').join('')+'</select></label>'+
  '<label style="font-size:12px;font-weight:800;flex:1;min-width:145px">Lecture<select data-pathdiff-flash-pick-lecture="1" style="display:block;width:100%;padding:8px;border-radius:8px"><option value="'+safe(conditionLecture)+'">L'+safe(conditionLecture)+' · Current</option>'+EXAM_GROUPS.flatMap(g=>Array.from({length:g.end-g.start+1},(_,i)=>String(g.start+i))).filter(n=>n!==String(conditionLecture)).map(n=>'<option value="'+safe(n)+'">Lecture '+safe(n)+'</option>').join('')+'</select></label>'+
@@ -557,14 +566,14 @@ function flashView(){
  if(flashComplete)return modal('🧠 Flashcard session complete',
  '<p>You reached the end of <b>'+flashCards.length+' card(s)</b>. '+pending+' are currently marked <b>Need practice</b> in this set.</p>'+
  '<div style="border-top:1px solid #cfdded;padding-top:11px;margin-top:12px"><b>Apply what you learned</b><p class="tiny" style="margin:5px 0">Flashcards teach recognition terms. The atlas checks gross and histologic patterns; cases challenge you to distinguish the causes.</p><div class="buttonrow"><button data-pathdiff-flash-specimens="1">🔬 Identify L'+safe(conditionLecture)+' specimens</button><button data-pathdiff-flash-cases="1">🧩 Solve L'+safe(conditionLecture)+' differential cases</button></div></div>'+
- flashControls+'<div class="buttonrow"><button data-pathdiff-flash-review="1">↺ Practice missed cards</button><button data-pathdiff-flash-all="1">New shuffled set</button><button data-pathdiff-flash-back="1">← Back to notes</button></div>'+ 
+ levelButtons+flashControls+'<div class="buttonrow"><button data-pathdiff-flash-review="1">↺ Practice missed cards</button><button data-pathdiff-flash-all="1">New shuffled set</button><button data-pathdiff-flash-back="1">← Back to notes</button></div>'+ 
  '<p class="tiny">Self-ratings are saved only in this browser. Skipped questions before reveal enter your practice list. These cards use instructor-derived notes; review real gross/histology photos separately.</p>');
  if(!c)return modal('🧠 Pathology flashcards',
  '<div class="buttonrow"><button data-pathdiff-flash-back="1">← Lecture topics</button></div>'+
- '<p>'+(flashReview?'No saved practice cards in this lecture yet. Mark any card “Need practice” to build a review deck.':'No flashcards were found for this selected topic.')+'</p>'+
+ levelButtons+flashControls+'<p>'+(flashReview?'No saved practice cards in this lecture yet. Mark any card “Need practice” to build a review deck.':'No flashcards were found for this selected topic.')+'</p>'+
  '<button data-pathdiff-flash-all="1">Study all '+(flashScope==='lecture'?'lecture':'topic')+' cards</button>');
  modal('🧠 L'+safe(conditionLecture)+' · '+(flashScope==='lecture'?'Lecture flashcards':flashScope==='foundation'?'CNS foundations':'Topic flashcards'),
- flashControls+'<div class="buttonrow"><button data-pathdiff-flash-back="1">← '+(flashScope==='topic'?'Topic notes':'Lecture topics')+'</button><button data-pathdiff-flash-all="1">↻ New shuffled set</button><button data-pathdiff-flash-review="1">↺ Missed cards</button>'+starButton+'</div>'+
+ levelButtons+flashControls+'<div class="buttonrow"><button data-pathdiff-flash-back="1">← '+(flashScope==='topic'?'Topic notes':'Lecture topics')+'</button><button data-pathdiff-flash-all="1">↻ New shuffled set</button><button data-pathdiff-flash-review="1">↺ Missed cards</button>'+starButton+'</div>'+
  '<p class="tiny"><b>Card '+(flashIndex+1)+' of '+flashCards.length+'</b> · '+(flashReview?'Missed-card review':c.curated?'Focused question from lecture':'Lecture note recall')+' · '+pending+' marked for practice in this set. Your marks stay in this browser.</p>'+
  '<div style="height:5px;max-width:100%;border-radius:6px;background:#e4eaf4;overflow:hidden;margin:10px 0"><div style="width:'+Math.round((flashIndex+1)/flashCards.length*100)+'%;background:#7391cc;height:100%;border-radius:6px"></div></div>'+
  '<span data-vpq-star-study="1" hidden aria-hidden="true"></span><div role="button" tabindex="0" data-pathdiff-flash-flip="1" title="Flip flashcard" aria-label="Flip flashcard to '+(flashFace?'question':'answer')+'" style="cursor:pointer;position:relative;border:1px solid #bbcae1;border-radius:18px;background:linear-gradient(145deg,#ffffff 5%,#eef5ff 100%);box-shadow:0 7px 22px rgba(44,62,100,.09);padding:clamp(16px,3vw,24px);min-height:230px;display:flex;flex-direction:column;justify-content:center;gap:12px;margin:12px 0;text-align:center">'+
@@ -820,6 +829,7 @@ function init(api){
  if(d.pathdiffFlashNew!==undefined)return window.VPQ_FLASHCARD_OWNER?.editor?.('pathology',conditionLecture,null,()=>flashView());
  if(d.pathdiffFlashSpecimens!==undefined)return window.VPQ_PATH_EXAM7?.studyLecture?.(conditionLecture);
  if(d.pathdiffFlashCases!==undefined){filter=conditionLecture;menu();const section=api.body.querySelector('#vpq-necro-case-list');if(section)section.open=true;return;}
+ if(d.pathdiffFlashLevel!==undefined){flashDifficulty=String(d.pathdiffFlashLevel);return startFlash(flashScope,false)}
  if(d.pathdiffFlashStar!==undefined){const c=flashCards[flashIndex];if(c){window.VPQ_STARRED?.save?.({id:'pathology-necro-'+c.id,front:c.prompt,back:c.answer+(c.why?'\nWhy: '+c.why:''),subject:'Pathology',origin:'Lecture '+conditionLecture});}return flashView()}
  if(d.pathdiffFlashFlip!==undefined){flashFace=!flashFace;return flashView()}
  if(d.pathdiffFlashPrev!==undefined){flashIndex=Math.max(0,flashIndex-1);flashFace=false;return flashView()}
