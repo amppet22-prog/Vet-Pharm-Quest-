@@ -344,6 +344,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 15",
       "curated": true
+    },
+    {
+      "prompt": "What are the two drugs to address hepatic encephalopathy?",
+      "answer": "Lactulose and Rifaximin.",
+      "why": "Lactulose is fermented by bacteria and acidifies the gut, so NH3 is trapped as NH4+ and not absorbed.\nRifazimin is a non-absorbed ABX so it decreases urease and bacteria so less NH3",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwsiwnky-5da3t",
+      "domain": "pharmacology",
+      "lecture": "Lecture 17",
+      "curated": true
     }
   ],
   "hidden": [
