@@ -318,6 +318,122 @@
       "updated": "2026-11-23T00:00:00Z",
       "imageStatus": "Original Commons file linked, rights and description verified",
       "reviewStatus": "Uploader-described teaching record; not a specialist-reviewed diagnosis"
+    },
+    "verified-canine-medial-patellar-luxation": {
+      "id": "verified-canine-medial-patellar-luxation",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Canine Stifles · Bilateral Medial Patellar Luxation",
+      "species": "Dog",
+      "region": "Pelvis / stifles / pelvic limbs",
+      "lecture": "Diagnostic Imaging · Appendicular Musculoskeletal",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Canine%20medial%20patellar%20luxation%20-%20ventrodorsal%20radiograph.png",
+          "view": "VD pelvis and pelvic limbs",
+          "caption": "Uploader identifies left grade 3, right grade 2 medial patellar luxation, plus small incidental bladder stones."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Canine_medial_patellar_luxation_-_ventrodorsal_radiograph.png",
+      "credit": "Corak80 · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "history": "Uploader identifies a Bichon Frisé with bilateral medial patellar luxation; no additional clinical history supplied.",
+      "lookFor": "Identify left and right using the L marker. Locate each patella relative to its femoral trochlea; check for asymmetry. Also review the cranial field for incidental findings.",
+      "quality": "VD view includes pelvis and pelvic limbs. Note alignment/rotation and whether patellar position is affected by stance.",
+      "findings": "Source: left patella (right side of image; L marker) medial to trochlea, grade 3; contralateral grade 2; small incidental urinary bladder calculi in upper right field.",
+      "interpretation": "Source-identified bilateral medial patellar luxation. Grading involves physical examination; source states left grade 3 and right grade 2.",
+      "differentials": "Malpositioned patella due to congenital or acquired instability, positioning artifacts, stifle trauma. Bladder calcifications are separate finding.",
+      "why": "The patella fails to track normally in the trochlear groove, potentially altering quadriceps function and contributing to secondary joint changes.",
+      "next": "Correlate with orthopedic exam and clinical lameness; evaluate incidental cystoliths if clinically indicated.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Verified Commons file description",
+      "reviewStatus": "Based on uploader report; not independently graded by radiologist"
+    },
+    "verified-canine-ununited-anconeal-process": {
+      "id": "verified-canine-ununited-anconeal-process",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Canine Elbow · Ununited Anconeal Process (UAP)",
+      "species": "Dog",
+      "region": "Elbow",
+      "lecture": "Diagnostic Imaging · Appendicular Musculoskeletal",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/X-ray%20image%20of%20an%20isolates%20processus%20anconaeus%20in%20a%205%20year%20old%20German%20shepherd%20dog.jpg",
+          "view": "Annotated canine elbow radiograph",
+          "caption": "Source red arrows indicate separated anconeal process; white arrows mark arthrosis."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:X-ray_image_of_an_isolates_processus_anconaeus_in_a_5_year_old_German_shepherd_dog.jpg",
+      "credit": "Kalumet · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "Original source identifies a five-year-old German Shepherd dog with an isolated anconeal process and arthrosis.",
+      "lookFor": "Locate the proximal ulna and anconeal process. Identify the radiolucent separation line and then secondary osteoarthritic changes marked on the source image.",
+      "quality": "The source includes colored arrow annotations. The exact projection is not specified in its description; assess joint positioning before comparing serial studies.",
+      "findings": "Uploader marks an isolated anconeal process with red arrows and arthrosis with white arrows.",
+      "interpretation": "Source-reported ununited/isolated anconeal process with secondary degenerative joint disease, one form of canine elbow dysplasia.",
+      "differentials": "Other developmental elbow disorders and trauma; distinguish from other causes of elbow osteoarthritis.",
+      "why": "Failure of normal union of the anconeal process can cause elbow instability/incongruity, leading to cartilage damage and secondary osteoarthritis.",
+      "next": "Clinical orthopedic evaluation, additional standard elbow projections, and surgical consultation where clinically indicated.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Verified Commons file description",
+      "reviewStatus": "Based on uploader report; not independently graded by radiologist"
+    },
+    "verified-feline-tooth-resorption-307": {
+      "id": "verified-feline-tooth-resorption-307",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Feline Dental · Tooth Resorption at 307",
+      "species": "Cat",
+      "region": "Left mandible / third premolar",
+      "lecture": "Diagnostic Imaging · Dental Radiography",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Feline%20tooth%20resorption%20-%20dental%20radiograph%20of%20the%20left%20mandibular%20third%20premolar%20(307).png",
+          "view": "Left mandibular third premolar (307) · dental radiograph",
+          "caption": "Author identifies tooth resorption involving tooth 307; extracted after imaging."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Feline_tooth_resorption_-_dental_radiograph_of_the_left_mandibular_third_premolar_(307).png",
+      "credit": "Corak80 · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "history": "Source provides an intraoral radiograph of feline tooth 307 with resorptive disease; uploader reports the tooth was extracted.",
+      "lookFor": "Confirm modified Triadan number 307 and identify crown-root structures. Look for localized loss of normal mineralized tooth structure and altered periodontal/lamina-dura definition.",
+      "quality": "Dental intraoral radiograph; confirm side, target tooth, field coverage and interpret adjacent structures.",
+      "findings": "Uploader identifies tooth resorption affecting the feline left mandibular third premolar (307).",
+      "interpretation": "Source-documented feline tooth resorption at 307. Radiographic subtype is not established in source description.",
+      "differentials": "Periodontal disease, endodontic disease, periapical change, fracture; look for tooth resorption pattern and clinical oral examination.",
+      "why": "Odontoclastic resorption progressively destroys mineralized dental tissues; radiographs help identify root involvement and inform extraction technique.",
+      "next": "Complete oral exam and full-mouth dental radiographic evaluation as indicated; dental treatment guided by lesion type and clinician.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Verified Commons file description",
+      "reviewStatus": "Based on uploader report; not independently graded by radiologist"
+    },
+    "verified-canine-normal-hips": {
+      "id": "verified-canine-normal-hips",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Canine Pelvis · Normal Hip Reference",
+      "species": "Dog",
+      "region": "Pelvis / coxofemoral joints",
+      "lecture": "Diagnostic Imaging · Appendicular Musculoskeletal",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Normal%20canine%20hips.JPG",
+          "view": "Canine hip radiograph · normal per source",
+          "caption": "Source identifies a radiograph of normal canine hips."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Normal_canine_hips.JPG",
+      "credit": "Joelmills / Joel Mills · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "Source calls the image a normal canine hip radiograph; breed, positioning and screening method not provided.",
+      "lookFor": "Locate acetabula, femoral heads, femoral necks and pelvic symmetry. Compare bilateral joint congruity and femoral head coverage.",
+      "quality": "Check pelvis rotation, limb extension/positioning and appropriate joint inclusion; this is not an OFA/PennHIP assessment.",
+      "findings": "Source labels hips normal; inspect head and acetabular congruity and overall joint symmetry, but avoid making precise dysplasia measurements without standardized positioning.",
+      "interpretation": "Source-designated normal canine hip reference, not a certified hip-scoring study.",
+      "differentials": "No confirmed abnormality reported. Compare with dysplastic coxofemoral joints or osteoarthritic hip morphology in separate verified cases.",
+      "why": "Normal hip stability involves congruent ball-and-socket anatomy and soft-tissue support. Malposition can change the apparent relationship.",
+      "next": "Use standardized dedicated hip projections for clinical screening or diagnosis.",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Verified Commons file description",
+      "reviewStatus": "Based on uploader report; not independently graded by radiologist"
     }
   }
 }
