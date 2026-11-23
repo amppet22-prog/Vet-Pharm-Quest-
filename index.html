@@ -4426,11 +4426,11 @@ document.head.appendChild(vpqToxStyle);
    ['🐾 How do patients work?','For a continuing patient journey, start at Reception for the history and check-in, move to the Examination Room to assess and plan, then follow care, monitoring, and discharge in the Treatment Ward. Other departments also have their OWN focused patients and practice scenarios — those do not all belong to the same Reception case.'],
    ['📚 Where should I study?','The Student Study Lounge is your cozy starting point for course selection, flashcards, quizzes, review, and games. Learning Centers and specialty rooms go deeper into individual subjects. Pick an exam or lecture when filters are available, then practice or star hard questions for later.'],
    ['🪙 Coins, the bank & level-ups','Studying and completing eligible challenges earns XP and coins. Leveling up unlocks more cosmetic options; check your bank/coin balance to see what you have earned, then spend coins on decorations, outfits, and companions where available. Learning is never locked behind purchases.'],
-   ['🎮 Walking, games & exploration','Move with A/D or ←/→, press E near an interactive station, or click equipment directly. Use Hospital Rooms or Floor Plan to jump around. Explore the Arcade, Differential Diagnosis Center, and other departments at your own pace — there is no required order.']
+   ['🎮 Walking, games & exploration','Move with W/A/S/D or ↑/←/↓/→, press E near an interactive station, or click equipment directly. Use Hospital Rooms or Floor Plan to jump around. Explore the Arcade, Differential Diagnosis Center, and other departments at your own pace — there is no required order.']
   ];
   showModal('🎮 How to Play · Quick Start',
     '<div class="vpqQuickHero"><div class="vpqQuickHeroBadge">🐾 STUDENT-BUILT VETERINARY LEARNING GAME</div><h3>Your teaching hospital, your adventure!</h3><p>Explore rooms, learn the why behind disease, help patients, and collect fun rewards. No rush and no required route.</p><div class="vpqQuickFree">🎉 And the best part? <strong>IT’S ALWAYS FREE!</strong> 💜</div></div>'+
-    '<div class="vpqQuickSteps"><div><b>🎮 Move &amp; interact</b><span>A/D or arrows · E near a station · or click</span></div><div><b>❔ Need help?</b><span>Question marks explain the room and its features</span></div></div>'+
+    '<div class="vpqQuickSteps"><div><b>🎮 Move &amp; interact</b><span>W/A/S/D or ↑/←/↓/→ · E to interact · or click</span></div><div><b>❔ Need help?</b><span>Question marks explain the room and its features</span></div></div>'+
     '<section class="vpqQuickFeatured vpqQuickFeaturedCompact"><div class="vpqQuickFeaturedIcon">🧩</div><div><span class="vpqQuickEyebrow">TRY THE DIFFERENTIAL DIAGNOSIS CENTER</span><h3>Can you solve the case?</h3><p>Find clues, build your differentials, and decide which test or treatment comes next. Visit Necropsy &amp; Pathology, or try patient cases in the Exam Room and Treatment Ward.</p></div></section>'+
     '<h3 class="vpqQuickSectionTitle">How everything works <small>Open anything you want to explore</small></h3>'+
     '<div class="vpqQuickDetails vpqQuickDetailsSimple">'+topics.map(([title,body])=>'<details><summary>'+h(title)+'</summary><p>'+h(body)+'</p></details>').join('')+'</div>'+
@@ -5741,7 +5741,7 @@ window.VPQ_COMPANION_LIBRARY_STATUS=function(){
  var saved='normal';try{saved=localStorage.getItem('vpq-reading-size-v1')||'normal'}catch(e){}
  apply(saved==='large'?'large':'normal');
 })();
-</script><script src="hospital-depth-movement.js?v=20261121-avatar-reception-fix-2"></script><script id="vpq-arcade-launcher-fix-20261122">
+</script><script src="hospital-depth-movement.js?v=20261123-left-facing-depth-scale-fix3"></script><script id="vpq-arcade-launcher-fix-20261122">
 (function(){
  "use strict";
  /* Single, self-contained Arcade launcher. No dependency on legacy
