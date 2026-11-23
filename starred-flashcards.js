@@ -39,7 +39,10 @@ function modal(title,html){
 }
 function due(c){return !c.next||c.next<=Date.now()}
 function matching(){return cards.filter(x=>filter==='All'||x.subject===filter).sort((a,b)=>Number(due(b))-Number(due(a))||(a.next||0)-(b.next||0))}
-function subjects(){return ['All',...new Set(cards.map(x=>x.subject))].sort((a,b)=>a==='All'?-1:b==='All'?1:a.localeCompare(b))}
+const DEPARTMENTS=['Pharmacology','Pathology','Clinical Pathology','One Health','Toxicology','Radiology','Parasitology','Virology','Bacteriology / Mycology','Clinical Skills','Other'];
+function subjects(){return ['All',...new Set([...DEPARTMENTS,...cards.map(x=>x.subject)])].sort((a,b)=>a==='All'?-1:b==='All'?1:a.localeCompare(b))}
+function canonicalSubject(title){const t=String(title||'').toLowerCase();if(t.includes('clinical path')||t.includes('clinpath')||t.includes('hematology')||t.includes('erythrogram')||t.includes('leukogram')||t.includes('blood gas'))return 'Clinical Pathology';if(t.includes('one health')||t.includes('zoonos')||t.includes('reportable'))return 'One Health';if(t.includes('toxic'))return 'Toxicology';if(t.includes('radiolog')||t.includes('imaging')||t.includes('x-ray')||t.includes('ultrasound'))return 'Radiology';if(t.includes('parasito'))return 'Parasitology';if(t.includes('virolog'))return 'Virology';if(t.includes('bacterio')||t.includes('mycolog'))return 'Bacteriology / Mycology';if(t.includes('patholog')||t.includes('necropsy')||t.includes('histolog'))return 'Pathology';if(t.includes('pharm')||t.includes('drug'))return 'Pharmacology';if(t.includes('injection')||t.includes('clinical skill')||t.includes('osce'))return 'Clinical Skills';return 'Other'}
+function currentSubject(){return canonicalSubject(el('modalTitle')?.textContent||'')}
 function layout(){
  const list=matching(),dueCount=list.filter(due).length;
  const options=subjects().map(s=>'<option value="'+esc(s)+'"'+(s===filter?' selected':'')+'>'+esc(s)+'</option>').join('');
@@ -58,7 +61,7 @@ function layout(){
  '<div class="vpq-star-actions"><button data-vpq-star-action="practice">▶ Practice '+(dueCount?'('+dueCount+' due)':'all')+'</button><button data-vpq-star-action="add">+ Write a card</button></div>'+
  (list.length?list.map(c=>'<article class="vpq-star-list-item"><div><b>'+esc(c.front)+'</b><small>'+esc(c.subject)+(c.origin?' · '+esc(c.origin):'')+(due(c)?' · Ready to practice':' · Reviewed')+'</small></div><div class="vpq-star-actions"><button data-vpq-star-edit="'+esc(c.id)+'">Edit</button><button data-vpq-star-remove="'+esc(c.id)+'" aria-label="Remove starred flashcard">Remove</button></div></article>').join(''):'<p>No starred cards here yet. Star a flashcard or save a question from any department.</p>'));
 }
-function open(){mode='list';filter='All';layout()}
+function open(subject){mode='list';filter=DEPARTMENTS.includes(subject)?subject:'All';layout()}
 function practice(){mode='practice';index=0;flipped=false;layout()}
 function toggleDialog(c){
  let dialog=el('vpqStarEditor');
@@ -93,21 +96,51 @@ function captureFromPage(){
   let box=root?.querySelector('[data-pathfound="fc-flip"],.vpqRecallCard,.vpq-flashcard,.flashcard,[class*="flashcard"]');
   candidate={front:selected||box?.querySelector('.vpqRecallQuestion,h3,.question,[class*="question"]')?.textContent?.trim()||root?.querySelector('h3')?.textContent?.trim()||'',
    back:box?.querySelector('.vpqRecallAnswer,.answer,[class*="answer"]')?.textContent?.trim()||root?.querySelector('.response')?.textContent?.trim()||'',
-   subject:title.split(/[·—–]/)[0].replace(/[📚🧠⭐]/gu,'').trim()||'General',origin:title};
+   subject:canonicalSubject(title),origin:title};
  }
  toggleDialog(candidate);
 }
+/* Department-wide integration: one saved deck, department-specific entry points.
+   Never infer a correct answer from unsubmitted choices. Open an editable copy instead. */
+function addDepartmentButtons(){
+ const root=el('modalBody'),head=el('modalTitle');
+ if(!root||!head||el('modalWrap')?.classList.contains('hidden'))return;
+ const title=head.textContent||'';
+ const subject=canonicalSubject(title);
+ const nav=el('vpqStarDepartmentOpen');
+ if(nav){nav.hidden=title.includes('Starred Flashcards');nav.dataset.vpqStarSubject=subject;nav.textContent='⭐ '+subject+' Review';}
+ if(title.includes('Starred Flashcards'))return;
+ const selectors='.vpq-case-question,.refpracticequestions,.refpracticequestion,.vpqRecallCard,[data-pathfound="fc-flip"],.vpq-flashcard,.flashcard,.path-flashcard';
+ root.querySelectorAll(selectors).forEach(block=>{
+   if(block.dataset.vpqStarIntegrated)return;
+   block.dataset.vpqStarIntegrated='1';
+   if(block.matches('.vpqRecallCard')||block.querySelector('[data-vpq-star-pharm]'))return;
+   const btn=document.createElement('button');
+   btn.type='button';btn.className='vpq-star-inline';btn.dataset.vpqStarCaptureBlock='1';btn.textContent='☆ Star this for practice';
+   btn.title='Copy this item into your '+subject+' starred review; check or edit its answer before saving';
+   block.insertAdjacentElement('afterend',btn);
+ });
+}
+function captureBlock(button){
+ const container=button.previousElementSibling;
+ const title=el('modalTitle')?.textContent||'';
+ const q=container?.querySelector('.vpq-case-question-label,.vpqRecallQuestion,.question,h3,[class*="question"]')?.textContent?.trim()
+   ||container?.textContent?.trim()?.slice(0,800)||'';
+ const a=container?.querySelector('.vpqRecallAnswer,.answer,.response,[class*="explanation"]')?.textContent?.trim()||'';
+ toggleDialog({front:q,back:a,subject:canonicalSubject(title),origin:title});
+}
 document.addEventListener('click',e=>{
- const b=e.target.closest('[data-vpq-star-action],[data-vpq-star-pharm],[data-vpq-star-study],[data-vpq-star-edit],[data-vpq-star-remove]');
+ const b=e.target.closest('[data-vpq-star-action],[data-vpq-star-pharm],[data-vpq-star-study],[data-vpq-star-edit],[data-vpq-star-remove],[data-vpq-star-capture-block]');
  if(!b)return;
  if(b.dataset.vpqStarPharm){e.preventDefault();e.stopPropagation();const c=getPharm(b.dataset.vpqStarPharm);if(c)save(c);b.textContent='★ Saved for review';return}
  if(b.dataset.vpqStarStudy){e.preventDefault();e.stopPropagation();if(current&&save(current))b.textContent='★ Saved for review';return}
+ if(b.dataset.vpqStarCaptureBlock){e.preventDefault();e.stopPropagation();captureBlock(b);return}
  if(b.dataset.vpqStarEdit){toggleDialog(cards.find(x=>x.id===b.dataset.vpqStarEdit));return}
  if(b.dataset.vpqStarRemove){const c=cards.find(x=>x.id===b.dataset.vpqStarRemove);if(c&&confirm('Remove this card from starred review?')){cards=cards.filter(x=>x.id!==c.id);persist();updateCounts();layout()}return}
  const action=b.dataset.vpqStarAction;
  if(!action)return;
  e.preventDefault();e.stopPropagation();
- if(action==='open')open();
+ if(action==='open')open(b.dataset.vpqStarSubject);
  else if(action==='capture')captureFromPage();
  else if(action==='add')toggleDialog({front:'',back:'',subject:filter==='All'?'General':filter,origin:''});
  else if(action==='practice')practice();
@@ -124,12 +157,13 @@ document.addEventListener('click',e=>{
 },true);
 function init(){
  const style=document.createElement('style');style.id='vpqStarredStyle';style.textContent=
- '.vpq-star-header{display:flex;align-items:start;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px;border:1px solid #e2cce6;background:#fcf6ff;border-radius:13px;margin-bottom:12px}.vpq-star-header label{font-size:13px}.vpq-star-header select{display:block;max-width:210px;padding:7px;border:1px solid #cdb6de;border-radius:9px}.vpq-star-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:10px 0}.vpq-star-actions button{padding:9px 12px;border-radius:10px}.vpq-star-list-item{padding:11px 14px;border:1px solid #e7dae9;background:#fffafc;border-radius:12px;margin:9px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.vpq-star-list-item small{display:block;color:#746079;margin-top:5px}.vpq-star-flip{width:100%;min-height:230px;border:2px solid #b7a1cf;border-radius:17px;background:#f9f2ff;color:#2a3755;display:flex;flex-direction:column;justify-content:center;gap:19px;align-items:center;padding:28px 20px;text-align:center;white-space:pre-wrap}.vpq-star-flip strong{font-size:clamp(19px,3vw,24px);line-height:1.45;max-width:650px}.vpq-star-flip small,.vpq-star-flip span,.vpq-star-progress{font-size:13px;color:#715683}.vpq-star-editor{padding:24px;min-width:min(85vw,440px);max-width:600px}.vpq-star-editor label{display:block;font-weight:700;margin:8px 0}.vpq-star-editor input,.vpq-star-editor textarea{width:100%;box-sizing:border-box;display:block;border:1px solid #d1b6db;border-radius:9px;padding:10px;font:inherit;margin-top:4px}#vpqStarEditor{border:2px solid #c2a4d5;border-radius:17px;max-width:92vw}#vpqStarEditor::backdrop{background:#1e243799}#vpqStarModalCapture{font-size:12px;padding:7px 10px;background:#fff2cb}';
+ '.vpq-star-header{display:flex;align-items:start;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px;border:1px solid #e2cce6;background:#fcf6ff;border-radius:13px;margin-bottom:12px}.vpq-star-header label{font-size:13px}.vpq-star-header select{display:block;max-width:210px;padding:7px;border:1px solid #cdb6de;border-radius:9px}.vpq-star-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:10px 0}.vpq-star-actions button{padding:9px 12px;border-radius:10px}.vpq-star-list-item{padding:11px 14px;border:1px solid #e7dae9;background:#fffafc;border-radius:12px;margin:9px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.vpq-star-list-item small{display:block;color:#746079;margin-top:5px}.vpq-star-flip{width:100%;min-height:230px;border:2px solid #b7a1cf;border-radius:17px;background:#f9f2ff;color:#2a3755;display:flex;flex-direction:column;justify-content:center;gap:19px;align-items:center;padding:28px 20px;text-align:center;white-space:pre-wrap}.vpq-star-flip strong{font-size:clamp(19px,3vw,24px);line-height:1.45;max-width:650px}.vpq-star-flip small,.vpq-star-flip span,.vpq-star-progress{font-size:13px;color:#715683}.vpq-star-editor{padding:24px;min-width:min(85vw,440px);max-width:600px}.vpq-star-editor label{display:block;font-weight:700;margin:8px 0}.vpq-star-editor input,.vpq-star-editor textarea{width:100%;box-sizing:border-box;display:block;border:1px solid #d1b6db;border-radius:9px;padding:10px;font:inherit;margin-top:4px}#vpqStarEditor{border:2px solid #c2a4d5;border-radius:17px;max-width:92vw}#vpqStarEditor::backdrop{background:#1e243799}#vpqStarModalCapture{font-size:12px;padding:7px 10px;background:#fff2cb}#vpqStarDepartmentOpen{font-size:12px;padding:7px 10px;background:#f2e7ff}.vpq-star-inline{background:#fff2d1;border:1px solid #e3c893;border-radius:9px;margin:6px 0 12px;padding:8px 11px;font-size:13px}';
  document.head.appendChild(style);
  const side=document.querySelector('.vpq-shift-options');
  if(side){const button=document.createElement('button');button.className='full';button.type='button';button.dataset.vpqStarAction='open';button.innerHTML='⭐ Starred Flashcards · Practice (<span data-vpq-star-count>0</span>)';side.appendChild(button)}
  const head=document.querySelector('#modalWrap .modalhead');
- if(head){const btn=document.createElement('button');btn.id='vpqStarModalCapture';btn.type='button';btn.dataset.vpqStarAction='capture';btn.textContent='☆ Save for review';head.insertBefore(btn,head.querySelector('#closeModal'))}
+ if(head){const btn=document.createElement('button');btn.id='vpqStarModalCapture';btn.type='button';btn.dataset.vpqStarAction='capture';btn.textContent='☆ Save for review';head.insertBefore(btn,head.querySelector('#closeModal'));const nav=document.createElement('button');nav.id='vpqStarDepartmentOpen';nav.type='button';nav.dataset.vpqStarAction='open';nav.dataset.vpqStarSubject='Other';nav.textContent='⭐ Department Review';head.insertBefore(nav,btn)}
+ const root=el('modalBody');if(root){const observer=new MutationObserver(()=>addDepartmentButtons());observer.observe(root,{childList:true,subtree:true});const title=el('modalTitle');if(title)observer.observe(title,{childList:true,characterData:true,subtree:true});}
  el('modalBody')?.addEventListener('change',e=>{if(e.target.id==='vpqStarFilter'){filter=e.target.value;index=0;flipped=false;layout()}});
  updateCounts();
 }
