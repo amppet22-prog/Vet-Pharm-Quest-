@@ -79,11 +79,27 @@ function home(){
 }
 function xrayHome(){
  session=null;
+ const cards=[
+ ['xray-technique','🩻','Technique & positioning','Start with the basics','Beam direction, projections, kVp / mAs & safe positioning','#f7edff','#cbb4ed'],
+ ['quality','✨','Radiograph quality','Make every image count','Collimation, rotation, markers, artifacts & exposure','#eaf8f4','#a7ded0'],
+ ['library','📚','Published imaging cases','Your teaching library','Normal references, clinical cases & published radiographs','#fff3e5','#f4d2a3'],
+ ['viewer','🖼️','Multi-view viewer','Take a closer look','Zoom and compare up to three radiographs','#eaf3ff','#b7d2f5'],
+ ['spotter','🔎','Spot the Abnormality','Put your detective hat on','Locate findings and reason through differentials','#fff0f5','#efb9d1'],
+ ['reading','📝','Radiology Reading Desk','Think like a radiologist','Interpretation, quality challenges & reports','#f2f1ff','#c9c5f0']
+ ];
  page('X-ray / Radiography',
- '<p style="margin:3px 0 12px">Everything related to <b>radiographs</b> is organized here, from technique and image quality to patient interpretation and published cases.</p>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px">'+
- [['xray-technique','🩻 Technique & positioning','Beam direction, projection names, kVp/mAs and radiation safety'],['quality','✅ Radiograph quality','Collimation, rotation, markers, exposure and artifacts'],['library','📚 Published imaging cases','Owner-published radiographs, normal references and interpretation'],['viewer','🖼️ Multi-view viewer','Zoom and compare up to three radiographs'],['spotter','🎯 Spot the Abnormality','Mark findings and work through clinical reasoning'],['reading','📝 Radiology Reading Desk','Quality challenges, projection guides and structured reporting']].map(([key,label,description])=>
- '<button data-vpqimage="'+key+'" style="text-align:left;min-height:94px;padding:11px;background:#fff9fe;border:1px solid #dfcde9;border-radius:11px"><b style="display:block">'+label+'</b><small style="display:block;margin-top:6px;color:#586b85;font-weight:500;line-height:1.4">'+description+'</small></button>').join('')+'</div>','home');
+ '<div style="position:relative;overflow:hidden;background:linear-gradient(110deg,#f9edff 0%,#edf7ff 52%,#effbf5 100%);border:1px solid #ded5ee;border-radius:17px;padding:15px 17px;margin:1px 0 15px">'+
+ '<span aria-hidden="true" style="position:absolute;right:14px;top:3px;font-size:29px;opacity:.42">✧ 🩻 ✧</span>'+
+ '<div style="font-size:11px;font-weight:850;letter-spacing:.11em;color:#8a72ab;text-transform:uppercase;margin-bottom:5px">Radiography learning lab</div>'+
+ '<b style="display:block;font-size:17px;color:#574475;line-height:1.3">See it. Describe it. Diagnose it. 💜</b>'+
+ '<p style="margin:7px 0 0;color:#586a83;font-size:12px;max-width:590px;line-height:1.55">Choose where to practice — from taking a good radiograph to working through real teaching cases. All six tools live together here.</p></div>'+
+ '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px">'+cards.map(([key,icon,name,tag,detail,bg,edge])=>
+ '<button type="button" data-vpqimage="'+key+'" style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-height:144px;text-align:left;padding:13px 14px;background:linear-gradient(145deg,#fff 0%,'+bg+' 100%);border:1.5px solid '+edge+';border-left:4px solid '+edge+';border-radius:15px;box-shadow:0 3px 10px #67779a12;transition:transform .15s ease,box-shadow .15s ease">'+
+ '<span aria-hidden="true" style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:11px;background:#ffffffa8;font-size:20px">'+icon+'</span>'+
+ '<b style="font-size:13px;line-height:1.3;color:#3f4e71">'+name+'</b>'+
+ '<span style="font-size:11px;font-weight:750;color:#795d91">'+tag+'</span>'+
+ '<small style="font-size:11px;font-weight:500;line-height:1.45;color:#5d6c81">'+detail+'</small></button>').join('')+'</div>'+
+ '<p style="margin:11px 4px 0;font-size:11px;color:#73809a;text-align:center">✦ Pick a station whenever you are ready. Your existing practice progress stays the same. ✦</p>','home');
 }
 function station(mode){
  session=null;
