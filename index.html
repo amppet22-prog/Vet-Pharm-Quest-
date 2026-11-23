@@ -2807,10 +2807,75 @@ const vpqDrugGroups36=[
  ['Autonomic nervous system','Muscarinic agonists','Bladder and eye',['bethanechol','pilocarpine-ophthalmic']],
  ['Autonomic nervous system','Adrenergic drugs','Ophthalmic alpha-1 agonists',['phenylephrine-ophthalmic']]
 ];
+// Exam 2 (Lectures 10-20) and later imported drug taxonomy. Primary therapeutic
+// destination beats route and broad receptor keywords. Exam 1 remains untouched.
+const vpqNewDrugGroups20261123=[
+ ['Endocrine & metabolic','Diabetes therapies','Insulin analogues and combinations','insulin-lispro insulin-aspart insulin-70-30 insulin-degludec'],
+ ['Endocrine & metabolic','Diabetes therapies','Oral hypoglycemics (teaching/limited veterinary use)','glyburide glipizide metformin'],
+ ['Endocrine & metabolic','Thyroid therapies','Radioiodine treatment','iodine-131'],
+ ['Endocrine & metabolic','Thyroid therapies','Thionamide antithyroid agents','propylthiouracil'],
+ ['Endocrine & metabolic','Calcium and hematopoiesis','Calcium replacement','calcium-borogluconate'],
+ ['Endocrine & metabolic','Calcium and hematopoiesis','Erythropoiesis stimulating therapies','molidustat darbepoetin'],
+ ['Specialty & toxicology','Antineoplastics','Cytotoxic agents','streptozotocin'],
+ ['Specialty & toxicology','Antidotes','Oxime reactivators','pralidoxime'],
+ ['Autonomic nervous system','Adrenergic / autonomic drugs','Alpha blockers','phenoxybenzamine'],
+ ['Autonomic nervous system','Adrenergic / autonomic drugs','Catecholamines and pressors','epinephrine ephedrine'],
+ ['Autonomic nervous system','Adrenergic / autonomic drugs','Production repartitioning beta agonists','ractopamine zilpaterol'],
+ ['Cardiovascular & renal','Cardiac rhythm control','Sodium-channel antiarrhythmics','lidocaine-arrhythmia mexiletine procainamide flecainide'],
+ ['Cardiovascular & renal','Cardiac rhythm control','Potassium-channel / mixed antiarrhythmics','amiodarone sotalol'],
+ ['Cardiovascular & renal','Cardiac rhythm control','Beta blockers','propranolol'],
+ ['Cardiovascular & renal','Heart failure and hemodynamics','Cardiac inotropes and inodilators','digoxin pimobendan dobutamine dopamine amrinone'],
+ ['Cardiovascular & renal','Blood pressure and vascular therapy','Calcium-channel blockers','amlodipine verapamil diltiazem'],
+ ['Cardiovascular & renal','Blood pressure and vascular therapy','RAAS inhibitors','telmisartan enalapril benazepril'],
+ ['Cardiovascular & renal','Blood pressure and vascular therapy','Direct vasodilators','hydralazine nitroprusside'],
+ ['Cardiovascular & renal','Pulmonary vascular therapy','PDE5 inhibitors','sildenafil'],
+ ['Cardiovascular & renal','Diuretics','Loop diuretics','furosemide torsemide'],
+ ['Cardiovascular & renal','Diuretics','Thiazide diuretics','hydrochlorothiazide'],
+ ['Cardiovascular & renal','Diuretics','Potassium-sparing diuretics','spironolactone triamterene amiloride'],
+ ['Cardiovascular & renal','Diuretics','Osmotic and carbonic anhydrase drugs','mannitol acetazolamide'],
+ ['GI & respiratory','Airway therapies','Beta-2 bronchodilators','terbutaline albuterol clenbuterol'],
+ ['GI & respiratory','Airway therapies','Methylxanthine bronchodilators','theophylline aminophylline'],
+ ['GI & respiratory','Airway therapies','Inhaled anticholinergic bronchodilators','ipratropium'],
+ ['GI & respiratory','Airway therapies','Inhaled anti-inflammatory steroids','ciclesonide'],
+ ['GI & respiratory','Airway therapies','Respiratory stimulants','doxapram'],
+ ['GI & respiratory','Airway therapies','Expectorants and antitussives','potassium-iodide dextromethorphan hydrocodone codeine'],
+ ['GI & respiratory','Gastric acid suppression','Proton pump inhibitors','omeprazole'],
+ ['GI & respiratory','Mucosal protection','Mucosal protectants and prostaglandin analogues','sucralfate misoprostol'],
+ ['GI & respiratory','GI motility','Prokinetics and cholinergic support','metoclopramide cisapride neostigmine'],
+ ['GI & respiratory','Antiemetics','NK1 and serotonin antagonists','maropitant ondansetron'],
+ ['GI & respiratory','Hepatic and nutritional support','Hepatic and micronutrient therapies','lactulose cobalamin ursodiol zinc-gluconate'],
+ ['GI & respiratory','Hepatic and nutritional support','Copper chelation','penicillamine'],
+ ['GI & respiratory','Hepatic and nutritional support','Glutathione replenishment / antidote','acetylcysteine'],
+ ['GI & respiratory','Intestinal inflammation','5-ASA prodrugs','sulfasalazine'],
+ ['GI & respiratory','Antimicrobials used in GI cases','GI antimicrobials (use per indication/stewardship)','rifaximin metronidazole tylosin'],
+ ['Neuropharmacology','Behavior and psychopharmacology','SSRIs','fluoxetine paroxetine sertraline'],
+ ['Neuropharmacology','Behavior and psychopharmacology','Tricyclic antidepressants','clomipramine amitriptyline doxepin imipramine'],
+ ['Neuropharmacology','Behavior and psychopharmacology','Other serotonergic / anxiolytic agents','buspirone mirtazapine trazodone cyproheptadine'],
+ ['Neuropharmacology','Behavior and psychopharmacology','MAO-B inhibitors','selegiline'],
+ ['Neuropharmacology','Antiseizure medications','Anticonvulsants','phenobarbital potassium-bromide levetiracetam zonisamide primidone felbamate carbamazepine'],
+ ['Neuropharmacology','Antiseizure and neuropathic pain','Gabapentinoids','gabapentin pregabalin'],
+ ['Neuropharmacology','Anesthesia and sedation','Benzodiazepines and reversal','diazepam midazolam alprazolam flumazenil'],
+ ['Neuropharmacology','Anesthesia and sedation','Injectable general anesthetics','alfaxalone pentobarbital propofol ketamine'],
+ ['Neuropharmacology','Anesthesia and sedation','Phenothiazine and butyrophenone tranquilizers','acepromazine azaperone'],
+ ['Neuropharmacology','Anesthesia and sedation','Neuromuscular blockers','succinylcholine'],
+ ['Neuropharmacology','Analgesic opioids','Opioid agonists and antagonists','butorphanol buprenorphine tramadol naloxone morphine fentanyl-patch naltrexone hydromorphone'],
+ ['Neuropharmacology','Sedatives and reversals','Alpha-2 adrenergic agents','clonidine'],
+ ['Autonomic nervous system','Antimuscarinics','Systemic antimuscarinics','glycopyrrolate'],
+ ['Antibiotics','Macrolides','50S ribosomal inhibitors','tulathromycin gamithromycin tildipirosin tilmicosin'],
+ ['Antibiotics','Phenicols','50S ribosomal inhibitors','florfenicol'],
+ ['Antibiotics','Cephalosporins','Beta-lactam cell-wall inhibitors','ceftiofur'],
+ ['Antibiotics','Fluoroquinolones','DNA gyrase/topoisomerase inhibitors','enrofloxacin danofloxacin pradofloxacin'],
+ ['Antibiotics','Penicillins','Aminopenicillin and beta-lactamase inhibitor','amoxicillin-clavulanate'],
+ ['Pain & inflammation','NSAIDs','COX inhibitors','flunixin-meglumine ketoprofen']
+];
+const vpqNewDrugCategoryIndex20261123=Object.create(null);
+for(const [branch,family,group,ids] of vpqNewDrugGroups20261123)
+ for(const id of ids.split(' '))vpqNewDrugCategoryIndex20261123[id]={branch,family,group};
 function vpqDrugCategory36(d){
  // Classify by canonical ID before keyword heuristics. Brand names and partial
  // substrings must not override the actual indication or mechanism.
  const id=String(d.id||'').toLowerCase();
+ if(vpqNewDrugCategoryIndex20261123[id])return vpqNewDrugCategoryIndex20261123[id];
  const exact={
   'fuzapladib':['GI & respiratory','Pancreatitis therapeutics','LFA-1 inhibitors (pancreatitis)'],
   'famotidine':['GI & respiratory','Gastric acid suppression','H2 receptor antagonists'],
