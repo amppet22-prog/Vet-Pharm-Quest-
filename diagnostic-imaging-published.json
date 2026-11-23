@@ -1,4 +1,178 @@
 {
   "version": 1,
-  "cases": {}
+  "cases": {
+    "verified-canine-thorax-lateral-vhs": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Source verified; annotated where marked",
+      "reviewStatus": "Source-derived educational interpretation; not independent specialist reading",
+      "id": "verified-canine-thorax-lateral-vhs",
+      "kind": "normal",
+      "title": "Canine Thorax · Lateral + Annotated VHS Example",
+      "species": "Dog",
+      "region": "Thorax / cardiac silhouette",
+      "lecture": "Diagnostic Imaging · Small Animal Thorax",
+      "source": "https://commons.wikimedia.org/wiki/File:Radiographie_thoracique_chien.jpg · Annotated version: https://commons.wikimedia.org/wiki/File:Vertebral_heart_score.jpg",
+      "credit": "Original radiograph: Ophélie TISSIER; annotated version by Uwe Gille · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Radiographie_thoracique_chien.jpg",
+          "view": "Lateral canine thorax · unannotated",
+          "caption": "Unannotated lateral thoracic image; side of recumbency and normality not established by source."
+        },
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Vertebral_heart_score.jpg",
+          "view": "Annotated VHS teaching version",
+          "caption": "Derivative of this canine thoracic radiograph with vertebral heart score markings."
+        }
+      ],
+      "history": "Source image shows a large dog in lateral recumbency; patient complaint and final diagnosis not provided.",
+      "quality": "Check thoracic field coverage, respiratory phase, sternum/spine overlap, exposure, and positioning.",
+      "findings": "Identify cardiac silhouette and vertebral bodies. The annotated derivative demonstrates a vertebral heart score measurement concept; it is not a validated clinical conclusion about this patient.",
+      "interpretation": "Anatomy and VHS technique reference. A vertebral heart score should be interpreted with breed, age, projection and clinical context.",
+      "differentials": "Not assigned; source does not establish a disease.",
+      "why": "The VHS method expresses long- and short-axis heart silhouette dimensions relative to thoracic vertebral length; interpretation depends on species/breed and acquisition.",
+      "next": "Practice identifying measurement axes on the original view, then check the annotated derivative. Correlate a measured score with patient context."
+    },
+    "verified-canine-thorax-vd": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Source verified; annotated where marked",
+      "reviewStatus": "Source-derived educational interpretation; not independent specialist reading",
+      "id": "verified-canine-thorax-vd",
+      "kind": "normal",
+      "title": "Canine Thorax · Ventrodorsal Reference",
+      "species": "Dog",
+      "region": "Thorax",
+      "lecture": "Diagnostic Imaging · Small Animal Thorax",
+      "source": "https://commons.wikimedia.org/wiki/File:Radiographie_thoracique_ventro-dorsale.jpg",
+      "credit": "Ophélie TISSIER · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Radiographie_thoracique_ventro-dorsale.jpg",
+          "view": "VD canine thorax",
+          "caption": "Ventro-dorsal projection from a large dog; do not assume the same animal as the lateral example."
+        }
+      ],
+      "history": "Large dog; clinical history not specified.",
+      "quality": "Assess centering, thoracic symmetry/rotation, lung coverage, laterality and exposure indicator if available.",
+      "findings": "Practice identifying right and left lung fields, cardiac silhouette, diaphragm, ribs and mediastinum.",
+      "interpretation": "Projection recognition reference; radiographic normality is not independently confirmed.",
+      "differentials": "No source-confirmed diagnosis; avoid inventing one.",
+      "why": "VD beam travel is ventral to dorsal. Rotation distorts the appearance of bilateral thoracic structures.",
+      "next": "Use alongside a true patient-matched lateral view whenever making clinical interpretations."
+    },
+    "verified-feline-thorax-lateral": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Source verified; annotated where marked",
+      "reviewStatus": "Source-derived educational interpretation; not independent specialist reading",
+      "id": "verified-feline-thorax-lateral",
+      "kind": "case",
+      "title": "Feline Thorax · Age-Related Bronchial Wall Mineralization",
+      "species": "Cat",
+      "region": "Thorax",
+      "lecture": "Diagnostic Imaging · Small Animal Thorax",
+      "source": "https://commons.wikimedia.org/wiki/File:Radiografia-lateral-gato.jpg",
+      "credit": "AurelioAHeckert · Public domain dedication (Commons file description)",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Radiografia-lateral-gato.jpg",
+          "view": "Lateral feline thorax",
+          "caption": "The source report describes normal-sized cardiac silhouette and mineralized bronchial walls; view side not established."
+        }
+      ],
+      "history": "Female domestic cat; report in source describes age-related bronchial wall calcification, without additional clinical history.",
+      "quality": "Confirm entire thorax included, correct projection/markers and adequate inspiration.",
+      "findings": "Source interpretation: heart silhouette within normal parameters; bronchial wall calcification described as a senile change; no radiographic findings suggestive of pulmonary metastasis in the views studied.",
+      "interpretation": "Source-reported bronchial wall calcification; no radiographic metastatic pattern reported. This is not equivalent to excluding all lung disease.",
+      "differentials": "Bronchial mineralization may be age-related; assess for concurrent inflammatory airway patterns with clinical correlation.",
+      "why": "Mineralized bronchial walls can create conspicuous ring/tram-line opacities; recognize chronic or age-related changes without automatically diagnosing active bronchitis.",
+      "next": "Correlate with respiratory history, prior imaging and orthogonal views."
+    },
+    "verified-feline-abdomen-right-lateral": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Source verified; annotated where marked",
+      "reviewStatus": "Source-derived educational interpretation; not independent specialist reading",
+      "id": "verified-feline-abdomen-right-lateral",
+      "kind": "case",
+      "title": "Feline Abdomen · Normal GI Appearance + T13–L1 Spondylosis",
+      "species": "Cat",
+      "region": "Abdomen / thoracolumbar junction",
+      "lecture": "Diagnostic Imaging · Small Animal Abdomen",
+      "source": "https://commons.wikimedia.org/wiki/File:Radio_abdominale_chat_-_LL_D_-_normale.jpg",
+      "credit": "Anja · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Radio_abdominale_chat_-_LL_D_-_normale.jpg",
+          "view": "Right lateral feline abdomen",
+          "caption": "Source describes GI tract as apparently normal and T13–L1 spondylosis."
+        }
+      ],
+      "history": "Source: 12-year-old overweight (BCS 6/9) castrated male cat imaged for suspected swallowed bone.",
+      "quality": "Check abdominal coverage and positioning; single-view examinations have limitations.",
+      "findings": "The source describes gastrointestinal appearance as unremarkable but notes spondylosis between T13 and L1.",
+      "interpretation": "No obvious GI finding described in this source image; T13–L1 spondylosis is a distinct radiographic finding.",
+      "differentials": "Clinical gastrointestinal obstruction may still warrant further evaluation; spondylosis may be incidental.",
+      "why": "Spondylosis involves degenerative osseous bridging/osteophytes, which may be unrelated to the presenting digestive complaint.",
+      "next": "Correlate with examination and additional imaging if clinical concern persists."
+    },
+    "verified-canine-gdv-lateral": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Source verified; annotated where marked",
+      "reviewStatus": "Source-derived educational interpretation; not independent specialist reading",
+      "id": "verified-canine-gdv-lateral",
+      "kind": "case",
+      "title": "Canine GDV · Lateral Abdominal Radiograph",
+      "species": "Dog",
+      "region": "Cranial abdomen / stomach",
+      "lecture": "Diagnostic Imaging · Abdomen / ER",
+      "source": "https://commons.wikimedia.org/wiki/File:Gdv2.jpg",
+      "credit": "Cokehabit · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gdv2.jpg",
+          "view": "Lateral canine abdomen",
+          "caption": "Source-identified side-view X-ray of gastric dilatation–volvulus (GDV)."
+        }
+      ],
+      "history": "The source identifies a canine GDV radiograph but supplies no complete clinical signalment.",
+      "quality": "Check that the distended stomach and relevant abdomen are included; side of lateral projection is not provided.",
+      "findings": "Assess gastric distension and abnormal intragastric gas compartmentalization suggestive of volvulus. Identify the gas/fluid pattern from the actual view.",
+      "interpretation": "Source-labeled example of canine gastric dilatation–volvulus.",
+      "differentials": "Simple gastric distension and alternative gastric outflow problems; interpret with clinical status.",
+      "why": "Gastric torsion can occlude venous outflow and compromise perfusion; time-critical shock and tissue injury can develop.",
+      "next": "Emergency stabilization and immediate veterinary surgical assessment; do not delay lifesaving care for additional views."
+    },
+    "verified-equine-laminitis-annotated": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Source verified; annotated where marked",
+      "reviewStatus": "Source-derived educational interpretation; not independent specialist reading",
+      "id": "verified-equine-laminitis-annotated",
+      "kind": "case",
+      "title": "Equine Laminitis · Annotated P3 Rotation",
+      "species": "Horse",
+      "region": "Distal digit / hoof",
+      "lecture": "Diagnostic Imaging · Equine Musculoskeletal",
+      "source": "https://commons.wikimedia.org/wiki/File:Laminitis_radiograph_with_annotation.jpg",
+      "credit": "Malcolm Morley (radiograph), Froggerlaura (annotations) · public domain (Commons file description)",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Laminitis_radiograph_with_annotation.jpg",
+          "view": "Annotated equine lateral foot",
+          "caption": "P2 and P3 labeled; yellow/white distance lines demonstrate change in dorsal hoof-wall-to-P3 relationship."
+        }
+      ],
+      "history": "Source describes a laminitic horse foot, without full individual history.",
+      "quality": "Original annotation is part of the image. Later unannotated views may be added to the same case.",
+      "findings": "The source identifies an increased distance between the distal portion of P3 and the dorsal hoof wall, indicating displacement/rotation in the laminitic example.",
+      "interpretation": "Annotated source-identified laminitis with distal phalanx rotation relative to the hoof wall.",
+      "differentials": "Other causes of hoof pain or altered phalangeal alignment require clinical and radiographic correlation.",
+      "why": "Damage to the lamellar suspension of P3 can allow its position within the hoof capsule to change.",
+      "next": "Interpret with lameness findings and standardized farriery/radiographic measurements; assess urgent support and treatment."
+    }
+  }
 }
