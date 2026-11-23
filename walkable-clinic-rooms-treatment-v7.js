@@ -124,15 +124,21 @@ function imaging(){
  '<rect x="150" y="370" width="102" height="19" rx="6" fill="#d5e5ed" stroke="#a6bacb" stroke-width="2"/>'+
  '<path d="M171 378h59" stroke="#8fa7bd" stroke-width="3" stroke-linecap="round"/>'+
  '<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
- // Side walls of the padded foam V-trough.
- '<path d="M146 334L165 318L195 335L210 339L231 319L251 336L236 348L164 348Z" fill="#a7c5c9" stroke="#719ba8" stroke-width="2.6"/>'+
- '<path d="M166 332L195 340L210 343L231 331L240 337L212 351L188 351L156 337Z" fill="#e4f1e9" stroke="#a1c7b7" stroke-width="1.5"/>'+
- '<path d="M160 335L194 346L212 346L241 334" stroke="#799da7" stroke-width="2" fill="none"/>'+
- // Higher-contrast foam trough top: visible above the tabletop from room view.
- '<path d="M164 318L190 335L205 340L231 319" stroke="#5c9294" stroke-width="3.5" fill="none" stroke-linejoin="round"/>'+
- '<path d="M165 320L191 338L206 343L231 321" stroke="#d7f3e5" stroke-width="7" fill="none" opacity=".8" stroke-linejoin="round"/>'+
- '<rect x="169" y="356" width="67" height="14" rx="5" fill="#f0fbf6" stroke="#6b9c9e" stroke-width="1.7"/>'+
- '<text x="202" y="366" text-anchor="middle" font-family="Arial" font-size="9" font-weight="900" fill="#39787b">V-TROUGH</text>'+
+ // Low-profile radiolucent foam positioning V-trough: two padded rails
+ // cradle a recessed central channel. Muted teal/gray keeps it legible at room scale.
+ '<ellipse cx="199" cy="348" rx="58" ry="10" fill="#526c85" opacity=".15"/>'+
+ // Outer foam base sits on the X-ray table.
+ '<path d="M146 337L166 315Q169 312 174 316L201 331L227 316Q232 312 236 317L255 338L239 348L163 348Z" fill="#819eac" stroke="#5e8296" stroke-width="2.2" stroke-linejoin="round"/>'+
+ // Concave center, darker at the deepest fold.
+ '<path d="M174 325L201 340L228 325L241 338L213 349Q201 353 188 349L157 337Z" fill="#adc7c8" stroke="#7096a3" stroke-width="1.4"/>'+
+ '<path d="M177 329L201 343L226 329L234 336L209 347Q200 349 192 346L169 336Z" fill="#6c929e" opacity=".66"/>'+
+ // Rounded left/right vinyl-covered foam wedges with soft, clean highlights.
+ '<path d="M146 337L165 316Q170 312 174 316L200 334L193 344Q188 345 183 342L153 337Z" fill="#d9e8df" stroke="#779eab" stroke-width="2" stroke-linejoin="round"/>'+
+ '<path d="M202 334L227 316Q232 312 236 317L255 338L246 340L220 346Q214 345 209 342Z" fill="#d9e8df" stroke="#779eab" stroke-width="2" stroke-linejoin="round"/>'+
+ '<path d="M154 333L169 320L191 335M211 335L231 320L246 334" stroke="#f7fff8" stroke-width="3" stroke-linecap="round" fill="none" opacity=".9"/>'+
+ // Front lip joins both wedges instead of a floating text label.
+ '<path d="M154 338L185 346Q200 352 215 347L247 339L241 346Q201 358 163 346Z" fill="#97b8b9" stroke="#6d94a0" stroke-width="1.8" stroke-linejoin="round"/>'+
+ '<path d="M168 346Q200 356 234 346" fill="none" stroke="#e9f4ed" stroke-width="2" opacity=".8"/>'+
  // Upright tube arm and collimator.
  '<path d="M146 251v83M146 252h73v25" stroke="#829dbd" stroke-width="14" fill="none"/>'+
  round(199,277,50,31,'#e2effc','#8caacc')+
