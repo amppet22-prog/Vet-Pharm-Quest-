@@ -198,6 +198,12 @@
       "answer": "It blocks muscarinic signaling, relaxing GI smooth muscle.",
       "why": "Short-term reduction in spasm does not rule out impaction, ischemia, or surgical disease.",
       "slide": "Lecture 17 · GI/hepatic deep lesson audit, 2026-11-20"
+    },
+    "pharm-e2-94": {
+      "prompt": "Why is misoprostol used in selected GI injury?",
+      "answer": "As a prostaglandin E1 analogue supporting mucosal defenses. The PGE 1 receptor agonist decreases acid and increases bicarbonate and stomach mucus.",
+      "why": "Pregnancy and reproductive risks require caution. It is an abortifacient. Must wear gloves! Can also get rid of IUDs (depending on the brand!)",
+      "slide": "Exam 2 lecture 17 · source-derived mechanism review"
     }
   },
   "custom": [
