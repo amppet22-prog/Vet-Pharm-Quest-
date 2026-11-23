@@ -3004,9 +3004,20 @@ function vpqDrugCategory36(d){
  return {branch,family:'Lecture-specific drug classes',group:title||'Class pending source verification'};
 }
 let vpqBranch36='All',vpqFamily36='All',vpqLecture36='All lectures',vpqDrugSearch36='';
+// Shared drugs listed in Exam 1 and re-taught in Exam 2 retain one ID/card.
+// The extra audited Exam 2 content is displayed without replacing legacy notes.
+const vpqSharedExam2Ids20261123=new Set(['famotidine','metronidazole','tulathromycin','ceftiofur','enrofloxacin']);
+function vpqSharedExam2Source20261123(id){
+ if(!vpqSharedExam2Ids20261123.has(String(id||'')))return null;
+ return (window.VPQ_PHARM_NEXT?.drugs||[]).find(x=>x.id===id)||null;
+}
+function vpqSharedExam2Lecture20261123(d){
+ const newer=vpqSharedExam2Source20261123(d.id);
+ return newer?{...d,lecture:[...new Set([...(String(d.lecture||'').split(/\\s*[,;]\\s*/)),newer.lecture].filter(Boolean))].join(', ')}:d;
+}
 function vpqPharmRender36(){
  const holder=$('vpqPharmLayout36');if(!holder)return;
- const all=dataDrugs(),cats=all.map(d=>({...d,...vpqDrugCategory36(d)}));
+ const all=dataDrugs().map(vpqSharedExam2Lecture20261123),cats=all.map(d=>({...d,...vpqDrugCategory36(d)}));
  // Derive lecture choices from the actual editable shelf records, including imported courses.
  const lectureLabels=[...new Set(all.flatMap(d=>String(d.lecture||'').split(/\s*[;,]\s*/).map(x=>x.trim()).filter(x=>/^Lecture(?:s)?\s+\d/.test(x))))].sort((a,b)=>{const na=Number((a.match(/\d+/)||[])[0]||999),nb=Number((b.match(/\d+/)||[])[0]||999);return na-nb||a.localeCompare(b)});
  const lectures=['All lectures',...lectureLabels];
@@ -3031,7 +3042,14 @@ const vpqOriginalDrugCard36=drugCardHTML;
 drugCardHTML=function(d){
  if(!d)return '<p>No selected drug.</p>';
  const cat=vpqDrugCategory36(d);
- return '<p class="tiny">📁 '+escapeHtml(cat.branch)+' → '+escapeHtml(cat.family)+' → '+escapeHtml(cat.group)+'</p>'+vpqOriginalDrugCard36(d)+
+ const exam2=vpqSharedExam2Source20261123(d.id);
+ const crossExam=exam2?'<details class="vpq-pharm-note" open><summary><b>📚 Exam 2 · '+escapeHtml(exam2.lecture)+' · Updated clinical review</b></summary>'+
+ '<p><b>Mechanism:</b> '+escapeHtml(exam2.moa||'')+'</p>'+
+ '<p><b>Indications:</b> '+escapeHtml(exam2.uses||'')+'</p>'+
+ '<p><b>Adverse effects:</b> '+escapeHtml(exam2.effects||'')+'</p>'+
+ '<p><b>Contraindications / legal cautions:</b> '+escapeHtml(exam2.contraindications||'')+'</p>'+
+ '<p><b>Physiology:</b> '+escapeHtml(exam2.why||'')+'</p></details>':'';
+ return '<p class="tiny">📁 '+escapeHtml(cat.branch)+' → '+escapeHtml(cat.family)+' → '+escapeHtml(cat.group)+'</p>'+vpqOriginalDrugCard36(d)+crossExam+
  '<div class="vpq-pharm-note"><b>Provenance:</b> '+escapeHtml(d.source||'Pharm 1 course review · lecture-linked, not independently verified')+
  (d.reviewStatus?' · '+escapeHtml(d.reviewStatus):'')+'. <b>Correction or verification needed?</b> Edit the card and record a source. Product labels, species restrictions, dose and withdrawal times require up-to-date confirmation.</div>';
 };
