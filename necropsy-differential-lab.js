@@ -414,7 +414,7 @@ function conditionIndex(){
  '<div style="background:#f3f7fc;border:1px solid #cbdbea;border-radius:9px;padding:10px;margin:8px 0"><b>'+safe((window.VPQ_PATH_LECTURE_LEARN||{})[conditionLecture]?.title||'Lecture '+conditionLecture+' · source inventory incomplete')+'</b><p style="font-size:12px;margin:5px 0">Recorded topics: '+row.teaching+' · Matched specimens: '+row.specimens+' · Topics with case matches: '+row.cases+' · Attached case image references: '+row.embedded+'</p><small>Some early exam content lives in separate learning tools and is not yet indexed here. Counts do not certify completeness.</small></div>'+
  '<div style="padding:10px;border:1px solid #cbdbea;border-radius:10px;margin:8px 0"><b>3 · Study or practice</b><div class="buttonrow" style="margin:8px 0"><button data-pathdiff-flash-lecture="1">🧠 Flashcards</button><button data-pathdiff-lecture-specimens="1">🔬 Specimen atlas</button><button data-pathdiff-lecture-cases="1">🩺 Patient cases</button><button data-pathdiff-lecture-ddx="1">🧩 Differential practice</button></div><small>Case modes use the same case bank, so uploaded questions remain connected to the lecture rather than duplicated.</small></div>'+
  (row.teaching===0?'<p style="padding:10px;background:#fff7e6;border:1px solid #e4d2a3;border-radius:9px"><b>Lecture inventory gap:</b> This lecture has no entries in the unified lecture inventory. Existing learning material elsewhere in the game may still be available. This is not marked complete.</p>':'')+
- '<div class="buttonrow"><button data-pathdiff-flash-lecture="1" style="background:#e8f2ff">🧠 Study this lecture · flashcards</button></div>'+
+ '<div class="buttonrow"><button data-pathdiff-flash-lecture="1" style="background:#e8f2ff">🧠 Flashcards · Choose difficulty</button></div>'+
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-topic-mode="disease" aria-pressed="'+(conditionTopicMode==='disease')+'" style="background:#f5edff">🩺 Diseases only</button><button data-pathdiff-topic-mode="all" aria-pressed="'+(conditionTopicMode==='all')+'">All topics / foundations</button></div>'+ 
  '<div class="buttonrow" style="margin:8px 0"><button data-pathdiff-gap="all" aria-pressed="'+(conditionGap==='all')+'">All '+sections.length+'</button><button data-pathdiff-gap="case" aria-pressed="'+(conditionGap==='case')+'">Needs differential case</button><button data-pathdiff-gap="photo" aria-pressed="'+(conditionGap==='photo')+'">Needs attached photo</button></div>'+
  '<p class="tiny">'+displayed.length+' topics displayed. Select any topic to see full instructor-derived notes and the source slide reference.</p>'+
@@ -428,7 +428,7 @@ function conditionIndex(){
  * A progress mark is a study preference, never a claim of diagnostic mastery.
  */
 const FLASH_KEY='vpq-necropsy-flashcards-v1';
-let flashCards=[],flashIndex=0,flashFace=false,flashScope='topic',flashReview=false,flashComplete=false,flashRoundSize=15;
+let flashCards=[],flashIndex=0,flashFace=false,flashScope='topic',flashReview=false,flashComplete=false,flashRoundSize=15,flashDifficulty='all';
 function flashProgress(){try{return JSON.parse(localStorage.getItem(FLASH_KEY)||'{}')}catch(_){return {}}}
 function saveFlashProgress(id,needsPractice){
  const data=flashProgress();if(needsPractice)data[id]=true;else delete data[id];
@@ -481,7 +481,9 @@ function startFlash(scope='topic',review=false){
  const all=flashDeck(scope),progress=flashProgress();
  // Lecture-wide sessions prioritize authored cards; generic note prompts remain available when opening individual topics.
  const clean=scope==='lecture'&&all.some(c=>c.curated)?all.filter(c=>c.curated):all;
- flashCards=(review?clean.filter(c=>progress[c.id]):clean);
+ const tier=c=>{const q=String(c.prompt||'');return /(?:^|\n|\s)A\.\s+/.test(q)&&/(?:^|\n|\s)D\.\s+/.test(q)?'intermediate':(/differential|interpret|pathogenesis|mechanism|explain why|most likely|based on|which diagnosis|describe the sequence|compare/i.test(q)||q.length>200)?'advanced':'beginner'};
+ const eligible=flashDifficulty==='all'?clean:clean.filter(c=>tier(c)===flashDifficulty);
+ flashCards=(review?eligible.filter(c=>progress[c.id]):eligible);
  // Limit a lecture session to a manageable size. Cards missed in earlier rounds
  // are presented first, then shuffle the remaining eligible questions.
  const shuffled=flashCards.map(c=>({c,k:Math.random()})).sort((a,b)=>
@@ -547,6 +549,7 @@ function flashPromptMarkup(prompt,answer,reveal=false){
 function flashView(){
  const progress=flashProgress(),c=flashCards[flashIndex],pending=flashCards.filter(x=>progress[x.id]).length;
  const flashControls='<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:end;padding:10px;margin:8px 0;background:#f8f3ff;border:1px solid #ded1ee;border-radius:12px">'+
+ '<label style="font-size:12px;font-weight:800;flex:1;min-width:145px">Practice level<select data-pathdiff-flash-pick-difficulty="1" style="display:block;width:100%;padding:8px;border-radius:8px">'+[['all','Mixed / all levels'],['beginner','Beginner · direct recall'],['intermediate','Intermediate · multiple choice'],['advanced','Advanced · reasoning']].map(([v,label])=>'<option value="'+v+'"'+(flashDifficulty===v?' selected':'')+'>'+label+'</option>').join('')+'</select></label>'+
  '<label style="font-size:12px;font-weight:800;flex:1;min-width:145px">Lecture<select data-pathdiff-flash-pick-lecture="1" style="display:block;width:100%;padding:8px;border-radius:8px"><option value="'+safe(conditionLecture)+'">L'+safe(conditionLecture)+' · Current</option>'+EXAM_GROUPS.flatMap(g=>Array.from({length:g.end-g.start+1},(_,i)=>String(g.start+i))).filter(n=>n!==String(conditionLecture)).map(n=>'<option value="'+safe(n)+'">Lecture '+safe(n)+'</option>').join('')+'</select></label>'+
  '<label style="font-size:12px;font-weight:800;flex:1;min-width:135px">Cards per round<select data-pathdiff-flash-pick-size="1" style="display:block;width:100%;padding:8px;border-radius:8px">'+[[15,"15 cards"],[30,"30 cards"],[0,"All available"]].map(([n,name])=>'<option value="'+n+'"'+(flashRoundSize===n?' selected':'')+'>'+name+'</option>').join('')+'</select></label></div>';
  if(c)window.VPQ_STARRED?.setCurrent?.({id:'pathology-necro-'+c.id,front:c.prompt,back:c.answer+(c.why?'\nWhy: '+c.why:''),subject:'Pathology',origin:'Lecture '+conditionLecture});
@@ -852,6 +855,7 @@ function init(api){
  const d=ev.target?.dataset;
  if(d?.pathdiffFlashPickLecture!==undefined){conditionLecture=String(ev.target.value);conditionChosen=-1;return startFlash('lecture',false)}
  if(d?.pathdiffFlashPickSize!==undefined){flashRoundSize=Number(ev.target.value);return startFlash(flashScope,flashReview)}
+ if(d?.pathdiffFlashPickDifficulty!==undefined){flashDifficulty=String(ev.target.value);return startFlash(flashScope,flashReview)}
  if(d?.pathdiffMenuExam!==undefined){const group=EXAM_GROUPS.find(g=>g.id===ev.target.value);if(group){selectedExam=group.id;conditionLecture=String(group.start);filter=conditionLecture;caseExam=group.id;roundsOnly=false;practiceMode='all';shuffledIds=[];menu();}return;}
  if(d?.pathdiffMenuLecture!==undefined){conditionLecture=String(ev.target.value);selectedExam=groupForLecture(conditionLecture)?.id||'7';filter=conditionLecture;caseExam=selectedExam;roundsOnly=false;practiceMode='all';shuffledIds=[];return menu();}
 
