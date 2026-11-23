@@ -288,7 +288,8 @@ async function editor(type,id){
  pending={type,id,title:base.title};
  const cur=type==='case'?getCase(id):type==='specimen'?getSpecimen(id):published.lectures?.[id]||{};
  const existing=photosOf(cur);
- const comparisonLabels=type==='specimen'&&Array.isArray(base.comparisonRows)?base.comparisonRows.map(row=>String(row[0]||'').trim()).filter(Boolean):[];
+ const comparisonRowsCurrent=Array.isArray(cur?.text?.comparisonRows)?cur.text.comparisonRows:(Array.isArray(base.comparisonRows)?base.comparisonRows:[]);
+ const comparisonLabels=type==='specimen'?comparisonRowsCurrent.map(row=>String(row[0]||'').trim()).filter(Boolean):[];
  const matchSelect=(attr,chosen='')=>comparisonLabels.length?'<label style="display:block;margin:6px 0;font-weight:800;color:#604985">📌 Comparison sheet position<select '+attr+' style="display:block;width:100%;padding:8px;margin-top:4px"><option value="">Unassigned / general gallery only</option>'+comparisonLabels.map((label,i)=>'<option value="'+esc(label)+'"'+(chosen===label?' selected':'')+'>Photo '+(i+1)+' — '+esc(label)+'</option>').join('')+'</select></label>':'';
  const draft=type==='case'?window.VPQ_NECROPSY_DIFFERENTIAL_LAB?.draftPhoto?.(id):type==='lecture'?await window.VPQ_PATH_INLINE_PHOTOS?.draftPhoto?.(lp[1],lp[2],lp[3]):window.VPQ_PATH_EXAM7?.draftPhoto?.(id);
  pending.localPhoto=String(draft||'').startsWith('data:image/jpeg;base64,')?draft:'';
@@ -305,6 +306,11 @@ async function editor(type,id){
  '<section style="padding:12px;background:#f6fcf9;border:1px solid #d4eadd;border-radius:14px;margin:12px 0"><h4 style="margin:0 0 7px">⚖️ 4 · Differentials & additional notes</h4>'+['compare','notes'].map(specimenFieldHTML).join('')+'</section>'+
  '<section style="padding:12px;background:#fffaf3;border:1px solid #e9dcc4;border-radius:14px;margin:12px 0"><h4 style="margin:0 0 7px">🐾 5 · Species-specific gross findings</h4><p class="tiny">These optional sections are separate from the general gross description. Edit each named species section here.</p>'+(window.VPQ_PATH_EXAM7?.speciesGrossEditorHTML?.(edits)||'')+'</section>';
 
+ const currentComparison=type==='specimen'&&(edits.atlasComparison===true||edits.dermComparison===true||Array.isArray(edits.comparisonRows));
+ const comparisonRowsEditor=()=>'<section style="padding:12px;background:#faf5ff;border:1px solid #dcc9ec;border-radius:12px;margin:10px 0"><b>⚖️ Comparison entries</b><p class="tiny">Each named row is a side-by-side condition. The matching photo slot uses this name.</p>'+
+ (comparisonRowsCurrent.length?comparisonRowsCurrent:[[ '', '', '', '', '', '' ],[ '', '', '', '', '', '' ]]).map((row,i)=>'<div style="background:white;border:1px solid #e2d8eb;border-radius:9px;padding:10px;margin:8px 0"><b>Row '+(i+1)+' · '+esc(row[0]||'New condition')+'</b>'+[['Condition name',0],['Gross look',1],['Tissue / location',2],['Species / site',3],['Visual clue',4],['Don’t confuse with',5]].map(([label,j])=>'<label style="display:block;font-size:12px;margin:6px 0">'+label+'<textarea data-np-compare-row="'+i+'" data-np-compare-col="'+j+'" rows="'+(j===0?1:2)+'" style="display:block;width:100%;padding:7px;border:1px solid #d9cfdf;border-radius:6px">'+esc(row[j]||'')+'</textarea></label>').join('')+'</div>').join('')+'</section>'+
+ '<div style="padding:10px;background:#f7faff;border:1px solid #d9e4f1;border-radius:10px"><b>Extra context</b>'+['gross','why','compare','notes'].map(specimenFieldHTML).join('')+'</div>';
+ const formChoice=()=>type!=='specimen'?'':'<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0"><button type="button" data-np-edit-form="disease" style="flex:1;min-width:135px;background:'+(!currentComparison?'#e5f2e9':'#fff')+';border:1px solid #c7d7e4;border-radius:9px;padding:9px;font-weight:800">🩺 Disease Card</button><button type="button" data-np-edit-form="comparison" style="flex:1;min-width:135px;background:'+(currentComparison?'#eee2fa':'#fff')+';border:1px solid #c7d7e4;border-radius:9px;padding:9px;font-weight:800">⚖️ Comparison Card</button></div>';
  const comparisonPhotoEditor=()=>!comparisonLabels.length?'':'<section id="npComparisonPhotoManager" style="padding:13px;margin:14px 0;border:2px solid #bfa7dc;border-radius:14px;background:linear-gradient(135deg,#fbf6ff,#fff9fc)">'+
  '<h4 style="margin:0 0 5px;color:#58416c">📷 Comparison Photos · Match each named condition</h4>'+
  '<p style="font-size:12px;line-height:1.55;margin:5px 0 12px">Each box below corresponds to <b>one specific position</b> in the side-by-side comparison sheet. Choose a picture directly in its box. You can also assign existing published pictures in the photo library further down. Uploading here does not delete other photos.</p>'+
@@ -324,12 +330,13 @@ async function editor(type,id){
  const saved=!!window.VPQ_OWNER_KEY_VAULT?.exists?.();
  draftState={};
  show(type==='case'?'✏️ Case editor · Lecture '+esc(base.lecture||''):'✏️ Edit & publish · '+esc(base.title),
- '<p style="padding:11px;background:#f5f0fc;border:1px solid #d7c9e8;border-radius:10px;font-size:12px"><b>Editing: '+esc(type==='case'?'Patient differential case':type==='lecture'?'Lecture image slot':isReproInfo?'Reproductive disease information card':'Pathology atlas specimen')+' · '+esc(base.title)+'</b><br>Lecture '+esc(base.lecture||lp?.[1]||'—')+' · '+esc(id)+'<br><b>How this works:</b> Edit the existing text in the named sections below, assign images to the right photo slot when relevant, then publish with your password. Existing images remain untouched unless you explicitly remove or replace them.</p>'+
+ '<div style="padding:7px 10px;background:#f7f5fa;border:1px solid #e0d7eb;border-radius:9px;font-size:12px;color:#655775">L'+esc(base.lecture||lp?.[1]||'—')+' · '+esc(base.title)+'</div>'+
+ formChoice()+(type==='specimen'?'<input type="hidden" data-np-selected-form value="'+(currentComparison?'comparison':'disease')+'">':'')+
  (type!=='lecture'?'<h4 style="margin:12px 0 5px">✏️ 1 · Display title / name</h4><label style="display:block;margin:9px 0"><b>Title visible in the atlas</b><input data-np-text="title" maxlength="180" style="width:100%;display:block;margin-top:4px" value="'+esc(edits.title||base.title)+'" placeholder="Condition or specimen name"></label><p class="tiny">Renaming keeps the existing card ID, photos, captions, species tags and case links. Publish your name change using the same password.</p>':'')+
- (type==='case'?caseEditorFields(edits):type==='specimen'?specimenSections():'')+
+ (type==='case'?caseEditorFields(edits):type==='specimen'?(currentComparison?comparisonRowsEditor():specimenSections()):'')+
  (type==='case'?'<h4>3 · Differential diagnoses & reasoning</h4><p class="tiny">Edit each answer and its supporting evidence. Mark exactly one as the best-supported diagnosis. Changes will publish with the case.</p>'+((edits.options||[]).map((o,i)=>'<div style="border:1px solid #cad9e7;border-radius:9px;padding:9px;margin:8px 0"><label style="font-weight:800"><input type="radio" name="np-best-option" value="'+i+'" '+(o.role==='best'||o.name===edits.best?'checked':'')+'> Best diagnosis '+(i+1)+'</label><label style="display:block;margin:5px 0">Diagnosis<input data-np-option-name="'+i+'" value="'+esc(o.name||'')+'" style="display:block;width:100%;padding:7px"></label>'+[['supports','Why it fits'],['against','Why less likely'],['hist','Histology distinction']].map(([k,label])=>'<label style="display:block;margin:5px 0">'+label+'<textarea data-np-option-'+k+'="'+i+'" rows="2" style="display:block;width:100%">'+esc(o[k]||'')+'</textarea></label>').join('')+'</div>').join('')):'')+
  (type==='specimen'?'<h4>✅ Structured classifications — select from the options</h4>'+(window.VPQ_PATH_ETIOLOGY?.editorHTML?.(edits)||'')+(window.VPQ_PATH_ATLAS_META?.editorHTML?.(edits)||''):'')+
- comparisonPhotoEditor()+
+ (currentComparison?comparisonPhotoEditor():'')+
  
  '<h4 style="padding:10px 12px;border-radius:10px;background:#f2ecfa;color:#5d487a">📷 '+(type==='specimen'?'6':'4')+' · Photo library · '+existing.length+' published</h4>'+
  (existing.length?'<p class="tiny"><b>Edit any existing photo below.</b> Change its caption, credit, source, or type without adding a new image. All other photos and your teaching text stay in place unless you explicitly remove or replace them.</p>':'')+
@@ -442,6 +449,15 @@ function readFields(){
  const kind=el('npOwnerKind')?.value||'gross',replaceAll=!!el('npOwnerReplaceAll')?.checked;
  const remove=Array.from(root.querySelectorAll('[data-np-remove]:checked')).map(x=>Number(x.dataset.npRemove));
  const edits={};root.querySelectorAll('[data-np-text]').forEach(x=>{edits[x.dataset.npText]=String(x.value||'').slice(0,9000)});
+ if(pending?.type==='specimen'){
+  const form=root.querySelector('[data-np-selected-form]')?.value;
+  if(form==='comparison'){
+   const rows=[...new Set(Array.from(root.querySelectorAll('[data-np-compare-row]')).map(x=>Number(x.dataset.npCompareRow)))].map(i=>Array.from({length:6},(_,j)=>String(root.querySelector('[data-np-compare-row="'+i+'"][data-np-compare-col="'+j+'"]')?.value||'').trim())).filter(row=>row[0]);
+   if(rows.length<2)throw Error('A comparison card needs at least two named conditions.');
+   edits.comparisonRows=rows;edits.atlasComparison=true;edits.dermComparison=false;
+  }else if(form==='disease'){edits.atlasComparison=false;edits.dermComparison=false;}
+ }
+
  if(pending?.type==='case'){
   const optFields=Array.from(root.querySelectorAll('[data-np-option-name]'));
   if(optFields.length){
