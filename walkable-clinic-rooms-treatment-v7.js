@@ -68,36 +68,52 @@ function base(type){
 }
 function imaging(){
  let s=base('imaging');
- // Original grayscale radiograph-style vignettes. These are decorative SVGs,
- // not clinical studies; the real image viewer will use separately verified scans.
- s+='<g filter="url(#img25-shadow)">'+round(88,169,184,112,'#d8ecfb','#96b7d0')+
- round(101,181,76,88,'#141e2b','#7c9cb9')+round(184,181,74,88,'#141e2b','#7c9cb9')+
- // Left screen: more cohesive lateral canine thorax with thoracic cage, spine, heart and diaphragm.
- '<g opacity=".86" fill="none" stroke-linecap="round">'+
- '<path d="M107 200Q135 188 170 200M108 207Q136 197 170 209M108 216Q136 207 170 219M109 225Q138 217 169 229M111 235Q138 228 168 240" stroke="#c4d4e2" stroke-width="1.9"/>'+
- '<path d="M112 202q7 22 6 38M121 200q9 25 6 43M132 198q10 28 7 48M143 198q10 25 10 46M154 199q9 19 10 38" stroke="#bbcbd9" stroke-width="1.3"/>'+
- '<path d="M109 194Q138 186 170 194M111 248Q140 254 166 244" stroke="#dce7ef" stroke-width="2.5"/>'+
- '<path d="M119 209Q113 229 125 245M159 207Q170 223 164 241" stroke="#829daf" stroke-width="2"/></g>'+
- '<path d="M137 215C127 210 123 224 125 232C127 242 140 245 148 236C155 226 145 215 137 215Z" fill="#9aaab8" opacity=".64"/>'+
- '<path d="M113 243Q137 236 166 245" stroke="#dce6f0" stroke-width="2" fill="none"/>'+
- '<g fill="#cedae5" opacity=".55">'+[191,197,203,209].map(y=>'<rect x="132" y="'+y+'" width="11" height="3" rx="1.5"/>').join('')+'</g>'+
- // Right screen: long bone / joint radiographic study with two cortical outlines.
- '<g fill="none" stroke-linecap="round">'+
- '<path d="M205 188Q201 203 207 216L211 232Q208 241 206 245Q209 252 216 250L218 235L216 217Q220 201 217 189" stroke="#d8e3ee" stroke-width="3.2"/>'+
- '<path d="M225 188Q229 202 224 218L221 232Q224 242 229 247Q234 251 240 246L236 232L234 218Q238 202 234 189" stroke="#c3d2df" stroke-width="3"/>'+
- '<path d="M205 241Q217 236 228 239M207 251Q224 258 239 247M202 219Q224 214 241 220" stroke="#b2c4d4" stroke-width="2"/>'+
- '<path d="M213 196L214 224M230 196L227 222" stroke="#8c9faf" stroke-width="1.5"/></g>'+
- '<path d="M208 244q7 3 13 1q8 5 15-1" fill="none" stroke="#ecf2f7" stroke-width="3"/>'+
- '<text x="106" y="263" fill="#aebfcd" font-size="7" font-family="Arial" font-weight="700">THORAX · LAT</text>'+
- '<text x="192" y="263" fill="#aebfcd" font-size="7" font-family="Arial" font-weight="700">BONE · LAT</text>'+
- '</g>';
- // Subtle grayscale grain makes the schematic panels resemble backlit films,
- // while keeping the content explicitly illustrative (not a diagnostic radiograph).
- s+='<defs><clipPath id="vpqImgFilmLeft"><rect x="103" y="183" width="72" height="84" rx="7"/></clipPath>'+
- '<clipPath id="vpqImgFilmRight"><rect x="186" y="183" width="70" height="84" rx="7"/></clipPath>'+
- '<filter id="vpqImgGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".34" numOctaves="2" seed="17" stitchTiles="stitch"/></filter></defs>'+
- '<g clip-path="url(#vpqImgFilmLeft)" opacity=".10"><rect x="103" y="183" width="72" height="84" filter="url(#vpqImgGrain)"/></g>'+
- '<g clip-path="url(#vpqImgFilmRight)" opacity=".09"><rect x="186" y="183" width="70" height="84" filter="url(#vpqImgGrain)"/></g>';
+ // Decorative, original grayscale X-ray studies: layered anatomy and
+ // tonal attenuation rather than simplified white line art. NOT clinical scans.
+ s+='<defs>'+
+ '<radialGradient id="vpqRadFilm" cx="45%" cy="40%" r="75%"><stop stop-color="#526170"/><stop offset=".6" stop-color="#27323e"/><stop offset="1" stop-color="#080e16"/></radialGradient>'+
+ '<radialGradient id="vpqRadSoft" cx="45%" cy="45%" r="70%"><stop stop-color="#b5bec6" stop-opacity=".77"/><stop offset=".65" stop-color="#74828d" stop-opacity=".52"/><stop offset="1" stop-color="#35424c" stop-opacity=".12"/></radialGradient>'+
+ '<filter id="vpqRadBlur"><feGaussianBlur stdDeviation="1.5"/></filter>'+
+ '<filter id="vpqRadGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="2" seed="21" stitchTiles="stitch"/></filter>'+
+ '<clipPath id="vpqRadL"><rect x="103" y="183" width="72" height="84" rx="7"/></clipPath>'+
+ '<clipPath id="vpqRadR"><rect x="186" y="183" width="70" height="84" rx="7"/></clipPath></defs>'+
+ '<g filter="url(#img25-shadow)">'+round(88,169,184,112,'#d8ecfb','#96b7d0')+
+ round(101,181,76,88,'#111923','#7c9cb9')+round(184,181,74,88,'#111923','#7c9cb9')+'</g>'+
+ // Lateral thorax: spine, scapular border, ribs, pulmonary lucency, cardiac shadow.
+ '<g clip-path="url(#vpqRadL)">'+
+ '<rect x="103" y="183" width="72" height="84" fill="url(#vpqRadFilm)"/>'+
+ '<path d="M102 202Q124 190 160 195L180 209L176 249Q150 258 119 249L100 239Z" fill="url(#vpqRadSoft)" opacity=".73" filter="url(#vpqRadBlur)"/>'+
+ '<path d="M107 206Q127 198 166 201L170 238Q158 249 135 246L112 236Z" fill="#121d29" opacity=".91"/>'+
+ '<path d="M105 193Q139 186 173 196" stroke="#e0e6eb" stroke-width="5" opacity=".5" fill="none" filter="url(#vpqRadBlur)"/>'+
+ '<path d="M105 194Q139 187 173 197" stroke="#c9d2db" stroke-width="2.5" opacity=".78" fill="none"/>'+
+ '<g stroke="#adbcc7" stroke-width="1.7" opacity=".65" fill="none">'+
+ [0,1,2,3,4,5,6].map(i=>'<path d="M'+(111+i*8)+' '+(195+i*.4)+' C'+(98+i*8)+' '+(210+i*1.1)+' '+(110+i*7)+' '+(236+i*.8)+' '+(122+i*6)+' '+(249+i*.4)+'"/>').join('')+
+ '</g>'+
+ '<g stroke="#d5dfe6" stroke-width="2" opacity=".56" fill="none">'+
+ '<path d="M107 207Q138 199 170 210M108 216Q139 207 171 218M110 227Q140 220 171 229M112 237Q139 232 169 238"/>'+
+ '</g>'+
+ '<path d="M139 215Q127 213 125 226Q123 242 140 247Q153 247 153 232Q151 218 139 215Z" fill="#8896a1" opacity=".79" filter="url(#vpqRadBlur)"/>'+
+ '<path d="M142 215Q131 215 131 225Q127 237 142 241Q151 242 149 230Z" fill="#a2acb5" opacity=".49"/>'+
+ '<path d="M108 240Q141 230 171 244" fill="none" stroke="#bac8d3" stroke-width="2" opacity=".75"/>'+
+ '<path d="M117 206Q121 225 114 239" stroke="#c4ced6" stroke-width="3" opacity=".5" fill="none"/>'+
+ '<rect x="103" y="183" width="72" height="84" fill="#fff" filter="url(#vpqRadGrain)" opacity=".075"/>'+
+ '</g>'+
+ // Lateral stifle: overlapping femoral condyles, tibial plateau and proximal tibia.
+ '<g clip-path="url(#vpqRadR)">'+
+ '<rect x="186" y="183" width="70" height="84" fill="url(#vpqRadFilm)"/>'+
+ '<path d="M204 180Q201 202 208 214Q211 225 217 226Q226 226 233 216Q239 203 237 183" stroke="#aab7c2" stroke-width="18" opacity=".44" filter="url(#vpqRadBlur)" fill="none"/>'+
+ '<path d="M207 181Q204 202 213 214Q216 225 223 221Q231 213 233 181" stroke="#e0e8ed" stroke-width="4" opacity=".79" fill="none"/>'+
+ '<path d="M203 218Q209 228 221 227Q233 230 238 220" stroke="#dce6eb" stroke-width="6" opacity=".65" fill="none"/>'+
+ '<path d="M203 223Q213 239 210 269M239 224Q229 243 233 269" stroke="#aebcc8" stroke-width="15" opacity=".54" fill="none" filter="url(#vpqRadBlur)"/>'+
+ '<path d="M208 228Q216 236 215 248L213 269M233 229Q226 241 227 251L230 269" stroke="#d9e3e9" stroke-width="3" opacity=".8" fill="none"/>'+
+ '<path d="M198 228Q206 237 207 247L206 261" stroke="#c6d1d9" stroke-width="3" opacity=".58" fill="none"/>'+
+ '<path d="M205 224Q220 220 238 227" stroke="#eef2f6" stroke-width="2.3" opacity=".86" fill="none"/>'+
+ '<ellipse cx="219" cy="220" rx="17" ry="9" fill="#becbd5" opacity=".18"/>'+
+ '<rect x="186" y="183" width="70" height="84" fill="#fff" filter="url(#vpqRadGrain)" opacity=".075"/>'+
+ '</g>'+
+ // Small acquisition-style legends inside the display, visually quiet.
+ '<g font-family="Arial" font-size="6.3" font-weight="700" fill="#d7e0e7" opacity=".87">'+
+ '<text x="106" y="263">THORAX  RL</text><text x="190" y="263">STIFLE  LAT</text></g>';
  // Positioning table and overhead tube
  s+='<g filter="url(#img25-shadow)"><rect x="114" y="342" width="175" height="18" rx="9" fill="#8ebade" stroke="#6288ac" stroke-width="5"/>'+
  round(136,360,130,54,'#eaf2ff','#96afcb')+'<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
