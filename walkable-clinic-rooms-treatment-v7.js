@@ -128,6 +128,30 @@ function imaging(){
  '<text x="402" y="183" text-anchor="middle" font-size="9" font-weight="900" fill="#7c658c">✓ MARKER  ✓ COLLIMATE</text>'+
  '<text x="402" y="193" text-anchor="middle" font-size="9" font-weight="800" fill="#7c658c">✓ CHECK POSITION</text>'+
  '</g>';
+ // Cozy details throughout the imaging suite, kept behind / outside interactive equipment.
+ s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
+ // Subtle pastel bunting along the back wall, above all workstation monitors.
+ '<path d="M89 157Q205 176 320 157M670 157Q802 179 916 157" stroke="#d8a9c5" stroke-width="2.5" fill="none"/>'+
+ '<path d="M115 163l10 0-5 14zM150 166l10 0-5 14zM185 166l10 0-5 14zM220 163l10 0-5 14zM730 166l10 0-5 14zM765 167l10 0-5 14zM800 167l10 0-5 14zM835 166l10 0-5 14zM870 162l10 0-5 14z" fill="#f5c5d4" opacity=".95"/>'+
+ // Tiny gold sparkle accents around the imaging department logo.
+ '<path d="M329 114l5 0m-2.5-2.5v5M670 114l5 0m-2.5-2.5v5M320 141l4 0m-2-2v4M678 141l4 0m-2-2v4" stroke="#e6b979" stroke-width="2.5" stroke-linecap="round"/>'+
+ // A friendly framed paw-print poster in the small wall gap beside CT.
+ '<rect x="729" y="104" width="37" height="44" rx="6" fill="#fffaf7" stroke="#c9b6db" stroke-width="4"/>'+
+ '<circle cx="748" cy="132" r="7" fill="#bdabd9"/>'+
+ '<circle cx="738" cy="120" r="3.5" fill="#bdabd9"/><circle cx="745" cy="117" r="3.5" fill="#bdabd9"/><circle cx="753" cy="117" r="3.5" fill="#bdabd9"/><circle cx="760" cy="121" r="3.5" fill="#bdabd9"/>'+
+ // Ultrasound label: a small pastel wall plaque, not a new workstation/hotspot.
+ '<rect x="349" y="153" width="105" height="17" rx="8" fill="#e3f5ee" stroke="#9ecdbf" stroke-width="2"/>'+
+ '<text x="401" y="165" text-anchor="middle" font-size="10" fill="#547e76" font-weight="900">ULTRASOUND</text>'+
+ // CT region: compact sign on rear wall, clear of gantry.
+ '<rect x="546" y="151" width="132" height="18" rx="8" fill="#e9e5fb" stroke="#b9abd9" stroke-width="2"/>'+
+ '<text x="612" y="164" text-anchor="middle" font-size="10" fill="#74669e" font-weight="900">CROSS-SECTIONAL</text>'+
+ // Reading desk cozy tea coaster + pencil cup, kept on far right corner.
+ '<ellipse cx="916" cy="317" rx="13" ry="4" fill="#d7b3b3" opacity=".8"/>'+
+ '<path d="M903 297h19l-2 19h-15z" fill="#f5d1d9" stroke="#b58d9e" stroke-width="2"/>'+
+ '<path d="M907 298l-3-10M912 298l2-14M917 298l5-9" stroke="#798faf" stroke-width="2.5"/>'+
+ // Small floor pawprints at far corners, avoiding the avatar walk center.
+ '<g fill="#f8effc" opacity=".8"><ellipse cx="75" cy="450" rx="10" ry="7" transform="rotate(-25 75 450)"/><circle cx="62" cy="437" r="4"/><circle cx="72" cy="432" r="4"/><circle cx="83" cy="435" r="4"/><ellipse cx="949" cy="453" rx="10" ry="7" transform="rotate(22 949 453)"/><circle cx="939" cy="440" r="4"/><circle cx="950" cy="435" r="4"/><circle cx="961" cy="438" r="4"/></g>'+
+ '</g>';
  return s+'</svg>';
 }
 function treatment(){
