@@ -210,6 +210,12 @@
       "answer": "It is a LFA-1 Inhibitor- which decreases neutrophil migration into the pancreas to help reduce inflammation.",
       "why": "It is not an anti-NGF monoclonal antibody which it is often confused for. \nUsed for recurrent pancreatitis as it destroys the islet cells, which can predispose to diabetes mellitus. So this helps prevent it. \n(I have also seen DVM's in practice give it to help with less hospitalization and they APPEAR to work but there is not enough published data to utilize this atm)",
       "slide": "Exam 2 lecture 17 · source-derived mechanism review"
+    },
+    "pharm-e2-gi17-audit-005": {
+      "prompt": "How do omeprazole and sucralfate differ in ulcer treatment?",
+      "answer": "Omeprazole inhibits parietal H+/K+-ATPase; sucralfate provides local mucosal protection via increasing PGS",
+      "why": "Acid suppression and surface protection address different aspects of injury.",
+      "slide": "Lecture 17 · GI/hepatic deep lesson audit, 2026-11-20"
     }
   },
   "custom": [
