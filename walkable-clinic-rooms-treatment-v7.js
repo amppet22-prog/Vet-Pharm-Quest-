@@ -71,7 +71,7 @@ function imaging(){
  // Backlit radiology display with original stylized diagnostic linework
  s+='<g filter="url(#img25-shadow)">'+round(88,169,184,112,'#d8ecfb','#96b7d0')+
  round(101,181,76,88,'#27394f','#7c9cb9')+round(184,181,74,88,'#27394f','#7c9cb9')+
- '<g fill="none" stroke="#c2eafa" stroke-width="3"><path d="M112 206q24 -19 54 3M112 214q24 -12 54 9M113 224q24 -8 53 10M118 234q23 -6 48 10M137 190v57"/><path d="M218 190v65M201 202l17 11 17 -11M207 249h23M218 248l-11 13M218 248l12 13"/></g></g>';
+ '<g opacity=".35" stroke="#a3b8cc" fill="none" stroke-width="1.2"><path d="M112 195q25-12 54 0M111 200q26-11 55 4M112 211q27-8 53 7M111 224q28-8 54 7M114 236q26-5 49 6"/><path d="M194 218h46M198 227h39M202 237h31M206 247h24"/></g>'+'<g fill="none" stroke="#c2eafa" stroke-width="3"><path d="M112 206q24 -19 54 3M112 214q24 -12 54 9M113 224q24 -8 53 10M118 234q23 -6 48 10M137 190v57"/><path d="M218 190v65M201 202l17 11 17 -11M207 249h23M218 248l-11 13M218 248l12 13"/></g></g>';
  // Positioning table and overhead tube
  s+='<g filter="url(#img25-shadow)"><rect x="114" y="342" width="175" height="18" rx="9" fill="#8ebade" stroke="#6288ac" stroke-width="5"/>'+
  round(136,360,130,54,'#eaf2ff','#96afcb')+'<path d="M155 413v16M251 413v16" stroke="#788daf" stroke-width="10"/>'+
@@ -118,8 +118,6 @@ function imaging(){
  '<path d="M301 221q5-8 11 0" stroke="#6383a7" stroke-width="3" fill="none"/>'+
  '<path d="M294 253l-4 7 4 4 4-6M321 253l4 7-4 4-4-6" fill="#f6d8e8" stroke="#a57b9d" stroke-width="1.7"/>'+
  // Pastel accents and a quiet workstation reminder above the reading desk.
- '<rect x="764" y="144" width="150" height="28" rx="9" fill="#fff8fc" stroke="#c6b3dd" stroke-width="3"/>'+
- '<text x="839" y="162" text-anchor="middle" font-size="12" font-weight="900" fill="#80658f">RADS · US · CT · MRI</text>'+
  '<rect x="875" y="307" width="32" height="14" rx="5" fill="#fff6e9" stroke="#d9b9c9" stroke-width="2"/>'+
  '<path d="M885 308q-8-11 0-18m8 18q10-11 1-19" stroke="#6fae97" stroke-width="3" fill="none"/>'+
  '<path d="M882 298q-8-3-5-12 9 3 5 12m12-4q7-9 12-4-6 9-12 4" fill="#7ebda9"/>'+
@@ -128,19 +126,27 @@ function imaging(){
  '<text x="402" y="183" text-anchor="middle" font-size="9" font-weight="900" fill="#7c658c">✓ MARKER  ✓ COLLIMATE</text>'+
  '<text x="402" y="193" text-anchor="middle" font-size="9" font-weight="800" fill="#7c658c">✓ CHECK POSITION</text>'+
  '</g>';
- // Compact visual reference wall: the five classic radiographic opacities.
- // This is a decorative primer, not an image atlas or a click target.
+ // Original miniature modality gallery, split across the back wall around the main sign.
+ // Symbolic illustrations only, not clinical images or textbook reproductions.
+ const miniModalities=[
+  {x:99,title:'RADS',kind:'bone'},{x:153,title:'US',kind:'wave'},{x:207,title:'CT',kind:'ring'},{x:261,title:'MRI',kind:'brain'},
+  {x:686,title:'PET',kind:'pet'},{x:740,title:'NUC',kind:'pet'},{x:794,title:'CYSTO',kind:'bladder'},{x:848,title:'FLUORO',kind:'wave'}
+ ];
  s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
- '<rect x="108" y="94" width="174" height="58" rx="10" fill="#fffdfa" stroke="#b3c8db" stroke-width="3"/>'+
- '<text x="195" y="108" text-anchor="middle" font-size="11" font-weight="900" fill="#676389">RADIOGRAPHIC OPACITY</text>'+
- ['#252c38','#86888b','#bcbfc3','#e2e4e8','#fbfcff'].map((shade,i)=>'<rect x="'+(119+i*32)+'" y="114" width="28" height="19" rx="4" fill="'+shade+'" stroke="#9faabe" stroke-width="1"/>').join('')+
- ['GAS','FAT','SOFT','BONE','METAL'].map((label,i)=>'<text x="'+(133+i*32)+'" y="144" text-anchor="middle" font-size="8" font-weight="900" fill="#65718b">'+label+'</text>').join('')+
- // Small report-writing reminder above the reading station.
- '<rect x="781" y="95" width="130" height="44" rx="9" fill="#fffafc" stroke="#b6aecf" stroke-width="3"/>'+
- '<text x="846" y="110" text-anchor="middle" font-size="10" font-weight="900" fill="#76628e">READ THE IMAGE</text>'+
- '<text x="846" y="121" text-anchor="middle" font-size="8.3" fill="#6e7792">Look · Describe · Localize</text>'+
- '<text x="846" y="132" text-anchor="middle" font-size="8.3" fill="#6e7792">Interpret · Recommend</text>'+
- '</g>';
+ '<rect x="91" y="91" width="229" height="66" rx="9" fill="#fffafc" stroke="#c5b6d9" stroke-width="3"/>'+
+ '<rect x="678" y="91" width="229" height="66" rx="9" fill="#fffafc" stroke="#c5b6d9" stroke-width="3"/>'+
+ '<text x="205" y="104" text-anchor="middle" font-size="10" font-weight="900" fill="#736189">IMAGING MODALITIES</text>'+
+ '<text x="793" y="104" text-anchor="middle" font-size="10" font-weight="900" fill="#736189">SPECIAL STUDIES</text>'+
+ miniModalities.map(m=>{
+ let art='';
+ if(m.kind==='bone')art='<path d="M8 3v23M2 7q6-7 12 0M2 13q6-7 12 0M2 19q6-5 12 0M4 25q4-4 8 0" stroke="#e3e9f0" stroke-width="2" fill="none"/>';
+ if(m.kind==='wave')art='<path d="M8 2L0 23Q8 31 17 23L12 2Z" fill="#8a9daa" stroke="#d8e7ed" stroke-width="2"/><path d="M3 19q6-5 11 0" stroke="#e6eff4" fill="none"/>';
+ if(m.kind==='ring')art='<circle cx="8" cy="14" r="12" fill="#9eabb9"/><circle cx="8" cy="14" r="7" fill="#3d4b5b"/><ellipse cx="6" cy="14" rx="2" ry="5" fill="#758696"/>';
+ if(m.kind==='brain')art='<ellipse cx="8" cy="14" rx="11" ry="13" fill="#a5a4b8"/><path d="M7 5q-8 5-2 11t3 8M9 5q9 5 2 11t-1 8" stroke="#43485c" fill="none" stroke-width="2"/>';
+ if(m.kind==='pet')art='<ellipse cx="8" cy="14" rx="10" ry="12" fill="#9d668a"/><ellipse cx="8" cy="14" rx="5" ry="7" fill="#f0bb69"/>';
+ if(m.kind==='bladder')art='<path d="M8 4q-9 0-9 11t9 11q9 0 9-11T8 4Z" fill="#a5b4c1" stroke="#e9f0f5" stroke-width="2"/><path d="M8 26v4" stroke="#e9f0f5" stroke-width="2"/>';
+ return '<g transform="translate('+m.x+' 108)"><rect width="45" height="33" rx="5" fill="#2b3d52"/><g transform="translate(14 1)">'+art+'</g><text x="22" y="42" font-size="8" text-anchor="middle" font-weight="900" fill="#6a6081">'+m.title+'</text></g>';
+ }).join('')+'</g>';
  // Cozy details throughout the imaging suite, kept behind / outside interactive equipment.
  s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
  // Subtle pastel bunting along the back wall, above all workstation monitors.
@@ -148,10 +154,6 @@ function imaging(){
  '<path d="M115 163l10 0-5 14zM150 166l10 0-5 14zM185 166l10 0-5 14zM220 163l10 0-5 14zM730 166l10 0-5 14zM765 167l10 0-5 14zM800 167l10 0-5 14zM835 166l10 0-5 14zM870 162l10 0-5 14z" fill="#f5c5d4" opacity=".95"/>'+
  // Tiny gold sparkle accents around the imaging department logo.
  '<path d="M329 114l5 0m-2.5-2.5v5M670 114l5 0m-2.5-2.5v5M320 141l4 0m-2-2v4M678 141l4 0m-2-2v4" stroke="#e6b979" stroke-width="2.5" stroke-linecap="round"/>'+
- // A friendly framed paw-print poster in the small wall gap beside CT.
- '<rect x="729" y="104" width="37" height="44" rx="6" fill="#fffaf7" stroke="#c9b6db" stroke-width="4"/>'+
- '<circle cx="748" cy="132" r="7" fill="#bdabd9"/>'+
- '<circle cx="738" cy="120" r="3.5" fill="#bdabd9"/><circle cx="745" cy="117" r="3.5" fill="#bdabd9"/><circle cx="753" cy="117" r="3.5" fill="#bdabd9"/><circle cx="760" cy="121" r="3.5" fill="#bdabd9"/>'+
  // Ultrasound label: a small pastel wall plaque, not a new workstation/hotspot.
  '<rect x="349" y="153" width="105" height="17" rx="8" fill="#e3f5ee" stroke="#9ecdbf" stroke-width="2"/>'+
  '<text x="401" y="165" text-anchor="middle" font-size="10" fill="#547e76" font-weight="900">ULTRASOUND</text>'+
