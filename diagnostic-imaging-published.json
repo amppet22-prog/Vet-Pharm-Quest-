@@ -584,6 +584,176 @@
         ],
         "note": "Displayed-film photograph: replace with original high-resolution DICOM/export if available; not appropriate for fine detail or measurements."
       }
+    },
+    "verified-canine-distal-femur-osteosarcoma": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Openly licensed original-source image; original file linked",
+      "reviewStatus": "Original uploader description verified; not independently read by a board-certified radiologist",
+      "id": "verified-canine-distal-femur-osteosarcoma",
+      "title": "Canine Distal Femur · Aggressive Osteolysis (Osteosarcoma Source Case)",
+      "species": "Dog",
+      "region": "Distal femur / stifle",
+      "lecture": "MSK II · Aggressive bone lesions",
+      "kind": "case",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Canine%20osteosarcoma.JPG",
+          "view": "Lateral distal femur",
+          "caption": "Original uploader identifies substantial bone destruction in distal femur of dog with osteosarcoma."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Canine_osteosarcoma.JPG",
+      "credit": "Joel Mills · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "Source identifies a dog with distal femoral osteosarcoma. Independent pathology and complete signalment are not supplied.",
+      "lookFor": "Identify distal femoral cortex and medullary bone. Locate the destructive radiolucent zone; describe margins, transition zone, cortical integrity and any adjacent reaction.",
+      "quality": "Photograph of radiograph (3,072 × 2,304 pixel file). Use for recognizing prominent lysis rather than assessing fine detail or precise measurements.",
+      "findings": "Original uploader describes a large dark region in distal femur representing bone destroyed by the tumor. Characterize this radiographically as focal aggressive-appearing osteolysis.",
+      "interpretation": "Uploader-described canine distal femoral osteosarcoma. Radiography alone cannot distinguish all aggressive neoplasms from osteomyelitis.",
+      "differentials": "Primary bone neoplasia (including osteosarcoma), osteomyelitis, other aggressive bone processes.",
+      "why": "Osteolysis represents net loss of mineralized bone. Rapid tumor-driven destruction can obscure normal trabecular/cortical boundaries and increase pathologic fracture risk.",
+      "next": "Obtain appropriately positioned orthogonal views and clinical staging; consider tissue diagnosis with specialist consultation.",
+      "studyImageReview": {
+        "priority": "replacement-preferred",
+        "clinicalQualityVerified": false,
+        "note": "Photographed radiograph, not original DICOM. Suitable for gross destructive lesion recognition; replace with original digital film when possible."
+      }
+    },
+    "verified-canine-bilateral-hip-dysplasia": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Openly licensed original-source image; original file linked",
+      "reviewStatus": "Original uploader description verified; not independently read by a board-certified radiologist",
+      "id": "verified-canine-bilateral-hip-dysplasia",
+      "title": "Canine Pelvis · Bilateral Hip Dysplasia in Young Labrador",
+      "species": "Dog",
+      "region": "Pelvis / coxofemoral joints",
+      "lecture": "MSK I · Congenital/developmental joint disease",
+      "kind": "case",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bilateral%20hip%20dysplasia.JPG",
+          "view": "Pelvic hip radiograph",
+          "caption": "Source reports bilateral hip dysplasia in Labrador puppy; left side has particularly poor femoral head coverage."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Bilateral_hip_dysplasia.JPG",
+      "credit": "Joel Mills · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "Labrador Retriever puppy; original description reports bilateral hip dysplasia with left worse than right.",
+      "lookFor": "Compare femoral head coverage by acetabula, joint congruity and symmetry. Confirm marker/laterality: the dog's left side appears on image right, per source.",
+      "quality": "Photograph of film; use for gross joint coverage, not formal hip scoring or submillimeter measurement.",
+      "findings": "Source identifies reduced acetabular coverage of both femoral heads, particularly on the left; evaluate joint subluxation.",
+      "interpretation": "Original-source described bilateral canine hip dysplasia.",
+      "differentials": "Developmental hip dysplasia versus projection-induced apparent asymmetry or traumatic instability; history and positioning matter.",
+      "why": "Insufficient congruity and laxity shift loading across cartilage/subchondral bone and predispose to secondary osteoarthritis.",
+      "next": "Clinical orthopedic evaluation and standardized hip studies when indicated; do not assign formal scoring from an informal film photograph.",
+      "studyImageReview": {
+        "priority": "replacement-preferred",
+        "clinicalQualityVerified": false,
+        "note": "Photo of radiograph. Anatomic changes source-described; not suitable for formal hip scoring."
+      }
+    },
+    "verified-feline-pleural-effusion-fip": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Openly licensed original-source image; original file linked",
+      "reviewStatus": "Original uploader description verified; not independently read by a board-certified radiologist",
+      "id": "verified-feline-pleural-effusion-fip",
+      "title": "Feline Thorax · Pleural Effusion (FIP-Labeled Teaching Radiograph)",
+      "species": "Cat",
+      "region": "Thorax / pleural space",
+      "lecture": "Small Animal Thorax · Pleural disease",
+      "kind": "case",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Fip-cat-numbered.jpg",
+          "view": "Lateral feline thorax · annotated",
+          "caption": "Source annotations indicate dependent pleural fluid obscuring cardiac borders, with relatively little aerated lung."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Fip-cat-numbered.jpg",
+      "credit": "Uwe Gille · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "Original image is labeled as a cat with FIP. Confirmatory diagnostic workup is not provided.",
+      "lookFor": "Locate dependent soft-tissue/fluid opacity, effacement of the cardiac silhouette and remaining aerated dorsal lung. Consider what compartment contains the fluid.",
+      "quality": "Small annotated image (1,020 × 501 pixels). Best for pleural-fluid recognition, not small pulmonary lesions.",
+      "findings": "Source annotation describes dependent thoracic fluid, loss of visible cardiac margins and compressed/limited aerated lung.",
+      "interpretation": "Pleural effusion pattern. FIP is the source-attributed disease, not a diagnosis established by this radiograph alone.",
+      "differentials": "FIP-associated effusion, cardiac disease, pyothorax, chylothorax, neoplasia, hemorrhage and other causes of pleural effusion.",
+      "why": "Fluid in the pleural space contrasts poorly with heart/soft tissue and restricts lung expansion; the lung retracts from chest wall and border effacement occurs.",
+      "next": "If dyspneic, stabilize first and consider oxygen and ultrasound-guided thoracocentesis where indicated; evaluate effusion and underlying cause.",
+      "studyImageReview": {
+        "priority": "replacement-preferred",
+        "clinicalQualityVerified": false,
+        "note": "Low-resolution pre-annotated image; best used as broad pleural-effusion pattern reference."
+      }
+    },
+    "verified-feline-right-pulmonary-opacity-2026": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Openly licensed original-source image; original file linked",
+      "reviewStatus": "Original uploader description verified; not independently read by a board-certified radiologist",
+      "id": "verified-feline-right-pulmonary-opacity-2026",
+      "title": "Feline Thorax · Asymmetric Pulmonary Opacity and Suspected Neoplasia",
+      "species": "Cat",
+      "region": "Thorax / pulmonary parenchyma",
+      "lecture": "Small Animal Thorax · Pulmonary patterns and differential diagnosis",
+      "kind": "case",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Radio%20thoracique%20chat%20-%20l%C3%A9sion%20pulmonaire.jpg",
+          "view": "Dorsoventral thoracoabdominal image",
+          "caption": "Source reports diffuse right-lung increased opacity and a left bronchoalveolar pattern. Subsequent CT reportedly suggested malignant neoplastic disease."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Radio_thoracique_chat_-_l%C3%A9sion_pulmonaire.jpg",
+      "credit": "Anja · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "history": "12-year-old male European cat; source describes subsequent deterioration and CT suspicious for malignant neoplastic disease with possible renal metastasis.",
+      "lookFor": "Confirm the DV projection and compare pulmonary opacity right versus left. Describe distribution and silhouette border changes before naming disease.",
+      "quality": "Full original 1,915 × 2,392 JPEG published by creator. Technical diagnostic quality and interpretation not independently verified.",
+      "findings": "Source describes diffuse increased opacity over right lung except craniomedial part of right cranial lobe, left bronchoalveolar change and cardiac border effacement.",
+      "interpretation": "Marked asymmetric pulmonary opacity. Source reports follow-up CT highly suspicious for malignant neoplasia; histopathologic confirmation not supplied.",
+      "differentials": "Pulmonary neoplasia, pneumonia, edema, hemorrhage, atelectasis or combined disease processes depending on clinical context.",
+      "why": "Replacement of aerated lung by cells, exudate, fluid or mass tissue increases radiographic opacity. Pattern and distribution narrow but do not uniquely identify etiology.",
+      "next": "Correlate with respiratory stability; consider orthogonal images and CT or sampling when appropriate.",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "note": "Source full-size digital image available; original radiologic findings reported by uploader; do not claim confirmed histology."
+      }
+    },
+    "verified-feline-pregnancy-fetal-skeletons": {
+      "modality": "X-ray",
+      "updated": "2026-11-23T00:00:00Z",
+      "imageStatus": "Openly licensed original-source image; original file linked",
+      "reviewStatus": "Original uploader description verified; not independently read by a board-certified radiologist",
+      "id": "verified-feline-pregnancy-fetal-skeletons",
+      "title": "Feline Abdomen · Mineralized Fetal Skeletons",
+      "species": "Cat",
+      "region": "Caudal abdomen / reproductive tract",
+      "lecture": "Abdominal anatomy · Reproductive radiography",
+      "kind": "case",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Radiography%20of%20a%20pregnant%20cat.jpg",
+          "view": "Feline abdominal radiograph · projection unconfirmed",
+          "caption": "Source identifies five fetal skeletons in gravid queen; count only distinctly visible skulls/spines."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Radiography_of_a_pregnant_cat.jpg",
+      "credit": "Santamarcanda · CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "history": "Source describes queen approximately one and a half months pregnant and five similarly sized fetuses.",
+      "lookFor": "Identify mineralized fetal skulls and vertebral columns; distinguish overlapped skeletons before estimating fetal count.",
+      "quality": "Original 1,554 × 2,321 JPEG, source annotated on Commons. Cannot judge fetal viability from this static radiograph.",
+      "findings": "Multiple mineralized fetal skeletons within maternal abdomen; original creator describes five fetuses.",
+      "interpretation": "Radiographic evidence of pregnancy. Fetal count is source-reported, not independently verified from every visible skeleton.",
+      "differentials": "No alternate etiology needed when multiple fetal skeletal structures are established; distinguish count uncertainty due to overlap.",
+      "why": "Fetal skeletal mineralization produces visible radiopaque skulls, spines and limbs later in gestation. Radiography does not establish fetal heart rate or viability.",
+      "next": "Use clinical examination and ultrasound for fetal viability when clinically indicated.",
+      "studyImageReview": {
+        "priority": "projection-review",
+        "clinicalQualityVerified": false,
+        "note": "Full-size source provided but projection/laterality not established; avoid definitive fetal count based on overlaps alone."
+      }
     }
   }
 }
