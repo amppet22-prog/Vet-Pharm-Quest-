@@ -80,7 +80,7 @@ function home(){
 function xrayHome(){
  session=null;
  const cards=[
- ['final-rounds','🎯','Final Image Interpretation Rounds','Practice with real radiographs','15 source-linked studies, 30 case questions, reasons & editable images','#fff1e9','#eac59e'],
+ ['final-rounds','🎯','Final Image Interpretation Rounds','Practice with real radiographs','20 source-linked studies, 40 case questions, reasons & editable images','#fff1e9','#eac59e'],
  ['course','📖','Radiology Learning Course','Learn before you diagnose','Lecture objectives, normal anatomy, interpretation method & final review','#f4eaff','#c5afe6'],
  ['xray-technique','🩻','Technique & positioning','Start with the basics','Beam direction, projections, kVp / mAs & safe positioning','#f7edff','#cbb4ed'],
  ['quality','✨','Radiograph quality','Make every image count','Collimation, rotation, markers, artifacts & exposure','#eaf8f4','#a7ded0'],
