@@ -416,6 +416,16 @@
       "domain": "pharmacology",
       "lecture": "Lecture 17",
       "curated": true
+    },
+    {
+      "prompt": "What are the fours anti-colic therapies for horses and their function?",
+      "answer": "Magnesium sulfate is an osmotic agent and helps with impacts that are less than 3 days.\nMineral oil is a lubricant and decreases water reabsorption\nPysllium helps with bulk and aids to clear sand impaction\nBuscopan (N-butylscopolammonium) is a muscarinic antagonist and helps relax the GI tract",
+      "why": "",
+      "slide": "Pharm LMU Lecture",
+      "id": "owner-pharmacology-mwskd3a6-axxj1",
+      "domain": "pharmacology",
+      "lecture": "Lecture 17",
+      "curated": true
     }
   ],
   "hidden": [
