@@ -979,6 +979,24 @@ body.vpq-reading-large #modalBody .vpq-patient-case .response p{font-size:18px!i
 #modalBody .vpqQuickNote p{font-size:12px;line-height:1.55;margin:0 0 7px}
 #modalBody .vpqQuickNote small{font-size:11px;color:#6f6880}
 @media(max-width:590px){#modalBody .vpqQuickSteps,#modalBody .vpqQuickDetails{grid-template-columns:1fr}#modalBody .vpqQuickFeatured{gap:9px;padding:12px}#modalBody .vpqQuickFeaturedIcon{font-size:23px;padding:6px}}
+</style>
+<style id="vpq-quick-start-simple-v2">
+#modalBody .vpqQuickFeaturedCompact{padding:12px 14px;gap:11px;margin-bottom:10px}
+#modalBody .vpqQuickFeaturedCompact .vpqQuickFeaturedIcon{font-size:25px;padding:7px}
+#modalBody .vpqQuickFeaturedCompact h3{font-size:16px;margin:3px 0 5px}
+#modalBody .vpqQuickFeaturedCompact p{font-size:12px;margin:0;line-height:1.45}
+#modalBody .vpqQuickDetailsSimple{grid-template-columns:1fr;gap:7px;margin-bottom:10px}
+#modalBody .vpqQuickDetailsSimple details{padding:10px 13px;background:#fff;border-color:#d9dceb}
+#modalBody .vpqQuickDetailsSimple summary{font-size:13px;color:#53608c}
+#modalBody .vpqQuickDetailsSimple details[open]{background:#f9f7ff;border-color:#c1b3dd}
+#modalBody .vpqQuickDetailsSimple p{font-size:12px;margin:9px 0 0}
+#modalBody .vpqQuickNoteCompact{margin:12px 0;padding:12px 14px}
+#modalBody .vpqQuickNoteCompact h3{font-size:14px}
+#modalBody .vpqQuickNoteCompact p{font-size:12px;margin-bottom:5px}
+#modalBody .vpqQuickHero{padding:13px 16px;margin-bottom:9px}
+#modalBody .vpqQuickHero h3{font-size:19px}
+#modalBody .vpqQuickSteps{gap:8px;margin-bottom:10px}
+#modalBody .vpqQuickSteps>div{padding:9px 11px}
 </style></head><body>
 <header class="head"><div class="brand">🐾 <span>Vet Pharm Quest</span><small>2D TEACHING HOSPITAL • v4.0</small></div><div class="hud"><span>⭐ <b id="xp">0</b> XP</span><span>🪙 <b id="coins">0</b></span><span>🏥 Lv <b id="level">1</b></span><button id="avatarBtn" class="mini">🧑‍⚕️ Customize</button><button id="vpqReceptionQuickBtn" class="mini">🎨 Reception Studio</button><button id="vpqLevelTopBtn" class="mini" type="button" style="background:#fff2d6;border-color:#d2ad64">⭐ Level Themes</button><button id="vpqCollectionTopBtn" class="mini" type="button" style="background:#fff0f8;border-color:#d8a8c8">💝 My Collection</button><button id="vpqFloorplanTopBtn" class="mini">🗺️ Floor Plan</button><button id="vpqArcadeTopBtn" class="mini">🕹️ Arcade</button><button id="vpqViewAvatarBtn" class="mini">👀 View My Avatar</button><button id="helpBtn" class="mini">❔ Help</button></div></header>
 <section class="vpq-welcome-section" aria-label="Hospital welcome"><div class="vpq-welcome-copy"><div class="vpq-welcome-kicker">🐾 VET PHARM QUEST · STUDENT TEACHING HOSPITAL</div><h1>Welcome to Alexandria’s Teaching Hospital!</h1><p>A safe and fun place to learn, grow, and build clinical skills connected to our studies.</p><p class="vpq-welcome-small" style="display:block;margin:5px 0 10px;line-height:1.45">📧 Creating an account? The confirmation email is sent through <strong>Supabase</strong>, our sign-in provider. Please check your inbox or spam/junk folder for the verification link.</p><button id="vpqHowToPlayTop" class="vpq-howtoplay" type="button">🎮 How to Play</button><button id="vpqMeetTeamBtn" type="button" class="vpq-meet-team-button" aria-label="Meet the Vet Pharm Quest team">🐾 Meet the Team</button><span class="vpq-welcome-small">Pharmacology · Toxicology (expanding) · One Health · Patient Rounds · More departments in development</span><div class="vpq-available-tox"><strong>☣️ Toxicology is here!</strong><span>Explore 11 lecture chapters, 48 toxicant cards and mechanism practice.</span><button type="button" id="vpqWelcomeToxBtn">Open Toxicology Atlas</button></div></div><div class="vpq-mera-portrait" aria-label="Mera Munchasurus, hospital mascot"><img src="assets/mera-munchasurus-family.webp" alt="Mera Munchasurus and Family illustrated portrait" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="vpq-mera-placeholder" style="display:none" aria-hidden="true">🦈🐕</span><strong>Mera Munchasurus and Family</strong><small>Hospital Mascots · Chiefs of Snacks &amp; Encouragement</small></div></section>
@@ -4341,14 +4359,21 @@ document.head.appendChild(vpqToxStyle);
  ];
  const h=x=>escapeHtml(String(x));
  function openQuick(){
+  const topics=[
+   ['❔ What do the question marks do?','Look for ? markers around the hospital! They open a short explanation of the station, why it matters, and where to go next. They are for learning and guidance; use the actual equipment or station label to start activities.'],
+   ['🐾 How do patients work?','For a continuing patient journey, start at Reception for the history and check-in, move to the Examination Room to assess and plan, then follow care, monitoring, and discharge in the Treatment Ward. Other departments also have their OWN focused patients and practice scenarios — those do not all belong to the same Reception case.'],
+   ['📚 Where should I study?','The Student Study Lounge is your cozy starting point for course selection, flashcards, quizzes, review, and games. Learning Centers and specialty rooms go deeper into individual subjects. Pick an exam or lecture when filters are available, then practice or star hard questions for later.'],
+   ['🪙 Coins, the bank & level-ups','Studying and completing eligible challenges earns XP and coins. Leveling up unlocks more cosmetic options; check your bank/coin balance to see what you have earned, then spend coins on decorations, outfits, and companions where available. Learning is never locked behind purchases.'],
+   ['🎮 Walking, games & exploration','Move with A/D or ←/→, press E near an interactive station, or click equipment directly. Use Hospital Rooms or Floor Plan to jump around. Explore the Arcade, Differential Diagnosis Center, and other departments at your own pace — there is no required order.']
+  ];
   showModal('🎮 How to Play · Quick Start',
-    '<div class="vpqQuickHero"><div class="vpqQuickHeroBadge">🐾 STUDENT-BUILT VETERINARY LEARNING GAME</div><h3>Explore. Diagnose. Learn why.</h3><p>Walk through the teaching hospital, investigate patient cases, practice your courses, and earn rewards. All educational material stays available without cosmetic purchases.</p></div>'+
-    '<section class="vpqQuickFeatured"><div class="vpqQuickFeaturedIcon">🧩</div><div><span class="vpqQuickEyebrow">FEATURED LEARNING CENTER</span><h3>Differential Diagnosis &amp; Clinical Reasoning</h3><p>Start with what you see: patient history, gross lesions, laboratory results, imaging, and clinical signs. Build and prioritize differentials, decide what tests would distinguish them, then explain your next step.</p><p class="vpqQuickFeaturedHint">Find the Differential Diagnosis Center in Necropsy &amp; Pathology, plus connected patient challenges in the Exam Room and Treatment Ward. More cases are being added.</p></div></section>'+
-    '<div class="vpqQuickSteps"><div><b>1 · Choose where to go</b><span>Hospital Rooms or Floor Plan</span></div><div><b>2 · Walk or click</b><span>A/D or ←/→ to move · E to interact</span></div><div><b>3 · Pick your topic</b><span>Course, exam, and lecture filters</span></div><div><b>4 · Practice &amp; revisit</b><span>Cases, games, quizzes, starred review</span></div></div>'+
-    '<h3 class="vpqQuickSectionTitle">Explore your learning stations <small>Tap a section to see details</small></h3>'+
-    '<div class="vpqQuickDetails">'+quick.map(([title,body],i)=>'<details'+(i===0?' open':'')+'><summary>'+h(title)+'</summary><p>'+h(body)+'</p></details>').join('')+'</div>'+
-    '<section class="vpqQuickNote"><h3>💜 Made by a veterinary student — and always growing!</h3><p>Vet Pharm Quest is a student-made educational project. I do my best to check medical and educational accuracy, but mistakes can happen. If you spot incorrect information, a broken feature, or something that needs clarification, please submit a request in <b>Settings &amp; Support</b> so I can review it.</p><p>New cases, games, radiographs, and learning areas are continuously being added. Keep an eye out for new and exciting things!</p><small>This game supports studying; it does not replace verified clinical references or veterinary judgment.</small></section>'+
-    '<div class="buttonrow"><button data-vpqguide="clinic">🗺️ Explore all departments</button><button data-vpqguide="studio">🎨 Reception Studio</button><button data-vpqguide="tox">☣️ Toxicology</button></div>');
+    '<div class="vpqQuickHero"><div class="vpqQuickHeroBadge">🐾 STUDENT-BUILT VETERINARY LEARNING GAME</div><h3>Your teaching hospital, your adventure!</h3><p>Explore rooms, learn the why behind disease, help patients, and collect fun rewards. No rush and no required route.</p></div>'+
+    '<div class="vpqQuickSteps"><div><b>🎮 Move &amp; interact</b><span>A/D or arrows · E near a station · or click</span></div><div><b>❔ Need help?</b><span>Question marks explain the room and its features</span></div></div>'+
+    '<section class="vpqQuickFeatured vpqQuickFeaturedCompact"><div class="vpqQuickFeaturedIcon">🧩</div><div><span class="vpqQuickEyebrow">TRY THE DIFFERENTIAL DIAGNOSIS CENTER</span><h3>Can you solve the case?</h3><p>Find clues, build your differentials, and decide which test or treatment comes next. Visit Necropsy &amp; Pathology, or try patient cases in the Exam Room and Treatment Ward.</p></div></section>'+
+    '<h3 class="vpqQuickSectionTitle">How everything works <small>Open anything you want to explore</small></h3>'+
+    '<div class="vpqQuickDetails vpqQuickDetailsSimple">'+topics.map(([title,body])=>'<details><summary>'+h(title)+'</summary><p>'+h(body)+'</p></details>').join('')+'</div>'+
+    '<section class="vpqQuickNote vpqQuickNoteCompact"><h3>💜 Made by a veterinary student — always growing!</h3><p>I do my best to check accuracy, but mistakes happen. If something is incorrect, unclear, or broken, send a request through <b>Settings &amp; Support</b>. Watch for new cases, games, and learning areas!</p><small>Educational practice only; verify clinical information with authoritative sources.</small></section>'+
+    '<div class="buttonrow"><button data-vpqguide="clinic">🗺️ All departments</button><button data-vpqguide="studio">🎨 Decorate the clinic</button><button data-vpqguide="tox">☣️ Toxicology</button></div>');
  }
  function openDirectory(){
   showModal('🗺️ Clinic Guide · Departments & Features',
