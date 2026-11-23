@@ -98,6 +98,36 @@ function imaging(){
  '<rect x="746" y="321" width="185" height="16" rx="5" fill="#f3d6be" stroke="#af9abb" stroke-width="4"/>'+
  '<path d="M762 337v77M914 337v77" stroke="#9a8fb7" stroke-width="10"/>'+
  '<rect x="797" y="344" width="78" height="8" rx="4" fill="#9ca6bd"/></g>';
+ // Diagnostic imaging personality + radiation safety, drawn directly in the active 2.5D SVG.
+ // All additions are visual only; no new hotspots, actions or movement barriers.
+ s+='<g aria-hidden="true" font-family="Arial,sans-serif">'+
+ // Left angled wall: caution poster, not an interactable object.
+ '<path d="M12 170L64 177V291L12 307Z" fill="#fff9ed" stroke="#bd9a6a" stroke-width="3"/>'+
+ '<path d="M19 184L58 188V211L19 210Z" fill="#ffe8a0"/>'+
+ '<text x="38" y="199" font-size="9" text-anchor="middle" font-weight="900" fill="#735424">CAUTION</text>'+
+ '<text x="38" y="207" font-size="8" text-anchor="middle" font-weight="900" fill="#735424">X-RAY</text>'+
+ '<text x="38" y="230" font-size="8" text-anchor="middle" font-weight="900" fill="#6e6480">ALARA</text>'+
+ '<text x="19" y="247" font-size="7.5" font-weight="800" fill="#6e6480">TIME</text>'+
+ '<text x="19" y="261" font-size="7.5" font-weight="800" fill="#6e6480">DISTANCE</text>'+
+ '<text x="19" y="275" font-size="7.2" font-weight="800" fill="#6e6480">SHIELDING</text>'+
+ // PPE rail and lead protective apron on the rear wall between the x-ray and ultrasound.
+ '<rect x="285" y="192" width="43" height="89" rx="6" fill="#fff8fc" stroke="#c8b5d9" stroke-width="3"/>'+
+ '<rect x="288" y="198" width="37" height="16" rx="4" fill="#e9d8f1"/>'+
+ '<text x="306" y="209" font-size="9" text-anchor="middle" fill="#765e8b" font-weight="900">PPE</text>'+
+ '<path d="M298 222h18l7 12-8 6v28h-17v-28l-7-6z" fill="#9cb7d5" stroke="#6383a7" stroke-width="2"/>'+
+ '<path d="M301 221q5-8 11 0" stroke="#6383a7" stroke-width="3" fill="none"/>'+
+ '<path d="M294 253l-4 7 4 4 4-6M321 253l4 7-4 4-4-6" fill="#f6d8e8" stroke="#a57b9d" stroke-width="1.7"/>'+
+ // Pastel accents and a quiet workstation reminder above the reading desk.
+ '<rect x="764" y="144" width="150" height="28" rx="9" fill="#fff8fc" stroke="#c6b3dd" stroke-width="3"/>'+
+ '<text x="839" y="162" text-anchor="middle" font-size="12" font-weight="900" fill="#80658f">RADS · US · CT · MRI</text>'+
+ '<rect x="875" y="307" width="32" height="14" rx="5" fill="#fff6e9" stroke="#d9b9c9" stroke-width="2"/>'+
+ '<path d="M885 308q-8-11 0-18m8 18q10-11 1-19" stroke="#6fae97" stroke-width="3" fill="none"/>'+
+ '<path d="M882 298q-8-3-5-12 9 3 5 12m12-4q7-9 12-4-6 9-12 4" fill="#7ebda9"/>'+
+ // Small safety checklist under wall sign (non-clickable and non-disruptive).
+ '<rect x="333" y="171" width="139" height="28" rx="7" fill="#fffdf6" stroke="#dac6e3" stroke-width="2"/>'+
+ '<text x="402" y="183" text-anchor="middle" font-size="9" font-weight="900" fill="#7c658c">✓ MARKER  ✓ COLLIMATE</text>'+
+ '<text x="402" y="193" text-anchor="middle" font-size="9" font-weight="800" fill="#7c658c">✓ CHECK POSITION</text>'+
+ '</g>';
  return s+'</svg>';
 }
 function treatment(){
