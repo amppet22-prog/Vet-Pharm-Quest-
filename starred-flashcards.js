@@ -169,5 +169,5 @@ function init(){
  updateCounts();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-window.VPQ_STARRED=Object.freeze({save,open,setCurrent,add:toggleDialog,count:()=>cards.length});
+window.VPQ_STARRED=Object.freeze({save,open,setCurrent,add:toggleDialog,count:()=>cards.length,exportForOwner:()=>cards.map(c=>({...c}))});
 })();
