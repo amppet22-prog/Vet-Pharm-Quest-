@@ -7,7 +7,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const el=id=>document.getElementById(id);
 let cards=[];
 try{const saved=JSON.parse(localStorage.getItem(KEY)||'[]');cards=Array.isArray(saved)?saved.filter(x=>x&&x.id&&x.front).slice(0,MAX):[]}catch(_){}
-let current=null,filter='All',mode='list',index=0,flipped=false;
+let current=null,filter='All',mode='list',index=0,flipped=false,missedOnly=false;
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(cards))}catch(e){console.warn('Starred cards were not saved:',e)}}
 function hash(s){let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return (h>>>0).toString(36)}
 function normalize(c){
@@ -38,15 +38,15 @@ function modal(title,html){
  else {alert('Open the hospital first to access your review deck.')}
 }
 function due(c){return !c.next||c.next<=Date.now()}
-function matching(){return cards.filter(x=>filter==='All'||x.subject===filter).sort((a,b)=>Number(due(b))-Number(due(a))||(a.next||0)-(b.next||0))}
+function matching(){return cards.filter(x=>(filter==='All'||x.subject===filter)&&(!missedOnly||(x.misses||0)>0)).sort((a,b)=>Number(due(b))-Number(due(a))||(a.next||0)-(b.next||0))}
 const DEPARTMENTS=['Pharmacology','Pathology','Clinical Pathology','One Health','Toxicology','Radiology','Parasitology','Virology','Bacteriology / Mycology','Clinical Skills','Other'];
 function subjects(){return ['All',...new Set([...DEPARTMENTS,...cards.map(x=>x.subject)])].sort((a,b)=>a==='All'?-1:b==='All'?1:a.localeCompare(b))}
-function canonicalSubject(title){const t=String(title||'').toLowerCase();if(t.includes('clinical path')||t.includes('clinpath')||t.includes('hematology')||t.includes('erythrogram')||t.includes('leukogram')||t.includes('blood gas'))return 'Clinical Pathology';if(t.includes('one health')||t.includes('zoonos')||t.includes('reportable'))return 'One Health';if(t.includes('toxic'))return 'Toxicology';if(t.includes('radiolog')||t.includes('imaging')||t.includes('x-ray')||t.includes('ultrasound'))return 'Radiology';if(t.includes('parasito'))return 'Parasitology';if(t.includes('virolog'))return 'Virology';if(t.includes('bacterio')||t.includes('mycolog'))return 'Bacteriology / Mycology';if(t.includes('patholog')||t.includes('necropsy')||t.includes('histolog'))return 'Pathology';if(t.includes('pharm')||t.includes('drug'))return 'Pharmacology';if(t.includes('injection')||t.includes('clinical skill')||t.includes('osce'))return 'Clinical Skills';return 'Other'}
+function canonicalSubject(title){const t=String(title||'').toLowerCase();if(t.includes('clinical path')||t.includes('clinpath')||t.includes('hematology')||t.includes('erythrogram')||t.includes('leukogram')||t.includes('blood gas')||t.includes('referral patient')||t.includes('urinalysis')||t.includes('cbc')||t.includes('coagulation')||t.includes('microscop')||t.includes('diagnostic lab'))return 'Clinical Pathology';if(t.includes('one health')||t.includes('zoonos')||t.includes('reportable'))return 'One Health';if(t.includes('toxic'))return 'Toxicology';if(t.includes('radiolog')||t.includes('imaging')||t.includes('x-ray')||t.includes('ultrasound'))return 'Radiology';if(t.includes('parasito'))return 'Parasitology';if(t.includes('virolog'))return 'Virology';if(t.includes('bacterio')||t.includes('mycolog'))return 'Bacteriology / Mycology';if(t.includes('patholog')||t.includes('necropsy')||t.includes('histolog'))return 'Pathology';if(t.includes('pharm')||t.includes('drug'))return 'Pharmacology';if(t.includes('injection')||t.includes('clinical skill')||t.includes('osce'))return 'Clinical Skills';return 'Other'}
 function currentSubject(){return canonicalSubject(el('modalTitle')?.textContent||'')}
 function layout(){
  const list=matching(),dueCount=list.filter(due).length;
  const options=subjects().map(s=>'<option value="'+esc(s)+'"'+(s===filter?' selected':'')+'>'+esc(s)+'</option>').join('');
- const head='<div class="vpq-star-header"><div><b>'+cards.length+' saved</b> · '+dueCount+' ready to review<p class="tiny">Saved in this browser. Missed cards return sooner; known cards return later. No XP required.</p></div><label>Subject <select id="vpqStarFilter">'+options+'</select></label></div>';
+ const head='<div class="vpq-star-header"><div><b>'+cards.length+' saved</b> · '+dueCount+' ready to review<p class="tiny">Saved in this browser. Missed cards return sooner; known cards return later. No XP required.</p></div><label>Subject <select id="vpqStarFilter">'+options+'</select></label></div><div class="vpq-star-actions"><button type="button" data-vpq-star-action="allcards" '+(!missedOnly?'disabled':'')+'>⭐ All starred</button><button type="button" data-vpq-star-action="missed" '+(missedOnly?'disabled':'')+'>🔁 Frequently missed</button></div>';
  if(mode==='practice'){
    if(!list.length)return modal('⭐ Starred Flashcards',head+'<p>No cards for this subject.</p><button data-vpq-star-action="list">← Collection</button>');
    index=Math.min(Math.max(index,0),list.length-1);
@@ -61,7 +61,7 @@ function layout(){
  '<div class="vpq-star-actions"><button data-vpq-star-action="practice">▶ Practice '+(dueCount?'('+dueCount+' due)':'all')+'</button><button data-vpq-star-action="add">+ Write a card</button></div>'+
  (list.length?list.map(c=>'<article class="vpq-star-list-item"><div><b>'+esc(c.front)+'</b><small>'+esc(c.subject)+(c.origin?' · '+esc(c.origin):'')+(due(c)?' · Ready to practice':' · Reviewed')+'</small></div><div class="vpq-star-actions"><button data-vpq-star-edit="'+esc(c.id)+'">Edit</button><button data-vpq-star-remove="'+esc(c.id)+'" aria-label="Remove starred flashcard">Remove</button></div></article>').join(''):'<p>No starred cards here yet. Star a flashcard or save a question from any department.</p>'));
 }
-function open(subject){mode='list';filter=DEPARTMENTS.includes(subject)?subject:'All';layout()}
+function open(subject){mode='list';missedOnly=false;filter=DEPARTMENTS.includes(subject)?subject:'All';layout()}
 function practice(){mode='practice';index=0;flipped=false;layout()}
 function toggleDialog(c){
  let dialog=el('vpqStarEditor');
@@ -142,6 +142,7 @@ document.addEventListener('click',e=>{
  e.preventDefault();e.stopPropagation();
  if(action==='open')open(b.dataset.vpqStarSubject);
  else if(action==='capture')captureFromPage();
+ else if(action==='missed'||action==='allcards'){missedOnly=action==='missed';mode='list';index=0;flipped=false;layout()}
  else if(action==='add')toggleDialog({front:'',back:'',subject:filter==='All'?'General':filter,origin:''});
  else if(action==='practice')practice();
  else if(action==='list'){mode='list';layout()}
