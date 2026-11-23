@@ -3932,10 +3932,10 @@
         "mechanismSummary": "Fetal death after skin formation → sterile uterine retention → fluid resorption → desiccation and mummification",
         "dx": "Uterus: fetal mummification, with retained desiccated fetal remains.",
         "histo": "Gross pattern is usually more diagnostic than histology; autolysis and dehydration occur without bacterial suppuration.",
-        "why": "Fetus dies after skin develops while cervix remains closed and uterine contents stay sterile; fetal fluids are resorbed and membranes contract around preserved tissue.",
-        "visualClue": "Dry leathery recognizable fetus with little or no putrid exudate.",
+        "why": "Fetus dies after skin develops while cervix remains closed and uterine contents stay sterile; fetal fluids are resorbed and membranes contract around preserved tissue. No bacterial infection. ",
+        "visualClue": "Dry leathery recognizable fetus with little or no putrid exudate. NO bacterial infection. ",
         "compare": "Maceration involves bacterial infection with fragmented soft tissues, bone remnants and pus; emphysematous fetus has gas and putrefaction.",
-        "notes": "**L77 · EXAM HIGHLIGHT (Fetus retained, no bacterial decomposition; mare twin and sow examples)** Most commonly seen in multiparous species.\n**SPECIES + GROSS:** Swine is the most common, cattle and occasionally mare twin; preserved, dry brown-black leathery fetal outline and little/no purulence.\n**WHY / PATHOGENESIS:** Sterile retained fetal death after skin differentiation → resorption of fluids → dehydration and retained preserved form.\n**DON’T CONFUSE WITH:** Maceration means bacterial breakdown with soft-tissue loss and bones/pus; gas-distended fetus is emphysematous.\n\n**L77 · instructor speaker notes (PPT slide 18 (speaker notes))**\n**Essential condition**: Fetal death with NO bacterial infection, retained fetus and sufficiently mature fetal skin; retained CL may maintain gestation.\n**Gross**: Dehydrated brown/black leathery fetus, sticky mucus, intact recognizable form; lack of foul odor/pus.\n**Species**: Especially sow and one twin in mare; large mummified bovine fetus may take months to fully desiccate.\n**Comparison**: Mummification preserves shape; maceration destroys soft tissue due to infection.",
+        "notes": "**L77 · EXAM HIGHLIGHT (Fetus retained, no bacterial decomposition; mare twin and sow examples)** Most commonly seen in multiparous species.\n**SPECIES + GROSS:** Swine is the most common, cattle and occasionally mare twin; preserved, dry brown-black leathery fetal outline and little/no purulence.\n**WHY / PATHOGENESIS:** Sterile retained fetal death after skin differentiation → resorption of fluids → dehydration and retained preserved form.\n\n**Essential condition**: Fetal death with NO bacterial infection, retained fetus and sufficiently mature fetal skin; retained CL may maintain gestation.\n**Gross**: Dehydrated brown/black leathery fetus, sticky mucus, intact recognizable form; lack of foul odor/pus.\n**Species**: Especially sow and one twin in mare; large mummified bovine fetus may take months to fully desiccate.\n**Comparison**: Mummification preserves shape; maceration destroys soft tissue due to infection.",
         "grossSpecies": "[{\"name\":\"Sows\",\"clue\":\"One or more small dry fetuses among littermates\",\"text\":\"Different conceptuses may die at different gestational ages; one or more dry dark shriveled fetuses can be present at parturition alongside normally developed piglets. Interpret fetal size and timing.\"},{\"name\":\"Mares\",\"clue\":\"Retained mummy or mummified twin\",\"text\":\"Uncommon but may follow one twin dying; intact dry compressed membranes and preserved fetal form help distinguish from infected maceration.\"},{\"name\":\"Cattle\",\"clue\":\"Large brown leathery retained fetus\",\"text\":\"Sterile retained fetal remains can dehydrate slowly for months, with persistent corpus luteum and prolonged gestation. A closed cervix and lack of infection are essential.\"}]",
         "etiologyCategories": [],
         "etiologyAgents": "",
@@ -3957,7 +3957,7 @@
         "zoonoticNotes": "",
         "reportabilityNotes": ""
       },
-      "updated": "2026-11-23T18:26:39.286Z",
+      "updated": "2026-11-23T18:29:55.363Z",
       "approvedBy": "amppet22-prog"
     }
   },
