@@ -382,7 +382,7 @@ function dermComparisonHTML(x){
  if(!(x.dermComparison||x.atlasComparison)||!Array.isArray(x.comparisonRows))return '';
  const official=window.VPQ_NECROPSY_OWNER_PUBLISH?.getSpecimen?.(x.id)||{};
  const photos=Array.isArray(official.photos)?official.photos:(official.photo?.url?[official.photo]:[]);
- const matchedPhoto=(label)=>photos.find(p=>p?.url&&String(p.comparisonLabel||'').trim()===String(label).trim())||photos.find(p=>p?.url&&!p.comparisonLabel&&String(p.caption||'').toLowerCase().includes(String(label).toLowerCase()));
+ const matchedPhoto=(label)=>[...photos].reverse().find(p=>p?.url&&String(p.comparisonLabel||'').trim()===String(label).trim())||[...photos].reverse().find(p=>p?.url&&!p.comparisonLabel&&String(p.caption||'').toLowerCase().includes(String(label).toLowerCase()));
  return '<section class="atlas-derm-comparison" aria-label="Side-by-side pathology concept comparison">'+
  '<h4>🔬 '+(x.foundationComparison?'Compare foundations · mechanism · microscopic appearance':x.dermComparison?'Compare by morphology · species · location':'Compare conditions · organ · gross appearance')+'</h4>'+ 
  '<p>These are comparative teaching patterns, not separate diagnoses. Each photo has a specific comparison position. Use Edit / Publish to assign each photo to the correct named slot; captions can contain any useful study description.</p>'+
