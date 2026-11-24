@@ -924,6 +924,40 @@
       "differentials": "No disease inference from a labeled anatomy figure.",
       "why": "MRI allows anatomy in multiple planes with strong soft tissue differentiation without ionizing radiation.",
       "next": "Review coronal/axial orientation and MRI contraindications and sequence contrasts."
+    },
+    "exam1-veterinary-ct-scanner-reference": {
+      "id": "exam1-veterinary-ct-scanner-reference",
+      "kind": "normal",
+      "modality": "CT",
+      "updated": "2026-11-24T19:45:00Z",
+      "title": "Exam 1 · Veterinary CT Scanner · Equipment Photo",
+      "species": "Horse / Veterinary",
+      "region": "CT scanner equipment",
+      "lecture": "Exam 1 · Ultrasound, CT and MRI",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/TC%20caballos.jpg",
+          "view": "Photograph of a veterinary computed tomography scanner",
+          "caption": "Equipment reference photograph; this image is NOT a CT cross-section."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:TC_caballos.jpg",
+      "credit": "Miguel Calvo · CC BY 4.0 · https://creativecommons.org/licenses/by/4.0/",
+      "history": "Veterinary faculty CT scanner equipment photograph, not a clinical patient study.",
+      "lookFor": "Recognize scanner gantry, patient positioning apparatus and bore; compare CT acquisition with planar radiography.",
+      "quality": "Photograph of CT equipment, not diagnostic image.",
+      "findings": "CT scanner photographed at University of Zaragoza Faculty of Veterinary Medicine.",
+      "interpretation": "Equipment reference for CT principles; no patient interpretation.",
+      "differentials": "Not a pathology case.",
+      "why": "CT acquires numerous X-ray projections around the patient and reconstructs cross-sectional slices to reduce structure superimposition.",
+      "next": "In the CT station, compare reconstructed axial/coronal/sagittal planes and window settings.",
+      "imageStatus": "Original 6688×4633 source file CC BY 4.0",
+      "reviewStatus": "Equipment image, not a patient scan",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "note": "Equipment photograph for learning scanner setup; not a diagnostic CT scan."
+      }
     }
   }
 }
