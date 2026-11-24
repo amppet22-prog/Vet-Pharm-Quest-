@@ -45,10 +45,10 @@ function viewRow(i,v){
  (v?.url?'<label style="display:block;font-size:12px"><input data-vpqi-remove="'+i+'" type="checkbox"> Remove this image when publishing</label>':'')+
  '</div>';
 }
-function edit(id=null){
+function edit(id=null,requestedSlot=''){
  selected=id||null;
  const card=id?data.cases[id]:null;if(id&&!card)return list();
- const c=card||{title:'',kind:'case',lecture:'',species:'Dog',modality:'X-ray',region:'',history:'',lookFor:'',quality:'',findings:'',interpretation:'',differentials:'',why:'',next:'',source:'',credit:'',images:[]};
+ const c=card||{title:requestedSlot?'Exam 2 · '+requestedSlot:'',kind:'case',lecture:requestedSlot?'CVM 743 · Exam 2 Abdomen':'',species:'Dog',modality:'X-ray',region:requestedSlot?'Abdomen':'',history:'',lookFor:'',quality:'',findings:'',interpretation:'',differentials:'',why:'',next:'',source:'',credit:'',exam2Slot:requestedSlot,images:[]};
  ownerDraft=c;
  screen((card?'Edit':'Add')+' Imaging '+(c.kind==='normal'?'Normal Reference':'Case'),
  '<div style="padding:10px;background:#f4f0fa;border:1px solid #ded2eb;border-radius:10px"><b>'+(card?'Edit published record':'Create permanent imaging record')+'</b><p style="font-size:12px;margin:4px 0">Each named projection belongs to the same case. Add new images in the image slots below. Existing images stay unless you replace or remove them.</p></div>'+
@@ -56,7 +56,9 @@ function edit(id=null){
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px">'+
  [['Title','Title','e.g. Canine Thorax · Case 001'],['Lecture','Lecture','e.g. DI Exam 4 / Thorax'],['Species','Species','e.g. Dog'],['Region','Region','e.g. Thorax'],['History','History','Presenting complaint / context'],['LookFor','What to look for','Student-friendly questions about the anatomy and signs, without revealing the diagnosis'],['Quality','Quality','Projection, exposure, positioning, artifacts'],['Findings','Findings','Objective radiographic signs'],['Interpretation','Interpretation','Diagnosis or assessment · revealed after practice'],['Differentials','Differentials','Competing explanations'],['Why','Why','Imaging signs and underlying pathophysiology'],['Next','Next','Diagnostic next steps / limitations'],['Source','Source','Lecture / original study reference'],['Credit','Credit','Rights holder or educational source']].map(([label,id,placeholder])=>'<label style="display:block;font-size:12px;font-weight:800">'+label+(id==='Title'||id==='Species'||id==='Region'||id==='Source'?' *':'')+
  (['History','LookFor','Quality','Findings','Interpretation','Differentials','Why','Next'].includes(id)?'<textarea rows="3" id="vpqi'+id+'" placeholder="'+E(placeholder)+'" style="display:block;width:100%;padding:9px;border:1px solid #d3dce9;border-radius:8px">'+E((id==='LookFor'?c.lookFor:c[id.toLowerCase()])||'')+'</textarea>':'<input id="vpqi'+id+'" value="'+E(c[id.toLowerCase()]||'')+'" placeholder="'+E(placeholder)+'" style="display:block;width:100%;padding:9px;border:1px solid #d3dce9;border-radius:8px">')+'</label>').join('')+
- '</div><h4 style="margin:14px 0 4px">📷 Views in this case</h4>'+
+ '<label style="display:block;font-size:12px;font-weight:800;margin-top:10px">Exam 2 abdominal photo slot (optional)<input id="vpqiExam2Slot" list="vpqiExam2Slots" value="'+E(c.exam2Slot||'')+'" placeholder="Choose matching Exam 2 challenge" style="display:block;width:100%;padding:9px;border:1px solid #d3dce9;border-radius:8px"></label>'+
+ '<datalist id="vpqiExam2Slots">'+(window.VPQ_ABDOMINAL_CHALLENGES?.tasks||[]).map(t=>'<option value="'+E(t[1])+'"></option>').join('')+'</datalist>'+
+'</div><h4 style="margin:14px 0 4px">📷 Views in this case</h4>'+
  '<div style="font-size:12px;background:#eff8ff;border:1px solid #d0e5f5;border-radius:10px;padding:10px;margin:8px 0"><b>Image standard:</b> Prefer full-resolution original radiographs from authorized CVM 743 lectures, permitted textbook figures, and licensed veterinary clinical teaching sources such as IDEXX or Today’s Veterinary Practice. Record source, reuse rights, species and projection. Avoid photographed monitors and compressed thumbnails. Permission for personal study does not automatically permit public redistribution.</div>'+
  '<p style="font-size:12px;color:#556a83">Image 1, 2 and 3 are independent upload slots. Label the projection before publishing. You can add views later without losing previously published files.</p>'+
  [0,1,2].map(i=>viewRow(i,c.images?.[i])).join('')+
@@ -148,7 +150,7 @@ async function publish(){
   if(url)newImages.push({url,view:it.view||it.old?.view||'',caption:it.caption||it.old?.caption||''});
  }
  if(!newImages.length)throw Error('The case requires at least one view.');
- const card={...(old||{}),id,title:v('Title').slice(0,180),kind:v('Kind')==='normal'?'normal':'case',modality:v('Modality')||'X-ray',lecture:v('Lecture').slice(0,120),species:v('Species').slice(0,120),region:v('Region').slice(0,140),history:v('History').slice(0,3500),lookFor:v('LookFor').slice(0,3500),quality:v('Quality').slice(0,3500),findings:v('Findings').slice(0,3500),interpretation:v('Interpretation').slice(0,3500),differentials:v('Differentials').slice(0,3500),why:v('Why').slice(0,3500),next:v('Next').slice(0,3500),source:v('Source').slice(0,500),credit:v('Credit').slice(0,500),images:newImages,updated:new Date().toISOString()};
+ const card={...(old||{}),exam2Slot:v('Exam2Slot').slice(0,180),id,title:v('Title').slice(0,180),kind:v('Kind')==='normal'?'normal':'case',modality:v('Modality')||'X-ray',lecture:v('Lecture').slice(0,120),species:v('Species').slice(0,120),region:v('Region').slice(0,140),history:v('History').slice(0,3500),lookFor:v('LookFor').slice(0,3500),quality:v('Quality').slice(0,3500),findings:v('Findings').slice(0,3500),interpretation:v('Interpretation').slice(0,3500),differentials:v('Differentials').slice(0,3500),why:v('Why').slice(0,3500),next:v('Next').slice(0,3500),source:v('Source').slice(0,500),credit:v('Credit').slice(0,500),images:newImages,updated:new Date().toISOString()};
  manifest.cases[id]=card;
  if(status)status.textContent='Publishing case and interpretation…';
  await github(API+FILE,token,'PUT',{message:'Owner '+(old?'update':'create')+' Diagnostic Imaging case '+id,content:enc(JSON.stringify(manifest,null,2)+'\n'),sha:raw.sha,branch:'main'});
