@@ -754,6 +754,176 @@
         "clinicalQualityVerified": false,
         "note": "Full-size source provided but projection/laterality not established; avoid definitive fetal count based on overlaps alone."
       }
+    },
+    "exam1-canine-prostate-ultrasound-reference": {
+      "updated": "2026-11-24T19:30:00Z",
+      "imageStatus": "Original image hosted at Wikimedia Commons; reusable license referenced",
+      "reviewStatus": "Source-attributed teaching image; clinical image not independently verified by radiologist",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "note": "Source figure suitable for teaching concepts; not a substitute for an original DICOM study or independent diagnostic interpretation."
+      },
+      "id": "exam1-canine-prostate-ultrasound-reference",
+      "kind": "normal",
+      "title": "Exam 1 · Canine Prostate Longitudinal Sonogram",
+      "species": "Dog",
+      "modality": "Ultrasound",
+      "region": "Prostate / caudal abdomen",
+      "lecture": "Exam 1 · Ultrasonography, CT and MRI",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Prostata%20Sono%20Hund.jpg",
+          "view": "Longitudinal ultrasound of canine prostate",
+          "caption": "Longitudinal plane; original uploaded file 307×367 px, a low-resolution teaching reference."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Prostata_Sono_Hund.jpg",
+      "credit": "Kalumet · CC BY 2.5 · https://creativecommons.org/licenses/by/2.5/",
+      "history": "Source identifies a canine prostate imaged longitudinally; no full patient history.",
+      "lookFor": "Identify speckled gray echotexture, boundaries and overall orientation. Describe relative echogenicity without calling pathology.",
+      "quality": "Low-resolution sonogram; use for grayscale recognition, not subtle lesion diagnosis.",
+      "findings": "Source labels a canine prostate in a longitudinal ultrasound projection.",
+      "interpretation": "Ultrasound normal-anatomy orientation reference; normality beyond the source's stated anatomy is not independently established.",
+      "differentials": "Normal appearance vs prostatitis/hyperplasia/neoplasia require clinical and better-quality imaging.",
+      "why": "Tissue interfaces return varying sound energy; liquid is darker, interfaces and tissue types yield relative echogenicities.",
+      "next": "Practice identifying scan plane and distinguish anechoic fluid from solid parenchymal echoes."
+    },
+    "exam1-canine-paraprostatic-cyst-ultrasound": {
+      "updated": "2026-11-24T19:30:00Z",
+      "imageStatus": "Original image hosted at Wikimedia Commons; reusable license referenced",
+      "reviewStatus": "Source-attributed teaching image; clinical image not independently verified by radiologist",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "note": "Source figure suitable for teaching concepts; not a substitute for an original DICOM study or independent diagnostic interpretation."
+      },
+      "id": "exam1-canine-paraprostatic-cyst-ultrasound",
+      "kind": "case",
+      "title": "Exam 1 · Canine Paraprostatic Cyst · Anechoic Fluid",
+      "species": "Dog",
+      "modality": "Ultrasound",
+      "region": "Caudal abdomen / prostate",
+      "lecture": "Exam 1 · Ultrasound echogenicity and artifacts",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Paraprostatic%20Cyst%20Dog.jpg",
+          "view": "Paraprostatic cyst and adjacent prostate labeled on sonogram",
+          "caption": "Uploader labeled prostate (Pr) and a paraprostatic cyst (Cy). Source file is 356×348 px."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Paraprostatic_Cyst_Dog.jpg",
+      "credit": "Kalumet · CC BY 2.5 · https://creativecommons.org/licenses/by/2.5/",
+      "history": "Canine ultrasound example with source-identified paraprostatic cyst; signalment unspecified.",
+      "lookFor": "Identify the cystic fluid region relative to soft tissue. Evaluate the role of anechoic lumen, wall boundaries, and possible distal enhancement.",
+      "quality": "Very low-resolution, annotated ultrasound. Use for recognizing a cystic versus solid region, not quantification.",
+      "findings": "Original source labels a cyst adjacent to the prostate. A fluid-filled structure typically has few internal echoes.",
+      "interpretation": "Source-defined paraprostatic cyst; this frame alone cannot establish complete etiology or anatomy.",
+      "differentials": "Fluid-filled cyst vs other cystic pelvic structures; prostate pathology may coexist.",
+      "why": "Uniform fluid gives few returning echoes and may produce increased brightness immediately deep to the fluid because sound attenuation is low.",
+      "next": "Compare with full ultrasound series and clinical context."
+    },
+    "exam1-canine-prostate-carcinoma-ultrasound": {
+      "updated": "2026-11-24T19:30:00Z",
+      "imageStatus": "Original image hosted at Wikimedia Commons; reusable license referenced",
+      "reviewStatus": "Source-attributed teaching image; clinical image not independently verified by radiologist",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "note": "Source figure suitable for teaching concepts; not a substitute for an original DICOM study or independent diagnostic interpretation."
+      },
+      "id": "exam1-canine-prostate-carcinoma-ultrasound",
+      "kind": "case",
+      "title": "Exam 1 · Canine Prostatic Neoplasia · Echogenicity",
+      "species": "Dog",
+      "modality": "Ultrasound",
+      "region": "Prostate",
+      "lecture": "Exam 1 · Ultrasound gray scale and soft tissue indications",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Prostata-Ca%20Dog.jpg",
+          "view": "Annotated prostate ultrasound",
+          "caption": "Source arrows label altered echogenicity and Z indicates cystic areas. Low-res 296×295 px."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Prostata-Ca_Dog.jpg",
+      "credit": "Kalumet · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "Author identifies canine prostatic carcinoma, but confirmation method not provided.",
+      "lookFor": "Compare regions of differing echogenicity within a soft-tissue organ; do not infer a specific tumor solely from brightness.",
+      "quality": "Low resolution and annotation permanently present; use as echo-pattern example only.",
+      "findings": "Uploader indicates hyperechoic areas and adjacent cystic regions.",
+      "interpretation": "Source-attributed prostatic carcinoma; ultrasound heterogeneity is nonspecific and does not establish histology alone.",
+      "differentials": "Prostatitis, abscess, hyperplasia or neoplasia.",
+      "why": "Cellular, fibrous and mineralized tissue may return different echoes than surrounding parenchyma; echogenicity is tissue response, not a direct cancer marker.",
+      "next": "Correlate with examination, labs and appropriate sampling."
+    },
+    "exam1-dog-hip-mri-femoral-head-necrosis": {
+      "updated": "2026-11-24T19:30:00Z",
+      "imageStatus": "Original image hosted at Wikimedia Commons; reusable license referenced",
+      "reviewStatus": "Source-attributed teaching image; clinical image not independently verified by radiologist",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "note": "Source figure suitable for teaching concepts; not a substitute for an original DICOM study or independent diagnostic interpretation."
+      },
+      "id": "exam1-dog-hip-mri-femoral-head-necrosis",
+      "kind": "case",
+      "title": "Exam 1 · Canine T1 MRI · Femoral Head Necrosis",
+      "species": "Dog",
+      "modality": "MRI",
+      "region": "Pelvis / femoral heads",
+      "lecture": "Exam 1 · MRI principles and indication",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Femurkopfnekrose.jpg",
+          "view": "Coronal T1-weighted MRI of canine hips",
+          "caption": "Source identifies right femoral head necrosis (shown left in image)."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Femurkopfnekrose.jpg",
+      "credit": "Hermannthomas · Public-domain dedication on Wikimedia Commons",
+      "history": "Canine femoral head MRI source example; detailed case data unspecified.",
+      "lookFor": "Recognize coronal cross-sectional MRI, bilateral femoral heads and relative soft-tissue contrast. Do not treat a T1 image as a CT image.",
+      "quality": "Public-domain 948×872 image; source report has no full MRI protocol or independent reading.",
+      "findings": "Uploader identifies unilateral femoral head necrosis, right patient side displayed on image left.",
+      "interpretation": "Source-attributed femoral head necrosis on T1-weighted canine MRI.",
+      "differentials": "Osteonecrosis, chronic degenerative changes or prior trauma require clinical correlation.",
+      "why": "MRI signal reflects proton density and relaxation characteristics rather than X-ray attenuation; it can help characterize marrow and soft tissues.",
+      "next": "Compare sequences, orientation and orthogonal radiographic findings."
+    },
+    "exam1-canine-olfactory-mri-anatomy": {
+      "updated": "2026-11-24T19:30:00Z",
+      "imageStatus": "Original image hosted at Wikimedia Commons; reusable license referenced",
+      "reviewStatus": "Source-attributed teaching image; clinical image not independently verified by radiologist",
+      "studyImageReview": {
+        "priority": "metadata-review",
+        "clinicalQualityVerified": false,
+        "note": "Source figure suitable for teaching concepts; not a substitute for an original DICOM study or independent diagnostic interpretation."
+      },
+      "id": "exam1-canine-olfactory-mri-anatomy",
+      "kind": "normal",
+      "title": "Exam 1 · Dog Sagittal MRI · Olfactory Anatomy",
+      "species": "Dog",
+      "modality": "MRI",
+      "region": "Skull / brain",
+      "lecture": "Exam 1 · MRI planes and contrast",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Canine%20Olfactory%20System.png",
+          "view": "Annotated sagittal canine MRI",
+          "caption": "Color overlays delineate canine olfactory-associated structures; not a disease case."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Canine_Olfactory_System.png",
+      "credit": "Paula Jendrny · CC BY 4.0 · https://creativecommons.org/licenses/by/4.0/",
+      "history": "Illustrative published anatomy MRI with colored overlays.",
+      "lookFor": "Find sagittal plane and the skull/nasal cavity/brain relationships; distinguish sequence-dependent signal from image annotations.",
+      "quality": "1,503×847 annotated teaching MRI; labels obscure some details.",
+      "findings": "Olfactory structures annotated on a sagittal MRI.",
+      "interpretation": "Anatomy-reference figure, no pathological conclusion.",
+      "differentials": "No disease inference from a labeled anatomy figure.",
+      "why": "MRI allows anatomy in multiple planes with strong soft tissue differentiation without ionizing radiation.",
+      "next": "Review coronal/axial orientation and MRI contraindications and sequence contrasts."
     }
   }
 }
