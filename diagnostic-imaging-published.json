@@ -958,6 +958,74 @@
         "clinicalQualityVerified": false,
         "note": "Equipment photograph for learning scanner setup; not a diagnostic CT scan."
       }
+    },
+    "verified-feline-abdomen-foreign-body-shrapnel": {
+      "id": "verified-feline-abdomen-foreign-body-shrapnel",
+      "kind": "normal",
+      "modality": "X-ray",
+      "lecture": "CVM 743 Exam 2 Abdomen",
+      "updated": "2026-11-24T20:15:00Z",
+      "imageStatus": "Source licensed and attributed; original link",
+      "reviewStatus": "Source-reported patient history; teaching interpretation not independent clinical review",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Projection and clinical source should be independently assessed before measurement."
+      },
+      "title": "Feline Abdomen · Metallic Shrapnel Localization Reference",
+      "species": "Cat",
+      "region": "Abdomen / soft tissue foreign body",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Belly%C2%B4s%20cat%20radiography.jpg",
+          "view": "Cat abdomen · source projection not specified",
+          "caption": "Real Siamese cat abdominal radiograph taken to follow a fragment of shrapnel in the left side; source metadata mentions previously sustained projectile injuries."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Belly%C2%B4s_cat_radiography.jpg",
+      "credit": "Santamarcanda, CC BY-SA 4.0 · https://creativecommons.org/licenses/by-sa/4.0/",
+      "history": "Four-year-old Siamese cat with an embedded shrapnel fragment in left side. The examination was intended to evaluate the fragment.",
+      "lookFor": "Orient the film, identify radiopaque metallic material and localize it in projection relative to abdominal tissues without claiming a specific organ location from a single view.",
+      "quality": "Original 1350 × 1692 JPEG; source metadata notes image orientation rotation; must verify display against anatomy.",
+      "findings": "Radiopaque foreign material is source-described. Location relative to internal structures requires orthogonal projections.",
+      "interpretation": "Source-identified retained shrapnel, not a GI obstruction or intestinal foreign body.",
+      "differentials": "External metallic artifact, implant or retained projectile material; localization requires context.",
+      "why": "Metal attenuates radiographs more strongly than mineral or soft tissues, producing marked radiopacity.",
+      "next": "Check projection/marker, compare orthogonal images if available, and assess whether further localization changes management."
+    },
+    "verified-canine-gdv-bloat-film": {
+      "id": "verified-canine-gdv-bloat-film",
+      "kind": "case",
+      "modality": "X-ray",
+      "lecture": "CVM 743 Exam 2 Abdomen",
+      "updated": "2026-11-24T20:15:00Z",
+      "imageStatus": "Source licensed and attributed; original link",
+      "reviewStatus": "Source-reported patient history; teaching interpretation not independent clinical review",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Projection and clinical source should be independently assessed before measurement."
+      },
+      "title": "Canine GDV · German Shepherd Diagnostic Reference",
+      "species": "Dog",
+      "region": "Stomach / cranial abdomen",
+      "images": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Bloat%20x-ray.JPG",
+          "view": "Photo of German Shepherd dog GDV radiograph · precise view unspecified",
+          "caption": "Source-identified GDV in a German Shepherd with a prominent gas-distended stomach; photographed radiograph, not uncompressed DICOM."
+        }
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Bloat_x-ray.JPG",
+      "credit": "Joel Mills, CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
+      "history": "German Shepherd with gastric dilation and volvulus; source describes GDV.",
+      "lookFor": "Marked gastric gaseous distension and altered compartments; consider whether projection permits confident determination of pyloric displacement.",
+      "quality": "2592 × 1944 photograph of an X-ray. Source does not provide acquisition metadata or definitive projection label.",
+      "findings": "Marked gastric gaseous dilation on source-confirmed GDV radiograph.",
+      "interpretation": "GDV is source-attributed; avoid treating a large stomach alone as proof of volvulus.",
+      "differentials": "Food bloat, gastric outflow obstruction, functional gastric ileus, aerophagia.",
+      "why": "Gastric volvulus twists the stomach, trapping gas and compromising vascular return.",
+      "next": "Emergency stabilization and veterinary surgical assessment."
     }
   }
 }
