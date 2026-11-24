@@ -163,6 +163,27 @@ async function publish(){
  if(rawToken&&password&&!vault?.exists?.()){try{await vault.store(rawToken,password)}catch(e){}}
  screen('✓ Imaging case published','<p><b>'+E(card.title)+'</b> was published to the shared imaging library with '+newImages.length+' image(s). Students can now open it.</p>'+button('open:'+E(id),'Open case')+button('library','Published library'));
 }
+
+/* Owner-only image slot approval: saved in the same GitHub manifest as cases. */
+async function saveReviewSlot(slotId,checks,password,rawToken=''){
+ const token=await auth(password,rawToken);
+ const raw=await github(API+FILE+'?ref=main',token);
+ const manifest=JSON.parse(dec(raw.content));
+ if(!manifest.cases||typeof manifest.cases!=='object')throw Error('Invalid imaging manifest');
+ const current=manifest.reviewSlots||{};
+ if(!/^[a-z0-9-]{2,100}$/.test(slotId))throw Error('Invalid image slot identifier');
+ const safe={source:!!checks.source,rights:!!checks.rights,quality:!!checks.quality,clinical:!!checks.clinical,placement:!!checks.placement};
+ const approved=Object.values(safe).every(Boolean);
+ // Marking a slot "approved" does not itself publish a missing photo or claim a specialist review.
+ current[slotId]={checks:safe,approved,updated:new Date().toISOString()};
+ manifest.reviewSlots=current;
+ await github(API+FILE,token,'PUT',{message:'Owner image review '+slotId+(approved?' approved':' updated'),content:enc(JSON.stringify(manifest,null,2)+'\n'),sha:raw.sha,branch:'main'});
+ data=manifest;
+ if(rawToken&&password&&!window.VPQ_OWNER_KEY_VAULT?.exists?.()){try{await window.VPQ_OWNER_KEY_VAULT.store(rawToken,password)}catch(e){}}
+ return current[slotId];
+}
+function reviewSlots(){return JSON.parse(JSON.stringify(data.reviewSlots||{}))}
+
 function init(context){
  api=context;if(api.body.__vpqImagingPublishInit)return;api.body.__vpqImagingPublishInit=true;
  api.body.addEventListener('click',event=>{
@@ -184,5 +205,5 @@ function init(context){
   }
  },true);
 }
-window.VPQ_IMAGING_PUBLISH=Object.freeze({init,load,library:()=>load().then(list),list,edit,getCases:available});
+window.VPQ_IMAGING_PUBLISH=Object.freeze({init,load,library:()=>load().then(list),list,edit,getCases:available,saveReviewSlot,reviewSlots});
 })();
