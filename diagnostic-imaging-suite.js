@@ -82,8 +82,7 @@ function xrayHome(){
  const cards=[
  ['exam1-technique','🛡️','Exam 1 · Safety & Physics','Lecture 1 essentials','ALARA, PPE, scatter, X-ray tube, kVp/mAs and radiation exposure','#eaf8ff','#9cc9e9'],
  ['exam1-reading','📖','Exam 1 · Radiographic Interpretation','Lecture 2 essentials','Display orientation, 5 opacities, Roentgen signs & artifacts','#fff1fa','#e7b4d1'],
- ['exam2-lessons','📗','Exam 2 · Abdominal Lecture Guide','Everything from lectures','Six deep learning units covering normal anatomy, technique, mass effects, GI and contrast','#eef7ff','#b3cfee'],
- ['abdomen-lab','🍎','Exam 2 · Abdominal Radiograph Lab','Normal, views & ileus','21 comparison challenges: anatomy, views, image quality and conditions','#fff2e9','#e7c29d'],
+ ['abdomen-lab','🍎','Exam 2 · Abdominal Radiology Course','Start here · 5 modules','57 guided challenges + lecture guide + image/photo slots','#fff2e9','#e7c29d'],
  ['final-rounds','🎯','Final Image Interpretation Rounds','Practice with real radiographs','20 source-linked studies, 40 case questions, reasons & editable images','#fff1e9','#eac59e'],
  ['conditions','🦴','Lecture Condition Casebook','Learn every disease pattern','54 lecture-based presentations, radiographic clues & look-alikes','#edf9f7','#a4d9cd'],
  ['course','📖','Radiology Learning Course','Learn before you diagnose','Lecture objectives, normal anatomy, interpretation method & final review','#f4eaff','#c5afe6'],
@@ -99,7 +98,7 @@ function xrayHome(){
  '<span aria-hidden="true" style="position:absolute;right:14px;top:3px;font-size:29px;opacity:.42">✧ 🩻 ✧</span>'+
  '<div style="font-size:11px;font-weight:850;letter-spacing:.11em;color:#8a72ab;text-transform:uppercase;margin-bottom:5px">Radiography learning lab</div>'+
  '<b style="display:block;font-size:17px;color:#574475;line-height:1.3">See it. Describe it. Diagnose it. 💜</b>'+
- '<p style="margin:7px 0 0;color:#586a83;font-size:12px;max-width:590px;line-height:1.55">Choose where to practice — from taking a good radiograph to working through real teaching cases. All six tools live together here.</p></div>'+
+ '<p style="margin:7px 0 0;color:#586a83;font-size:12px;max-width:590px;line-height:1.55">Choose where to practice — from taking a good radiograph to working through real teaching cases. All radiography study tools live together here.</p></div>'+
  '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px">'+cards.map(([key,icon,name,tag,detail,bg,edge])=>
  '<button type="button" data-vpqimage="'+key+'" style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-height:144px;text-align:left;padding:13px 14px;background:linear-gradient(145deg,#fff 0%,'+bg+' 100%);border:1.5px solid '+edge+';border-left:4px solid '+edge+';border-radius:15px;box-shadow:0 3px 10px #67779a12;transition:transform .15s ease,box-shadow .15s ease">'+
  '<span aria-hidden="true" style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:11px;background:#ffffffa8;font-size:20px">'+icon+'</span>'+
