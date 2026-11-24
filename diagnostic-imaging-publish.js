@@ -165,7 +165,7 @@ async function publish(){
 }
 
 /* Owner-only image slot approval: saved in the same GitHub manifest as cases. */
-async function saveReviewSlot(slotId,checks,password,rawToken=''){
+async function saveReviewSlot(slotId,checks,password,rawToken='',caseId=''){
  const token=await auth(password,rawToken);
  const raw=await github(API+FILE+'?ref=main',token);
  const manifest=JSON.parse(dec(raw.content));
@@ -173,9 +173,12 @@ async function saveReviewSlot(slotId,checks,password,rawToken=''){
  const current=manifest.reviewSlots||{};
  if(!/^[a-z0-9-]{2,100}$/.test(slotId))throw Error('Invalid image slot identifier');
  const safe={source:!!checks.source,rights:!!checks.rights,quality:!!checks.quality,clinical:!!checks.clinical,placement:!!checks.placement};
- const approved=Object.values(safe).every(Boolean);
+ const linked=caseId?manifest.cases[caseId]:null;
+ if(caseId&&(!linked||!linked.images?.some(v=>v.url)))throw Error('Selected case has no published images.');
+ const approved=Object.values(safe).every(Boolean)&&!!linked;
+ if(Object.values(safe).every(Boolean)&&!linked)throw Error('Select a published example or upload a case before approval.');
  // Marking a slot "approved" does not itself publish a missing photo or claim a specialist review.
- current[slotId]={checks:safe,approved,updated:new Date().toISOString()};
+ current[slotId]={checks:safe,approved,caseId:caseId||'',updated:new Date().toISOString()};
  manifest.reviewSlots=current;
  await github(API+FILE,token,'PUT',{message:'Owner image review '+slotId+(approved?' approved':' updated'),content:enc(JSON.stringify(manifest,null,2)+'\n'),sha:raw.sha,branch:'main'});
  data=manifest;
