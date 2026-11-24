@@ -961,7 +961,7 @@
     },
     "verified-feline-abdomen-foreign-body-shrapnel": {
       "id": "verified-feline-abdomen-foreign-body-shrapnel",
-      "kind": "normal",
+      "kind": "case",
       "modality": "X-ray",
       "lecture": "CVM 743 Exam 2 Abdomen",
       "updated": "2026-11-24T20:15:00Z",
@@ -970,7 +970,7 @@
       "studyImageReview": {
         "priority": "teaching",
         "clinicalQualityVerified": false,
-        "note": "Projection and clinical source should be independently assessed before measurement."
+        "note": "Source documents shrapnel and includes EXIF orientation metadata; verify upright display and marker before using for localization. Source license CC BY-SA 4.0."
       },
       "title": "Feline Abdomen · Metallic Shrapnel Localization Reference",
       "species": "Cat",
