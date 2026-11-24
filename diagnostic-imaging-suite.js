@@ -90,7 +90,7 @@ function xrayHome(){
  ['course','📖','Radiology Learning Course','Learn before you diagnose','Lecture objectives, normal anatomy, interpretation method & final review','#f4eaff','#c5afe6'],
  ['xray-technique','🩻','Technique & positioning','Start with the basics','Beam direction, projections, kVp / mAs & safe positioning','#f7edff','#cbb4ed'],
  ['quality','✨','Radiograph quality','Make every image count','Collimation, rotation, markers, artifacts & exposure','#eaf8f4','#a7ded0'],
- ['approval-queue','✅','Owner Image Approval Queue','Check and publish lecture photos','30 image targets · examples, quiz-key figures and owner approval','#edf8f4','#b7dacc'],
+ ['approval-queue','✅','Owner Image Approval Queue','Check and publish lecture photos','40 image targets · Exams 1–3, including BSAVA MSK references','#edf8f4','#b7dacc'],
  ['library','📚','Published imaging cases','Your teaching library','Normal references, clinical cases & published radiographs','#fff3e5','#f4d2a3'],
  ['viewer','🖼️','Multi-view viewer','Take a closer look','Zoom and compare up to three radiographs','#eaf3ff','#b7d2f5'],
  ['spotter','🔎','Spot the Abnormality','Put your detective hat on','Locate findings and reason through differentials','#fff0f5','#efb9d1'],
