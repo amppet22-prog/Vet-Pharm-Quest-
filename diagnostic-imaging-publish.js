@@ -148,7 +148,7 @@ async function publish(){
   if(url)newImages.push({url,view:it.view||it.old?.view||'',caption:it.caption||it.old?.caption||''});
  }
  if(!newImages.length)throw Error('The case requires at least one view.');
- const card={id,title:v('Title').slice(0,180),kind:v('Kind')==='normal'?'normal':'case',modality:v('Modality')||'X-ray',lecture:v('Lecture').slice(0,120),species:v('Species').slice(0,120),region:v('Region').slice(0,140),history:v('History').slice(0,3500),lookFor:v('LookFor').slice(0,3500),quality:v('Quality').slice(0,3500),findings:v('Findings').slice(0,3500),interpretation:v('Interpretation').slice(0,3500),differentials:v('Differentials').slice(0,3500),why:v('Why').slice(0,3500),next:v('Next').slice(0,3500),source:v('Source').slice(0,500),credit:v('Credit').slice(0,500),images:newImages,updated:new Date().toISOString()};
+ const card={...(old||{}),id,title:v('Title').slice(0,180),kind:v('Kind')==='normal'?'normal':'case',modality:v('Modality')||'X-ray',lecture:v('Lecture').slice(0,120),species:v('Species').slice(0,120),region:v('Region').slice(0,140),history:v('History').slice(0,3500),lookFor:v('LookFor').slice(0,3500),quality:v('Quality').slice(0,3500),findings:v('Findings').slice(0,3500),interpretation:v('Interpretation').slice(0,3500),differentials:v('Differentials').slice(0,3500),why:v('Why').slice(0,3500),next:v('Next').slice(0,3500),source:v('Source').slice(0,500),credit:v('Credit').slice(0,500),images:newImages,updated:new Date().toISOString()};
  manifest.cases[id]=card;
  if(status)status.textContent='Publishing case and interpretation…';
  await github(API+FILE,token,'PUT',{message:'Owner '+(old?'update':'create')+' Diagnostic Imaging case '+id,content:enc(JSON.stringify(manifest,null,2)+'\n'),sha:raw.sha,branch:'main'});
