@@ -5175,9 +5175,10 @@ const vpqCompanionCategories=[
 ];
 let vpqCompanionTab='dog';
 const vpqCompanionCatalog=[
- {id:'dog-mera',name:'Mera Shark',category:'dog',pet:'🐕',petBreed:'husky-shepherd',level:1,price:0,image:null},
- // Additive Mera option: display only after the actual transparent PNG exists.
+ // Current approved transparent Mera is the default. Retain the unique saved ID.
  {id:'dog-mera-regular',name:'Mera',category:'dog',pet:'🐕',petBreed:'dog-mera-regular',level:1,price:0,image:'Mera-Regular-Transparent.png'},
+ // Her shark costume remains a distinct, optional appearance, not the legacy starter.
+ {id:'dog-mera-shark',name:'Mera · Shark Costume',category:'dog',pet:'🐕',petBreed:'dog-mera-shark',level:1,price:0,image:null},
  ...vpqBatch1Dogs.filter(d=>d&&d.species==='dog'&&/^dog-b1-[0-9a-f]{12}$/.test(d.id)).map((d,i)=>({
    id:d.id,category:'dog',name:d.label,pet:'🐕',petBreed:d.id,
    level:i<4?1:i<12?3:i<24?6:i<36?10:15,
@@ -5830,9 +5831,16 @@ for(const starterId of ['cat-siamese','pocket-rabbit-holland','exotic-beardie'])
 const vpqCompanionById=id=>vpqCompanionCatalog.find(c=>c.id===id);
 const vpqCompanionLv=()=>Math.floor(Math.max(0,Number(state.xp)||0)/LEVEL_THRESH)+1;
 if(!Array.isArray(state.vpqCompanionOwned))state.vpqCompanionOwned=[];
+// Retire the old Mera starter selection that could resurrect the obsolete sprite
+// on profile reload. This is a targeted ID migration, not a save reset.
+if(state.vpqCompanionId==='dog-mera'){
+ state.vpqCompanionId='dog-mera-regular';
+ state.petBreed='dog-mera-regular';
+ persist();
+}
 if(!state.vpqCompanionId || !vpqCompanionById(state.vpqCompanionId)){
  const oldDog=vpqCompanionCatalog.find(c=>c.category==='dog'&&c.petBreed===state.petBreed);
- state.vpqCompanionId=oldDog?.id||(state.pet==='🐈'?'cat-tuxedo':'dog-mera');
+ state.vpqCompanionId=oldDog?.id||(state.pet==='🐈'?'cat-tuxedo':'dog-mera-regular');
 }
 // Free starters never need an explicit purchase record.
 function vpqCompanionOwned(c){return !!c&&(c.price===0||state.vpqCompanionOwned.includes(c.id))}
@@ -5882,11 +5890,8 @@ function vpqCompanionAvatar(c){
   if(status==='missing')return '<span class="vpq-companion-placeholder">⚠️<small>Image missing</small></span>';
   return '<img class="vpq-companion-art" loading="lazy" src="'+vpqDogAssetURL(c.image)+'" alt="'+escapeHtml(c.name)+(status==='opaque'?' — image background needs transparency':'')+'" draggable="false">';
  }
- // Retain the recognizable pre-shop illustrated Mera instead of an emoji.
- if(c.id==='dog-mera'){
-  // COMPANION CONTRACT: Mera's real artwork is the owner's shark-costume PNG.
-  // Until that exact binary is present in this repository, use the original
-  // illustrated starter rather than inventing a new Mera or showing a broken URL.
+ // Shark costume is an explicit alternate companion appearance; never an old fallback.
+ if(c.id==='dog-mera-shark'){
   if(window.VPQ_MERA_SHARK_IMAGE_READY===true){
    return '<img class="vpq-companion-art" loading="eager" src="Mera%20in%20a%20Shark%20Costume-5.png" alt="Mera in her blue shark costume" draggable="false">';
   }
@@ -5919,7 +5924,7 @@ window.VPQ_MERA_SHARK_IMAGE_READY=false;
 (function checkOfficialMeraImage(){
  const im=new Image();
  im.onload=function(){window.VPQ_MERA_SHARK_IMAGE_READY=true;
-  if(state.vpqCompanionId==='dog-mera')updateAvatar();
+  if(state.vpqCompanionId==='dog-mera-shark')updateAvatar();
  };
  im.onerror=function(){window.VPQ_MERA_SHARK_IMAGE_READY=false};
  im.src='Mera%20in%20a%20Shark%20Costume-5.png';
@@ -5936,7 +5941,7 @@ vpqUpdatePetGallery=function(){
  const tabs=vpqCompanionCategories.map(([id,emoji,label])=>
   '<button type="button" data-vpqcomp-tab="'+id+'" class="'+(vpqCompanionTab===id?'chosen':'')+'">'+emoji+' '+label+'</button>').join('');
  // Show actual uploaded artwork; suppress old emoji-only placeholders (especially cows/birds), retaining IDs in saved data.
- const list=vpqCompanionCatalog.filter(c=>c.category===vpqCompanionTab && (c.image || c.id==='dog-mera') && (c.id!=='dog-mera-regular' || vpqUploadedImageStatus.get(c.id)==='ready'));
+ const list=vpqCompanionCatalog.filter(c=>c.category===vpqCompanionTab && (c.image || c.id==='dog-mera-shark') && (c.id!=='dog-mera-regular' || vpqUploadedImageStatus.get(c.id)==='ready'));
  // Mera is hidden until her approved transparent PNG exists; no broken preview or fallback substitution.
  const cards=list.map(c=>{
   const owned=vpqCompanionOwned(c),levelOK=vpqCompanionLv()>=c.level;
