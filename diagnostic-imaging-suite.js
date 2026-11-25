@@ -79,31 +79,29 @@ function home(){
 }
 function xrayHome(){
  session=null;
- const groups=[
-  {number:'01',icon:'📖',name:'LEARN',desc:'Understand the normal image, then the abnormal pattern. No pressure to quiz yet.',color:'#f6efff',buttons:[
-   ['visual-learn','Start here · SEE → WHY → COMPARE','Source-attributed radiographs with reasons and look-alikes'],
-   ['course','Full lecture notes and objectives','Existing Exam 1–3 lessons preserved for reference'],
-   ['exam1-reading','Exam 1 · Opacities & interpretation','Five opacities, Roentgen signs, orientation and artifacts'],
-   ['abdomen-lab','Exam 2 · Abdominal learning','Normal abdomen, GI and GU with progressive teaching'],
-   ['conditions','Disease pattern reference','Look-alikes and differential explanations']
-  ]},
-  {number:'02',icon:'🔎',name:'PRACTICE',desc:'Look at a real image and recognize the anatomy, projection or visible finding.',color:'#edf8fc',buttons:[
-   ['visual-exam1','Exam 1 · Image basics','Projections, anatomy and foundational signs'],
-   ['visual-exam2','Exam 2 · Abdominal images','Identify what is actually visible in the film'],
-   ['spotter','Spot the abnormality','Find the relevant region before diagnosing']
-  ]},
-  {number:'03',icon:'🩻',name:'INTERPRET & REPORT',desc:'One connected clinical case: inspect the film, describe Roentgen signs, rank differentials and complete the LMU report.',color:'#eef8f1',buttons:[
-   ['write-report','Clinical Case + LMU Report','Source-attributed radiographs · findings · ranked differentials · impression and follow-up'],
-   ['image-review','Guided image-to-findings review','Scaffolded recognition and description before full cases'],
-   ['viewer','Compare multiple views','Enlarge and inspect projections']
-  ]}
- ];
- const tile=([key,title,detail])=>'<button type="button" data-vpqimage="'+key+'" style="display:block;text-align:left;width:100%;padding:11px 12px;background:#fff;border:1px solid #d8dfea;border-radius:11px;min-height:72px"><strong style="display:block;font-size:13px;color:#344f78">'+E(title)+'</strong><small style="display:block;font-size:11px;font-weight:500;margin-top:5px;color:#68788a;line-height:1.45">'+E(detail)+'</small></button>';
- const panels=groups.map(g=>'<section style="background:'+g.color+';border:1px solid #e0dfeb;border-radius:15px;padding:13px;margin:0 0 12px"><div style="display:flex;align-items:center;gap:10px"><span style="border-radius:10px;background:#fff;padding:7px;font-size:20px" aria-hidden="true">'+g.icon+'</span><div><b style="font-size:14px;letter-spacing:.04em;color:#3b4b71">'+g.number+' · '+g.name+'</b><p style="font-size:12px;font-weight:500;margin:3px 0 0;line-height:1.45;color:#53647c">'+E(g.desc)+'</p></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:8px;margin-top:12px">'+g.buttons.map(tile).join('')+'</div></section>').join('');
- page('X-ray / Radiography','<p style="font-size:13px;margin:3px 0 12px;color:#50647c">Your radiology path: <b>Learn → Practice → Interpret & Report.</b> Start with Learn; return here whenever you want to move to the next level. Existing progress and case data are preserved.</p>'+panels+
- '<details style="margin:12px 0;border:1px solid #d9dfec;border-radius:12px;padding:10px 12px"><summary style="cursor:pointer;font-weight:800">🧰 Other tools · technique, older activities & owner images</summary><p style="font-size:12px;color:#64738a">These are supporting resources, not extra mandatory steps.</p><div style="display:flex;flex-wrap:wrap;gap:8px">'+[
+ const tile=(key,title,detail)=>'<button type="button" data-vpqimage="'+key+'" style="display:block;text-align:left;width:100%;padding:12px;background:white;border:1px solid #d8dfea;border-radius:11px;min-height:76px"><strong style="display:block;font-size:13px;color:#344f78">'+E(title)+'</strong><small style="display:block;font-size:11px;font-weight:500;margin-top:5px;color:#68788a;line-height:1.45">'+E(detail)+'</small></button>';
+ const section=(num,title,desc,color,items)=>'<section style="background:'+color+';border:1px solid #e0dfeb;border-radius:15px;padding:13px;margin:0 0 12px"><b style="color:#3b4b71;font-size:15px">'+num+' · '+E(title)+'</b><p style="margin:5px 0 11px;color:#53647c;font-size:12px;line-height:1.5">'+E(desc)+'</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:8px">'+items.map(x=>tile(...x)).join('')+'</div></section>';
+ const exams=section('01','Choose your exam / body system','Keep your course materials together. Start with normal anatomy, then learn each radiographic sign and its cause.','#f4efff',[
+  ['exam1-reading','Exam 1 · Foundations','Normal views, five opacities, Roentgen signs, projection and quality'],
+  ['abdomen-lab','Exam 2 · Abdomen','Normal GI/GU anatomy, mechanical versus functional ileus, foreign bodies and mass effect'],
+  ['conditions','MSK & disease comparisons','Fracture language, aggressive bone lesions, joint changes, and look-alike conditions'],
+  ['course','Complete lecture guide','All existing exam-organized learning units and objectives']
+ ]);
+ const path=section('02','Work through one interpretation','Do not stop at recognizing a pattern: describe all findings, explain why they occur, then interpret the entire case.','#eef8fc',[
+  ['visual-learn','A · Learn with radiographs','See → describe → explain → compare normal and abnormal'),
+  ['image-review','B · Describe every finding','Practice anatomical localization, opacity, distribution and multiple concurrent signs'),
+  ['write-report','C · Full clinical case + LMU report','Radiographs → objective findings → ranked differentials → next diagnostics'],
+  ['viewer','Compare views / zoom','Inspect projections side by side before committing to an interpretation']
+ ]);
+ const practice=section('03','Optional focused practice','Use these tools to reinforce the skill you need, without treating them as separate required courses.','#eff8f2',[
+  ['visual-exam1','Findings · Exam 1 images','Practice projections, normal anatomy and opacity signs'],
+  ['visual-exam2','Findings · Exam 2 images','Recognize actual abdominal findings'],
+  ['spotter','Spot the abnormality','Locate findings before naming a diagnosis']
+ ]);
+ page('X-ray / Radiography','<p style="font-size:13px;margin:3px 0 12px;color:#50647c">Your pathway: <b>normal → describe all signs → understand WHY → full interpretation.</b> Choose an exam or body system, then work through a clinical radiograph. Existing lessons and saved progress are retained.</p>'+exams+path+practice+
+ '<details style="margin:12px 0;border:1px solid #d9dfec;border-radius:12px;padding:10px 12px"><summary style="cursor:pointer;font-weight:800">🧰 Reference tools, technique & owner review</summary><p style="font-size:12px;color:#64738a">Reference activities and owner tools; not extra required learning stages.</p><div style="display:flex;flex-wrap:wrap;gap:8px">'+[
  ['exam1-technique','Safety & physics'],['xray-technique','Technique & positioning'],['quality','Radiograph quality'],
- ['library','Published image library'],['extra-cases','Extra Cases · supplemental examples'],['approval-queue','Owner photo approval queue']
+ ['library','Published image library'],['extra-cases','Extra cases'],['approval-queue','Owner photo approval queue']
  ].map(([key,label])=>B(key,label)).join('')+'</div></details>','home');
 }
 function station(mode){
