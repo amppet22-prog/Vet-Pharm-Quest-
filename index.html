@@ -5166,7 +5166,7 @@ window.addEventListener('load',restoreVisibleRoom,{once:true});
 const vpqCompanionCategories=[
  ['horse','🐴','Horse'],['dog','🐕','Dog'],['cat','🐈','Cat'],
  ['pocket','🐹','Pocket Pets'],['exotics','🦎','Exotics'],
- ['avians','🦜','Avians'],['ruminants','🐄','Ruminants'],
+ ['avians','🦜','Avians'],['ruminants','🐄','Ruminants'],['swine','🐖','Pigs'],
  ['legendary','✨','Legendary'],['wildlife-rehab','🦊','Wildlife Rehab']
 ];
 let vpqCompanionTab='dog';
@@ -5797,14 +5797,18 @@ vpqUploadedCompanionManifest.push(...[
   "legendary"
  ]
 ]);
+/* Complete Nov 24 upload batches: generic filenames preserved, labels intentionally
+ * neutral until owner can visually identify the animal. Imported assets only.
+ * Swine has its own category; no pigs placed under Ruminants. */
+vpqUploadedCompanionManifest.push(...[["uploaded-20261125-442e7336","Ruminant · 01","ChatGPT Image Nov 24, 2026, 06_16_09 PM-1.png","ruminants"],["uploaded-20261125-441b3a35","Ruminant · 02","ChatGPT Image Nov 24, 2026, 06_16_09 PM-2.png","ruminants"],["uploaded-20261125-89dcb11c","Ruminant · 03","ChatGPT Image Nov 24, 2026, 06_16_10 PM-3.png","ruminants"],["uploaded-20261125-8a0fc99b","Ruminant · 04","ChatGPT Image Nov 24, 2026, 06_16_10 PM-4.png","ruminants"],["uploaded-20261125-89fec19a","Ruminant · 05","ChatGPT Image Nov 24, 2026, 06_16_10 PM-5.png","ruminants"],["uploaded-20261125-5b7952f8","Ruminant · 06","ChatGPT Image Nov 24, 2026, 06_16_11 PM-6.png","ruminants"],["uploaded-20261125-5b442a79","Ruminant · 07","ChatGPT Image Nov 24, 2026, 06_16_11 PM-7.png","ruminants"],["uploaded-20261125-78c9b913","Pig · 01","ChatGPT Image Nov 24, 2026, 06_43_59 PM-1.png","swine"],["uploaded-20261125-c2bb0fb0","Pig · 02","ChatGPT Image Nov 24, 2026, 06_46_28 PM-1.png","swine"],["uploaded-20261125-4bb94f12","Pig · 03","ChatGPT Image Nov 24, 2026, 06_46_29 PM-2.png","swine"],["uploaded-20261125-4bca5713","Pig · 04","ChatGPT Image Nov 24, 2026, 06_46_29 PM-3.png","swine"],["uploaded-20261125-e0761b58","Exotic · 01","ChatGPT Image Nov 24, 2026, 06_07_37 PM-2.png","exotics"],["uploaded-20261125-e0872359","Exotic · 02","ChatGPT Image Nov 24, 2026, 06_07_37 PM-3.png","exotics"],["uploaded-20261125-ab7e3fb1","Exotic · 03","ChatGPT Image Nov 24, 2026, 06_07_38 PM-4.png","exotics"],["uploaded-20261125-abb38930","Exotic · 04","ChatGPT Image Nov 24, 2026, 06_07_38 PM-5.png","exotics"],["uploaded-20261125-ab5c5033","Exotic · 05","ChatGPT Image Nov 24, 2026, 06_07_38 PM-6.png","exotics"],["uploaded-20261125-34c2d093","Exotic · 06","ChatGPT Image Nov 24, 2026, 06_07_39 PM-7.png","exotics"],["uploaded-20261125-3517b81c","Exotic · 07","ChatGPT Image Nov 24, 2026, 06_07_39 PM-8.png","exotics"],["uploaded-20261125-bad8ef33","Exotic · 08","ChatGPT Image Nov 24, 2026, 06_07_40 PM-9.png","exotics"],["uploaded-20261125-751fa84a","Exotic · 09","ChatGPT Image Nov 24, 2026, 06_07_41 PM-10.png","exotics"],["uploaded-20261125-e72fb55","Legendary · 01","ChatGPT Image Nov 24, 2026, 06_16_12 PM-8.png","legendary"],["uploaded-20261125-a1ccc84d","Legendary · 02","ChatGPT Image Nov 24, 2026, 06_16_13 PM-10.png","legendary"],["uploaded-20261125-e54ccab5","Legendary · 03","ChatGPT Image Nov 24, 2026, 06_16_13 PM-9.png","legendary"],["uploaded-20261125-4b973e94","Legendary · 04","ChatGPT Image Nov 24, 2026, 06_46_29 PM-4.png","legendary"],["uploaded-20261125-3dc43d3d","Legendary · 05","ChatGPT Image Nov 24, 2026, 06_46_30 PM-5.png","legendary"],["uploaded-20261125-5222e610","Philadelphia Eagle","Philadelphia Eagle Mascot with Scarf and Dog Tag-1.png","legendary"]]);
 for(const [id,name,image,category] of vpqUploadedCompanionManifest){
  const existing=vpqCompanionCatalog.find(c=>c.id===id);
  if(existing){existing.image=image;existing.name=name;continue}
  const tier=category==='wildlife-rehab'?[30,475]:category==='legendary'?[18,285]:category==='dog'?[8,120]:
  category==='horse'?[6,100]:category==='cat'?[5,80]:
- category==='exotics'?[5,75]:category==='ruminants'?[5,85]:category==='avians'?[4,65]:[4,65];
+ category==='exotics'?[5,75]:category==='ruminants'?[5,85]:category==='swine'?[5,75]:category==='avians'?[4,65]:[4,65];
  const pet=category==='horse'?'🐴':category==='cat'?'🐈':category==='dog'?'🐕':
- category==='pocket'?'🐹':category==='exotics'?'🦎':category==='avians'?'🦜':category==='ruminants'?'🐄':category==='wildlife-rehab'?'🦊':'✨';
+ category==='pocket'?'🐹':category==='exotics'?'🦎':category==='avians'?'🦜':category==='ruminants'?'🐄':category==='swine'?'🐖':category==='wildlife-rehab'?'🦊':'✨';
  vpqCompanionCatalog.push({id,name,image,category,pet,petBreed:category==='dog'?id:undefined,level:tier[0],price:tier[1]});
 }
 /* Exam Room small-animal table: reuse uploaded companion art only.
