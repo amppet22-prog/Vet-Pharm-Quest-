@@ -2707,7 +2707,7 @@ openAvatar=function(){
  '<div class="vpq-section" data-vpqsection="vet">'+vetSection+'</div>'+
  '<div class="vpq-section" data-vpqsection="outfits">'+outfitSection+'</div>'+
  '<div class="vpq-section" data-vpqsection="extras">'+extrasSection+'</div>'+
- '<footer class="vpq-story-footer"><span class="tiny">Your progress and existing unlocks stay safe.</span><span><button type="button" class="secondary" id="vpqStoryCancel">Cancel</button> <button type="submit">💜 Save My Look</button></span></footer>'+
+ '<footer class="vpq-story-footer"><span><button type="button" class="secondary" id="vpqStoryCancel">Cancel</button> <button type="submit">💜 Save My Look</button></span></footer>'+
  '</form></div></div>';
  showModal('🎨 Create Your Veterinarian & Companion',html);
  vpqActivateStoryTab(vpqCurrentCreatorTab||'pet');
@@ -4412,7 +4412,6 @@ document.head.appendChild(vpqToxStyle);
  ['🦠 One Health, Parasites and Toxicology','One Health includes Exam 1–4 disease cards, host roles, zoonoses and reporting practice. Parasite and pathogen recognition appears in relevant rooms/arcade modes. Toxicology offers toxin references and mechanism learning, with additional content still being developed.'],
  ['🕹️ Arcade and games','Open the Arcade for Drug Match, Bug Battles and other available mini-games. Use course/topic filters when provided. Games reinforce—but do not replace—lecture explanations, patient cases, and study guides.'],
  ['⭐ XP, coins and customization','First mastery of a correct study question awards 10 XP, and every 100 study XP grants 10 clinic coins. Patient challenges can give additional rewards. Customize avatars, companions, wallpapers and rooms; cosmetic purchases never lock learning.'],
- ['💾 Saves, support and credits','Check Save status before switching devices. Settings & Support includes the evolving student-project disclaimer, learning-source attribution, issue reporting and account links. Do not enter passwords or private patient data into public reports.'],
  ['⚕️ Educational use only','This game is a developing student-made learning aid, not a clinical prescribing or diagnostic authority. Verify species-specific ranges, drug labels, current reporting guidance and referenced information before real-world use.']
  ];
  const directory=[
@@ -5757,12 +5756,15 @@ window.VPQ_COMPANION_LIBRARY_STATUS=function(){
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const url=p=>String(p).split('/').map(encodeURIComponent).join('/');
  button.addEventListener('click',function(){
+   // Show every existing team/group portrait uploaded to GitHub; keep them together for owner curation.
    const portraits=[
-     {src:'assets/meet-team-pets-preview.svg?v=real-photo-20261120',alt:'Vet Pharm Quest illustrated team gathered with a dog and a cat',caption:'The team & our furry friends'},
-     {src:'assets/meet-team-group-preview.svg?v=real-photo-20261120',alt:'Vet Pharm Quest group illustration of diverse veterinary team members',caption:'Meet our veterinary team'}
+     {src:'Maroon Paw-Care Team Portrait.png',alt:'Maroon Paw-Care team portrait',caption:'Maroon Paw-Care Team'},
+     {src:'Veterinary Team Portrait at Alexandria’s Hospital-24.png',alt:'Veterinary team portrait at Alexandria’s hospital',caption:'Alexandria’s Hospital Team'},
+     {src:'assets/avatars/Diverse Veterinary Team Portrait with Pets.png',alt:'Veterinary team portrait with pets',caption:'Our Veterinary Team & Pets'},
+     {src:'assets/avatars/Diverse Veterinary Team Portrait.png',alt:'Veterinary team group portrait',caption:'Our Veterinary Team'}
    ];
    const items=portraits.map(p=>'<figure><img loading="lazy" src="'+esc(p.src)+'" alt="'+esc(p.alt)+'"><figcaption>'+esc(p.caption)+'</figcaption></figure>').join('');
-   const body='<p>Meet the crew behind our teaching hospital! These are the two team portraits from your photo collection. Alexandria can join the group portrait in a future update.</p><div class="vpq-team-preview vpq-team-group-photos">'+items+'</div><p><b>Mera Munchasurus and Family</b> are our hospital mascots and chiefs of snacks &amp; encouragement.</p>';
+   const body='<p>Meet the crew behind our teaching hospital! Here are all four group portraits currently uploaded to the game. We can choose our favorites later.</p><div class="vpq-team-preview vpq-team-group-photos">'+items+'</div><p><b>Mera Munchasurus and Family</b> are our hospital mascots and chiefs of snacks &amp; encouragement.</p>';
    const title='🐾 Meet the Vet Pharm Quest Team';
    if(typeof window.showModal==='function'){window.showModal(title,body);return}
    const wrap=document.getElementById('modalWrap'),heading=document.getElementById('modalTitle'),target=document.getElementById('modalBody');
