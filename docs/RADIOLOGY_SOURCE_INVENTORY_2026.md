@@ -40,3 +40,23 @@ These are paraphrased **educational concepts**, not public copies of original no
 - [ ] EQUINE-MSK: verified course-specific lesions and comparative normal anatomy
 
 For each item capture the exact source file, page, view, image rights, image/answer matching, lesion list, mechanism, reviewer, status, and owner approval. Prioritize **existing source images** before seeking new ones.
+
+## Repo audit update — 2026-11-25
+Checked live code paths in `index.html` (loader and X-ray routing), `diagnostic-imaging-suite.js`, `radiology-reading-desk.js`, `radiology-visual-learning.js`, `radiology-lecture-course.js`, `radiology-exam2-lecture-expansion.js`, `radiology-lecture-condition-casebook.js`, and `radiology-image-approval-queue.js`.
+
+Already present and **preserved**, not recreated:
+- X-ray station with exam-specific lessons, practice, visual learning and reporting.
+- Image-based visual learning pilot with published-source manifest checks (cases absent from manifest are disabled).
+- Structured Roentgen sign and LMU report practice.
+- MSK clinical condition casebook including small-animal and equine entries, with stated distinction that fictional learning scenarios are not actual patient radiographs.
+- Owner image-review queue: broad ileus overview, linear foreign body, and many MSK image slots already existed. These were **not duplicated**.
+
+New source-matched placeholders in owner approval queue (not published images):
+- `e2-ileus-mechanical`: confirmed mechanical obstruction with complete finding list and differential.
+- `e2-ileus-functional`: clinically supported functional ileus with complete finding list.
+- `e2-ileus-equivocal`: ambiguous cat with ingestion history; **do not force a confirmed obstruction diagnosis**.
+- `e2-ileus-linear-fb-comparison`: confirmed plication and atypical small gas pockets compared with nonspecific dilation.
+
+The existing `e2-ileus` slot remains as the **general comparison overview**; the added entries are specific source-matched cases, not duplicate teaching activities. No source image files have been inserted in this pass.
+
+X-ray hub in the development branch is now organized around (1) exam/body system, (2) a continuous see/describe/explain/interpret workflow, and (3) optional targeted practice. This is navigation improvement, not yet full case-flow consolidation. JavaScript syntax parsing passed for modified `diagnostic-imaging-suite.js` and `radiology-image-approval-queue.js`; interactive browser regression testing remains pending.
