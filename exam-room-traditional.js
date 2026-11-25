@@ -7,45 +7,23 @@ if(!stage||!art||!rooms.exam)return null;
 const previous=art.roomArt.bind(art);
 let examAnimal=''; // Blank exam table until the user chooses a patient.
 const escExam=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const dogNames=['Husky / Shepherd','German Shepherd','Husky','Corgi','Dachshund','Greyhound','Border Collie','Australian Shepherd','Labrador','Golden Retriever','Mixed Breed','Other Dog'];
-const catNames=['Tabby','Black','Orange','Tuxedo','Calico','Longhair','Siamese','Other Cat'];
-const catalog=[...dogNames.map((label,i)=>({id:'dog-'+i,label:'Dog · '+label,species:'dog',atlas:i})),...catNames.map((label,i)=>({id:'cat-'+i,label:'Cat · '+label,species:'cat',atlas:i+12})),...['Rabbit','Lizard','Snake','Turtle'].map((label,i)=>({id:label.toLowerCase(),label,species:label.toLowerCase(),atlas:i+22}))];
-const allowed={dog:'🐕',cat:'🐈',rabbit:'🐇',lizard:'🦎',snake:'🐍',turtle:'🐢'};
+// Exam-table patients are now sourced from the current uploaded companion artwork,
+ // not the original cartoon breed atlas. This does not change the equipped companion.
 function examPatients(){
- const options=[{id:'dog',label:'Funky original dog',species:'dog'},{id:'cat',label:'Original cartoon cat',species:'cat'},...catalog];
- try{
- const pet=JSON.parse(localStorage.getItem('vpq-v2-clinic-state')||'{}');
- const species=Object.keys(allowed).find(k=>allowed[k]===pet.pet);
- if(species){
-  const names=species==='dog'?['husky-shepherd','german-shepherd','husky','corgi','dachshund','greyhound','border-collie','australian-shepherd','labrador','golden-retriever','mixed','other-dog']:['tabby','black','orange','tuxedo','calico','longhair','siamese','other-cat'];
-  const i=species==='dog'?Math.max(0,names.indexOf(pet.petBreed)):species==='cat'?12+Math.max(0,names.indexOf(pet.catLook)):catalog.find(x=>x.species===species)?.atlas;
-  options.splice(2,0,{id:'saved',label:String(pet.petName||'My companion').slice(0,30)+' · my companion',species,atlas:i});
- }
- }catch(e){}
- (Array.isArray(window.VPQ_EXAM_PATIENTS)?window.VPQ_EXAM_PATIENTS:[]).forEach(p=>{
-  const species=String(p?.species||'').toLowerCase();
-  if(p&&Object.prototype.hasOwnProperty.call(allowed,species)&&/^[a-z0-9_-]{1,50}$/i.test(p.id||'')&&!options.some(q=>q.id===p.id))
-   options.push({id:p.id,label:String(p.label||p.id).slice(0,50),image:p.image,species,atlas:p.atlas});
- });
- return options;
+ const current=window.VPQ_EXAM_PATIENTS;
+ return Array.isArray(current)?current.filter(p=>p&&typeof p.id==='string'&&typeof p.image==='string'):[];
 }
 function examPatientArt(){
  if(!examAnimal)return '';
  const p=examPatients().find(x=>x.id===examAnimal);
  if(!p)return '';
- if(p.id==='dog'||p.id==='cat')return animalArt();
- if(typeof p.image==='string'&&p.image.startsWith('assets/')&&!p.image.includes('..')&&/\.(png|jpg|jpeg|webp)$/i.test(p.image))
-   return '<image href="'+escExam(p.image)+'" x="442" y="208" width="190" height="130" preserveAspectRatio="xMidYMax meet"/>';
- if(Number.isInteger(p.atlas)&&p.atlas>=0&&p.atlas<32){
-  const c=p.atlas%8,r=Math.floor(p.atlas/8);
-  return '<svg x="446" y="196" width="185" height="139" viewBox="'+c*100+' '+r*100+' 100 100"><image href="assets/vpq-illustrated-pets.webp" x="0" y="0" width="800" height="400" preserveAspectRatio="none"/></svg>';
- }
- return '<text x="535" y="304" text-anchor="middle" font-size="96">'+escExam(allowed[p.species]||'🐾')+'</text>';
+ // Validated, uploaded root or assets image paths only. Keep SVG rendering to
+ // retain the existing exam room scene, position and interactions.
+ const path=String(p.image||'');
+ if(!/^(?:assets\\/)?[^\\/\\\\]+\\.(?:png|jpe?g|webp)$/i.test(path)||path.includes('..'))return '';
+ const url=path.split('/').map(encodeURIComponent).join('/');
+ return '<image href="'+escExam(url)+'" x="442" y="208" width="190" height="130" preserveAspectRatio="xMidYMax meet"/>';
 }
-
-const animalArt=()=>examAnimal==='cat'
- ? '<g transform="translate(0 0)"><path d="M521 312q-37 -26 -5 -44q22 -9 37 10q14 -13 32 -6q24 7 25 33q-6 27 -43 30l-31 0Z" fill="#d8ac86" stroke="#926c63" stroke-width="6"/><path d="M578 275q18 -31 37 -13l20 34l-12 16" fill="none" stroke="#926c63" stroke-width="10" stroke-linecap="round"/><path d="M496 284l-9 -32l26 17l22 -22l5 35" fill="#d8ac86" stroke="#926c63" stroke-width="6"/><ellipse cx="517" cy="288" rx="29" ry="29" fill="#d8ac86" stroke="#926c63" stroke-width="5"/><path d="M502 285h8m17 0h8" stroke="#584d55" stroke-width="5" stroke-linecap="round"/><path d="M519 290l5 5l-5 3l-5 -3Z" fill="#bb7f89"/><path d="M519 299q-11 7 -18 0m18 0q11 7 19 0" stroke="#795b5d" stroke-width="2" fill="none"/><path d="M548 325v17m33 -14v16" stroke="#926c63" stroke-width="9" stroke-linecap="round"/></g>'
- : '<g><path d="M497 307q19 -35 64 -33q51 1 67 33l-9 24h-114Z" fill="#c59b73" stroke="#8e6b58" stroke-width="6"/><path d="M612 281q40 -45 50 -8" fill="none" stroke="#8e6b58" stroke-width="12" stroke-linecap="round"/><path d="M499 307q-31 4 -43 -17q-13 -24 3 -44q21 -19 46 2l16 33" fill="#c59b73" stroke="#8e6b58" stroke-width="6"/><path d="M456 261l-12 -29q-14 30 -3 47" fill="#a77862" stroke="#8e6b58" stroke-width="5"/><path d="M502 256l20 -23q4 30 -12 48" fill="#a77862" stroke="#8e6b58" stroke-width="5"/><ellipse cx="457" cy="293" rx="27" ry="18" fill="#ead6b5"/><circle cx="475" cy="268" r="4" fill="#3d3b44"/><circle cx="444" cy="289" r="5" fill="#544c52"/><path d="M501 320v21m45 -14v20m39 -19v19" stroke="#8e6b58" stroke-width="10" stroke-linecap="round"/><path d="M485 276q17 -8 26 7" fill="none" stroke="#fff9e9" stroke-width="6"/></g>';
 function drawing(){
  // Fully illustrated small animal examination room. Equipment is drawn as SVG,
  // not emoji: treat jar, stethoscope rack, wall-mounted otoscope/ophthalmoscope,
@@ -161,7 +139,7 @@ function refresh(){
  '<button type="button" class="vpqExamHelp vpqExamHelpSkills" data-examhelp="skills" aria-label="What is the clinical skills area?">?</button>'+
  '<button type="button" class="vpqExamHelp vpqExamHelpPicker" data-examhelp="picker" aria-label="How do I select an exam-room patient?">?</button>'+
  '<div class="vpqExamHelpPopover" id="vpqExamHelpPopover" hidden role="status" aria-live="polite"></div>'+
- '<label class="vpqExamPatientPicker">🐾 Patient <select data-vpqexamanimal="1" aria-label="Choose exam patient"><option value=""'+(!examAnimal?' selected':'')+'>Select a patient…</option>'+examPatients().map(p=>'<option value="'+escExam(p.id)+'"'+(p.id===examAnimal?' selected':'')+'>'+escExam(p.label)+'</option>').join('')+'</select></label>'+
+ '<label class="vpqExamPatientPicker">🐾 Exam animal <select data-vpqexamanimal="1" aria-label="Choose an uploaded animal for the exam table"><option value=""'+(!examAnimal?' selected':'')+'>Select an animal…</option>'+examPatients().map(p=>'<option value="'+escExam(p.id)+'"'+(p.id===examAnimal?' selected':'')+'>'+escExam(p.label)+'</option>').join('')+'</select></label>'+
  '<button type="button" class="vpqExamSkills" data-vpqexamaction="skillsWing" aria-label="Walk into Clinical Skills for injection and blood draw">💉 🩸 Clinical Skills · Injection / Blood Draw</button>'+ 
  '<button type="button" class="vpqExamExit" data-vpqexamreturn="1">← Reception</button>';
  el.addEventListener('change',e=>{if(e.target.matches('[data-vpqexamanimal]')){examAnimal=e.target.value;const svg=document.getElementById('scene')?.querySelector('.vpqExamRoomArt');if(svg)svg.outerHTML=drawing();}});
@@ -173,7 +151,7 @@ function refresh(){
    protocols:'Clinical Protocols: review clinical checklists, safety steps, and patient workflows.',
    patients:'Examine Patient: start clinical cases and apply what you learned to the patient.',
    skills:'Clinical Skills: practice injections, venipuncture, and sample handling.',
-   picker:'Patient selector: pick any small companion to display on this table. Your equipped companion will not change. Large animals belong in the future barn.'
+   picker:'Exam animal: choose from the newly uploaded dogs, cats, pocket pets, birds, and exotics. This changes only the animal displayed on the table, not your equipped companion or clinical cases.'
   };
   const pop=el.querySelector('#vpqExamHelpPopover');
   const active=pop.dataset.open===b.dataset.examhelp&&!pop.hidden;
