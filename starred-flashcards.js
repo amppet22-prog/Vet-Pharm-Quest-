@@ -81,6 +81,7 @@ function toggleDialog(c){
  dialog.showModal();
 }
 function captureFromPage(){
+ if(!isFlashcardView())return;
  const root=el('modalBody');const selected=String(window.getSelection?.()?.toString()||'').trim();
  const isStudyQuestion=!!root?.querySelector('[data-vpq-star-study]');
  let candidate=isStudyQuestion?current:null;
@@ -105,23 +106,32 @@ function captureFromPage(){
 }
 /* Department-wide integration: one saved deck, department-specific entry points.
    Never infer a correct answer from unsubmitted choices. Open an editable copy instead. */
+function isFlashcardView(){
+ const root=el('modalBody'),title=el('modalTitle')?.textContent||'';
+ if(!root||el('modalWrap')?.classList.contains('hidden'))return false;
+ // A label alone cannot turn an avatar, shop, how-to, or other non-study modal into a flashcard.
+ const blocked=!!root.querySelector('#avatarForm,#vpqPetGallery,#vpqUploadedGallery,.vpq-avatar-showcase,.vpq-uploaded-gallery');
+ if(blocked)return false;
+ if(title.includes('Starred Flashcards'))return false;
+ return !!root.querySelector('[data-vpq-star-study],[data-vpqpharmfc-flip],[data-pathfound="fc-flip"],.vpqRecallCard,.vpq-flashcard,.flashcard,.path-flashcard,[data-vpq-star-pharm]');
+}
 function addDepartmentButtons(){
  const root=el('modalBody'),head=el('modalTitle');
- if(!root||!head||el('modalWrap')?.classList.contains('hidden'))return;
- const title=head.textContent||'';
- const subject=canonicalSubject(title);
- const nav=el('vpqStarDepartmentOpen');
- if(nav){nav.hidden=title.includes('Starred Flashcards');nav.dataset.vpqStarSubject=subject;nav.textContent='⭐ '+subject+' Review';}
- if(title.includes('Starred Flashcards'))return;
- const selectors='.vpq-case-question,.refpracticequestions,.refpracticequestion,.vpqRecallCard,[data-pathfound="fc-flip"],.vpq-flashcard,.flashcard,.path-flashcard';
+ const capture=el('vpqStarModalCapture'),nav=el('vpqStarDepartmentOpen');
+ const visible=isFlashcardView();
+ if(capture)capture.hidden=!visible;
+ if(nav){nav.hidden=!visible; if(visible){const subject=canonicalSubject(head?.textContent||'');nav.dataset.vpqStarSubject=subject;nav.textContent='⭐ '+subject+' Review';}}
+ if(!visible||!root)return;
+ const subject=canonicalSubject(head?.textContent||'');
+ const selectors='.vpqRecallCard,[data-pathfound="fc-flip"],.vpq-flashcard,.flashcard,.path-flashcard';
  root.querySelectorAll(selectors).forEach(block=>{
-   if(block.dataset.vpqStarIntegrated)return;
-   block.dataset.vpqStarIntegrated='1';
-   if(block.matches('.vpqRecallCard')||block.querySelector('[data-vpq-star-pharm]'))return;
-   const btn=document.createElement('button');
-   btn.type='button';btn.className='vpq-star-inline';btn.dataset.vpqStarCaptureBlock='1';btn.textContent='☆ Star this for practice';
-   btn.title='Copy this item into your '+subject+' starred review; check or edit its answer before saving';
-   block.insertAdjacentElement('afterend',btn);
+  if(block.dataset.vpqStarIntegrated)return;
+  block.dataset.vpqStarIntegrated='1';
+  if(block.matches('.vpqRecallCard')||block.querySelector('[data-vpq-star-pharm]'))return;
+  const btn=document.createElement('button');
+  btn.type='button';btn.className='vpq-star-inline';btn.dataset.vpqStarCaptureBlock='1';btn.textContent='☆ Star this for practice';
+  btn.title='Copy this flashcard into your '+subject+' starred review';
+  block.insertAdjacentElement('afterend',btn);
  });
 }
 function captureBlock(button){
@@ -139,14 +149,14 @@ document.addEventListener('click',e=>{
  if(!b)return;
  if(b.dataset.vpqStarPharm){e.preventDefault();e.stopPropagation();const c=getPharm(b.dataset.vpqStarPharm);if(c)save(c);b.textContent='★ Saved for review';return}
  if(b.dataset.vpqStarStudy){e.preventDefault();e.stopPropagation();if(current&&save(current))b.textContent='★ Saved for review';return}
- if(b.dataset.vpqStarCaptureBlock){e.preventDefault();e.stopPropagation();captureBlock(b);return}
+ if(b.dataset.vpqStarCaptureBlock){e.preventDefault();e.stopPropagation();if(isFlashcardView())captureBlock(b);return}
  if(b.dataset.vpqStarEdit){toggleDialog(cards.find(x=>x.id===b.dataset.vpqStarEdit));return}
  if(b.dataset.vpqStarRemove){const c=cards.find(x=>x.id===b.dataset.vpqStarRemove);if(c&&confirm('Remove this card from starred review?')){cards=cards.filter(x=>x.id!==c.id);persist();updateCounts();layout()}return}
  const action=b.dataset.vpqStarAction;
  if(!action)return;
  e.preventDefault();e.stopPropagation();
  if(action==='open')open(b.dataset.vpqStarSubject);
- else if(action==='capture')captureFromPage();
+ else if(action==='capture'&&isFlashcardView())captureFromPage();
  else if(action==='missed'||action==='allcards'){missedOnly=action==='missed';mode='list';index=0;flipped=false;layout()}
  else if(action==='add')toggleDialog({front:'',back:'',subject:filter==='All'?'General':filter,origin:''});
  else if(action==='practice')practice();
@@ -168,10 +178,10 @@ function init(){
  const side=document.querySelector('.vpq-shift-options');
  if(side){const button=document.createElement('button');button.className='full';button.type='button';button.dataset.vpqStarAction='open';button.innerHTML='⭐ Starred Flashcards · Practice (<span data-vpq-star-count>0</span>)';side.appendChild(button)}
  const head=document.querySelector('#modalWrap .modalhead');
- if(head){const btn=document.createElement('button');btn.id='vpqStarModalCapture';btn.type='button';btn.dataset.vpqStarAction='capture';btn.textContent='☆ Save for review';head.insertBefore(btn,head.querySelector('#closeModal'));const nav=document.createElement('button');nav.id='vpqStarDepartmentOpen';nav.type='button';nav.dataset.vpqStarAction='open';nav.dataset.vpqStarSubject='Other';nav.textContent='⭐ Department Review';head.insertBefore(nav,btn)}
+ if(head){const btn=document.createElement('button');btn.id='vpqStarModalCapture';btn.type='button';btn.dataset.vpqStarAction='capture';btn.textContent='☆ Save for review';btn.hidden=true;head.insertBefore(btn,head.querySelector('#closeModal'));const nav=document.createElement('button');nav.id='vpqStarDepartmentOpen';nav.type='button';nav.dataset.vpqStarAction='open';nav.dataset.vpqStarSubject='Other';nav.textContent='⭐ Department Review';nav.hidden=true;head.insertBefore(nav,btn)}
  const root=el('modalBody');if(root){const observer=new MutationObserver(()=>addDepartmentButtons());observer.observe(root,{childList:true,subtree:true});const title=el('modalTitle');if(title)observer.observe(title,{childList:true,characterData:true,subtree:true});}
  el('modalBody')?.addEventListener('change',e=>{if(e.target.id==='vpqStarFilter'){filter=e.target.value;index=0;flipped=false;layout()}});
- updateCounts();
+ updateCounts();addDepartmentButtons();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 window.VPQ_STARRED=Object.freeze({save,has,open,setCurrent,add:toggleDialog,count:()=>cards.length,exportForOwner:()=>cards.map(c=>({...c}))});
