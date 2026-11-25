@@ -5863,11 +5863,14 @@ function vpqVerifyUploadedCompanion(c){
   }catch(e){status='unchecked'}
   vpqUploadedImageStatus.set(c.id,status);
   if(document.getElementById('vpqPetGallery'))vpqUpdatePetGallery();
-  // Room pet is updated only when a player explicitly equips a companion.
+  // On login, previously equipped images can finish validating after first render.
+  // Refresh the selected companion's art without re-equipping or changing its saved ID.
+  if(state.vpqCompanionId===c.id)updateAvatar();
  };
  img.onerror=function(){
   vpqUploadedImageStatus.set(c.id,'missing');
   if(document.getElementById('vpqPetGallery'))vpqUpdatePetGallery();
+  if(state.vpqCompanionId===c.id)updateAvatar();
  };
  img.src=vpqDogAssetURL(c.image);
 }
