@@ -1,12 +1,12 @@
 # Radiology course-image manifest (Claude) · 2026-11-25
 
 Branch `claude/radiology-image-manifest-2026-11-25` · coordination: Issue #40.
-This branch adds **documentation only**. It contains no image binaries and makes no changes to live game files.
+The owner uploaded the photo pack as a zip to `main` (a608ddd). This branch **unpacks it into `radiology-course-photos/exam3/`** (87 student images in one folder per slot, plus `_answer-keys/` slide renders) and **removes the zip**. Live game files are unchanged: the images are not yet registered in `diagnostic-imaging-published.json` or shown in any lesson.
 
 ## Relation to existing work (not a duplicate)
 - `docs/RADIOLOGY_MSK_IMAGE_SOURCE_INVENTORY_2026-11-25.md` (ChatGPT) already inventoried the same sources (284 extracted objects) and kept the extraction outside GitHub.
 - This manifest is the **next step**: it maps a curated subset of 87 images to the **existing** Exam 3 slot IDs in `radiology-image-approval-queue.js`. It adds no new slots.
-- Images get uploaded by the owner through the existing publisher (`diagnostic-imaging-publish.js`). The pack zip is delivered to the owner outside the repo.
+- Integration: reference `repoPath` / `pagesUrl` from the manifest directly. No one-by-one publisher upload is needed. Never show `_answer-keys/` or `studentRole: answer-key-only` images as question images.
 
 ## Coverage
 | Slot | Images | Source |
@@ -26,7 +26,7 @@ This branch adds **documentation only**. It contains no image binaries and makes
 
 ## Key facts for integrators
 - The extracted embedded images do **not** contain the slide's "Normal" labels or arrows. Those are separate slide layers, so the files are clean student views. There are 3 exceptions where the label is burned in: `studentRole: answer-key-only`.
-- `annotatedKeyPath` points to a rendered slide page in the owner's pack (`_answer-keys/`). Those renders are not in the repo.
+- `annotatedKeyRepoPath` points to the rendered slide page (instructor labels and arrows) in `radiology-course-photos/exam3/_answer-keys/`.
 - 8 images are `found-unverified`: on the hyperparathyroidism (p9) and nasal (pp.11–12) slides, which image is the normal one is ambiguous. Spine p12 img 015 looks like a duplicate of p11 img 011.
 - Rights: `owner-attested-lmu-noncommercial` (owner statement, 2026-11-25: LMU permits course material and assigned textbooks for this non-commercial LMU game). This updates the "reference-only" stance in the existing inventory **by owner decision**. Third-party diagrams (e.g., MSK2 p21 "Modified from Thrall") were deliberately left out of the pack.
 - No review state above `matched-to-case`. `medicalReviewed` and `ownerApproved` are false everywhere.

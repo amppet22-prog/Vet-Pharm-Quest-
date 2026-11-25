@@ -27,7 +27,10 @@
    "annotatedKeyPath": null,
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-practice-hip-gsd/e3-practice-hip-gsd__01_case1-lateral-pelvis.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-practice-hip-gsd/e3-practice-hip-gsd__01_case1-lateral-pelvis.jpg",
+   "annotatedKeyRepoPath": null
   },
   {
    "slotId": "e3-practice-hip-gsd",
@@ -52,7 +55,10 @@
    "annotatedKeyPath": null,
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-practice-hip-gsd/e3-practice-hip-gsd__02_case1-vd-pelvis.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-practice-hip-gsd/e3-practice-hip-gsd__02_case1-vd-pelvis.jpg",
+   "annotatedKeyRepoPath": null
   },
   {
    "slotId": "e3-practice-mastiff-forelimb",
@@ -77,7 +83,10 @@
    "annotatedKeyPath": null,
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-practice-mastiff-forelimb/e3-practice-mastiff-forelimb__01_case2-right-distal-forelimb-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-practice-mastiff-forelimb/e3-practice-mastiff-forelimb__01_case2-right-distal-forelimb-lateral.jpg",
+   "annotatedKeyRepoPath": null
   },
   {
    "slotId": "e3-practice-mastiff-forelimb",
@@ -102,7 +111,10 @@
    "annotatedKeyPath": null,
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-practice-mastiff-forelimb/e3-practice-mastiff-forelimb__02_case2-right-distal-forelimb-crcd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-practice-mastiff-forelimb/e3-practice-mastiff-forelimb__02_case2-right-distal-forelimb-crcd.jpg",
+   "annotatedKeyRepoPath": null
   },
   {
    "slotId": "e3-practice-puppy-lameness",
@@ -127,7 +139,10 @@
    "annotatedKeyPath": null,
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-practice-puppy-lameness/e3-practice-puppy-lameness__01_case3-right-femur-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-practice-puppy-lameness/e3-practice-puppy-lameness__01_case3-right-femur-lateral.jpg",
+   "annotatedKeyRepoPath": null
   },
   {
    "slotId": "e3-practice-puppy-lameness",
@@ -152,7 +167,10 @@
    "annotatedKeyPath": null,
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-practice-puppy-lameness/e3-practice-puppy-lameness__02_case3-right-femur-crcd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-practice-puppy-lameness/e3-practice-puppy-lameness__02_case3-right-femur-crcd.jpg",
+   "annotatedKeyRepoPath": null
   },
   {
    "slotId": "e3-bone-osteopenia",
@@ -177,7 +195,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p019-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__01_generalized-osteopenia-normal-vs-affected.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__01_generalized-osteopenia-normal-vs-affected.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p019-slide.jpg"
   },
   {
    "slotId": "e3-bone-osteopenia",
@@ -202,7 +223,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p020-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__02_regional-osteopenia-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__02_regional-osteopenia-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p020-slide.jpg"
   },
   {
    "slotId": "e3-bone-osteopenia",
@@ -227,7 +251,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p020-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__03_regional-osteopenia-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__03_regional-osteopenia-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p020-slide.jpg"
   },
   {
    "slotId": "e3-bone-osteopenia",
@@ -252,7 +279,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p020-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__04_regional-osteopenia-zoom.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__04_regional-osteopenia-zoom.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p020-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -277,7 +307,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p024-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__01_stifle-normal-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__01_stifle-normal-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p024-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -302,7 +335,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p024-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__02_stifle-increased-synovial-mass-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__02_stifle-increased-synovial-mass-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p024-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -327,7 +363,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p025-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__03_stifle-increased-synovial-mass-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__03_stifle-increased-synovial-mass-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p025-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -352,7 +391,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p025-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__04_stifle-increased-synovial-mass-c.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__04_stifle-increased-synovial-mass-c.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p025-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -377,7 +419,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p034-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__05_stifle-oa-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__05_stifle-oa-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p034-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -402,7 +447,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p034-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__06_stifle-oa-crcd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__06_stifle-oa-crcd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p034-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -427,7 +475,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p034-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__07_stifle-normal-lateral-crcd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__07_stifle-normal-lateral-crcd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p034-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -452,7 +503,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p035-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__08_stifle-effusion-subluxation-crcl.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__08_stifle-effusion-subluxation-crcl.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p035-slide.jpg"
   },
   {
    "slotId": "e3-djd-stifle",
@@ -477,7 +531,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p035-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__09_stifle-normal-lateral-r.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__09_stifle-normal-lateral-r.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p035-slide.jpg"
   },
   {
    "slotId": "e3-ocd-shoulder",
@@ -502,7 +559,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p040-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-ocd-shoulder/e3-ocd-shoulder__01_ocd-caudal-humeral-head-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-ocd-shoulder/e3-ocd-shoulder__01_ocd-caudal-humeral-head-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p040-slide.jpg"
   },
   {
    "slotId": "e3-ocd-shoulder",
@@ -527,7 +587,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p041-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-ocd-shoulder/e3-ocd-shoulder__02_ocd-caudal-humeral-head-flap.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-ocd-shoulder/e3-ocd-shoulder__02_ocd-caudal-humeral-head-flap.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p041-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -552,7 +615,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p042-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__01_oc-medial-humeral-condyle.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__01_oc-medial-humeral-condyle.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p042-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -577,7 +643,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p078-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__02_elbow-oblique-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__02_elbow-oblique-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p078-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -602,7 +671,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p078-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__03_elbow-oblique-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__03_elbow-oblique-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p078-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -627,7 +699,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p085-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__04_uap-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__04_uap-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p085-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -652,7 +727,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p085-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__05_uap-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__05_uap-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p085-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -677,7 +755,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p086-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__06_uap-vs-not-uap.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__06_uap-vs-not-uap.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p086-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -702,7 +783,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p089-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__07_fmcp.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__07_fmcp.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p089-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -727,7 +811,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p089-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__08_elbow-normal-lateral-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__08_elbow-normal-lateral-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p089-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -752,7 +839,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p091-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__09_elbow-joint-incongruity.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__09_elbow-joint-incongruity.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p091-slide.jpg"
   },
   {
    "slotId": "e3-bsava-elbow",
@@ -777,7 +867,10 @@
    "annotatedKeyPath": "_answer-keys/msk1-p091-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__10_elbow-normal-lateral-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__10_elbow-normal-lateral-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk1-p091-slide.jpg"
   },
   {
    "slotId": "e3-msk2-lysis-pattern",
@@ -802,7 +895,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p004-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__01_cortical-disruption-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__01_cortical-disruption-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p004-slide.jpg"
   },
   {
    "slotId": "e3-msk2-lysis-pattern",
@@ -827,7 +923,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p004-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__02_cortical-disruption-b-zoom.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__02_cortical-disruption-b-zoom.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p004-slide.jpg"
   },
   {
    "slotId": "e3-msk2-lysis-pattern",
@@ -852,7 +951,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p006-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__03_geographic-lysis-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__03_geographic-lysis-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p006-slide.jpg"
   },
   {
    "slotId": "e3-msk2-lysis-pattern",
@@ -877,7 +979,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p006-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__04_geographic-lysis-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__04_geographic-lysis-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p006-slide.jpg"
   },
   {
    "slotId": "e3-msk2-lysis-pattern",
@@ -902,7 +1007,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p008-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__05_expansile-lysis.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__05_expansile-lysis.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p008-slide.jpg"
   },
   {
    "slotId": "e3-msk2-lysis-pattern",
@@ -927,7 +1035,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p009-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__06_moth-eaten-lysis.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__06_moth-eaten-lysis.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p009-slide.jpg"
   },
   {
    "slotId": "e3-msk2-lysis-pattern",
@@ -952,7 +1063,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p010-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__07_permeative-lysis.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__07_permeative-lysis.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p010-slide.jpg"
   },
   {
    "slotId": "e3-msk2-periosteal",
@@ -977,7 +1091,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p014-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__01_periosteal-solid.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__01_periosteal-solid.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p014-slide.jpg"
   },
   {
    "slotId": "e3-msk2-periosteal",
@@ -1002,7 +1119,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p016-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__02_periosteal-lamellar-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__02_periosteal-lamellar-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p016-slide.jpg"
   },
   {
    "slotId": "e3-msk2-periosteal",
@@ -1027,7 +1147,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p016-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__03_periosteal-lamellar-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__03_periosteal-lamellar-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p016-slide.jpg"
   },
   {
    "slotId": "e3-msk2-periosteal",
@@ -1052,7 +1175,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p017-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__04_periosteal-palisading.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__04_periosteal-palisading.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p017-slide.jpg"
   },
   {
    "slotId": "e3-msk2-periosteal",
@@ -1077,7 +1203,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p018-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__05_periosteal-spiculated-sunburst.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__05_periosteal-spiculated-sunburst.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p018-slide.jpg"
   },
   {
    "slotId": "e3-msk2-periosteal",
@@ -1102,7 +1231,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p019-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__06_periosteal-amorphous.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__06_periosteal-amorphous.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p019-slide.jpg"
   },
   {
    "slotId": "e3-bsava-infection-neoplasm",
@@ -1127,7 +1259,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p024-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__01_tumor-or-infection-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__01_tumor-or-infection-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p024-slide.jpg"
   },
   {
    "slotId": "e3-bsava-infection-neoplasm",
@@ -1152,7 +1287,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p024-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__02_tumor-or-infection-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__02_tumor-or-infection-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p024-slide.jpg"
   },
   {
    "slotId": "e3-bsava-infection-neoplasm",
@@ -1177,7 +1315,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p026-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__03_hematogenous-aspergillosis-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__03_hematogenous-aspergillosis-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p026-slide.jpg"
   },
   {
    "slotId": "e3-bsava-infection-neoplasm",
@@ -1202,7 +1343,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p026-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__04_hematogenous-aspergillosis-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__04_hematogenous-aspergillosis-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p026-slide.jpg"
   },
   {
    "slotId": "e3-bsava-infection-neoplasm",
@@ -1227,7 +1371,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p030-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__05_soft-tissue-tumor-invading-bone-lat.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__05_soft-tissue-tumor-invading-bone-lat.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p030-slide.jpg"
   },
   {
    "slotId": "e3-bsava-infection-neoplasm",
@@ -1252,7 +1399,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p030-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__06_soft-tissue-tumor-invading-bone-crcd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__06_soft-tissue-tumor-invading-bone-crcd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p030-slide.jpg"
   },
   {
    "slotId": "e3-bsava-healing",
@@ -1277,7 +1427,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p065-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-healing/e3-bsava-healing__01_fracture-margin-chronicity-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-healing/e3-bsava-healing__01_fracture-margin-chronicity-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p065-slide.jpg"
   },
   {
    "slotId": "e3-bsava-healing",
@@ -1302,7 +1455,10 @@
    "annotatedKeyPath": "_answer-keys/msk2-p065-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-bsava-healing/e3-bsava-healing__02_fracture-margin-chronicity-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-bsava-healing/e3-bsava-healing__02_fracture-margin-chronicity-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/msk2-p065-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1327,7 +1483,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p005-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__01_cmo-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__01_cmo-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p005-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1352,7 +1511,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p005-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__02_cmo-vd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__02_cmo-vd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p005-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1377,7 +1539,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p007-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__03_mlo-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__03_mlo-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p007-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1402,7 +1567,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p007-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__04_mlo-lateral-zoom.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__04_mlo-lateral-zoom.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p007-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1427,7 +1595,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p009-slide.jpg",
    "reviewState": "found-unverified",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__05_hyperparathyroidism-skull-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__05_hyperparathyroidism-skull-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p009-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1452,7 +1623,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p009-slide.jpg",
    "reviewState": "found-unverified",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__06_hyperparathyroidism-mandible-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__06_hyperparathyroidism-mandible-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p009-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1477,7 +1651,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p009-slide.jpg",
    "reviewState": "found-unverified",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__07_hyperparathyroidism-mandible-b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__07_hyperparathyroidism-mandible-b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p009-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1502,7 +1679,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p010-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__08_nasal-rhinitis-open-mouth-vd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__08_nasal-rhinitis-open-mouth-vd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p010-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1527,7 +1707,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p011-slide.jpg",
    "reviewState": "found-unverified",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__09_nasal-example-2a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__09_nasal-example-2a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p011-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1552,7 +1735,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p011-slide.jpg",
    "reviewState": "found-unverified",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__10_nasal-example-2b.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__10_nasal-example-2b.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p011-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1577,7 +1763,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p012-slide.jpg",
    "reviewState": "found-unverified",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__11_nasal-closed-mouth-vd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__11_nasal-closed-mouth-vd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p012-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1602,7 +1791,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p012-slide.jpg",
    "reviewState": "found-unverified",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__12_nasal-normal-or-abnormal-a.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__12_nasal-normal-or-abnormal-a.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p012-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1627,7 +1819,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p012-slide.jpg",
    "reviewState": "found-unverified",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__13_nasal-normal-open-mouth.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__13_nasal-normal-open-mouth.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p012-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1652,7 +1847,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p014-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__14_nasal-aspergillosis.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__14_nasal-aspergillosis.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p014-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1677,7 +1875,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p017-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__15_atlantoaxial-subluxation.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__15_atlantoaxial-subluxation.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p017-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1702,7 +1903,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p019-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__16_block-vertebra.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__16_block-vertebra.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p019-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1727,7 +1931,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p020-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__17_transitional-vertebra.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__17_transitional-vertebra.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p020-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1752,7 +1959,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p021-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__18_hemivertebrae-vd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__18_hemivertebrae-vd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p021-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1777,7 +1987,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p021-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__19_hemivertebrae-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__19_hemivertebrae-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p021-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1802,7 +2015,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p022-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__20_hemivertebrae-lateral-zoom.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__20_hemivertebrae-lateral-zoom.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p022-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1827,7 +2043,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p022-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__21_hemivertebrae-vd-zoom.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__21_hemivertebrae-vd-zoom.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p022-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1852,7 +2071,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p023-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__22_spondylosis-deformans.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__22_spondylosis-deformans.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p023-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1877,7 +2099,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p027-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__23_discospondylitis-c2c3-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__23_discospondylitis-c2c3-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p027-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1902,7 +2127,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p028-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__24_discospondylitis-c2c3-lateral-zoom.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__24_discospondylitis-c2c3-lateral-zoom.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p028-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1927,7 +2155,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p028-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__25_discospondylitis-c2c3-vd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__25_discospondylitis-c2c3-vd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p028-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1952,7 +2183,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p029-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__26_discospondylitis-chronic-lumbar.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__26_discospondylitis-chronic-lumbar.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p029-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -1977,7 +2211,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p032-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__27_ivdd-a-trauma-dog.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__27_ivdd-a-trauma-dog.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p032-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -2002,7 +2239,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p032-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__28_ivdd-b-l1l2.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__28_ivdd-b-l1l2.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p032-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -2027,7 +2267,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p033-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__29_ivdd-chronic-t12t13-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__29_ivdd-chronic-t12t13-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p033-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -2052,7 +2295,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p033-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__30_ivdd-chronic-t12t13-vd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__30_ivdd-chronic-t12t13-vd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p033-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -2077,7 +2323,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p034-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__31_ivdd-mineral-in-foramen-lateral.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__31_ivdd-mineral-in-foramen-lateral.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p034-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -2102,7 +2351,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p034-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__32_ivdd-mineral-in-foramen-vd.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__32_ivdd-mineral-in-foramen-vd.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p034-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -2127,7 +2379,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p035-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__33_mineralized-disc-in-situ-postop.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__33_mineralized-disc-in-situ-postop.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p035-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -2152,7 +2407,10 @@
    "annotatedKeyPath": "_answer-keys/spine-p039-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__34_vertebral-multiple-myeloma.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__34_vertebral-multiple-myeloma.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p039-slide.jpg"
   },
   {
    "slotId": "e3-skull-spine",
@@ -2177,7 +2435,12 @@
    "annotatedKeyPath": "_answer-keys/spine-p041-slide.jpg",
    "reviewState": "matched-to-case",
    "medicalReviewed": false,
-   "ownerApproved": false
+   "ownerApproved": false,
+   "repoPath": "radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__35_spinal-fracture-luxation-t12t13.jpg",
+   "pagesUrl": "https://amppet22-prog.github.io/Vet-Pharm-Quest-/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__35_spinal-fracture-luxation-t12t13.jpg",
+   "annotatedKeyRepoPath": "radiology-course-photos/exam3/_answer-keys/spine-p041-slide.jpg"
   }
- ]
+ ],
+ "imageFolder": "radiology-course-photos/exam3/",
+ "note": "Images live in the repo at imageFolder (unpacked from the owner-uploaded zip, commit a608ddd). Not yet registered in diagnostic-imaging-published.json; integration via ChatGPT radiology work (Issue #40)."
 }
