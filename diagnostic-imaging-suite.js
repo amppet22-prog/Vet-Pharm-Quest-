@@ -91,18 +91,15 @@ function xrayHome(){
    ['visual-exam2','Exam 2 · Abdominal images','Identify what is actually visible in the film'],
    ['spotter','Spot the abnormality','Find the relevant region before diagnosing']
   ]},
-  {number:'03',icon:'🩻',name:'INTERPRET',desc:'Use patient context and radiographic findings to consider plausible differentials.',color:'#eef8f1',buttons:[
-   ['image-review','Guided image-to-findings review','Recognize, describe and compare with source interpretation'],
-   ['final-rounds','Clinical image rounds','Case questions; this bank is being improved for difficulty']
-  ]},
-  {number:'04',icon:'📝',name:'REPORT',desc:'Practice a complete written interpretation using the LMU report structure.',color:'#fff3ed',buttons:[
-   ['write-report','LMU structured radiology report','Write findings, impression and recommended next steps'],
-   ['viewer','Compare multiple views','Inspect additional projections before writing']
+  {number:'03',icon:'🩻',name:'INTERPRET & REPORT',desc:'One connected clinical case: inspect the film, describe Roentgen signs, rank differentials and complete the LMU report.',color:'#eef8f1',buttons:[
+   ['write-report','Clinical Case + LMU Report','Source-attributed radiographs · findings · ranked differentials · impression and follow-up'],
+   ['image-review','Guided image-to-findings review','Scaffolded recognition and description before full cases'],
+   ['viewer','Compare multiple views','Enlarge and inspect projections']
   ]}
  ];
  const tile=([key,title,detail])=>'<button type="button" data-vpqimage="'+key+'" style="display:block;text-align:left;width:100%;padding:11px 12px;background:#fff;border:1px solid #d8dfea;border-radius:11px;min-height:72px"><strong style="display:block;font-size:13px;color:#344f78">'+E(title)+'</strong><small style="display:block;font-size:11px;font-weight:500;margin-top:5px;color:#68788a;line-height:1.45">'+E(detail)+'</small></button>';
  const panels=groups.map(g=>'<section style="background:'+g.color+';border:1px solid #e0dfeb;border-radius:15px;padding:13px;margin:0 0 12px"><div style="display:flex;align-items:center;gap:10px"><span style="border-radius:10px;background:#fff;padding:7px;font-size:20px" aria-hidden="true">'+g.icon+'</span><div><b style="font-size:14px;letter-spacing:.04em;color:#3b4b71">'+g.number+' · '+g.name+'</b><p style="font-size:12px;font-weight:500;margin:3px 0 0;line-height:1.45;color:#53647c">'+E(g.desc)+'</p></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:8px;margin-top:12px">'+g.buttons.map(tile).join('')+'</div></section>').join('');
- page('X-ray / Radiography','<p style="font-size:13px;margin:3px 0 12px;color:#50647c">Your radiology path: <b>Learn → Practice → Interpret → Report.</b> Start with Learn; return here whenever you want to move to the next level. Existing progress and case data are preserved.</p>'+panels+
+ page('X-ray / Radiography','<p style="font-size:13px;margin:3px 0 12px;color:#50647c">Your radiology path: <b>Learn → Practice → Interpret & Report.</b> Start with Learn; return here whenever you want to move to the next level. Existing progress and case data are preserved.</p>'+panels+
  '<details style="margin:12px 0;border:1px solid #d9dfec;border-radius:12px;padding:10px 12px"><summary style="cursor:pointer;font-weight:800">🧰 Other tools · technique, older activities & owner images</summary><p style="font-size:12px;color:#64738a">These are supporting resources, not extra mandatory steps.</p><div style="display:flex;flex-wrap:wrap;gap:8px">'+[
  ['exam1-technique','Safety & physics'],['xray-technique','Technique & positioning'],['quality','Radiograph quality'],
  ['library','Published image library'],['approval-queue','Owner photo approval queue']
