@@ -160,7 +160,7 @@
     },
     "verified-canine-gdv-lateral": {
       "modality": "X-ray",
-      "updated": "2026-11-23T00:00:00Z",
+      "updated": "2026-11-25T06:36:08.345Z",
       "imageStatus": "Source verified; annotated where marked",
       "reviewStatus": "Source-derived educational interpretation; not independent specialist reading",
       "id": "verified-canine-gdv-lateral",
@@ -173,9 +173,14 @@
       "credit": "Cokehabit · CC BY-SA 3.0 · https://creativecommons.org/licenses/by-sa/3.0/",
       "images": [
         {
-          "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Gdv2.jpg",
-          "view": "Lateral canine abdomen",
-          "caption": "Source-identified side-view X-ray of gastric dilatation–volvulus (GDV)."
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/diagnostic-imaging-photos/verified-canine-gdv-lateral-1795588565784-0.jpg",
+          "view": "Right lateral abdomen",
+          "caption": "Source-identified side-view X-ray of gastric dilatation–volvulus (GDV). Right lateral"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/diagnostic-imaging-photos/verified-canine-gdv-lateral-1795588567053-1.jpg",
+          "view": "Left lateral Ab.",
+          "caption": "Left lateral view of a patient with GDV"
         }
       ],
       "history": "The source identifies a canine GDV radiograph but supplies no complete clinical signalment.",
@@ -194,7 +199,11 @@
           "Licensed veterinary teaching radiograph (IDEXX, Today's Veterinary Practice or similar)"
         ],
         "note": "Confirm projection and full-resolution diagnostic quality before testing specific side-dependent findings."
-      }
+      },
+      "imageReviewSlot": "e1-opacity-gas",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "lookFor": ""
     },
     "verified-equine-laminitis-annotated": {
       "modality": "X-ray",
