@@ -88,8 +88,8 @@ function xrayHome(){
   ['course','Complete lecture guide','All existing exam-organized learning units and objectives']
  ]);
  const path=section('02','Work through one interpretation','Do not stop at recognizing a pattern: describe all findings, explain why they occur, then interpret the entire case.','#eef8fc',[
-  ['visual-learn','A · Learn with radiographs','See → describe → explain → compare normal and abnormal'),
-  ['image-review','B · Describe every finding','Practice anatomical localization, opacity, distribution and multiple concurrent signs'),
+  ['visual-learn','A · Learn with radiographs','See → describe → explain → compare normal and abnormal'],
+  ['image-review','B · Describe every finding','Practice anatomical localization, opacity, distribution and multiple concurrent signs'],
   ['write-report','C · Full clinical case + LMU report','Radiographs → objective findings → ranked differentials → next diagnostics'],
   ['viewer','Compare views / zoom','Inspect projections side by side before committing to an interpretation']
  ]);
