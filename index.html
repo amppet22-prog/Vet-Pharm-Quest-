@@ -5489,6 +5489,14 @@ for(const [id,name,image,category] of vpqUploadedCompanionManifest){
  category==='pocket'?'🐹':category==='exotics'?'🦎':category==='avians'?'🦜':category==='wildlife-rehab'?'🦊':'✨';
  vpqCompanionCatalog.push({id,name,image,category,pet,petBreed:category==='dog'?id:undefined,level:tier[0],price:tier[1]});
 }
+/* Exam Room small-animal table: reuse uploaded companion art only.
+ * This is an independent exam-table display catalog, not the player's active pet.
+ * Preserve all companion unlocks, IDs, sizes, and saved selections.
+ */
+window.VPQ_EXAM_PATIENTS=vpqCompanionCatalog
+ .filter(a=>a&&a.image&&['dog','cat','pocket','exotics','avians'].includes(a.category))
+ .filter(a=>/^(?:assets\\/)?[^\\/\\\\]+\\.(?:png|jpe?g|webp)$/i.test(a.image)&&!a.image.includes('..'))
+ .map(a=>({id:'vpq-exam-'+a.id,label:({dog:'🐕 Dogs',cat:'🐈 Cats',pocket:'🐹 Pocket pets',exotics:'🦎 Exotics',avians:'🦜 Birds'})[a.category]+' · '+a.name,image:a.image,species:a.category}));
 /* Illustrated, zero-cost starters for species testing. Existing selections and owned IDs are preserved. */
 for(const starterId of ['cat-siamese','pocket-rabbit-holland','exotic-beardie']){const starter=vpqCompanionCatalog.find(c=>c.id===starterId);if(starter){starter.level=1;starter.price=0;}}
 const vpqCompanionById=id=>vpqCompanionCatalog.find(c=>c.id===id);
