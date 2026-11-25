@@ -79,36 +79,34 @@ function home(){
 }
 function xrayHome(){
  session=null;
- const cards=[
- ['exam1-technique','🛡️','Exam 1 · Safety & Physics','Lecture 1 essentials','ALARA, PPE, scatter, X-ray tube, kVp/mAs and radiation exposure','#eaf8ff','#9cc9e9'],
- ['exam1-reading','📖','Exam 1 · Radiographic Interpretation','Lecture 2 essentials','Display orientation, 5 opacities, Roentgen signs & artifacts','#fff1fa','#e7b4d1'],
- ['visual-exam1','🔎','Exam 1 · Image Recognition','Real source studies','9 photo-first questions, beginner to clinical','#ebf8f5','#b1ded0'],
- ['visual-exam2','🩻','Exam 2 · Radiograph Recognition','Practice before interpreting','10 photo-first questions; verify evidence on the actual film','#eef4ff','#bdcff2'],
- ['abdomen-lab','🍎','Exam 2 · Abdominal Radiology Course','Start here · 5 modules','57 guided challenges + lecture guide + image/photo slots','#fff2e9','#e7c29d'],
- ['final-rounds','🎯','Final Image Interpretation Rounds','Practice with real radiographs','20 source-linked studies, 40 case questions, reasons & editable images','#fff1e9','#eac59e'],
- ['conditions','🦴','Lecture Condition Casebook','Learn every disease pattern','54 lecture-based presentations, radiographic clues & look-alikes','#edf9f7','#a4d9cd'],
- ['course','📖','Radiology Learning Course','Learn before you diagnose','Lecture objectives, normal anatomy, interpretation method & final review','#f4eaff','#c5afe6'],
- ['xray-technique','🩻','Technique & positioning','Start with the basics','Beam direction, projections, kVp / mAs & safe positioning','#f7edff','#cbb4ed'],
- ['quality','✨','Radiograph quality','Make every image count','Collimation, rotation, markers, artifacts & exposure','#eaf8f4','#a7ded0'],
- ['approval-queue','✅','Owner Image Approval Queue','Check and publish lecture photos','40 image targets · Exams 1–3, including BSAVA MSK references','#edf8f4','#b7dacc'],
- ['library','📚','Published imaging cases','Your teaching library','Normal references, clinical cases & published radiographs','#fff3e5','#f4d2a3'],
- ['viewer','🖼️','Multi-view viewer','Take a closer look','Zoom and compare up to three radiographs','#eaf3ff','#b7d2f5'],
- ['spotter','🔎','Spot the Abnormality','Put your detective hat on','Locate findings and reason through differentials','#fff0f5','#efb9d1'],
- ['reading','📝','Radiology Reading Desk','Think like a radiologist','Interpretation, quality challenges & reports','#f2f1ff','#c9c5f0']
+ const groups=[
+  {number:'01',icon:'📖',name:'LEARN',desc:'Understand the normal image, then the abnormal pattern. No pressure to quiz yet.',color:'#f6efff',buttons:[
+   ['course','Course lessons · Start here','Guided foundations, normal anatomy and lecture concepts'],
+   ['exam1-reading','Exam 1 · Opacities & interpretation','Five opacities, Roentgen signs, orientation and artifacts'],
+   ['abdomen-lab','Exam 2 · Abdominal learning','Normal abdomen, GI and GU with progressive teaching'],
+   ['conditions','Disease pattern reference','Look-alikes and differential explanations']
+  ]},
+  {number:'02',icon:'🔎',name:'PRACTICE',desc:'Look at a real image and recognize the anatomy, projection or visible finding.',color:'#edf8fc',buttons:[
+   ['visual-exam1','Exam 1 · Image basics','Projections, anatomy and foundational signs'],
+   ['visual-exam2','Exam 2 · Abdominal images','Identify what is actually visible in the film'],
+   ['spotter','Spot the abnormality','Find the relevant region before diagnosing']
+  ]},
+  {number:'03',icon:'🩻',name:'INTERPRET',desc:'Use patient context and radiographic findings to consider plausible differentials.',color:'#eef8f1',buttons:[
+   ['reading','Guided image-to-findings review','Recognize, describe and compare with source interpretation'],
+   ['final-rounds','Clinical image rounds','Case questions; this bank is being improved for difficulty']
+  ]},
+  {number:'04',icon:'📝',name:'REPORT',desc:'Practice a complete written interpretation using the LMU report structure.',color:'#fff3ed',buttons:[
+   ['reading','Radiology Reading Desk','Open the LMU-style report practice and image library'],
+   ['viewer','Compare multiple views','Inspect additional projections before writing']
+  ]}
  ];
- page('X-ray / Radiography',
- '<div style="position:relative;overflow:hidden;background:linear-gradient(110deg,#f9edff 0%,#edf7ff 52%,#effbf5 100%);border:1px solid #ded5ee;border-radius:17px;padding:15px 17px;margin:1px 0 15px">'+
- '<span aria-hidden="true" style="position:absolute;right:14px;top:3px;font-size:29px;opacity:.42">✧ 🩻 ✧</span>'+
- '<div style="font-size:11px;font-weight:850;letter-spacing:.11em;color:#8a72ab;text-transform:uppercase;margin-bottom:5px">Radiography learning lab</div>'+
- '<b style="display:block;font-size:17px;color:#574475;line-height:1.3">See it. Describe it. Diagnose it. 💜</b>'+
- '<p style="margin:7px 0 0;color:#586a83;font-size:12px;max-width:590px;line-height:1.55">Choose where to practice — from taking a good radiograph to working through real teaching cases. All radiography study tools live together here.</p></div>'+
- '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px">'+cards.map(([key,icon,name,tag,detail,bg,edge])=>
- '<button type="button" data-vpqimage="'+key+'" style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-height:144px;text-align:left;padding:13px 14px;background:linear-gradient(145deg,#fff 0%,'+bg+' 100%);border:1.5px solid '+edge+';border-left:4px solid '+edge+';border-radius:15px;box-shadow:0 3px 10px #67779a12;transition:transform .15s ease,box-shadow .15s ease">'+
- '<span aria-hidden="true" style="display:inline-grid;place-items:center;width:34px;height:34px;border-radius:11px;background:#ffffffa8;font-size:20px">'+icon+'</span>'+
- '<b style="font-size:13px;line-height:1.3;color:#3f4e71">'+name+'</b>'+
- '<span style="font-size:11px;font-weight:750;color:#795d91">'+tag+'</span>'+
- '<small style="font-size:11px;font-weight:500;line-height:1.45;color:#5d6c81">'+detail+'</small></button>').join('')+'</div>'+
- '<p style="margin:11px 4px 0;font-size:11px;color:#73809a;text-align:center">✦ Pick a station whenever you are ready. Your existing practice progress stays the same. ✦</p>','home');
+ const tile=([key,title,detail])=>'<button type="button" data-vpqimage="'+key+'" style="display:block;text-align:left;width:100%;padding:11px 12px;background:#fff;border:1px solid #d8dfea;border-radius:11px;min-height:72px"><strong style="display:block;font-size:13px;color:#344f78">'+E(title)+'</strong><small style="display:block;font-size:11px;font-weight:500;margin-top:5px;color:#68788a;line-height:1.45">'+E(detail)+'</small></button>';
+ const panels=groups.map(g=>'<section style="background:'+g.color+';border:1px solid #e0dfeb;border-radius:15px;padding:13px;margin:0 0 12px"><div style="display:flex;align-items:center;gap:10px"><span style="border-radius:10px;background:#fff;padding:7px;font-size:20px" aria-hidden="true">'+g.icon+'</span><div><b style="font-size:14px;letter-spacing:.04em;color:#3b4b71">'+g.number+' · '+g.name+'</b><p style="font-size:12px;font-weight:500;margin:3px 0 0;line-height:1.45;color:#53647c">'+E(g.desc)+'</p></div></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:8px;margin-top:12px">'+g.buttons.map(tile).join('')+'</div></section>').join('');
+ page('X-ray / Radiography','<p style="font-size:13px;margin:3px 0 12px;color:#50647c">Your radiology path: <b>Learn → Practice → Interpret → Report.</b> Start with Learn; return here whenever you want to move to the next level. Existing progress and case data are preserved.</p>'+panels+
+ '<details style="margin:12px 0;border:1px solid #d9dfec;border-radius:12px;padding:10px 12px"><summary style="cursor:pointer;font-weight:800">🧰 Other tools · technique, older activities & owner images</summary><p style="font-size:12px;color:#64738a">These are supporting resources, not extra mandatory steps.</p><div style="display:flex;flex-wrap:wrap;gap:8px">'+[
+ ['exam1-technique','Safety & physics'],['xray-technique','Technique & positioning'],['quality','Radiograph quality'],
+ ['library','Published image library'],['approval-queue','Owner photo approval queue']
+ ].map(([key,label])=>B(key,label)).join('')+'</div></details>','home');
 }
 function station(mode){
  session=null;
