@@ -81,3 +81,13 @@ Image stages: `missing` → `found-unverified` → `matched-to-case` → `rights
 - Ensure each case has **all** objectively visible findings, not one pattern; capture incorrect/partial descriptions with helpful feedback.
 - Verify status/rights and reviewer signoffs. No unverifiable images or image-less image questions in release.
 - Perform browser-based QA in addition to static code review.
+
+## Owner publication path — implemented in PR #39
+1. Go to X-ray station → **Reference tools, technique & owner review** → **Owner photo approval queue**. Pick Exam 2 / Exam 3 and a specific slot.
+2. Choose **Add image in existing publisher** (or **Edit existing image / publish** for a linked case). The editor pre-populates the exam, image review ID, source reference and intended teaching prompt; it no longer mislabels Exam 3 as Exam 2.
+3. Supply a genuine verified study: patient species, region, appropriate views, source and credit/permission; write objective findings, interpretation, competing differentials, WHY, and diagnostic follow-up. Sign in via the existing owner password and GitHub token vault; use **Publish**. Publishing writes the study and its metadata to the shared GitHub imaging library.
+4. Return to the owner queue, link the correct published case, complete source/rights/quality/clinical/placement review and **Save review / approval**. This is separate from the initial upload and guards against assigning a random study to an ileus topic.
+5. The abdominal module reads approved `reviewSlots` mappings automatically for specific functional/mechanical/equivocal/linear-FB exercises, so students can see the actual source-matched radiographs after the owner's review. Do not conflate a pattern question with a definitive patient diagnosis.
+6. These code changes are on a feature branch; they only reach the hosted game once safely merged and deployed. Browser and iPad QA are still needed.
+
+No case image has been invented or attached by this code; the owner still supplies and approves source-matched radiographs. The publisher intentionally refuses an imaging record without a real image.
