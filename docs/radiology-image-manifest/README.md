@@ -38,3 +38,12 @@ The anatomy lecture is not mapped yet. It contains third-party figures on pp.8�
 
 ## Regenerate
 `build_pack.py` lists every image → slot decision and rebuilds the pack from the original uploads.
+
+## Published as game cases (PR: Exam 3 photo cases)
+`build_exam3_cases.py` registers the photos as **48 cases** in `diagnostic-imaging-published.json` (ids start with `exam3-`, 120 views). This is the same format the owner publisher writes, and it is visible in the Published Imaging Library, Reading Desk and the approval queue (`imageReviewSlot` links each case to its slot).
+- Spoiler rules: titles name only the slot topic and slide number. View labels are neutral ("Lateral · view A"). Captions, findings and the diagnosis appear only after **Reveal**. Image filenames are neutral (`<slot>__NN.jpg`).
+- The lecture slide is attached as "Annotated teaching key · lecture slide", which the viewer hides until the student chooses to show it.
+- `findings` contain only the instructor's slide bullets or the paraphrased Gallaher narration. Practice cases have no answer key in the source, and the case says so.
+- Excluded from question views: the 8 `verify` images and the 3 `answer-key-only` images.
+- Each case has at most 3 views, so the owner editor can still edit it.
+- Re-running the script replaces only `exam3-` cases.

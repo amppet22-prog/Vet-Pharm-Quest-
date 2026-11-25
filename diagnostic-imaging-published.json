@@ -1035,6 +1035,2142 @@
       "differentials": "Food bloat, gastric outflow obstruction, functional gastric ileus, aerophagia.",
       "why": "Gastric volvulus twists the stomach, trapping gas and compromising vascular return.",
       "next": "Emergency stabilization and veterinary surgical assessment."
+    },
+    "exam3-practice-case-1": {
+      "id": "exam3-practice-case-1",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 Practice Case 1 · 6-year-old MN German Shepherd Dog",
+      "lecture": "CVM 743 · Exam 3 · MSK Practice Cases",
+      "species": "Canine",
+      "region": "pelvis / coxofemoral",
+      "history": "6-year-old MN German Shepherd Dog. Presented for being slow getting up (case 1 title slide).",
+      "lookFor": "Using the LMU template, report projection quality, hip joint morphology, findings, impression and appropriate next steps.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "The source slides give the signalment and views only. No answer key is included, so check your interpretation against the class discussion or the instructor.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSKPracticecases (1).pptx · slide 3 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-practice-hip-gsd/e3-practice-hip-gsd__01.jpg",
+          "view": "Lateral · view A",
+          "caption": "Case 1: 6 yo MN German Shepherd, slow getting up (slide 2). No diagnosis on slides."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-practice-hip-gsd/e3-practice-hip-gsd__02.jpg",
+          "view": "VD · view B",
+          "caption": "Same patient as lateral (single slide-3 composite)."
+        }
+      ],
+      "imageReviewSlot": "e3-practice-hip-gsd",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-practice-case-2": {
+      "id": "exam3-practice-case-2",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 Practice Case 2 · 8-year-old FS English Mastiff",
+      "lecture": "CVM 743 · Exam 3 · MSK Practice Cases",
+      "species": "Canine",
+      "region": "right distal antebrachium / carpus",
+      "history": "8-year-old FS English Mastiff. Presented lame on the right forelimb (case 2 title slide).",
+      "lookFor": "Describe the lesion using Roentgen signs. Is the pattern aggressive? Which differentials and tests are justified?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "The source slides give the signalment and views only. No answer key is included, so check your interpretation against the class discussion or the instructor.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSKPracticecases (1).pptx · slide 5 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-practice-mastiff-forelimb/e3-practice-mastiff-forelimb__01.jpg",
+          "view": "Mediolateral · view A",
+          "caption": "Case 2: 8 yo FS English Mastiff, lame right forelimb (slide 4). No diagnosis on slides."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-practice-mastiff-forelimb/e3-practice-mastiff-forelimb__02.jpg",
+          "view": "Craniocaudal · view B",
+          "caption": "Same patient (slide-5 composite)."
+        }
+      ],
+      "imageReviewSlot": "e3-practice-mastiff-forelimb",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-practice-case-3": {
+      "id": "exam3-practice-case-3",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 Practice Case 3 · 8-month-old MN mixed-breed dog",
+      "lecture": "CVM 743 · Exam 3 · MSK Practice Cases",
+      "species": "Canine",
+      "region": "right femur / stifle",
+      "history": "8-month-old MN mixed-breed dog. Presented with shifting limb lameness, fever and lethargy (case 3 title slide).",
+      "lookFor": "Assess age, lesion distribution and radiographic description before ranking differentials.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "The source slides give the signalment and views only. No answer key is included, so check your interpretation against the class discussion or the instructor.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSKPracticecases (1).pptx · slide 7 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-practice-puppy-lameness/e3-practice-puppy-lameness__01.jpg",
+          "view": "Mediolateral · view A",
+          "caption": "Case 3: 8 mo MN mixed breed, shifting limb lameness, fever, lethargy (slide 6). No diagnosis on slides."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-practice-puppy-lameness/e3-practice-puppy-lameness__02.jpg",
+          "view": "Craniocaudal · view B",
+          "caption": "Same patient (slide 7)."
+        }
+      ],
+      "imageReviewSlot": "e3-practice-puppy-lameness",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p20-bone-osteopenia": {
+      "id": "exam3-msk1-p20-bone-osteopenia",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 20 · Regional versus generalized osteopenia",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "distal limb with orthopedic wire/pins",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 20.",
+      "lookFor": "Compare distribution, opacity and any relevant artifacts.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Regional osteopenia",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 20 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__02.jpg",
+          "view": "CrCd/DP · view A",
+          "caption": "Slide \"Regional osteopenia\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bone-osteopenia/e3-bone-osteopenia__03.jpg",
+          "view": "Oblique/lateral · view B",
+          "caption": "Slide \"Regional osteopenia\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p020-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bone-osteopenia",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p24-djd-stifle": {
+      "id": "exam3-msk1-p24-djd-stifle",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 24 · Osteoarthritis and stifle effusion",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "stifle",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 24.",
+      "lookFor": "Identify indirect radiographic clues to stifle disease.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Fluid versus soft tissue; Effusion or synovial proliferation (both).",
+      "interpretation": "Increased synovial mass",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 24 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__01.jpg",
+          "view": "Lateral · view A",
+          "caption": "Comparison view: the lecture slide labels this image Normal."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__02.jpg",
+          "view": "Lateral · view B",
+          "caption": "Slide \"Increased synovial mass\" (fluid vs soft tissue; effusion or synovial proliferation)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p024-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-djd-stifle",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p25-djd-stifle": {
+      "id": "exam3-msk1-p25-djd-stifle",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 25 · Osteoarthritis and stifle effusion",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "stifle",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 25.",
+      "lookFor": "Identify indirect radiographic clues to stifle disease.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Increased synovial mass",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 25 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__03.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Increased synovial mass\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__04.jpg",
+          "view": "Lateral · view B",
+          "caption": "Slide \"Increased synovial mass\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p025-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-djd-stifle",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p34-djd-stifle": {
+      "id": "exam3-msk1-p34-djd-stifle",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 34 · Osteoarthritis and stifle effusion",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "stifle",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 34.",
+      "lookFor": "Identify indirect radiographic clues to stifle disease.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Radiographic features of OA",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 34 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__05.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Radiographic features of OA\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__06.jpg",
+          "view": "Craniocaudal · view B",
+          "caption": "Slide \"Radiographic features of OA\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p034-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-djd-stifle",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p35-djd-stifle": {
+      "id": "exam3-msk1-p35-djd-stifle",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 35 · Osteoarthritis and stifle effusion",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "stifle",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 35.",
+      "lookFor": "Identify indirect radiographic clues to stifle disease.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Stifle Effusion and Subluxation Due to Cranial Cruciate Ligament Rupture",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 35 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__08.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Stifle effusion and subluxation due to cranial cruciate ligament rupture\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-djd-stifle/e3-djd-stifle__09.jpg",
+          "view": "Lateral · view B",
+          "caption": "Comparison view: the lecture slide labels this image Normal."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p035-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-djd-stifle",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p40-ocd-shoulder": {
+      "id": "exam3-msk1-p40-ocd-shoulder",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 40 · Osteochondrosis/OCD",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "shoulder",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 40.",
+      "lookFor": "Describe the subchondral lesion and justify imaging differentials.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Caudal humeral head; Subchondral sclerosis; Subchondral concavity or flattening.",
+      "interpretation": "OC/OCD",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 40 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-ocd-shoulder/e3-ocd-shoulder__01.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"OC/OCD caudal humeral head: subchondral sclerosis, concavity or flattening\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p040-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-ocd-shoulder",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p41-ocd-shoulder": {
+      "id": "exam3-msk1-p41-ocd-shoulder",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 41 · Osteochondrosis/OCD",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "shoulder",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 41.",
+      "lookFor": "Describe the subchondral lesion and justify imaging differentials.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Caudal humeral head; Subchondral sclerosis; Subchondral concavity or flattening; Mineralized flap.",
+      "interpretation": "OC/OCD",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 41 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-ocd-shoulder/e3-ocd-shoulder__02.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide adds \"mineralized flap\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p041-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-ocd-shoulder",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p42-bsava-elbow": {
+      "id": "exam3-msk1-p42-bsava-elbow",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 42 · Elbow special views",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "elbow",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 42.",
+      "lookFor": "Which projection best evaluates the anconeal process and what is a limitation of radiographs for medial coronoid disease?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Medial aspect of humeral condyle; Subchondral sclerosis; Subchondral concavity or flattening.",
+      "interpretation": "OC/OCD",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 42 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__01.jpg",
+          "view": "Craniocaudal · view A",
+          "caption": "Slide \"OC/OCD medial aspect of humeral condyle\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p042-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-elbow",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p78-bsava-elbow": {
+      "id": "exam3-msk1-p78-bsava-elbow",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 78 · Elbow special views",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "elbow",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 78.",
+      "lookFor": "Which projection best evaluates the anconeal process and what is a limitation of radiographs for medial coronoid disease?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Best visibility of medial compartment.",
+      "interpretation": "Oblique view",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 78 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__02.jpg",
+          "view": "Oblique · view A",
+          "caption": "Slide \"Oblique view - best visibility of medial compartment\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__03.jpg",
+          "view": "Oblique/lateral · view B",
+          "caption": "Same slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p078-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-elbow",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p85-bsava-elbow": {
+      "id": "exam3-msk1-p85-bsava-elbow",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 85 · Elbow special views",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "elbow",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 85.",
+      "lookFor": "Which projection best evaluates the anconeal process and what is a limitation of radiographs for medial coronoid disease?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Ununited Anconeal Process (UAP)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 85 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__04.jpg",
+          "view": "Flexed lateral · view A",
+          "caption": "Slide \"Ununited anconeal process (UAP)\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__05.jpg",
+          "view": "Flexed lateral · view B",
+          "caption": "Slide \"Ununited anconeal process (UAP)\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p085-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-elbow",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p89-bsava-elbow": {
+      "id": "exam3-msk1-p89-bsava-elbow",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 89 · Elbow special views",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "elbow",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 89.",
+      "lookFor": "Which projection best evaluates the anconeal process and what is a limitation of radiographs for medial coronoid disease?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "FMCP",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 89 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__07.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"FMCP\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__08.jpg",
+          "view": "Lateral · view B",
+          "caption": "Comparison view: the lecture slide labels this image Normal."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p089-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-elbow",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk1-p91-bsava-elbow": {
+      "id": "exam3-msk1-p91-bsava-elbow",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 91 · Elbow special views",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "elbow",
+      "history": "Teaching image set from the MSK I lecture (Fall 2026), slide 91.",
+      "lookFor": "Which projection best evaluates the anconeal process and what is a limitation of radiographs for medial coronoid disease?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Lateral view is best for detection; Radiographic features; Radioulnar step Normal; Widened humeroulnar joint space (most commonly); Elongated trochlear notch; Cranially positioned humeral condyle.",
+      "interpretation": "Joint Incongruity",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK1FALL26 (1).pdf · page 91 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__09.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Joint incongruity\": radioulnar step, widened humeroulnar joint space, elongated trochlear notch, cranially positioned humeral condyle."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-elbow/e3-bsava-elbow__10.jpg",
+          "view": "Lateral · view B",
+          "caption": "Comparison view: the lecture slide labels this image Normal."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk1-p091-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-elbow",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p04-msk2-lysis-pattern": {
+      "id": "exam3-msk2-p04-msk2-lysis-pattern",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 4 · Geographic, moth-eaten and permeative lysis",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "proximal humerus",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 4.",
+      "lookFor": "Which pattern of lysis, zone of transition and aggressiveness?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: An aggressive characteristic; Makes fracture more likely - PATHOLOGIC FRACTURE.",
+      "interpretation": "Cortical disruption",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 4 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__01.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Cortical disruption - aggressive; makes pathologic fracture more likely\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__02.jpg",
+          "view": "Lateral zoom · view B",
+          "caption": "Same slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p004-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-lysis-pattern",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p06-msk2-lysis-pattern": {
+      "id": "exam3-msk2-p06-msk2-lysis-pattern",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 6 · Geographic, moth-eaten and permeative lysis",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "long bone",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 6.",
+      "lookFor": "Which pattern of lysis, zone of transition and aggressiveness?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Focal; Well-defined (benign) or indistinct (more aggressive) margins; With or without cortical expansion; Shorter zone of transition between normal and abnormal, but not always well-defined; More apt to include benign differentials, e.g. bone cyst.",
+      "interpretation": "Geographic lysis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 6 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__03.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Geographic lysis\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__04.jpg",
+          "view": "CrCd · view B",
+          "caption": "Slide \"Geographic lysis\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p006-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-lysis-pattern",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p08-msk2-lysis-pattern": {
+      "id": "exam3-msk2-p08-msk2-lysis-pattern",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 8 · Geographic, moth-eaten and permeative lysis",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "manus/pes",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 8.",
+      "lookFor": "Which pattern of lysis, zone of transition and aggressiveness?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: A geographic region of lysis that expands beyond normal cortical margin shape; Soft tissue swelling centered at joint (intracapsular); Periosteal proliferation at lytic margins indicating some evidence for “slow” growth; Smooth solid, well-defined periosteal proliferation - Codm.",
+      "interpretation": "Expansile lysis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 8 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__05.jpg",
+          "view": "DP · view A",
+          "caption": "Slide \"Expansile lysis\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p008-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-lysis-pattern",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p09-msk2-lysis-pattern": {
+      "id": "exam3-msk2-p09-msk2-lysis-pattern",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 9 · Geographic, moth-eaten and permeative lysis",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "humerus",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 9.",
+      "lookFor": "Which pattern of lysis, zone of transition and aggressiveness?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Multiple regions of lysis varying in size and shape; Indistinct margins; Long zone of transition between normal and abnormal bone; More aggressive differential diagnoses (e.g. neoplasia, infection).",
+      "interpretation": "Moth-eaten lysis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 9 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__06.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Moth-eaten lysis\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p009-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-lysis-pattern",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p10-msk2-lysis-pattern": {
+      "id": "exam3-msk2-p10-msk2-lysis-pattern",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 10 · Geographic, moth-eaten and permeative lysis",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "humerus",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 10.",
+      "lookFor": "Which pattern of lysis, zone of transition and aggressiveness?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Very indistinct, pinpoint areas of lysis; Long zone of transition between normal and abnormal bone; Malignant neoplasia and uncontrolled osteomyelitis/infection.",
+      "interpretation": "Permeative lysis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 10 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-lysis-pattern/e3-msk2-lysis-pattern__07.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Permeative lysis\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p010-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-lysis-pattern",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p14-msk2-periosteal": {
+      "id": "exam3-msk2-p14-msk2-periosteal",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 14 · Periosteal reactions",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "long bone",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 14.",
+      "lookFor": "Classify reaction and indicate whether a lesion could be aggressive.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Can be smooth or irregular; Bone fills the space deep to periosteum; Well-defined or indistinct; Based on maturity, activity, and aggressiveness; Differentials are more benign; Continuous, low-grade trauma; Remodeling; Final stage of bone healing or other periosteal pattern.",
+      "interpretation": "Solid",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 14 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__01.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Solid\" periosteal reaction."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p014-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-periosteal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p16-msk2-periosteal": {
+      "id": "exam3-msk2-p16-msk2-periosteal",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 16 · Periosteal reactions",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "long bone",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 16.",
+      "lookFor": "Classify reaction and indicate whether a lesion could be aggressive.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Repeated episodes of periosteal trauma; Sheets of new bone parallel to the cortex; Layered or “onion skin” appearance; Semi-aggressive; Seen in hypertrophic osteodystrophy (HOD).",
+      "interpretation": "Lamellar",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 16 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__02.jpg",
+          "view": "CrCd · view A",
+          "caption": "Slide \"Lamellar\" (onion skin; seen in HOD)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__03.jpg",
+          "view": "Zoom · view B",
+          "caption": "Slide \"Lamellar\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p016-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-periosteal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p17-msk2-periosteal": {
+      "id": "exam3-msk2-p17-msk2-periosteal",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 17 · Periosteal reactions",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "long bone",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 17.",
+      "lookFor": "Classify reaction and indicate whether a lesion could be aggressive.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Periosteal reaction at 90° angle to axis of bone; Often solid with variable margination; Malignant or benign differential diagnoses; Seen with hypertrophic osteopathy (periosteal reaction secondary to thoracic disease) or osteomyelitis (bacterial).",
+      "interpretation": "Palisading or Columnar",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 17 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__04.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Palisading or columnar\" (e.g., hypertrophic osteopathy)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p017-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-periosteal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p18-msk2-periosteal": {
+      "id": "exam3-msk2-p18-msk2-periosteal",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 18 · Periosteal reactions",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "distal radius",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 18.",
+      "lookFor": "Classify reaction and indicate whether a lesion could be aggressive.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Thin spicules of new bone radiate from lesion; Periosteum/osteoblasts along Sharpey’s fibers are responsible for the appearance of the pattern; Aggressive lesion; Malignant neoplasia or infection.",
+      "interpretation": "Spiculated or Sunburst",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 18 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__05.jpg",
+          "view": "CrCd · view A",
+          "caption": "Slide \"Spiculated or sunburst\" - aggressive (malignant neoplasia or infection)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p018-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-periosteal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p19-msk2-periosteal": {
+      "id": "exam3-msk2-p19-msk2-periosteal",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 19 · Periosteal reactions",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "proximal humerus",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 19.",
+      "lookFor": "Classify reaction and indicate whether a lesion could be aggressive.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Random, indistinct, very disorganized periosteal bone formation; Aggressive and typically associated with malignancy.",
+      "interpretation": "Amorphous",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 19 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-msk2-periosteal/e3-msk2-periosteal__06.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Amorphous\" - aggressive, typically malignancy."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p019-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-msk2-periosteal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p24-bsava-infection-neoplasm": {
+      "id": "exam3-msk2-p24-bsava-infection-neoplasm",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 24 · Osteomyelitis versus neoplasia",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "long bone",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 24.",
+      "lookFor": "What findings overlap between infection and tumor, and what further sampling is indicated?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Short answer – you can’t; Cytology or histopathology.",
+      "interpretation": "How can I tell if it’s a tumor or infection?",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 24 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__01.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"How can I tell if it's a tumor or infection? Short answer - you can't; cytology or histopathology\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__02.jpg",
+          "view": "Lateral · view B",
+          "caption": "Same slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p024-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-infection-neoplasm",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p26-bsava-infection-neoplasm": {
+      "id": "exam3-msk2-p26-bsava-infection-neoplasm",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 26 · Osteomyelitis versus neoplasia",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "elbow region",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 26.",
+      "lookFor": "What findings overlap between infection and tumor, and what further sampling is indicated?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Hematogenous infection Disseminated Aspergillosis DMPLO",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 26 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__03.jpg",
+          "view": "DMPLO/lateral · view A",
+          "caption": "Slide \"Hematogenous infection - disseminated aspergillosis\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__04.jpg",
+          "view": "Lateral · view B",
+          "caption": "Same slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p026-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-infection-neoplasm",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p30-bsava-infection-neoplasm": {
+      "id": "exam3-msk2-p30-bsava-infection-neoplasm",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 30 · Osteomyelitis versus neoplasia",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "stifle",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 30.",
+      "lookFor": "What findings overlap between infection and tumor, and what further sampling is indicated?\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Joint/periarticular neoplasms; Synovial cell sarcoma; Histiocytic sarcoma; Lesion is centered at a joint; All adjacent bones can be affected.",
+      "interpretation": "Soft tissue neoplasia/tumor invading bone",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 30 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__05.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Soft tissue neoplasia invading bone (joint/periarticular neoplasms)\"."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-infection-neoplasm/e3-bsava-infection-neoplasm__06.jpg",
+          "view": "CrCd · view B",
+          "caption": "Same slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p030-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-infection-neoplasm",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-msk2-p65-bsava-healing": {
+      "id": "exam3-msk2-p65-bsava-healing",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 65 · Fracture healing progression",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "long bone fracture",
+      "history": "Teaching image set from the MSK II lecture (Fall 2026), slide 65.",
+      "lookFor": "Describe changes between films without equating callus alone with union.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor slide: Affects repair plan/difficulty; Knowledge of bone modeling/remodeling; Fracture margin resorption causes rounded fracture margins (7 – 10 days); New bone formation (10 – 14 days).",
+      "interpretation": "Fracture margins – chronicity",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "MSK2FALL2026 (1).pdf · page 65 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-healing/e3-bsava-healing__01.jpg",
+          "view": "Lateral · view A",
+          "caption": "Slide \"Fracture margins - chronicity\": resorption rounds margins 7-10 d; new bone 10-14 d."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-bsava-healing/e3-bsava-healing__02.jpg",
+          "view": "Lateral · view B",
+          "caption": "Same slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/msk2-p065-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-bsava-healing",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p05-skull-spine": {
+      "id": "exam3-spine-p05-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 5 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "skull / mandible",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 5.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): young dog (wide pulp cavities); fairly bilaterally symmetric, well-defined, mottled but smooth/solid mandibular new bone; not aggressive. straight lateral + VD are enough to support CMO suspicion.",
+      "interpretation": "Craniomandibular osteopathy (CMO)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 5 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__01.jpg",
+          "view": "Lateral · view A",
+          "caption": "CMO slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__02.jpg",
+          "view": "VD · view B",
+          "caption": "CMO slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p005-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p07-skull-spine": {
+      "id": "exam3-spine-p07-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 7 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "skull",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 7.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): well-defined, coarse granular \"popcorn ball\" new bone, little lysis.",
+      "interpretation": "Multilobular osteochondrosarcoma (MLO)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 7 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__03.jpg",
+          "view": "Lateral · view A",
+          "caption": "MLO slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__04.jpg",
+          "view": "Lateral zoom · view B",
+          "caption": "MLO slide (zoomed)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p007-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p10-skull-spine": {
+      "id": "exam3-spine-p10-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 10 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "nasal cavity",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 10.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): normal striated turbinates on one side vs increased soft tissue opacity/loss of pattern on the other.",
+      "interpretation": "Nasal disease · open-mouth VD",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 10 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__08.jpg",
+          "view": "Open-mouth VD · view A",
+          "caption": "Nasal rhinitis slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p010-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p14-skull-spine": {
+      "id": "exam3-spine-p14-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 14 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "nasal cavity",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 14.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): turbinate lysis, punctate lucencies, \"empty nose\".",
+      "interpretation": "Nasal aspergillosis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 14 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__14.jpg",
+          "view": "Open-mouth VD · view A",
+          "caption": "Nasal aspergillosis slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p014-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p17-skull-spine": {
+      "id": "exam3-spine-p17-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 17 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "caudal skull / C1-C2",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 17.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): increased C1-C2 distance/step, tiny hypoplastic dens.",
+      "interpretation": "Atlantoaxial subluxation",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 17 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__15.jpg",
+          "view": "VD/rostrocaudal · view A",
+          "caption": "Atlantoaxial subluxation slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p017-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p19-skull-spine": {
+      "id": "exam3-spine-p19-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 19 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracolumbar spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 19.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): incidental; two vertebrae fused.",
+      "interpretation": "Block vertebra",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 19 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__16.jpg",
+          "view": "Lateral · view A",
+          "caption": "Block vertebra slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p019-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p20-skull-spine": {
+      "id": "exam3-spine-p20-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 20 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracolumbar junction",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 20.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): broad-based malformed ribs on last thoracic/first lumbar; count vertebrae.",
+      "interpretation": "Transitional vertebra",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 20 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__17.jpg",
+          "view": "VD · view A",
+          "caption": "Transitional vertebra slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p020-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p21-skull-spine": {
+      "id": "exam3-spine-p21-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 21 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracic spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 21.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): wedge/butterfly vertebrae, block segments, malalignment, screw tail.",
+      "interpretation": "Hemivertebrae",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 21 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__18.jpg",
+          "view": "VD · view A",
+          "caption": "Hemivertebrae slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__19.jpg",
+          "view": "Lateral · view B",
+          "caption": "Hemivertebrae slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p021-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p22-skull-spine": {
+      "id": "exam3-spine-p22-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 22 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracic spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 22.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Hemivertebrae · zoomed views",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 22 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__20.jpg",
+          "view": "Lateral zoom · view A",
+          "caption": "Hemivertebrae slide (zoom, same dog)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__21.jpg",
+          "view": "VD zoom · view B",
+          "caption": "Same dog."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p022-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p23-skull-spine": {
+      "id": "exam3-spine-p23-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 23 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracolumbar spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 23.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): varied severity ventral endplate new bone incl. L6-L7 and L7-S1; disc spaces often normal.",
+      "interpretation": "Spondylosis deformans",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 23 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__22.jpg",
+          "view": "Lateral · view A",
+          "caption": "Spondylosis deformans slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p023-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p27-skull-spine": {
+      "id": "exam3-spine-p27-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 27 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "cervical spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 27.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): C2-C3 ill-defined endplates, lysis centered on disc space with sclerosis.",
+      "interpretation": "Discospondylitis · cervical",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 27 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__23.jpg",
+          "view": "Lateral · view A",
+          "caption": "Discospondylitis slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p027-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p28-skull-spine": {
+      "id": "exam3-spine-p28-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 28 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "cervical spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 28.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Discospondylitis · cervical, zoom + VD",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 28 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__24.jpg",
+          "view": "Lateral zoom · view A",
+          "caption": "Same dog zoomed."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__25.jpg",
+          "view": "VD · view B",
+          "caption": "Same dog orthogonal; lesion more left-sided per transcript."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p028-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p29-skull-spine": {
+      "id": "exam3-spine-p29-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 29 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "lumbar / lumbosacral",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 29.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): narrowed space, endplate lysis + sclerosis, new bone; second lesion at lumbosacral junction.",
+      "interpretation": "Discospondylitis · chronic",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 29 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__26.jpg",
+          "view": "Lateral · view A",
+          "caption": "Discospondylitis slide (chronic)."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p029-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p32-skull-spine": {
+      "id": "exam3-spine-p32-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 32 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "lumbar spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 32.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): hit by car; one narrowed space beyond divergent-beam artifact; mild spondylosis; needs advanced imaging. slightly narrowed L1-L2; MRI confirmed acute disc herniation (renal mass incidental).",
+      "interpretation": "Intervertebral disc disease · two dogs",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 32 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__27.jpg",
+          "view": "Lateral · view A",
+          "caption": "IVDD slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__28.jpg",
+          "view": "Lateral · view B",
+          "caption": "IVDD slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p032-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p33-skull-spine": {
+      "id": "exam3-spine-p33-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 33 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracolumbar spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 33.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): T12-T13 near-collapsed space, sclerosis, mineral over foramen; ballistic fragment elsewhere.",
+      "interpretation": "Intervertebral disc disease · chronic T12–T13",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 33 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__29.jpg",
+          "view": "Lateral · view A",
+          "caption": "IVDD slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__30.jpg",
+          "view": "VD · view B",
+          "caption": "Same dog."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p033-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p34-skull-spine": {
+      "id": "exam3-spine-p34-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 34 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracolumbar spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 34.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): mild narrowing, slightly small foramen, rounded mineral in canal at disc space.",
+      "interpretation": "Intervertebral disc disease · mineral at foramen",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 34 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__31.jpg",
+          "view": "Lateral · view A",
+          "caption": "IVDD slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__32.jpg",
+          "view": "VD · view B",
+          "caption": "Same slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p034-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p35-skull-spine": {
+      "id": "exam3-spine-p35-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 35 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracolumbar spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 35.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): skin staples from hemilaminectomy at T13-L1; in-situ mineralized discs are NOT the culprit.",
+      "interpretation": "Mineralized disc in situ",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 35 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__33.jpg",
+          "view": "Lateral · view A",
+          "caption": "Mineralized disc in situ slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p035-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p39-skull-spine": {
+      "id": "exam3-spine-p39-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 39 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "lumbar spine / sacrum",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 39.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): expansile lysis L5 into pedicle/lamina/spinous process + sacrum, punctate lesions; multiple myeloma (metastatic carcinoma could look similar).",
+      "interpretation": "Vertebral neoplasia",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 39 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__34.jpg",
+          "view": "Lateral · view A",
+          "caption": "Vertebral neoplasia slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p039-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
+    },
+    "exam3-spine-p41-skull-spine": {
+      "id": "exam3-spine-p41-skull-spine",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · Skull & Spine slide 41 · Normal vs abnormal",
+      "lecture": "CVM 743 · Exam 3 · Skull and Spine Radiography",
+      "species": "Canine",
+      "region": "thoracolumbar spine",
+      "history": "Teaching image set from the Skull & Spine lecture (Fall 2026), slide 41.",
+      "lookFor": "Describe location, findings and radiographic limitations, then choose an appropriate advanced imaging modality if needed.\nWork systematically: projection and positioning, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Instructor narration (paraphrased): fracture-luxation at T12-T13 with dorsal displacement of caudal segment and ventral fragment.",
+      "interpretation": "Spinal trauma",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Spineandskull2026(2).pdf · page 41 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebecca Gallaher, LMU CVM (skull & spine lecture)",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/e3-skull-spine/e3-skull-spine__35.jpg",
+          "view": "Lateral · view A",
+          "caption": "Trauma slide."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/_answer-keys/spine-p041-slide.jpg",
+          "view": "Annotated teaching key · lecture slide",
+          "caption": "Full lecture slide with the instructor's title, labels and arrows. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e3-skull-spine",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide and slot by Claude; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-25T23:30:00Z"
     }
   }
 }

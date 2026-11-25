@@ -1,0 +1,64 @@
+{
+ "msk1": {
+  "text": {
+   "19": "Generalized osteopenia",
+   "20": "Regional osteopenia",
+   "24": "Increased synovial mass • Fluid versus soft tissue • Effusion or synovial proliferation (both) Normal",
+   "25": "Increased synovial mass",
+   "34": "Radiographic features of OA",
+   "35": "Stifle Effusion and Subluxation Due to Cranial Cruciate Ligament Rupture Normal",
+   "40": "OC/OCD • Caudal humeral head • Subchondral sclerosis • Subchondral concavity or flattening",
+   "41": "OC/OCD • Caudal humeral head • Subchondral sclerosis • Subchondral concavity or flattening • Mineralized flap",
+   "42": "OC/OCD • Medial aspect of humeral condyle • Subchondral sclerosis • Subchondral concavity or flattening L",
+   "78": "Oblique view • Best visibility of medial compartment",
+   "85": "Ununited Anconeal Process (UAP)",
+   "86": "UAP",
+   "89": "FMCP Normal",
+   "91": "Joint Incongruity • Lateral view is best for detection • Radiographic features • Radioulnar step Normal • Widened humeroulnar joint space (most commonly) • Elongated trochlear notch • Cranially positioned humeral condyle"
+  }
+ },
+ "msk2": {
+  "text": {
+   "4": "Cortical disruption • An aggressive characteristic • Makes fracture more likely - PATHOLOGIC FRACTURE",
+   "6": "Geographic lysis • Focal • Well-defined (benign) or indistinct (more aggressive) margins • With or without cortical expansion • Shorter zone of transition between normal and abnormal, but not always well-defined • More apt to include benign differentials, e.g. bone cyst",
+   "8": "Expansile lysis • A geographic region of lysis that expands beyond normal cortical margin shape • Soft tissue swelling centered at joint (intracapsular) • Periosteal proliferation at lytic margins indicating some evidence for “slow” growth • Smooth solid, well-defined periosteal proliferation - Codm",
+   "9": "Moth-eaten lysis • Multiple regions of lysis varying in size and shape • Indistinct margins • Long zone of transition between normal and abnormal bone • More aggressive differential diagnoses (e.g. neoplasia, infection)",
+   "10": "Permeative lysis • Very indistinct, pinpoint areas of lysis • Long zone of transition between normal and abnormal bone • Malignant neoplasia and uncontrolled osteomyelitis/infection",
+   "14": "Solid • Can be smooth or irregular • Bone fills the space deep to periosteum • Well-defined or indistinct • Based on maturity, activity, and aggressiveness • Differentials are more benign • Continuous, low-grade trauma • Remodeling • Final stage of bone healing or other periosteal pattern",
+   "16": "Lamellar • Repeated episodes of periosteal trauma • Sheets of new bone parallel to the cortex • Layered or “onion skin” appearance • Semi-aggressive • Seen in hypertrophic osteodystrophy (HOD)",
+   "17": "Palisading or Columnar • Periosteal reaction at 90° angle to axis of bone • Often solid with variable margination • Malignant or benign differential diagnoses • Seen with hypertrophic osteopathy (periosteal reaction secondary to thoracic disease) or osteomyelitis (bacterial)",
+   "18": "Spiculated or Sunburst • Thin spicules of new bone radiate from lesion • Periosteum/osteoblasts along Sharpey’s fibers are responsible for the appearance of the pattern • Aggressive lesion • Malignant neoplasia or infection",
+   "19": "Amorphous • Random, indistinct, very disorganized periosteal bone formation • Aggressive and typically associated with malignancy",
+   "24": "How can I tell if it’s a tumor or infection? • Short answer – you can’t • Cytology or histopathology",
+   "26": "Hematogenous infection Disseminated Aspergillosis DMPLO",
+   "30": "Soft tissue neoplasia/tumor invading bone • Joint/periarticular neoplasms • Synovial cell sarcoma • Histiocytic sarcoma • Lesion is centered at a joint • All adjacent bones can be affected",
+   "65": "Fracture margins – chronicity • Affects repair plan/difficulty • Knowledge of bone modeling/remodeling • Fracture margin resorption causes rounded fracture margins (7 – 10 days) • New bone formation (10 – 14 days)"
+  }
+ },
+ "spine": {
+  "text": {
+   "5": "",
+   "7": "MLO",
+   "9": "Normal Normal",
+   "10": "Nasal Rhinitis • Destructive rhinitis • Neoplasia • Fungal • Non-destructive rhinitis • Viral and bacterial, lymphocytic • Foreign bodies",
+   "11": "Normal",
+   "12": "Normal Normal",
+   "14": "Nasal aspergillosis • Destructive rhinitis • Younger (less than 4 years of age) • Non-brachycephalic dogs • Lysis of conchae with punctate lucencies of bone • Increased localized soft-tissue opacity of the nasal • Frontal sinus involvement variable",
+   "17": "",
+   "19": "Block vertebra",
+   "20": "Transitional vertebra",
+   "21": "Hemivertebrae",
+   "22": "Hemivertebrae",
+   "23": "Spondylosis deformans • Non-inflammatory degeneration of peripheral endplate region • Mineralization of ventral longitudinal ligament and entheses • Unclear clinical significance",
+   "27": "",
+   "28": "",
+   "29": "",
+   "32": "",
+   "33": "",
+   "34": "",
+   "35": "Mineralized (calcified) disc in situ",
+   "39": "",
+   "41": ""
+  }
+ }
+}
