@@ -24,9 +24,16 @@ function draw(){
  });
 }
 function controls(){
- const nav=document.getElementById('roomnav');if(nav&&!nav.querySelector('#vpqRoomStaffButton')){const button=document.createElement('button');button.id='vpqRoomStaffButton';button.type='button';button.textContent='👩‍⚕️ Add Room Staff';nav.append(button)}
- const frame=document.querySelector('.stageframe');if(frame&&!frame.querySelector('#vpqStaffRoomShortcut')){const shortcut=document.createElement('button');shortcut.id='vpqStaffRoomShortcut';shortcut.type='button';shortcut.textContent='👩‍⚕️ Staff +';shortcut.title='Add or change staff in this room';frame.append(shortcut)}
+ const nav=document.getElementById('roomnav');
+ if(nav&&!nav.querySelector('#vpqRoomStaffButton')){
+  const btn=document.createElement('button');btn.id='vpqRoomStaffButton';btn.type='button';btn.textContent='👩‍⚕️ Add Room Staff';btn.addEventListener('click',staffButtonClick);nav.append(btn)
+ }
+ const frame=document.querySelector('.stageframe');
+ if(frame&&!frame.querySelector('#vpqStaffRoomShortcut')){
+  const btn=document.createElement('button');btn.id='vpqStaffRoomShortcut';btn.type='button';btn.textContent='👩‍⚕️ Staff +';btn.title='Add or change staff in this room';btn.addEventListener('click',staffButtonClick);frame.append(btn)
+ }
 }
+function staffButtonClick(e){e.preventDefault();e.stopPropagation();try{open()}catch(err){console.error('Room Staff:',err);alert('Room Staff error: '+(err?.message||err))}}
 function open(){
  const selected=room(),list=get(selected);
  const opts=(id)=>'<option value="">No character</option>'+all().map(a=>'<option value="'+esc(a.id)+'"'+(a.id===id?' selected':'')+'>'+esc(a.label)+'</option>').join('');
@@ -36,7 +43,28 @@ function open(){
  '<div id="vpqStaffPreview" class="vpq-staff-preview"></div>'+
  '<div class="buttonrow"><button type="button" data-vpq-staff-save>Save room staff</button><button type="button" data-vpq-staff-clear>Remove all staff from this room</button></div>'+
  '<p class="tiny">Staff are decorative and saved with your profile. They do not block equipment or change movement.</p>';
- window.VPQ_ROOM_STAFF_BRIDGE?.openModal?.('👩‍⚕️ Room Staff · Add Characters',html);preview();
+ const previous=document.getElementById('vpqRoomStaffDialog');if(previous){previous.close();previous.remove()}
+ const dialog=document.createElement('dialog');dialog.id='vpqRoomStaffDialog';
+ dialog.setAttribute('aria-label','Room Staff · Add Characters');
+ dialog.innerHTML='<div class="vpq-staff-dialog-head"><h2>👩‍⚕️ Room Staff · Add Characters</h2><button type="button" data-vpq-staff-close aria-label="Close Room Staff">✕</button></div><div class="vpq-staff-dialog-body">'+html+'</div>';
+ document.body.append(dialog);
+ dialog.addEventListener('close',()=>dialog.remove(),{once:true});
+ dialog.addEventListener('click',e=>{
+  if(e.target===dialog){dialog.close();return}
+  const btn=e.target.closest?.('button');if(!btn)return;
+  if(btn.hasAttribute('data-vpq-staff-close')){dialog.close();return}
+  if(!btn.matches('[data-vpq-staff-save],[data-vpq-staff-clear]'))return;
+  e.preventDefault();e.stopPropagation();
+  const r=dialog.querySelector('#vpqRoomStaffRoom')?.value;if(!rooms.includes(r))return;
+  put(r,btn.hasAttribute('data-vpq-staff-clear')?['','','']:[...dialog.querySelectorAll('[data-vpq-staff-slot]')].map(x=>x.value));draw();preview();
+  const save=dialog.querySelector('[data-vpq-staff-save]');if(save)save.textContent='✓ Staff saved for '+(labels[r]||r);
+ });
+ dialog.addEventListener('change',e=>{
+  if(e.target?.id==='vpqRoomStaffRoom'||e.target?.matches?.('[data-vpq-staff-slot]')){
+   preview();const btn=dialog.querySelector('[data-vpq-staff-save]');if(btn)btn.textContent='Save room staff'
+  }
+ });
+ dialog.showModal();preview();
 }
 function preview(){
  const roomId=document.getElementById('vpqRoomStaffRoom')?.value||'reception',stored=get(roomId),inputs=[...document.querySelectorAll('[data-vpq-staff-slot]')];
@@ -44,15 +72,9 @@ function preview(){
  const view=document.getElementById('vpqStaffPreview');if(!view)return;view.replaceChildren();
  inputs.forEach((el,i)=>{const a=all().find(x=>x.id===el.value),tile=document.createElement('div');tile.className='vpq-staff-preview-card';if(a){const img=document.createElement('img');img.src=fileURL(a.path);img.alt=a.label;tile.append(img)}else{const none=document.createElement('span');none.textContent='Empty';tile.append(none)}const label=document.createElement('small');label.textContent=['Left','Middle','Right'][i];tile.append(label);view.append(tile)})
 }
-window.addEventListener('click',e=>{
- if(e.target.closest?.('#vpqRoomStaffButton,#vpqStaffRoomShortcut')){e.preventDefault();e.stopImmediatePropagation();open();return}
- const btn=e.target.closest?.('[data-vpq-staff-save],[data-vpq-staff-clear]');if(!btn)return;e.preventDefault();e.stopImmediatePropagation();
- const r=document.getElementById('vpqRoomStaffRoom')?.value;if(!rooms.includes(r))return;
- put(r,btn.hasAttribute('data-vpq-staff-clear')?['','','']:[...document.querySelectorAll('[data-vpq-staff-slot]')].map(x=>x.value));draw();preview();
- const save=document.querySelector('[data-vpq-staff-save]');if(save)save.textContent='✓ Staff saved for '+(labels[r]||r);
-},true);
-document.addEventListener('change',e=>{if(e.target?.id==='vpqRoomStaffRoom'||e.target?.matches?.('[data-vpq-staff-slot]')){preview();const b=document.querySelector('[data-vpq-staff-save]');if(b)b.textContent='Save room staff'}});
 const css=document.createElement('style');css.textContent=
+'#vpqRoomStaffDialog{width:min(92vw,680px);max-height:85vh;overflow-y:auto;padding:16px;border:2px solid #bca8d9;border-radius:18px;background:#fffafd;color:#334660;box-shadow:0 16px 45px #19243f50}#vpqRoomStaffDialog::backdrop{background:#1e284d85}#vpqRoomStaffDialog .vpq-staff-dialog-head{display:flex;gap:10px;justify-content:space-between;align-items:center}#vpqRoomStaffDialog h2{font-size:18px;margin:0}#vpqRoomStaffDialog .vpq-staff-dialog-head button{font-size:17px;min-width:38px}#vpqRoomStaffDialog .vpq-staff-dialog-body{margin-top:12px}'+
+
 '.stageframe{position:relative}#vpqStaffRoomShortcut{position:absolute;top:9px;right:10px;z-index:12;background:#fff4ffec;border:2px solid #b8a0d2;border-radius:16px;padding:8px 11px;color:#493b73;font-weight:900;box-shadow:0 2px 9px #27364c33}'+
 '#vpqRoomStaffButton{background:#f3eafb;border-color:#a69ac8;color:#493b73}'+
 '#vpqRoomStaffLayer{position:absolute;inset:0;z-index:5;pointer-events:none}.vpq-room-staff-sprite{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;pointer-events:none}.vpq-room-staff-sprite img{height:100%;width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(1px 3px 2px #3645574d)}.vpq-room-staff-sprite span{position:absolute;bottom:-13px;background:#f6f0ffed;border:1px solid #bcb0d4;border-radius:8px;padding:1px 5px;color:#524575;font-weight:800;font-size:9px;white-space:nowrap}'+
