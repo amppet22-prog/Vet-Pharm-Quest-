@@ -506,87 +506,87 @@ window.VPQ_UPLOADED_AVATARS=[
   },
   {
     "id": "uploaded-485f1bde3ce9",
-    "path": "Friendly Lavender Veterinary Professional.png",
+    "path": "VPQ-Avatar-101-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-ad79cbf9fb3f",
-    "path": "Friendly Lavender-Hijab Healthcare Professional-7.png",
+    "path": "VPQ-Avatar-102-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-4992526d67a5",
-    "path": "Friendly Medical Professional in Scrubs-2.png",
+    "path": "VPQ-Avatar-103-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-b28dea9a21d6",
-    "path": "Friendly Medical Professional in Teal Scrubs-4.png",
+    "path": "VPQ-Avatar-104-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-8e79fbc13a61",
-    "path": "Friendly Paw Print Veterinarian.png",
+    "path": "VPQ-Avatar-105-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-2fe3a21d4fb5",
-    "path": "Friendly Plus-Size Black Healthcare Professional-10.png",
+    "path": "VPQ-Avatar-106-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-cb3034d80b82",
-    "path": "Friendly Teal-Scrub Veterinary Professional-4.png",
+    "path": "VPQ-Avatar-107-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-5ac9be4cbd33",
-    "path": "Friendly Veterinarian in Green Scrubs-12.png",
+    "path": "VPQ-Avatar-108-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-86965348949f",
-    "path": "Friendly Veterinarian in Lavender Scrubs-8.png",
+    "path": "VPQ-Avatar-109-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-b8c84d3fe6bd",
-    "path": "Friendly Veterinarian in Navy Scrubs-8.png",
+    "path": "VPQ-Avatar-110-Transparent.png",
     "color": "Blue & Navy"
   },
   {
     "id": "uploaded-d0891cbe1841",
-    "path": "Friendly Veterinarian in Navy Scrubs-9.png",
+    "path": "VPQ-Avatar-111-Transparent.png",
     "color": "Blue & Navy"
   },
   {
     "id": "uploaded-e273edb3740c",
-    "path": "Friendly Veterinarian in Purple Scrubs-2.png",
+    "path": "VPQ-Avatar-112-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-12516271638f",
-    "path": "Friendly Veterinarian in Teal Scrubs-2.png",
+    "path": "VPQ-Avatar-113-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-e140536bff71",
-    "path": "Friendly Veterinarian in Teal Scrubs-7.png",
+    "path": "VPQ-Avatar-114-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-103f9bc6ca28",
-    "path": "Friendly Veterinary Care Portrait-3.png",
+    "path": "VPQ-Avatar-115-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-202f212e677d",
-    "path": "Friendly Veterinary Doctor Character.png",
+    "path": "VPQ-Avatar-116-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-fc432ae6d405",
-    "path": "Friendly Veterinary Healthcare Worker Illustration-7.png",
+    "path": "VPQ-Avatar-117-Transparent.png",
     "color": "More Colors"
   },
   {
@@ -596,12 +596,12 @@ window.VPQ_UPLOADED_AVATARS=[
   },
   {
     "id": "uploaded-3846274af9a0",
-    "path": "Friendly Veterinary Professional in Scrubs-12.png",
+    "path": "VPQ-Avatar-119-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-0a98fe8d4437",
-    "path": "Friendly Veterinary Scrubs Avatar-9.png",
+    "path": "VPQ-Avatar-120-Transparent.png",
     "color": "More Colors"
   },
   {
@@ -611,87 +611,87 @@ window.VPQ_UPLOADED_AVATARS=[
   },
   {
     "id": "uploaded-29273c72b66f",
-    "path": "Indigenous Veterinarian in Scrubs and Lab Coat.png",
+    "path": "VPQ-Avatar-122-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-f60f90f3366a",
-    "path": "Rainbow Scrubs Veterinary Professional.png",
+    "path": "VPQ-Avatar-123-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-49c3b89a0df5",
-    "path": "Rainbow Veterinarian in Scrubs.png",
+    "path": "VPQ-Avatar-124-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-3754f2206485",
-    "path": "Smiling Blond Healthcare Worker in Scrubs-2.png",
+    "path": "VPQ-Avatar-125-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-4fdc6beb2acd",
-    "path": "Smiling Doctor in Navy Scrubs-6.png",
+    "path": "VPQ-Avatar-126-Transparent.png",
     "color": "Blue & Navy"
   },
   {
     "id": "uploaded-0e315c3b0d20",
-    "path": "Smiling Healthcare Worker in Green Scrubs-6.png",
+    "path": "VPQ-Avatar-127-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-a2d56bc1bc05",
-    "path": "Smiling Healthcare Worker in Scrubs-5.png",
+    "path": "VPQ-Avatar-128-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-aa144a5d1757",
-    "path": "Smiling Healthcare Worker in Teal Scrubs-1.png",
+    "path": "VPQ-Avatar-129-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-a380d2321e21",
-    "path": "Smiling Hijabi Medical Professional-2.png",
+    "path": "VPQ-Avatar-130-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-0bca9031d5b2",
-    "path": "Smiling Hijabi Veterinary Professional-1.png",
+    "path": "VPQ-Avatar-131-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-dea74ccee81c",
-    "path": "Smiling Indian Healthcare Professional in Teal Scrubs.png",
+    "path": "VPQ-Avatar-132-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-66f0f4d1ed4e",
-    "path": "Smiling Tattooed Doctor in Burgundy Scrubs-1.png",
+    "path": "VPQ-Avatar-133-Transparent.png",
     "color": "Pink & Burgundy"
   },
   {
     "id": "uploaded-5a200085d92e",
-    "path": "Smiling Veterinarian in Blue Scrubs-1.png",
+    "path": "VPQ-Avatar-134-Transparent.png",
     "color": "Blue & Navy"
   },
   {
     "id": "uploaded-80989bb1c85e",
-    "path": "Smiling Veterinarian in Burgundy Scrubs.png",
+    "path": "VPQ-Avatar-135-Transparent.png",
     "color": "Pink & Burgundy"
   },
   {
     "id": "uploaded-f93fce3c2d9b",
-    "path": "Smiling Veterinarian in Navy Scrubs-10.png",
+    "path": "VPQ-Avatar-136-Transparent.png",
     "color": "Blue & Navy"
   },
   {
     "id": "uploaded-b25f1b8862e5",
-    "path": "Smiling Veterinarian in Plum Hijab (1).png",
+    "path": "VPQ-Avatar-137-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-ce65f1976c44",
-    "path": "Smiling Veterinarian in Purple Scrubs-6.png",
+    "path": "VPQ-Avatar-138-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
@@ -701,22 +701,22 @@ window.VPQ_UPLOADED_AVATARS=[
   },
   {
     "id": "uploaded-a59598550af6",
-    "path": "Smiling Veterinarian in Teal Scrubs-2.png",
+    "path": "VPQ-Avatar-140-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-129b6bb7ffa0",
-    "path": "Smiling Veterinary Professional in Burgundy Scrubs-3.png",
+    "path": "VPQ-Avatar-141-Transparent.png",
     "color": "Pink & Burgundy"
   },
   {
     "id": "uploaded-5d3702e20310",
-    "path": "Smiling Veterinary Professional in Burgundy Scrubs-4.png",
+    "path": "VPQ-Avatar-142-Transparent.png",
     "color": "Pink & Burgundy"
   },
   {
     "id": "uploaded-76e45e91a183",
-    "path": "Smiling Veterinary Professional in Teal Scrubs-5.png",
+    "path": "VPQ-Avatar-143-Transparent.png",
     "color": "Teal & Green"
   },
   {
@@ -742,25 +742,25 @@ window.VPQ_UPLOADED_AVATARS=[
   },
   {
     "id": "uploaded-a21d495da185",
-    "path": "ChatGPT Image Nov 21, 2026, 05_02_04 PM-1.png",
+    "path": "VPQ-Avatar-147-Transparent.png",
     "color": "More Colors",
     "batch": "11-21"
   },
   {
     "id": "uploaded-f86971662247",
-    "path": "ChatGPT Image Nov 21, 2026, 05_02_04 PM-2.png",
+    "path": "VPQ-Avatar-148-Transparent.png",
     "color": "More Colors",
     "batch": "11-21"
   },
   {
     "id": "uploaded-2acbcf14116b",
-    "path": "ChatGPT Image Nov 21, 2026, 05_02_05 PM-3.png",
+    "path": "VPQ-Avatar-149-Transparent.png",
     "color": "More Colors",
     "batch": "11-21"
   },
   {
     "id": "uploaded-ba81a1a13238",
-    "path": "ChatGPT Image Nov 21, 2026, 05_02_06 PM-4.png",
+    "path": "VPQ-Avatar-150-Transparent.png",
     "color": "More Colors",
     "batch": "11-21"
   },
@@ -988,13 +988,13 @@ window.VPQ_UPLOADED_AVATARS=[
   },
   {
     "id": "uploaded-47e55fb591ce",
-    "path": "Rainbow Veterinary Hero in Lab Coat-3.png",
+    "path": "VPQ-Avatar-188-Transparent.png",
     "color": "Rainbow & Patterns",
     "batch": "11-21"
   },
   {
     "id": "uploaded-fa81f58fa3da",
-    "path": "Rainbow Veterinary Professional Portrait-2.png",
+    "path": "VPQ-Avatar-189-Transparent.png",
     "color": "Rainbow & Patterns",
     "batch": "11-21"
   },
