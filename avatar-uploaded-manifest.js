@@ -6,442 +6,442 @@
 window.VPQ_UPLOADED_AVATARS=[
   {
     "id": "uploaded-80bc5f87d889",
-    "path": "ChatGPT Image Nov 20, 2026, 01_16_02 AM-1.png",
+    "path": "vpq-early-avatar-01-transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-18257c0fa0a1",
-    "path": "ChatGPT Image Nov 20, 2026, 01_16_05 AM-2.png",
+    "path": "vpq-early-avatar-02-transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-3c1d986aec56",
-    "path": "ChatGPT Image Nov 20, 2026, 01_16_06 AM-3.png",
+    "path": "vpq-early-avatar-03-transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-0e9310f21cbf",
-    "path": "ChatGPT Image Nov 20, 2026, 01_16_07 AM-4.png",
+    "path": "vpq-early-avatar-04-transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-5d96ea674564",
-    "path": "ChatGPT Image Nov 20, 2026, 01_36_26 AM.jpg",
+    "path": "VPQ-Avatar-05-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-ce431f49874c",
-    "path": "ChatGPT Image Nov 20, 2026, 01_36_34 AM.jpg",
+    "path": "VPQ-Avatar-06-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-4084dc3fc9a1",
-    "path": "ChatGPT Image Nov 20, 2026, 01_36_42 AM.jpg",
+    "path": "VPQ-Avatar-07-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-9383723bf1cd",
-    "path": "ChatGPT Image Nov 20, 2026, 01_36_50 AM.jpg",
+    "path": "VPQ-Avatar-08-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-78275aaed377",
-    "path": "ChatGPT Image Nov 20, 2026, 01_36_57 AM.jpg",
+    "path": "VPQ-Avatar-09-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-44f349da023e",
-    "path": "ChatGPT Image Nov 20, 2026, 01_37_09 AM.jpg",
+    "path": "VPQ-Avatar-10-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-adc4eca4a3ca",
-    "path": "ChatGPT Image Nov 20, 2026, 01_37_17 AM.jpg",
+    "path": "VPQ-Avatar-11-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-b2b943a6a4a7",
-    "path": "ChatGPT Image Nov 20, 2026, 01_37_26 AM.jpg",
+    "path": "VPQ-Avatar-12-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-c4b2bc42f742",
-    "path": "ChatGPT Image Nov 20, 2026, 01_37_37 AM.jpg",
+    "path": "VPQ-Avatar-13-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-2737f1eec3eb",
-    "path": "ChatGPT Image Nov 20, 2026, 01_37_46 AM.jpg",
+    "path": "VPQ-Avatar-14-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-c1543131ce65",
-    "path": "ChatGPT Image Nov 20, 2026, 01_37_55 AM.jpg",
+    "path": "VPQ-Avatar-15-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-55ea0bb75f0a",
-    "path": "ChatGPT Image Nov 20, 2026, 01_38_04 AM.jpg",
+    "path": "VPQ-Avatar-16-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-ec15c3af3211",
-    "path": "ChatGPT Image Nov 20, 2026, 01_38_15 AM.jpg",
+    "path": "VPQ-Avatar-17-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-a1f2e6f1ab04",
-    "path": "ChatGPT Image Nov 20, 2026, 01_38_24 AM.jpg",
+    "path": "VPQ-Avatar-18-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-59de8346e716",
-    "path": "ChatGPT Image Nov 20, 2026, 01_38_35 AM.jpg",
+    "path": "VPQ-Avatar-19-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-e24cc6ef7a58",
-    "path": "ChatGPT Image Nov 20, 2026, 01_38_44 AM.jpg",
+    "path": "VPQ-Avatar-20-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-cd1b6d7886ea",
-    "path": "ChatGPT Image Nov 20, 2026, 01_38_54 AM.jpg",
+    "path": "VPQ-Avatar-21-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-bd12f61131f0",
-    "path": "ChatGPT Image Nov 20, 2026, 01_39_36 AM.jpg",
+    "path": "VPQ-Avatar-22-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-480f17c4dcfe",
-    "path": "ChatGPT Image Nov 20, 2026, 01_39_45 AM.jpg",
+    "path": "VPQ-Avatar-23-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-70cdcb77c4fd",
-    "path": "ChatGPT Image Nov 20, 2026, 01_39_54 AM.jpg",
+    "path": "VPQ-Avatar-24-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-67d5daef0a18",
-    "path": "ChatGPT Image Nov 20, 2026, 01_40_13 AM.jpg",
+    "path": "VPQ-Avatar-25-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-7721b2ac7f17",
-    "path": "ChatGPT Image Nov 20, 2026, 01_40_24 AM.jpg",
+    "path": "VPQ-Avatar-26-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-947e29a77a7d",
-    "path": "ChatGPT Image Nov 20, 2026, 01_40_34 AM.jpg",
+    "path": "VPQ-Avatar-27-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-fe2e2db9232f",
-    "path": "ChatGPT Image Nov 20, 2026, 01_40_42 AM.jpg",
+    "path": "VPQ-Avatar-28-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-068872077fa8",
-    "path": "ChatGPT Image Nov 20, 2026, 01_40_53 AM.jpg",
+    "path": "VPQ-Avatar-29-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-cf66e0114991",
-    "path": "ChatGPT Image Nov 20, 2026, 01_41_03 AM.jpg",
+    "path": "VPQ-Avatar-30-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-8f9c9368534c",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_04 AM.png",
+    "path": "VPQ-Avatar-31-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-e82becbb8320",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_08 AM.png",
+    "path": "VPQ-Avatar-32-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-253f9f5e44de",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_12 AM.png",
+    "path": "VPQ-Avatar-33-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-fe7b2104594b",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_17 AM.png",
+    "path": "VPQ-Avatar-34-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-9b39cb4f2580",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_22 AM.png",
+    "path": "VPQ-Avatar-35-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-eb402f2cb888",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_26 AM.png",
+    "path": "VPQ-Avatar-36-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-2adca2585510",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_35 AM.png",
+    "path": "VPQ-Avatar-37-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-f416d1fda7cc",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_40 AM.png",
+    "path": "VPQ-Avatar-38-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-7ce2234beeea",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_52 AM.png",
+    "path": "VPQ-Avatar-39-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-04b253fc7172",
-    "path": "ChatGPT Image Nov 20, 2026, 12_31_56 AM.png",
+    "path": "VPQ-Avatar-40-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-23d225a8f62b",
-    "path": "ChatGPT Image Nov 20, 2026, 12_32_00 AM.png",
+    "path": "VPQ-Avatar-41-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-0e4149144b1a",
-    "path": "ChatGPT Image Nov 20, 2026, 12_32_06 AM.png",
+    "path": "VPQ-Avatar-42-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-7f729b9b387d",
-    "path": "ChatGPT Image Nov 20, 2026, 12_32_10 AM.png",
+    "path": "VPQ-Avatar-43-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-d0c68db4f1f0",
-    "path": "ChatGPT Image Nov 20, 2026, 12_32_15 AM.png",
+    "path": "VPQ-Avatar-44-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-e68025440fa3",
-    "path": "ChatGPT Image Nov 20, 2026, 12_32_19 AM.png",
+    "path": "VPQ-Avatar-45-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-7f49def24d85",
-    "path": "ChatGPT Image Nov 20, 2026, 12_32_23 AM.png",
+    "path": "VPQ-Avatar-46-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-25f04f9a4c16",
-    "path": "ChatGPT Image Nov 20, 2026, 12_35_25 AM.jpg",
+    "path": "VPQ-Avatar-47-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-6e646bca0782",
-    "path": "ChatGPT Image Nov 20, 2026, 12_35_39 AM.jpg",
+    "path": "VPQ-Avatar-48-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-125223ee9657",
-    "path": "ChatGPT Image Nov 20, 2026, 12_36_46 AM-1.png",
+    "path": "VPQ-Avatar-49-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-f53ca8860f02",
-    "path": "ChatGPT Image Nov 20, 2026, 12_36_47 AM-2.png",
+    "path": "VPQ-Avatar-50-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-d6005a115815",
-    "path": "ChatGPT Image Nov 20, 2026, 12_36_49 AM-3.png",
+    "path": "VPQ-Avatar-51-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-33941c5ce37f",
-    "path": "ChatGPT Image Nov 20, 2026, 12_36_49 AM-4.png",
+    "path": "VPQ-Avatar-52-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-28d4e9c2ac6b",
-    "path": "ChatGPT Image Nov 20, 2026, 12_36_51 AM-5.png",
+    "path": "VPQ-Avatar-53-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-b141a1799a8e",
-    "path": "ChatGPT Image Nov 20, 2026, 12_36_52 AM-6.png",
+    "path": "VPQ-Avatar-54-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-4be58039f059",
-    "path": "ChatGPT Image Nov 20, 2026, 12_38_55 AM-1.png",
+    "path": "VPQ-Avatar-55-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-d5e243c9e9da",
-    "path": "ChatGPT Image Nov 20, 2026, 12_38_56 AM-2.png",
+    "path": "VPQ-Avatar-56-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-36b44f621fb5",
-    "path": "ChatGPT Image Nov 20, 2026, 12_38_58 AM-3.png",
+    "path": "VPQ-Avatar-57-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-51b196e330e4",
-    "path": "ChatGPT Image Nov 20, 2026, 12_38_59 AM-4.png",
+    "path": "VPQ-Avatar-58-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-33cd2da7762a",
-    "path": "Cheerful Red-Haired Doctor in Scrubs.png",
+    "path": "VPQ-Avatar-59-Transparent.png",
     "color": "Pink & Burgundy"
   },
   {
     "id": "uploaded-2d20f4fcc3e5",
-    "path": "Confident Black Healthcare Professional in Scrubs-6.png",
+    "path": "VPQ-Avatar-60-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-a906ed2adbd2",
-    "path": "Confident Floral Hijab Healthcare Professional-7.png",
+    "path": "VPQ-Avatar-61-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-491437fe3765",
-    "path": "Confident Floral Veterinarian in Green Scrubs.png",
+    "path": "VPQ-Avatar-62-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-471f1dd7a3ae",
-    "path": "Confident Floral Veterinary Nurse.png",
+    "path": "VPQ-Avatar-63-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-3db5243b416e",
-    "path": "Confident Hibiscus Veterinary Professional.png",
+    "path": "VPQ-Avatar-64-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-776b309a7ff9",
-    "path": "Confident Hijabi Healthcare Professional-11.png",
+    "path": "VPQ-Avatar-65-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-c59922001394",
-    "path": "Confident Hijabi Healthcare Professional-2.png",
+    "path": "VPQ-Avatar-66-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-c55710a7b730",
-    "path": "Confident Hijabi Healthcare Professional-3.png",
+    "path": "VPQ-Avatar-67-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-3e716c563794",
-    "path": "Confident Hijabi Healthcare Professional-7.png",
+    "path": "VPQ-Avatar-68-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-eb71d52fd6db",
-    "path": "Confident Hijabi Medical Professional-9.png",
+    "path": "VPQ-Avatar-69-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-190a0efee8f0",
-    "path": "Confident Hijabi Veterinary Professional-9.png",
+    "path": "VPQ-Avatar-70-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-6a3addf9d471",
-    "path": "Confident Lavender Scrub Portrait.png",
+    "path": "VPQ-Avatar-71-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-89c505c146b5",
-    "path": "Confident Muslim Healthcare Professional in Teal Scrubs-12.png",
+    "path": "VPQ-Avatar-72-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-1889439241d7",
-    "path": "Confident Muslim Healthcare Professional-10.png",
+    "path": "VPQ-Avatar-73-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-98357449ccd6",
-    "path": "Confident Muslim healthcare worker in scrubs-8.png",
+    "path": "VPQ-Avatar-74-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-6de90ca79f34",
-    "path": "Confident South Asian Veterinarian Illustration.png",
+    "path": "VPQ-Avatar-75-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-966768e7b7d8",
-    "path": "Confident Tropical Vet in Scrubs.png",
+    "path": "VPQ-Avatar-76-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-933476d88c00",
-    "path": "Confident Tropical Veterinarian Illustration-3.png",
+    "path": "VPQ-Avatar-77-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-d8bf3f140cb4",
-    "path": "Confident Tropical Veterinarian in Floral Scrubs-6.png",
+    "path": "VPQ-Avatar-78-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-ec13a64b6922",
-    "path": "Confident Veterinarian in Floral Scrubs.png",
+    "path": "VPQ-Avatar-79-Transparent.png",
     "color": "Rainbow & Patterns"
   },
   {
     "id": "uploaded-c3ccac5c3a1f",
-    "path": "Confident Veterinarian in Green Scrubs (1).png",
+    "path": "VPQ-Avatar-80-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-60d3cfa03aa5",
-    "path": "Confident Veterinarian in Green Scrubs.png",
+    "path": "VPQ-Avatar-81-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-e335bd66b6d7",
-    "path": "Confident Veterinarian in Plum Scrubs.png",
+    "path": "VPQ-Avatar-82-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-23201ec3f829",
-    "path": "Confident Veterinarian in Scrubs(1).png",
+    "path": "VPQ-Avatar-83-Transparent.png",
     "color": "More Colors"
   },
   {
     "id": "uploaded-320ca253979c",
-    "path": "Confident Veterinary Nurse in Teal Scrubs-5.png",
+    "path": "VPQ-Avatar-84-Transparent.png",
     "color": "Teal & Green"
   },
   {
     "id": "uploaded-f3cfef429b5a",
-    "path": "Confident Veterinary Professional in Maroon Scrubs-4.png",
+    "path": "VPQ-Avatar-85-Transparent.png",
     "color": "Pink & Burgundy"
   },
   {
     "id": "uploaded-29cba9ebfe2c",
-    "path": "Confident Veterinary Professional in Purple Scrubs-10.png",
+    "path": "VPQ-Avatar-86-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-32a0520a3070",
-    "path": "Confident Veterinary Professional in Purple Scrubs-3.png",
+    "path": "VPQ-Avatar-87-Transparent.png",
     "color": "Purple & Lavender"
   },
   {
     "id": "uploaded-9172a8fd6c5f",
-    "path": "Confident Veterinary Professional in Scrubs-5.png",
+    "path": "VPQ-Avatar-88-Transparent.png",
     "color": "More Colors"
   },
   {
