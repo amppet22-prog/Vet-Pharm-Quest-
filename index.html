@@ -5495,7 +5495,7 @@ for(const [id,name,image,category] of vpqUploadedCompanionManifest){
  */
 window.VPQ_EXAM_PATIENTS=vpqCompanionCatalog
  .filter(a=>a&&a.image&&['dog','cat','pocket','exotics','avians'].includes(a.category))
- .filter(a=>/^(?:assets\\/)?[^\\/\\\\]+\\.(?:png|jpe?g|webp)$/i.test(a.image)&&!a.image.includes('..'))
+ .filter(a=>{const p=String(a.image);return !p.includes('..')&&(p.startsWith('assets/')?p.slice(7).indexOf('/')===-1:p.indexOf('/')===-1)&&/\.(png|jpe?g|webp)$/i.test(p)})
  .map(a=>({id:'vpq-exam-'+a.id,label:({dog:'🐕 Dogs',cat:'🐈 Cats',pocket:'🐹 Pocket pets',exotics:'🦎 Exotics',avians:'🦜 Birds'})[a.category]+' · '+a.name,image:a.image,species:a.category}));
 /* Illustrated, zero-cost starters for species testing. Existing selections and owned IDs are preserved. */
 for(const starterId of ['cat-siamese','pocket-rabbit-holland','exotic-beardie']){const starter=vpqCompanionCatalog.find(c=>c.id===starterId);if(starter){starter.level=1;starter.price=0;}}
