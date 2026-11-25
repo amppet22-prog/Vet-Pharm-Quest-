@@ -6,9 +6,9 @@ const labels={reception:'Reception',exam:'Exam Room',treatment:'Treatment Ward',
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fileURL=p=>String(p||'').split('/').map(encodeURIComponent).join('/');
 const all=()=>[{id:'roster-28',path:'assets/alexandria-standing-v3.webp',label:'Alexandria · Original'},...(window.VPQ_UPLOADED_AVATARS||[]).map((a,i)=>({id:a.id,path:a.path,label:a.collection==='Alexandria'?(a.label||'Alexandria · Personal'):'Vet '+String(i+1).padStart(3,'0')+' · '+(a.color||'Scrubs')}))];
-function saved(){if(!state.vpqRoomStaff||typeof state.vpqRoomStaff!=='object'||Array.isArray(state.vpqRoomStaff))state.vpqRoomStaff={};return state.vpqRoomStaff}
+function saved(){const profile=window.VPQ_ROOM_STAFF_BRIDGE?.getState?.();if(!profile)return {};if(!profile.vpqRoomStaff||typeof profile.vpqRoomStaff!=='object'||Array.isArray(profile.vpqRoomStaff))profile.vpqRoomStaff={};return profile.vpqRoomStaff}
 function get(room){const value=saved()[room],old=typeof value==='string'?[value]:Array.isArray(value)?value:[],valid=new Set(all().map(a=>a.id));return Array.from({length:3},(_,i)=>valid.has(old[i])?old[i]:'')}
-function put(room,values){const seen=new Set(),v=values.slice(0,3).map(id=>{if(!id||seen.has(id)||!all().some(a=>a.id===id))return '';seen.add(id);return id});if(v.some(Boolean))saved()[room]=v;else delete saved()[room];persist()}
+function put(room,values){const seen=new Set(),v=values.slice(0,3).map(id=>{if(!id||seen.has(id)||!all().some(a=>a.id===id))return '';seen.add(id);return id});if(v.some(Boolean))saved()[room]=v;else delete saved()[room];window.VPQ_ROOM_STAFF_BRIDGE?.persist?.()}
 function room(){return document.getElementById('stage')?.dataset.room||'reception'}
 function draw(){
  const stage=document.getElementById('stage');if(!stage)return;
@@ -31,12 +31,12 @@ function open(){
  const selected=room(),list=get(selected);
  const opts=(id)=>'<option value="">No character</option>'+all().map(a=>'<option value="'+esc(a.id)+'"'+(a.id===id?' selected':'')+'>'+esc(a.label)+'</option>').join('');
  const html='<p>Place up to <b>three extra stationary veterinarian characters</b> in each room. Your walking avatar and companion remain untouched.</p>'+
- '<label for="vpqRoomStaffRoom"><b>Choose room</b></label><select id="vpqRoomStaffRoom" style="width:100%;padding:8px;margin:6px 0 12px">'+rooms.filter(r=>typeof ROOMS==='undefined'||ROOMS[r]).map(r=>'<option value="'+r+'"'+(r===selected?' selected':'')+'>'+esc(labels[r]||r)+'</option>').join('')+'</select>'+
+ '<label for="vpqRoomStaffRoom"><b>Choose room</b></label><select id="vpqRoomStaffRoom" style="width:100%;padding:8px;margin:6px 0 12px">'+rooms.filter(r=>window.VPQ_ROOM_STAFF_BRIDGE?.rooms?.().includes(r)).map(r=>'<option value="'+r+'"'+(r===selected?' selected':'')+'>'+esc(labels[r]||r)+'</option>').join('')+'</select>'+
  '<div class="vpq-staff-slots">'+[0,1,2].map(i=>'<label><b>Staff '+(i+1)+'</b> · '+['Left','Middle','Right'][i]+'<select data-vpq-staff-slot="'+i+'">'+opts(list[i])+'</select></label>').join('')+'</div>'+
  '<div id="vpqStaffPreview" class="vpq-staff-preview"></div>'+
  '<div class="buttonrow"><button type="button" data-vpq-staff-save>Save room staff</button><button type="button" data-vpq-staff-clear>Remove all staff from this room</button></div>'+
  '<p class="tiny">Staff are decorative and saved with your profile. They do not block equipment or change movement.</p>';
- showModal('👩‍⚕️ Room Staff · Add Characters',html);preview();
+ window.VPQ_ROOM_STAFF_BRIDGE?.openModal?.('👩‍⚕️ Room Staff · Add Characters',html);preview();
 }
 function preview(){
  const roomId=document.getElementById('vpqRoomStaffRoom')?.value||'reception',stored=get(roomId),inputs=[...document.querySelectorAll('[data-vpq-staff-slot]')];
@@ -44,13 +44,13 @@ function preview(){
  const view=document.getElementById('vpqStaffPreview');if(!view)return;view.replaceChildren();
  inputs.forEach((el,i)=>{const a=all().find(x=>x.id===el.value),tile=document.createElement('div');tile.className='vpq-staff-preview-card';if(a){const img=document.createElement('img');img.src=fileURL(a.path);img.alt=a.label;tile.append(img)}else{const none=document.createElement('span');none.textContent='Empty';tile.append(none)}const label=document.createElement('small');label.textContent=['Left','Middle','Right'][i];tile.append(label);view.append(tile)})
 }
-document.addEventListener('click',e=>{
- if(e.target.closest?.('#vpqRoomStaffButton,#vpqStaffRoomShortcut')){e.preventDefault();open();return}
- const btn=e.target.closest?.('[data-vpq-staff-save],[data-vpq-staff-clear]');if(!btn)return;e.preventDefault();
+window.addEventListener('click',e=>{
+ if(e.target.closest?.('#vpqRoomStaffButton,#vpqStaffRoomShortcut')){e.preventDefault();e.stopImmediatePropagation();open();return}
+ const btn=e.target.closest?.('[data-vpq-staff-save],[data-vpq-staff-clear]');if(!btn)return;e.preventDefault();e.stopImmediatePropagation();
  const r=document.getElementById('vpqRoomStaffRoom')?.value;if(!rooms.includes(r))return;
  put(r,btn.hasAttribute('data-vpq-staff-clear')?['','','']:[...document.querySelectorAll('[data-vpq-staff-slot]')].map(x=>x.value));draw();preview();
  const save=document.querySelector('[data-vpq-staff-save]');if(save)save.textContent='✓ Staff saved for '+(labels[r]||r);
-});
+},true);
 document.addEventListener('change',e=>{if(e.target?.id==='vpqRoomStaffRoom'||e.target?.matches?.('[data-vpq-staff-slot]')){preview();const b=document.querySelector('[data-vpq-staff-save]');if(b)b.textContent='Save room staff'}});
 const css=document.createElement('style');css.textContent=
 '.stageframe{position:relative}#vpqStaffRoomShortcut{position:absolute;top:9px;right:10px;z-index:12;background:#fff4ffec;border:2px solid #b8a0d2;border-radius:16px;padding:8px 11px;color:#493b73;font-weight:900;box-shadow:0 2px 9px #27364c33}'+
