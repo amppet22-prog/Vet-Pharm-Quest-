@@ -5450,6 +5450,36 @@ vpqUploadedCompanionManifest.push(...[
   "dog"
  ]
 ]);
+/* 2026-11-24 additive avian & fantasy-wildlife uploads, retaining original asset paths and all saved companion IDs. */
+vpqUploadedCompanionManifest.push(...[
+ ["vpq-avians-f2e303711595","Moon-Charms Magpie","Celestial Magpie with Moon Charms-6.png","avians"],
+ ["vpq-avians-ebf3ac74b658","Midnight Heron","Celestial Midnight Heron Illustration-4.png","avians"],
+ ["vpq-legendary-b21da9ec1021","Starry-Armor Owl","Celestial Owl in Starry Armor-8.png","legendary"],
+ ["vpq-legendary-126468467478","Crescent-Crown Owl","Celestial Owl with Crescent Crown-7.png","legendary"],
+ ["vpq-avians-200827e22115","Golden-Accent Owl","Celestial Owl with Golden Accents-2.png","avians"],
+ ["vpq-legendary-07923c4ba4a6","Galaxy Raven","Chibi Galaxy Raven with Crescent Glow-5.png","legendary"],
+ ["vpq-legendary-b3a818054f9a","Celestial Crowned Duck","Celestial Legendary Duck with Crown-3.png","legendary"],
+ ["vpq-legendary-9409397c10a8","Fiery Rooster Warrior","Legendary Fiery Rooster Warrior-5.png","legendary"],
+ ["vpq-legendary-cc32667ba5be","Celestial Royal Duck","Majestic Celestial Crowned Duck-4.png","legendary"],
+ ["vpq-legendary-9eafeaeebe7a","Jeweled Peacock","Majestic Jeweled Peacock Fantasy Art-9.png","legendary"],
+ ["vpq-legendary-f3a38b665b88","Celestial Wizard Raven","Mystical Raven in Celestial Wizard Cloak-1.png","legendary"],
+ ["vpq-legendary-d20d17985a82","Wizard Raven","Mystical Raven in Wizard Attire-3.png","legendary"],
+ ["vpq-legendary-e9c57dfee447","Flamecrest Rooster","Regal Flamecrest Rooster-6.png","legendary"],
+ ["vpq-legendary-381d628ce016","Flamingo Princess","Regal Sparkling Flamingo Princess-11.png","legendary"],
+ ["vpq-legendary-095062d68a62","Crystal-Crown Penguin","Sparkling Royal Penguin in Crystal Crown-10.png","legendary"],
+ ["vpq-legendary-b56378d5b1c3","Enchanted Deer","Enchanted Rehabilitated Wildlife Deer-7.png","legendary"],
+ ["vpq-legendary-2b7d42f8e514","Enchanted Elk","Rehabilitated Elk with Enchanted Antlers-10.png","legendary"],
+ ["vpq-legendary-8b86553ec59a","Floral-Antler Elk","Rehabilitated Elk with Floral Antlers-9.png","legendary"],
+ ["vpq-legendary-01edd76b5063","Wildlife Fox Ranger","Rehabilitated Wildlife Fox Ranger-12.png","legendary"],
+ ["vpq-legendary-23bd2a7bcf7c","Wildlife Rescue Fox","Rehabilitated Wildlife Fox with Vest-11.png","legendary"],
+ ["vpq-legendary-c30d9e34ebcb","Wildlife Lion Explorer","Rehabilitated Wildlife Lion Explorer-4.png","legendary"],
+ ["vpq-legendary-48b954d2a934","Wildlife Lion","Rehabilitated Wildlife Lion Mascot-3.png","legendary"],
+ ["vpq-legendary-783441ff763f","Enchanted Stag","Rehabilitated Wildlife Stag with Enchanted Antlers-8.png","legendary"],
+ ["vpq-legendary-6bc86cdcae73","Wildlife Tiger Ranger","Rehabilitated Wildlife Tiger Ranger-2.png","legendary"],
+ ["vpq-legendary-fd53f2c9518a","Wildlife Rescue Tiger","Rehabilitated Wildlife Tiger Rescue Vest-1.png","legendary"],
+ ["vpq-legendary-29e31fb5a5e0","Wildlife Zebra Ranger","Rehabilitated Wildlife Zebra Ranger-6.png","legendary"],
+ ["vpq-legendary-f6cbde298be4","Wildlife Zebra","Rehabilitated Zebra Wildlife Portrait-5.png","legendary"],
+]);
 for(const [id,name,image,category] of vpqUploadedCompanionManifest){
  const existing=vpqCompanionCatalog.find(c=>c.id===id);
  if(existing){existing.image=image;existing.name=name;continue}
