@@ -20,7 +20,7 @@ function examPatientArt(){
  // Validated, uploaded root or assets image paths only. Keep SVG rendering to
  // retain the existing exam room scene, position and interactions.
  const path=String(p.image||'');
- if(!/^(?:assets\\/)?[^\\/\\\\]+\\.(?:png|jpe?g|webp)$/i.test(path)||path.includes('..'))return '';
+ if(!path||path.includes('..')||!(path.startsWith('assets/')?path.slice(7).indexOf('/')===-1:path.indexOf('/')===-1)||!/\.(png|jpe?g|webp)$/i.test(path))return '';
  const url=path.split('/').map(encodeURIComponent).join('/');
  return '<image href="'+escExam(url)+'" x="442" y="208" width="190" height="130" preserveAspectRatio="xMidYMax meet"/>';
 }
