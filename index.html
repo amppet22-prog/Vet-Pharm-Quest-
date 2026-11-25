@@ -6087,6 +6087,14 @@ window.VPQ_COMPANION_LIBRARY_STATUS=function(){
 };
 
 
+// Controlled bridge: independently loaded optional room decorators cannot access
+// the clinic's private IIFE state or modal functions by bare identifier.
+window.VPQ_ROOM_STAFF_BRIDGE=Object.freeze({
+ getState:()=>state,
+ persist:()=>persist(),
+ rooms:()=>Object.keys(ROOMS),
+ openModal:(title,html)=>showModal(title,html)
+});
 })();
 
 </script><script src="oh3-final-review.js"></script><script src="game-account-link.js" defer></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="game-cloud-auth-bridge.js" defer></script><script src="player-cloud-saves.js?v=20261120-compare-cards" defer></script><script id="vpq-welcome-team-script">
@@ -6576,5 +6584,5 @@ window.VPQ_CLINPATH_REFERRAL_PILOT={home,open:render};
 
 <script src="starred-flashcards.js?v=20261125-flashcards-only-v3"></script>
 <script src="owner-flashcard-audit.js?v=20261122-owner-audit1"></script>
-<script src="room-staff-avatars.js?v=20261125-room-staff-multi-v2"></script>
+<script src="room-staff-avatars.js?v=20261125-room-staff-modal-bridge-v3"></script>
 </body></html>
