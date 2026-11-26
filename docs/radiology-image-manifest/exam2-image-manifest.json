@@ -1,0 +1,861 @@
+{
+ "version": 1,
+ "created": "2026-11-26",
+ "rightsStatus": "owner-attested-lmu-noncommercial",
+ "notesAttribution": "Owner confirmed handwritten slide notes are the professor's statements (2026-11-25).",
+ "sections": {
+  "start": "Start here \u00b7 course cases",
+  "gi": "GI tract \u00b7 stomach, ileus, foreign bodies, colon",
+  "abd": "Abdominal principles \u00b7 serosal detail, mass effect, free gas, liver & spleen",
+  "normal": "Normal abdomen",
+  "gu": "Genitourinary \u00b7 kidneys, bladder, uterus & prostate"
+ },
+ "images": [
+  {
+   "caseId": "exam2-case1-dsh",
+   "slotId": "e2-serosal",
+   "section": "start",
+   "repoPath": "radiology-course-photos/exam2/start/exam2-case1-dsh__01.jpg",
+   "sourceFile": "b9a1845d-AbdomenCasesFa26.pdf",
+   "sourcePage": 4,
+   "sha256": "3fce250113fbe41ef92ab6c9878c2aaa175e843168a28a4f50b8f612536d057b"
+  },
+  {
+   "caseId": "exam2-case1-dsh",
+   "slotId": "e2-serosal",
+   "section": "start",
+   "repoPath": "radiology-course-photos/exam2/start/exam2-case1-dsh__02.jpg",
+   "sourceFile": "b9a1845d-AbdomenCasesFa26.pdf",
+   "sourcePage": 5,
+   "sha256": "ee77c408061ca5ee719b44a393757bba47a839190c41010d2edaa10b4a3d98fe"
+  },
+  {
+   "caseId": "exam2-case2-dog-mass",
+   "slotId": "e2-mass-effect",
+   "section": "start",
+   "repoPath": "radiology-course-photos/exam2/start/exam2-case2-dog-mass__01.jpg",
+   "sourceFile": "b9a1845d-AbdomenCasesFa26.pdf",
+   "sourcePage": 8,
+   "sha256": "b7b64db0ebe0b29a71972b868246c17a19e9905cf05db986158b514738db0657"
+  },
+  {
+   "caseId": "exam2-case2-dog-mass",
+   "slotId": "e2-mass-effect",
+   "section": "start",
+   "repoPath": "radiology-course-photos/exam2/start/exam2-case2-dog-mass__02.jpg",
+   "sourceFile": "b9a1845d-AbdomenCasesFa26.pdf",
+   "sourcePage": 9,
+   "sha256": "2064d39ac8ccb51910e027114eed5b7172b8ca00aeaf155f761546ce45a6a465"
+  },
+  {
+   "caseId": "exam2-case3-dmh-hairties",
+   "slotId": "e2-ileus-equivocal",
+   "section": "start",
+   "repoPath": "radiology-course-photos/exam2/start/exam2-case3-dmh-hairties__01.jpg",
+   "sourceFile": "b9a1845d-AbdomenCasesFa26.pdf",
+   "sourcePage": 12,
+   "sha256": "5d6f7ab32981af93b556c20ddfb9faa0de53856fa3eeb9b1ea366895b4bfd8f3"
+  },
+  {
+   "caseId": "exam2-case3-dmh-hairties",
+   "slotId": "e2-ileus-equivocal",
+   "section": "start",
+   "repoPath": "radiology-course-photos/exam2/start/exam2-case3-dmh-hairties__02.jpg",
+   "sourceFile": "b9a1845d-AbdomenCasesFa26.pdf",
+   "sourcePage": 13,
+   "sha256": "76bf9f0ec4f5e52d1ba5aa5c11fe69f484071f21af3e1405eb3f755eb6243e42"
+  },
+  {
+   "caseId": "exam2-gi-lab-mechanical",
+   "slotId": "e2-ileus-mechanical",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-lab-mechanical__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 18,
+   "sha256": "83ebeff2a97bc120d57f3f058fc5a0b974a83bfd8f03102ee56d480537207241"
+  },
+  {
+   "caseId": "exam2-gi-lab-mechanical",
+   "slotId": "e2-ileus-mechanical",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-lab-mechanical__02.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 18,
+   "sha256": "df56674ddfc599bbf2df9f706e5fac3dc4689d0f951417d14c807297fb77b382"
+  },
+  {
+   "caseId": "exam2-gi-gsd-functional",
+   "slotId": "e2-ileus-functional",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-gsd-functional__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 21,
+   "sha256": "cae5f89a064eead77e47837f3dc2156efbdf1eb8d0814cf030288d565f922c91"
+  },
+  {
+   "caseId": "exam2-gi-gsd-functional",
+   "slotId": "e2-ileus-functional",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-gsd-functional__02.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 22,
+   "sha256": "d2c8a631aea33e6fc083835ee55439542b65337b6381436770710073a5129a27"
+  },
+  {
+   "caseId": "exam2-gi-minpin-linear",
+   "slotId": "e2-linear-fb",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-minpin-linear__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 24,
+   "sha256": "96bcf5340201b8e7b128d5518d9daaa45033338bd599b2d76a5371725167cb6a"
+  },
+  {
+   "caseId": "exam2-gi-minpin-linear",
+   "slotId": "e2-linear-fb",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-minpin-linear__02.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 24,
+   "sha256": "c293ef7ecf132ed4d800a202259300c0f0009da910885327b0251cd915413c3e"
+  },
+  {
+   "caseId": "exam2-gi-dsh-linear-compression",
+   "slotId": "e2-ileus-linear-fb-comparison",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-dsh-linear-compression__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 26,
+   "sha256": "d64bbc313b0c2a5bea60cde71f1d3ff45d16972af7a679722f95497ae8e39d7e"
+  },
+  {
+   "caseId": "exam2-gi-dsh-linear-compression",
+   "slotId": "e2-ileus-linear-fb-comparison",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-dsh-linear-compression__02.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 26,
+   "sha256": "799a8a91647c1ad6c1b4aa0adfde0b6751fd48ca8605bff8d3a2340d117ff916"
+  },
+  {
+   "caseId": "exam2-gi-dsh-plication",
+   "slotId": "e2-linear-fb",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-dsh-plication__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 27,
+   "sha256": "6aed4bd119ecf88f53dc6c80b188ab2644275feabeeaab76e095f414b7ae0057"
+  },
+  {
+   "caseId": "exam2-gi-dsh-plication",
+   "slotId": "e2-linear-fb",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-dsh-plication__02.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 27,
+   "sha256": "087c36450835ee79f818708c9663094a4c4978e262ed26a752d0b3ca5c071ed1"
+  },
+  {
+   "caseId": "exam2-gi-gsd-generalized",
+   "slotId": "e2-ileus",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-gsd-generalized__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 30,
+   "sha256": "3e98fa9790c8c63f513280c234403375737fdd964b9b292161bcc33563fc4c05"
+  },
+  {
+   "caseId": "exam2-gi-pitbull-colon",
+   "slotId": "e2-colon",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-pitbull-colon__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 32,
+   "sha256": "9ba447ab85dbe7b5f29c097c071e65808bdd901fead60e654d96962a59267851"
+  },
+  {
+   "caseId": "exam2-gi-pitbull-colon",
+   "slotId": "e2-colon",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-pitbull-colon__02.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 33,
+   "sha256": "f862e4f2a311134476b4c2252ec46430e402f7a57acd05316436ebfa1d21ceba"
+  },
+  {
+   "caseId": "exam2-gi-lab-fb-colonogram",
+   "slotId": "e2-colon",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-lab-fb-colonogram__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 60,
+   "sha256": "bf0e0d280aca49e38ba0a7943a4af5d469e7d98e8edee804f20bc54473d5f08f"
+  },
+  {
+   "caseId": "exam2-gi-lab-fb-colonogram",
+   "slotId": "e2-colon",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-lab-fb-colonogram__02.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 61,
+   "sha256": "076b95b8faf329a0f1d86a31b806b2515a8ac7704a58502c2ec89fa02adbbf84"
+  },
+  {
+   "caseId": "exam2-gi-gdv",
+   "slotId": "e2-gdv",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-gdv__01.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 11,
+   "sha256": "0eeed39feb16120e66b32bde1f68e43e6e07116a373cb93aac692117abdb7bd5"
+  },
+  {
+   "caseId": "exam2-gi-gdv",
+   "slotId": "e2-gdv",
+   "section": "gi",
+   "repoPath": "radiology-course-photos/exam2/gi/exam2-gi-gdv__02.jpg",
+   "sourceFile": "e0da0772-GastrointestinalPrinciplesPost.pdf",
+   "sourcePage": 11,
+   "sha256": "95f18c59c9a4cf705e7037b30ff7a3a66e54463ca6c532b818e3033f5d55a8ca"
+  },
+  {
+   "caseId": "exam2-abd-p16",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p16__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 16,
+   "sha256": "a53d1149f4e38377c6d8f184aea0485ff11fef056c11498c3063fcccaa92208d"
+  },
+  {
+   "caseId": "exam2-abd-p20",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p20__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 20,
+   "sha256": "3feab0d4f93c9410b66e6812f866344fae027eee29b9fec2f6e7461da81835ed"
+  },
+  {
+   "caseId": "exam2-abd-p20",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p20__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 20,
+   "sha256": "bbfa780ecf2bda3c095d27e2c1aeafa16a9a503d009f192fd8bd922cb1b37899"
+  },
+  {
+   "caseId": "exam2-abd-p21",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p21__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 21,
+   "sha256": "1381d3c6760d6e3d60d5f73f22ec3ff76c0c54959652ef46978c23dcc4471fda"
+  },
+  {
+   "caseId": "exam2-abd-p21",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p21__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 21,
+   "sha256": "fe63820593d1612b4a5449f4be5ca95e12d54d49936ec11b280f72626a6a2d07"
+  },
+  {
+   "caseId": "exam2-abd-p22",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p22__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 22,
+   "sha256": "1aaf3ef49b8065b39a254a01ede876a3b1d8dfa7e2bcb28c1491de65e0723dce"
+  },
+  {
+   "caseId": "exam2-abd-p22",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p22__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 22,
+   "sha256": "ed417a282d08fed8d54df70c297bad789ce11243a88addcae68610e38eac358e"
+  },
+  {
+   "caseId": "exam2-abd-p23",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p23__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 23,
+   "sha256": "5e0e25bcbab277df27d52776c247ab015519d367f53eb0d6bf6f8f1416bd61e5"
+  },
+  {
+   "caseId": "exam2-abd-p23",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p23__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 23,
+   "sha256": "79da69b0f898ceefa07fa74cc13651b0c33e38f953b0adea8835939b1f69a118"
+  },
+  {
+   "caseId": "exam2-abd-p35",
+   "slotId": "e2-serosal",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p35__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 35,
+   "sha256": "779ebdac7b45bd55361e7ce2fc6a538a304cd0cf8262262cd5c0137f74e33a6b"
+  },
+  {
+   "caseId": "exam2-abd-p24",
+   "slotId": "e2-mass-effect",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p24__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 24,
+   "sha256": "660a671aeb4de6ce745146b9ea777f9fd4c8302e5924d2beef0c67f7a1da8c67"
+  },
+  {
+   "caseId": "exam2-abd-p24",
+   "slotId": "e2-mass-effect",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p24__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 24,
+   "sha256": "4ba98fabf7c271fa20a4a4e519f1609f7bce68c2648ec71b4ebd9a482aa6715a"
+  },
+  {
+   "caseId": "exam2-abd-p28",
+   "slotId": "e2-mass-effect",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p28__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 28,
+   "sha256": "3767181c9bf384549847d62e8c08cdb8fbf4da6246f519a6733eccfb201c4025"
+  },
+  {
+   "caseId": "exam2-abd-p28",
+   "slotId": "e2-mass-effect",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p28__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 28,
+   "sha256": "b53c07065807c7a1d1c3bc24d2b23f91e5f54f51b4246c8ea464ba3acf919ee3"
+  },
+  {
+   "caseId": "exam2-abd-p29",
+   "slotId": "e2-mass-effect",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p29__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 29,
+   "sha256": "37cf72135b5e8ab2ceca1b086bd85b16cfb6538eecdd87ac0dc2fbb654decec4"
+  },
+  {
+   "caseId": "exam2-abd-p29",
+   "slotId": "e2-mass-effect",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p29__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 29,
+   "sha256": "6a079e807875ae1f9a717de791ac07edcbd6b0d9c04c83a81d9e66e6e5709eed"
+  },
+  {
+   "caseId": "exam2-abd-p38",
+   "slotId": "e2-free-gas",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p38__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 38,
+   "sha256": "e608a3f2fd3c2b01755b66387e491391ddce975ac40ff2c398842f2ced0f2e96"
+  },
+  {
+   "caseId": "exam2-abd-p39",
+   "slotId": "e2-free-gas",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p39__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 39,
+   "sha256": "738b63e777278c5d41d4c6e9cdf3de936f7155108cc393c0efb7971ec6457655"
+  },
+  {
+   "caseId": "exam2-abd-p39",
+   "slotId": "e2-free-gas",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p39__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 39,
+   "sha256": "2fb2a714cac97d17487b996c9e1d10b18a1fe90080938bf320b6bbc78cd4ee90"
+  },
+  {
+   "caseId": "exam2-abd-p40",
+   "slotId": "e2-free-gas",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p40__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 40,
+   "sha256": "55de0b24dd984e6da32f73d6a4503aa1c7e7ff88e1404d7198fd58e8f4e7c05a"
+  },
+  {
+   "caseId": "exam2-abd-p40",
+   "slotId": "e2-free-gas",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p40__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 40,
+   "sha256": "f17369e114e3b6d279f4c0745816fd85fde4985b2fd7cf1b729c8a245f159f9f"
+  },
+  {
+   "caseId": "exam2-abd-p42",
+   "slotId": "e2-free-gas",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p42__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 42,
+   "sha256": "d41222efdf466e35f1fd2ff7b0ba89b19ebb09bd8f447cfe4edfe44f426c3b8e"
+  },
+  {
+   "caseId": "exam2-abd-p42",
+   "slotId": "e2-free-gas",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p42__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 42,
+   "sha256": "7db07f2322d5093c27c04ceab1ebc89d5081206a1a7956ead7110ae2384597ac"
+  },
+  {
+   "caseId": "exam2-abd-p45",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p45__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 45,
+   "sha256": "9287303860fdd2c30f5d851ba90fa5e8aa6f26d783b60eb9f4c7778e4a8047cf"
+  },
+  {
+   "caseId": "exam2-abd-p45",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p45__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 45,
+   "sha256": "f509d0c09699f47ed515786920317c7fcda5e713ef5e2091b831a012f3f2fdb8"
+  },
+  {
+   "caseId": "exam2-abd-p46",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p46__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 46,
+   "sha256": "82d88f245120f299d6700f26dbc282e34b2e85f964340b2f51c9a561b1103824"
+  },
+  {
+   "caseId": "exam2-abd-p46",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p46__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 46,
+   "sha256": "83bc804daaf1468dc7c1d550220e60b57174c39dc39cd5742dc2e9c885573f4b"
+  },
+  {
+   "caseId": "exam2-abd-p51",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p51__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 51,
+   "sha256": "b539e0f796ef1aee942887fac1ecdec69148a78c968cc12c784367e135f2c907"
+  },
+  {
+   "caseId": "exam2-abd-p51",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p51__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 51,
+   "sha256": "7d0260e56bcbc386304ea4a7b629e140ef394ed4d368ae5713609a62d570b618"
+  },
+  {
+   "caseId": "exam2-abd-p53",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p53__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 53,
+   "sha256": "2ab2891c00faab3777f16911fb32d010e2ba7b60bdb29ad3ac0822380e869776"
+  },
+  {
+   "caseId": "exam2-abd-p54",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p54__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 54,
+   "sha256": "0263408bca9574a4e8ae981aafe4a614ce5aedffaa7320fc41e0cb335cc81e76"
+  },
+  {
+   "caseId": "exam2-abd-p54",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p54__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 54,
+   "sha256": "26d74a440f32e10bade7e3aa0189dbc2b1e393ae882605a9f8dee0c69a32bc20"
+  },
+  {
+   "caseId": "exam2-abd-p59",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p59__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 59,
+   "sha256": "0610a75c079d20d68b2c5cad0b784e09f24b9d4b91ca83c24228df360fd67c02"
+  },
+  {
+   "caseId": "exam2-abd-p59",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p59__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 59,
+   "sha256": "c7b173c9eb24037210bce78f7eee9805d4962dbaff5399d9c6d5336324cfc38b"
+  },
+  {
+   "caseId": "exam2-abd-p62",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p62__01.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 62,
+   "sha256": "d630544a475bdc8ba45b493333b1a7cb9f9ca0d6b706b4c56886e63ebbebe356"
+  },
+  {
+   "caseId": "exam2-abd-p62",
+   "slotId": "e2-liver-spleen",
+   "section": "abd",
+   "repoPath": "radiology-course-photos/exam2/abd/exam2-abd-p62__02.jpg",
+   "sourceFile": "fea14ada-AbdomenPrinciplesIandIIPost.pdf",
+   "sourcePage": 62,
+   "sha256": "d64bbc313b0c2a5bea60cde71f1d3ff45d16972af7a679722f95497ae8e39d7e"
+  },
+  {
+   "caseId": "exam2-normal-p03",
+   "slotId": "e2-normal-abdomen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p03__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 3,
+   "sha256": "258891ebe7f7aa316aa16150021d56fadfb5d483ab3919fb9e5a74555672d427"
+  },
+  {
+   "caseId": "exam2-normal-p03",
+   "slotId": "e2-normal-abdomen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p03__02.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 3,
+   "sha256": "d88c0a1caca9829d5afc837783d714bee410f7ee6a27718dd9f820ba40f0942b"
+  },
+  {
+   "caseId": "exam2-normal-p11",
+   "slotId": "e2-liver-spleen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p11__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 11,
+   "sha256": "4e26038ac810d35a63931c82e265beda3ee27c9a62f11400fd26524e7c19f483"
+  },
+  {
+   "caseId": "exam2-normal-p11",
+   "slotId": "e2-liver-spleen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p11__02.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 11,
+   "sha256": "93a5927670d72fd1ff92de7ccb424dc45517186f876f0a65be29aabc62719bac"
+  },
+  {
+   "caseId": "exam2-normal-p12",
+   "slotId": "e2-liver-spleen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p12__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 12,
+   "sha256": "b39b12df9a4beee5377dc4b9d8939abd5464a82cc3745d0b27eee7c57612b3e3"
+  },
+  {
+   "caseId": "exam2-normal-p12",
+   "slotId": "e2-liver-spleen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p12__02.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 13,
+   "sha256": "5bd42cf0915d1e3c9e51aec1314e76f7346eeb8b3bfe45b3fe23d443c63b3588"
+  },
+  {
+   "caseId": "exam2-normal-p14",
+   "slotId": "e2-liver-spleen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p14__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 14,
+   "sha256": "a4b948f15db2e61d763e1c32ea5bc3fdcd702ec4a0186248312c8d3982c8832a"
+  },
+  {
+   "caseId": "exam2-normal-p14",
+   "slotId": "e2-liver-spleen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p14__02.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 15,
+   "sha256": "9beecb48aa773aee9830faf1cd30aa0cbbf02dc070ed50e27ad4fe5d5bae9bf1"
+  },
+  {
+   "caseId": "exam2-normal-p16",
+   "slotId": "e2-liver-spleen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p16__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 17,
+   "sha256": "d9b123caa48ef0edc482041644ec54259585ffb16a40296297e01c379f44d83d"
+  },
+  {
+   "caseId": "exam2-normal-p21",
+   "slotId": "e2-kidney",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p21__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 21,
+   "sha256": "e43ad0c7a2bf29912c2e39d32d046530d898963fd447df2680a273ea2e7d8d69"
+  },
+  {
+   "caseId": "exam2-normal-p21",
+   "slotId": "e2-kidney",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p21__02.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 22,
+   "sha256": "6561e304e97cef9bf07cb24b3b3eba6d743ce27b286eeaa05b9e1a6e5a034061"
+  },
+  {
+   "caseId": "exam2-normal-p25",
+   "slotId": "e2-urinary",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p25__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 25,
+   "sha256": "ddccfd597d8c85015a7f7c9ef62b78618803ba85203662d6d7f456e777dc945c"
+  },
+  {
+   "caseId": "exam2-normal-p25",
+   "slotId": "e2-urinary",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p25__02.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 26,
+   "sha256": "e4a3f3a3bae5c41e3fd150199a196cd14ad1ed422730b6403db073e9174545fc"
+  },
+  {
+   "caseId": "exam2-normal-p30",
+   "slotId": "e2-normal-abdomen",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p30__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 30,
+   "sha256": "dc194cdc4364c24a05cd40980ae2c4c75f922de894a7e01001081755b45f3720"
+  },
+  {
+   "caseId": "exam2-normal-p35",
+   "slotId": "e2-colon",
+   "section": "normal",
+   "repoPath": "radiology-course-photos/exam2/normal/exam2-normal-p35__01.jpg",
+   "sourceFile": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf",
+   "sourcePage": 35,
+   "sha256": "c1e4fd7a341ba09e0814dd0d5d6130b5afcfe30fc6ce4bac1977cfb44dd76df2"
+  },
+  {
+   "caseId": "exam2-gu-adrenal-mass",
+   "slotId": "e2-mass-effect",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-adrenal-mass__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 4,
+   "sha256": "318c1f79b4788d5967947b04f5300f96638007ed23e732a62f81b01100804724"
+  },
+  {
+   "caseId": "exam2-gu-adrenal-mass",
+   "slotId": "e2-mass-effect",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-adrenal-mass__02.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 4,
+   "sha256": "e267f05c9048a22acdd46d58234c8738687f2144ef056b4d03d1756cf12d4291"
+  },
+  {
+   "caseId": "exam2-gu-cat-renomegaly",
+   "slotId": "e2-kidney",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-cat-renomegaly__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 7,
+   "sha256": "e522917d898e0fcca6ed51e519afd625bb468be85b417e842876a2808bed81b5"
+  },
+  {
+   "caseId": "exam2-gu-cat-renomegaly",
+   "slotId": "e2-kidney",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-cat-renomegaly__02.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 7,
+   "sha256": "455359485ff314c4a43be52442d7b2149a3dfa90d1a4ccab0cbf4e66c8a7d0a7"
+  },
+  {
+   "caseId": "exam2-gu-scottie-renal",
+   "slotId": "e2-kidney",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-scottie-renal__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 11,
+   "sha256": "fe46b1fe2b0c96bfb1f0aa21c51e217c312ba8f471f6a20b9e480e189c219c13"
+  },
+  {
+   "caseId": "exam2-gu-p14",
+   "slotId": "e2-urinary",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p14__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 14,
+   "sha256": "ab432e9fb59b3dbecfe7928570e5dfe095ef790bb7b558bf60e42118e9a37506"
+  },
+  {
+   "caseId": "exam2-gu-p20",
+   "slotId": "e2-urinary",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p20__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 20,
+   "sha256": "5c0005873367b56b0d0dec5b9314c4edbfcde6ecc35e6ebcdd8abd196b7e8a2c"
+  },
+  {
+   "caseId": "exam2-gu-p22",
+   "slotId": "e2-urinary",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p22__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 22,
+   "sha256": "0e5096f70436725bc08c62c62f5f1a5e801521032cd5ecbe78a6e94b4ada81d7"
+  },
+  {
+   "caseId": "exam2-gu-beagle",
+   "slotId": "e2-urinary",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-beagle__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 23,
+   "sha256": "5fca3d9074501e35032c756f6fe93165ad38acfe7782acb618321ba31959c4c7"
+  },
+  {
+   "caseId": "exam2-gu-beagle",
+   "slotId": "e2-urinary",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-beagle__02.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 23,
+   "sha256": "76536e2e83fa574c686933e77311589fc667ae7d9cf5e893a328bf1290bd7b6b"
+  },
+  {
+   "caseId": "exam2-gu-p25",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p25__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 25,
+   "sha256": "2a1f3a23e56fe587f800cc097d4160b1b8a332a813cdf7a59d6b57c211cc99e0"
+  },
+  {
+   "caseId": "exam2-gu-p25",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p25__02.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 25,
+   "sha256": "c6c6007b949a9a0cb54e276d119801c8a5b376f3fc2014059e7c84c8dd15712e"
+  },
+  {
+   "caseId": "exam2-gu-p26",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p26__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 26,
+   "sha256": "7f149c837a2919f778545812331023dbf143c6997b9b91dbfd1e78d6e68de7fa"
+  },
+  {
+   "caseId": "exam2-gu-p26",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p26__02.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 26,
+   "sha256": "bcf41634aa75119dc8684e5f1c024139cb475d8a0aa982a48b6a3b6702f85d45"
+  },
+  {
+   "caseId": "exam2-gu-p27",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p27__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 27,
+   "sha256": "e98f534d374fddd02928d6686f0e0942586eeb96c36c7afe9029f3481247b1e3"
+  },
+  {
+   "caseId": "exam2-gu-p28",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p28__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 28,
+   "sha256": "2d7546c039053b01f0839d6c6ee2b1a6efd2b9a86f374e883dfcbb3882c89296"
+  },
+  {
+   "caseId": "exam2-gu-p28",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p28__02.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 28,
+   "sha256": "8bc5f9407396a7388a37f426acaccb7d0251c1c93d63fca29c970b4a365b0cda"
+  },
+  {
+   "caseId": "exam2-gu-p30",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-p30__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 30,
+   "sha256": "bff9716ab6079ec1c78185128b05d4d45f5534faec11e0bfbd95e69d9ea391e0"
+  },
+  {
+   "caseId": "exam2-gu-corgi",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-corgi__01.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 31,
+   "sha256": "2b69e21590a4c18ed653a19328ea3de519dd4fe171e9309c19f4cc64a4fce38d"
+  },
+  {
+   "caseId": "exam2-gu-corgi",
+   "slotId": "",
+   "section": "gu",
+   "repoPath": "radiology-course-photos/exam2/gu/exam2-gu-corgi__02.jpg",
+   "sourceFile": "Genitourinary.pdf",
+   "sourcePage": 31,
+   "sha256": "ed951b360bed9b464c7f567237bbd182ddd2c0065df37ad226fa1f22782031ac"
+  }
+ ]
+}

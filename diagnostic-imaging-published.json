@@ -4310,6 +4310,2568 @@
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
       "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam2-case1-dsh": {
+      "id": "exam2-case1-dsh",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Cases · Abdomen case 1 · effusion, mixed intestinal gas and mass effect",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Cases (Fall 2026)",
+      "species": "Feline",
+      "region": "Abdomen",
+      "history": "10-year-old DSH cat. Anorexia; no other information provided.",
+      "lookFor": "Describe serosal detail before choosing the most defensible differentials.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: two views. Loss of serosal detail in the abdomen with a fluid-filled appearance (ascites). Increased radiolucency in the stomach, small intestine and colon; small-intestinal gas distension with multiple populations; greater gas distension in the fundus. Mass effect with leftward displacement. Small mineral/radiopaque material that appears to be bone in the intestines; some fecal material in the rectum and colon. If there were a perforation you would also expect free gas.",
+      "interpretation": "Differentials discussed in class: ruptured mass (neoplasia), hemoabdomen, foreign-body perforation, ascites (e.g., right-sided heart failure), distended bladder. Radiographs alone do not give the final diagnosis.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "b9a1845d-AbdomenCasesFa26.pdf · slide 4 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Images courtesy of Dr. Rick Widmer; case discussion by Dr. Rebekah Gallaher, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/start/exam2-case1-dsh__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Cases, slide 4."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/start/exam2-case1-dsh__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Cases, slide 5."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/cases-p004.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-serosal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "start",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Peritoneal effusion with mixed intestinal gas and mass effect"
+    },
+    "exam2-case2-dog-mass": {
+      "id": "exam2-case2-dog-mass",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Cases · Abdomen case 2 · mid-abdominal mass",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Cases (Fall 2026)",
+      "species": "Canine",
+      "region": "Abdomen",
+      "history": "8-year-old mixed-breed dog. Pale mucous membranes, extreme lethargy.",
+      "lookFor": "Describe displacement before naming source.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: rounded liver margins, but the liver stays within the rib cage. Mid-abdominal soft-tissue mass with summation and border effacement where structures overlap. Ventral/caudal displacement of the intestines. Colon contains mixed radiopaque fecal material.",
+      "interpretation": "Mid-abdominal mass. Abdominal ultrasound is needed to determine where the mass comes from; you cannot know from radiographs alone.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "b9a1845d-AbdomenCasesFa26.pdf · slide 8 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Images courtesy of Dr. Rick Widmer; case discussion by Dr. Rebekah Gallaher, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/start/exam2-case2-dog-mass__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Cases, slide 8."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/start/exam2-case2-dog-mass__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Cases, slide 9."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/cases-p008.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-mass-effect",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "start",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Mid-abdominal mass (needs ultrasound for origin)"
+    },
+    "exam2-case3-dmh-hairties": {
+      "id": "exam2-case3-dmh-hairties",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Cases · Abdomen case 3 · equivocal intestinal pattern",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Cases (Fall 2026)",
+      "species": "Feline",
+      "region": "Abdomen",
+      "history": "2-year-old DMH cat. History of eating hair ties; anorexia, lethargy.",
+      "lookFor": "List each objective sign and explain why the imaging remains indeterminate. Rank functional ileus versus possible early/partial obstruction and choose appropriate next diagnostics.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: abnormal arrangement of the small intestine (\"tortuous turns\", \"stacking\"). Mixed populations of intestinal diameter. Colon enlarged with fecal material (constipation). The border of the spleen is not clearly seen.",
+      "interpretation": "Equivocal. Rule-outs: constipation, foreign body, and ileus (functional or mechanical); the radiologist stated either. Plan discussed in class: enema, then repeat radiographs (the enema will introduce some gas). Decide on surgery from the clinical signs (GI signs, litter box); if the cat has not defecated within 1–2 hours, exploratory surgery is better than not, but be transparent with the owner about cost.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "b9a1845d-AbdomenCasesFa26.pdf · slide 12 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Images courtesy of Dr. Rick Widmer; case discussion by Dr. Rebekah Gallaher, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/start/exam2-case3-dmh-hairties__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Cases, slide 12."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/start/exam2-case3-dmh-hairties__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Cases, slide 13."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/cases-p013.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-ileus-equivocal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "start",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Equivocal: constipation vs foreign body vs ileus"
+    },
+    "exam2-gi-lab-mechanical": {
+      "id": "exam2-gi-lab-mechanical",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI patient · intestinal gas pattern (Labrador)",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Canine",
+      "region": "Abdomen",
+      "history": "2-year-old FS Labrador. Vomited 2 days ago, lethargy, anorexia.",
+      "lookFor": "Describe all visible bowel populations and secondary signs. Does the radiographic pattern favor mechanical obstruction, and what evidence or next step supports that interpretation?\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: mixed population of gas-dilated small intestine. Soft tissue with a textile-like texture on the VD view.",
+      "interpretation": "Mechanical ileus due to an intraluminal foreign body.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 18 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-lab-mechanical__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 18."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-lab-mechanical__02.jpg",
+          "view": "View B",
+          "caption": "GI Principles, slide 18."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p018.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-ileus-mechanical",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Mechanical ileus (intraluminal foreign body)"
+    },
+    "exam2-gi-gsd-functional": {
+      "id": "exam2-gi-gsd-functional",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI patient · intestinal gas pattern (German Shepherd puppy)",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Canine",
+      "region": "Abdomen",
+      "history": "4-month-old MI German Shepherd. Vomiting for 24 hours, lethargy, anorexia.",
+      "lookFor": "Describe bowel distribution, explain impaired motility, distinguish from mechanical obstruction, and identify when further tests are warranted.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: mildly dilated small intestines with good segmental gas and colonic content. This is not a mixed population.",
+      "interpretation": "Functional ileus. Diagnosis given: viral enteritis ± parvovirus.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 21 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-gsd-functional__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 21."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-gsd-functional__02.jpg",
+          "view": "View B",
+          "caption": "GI Principles, slide 22."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p021.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-ileus-functional",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Functional ileus (viral enteritis/parvo)"
+    },
+    "exam2-gi-minpin-linear": {
+      "id": "exam2-gi-minpin-linear",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI patient · intestinal gas shapes (Min Pin)",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Canine",
+      "region": "Abdomen",
+      "history": "1-year-old FS Miniature Pinscher. Vomiting since yesterday, straining to defecate this morning.",
+      "lookFor": "Identify plication-related signs and reasonable next steps.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: discrete gas opacities that are well defined with irregular shapes; serosal margins irregular and constrained. Linear foreign bodies need to be \"anchored\" somewhere: in cats the anchor point is the tongue, in dogs it is normally the pylorus (so plication shows in the duodenum). Look for small, irregular, crescent/comma-shaped gas pockets.",
+      "interpretation": "Linear foreign body (dog).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 24 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-minpin-linear__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 24."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-minpin-linear__02.jpg",
+          "view": "View B",
+          "caption": "GI Principles, slide 24."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p024.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-linear-fb",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Linear foreign body"
+    },
+    "exam2-gi-dsh-linear-compression": {
+      "id": "exam2-gi-dsh-linear-compression",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI patient · intestinal pattern with compression view (young cat)",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Feline",
+      "region": "Abdomen",
+      "history": "1-year-old FS DSH. Vomiting and anorexia.",
+      "lookFor": "Identify plication signs, explain anchoring and peristalsis, then compare against nonspecific ileus and choose the next step.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: small intestine clumped with irregular gas shapes (comma, ovoid). On the compression (spoon) study you should see the small-intestinal segments spread apart; here they do not. Large spleen noted.",
+      "interpretation": "Linear foreign body (cat).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 26 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-dsh-linear-compression__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 26."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-dsh-linear-compression__02.jpg",
+          "view": "View B",
+          "caption": "GI Principles, slide 26."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p025.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-ileus-linear-fb-comparison",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Linear foreign body"
+    },
+    "exam2-gi-dsh-plication": {
+      "id": "exam2-gi-dsh-plication",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI patient · intestinal pattern (adult cat)",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Feline",
+      "region": "Abdomen",
+      "history": "3-year-old FS DSH. Vomiting.",
+      "lookFor": "Identify plication-related signs and reasonable next steps.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: obvious plication; clumped intestines; summation effect; suspicious area marked on the lateral.",
+      "interpretation": "Plication consistent with a linear foreign body.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 27 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-dsh-plication__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 27."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-dsh-plication__02.jpg",
+          "view": "View B",
+          "caption": "GI Principles, slide 27."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p027.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-linear-fb",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Linear foreign body (plication)"
+    },
+    "exam2-gi-gsd-generalized": {
+      "id": "exam2-gi-gsd-generalized",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI patient · generalized intestinal gas (adult German Shepherd)",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Canine",
+      "region": "Abdomen",
+      "history": "7-year-old MI German Shepherd. Vomiting and hematochezia for 1 day, recumbent.",
+      "lookFor": "Describe bowel population, contents and degree of dilation before selecting differentials.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: all of the small intestine is affected, distended with gas.",
+      "interpretation": "Severe generalized small-intestinal gas distension. The lecture presents this case together with intestinal torsion and volvulus, which are life-threatening; check the annotated slide and lecture for the final call.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 30 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-gsd-generalized__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 30."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p030.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-ileus",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-gi-pitbull-colon": {
+      "id": "exam2-gi-pitbull-colon",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI patient · colon (older Pit Bull)",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Canine",
+      "region": "Abdomen / colon",
+      "history": "12-year-old F Pit Bull. Vomiting, inappetence for 3–4 days, weight loss.",
+      "lookFor": "Differentiate large and small bowel and describe distension.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: colon distended with hard fecal material; ventral mass effect noted. A barium enema was used to evaluate the colon.",
+      "interpretation": "Colonic distension with retained hard feces, evaluated further with a barium enema.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 32 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-pitbull-colon__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 32."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-pitbull-colon__02.jpg",
+          "view": "View B",
+          "caption": "GI Principles, slide 33."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p032.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-colon",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Colonic distension with retained feces"
+    },
+    "exam2-gi-lab-fb-colonogram": {
+      "id": "exam2-gi-lab-fb-colonogram",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI patient · small intestine or colon? (young Labrador)",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Canine",
+      "region": "Abdomen",
+      "history": "1-year-old MI Labrador. Vomiting, inappetence, history of foreign-body ingestion.",
+      "lookFor": "Differentiate large and small bowel and describe distension.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: is the distended loop colon or small intestine? A pneumocolonogram (air in the colon) answers that. Compare a fixed narrow point (stricture, dilated on both sides) with normal peristaltic narrowing (\"squeeze\").",
+      "interpretation": "Pneumocolonogram used to separate colon from small intestine; stricture versus normal peristalsis discussed.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 60 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-lab-fb-colonogram__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 60."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-lab-fb-colonogram__02.jpg",
+          "view": "View B",
+          "caption": "GI Principles, slide 61."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p060.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-colon",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-gi-gdv": {
+      "id": "exam2-gi-gdv",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GI Principles · GI · stomach position and shape",
+      "lecture": "CVM 743 · Exam 2 · Gastrointestinal Principles I & II",
+      "species": "Canine",
+      "region": "Stomach",
+      "history": "Teaching example from the GI Principles lecture.",
+      "lookFor": "Describe the gastric findings that support volvulus.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: compartmentalization; pylorus located dorsally and to the left; splenomegaly; megaesophagus.",
+      "interpretation": "Gastric dilatation-volvulus (GDV).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "e0da0772-GastrointestinalPrinciplesPost.pdf · slide 11 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-gdv__01.jpg",
+          "view": "View A",
+          "caption": "GI Principles, slide 11."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gi/exam2-gi-gdv__02.jpg",
+          "view": "View B",
+          "caption": "GI Principles, slide 11."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gi-p011.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-gdv",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gi",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Gastric dilatation-volvulus (GDV)"
+    },
+    "exam2-abd-p16": {
+      "id": "exam2-abd-p16",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Serosal detail · normal vs abnormal",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe serosal detail before choosing the most defensible differentials.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Normal serosal detail is sharp and well defined; abnormal is loss of detail at the borders of the organs.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 16 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p16__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 16."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p016.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-serosal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-abd-p20": {
+      "id": "exam2-abd-p20",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Peritoneal effusion",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe serosal detail before choosing the most defensible differentials.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Peritoneal effusion: loss of serosal detail.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 20 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p20__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 20."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p20__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 20."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p020.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-serosal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Peritoneal effusion"
+    },
+    "exam2-abd-p21": {
+      "id": "exam2-abd-p21",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Serosal detail in a normal puppy",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe serosal detail before choosing the most defensible differentials.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Normal puppy: reduced serosal detail is expected (little abdominal fat).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 21 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p21__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 21."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p21__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 21."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p021.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-serosal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Normal puppy (low serosal detail is expected)"
+    },
+    "exam2-abd-p22": {
+      "id": "exam2-abd-p22",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Serosal detail in an overconditioned patient",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe serosal detail before choosing the most defensible differentials.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Overconditioned: abundant fat gives excellent serosal detail.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 22 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p22__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 22."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p22__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 22."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p022.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-serosal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Overconditioned (excellent serosal detail)"
+    },
+    "exam2-abd-p23": {
+      "id": "exam2-abd-p23",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Serosal detail with poor body condition",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe serosal detail before choosing the most defensible differentials.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Poor body condition: little fat, so serosal detail is reduced without disease.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 23 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p23__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 23."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p23__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 23."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p023.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-serosal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Poor body condition (reduced serosal detail)"
+    },
+    "exam2-abd-p35": {
+      "id": "exam2-abd-p35",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Retroperitoneal detail",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe serosal detail before choosing the most defensible differentials.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Loss of retroperitoneal detail: poor visibility of the kidneys and ventral displacement of the intestines and colon. Causes: hemorrhage, urine, neoplasia, abscess, FB granuloma.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 35 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p35__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 35."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p035.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-serosal",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Loss of retroperitoneal detail"
+    },
+    "exam2-abd-p24": {
+      "id": "exam2-abd-p24",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Mass effect · abdominal mass",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe displacement before naming source.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Abdominal mass with displacement of surrounding organs.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 24 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p24__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 24."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p24__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 24."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p024.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-mass-effect",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Abdominal mass with organ displacement"
+    },
+    "exam2-abd-p28": {
+      "id": "exam2-abd-p28",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Mass effect · distended stomach",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe displacement before naming source.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Distended stomach displacing surrounding organs.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 28 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p28__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 28."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p28__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 28."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p028.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-mass-effect",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Distended stomach"
+    },
+    "exam2-abd-p29": {
+      "id": "exam2-abd-p29",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Mass effect · splenic mass",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe displacement before naming source.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Splenic mass.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 29 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p29__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 29."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p29__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 29."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p029.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-mass-effect",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Splenic mass"
+    },
+    "exam2-abd-p38": {
+      "id": "exam2-abd-p38",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Free abdominal gas · example 1",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Localize the gas and explain the significance.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Free peritoneal gas (pneumoperitoneum).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 38 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p38__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 38."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p038.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-free-gas",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Pneumoperitoneum (free abdominal gas)"
+    },
+    "exam2-abd-p39": {
+      "id": "exam2-abd-p39",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Free abdominal gas · example 2",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Localize the gas and explain the significance.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Free peritoneal gas (pneumoperitoneum).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 39 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p39__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 39."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p39__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 39."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p039.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-free-gas",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Pneumoperitoneum (free abdominal gas)"
+    },
+    "exam2-abd-p40": {
+      "id": "exam2-abd-p40",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Free abdominal gas · example 3",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Localize the gas and explain the significance.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Free peritoneal gas (pneumoperitoneum).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 40 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p40__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 40."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p40__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 40."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p040.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-free-gas",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Pneumoperitoneum (free abdominal gas)"
+    },
+    "exam2-abd-p42": {
+      "id": "exam2-abd-p42",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Free abdominal gas · horizontal-beam view",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Localize the gas and explain the significance.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Horizontal-beam radiography detects free gas: dorsal or left lateral recumbency, wait 5–10 minutes.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 42 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p42__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 42."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p42__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 42."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p042.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-free-gas",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Pneumoperitoneum (free abdominal gas)"
+    },
+    "exam2-abd-p45": {
+      "id": "exam2-abd-p45",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Liver size · comparison",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Generalized hepatomegaly (compare with the normal view on the slide).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 45 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p45__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 45. The slide pairs an abnormal and a Normal view; open the annotated key to see which is which."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p45__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 45. The slide pairs an abnormal and a Normal view; open the annotated key to see which is which."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p045.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Generalized hepatomegaly"
+    },
+    "exam2-abd-p46": {
+      "id": "exam2-abd-p46",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Liver size · second example",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Generalized hepatomegaly.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 46 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p46__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 46."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p46__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 46."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p046.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Generalized hepatomegaly"
+    },
+    "exam2-abd-p51": {
+      "id": "exam2-abd-p51",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Liver · focal change",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Focal liver mass.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 51 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p51__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 51."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p51__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 51."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p051.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Focal liver mass"
+    },
+    "exam2-abd-p53": {
+      "id": "exam2-abd-p53",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Liver size · small-liver comparison",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Microhepatia (compare with the normal view on the slide).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 53 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p53__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 53. The slide pairs an abnormal and a Normal view; open the annotated key to see which is which."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p053.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Microhepatia"
+    },
+    "exam2-abd-p54": {
+      "id": "exam2-abd-p54",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Liver size · VD comparison",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Microhepatia versus normal.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 54 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p54__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 54. The slide pairs an abnormal and a Normal view; open the annotated key to see which is which."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p54__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 54. The slide pairs an abnormal and a Normal view; open the annotated key to see which is which."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p054.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Microhepatia"
+    },
+    "exam2-abd-p59": {
+      "id": "exam2-abd-p59",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Spleen size · example 1",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Generalized splenomegaly.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 59 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p59__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 59."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p59__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 59."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p059.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Generalized splenomegaly"
+    },
+    "exam2-abd-p62": {
+      "id": "exam2-abd-p62",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · Abdomen Principles · Spleen size · example 2",
+      "lecture": "CVM 743 · Exam 2 · Abdomen Principles I & II",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Abdomen Principles I & II lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Generalized splenomegaly.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "fea14ada-AbdomenPrinciplesIandIIPost.pdf · slide 62 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p62__01.jpg",
+          "view": "View A",
+          "caption": "Abdomen Principles, slide 62."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/abd/exam2-abd-p62__02.jpg",
+          "view": "View B",
+          "caption": "Abdomen Principles, slide 62."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/abd-p062.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "abd",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Generalized splenomegaly"
+    },
+    "exam2-normal-p03": {
+      "id": "exam2-normal-p03",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Standard abdominal views",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "Locate liver, stomach, kidneys, colon, bladder and small intestine.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: Standard views: lateral and ventrodorsal.",
+      "interpretation": "Standard views: lateral and ventrodorsal.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 3 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p03__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 3."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p03__02.jpg",
+          "view": "View B",
+          "caption": "Normal Abdomen, slide 3."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p003.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-normal-abdomen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-normal-p11": {
+      "id": "exam2-normal-p11",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Normal liver · lateral",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: Normal liver on the lateral: cranial abdomen between stomach and diaphragm, homogeneous soft tissue, contained within the costal arch.",
+      "interpretation": "Normal liver on the lateral: cranial abdomen between stomach and diaphragm, homogeneous soft tissue, contained within the costal arch.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 11 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p11__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 11."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p11__02.jpg",
+          "view": "View B",
+          "caption": "Normal Abdomen, slide 11."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p011.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-normal-p12": {
+      "id": "exam2-normal-p12",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Normal liver · VD and stomach fill",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: VD liver; position depends on stomach fill (a full stomach can slightly displace the liver).",
+      "interpretation": "VD liver; position depends on stomach fill (a full stomach can slightly displace the liver).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 12 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p12__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 12."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p12__02.jpg",
+          "view": "View B",
+          "caption": "Normal Abdomen, slide 13."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p012.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-normal-p14": {
+      "id": "exam2-normal-p14",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Normal canine spleen",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: Canine spleen: mid-left abdomen, homogeneous soft tissue; the head sits near the gastric fundus.",
+      "interpretation": "Canine spleen: mid-left abdomen, homogeneous soft tissue; the head sits near the gastric fundus.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 14 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p14__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 14."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p14__02.jpg",
+          "view": "View B",
+          "caption": "Normal Abdomen, slide 15."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p014.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-normal-p16": {
+      "id": "exam2-normal-p16",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Normal feline spleen",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "Describe relative organ size and positional effects.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: Feline spleen: commonly seen only on the VD and sometimes not at all; if seen on both lateral and VD, suspect enlargement.",
+      "interpretation": "Feline spleen: commonly seen only on the VD and sometimes not at all; if seen on both lateral and VD, suspect enlargement.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 16 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p16__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 17."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p016.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-liver-spleen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-normal-p21": {
+      "id": "exam2-normal-p21",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Normal kidneys",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "Describe renal position and supporting evidence.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: Normal kidneys on lateral and VD.",
+      "interpretation": "Normal kidneys on lateral and VD.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 21 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p21__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 21."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p21__02.jpg",
+          "view": "View B",
+          "caption": "Normal Abdomen, slide 22."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p021.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-kidney",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-normal-p25": {
+      "id": "exam2-normal-p25",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Normal urinary bladder",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "State number, shape, opacity and localization.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: Urinary bladder: caudal abdomen, homogeneous soft tissue (gas only after cystocentesis or catheterization).",
+      "interpretation": "Urinary bladder: caudal abdomen, homogeneous soft tissue (gas only after cystocentesis or catheterization).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 25 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p25__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 25."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p25__02.jpg",
+          "view": "View B",
+          "caption": "Normal Abdomen, slide 26."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p025.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-urinary",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-normal-p30": {
+      "id": "exam2-normal-p30",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Normal stomach · gas and fluid by recumbency",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "Locate liver, stomach, kidneys, colon, bladder and small intestine.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: Right lateral: fluid in pylorus, gas in fundus (fluid-filled pylorus can look round). Left lateral: gas rises into the pylorus.",
+      "interpretation": "Right lateral: fluid in pylorus, gas in fundus (fluid-filled pylorus can look round). Left lateral: gas rises into the pylorus.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 30 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p30__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 30."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p030.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-normal-abdomen",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-normal-p35": {
+      "id": "exam2-normal-p35",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 2 · Normal Abdomen · Normal large intestine",
+      "lecture": "CVM 743 · Exam 2 · Normal Radiographic Anatomy: Abdomen",
+      "species": "",
+      "region": "Abdomen",
+      "history": "Teaching image from the Normal Radiographic Anatomy: Abdomen lecture.",
+      "lookFor": "Differentiate large and small bowel and describe distension.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: Large intestine: soft-tissue feces and gas common, rarely fluid-filled.",
+      "interpretation": "Large intestine: soft-tissue feces and gas common, rarely fluid-filled.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "1060df36-NormalRadiographicAnatomyAbdomenFa26.pdf · slide 35 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Victoria Morris, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/normal/exam2-normal-p35__01.jpg",
+          "view": "View A",
+          "caption": "Normal Abdomen, slide 35."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/normal-p035.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-colon",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "normal",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-gu-adrenal-mass": {
+      "id": "exam2-gu-adrenal-mass",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · GU patient · retroperitoneal changes (older dog)",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "Canine",
+      "region": "Retroperitoneum",
+      "history": "12-year-old MN mixed-breed dog. Vomiting and lethargy with suspected foreign body.",
+      "lookFor": "Describe displacement before naming source.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: dorsally positioned mass in the cranial retroperitoneum pushing the left kidney caudally; loss of serosal detail with some free fluid.",
+      "interpretation": "Retroperitoneal mass effect from an adrenal mass: ventral displacement of the small intestines and caudolateral displacement of the kidney.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 4 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-adrenal-mass__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 4."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-adrenal-mass__02.jpg",
+          "view": "View B",
+          "caption": "GU Principles, slide 4."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p004.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-mass-effect",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Retroperitoneal (adrenal) mass"
+    },
+    "exam2-gu-cat-renomegaly": {
+      "id": "exam2-gu-cat-renomegaly",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · GU patient · kidney size (older cat)",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "Feline",
+      "region": "Kidneys",
+      "history": "8-year-old MN cat. Weight loss.",
+      "lookFor": "Describe renal position and supporting evidence.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: renomegaly, smooth and bilateral.",
+      "interpretation": "Bilateral smooth renomegaly; hydronephrosis was suggested, with ultrasound needed to confirm.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 7 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-cat-renomegaly__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 7."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-cat-renomegaly__02.jpg",
+          "view": "View B",
+          "caption": "GU Principles, slide 7."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p007.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-kidney",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Bilateral smooth renomegaly"
+    },
+    "exam2-gu-scottie-renal": {
+      "id": "exam2-gu-scottie-renal",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · GU patient · acutely down in the rear (Scottish Terrier)",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "Canine",
+      "region": "Kidneys",
+      "history": "7-year-old FS Scottish Terrier. Acutely down in the rear.",
+      "lookFor": "Describe renal position and supporting evidence.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: large mass on the right (renal) side displacing intestines; the lateral looks fairly normal.",
+      "interpretation": "Renal neoplasia; carcinoma is most common.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 11 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-scottie-renal__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 11."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p011.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-kidney",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Renal mass (neoplasia)"
+    },
+    "exam2-gu-p14": {
+      "id": "exam2-gu-p14",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · Uroliths · example",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "",
+      "region": "Urinary tract",
+      "history": "Teaching image from the Genitourinary Principles lecture.",
+      "lookFor": "State number, shape, opacity and localization.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Radiopaque uroliths.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 14 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p14__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 14."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p014.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-urinary",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Radiopaque uroliths"
+    },
+    "exam2-gu-p20": {
+      "id": "exam2-gu-p20",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · Urolith opacity",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "",
+      "region": "Urinary tract",
+      "history": "Teaching image from the Genitourinary Principles lecture.",
+      "lookFor": "State number, shape, opacity and localization.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Radiopaque: struvite, calcium oxalate, calcium carbonate, silica. Radiolucent: urate, xanthine (cystine variable).",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 20 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p20__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 20."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p020.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-urinary",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
+    },
+    "exam2-gu-p22": {
+      "id": "exam2-gu-p22",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · Bladder gas",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "",
+      "region": "Urinary tract",
+      "history": "Teaching image from the Genitourinary Principles lecture.",
+      "lookFor": "State number, shape, opacity and localization.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Emphysematous cystitis: gas in the bladder wall/lumen; almost always associated with glucosuria, most commonly diabetes mellitus.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 22 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p22__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 22."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p022.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-urinary",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Emphysematous cystitis"
+    },
+    "exam2-gu-beagle": {
+      "id": "exam2-gu-beagle",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · GU patient · straining to urinate (Beagle)",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "Canine",
+      "region": "Urinary tract",
+      "history": "8-year-old MN Beagle. 1 day of anorexia, straining to urinate, recent lack of urination; cystotomy for cystoliths 6 months ago.",
+      "lookFor": "State number, shape, opacity and localization.\nWork systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: gas in the bladder (emphysematous cystitis). Stones wedged at the os penis are easily missed, so take a view that includes the perineal region.",
+      "interpretation": "Emphysematous cystitis with recurrent urethral calculi.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 23 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-beagle__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 23."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-beagle__02.jpg",
+          "view": "View B",
+          "caption": "GU Principles, slide 23."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p023.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "e2-urinary",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Emphysematous cystitis with urethral calculi"
+    },
+    "exam2-gu-p25": {
+      "id": "exam2-gu-p25",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · Uterus · enlargement",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "",
+      "region": "Reproductive tract",
+      "history": "Teaching image from the Genitourinary Principles lecture.",
+      "lookFor": "Work systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Enlarged uterus displacing the small intestine; could be pregnancy if the patient is otherwise fine, pyometra if the patient is sick.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 25 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p25__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 25."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p25__02.jpg",
+          "view": "View B",
+          "caption": "GU Principles, slide 25."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p025.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Uterine enlargement"
+    },
+    "exam2-gu-p26": {
+      "id": "exam2-gu-p26",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · Uterus · enlargement, second example",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "",
+      "region": "Reproductive tract",
+      "history": "Teaching image from the Genitourinary Principles lecture.",
+      "lookFor": "Work systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Folding of the enlarged uterus with mass effect.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 26 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p26__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 26."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p26__02.jpg",
+          "view": "View B",
+          "caption": "GU Principles, slide 26."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p026.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Uterine enlargement"
+    },
+    "exam2-gu-p27": {
+      "id": "exam2-gu-p27",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · Uterus · late gestation",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "",
+      "region": "Reproductive tract",
+      "history": "Teaching image from the Genitourinary Principles lecture.",
+      "lookFor": "Work systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Gravid uterus.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 27 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p27__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 27."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p027.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Gravid uterus"
+    },
+    "exam2-gu-p28": {
+      "id": "exam2-gu-p28",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · Uterus · abnormal pregnancy",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "",
+      "region": "Reproductive tract",
+      "history": "Teaching image from the Genitourinary Principles lecture.",
+      "lookFor": "Work systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Abnormal pregnancy / dystocia: look for signs of fetal death and malpositioned fetuses.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 28 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p28__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 28."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p28__02.jpg",
+          "view": "View B",
+          "caption": "GU Principles, slide 28."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p028.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Dystocia / abnormal pregnancy"
+    },
+    "exam2-gu-p30": {
+      "id": "exam2-gu-p30",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · Prostate",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "",
+      "region": "Reproductive tract",
+      "history": "Teaching image from the Genitourinary Principles lecture.",
+      "lookFor": "Work systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "",
+      "interpretation": "Prostatomegaly.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 30 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-p30__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 30."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p030.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z",
+      "answer": "Prostatomegaly"
+    },
+    "exam2-gu-corgi": {
+      "id": "exam2-gu-corgi",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 2 · GU Principles · GU patient · painful hind region (Corgi)",
+      "lecture": "CVM 743 · Exam 2 · Genitourinary Principles",
+      "species": "Canine",
+      "region": "Caudal abdomen",
+      "history": "3-year-old MN Corgi. Painful hind region.",
+      "lookFor": "Work systematically: views and positioning, then each organ system (liver, spleen, stomach, small intestine, colon, kidneys, bladder), serosal and retroperitoneal detail, then Roentgen signs before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: caudal abdominal structures outlined near the pelvic inlet; see the annotated slide.",
+      "interpretation": "See the annotated slide for the professor's interpretation.",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "Genitourinary.pdf · slide 31 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "Dr. Rebekah Gallaher, DACVR, LMU CVM",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-corgi__01.jpg",
+          "view": "View A",
+          "caption": "GU Principles, slide 31."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/gu/exam2-gu-corgi__02.jpg",
+          "view": "View B",
+          "caption": "GU Principles, slide 31."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam2/_answer-keys/gu-p031.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's handwritten notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam2Section": "gu",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings transcribed from the professor's slide notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T05:30:00Z"
     }
   }
 }
