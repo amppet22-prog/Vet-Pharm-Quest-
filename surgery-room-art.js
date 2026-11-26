@@ -71,6 +71,15 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=path('M335 301h17','#709ca9',2);
  // Distinct sterile pack cubbies below supplies; folded blue-wrapped packs read as equipment.
  for(let x of [187,220,253])s+=rect(x,183,25,11,'#a9d8e7','#e9fbff',3,1);
+  // Sterile prep is anchored into the room: splashback, drain, plinth and low-side shadows.
+ s+='<path d="M113 267H253" stroke="#fff" stroke-width="3" opacity=".85"/>';
+ s+='<path d="M112 341h144" stroke="#6f9eaa" stroke-width="3"/>';
+ s+='<ellipse cx="316" cy="347" rx="50" ry="8" fill="#7094a8" opacity=".15"/>';
+ s+=rect(271,326,89,15,'#d6e8ee','#9aafbe',4,2);
+ s+=path('M275 337h80','#f4fcfc',2);
+ // Wall packs are individually wrapped; visible fold lines and cabinet labels.
+ for(let x of [193,226,259])s+=path('M'+x+' 188h19','#f8ffff',1.4);
+
   // Physical partition / doorway.
  // Partial glass partition with framed pass-through between clean prep and OR.
  s+='<polygon points="382,55 402,67 402,350 382,363" fill="url(#sSteel)" stroke="#799bac" stroke-width="3"/>';
@@ -104,6 +113,10 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(535,255,20,52,'#e1f2f4','#90b5bd',6,3);
  s+='<circle cx="545" cy="267" r="5" fill="#b0d5d6"/>';
  s+=path('M535 274q-12 -9 -17 -19','#8fbcc3',3);
+  // Small integrated wheels and breathing apparatus controls, not another free-standing box.
+ for(let x of [447,473,501])s+='<circle cx="'+x+'" cy="326" r="4.5" fill="#718f9f" stroke="#d3e6ed" stroke-width="1.5"/>';
+ s+='<path d="M447 323h55" stroke="#93b0ba" stroke-width="2"/>';
+
   // Separate large patient monitor raised on pole.
  s+='<g filter="url(#sSh)">'+rect(561,180,112,76,'#deeef4','#8ba9bd',8,5)+rect(572,190,90,54,'#263f59','#466b80',4)+path('M579 224h13l5 -11 5 21 7 -16 8 7h8l7 -12 7 17 6 -9h11','#64dcb3',3)+txt(648,207,'98',13,'#c7edb1',900)+txt(646,238,'96',12,'#c4e6f4',900);
  s+=path('M580 236h29l6 -5 10 6h12','#edc78e',2)+txt(581,200,'ECG',8,'#c4dce5',700);
@@ -120,6 +133,12 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(739,197,37,49,'#e6f4f4','#98b9c3',5,2);
  for(let k=0;k<2;k++)s+='<circle cx="'+(751+k*14)+'" cy="211" r="5" fill="'+(k?'#c5dff5':'#b8e5d5')+'" stroke="#7e9fae" stroke-width="2"/>';
  s+=path('M747 229h21','#9bb5bf',2);
+  // Under-table floor marking and restrained wall storage make the central OR more legible.
+ s+='<ellipse cx="694" cy="383" rx="98" ry="8" fill="#7899a9" opacity=".12"/>';
+ s+=rect(745,250,30,24,'#edf6f7','#99b5bd',4,2);
+ s+=rect(752,254,15,8,'#d7e7e3','#9dbfb7',2,1);
+ s+=path('M750 267h20','#a1b7bc',2);
+
   // Sculpted 2.5D stainless operating table, thick apron and pedestal.
  s+='<ellipse cx="691" cy="373" rx="114" ry="15" fill="#658fa4" opacity=".16"/>';
  s+='<g filter="url(#sSh)">';
@@ -185,6 +204,11 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<polygon points="910,283 962,270 962,292 910,307" fill="#e6bed7" stroke="#baabc9" stroke-width="2"/>';
  s+='<polygon points="914,289 956,278 956,287 914,301" fill="#f3dce6"/>';
  s+='<polygon points="905,313 966,295 966,329 905,320" fill="#83aabd" opacity=".36"/>';
+  // Distinct doors and cage divider rail: recognisable two stacked recovery runs.
+ s+=path('M907 232l56 -18M907 297l56 -18','#758fa1',3.5);
+ s+='<rect x="905" y="145" width="12" height="11" rx="2" fill="#e9f5f5" stroke="#a4bfc4" stroke-width="1"/>';
+ s+='<circle cx="912" cy="151" r="2" fill="#91c8aa"/>';
+
   // Steel/glass frames and door handle for a real architectural opening.
  s+='<polygon points="885,102 895,108 895,324 885,331" fill="#ddd3ef"/>';
  s+='<polygon points="969,81 978,76 978,352 969,348" fill="#907db4"/>';
