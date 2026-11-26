@@ -11,6 +11,17 @@ catcorner:[['🛏️ Rest & Hide','vpqCatRest',13],['🌳 Climb & Perch','vpqCat
 yardview:[['🌸 Sniff Garden','vpqDogSniff',15],['🦴 Agility Zone','vpqDogMove',36],['🐕 Open Play','vpqDogOpen',56],['💧 Rest & Tunnel','vpqDogRest',78],['🚪 Reception','vpqWingLobby',94]]
 };
 for(const [room,arr] of Object.entries(slots))rooms[room]={name:room==='hallway'?'Reception · Clinical Hallway':room==='catcorner'?'Reception Cat Corner':'Kennel · Expanded Dog Play Yard',color:'#f4eefa',banner:'EXTENDED HOSPITAL',decor:[],props:arr.map(([label,action,x])=>({x,label,action,emoji:label.slice(0,2),bubble:'Interact'}))};
+// Empty, stable anchor coordinates for FUTURE user-selected dog occupants.
+// Decorative stock dogs are intentionally not hard-coded into the yard SVG.
+window.VPQ_DOG_YARD_LAYOUT=Object.freeze({
+ zones:Object.freeze(['sniff','agility','open','quiet']),
+ placements:Object.freeze([
+  {id:'sniff-a',zone:'sniff',x:12,y:74},{id:'sniff-b',zone:'sniff',x:21,y:69},
+  {id:'agility-a',zone:'agility',x:33,y:75},{id:'agility-b',zone:'agility',x:43,y:74},
+  {id:'open-a',zone:'open',x:57,y:72},{id:'open-b',zone:'open',x:66,y:77},
+  {id:'quiet-a',zone:'quiet',x:80,y:78},{id:'quiet-b',zone:'quiet',x:91,y:76}
+ ])
+});
 const choices={
 'cat-tree':['Cat climbing tree',40,'catcorner','🌳'],
 'cat-wall':['Wall climbing shelves',50,'catcorner','🪜'],
