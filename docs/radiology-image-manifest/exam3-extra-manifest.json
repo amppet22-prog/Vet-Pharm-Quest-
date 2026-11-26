@@ -2,7 +2,9 @@
  "sections": {
   "msk1-dev": "MSK I \u00b7 developmental bone disease (RCC, HOD, panosteitis)",
   "msk1-hip": "MSK I \u00b7 hips (dysplasia, Legg-Calv\u00e9-Perthes, physeal dysplasia)",
-  "msk2-joint": "MSK II \u00b7 erosive joint disease"
+  "msk2-joint": "MSK II \u00b7 erosive joint disease",
+  "spine-extra": "Skull & spine \u00b7 comparisons with a normal",
+  "anatomy": "Normal MSK anatomy \u00b7 name the region and view"
  },
  "images": [
   {
@@ -196,6 +198,180 @@
    "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p37__01.jpg",
    "sourceFile": "5eb64d9f-MSK2FALL2026_1.pdf",
    "sourcePage": 37
+  },
+  {
+   "caseId": "exam3x-spine-p09",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-spine-p09__01.jpg",
+   "sourceFile": "cad5c0b5-Spineandskull2026.pdf",
+   "sourcePage": 9
+  },
+  {
+   "caseId": "exam3x-spine-p09",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-spine-p09__02.jpg",
+   "sourceFile": "cad5c0b5-Spineandskull2026.pdf",
+   "sourcePage": 9
+  },
+  {
+   "caseId": "exam3x-spine-p11",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-spine-p11__01.jpg",
+   "sourceFile": "cad5c0b5-Spineandskull2026.pdf",
+   "sourcePage": 11
+  },
+  {
+   "caseId": "exam3x-spine-p11",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-spine-p11__02.jpg",
+   "sourceFile": "cad5c0b5-Spineandskull2026.pdf",
+   "sourcePage": 11
+  },
+  {
+   "caseId": "exam3x-spine-p12",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-spine-p12__01.jpg",
+   "sourceFile": "cad5c0b5-Spineandskull2026.pdf",
+   "sourcePage": 12
+  },
+  {
+   "caseId": "exam3x-spine-p12",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-spine-p12__02.jpg",
+   "sourceFile": "cad5c0b5-Spineandskull2026.pdf",
+   "sourcePage": 12
+  },
+  {
+   "caseId": "exam3x-anat2-p06",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p06__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 6
+  },
+  {
+   "caseId": "exam3x-anat2-p06",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p06__02.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 6
+  },
+  {
+   "caseId": "exam3x-anat2-p11",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p11__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 11
+  },
+  {
+   "caseId": "exam3x-anat2-p12",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p12__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 12
+  },
+  {
+   "caseId": "exam3x-anat2-p17",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p17__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 17
+  },
+  {
+   "caseId": "exam3x-anat2-p18",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p18__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 18
+  },
+  {
+   "caseId": "exam3x-anat2-p19",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p19__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 19
+  },
+  {
+   "caseId": "exam3x-anat2-p23",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p23__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 23
+  },
+  {
+   "caseId": "exam3x-anat2-p24",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p24__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 24
+  },
+  {
+   "caseId": "exam3x-anat2-p26",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p26__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 26
+  },
+  {
+   "caseId": "exam3x-anat2-p27",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p27__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 27
+  },
+  {
+   "caseId": "exam3x-anat2-p28",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p28__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 28
+  },
+  {
+   "caseId": "exam3x-anat2-p30",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p30__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 30
+  },
+  {
+   "caseId": "exam3x-anat2-p32",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p32__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 32
+  },
+  {
+   "caseId": "exam3x-anat2-p33",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p33__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 33
+  },
+  {
+   "caseId": "exam3x-anat2-p36",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p36__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 36
+  },
+  {
+   "caseId": "exam3x-anat2-p37",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p37__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 37
+  },
+  {
+   "caseId": "exam3x-anat2-p38",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p38__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 38
+  },
+  {
+   "caseId": "exam3x-anat2-p39",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p39__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 39
+  },
+  {
+   "caseId": "exam3x-anat2-p40",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p40__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 40
+  },
+  {
+   "caseId": "exam3x-anat2-p41",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p41__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 41
+  },
+  {
+   "caseId": "exam3x-anat2-p42",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p42__01.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 42
+  },
+  {
+   "caseId": "exam3x-anat2-p42",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-anat2-p42__02.jpg",
+   "sourceFile": "3ee5996e-Musculoskeletal_Anatomy_Fa26_1.pdf",
+   "sourcePage": 42
   }
  ]
 }

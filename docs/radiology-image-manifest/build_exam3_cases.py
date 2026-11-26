@@ -46,6 +46,27 @@ PRACTICE = {'e3-practice-hip-gsd': (1, '6-year-old MN German Shepherd Dog', 'Pre
             'e3-practice-puppy-lameness': (3, '8-month-old MN mixed-breed dog', 'Presented with shifting limb lameness, fever and lethargy (case 3 title slide).')}
 
 
+
+# Professor's handwritten notes on the annotated Skull & Spine slides (owner-confirmed as the professor's
+# statements). Student-authored remarks on those slides ("this is my assumption", "I can't see it") are excluded.
+SPINE_PROF = {
+ 10: 'one side of the nasal cavity marked normal; the other abnormal with increased soft-tissue opacity.',
+ 17: 'C1 and C2 labeled with the gap between them marked; on the rostrocaudal view the dens is not seen, which could be dens hypoplasia.',
+ 19: 'variation in the number of vertebrae: two or more vertebral bodies fused. Here they are fused ventrally but not completely fused dorsally.',
+ 20: 'a vertebra with features of two regions; it looks like two but is one (T13 region, odd-shaped ribs that look like transverse processes).',
+ 21: 'congenitally malformed vertebrae where only half of the vertebra forms, causing the spine to kink. Also marked: screw tail, a block vertebra, spondylosis and a "butterfly" hemivertebra on the VD.',
+ 23: 'spondylosis does not affect the intervertebral disc; if the disc space is affected, think of another diagnosis (e.g., discospondylitis). Ventral bridging marked at several sites.',
+ 27: 'discospondylitis between C2 and C3: lysis of the vertebral endplate, ill-defined margins, subchondral sclerosis.',
+ 28: 'discospondylitis with poor margins and lysis; on the VD a normal disc space is marked for comparison, with subchondral sclerosis and lysis of the vertebral endplates at the lesion. Irregular endplates with lysis are the key sign.',
+ 29: 'chronic discospondylitis: narrowed/collapsed disc space, irregular endplates, lysis, sclerosis and new bone formation. In chronic cases you can see fusion even when the patient improves with treatment.',
+ 32: 'possible narrowed disc space marked.',
+ 33: 'narrowed disc space with periarticular sclerosis of the articulating vertebral bodies; smaller disc space, new bone formation and sclerosis; mineral opacity in the foramen.',
+ 34: 'mineralization marked in the canal at the disc space.',
+ 35: 'this dog had clinical signs and the narrowed disc is the problem. Disc mineralization is normal in dachshunds; it reflects breed predisposition and does not mean the disc ruptured or is causing signs.',
+ 39: 'multiple myeloma: multiple areas of lysis; the lesion is mostly lysis.',
+ 41: 'fracture and subluxation with malalignment.',
+}
+
 TITLES = {}
 
 
@@ -149,6 +170,8 @@ def main():
                 lines.append('Instructor slide: ' + '; '.join(bullets) + '.')
             if interps and SRCKEY[src] == 'spine':
                 lines.append('Instructor narration (paraphrased): ' + ' '.join(i.replace('Transcript: ', '') for i in interps))
+            if SRCKEY[src] == 'spine' and page in SPINE_PROF:
+                lines.append("Professor's notes (class slide): " + SPINE_PROF[page])
             findings = '\n'.join(lines)
             interp = topic
             views = usable[:2]

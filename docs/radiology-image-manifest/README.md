@@ -62,3 +62,9 @@ The anatomy lecture is not mapped yet. It contains third-party figures on pp.8�
 - View labels are neutral ("View A/B") because the slide order doesn't reliably tell you the projection.
 - `radiology-exam2-hub.js`: the Exam 2 hub (5 sections) using the shared case player, with links to the existing Abdomen Lab and the abdomen condition cards. The X-ray hub's Exam 2 tile now opens this hub.
 - Note: ChatGPT's Abdomen Lab only shows ileus images after owner approval in the Photo Approval Queue (`reviewSlots[slot].approved`). These cases are linked to those slots and are ready to approve.
+
+## Professor's notes from Skull & Spine + MSK Anatomy (2026-11-26)
+- Skull & Spine answer keys were re-rendered from the **annotated copy** (`6c1a80ee`, same page numbers). `build_exam3_cases.py` → `SPINE_PROF` adds "Professor's notes (class slide)" to 15 spine cases. Two student-authored remarks on those slides ("this is my assumption, she did not comment", "I can't see it") were deliberately **excluded**. Note that they are still visible on the annotated key images.
+- The 3 cases previously held back as `verify` (hyperparathyroidism p9, nasal p11 and p12) are now `exam3x-spine-p09/p11/p12`. The annotated slides show which view is Normal.
+- 21 **normal MSK anatomy** cases (`exam3x-anat2-*`, Dr. Morris) with MC "name the region and view", linked to `e3-anatomy-projection-quiz`. Third-party figures in that lecture (Veterian Key pp.8–9, Today's Veterinary Practice pp.25/44, Frontiers p.31, anatomy atlas p.34) and the text graphics were excluded.
+- Bug fixed: comparison captions said "annotated key", so the player (which hides any view whose label contains "annotated") hid the real photos on 9 Exam 3 and 3 Exam 2 cases. Captions now say "teaching key". Check: 0 cases without visible student images.
