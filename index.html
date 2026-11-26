@@ -5830,6 +5830,27 @@ window.VPQ_EXAM_PATIENTS=vpqCompanionCatalog
 if(typeof vpqTraditionalExam!=='undefined')vpqTraditionalExam?.refresh?.();
 /* Illustrated, zero-cost starters for species testing. Existing selections and owned IDs are preserved. */
 for(const starterId of ['cat-siamese','pocket-rabbit-holland','exotic-beardie']){const starter=vpqCompanionCatalog.find(c=>c.id===starterId);if(starter){starter.level=1;starter.price=0;}}
+/* PROGRESSION CONTRACT — gradual rewards instead of dozens sharing one tier.
+ * All verified-image, paid companions keep their original IDs and coin costs.
+ * Preserve true free starters at level 1. Species groups have distinct ranges
+ * so each new level brings something to look forward to across the collection.
+ * Catalog order is stable, so milestone assignments do not change on refresh.
+ */
+const vpqCompanionUnlockBands={
+ dog:[2,34],cat:[2,32],horse:[3,37],pocket:[2,33],exotics:[3,36],
+ avians:[3,38],ruminants:[4,37],swine:[5,36],legendary:[17,45],
+ 'wildlife-rehab':[27,50]
+};
+for(const [category,[minLevel,maxLevel]] of Object.entries(vpqCompanionUnlockBands)){
+ const eligible=vpqCompanionCatalog.filter(c=>c.category===category&&c.image&&c.price>0);
+ eligible.forEach((c,i)=>{
+  const span=Math.max(1,eligible.length-1);
+  c.level=minLevel+Math.round(i*(maxLevel-minLevel)/span);
+ });
+}
+// Only first-time purchases check new milestones: existing inventory and the
+// active companion must remain available even if unlocked before this update.
+
 const vpqCompanionById=id=>vpqCompanionCatalog.find(c=>c.id===id);
 const vpqCompanionLv=()=>Math.floor(Math.max(0,Number(state.xp)||0)/LEVEL_THRESH)+1;
 if(!Array.isArray(state.vpqCompanionOwned))state.vpqCompanionOwned=[];
@@ -5960,7 +5981,10 @@ vpqUpdatePetGallery=function(){
     '<span class="vpq-companion-meta">'+(c.price===0?'Free starter':'Level '+c.level+' · '+c.price+' coins')+'</span>'+
     '<button type="button" data-vpqcomp-act="'+escapeHtml(c.id)+'" '+(disabled?'disabled':'')+'>'+status+'</button></article>';
  }).join('');
- holder.innerHTML='<div class="vpq-companion-heading"><h3>🐾 Companion Collection · Shop v4.1</h3><span>Level '+vpqCompanionLv()+' · '+state.coins+' 🪙</span></div>'+
+ const nextCompanions=vpqCompanionCatalog.filter(c=>c.image&&c.category===vpqCompanionTab&&c.price>0&&!vpqCompanionOwned(c)&&c.level>vpqCompanionLv()).sort((a,b)=>a.level-b.level);
+ const nextUnlock=nextCompanions[0];
+ holder.innerHTML='<div class="vpq-companion-heading"><h3>🐾 Companion Collection · Shop v4.2</h3><span>Level '+vpqCompanionLv()+' · '+state.coins+' 🪙</span></div>'+
+  (nextUnlock?'<p class="tiny" style="background:#f5efff;border:1px solid #d6c4ec;border-radius:9px;padding:7px 10px;margin:7px 0">✨ Next '+escapeHtml(vpqCompanionTab)+' companion: <b>Level '+nextUnlock.level+' · '+escapeHtml(nextUnlock.name)+'</b></p>':'')+
   '<p class="tiny">Earn XP in lessons, cases and arcade games to unlock companions; spend the coins you already earn. Purchased companions stay yours.</p>'+
   '<div class="vpq-pet-tabs vpq-companion-tabs">'+tabs+'</div>'+
   '<div class="vpq-companion-grid">'+(cards||'<p class="small">No game-ready art in this group yet. More companions coming soon.</p>')+'</div>';
@@ -5984,7 +6008,7 @@ $('modalBody').addEventListener('click',function(e){
  e.preventDefault();e.stopImmediatePropagation();
  if(tab){vpqCompanionTab=tab.dataset.vpqcompTab;vpqUpdatePetGallery();return;}
  const c=vpqCompanionById(btn.dataset.vpqcompAct);
- if(!c||!vpqCompanionValid(c)||vpqCompanionLv()<c.level)return;
+ if(!c||!vpqCompanionValid(c)||(!vpqCompanionOwned(c)&&state.vpqCompanionId!==c.id&&vpqCompanionLv()<c.level))return;
  if(!vpqCompanionOwned(c)){
    if(Number(state.coins)<c.price)return;
    state.coins-=c.price;
