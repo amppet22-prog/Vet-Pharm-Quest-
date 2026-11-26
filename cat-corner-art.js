@@ -143,6 +143,22 @@ s+=`</g>
  <rect x="687" y="367" width="70" height="16" rx="8" fill="#d8b5e2" stroke="#a584c2" stroke-width="3"/>
  <circle cx="703" cy="373" r="4" fill="#f7c47e"/><circle cx="723" cy="373" r="4" fill="#92c6a8"/><circle cx="742" cy="373" r="4" fill="#f1aeca"/>
 </g>
+<!-- Grounded feline resources: scratching surface and wall water shelf away from hides and toys -->
+<g filter="url(#catDrop3)">
+ <!-- Vertical wall scratcher on left angled wall; floor area remains walkable -->
+ <polygon points="60,247 86,256 86,336 60,348" fill="#d9bfa6" stroke="#b68e8c" stroke-width="3"/>
+ <path d="M65 255l16 5M65 264l16 5M65 273l16 5M65 282l16 5M65 291l16 5M65 300l16 5M65 309l16 5M65 318l16 5M65 327l16 5" stroke="#b08f79" stroke-width="2"/>
+ <!-- Wall-mounted shallow water station, distant from the resting hide -->
+ <path d="M661 277h39" stroke="#b48ea7" stroke-width="7"/>
+ <rect x="666" y="259" width="30" height="15" rx="6" fill="#b7dce8" stroke="#94bfc7" stroke-width="3"/>
+ <ellipse cx="681" cy="259" rx="15" ry="5" fill="#e0f8fa" stroke="#92c3ce" stroke-width="2"/>
+ <path d="M681 259v-17" stroke="#9cbebf" stroke-width="3"/>
+ <circle cx="681" cy="241" r="4" fill="#c7edef"/>
+</g>
+<!-- Ceiling corner returns, side-wall edging and shelf supports improve the 2.5D room depth -->
+<path d="M53 61h893M55 68v278M945 68v277" fill="none" stroke="#fff8f6" stroke-width="5" opacity=".65"/>
+<path d="M53 345l-53 67M945 345l55 67" stroke="#ad93ad" stroke-width="5" opacity=".42"/>
+<path d="M172 186v-13M241 157v-14M729 191v-13M771 267v-13" stroke="#b49a95" stroke-width="3" opacity=".75"/>
 <!-- suspended toys under perches -->
 <path d="M427 187v45M608 212v34M753 270v30" stroke="#bd9dbb" stroke-width="2" stroke-dasharray="3 3"/>
 <circle cx="427" cy="238" r="10" fill="#e7afd4" stroke="#bc89af" stroke-width="3"/>
