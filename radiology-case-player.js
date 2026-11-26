@@ -22,7 +22,7 @@ function options(c){
  const add=x=>{const n=norm(x);if(!x||seen.has(n))return;seen.add(n);pick.push(x)};
  const exam=(String(c.id).match(/^exam(\d)/)||[])[1];
  const global=(window.VPQ_IMAGING_PUBLISH?.getCases?.()||[]).filter(x=>x.answer&&exam&&String(x.id).startsWith('exam'+exam));
- const sec=x=>x.exam2Section||x.exam3Section||x.imageReviewSlot;
+ const sec=x=>x.exam2Section||x.exam3Section||x.exam4Section||x.imageReviewSlot;
  const pools=[list.filter(x=>x.imageReviewSlot&&x.imageReviewSlot===c.imageReviewSlot),list.filter(x=>sec(x)===sec(c)),global.filter(x=>sec(x)===sec(c)),list,global];
  for(const pool of pools){const sorted=pool.filter(x=>x.id!==c.id&&x.answer).sort((a,b)=>hash(c.id+a.id)-hash(c.id+b.id));for(const x of sorted){if(pick.length>=3)break;add(x.answer)}if(pick.length>=3)break}
  if(pick.length<2)return null;
@@ -48,10 +48,12 @@ function mc(c){
 }
 function answerPanel(c){
  if(!revealed)return '<div class="buttonrow">'+btn('reveal','🔎 Reveal findings & interpretation')+'</div>';
- const key=(c.images||[]).find(v=>v.url&&isKey(v));
+ const keys=(c.images||[]).filter(v=>v.url&&isKey(v));
  const sec=(t,v)=>v?'<h3 style="font-size:14px;margin:10px 0 4px">'+t+'</h3><p style="margin:0;white-space:pre-line">'+E(v)+'</p>':'';
+ const kl=keys.length===1?'annotated lecture slide':'answer keys ('+keys.length+': lecture slides, comparisons, textbook)';
+ const fig=v=>'<figure style="margin:8px 0 0"><a href="'+E(v.url)+'" target="_blank" rel="noopener"><img loading="lazy" src="'+E(v.url)+'" alt="'+E(v.view||'Answer key')+'" style="width:100%;border-radius:10px;border:1px solid #cfd8e6"></a><figcaption style="font-size:11px;color:#5d6d84"><b>'+E(String(v.view||'').replace(/^Annotated (teaching key|comparison|textbook view) · /,function(m,k){return {'teaching key':'Lecture slide · ','comparison':'Comparison · ','textbook view':'📘 Textbook · '}[k]}))+'</b>'+(v.caption?' — '+E(v.caption):'')+'</figcaption></figure>';
  return '<div style="background:#f0f9f5;border:1px solid #cce4db;border-radius:12px;padding:13px;margin:10px 0">'+sec('Findings',c.findings)+sec('Interpretation',c.interpretation)+sec('Differentials',c.differentials)+sec('Next step',c.next)+
-  (key?'<div class="buttonrow" style="margin-top:10px">'+btn('key',showKey?'🙈 Hide annotated lecture slide':'🖼️ Show annotated lecture slide')+'</div>'+(showKey?'<figure style="margin:8px 0 0"><a href="'+E(key.url)+'" target="_blank" rel="noopener"><img loading="lazy" src="'+E(key.url)+'" alt="Annotated lecture slide" style="width:100%;border-radius:10px;border:1px solid #cfd8e6"></a><figcaption style="font-size:11px;color:#5d6d84">'+E(key.caption||'')+'</figcaption></figure>':''):'')+
+  (keys.length?'<div class="buttonrow" style="margin-top:10px">'+btn('key',showKey?'🙈 Hide '+kl:'🖼️ Show '+kl)+'</div>'+(showKey?keys.map(fig).join(''):''):'')+
   '<p style="font-size:11px;color:#6b7a90;margin:10px 0 0">'+E(c.source||'')+(c.credit?' · '+E(c.credit):'')+'</p></div>';
 }
 function render(){

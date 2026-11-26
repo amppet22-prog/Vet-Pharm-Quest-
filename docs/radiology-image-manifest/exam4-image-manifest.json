@@ -1,0 +1,1442 @@
+{
+ "version": 1,
+ "created": "2026-11-26",
+ "rightsStatus": "owner-attested-lmu-noncommercial",
+ "notesAttribution": "Owner confirmed handwritten slide notes are the professor's statements (2026-11-25).",
+ "textbookFigures": {
+  "1.36": "Textbook Fig. 1.36 \u00b7 pulmonary nodule vs body-wall nodule (orthogonal view)",
+  "1.37": "Textbook Fig. 1.37 \u00b7 recumbency atelectasis vs pneumonia (repeat after repositioning)",
+  "1.38": "Textbook Fig. 1.38 \u00b7 skin folds (not pneumothorax)",
+  "1.39": "Textbook Fig. 1.39 \u00b7 nipple vs pulmonary nodule (barium on nipples)",
+  "thymoma": "Textbook figure \u00b7 cranial mediastinal mass (thymoma) with megaoesophagus",
+  "7.15": "Textbook Fig. 7.15 \u00b7 the five thoracic compartments",
+  "7.17": "Textbook Fig. 7.17 \u00b7 left heart enlargement: PDA (a) vs SAS (b)"
+ },
+ "sections": {
+  "final": "Start here \u00b7 L8 putting it all together",
+  "patterns": "Lung patterns \u00b7 bronchial, interstitial, alveolar",
+  "mimics": "Technique & look-alikes \u00b7 artifacts, atelectasis, nodule mimics",
+  "lung": "Lung cases \u00b7 signalment and history matter",
+  "heart": "Heart & vessels \u00b7 chambers, failure, acquired & congenital disease",
+  "cavity": "Pleura, mediastinum, esophagus, trachea, diaphragm & ribs",
+  "cases": "Numbered lecture cases (L6\u2013L7)"
+ },
+ "images": [
+  {
+   "caseId": "exam4-l8-fred",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-fred__01.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 14,
+   "sha256": "0476b56109248f400f2a9d306d39238f70ebed79e9614a187d702a4a8aae1f43"
+  },
+  {
+   "caseId": "exam4-l8-fred",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-fred__02.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 15,
+   "sha256": "2a9351a920e233006f8bae31307e3fce3992aae94f0ecd2748960fb2c6bdd3fc"
+  },
+  {
+   "caseId": "exam4-l8-fred",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-fred__03.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 16,
+   "sha256": "97002a0fdecfacd8e64552847139d2559166e8f017bcc094ab21fef4d72fe60e"
+  },
+  {
+   "caseId": "exam4-l8-fred",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-fred__04.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 17,
+   "sha256": "30a55dae44a682f1f1e64818e86538ffa26b9b45c9c34a142d0526c8b63c90b2"
+  },
+  {
+   "caseId": "exam4-l8-toto",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-toto__01.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 20,
+   "sha256": "67e7c35243c1805b4b54b16788c56175372c2fd528dfbb0bc80c4b6301bac0ce"
+  },
+  {
+   "caseId": "exam4-l8-toto",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-toto__02.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 22,
+   "sha256": "6ae6ba27170cf01065ee2d0b70ef5988859629925eedbf64caf27a3b17a783b5"
+  },
+  {
+   "caseId": "exam4-l8-skittle",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-skittle__01.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 25,
+   "sha256": "4454d6c77073cf7e6d00f85164135a1526695b3d3d3ac98f26e4188705a312e3"
+  },
+  {
+   "caseId": "exam4-l8-skittle",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-skittle__02.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 26,
+   "sha256": "b1c14e4db206fad0bcf44e7006355b4400c67dce3989e820bde2590b8cce59f8"
+  },
+  {
+   "caseId": "exam4-l8-shadow",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-shadow__01.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 30,
+   "sha256": "1cf59ca5116e4e87dbbbaa57f0dc3de2249d6831eec37d1aafd6e540e863c168"
+  },
+  {
+   "caseId": "exam4-l8-shadow",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-shadow__02.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 32,
+   "sha256": "f9e9db80b3f5729f109a0a9cd0185d28f378a37236ce7e48bd98ed1575a6e9f8"
+  },
+  {
+   "caseId": "exam4-l8-maeby",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-maeby__01.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 35,
+   "sha256": "bab2ed3062e728cd54aa0a7be3b8d3b17cac9846b792b6ecf668d8cde199f089"
+  },
+  {
+   "caseId": "exam4-l8-maeby",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-maeby__02.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 36,
+   "sha256": "b8f950e161a273fe11dadfa7e764e3419850b90b01d7d27924d9b742ceaf0e2f"
+  },
+  {
+   "caseId": "exam4-l8-case3-lab",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-case3-lab__01.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 39,
+   "sha256": "6c177d40af03e814b8572912bfe9466aedefd5c41687fab6e9ea0c5218d89251"
+  },
+  {
+   "caseId": "exam4-l8-case3-lab",
+   "section": "final",
+   "repoPath": "radiology-course-photos/exam4/final/exam4-l8-case3-lab__02.jpg",
+   "sourceFile": "L8_Thorax_putting_it_all_together__282_29.pdf",
+   "sourcePage": 41,
+   "sha256": "b1374965ce39b99917321f0c2852996dbaccbc699649c2304d832c86b1c6dd4f"
+  },
+  {
+   "caseId": "exam4-pat-bronch-marked",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-bronch-marked__01.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 47,
+   "sha256": "ef8a8a2ffd66bb571e91f1716d5a8613677112a63585dd9183e1bf05c76b4a88"
+  },
+  {
+   "caseId": "exam4-pat-bronch-marked",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-bronch-marked__02.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 47,
+   "sha256": "09fadbcfe6cdf0d4831c99016b0a8077d1cee77751277e8130a845a873f64534"
+  },
+  {
+   "caseId": "exam4-pat-bronch-lacy",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-bronch-lacy__01.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 48,
+   "sha256": "7394e47997a3fdf9ef2a3978724a350e92909188e6f692f4dc4698d9bad38733"
+  },
+  {
+   "caseId": "exam4-pat-bronch-mild",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-bronch-mild__01.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 49,
+   "sha256": "3abb99f56979489e0c86bdfd9fbf0576bc50552418ba002bdf6bc7b84f4339d9"
+  },
+  {
+   "caseId": "exam4-pat-bronch-mild",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-bronch-mild__02.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 49,
+   "sha256": "67a27f147d0697ecd29e141802d3c4108f2508d27e4111c3f7f9b9869649892d"
+  },
+  {
+   "caseId": "exam4-pat-bronch-moderate",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-bronch-moderate__01.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 50,
+   "sha256": "53c63f8a3d9977ad2f02476ca8b7f68a078b8e3eb983ec396ff4d537c3c69949"
+  },
+  {
+   "caseId": "exam4-pat-cat-wheeze",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-cat-wheeze__01.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 65,
+   "sha256": "c81593290b9c8173f70ccc726b7f7d97bb374998a5625644023eb9d5f00cd548"
+  },
+  {
+   "caseId": "exam4-pat-cat-wheeze",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-cat-wheeze__02.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 67,
+   "sha256": "8daf303c2eac9f19b32787e1f7145b3cc91720906e6d752a0d169993248a3410"
+  },
+  {
+   "caseId": "exam4-pat-ui-right",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-ui-right__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 17,
+   "sha256": "cf3943204ee2dc9204d975cc84e771e3425f069e61042e19ec2da8eb3adeed62"
+  },
+  {
+   "caseId": "exam4-pat-ui-marked",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-ui-marked__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 18,
+   "sha256": "b881e05e84034e8ee58ada4a0385dcb6fed3f8f8b5a615af803c44b61f86c00a"
+  },
+  {
+   "caseId": "exam4-pat-ui-marked",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-ui-marked__02.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 18,
+   "sha256": "fb5918022298d52e65d3757681e9724c5c5a2726ef3ede42817f7302a5d09aff"
+  },
+  {
+   "caseId": "exam4-pat-ui-moderate",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-ui-moderate__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 19,
+   "sha256": "f77d0fffc5bd989a37be7703c88ae8b3f4042d4d74d22eb58ca7790b3aadfe32"
+  },
+  {
+   "caseId": "exam4-pat-ui-l3",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-ui-l3__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 16,
+   "sha256": "24dd322ad325ac615d9cc957be148fc4636aa4e40e1096a4ad4b948d9eb34fad"
+  },
+  {
+   "caseId": "exam4-pat-si-1",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-si-1__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 46,
+   "sha256": "02da72b31e8981e79701ebafc19427deb33a54729a3eecaff44f7a62eb7e13f6"
+  },
+  {
+   "caseId": "exam4-pat-si-miliary",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-si-miliary__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 48,
+   "sha256": "79a78869e9d5e0f495acea6ce83408d5ea3d9de9e8df5924fb8469f6be06c6f1"
+  },
+  {
+   "caseId": "exam4-pat-si-miliary",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-si-miliary__02.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 48,
+   "sha256": "7224ca46470edcd25a027da92796654bf4d5a3efa12c3a9f64cae10741905863"
+  },
+  {
+   "caseId": "exam4-pat-si-large",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-si-large__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 49,
+   "sha256": "2e83fd16b6061a408daaa0a9a5a136b2d840e358f57e9d6464dcc9e5bf7a1a30"
+  },
+  {
+   "caseId": "exam4-pat-alv-bronchogram",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-alv-bronchogram__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 84,
+   "sha256": "f222506e3e1f7866ab387d70a279c8344fcea805ec6618ee6e560b0fd44c08d3"
+  },
+  {
+   "caseId": "exam4-pat-alv-lobar-vd",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-alv-lobar-vd__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 86,
+   "sha256": "e4d1c09b368827babcbbfd4f1d5ba227d71887e2c9b51237439710508c110724"
+  },
+  {
+   "caseId": "exam4-pat-alv-lobar-lat",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-alv-lobar-lat__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 87,
+   "sha256": "ce9575b4d31f6f08c3a7d1769c09e8dfae65ea0c2131660e55e9cc43b9bd7c0e"
+  },
+  {
+   "caseId": "exam4-pat-alv-aspiration",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-alv-aspiration__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 33,
+   "sha256": "820f5162dae563844270fde595d86fb75bdff6534099c30093aea69c6f6a3c94"
+  },
+  {
+   "caseId": "exam4-pat-mixed-cat",
+   "section": "patterns",
+   "repoPath": "radiology-course-photos/exam4/patterns/exam4-pat-mixed-cat__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 95,
+   "sha256": "41d7e5c47bc51215286fa33fb1915258337058f95840d004c5635f69cf071f8e"
+  },
+  {
+   "caseId": "exam4-mim-obliquity",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-obliquity__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 24,
+   "sha256": "a6169a4c8a1da985c0439561a2f4eed784542b874997d3bdd2f51671cc6eeee5"
+  },
+  {
+   "caseId": "exam4-mim-obesity",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-obesity__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 25,
+   "sha256": "890126f2fe227fe8c59f60e2ad77cd582fc9701f9dfb724d1d6f5624c1077691"
+  },
+  {
+   "caseId": "exam4-mim-underexposed",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-underexposed__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 26,
+   "sha256": "0204b43bc5be9a07ca35ba88c822ea4a17be6c9573ddb79745d1bbf22f0079b3"
+  },
+  {
+   "caseId": "exam4-mim-skinfold",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-skinfold__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 27,
+   "sha256": "50f6c7d840912a59ff35eb7441c76d4d06d75f50a4dc3c7365d127357ebfb285"
+  },
+  {
+   "caseId": "exam4-mim-expiration-1",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-expiration-1__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 31,
+   "sha256": "d4725d245ba57730db90b29b7f73a57b5d16784601244de26e28158333029187"
+  },
+  {
+   "caseId": "exam4-mim-expiration-2",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-expiration-2__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 32,
+   "sha256": "b42705025e014d9cc829bed4b845353e0785df52592d1bf7e9932cff3cf4f4dc"
+  },
+  {
+   "caseId": "exam4-mim-anesthesia",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-anesthesia__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 34,
+   "sha256": "65034b16ce2d723f775601895ecf6f9bfc05df87f94a963fb248fc1f29e6d553"
+  },
+  {
+   "caseId": "exam4-mim-pleural-atelectasis",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-pleural-atelectasis__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 33,
+   "sha256": "977aaf67b12a9c461683899c642ef07afbcdc912b055915e74e10f620718db42"
+  },
+  {
+   "caseId": "exam4-mim-pleural-atelectasis",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-pleural-atelectasis__02.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 33,
+   "sha256": "c2f0a736e77ccc943a566d629253060e845578d29bc630409d408dba6a39bfef"
+  },
+  {
+   "caseId": "exam4-mim-osteomas",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-osteomas__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 58,
+   "sha256": "df8f6d5ce4443a8878436eab90eb945ac3df0ea18ad0b9bb22c34882a34bb184"
+  },
+  {
+   "caseId": "exam4-mim-endon",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-endon__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 61,
+   "sha256": "bd3a6b80233e5eec37f83ba364e9418d9c560a87708340582392abf6e26cfff0"
+  },
+  {
+   "caseId": "exam4-mim-nipple",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-nipple__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 63,
+   "sha256": "98462bf8bbe0650ff5841a4e8b31f417dc76ca6038516481b920307101a88f9f"
+  },
+  {
+   "caseId": "exam4-mim-nipple",
+   "section": "mimics",
+   "repoPath": "radiology-course-photos/exam4/mimics/exam4-mim-nipple__02.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 63,
+   "sha256": "34151759fdd8786cbd48c3a565f3b896295050bcd232972f35efde57f68a2605"
+  },
+  {
+   "caseId": "exam4-lung-14yo-cat",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-14yo-cat__01.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 69,
+   "sha256": "2dcbccf42c89e5f714818dae8e9b2ba5bcd51a09a2b745dac4824ec5f7366caa"
+  },
+  {
+   "caseId": "exam4-lung-14yo-cat",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-14yo-cat__02.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 69,
+   "sha256": "e126bc76a744ef384636a39aa2c41e96f5a2e7632e4b6373e6a1dbbdd9e9c788"
+  },
+  {
+   "caseId": "exam4-lung-bronchiectasis",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-bronchiectasis__01.jpg",
+   "sourceFile": "dc4b2e17-L1PulmonaryPatterns.pdf",
+   "sourcePage": 71,
+   "sha256": "727a6a7628f0ccb5feb4e6174c77212c5c5e7b318566f50f4745efa8dbb92fd6"
+  },
+  {
+   "caseId": "exam4-lung-2yo-dog",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-2yo-dog__01.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 72,
+   "sha256": "a2b59dc320c08e62862db4481f0c505fd4bf9ffb5c5e640b4f999ecc477f0c7e"
+  },
+  {
+   "caseId": "exam4-lung-2yo-dog",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-2yo-dog__02.jpg",
+   "sourceFile": "82acae2c-L2-InterstitialandAlveolar.pdf",
+   "sourcePage": 73,
+   "sha256": "d33a88578b66cd39fc0f9a83dd0b2dd997ea3a1cb6f313566042c943591cb14c"
+  },
+  {
+   "caseId": "exam4-lung-l3-lab-regurg",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-lab-regurg__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 7,
+   "sha256": "22a90c4a99262198041865697111769e329bf258df15880e6125e8c738d6ca5d"
+  },
+  {
+   "caseId": "exam4-lung-l3-fcr",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-fcr__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 7,
+   "sha256": "4396e1073e42fb3dca0796b9ae0f346d9ed500a1f52216bd8e82aefb36247629"
+  },
+  {
+   "caseId": "exam4-lung-l3-cat-mets",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-cat-mets__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 25,
+   "sha256": "323494b4e1ef60161ba6f273c1ba58f34cc966cc79bd863d2fdcd420f9196e0d"
+  },
+  {
+   "caseId": "exam4-lung-l3-cat-smoker",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-cat-smoker__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 20,
+   "sha256": "0a611f75249a8c3f3e65fcb2ce7c615c89b2b8fc582bac9fd4f0bf687b0141d7"
+  },
+  {
+   "caseId": "exam4-lung-l3-rml",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-rml__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 30,
+   "sha256": "de8de00836ee95cec13219af9d76e768711a592503eb8cb1c618f3e650855ca6"
+  },
+  {
+   "caseId": "exam4-lung-l3-rml",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-rml__02.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 30,
+   "sha256": "00143b02bdae2d3ec2981f67dfb9d01f80957c5010bec9ca891fd01bdb7db224"
+  },
+  {
+   "caseId": "exam4-lung-l3-lymphoma",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-lymphoma__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 46,
+   "sha256": "f01747486324ae0ddc72088d9c5f08a521da491ce2b518c3fa3055642ece5733"
+  },
+  {
+   "caseId": "exam4-lung-l3-puffball",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-puffball__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 46,
+   "sha256": "585ebc8dabe28279924b5210b48d049412e3450b5f704e0da1d0bd7085462275"
+  },
+  {
+   "caseId": "exam4-lung-l3-blasto",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-blasto__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 61,
+   "sha256": "ae658ee224a882666bb5a603187c69c9e37a2852ad31123553373c583b9eb0b3"
+  },
+  {
+   "caseId": "exam4-lung-l3-mets",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-l3-mets__01.jpg",
+   "sourceFile": "L3_-Cases.pdf",
+   "sourcePage": 61,
+   "sha256": "467e1249af5383591cbd9ae4943287f34282a97d8bcb456ff2a26cf04d28e7ac"
+  },
+  {
+   "caseId": "exam4-lung-puppy-pool",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-puppy-pool__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 27,
+   "sha256": "a071f85a96f1aae1c0e49fbf06ffc4895c7fc9e740ff57822fa23265269857f0"
+  },
+  {
+   "caseId": "exam4-lung-puppy-pool",
+   "section": "lung",
+   "repoPath": "radiology-course-photos/exam4/lung/exam4-lung-puppy-pool__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 27,
+   "sha256": "6b736a863e83ab41e9ad67fa361815c6352fcbd764560a9c50382a8f04edc2cb"
+  },
+  {
+   "caseId": "exam4-hrt-lae",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-lae__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 18,
+   "sha256": "c90747d096c8ea77e39233af70c99f973a05e6217801d9344fa82c495f76c743"
+  },
+  {
+   "caseId": "exam4-hrt-lae",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-lae__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 18,
+   "sha256": "eb2268b0ffd0406aa4dc07fb48ccfec9f771c64b6a1cd941f4a31967d36aa7cb"
+  },
+  {
+   "caseId": "exam4-hrt-lae-2",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-lae-2__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 20,
+   "sha256": "ca3c595868675ba7c16a020c6ea8e0abcd4c528ebe869d6df758d96af3505d61"
+  },
+  {
+   "caseId": "exam4-hrt-lve",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-lve__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 21,
+   "sha256": "ba37c18ad336923e571ad2378c4a60573e8a8a106d8cccf4ec30dfa71a9dc4fb"
+  },
+  {
+   "caseId": "exam4-hrt-lve",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-lve__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 21,
+   "sha256": "51137a5246ad34a3b5e587026a7d690c5c580ce01ce8042acb360258eb9379bf"
+  },
+  {
+   "caseId": "exam4-hrt-rae",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-rae__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 22,
+   "sha256": "e9a3172a5ff9a1c4486d1f1f50e71e22ae96e23fddfac78c591c7797d8ea07c4"
+  },
+  {
+   "caseId": "exam4-hrt-rae",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-rae__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 22,
+   "sha256": "922915e355c44aaa3095c4097574e41193390675038fc7c6cefb3ef5ff1d4e34"
+  },
+  {
+   "caseId": "exam4-hrt-lchf-veins",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-lchf-veins__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 45,
+   "sha256": "0b575c56e5305ef47f606e20292124f24b4f3a299e6b101342c0fc1e28e8a97c"
+  },
+  {
+   "caseId": "exam4-hrt-lchf-edema",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-lchf-edema__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 47,
+   "sha256": "c2e0fb4dd943bbe8e7deebc61750806b7dd979f9a429a779df4474476e6f883a"
+  },
+  {
+   "caseId": "exam4-hrt-lchf-edema",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-lchf-edema__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 48,
+   "sha256": "c0878fdb35e50484031152264b00f0602ec92fbc314b871d35627b28e6d85377"
+  },
+  {
+   "caseId": "exam4-hrt-labile",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-labile__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 49,
+   "sha256": "be0c20612617e43d6f43162bdd4c5d23584dd4705129ed8e72fe82216af6d9f1"
+  },
+  {
+   "caseId": "exam4-hrt-rchf",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-rchf__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 52,
+   "sha256": "2da2c72fb5309d251ce7883a9e75d9b75f4b82177cf11247be16f6383420e201"
+  },
+  {
+   "caseId": "exam4-hrt-mvi",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-mvi__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 55,
+   "sha256": "148639ed6603758b29f75ba0bff5e853853ed78763948015f4c42e8c81c1bacf"
+  },
+  {
+   "caseId": "exam4-hrt-cocker",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-cocker__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 57,
+   "sha256": "b9827b9bceb295bee345a83c6cfd488bd94c9a49226cea5485d97041ce75af68"
+  },
+  {
+   "caseId": "exam4-hrt-cocker",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-cocker__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 57,
+   "sha256": "eb3f1d882cbf6fb16309eee63f3bb0c498dfb4301f2566bab57ade701a63c626"
+  },
+  {
+   "caseId": "exam4-hrt-cat-edema",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-cat-edema__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 65,
+   "sha256": "167b95864ebee0b383da9cc750a5df877699b69451170853228dd1d6ee4b301f"
+  },
+  {
+   "caseId": "exam4-hrt-cat-edema-lat",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-cat-edema-lat__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 72,
+   "sha256": "7da884a2d1d484568f910c1a0b262bf8aa3447114f6755893aebfe735c50730b"
+  },
+  {
+   "caseId": "exam4-hrt-cat-lae",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-cat-lae__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 69,
+   "sha256": "2ee156bee34731dfb0ef8a3f7b931736812709526ca7fb291f27277d7de954e2"
+  },
+  {
+   "caseId": "exam4-hrt-cat-lae",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-cat-lae__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 69,
+   "sha256": "9e3748989b69418ca29c5048f1d7a8a637370e73cbbf772adb0ddd5955fdc1da"
+  },
+  {
+   "caseId": "exam4-hrt-dcm-vd",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-dcm-vd__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 78,
+   "sha256": "27babee71229e8bff0ead22a22d6f6560d34c2ec334575544fb457ba77dda3e7"
+  },
+  {
+   "caseId": "exam4-hrt-dcm-giant",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-dcm-giant__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 79,
+   "sha256": "44897f9f8ba0025bda1b4e357b104fc1e59f95416d3cab57b0acf2ed301235df"
+  },
+  {
+   "caseId": "exam4-hrt-hwd-lat",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-hwd-lat__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 82,
+   "sha256": "0572e688b778ef5a971c3f19f163b19a26120b357c24f3b88043f38ad82d9300"
+  },
+  {
+   "caseId": "exam4-hrt-hwd-vd",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-hwd-vd__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 84,
+   "sha256": "4a7372a98ab9f7d06fedae99909ce3efa420095578a8dde106062a97156062c8"
+  },
+  {
+   "caseId": "exam4-hrt-hwd-classic",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-hwd-classic__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 86,
+   "sha256": "d2c69e0716d1da6749990669b09fa598524cd64c9d29baf36c509e39f991bf34"
+  },
+  {
+   "caseId": "exam4-hrt-hwd-classic",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-hwd-classic__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 86,
+   "sha256": "748135a77cb454114eee16b308ec76dad84d71046596ba1481fa3b0672916f04"
+  },
+  {
+   "caseId": "exam4-hrt-hwd-174",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-hwd-174__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 174,
+   "sha256": "c59ee7b368b382a93dd1cea21341cf48cfd6a147f7863f0238b588586387eaf4"
+  },
+  {
+   "caseId": "exam4-hrt-hwd-174",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-hwd-174__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 174,
+   "sha256": "46dd1b0a20675945eebf24429b8b593e10f6d03c44cb5577d3adaa0658fab2dc"
+  },
+  {
+   "caseId": "exam4-hrt-pe-globoid",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-pe-globoid__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 89,
+   "sha256": "bfda3ecb7f8c76d61ab0532dda5710f51d85c3b51da46a2ad603085ea8a436ea"
+  },
+  {
+   "caseId": "exam4-hrt-pe-lat",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-pe-lat__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 90,
+   "sha256": "9986cd6b2cf76a7e0728c57a5e5b753c553ccfa7c4cb94ad24860a3c49509a97"
+  },
+  {
+   "caseId": "exam4-hrt-ra-hsa",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-ra-hsa__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 93,
+   "sha256": "631564b5649aa93393536a17ee90bc15d381731ba95da127996704b6cb89b79f"
+  },
+  {
+   "caseId": "exam4-hrt-ra-hsa",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-ra-hsa__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 93,
+   "sha256": "deab7bc7702166c301c98d99a0bbdfb06f85094c5fb4267dc57bb69548e42237"
+  },
+  {
+   "caseId": "exam4-hrt-kitten",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-kitten__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 98,
+   "sha256": "66d57e58e1d014f0515b6f00ca92b83246fa32cfb6df95d074d6de9d525fe99f"
+  },
+  {
+   "caseId": "exam4-hrt-kitten",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-kitten__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 98,
+   "sha256": "a33137f106feb218d91c6304698928d550946dd7299928cd6329689b5e4ca362"
+  },
+  {
+   "caseId": "exam4-hrt-sas",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-sas__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 109,
+   "sha256": "7775843ab7f88e61a56dc4b9cb3f1ed6d18eaefa3093996a94c7d57406d11d3e"
+  },
+  {
+   "caseId": "exam4-hrt-sas",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-sas__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 109,
+   "sha256": "9763e7d1ced65464eb368b564a98f2ea96cfb97ca213d04abb632eabe4b1154c"
+  },
+  {
+   "caseId": "exam4-hrt-sas-2",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-sas-2__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 112,
+   "sha256": "257faa681f416d981bf7316cbcc520ee0b286d83b60e7fd62a5f82d1322f68b1"
+  },
+  {
+   "caseId": "exam4-hrt-sas-2",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-sas-2__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 112,
+   "sha256": "2350bd1a2d5636e9bec7f9e6d54fc16750f72b06ac0d5117ebfed11c6044ab45"
+  },
+  {
+   "caseId": "exam4-hrt-ps",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-ps__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 115,
+   "sha256": "ae96c11951e1f0a5f4f415b2fe18126d068f577380ea8912997909f132c00924"
+  },
+  {
+   "caseId": "exam4-hrt-ps-lat",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-ps-lat__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 116,
+   "sha256": "e4c401ab6baf0a399bb2a80efa6a4cf9bf49547fdd9b9e53f2f7bc09f99287de"
+  },
+  {
+   "caseId": "exam4-hrt-mvd",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-mvd__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 119,
+   "sha256": "3346846006daa88a08a6ff706ec03e5f97644f5f81cec4bc500de59a790c2b98"
+  },
+  {
+   "caseId": "exam4-hrt-mvd-2",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-mvd-2__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 120,
+   "sha256": "0f8353dfdfc6ffc962dcd0b97eff7917895676d0ea6d442b1641178eaf5e28dd"
+  },
+  {
+   "caseId": "exam4-hrt-mvd-2",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-mvd-2__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 120,
+   "sha256": "c2b35ff39ff656e4855b44701a74c23d33ac8c2190b7d71d31d35a09e5523b4b"
+  },
+  {
+   "caseId": "exam4-hrt-pda",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-pda__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 129,
+   "sha256": "36aa975e86c2a2b5f97d1f3b02b80309eb3ec6e53cdda09dbb18ef0ca979f5e4"
+  },
+  {
+   "caseId": "exam4-hrt-arthur",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-arthur__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 136,
+   "sha256": "1d873ef98466916e24cca2ba1af01033970634130bc324a1b7fc45b321c74af0"
+  },
+  {
+   "caseId": "exam4-hrt-arthur",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-arthur__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 136,
+   "sha256": "0414f7b3e02d6ac673f51c7f07d09a47cb1d1dc7c630457e653a0651bf1ad918"
+  },
+  {
+   "caseId": "exam4-hrt-samantha",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-samantha__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 147,
+   "sha256": "c8b2873986314757324c58c7aae824f6d96ee366d04e27cca568b21eb42ef9da"
+  },
+  {
+   "caseId": "exam4-hrt-samantha",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-hrt-samantha__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 148,
+   "sha256": "d2cd101b0ecfdf340e2a66bc861fad221402ccb6bc83008b626b4396a1975267"
+  },
+  {
+   "caseId": "exam4-ves-overcirc",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-overcirc__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 166,
+   "sha256": "99c0f03ebbde08160279bef7c1ed32cbf3416cfc6c01fe55782cecfe621f992e"
+  },
+  {
+   "caseId": "exam4-ves-overcirc",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-overcirc__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 166,
+   "sha256": "ab336fa86368a7fc81fa50f62972ec759ca1dca15070602745a109401340d0af"
+  },
+  {
+   "caseId": "exam4-ves-fluid",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-fluid__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 166,
+   "sha256": "9325eb6c6872735ca623a1366f8ff97257372395c2f1d23394ac79b1d93c140a"
+  },
+  {
+   "caseId": "exam4-ves-under",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-under__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 168,
+   "sha256": "951b5a6a6bc03d5a8c6c5f4cc3a223cd2e982d43fe2dba005bb63597897278fd"
+  },
+  {
+   "caseId": "exam4-ves-under",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-under__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 168,
+   "sha256": "257fc0b8cf55b375cb7273d86d18f0a399084f5d312893125891f0ee78c67521"
+  },
+  {
+   "caseId": "exam4-ves-hcm-veins",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-hcm-veins__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 171,
+   "sha256": "27227af5c865b145c9c5235a32a5fffe21a31958ce5da9047d0412bd9ebc0a4a"
+  },
+  {
+   "caseId": "exam4-ves-hcm-veins",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-hcm-veins__02.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 171,
+   "sha256": "552ce732c51f116f970beb07c9f0f3215219df7866c741062cd02ed328e7c0b3"
+  },
+  {
+   "caseId": "exam4-ves-mpa",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-mpa__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 175,
+   "sha256": "8c0b1c58d4b10b3d3c5210b1d31ed7808b8141252ba29cca828235b69d1330b2"
+  },
+  {
+   "caseId": "exam4-ves-aorta",
+   "section": "heart",
+   "repoPath": "radiology-course-photos/exam4/heart/exam4-ves-aorta__01.jpg",
+   "sourceFile": "18a9a98a-L42C5HaveaHeartCardiacRadiologyPartI.pdf",
+   "sourcePage": 176,
+   "sha256": "0932b89a2f43d281868d0652a72f4e48728f8f5f2477ca9e3c1b8f68abd60472"
+  },
+  {
+   "caseId": "exam4-cav-fissure",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-fissure__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 5,
+   "sha256": "9836f190a60ccd94f3b4b123786e30c2b5a3b596344d3af70535cb9a91f1a878"
+  },
+  {
+   "caseId": "exam4-cav-fissure-thick",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-fissure-thick__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 6,
+   "sha256": "85d15d0e4e5add2b4914af7bbb4ab0777a2dfb38d3a14411c7fcd90065a5d732"
+  },
+  {
+   "caseId": "exam4-cav-pe-signs",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-pe-signs__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 9,
+   "sha256": "339b9ec1739efac1182a67886e082d1dbd90a23faa6ee6da82e3850d09573a44"
+  },
+  {
+   "caseId": "exam4-cav-pe-volume",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-pe-volume__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 10,
+   "sha256": "c1dcf51ff4327bcc5014dc2012e09f2094ea7734a478774a70f4bcd0930d0d55"
+  },
+  {
+   "caseId": "exam4-cav-zoey",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-zoey__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 13,
+   "sha256": "6f040a0c7c510d3cdd2fa87b00765142c94f2f94c2c75ef43f1352151f1a87be"
+  },
+  {
+   "caseId": "exam4-cav-zoey",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-zoey__02.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 14,
+   "sha256": "ccfc3edc3cf8cfec07acaa5bd0b502f0905a3fd53ce3e06209413d6a925d0625"
+  },
+  {
+   "caseId": "exam4-cav-zoey",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-zoey__03.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 15,
+   "sha256": "901ba1bd16afd06fd2e26e33b94d2f9415dd599cd39c51ec37d19813ef613bc6"
+  },
+  {
+   "caseId": "exam4-cav-ptx-lat",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-ptx-lat__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 21,
+   "sha256": "999675d2a5d341cdc7abb2acc368bceff7c36574e67c048d09cf04f81811cbea"
+  },
+  {
+   "caseId": "exam4-cav-ptx-vd",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-ptx-vd__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 25,
+   "sha256": "6ebca5941ba4cff944f4001b3e28c57a085f0aa86f2f4c1eb6c71b479fd564a4"
+  },
+  {
+   "caseId": "exam4-cav-shift-mass",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-shift-mass__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 30,
+   "sha256": "1386b349e9584e49ba6d4af6c73d4221846ed80884b32a992e8e7c8d91d7b8bc"
+  },
+  {
+   "caseId": "exam4-cav-shift-lobectomy",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-shift-lobectomy__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 31,
+   "sha256": "96b30e90577405b30c3b4ac14fea9be56ba631033d288ca09089a1e059c5a69b"
+  },
+  {
+   "caseId": "exam4-cav-shift-positioning",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-shift-positioning__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 32,
+   "sha256": "2a13c9bd3846e74dd2b9e1b2a0f961fb67e88210ce7773ed1954ac7fbae91f65"
+  },
+  {
+   "caseId": "exam4-cav-cat-caudal",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-cat-caudal__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 38,
+   "sha256": "79ab5a41e26a2c911dca3295eb12d4672aed935cd5a471d0efb42392183d5c9c"
+  },
+  {
+   "caseId": "exam4-cav-pneumomed",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-pneumomed__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 43,
+   "sha256": "8b97c663c06234c8f319b40cb26da87d264bd380cdb16c19784cc0eda5145618"
+  },
+  {
+   "caseId": "exam4-cav-sternal-ln",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-sternal-ln__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 62,
+   "sha256": "655d64b5f6814102a892b7aedbab2897d24fe2015976d8f845fd11bc8a34fd5e"
+  },
+  {
+   "caseId": "exam4-cav-beagle",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-beagle__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 68,
+   "sha256": "97520bc8aad202df2349b44ac770c301afe01983b66c3b8f9143d254d1b801a8"
+  },
+  {
+   "caseId": "exam4-cav-beagle",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-beagle__02.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 68,
+   "sha256": "8d487c8d8bd63a3135dcaabc5d96cbb071f63eb1ac0714c9ce783c3802623b4a"
+  },
+  {
+   "caseId": "exam4-cav-stbernard",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-stbernard__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 6,
+   "sha256": "1a17ce2dc136e56b246af006dd680134096014be996fc64e2e467e95f581bc93"
+  },
+  {
+   "caseId": "exam4-cav-stbernard",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-stbernard__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 6,
+   "sha256": "c1461518ddf52280da7b3ef088b5421c4a93a169e5160d65cc1636e5d81033d3"
+  },
+  {
+   "caseId": "exam4-cav-praa",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-praa__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 8,
+   "sha256": "8c6106f16cd61661190fe2f60897084599c6a57cfcfb1f4389b2aa77ad59e7b9"
+  },
+  {
+   "caseId": "exam4-cav-praa",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-praa__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 8,
+   "sha256": "db09b3f2524921647440fc9995b4ac1b009d4e7dac1e08ef6db62f7673acd81e"
+  },
+  {
+   "caseId": "exam4-cav-esoph-fb",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-esoph-fb__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 10,
+   "sha256": "c14e793f0e0c2336c4702875160824900a047f563dea26d9c4dab37e6a25e206"
+  },
+  {
+   "caseId": "exam4-cav-trachea-normal",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-trachea-normal__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 11,
+   "sha256": "467b192b369a78de9329efadee7cd14a072c1063635881b3696e2bef49d651e9"
+  },
+  {
+   "caseId": "exam4-cav-trachea-normal",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-trachea-normal__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 11,
+   "sha256": "d1e606d2bab8b4c130ee59d7967ac716e0b46232bfcb529a1d6d352887bc8641"
+  },
+  {
+   "caseId": "exam4-cav-mainstem",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-mainstem__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 14,
+   "sha256": "c36c538ee2347da139e3bce70e550b2e3ec605c5b1e437d79de10ae027e4aff4"
+  },
+  {
+   "caseId": "exam4-cav-chihuahua",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-chihuahua__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 15,
+   "sha256": "3a0f4835471615d44ea503ba973249553ef493464ada57666584bc9d44b5b9bd"
+  },
+  {
+   "caseId": "exam4-cav-hypoplasia",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-hypoplasia__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 18,
+   "sha256": "87c0b90a28d0f03b5ec3da546f0e5d8b2e1ae3a04c08a02b2d2fef4ad79eeed8"
+  },
+  {
+   "caseId": "exam4-cav-dh",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-dh__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 36,
+   "sha256": "693058f91485824f65635b1640de9bef8e55daba7da5202027d038bc75029db3"
+  },
+  {
+   "caseId": "exam4-cav-dh",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-dh__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 37,
+   "sha256": "8fadc32f995cc1f662e59e7805ef7e94716a4eef6424292ef2fb42eb21626b84"
+  },
+  {
+   "caseId": "exam4-cav-hiatal",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-hiatal__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 41,
+   "sha256": "d456c70f10f895601dfe590ccdd7911f2cd398c1de7112aa8d1978cb6f8f70be"
+  },
+  {
+   "caseId": "exam4-cav-hiatal",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-hiatal__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 41,
+   "sha256": "9be2ae40785e98c8b07744937fed05bbf0d6f2149631534c5ee3aa688b0fbd4d"
+  },
+  {
+   "caseId": "exam4-cav-gsd-ge",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-gsd-ge__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 44,
+   "sha256": "8d856221a4eb8af548d200f1ec7b65f7b6d9e6ab72a1a6ec741705978da9d894"
+  },
+  {
+   "caseId": "exam4-cav-gsd-ge",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-gsd-ge__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 44,
+   "sha256": "b8484a621e907c8ed3a33a1cd71406744e63dec8006564d0eacb76af17e6beb9"
+  },
+  {
+   "caseId": "exam4-cav-rib-fx",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-rib-fx__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 58,
+   "sha256": "f3031900a3219f67613898f4721802373986943aea22bb5842b768d355bdd35d"
+  },
+  {
+   "caseId": "exam4-cav-rib-tumor",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-rib-tumor__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 59,
+   "sha256": "0724bd06adc1e468f2a2519abd2edf790cb8e14277048f45a128b348587e9213"
+  },
+  {
+   "caseId": "exam4-cav-rib-tumor",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-rib-tumor__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 59,
+   "sha256": "fbc8b0ccab2d75a2f396735e3e4d720ac60253d2066d410c33064da46ebcbba3"
+  },
+  {
+   "caseId": "exam4-cav-healed-rib",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-healed-rib__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 66,
+   "sha256": "38cf6b09c06db09288ad7b31acd4c8b0050baef2545ec79e21d0d4e0ceef9ea0"
+  },
+  {
+   "caseId": "exam4-cav-healed-rib",
+   "section": "cavity",
+   "repoPath": "radiology-course-photos/exam4/cavity/exam4-cav-healed-rib__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 66,
+   "sha256": "484edcb2ae4bbf840bec0efcf85a3dc36c19758f4f766e12d7ef40279f22d74a"
+  },
+  {
+   "caseId": "exam4-case3-dachshund",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case3-dachshund__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 21,
+   "sha256": "f375741e6bd928907c67041fe0287c115a236b034faa22b1fe81872d0b69cf28"
+  },
+  {
+   "caseId": "exam4-case3-dachshund",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case3-dachshund__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 22,
+   "sha256": "324c44da3edb551e56243e8c0b201a59ecb9a59177908656adfc175d97a0d0d5"
+  },
+  {
+   "caseId": "exam4-case4-blue",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case4-blue__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 48,
+   "sha256": "093cfb99e9e47e53a54062cea9f4e78549d3be2efac31b815ba98b036d33b442"
+  },
+  {
+   "caseId": "exam4-case4-blue",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case4-blue__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 49,
+   "sha256": "cec6daffc67bd6c9d8a425157ff9042046f8e0b3922ec2f63f9db6ea6fa345f1"
+  },
+  {
+   "caseId": "exam4-case4-blue",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case4-blue__03.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 50,
+   "sha256": "d0dc5983fe2a4600e7667573d13fde31695f0041bf228e6651f662c003ca1370"
+  },
+  {
+   "caseId": "exam4-case5-gsp",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case5-gsp__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 71,
+   "sha256": "645874fe551f668224da85f9ab771b81f2644b0c0cd604efb64fd984fea38b84"
+  },
+  {
+   "caseId": "exam4-case5-gsp",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case5-gsp__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 72,
+   "sha256": "2b07caaa561bd982d83de9dbd739fd0cc6e9bdeb8d92ab2f502c4f36501da0c1"
+  },
+  {
+   "caseId": "exam4-case5-gsp",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case5-gsp__03.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 73,
+   "sha256": "f461550df48328f5bbe140b75738c774a97e07f3f77f15816eefa8e28ce1ca38"
+  },
+  {
+   "caseId": "exam4-case6-golden",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case6-golden__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 79,
+   "sha256": "2f084c7765ab2b02ab8e5c7b25f80fa483c38842e4b99743d1ca31a4b7d4414a"
+  },
+  {
+   "caseId": "exam4-case6-golden",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case6-golden__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 80,
+   "sha256": "3432de73fb8e8f9ce137199601053369598fb7bb9aa5799514c8e19a0d9a7833"
+  },
+  {
+   "caseId": "exam4-case7-hwd",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case7-hwd__01.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 48,
+   "sha256": "25dac230aa5235d088e096e796a0a77f195cc7fe0898b6b2865b32df93fd0e6a"
+  },
+  {
+   "caseId": "exam4-case7-hwd",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case7-hwd__02.jpg",
+   "sourceFile": "dd861f14-L6-Therestofthethoraciccavity.pdf",
+   "sourcePage": 49,
+   "sha256": "a82beb770aa27c205aae3a85e989d6003d777ed50240892f798ffb5e7dc168e4"
+  },
+  {
+   "caseId": "exam4-case8-brittany",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case8-brittany__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 86,
+   "sha256": "212645755fb3546ccbcc86617d8122b27c2c7617863f4fad4a050e5516498740"
+  },
+  {
+   "caseId": "exam4-case8-brittany",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case8-brittany__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 88,
+   "sha256": "6c0ce73ead2543cf6474093afc10931482ed76cf3aef0ec1a07e9f6efdd826b7"
+  },
+  {
+   "caseId": "exam4-case9-mainecoon",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case9-mainecoon__01.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 95,
+   "sha256": "d84e5f4b48cc590fcebed13cd1b43e708b372a4f250f654e3787efb23f37741c"
+  },
+  {
+   "caseId": "exam4-case9-mainecoon",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case9-mainecoon__02.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 96,
+   "sha256": "7d899517d7ded48b35c0a498d274058f53d70a61782094d644b5b54a11a71fcb"
+  },
+  {
+   "caseId": "exam4-case9-mainecoon",
+   "section": "cases",
+   "repoPath": "radiology-course-photos/exam4/cases/exam4-case9-mainecoon__03.jpg",
+   "sourceFile": "88d34f5c-L7-TherestofthethoraciccavityPart2.pdf",
+   "sourcePage": 97,
+   "sha256": "d95356e8c3f5c1e6773b2d08205877bd68ea18ce22664fc77cf648395d903d02"
+  }
+ ]
+}
