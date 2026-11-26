@@ -58,7 +58,12 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<circle cx="315" cy="257" r="30" fill="#86a8b7" stroke="#edfaff" stroke-width="5"/><circle cx="315" cy="257" r="22" fill="#d5e9f0" stroke="#90b2bd" stroke-width="3"/>';
  s+=rect(272,305,12,7,'#79c7ac','',2)+txt(315,340,'AUTOCLAVE',10,'#577f99',900);
  // Physical partition / doorway.
- s+=rect(382,57,13,308,'url(#sSteel)','#7996ad',3,3)+rect(395,90,22,239,'url(#sGlass)','#b0c9d8',1,2)+path('M395 92L416 120M397 182L416 202','#f8ffff',4);
+ // Partial glass partition with framed pass-through between clean prep and OR.
+ s+='<polygon points="382,55 402,67 402,350 382,363" fill="url(#sSteel)" stroke="#799bac" stroke-width="3"/>';
+ s+='<polygon points="403,88 426,95 426,333 403,339" fill="url(#sGlass)" stroke="#a8c5d4" stroke-width="3"/>';
+ s+=path('M405 107L424 129M405 165L424 190M405 229L424 254','#ffffff',3);
+ s+=path('M400 80v272M429 99v229','#90b4c4',2);
+ s+='<polygon points="383,353 425,341 435,349 394,365" fill="#95b5c3" stroke="#6f9da9" stroke-width="2"/>';
  s+=rect(381,343,40,8,'#9bb9c6');
  // Header over OR area kept high, not over devices.
  s+=rect(446,74,358,42,'#f8fbff','#8bb5c8',18,3)+txt(624,102,'SURGERY &amp; ANESTHESIA',19,'#426b91',900);
@@ -70,9 +75,15 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  for(let x of [458,483,508])s+=rect(x,265,16,33,x===483?'#e4c4e7':'#b7d9e2','#8daebd',4);
  s+=path('M437 328v16M528 328v16','#7c9aa9',6)+'<circle cx="440" cy="348" r="6" fill="#6c8ea1"/><circle cx="525" cy="348" r="6" fill="#6c8ea1"/>';
  s+=path('M510 225q65 -25 64 40','#a5c8cf',5)+ '<ellipse cx="571" cy="273" rx="13" ry="31" fill="#69bbaa" stroke="#3d9994" stroke-width="3"/>';
+ // Airway machine flowmeters, vaporizer knob and breathing circuit.
+ for(let k=0;k<3;k++){let x=444+k*15;s+=rect(x,231,11,31,'#c9e9ee','#8ab5bb',4,2)+rect(x+3,240+k*3,5,12,'#77c3c2','',2);}
+ s+=rect(501,230,21,24,'#e6e5f0','#a4b8ca',5,2)+'<circle cx="512" cy="242" r="6" fill="#90a6c2" stroke="#eefaff" stroke-width="2"/>';
+ s+=path('M541 255q20 -17 35 7','#c3dce0',5);
  s+='</g>'; // no floating station label
  // Separate large patient monitor raised on pole.
- s+='<g filter="url(#sSh)">'+rect(561,180,112,76,'#deeef4','#8ba9bd',8,5)+rect(572,190,90,54,'#263f59','#466b80',4)+path('M579 224h13l5 -11 5 21 7 -16 8 7h8l7 -12 7 17 6 -9h11','#64dcb3',3)+txt(648,207,'98',13,'#c7edb1',900)+txt(646,238,'96',12,'#c4e6f4',900)+path('M619 256v17','#8aa8b8',5)+rect(597,273,44,12,'url(#sSteel)','#a7bdc4',3)+'</g>';
+ s+='<g filter="url(#sSh)">'+rect(561,180,112,76,'#deeef4','#8ba9bd',8,5)+rect(572,190,90,54,'#263f59','#466b80',4)+path('M579 224h13l5 -11 5 21 7 -16 8 7h8l7 -12 7 17 6 -9h11','#64dcb3',3)+txt(648,207,'98',13,'#c7edb1',900)+txt(646,238,'96',12,'#c4e6f4',900);
+ s+=path('M580 236h29l6 -5 10 6h16','#edc78e',2)+txt(581,200,'ECG',8,'#c4dce5',700)+txt(646,225,'SpO₂',8,'#acdcd2',700);
+ s+=path('M619 256v17','#8aa8b8',5)+rect(597,273,44,12,'url(#sSteel)','#a7bdc4',3)+'</g>';
  // Monitor display identifies the station without another overlapping label.
  // Multi-lamp articulating LED heads above the surgical field.
  s+=path('M705 0v88l-62 42M705 61l69 62','#91a6b7',9);
@@ -85,6 +96,8 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<ellipse cx="691" cy="373" rx="114" ry="15" fill="#658fa4" opacity=".16"/>';
  s+='<g filter="url(#sSh)">';
  s+='<polygon points="578,274 756,274 792,290 602,292" fill="#f3fbfe" stroke="#8eafbd" stroke-width="4"/>';
+ s+='<polygon points="587,277 753,278 781,289 604,288" fill="#a5d7d7" stroke="#d8f8f7" stroke-width="2"/>';
+ s+='<path d="M603 290h177" stroke="#f9ffff" stroke-width="2.5" opacity=".85"/>';
  s+='<polygon points="602,292 792,290 786,308 606,312" fill="url(#sSteel)" stroke="#789cae" stroke-width="3"/>';
  s+=path('M612 288h166M611 302h169','#f7ffff',2);
  s+='<polygon points="650,312 735,310 730,322 654,325" fill="#b0cbd4" stroke="#789bac" stroke-width="3"/>';
@@ -107,8 +120,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(821,235,34,21,'#d3e6f1','#98b4c6',4,2)+rect(826,240,20,8,'#3d627c','#afcad3',2,1);
  s+='<path d="M835 259l-18 33h32z" fill="#ffe1a6" opacity=".16"/>';
   // Recovery entrance is added last as an angled RIGHT SIDE WALL doorway, not the back wall.
- // Small wall-mounted Tool ID placard (the clickable hit area remains in the game).
- 
+
  // Electrosurgical unit in theatre (no overlaid redundant caption).
  s+=rect(787,192,65,48,'#e9f0f9','#8eabc2',7,3)+rect(797,202,35,20,'#304f69','#8fb8c9',3,2);
  s+=txt(814,216,'ESU',10,'#c6f7f2',900)+rect(839,203,8,14,'#e6c69e','#9fa6b2',2);
@@ -120,6 +132,10 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<polygon points="883,101 987,54 987,375 883,329" fill="#9c8cbe" stroke="#8074a7" stroke-width="6"/>';
  s+='<polygon points="892,111 977,74 977,356 892,322" fill="#dae9f4" stroke="#f5f4fe" stroke-width="3"/>';
  s+='<polygon points="900,125 969,97 969,333 900,309" fill="#c5e3ee"/>';
+ s+='<polygon points="910,153 964,133 964,144 910,164" fill="#e9faff" opacity=".85"/>';
+ s+='<polygon points="905,308 967,291 967,331 905,314" fill="#99bed0" opacity=".45"/>';
+ s+='<polygon points="917,173 953,162 953,180 917,192" fill="#f7fbff" stroke="#a2bfd3" stroke-width="2"/>';
+ s+='<polygon points="924,177 948,170 948,178 924,185" fill="#4b7389"/>';
  // Kennel bank inside the room behind glass with a visible pink bed.
  s+='<polygon points="904,190 965,169 965,256 904,276" fill="#a5becf" stroke="#819eb2" stroke-width="3"/>';
  for(let i=0;i<5;i++){let x=911+i*12;s+=path('M'+x+' '+(187-i*4)+'v87','#89a5b8',2);}
