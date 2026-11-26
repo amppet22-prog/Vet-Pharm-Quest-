@@ -85,3 +85,12 @@ The anatomy lecture is not mapped yet. It contains third-party figures on pp.8�
 - Each pattern tab has: the tell, "What it looks like" (slide text), "How to check for it" (study aid, labelled as such), lecture films with an unmarked ↔ "Show me where" toggle (marked = rendered annotated slide), the slide's common-causes table, sampling, and a Practice button that plays that pattern's Exam 4 cases.
 - Extra teaching slides are rendered into `radiology-course-photos/exam4/_guide/` by `build_exam4.py` (`GUIDE` list).
 - Fix: the "highlighted version" rasters on L2 slides 27, 86 and 87 are identical to the plain film (the arrows are vector overlays on the slide), so those comparison views were removed; the rendered slide keys show the arrows.
+
+## Exam 4 · Lungs unit — agreed layout (2026-11-26)
+Owner's choices on the layout draft: lessons in a suggested order, all unlocked · 5-question quick checks · practice by skill with "pick how many" · a collapsible list with no titles · same 4 pattern choices every time (look-alikes in Mixed) · same layout for the rest of the game later · owner drawings for patterns, lobes and views when ready.
+- `radiology-exam4-lungs.js` (`VPQ_EXAM4_LUNGS.open()`), opened from the "🫁 Lungs — start here" banner in the Exam 4 hub:
+  1. **7 lessons** (views · lobes · normal airways/vessels · the 4 patterns · interstitial → alveolar (added at the owner's request) · where = what it means · look-alikes), each with 5 quick-check questions (35 total; every answer cites its slide).
+  2. **Practice by skill:** Name the view (9 films from Basics / Radiographic Anatomy, `_skills/`), Which lobe (6), Name the pattern (27 class films, same 4 choices), Spot the look-alike (10), Where = what it means (8), Mixed. Options: 5/10 shuffled or all; "Pick a film" dropdown with Film numbers only; "👉 Show me where" after answering.
+  3. **27 class cases, step by step** (72 graded steps) built only from the professor's in-class questions, circled answers, slide answers and case notes; findings and answer keys at the end.
+- Exam 4 hub: topic sections are collapsible, film tiles are "Film N" (no titles), and the case player hides the title and lecture until you answer (`hideTitle`).
+- Progress: localStorage `vpq-exam4-lungs-v1`; XP namespace `exam4-lungs`.
