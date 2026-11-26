@@ -125,9 +125,9 @@ if(room==='catcorner'){
 }
 if(room==='yardview'){
  // The real yard is a zoned 1000×500 SVG, not a flattened screenshot.
- // Keep character placements EMPTY: the owner will add their own dogs later.
+ // Owned, transparent dog companion art is populated at the saved user-selected positions.
  s='<svg class="vpqWingArt" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Expanded walkable kennel yard with distinct sniffing, agility, open play, and quiet tunnel spaces">'+
- '<image href="assets/reception/dog-yard-enrichment.svg?v=20261126-2point5d-yard-v2" x="0" y="0" width="1000" height="500" preserveAspectRatio="none" pointer-events="none"/>';
+ '<image href="assets/reception/dog-yard-enrichment.svg?v=20261126-safe-yard-depth-v3" x="0" y="0" width="1000" height="500" preserveAspectRatio="none" pointer-events="none"/>';
  const placed=state.receptionHabitats?.placed||[];
  if(placed.includes('yard-toys')){
   s+='<g aria-label="Extra enrichment toys"><circle cx="573" cy="412" r="13" fill="#efbc87" stroke="#b98e7d" stroke-width="4"/><path d="M564 403l18 18M582 403l-18 18" stroke="#fff9ef" stroke-width="3"/><circle cx="193" cy="407" r="9" fill="#b5ade4"/></g>';
