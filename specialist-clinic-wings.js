@@ -58,8 +58,8 @@ function scene(key){
  '<path d="M66 342H934L1000 500H0Z" fill="#ddd4e4"/>'+
  '<path d="M66 342L0 500M934 342L1000 500M300 342L260 500M500 342V500M700 342L740 500M32 433H969M50 385H950" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>'+
  [155,395,615,845].map(x=>'<ellipse cx="'+x+'" cy="41" rx="28" ry="12" fill="#fff7dd" stroke="#fff" stroke-width="5"/>').join('')+
- '<g filter="url(#vpqSpecShadow)">'+rect(321,92,359,54,'#fffdfd','#a8b9d6')+
- '<text x="500" y="127" font-family="Arial,sans-serif" font-weight="900" font-size="24" fill="#607b90" text-anchor="middle">'+label+'</text></g>';
+ (key==='surgery'?'':'<g filter="url(#vpqSpecShadow)">'+rect(321,92,359,54,'#fffdfd','#a8b9d6')+
+ '<text x="500" y="127" font-family="Arial,sans-serif" font-weight="900" font-size="24" fill="#607b90" text-anchor="middle">'+label+'</text></g>');
  if(cp){
    s+='<text x="500" y="174" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="15" fill="#68839a">REFERRAL DIAGNOSTICS · QUESTIONS &amp; INTERPRETATION</text>';
    const stations=[
