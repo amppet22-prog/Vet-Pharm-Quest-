@@ -45,35 +45,29 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=txt(54,261,'ET TUBES',8,'#5b829b',900);
  for(let i=0;i<4;i++){let x=35+i*12;s+=rect(x,269,6,7,'#e9faff','#91b9c5',1,1)+path('M'+(x+3)+' 277v24q0 5 3 5','#86b8c4',1.7);}
  s+=path('M33 265h45','#a4c8d0',1.5);
- // Clean supply shelf, gowns, masks, caps and wrapped drapes.
- s+=rect(181,110,188,80,'#f7fbfe','#a7c1cc',5,2)+path('M188 148h173','#9db9c7',3);
- for(let i=0;i<5;i++){let x=192+i*33;s+=rect(x,117,28,22,['#c5daed','#d8c7ed','#c0dfda','#b8d6e8','#ded3ee'][i],'#f5ffff',2,1)+rect(x,155,28,23,['#e1d6ee','#c5e5e8','#d0dff3','#c9e4e0','#e5d2ec'][i],'#f5ffff',2,1);}
- // PPE shelf is stocked with recognizable folded packs and hanging masks, not abstract color tiles.
+ // One coherent sterile-supply cabinet, avoiding overlapping shelves and duplicate pack layers.
+ s+=rect(181,107,188,89,'#f9fcff','#a8bdce',6,3);
+ s+=path('M188 145h174M188 184h174','#a5c0ca',2.5);
+ const supplyTop=[
+  {x:190,w:40,label:'GAUZE',fill:'#d5eaf5'},
+  {x:234,w:40,label:'GLOVES',fill:'#d8c9eb'},
+  {x:278,w:40,label:'DRAPES',fill:'#c9e7de'},
+  {x:322,w:39,label:'PACKS',fill:'#d2ddf2'}
+ ];
+ for(const u of supplyTop){
+  s+=rect(u.x,115,u.w,22,u.fill,'#e9f9fc',3,1);
+  s+=path('M'+(u.x+5)+' 120h'+(u.w-10),'#ffffff',1.5);
+  s+=txt(u.x+u.w/2,142,u.label,7.5,'#536e87',800);
+ }
+ // Low second shelf: sealed labeled packages and tiny clip-hooks rather than unlabeled blocks.
  for(let i=0;i<4;i++){
-  const x=194+i*41;
-  s+=rect(x,124,31,11,['#b7d9e9','#d4c7ef','#a7d9d1','#c5d9ed'][i],'#f6ffff',3,1);
-  s+=path('M'+(x+5)+' 129h21','#f8ffff',1.4);
+  let x=190+i*44;
+  s+=rect(x,154,36,24,['#c1dce8','#d6e7e4','#e0d8ee','#cddfe9'][i],'#a1c4cc',3,1.2);
+  s+=rect(x+11,161,14,7,'#fffdfa','#afcdd5',2,1);
+  s+=path('M'+(x+4)+' 177h28','#f7ffff',1.3);
  }
- // Four wrapped sterile packs, labels and a tiny seal on their lower shelf.
- for(let i=0;i<4;i++){
-  const x=193+i*41;
-  s+=rect(x,158,28,17,'#d7edee','#98c2cd',3,1.3);
-  s+=rect(x+10,164,8,5,'#fffaf4','#c3d5d9',1,1);
- }
-
-  // Clearly differentiated surgical supply containers rather than repeated undifferentiated rectangles.
- // Smaller shelf text stays within each cubby and off the operating equipment.
- s+=txt(208,138,'GAUZE',8,'#5b7897',800)+txt(245,138,'GLOVES',8,'#5b7897',800)+txt(289,138,'DRAPES',8,'#5b7897',800)+txt(336,138,'PACKS',8,'#5b7897',800);
- // Two wire storage rails and neatly folded sealed surgical packs in the wall cabinetry.
- s+=path('M189 151H361M188 185H362','#adc7ce',1.8);
- for(let x of [191,221,251]){
-   s+=rect(x,163,24,12,'#b8dbe4','#dffbfa',2,1);
-   s+=path('M'+(x+5)+' 170h14','#f8ffff',1.2);
- }
- // A clean tray and disposable brush canister are stored above the scrub sinks.
- s+=rect(351,181,16,18,'#d9e8f2','#90b7c6',3,1.5);
- s+=path('M355 185l7 8','#9bcfbb',2);
-
+ // Closed-side cabinet is visually attached to the wall and stays clear of scrub sink.
+ s+=path('M181 197h188','#9bafbd',3);
  // Floor-standing scrub sink with wall taps, deep twin basins and grounded cabinets.
  s+='<ellipse cx="185" cy="350" rx="85" ry="10" fill="#769aa4" opacity=".18"/>';
  s+=rect(112,268,144,76,'#e9f2f4','#a3bbc5',6,3);
@@ -95,16 +89,12 @@ window.VPQ_SURGERY_ROOM_ART=function(){
   // Autoclave control bezel and door handle.
  s+='<circle cx="345" cy="307" r="4" fill="#a1c9d6" stroke="#edfaff" stroke-width="1"/>';
  s+=path('M335 301h17','#709ca9',2);
- // Distinct sterile pack cubbies below supplies; folded blue-wrapped packs read as equipment.
- for(let x of [187,220,253])s+=rect(x,183,25,11,'#a9d8e7','#e9fbff',3,1);
   // Sterile prep is anchored into the room: splashback, drain, plinth and low-side shadows.
  s+='<path d="M113 267H253" stroke="#fff" stroke-width="3" opacity=".85"/>';
  s+='<path d="M112 341h144" stroke="#6f9eaa" stroke-width="3"/>';
  s+='<ellipse cx="316" cy="347" rx="50" ry="8" fill="#7094a8" opacity=".15"/>';
  s+=rect(271,326,89,15,'#d6e8ee','#9aafbe',4,2);
  s+=path('M275 337h80','#f4fcfc',2);
- // Wall packs are individually wrapped; visible fold lines and cabinet labels.
- for(let x of [193,226,259])s+=path('M'+x+' 188h19','#f8ffff',1.4);
 
   // Physical partition / doorway.
  // Partial glass partition with framed pass-through between clean prep and OR.
@@ -120,7 +110,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<ellipse cx="412" cy="360" rx="26" ry="7" fill="#678fa1" opacity=".14"/>';
   // Header over OR area kept high, not over devices.
  // The page header already names this suite. A small theatre plaque avoids the lamp arms.
- s+=rect(469,81,180,29,'#f8fbff','#8bb5c8',12,2)+txt(559,101,'OPERATING THEATRE',13,'#426b91',900);
+ s+=rect(472,80,146,25,'#f8fbff','#8bb5c8',11,2)+txt(545,97,'OPERATING ROOM',12,'#426b91',900);
  // Storage behind anesthesia machine is deliberately minimal.
  s+=rect(430,145,105,60,'#d9ecf3','#9eb8c6',5,2);
  for(let i=0;i<4;i++)s+=rect(438+i*23,156,17,28,['#c2d9e5','#d4c5e5','#bcd8d2','#c7cee8'][i],'#eef9fc',3,1);
