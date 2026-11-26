@@ -37,7 +37,7 @@ function render(){
    return '<button type="button" data-vpqexam4-play="'+E(c.id)+'" style="text-align:left;padding:10px 11px;background:#fff;border:1px solid '+(ok(c.id)?'#2e9a57':seen(c.id)?'#9fd3b5':'#d8dfea')+';border-radius:10px;min-height:58px"><strong style="display:block;font-size:12.5px;color:#344f78">'+(ok(c.id)?'⭐ ':seen(c.id)?'✓ ':'')+E(label(c))+'</strong><small style="color:#68788a">'+E(c.species||'')+(c.region?' · '+E(c.region):'')+' · '+views+' view'+(views===1?'':'s')+(c.answer?' · multiple choice':'')+'</small></button>'}).join('')+'</div></section>').join('');
  api.showModal('🫁 Exam 4 · Thorax & cardiac',
   '<div style="font-size:13px;color:#354967;line-height:1.55"><div class="buttonrow" style="margin-bottom:10px">'+
-  '<button type="button" data-vpqexam4="back">← X-ray hub</button><button type="button" data-vpqexam4="start">▶ Start from the first case</button><button type="button" data-vpqexam4="conditions">🃏 Condition cards · Thorax</button></div>'+
+  '<button type="button" data-vpqexam4="back">← X-ray hub</button><button type="button" data-vpqexam4="guide" style="background:#3b4b71;color:#fff;border-color:#3b4b71">📖 Lung patterns: how to see & check them</button><button type="button" data-vpqexam4="start">▶ Start from the first case</button><button type="button" data-vpqexam4="conditions">🃏 Condition cards · Thorax</button></div>'+
   '<div style="background:linear-gradient(120deg,#f4eaff,#eaf9f5);padding:12px 14px;border:1px solid #e0d6ed;border-radius:13px;margin-bottom:12px"><b>Each case:</b> look at every view → pick the diagnosis (or write your findings) → read the professor\'s findings → open the answer keys (annotated lecture slides, comparison films and, where helpful, a marked textbook radiograph 📘). Use <b>Previous / Next</b> to move through a topic. <span style="color:#5d6d84">'+opened+' of '+total+' opened · '+mastered+' answered correctly.</span></div>'+
   sec+'<p style="font-size:11px;color:#6b7a90">LMU CVM 743 course radiographs (Dr. Lynn Griffin) and textbook figures from your Labeled_rads notes, used with LMU permission for non-commercial study. Images are lecture-slide copies, so don\'t measure from them.</p></div>');
 }
@@ -49,6 +49,7 @@ function init(ctx){
   const b=e.target.closest('[data-vpqexam4]');if(!b)return;e.preventDefault();
   const k=b.dataset.vpqexam4;
   if(k==='back')return window.VPQ_IMAGING_SUITE?.xrayHome?.();
+  if(k==='guide')return window.VPQ_LUNG_PATTERN_GUIDE?.open?.('how',{backLabel:'Exam 4',onBack:open});
   if(k==='start'){const l=flat();return l.length&&play(l[0].id)}
     if(k==='conditions')return window.VPQ_RADIOLOGY_CONDITIONS?.open?.('Thorax',{backLabel:'Exam 4',onBack:open});
  });

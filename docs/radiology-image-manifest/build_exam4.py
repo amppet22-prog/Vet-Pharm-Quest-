@@ -53,6 +53,8 @@ TB = {
  '7.15': (9, 187, None, 'Textbook Fig. 7.15 · the five thoracic compartments'),
  '7.17': (9, 189, None, 'Textbook Fig. 7.17 · left heart enlargement: PDA (a) vs SAS (b)'),
 }
+# Extra slides rendered for the lung-pattern guide (radiology-lung-pattern-guide.js)
+GUIDE = [('L1', 43), ('L1', 44), ('L2', 15), ('L2', 81), ('L2', 91), ('L2', 94), ('L3', 23), ('L3', 34), ('L3', 35), ('L3', 18)]
 # Burned-in patient/owner names or labels to cover: (src, page, num) -> list of fractional boxes
 MASK = {
  ('L8', 32, 33): [(0, 0, .32, .045), (0, .87, .3, 1)],
@@ -149,13 +151,13 @@ case('pat-si-large', 'patterns', 'L2', [(49, 616)], [49], 'Pattern film · L2 sl
      interp='Structured interstitial pattern — multiple larger nodules (metastatic cancer).', answer='Structured interstitial pattern (nodules/masses)')
 case('pat-alv-bronchogram', 'patterns', 'L2', [(84, 1055)], [84], 'Pattern film · L2 slide 84',
      findings=S + 'air bronchogram — lucent airway with surrounding soft-tissue opacity; vessels are border effaced (vessels are also soft-tissue opaque, no contrast).',
-     interp='Alveolar pattern (air bronchograms).', answer='Alveolar pattern', extra=[('L2', 84, 1056, 'Highlighted version from the slide')])
+     interp='Alveolar pattern (air bronchograms).', answer='Alveolar pattern', extra=[('L2', 84, 1056, 'Contrast-enhanced version from the slide (airways darker)')])
 case('pat-alv-lobar-vd', 'patterns', 'L2', [(86, 1080)], [86], 'Pattern film · L2 slide 86',
      findings=S + 'lobar sign — well-defined marked change in opacity between adjacent lung lobes (arrows on the highlighted version).',
-     interp='Alveolar pattern (lobar sign).', answer='Alveolar pattern', extra=[('L2', 86, 1081, 'Highlighted version from the slide')])
+     interp='Alveolar pattern (lobar sign).', answer='Alveolar pattern')
 case('pat-alv-lobar-lat', 'patterns', 'L2', [(87, 1093)], [87], 'Pattern film · L2 slide 87',
      findings=S + 'lobar sign — well-defined marked change in opacity between adjacent lung lobes. ' + P + 'accessory lung lobe.',
-     interp='Alveolar pattern (lobar sign, accessory lobe).', answer='Alveolar pattern', extra=[('L2', 87, 1094, 'Highlighted version from the slide')])
+     interp='Alveolar pattern (lobar sign, accessory lobe).', answer='Alveolar pattern')
 case('pat-alv-aspiration', 'patterns', 'L45', [(33, 49)], [33], 'Pattern film · L4–5 slide 33',
      findings=S + 'ventral alveolar pattern, often cranial to mid thorax; can be one or multiple lung lobes; some regions can also have interstitial and/or bronchial.',
      interp='Alveolar pattern, ventral — the slide is "Aspiration pneumonia / bronchopneumonia" (usually history of vomiting, regurgitation, anesthesia/surgery).', answer='Alveolar pattern')
@@ -176,7 +178,7 @@ case('mim-underexposed', 'mimics', 'L2', [(26, 327)], [26], 'Look-alike · L2 sl
 case('mim-skinfold', 'mimics', 'L2', [(27, 339)], [27], 'Look-alike · L2 slide 27',
      findings=S + 'superimposed soft tissue — "skin folds" or superficial masses: homogeneous regional increased soft-tissue opacity, brightest at the fold margin, passes through lung lobes ignoring their margins and passes outside of the lungs.',
      interp='Superimposed skin fold (not lung disease, not pneumothorax).', answer='Superimposed skin fold',
-     extra=[('L2', 27, 340, 'Highlighted version from the slide')], tb=['1.38'])
+     tb=['1.38'])
 case('mim-expiration-1', 'mimics', 'L2', [(31, 387)], [31], 'Technique · L2 slide 31',
      findings=S + 'best to take thoracic radiographs at peak inspiration. Expiratory phase: marked caudodorsal "interstitial" pattern could hide anything; on the inspiratory image it goes away.',
      interp='Expiratory radiograph (false interstitial pattern).', answer='Expiratory radiograph',
@@ -609,6 +611,10 @@ def main():
         }
         if c['answer']:
             cases[cid]['answer'] = c['answer']
+    os.makedirs(out + '/_guide')
+    for src, pg in GUIDE:
+        subprocess.run(['pdftoppm', '-f', str(pg), '-l', str(pg), '-r', '130', '-jpeg', '-singlefile', U + SRC[src][0],
+                        os.path.join(out, '_guide', f'{src}-p{pg:03d}')], check=True, stderr=subprocess.DEVNULL)
     pubp = os.path.join(REPO, 'diagnostic-imaging-published.json')
     pub = json.load(open(pubp, encoding='utf-8'))
     for k in [k for k in pub['cases'] if k.startswith('exam4-')]:

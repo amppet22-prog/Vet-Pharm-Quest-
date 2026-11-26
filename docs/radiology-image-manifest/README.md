@@ -79,3 +79,9 @@ The anatomy lecture is not mapped yet. It contains third-party figures on pp.8�
 - Shared player change: shows **every** hidden key (lecture slides, comparisons, textbook) after answering, not only the first; supports `exam4Section` for distractors.
 - `radiology-exam4-hub.js` + X-ray hub tile "Exam 4 · Thorax & cardiac"; the 11 thorax condition cards now have `lecturePairs` (pulmonary contusion still has no lecture film).
 - Labeled_rads pages 1–7 are MSK/spine, so they're not used for Exam 4.
+
+## Exam 4 · lung pattern guide (2026-11-26)
+- `radiology-lung-pattern-guide.js` (`VPQ_LUNG_PATTERN_GUIDE.open(tab)`): a lesson opened from the Exam 4 hub ("📖 Lung patterns: how to see & check them"). Tabs: How to check (5-question flow), Bronchial, Unstructured interstitial, Structured interstitial, Alveolar, Mixed, Look-alikes.
+- Each pattern tab has: the tell, "What it looks like" (slide text), "How to check for it" (study aid, labelled as such), lecture films with an unmarked ↔ "Show me where" toggle (marked = rendered annotated slide), the slide's common-causes table, sampling, and a Practice button that plays that pattern's Exam 4 cases.
+- Extra teaching slides are rendered into `radiology-course-photos/exam4/_guide/` by `build_exam4.py` (`GUIDE` list).
+- Fix: the "highlighted version" rasters on L2 slides 27, 86 and 87 are identical to the plain film (the arrows are vector overlays on the slide), so those comparison views were removed; the rendered slide keys show the arrows.
