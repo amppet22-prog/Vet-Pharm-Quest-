@@ -19,10 +19,14 @@ function draw(){
  // Match the room's existing avatar depth presentation rather than the old
  // fixed 101px staff art; keep each staff stationary and out of the movement system.
  const player=document.getElementById('avatarSprite');
- const playerHeight=player?.getBoundingClientRect?.().height||230;
- const baseHeight=Math.max(148,Math.min(215,playerHeight*.82));
+ const rect=player?.getBoundingClientRect?.();
+ // Staff 1 must have the SAME on-stage bounding box as the playable vet.
+ // The prior .82 reduction and 215px cap made side staff visibly miniature.
+ const playerHeight=Math.max(180,rect?.height||Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-height'))||230);
+ const playerWidth=Math.max(98,rect?.width||playerHeight*.55);
+ const baseHeight=playerHeight;
  layer.replaceChildren();
- ids.forEach((id,i)=>{const a=choices.get(id);if(!a)return;const sprite=document.createElement('div');sprite.className='vpq-room-staff-sprite';sprite.style.left=positions[i]+'%';sprite.style.width=Math.round(baseHeight*(i===1?.56:.59))+'px';sprite.style.height=Math.round(baseHeight*(i===1?.93:1))+'px';sprite.style.bottom=(i===1?12:13)+'%';
+ ids.forEach((id,i)=>{const a=choices.get(id);if(!a)return;const sprite=document.createElement('div');sprite.className='vpq-room-staff-sprite';sprite.style.left=positions[i]+'%';sprite.style.width=Math.round(i===0?playerWidth:baseHeight*.55)+'px';sprite.style.height=Math.round(i===0?playerHeight:baseHeight*.93)+'px';sprite.style.bottom=(i===0?Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-bottom'))||10:i===1?12:13)+'%';
  const img=document.createElement('img');img.src=fileURL(a.path);img.alt=a.label;img.loading='lazy';img.draggable=false;img.onerror=()=>{sprite.hidden=true};
  const caption=document.createElement('span');caption.textContent='Staff '+(i+1);
  sprite.append(img,caption);layer.append(sprite);
@@ -112,5 +116,15 @@ const css=document.createElement('style');css.textContent=
 document.head.append(css);
 const nav=document.getElementById('roomnav'),stage=document.getElementById('stage');if(nav)new MutationObserver(controls).observe(nav,{childList:true});if(stage)new MutationObserver(draw).observe(stage,{attributes:true,attributeFilter:['data-room']});
 controls();draw();
+const player=document.getElementById('avatarSprite');
+if(player&&typeof ResizeObserver==='function'){
+ let lastSize='';
+ new ResizeObserver(entries=>{
+  const rect=entries[0]?.contentRect;if(!rect)return;
+  const value=Math.round(rect.width)+'x'+Math.round(rect.height);
+  if(value===lastSize)return;lastSize=value;
+  draw();
+ }).observe(player);
+}
 window.VPQ_ROOM_STAFF={open,redraw:draw,assignments:get};
 })();
