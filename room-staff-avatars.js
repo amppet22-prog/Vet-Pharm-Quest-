@@ -20,13 +20,13 @@ function draw(){
  // fixed 101px staff art; keep each staff stationary and out of the movement system.
  const player=document.getElementById('avatarSprite');
  const rect=player?.getBoundingClientRect?.();
- // Staff 1 must have the SAME on-stage bounding box as the playable vet.
- // The prior .82 reduction and 215px cap made side staff visibly miniature.
+ // Match ALL three room staff to the playable avatar's bounding dimensions.
+ // The old slot multipliers made each stationary staff a different size.
  const playerHeight=Math.max(180,rect?.height||Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-height'))||230);
  const playerWidth=Math.max(98,rect?.width||playerHeight*.55);
  const baseHeight=playerHeight;
  layer.replaceChildren();
- ids.forEach((id,i)=>{const a=choices.get(id);if(!a)return;const sprite=document.createElement('div');sprite.className='vpq-room-staff-sprite';sprite.style.left=positions[i]+'%';sprite.style.width=Math.round(i===0?playerWidth:baseHeight*.55)+'px';sprite.style.height=Math.round(i===0?playerHeight:baseHeight*.93)+'px';sprite.style.bottom=(i===0?Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-bottom'))||10:i===1?12:13)+'%';
+ ids.forEach((id,i)=>{const a=choices.get(id);if(!a)return;const sprite=document.createElement('div');sprite.className='vpq-room-staff-sprite';sprite.style.left=positions[i]+'%';sprite.style.width=Math.round(playerWidth)+'px';sprite.style.height=Math.round(playerHeight)+'px';sprite.style.bottom=(Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-bottom'))||10)+'%';
  const img=document.createElement('img');img.src=fileURL(a.path);img.alt=a.label;img.loading='lazy';img.draggable=false;img.onerror=()=>{sprite.hidden=true};
  const caption=document.createElement('span');caption.textContent='Staff '+(i+1);
  sprite.append(img,caption);layer.append(sprite);
