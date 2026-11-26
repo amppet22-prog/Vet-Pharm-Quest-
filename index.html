@@ -2292,7 +2292,13 @@ $('modalBody').addEventListener('submit',e=>{if(e.target.id!=='avatarForm')retur
   form.querySelector('.vpq-companion-save-warning')?.remove();
   form.appendChild(message);return;
  }
- Object.assign(state,chosen);persist();updateAvatar();updateHUD();closeModal()},true);
+ Object.assign(state,chosen);
+ // Saving the avatar editor also updates the currently selected companion's own name.
+ if(state.vpqCompanionId&&state.vpqCompanionNames&&chosen.petName?.trim()){
+  state.vpqCompanionNames[state.vpqCompanionId]=chosen.petName.replace(/[<>]/g,'').trim().slice(0,28);
+  state.petName=state.vpqCompanionNames[state.vpqCompanionId];
+ }
+ persist();updateAvatar();updateHUD();closeModal()},true);
 $('modalBody').addEventListener('click',e=>{if(e.target.closest('#vpqCancelAvatar'))closeModal()});
 $('upgradeList').addEventListener('click',e=>{const c=e.target.closest('[data-rewardcat]');if(c){vpqRewardCategory=c.dataset.rewardcat;renderUpgrades()}const eq=e.target.closest('[data-rewardequip]');if(eq){const theme=eq.dataset.rewardequip;if(theme==='default'||state.upgrades.some(id=>{const u=upgrades.find(v=>v.id===id);return u&&u.theme===theme})){state.activeTheme=theme;persist();renderRoom();renderUpgrades()}}});
 
@@ -5858,6 +5864,25 @@ for(const [category,[minLevel,maxLevel]] of Object.entries(vpqCompanionUnlockBan
 const vpqCompanionById=id=>vpqCompanionCatalog.find(c=>c.id===id);
 const vpqCompanionLv=()=>Math.floor(Math.max(0,Number(state.xp)||0)/LEVEL_THRESH)+1;
 if(!Array.isArray(state.vpqCompanionOwned))state.vpqCompanionOwned=[];
+// Unique player-chosen names are stored per companion ID; no asset/catalog renames.
+if(!state.vpqCompanionNames||typeof state.vpqCompanionNames!=='object'||Array.isArray(state.vpqCompanionNames))state.vpqCompanionNames={};
+function vpqCustomCompanionName(c){
+ if(!c)return '';
+ const custom=state.vpqCompanionNames[c.id];
+ return typeof custom==='string'&&custom.trim()?custom.trim():c.name;
+}
+function vpqSaveCompanionName(c,raw){
+ if(!c||!vpqCompanionOwned(c))return false;
+ const cleaned=String(raw||'').replace(/[<>]/g,'').replace(/\s+/g,' ').trim().slice(0,28);
+ if(!cleaned)return false;
+ state.vpqCompanionNames[c.id]=cleaned;
+ if(state.vpqCompanionId===c.id){
+  state.petName=cleaned;
+  const form=$('avatarForm');if(form?.elements?.petName)form.elements.petName.value=cleaned;
+ }
+ persist();updateHUD();updateAvatar();
+ return true;
+}
 // Retire the old Mera starter selection that could resurrect the obsolete sprite
 // on profile reload. This is a targeted ID migration, not a save reset.
 if(state.vpqCompanionId==='dog-mera'){
@@ -5868,6 +5893,12 @@ if(state.vpqCompanionId==='dog-mera'){
 if(!state.vpqCompanionId || !vpqCompanionById(state.vpqCompanionId)){
  const oldDog=vpqCompanionCatalog.find(c=>c.category==='dog'&&c.petBreed===state.petBreed);
  state.vpqCompanionId=oldDog?.id||(state.pet==='🐈'?'cat-tuxedo':'dog-mera-regular');
+}
+// Migrate a pre-existing personalized pet name without replacing other names.
+// Generic starter labels are not treated as intentional custom names.
+if(!state.vpqCompanionNames[state.vpqCompanionId]&&state.petName&&
+ !['Buddy','Companion','Pet'].includes(state.petName)){
+ state.vpqCompanionNames[state.vpqCompanionId]=String(state.petName).slice(0,28);
 }
 // Free starters never need an explicit purchase record.
 function vpqCompanionOwned(c){return !!c&&(c.price===0||state.vpqCompanionOwned.includes(c.id))}
@@ -5930,6 +5961,7 @@ function vpqCompanionApply(c,form){
  if(!c)return;
  state.vpqCompanionId=c.id;
  state.pet=c.pet;
+ state.petName=vpqCustomCompanionName(c);
  // Keep legacy pet fields synchronized so movement, preview and saves still work.
  if(c.category==='dog')state.petBreed=c.petBreed||c.id;
  else if(c.category==='cat')state.catLook=c.id.replace(/^cat-/,'');
@@ -5981,9 +6013,12 @@ vpqUpdatePetGallery=function(){
   const disabled=selected||!vpqCompanionValid(c)||(!owned&&(!levelOK||!afford));
   return '<article class="vpq-companion-card '+(selected?'chosen':'')+'">'+
     '<div class="vpq-companion-figure">'+vpqCompanionAvatar(c)+'</div>'+
-    '<strong>'+escapeHtml(c.name)+'</strong>'+
+    '<strong>'+escapeHtml(vpqCustomCompanionName(c))+'</strong>'+
+    (vpqCustomCompanionName(c)!==c.name?'<small class="vpq-companion-original">Original: '+escapeHtml(c.name)+'</small>':'')+
     '<span class="vpq-companion-meta">'+(c.price===0?'Free starter':'Level '+c.level+' · '+c.price+' coins')+'</span>'+
-    '<button type="button" data-vpqcomp-act="'+escapeHtml(c.id)+'" '+(disabled?'disabled':'')+'>'+status+'</button></article>';
+    '<button type="button" data-vpqcomp-act="'+escapeHtml(c.id)+'" '+(disabled?'disabled':'')+'>'+status+'</button>'+
+    (owned?'<button type="button" class="vpq-companion-rename" data-vpqcomp-rename="'+escapeHtml(c.id)+'">✏️ Custom name</button>':'')+
+    '</article>';
  }).join('');
  const nextCompanions=vpqCompanionCatalog.filter(c=>c.image&&c.category===vpqCompanionTab&&c.price>0&&!vpqCompanionOwned(c)&&c.level>vpqCompanionLv()).sort((a,b)=>a.level-b.level);
  const nextUnlock=nextCompanions[0];
@@ -6008,9 +6043,20 @@ updateAvatar=function(){
 $('modalBody').addEventListener('click',function(e){
  const tab=e.target.closest('[data-vpqcomp-tab]');
  const btn=e.target.closest('[data-vpqcomp-act]');
- if(!tab&&!btn)return;
+ const rename=e.target.closest('[data-vpqcomp-rename]');
+ if(!tab&&!btn&&!rename)return;
  e.preventDefault();e.stopImmediatePropagation();
  if(tab){vpqCompanionTab=tab.dataset.vpqcompTab;vpqUpdatePetGallery();return;}
+ if(rename){
+  const chosen=vpqCompanionById(rename.dataset.vpqcompRename);
+  if(!vpqCompanionOwned(chosen))return;
+  const name=window.prompt('Choose a name for '+chosen.name+' (up to 28 characters):',vpqCustomCompanionName(chosen));
+  if(name===null)return;
+  if(!vpqSaveCompanionName(chosen,name)){window.alert('Please enter a name with at least one character.');return;}
+  vpqUpdatePetGallery();
+  if($('avatarForm'))vpqRenderStoryPreview();
+  return;
+ }
  const c=vpqCompanionById(btn.dataset.vpqcompAct);
  if(!c||!vpqCompanionValid(c)||(!vpqCompanionOwned(c)&&state.vpqCompanionId!==c.id&&vpqCompanionLv()<c.level))return;
  if(!vpqCompanionOwned(c)){
@@ -6035,7 +6081,7 @@ const vpqCompanionStyles=document.createElement('style');
 vpqCompanionStyles.textContent=
  '.vpq-companion-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px}.vpq-companion-heading h3{margin:5px 0}.vpq-companion-heading span{font-weight:800;color:#71509b}'+
  '.vpq-companion-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.vpq-companion-tabs button{font-size:13px;padding:7px 10px;border-radius:22px}'+
- '.vpq-companion-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:9px;margin:8px 0}'+
+ '.vpq-companion-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:9px;margin:8px 0}.vpq-companion-card .vpq-companion-rename{margin-top:5px;background:#f3eaff;border:1px solid #bda8d4;color:#63507d;font-size:11px;padding:6px}.vpq-companion-original{display:block;color:#746987;font-size:10px;min-height:13px}'+
  '.vpq-companion-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;border:2px solid #ead9e4;background:#fff9f5;border-radius:14px;padding:9px 6px;min-width:0}'+
  '.vpq-companion-card.chosen{border-color:#a57ad6;background:#f3eaff}.vpq-companion-card strong{font-size:13px;min-height:30px;line-height:1.2}'+
  '.vpq-companion-figure{display:grid;place-items:center;width:100%;height:112px}.vpq-companion-art{width:100%;height:105px;object-fit:contain;filter:drop-shadow(0 3px 3px #394b4826)}'+
