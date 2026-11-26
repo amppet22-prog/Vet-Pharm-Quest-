@@ -1,21 +1,93 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" aria-label="Pastel illustrated veterinary dog enrichment courtyard" role="img">
-<defs><linearGradient id="sky" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#b8e6f4"/><stop offset="1" stop-color="#fff5dc"/></linearGradient><linearGradient id="grass" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#c2e3b1"/><stop offset="1" stop-color="#96caa2"/></linearGradient></defs>
-<rect width="1000" height="500" fill="#f5ecf8"/><path d="M0 0H1000L944 71H56Z" fill="#fff9ef"/><path d="M0 0L57 71V350L0 420Z M1000 0L943 71V350L1000 420Z" fill="#d5c9e4"/>
-<rect x="59" y="66" width="882" height="296" rx="20" fill="url(#sky)"/><circle cx="798" cy="114" r="38" fill="#ffe5a1"/>
-<path d="M60 244q137-103 290-12q171-97 320-14q154-74 271 24v122H60Z" fill="#c8e0c2"/><path d="M60 291q180-65 347 3q186-89 339-13q92-34 195 15v66H60Z" fill="#93caaa"/>
-<g fill="#e8f7ec" stroke="#8bad9d" stroke-width="5"><path d="M120 235V360M216 235V360M312 235V360M408 235V360M504 235V360M600 235V360M696 235V360M792 235V360M888 235V360M105 262h805M105 336h805" fill="none"/></g>
-<path d="M59 361H941L1000 500H0Z" fill="url(#grass)"/><path d="M59 361L0 500M941 361L1000 500M300 361L262 500M510 361v139M720 361L758 500" fill="none" stroke="#d5f0c7" stroke-width="4"/>
-<path d="M450 420q75-25 138 0" stroke="#fffaf1" stroke-width="8" stroke-dasharray="12 13" fill="none" opacity=".65"/>
-<rect x="323" y="81" width="355" height="62" rx="25" fill="#fff9f4" stroke="#bca1d0" stroke-width="6"/><text x="500" y="108" text-anchor="middle" font-family="Arial" font-size="24" font-weight="900" fill="#8269a6">THE HAPPY PAW YARD</text><text x="500" y="132" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#c28ca8">SNIFF • PLAY • REST • LEARN</text>
-<!-- Quiet shaded station left -->
-<rect x="87" y="270" width="193" height="103" rx="17" fill="#ead6ed" stroke="#b59dc8" stroke-width="6"/><path d="M72 273l106-82 120 82" fill="#f4c3d6" stroke="#b78fae" stroke-width="8" stroke-linejoin="round"/><path d="M123 369v-43q0-42 47-42t47 42v43" fill="#a998be"/><ellipse cx="167" cy="355" rx="47" ry="11" fill="#f7e8eb"/><rect x="219" y="306" width="42" height="49" rx="10" fill="#e9f4f0"/>
-<!-- Sniffing garden rear-left -->
-<path d="M321 330q-25-44 1-67q40-5 38 46M356 328q5-51 37-53q34 26 6 57" stroke="#7bad9c" stroke-width="11" fill="none"/><g fill="#f1bad0"><circle cx="313" cy="274" r="12"/><circle cx="368" cy="260" r="13"/><circle cx="399" cy="281" r="10"/></g>
-<!-- agility stepping blocks center rear -->
-<rect x="440" y="312" width="91" height="49" rx="10" fill="#d9b9df" stroke="#b49aca" stroke-width="6"/><rect x="536" y="286" width="91" height="76" rx="10" fill="#a7cbd3" stroke="#89acbd" stroke-width="6"/><rect x="630" y="321" width="63" height="43" rx="10" fill="#edd3aa" stroke="#c6a783" stroke-width="6"/><path d="M452 312h66M549 286h66M639 321h45" stroke="#fff9ee" stroke-width="7" stroke-linecap="round"/>
-<!-- Right water and rest -->
-<rect x="785" y="315" width="111" height="55" rx="18" fill="#b4d5e2" stroke="#83b5c5" stroke-width="6"/><ellipse cx="840" cy="325" rx="52" ry="12" fill="#daeff7"/><path d="M777 276l80-81 76 81" fill="#d8c5e6" stroke="#af95c8" stroke-width="8" stroke-linejoin="round"/>
-<!-- Original placeholder dog figures replaced with distinctive illustrated dog characters. -->
-<!-- Dog characters are positioned from the room scene so their locations stay editable. -->
-<g><circle cx="453" cy="392" r="16" fill="#f6cb89"/><path d="M442 382l22 23m0-22-22 23" stroke="#fff8f4" stroke-width="4"/><path d="M860 394q30-24 43 9" stroke="#e7a7c6" stroke-width="12" fill="none"/></g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-label="Expanded pastel veterinary kennel dog yard with separate sniffing, agility, run, tunnel and quiet recovery spaces; empty placements for user-owned dogs">
+<defs>
+ <linearGradient id="yardSky" x2="0" y2="1"><stop stop-color="#c4eafd"/><stop offset="1" stop-color="#f8f9e9"/></linearGradient>
+ <linearGradient id="yardGrass" x2="0" y2="1"><stop stop-color="#c7e9ae"/><stop offset="1" stop-color="#9dd29e"/></linearGradient>
+ <linearGradient id="yardTeal" x2="0" y2="1"><stop stop-color="#a6dfd5"/><stop offset="1" stop-color="#419b97"/></linearGradient>
+ <linearGradient id="yardSand" x2="0" y2="1"><stop stop-color="#f8e3bd"/><stop offset="1" stop-color="#e9c99e"/></linearGradient>
+ <filter id="yardShadow" x="-20%" y="-30%" width="145%" height="160%"><feDropShadow dx="2" dy="3" stdDeviation="3" flood-color="#648578" flood-opacity=".22"/></filter>
+</defs>
+<rect width="1000" height="500" fill="url(#yardSky)"/>
+<path d="M0 85Q190 40 378 83T760 69T1000 96V231H0Z" fill="#dceacc"/>
+<path d="M0 119Q230 73 451 126T1000 113V244H0Z" fill="#bcdcb6"/>
+<!-- trees, gentle canopy and kennel exterior -->
+<g fill="#83b598" stroke="#69967d" stroke-width="3">
+ <path d="M20 174V67" stroke="#967d65" stroke-width="17"/>
+ <circle cx="28" cy="66" r="56"/><circle cx="74" cy="49" r="40"/>
+ <path d="M931 179V84" stroke="#967d65" stroke-width="17"/>
+ <circle cx="927" cy="57" r="57"/><circle cx="982" cy="74" r="47"/>
+</g>
+<path d="M42 115H958V238H42Z" fill="#daf0da" opacity=".3"/>
+<path d="M42 123H958M42 206H958" stroke="#526e6a" stroke-width="8"/>
+<path d="M50 121v104" stroke="#526e6a" stroke-width="6"/><path d="M102 121v104" stroke="#526e6a" stroke-width="6"/><path d="M154 121v104" stroke="#526e6a" stroke-width="6"/><path d="M206 121v104" stroke="#526e6a" stroke-width="6"/><path d="M258 121v104" stroke="#526e6a" stroke-width="6"/><path d="M310 121v104" stroke="#526e6a" stroke-width="6"/><path d="M362 121v104" stroke="#526e6a" stroke-width="6"/><path d="M414 121v104" stroke="#526e6a" stroke-width="6"/><path d="M466 121v104" stroke="#526e6a" stroke-width="6"/><path d="M518 121v104" stroke="#526e6a" stroke-width="6"/><path d="M570 121v104" stroke="#526e6a" stroke-width="6"/><path d="M622 121v104" stroke="#526e6a" stroke-width="6"/><path d="M674 121v104" stroke="#526e6a" stroke-width="6"/><path d="M726 121v104" stroke="#526e6a" stroke-width="6"/><path d="M778 121v104" stroke="#526e6a" stroke-width="6"/><path d="M830 121v104" stroke="#526e6a" stroke-width="6"/><path d="M882 121v104" stroke="#526e6a" stroke-width="6"/><path d="M934 121v104" stroke="#526e6a" stroke-width="6"/>
+<path d="M0 224Q235 215 448 231T1000 226V500H0Z" fill="url(#yardGrass)"/>
+<path d="M0 366Q150 349 276 380T510 384Q675 350 823 376T1000 359V500H0Z" fill="#acd79e" opacity=".7"/>
+<!-- zone boundaries permit different dogs later; not actual animal slots yet -->
+<path d="M251 231Q276 321 248 482M494 229Q511 314 503 482M754 235Q728 323 761 482" stroke="#f6f5df" stroke-width="5" stroke-dasharray="9 13" fill="none" opacity=".85"/>
+<!-- top sign, above room equipment -->
+<rect x="277" y="10" width="446" height="60" rx="20" fill="#fffbf2" stroke="#96c6bf" stroke-width="5" filter="url(#yardShadow)"/>
+<text x="500" y="34" font-family="Arial,sans-serif" font-size="25" text-anchor="middle" fill="#477e7c" font-weight="900">HAPPY PAWS · KENNEL YARD</text>
+<text x="500" y="53" font-family="Arial,sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#8b829e">EXPLORE  •  PLAY  •  ENRICH  •  REST</text>
+<!-- 1: sniff and sensory garden, left -->
+<path d="M23 347Q117 307 237 348V445Q112 482 23 440Z" fill="#e6d4ab" stroke="#c4a779" stroke-width="5"/>
+<path d="M39 350Q125 321 218 356" fill="none" stroke="#f9e9cb" stroke-width="6"/>
+<rect x="38" y="271" width="190" height="66" rx="15" fill="#e7f1df" stroke="#a5bea3" stroke-width="4"/>
+<path d="M54 311q31-36 63 0q31-36 61 0q19-19 35-4" fill="none" stroke="#83b196" stroke-width="10"/>
+<circle cx="75" cy="291" r="12" fill="#efbad5"/><circle cx="135" cy="285" r="13" fill="#f2c6a2"/><circle cx="188" cy="294" r="12" fill="#e8a7ca"/>
+<g filter="url(#yardShadow)">
+ <rect x="54" y="376" width="158" height="50" rx="8" fill="url(#yardSand)" stroke="#b9916d" stroke-width="6"/>
+ <path d="M71 392q17 12 37 1M133 409q22-12 41-1" fill="none" stroke="#d4b28a" stroke-width="4"/>
+ <circle cx="103" cy="403" r="5" fill="#cc9e74"/><circle cx="123" cy="395" r="5" fill="#cc9e74"/>
+</g>
+<path d="M78 355h121" stroke="#8aaf94" stroke-width="7" stroke-linecap="round"/>
+<!-- 2: obstacle / confidence agility -->
+<path d="M267 359Q383 305 483 360V468Q380 486 267 455Z" fill="#cfad87" opacity=".53"/>
+<path d="M267 360Q379 314 485 360" stroke="#f1e4d3" stroke-width="5" fill="none"/>
+<g filter="url(#yardShadow)">
+ <path d="M287 385L341 316L395 385" fill="#70bbb0" stroke="#377d82" stroke-width="7" stroke-linejoin="round"/>
+ <path d="M308 356h64M323 338h37M296 372h90" stroke="#ddf7ed" stroke-width="5"/>
+ <rect x="401" y="343" width="59" height="17" rx="5" fill="#a1dcd0" stroke="#388e8a" stroke-width="5"/>
+ <path d="M410 356v45M449 356v45" stroke="#5a938e" stroke-width="8"/>
+ <circle cx="306" cy="418" r="17" fill="#9fdad0" stroke="#3f8a86" stroke-width="5"/><circle cx="356" cy="429" r="17" fill="#9fdad0" stroke="#3f8a86" stroke-width="5"/><circle cx="405" cy="420" r="17" fill="#9fdad0" stroke="#3f8a86" stroke-width="5"/>
+</g>
+<!-- 3: central open run and chase field -->
+<path d="M512 284Q623 252 744 296V451Q618 470 515 437Z" fill="#cbe8a9" stroke="#b1d797" stroke-width="3"/>
+<path d="M541 343Q627 301 710 346M543 400Q629 438 719 395" stroke="#e6f4c7" stroke-width="6" stroke-dasharray="14 12" fill="none"/>
+<g fill="#f7e2ae" opacity=".9"><ellipse cx="624" cy="366" rx="27" ry="12"/><circle cx="605" cy="349" r="7"/><circle cx="619" cy="344" r="7"/><circle cx="635" cy="345" r="7"/><circle cx="648" cy="351" r="7"/></g>
+<g filter="url(#yardShadow)"><path d="M558 286v49M709 286v49" stroke="#527a71" stroke-width="8"/><rect x="553" y="289" width="161" height="22" rx="9" fill="#67b5ab" stroke="#368b86" stroke-width="4"/><path d="M629 292v14" stroke="#e4fff2" stroke-width="5"/></g>
+<!-- 4: tunnel, separate sensory and hide corner -->
+<path d="M769 338q59-95 185-8l18 101H758Z" fill="#b5d2a4" stroke="#88b298" stroke-width="6"/>
+<path d="M792 367q63-75 151 0v53H792Z" fill="#a9c9a2" stroke="#83ae91" stroke-width="5"/>
+<ellipse cx="875" cy="389" rx="53" ry="41" fill="#bca4a0" stroke="#a48b81" stroke-width="10"/>
+<ellipse cx="874" cy="390" rx="38" ry="31" fill="#776f77" stroke="#d4b7a3" stroke-width="6"/>
+<ellipse cx="872" cy="394" rx="26" ry="22" fill="#524f5a"/>
+<path d="M798 340l17-21M814 328l16-21M835 313l10-11M929 324l20 16" stroke="#dceecb" stroke-width="7" stroke-linecap="round"/>
+<!-- rest/shade pavilion in rear-left with water station -->
+<g filter="url(#yardShadow)">
+ <path d="M91 237V164M210 236V164" stroke="#8e8c83" stroke-width="10"/>
+ <path d="M66 168l85-59 87 59Z" fill="#72bdb4" stroke="#4c898e" stroke-width="7" stroke-linejoin="round"/>
+ <path d="M80 171h145" stroke="#c1f1e4" stroke-width="6"/>
+ <rect x="103" y="213" width="103" height="14" rx="6" fill="#bc9f8a" stroke="#8c7c74" stroke-width="3"/>
+ <path d="M112 226v14M197 226v14" stroke="#82766c" stroke-width="7"/>
+ <rect x="111" y="182" width="92" height="31" rx="7" fill="#fff0d8"/>
+ <path d="M128 190h58" stroke="#b7a0ac" stroke-width="3"/>
+ <rect x="244" y="199" width="33" height="48" rx="6" fill="#72b8b2" stroke="#398c8a" stroke-width="4"/>
+ <ellipse cx="261" cy="245" rx="27" ry="9" fill="#d6e5e1" stroke="#78a9af" stroke-width="4"/>
+</g>
+<!-- rear dividers and open fencing for independent future dog placements -->
+<path d="M498 241v-32M754 242v-32" stroke="#587d76" stroke-width="9" stroke-linecap="round"/>
+<path d="M495 213h260" stroke="#81ada1" stroke-width="7"/>
+<g transform="translate(62 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(129 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(196 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(263 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(330 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(397 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(464 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(531 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(598 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(665 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(732 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(799 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(866 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(933 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(110 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(177 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(244 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(311 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(378 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(445 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(512 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(579 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(646 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(713 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(780 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(847 203)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(914 324)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#f9d0a0"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g><g transform="translate(91 156)"><path d="M0 13V-4" stroke="#729b75" stroke-width="3"/><circle cy="-7" r="7" fill="#e9a9cb"/><circle cx="-6" cy="-8" r="4" fill="#f7e7f0"/><circle cx="5" cy="-13" r="4" fill="#f7e7f0"/></g>
+<!-- understated section labels; hotspots still own click and E behavior -->
+<g font-family="Arial,sans-serif" font-size="12" font-weight="900" text-anchor="middle">
+ <rect x="38" y="250" width="200" height="23" rx="10" fill="#fffaf0" stroke="#9fbeb4" stroke-width="3"/><text x="138" y="266" fill="#547b79">SNIFF &amp; SENSORY</text>
+ <rect x="281" y="250" width="199" height="23" rx="10" fill="#fffaf0" stroke="#9fbeb4" stroke-width="3"/><text x="380" y="266" fill="#547b79">LOW-IMPACT AGILITY</text>
+ <rect x="530" y="250" width="191" height="23" rx="10" fill="#fffaf0" stroke="#9fbeb4" stroke-width="3"/><text x="625" y="266" fill="#547b79">OPEN PLAY FIELD</text>
+ <rect x="775" y="250" width="187" height="23" rx="10" fill="#fffaf0" stroke="#9fbeb4" stroke-width="3"/><text x="869" y="266" fill="#547b79">TUNNEL &amp; QUIET</text>
+</g>
+<!-- foreground gate and walkway, keep clear of dog/character sprites -->
+<path d="M0 476H1000" stroke="#f2e9d5" stroke-width="22"/>
+<path d="M25 475H975" stroke="#527b77" stroke-width="7"/>
+<path d="M24 467v33M122 467v33M220 467v33M780 467v33M880 467v33M975 467v33" stroke="#527b77" stroke-width="8"/>
+<rect x="470" y="456" width="60" height="34" rx="9" fill="#fdfaf2" stroke="#6a9691" stroke-width="4"/>
+<g fill="#75afa4"><ellipse cx="499" cy="474" rx="12" ry="7"/><circle cx="489" cy="464" r="4"/><circle cx="497" cy="461" r="4"/><circle cx="506" cy="462" r="4"/><circle cx="514" cy="465" r="4"/></g>
 </svg>
