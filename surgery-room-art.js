@@ -74,7 +74,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  // Instrument/ Mayo stand and instrument line.
  s+='<g filter="url(#sSh)">'+rect(544,305,69,10,'#8eaeae','#e3f3f0',4)+rect(548,311,61,8,'#6bc3bd')+path('M554 319v39M601 319v39','#7b9fab',5)+rect(543,358,70,10,'url(#sSteel)','#94b2ba',3);
  for(let x of [551,564,577,590])s+=path('M'+x+' 311l7 -10','#658b97',2);
- s+='</g>'+label(634,371,111,'OPERATING TABLE');
+ s+='</g>'; // Operating table is labeled by existing station button.
  // OR equipment drawer cart and supplies.
  s+=rect(791,242,69,111,'url(#sSteel)','#86a8b6',8,3);
  for(let i=0;i<3;i++){s+=rect(798,263+i*27,55,22,'#e3f2f5','#9bbac7',3)+path('M818 '+(275+i*27)+'h16','#8eb2bc',2);}
@@ -105,7 +105,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<polygon points="969,81 978,76 978,352 969,348" fill="#907db4"/>';
  s+=path('M898 117L971 85M897 313L971 338','#f5faff',3);
  s+='<ellipse cx="956" cy="240" rx="4" ry="6" fill="#f6e4b7" stroke="#8e83ab" stroke-width="1"/>';
- s+=rect(890,67,95,24,'#faf7ff','#b2a6cb',7,2)+txt(938,83,'RECOVERY',11,'#6f608f',900);
+ s+=rect(892,58,90,22,'#faf7ff','#b2a6cb',7,2)+txt(937,73,'RECOVERY',10,'#6f608f',900);
  // A few floor reflections indicate depth, leaving foreground walkable for avatars.
  s+='<path d="M71 377H376M429 382H952" stroke="#ffffff" stroke-width="3" opacity=".65"/>';
  s+='<path d="M375 353L339 500M863 353L904 500" stroke="#effcff" stroke-width="2" opacity=".65"/>';
