@@ -215,7 +215,7 @@ def main():
             pg = int(os.path.basename(f).split('-')[1])
             cap = f'{short}, slide {pg}.'
             if c['notes_normal']:
-                cap += ' The slide pairs an abnormal and a Normal view; open the annotated key to see which is which.'
+                cap += ' The slide pairs an abnormal and a Normal view; the teaching key shows which is which.'
             images.append({'url': RAW_URL + rel, 'view': f'View {"AB"[n - 1]}', 'caption': cap})
             manifest.append({'caseId': cid, 'slotId': c['slot'], 'section': c['section'], 'repoPath': rel, 'sourceFile': pdf,
                              'sourcePage': pg, 'sha256': hashlib.sha256(open(os.path.join(REPO, rel), 'rb').read()).hexdigest()})

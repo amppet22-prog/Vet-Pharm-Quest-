@@ -5,13 +5,14 @@
  */
 (function(){'use strict';
 const SECTIONS=[
+ {icon:'🦴',title:'Normal MSK anatomy · name the region and view',desc:'Normal radiographs from the MSK Anatomy lecture (Dr. Morris). Warm up here before the disease cases.',sections:['anatomy']},
  {icon:'🩺',title:'Start here · practice cases',desc:'Three whole patients from the MSK practice-case slides. Describe both views before you reveal.',slots:['e3-practice-hip-gsd','e3-practice-mastiff-forelimb','e3-practice-puppy-lameness']},
  {icon:'🦴',title:'MSK I · bone density, joints, OCD and elbow',desc:'Osteopenia, stifle effusion and DJD, shoulder OCD and elbow dysplasia.',slots:['e3-bone-osteopenia','e3-djd-stifle','e3-ocd-shoulder','e3-bsava-elbow']},
  {icon:'🌱',title:'MSK I · developmental bone disease',desc:'Retained cartilaginous core, HOD stages and panosteitis.',sections:['msk1-dev']},
  {icon:'🐕',title:'MSK I · hips',desc:'Normal coverage, hip dysplasia progression, Legg-Calvé-Perthes and physeal dysplasia.',sections:['msk1-hip']},
  {icon:'🔥',title:'MSK II · aggressive vs non-aggressive bone',desc:'Lysis patterns, periosteal reactions, infection versus neoplasia, and fracture chronicity.',slots:['e3-msk2-lysis-pattern','e3-msk2-periosteal','e3-bsava-infection-neoplasm','e3-bsava-healing']},
  {icon:'🦵',title:'MSK II · erosive joint disease',desc:'Septic arthritis, joint-centered neoplasia and erosive polyarthropathy.',sections:['msk2-joint']},
- {icon:'🧠',title:'Skull & spine',desc:'Skull and nasal disease, congenital vertebral anomalies, discospondylitis, disc disease, neoplasia and trauma.',slots:['e3-skull-spine']}
+ {icon:'🧠',title:'Skull & spine',desc:'Skull and nasal disease, congenital vertebral anomalies, discospondylitis, disc disease, neoplasia and trauma.',slots:['e3-skull-spine'],sections:['spine-extra']}
 ];
 let api=null;
 const E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
