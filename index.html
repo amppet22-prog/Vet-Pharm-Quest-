@@ -5898,7 +5898,10 @@ if(!state.vpqCompanionId || !vpqCompanionById(state.vpqCompanionId)){
 // Generic starter labels are not treated as intentional custom names.
 if(!state.vpqCompanionNames[state.vpqCompanionId]&&state.petName&&
  !['Buddy','Companion','Pet'].includes(state.petName)){
- state.vpqCompanionNames[state.vpqCompanionId]=String(state.petName).slice(0,28);
+ state.vpqCompanionNames[state.vpqCompanionId]=String(state.petName).replace(/[<>]/g,'').trim().slice(0,28);
+}
+if(typeof state.vpqCompanionNames[state.vpqCompanionId]==='string'&&state.vpqCompanionNames[state.vpqCompanionId].trim()){
+ state.petName=state.vpqCompanionNames[state.vpqCompanionId].trim();
 }
 // Free starters never need an explicit purchase record.
 function vpqCompanionOwned(c){return !!c&&(c.price===0||state.vpqCompanionOwned.includes(c.id))}
@@ -5966,6 +5969,7 @@ function vpqCompanionApply(c,form){
  if(c.category==='dog')state.petBreed=c.petBreed||c.id;
  else if(c.category==='cat')state.catLook=c.id.replace(/^cat-/,'');
  if(form){
+  if(form.elements.petName)form.elements.petName.value=state.petName;
   if(form.elements.pet)form.elements.pet.value=state.pet;
   if(form.elements.petBreed)form.elements.petBreed.value=state.petBreed||'husky-shepherd';
   if(form.elements.catLook)form.elements.catLook.value=state.catLook||'tabby';
