@@ -61,7 +61,20 @@ window.VPQ_SURGERY_ROOM_ART=function(){
   s+=rect(x+10,164,8,5,'#fffaf4','#c3d5d9',1,1);
  }
 
-  // Floor-standing scrub sink with wall taps, deep twin basins and grounded cabinets.
+  // Clearly differentiated surgical supply containers rather than repeated undifferentiated rectangles.
+ // Smaller shelf text stays within each cubby and off the operating equipment.
+ s+=txt(208,138,'GAUZE',8,'#5b7897',800)+txt(245,138,'GLOVES',8,'#5b7897',800)+txt(289,138,'DRAPES',8,'#5b7897',800)+txt(336,138,'PACKS',8,'#5b7897',800);
+ // Two wire storage rails and neatly folded sealed surgical packs in the wall cabinetry.
+ s+=path('M189 151H361M188 185H362','#adc7ce',1.8);
+ for(let x of [191,221,251]){
+   s+=rect(x,163,24,12,'#b8dbe4','#dffbfa',2,1);
+   s+=path('M'+(x+5)+' 170h14','#f8ffff',1.2);
+ }
+ // A clean tray and disposable brush canister are stored above the scrub sinks.
+ s+=rect(351,181,16,18,'#d9e8f2','#90b7c6',3,1.5);
+ s+=path('M355 185l7 8','#9bcfbb',2);
+
+ // Floor-standing scrub sink with wall taps, deep twin basins and grounded cabinets.
  s+='<ellipse cx="185" cy="350" rx="85" ry="10" fill="#769aa4" opacity=".18"/>';
  s+=rect(112,268,144,76,'#e9f2f4','#a3bbc5',6,3);
  s+=cabinet(119,274,62,66)+cabinet(187,274,62,66);
@@ -134,7 +147,16 @@ window.VPQ_SURGERY_ROOM_ART=function(){
   s+='<circle cx="'+(x+8)+'" cy="256" r="5" fill="#f8fbff" stroke="#8e9aaf" stroke-width="1.5"/>';
  }
 
-  // Anesthesia bedside accessory: calibrated absorber canister and organized looped hoses.
+  // Pressure gauge, adjustable control knobs, and machine-mounted tubing bracket.
+ s+='<circle cx="504" cy="218" r="10" fill="#eef9ff" stroke="#9cb7c5" stroke-width="2.5"/>';
+ s+=path('M504 218l5 -5','#7395aa',2.5);
+ s+=path('M526 220v24M526 221h13','#99bbc9',3);
+ s+='<circle cx="452" cy="281" r="4" fill="#76b3b4"/><circle cx="479" cy="281" r="4" fill="#78aac9"/><circle cx="511" cy="281" r="4" fill="#b9a2ce"/>';
+ // Separate labeled vaporizer knobs are visibly attached to the machine's front panel.
+ s+=rect(494,287,35,16,'#f7f2fb','#9fa9c3',4,1.5);
+ s+=txt(511,298,'VAP',8,'#647d9b',800);
+
+ // Anesthesia bedside accessory: calibrated absorber canister and organized looped hoses.
  s+='<ellipse cx="546" cy="315" rx="17" ry="7" fill="#547d91" opacity=".12"/>';
  s+=rect(535,255,20,52,'#e1f2f4','#90b5bd',6,3);
  s+='<circle cx="545" cy="267" r="5" fill="#b0d5d6"/>';
@@ -147,7 +169,8 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(534,275,20,35,'#dceeee','#8dadb3',5,2);
  for(let i=0;i<4;i++)s+='<circle cx="'+(539+i%2*7)+'" cy="'+(284+i*6)+'" r="2" fill="#e0b78d"/>';
  s+=path('M544 258q-15 -22 -31 -13M553 289q20 -10 23 -26','#9fc3c7',3);
- s+='<ellipse cx="573" cy="281" rx="12" ry="28" fill="#7dc5ac" stroke="#5ca08f" stroke-width="2.5"/>';
+ // Use only the original reservoir bag; otherwise two overlapping bags look like a graphical error.
+ s+=path('M548 291q11 -12 19 -3','#9bc6c0',2.5);
 
   // Separate large patient monitor raised on pole.
  s+='<g filter="url(#sSh)">'+rect(561,180,112,76,'#deeef4','#8ba9bd',8,5)+rect(572,190,90,54,'#263f59','#466b80',4)+path('M579 224h13l5 -11 5 21 7 -16 8 7h8l7 -12 7 17 6 -9h11','#64dcb3',3)+txt(648,207,'98',13,'#c7edb1',900)+txt(646,238,'96',12,'#c4e6f4',900);
@@ -212,7 +235,11 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(768,311,7,7,'#accfcd','#7ca7a6',2,1);
  s+=path('M771 313q-8 -28 -21 -28','#91b9c0',3);
  s+='<ellipse cx="772" cy="355" rx="9" ry="3" fill="#a3c0c5"/>';
-  // The upper-right plane is explicitly the side wall. Keep the OR free of recovery beds.
+  // Onboard cable rail and wall-mounted instrument holder; no loose instruments on the walkway.
+ s+=rect(797,258,45,16,'#e7f6f5','#95bec0',4,2);
+ for(let x of [807,819,831])s+=path('M'+x+' 263v7','#8cafb6',2);
+
+ // The upper-right plane is explicitly the side wall. Keep the OR free of recovery beds.
  s+='<polygon points="865,72 1000,0 1000,406 865,342" fill="#bfd4e1" stroke="#96aec1" stroke-width="5"/>';
  // Right wall reserved entirely for a clear passage into the separate recovery ward.
  // Recessed purple jamb, perspective reveals the recovery room behind the RIGHT wall.
