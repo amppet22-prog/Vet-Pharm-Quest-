@@ -8,7 +8,7 @@ const original=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const assets={
  skills:'assets/rooms/clinical-skills.svg',
  hallway:'assets/rooms/clinical-hallway.svg',
- surgery:'assets/rooms/surgery-suite.svg',
+ // Surgery now uses the richer interactive SVG drawn by VPQ_SPECIALIST_ROOMS; do not override it with the old flat asset.
  // Necropsy is rendered by VPQ_NECROPSY_ROOM_ART via specialist-clinic-wings.js.
  // Do not replace the live SVG with the retired necropsy-floor.svg image.
  // The specialist room SVG controller owns 'clinpath'. Do not override its
