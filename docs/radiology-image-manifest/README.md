@@ -47,3 +47,9 @@ The anatomy lecture is not mapped yet. It contains third-party figures on pp.8�
 - Excluded from question views: the 8 `verify` images and the 3 `answer-key-only` images.
 - Each case has at most 3 views, so the owner editor can still edit it.
 - Re-running the script replaces only `exam3-` cases.
+
+## Case player, multiple choice and extra Exam 3 cases (2026-11-26)
+- `radiology-case-player.js`: shared player for lecture cases. Flow: photos (tap to enlarge) → pick-the-answer multiple choice from each case's `answer` → professor findings → annotated slide, with Back / Previous / Next buttons. Grading is green for correct and orange for incorrect. The first correct answer per case earns study XP via `awardQuestion` (namespace `radiology-lecture-case-mc`).
+- `answer` labels were added to 43 Exam 3 cases (`build_exam3_cases.py` → `ANSWERS`). Practice cases and view/technique slides have no MC.
+- `build_exam3_extra.py` adds 24 `exam3x-*` cases: RCC, HOD stages, panosteitis, hip dysplasia progression, Legg-Calvé-Perthes, physeal dysplasia, erosive joint disease. The answer keys are the **professor-annotated MSK I** slides (the noted copy is +1 page from slide 22).
+- Condition cards (`radiology-lecture-condition-casebook.js`) show lecture radiographs via `lecturePairs` (group|title → case ids), and can open them as multiple-choice cases. Also added Previous, Back to the Exam hub, and `open(section, {backLabel, onBack})`. Abdomen pairs point at `exam2-*` ids, which appear once Exam 2 is published.
