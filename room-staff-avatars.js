@@ -10,26 +10,54 @@ function saved(){const profile=window.VPQ_ROOM_STAFF_BRIDGE?.getState?.();if(!pr
 function get(room){const value=saved()[room],old=typeof value==='string'?[value]:Array.isArray(value)?value:[],valid=new Set(all().map(a=>a.id));return Array.from({length:3},(_,i)=>valid.has(old[i])?old[i]:'')}
 function put(room,values){const seen=new Set(),v=values.slice(0,3).map(id=>{if(!id||seen.has(id)||!all().some(a=>a.id===id))return '';seen.add(id);return id});if(v.some(Boolean))saved()[room]=v;else delete saved()[room];window.VPQ_ROOM_STAFF_BRIDGE?.persist?.()}
 function room(){return document.getElementById('stage')?.dataset.room||'reception'}
+
+const trimCache=new Map();
+function loadTrimmed(path,img){
+ const key=fileURL(path);
+ if(trimCache.has(key)){img.src=trimCache.get(key);return}
+ img.dataset.staffSource=key;
+ img.onload=function(){
+  img.onload=null;
+  try{
+   const nw=img.naturalWidth,nh=img.naturalHeight;
+   if(!nw||!nh)return;
+   const ratio=Math.min(1,640/Math.max(nw,nh)),w=Math.max(1,Math.round(nw*ratio)),h=Math.max(1,Math.round(nh*ratio));
+   const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+   const ctx=canvas.getContext('2d',{willReadFrequently:true});if(!ctx)return;
+   ctx.drawImage(img,0,0,w,h);
+   const data=ctx.getImageData(0,0,w,h).data;
+   let minX=w,minY=h,maxX=-1,maxY=-1;
+   for(let y=0;y<h;y+=2)for(let x=0;x<w;x+=2){
+    if(data[(y*w+x)*4+3]>24){minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y)}
+   }
+   if(maxX<0)return;
+   const padX=Math.ceil(w*.015),padY=Math.ceil(h*.015);
+   minX=Math.max(0,minX-padX);minY=Math.max(0,minY-padY);
+   maxX=Math.min(w,maxX+padX+2);maxY=Math.min(h,maxY+padY+2);
+   const cropped=document.createElement('canvas');cropped.width=maxX-minX;cropped.height=maxY-minY;
+   cropped.getContext('2d').drawImage(canvas,minX,minY,cropped.width,cropped.height,0,0,cropped.width,cropped.height);
+   const src=cropped.toDataURL('image/png');trimCache.set(key,src);
+   if(img.isConnected&&img.dataset.staffSource===key)img.src=src;
+  }catch(err){/* Keep the source image if the browser cannot read its pixels. */}
+ };
+ img.src=key;
+}
 function draw(){
  const stage=document.getElementById('stage');if(!stage)return;
  let layer=stage.querySelector('#vpqRoomStaffLayer');const ids=get(room());
  if(!ids.some(Boolean)){layer?.remove();return}
  if(!layer){layer=document.createElement('div');layer.id='vpqRoomStaffLayer';stage.append(layer)}
  const choices=new Map(all().map(a=>[a.id,a])),positions=[16,70,88];
- // Match the room's existing avatar depth presentation rather than the old
- // fixed 101px staff art; keep each staff stationary and out of the movement system.
- const player=document.getElementById('avatarSprite');
- const rect=player?.getBoundingClientRect?.();
- // Match ALL three room staff to the playable avatar's bounding dimensions.
- // The old slot multipliers made each stationary staff a different size.
- const playerHeight=Math.max(180,rect?.height||Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-height'))||230);
- const playerWidth=Math.max(98,rect?.width||playerHeight*.55);
- const baseHeight=playerHeight;
  layer.replaceChildren();
- ids.forEach((id,i)=>{const a=choices.get(id);if(!a)return;const sprite=document.createElement('div');sprite.className='vpq-room-staff-sprite';sprite.style.left=positions[i]+'%';sprite.style.width=Math.round(playerWidth)+'px';sprite.style.height=Math.round(playerHeight)+'px';sprite.style.bottom=(Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-bottom'))||10)+'%';
- const img=document.createElement('img');img.src=fileURL(a.path);img.alt=a.label;img.loading='lazy';img.draggable=false;img.onerror=()=>{sprite.hidden=true};
- const caption=document.createElement('span');caption.textContent='Staff '+(i+1);
- sprite.append(img,caption);layer.append(sprite);
+ ids.forEach((id,i)=>{
+  const av=choices.get(id);if(!av)return;
+  const sprite=document.createElement('div');sprite.className='vpq-room-staff-sprite';
+  sprite.style.left=positions[i]+'%';
+  sprite.style.width='116px';sprite.style.height='190px';sprite.style.bottom='12%';
+  const img=document.createElement('img');img.alt=av.label;img.loading='eager';img.draggable=false;
+  img.onerror=()=>{sprite.hidden=true};
+  const caption=document.createElement('span');caption.textContent='Staff '+(i+1);
+  sprite.append(img,caption);layer.append(sprite);loadTrimmed(av.path,img);
  });
 }
 function controls(){
@@ -116,15 +144,5 @@ const css=document.createElement('style');css.textContent=
 document.head.append(css);
 const nav=document.getElementById('roomnav'),stage=document.getElementById('stage');if(nav)new MutationObserver(controls).observe(nav,{childList:true});if(stage)new MutationObserver(draw).observe(stage,{attributes:true,attributeFilter:['data-room']});
 controls();draw();
-const player=document.getElementById('avatarSprite');
-if(player&&typeof ResizeObserver==='function'){
- let lastSize='';
- new ResizeObserver(entries=>{
-  const rect=entries[0]?.contentRect;if(!rect)return;
-  const value=Math.round(rect.width)+'x'+Math.round(rect.height);
-  if(value===lastSize)return;lastSize=value;
-  draw();
- }).observe(player);
-}
 window.VPQ_ROOM_STAFF={open,redraw:draw,assignments:get};
 })();
