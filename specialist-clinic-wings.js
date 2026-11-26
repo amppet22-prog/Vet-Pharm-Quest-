@@ -45,6 +45,7 @@ const data={
 };
 const rect=(x,y,w,h,fill,stroke='#a4b7c9')=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="13" fill="'+fill+'" stroke="'+stroke+'" stroke-width="5"/>';
 function scene(key){
+ if(key==='surgery'&&typeof window.VPQ_SURGERY_ROOM_ART==='function')return window.VPQ_SURGERY_ROOM_ART();
  if(key==='necropsy'&&typeof window.VPQ_NECROPSY_ROOM_ART==='function')return window.VPQ_NECROPSY_ROOM_ART();
  if(key==='clinpath'&&typeof window.VPQ_CLINPATH_HYBRID_SCENE==='function')return window.VPQ_CLINPATH_HYBRID_SCENE();
  const iso=key==='isolation',cp=key==='clinpath';
