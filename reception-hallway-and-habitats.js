@@ -8,9 +8,9 @@ const destinations={vpqGoHallway:'hallway',vpqGoCat:'catcorner',vpqGoYard:'yardv
 const slots={
 hallway:[['🩺 Exam','vpqWingExam',10],['❤️ Treatment','vpqWingTreatment',27],['🩺 Surgery','vpqWingSurgery',44],['🛡️ Isolation','vpqWingIsolation',61],['🔬 Advanced','vpqWingClinpath',78],['🩻 Imaging','vpqWingImaging',93]],
 catcorner:[['🛏️ Rest & Hide','vpqCatRest',13],['🌳 Climb & Perch','vpqCatClimb',36],['🧶 Play & Enrich','vpqCatPlay',59],['🐈 Meet Cats','vpqCatView',78],['🚪 Reception','vpqWingLobby',94]],
-yardview:[['🌸 Sniff & Search','vpqDogSniff',18],['🦴 Move & Explore','vpqDogMove',43],['💧 Rest & Recover','vpqDogRest',68],['🚪 Reception','vpqWingLobby',92]]
+yardview:[['🌸 Sniff Garden','vpqDogSniff',15],['🦴 Agility Zone','vpqDogMove',36],['🐕 Open Play','vpqDogOpen',56],['💧 Rest & Tunnel','vpqDogRest',78],['🚪 Reception','vpqWingLobby',94]]
 };
-for(const [room,arr] of Object.entries(slots))rooms[room]={name:room==='hallway'?'Reception · Clinical Hallway':room==='catcorner'?'Reception Cat Corner':'Dog Kennel & Play Yard Window',color:'#f4eefa',banner:'EXTENDED HOSPITAL',decor:[],props:arr.map(([label,action,x])=>({x,label,action,emoji:label.slice(0,2),bubble:'Interact'}))};
+for(const [room,arr] of Object.entries(slots))rooms[room]={name:room==='hallway'?'Reception · Clinical Hallway':room==='catcorner'?'Reception Cat Corner':'Kennel · Expanded Dog Play Yard',color:'#f4eefa',banner:'EXTENDED HOSPITAL',decor:[],props:arr.map(([label,action,x])=>({x,label,action,emoji:label.slice(0,2),bubble:'Interact'}))};
 const choices={
 'cat-tree':['Cat climbing tree',40,'catcorner','🌳'],
 'cat-wall':['Wall climbing shelves',50,'catcorner','🪜'],
@@ -57,16 +57,18 @@ if(room==='catcorner'){
  if(old.includes('cat-toys'))s+='<text x="725" y="353" font-size="27">🪶</text>';
 }
 if(room==='yardview'){
- s='<svg class="vpqWingArt" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Cute walkable dog enrichment courtyard">'+
- '<image href="assets/reception/dog-yard-enrichment.svg?v=20261111-yard-art24" x="0" y="0" width="1000" height="500" preserveAspectRatio="none"/>';
- s+='<image href="assets/reception/dog-character-poppy.svg" x="316" y="242" width="88" height="82" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/dog-character-maple.svg" x="389" y="277" width="88" height="77" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/dog-character-ranger.svg" x="543" y="205" width="126" height="111" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/dog-character-mocha.svg" x="685" y="273" width="96" height="83" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/dog-character-sunny.svg" x="816" y="247" width="111" height="101" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ // The real yard is a zoned 1000×500 SVG, not a flattened screenshot.
+ // Keep character placements EMPTY: the owner will add their own dogs later.
+ s='<svg class="vpqWingArt" viewBox="0 0 1000 500" preserveAspectRatio="none" role="img" aria-label="Expanded walkable kennel yard with distinct sniffing, agility, open play, and quiet tunnel spaces">'+
+ '<image href="assets/reception/dog-yard-enrichment.svg?v=20261126-expanded-zones-v1" x="0" y="0" width="1000" height="500" preserveAspectRatio="none" pointer-events="none"/>';
  const placed=state.receptionHabitats?.placed||[];
- if(placed.includes('yard-toys'))s+='<circle cx="439" cy="390" r="18" fill="#f5d49b" stroke="#c99f9f" stroke-width="5"/><path d="M429 379l18 20M447 379l-18 20" stroke="#fff" stroke-width="4"/>';
- if(placed.includes('yard-agility'))s+='<path d="M467 352l72-72 70 72" stroke="#e8a9b9" stroke-width="15" stroke-linecap="round" fill="none"/><path d="M474 352h130" stroke="#b48bb3" stroke-width="14" stroke-linecap="round"/>';
+ if(placed.includes('yard-toys')){
+  s+='<g aria-label="Extra enrichment toys"><circle cx="573" cy="412" r="13" fill="#efbc87" stroke="#b98e7d" stroke-width="4"/><path d="M564 403l18 18M582 403l-18 18" stroke="#fff9ef" stroke-width="3"/><circle cx="193" cy="407" r="9" fill="#b5ade4"/></g>';
+ }
+ if(placed.includes('yard-agility')){
+  // Existing cosmetic agility unlock adds optional bunting, not a second ramp.
+  s+='<path d="M299 283Q379 297 458 284" fill="none" stroke="#5eaaa2" stroke-width="4"/><path d="M326 289l13 19 12-17M383 293l13 19 12-19" fill="#edc6d8" stroke="#9abbb5" stroke-width="2"/>';
+ }
 }
 return s+'</svg>';
 }
@@ -158,6 +160,7 @@ function buy(id){
 const dogPrompts={
  sniff:{title:'🌸 Sniff & Search',intro:'A friendly dog is curious but quickly loses interest in repeated fetch. What enrichment offers a different natural behavior?',choices:['Scatter a few diet-appropriate treats in a safe sniffing area','Make the dog chase a ball until exhausted','Remove all opportunities to explore'],correct:0,why:'Olfactory exploration and foraging offer species-typical mental enrichment. Use appropriate food, secure fencing and supervision.'},
  move:{title:'🦴 Move & Explore',intro:'A recovering senior dog has mild mobility limitations. Which equipment is the safest starting point?',choices:['Require high jumps across several obstacles','Choose low non-slip steps or a gentle supported ramp','Force a sprint through an agility tunnel'],correct:1,why:'Accessible low-impact options accommodate pain or weakness. Mobility activities must suit individual orthopedic and cardiovascular status; avoid forced high-impact exercise.'},
+ open:{title:'🐕 Open Play & Safe Groups',intro:'The new yard includes an open running area and separate calm spaces. How should a new kennel dog be introduced to a compatible play group?',choices:['Immediately release all dogs together with shared high-value toys','Assess individual temperament and health, supervise closely, and introduce compatible dogs gradually','Let dogs decide the hierarchy without supervision'],correct:1,why:'Supervised, gradual introductions and appropriate group selection reduce conflict. Not every dog benefits from group play, and separating resources and offering retreat spaces protects welfare.'},
  rest:{title:'💧 Rest & Recover',intro:'Two dogs are becoming tense, showing stiff bodies and prolonged staring. What is the best next step?',choices:['Keep them together until they sort it out','Encourage rough play with a high-value toy','Separate calmly, provide water and quiet resting areas'],correct:2,why:'Stiff posture and hard staring can precede conflict. Separate safely and allow decompression; never assume dogs must play together. Provide water, shade and individual choice.'}
 };
 function dogLesson(id){
@@ -183,6 +186,7 @@ function route(cmd){
  if(cmd==='vpqCatView'){if(catBehavior)return catBehavior.menu();return true}
  if(cmd==='vpqDogSniff')return dogLesson('sniff');
  if(cmd==='vpqDogMove')return dogLesson('move');
+ if(cmd==='vpqDogOpen')return dogLesson('open');
  if(cmd==='vpqDogRest')return dogLesson('rest');
  if(cmd==='vpqYardView'){api.showModal('🐕 Dog Play Yard','<p>See the play yard from the reception window. Dogs shown are part of the scenery, not unassigned patients. Safe play requires supervision, secure fencing and compatible groups.</p>');return true}
  return false;
