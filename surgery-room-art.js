@@ -57,7 +57,16 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(261,210,109,116,'url(#sSteel)','#8aa9bb',7,4)+rect(270,220,91,78,'#e8f4f8','#8ea8b8',6,2);
  s+='<circle cx="315" cy="257" r="30" fill="#86a8b7" stroke="#edfaff" stroke-width="5"/><circle cx="315" cy="257" r="22" fill="#d5e9f0" stroke="#90b2bd" stroke-width="3"/>';
  s+=rect(272,305,12,7,'#79c7ac','',2)+txt(315,340,'AUTOCLAVE',10,'#577f99',900);
- // Physical partition / doorway.
+ // Purpose-built scrub zone: wall-mounted soap and scrub dispenser above sink; cabinets remain unobstructed.
+ s+=rect(110,190,23,28,'#f5fbff','#8dabb9',4,2)+rect(116,195,11,12,'#a5dfcf','',3);
+ s+=rect(141,190,23,28,'#f5fbff','#8dabb9',4,2)+rect(147,195,11,12,'#c9b6e4','',3);
+ s+=path('M120 207v7M151 207v7','#789eac',2);
+ // Autoclave control bezel and door handle.
+ s+='<circle cx="345" cy="307" r="4" fill="#a1c9d6" stroke="#edfaff" stroke-width="1"/>';
+ s+=path('M335 301h17','#709ca9',2);
+ // Distinct sterile pack cubbies below supplies; folded blue-wrapped packs read as equipment.
+ for(let x of [187,220,253])s+=rect(x,183,25,11,'#a9d8e7','#e9fbff',3,1);
+  // Physical partition / doorway.
  // Partial glass partition with framed pass-through between clean prep and OR.
  s+='<polygon points="382,55 402,67 402,350 382,363" fill="url(#sSteel)" stroke="#799bac" stroke-width="3"/>';
  s+='<polygon points="403,88 426,95 426,333 403,339" fill="url(#sGlass)" stroke="#a8c5d4" stroke-width="3"/>';
@@ -65,7 +74,11 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=path('M400 80v272M429 99v229','#90b4c4',2);
  s+='<polygon points="383,353 425,341 435,349 394,365" fill="#95b5c3" stroke="#6f9da9" stroke-width="2"/>';
  s+=rect(381,343,40,8,'#9bb9c6');
- // Header over OR area kept high, not over devices.
+ // Transparent architectural half-wall frame; floor anchoring and parallax edge.
+ s+='<polygon points="401,115 425,121 425,325 401,332" fill="#f1ffff" opacity=".10"/>';
+ s+=path('M398 342l28 -9M391 355l35 -12','#6d9eaa',2);
+ s+='<ellipse cx="412" cy="360" rx="26" ry="7" fill="#678fa1" opacity=".14"/>';
+  // Header over OR area kept high, not over devices.
  s+=rect(446,74,358,42,'#f8fbff','#8bb5c8',18,3)+txt(624,102,'SURGERY &amp; ANESTHESIA',19,'#426b91',900);
  // Storage behind anesthesia machine is deliberately minimal.
  s+=rect(430,145,105,60,'#d9ecf3','#9eb8c6',5,2);
@@ -80,7 +93,12 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(501,230,21,24,'#e6e5f0','#a4b8ca',5,2)+'<circle cx="512" cy="242" r="6" fill="#90a6c2" stroke="#eefaff" stroke-width="2"/>';
  s+=path('M541 255q20 -17 35 7','#c3dce0',5);
  s+='</g>'; // no floating station label
- // Separate large patient monitor raised on pole.
+ // Anesthesia bedside accessory: calibrated absorber canister and organized looped hoses.
+ s+='<ellipse cx="546" cy="315" rx="17" ry="7" fill="#547d91" opacity=".12"/>';
+ s+=rect(535,255,20,52,'#e1f2f4','#90b5bd',6,3);
+ s+='<circle cx="545" cy="267" r="5" fill="#b0d5d6"/>';
+ s+=path('M535 274q-15 -8 -18 -22M550 275q21 -9 25 0','#8fbcc3',3);
+  // Separate large patient monitor raised on pole.
  s+='<g filter="url(#sSh)">'+rect(561,180,112,76,'#deeef4','#8ba9bd',8,5)+rect(572,190,90,54,'#263f59','#466b80',4)+path('M579 224h13l5 -11 5 21 7 -16 8 7h8l7 -12 7 17 6 -9h11','#64dcb3',3)+txt(648,207,'98',13,'#c7edb1',900)+txt(646,238,'96',12,'#c4e6f4',900);
  s+=path('M580 236h29l6 -5 10 6h16','#edc78e',2)+txt(581,200,'ECG',8,'#c4dce5',700)+txt(646,225,'SpO₂',8,'#acdcd2',700);
  s+=path('M619 256v17','#8aa8b8',5)+rect(597,273,44,12,'url(#sSteel)','#a7bdc4',3)+'</g>';
@@ -92,7 +110,11 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  for(let k=0;k<7;k++){let a=k*Math.PI*2/7;s+='<circle cx="'+f(x+17*Math.cos(a))+'" cy="'+f(y+12*Math.sin(a))+'" r="4" fill="#fff8dd" stroke="#fff" stroke-width="1"/>'}
  s+='<circle cx="'+x+'" cy="'+y+'" r="5" fill="#fff9d7"/>';
  }
- // Sculpted 2.5D stainless operating table, thick apron and pedestal.
+ // Clinical OR headwall details behind table: medical gas and suction wall ports.
+ s+=rect(739,197,37,49,'#e6f4f4','#98b9c3',5,2);
+ for(let k=0;k<2;k++)s+='<circle cx="'+(751+k*14)+'" cy="211" r="5" fill="'+(k?'#c5dff5':'#b8e5d5')+'" stroke="#7e9fae" stroke-width="2"/>';
+ s+=path('M747 229h21','#9bb5bf',2);
+  // Sculpted 2.5D stainless operating table, thick apron and pedestal.
  s+='<ellipse cx="691" cy="373" rx="114" ry="15" fill="#658fa4" opacity=".16"/>';
  s+='<g filter="url(#sSh)">';
  s+='<polygon points="578,274 756,274 792,290 602,292" fill="#f3fbfe" stroke="#8eafbd" stroke-width="4"/>';
@@ -112,7 +134,10 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=path('M563 311v44M609 308v46','#83a5b2',4)+rect(555,353,62,7,'url(#sSteel)','#8babb9',3);
  for(let x of [560,574,586,598])s+=path('M'+x+' 296l7 -5','#7597a7',2);
  s+='</g>';
- // OR equipment drawer cart and supplies.
+ // Rounded instrument tray lip and organized clamps in a single compact visual layer.
+ s+='<path d="M552 296l10 -1 10 1M578 295l10 -2 10 2" fill="none" stroke="#e9fcfa" stroke-width="2"/>';
+ s+='<circle cx="557" cy="356" r="4" fill="#7798a6"/><circle cx="608" cy="356" r="4" fill="#7798a6"/>';
+  // OR equipment drawer cart and supplies.
  s+=rect(791,242,69,111,'url(#sSteel)','#86a8b6',8,3);
  for(let i=0;i<3;i++){s+=rect(798,263+i*27,55,22,'#e3f2f5','#9bbac7',3)+path('M818 '+(275+i*27)+'h16','#8eb2bc',2);}
  s+=rect(789,230,76,11,'#a9c3ca','#fff',3)+rect(808,217,11,13,'#d9f8f8','#8cb8c6',2);
@@ -125,7 +150,12 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(787,192,65,48,'#e9f0f9','#8eabc2',7,3)+rect(797,202,35,20,'#304f69','#8fb8c9',3,2);
  s+=txt(814,216,'ESU',10,'#c6f7f2',900)+rect(839,203,8,14,'#e6c69e','#9fa6b2',2);
  s+=path('M844 218q18 20 6 42','#778baf',3);
- // The upper-right plane is explicitly the side wall. Keep the OR free of recovery beds.
+ // Portable suction cylinder next to the equipment cart, wholly outside the surgery tabletop.
+ s+=rect(762,317,19,37,'#e1f2ef','#9fbdb9',7,2);
+ s+=rect(768,311,7,7,'#accfcd','#7ca7a6',2,1);
+ s+=path('M771 313q-8 -28 -21 -28','#91b9c0',3);
+ s+='<ellipse cx="772" cy="355" rx="9" ry="3" fill="#a3c0c5"/>';
+  // The upper-right plane is explicitly the side wall. Keep the OR free of recovery beds.
  s+='<polygon points="865,72 1000,0 1000,406 865,342" fill="#bfd4e1" stroke="#96aec1" stroke-width="5"/>';
  // Right wall reserved entirely for a clear passage into the separate recovery ward.
  // Recessed purple jamb, perspective reveals the recovery room behind the RIGHT wall.
@@ -141,14 +171,22 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  for(let i=0;i<5;i++){let x=911+i*12;s+=path('M'+x+' '+(187-i*4)+'v87','#89a5b8',2);}
  s+='<polygon points="905,260 965,241 965,285 905,301" fill="#e3cce7" stroke="#bea4d1" stroke-width="3"/>';
  s+='<polygon points="903,303 967,286 967,332 903,312" fill="#9fc7d9"/>';
- // Steel/glass frames and door handle for a real architectural opening.
+ // Recovery area appears deeper: a small kennel blanket, wall fixture and subtle internal floor shadow.
+ s+='<polygon points="913,268 959,254 959,272 913,286" fill="#deb8dc" opacity=".85"/>';
+ s+='<polygon points="920,277 947,268 947,280 920,289" fill="#f0d7e8"/>';
+ s+='<polygon points="910,319 965,301 965,333 910,315" fill="#83acc2" opacity=".20"/>';
+  // Steel/glass frames and door handle for a real architectural opening.
  s+='<polygon points="885,102 895,108 895,324 885,331" fill="#ddd3ef"/>';
  s+='<polygon points="969,81 978,76 978,352 969,348" fill="#907db4"/>';
  s+=path('M898 117L971 85M897 313L971 338','#f5faff',3);
  s+='<ellipse cx="956" cy="240" rx="4" ry="6" fill="#f6e4b7" stroke="#8e83ab" stroke-width="1"/>';
  s+=rect(892,58,90,22,'#faf7ff','#b2a6cb',7,2)+txt(937,73,'RECOVERY',10,'#6f608f',900);
  s+='<path d="M865 342L835 390L1000 445V408Z" fill="#61879d" opacity=".10"/>';
- // A few floor reflections indicate depth, leaving foreground walkable for avatars.
+ // Deliberate warm-cute cues kept in walls, not in the sterile field: subtle paw and sparkle details.
+ s+='<circle cx="344" cy="82" r="4" fill="#bd9acb"/><circle cx="355" cy="80" r="4" fill="#bd9acb"/>';
+ s+='<circle cx="339" cy="73" r="2.5" fill="#bd9acb"/><circle cx="347" cy="70" r="2.5" fill="#bd9acb"/><circle cx="355" cy="72" r="2.5" fill="#bd9acb"/>';
+ s+=path('M771 88l3 -7 3 7 7 3 -7 3 -3 7 -3 -7 -7 -3z','#eed9ac',1.5,'#fff0c7');
+  // A few floor reflections indicate depth, leaving foreground walkable for avatars.
  s+='<path d="M71 377H376M429 382H952" stroke="#ffffff" stroke-width="3" opacity=".65"/>';
  s+='<path d="M375 353L339 500M863 353L904 500" stroke="#effcff" stroke-width="2" opacity=".65"/>';
  s+='</svg>';return s;
