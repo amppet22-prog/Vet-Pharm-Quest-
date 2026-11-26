@@ -22,6 +22,62 @@ window.VPQ_DOG_YARD_LAYOUT=Object.freeze({
   {id:'quiet-a',zone:'quiet',x:80,y:78},{id:'quiet-b',zone:'quiet',x:91,y:76}
  ])
 });
+// Stationary decorative yard occupants are independent from the selected follower.
+const yardPositions=window.VPQ_DOG_YARD_LAYOUT.placements;
+const yardEsc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+function yardOwnedDogs(){return typeof window.VPQ_YARD_OWNED_DOGS==='function'?window.VPQ_YARD_OWNED_DOGS():[]}
+function yardPlacements(){
+ if(!state.vpqYardDogs||typeof state.vpqYardDogs!=='object'||Array.isArray(state.vpqYardDogs))state.vpqYardDogs={};
+ return state.vpqYardDogs;
+}
+function yardPetArt(){
+ const owned=yardOwnedDogs(),byId=new Map(owned.map(d=>[d.id,d]));
+ const selected=window.VPQ_YARD_ACTIVE_DOG_ID?.();
+ const placed=yardPlacements();
+ return yardPositions.map(p=>{
+  const pet=byId.get(placed[p.id]);
+  // The currently equipped follower is not drawn twice in the same room.
+  if(!pet||pet.id===selected)return '';
+  const x=p.x*10,y=p.y*5;
+  const scale=p.zone==='quiet'?.91:p.zone==='open'?1.03:1;
+  const w=Math.round(72*scale),h=Math.round(84*scale);
+  const px=x-w/2,py=y-h+7;
+  const label=yardEsc(pet.name.slice(0,18));
+  const url=yardEsc(pet.src);
+  return '<g class="vpqYardPlacedDog" aria-label="Placed companion '+label+'" pointer-events="none">'+
+   '<ellipse cx="'+x+'" cy="'+(y+4)+'" rx="'+Math.round(w*.37)+'" ry="8" fill="#527d73" opacity=".20"/>'+
+   '<image href="'+url+'" x="'+px+'" y="'+py+'" width="'+w+'" height="'+h+'" preserveAspectRatio="xMidYMax meet"/>'+
+   '<rect x="'+(x-35)+'" y="'+(y+6)+'" width="70" height="17" rx="8" fill="#fffdf6" fill-opacity=".93" stroke="#a2caba" stroke-width="1.5"/>'+
+   '<text x="'+x+'" y="'+(y+18)+'" text-anchor="middle" font-family="Arial" font-size="10" font-weight="800" fill="#47776d">'+label+'</text></g>';
+ }).join('');
+}
+function yardPlaceModal(){
+ const owned=yardOwnedDogs(),current=yardPlacements(),active=window.VPQ_YARD_ACTIVE_DOG_ID?.();
+ const label={sniff:'Sniff Garden',agility:'Low-impact Agility',open:'Open Play',quiet:'Quiet Retreat'};
+ const opts=owned.map(d=>'<option value="'+yardEsc(d.id)+'">'+yardEsc(d.name)+(d.id===active?' (your follower)':'')+'</option>').join('');
+ const cards=yardPositions.map((p,i)=>'<label style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:#f4faf6;border:1px solid #c7dccb;border-radius:12px;padding:9px 11px">'+
+  '<span style="min-width:145px;font-weight:800">'+label[p.zone]+' '+((i%2)+1)+'</span>'+
+  '<select data-vpqyardselect="'+p.id+'" aria-label="Companion for '+label[p.zone]+'" style="flex:1;min-width:170px;padding:8px;border:1px solid #abc7c4;border-radius:8px"><option value="">Empty / remove</option>'+opts+'</select>'+
+  '<button type="button" data-vpqyardassign="'+p.id+'" style="padding:8px 12px;border-radius:9px;background:#e0f5eb;border:1px solid #80bba4;font-weight:800">Save spot</button></label>').join('');
+ api.showModal('🐕 Place Your Dogs in the Yard',
+  '<p>Choose from the dogs you already own. These are <b>stationary yard companions</b>—they do not replace your active follower. Each dog can occupy only one spot.</p>'+
+  (!owned.length?'<p>No owned dogs with ready transparent art are available yet. Purchase or unlock dogs in your companion collection first.</p>':'<div style="display:grid;gap:8px">'+cards+'</div>')+
+  '<p class="tiny">Eight spaces across four zones. Your current follower stays beside you and is not duplicated in the yard. These spots are for your collection, not a claim that all dogs should share a play group.</p>');
+ // Modal content is rerendered, so restore each selection after showModal.
+ api.modalBody.querySelectorAll('[data-vpqyardselect]').forEach(el=>{
+   if(owned.some(d=>d.id===current[el.dataset.vpqyardselect]))el.value=current[el.dataset.vpqyardselect];
+ });
+}
+function yardAssign(slot,id){
+ if(!yardPositions.some(p=>p.id===slot))return;
+ const dogs=yardOwnedDogs(),placed=yardPlacements();
+ if(id&&!dogs.some(d=>d.id===id))return;
+ if(id){for(const key of Object.keys(placed))if(placed[key]===id)delete placed[key];placed[slot]=id;}
+ else delete placed[slot];
+ api.persist();
+ if(stage.dataset.room==='yardview')api.renderRoom();
+ yardPlaceModal();
+}
 const choices={
 'cat-tree':['Cat climbing tree',40,'catcorner','🌳'],
 'cat-wall':['Wall climbing shelves',50,'catcorner','🪜'],
@@ -76,6 +132,7 @@ if(room==='yardview'){
  if(placed.includes('yard-toys')){
   s+='<g aria-label="Extra enrichment toys"><circle cx="573" cy="412" r="13" fill="#efbc87" stroke="#b98e7d" stroke-width="4"/><path d="M564 403l18 18M582 403l-18 18" stroke="#fff9ef" stroke-width="3"/><circle cx="193" cy="407" r="9" fill="#b5ade4"/></g>';
  }
+ s+=yardPetArt();
  if(placed.includes('yard-agility')){
   // Existing cosmetic agility unlock adds optional bunting, not a second ramp.
   s+='<path d="M299 283Q379 297 458 284" fill="none" stroke="#5eaaa2" stroke-width="4"/><path d="M326 289l13 19 12-17M383 293l13 19 12-19" fill="#edc6d8" stroke="#9abbb5" stroke-width="2"/>';
@@ -86,6 +143,9 @@ return s+'</svg>';
 window.VPQ_SCENERY.roomArt=k=>slots[k]?scene(k):prior(k);
 const style=document.createElement('style');
 style.textContent='.vpqWingArt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.stage[data-room="hallway"] .prop,.stage[data-room="catcorner"] .prop,.stage[data-room="yardview"] .prop,.stage[data-room="hallway"] .roomBanner,.stage[data-room="catcorner"] .roomBanner,.stage[data-room="yardview"] .roomBanner{display:none!important}'+
+'.stage[data-room="yardview"] .vpqWingHit:hover,.stage[data-room="yardview"] .vpqWingHit:focus-visible,.stage[data-room="yardview"] .vpqWingHit.vpqWingNear{border:0;outline:0;background:linear-gradient(to top,#dcf9ed44,transparent 32%);box-shadow:inset 0 -3px 0 #84c5b4}'+
+'.vpqYardPlaceBtn{position:absolute;right:3%;top:5%;padding:7px 11px;z-index:12;border:2px solid #8dbbae;border-radius:13px;background:#f9fffbf0;box-shadow:0 2px 6px #577a7740;font-weight:900;color:#4b766e;pointer-events:auto;cursor:pointer}'+
+'.vpqYardPlaceBtn:hover,.vpqYardPlaceBtn:focus-visible{background:#e2f8ed;border-color:#62a58e}'+
 '#vpqWingHits{position:absolute;inset:0;z-index:5;pointer-events:none}.vpqWingHit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:16px;box-shadow:none;transform:none!important;padding:0}.vpqWingHit:hover,.vpqWingHit:focus-visible,.vpqWingHit.vpqWingNear{border:3px solid #ffc768;background:#fff1c42c;box-shadow:0 0 17px #ffdb94;outline:2px solid #fffae4}'+
 '.vpqWingHit span{position:absolute;bottom:3%;left:50%;transform:translateX(-50%);font-size:12px;font-weight:900;background:#fff9ff;border:2px solid #b4a2d4;color:#675780;border-radius:14px;padding:6px 8px;white-space:nowrap;box-shadow:0 4px 9px #604e7755}.vpqWingHit.vpqWingNear span{background:#fff2c9;border-color:#e9b15e}.vpqWingHit.vpqWingNear:after{content:"E · INTERACT";position:absolute;top:2%;left:50%;transform:translateX(-50%);background:#fff9df;border:2px solid #ecc16e;border-radius:10px;padding:4px 6px;font-size:10px;font-weight:900;white-space:nowrap}'+
 '.vpqYardWindowEntry{left:8.3%!important;top:20.8%!important;width:14.8%!important;height:31%!important;min-width:0!important;padding:0!important;border:2px solid transparent!important;border-radius:9px!important;background:transparent!important;box-shadow:none!important}'+
@@ -101,6 +161,7 @@ function refresh(){
  existing?.remove();extras?.remove();
  const div=document.createElement('div');div.id='vpqWingHits';div.dataset.room=room;
  if(slots[room])div.innerHTML=slots[room].map(([label,action,x])=>'<button type="button" class="vpqWingHit" data-vpqwingaction="'+action+'" style="left:'+(x-7)+'%;top:'+(room==='catcorner'?42:38)+'%;width:14%;height:'+(room==='catcorner'?35:41)+'%" aria-label="'+label+'"><span>'+label+'</span></button>').join('');
+ if(room==='yardview')div.innerHTML+='<button type="button" class="vpqYardPlaceBtn" data-vpqwingaction="vpqYardPlaceDogs" aria-label="Place owned dog companions in yard">🐕 Place Dogs</button>';
  if(room==='hallway')div.innerHTML+='<button type="button" class="vpqReceptionExtra" data-vpqwingaction="vpqWingLobby" style="left:2%;top:4%;z-index:8">← Reception Lobby</button>';
  div.addEventListener('click',e=>{const b=e.target.closest('[data-vpqwingaction]');if(b)route(b.dataset.vpqwingaction)});
  stage.appendChild(div);
@@ -193,6 +254,7 @@ function route(cmd){
  if(cmd==='vpqCatPlay'){if(catEnrichment)return catEnrichment.menu();return true}
  if(cmd==='vpqCatLounge'){api.doAction?.('catLounge');return true}
  if(cmd==='vpqCatShop'){shop('catcorner');return true}
+ if(cmd==='vpqYardPlaceDogs'){yardPlaceModal();return true}
  if(cmd==='vpqYardShop'){shop('yardview');return true}
  if(cmd==='vpqCatView'){if(catBehavior)return catBehavior.menu();return true}
  if(cmd==='vpqDogSniff')return dogLesson('sniff');
@@ -204,6 +266,6 @@ function route(cmd){
 }
 const observer=new MutationObserver(()=>{const room=stage.dataset.room,el=stage.querySelector('#vpqWingHits'),extra=stage.querySelector('#vpqReceptionExtras');if(((!!slots[room]||room==='reception')!==!!el)||(el&&el.dataset.room!==room)||(room==='reception'&&stage.dataset.receptionView==='isometric'&&!extra))refresh()});
 observer.observe(stage,{childList:true,attributes:true,attributeFilter:['data-room','data-reception-view']});
-api.modalBody.addEventListener('click',e=>{const dogAnswer=e.target.closest('[data-vpqdoganswer]');if(dogAnswer){const [id,n]=dogAnswer.dataset.vpqdoganswer.split(':');return dogResult(id,Number(n))}const dogRetry=e.target.closest('[data-vpqdogretry]');if(dogRetry)return dogLesson(dogRetry.dataset.vpqdogretry);if(e.target.closest('[data-vpqdogback]'))return api.closeModal();if(e.target.closest('[data-vpqcatstudio]'))return route('vpqCatLounge');if(e.target.closest('[data-vpqcatlegacy]'))return route('vpqCatShop');const el=e.target.closest('[data-vpqwingmap],[data-vpqwingbuy]');if(!el)return;if(el.dataset.vpqwingmap){api.closeModal();api.changeRoom(el.dataset.vpqwingmap)}else if(el.dataset.vpqwingbuy)buy(el.dataset.vpqwingbuy)});
+api.modalBody.addEventListener('click',e=>{const yardAssignButton=e.target.closest('[data-vpqyardassign]');if(yardAssignButton){const slot=yardAssignButton.dataset.vpqyardassign;const selected=Array.from(api.modalBody.querySelectorAll('[data-vpqyardselect]')).find(el=>el.dataset.vpqyardselect===slot);return yardAssign(slot,selected?.value||'');}const dogAnswer=e.target.closest('[data-vpqdoganswer]');if(dogAnswer){const [id,n]=dogAnswer.dataset.vpqdoganswer.split(':');return dogResult(id,Number(n))}const dogRetry=e.target.closest('[data-vpqdogretry]');if(dogRetry)return dogLesson(dogRetry.dataset.vpqdogretry);if(e.target.closest('[data-vpqdogback]'))return api.closeModal();if(e.target.closest('[data-vpqcatstudio]'))return route('vpqCatLounge');if(e.target.closest('[data-vpqcatlegacy]'))return route('vpqCatShop');const el=e.target.closest('[data-vpqwingmap],[data-vpqwingbuy]');if(!el)return;if(el.dataset.vpqwingmap){api.closeModal();api.changeRoom(el.dataset.vpqwingmap)}else if(el.dataset.vpqwingbuy)buy(el.dataset.vpqwingbuy)});
 refresh();return {route,refresh,near,interact,map};
 };
