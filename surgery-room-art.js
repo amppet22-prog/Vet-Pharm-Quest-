@@ -48,7 +48,20 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  // Clean supply shelf, gowns, masks, caps and wrapped drapes.
  s+=rect(181,110,188,80,'#f7fbfe','#a7c1cc',5,2)+path('M188 148h173','#9db9c7',3);
  for(let i=0;i<5;i++){let x=192+i*33;s+=rect(x,117,28,22,['#c5daed','#d8c7ed','#c0dfda','#b8d6e8','#ded3ee'][i],'#f5ffff',2,1)+rect(x,155,28,23,['#e1d6ee','#c5e5e8','#d0dff3','#c9e4e0','#e5d2ec'][i],'#f5ffff',2,1);}
- // Floor-standing scrub sink with wall taps, deep twin basins and grounded cabinets.
+ // PPE shelf is stocked with recognizable folded packs and hanging masks, not abstract color tiles.
+ for(let i=0;i<4;i++){
+  const x=194+i*41;
+  s+=rect(x,124,31,11,['#b7d9e9','#d4c7ef','#a7d9d1','#c5d9ed'][i],'#f6ffff',3,1);
+  s+=path('M'+(x+5)+' 129h21','#f8ffff',1.4);
+ }
+ // Four wrapped sterile packs, labels and a tiny seal on their lower shelf.
+ for(let i=0;i<4;i++){
+  const x=193+i*41;
+  s+=rect(x,158,28,17,'#d7edee','#98c2cd',3,1.3);
+  s+=rect(x+10,164,8,5,'#fffaf4','#c3d5d9',1,1);
+ }
+
+  // Floor-standing scrub sink with wall taps, deep twin basins and grounded cabinets.
  s+='<ellipse cx="185" cy="350" rx="85" ry="10" fill="#769aa4" opacity=".18"/>';
  s+=rect(112,268,144,76,'#e9f2f4','#a3bbc5',6,3);
  s+=cabinet(119,274,62,66)+cabinet(187,274,62,66);
@@ -108,7 +121,20 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(501,230,21,24,'#e6e5f0','#a4b8ca',5,2)+'<circle cx="512" cy="242" r="6" fill="#90a6c2" stroke="#eefaff" stroke-width="2"/>';
  s+=path('M541 255q20 -17 35 7','#c3dce0',5);
  s+='</g>'; // no floating station label
- // Anesthesia bedside accessory: calibrated absorber canister and organized looped hoses.
+ // Dedicated vaporizers, pressure gauges, flowmeters and switches are recognizable at teaching scale.
+ s+=rect(443,232,82,10,'#f8fcff','#8eacba',3,2);
+ for(let k=0;k<3;k++){
+  let x=448+16*k;
+  s+=rect(x,245,9,29,'#cdeff0','#85acb9',4,1.5);
+  s+=path('M'+(x+4)+' 250v16','#79c1bf',2);
+ }
+ for(let k=0;k<2;k++){
+  let x=496+k*18;
+  s+=rect(x,244,16,29,k?'#f3d4e7':'#e8d2ed','#a6a8c5',3,1.5);
+  s+='<circle cx="'+(x+8)+'" cy="256" r="5" fill="#f8fbff" stroke="#8e9aaf" stroke-width="1.5"/>';
+ }
+
+  // Anesthesia bedside accessory: calibrated absorber canister and organized looped hoses.
  s+='<ellipse cx="546" cy="315" rx="17" ry="7" fill="#547d91" opacity=".12"/>';
  s+=rect(535,255,20,52,'#e1f2f4','#90b5bd',6,3);
  s+='<circle cx="545" cy="267" r="5" fill="#b0d5d6"/>';
@@ -116,6 +142,12 @@ window.VPQ_SURGERY_ROOM_ART=function(){
   // Small integrated wheels and breathing apparatus controls, not another free-standing box.
  for(let x of [447,473,501])s+='<circle cx="'+x+'" cy="326" r="4.5" fill="#718f9f" stroke="#d3e6ed" stroke-width="1.5"/>';
  s+='<path d="M447 323h55" stroke="#93b0ba" stroke-width="2"/>';
+
+  // Absorber transparent canister with granules and a looped reservoir circuit.
+ s+=rect(534,275,20,35,'#dceeee','#8dadb3',5,2);
+ for(let i=0;i<4;i++)s+='<circle cx="'+(539+i%2*7)+'" cy="'+(284+i*6)+'" r="2" fill="#e0b78d"/>';
+ s+=path('M544 258q-15 -22 -31 -13M553 289q20 -10 23 -26','#9fc3c7',3);
+ s+='<ellipse cx="573" cy="281" rx="12" ry="28" fill="#7dc5ac" stroke="#5ca08f" stroke-width="2.5"/>';
 
   // Separate large patient monitor raised on pole.
  s+='<g filter="url(#sSh)">'+rect(561,180,112,76,'#deeef4','#8ba9bd',8,5)+rect(572,190,90,54,'#263f59','#466b80',4)+path('M579 224h13l5 -11 5 21 7 -16 8 7h8l7 -12 7 17 6 -9h11','#64dcb3',3)+txt(648,207,'98',13,'#c7edb1',900)+txt(646,238,'96',12,'#c4e6f4',900);
