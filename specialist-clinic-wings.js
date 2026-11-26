@@ -351,7 +351,7 @@ function scene(key){
 window.VPQ_SCENERY.roomArt=k=>data[k]?scene(k):previous(k);
 const style=document.createElement('style');
 style.textContent='.vpqSpecArt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}'+
-'.stage[data-room="skills"] .prop,.stage[data-room="skills"] .roomdecor,.stage[data-room="skills"] .roomBanner,.stage[data-room="clinpath"] .prop,.stage[data-room="isolation"] .prop,.stage[data-room="necropsy"] .prop,.stage[data-room="clinpath"] .roomdecor,.stage[data-room="isolation"] .roomdecor,.stage[data-room="necropsy"] .roomdecor,.stage[data-room="clinpath"] .roomBanner,.stage[data-room="isolation"] .roomBanner,.stage[data-room="necropsy"] .roomBanner{display:none!important}'+
+'.stage[data-room="surgery"] .prop,.stage[data-room="surgery"] .roomdecor,.stage[data-room="surgery"] .roomBanner,.stage[data-room="skills"] .prop,.stage[data-room="skills"] .roomdecor,.stage[data-room="skills"] .roomBanner,.stage[data-room="clinpath"] .prop,.stage[data-room="isolation"] .prop,.stage[data-room="necropsy"] .prop,.stage[data-room="clinpath"] .roomdecor,.stage[data-room="isolation"] .roomdecor,.stage[data-room="necropsy"] .roomdecor,.stage[data-room="clinpath"] .roomBanner,.stage[data-room="isolation"] .roomBanner,.stage[data-room="necropsy"] .roomBanner{display:none!important}'+
 '#vpqSpecHits{position:absolute;inset:0;z-index:5;pointer-events:none}'+
 '.vpqSpecHit{position:absolute;pointer-events:auto;background:transparent;border:2px solid transparent;border-radius:16px;box-shadow:none;transform:none!important;padding:0}'+
 '.vpqSpecHit:hover,.vpqSpecHit:focus-visible,.vpqSpecHit.vpqSpecNear{background:#fff2c52b;border:3px solid #ffcb65;outline:2px solid #fff5cc;box-shadow:0 0 20px #ffc8738e}'+
