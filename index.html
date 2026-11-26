@@ -2151,6 +2151,32 @@ renderUpgrades=function(){
 const vpqFurnitureRoomList=[['reception','🏥 Reception'],['treatment','🩺 Treatment'],['catcorner','🐈 Cats'],['yardview','🐕 Dogs']];
 let vpqFurnitureRoom='reception';
 const vpqFurniturePalettes={"Mushroom Cottage":["#dc9b94","#9a675e","#fff1d9"],"Fairy Garden":["#cbb1e4","#8c80bc","#fcf1c8"],"Royal Palace":["#9877c5","#59447d","#f9db9b"],"Pink Paradise":["#f5a8d2","#ce6ca9","#fff3f9"],"Dracula's Castle":["#594561","#281f3c","#bf6775"],"Comic Heroes":["#6d98ed","#364e8e","#f6c552"],"Snow Day":["#b8dce9","#829dc8","#ffffff"],"Stars & Stripes":["#c96166","#436da6","#f8f7f1"],"Cowboy Ranch":["#b98a65","#765940","#f3ddb0"],"Barnyard Buddies":["#c6b7a6","#645c53","#f0d9d0"],"Reptile Rescue":["#90c0a2","#547e68","#f4eec6"],"Jurassic Vet":["#98b991","#50755a","#f0ca73"],"Cow Cottage":["#d0c9be","#555759","#fafafa"],"Horse Stable":["#b88b67","#805d44","#e5d5a8"],"Piggy Picnic":["#f3a8bc","#cc788f","#fff3e6"],"Hedgehog Hollow":["#b6ad89","#897d5f","#e8d8ac"],"Pride Celebration":["#e9abc8","#8067be","#f1e8a1"]};
+/* Reliable room-decor slots: choose a clearly named wall/floor position, not invisible percentage nudges.
+ * All items retain existing saved coordinates, ownership and show/hide state. */
+const vpqFurnitureSlots=[
+ {id:'left-wall',label:'Left wall · upper',x:16,y:34},
+ {id:'rear-left',label:'Back wall · left',x:31,y:39},
+ {id:'rear-right',label:'Back wall · right',x:70,y:39},
+ {id:'right-wall',label:'Right wall · upper',x:86,y:35},
+ {id:'floor-left',label:'Front · left',x:17,y:73},
+ {id:'floor-mid-left',label:'Front · middle-left',x:35,y:75},
+ {id:'floor-mid-right',label:'Front · middle-right',x:67,y:75},
+ {id:'floor-right',label:'Front · right',x:85,y:73},
+ {id:'back-floor-left',label:'Back floor · left',x:24,y:57},
+ {id:'back-floor-right',label:'Back floor · right',x:77,y:57}
+];
+function vpqSlotMatch(u){
+ const p=state.furniturePositions[u.id]||{x:u.furnitureX,y:u.furnitureY};
+ return vpqFurnitureSlots.find(slot=>Math.abs(Number(p.x)-slot.x)<.01&&Math.abs(Number(p.y)-slot.y)<.01);
+}
+function vpqOccupiedFurnitureSlots(u){
+ const taken=new Set();
+ for(const other of vpqFurnitureItems){
+  if(other.id===u.id||other.levelRoom!==u.levelRoom||!state.upgrades.includes(other.id)||state.furnitureHidden.includes(other.id))continue;
+  const used=vpqSlotMatch(other);if(used)taken.add(used.id);
+ }
+ return taken;
+}
 function vpqDrawFurniture(){
  const scene=$('scene');
  for(const u of vpqFurnitureItems){
@@ -2174,10 +2200,18 @@ function vpqOpenFurnitureStudio(room){
  const level=Math.floor((Number(state.xp)||0)/LEVEL_THRESH)+1;
  const selected=vpqFurnitureItems.filter(x=>x.levelRoom===vpqFurnitureRoom&&x.furnitureKind!=='flag');
  const buttons=vpqFurnitureRoomList.map(([id,name])=>'<button data-furniture-room="'+id+'" '+(id===vpqFurnitureRoom?'style="background:#d7ebff;border:2px solid #6c9ad4"':'')+'>'+name+'</button>').join('');
- const html='<div class="buttonrow"><button data-furniture-exit="1">← Return to room</button><button data-furniture-shop="1">🪙 Furniture shop</button></div><p>Choose a room. Earn the required level, buy furniture with coins, then arrange or hide your purchased pieces. Your layout is saved.</p><div class="buttonrow">'+buttons+'</div><p><b>⭐ Level '+level+' · '+state.coins+' coins</b></p>'+
+ const html='<div class="buttonrow"><button data-furniture-exit="1">← Return to room</button><button data-furniture-shop="1">🪙 Furniture shop</button></div><p>Choose a room. Earn the required level, buy furniture with coins, then choose visible, fixed spots for your purchased pieces. No tiny invisible arrow movements; placements save and take you back to the room.</p><div class="buttonrow">'+buttons+'</div><p><b>⭐ Level '+level+' · '+state.coins+' coins</b></p>'+
  selected.map(u=>{
  const owned=state.upgrades.includes(u.id),hidden=state.furnitureHidden.includes(u.id);
- const action=owned&&u.furnitureKind==='sofa'&&u.levelRoom==='reception'?'<div class="buttonrow"><button data-furniture-sofa="'+u.id+'">'+(state.activeReceptionLevelSofa===u.id?'✓ Equipped on Reception Couch':'🛋️ Equip on Reception Couch')+'</button></div>':owned?'<div class="buttonrow"><button data-furniture-move="'+u.id+'" data-furniture-direction="left">←</button><button data-furniture-move="'+u.id+'" data-furniture-direction="up">↑</button><button data-furniture-move="'+u.id+'" data-furniture-direction="down">↓</button><button data-furniture-move="'+u.id+'" data-furniture-direction="right">→</button><button data-furniture-toggle="'+u.id+'">'+(hidden?'Show':'Hide')+'</button><button data-furniture-reset="'+u.id+'">Reset position</button></div>':
+ const action=owned&&u.furnitureKind==='sofa'&&u.levelRoom==='reception'?'<div class="buttonrow"><button data-furniture-sofa="'+u.id+'">'+(state.activeReceptionLevelSofa===u.id?'✓ Equipped on Reception Couch':'🛋️ Equip on Reception Couch')+'</button></div>':owned?(()=>{
+  const current=vpqSlotMatch(u),taken=vpqOccupiedFurnitureSlots(u);
+  const choices=vpqFurnitureSlots.map(slot=>'<option value="'+slot.id+'" '+(current?.id===slot.id?'selected ':'')+(taken.has(slot.id)?'disabled ':'')+'>'+slot.label+(taken.has(slot.id)?' · occupied':'')+'</option>').join('');
+  return '<div class="buttonrow vpq-furniture-slot-controls"><label style="font-size:12px;font-weight:800" for="vpqslot-'+u.id+'">Position</label><select id="vpqslot-'+u.id+'" data-furniture-spot-select="'+u.id+'" style="max-width:215px;padding:7px;border:1px solid #bca8d0;border-radius:9px">'+
+   (!current?'<option value="" selected>Current custom position</option>':'')+choices+'</select>'+
+   '<button data-furniture-place="'+u.id+'">📍 Place &amp; view</button>'+
+   '<button data-furniture-toggle="'+u.id+'">'+(hidden?'Show':'Hide')+'</button>'+
+   '<button data-furniture-reset="'+u.id+'">Reset to original</button></div>';
+ })():
  '<button data-furniture-buy="'+u.id+'" '+(level<u.levelRequired||state.coins<u.price?'disabled':'')+'>'+(level<u.levelRequired?'🔒 Level '+u.levelRequired:'Buy '+u.price+' 🪙')+'</button>';
  return '<article class="vpq-furniture-shoprow"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(u.themeGroup)+' · '+escapeHtml(u.levelRoom)+' · Level '+u.levelRequired+' · '+u.price+' 🪙</small>'+action+'</article>';
  }).join('');
@@ -2276,6 +2310,20 @@ $('modalBody').addEventListener('click',ev=>{
  if(d.furnitureRoom)return vpqOpenFurnitureStudio(d.furnitureRoom);
  if(d.furnitureExit)return closeModal();
  if(d.furnitureShop){closeModal();vpqRewardCategory='Furniture';renderUpgrades();$('upgradeList')?.closest('details')?.setAttribute('open','');return}
+ if(d.furniturePlace){
+  const u=vpqFurnitureItems.find(x=>x.id===d.furniturePlace);
+  if(!u||!state.upgrades.includes(u.id))return;
+  const control=Array.from($('modalBody').querySelectorAll('[data-furniture-spot-select]')).find(el=>el.dataset.furnitureSpotSelect===u.id);
+  const slot=vpqFurnitureSlots.find(v=>v.id===control?.value);
+  if(!slot){return vpqOpenFurnitureStudio(u.levelRoom)}
+  if(vpqOccupiedFurnitureSlots(u).has(slot.id))return vpqOpenFurnitureStudio(u.levelRoom);
+  state.furniturePositions[u.id]={x:slot.x,y:slot.y};
+  state.furnitureHidden=state.furnitureHidden.filter(v=>v!==u.id);
+  persist();
+  closeModal();
+  if(activeRoom!==u.levelRoom)changeRoom(u.levelRoom);else renderRoom();
+  return;
+ }
  const id=d.furnitureSofa||d.furnitureMove||d.furnitureToggle||d.furnitureReset||d.furnitureBuy;
  const u=vpqFurnitureItems.find(x=>x.id===id);if(!u)return;
  if(d.furnitureBuy){buyUpgrade(id);return vpqOpenFurnitureStudio()}
@@ -2283,8 +2331,7 @@ $('modalBody').addEventListener('click',ev=>{
  if(d.furnitureSofa){state.activeReceptionLevelSofa=id;state.furnitureHidden=state.furnitureHidden.filter(x=>x!==id);persist();renderRoom();return vpqOpenFurnitureStudio('reception')}
  if(d.furnitureToggle)state.furnitureHidden=state.furnitureHidden.includes(id)?state.furnitureHidden.filter(x=>x!==id):[...state.furnitureHidden,id];
  if(d.furnitureReset)delete state.furniturePositions[id];
- if(d.furnitureMove){const p=state.furniturePositions[id]||{x:u.furnitureX,y:u.furnitureY};const step=5;
- state.furniturePositions[id]={x:Math.max(9,Math.min(91,Number(p.x)+(d.furnitureDirection==='right'?step:d.furnitureDirection==='left'?-step:0))),y:Math.max(17,Math.min(83,Number(p.y)+(d.furnitureDirection==='down'?step:d.furnitureDirection==='up'?-step:0)))};}
+ // Retired invisible 5% furniture nudges; choose a fixed spot and view it directly instead.
  persist();renderRoom();vpqOpenFurnitureStudio();
 },true);
 const vpqPreviousRoomRender=renderRoom;
