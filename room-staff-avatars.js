@@ -19,10 +19,14 @@ function draw(){
  // Match the room's existing avatar depth presentation rather than the old
  // fixed 101px staff art; keep each staff stationary and out of the movement system.
  const player=document.getElementById('avatarSprite');
- const playerHeight=player?.getBoundingClientRect?.().height||230;
- const baseHeight=Math.max(148,Math.min(215,playerHeight*.82));
+ const rect=player?.getBoundingClientRect?.();
+ // Staff 1 must have the SAME on-stage bounding box as the playable vet.
+ // The prior .82 reduction and 215px cap made side staff visibly miniature.
+ const playerHeight=Math.max(180,rect?.height||Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-height'))||230);
+ const playerWidth=Math.max(98,rect?.width||playerHeight*.55);
+ const baseHeight=playerHeight;
  layer.replaceChildren();
- ids.forEach((id,i)=>{const a=choices.get(id);if(!a)return;const sprite=document.createElement('div');sprite.className='vpq-room-staff-sprite';sprite.style.left=positions[i]+'%';sprite.style.width=Math.round(baseHeight*(i===1?.56:.59))+'px';sprite.style.height=Math.round(baseHeight*(i===1?.93:1))+'px';sprite.style.bottom=(i===1?12:13)+'%';
+ ids.forEach((id,i)=>{const a=choices.get(id);if(!a)return;const sprite=document.createElement('div');sprite.className='vpq-room-staff-sprite';sprite.style.left=positions[i]+'%';sprite.style.width=Math.round(i===0?playerWidth:baseHeight*.55)+'px';sprite.style.height=Math.round(i===0?playerHeight:baseHeight*.93)+'px';sprite.style.bottom=(i===0?Number.parseFloat(player?.style.getPropertyValue('--vpq-depth-bottom'))||10:i===1?12:13)+'%';
  const img=document.createElement('img');img.src=fileURL(a.path);img.alt=a.label;img.loading='lazy';img.draggable=false;img.onerror=()=>{sprite.hidden=true};
  const caption=document.createElement('span');caption.textContent='Staff '+(i+1);
  sprite.append(img,caption);layer.append(sprite);
@@ -108,9 +112,19 @@ const css=document.createElement('style');css.textContent=
 '#vpqRoomStaffButton{background:#f3eafb;border-color:#a69ac8;color:#493b73}'+
 '#vpqRoomStaffLayer{position:absolute;inset:0;z-index:5;pointer-events:none}.vpq-room-staff-sprite{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;pointer-events:none}.vpq-room-staff-sprite img{height:100%;width:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(1px 3px 2px #3645574d)}.vpq-room-staff-sprite span{position:absolute;bottom:-13px;background:#f6f0ffed;border:1px solid #bcb0d4;border-radius:8px;padding:1px 5px;color:#524575;font-weight:800;font-size:9px;white-space:nowrap}'+
 '.vpq-staff-slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}.vpq-staff-slots label{background:#f9f5ff;border:1px solid #ddd0e8;padding:9px;border-radius:9px}.vpq-staff-slots select{display:block;width:100%;padding:8px;margin-top:5px}.vpq-staff-preview{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:12px 0}.vpq-staff-preview-card{cursor:pointer;width:118px;min-height:164px;border:2px solid #e0d6ee;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fcfaff;padding:7px}.vpq-staff-preview-card.is-focused{border-color:#8361b5;background:#f2e9ff}.vpq-staff-preview-card img{width:104px;height:132px;object-fit:contain;object-position:center bottom}.vpq-staff-preview-card span{color:#768093;font-size:12px}.vpq-staff-preview-card small{font-size:11px;font-weight:700}.vpq-staff-large-preview{min-height:210px;border:1px solid #e3d6eb;border-radius:13px;background:linear-gradient(#f8f7ff,#fffaf7);display:flex;align-items:center;flex-direction:column;justify-content:center;gap:6px;padding:8px;text-align:center}.vpq-staff-large-preview img{max-width:100%;width:195px;height:205px;object-fit:contain;object-position:center bottom}.vpq-staff-large-preview strong{font-size:12px;color:#5c4b79}'+
-'@media(max-width:600px){#vpqStaffRoomShortcut{top:6px;right:6px;font-size:12px;padding:6px 8px}.vpq-room-staff-sprite{max-width:17vw}.vpq-staff-preview-card{width:90px;min-height:132px}.vpq-staff-preview-card img{width:82px;height:106px}}';
+'@media(max-width:600px){#vpqStaffRoomShortcut{top:6px;right:6px;font-size:12px;padding:6px 8px}.vpq-room-staff-sprite{max-width:none}.vpq-staff-preview-card{width:90px;min-height:132px}.vpq-staff-preview-card img{width:82px;height:106px}}';
 document.head.append(css);
 const nav=document.getElementById('roomnav'),stage=document.getElementById('stage');if(nav)new MutationObserver(controls).observe(nav,{childList:true});if(stage)new MutationObserver(draw).observe(stage,{attributes:true,attributeFilter:['data-room']});
 controls();draw();
+const player=document.getElementById('avatarSprite');
+if(player&&typeof ResizeObserver==='function'){
+ let lastSize='';
+ new ResizeObserver(entries=>{
+  const rect=entries[0]?.contentRect;if(!rect)return;
+  const value=Math.round(rect.width)+'x'+Math.round(rect.height);
+  if(value===lastSize)return;lastSize=value;
+  draw();
+ }).observe(player);
+}
 window.VPQ_ROOM_STAFF={open,redraw:draw,assignments:get};
 })();
