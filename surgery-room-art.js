@@ -89,6 +89,51 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  for(let x of [904,921,938,955])s+=path('M'+x+' 166v48','#a9afc6',2);
  s+=path('M920 104v224','#a7a4c2',4)+ '<circle cx="952" cy="244" r="4" fill="#917a9e"/>';
  s+=label(866,65,119,'RECOVERY WARD');
+
+ // Clearly identifiable wall-mounted airway supplies outside operating zone.
+ s+=rect(72,110,86,90,'#f7fcff','#8eafc2',7,3);
+ s+=txt(115,124,'ET TUBES',10,'#4c728e',900)+path('M82 135h66','#a1b8c7',3);
+ for(let i=0;i<5;i++){let x=85+i*13;s+=path('M'+x+' 142v32q0 9 8 9','#accbd6',3)+rect(x-3,134,7,10,'#e0f7fc','#86b7c2',2,1);}
+ s+=rect(96,186,40,7,'#c4e5e9','#89bcc5',3)+txt(116,199,'AIRWAY',8,'#6583a3');
+ // Sterilizer/autoclave recessed in clean storage, visually distinct from prep sink.
+ s+=rect(250,194,86,74,'url(#sSteel)','#89aabd',7,4);
+ s+=rect(259,203,68,47,'#e3eff4','#7c9fb3',5,2);
+ s+='<circle cx="291" cy="226" r="18" fill="#799eae" stroke="#d6f6f8" stroke-width="4"/><circle cx="291" cy="226" r="12" fill="#cbe6ee" stroke="#86b0bc" stroke-width="2"/>';
+ s+=rect(261,255,12,6,'#72c0b3','',2)+txt(293,275,'AUTOCLAVE',11,'#557993',900);
+ // PPE shelving: separated from surgical field by partial glass wall.
+ s+=rect(191,110,153,85,'#f7fbff','#9ebfcb',6,3)+path('M197 139h141M197 171h141','#a9cbd6',3);
+ for(let i=0;i<4;i++){
+   let x=200+i*34;
+   s+=rect(x,118,28,15,['#d5c5ef','#c0e5f2','#cde7e2','#e6d8ed'][i],'#fff',3,1);
+   s+=rect(x,148,28,17,['#dceaf7','#a9d5e8','#cbd9f5','#d2ebe2'][i],'#e8fdff',2,1);
+ }
+ s+=txt(266,186,'GOWNS · DRAPES · CAPS · MASKS',9,'#64849d',800);
+ // Tool ID display on supply wall, with recognizable forceps, scissors, needle holder.
+ s+=rect(333,108,45,97,'#fcfcff','#a7bdcd',4,3);
+ s+=txt(355,120,'TOOLS',9,'#587e9c',900);
+ s+=path('M345 136l20 18M364 136l-19 18M344 147l22 0','#7e9fac',2.5);
+ s+='<circle cx="348" cy="164" r="4" fill="none" stroke="#759ca8" stroke-width="2"/><circle cx="361" cy="164" r="4" fill="none" stroke="#759ca8" stroke-width="2"/>';
+ s+=path('M349 164l15 19M361 164l-12 19','#829faf',2);
+ s+=txt(355,195,'ID',9,'#587e9c');
+ // Electrosurgical generator with foot pedal and holstered handpiece (training representation).
+ s+=rect(746,215,72,45,'#e9f0f9','#8eabc2',8,3)+rect(757,224,38,21,'#304f69','#8fb8c9',4,2);
+ s+=txt(776,240,'ESU',11,'#c6f7f2',900);
+ s+=rect(800,226,7,15,'#ebcda5','#9fa6b2',2,1);
+ s+=path('M806 246q20 24 6 42','#778baf',3)+rect(807,285,25,8,'#8ca6b7','#d7e7eb',3,1);
+ s+=txt(783,271,'ELECTROSURGERY',8,'#69839b',900);
+ // Recovery room cutaway: depth, a kennel bank and cozy recovery bed beyond glass.
+ s+=rect(883,113,84,204,'#bddce9','#a3c0d7',4,2);
+ s+=rect(889,169,71,74,'#e9f0f7','#93adbd',4,2);
+ s+=rect(892,177,66,59,'#d3e5ef','#aabcca',3,2);
+ for(let j=0;j<5;j++)s+=path('M'+(899+j*12)+' 178v57','#9aaebf',2);
+ s+=rect(893,242,61,12,'#dcb9db','#a9a8ce',5,1);
+ s+=rect(892,260,67,37,'#91bbc9','#7199ae',6,2)+rect(899,267,53,22,'#e7d8ec','#c5a9d8',5);
+ s+='<ellipse cx="926" cy="283" rx="17" ry="5" fill="#e0bcdc"/>';
+ s+=rect(883,113,84,204,'url(#sGlass)','#aba4cb',4,1);
+ s+=path('M880 113v204M967 113v204M922 112v205','#9b91bd',4);
+ s+=rect(874,101,100,12,'#e6ddf2','#a99ccc',5,2);
+ s+=txt(923,110,'SEPARATE WARD',9,'#7966a1',900);
+
  // A few floor reflections indicate depth, leaving foreground walkable for avatars.
  s+='<path d="M71 377H376M429 382H952" stroke="#ffffff" stroke-width="3" opacity=".65"/>';
  s+='<path d="M375 353L339 500M863 353L904 500" stroke="#effcff" stroke-width="2" opacity=".65"/>';
