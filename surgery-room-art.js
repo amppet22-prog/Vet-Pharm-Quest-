@@ -52,7 +52,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(382,57,13,308,'url(#sSteel)','#7996ad',3,3)+rect(395,90,22,239,'url(#sGlass)','#b0c9d8',1,2)+path('M395 92L416 120M397 182L416 202','#f8ffff',4);
  s+=rect(381,343,40,8,'#9bb9c6')+label(269,341,103,'PACK STORAGE');
  // Header over OR area kept high, not over devices.
- s+=rect(448,74,380,42,'#f8fbff','#8bb5c8',18,3)+txt(638,102,'SURGERY &amp; ANESTHESIA',21,'#426b91',900);
+ s+=rect(446,74,358,42,'#f8fbff','#8bb5c8',18,3)+txt(624,102,'SURGERY &amp; ANESTHESIA',19,'#426b91',900);
  // Storage behind anesthesia machine is deliberately minimal.
  s+=rect(430,145,105,60,'#d9ecf3','#9eb8c6',5,2);
  for(let i=0;i<4;i++)s+=rect(438+i*23,156,17,28,['#c2d9e5','#d4c5e5','#bcd8d2','#c7cee8'][i],'#eef9fc',3,1);
@@ -97,12 +97,12 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  // Perspective right-wall mount: readable surgical-tool quick-guide with silhouette icons.
  // Kept above mobile equipment and outside the sterile table's working silhouette.
  s+='<polygon points="803,91 891,68 891,334 803,348" fill="#c0d7e3" stroke="#97b6c6" stroke-width="3"/>';
- s+='<polygon points="811,105 880,90 880,216 811,228" fill="#f9fcff" stroke="#92afc4" stroke-width="4"/>';
+ s+='<polygon points="811,103 880,89 880,205 811,217" fill="#f9fcff" stroke="#92afc4" stroke-width="4"/>';
  s+=txt(845,121,'SURGICAL',9,'#466d8d',900)+txt(845,134,'TOOLS',11,'#466d8d',900);
  s+=path('M823 148l16 22M840 148l-17 22M850 151l17 19M866 151l-16 19','#7099ad',3);
  s+='<circle cx="826" cy="185" r="5" fill="none" stroke="#6892a7" stroke-width="2"/><circle cx="837" cy="185" r="5" fill="none" stroke="#6892a7" stroke-width="2"/>';
- s+=path('M826 185l23 18M837 185l14 17M859 184v22M852 190l14 -3','#7ba0b3',2);
- s+=txt(847,218,'TAP TO LEARN',8,'#6b92a9',800);
+ s+=path('M826 182l23 14M837 182l14 14M859 179v17M852 184l14 -3','#7ba0b3',2);
+ s+=txt(845,201,'TAP TO LEARN',8,'#6b92a9',800);
  
  // Recessed purple jamb, perspective reveals the recovery room behind the RIGHT wall.
  s+='<polygon points="883,101 987,54 987,375 883,329" fill="#9c8cbe" stroke="#8074a7" stroke-width="6"/>';
