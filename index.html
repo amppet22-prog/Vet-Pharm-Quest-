@@ -1136,7 +1136,7 @@ body.vpq-reading-large #modalBody .vpq-patient-case .response p{font-size:18px!i
 <script src="specialist-clinic-wings.js?v=20261126-pathfound-20261126-surgery-suite-art-v2"></script>
 <script src="feline-behavior-game.js?v=20261111-cuter-cats3"></script>
 <script src="feline-enrichment-game.js?v=20261111-play-enrich1"></script>
-<script src="reception-hallway-and-habitats.js?v=20261126-expanded-kennel-yard-zones-v1"></script>
+<script src="reception-hallway-and-habitats.js?v=20261126-yard-2point5d-placement-v2"></script>
 <script src="clinic-image-backgrounds.js?v=20261126-surgery-specialist-route-v2"></script>
 <script src="companion-dogs-batch1.js?v=20261121-transparent-filter-2"></script>
 <script src="avatar-standing-companions.js?v=20261108-alex-original1"></script>
@@ -5919,6 +5919,17 @@ function vpqCompanionValid(c){
  if(/^dog-b1-[0-9a-f]{12}$/.test(c.id))return vpqUsableDogIds.has(c.id);
  return vpqUploadedImageStatus.get(c.id)==='ready';
 }
+// Safe read-only bridge for the Kennel Yard. Never changes an equipped companion,
+// catalog purchase, companion art, or player save schema.
+window.VPQ_YARD_OWNED_DOGS=function(){
+ return vpqCompanionCatalog
+  .filter(c=>c&&c.category==='dog'&&c.image&&vpqCompanionOwned(c)&&vpqCompanionValid(c))
+  .map(c=>({id:c.id,name:vpqCustomCompanionName(c),src:vpqDogAssetURL(c.image)}));
+};
+window.VPQ_YARD_ACTIVE_DOG_ID=function(){
+ const c=vpqCompanionById(state.vpqCompanionId);
+ return c?.category==='dog'?c.id:null;
+};
 function vpqVerifyUploadedCompanion(c){
  if(!c.image||/^dog-b1-[0-9a-f]{12}$/.test(c.id))return;
  if(vpqUploadedImageStatus.has(c.id))return;

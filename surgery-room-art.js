@@ -79,7 +79,8 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=path('M398 342l28 -9M391 355l35 -12','#6d9eaa',2);
  s+='<ellipse cx="412" cy="360" rx="26" ry="7" fill="#678fa1" opacity=".14"/>';
   // Header over OR area kept high, not over devices.
- s+=rect(446,74,358,42,'#f8fbff','#8bb5c8',18,3)+txt(624,102,'SURGERY &amp; ANESTHESIA',19,'#426b91',900);
+ // The page header already names this suite. A small theatre plaque avoids the lamp arms.
+ s+=rect(467,81,209,29,'#f8fbff','#8bb5c8',12,2)+txt(571,101,'OPERATING THEATRE',14,'#426b91',900);
  // Storage behind anesthesia machine is deliberately minimal.
  s+=rect(430,145,105,60,'#d9ecf3','#9eb8c6',5,2);
  for(let i=0;i<4;i++)s+=rect(438+i*23,156,17,28,['#c2d9e5','#d4c5e5','#bcd8d2','#c7cee8'][i],'#eef9fc',3,1);

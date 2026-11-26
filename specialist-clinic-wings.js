@@ -425,6 +425,7 @@ style.textContent='.vpqSpecArt{position:absolute;inset:0;width:100%;height:100%;
 '.stage[data-room="clinpath"] .interactToast{left:7px;top:5px;max-width:128px;font-size:9px;padding:4px 6px;line-height:1.15;border-width:1px;border-radius:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:none;background:#ffffffeb}'+
 '.stage[data-room="clinpath"] .vpqSpecHit[data-vpqspecact="advancedCases"]{z-index:6;cursor:pointer}'+
 '.stage[data-room="clinpath"] .vpqSpecHit span{display:none!important}.stage[data-room="clinpath"] .vpqSpecHit{border-radius:17px}.stage[data-room="clinpath"] .vpqSpecHit.vpqSpecNear:after{top:auto;bottom:5%;font-size:11px}.stage[data-room="clinpath"] .vpqSpecHit:hover{background:#fff6c82a}'+
+'.stage[data-room="surgery"] .vpqSpecHit.vpqSpecNear:after{display:none!important}'+
 '.vpqSpecHit.vpqSpecNear:after{content:"E · INTERACT";position:absolute;top:1%;left:50%;transform:translateX(-50%);font-size:11px;font-weight:900;color:#744d22;background:#fff8dd;border:2px solid #e9bf76;border-radius:12px;padding:4px 8px;white-space:nowrap}'+
 '@media(max-width:650px){.vpqSpecHit span{font-size:10px;padding:4px 5px;white-space:normal;min-width:80%}}';
 document.head.appendChild(style);

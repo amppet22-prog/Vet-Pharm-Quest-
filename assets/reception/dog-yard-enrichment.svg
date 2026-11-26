@@ -23,10 +23,25 @@
 <path d="M0 366Q150 349 276 380T510 384Q675 350 823 376T1000 359V500H0Z" fill="#acd79e" opacity=".7"/>
 <!-- zone boundaries permit different dogs later; not actual animal slots yet -->
 <path d="M251 231Q276 321 248 482M494 229Q511 314 503 482M754 235Q728 323 761 482" stroke="#f6f5df" stroke-width="5" stroke-dasharray="9 13" fill="none" opacity=".85"/>
+<!-- Perspective side fencing / yard perimeter, with angled walls that lead the eye into the play spaces -->
+<path d="M0 98L72 136V328L0 397Z" fill="#b2d4c0" stroke="#82aa99" stroke-width="6"/>
+<path d="M1000 98L930 136V328L1000 397Z" fill="#b2d4c0" stroke="#82aa99" stroke-width="6"/>
+<path d="M0 134L73 157M0 202L72 206M0 273L72 253M1000 134L929 157M1000 202L930 206M1000 273L930 253" fill="none" stroke="#638f83" stroke-width="5" opacity=".65"/>
+<path d="M72 329L0 400M930 328L1000 400" stroke="#e7f5d9" stroke-width="6"/>
+<path d="M73 328L0 500M931 328L1000 500" stroke="#c1ddad" stroke-width="8" opacity=".7"/>
+<!-- Turf strips recede toward the fence; soft textured path edges remain unobstructed -->
+<path d="M264 233L230 475M487 231L484 474M752 234L782 473" stroke="#f5f4db" stroke-width="3" stroke-dasharray="7 11" opacity=".65"/>
+<path d="M72 330L0 500M930 330L1000 500" stroke="#fcfce5" stroke-width="3" opacity=".55"/>
 <!-- top sign, above room equipment -->
 <rect x="277" y="10" width="446" height="60" rx="20" fill="#fffbf2" stroke="#96c6bf" stroke-width="5" filter="url(#yardShadow)"/>
 <text x="500" y="34" font-family="Arial,sans-serif" font-size="25" text-anchor="middle" fill="#477e7c" font-weight="900">HAPPY PAWS · KENNEL YARD</text>
 <text x="500" y="53" font-family="Arial,sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#8b829e">EXPLORE  •  PLAY  •  ENRICH  •  REST</text>
+<!-- Fence-mounted shade/safety station set back from the dogs' play route -->
+<g filter="url(#yardShadow)">
+ <polygon points="103,193 219,193 229,208 111,208" fill="#d1a9d2" stroke="#b08eb7" stroke-width="3"/>
+ <rect x="111" y="208" width="106" height="16" rx="4" fill="#faf8ee" stroke="#b5a4bb" stroke-width="2"/>
+ <text x="164" y="220" text-anchor="middle" font-size="9" font-family="Arial" font-weight="800" fill="#7c7898">WATER • SHADE</text>
+</g>
 <!-- 1: sniff and sensory garden, left -->
 <path d="M23 347Q117 307 237 348V445Q112 482 23 440Z" fill="#e6d4ab" stroke="#c4a779" stroke-width="5"/>
 <path d="M39 350Q125 321 218 356" fill="none" stroke="#f9e9cb" stroke-width="6"/>
@@ -40,10 +55,15 @@
 </g>
 <path d="M78 355h121" stroke="#8aaf94" stroke-width="7" stroke-linecap="round"/>
 <!-- 2: obstacle / confidence agility -->
-<path d="M267 359Q383 305 483 360V468Q380 486 267 455Z" fill="#cfad87" opacity=".53"/>
+<path d="M267 359Q383 305 483 360V468Q380 486 267 455Z" fill="#cfad87" opacity=".35"/>
+<!-- 2.5D agility deck underlay and side risers -->
+<path d="M288 387L338 315L396 386L389 405L338 344L300 404Z" fill="#4d9995" opacity=".42"/>
+<ellipse cx="373" cy="436" rx="119" ry="19" fill="#547969" opacity=".11"/>
 <path d="M267 360Q379 314 485 360" stroke="#f1e4d3" stroke-width="5" fill="none"/>
 <g filter="url(#yardShadow)">
  <path d="M287 385L341 316L395 385" fill="#70bbb0" stroke="#377d82" stroke-width="7" stroke-linejoin="round"/>
+ <path d="M288 385L338 323L338 338L294 394Z" fill="#95d3c4" stroke="#3d8f88" stroke-width="2"/>
+ <path d="M342 320L395 386L391 398L342 339Z" fill="#428f89" stroke="#377d82" stroke-width="2"/>
  <path d="M308 356h64M323 338h37M296 372h90" stroke="#ddf7ed" stroke-width="5"/>
  <rect x="401" y="343" width="59" height="17" rx="5" fill="#a1dcd0" stroke="#388e8a" stroke-width="5"/>
  <path d="M410 356v45M449 356v45" stroke="#5a938e" stroke-width="8"/>
@@ -57,6 +77,8 @@
 <!-- 4: tunnel, separate sensory and hide corner -->
 <path d="M769 338q59-95 185-8l18 101H758Z" fill="#b5d2a4" stroke="#88b298" stroke-width="6"/>
 <path d="M792 367q63-75 151 0v53H792Z" fill="#a9c9a2" stroke="#83ae91" stroke-width="5"/>
+<ellipse cx="875" cy="397" rx="70" ry="15" fill="#5f7d74" opacity=".18"/>
+<path d="M807 358q60-79 136 0l21 38q-72-47-155 2Z" fill="#8fb9a6" stroke="#78a38f" stroke-width="4"/>
 <ellipse cx="875" cy="389" rx="53" ry="41" fill="#bca4a0" stroke="#a48b81" stroke-width="10"/>
 <ellipse cx="874" cy="390" rx="38" ry="31" fill="#776f77" stroke="#d4b7a3" stroke-width="6"/>
 <ellipse cx="872" cy="394" rx="26" ry="22" fill="#524f5a"/>
@@ -65,6 +87,8 @@
 <g filter="url(#yardShadow)">
  <path d="M91 237V164M210 236V164" stroke="#8e8c83" stroke-width="10"/>
  <path d="M66 168l85-59 87 59Z" fill="#72bdb4" stroke="#4c898e" stroke-width="7" stroke-linejoin="round"/>
+ <path d="M66 168L151 109L151 128L80 182Z" fill="#a3dacc" opacity=".85"/>
+ <path d="M151 109L238 168L226 182L151 128Z" fill="#4c9f9a" opacity=".75"/>
  <path d="M80 171h145" stroke="#c1f1e4" stroke-width="6"/>
  <rect x="103" y="213" width="103" height="14" rx="6" fill="#bc9f8a" stroke="#8c7c74" stroke-width="3"/>
  <path d="M112 226v14M197 226v14" stroke="#82766c" stroke-width="7"/>
@@ -84,6 +108,9 @@
  <rect x="530" y="250" width="191" height="23" rx="10" fill="#fffaf0" stroke="#9fbeb4" stroke-width="3"/><text x="625" y="266" fill="#547b79">OPEN PLAY FIELD</text>
  <rect x="775" y="250" width="187" height="23" rx="10" fill="#fffaf0" stroke="#9fbeb4" stroke-width="3"/><text x="869" y="266" fill="#547b79">TUNNEL &amp; QUIET</text>
 </g>
+<!-- Yard foreground is closer to viewer: edge shadows and gently raised fence rail -->
+<path d="M0 462Q240 458 490 465T1000 460V487H0Z" fill="#d6e7c0" opacity=".46"/>
+<path d="M0 473H1000" stroke="#5b8e83" stroke-width="6" opacity=".3"/>
 <!-- foreground gate and walkway, keep clear of dog/character sprites -->
 <path d="M0 476H1000" stroke="#f2e9d5" stroke-width="22"/>
 <path d="M25 475H975" stroke="#527b77" stroke-width="7"/>
