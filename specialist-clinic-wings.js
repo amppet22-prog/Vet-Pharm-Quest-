@@ -229,36 +229,104 @@ function scene(key){
    [738,781,824].map((x,i)=>'<rect x="'+x+'" y="250" width="22" height="54" rx="5" fill="'+['#bca5de','#e7a7c3','#e2c892'][i]+'" stroke="#7fabb1" stroke-width="4"/>').join('')+
    '<text x="795" y="338" text-anchor="middle" font-family="Arial" font-size="17" font-weight="900" fill="#588875">SAMPLE HANDLING</text>'+
    '</g><text x="500" y="162" text-anchor="middle" font-family="Arial" font-weight="900" font-size="16" fill="#8d7298">CHOOSE A SPECIES · LEARN THE REASON · PRACTICE SAFELY</text>';
+
  }else if(key==='surgery'){
-   s+='<g filter="url(#vpqSpecShadow)">'+
-   rect(74,191,177,148,'#fff2f5','#d5adc5')+
-   '<rect x="93" y="214" width="137" height="90" rx="9" fill="#fff" stroke="#b5c4d8" stroke-width="4"/>'+
-   '<text x="161" y="241" text-anchor="middle" font-family="Arial" font-size="16" fill="#9a7aaa" font-weight="900">STERILE FIELD</text>'+
-   '<text x="160" y="286" font-size="43" text-anchor="middle">🧽</text>'+
-   rect(286,177,196,162,'#e4f1fa','#a4bbd6')+
-   rect(303,198,165,96,'#405975','#93b4ca')+
-   '<path d="M317 254h27l9 -19 12 32 14 -23 13 13h62" fill="none" stroke="#84edc1" stroke-width="6"/>'+
-   '<text x="386" y="228" font-size="19" text-anchor="middle" fill="#f6cfdd">♥ 112</text>'+
-   rect(523,230,230,103,'#ebdef4','#b7a0cc')+
-   '<rect x="535" y="252" width="206" height="31" rx="12" fill="#c6b4db"/>'+
-   // Friendly monitored cat in the recovery bay.
-   '<ellipse cx="650" cy="250" rx="68" ry="17" fill="#dfc6e7"/>'+
-   '<ellipse cx="642" cy="241" rx="46" ry="19" fill="#c1b4df" stroke="#998abf" stroke-width="3"/>'+
-   '<circle cx="601" cy="227" r="20" fill="#d9c3e9" stroke="#a38cbf" stroke-width="3"/>'+
-   '<path d="M586 215l-8 -17 19 11 12 -15 10 21" fill="#c4a4d4" stroke="#a38cbf" stroke-width="2"/>'+
-   '<path d="M590 227q5 6 10 0M607 227q5 6 10 0" fill="none" stroke="#69566f" stroke-width="2"/>'+
-   '<path d="M600 233l6 0 -3 4z" fill="#df93b2"/>'+
-   '<path d="M671 241q30 -29 35 -1" stroke="#b9a3d3" stroke-width="10" fill="none"/>'+
-   '<path d="M558 332v36M720 332v36" stroke="#9c9cbd" stroke-width="10"/>'+
-   '<path d="M580 243v-36h29" stroke="#9db3ce" stroke-width="9" fill="none"/>'+
-   rect(785,194,159,141,'#f4e8f9','#b8add4')+
-   rect(799,210,130,92,'#435b7d','#99b6cf')+
-   '<text x="862" y="263" font-size="21" text-anchor="middle" fill="#fff">CASE FILES</text>'+
-   '</g><g font-size="14" font-family="Arial" font-weight="900" text-anchor="middle" fill="#786b9a">'+
-   '<text x="165" y="175">PREP & ASEPSIS</text><text x="389" y="165">ANESTHESIA</text>'+
-   '<text x="639" y="208">RECOVERY</text><text x="864" y="177">PATIENT BOARD</text></g>'+
-   '<g><rect x="68" y="116" width="170" height="46" rx="12" fill="#fff7cf" stroke="#e8c379" stroke-width="4"/>'+
-   '<text x="153" y="144" text-anchor="middle" font-size="16" font-family="Arial" fill="#9e7440" font-weight="900">HAND HYGIENE</text></g>';
+   // Purely scenic SVG: keep existing interactive hit targets and case routing.
+   // The low foreground is kept clear for moving avatars and stationary room staff.
+   s+=`
+   <defs>
+     <linearGradient id="vpqSurgGlass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1fffc"/><stop offset="1" stop-color="#bededb"/></linearGradient>
+     <linearGradient id="vpqSurgSteel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".5" stop-color="#a9c5c8"/><stop offset="1" stop-color="#e4f1ef"/></linearGradient>
+     <linearGradient id="vpqSurgScreen" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#263c58"/><stop offset="1" stop-color="#3d6580"/></linearGradient>
+     <linearGradient id="vpqSurgDrape" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c8f1e3"/><stop offset="1" stop-color="#72bbaa"/></linearGradient>
+   </defs>
+   <!-- Surgery-specific sterile room trim and warm operating lights -->
+   <rect x="66" y="70" width="868" height="270" fill="#e8f4f1"/>
+   <rect x="66" y="71" width="868" height="21" fill="#c9e4df"/>
+   <path d="M66 329H934" stroke="#98c9c2" stroke-width="12"/>
+   <path d="M70 339H931" stroke="#fff" stroke-width="3"/>
+   <path d="M66 340H934L1000 500H0Z" fill="#d8e9e5"/>
+   <path d="M66 340L0 500M934 340L1000 500M272 340L212 500M498 340V500M722 340L784 500M25 418H975M53 376H947" stroke="#fff" stroke-width="3" fill="none" opacity=".82"/>
+   <path d="M92 94h814" stroke="#fff" stroke-width="5" opacity=".75"/>
+   <rect x="332" y="96" width="336" height="48" rx="17" fill="#fffafc" stroke="#95c4bd" stroke-width="4" filter="url(#vpqSpecShadow)"/>
+   <text x="500" y="127" fill="#416f72" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="25">SURGERY &amp; ANESTHESIA</text>
+   <text x="500" y="159" fill="#6f9295" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="12">PREP  ·  MONITOR  ·  OPERATE  ·  RECOVER</text>
+   <!-- 1: Scrub and sterile preparation zone -->
+   <g filter="url(#vpqSpecShadow)">
+     <rect x="78" y="175" width="169" height="159" rx="16" fill="#f9fefd" stroke="#8bbcb8" stroke-width="6"/>
+     <rect x="91" y="189" width="143" height="83" rx="9" fill="url(#vpqSurgGlass)" stroke="#badbd8" stroke-width="3"/>
+     <path d="M108 242h104" stroke="#7da9b1" stroke-width="4"/>
+     <path d="M136 207v18h46v-18" fill="none" stroke="#719ba9" stroke-width="6" stroke-linecap="round"/>
+     <path d="M156 204v-13h26" fill="none" stroke="#719ba9" stroke-width="6" stroke-linecap="round"/>
+     <path d="M182 190v11" stroke="#719ba9" stroke-width="4"/>
+     <ellipse cx="160" cy="254" rx="38" ry="8" fill="#90bbb8" opacity=".85"/>
+     <rect x="101" y="275" width="123" height="39" rx="7" fill="#d5eae9" stroke="#92bab6" stroke-width="2"/>
+     <path d="M114 291h32M114 302h32M180 283v23" stroke="#94b7b8" stroke-width="4" stroke-linecap="round"/>
+     <rect x="109" y="151" width="105" height="19" rx="9" fill="#fff5dc" stroke="#d6c297" stroke-width="2"/>
+     <text x="161" y="165" font-family="Arial" font-size="10" font-weight="900" fill="#816e4c" text-anchor="middle">SCRUB + PREP</text>
+   </g>
+   <g><rect x="89" y="315" width="148" height="29" rx="10" fill="#fff" stroke="#badad4" stroke-width="3"/><text x="163" y="334" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#527b7b">STERILE PREP</text></g>
+   <!-- 2: Anesthesia cart with ventilator, capnography and monitoring -->
+   <g filter="url(#vpqSpecShadow)">
+     <rect x="270" y="171" width="215" height="165" rx="16" fill="#e1eff2" stroke="#8baebd" stroke-width="6"/>
+     <rect x="284" y="184" width="184" height="92" rx="11" fill="url(#vpqSurgScreen)" stroke="#9fbfcc" stroke-width="5"/>
+     <path d="M295 238h22l7 -15 9 29 12 -19 8 10 9 -6h15l8 -18 11 32 11 -14h22" fill="none" stroke="#8ce7ba" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+     <path d="M300 263h45l15 -10h20l16 9h58" fill="none" stroke="#f5cf8e" stroke-width="3"/>
+     <text x="301" y="207" fill="#d6f1f4" font-size="10" font-family="Arial" font-weight="700">ECG   SpO₂   ETCO₂</text>
+     <text x="439" y="207" fill="#a8ecc4" font-size="14" font-family="Arial" text-anchor="end">98%</text>
+     <rect x="299" y="282" width="149" height="48" rx="9" fill="#f5fcfa" stroke="#a8c6ca" stroke-width="2"/>
+     <circle cx="320" cy="306" r="12" fill="#dbeaf0" stroke="#6c97aa" stroke-width="3"/>
+     <circle cx="357" cy="306" r="12" fill="#e8f7ed" stroke="#80ad9a" stroke-width="3"/>
+     <circle cx="394" cy="306" r="12" fill="#e4eafa" stroke="#9ca9c8" stroke-width="3"/>
+     <path d="M453 312q29 22 35 -3q5 -20 27 -12" stroke="#8bafbf" stroke-width="6" fill="none"/>
+     <rect x="287" y="335" width="176" height="29" rx="10" fill="#fff" stroke="#b4d4d1" stroke-width="3"/>
+     <text x="375" y="355" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#527b7b">ANESTHESIA MONITOR</text>
+   </g>
+   <!-- Ceiling mounted operating lamps; put lighting above surgical field -->
+   <g filter="url(#vpqSpecShadow)">
+     <path d="M606 69v39l-34 24" fill="none" stroke="#9badba" stroke-width="9" stroke-linecap="round"/>
+     <path d="M572 132l-19 13" stroke="#9badba" stroke-width="8" stroke-linecap="round"/>
+     <ellipse cx="548" cy="152" rx="35" ry="16" fill="#b6d1cd" stroke="#7da9a9" stroke-width="5"/>
+     <ellipse cx="548" cy="155" rx="24" ry="10" fill="#fff7d5" stroke="#fff" stroke-width="3"/>
+     <path d="M747 69v40l-33 24" fill="none" stroke="#9badba" stroke-width="8" stroke-linecap="round"/>
+     <ellipse cx="704" cy="145" rx="33" ry="15" fill="#b6d1cd" stroke="#7da9a9" stroke-width="5"/>
+     <ellipse cx="704" cy="147" rx="22" ry="9" fill="#fff7d5" stroke="#fff" stroke-width="3"/>
+   </g>
+   <!-- 3: Surgery table, drape, overhead light, trolley and compact patient silhouette -->
+   <g filter="url(#vpqSpecShadow)">
+     <rect x="504" y="271" width="235" height="28" rx="12" fill="url(#vpqSurgSteel)" stroke="#89adb5" stroke-width="5"/>
+     <path d="M534 295l-10 52M714 295l13 52" stroke="#8aa6ac" stroke-width="12" stroke-linecap="round"/>
+     <path d="M542 352h183" stroke="#9caeb7" stroke-width="9" stroke-linecap="round"/>
+     <ellipse cx="622" cy="267" rx="93" ry="18" fill="#c6e9dc"/>
+     <ellipse cx="628" cy="257" rx="64" ry="20" fill="url(#vpqSurgDrape)" stroke="#78b6a7" stroke-width="3"/>
+     <path d="M574 254h106M592 246h67" stroke="#e0fff4" stroke-width="3" opacity=".75"/>
+     <ellipse cx="578" cy="244" rx="25" ry="17" fill="#caaf99" stroke="#a58b7c" stroke-width="3"/>
+     <path d="M559 235l-5 -17 16 9 13 -8 8 17" fill="#c9aa92" stroke="#a58b7c" stroke-width="2"/>
+     <path d="M570 244q5 5 10 0" stroke="#735d5b" stroke-width="2" fill="none"/>
+     <path d="M594 263q12 5 24 1" stroke="#f3fff8" stroke-width="3" fill="none"/>
+     <rect x="547" y="338" width="147" height="27" rx="10" fill="#fff" stroke="#b4d4d1" stroke-width="3"/>
+     <text x="621" y="356" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#527b7b">OPERATING TABLE</text>
+   </g>
+   <!-- 4: Recovery and case board, framed as one interactive zone -->
+   <g filter="url(#vpqSpecShadow)">
+     <rect x="759" y="167" width="178" height="166" rx="16" fill="#f3f5fb" stroke="#b5b3d4" stroke-width="6"/>
+     <rect x="771" y="180" width="152" height="95" rx="10" fill="#fffefa" stroke="#d4cedd" stroke-width="3"/>
+     <rect x="787" y="194" width="118" height="67" rx="9" fill="#456178"/>
+     <path d="M799 209h30M799 224h76M799 239h57" stroke="#a5d8d6" stroke-width="6" stroke-linecap="round"/>
+     <rect x="868" y="199" width="26" height="22" rx="5" fill="#e5b9d0"/>
+     <path d="M881 204v13M875 211h12" stroke="#fff" stroke-width="4"/>
+     <rect x="777" y="281" width="145" height="40" rx="9" fill="#e7e6f6" stroke="#bcb9d5" stroke-width="3"/>
+     <path d="M789 304h122" stroke="#bac4d6" stroke-width="4"/>
+     <rect x="776" y="335" width="148" height="28" rx="10" fill="#fff" stroke="#c6c1dd" stroke-width="3"/>
+     <text x="850" y="354" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#747197">RECOVERY + CASES</text>
+   </g>
+   <!-- Warm sterile charm: no fake interactive buttons or obstructing scenery -->
+   <g font-family="Arial" text-anchor="middle" font-size="10" font-weight="800">
+     <rect x="90" y="112" width="137" height="27" rx="10" fill="#fff8e5" stroke="#decaa5" stroke-width="3"/>
+     <text x="158" y="129" fill="#947b57">CLEAN HANDS · PPE</text>
+     <rect x="788" y="120" width="123" height="26" rx="10" fill="#fff8e5" stroke="#decaa5" stroke-width="3"/>
+     <text x="850" y="137" fill="#947b57">PATIENT SAFETY</text>
+   </g>`;
  }else{
    s+='<g filter="url(#vpqSpecShadow)">'+
    rect(85,211,213,119,'#e8f1ed','#a2bdb2')+
