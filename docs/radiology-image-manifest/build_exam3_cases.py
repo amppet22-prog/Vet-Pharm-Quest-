@@ -49,6 +49,41 @@ PRACTICE = {'e3-practice-hip-gsd': (1, '6-year-old MN German Shepherd Dog', 'Pre
 TITLES = {}
 
 
+
+# Short answer labels for the multiple-choice question (from slide titles / professor narration).
+# None = no MC (no answer key in the source, or the slide is a technique/view example).
+ANSWERS = {
+ 'exam3-msk1-p20-bone-osteopenia': 'Regional osteopenia',
+ 'exam3-msk1-p24-djd-stifle': 'Increased synovial mass (stifle effusion)', 'exam3-msk1-p25-djd-stifle': 'Increased synovial mass (stifle effusion)',
+ 'exam3-msk1-p34-djd-stifle': 'Osteoarthritis (degenerative joint disease)',
+ 'exam3-msk1-p35-djd-stifle': 'Stifle effusion and subluxation (cranial cruciate ligament rupture)',
+ 'exam3-msk1-p40-ocd-shoulder': 'Osteochondrosis / OCD of the caudal humeral head', 'exam3-msk1-p41-ocd-shoulder': 'Osteochondrosis / OCD of the caudal humeral head',
+ 'exam3-msk1-p42-bsava-elbow': 'Osteochondrosis / OCD of the medial humeral condyle',
+ 'exam3-msk1-p78-bsava-elbow': None,
+ 'exam3-msk1-p85-bsava-elbow': 'Ununited anconeal process (UAP)', 'exam3-msk1-p89-bsava-elbow': 'Fragmented medial coronoid process (FMCP)',
+ 'exam3-msk1-p91-bsava-elbow': 'Elbow joint incongruity',
+ 'exam3-msk2-p04-msk2-lysis-pattern': 'Cortical disruption (aggressive)', 'exam3-msk2-p06-msk2-lysis-pattern': 'Geographic lysis',
+ 'exam3-msk2-p08-msk2-lysis-pattern': 'Expansile lysis', 'exam3-msk2-p09-msk2-lysis-pattern': 'Moth-eaten lysis',
+ 'exam3-msk2-p10-msk2-lysis-pattern': 'Permeative lysis',
+ 'exam3-msk2-p14-msk2-periosteal': 'Solid periosteal reaction', 'exam3-msk2-p16-msk2-periosteal': 'Lamellar periosteal reaction',
+ 'exam3-msk2-p17-msk2-periosteal': 'Palisading (columnar) periosteal reaction', 'exam3-msk2-p18-msk2-periosteal': 'Spiculated (sunburst) periosteal reaction',
+ 'exam3-msk2-p19-msk2-periosteal': 'Amorphous periosteal reaction',
+ 'exam3-msk2-p24-bsava-infection-neoplasm': 'Aggressive bone lesion: tumor or infection (needs cytology/histopathology)',
+ 'exam3-msk2-p26-bsava-infection-neoplasm': 'Hematogenous osteomyelitis (disseminated aspergillosis)',
+ 'exam3-msk2-p30-bsava-infection-neoplasm': 'Soft-tissue tumor invading bone',
+ 'exam3-msk2-p65-bsava-healing': None,
+ 'exam3-spine-p05-skull-spine': 'Craniomandibular osteopathy (CMO)', 'exam3-spine-p07-skull-spine': 'Multilobular osteochondrosarcoma (MLO)',
+ 'exam3-spine-p10-skull-spine': 'Nasal disease (unilateral loss of turbinate pattern)', 'exam3-spine-p14-skull-spine': 'Nasal aspergillosis',
+ 'exam3-spine-p17-skull-spine': 'Atlantoaxial subluxation', 'exam3-spine-p19-skull-spine': 'Block vertebra',
+ 'exam3-spine-p20-skull-spine': 'Transitional vertebra', 'exam3-spine-p21-skull-spine': 'Hemivertebrae', 'exam3-spine-p22-skull-spine': 'Hemivertebrae',
+ 'exam3-spine-p23-skull-spine': 'Spondylosis deformans', 'exam3-spine-p27-skull-spine': 'Discospondylitis',
+ 'exam3-spine-p28-skull-spine': 'Discospondylitis', 'exam3-spine-p29-skull-spine': 'Discospondylitis',
+ 'exam3-spine-p32-skull-spine': 'Intervertebral disc disease', 'exam3-spine-p33-skull-spine': 'Intervertebral disc disease',
+ 'exam3-spine-p34-skull-spine': 'Intervertebral disc disease', 'exam3-spine-p35-skull-spine': 'Mineralized discs in situ (incidental)',
+ 'exam3-spine-p39-skull-spine': 'Vertebral neoplasia (multiple myeloma)', 'exam3-spine-p41-skull-spine': 'Spinal fracture-luxation',
+}
+
+
 def slot_needs():
     s = open(QUEUE, encoding='utf-8').read()
     out = {}
@@ -142,6 +177,8 @@ def main():
                                  'note': 'Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it.'},
             'updated': UPDATED,
         }
+        if ANSWERS.get(cid):
+            cases[cid]['answer'] = ANSWERS[cid]
 
     raw = open(PUB, encoding='utf-8').read()
     pub = json.loads(raw)

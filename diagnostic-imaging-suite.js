@@ -85,7 +85,7 @@ function xrayHome(){
   ['exam1-reading','Exam 1 · Foundations','Normal views, five opacities, Roentgen signs, projection and quality'],
   ['abdomen-lab','Exam 2 · Abdomen','Normal GI/GU anatomy, mechanical versus functional ileus, foreign bodies and mass effect'],
   ['exam3','Exam 3 · MSK, skull & spine','Practice cases, joints, aggressive bone lesions, skull and spine radiographs from your lectures'],
-  ['conditions','MSK & disease comparisons','Fracture language, aggressive bone lesions, joint changes, and look-alike conditions'],
+  ['conditions','Condition cards · all exams','Multiple-choice condition cards for MSK, abdomen, thorax, equine and advanced imaging, with lecture radiographs'],
   ['course','Complete lecture guide','All existing exam-organized learning units and objectives']
  ]);
  const path=section('02','Work through one interpretation','Do not stop at recognizing a pattern: describe all findings, explain why they occur, then interpret the entire case.','#eef8fc',[

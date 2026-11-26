@@ -1207,7 +1207,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Regional osteopenia"
     },
     "exam3-msk1-p24-djd-stifle": {
       "id": "exam3-msk1-p24-djd-stifle",
@@ -1254,7 +1255,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Increased synovial mass (stifle effusion)"
     },
     "exam3-msk1-p25-djd-stifle": {
       "id": "exam3-msk1-p25-djd-stifle",
@@ -1301,7 +1303,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Increased synovial mass (stifle effusion)"
     },
     "exam3-msk1-p34-djd-stifle": {
       "id": "exam3-msk1-p34-djd-stifle",
@@ -1348,7 +1351,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Osteoarthritis (degenerative joint disease)"
     },
     "exam3-msk1-p35-djd-stifle": {
       "id": "exam3-msk1-p35-djd-stifle",
@@ -1395,7 +1399,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Stifle effusion and subluxation (cranial cruciate ligament rupture)"
     },
     "exam3-msk1-p40-ocd-shoulder": {
       "id": "exam3-msk1-p40-ocd-shoulder",
@@ -1437,7 +1442,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Osteochondrosis / OCD of the caudal humeral head"
     },
     "exam3-msk1-p41-ocd-shoulder": {
       "id": "exam3-msk1-p41-ocd-shoulder",
@@ -1479,7 +1485,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Osteochondrosis / OCD of the caudal humeral head"
     },
     "exam3-msk1-p42-bsava-elbow": {
       "id": "exam3-msk1-p42-bsava-elbow",
@@ -1521,7 +1528,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Osteochondrosis / OCD of the medial humeral condyle"
     },
     "exam3-msk1-p78-bsava-elbow": {
       "id": "exam3-msk1-p78-bsava-elbow",
@@ -1615,7 +1623,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Ununited anconeal process (UAP)"
     },
     "exam3-msk1-p89-bsava-elbow": {
       "id": "exam3-msk1-p89-bsava-elbow",
@@ -1662,7 +1671,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Fragmented medial coronoid process (FMCP)"
     },
     "exam3-msk1-p91-bsava-elbow": {
       "id": "exam3-msk1-p91-bsava-elbow",
@@ -1709,7 +1719,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Elbow joint incongruity"
     },
     "exam3-msk2-p04-msk2-lysis-pattern": {
       "id": "exam3-msk2-p04-msk2-lysis-pattern",
@@ -1756,7 +1767,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Cortical disruption (aggressive)"
     },
     "exam3-msk2-p06-msk2-lysis-pattern": {
       "id": "exam3-msk2-p06-msk2-lysis-pattern",
@@ -1803,7 +1815,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Geographic lysis"
     },
     "exam3-msk2-p08-msk2-lysis-pattern": {
       "id": "exam3-msk2-p08-msk2-lysis-pattern",
@@ -1845,7 +1858,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Expansile lysis"
     },
     "exam3-msk2-p09-msk2-lysis-pattern": {
       "id": "exam3-msk2-p09-msk2-lysis-pattern",
@@ -1887,7 +1901,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Moth-eaten lysis"
     },
     "exam3-msk2-p10-msk2-lysis-pattern": {
       "id": "exam3-msk2-p10-msk2-lysis-pattern",
@@ -1929,7 +1944,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Permeative lysis"
     },
     "exam3-msk2-p14-msk2-periosteal": {
       "id": "exam3-msk2-p14-msk2-periosteal",
@@ -1971,7 +1987,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Solid periosteal reaction"
     },
     "exam3-msk2-p16-msk2-periosteal": {
       "id": "exam3-msk2-p16-msk2-periosteal",
@@ -2018,7 +2035,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Lamellar periosteal reaction"
     },
     "exam3-msk2-p17-msk2-periosteal": {
       "id": "exam3-msk2-p17-msk2-periosteal",
@@ -2060,7 +2078,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Palisading (columnar) periosteal reaction"
     },
     "exam3-msk2-p18-msk2-periosteal": {
       "id": "exam3-msk2-p18-msk2-periosteal",
@@ -2102,7 +2121,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Spiculated (sunburst) periosteal reaction"
     },
     "exam3-msk2-p19-msk2-periosteal": {
       "id": "exam3-msk2-p19-msk2-periosteal",
@@ -2144,7 +2164,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Amorphous periosteal reaction"
     },
     "exam3-msk2-p24-bsava-infection-neoplasm": {
       "id": "exam3-msk2-p24-bsava-infection-neoplasm",
@@ -2191,7 +2212,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Aggressive bone lesion: tumor or infection (needs cytology/histopathology)"
     },
     "exam3-msk2-p26-bsava-infection-neoplasm": {
       "id": "exam3-msk2-p26-bsava-infection-neoplasm",
@@ -2238,7 +2260,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Hematogenous osteomyelitis (disseminated aspergillosis)"
     },
     "exam3-msk2-p30-bsava-infection-neoplasm": {
       "id": "exam3-msk2-p30-bsava-infection-neoplasm",
@@ -2285,7 +2308,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Soft-tissue tumor invading bone"
     },
     "exam3-msk2-p65-bsava-healing": {
       "id": "exam3-msk2-p65-bsava-healing",
@@ -2379,7 +2403,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Craniomandibular osteopathy (CMO)"
     },
     "exam3-spine-p07-skull-spine": {
       "id": "exam3-spine-p07-skull-spine",
@@ -2426,7 +2451,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Multilobular osteochondrosarcoma (MLO)"
     },
     "exam3-spine-p10-skull-spine": {
       "id": "exam3-spine-p10-skull-spine",
@@ -2468,7 +2494,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Nasal disease (unilateral loss of turbinate pattern)"
     },
     "exam3-spine-p14-skull-spine": {
       "id": "exam3-spine-p14-skull-spine",
@@ -2510,7 +2537,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Nasal aspergillosis"
     },
     "exam3-spine-p17-skull-spine": {
       "id": "exam3-spine-p17-skull-spine",
@@ -2552,7 +2580,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Atlantoaxial subluxation"
     },
     "exam3-spine-p19-skull-spine": {
       "id": "exam3-spine-p19-skull-spine",
@@ -2594,7 +2623,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Block vertebra"
     },
     "exam3-spine-p20-skull-spine": {
       "id": "exam3-spine-p20-skull-spine",
@@ -2636,7 +2666,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Transitional vertebra"
     },
     "exam3-spine-p21-skull-spine": {
       "id": "exam3-spine-p21-skull-spine",
@@ -2683,7 +2714,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Hemivertebrae"
     },
     "exam3-spine-p22-skull-spine": {
       "id": "exam3-spine-p22-skull-spine",
@@ -2730,7 +2762,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Hemivertebrae"
     },
     "exam3-spine-p23-skull-spine": {
       "id": "exam3-spine-p23-skull-spine",
@@ -2772,7 +2805,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Spondylosis deformans"
     },
     "exam3-spine-p27-skull-spine": {
       "id": "exam3-spine-p27-skull-spine",
@@ -2814,7 +2848,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Discospondylitis"
     },
     "exam3-spine-p28-skull-spine": {
       "id": "exam3-spine-p28-skull-spine",
@@ -2861,7 +2896,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Discospondylitis"
     },
     "exam3-spine-p29-skull-spine": {
       "id": "exam3-spine-p29-skull-spine",
@@ -2903,7 +2939,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Discospondylitis"
     },
     "exam3-spine-p32-skull-spine": {
       "id": "exam3-spine-p32-skull-spine",
@@ -2950,7 +2987,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Intervertebral disc disease"
     },
     "exam3-spine-p33-skull-spine": {
       "id": "exam3-spine-p33-skull-spine",
@@ -2997,7 +3035,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Intervertebral disc disease"
     },
     "exam3-spine-p34-skull-spine": {
       "id": "exam3-spine-p34-skull-spine",
@@ -3044,7 +3083,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Intervertebral disc disease"
     },
     "exam3-spine-p35-skull-spine": {
       "id": "exam3-spine-p35-skull-spine",
@@ -3086,7 +3126,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Mineralized discs in situ (incidental)"
     },
     "exam3-spine-p39-skull-spine": {
       "id": "exam3-spine-p39-skull-spine",
@@ -3128,7 +3169,8 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Vertebral neoplasia (multiple myeloma)"
     },
     "exam3-spine-p41-skull-spine": {
       "id": "exam3-spine-p41-skull-spine",
@@ -3170,7 +3212,1104 @@
         "clinicalQualityVerified": false,
         "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
       },
-      "updated": "2026-11-25T23:30:00Z"
+      "updated": "2026-11-25T23:30:00Z",
+      "answer": "Spinal fracture-luxation"
+    },
+    "exam3x-msk1-p45": {
+      "id": "exam3x-msk1-p45",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 45 · Distal ulna in a growing dog",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: conical lucency in the distal ulnar metaphysis with a centrally widened physis; compare with the normal example on the slide.",
+      "interpretation": "Retained cartilaginous core",
+      "answer": "Retained cartilaginous core",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 45 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p45__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 45. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p45__02.jpg",
+          "view": "View B",
+          "caption": "MSK I, slide 45. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p045.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-dev",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p48": {
+      "id": "exam3x-msk1-p48",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 48 · Metaphyses in a young dog",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: ill-defined lucency in the metaphysis just proximal to the physis; may be referred to as a \"double physis\".",
+      "interpretation": "Hypertrophic osteodystrophy (HOD)",
+      "answer": "Hypertrophic osteodystrophy (HOD)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 48 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p48__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 48."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p048.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-dev",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p50": {
+      "id": "exam3x-msk1-p50",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 50 · Metaphysis · stage 1",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: mild focal swelling; irregular metaphyseal margins with subphyseal sclerosis. Professor's notes: the irregular margins with subphyseal sclerosis are the defining characteristic of early HOD.",
+      "interpretation": "Early HOD",
+      "answer": "Early HOD",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 50 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p50__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 50."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p050.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-dev",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p51": {
+      "id": "exam3x-msk1-p51",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 51 · Metaphysis · stage 2",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: mild focal swelling; irregular metaphyseal margins; thick, irregular, indistinct linear lucency paralleling the physes. Professor's notes: the lucent line (\"double physis\") is the defining characteristic of classic HOD.",
+      "interpretation": "Classic HOD",
+      "answer": "Classic HOD",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 51 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p51__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 51."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p051.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-dev",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p52": {
+      "id": "exam3x-msk1-p52",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 52 · Metaphysis · stage 3",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: moderate focal soft-tissue swelling; metaphyseal periosteal cuffing. Professor's notes: periosteal cuffing along the metaphysis is the defining characteristic of chronic HOD.",
+      "interpretation": "Chronic HOD",
+      "answer": "Chronic HOD",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 52 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p52__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 52."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p052.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-dev",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p55": {
+      "id": "exam3x-msk1-p55",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 55 · Long-bone medullary opacity · example 1",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: polyostotic, multifocal increased medullary and endosteal opacity (sclerosis); decreased corticomedullary definition at affected sites; periosteal proliferation (often mild and solid, may be indistinct) adjacent to the sites of sclerosis.",
+      "interpretation": "Panosteitis",
+      "answer": "Panosteitis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 55 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p55__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 55."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p055.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-dev",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p56": {
+      "id": "exam3x-msk1-p56",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 56 · Long-bone medullary opacity · example 2",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: patchy medullary sclerosis within the shaft with periosteal reaction; compare left and right.",
+      "interpretation": "Panosteitis",
+      "answer": "Panosteitis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 56 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p56__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 56."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p056.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-dev",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p59": {
+      "id": "exam3x-msk1-p59",
+      "kind": "normal",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 59 · Coxofemoral joint · coverage",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: at least 50% coverage of the femoral head by the dorsal acetabular rim. Professor's notes: when checking for hip dysplasia make sure the pelvis is perfectly straight; improper positioning can over- or under-estimate acetabular coverage.",
+      "interpretation": "Normal coxofemoral joint",
+      "answer": "Normal coxofemoral joint",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 59 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p59__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 59."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p059.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p60": {
+      "id": "exam3x-msk1-p60",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 60 · Coxofemoral joints · VD",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: widened/wedge-shaped coxofemoral joint space; decreased coverage (<50%) of the femoral head by the dorsal acetabulum. Professor's notes: bilateral hip dysplasia; no signs of degenerative change yet.",
+      "interpretation": "Early hip dysplasia",
+      "answer": "Early hip dysplasia",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 60 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p60__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 60."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p060.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p61": {
+      "id": "exam3x-msk1-p61",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 61 · Coxofemoral joint · close-up comparison",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: widened, wedge-shaped joint space with decreased dorsal acetabular coverage, compared with a normal joint.",
+      "interpretation": "Early hip dysplasia",
+      "answer": "Early hip dysplasia",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 61 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p61__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 61. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p61__02.jpg",
+          "view": "View B",
+          "caption": "MSK I, slide 61. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p061.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p62": {
+      "id": "exam3x-msk1-p62",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 62 · Coxofemoral joints · adult dog",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: same changes as early hip dysplasia, now with chronic degenerative changes (periarticular bone formation, osteophytes).",
+      "interpretation": "Hip dysplasia with premature DJD/OA",
+      "answer": "Hip dysplasia with premature DJD/OA",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 62 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p62__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 62."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p062.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p63": {
+      "id": "exam3x-msk1-p63",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 63 · Coxofemoral joints · close-up",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: close-up of the previous dog compared with a normal joint.",
+      "interpretation": "Hip dysplasia with premature DJD/OA",
+      "answer": "Hip dysplasia with premature DJD/OA",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 63 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p63__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 63. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p63__02.jpg",
+          "view": "View B",
+          "caption": "MSK I, slide 63. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p063.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p64": {
+      "id": "exam3x-msk1-p64",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 64 · Coxofemoral joints · older dog",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: same changes as before, plus thickened femoral necks and flattened femoral heads.",
+      "interpretation": "Hip dysplasia with severe DJD/OA",
+      "answer": "Hip dysplasia with severe DJD/OA",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 64 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p64__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 64."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p064.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p65": {
+      "id": "exam3x-msk1-p65",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 65 · Coxofemoral joints · close-up, older dog",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: close-up of the previous dog compared with a normal joint.",
+      "interpretation": "Hip dysplasia with severe DJD/OA",
+      "answer": "Hip dysplasia with severe DJD/OA",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 65 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p65__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 65. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p65__02.jpg",
+          "view": "View B",
+          "caption": "MSK I, slide 65. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p065.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p68": {
+      "id": "exam3x-msk1-p68",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 68 · Femoral head · young small-breed dog",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide (aseptic necrosis of the femoral head, early): muscle atrophy of the affected limb; indistinct, irregular lucency of the femoral neck; widened coxofemoral joint space.",
+      "interpretation": "Legg-Calvé-Perthes disease (early)",
+      "answer": "Legg-Calvé-Perthes disease (early)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 68 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p68__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 68."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p068.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p69": {
+      "id": "exam3x-msk1-p69",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 69 · Femoral head · close-up comparison",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: early aseptic necrosis of the femoral head: irregular lucency in the femoral head and neck with widened joint space, compared with a normal joint.",
+      "interpretation": "Legg-Calvé-Perthes disease (early)",
+      "answer": "Legg-Calvé-Perthes disease (early)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 69 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p69__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 69. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p69__02.jpg",
+          "view": "View B",
+          "caption": "MSK I, slide 69. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p069.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p70": {
+      "id": "exam3x-msk1-p70",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 70 · Femoral head · small-breed dog, later stage",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide (chronic): muscle atrophy of the affected limb; sclerotic and irregular femoral head and neck; widened coxofemoral joint space; premature osteoarthrosis.",
+      "interpretation": "Legg-Calvé-Perthes disease (chronic)",
+      "answer": "Legg-Calvé-Perthes disease (chronic)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 70 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p70__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 70."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p070.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p71": {
+      "id": "exam3x-msk1-p71",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 71 · Femoral head · close-up, later stage",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: sclerosis of the femoral head and neck with a widened joint, compared with a normal joint.",
+      "interpretation": "Legg-Calvé-Perthes disease (chronic)",
+      "answer": "Legg-Calvé-Perthes disease (chronic)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 71 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p71__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 71. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p71__02.jpg",
+          "view": "View B",
+          "caption": "MSK I, slide 71. The slide pairs this with a Normal comparison; check the annotated key."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p071.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p74": {
+      "id": "exam3x-msk1-p74",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 74 · Proximal femur · young cat",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Feline",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: abnormal proximal (capital) femoral physis; compare the two sides.",
+      "interpretation": "Physeal dysplasia (capital femoral physis)",
+      "answer": "Physeal dysplasia (capital femoral physis)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 74 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p74__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 74."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p74__02.jpg",
+          "view": "View B",
+          "caption": "MSK I, slide 74."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p074.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk1-p75": {
+      "id": "exam3x-msk1-p75",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK I slide 75 · Proximal femur · close-up",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography I",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Professor's notes: lucent, irregular capital femoral physis on the affected side versus the contralateral physis.",
+      "interpretation": "Physeal dysplasia (capital femoral physis)",
+      "answer": "Physeal dysplasia (capital femoral physis)",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "d93647b2-MSK1FALL26_1.pdf · page 75 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p75__01.jpg",
+          "view": "View A",
+          "caption": "MSK I, slide 75."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk1-p075.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide with the professor's notes from class. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk1-hip",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk2-p33": {
+      "id": "exam3x-msk2-p33",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 33 · Joint · erosive change",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: septic arthritis is an erosive arthropathy, mono- or polyarticular.",
+      "interpretation": "Septic arthritis",
+      "answer": "Septic arthritis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "5eb64d9f-MSK2FALL2026_1.pdf · page 33 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p33__01.jpg",
+          "view": "View A",
+          "caption": "MSK II, slide 33."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk2-p033.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk2-joint",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk2-p34": {
+      "id": "exam3x-msk2-p34",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 34 · Joint · erosive change, second example",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: septic arthritis.",
+      "interpretation": "Septic arthritis",
+      "answer": "Septic arthritis",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "5eb64d9f-MSK2FALL2026_1.pdf · page 34 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p34__01.jpg",
+          "view": "View A",
+          "caption": "MSK II, slide 34."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p34__02.jpg",
+          "view": "View B",
+          "caption": "MSK II, slide 34."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk2-p034.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk2-joint",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk2-p36": {
+      "id": "exam3x-msk2-p36",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 36 · Joint · older dog",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: joint-centered neoplasia is an erosive monoarthropathy, often in geriatric dogs.",
+      "interpretation": "Joint-centered neoplasia",
+      "answer": "Joint-centered neoplasia",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "5eb64d9f-MSK2FALL2026_1.pdf · page 36 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p36__01.jpg",
+          "view": "View A",
+          "caption": "MSK II, slide 36."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk2-p036.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk2-joint",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
+    },
+    "exam3x-msk2-p37": {
+      "id": "exam3x-msk2-p37",
+      "kind": "case",
+      "modality": "X-ray",
+      "title": "Exam 3 · MSK II slide 37 · Multiple joints",
+      "lecture": "CVM 743 · Exam 3 · Small Animal MSK Radiography II",
+      "species": "Canine",
+      "region": "Musculoskeletal",
+      "history": "",
+      "lookFor": "Work systematically: projection, anatomy, then Roentgen signs (number, size, shape, location, margination, opacity) before naming a diagnosis.",
+      "quality": "",
+      "findings": "Slide: erosive polyarthropathy is rare; two known types (rheumatoid arthritis; greyhound polyarthritis).",
+      "interpretation": "Erosive polyarthropathy",
+      "answer": "Erosive polyarthropathy",
+      "differentials": "",
+      "why": "",
+      "next": "",
+      "source": "5eb64d9f-MSK2FALL2026_1.pdf · page 37 · LMU CVM 743 course material, used with LMU permission (non-commercial)",
+      "credit": "LMU CVM diagnostic imaging course",
+      "images": [
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p37__01.jpg",
+          "view": "View A",
+          "caption": "MSK II, slide 37."
+        },
+        {
+          "url": "https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/radiology-course-photos/exam3/developmental-joint/_answer-keys/msk2-p037.jpg",
+          "view": "Annotated teaching key · lecture slide with professor's notes",
+          "caption": "Lecture slide. Answer key."
+        }
+      ],
+      "imageReviewSlot": "",
+      "exam1Slot": "",
+      "exam2Slot": "",
+      "exam3Section": "msk2-joint",
+      "imageStatus": "LMU course radiograph extracted from lecture slides; owner-attested permission",
+      "reviewStatus": "Matched to lecture slide by Claude; findings from slide text and the professor's notes; not independently medically reviewed",
+      "studyImageReview": {
+        "priority": "teaching",
+        "clinicalQualityVerified": false,
+        "note": "Extracted from lecture slides, so resolution is limited to the slide copy. Do not measure from it."
+      },
+      "updated": "2026-11-26T06:00:00Z"
     }
   }
 }

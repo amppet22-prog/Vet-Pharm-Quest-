@@ -1,0 +1,201 @@
+{
+ "sections": {
+  "msk1-dev": "MSK I \u00b7 developmental bone disease (RCC, HOD, panosteitis)",
+  "msk1-hip": "MSK I \u00b7 hips (dysplasia, Legg-Calv\u00e9-Perthes, physeal dysplasia)",
+  "msk2-joint": "MSK II \u00b7 erosive joint disease"
+ },
+ "images": [
+  {
+   "caseId": "exam3x-msk1-p45",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p45__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 45
+  },
+  {
+   "caseId": "exam3x-msk1-p45",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p45__02.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 45
+  },
+  {
+   "caseId": "exam3x-msk1-p48",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p48__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 48
+  },
+  {
+   "caseId": "exam3x-msk1-p50",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p50__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 50
+  },
+  {
+   "caseId": "exam3x-msk1-p51",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p51__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 51
+  },
+  {
+   "caseId": "exam3x-msk1-p52",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p52__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 52
+  },
+  {
+   "caseId": "exam3x-msk1-p55",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p55__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 55
+  },
+  {
+   "caseId": "exam3x-msk1-p56",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p56__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 56
+  },
+  {
+   "caseId": "exam3x-msk1-p59",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p59__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 59
+  },
+  {
+   "caseId": "exam3x-msk1-p60",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p60__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 60
+  },
+  {
+   "caseId": "exam3x-msk1-p61",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p61__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 61
+  },
+  {
+   "caseId": "exam3x-msk1-p61",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p61__02.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 61
+  },
+  {
+   "caseId": "exam3x-msk1-p62",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p62__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 62
+  },
+  {
+   "caseId": "exam3x-msk1-p63",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p63__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 63
+  },
+  {
+   "caseId": "exam3x-msk1-p63",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p63__02.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 63
+  },
+  {
+   "caseId": "exam3x-msk1-p64",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p64__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 64
+  },
+  {
+   "caseId": "exam3x-msk1-p65",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p65__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 65
+  },
+  {
+   "caseId": "exam3x-msk1-p65",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p65__02.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 65
+  },
+  {
+   "caseId": "exam3x-msk1-p68",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p68__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 68
+  },
+  {
+   "caseId": "exam3x-msk1-p69",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p69__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 69
+  },
+  {
+   "caseId": "exam3x-msk1-p69",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p69__02.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 69
+  },
+  {
+   "caseId": "exam3x-msk1-p70",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p70__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 70
+  },
+  {
+   "caseId": "exam3x-msk1-p71",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p71__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 71
+  },
+  {
+   "caseId": "exam3x-msk1-p71",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p71__02.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 71
+  },
+  {
+   "caseId": "exam3x-msk1-p74",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p74__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 74
+  },
+  {
+   "caseId": "exam3x-msk1-p74",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p74__02.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 74
+  },
+  {
+   "caseId": "exam3x-msk1-p75",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk1-p75__01.jpg",
+   "sourceFile": "d93647b2-MSK1FALL26_1.pdf",
+   "sourcePage": 75
+  },
+  {
+   "caseId": "exam3x-msk2-p33",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p33__01.jpg",
+   "sourceFile": "5eb64d9f-MSK2FALL2026_1.pdf",
+   "sourcePage": 33
+  },
+  {
+   "caseId": "exam3x-msk2-p34",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p34__01.jpg",
+   "sourceFile": "5eb64d9f-MSK2FALL2026_1.pdf",
+   "sourcePage": 34
+  },
+  {
+   "caseId": "exam3x-msk2-p34",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p34__02.jpg",
+   "sourceFile": "5eb64d9f-MSK2FALL2026_1.pdf",
+   "sourcePage": 34
+  },
+  {
+   "caseId": "exam3x-msk2-p36",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p36__01.jpg",
+   "sourceFile": "5eb64d9f-MSK2FALL2026_1.pdf",
+   "sourcePage": 36
+  },
+  {
+   "caseId": "exam3x-msk2-p37",
+   "repoPath": "radiology-course-photos/exam3/developmental-joint/exam3x-msk2-p37__01.jpg",
+   "sourceFile": "5eb64d9f-MSK2FALL2026_1.pdf",
+   "sourcePage": 37
+  }
+ ]
+}
