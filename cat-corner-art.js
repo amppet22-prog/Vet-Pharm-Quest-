@@ -115,6 +115,34 @@ s+=`</g>
  <path d="M737 281h35l-5 22h-27Z" fill="#e7b9a3" stroke="#bc8b86" stroke-width="2"/>
  <path d="M753 281q-23-37-10-40q20 9 10 40M754 281q17-41 29-32q-1 22-29 32" fill="#82b99b" stroke="#6f9e87" stroke-width="2"/>
 </g>
+<!-- illustrated upper-room additions from approved lounge concept: usable-looking wall cubbies and a rope hammock, away from floor controls -->
+<g filter="url(#catDrop3)">
+ <!-- wall-mounted enclosed cubby at left, integrated with the climbing steps -->
+ <path d="M158 171l11-15h59l11 15v48h-81Z" fill="#e9c8b8" stroke="#b88e9c" stroke-width="4"/>
+ <path d="M175 211v-19q0-16 22-16t22 16v19Z" fill="#82628e" stroke="#ccafd1" stroke-width="4"/>
+ <ellipse cx="198" cy="209" rx="22" ry="8" fill="#dcb0d0"/>
+ <!-- suspended hammock supported by two existing structural wall points -->
+ <path d="M253 213L309 230L361 210" fill="none" stroke="#b58396" stroke-width="4"/>
+ <path d="M252 213Q303 268 360 211Q308 258 252 213Z" fill="#e0b2d3" stroke="#ba8ead" stroke-width="3"/>
+ <path d="M254 214L260 192M357 212L355 194" stroke="#b3889c" stroke-width="3"/>
+ <!-- upper right wall cube hide connected to existing cat wall steps -->
+ <path d="M709 196l12-20h54l11 20v58h-77Z" fill="#f5cfaf" stroke="#c49a99" stroke-width="4"/>
+ <path d="M727 245v-23q0-20 20-20t20 20v23Z" fill="#946c9b"/>
+ <ellipse cx="747" cy="245" rx="29" ry="8" fill="#e9b4d6"/>
+ <!-- cozy window seat gets a padded backrest and folded blanket -->
+ <path d="M798 302q23-21 42-5v22h-42Z" fill="#f8e0d7" stroke="#dcafb9" stroke-width="2"/>
+ <path d="M908 302q27-20 39-1v19h-39Z" fill="#fce6da" stroke="#dcafb9" stroke-width="2"/>
+ <path d="M854 324q21-13 37 0" fill="none" stroke="#fff5f3" stroke-width="5"/>
+</g>
+<!-- enrichment varied by function: kicker toy, rolling ball and puzzle feeder rather than repeated generic clutter -->
+<g filter="url(#catDrop3)">
+ <path d="M267 397q24-16 36 9l-7 12q-17-4-29-21Z" fill="#b6cce0" stroke="#91afc9" stroke-width="3"/>
+ <path d="M273 398l20 15M281 391l15 18" stroke="#f9f8f5" stroke-width="2"/>
+ <circle cx="813" cy="396" r="13" fill="#f0b9a5" stroke="#c88f9b" stroke-width="3"/>
+ <path d="M801 395h24M814 384v24" stroke="#f6decb" stroke-width="3"/>
+ <rect x="687" y="367" width="70" height="16" rx="8" fill="#d8b5e2" stroke="#a584c2" stroke-width="3"/>
+ <circle cx="703" cy="373" r="4" fill="#f7c47e"/><circle cx="723" cy="373" r="4" fill="#92c6a8"/><circle cx="742" cy="373" r="4" fill="#f1aeca"/>
+</g>
 <!-- suspended toys under perches -->
 <path d="M427 187v45M608 212v34M753 270v30" stroke="#bd9dbb" stroke-width="2" stroke-dasharray="3 3"/>
 <circle cx="427" cy="238" r="10" fill="#e7afd4" stroke="#bc89af" stroke-width="3"/>
