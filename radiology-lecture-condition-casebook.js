@@ -31,7 +31,18 @@ const lecturePairs={
  "Abdomen|Mechanical small intestinal obstruction":["exam2-gi-lab-mechanical"],
  "Abdomen|Functional ileus":["exam2-gi-gsd-functional"],
  "Abdomen|Linear gastrointestinal foreign body":["exam2-gi-minpin-linear","exam2-gi-dsh-linear-compression","exam2-gi-dsh-plication"],
- "Abdomen|Intestinal volvulus/torsion":["exam2-gi-gsd-generalized"]
+ "Abdomen|Intestinal volvulus/torsion":["exam2-gi-gsd-generalized"],
+ "Thorax|Feline asthma / bronchitis":["exam4-lung-l3-cat-smoker","exam4-pat-cat-wheeze","exam4-lung-14yo-cat"],
+ "Thorax|Aspiration pneumonia":["exam4-case5-gsp","exam4-lung-l3-lab-regurg","exam4-pat-alv-aspiration"],
+ "Thorax|Canine cardiogenic pulmonary edema":["exam4-hrt-cocker","exam4-case3-dachshund","exam4-hrt-lchf-edema","exam4-hrt-labile"],
+ "Thorax|Feline heart failure pulmonary edema":["exam4-case9-mainecoon","exam4-hrt-cat-edema","exam4-hrt-kitten","exam4-hrt-cat-edema-lat"],
+ "Thorax|Noncardiogenic pulmonary edema":["exam4-lung-puppy-pool"],
+ "Thorax|Lobar atelectasis":["exam4-lung-l3-rml","exam4-lung-14yo-cat","exam4-mim-anesthesia"],
+ "Thorax|Pulmonary nodules / metastases":["exam4-pat-si-large","exam4-pat-si-miliary","exam4-lung-l3-mets","exam4-l8-case3-lab","exam4-mim-nipple"],
+ "Thorax|Pneumothorax":["exam4-cav-ptx-lat","exam4-cav-ptx-vd","exam4-case6-golden"],
+ "Thorax|Pleural effusion":["exam4-l8-fred","exam4-cav-zoey","exam4-cav-pe-signs","exam4-cav-fissure-thick"],
+ "Thorax|Megaesophagus":["exam4-cav-stbernard","exam4-l8-shadow","exam4-cav-praa"],
+ "Thorax|Cranial mediastinal mass":["exam4-case4-blue","exam4-l8-toto"]
 };
 let backOpts=null;
 function lectureCases(c){const all=window.VPQ_IMAGING_PUBLISH?.getCases?.()||[];return (lecturePairs[c.group+'|'+c.title]||[]).map(id=>all.find(x=>x.id===id)).filter(x=>x&&x.images?.some(im=>im.url))}
