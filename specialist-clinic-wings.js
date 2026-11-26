@@ -252,6 +252,26 @@ function scene(key){
    <rect x="332" y="96" width="336" height="48" rx="17" fill="#fffafc" stroke="#95c4bd" stroke-width="4" filter="url(#vpqSpecShadow)"/>
    <text x="500" y="127" fill="#416f72" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="25">SURGERY &amp; ANESTHESIA</text>
    <text x="500" y="159" fill="#6f9295" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="12">PREP  ·  MONITOR  ·  OPERATE  ·  RECOVER</text>
+   <!-- Built-in storage, theatre glass, scrub threshold and overhead track. -->
+   <defs>
+      <linearGradient id="vpqSurgWallV2" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f7fffe"/><stop offset="1" stop-color="#cee7e4"/></linearGradient>
+      <linearGradient id="vpqSurgWarmV2" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff8d5" stop-opacity=".48"/><stop offset="1" stop-color="#fff8d5" stop-opacity="0"/></linearGradient>
+   </defs>
+   <rect x="67" y="94" width="680" height="75" fill="url(#vpqSurgWallV2)" opacity=".85"/>
+   <rect x="68" y="165" width="679" height="4" fill="#b0d6d0"/>
+   <rect x="74" y="98" width="172" height="54" rx="7" fill="#f6fffd" stroke="#a2c8c4" stroke-width="3"/>
+   <path d="M131 102v46M187 102v46" stroke="#b4d6d2" stroke-width="3"/>
+   <path d="M113 126h5M169 126h5M222 126h5" stroke="#6aaba9" stroke-width="4" stroke-linecap="round"/>
+   <rect x="264" y="111" width="45" height="38" rx="5" fill="#f1f9fa" stroke="#a4c6ca" stroke-width="3"/>
+   <path d="M274 130h24M286 118v24" stroke="#a4d0bb" stroke-width="6"/>
+   <path d="M490 96h244" stroke="#a7c2c8" stroke-width="6" stroke-linecap="round"/>
+   <path d="M517 97v30M704 97v29" stroke="#9aafb7" stroke-width="4"/>
+   <rect x="86" y="350" width="153" height="13" rx="6" fill="#a8c9c3" opacity=".85"/>
+   <rect x="88" y="363" width="149" height="8" rx="4" fill="#fff" opacity=".9"/>
+   <path d="M242 171v170" stroke="#8bb9b7" stroke-width="7"/>
+   <path d="M251 175v164" stroke="#e2fbf5" stroke-width="3"/>
+   <rect x="88" y="375" width="144" height="20" rx="10" fill="#fff8e5" stroke="#d9c69b" stroke-width="2"/>
+   <text x="160" y="389" text-anchor="middle" font-size="10" font-weight="900" font-family="Arial" fill="#9c8053">SCRUB BEFORE ENTRY</text>
    <!-- 1: Scrub and sterile preparation zone -->
    <g filter="url(#vpqSpecShadow)">
      <rect x="78" y="175" width="169" height="159" rx="16" fill="#f9fefd" stroke="#8bbcb8" stroke-width="6"/>
@@ -283,6 +303,15 @@ function scene(key){
      <rect x="287" y="335" width="176" height="29" rx="10" fill="#fff" stroke="#b4d4d1" stroke-width="3"/>
      <text x="375" y="355" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#527b7b">ANESTHESIA MONITOR</text>
    </g>
+   <!-- Anesthesia trolley: oxygen cylinder, breathing circuit, and organized supplies. -->
+   <g filter="url(#vpqSpecShadow)">
+      <rect x="272" y="369" width="190" height="11" rx="5" fill="#a5c3c6"/>
+      <path d="M292 379v19M442 379v19" stroke="#91abb7" stroke-width="6"/>
+      <circle cx="292" cy="399" r="6" fill="#6d8897"/><circle cx="442" cy="399" r="6" fill="#6d8897"/>
+      <rect x="467" y="229" width="20" height="102" rx="10" fill="#a3cdbb" stroke="#689e90" stroke-width="3"/>
+      <rect x="471" y="221" width="12" height="12" rx="3" fill="#d4ece1" stroke="#689e90" stroke-width="2"/>
+      <path d="M479 222q33 -19 49 9" fill="none" stroke="#b5ccd5" stroke-width="5" stroke-linecap="round"/>
+   </g>
    <!-- Ceiling mounted operating lamps; put lighting above surgical field -->
    <g filter="url(#vpqSpecShadow)">
      <path d="M606 69v39l-34 24" fill="none" stroke="#9badba" stroke-width="9" stroke-linecap="round"/>
@@ -292,6 +321,17 @@ function scene(key){
      <path d="M747 69v40l-33 24" fill="none" stroke="#9badba" stroke-width="8" stroke-linecap="round"/>
      <ellipse cx="704" cy="145" rx="33" ry="15" fill="#b6d1cd" stroke="#7da9a9" stroke-width="5"/>
      <ellipse cx="704" cy="147" rx="22" ry="9" fill="#fff7d5" stroke="#fff" stroke-width="3"/>
+   </g>
+   <!-- Additional theatre accents: multi-LED lights and sterile instrument trolley. -->
+   <g filter="url(#vpqSpecShadow)">
+      <circle cx="548" cy="155" r="17" fill="#fff8d9" stroke="#e3d9ba" stroke-width="2"/>
+      <circle cx="538" cy="151" r="4" fill="#fff"/><circle cx="557" cy="151" r="4" fill="#fff"/><circle cx="548" cy="162" r="4" fill="#fff"/>
+      <circle cx="704" cy="147" r="15" fill="#fff8d9" stroke="#e3d9ba" stroke-width="2"/>
+      <circle cx="697" cy="144" r="3.5" fill="#fff"/><circle cx="711" cy="144" r="3.5" fill="#fff"/><circle cx="704" cy="153" r="3.5" fill="#fff"/>
+      <rect x="687" y="191" width="51" height="15" rx="5" fill="url(#vpqSurgSteel)" stroke="#89abb6" stroke-width="3"/>
+      <path d="M696 207v18M729 207v18" stroke="#97adb7" stroke-width="5"/>
+      <path d="M695 199h15l6 -5 10 5" stroke="#6d9d9c" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <rect x="688" y="214" width="48" height="8" rx="4" fill="#dff7ef"/>
    </g>
    <!-- 3: Surgery table, drape, overhead light, trolley and compact patient silhouette -->
    <g filter="url(#vpqSpecShadow)">
@@ -308,6 +348,11 @@ function scene(key){
      <rect x="547" y="338" width="147" height="27" rx="10" fill="#fff" stroke="#b4d4d1" stroke-width="3"/>
      <text x="621" y="356" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#527b7b">OPERATING TABLE</text>
    </g>
+   <!-- Clear architectural partition: recovery is a DIFFERENT room behind a closed door. -->
+   <path d="M748 92v253" stroke="#76989f" stroke-width="11"/>
+   <path d="M750 95v247" stroke="#f3ffff" stroke-width="3"/>
+   <rect x="758" y="97" width="178" height="236" rx="5" fill="#dbedfa" opacity=".28"/>
+   <path d="M763 112L917 285" stroke="#fff" stroke-width="4" opacity=".3"/>
    <!-- 4: A separate recovery WARD is depicted beyond sealed glass and its own door.
       This is a room cutaway/navigation preview, NOT a recovery cage in the sterile operating room. -->
    <g>
@@ -325,21 +370,6 @@ function scene(key){
      <rect x="772" y="321" width="161" height="31" rx="9" fill="#fff" stroke="#b2aacd" stroke-width="3"/>
      <text x="852" y="340" text-anchor="middle" fill="#71658c" font-family="Arial" font-size="12" font-weight="900">RECOVERY BEHIND DOOR</text>
    </g>
-   <!-- Retired original combined recovery/cases area; kept in source below for historical layout comparison only. -->
-   <!-- 
-   <g filter="url(#vpqSpecShadow)">
-     <rect x="759" y="167" width="178" height="166" rx="16" fill="#f3f5fb" stroke="#b5b3d4" stroke-width="6"/>
-     <rect x="771" y="180" width="152" height="95" rx="10" fill="#fffefa" stroke="#d4cedd" stroke-width="3"/>
-     <rect x="787" y="194" width="118" height="67" rx="9" fill="#456178"/>
-     <path d="M799 209h30M799 224h76M799 239h57" stroke="#a5d8d6" stroke-width="6" stroke-linecap="round"/>
-     <rect x="868" y="199" width="26" height="22" rx="5" fill="#e5b9d0"/>
-     <path d="M881 204v13M875 211h12" stroke="#fff" stroke-width="4"/>
-     <rect x="777" y="281" width="145" height="40" rx="9" fill="#e7e6f6" stroke="#bcb9d5" stroke-width="3"/>
-     <path d="M789 304h122" stroke="#bac4d6" stroke-width="4"/>
-     <rect x="776" y="335" width="148" height="28" rx="10" fill="#fff" stroke="#c6c1dd" stroke-width="3"/>
-     <text x="850" y="354" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#747197">RECOVERY + CASES</text>
-   </g>
-   -->
       <!-- Warm sterile charm: no fake interactive buttons or obstructing scenery -->
    <g font-family="Arial" text-anchor="middle" font-size="10" font-weight="800">
      <rect x="90" y="112" width="137" height="27" rx="10" fill="#fff8e5" stroke="#decaa5" stroke-width="3"/>
