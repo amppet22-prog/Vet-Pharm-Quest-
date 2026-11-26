@@ -30,12 +30,20 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(64,61,877,9,'#f4fdff');
  // Supply and scrub side: clear wall bands and explicit non-overlapping equipment zones.
  s+=rect(101,88,284,252,'#d5e9ed')+rect(101,95,281,7,'#f6fcfb')+label(179,77,180,'CLEAN PREP &amp; SUPPLIES');
- // Side-wall inset ET rack: foreshortened by wall perspective and mounted away from floor equipment.
+ // Two vertically stacked fixtures on the LEFT angled wall: tools above, smaller ET tube rack below.
  s+='<polygon points="0,46 99,91 99,351 0,407" fill="#aecbd5" stroke="#91b1c1" stroke-width="3"/>';
- s+='<polygon points="23,118 91,139 91,273 23,295" fill="#f4faff" stroke="#8fb2c5" stroke-width="3"/>';
- s+=txt(58,155,'ET TUBES',9,'#517795',900);
- for(let i=0;i<4;i++){let x=34+i*13;s+=rect(x,172,7,8,'#e8faff','#9cbfca',1,1)+path('M'+(x+3)+' 180v47q0 7 5 7','#85b5c1',2);}
- s+=path('M30 165L85 174M27 256L88 238','#9cbfcd',2);
+ // Tool board recessed into the angled wall; small silhouettes support the interactive overview.
+ s+='<polygon points="22,109 88,132 88,226 22,240" fill="#f8fcff" stroke="#88aabe" stroke-width="3"/>';
+ s+=txt(55,146,'SURGICAL',8,'#4a718e',900)+txt(55,158,'TOOLS',10,'#4a718e',900);
+ s+=path('M33 169l15 16M48 169l-15 16M60 169l15 16M75 169l-15 16','#779cb0',2.4);
+ s+='<circle cx="41" cy="194" r="4" fill="none" stroke="#7299ac" stroke-width="2"/><circle cx="52" cy="194" r="4" fill="none" stroke="#7299ac" stroke-width="2"/>';
+ s+=path('M41 194l19 15M52 194l14 15M73 196v14','#779cb0',2);
+ s+=txt(55,221,'TAP TO LEARN',7,'#7295aa',800);
+ // ET rack reduced and deliberately located directly BELOW the tools board.
+ s+='<polygon points="26,248 83,241 83,314 26,334" fill="#f6fcff" stroke="#91b2c1" stroke-width="3"/>';
+ s+=txt(54,261,'ET TUBES',8,'#5b829b',900);
+ for(let i=0;i<4;i++){let x=35+i*12;s+=rect(x,269,6,7,'#e9faff','#91b9c5',1,1)+path('M'+(x+3)+' 277v24q0 5 3 5','#86b8c4',1.7);}
+ s+=path('M33 265h45','#a4c8d0',1.5);
  // Clean supply shelf, gowns, masks, caps and wrapped drapes.
  s+=rect(181,110,188,80,'#f7fbfe','#a7c1cc',5,2)+path('M188 148h173','#9db9c7',3);
  for(let i=0;i<5;i++){let x=192+i*33;s+=rect(x,117,28,22,['#c5daed','#d8c7ed','#c0dfda','#b8d6e8','#ded3ee'][i],'#f5ffff',2,1)+rect(x,155,28,23,['#e1d6ee','#c5e5e8','#d0dff3','#c9e4e0','#e5d2ec'][i],'#f5ffff',2,1);}
@@ -94,16 +102,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=path('M839 239q14 14 8 33','#778baf',3);
  // The upper-right plane is explicitly the side wall. Keep the OR free of recovery beds.
  s+='<polygon points="865,72 1000,0 1000,406 865,342" fill="#bfd4e1" stroke="#96aec1" stroke-width="5"/>';
- // Perspective right-wall mount: readable surgical-tool quick-guide with silhouette icons.
- // Kept above mobile equipment and outside the sterile table's working silhouette.
- s+='<polygon points="803,91 891,68 891,334 803,348" fill="#c0d7e3" stroke="#97b6c6" stroke-width="3"/>';
- s+='<polygon points="811,103 880,89 880,205 811,217" fill="#f9fcff" stroke="#92afc4" stroke-width="4"/>';
- s+=txt(845,121,'SURGICAL',9,'#466d8d',900)+txt(845,134,'TOOLS',11,'#466d8d',900);
- s+=path('M823 148l16 22M840 148l-17 22M850 151l17 19M866 151l-16 19','#7099ad',3);
- s+='<circle cx="826" cy="185" r="5" fill="none" stroke="#6892a7" stroke-width="2"/><circle cx="837" cy="185" r="5" fill="none" stroke="#6892a7" stroke-width="2"/>';
- s+=path('M826 182l23 14M837 182l14 14M859 179v17M852 184l14 -3','#7ba0b3',2);
- s+=txt(845,201,'TAP TO LEARN',8,'#6b92a9',800);
- 
+ // Right wall reserved entirely for a clear passage into the separate recovery ward.
  // Recessed purple jamb, perspective reveals the recovery room behind the RIGHT wall.
  s+='<polygon points="883,101 987,54 987,375 883,329" fill="#9c8cbe" stroke="#8074a7" stroke-width="6"/>';
  s+='<polygon points="892,111 977,74 977,356 892,322" fill="#dae9f4" stroke="#f5f4fe" stroke-width="3"/>';
