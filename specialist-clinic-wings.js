@@ -35,10 +35,11 @@ const data={
   {x:70,y:39,w:24,h:41,walk:82,label:'🧪 Sample Handling',action:'diagnosticSkills'}
  ],
  surgery:[
-  {x:5,y:40,w:22,h:39,walk:16,label:'🧽 Sterile Prep',action:'surgPrep'},
-  {x:28,y:40,w:21,h:39,walk:39,label:'💗 Anesthesia',action:'surgMonitor'},
-  {x:52,y:40,w:20,h:39,walk:63,label:'🛏️ Recovery',action:'surgRecovery'},
-  {x:76,y:40,w:21,h:39,walk:87,label:'🐾 Patient Cases',action:'surgCases'}
+  {x:2,y:40,w:19,h:39,walk:11,label:'🧽 Sterile Prep',action:'surgPrep'},
+  {x:21,y:40,w:19,h:39,walk:30,label:'💗 Anesthesia',action:'surgMonitor'},
+  {x:40,y:40,w:20,h:39,walk:50,label:'🪡 Spay Simulation',action:'surgSim'},
+  {x:60,y:40,w:19,h:39,walk:69,label:'🛏️ Recovery Ward',action:'surgRecovery'},
+  {x:79,y:40,w:19,h:39,walk:89,label:'🐾 Patient Cases',action:'surgCases'}
  ]
 
 };
@@ -307,7 +308,25 @@ function scene(key){
      <rect x="547" y="338" width="147" height="27" rx="10" fill="#fff" stroke="#b4d4d1" stroke-width="3"/>
      <text x="621" y="356" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#527b7b">OPERATING TABLE</text>
    </g>
-   <!-- 4: Recovery and case board, framed as one interactive zone -->
+   <!-- 4: A separate recovery WARD is depicted beyond sealed glass and its own door.
+      This is a room cutaway/navigation preview, NOT a recovery cage in the sterile operating room. -->
+   <g>
+     <rect x="751" y="92" width="190" height="246" rx="3" fill="#f0eafa" stroke="#9c92b9" stroke-width="7"/>
+     <path d="M752 94v246" stroke="#807c9f" stroke-width="9"/>
+     <rect x="769" y="105" width="153" height="213" rx="7" fill="#e1f7fc" fill-opacity=".85" stroke="#b6bad9" stroke-width="5"/>
+     <path d="M846 108v208" stroke="#a2a3c1" stroke-width="5"/>
+     <rect x="847" y="175" width="65" height="128" rx="4" fill="#efe6f6" fill-opacity=".9" stroke="#aa9dc3" stroke-width="3"/>
+     <circle cx="902" cy="244" r="4" fill="#927c9f"/>
+     <rect x="785" y="236" width="52" height="39" rx="8" fill="#a4cbd3" stroke="#7898ac" stroke-width="3"/>
+     <path d="M785 248h52M785 259h52" stroke="#f2fffd" stroke-width="3"/>
+     <rect x="781" y="125" width="133" height="34" rx="8" fill="#fff" stroke="#b4acd2" stroke-width="3"/>
+     <text x="848" y="138" text-anchor="middle" fill="#71658c" font-size="10" font-family="Arial" font-weight="900">SEPARATE RECOVERY</text>
+     <text x="848" y="151" text-anchor="middle" fill="#71658c" font-size="10" font-family="Arial" font-weight="900">WARD · DOOR</text>
+     <rect x="772" y="321" width="161" height="31" rx="9" fill="#fff" stroke="#b2aacd" stroke-width="3"/>
+     <text x="852" y="340" text-anchor="middle" fill="#71658c" font-family="Arial" font-size="12" font-weight="900">RECOVERY BEHIND DOOR</text>
+   </g>
+   <!-- Retired original combined recovery/cases area; kept in source below for historical layout comparison only. -->
+   <!-- 
    <g filter="url(#vpqSpecShadow)">
      <rect x="759" y="167" width="178" height="166" rx="16" fill="#f3f5fb" stroke="#b5b3d4" stroke-width="6"/>
      <rect x="771" y="180" width="152" height="95" rx="10" fill="#fffefa" stroke="#d4cedd" stroke-width="3"/>
@@ -320,7 +339,8 @@ function scene(key){
      <rect x="776" y="335" width="148" height="28" rx="10" fill="#fff" stroke="#c6c1dd" stroke-width="3"/>
      <text x="850" y="354" text-anchor="middle" font-family="Arial" font-size="13" font-weight="900" fill="#747197">RECOVERY + CASES</text>
    </g>
-   <!-- Warm sterile charm: no fake interactive buttons or obstructing scenery -->
+   -->
+      <!-- Warm sterile charm: no fake interactive buttons or obstructing scenery -->
    <g font-family="Arial" text-anchor="middle" font-size="10" font-weight="800">
      <rect x="90" y="112" width="137" height="27" rx="10" fill="#fff8e5" stroke="#decaa5" stroke-width="3"/>
      <text x="158" y="129" fill="#947b57">CLEAN HANDS · PPE</text>
