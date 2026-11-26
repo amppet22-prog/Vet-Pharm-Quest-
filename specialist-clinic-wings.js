@@ -5,6 +5,7 @@
 window.VPQ_SPECIALIST_ROOMS=function(api){
 'use strict';
 const stage=document.getElementById('stage');if(!stage||!window.VPQ_SCENERY)return null;
+window.VPQ_SURGERY_SKILLS_NAV=()=>api.doAction('skillsWing');
 const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 const data={
  clinpath:[
