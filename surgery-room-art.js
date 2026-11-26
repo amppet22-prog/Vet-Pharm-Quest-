@@ -48,20 +48,25 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  // Clean supply shelf, gowns, masks, caps and wrapped drapes.
  s+=rect(181,110,188,80,'#f7fbfe','#a7c1cc',5,2)+path('M188 148h173','#9db9c7',3);
  for(let i=0;i<5;i++){let x=192+i*33;s+=rect(x,117,28,22,['#c5daed','#d8c7ed','#c0dfda','#b8d6e8','#ded3ee'][i],'#f5ffff',2,1)+rect(x,155,28,23,['#e1d6ee','#c5e5e8','#d0dff3','#c9e4e0','#e5d2ec'][i],'#f5ffff',2,1);}
- // Wash station: separate from autoclave without overlapping objects.
- s+=rect(83,211,165,14,'url(#sSteel)','#91afbe',4)+rect(84,226,163,99,'#eef4f7','#aec1cb',5);
- s+=cabinet(90,255,72,66)+cabinet(164,255,74,66);
- s+=rect(93,220,143,28,'#a9c4ce','#f3fdff',7)+rect(99,223,61,20,'#83a9b9','#d9edf2',9)+rect(164,223,64,20,'#83a9b9','#d9edf2',9);
- for(let x of [123,190])s+=path('M'+x+' 219v-18q0 -5 6 -5h8v14','#789aab',4);
- // Dedicated vertical autoclave footprint, no supply trolley drawn underneath.
+ // Floor-standing scrub sink with wall taps, deep twin basins and grounded cabinets.
+ s+='<ellipse cx="185" cy="350" rx="85" ry="10" fill="#769aa4" opacity=".18"/>';
+ s+=rect(112,268,144,76,'#e9f2f4','#a3bbc5',6,3);
+ s+=cabinet(119,274,62,66)+cabinet(187,274,62,66);
+ s+=rect(115,341,138,8,'#89abb7','#7299a8',3,2);
+ s+='<polygon points="112,261 248,261 258,272 108,272" fill="url(#sSteel)" stroke="#90b0bc" stroke-width="3"/>';
+ s+=rect(118,243,128,20,'#b5d0d6','#8badbb',6,3);
+ s+=rect(122,247,54,13,'#799eae','#ecf9fa',8,2)+rect(184,247,54,13,'#799eae','#ecf9fa',8,2);
+ for(let x of [144,206])s+=path('M'+x+' 241v-22q0 -7 7 -7h9v20','#7199aa',4);
+ s+=path('M118 271h131','#f7ffff',2);
+  // Dedicated vertical autoclave footprint, no supply trolley drawn underneath.
  s+=rect(261,210,109,116,'url(#sSteel)','#8aa9bb',7,4)+rect(270,220,91,78,'#e8f4f8','#8ea8b8',6,2);
  s+='<circle cx="315" cy="257" r="30" fill="#86a8b7" stroke="#edfaff" stroke-width="5"/><circle cx="315" cy="257" r="22" fill="#d5e9f0" stroke="#90b2bd" stroke-width="3"/>';
  s+=rect(272,305,12,7,'#79c7ac','',2)+txt(315,340,'AUTOCLAVE',10,'#577f99',900);
- // Purpose-built scrub zone: wall-mounted soap and scrub dispenser above sink; cabinets remain unobstructed.
- s+=rect(110,190,23,28,'#f5fbff','#8dabb9',4,2)+rect(116,195,11,12,'#a5dfcf','',3);
- s+=rect(141,190,23,28,'#f5fbff','#8dabb9',4,2)+rect(147,195,11,12,'#c9b6e4','',3);
- s+=path('M120 207v7M151 207v7','#789eac',2);
- // Autoclave control bezel and door handle.
+ // Antiseptic and scrub dispensers mounted above the basins.
+ s+=rect(132,190,23,29,'#f5fbff','#8dabb9',4,2)+rect(138,195,11,13,'#a5dfcf','',3);
+ s+=rect(164,190,23,29,'#f5fbff','#8dabb9',4,2)+rect(170,195,11,13,'#c9b6e4','',3);
+ s+=path('M142 209v6M175 209v6','#789eac',2);
+  // Autoclave control bezel and door handle.
  s+='<circle cx="345" cy="307" r="4" fill="#a1c9d6" stroke="#edfaff" stroke-width="1"/>';
  s+=path('M335 301h17','#709ca9',2);
  // Distinct sterile pack cubbies below supplies; folded blue-wrapped packs read as equipment.
@@ -80,7 +85,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<ellipse cx="412" cy="360" rx="26" ry="7" fill="#678fa1" opacity=".14"/>';
   // Header over OR area kept high, not over devices.
  // The page header already names this suite. A small theatre plaque avoids the lamp arms.
- s+=rect(467,81,209,29,'#f8fbff','#8bb5c8',12,2)+txt(571,101,'OPERATING THEATRE',14,'#426b91',900);
+ s+=rect(469,81,180,29,'#f8fbff','#8bb5c8',12,2)+txt(559,101,'OPERATING THEATRE',13,'#426b91',900);
  // Storage behind anesthesia machine is deliberately minimal.
  s+=rect(430,145,105,60,'#d9ecf3','#9eb8c6',5,2);
  for(let i=0;i<4;i++)s+=rect(438+i*23,156,17,28,['#c2d9e5','#d4c5e5','#bcd8d2','#c7cee8'][i],'#eef9fc',3,1);
@@ -98,10 +103,10 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<ellipse cx="546" cy="315" rx="17" ry="7" fill="#547d91" opacity=".12"/>';
  s+=rect(535,255,20,52,'#e1f2f4','#90b5bd',6,3);
  s+='<circle cx="545" cy="267" r="5" fill="#b0d5d6"/>';
- s+=path('M535 274q-15 -8 -18 -22M550 275q21 -9 25 0','#8fbcc3',3);
+ s+=path('M535 274q-12 -9 -17 -19','#8fbcc3',3);
   // Separate large patient monitor raised on pole.
  s+='<g filter="url(#sSh)">'+rect(561,180,112,76,'#deeef4','#8ba9bd',8,5)+rect(572,190,90,54,'#263f59','#466b80',4)+path('M579 224h13l5 -11 5 21 7 -16 8 7h8l7 -12 7 17 6 -9h11','#64dcb3',3)+txt(648,207,'98',13,'#c7edb1',900)+txt(646,238,'96',12,'#c4e6f4',900);
- s+=path('M580 236h29l6 -5 10 6h16','#edc78e',2)+txt(581,200,'ECG',8,'#c4dce5',700)+txt(646,225,'SpO₂',8,'#acdcd2',700);
+ s+=path('M580 236h29l6 -5 10 6h12','#edc78e',2)+txt(581,200,'ECG',8,'#c4dce5',700);
  s+=path('M619 256v17','#8aa8b8',5)+rect(597,273,44,12,'url(#sSteel)','#a7bdc4',3)+'</g>';
  // Monitor display identifies the station without another overlapping label.
  // Multi-lamp articulating LED heads above the surgical field.
@@ -167,15 +172,19 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<polygon points="905,308 967,291 967,331 905,314" fill="#99bed0" opacity=".45"/>';
  s+='<polygon points="917,173 953,162 953,180 917,192" fill="#f7fbff" stroke="#a2bfd3" stroke-width="2"/>';
  s+='<polygon points="924,177 948,170 948,178 924,185" fill="#4b7389"/>';
- // Kennel bank inside the room behind glass with a visible pink bed.
- s+='<polygon points="904,190 965,169 965,256 904,276" fill="#a5becf" stroke="#819eb2" stroke-width="3"/>';
- for(let i=0;i<5;i++){let x=911+i*12;s+=path('M'+x+' '+(187-i*4)+'v87','#89a5b8',2);}
- s+='<polygon points="905,260 965,241 965,285 905,301" fill="#e3cce7" stroke="#bea4d1" stroke-width="3"/>';
- s+='<polygon points="903,303 967,286 967,332 903,312" fill="#9fc7d9"/>';
- // Recovery area appears deeper: a small kennel blanket, wall fixture and subtle internal floor shadow.
- s+='<polygon points="913,268 959,254 959,272 913,286" fill="#deb8dc" opacity=".85"/>';
- s+='<polygon points="920,277 947,268 947,280 920,289" fill="#f0d7e8"/>';
- s+='<polygon points="910,319 965,301 965,333 910,315" fill="#83acc2" opacity=".20"/>';
+ // Behind the glass, a recognisable 2-tier kennel bank set into the recovery ward.
+ s+='<polygon points="903,165 966,146 966,301 903,319" fill="#9bb5c5" stroke="#6f98ac" stroke-width="3"/>';
+ for(let row=0;row<2;row++){
+   let o=row*66;
+   s+='<polygon points="908,'+(180+o)+' 961,'+(164+o)+' 961,'+(215+o)+' 908,'+(229+o)+'" fill="#d6e7ef" stroke="#80a3b4" stroke-width="2.5"/>';
+   s+=path('M910 '+(188+o)+'L959 '+(174+o)+'M911 '+(220+o)+'L959 '+(205+o),'#8aa7b5',2);
+   for(let k=0;k<5;k++){let x=914+k*9;s+=path('M'+x+' '+(183+o-k*3)+'v41','#91aab7',1.7);}
+   s+=rect(936,209+o,12,7,'#f9f8eb','#adc3c6',2,1);
+   s+='<circle cx="953" cy="'+(215+o)+'" r="2.3" fill="#c8acbd"/>';
+ }
+ s+='<polygon points="910,283 962,270 962,292 910,307" fill="#e6bed7" stroke="#baabc9" stroke-width="2"/>';
+ s+='<polygon points="914,289 956,278 956,287 914,301" fill="#f3dce6"/>';
+ s+='<polygon points="905,313 966,295 966,329 905,320" fill="#83aabd" opacity=".36"/>';
   // Steel/glass frames and door handle for a real architectural opening.
  s+='<polygon points="885,102 895,108 895,324 885,331" fill="#ddd3ef"/>';
  s+='<polygon points="969,81 978,76 978,352 969,348" fill="#907db4"/>';
