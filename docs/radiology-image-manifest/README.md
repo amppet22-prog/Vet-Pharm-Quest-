@@ -53,3 +53,12 @@ The anatomy lecture is not mapped yet. It contains third-party figures on pp.8�
 - `answer` labels were added to 43 Exam 3 cases (`build_exam3_cases.py` → `ANSWERS`). Practice cases and view/technique slides have no MC.
 - `build_exam3_extra.py` adds 24 `exam3x-*` cases: RCC, HOD stages, panosteitis, hip dysplasia progression, Legg-Calvé-Perthes, physeal dysplasia, erosive joint disease. The answer keys are the **professor-annotated MSK I** slides (the noted copy is +1 page from slide 22).
 - Condition cards (`radiology-lecture-condition-casebook.js`) show lecture radiographs via `lecturePairs` (group|title → case ids), and can open them as multiple-choice cases. Also added Previous, Back to the Exam hub, and `open(section, {backLabel, onBack})`. Abdomen pairs point at `exam2-*` ids, which appear once Exam 2 is published.
+
+## Exam 2 · abdomen, GI and GU (2026-11-26)
+- `build_exam2.py` builds **54 `exam2-*` cases** (94 student images and 54 annotated keys in `radiology-course-photos/exam2/`) from the owner's annotated copies of Abdomen Cases, GI Principles I & II, Abdomen Principles I & II, Normal Abdomen (Dr. Morris) and Genitourinary.
+- Findings and answers come from the **professor's handwritten slide notes**. The owner confirmed the notes are the professor's statements. Nothing was added by Claude.
+- Ileus slots: `e2-ileus-mechanical` = 2 yo Lab (GI p18), `e2-ileus-functional` = 4 mo GSD (GI p21–22), `e2-ileus-equivocal` = 2 yo DMH hair-tie cat (Abdomen Cases p12–13, kept equivocal), `e2-ileus-linear-fb-comparison` = 1 yo DSH (GI p25–26).
+- Excluded images: projector-screen phone photos (GI p21, Abdomen p35), a stock kitten photo (Normal p16), a burned-in "Normal" label (Abdomen p53) and a cropped detail (GI p11).
+- View labels are neutral ("View A/B") because the slide order doesn't reliably tell you the projection.
+- `radiology-exam2-hub.js`: the Exam 2 hub (5 sections) using the shared case player, with links to the existing Abdomen Lab and the abdomen condition cards. The X-ray hub's Exam 2 tile now opens this hub.
+- Note: ChatGPT's Abdomen Lab only shows ileus images after owner approval in the Photo Approval Queue (`reviewSlots[slot].approved`). These cases are linked to those slots and are ready to approve.
