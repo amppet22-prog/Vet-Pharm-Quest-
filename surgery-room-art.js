@@ -23,7 +23,8 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(0,0,1000,500,'#f7fcff')+rect(0,32,1000,307,'url(#sWall)');
  s+='<polygon points="0,0 1000,0 944,60 63,60" fill="#f9fbfc"/><polygon points="0,0 63,60 63,344 0,408" fill="#a9c8d2"/><polygon points="1000,0 944,60 944,344 1000,408" fill="#a9c2d1"/>';
  s+=path('M63 60H944M63 337H944','#ecfbff',5)+path('M0 408L63 344H944L1000 408V500H0Z','#c7dce9',0,'url(#sFloor)');
- s+='<path d="M63 344L0 500M944 344L1000 500M286 344L250 500M540 344V500M771 344L801 500M0 412H1000" stroke="#fff" stroke-width="3" opacity=".65" fill="none"/>';
+ s+='<path d="M63 344L0 500M944 344L1000 500M286 344L250 500M540 344V500M771 344L801 500M0 412H1000" stroke="#fff" stroke-width="2.5" opacity=".5" fill="none"/>';
+ s+='<path d="M63 343H944" stroke="#86b8c5" stroke-width="6" opacity=".5"/>';
  // Ceiling tile geometry.
  for(let x=70;x<=930;x+=140)s+=path('M'+x+' 2L'+(x+13)+' 59','#cbd8df',1);
  for(let x of [148,372,617,846])s+='<ellipse cx="'+x+'" cy="29" rx="28" ry="9" fill="#fffbe6" stroke="#fff" stroke-width="4"/>';
@@ -58,7 +59,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(272,305,12,7,'#79c7ac','',2)+txt(315,340,'AUTOCLAVE',10,'#577f99',900);
  // Physical partition / doorway.
  s+=rect(382,57,13,308,'url(#sSteel)','#7996ad',3,3)+rect(395,90,22,239,'url(#sGlass)','#b0c9d8',1,2)+path('M395 92L416 120M397 182L416 202','#f8ffff',4);
- s+=rect(381,343,40,8,'#9bb9c6')+label(269,341,103,'PACK STORAGE');
+ s+=rect(381,343,40,8,'#9bb9c6');
  // Header over OR area kept high, not over devices.
  s+=rect(446,74,358,42,'#f8fbff','#8bb5c8',18,3)+txt(624,102,'SURGERY &amp; ANESTHESIA',19,'#426b91',900);
  // Storage behind anesthesia machine is deliberately minimal.
@@ -69,10 +70,10 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  for(let x of [458,483,508])s+=rect(x,265,16,33,x===483?'#e4c4e7':'#b7d9e2','#8daebd',4);
  s+=path('M437 328v16M528 328v16','#7c9aa9',6)+'<circle cx="440" cy="348" r="6" fill="#6c8ea1"/><circle cx="525" cy="348" r="6" fill="#6c8ea1"/>';
  s+=path('M510 225q65 -25 64 40','#a5c8cf',5)+ '<ellipse cx="571" cy="273" rx="13" ry="31" fill="#69bbaa" stroke="#3d9994" stroke-width="3"/>';
- s+='</g>'+label(427,130,114,'ANESTHESIA MACHINE');
+ s+='</g>'; // no floating station label
  // Separate large patient monitor raised on pole.
  s+='<g filter="url(#sSh)">'+rect(561,180,112,76,'#deeef4','#8ba9bd',8,5)+rect(572,190,90,54,'#263f59','#466b80',4)+path('M579 224h13l5 -11 5 21 7 -16 8 7h8l7 -12 7 17 6 -9h11','#64dcb3',3)+txt(648,207,'98',13,'#c7edb1',900)+txt(646,238,'96',12,'#c4e6f4',900)+path('M619 256v17','#8aa8b8',5)+rect(597,273,44,12,'url(#sSteel)','#a7bdc4',3)+'</g>';
- s+=label(565,147,103,'PATIENT MONITOR');
+ // Monitor display identifies the station without another overlapping label.
  // Multi-lamp articulating LED heads above the surgical field.
  s+=path('M705 0v88l-62 42M705 61l69 62','#91a6b7',9);
  for(let [x,y] of [[633,145],[778,138]]){
@@ -80,12 +81,24 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  for(let k=0;k<7;k++){let a=k*Math.PI*2/7;s+='<circle cx="'+f(x+17*Math.cos(a))+'" cy="'+f(y+12*Math.sin(a))+'" r="4" fill="#fff8dd" stroke="#fff" stroke-width="1"/>'}
  s+='<circle cx="'+x+'" cy="'+y+'" r="5" fill="#fff9d7"/>';
  }
- // Stainless operating table: dominant central element, no cartoon patient permanently baked in.
- s+='<g filter="url(#sSh)">'+rect(575,286,206,25,'url(#sSteel)','#769eb1',8,4)+path('M593 307h173','#f8ffff',3)+rect(664,312,39,47,'url(#sSteel)','#779bad',4,3)+rect(622,356,122,14,'url(#sSteel)','#7b9fae',5,3)+'</g>';
- // Instrument/ Mayo stand and instrument line.
- s+='<g filter="url(#sSh)">'+rect(544,305,69,10,'#8eaeae','#e3f3f0',4)+rect(548,311,61,8,'#6bc3bd')+path('M554 319v39M601 319v39','#7b9fab',5)+rect(543,358,70,10,'url(#sSteel)','#94b2ba',3);
- for(let x of [551,564,577,590])s+=path('M'+x+' 311l7 -10','#658b97',2);
- s+='</g>'; // Operating table is labeled by existing station button.
+ // Sculpted 2.5D stainless operating table, thick apron and pedestal.
+ s+='<ellipse cx="691" cy="373" rx="114" ry="15" fill="#658fa4" opacity=".16"/>';
+ s+='<g filter="url(#sSh)">';
+ s+='<polygon points="578,274 756,274 792,290 602,292" fill="#f3fbfe" stroke="#8eafbd" stroke-width="4"/>';
+ s+='<polygon points="602,292 792,290 786,308 606,312" fill="url(#sSteel)" stroke="#789cae" stroke-width="3"/>';
+ s+=path('M612 288h166M611 302h169','#f7ffff',2);
+ s+='<polygon points="650,312 735,310 730,322 654,325" fill="#b0cbd4" stroke="#789bac" stroke-width="3"/>';
+ s+='<polygon points="678,323 710,322 708,361 681,362" fill="url(#sSteel)" stroke="#80a4b4" stroke-width="3"/>';
+ s+='<polygon points="638,360 750,358 763,373 625,374" fill="url(#sSteel)" stroke="#86a7b6" stroke-width="4"/>';
+ s+=path('M663 369h75','#f5feff',3);
+ s+='</g>';
+ // Mayo stand just beside the table, without obscuring its main surface.
+ s+='<g filter="url(#sSh)">';
+ s+='<polygon points="549,292 599,289 619,297 561,301" fill="#d7f5eb" stroke="#7baea5" stroke-width="3"/>';
+ s+='<polygon points="561,301 619,297 615,309 564,314" fill="#89c9bf" stroke="#6fa89f" stroke-width="2"/>';
+ s+=path('M563 311v44M609 308v46','#83a5b2',4)+rect(555,353,62,7,'url(#sSteel)','#8babb9',3);
+ for(let x of [560,574,586,598])s+=path('M'+x+' 296l7 -5','#7597a7',2);
+ s+='</g>';
  // OR equipment drawer cart and supplies.
  s+=rect(791,242,69,111,'url(#sSteel)','#86a8b6',8,3);
  for(let i=0;i<3;i++){s+=rect(798,263+i*27,55,22,'#e3f2f5','#9bbac7',3)+path('M818 '+(275+i*27)+'h16','#8eb2bc',2);}
@@ -97,9 +110,9 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  // Small wall-mounted Tool ID placard (the clickable hit area remains in the game).
  
  // Electrosurgical unit in theatre (no overlaid redundant caption).
- s+=rect(778,209,72,48,'#e9f0f9','#8eabc2',7,3)+rect(789,219,35,20,'#304f69','#8fb8c9',3,2);
- s+=txt(807,233,'ESU',10,'#c6f7f2',900)+rect(833,220,8,14,'#e6c69e','#9fa6b2',2);
- s+=path('M839 239q14 14 8 33','#778baf',3);
+ s+=rect(787,192,65,48,'#e9f0f9','#8eabc2',7,3)+rect(797,202,35,20,'#304f69','#8fb8c9',3,2);
+ s+=txt(814,216,'ESU',10,'#c6f7f2',900)+rect(839,203,8,14,'#e6c69e','#9fa6b2',2);
+ s+=path('M844 218q18 20 6 42','#778baf',3);
  // The upper-right plane is explicitly the side wall. Keep the OR free of recovery beds.
  s+='<polygon points="865,72 1000,0 1000,406 865,342" fill="#bfd4e1" stroke="#96aec1" stroke-width="5"/>';
  // Right wall reserved entirely for a clear passage into the separate recovery ward.
@@ -118,6 +131,7 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=path('M898 117L971 85M897 313L971 338','#f5faff',3);
  s+='<ellipse cx="956" cy="240" rx="4" ry="6" fill="#f6e4b7" stroke="#8e83ab" stroke-width="1"/>';
  s+=rect(892,58,90,22,'#faf7ff','#b2a6cb',7,2)+txt(937,73,'RECOVERY',10,'#6f608f',900);
+ s+='<path d="M865 342L835 390L1000 445V408Z" fill="#61879d" opacity=".10"/>';
  // A few floor reflections indicate depth, leaving foreground walkable for avatars.
  s+='<path d="M71 377H376M429 382H952" stroke="#ffffff" stroke-width="3" opacity=".65"/>';
  s+='<path d="M375 353L339 500M863 353L904 500" stroke="#effcff" stroke-width="2" opacity=".65"/>';
