@@ -60,8 +60,8 @@ function render(){
  const c=list[at];if(!c)return opts.onBack?.();
  const p=prog()[c.id]||{};
  api.showModal((opts.icon||'🩻')+' '+(opts.title||'Radiology case'),'<div style="font-size:13px;color:#354967;line-height:1.55">'+nav()+
-  '<h2 style="font-size:16px;margin:10px 0 2px;color:#3b4b71">'+E(String(c.title).replace(/^Exam \d · /,''))+'</h2>'+
-  '<p style="margin:0 0 6px;color:#7d6595;font-size:12px">'+[c.species,c.region,c.lecture].filter(Boolean).map(E).join(' · ')+(p.correct?' · <b style="color:#1d5e36">✓ mastered</b>':'')+'</p>'+
+  '<h2 style="font-size:16px;margin:10px 0 2px;color:#3b4b71">'+(opts.hideTitle&&!revealed?'Film '+(at+1):E(String(c.title).replace(/^Exam \d · /,'')))+'</h2>'+
+  '<p style="margin:0 0 6px;color:#7d6595;font-size:12px">'+(opts.hideTitle&&!revealed?[c.species,c.region]:[c.species,c.region,c.lecture]).filter(Boolean).map(E).join(' · ')+(p.correct?' · <b style="color:#1d5e36">✓ mastered</b>':'')+'</p>'+
   (c.history?'<div style="border:1px solid #dbe2f0;border-radius:12px;background:#f4f8ff;padding:10px 12px"><b>🏥 History</b><p style="margin:4px 0 0">'+E(c.history)+'</p></div>':'')+
   imgs(c)+mc(c)+answerPanel(c)+
   (c.studyImageReview?.note?'<p style="font-size:11px;color:#8a6d3b">'+E(c.studyImageReview.note)+'</p>':'')+nav()+'</div>');

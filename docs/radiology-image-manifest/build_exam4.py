@@ -29,6 +29,8 @@ SRC = {
  'L6': ('dd861f14-L6-Therestofthethoraciccavity.pdf', 'L6 · The (Rest of the) Thoracic Cavity, Part 1', 'L6 Thoracic cavity'),
  'L7': ('88d34f5c-L7-TherestofthethoraciccavityPart2.pdf', 'L7 · The (Rest of the) Thoracic Cavity, Part 2', 'L7 Thoracic cavity'),
  'L8': ('L8_Thorax_putting_it_all_together__282_29.pdf', 'L8 · Thorax: Putting It All Together', 'L8 Putting it all together'),
+ 'BAS': ('98f9a6bc-BasicsofTakingGoodThoracicRadiographs.pdf', 'Basics of Taking Good Thoracic Radiographs', 'Basics'),
+ 'ANAT': ('Radiographic_Anatomy_of_the_Thorax_Fa26.pdf', 'Radiographic Anatomy of the Thorax', 'Thorax anatomy'),
  'LAB': ('Labeled_rads_.pdf', 'Labeled radiographs (owner\'s textbook compilation)', 'Textbook'),
 }
 RAW_URL = 'https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/'
@@ -54,7 +56,16 @@ TB = {
  '7.17': (9, 189, None, 'Textbook Fig. 7.17 · left heart enlargement: PDA (a) vs SAS (b)'),
 }
 # Extra slides rendered for the lung-pattern guide (radiology-lung-pattern-guide.js)
-GUIDE = [('L1', 43), ('L1', 44), ('L2', 15), ('L2', 81), ('L2', 91), ('L2', 94), ('L3', 23), ('L3', 34), ('L3', 35), ('L3', 18)]
+GUIDE = [('BAS', 7), ('BAS', 8), ('BAS', 10), ('BAS', 11), ('BAS', 25), ('BAS', 28), ('BAS', 29), ('BAS', 30), ('BAS', 31), ('BAS', 34), ('BAS', 37), ('BAS', 38),
+         ('ANAT', 16), ('ANAT', 20), ('ANAT', 25), ('ANAT', 29), ('ANAT', 33), ('ANAT', 34), ('ANAT', 35), ('L2', 20), ('L2', 21), ('L2', 30), ('L2', 32), ('L45', 47), ('L45', 49), ('L1', 43), ('L1', 44), ('L2', 15), ('L2', 81), ('L2', 91), ('L2', 94), ('L3', 23), ('L3', 34), ('L3', 35), ('L3', 18)]
+# Films for the skill drills in radiology-exam4-lungs.js (neutral file names; answers live in the JS)
+SKILL = [('BAS', 7, 83, 'view-01'), ('BAS', 7, 84, 'view-02'), ('BAS', 8, 98, 'view-03'), ('BAS', 10, 125, 'view-04'),
+         ('BAS', 10, 126, 'view-05'), ('BAS', 11, 138, 'view-06'), ('BAS', 11, 139, 'view-07'), ('ANAT', 16, 18, 'view-08'),
+         ('ANAT', 16, 21, 'view-09'), ('BAS', 28, 379, 'view-10'), ('BAS', 28, 380, 'view-11'),
+         ('BAS', 29, 392, 'lobe-01a'), ('BAS', 29, 393, 'lobe-01b'), ('BAS', 29, 394, 'lobe-01c'),
+         ('BAS', 34, 455, 'lobe-02a'), ('BAS', 34, 456, 'lobe-02b'), ('BAS', 34, 457, 'lobe-02c')]
+SKILL_SRC = {'BAS': ('98f9a6bc-BasicsofTakingGoodThoracicRadiographs.pdf', 'Basics of Taking Good Thoracic Radiographs'),
+             'ANAT': ('Radiographic_Anatomy_of_the_Thorax_Fa26.pdf', 'Radiographic Anatomy of the Thorax')}
 # Burned-in patient/owner names or labels to cover: (src, page, num) -> list of fractional boxes
 MASK = {
  ('L8', 32, 33): [(0, 0, .32, .045), (0, .87, .3, 1)],
@@ -611,7 +622,9 @@ def main():
         }
         if c['answer']:
             cases[cid]['answer'] = c['answer']
-    os.makedirs(out + '/_guide')
+    os.makedirs(out + '/_guide'); os.makedirs(out + '/_skills')
+    for src, pg, num, name in SKILL:
+        save_img(raw_file(src, pg, num), os.path.join(out, '_skills', f'sk-{name}.jpg'))
     for src, pg in GUIDE:
         subprocess.run(['pdftoppm', '-f', str(pg), '-l', str(pg), '-r', '130', '-jpeg', '-singlefile', U + SRC[src][0],
                         os.path.join(out, '_guide', f'{src}-p{pg:03d}')], check=True, stderr=subprocess.DEVNULL)
