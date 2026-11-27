@@ -78,6 +78,41 @@ function yardAssign(slot,id){
  if(stage.dataset.room==='yardview')api.renderRoom();
  yardPlaceModal();
 }
+// Cat Studio displays only cats the player has purchased or unlocked.
+const catSpots=[
+ {id:'perch-left',label:'Upper left perch',x:23,y:39,scale:.82},
+ {id:'perch-center',label:'Center cat tower',x:49,y:40,scale:.82},
+ {id:'window',label:'Window perch',x:84,y:50,scale:.82},
+ {id:'rest-left',label:'Quiet rest · left',x:22,y:76,scale:1},
+ {id:'floor',label:'Exploration floor',x:50,y:79,scale:1},
+ {id:'rest-right',label:'Quiet rest · right',x:76,y:77,scale:.94}
+];
+function ownedCats(){return window.VPQ_STUDIO_OWNED_CATS?.()||[]}
+function catSaved(){if(!state.vpqStudioCats||typeof state.vpqStudioCats!=='object'||Array.isArray(state.vpqStudioCats))state.vpqStudioCats={};return state.vpqStudioCats}
+function catArt(){
+ const cats=new Map(ownedCats().map(c=>[c.id,c])),saved=catSaved(),active=window.VPQ_STUDIO_ACTIVE_CAT_ID?.();
+ return catSpots.map(p=>{
+  const c=cats.get(saved[p.id]);if(!c||c.id===active)return '';
+  const x=p.x*10,y=p.y*5,w=Math.round(79*p.scale),h=Math.round(88*p.scale),name=yardEsc(c.name.slice(0,18));
+  return '<g pointer-events="none" aria-label="Selected cat '+name+'"><ellipse cx="'+x+'" cy="'+(y+4)+'" rx="'+Math.round(w*.38)+'" ry="7" fill="#786985" opacity=".18"/><image href="'+yardEsc(c.src)+'" x="'+(x-w/2)+'" y="'+(y-h+6)+'" width="'+w+'" height="'+h+'" preserveAspectRatio="xMidYMax meet"/><rect x="'+(x-38)+'" y="'+(y+5)+'" width="76" height="16" rx="8" fill="#fffaf8" fill-opacity=".95" stroke="#baa7c2"/><text x="'+x+'" y="'+(y+17)+'" font-size="10" font-family="Arial" font-weight="800" text-anchor="middle" fill="#6d597a">'+name+'</text></g>';
+ }).join('');
+}
+function catPlaceModal(){
+ const cats=ownedCats(),saved=catSaved(),active=window.VPQ_STUDIO_ACTIVE_CAT_ID?.();
+ const opts=cats.map(c=>'<option value="'+yardEsc(c.id)+'">'+yardEsc(c.name)+(c.id===active?' (active follower)':'')+'</option>').join('');
+ api.showModal('🐈 Place Your Purchased Cats','<p>Choose which purchased or unlocked cats appear in the Cat Studio. Each selection saves independently of your active companion.</p>'+
+ (!cats.length?'<p>You do not yet have owned cats with ready transparent artwork. Visit Companions to buy or unlock cats.</p>':
+ '<div style="display:grid;gap:8px">'+catSpots.map(p=>'<label style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:9px;background:#fbf5fa;border:1px solid #dbc5dd;border-radius:12px"><strong style="min-width:145px">'+p.label+'</strong><select data-vpqcatselect="'+p.id+'" style="flex:1;min-width:145px;padding:8px;border:1px solid #c9b7d0;border-radius:8px"><option value="">Empty / remove</option>'+opts+'</select><button type="button" data-vpqcatassign="'+p.id+'">Save spot</button></label>').join('')+'</div>')+
+ '<p class="tiny">Six saved places. Cats are decorative residents, not additional followers; real cat introductions and housing need individual welfare assessment.</p>');
+ api.modalBody.querySelectorAll('[data-vpqcatselect]').forEach(el=>{if(cats.some(c=>c.id===saved[el.dataset.vpqcatselect]))el.value=saved[el.dataset.vpqcatselect]});
+}
+function catAssign(slot,id){
+ if(!catSpots.some(s=>s.id===slot))return;
+ const cats=ownedCats(),saved=catSaved();
+ if(id&&!cats.some(c=>c.id===id))return;
+ if(id){for(const k of Object.keys(saved))if(saved[k]===id)delete saved[k];saved[slot]=id}else delete saved[slot];
+ api.persist();if(stage.dataset.room==='catcorner')api.renderRoom();catPlaceModal();
+}
 const choices={
 'cat-tree':['Cat climbing tree',40,'catcorner','🌳'],
 'cat-wall':['Wall climbing shelves',50,'catcorner','🪜'],
@@ -117,12 +152,9 @@ if(room==='catcorner'){
  s+=choose(['cataccent-halloween','cataccent-winter','cataccent-pride','cataccent-spring'],156,285,132,71);
  s+=choose(['decor-cat-tree','decor-cat-tree-cloud','decor-cat-tree-castle','decor-cat-tree-forest','decor-cat-tree-moon'],426,173,147,192);
  s+=choose(['cat-companion-tabby','cat-companion-tuxedo','cat-companion-calico','cat-companion-gray'],657,287,93,91);
- // Cheerful avatar-style residents occupy the furnishings without blocking the walkway.
- s+='<image href="assets/reception/cat-character-mochi.svg" x="163" y="264" width="105" height="100" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- s+='<image href="assets/reception/cat-character-juniper.svg" x="454" y="155" width="99" height="88" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
- if(old.includes('cat-tree'))s+='<image href="assets/reception/cat-character-luna.svg" x="368" y="221" width="92" height="89" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
+ // Purchased cat residents replace preselected decorative cats.
+ s+=catArt();
  if(old.includes('cat-wall'))s+='<path d="M103 194h97M229 174h85" stroke="#bf98c6" stroke-width="13" stroke-linecap="round"/>';
- if(old.includes('cat-extra'))s+='<image href="assets/reception/cat-character-pebble.svg" x="625" y="287" width="94" height="88" preserveAspectRatio="xMidYMid meet" pointer-events="none"/>';
  if(old.includes('cat-toys'))s+='<text x="725" y="353" font-size="27">🪶</text>';
 }
 if(room==='yardview'){
@@ -164,6 +196,7 @@ function refresh(){
  existing?.remove();extras?.remove();
  const div=document.createElement('div');div.id='vpqWingHits';div.dataset.room=room;
  if(slots[room])div.innerHTML=slots[room].map(([label,action,x])=>'<button type="button" class="vpqWingHit" data-vpqwingaction="'+action+'" style="left:'+(x-7)+'%;top:'+(room==='catcorner'?42:38)+'%;width:14%;height:'+(room==='catcorner'?35:41)+'%" aria-label="'+label+'"><span>'+label+'</span></button>').join('');
+ if(room==='catcorner')div.innerHTML+='<button type="button" class="vpqYardPlaceBtn" data-vpqwingaction="vpqCatPlacePets" aria-label="Place purchased cats">🐈 Place Cats</button>';
  if(room==='yardview')div.innerHTML+='<button type="button" class="vpqYardPlaceBtn" data-vpqwingaction="vpqYardPlaceDogs" aria-label="Place owned dog companions in yard">🐕 Place Dogs</button>';
  if(room==='hallway')div.innerHTML+='<button type="button" class="vpqReceptionExtra" data-vpqwingaction="vpqWingLobby" style="left:2%;top:4%;z-index:8">← Reception Lobby</button>';
  div.addEventListener('click',e=>{const b=e.target.closest('[data-vpqwingaction]');if(b)route(b.dataset.vpqwingaction)});
@@ -257,6 +290,7 @@ function route(cmd){
  if(cmd==='vpqCatPlay'){if(catEnrichment)return catEnrichment.menu();return true}
  if(cmd==='vpqCatLounge'){api.doAction?.('catLounge');return true}
  if(cmd==='vpqCatShop'){shop('catcorner');return true}
+ if(cmd==='vpqCatPlacePets'){catPlaceModal();return true}
  if(cmd==='vpqYardPlaceDogs'){yardPlaceModal();return true}
  if(cmd==='vpqYardShop'){shop('yardview');return true}
  if(cmd==='vpqCatView'){if(catBehavior)return catBehavior.menu();return true}
@@ -269,6 +303,6 @@ function route(cmd){
 }
 const observer=new MutationObserver(()=>{const room=stage.dataset.room,el=stage.querySelector('#vpqWingHits'),extra=stage.querySelector('#vpqReceptionExtras');if(((!!slots[room]||room==='reception')!==!!el)||(el&&el.dataset.room!==room)||(room==='reception'&&stage.dataset.receptionView==='isometric'&&!extra))refresh()});
 observer.observe(stage,{childList:true,attributes:true,attributeFilter:['data-room','data-reception-view']});
-api.modalBody.addEventListener('click',e=>{const yardAssignButton=e.target.closest('[data-vpqyardassign]');if(yardAssignButton){const slot=yardAssignButton.dataset.vpqyardassign;const selected=Array.from(api.modalBody.querySelectorAll('[data-vpqyardselect]')).find(el=>el.dataset.vpqyardselect===slot);return yardAssign(slot,selected?.value||'');}const dogAnswer=e.target.closest('[data-vpqdoganswer]');if(dogAnswer){const [id,n]=dogAnswer.dataset.vpqdoganswer.split(':');return dogResult(id,Number(n))}const dogRetry=e.target.closest('[data-vpqdogretry]');if(dogRetry)return dogLesson(dogRetry.dataset.vpqdogretry);if(e.target.closest('[data-vpqdogback]'))return api.closeModal();if(e.target.closest('[data-vpqcatstudio]'))return route('vpqCatLounge');if(e.target.closest('[data-vpqcatlegacy]'))return route('vpqCatShop');const el=e.target.closest('[data-vpqwingmap],[data-vpqwingbuy]');if(!el)return;if(el.dataset.vpqwingmap){api.closeModal();api.changeRoom(el.dataset.vpqwingmap)}else if(el.dataset.vpqwingbuy)buy(el.dataset.vpqwingbuy)});
+api.modalBody.addEventListener('click',e=>{const catButton=e.target.closest('[data-vpqcatassign]');if(catButton){const slot=catButton.dataset.vpqcatassign;const selected=Array.from(api.modalBody.querySelectorAll('[data-vpqcatselect]')).find(el=>el.dataset.vpqcatselect===slot);return catAssign(slot,selected?.value||'');}const yardAssignButton=e.target.closest('[data-vpqyardassign]');if(yardAssignButton){const slot=yardAssignButton.dataset.vpqyardassign;const selected=Array.from(api.modalBody.querySelectorAll('[data-vpqyardselect]')).find(el=>el.dataset.vpqyardselect===slot);return yardAssign(slot,selected?.value||'');}const dogAnswer=e.target.closest('[data-vpqdoganswer]');if(dogAnswer){const [id,n]=dogAnswer.dataset.vpqdoganswer.split(':');return dogResult(id,Number(n))}const dogRetry=e.target.closest('[data-vpqdogretry]');if(dogRetry)return dogLesson(dogRetry.dataset.vpqdogretry);if(e.target.closest('[data-vpqdogback]'))return api.closeModal();if(e.target.closest('[data-vpqcatstudio]'))return route('vpqCatLounge');if(e.target.closest('[data-vpqcatlegacy]'))return route('vpqCatShop');const el=e.target.closest('[data-vpqwingmap],[data-vpqwingbuy]');if(!el)return;if(el.dataset.vpqwingmap){api.closeModal();api.changeRoom(el.dataset.vpqwingmap)}else if(el.dataset.vpqwingbuy)buy(el.dataset.vpqwingbuy)});
 refresh();return {route,refresh,near,interact,map};
 };
