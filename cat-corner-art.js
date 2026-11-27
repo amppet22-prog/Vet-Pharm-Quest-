@@ -170,6 +170,30 @@ s+=`</g>
  <path d="M681 259v-17" stroke="#9cbebf" stroke-width="3"/>
  <circle cx="681" cy="241" r="4" fill="#c7edef"/>
 </g>
+<!-- Additional interactive-looking feline enrichment: climbing tunnel, quiet retreat and varied toys -->
+<g aria-label="Enclosed upper climbing tunnel, anchored to wall">
+ <rect x="284" y="112" width="118" height="43" rx="20" fill="#e4bfd5" stroke="#ab82a5" stroke-width="5"/>
+ <ellipse cx="303" cy="133" rx="18" ry="18" fill="#694f72" stroke="#c88bb3" stroke-width="5"/>
+ <ellipse cx="387" cy="133" rx="14" ry="16" fill="#71567b" stroke="#c88bb3" stroke-width="4"/>
+ <path d="M319 114q35-12 60 0" fill="none" stroke="#fff2e8" stroke-width="5" opacity=".8"/>
+ <path d="M302 155v14M383 155v14" stroke="#b28ca5" stroke-width="7"/>
+</g>
+<g aria-label="Low privacy hide with washable cushion">
+ <path d="M563 321Q565 285 601 285H648Q678 288 677 325V359H563Z" fill="#d5b6dd" stroke="#9c80b5" stroke-width="5"/>
+ <path d="M584 354V328Q584 306 610 306Q640 306 642 329V354Z" fill="#776083" stroke="#ae90b9" stroke-width="3"/>
+ <ellipse cx="612" cy="350" rx="30" ry="8" fill="#f3c8d8"/>
+ <path d="M572 299l13-18 15 14M648 294l16-16 9 24" fill="#d5b6dd" stroke="#9c80b5" stroke-width="4"/>
+</g>
+<g aria-label="Feline toys and enrichment">
+ <path d="M461 385q22-12 48 0" fill="none" stroke="#c68ea9" stroke-width="5"/>
+ <circle cx="484" cy="377" r="11" fill="#b5dce6" stroke="#88b2c3" stroke-width="3"/>
+ <path d="M484 367v20M474 377h20" stroke="#f9f7fa" stroke-width="2"/>
+ <rect x="710" y="381" width="55" height="17" rx="9" fill="#e4b9a7" stroke="#b98d85" stroke-width="3"/>
+ <circle cx="722" cy="383" r="5" fill="#9cbdb5"/><circle cx="751" cy="383" r="5" fill="#9cbdb5"/>
+ <path d="M728 349q12-18 25 0" fill="none" stroke="#ab83af" stroke-width="4"/>
+ <path d="M741 347v23" stroke="#ab83af" stroke-width="3" stroke-dasharray="4 3"/>
+ <path d="M732 371q10-10 18 0l-9 12Z" fill="#f2b4c8" stroke="#c18ca1" stroke-width="2"/>
+</g>
 <!-- Ceiling corner returns, side-wall edging and shelf supports improve the 2.5D room depth -->
 <path d="M53 61h893M55 68v278M945 68v277" fill="none" stroke="#fff8f6" stroke-width="5" opacity=".65"/>
 <path d="M53 345l-53 67M945 345l55 67" stroke="#ad93ad" stroke-width="5" opacity=".42"/>
