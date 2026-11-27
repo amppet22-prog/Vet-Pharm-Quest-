@@ -91,6 +91,21 @@ s+=`</g>
  <ellipse cx="318" cy="381" rx="72" ry="27" fill="#d9a8b8" stroke="#bf8a90" stroke-width="6"/>
  <ellipse cx="318" cy="374" rx="60" ry="18" fill="#ffe1dc"/>
 </g>
+<!-- Anchored climbing furniture: brackets, recessed hide openings and soft washable landings -->
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M346 188v15M438 188v15M450 153v13M551 154v13M549 214v15M637 214v15" stroke="#a88599" stroke-width="3"/>
+ <path d="M349 199h17M435 199h-14M553 224h16M629 224h-16" stroke="#e8cddd" stroke-width="4"/>
+</g>
+<!-- Separate, wall-fixed upper cat hide with partial privacy and a lookout -->
+<g filter="url(#catDrop3)" transform="translate(95 0)">
+ <path d="M561 92l10-18h51l12 18v42h-73Z" fill="#e7c4d7" stroke="#b58ba8" stroke-width="4"/>
+ <path d="M578 128v-19q0-13 19-13t19 13v19Z" fill="#7a598b"/>
+ <ellipse cx="597" cy="131" rx="30" ry="7" fill="#efbfd9"/>
+ <path d="M565 91h64" stroke="#f8e2ed" stroke-width="3"/>
+</g>
+<!-- Cozy washable soft bedding and a clear deep tunnel portal -->
+<path d="M650 353q27-10 54 1" fill="none" stroke="#f8e0d9" stroke-width="5" opacity=".85"/>
+<ellipse cx="569" cy="352" rx="12" ry="20" fill="none" stroke="#e8c9ef" stroke-width="2.5" opacity=".85"/>
 <!-- easy-to-understand cat enrichment objects, low on the floor -->
 <g filter="url(#catDrop3)">
  <ellipse cx="500" cy="449" rx="214" ry="35" fill="#e9bfd7" stroke="#bd96ca" stroke-width="7"/>
