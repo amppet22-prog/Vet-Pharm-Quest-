@@ -78,6 +78,13 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(122,247,54,13,'#799eae','#ecf9fa',8,2)+rect(184,247,54,13,'#799eae','#ecf9fa',8,2);
  for(let x of [144,206])s+=path('M'+x+' 241v-22q0 -7 7 -7h9v20','#7199aa',4);
  s+=path('M118 271h131','#f7ffff',2);
+  // Wall-mounted PPE cabinet: subtle deep shelving and individually wrapped supply packs.
+ // Leave lower floor area clear for the existing sink and sterilizer.
+ s+='<path d="M182 109l-9 9v80l9 -3M369 109l8 9v76l-8 3" fill="#d8eaf1" stroke="#a9c3d0" stroke-width="2.5"/>';
+ s+='<path d="M182 198h187" stroke="#88a7b3" stroke-width="3" opacity=".45"/>';
+ // Surgical gown hanging rack to the side of the storage cabinet, above worktop height.
+ s+=path('M376 137h20','#91aab8',3);
+ s+='<path d="M379 150l9-11 9 11 -4 6v28h-11v-28Z" fill="#b4dce8" stroke="#8fb5c6" stroke-width="2"/>';
   // Dedicated vertical autoclave footprint, no supply trolley drawn underneath.
  s+=rect(261,210,109,116,'url(#sSteel)','#8aa9bb',7,4)+rect(270,220,91,78,'#e8f4f8','#8ea8b8',6,2);
  s+='<circle cx="315" cy="257" r="30" fill="#86a8b7" stroke="#edfaff" stroke-width="5"/><circle cx="315" cy="257" r="22" fill="#d5e9f0" stroke="#90b2bd" stroke-width="3"/>';
@@ -146,7 +153,14 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+=rect(494,287,35,16,'#f7f2fb','#9fa9c3',4,1.5);
  s+=txt(511,298,'VAP',8,'#647d9b',800);
 
- // Anesthesia bedside accessory: calibrated absorber canister and organized looped hoses.
+ // Main anesthesia screen now has a recognizable airway pressure dial and device face.
+ // Use unobtrusive marks rather than floating labels on top of the equipment.
+ s+='<circle cx="518" cy="199" r="7" fill="#f3fcff" stroke="#92b0c1" stroke-width="2"/>';
+ s+=path('M518 199l4 -4','#738ca8',2);
+ s+=path('M438 314h92','#a3bfca',2.5);
+ s+=rect(450,313,68,8,'#ecf4f8','#9db6c0',3,1);
+ // Make the cylinder transparent and textured with granular absorbent.
+  // Anesthesia bedside accessory: calibrated absorber canister and organized looped hoses.
  s+='<ellipse cx="546" cy="315" rx="17" ry="7" fill="#547d91" opacity=".12"/>';
  s+=rect(535,255,20,52,'#e1f2f4','#90b5bd',6,3);
  s+='<circle cx="545" cy="267" r="5" fill="#b0d5d6"/>';
@@ -242,6 +256,10 @@ window.VPQ_SURGERY_ROOM_ART=function(){
  s+='<polygon points="924,177 948,170 948,178 924,185" fill="#4b7389"/>';
  // Behind the glass, a recognisable 2-tier kennel bank set into the recovery ward.
  s+='<polygon points="903,165 966,146 966,301 903,319" fill="#9bb5c5" stroke="#6f98ac" stroke-width="3"/>';
+ // Back wall and receding kennel shelf shadows reinforce a separate ward behind glass.
+ s+='<polygon points="906,166 961,149 961,157 906,174" fill="#eefaff" opacity=".6"/>';
+ s+='<polygon points="906,231 963,213 963,221 906,239" fill="#648aa0" opacity=".22"/>';
+ s+='<path d="M908 168l54 -16M908 301l54 -15" stroke="#f7ffff" stroke-width="2" opacity=".6"/>';
  for(let row=0;row<2;row++){
    let o=row*66;
    s+='<polygon points="908,'+(180+o)+' 961,'+(164+o)+' 961,'+(215+o)+' 908,'+(229+o)+'" fill="#d6e7ef" stroke="#80a3b4" stroke-width="2.5"/>';
