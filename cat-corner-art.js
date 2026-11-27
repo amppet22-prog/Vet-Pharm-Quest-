@@ -97,7 +97,7 @@ s+=`</g>
  <path d="M349 199h17M435 199h-14M553 224h16M629 224h-16" stroke="#e8cddd" stroke-width="4"/>
 </g>
 <!-- Separate, wall-fixed upper cat hide with partial privacy and a lookout -->
-<g filter="url(#catDrop3)">
+<g filter="url(#catDrop3)" transform="translate(95 0)">
  <path d="M561 92l10-18h51l12 18v42h-73Z" fill="#e7c4d7" stroke="#b58ba8" stroke-width="4"/>
  <path d="M578 128v-19q0-13 19-13t19 13v19Z" fill="#7a598b"/>
  <ellipse cx="597" cy="131" rx="30" ry="7" fill="#efbfd9"/>
