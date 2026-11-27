@@ -69,6 +69,30 @@
 <!-- Back fence casts a narrow shadow onto grass, keeping the yard feeling enclosed -->
 <path d="M72 231Q470 225 932 229" stroke="#5e9080" stroke-width="11" fill="none" opacity=".13"/>
 
+<!-- Kennel construction details: weatherproof pitched roof, ventilation, secure latches, and wash-safe surfaces -->
+<g aria-label="Roof and ventilation above individual kennel runs">
+ <path d="M277 145L301 114H699L726 145Z" fill="#a4bdb8" stroke="#638d88" stroke-width="5"/>
+ <path d="M306 117H696L706 126H297Z" fill="#dce9df"/>
+ <path d="M304 135H696" stroke="#edf4ee" stroke-width="4" opacity=".8"/>
+ <g fill="#e8f0eb" stroke="#7fa59d" stroke-width="2">
+  <rect x="340" y="118" width="46" height="10" rx="3"/>
+  <rect x="478" y="118" width="46" height="10" rx="3"/>
+  <rect x="615" y="118" width="46" height="10" rx="3"/>
+ </g>
+ <g fill="#6d948c">
+  <circle cx="404" cy="180" r="3"/><circle cx="543" cy="180" r="3"/><circle cx="685" cy="180" r="3"/>
+ </g>
+ <path d="M282 225H725" stroke="#829e95" stroke-width="5"/>
+</g>
+<!-- Double-gate vestibule to stop accidental escape from the exercise yard -->
+<g aria-label="Kennel access airlock with two closing gates">
+ <path d="M738 210L750 232L834 231L842 207" fill="#c8dfd1" fill-opacity=".56" stroke="#6a968b" stroke-width="4"/>
+ <path d="M750 233V267M833 232V267" stroke="#5c8c80" stroke-width="6"/>
+ <path d="M751 267L833 267" stroke="#5c8c80" stroke-width="5"/>
+ <path d="M761 235v30M775 235v30M790 234v31M806 235v30M821 234v31" stroke="#8bb4a4" stroke-width="2.5"/>
+ <rect x="770" y="246" width="45" height="14" rx="5" fill="#f9f4de" stroke="#95bba8" stroke-width="2"/>
+ <text x="792" y="256" font-size="8" font-family="Arial" text-anchor="middle" font-weight="bold" fill="#577d72">AIRLOCK</text>
+</g>
 <!-- top sign, above room equipment -->
 <rect x="277" y="10" width="446" height="60" rx="20" fill="#fffbf2" stroke="#96c6bf" stroke-width="5" filter="url(#yardShadow)"/>
 <text x="500" y="34" font-family="Arial,sans-serif" font-size="25" text-anchor="middle" fill="#477e7c" font-weight="900">HAPPY PAWS · KENNEL YARD</text>
@@ -87,6 +111,18 @@
  <rect x="909" y="188" width="16" height="5" rx="2" fill="#85c5b1"/>
 </g>
 
+<!-- Practical wall-mounted enrichment / cleanup storage; supplies stay away from loose dogs -->
+<g aria-label="Secured dog care supply cabinet and enrichment storage">
+ <rect x="74" y="157" width="86" height="42" rx="7" fill="#e8f2ed" stroke="#719d94" stroke-width="4"/>
+ <path d="M117 161v34" stroke="#9cbeb2" stroke-width="3"/>
+ <g fill="#bcdbce" stroke="#6b9991" stroke-width="2"><rect x="88" y="172" width="19" height="16" rx="3"/><rect x="127" y="172" width="19" height="16" rx="3"/></g>
+ <path d="M91 181h12M130 181h12" stroke="#faf8ee" stroke-width="2.5"/>
+ <text x="117" y="167" text-anchor="middle" font-size="7" font-family="Arial" font-weight="bold" fill="#567c75">SUPPLIES</text>
+</g>
+<!-- Turf depth markers and light paw tracks are background marks, not actual dogs -->
+<g fill="none" stroke="#7dbb8c" stroke-width="2" opacity=".28" stroke-linecap="round">
+ <path d="M64 454l-5-11m6 11 7-8M224 459l-5-9m5 9 6-7M280 474l-4-10m4 10 7-6M461 465l-4-8m4 8 7-8M562 471l-5-10m5 10 6-8M701 462l-3-9m3 9 7-6M814 466l-4-10m4 10 6-7M948 451l-4-8m4 8 7-6"/>
+</g>
 <!-- 1: sniff and sensory garden, left -->
 <path d="M23 347Q117 307 237 348V445Q112 482 23 440Z" fill="#e6d4ab" stroke="#c4a779" stroke-width="5"/>
 <path d="M39 350Q125 321 218 356" fill="none" stroke="#f9e9cb" stroke-width="6"/>
