@@ -51,21 +51,32 @@ function yardPetArt(){
    '<text x="'+x+'" y="'+(y+18)+'" text-anchor="middle" font-family="Arial" font-size="10" font-weight="800" fill="#47776d">'+label+'</text></g>';
  }).join('');
 }
+function yardUpdatePreview(select){
+ if(!select)return;
+ const row=select.closest('[data-vpqyardrow]');
+ const photo=row?.querySelector('[data-vpqyardpreview]');
+ if(!photo)return;
+ const chosen=yardOwnedDogs().find(d=>d.id===select.value);
+ if(chosen){
+  photo.src=chosen.src;photo.alt=chosen.name+' companion preview';photo.hidden=false;
+ }else{photo.removeAttribute('src');photo.alt='Empty yard spot';photo.hidden=true}
+}
 function yardPlaceModal(){
  const owned=yardOwnedDogs(),current=yardPlacements(),active=window.VPQ_YARD_ACTIVE_DOG_ID?.();
  const label={sniff:'Sniff Garden',agility:'Low-impact Agility',open:'Open Play',quiet:'Quiet Retreat'};
  const opts=owned.map(d=>'<option value="'+yardEsc(d.id)+'">'+yardEsc(d.name)+(d.id===active?' (your follower)':'')+'</option>').join('');
- const cards=yardPositions.map((p,i)=>'<label style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:#f4faf6;border:1px solid #c7dccb;border-radius:12px;padding:9px 11px">'+
-  '<span style="min-width:145px;font-weight:800">'+label[p.zone]+' '+((i%2)+1)+'</span>'+
-  '<select data-vpqyardselect="'+p.id+'" aria-label="Companion for '+label[p.zone]+'" style="flex:1;min-width:170px;padding:8px;border:1px solid #abc7c4;border-radius:8px"><option value="">Empty / remove</option>'+opts+'</select>'+
-  '<button type="button" data-vpqyardassign="'+p.id+'" style="padding:8px 12px;border-radius:9px;background:#e0f5eb;border:1px solid #80bba4;font-weight:800">Save spot</button></label>').join('');
- api.showModal('🐕 Place Your Dogs in the Yard',
-  '<p>Choose from the dogs you already own. These are <b>stationary yard companions</b>—they do not replace your active follower. Each dog can occupy only one spot.</p>'+
+ const cards=yardPositions.map((p,i)=>'<div data-vpqyardrow="'+p.id+'" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:#f4faf6;border:1px solid #c7dccb;border-radius:12px;padding:9px 11px">'+
+  '<span style="width:50px;height:58px;display:grid;place-items:center;background:#e8f4ec;border-radius:10px;border:1px solid #c5dcd0"><img data-vpqyardpreview="'+p.id+'" hidden alt="Empty yard spot" style="width:48px;height:56px;object-fit:contain"/></span>'+
+  '<label style="flex:1;min-width:170px;font-size:12px;font-weight:800">'+label[p.zone]+' '+((i%2)+1)+
+  '<select data-vpqyardselect="'+p.id+'" aria-label="Companion for '+label[p.zone]+'" style="display:block;width:100%;margin-top:5px;padding:8px;border:1px solid #abc7c4;border-radius:8px"><option value="">Empty / remove</option>'+opts+'</select></label>'+
+  '<button type="button" data-vpqyardassign="'+p.id+'" style="padding:8px 12px;border-radius:9px;background:#e0f5eb;border:1px solid #80bba4;font-weight:800">Save spot</button></div>').join('');
+ api.showModal('🐕 Choose Your Kennel & Yard Dogs',
+  '<p>Pick from your own purchased or unlocked dogs. Preview their artwork, then save them to individual yard spaces. Your active follower remains independent.</p>'+
   (!owned.length?'<p>No owned dogs with ready transparent art are available yet. Purchase or unlock dogs in your companion collection first.</p>':'<div style="display:grid;gap:8px">'+cards+'</div>')+
-  '<p class="tiny">Eight spaces across four zones. Your current follower stays beside you and is not duplicated in the yard. These spots are for your collection, not a claim that all dogs should share a play group.</p>');
- // Modal content is rerendered, so restore each selection after showModal.
+  '<p class="tiny">Eight saved spots across four areas. An assigned dog is displayed once; its active-follower appearance is not duplicated. Real-world group housing requires individual behavioral and health assessment.</p>');
  api.modalBody.querySelectorAll('[data-vpqyardselect]').forEach(el=>{
-   if(owned.some(d=>d.id===current[el.dataset.vpqyardselect]))el.value=current[el.dataset.vpqyardselect];
+  if(owned.some(d=>d.id===current[el.dataset.vpqyardselect]))el.value=current[el.dataset.vpqyardselect];
+  yardUpdatePreview(el);
  });
 }
 function yardAssign(slot,id){
@@ -303,6 +314,7 @@ function route(cmd){
 }
 const observer=new MutationObserver(()=>{const room=stage.dataset.room,el=stage.querySelector('#vpqWingHits'),extra=stage.querySelector('#vpqReceptionExtras');if(((!!slots[room]||room==='reception')!==!!el)||(el&&el.dataset.room!==room)||(room==='reception'&&stage.dataset.receptionView==='isometric'&&!extra))refresh()});
 observer.observe(stage,{childList:true,attributes:true,attributeFilter:['data-room','data-reception-view']});
+api.modalBody.addEventListener('change',e=>{const select=e.target.closest('[data-vpqyardselect]');if(select)yardUpdatePreview(select)});
 api.modalBody.addEventListener('click',e=>{const catButton=e.target.closest('[data-vpqcatassign]');if(catButton){const slot=catButton.dataset.vpqcatassign;const selected=Array.from(api.modalBody.querySelectorAll('[data-vpqcatselect]')).find(el=>el.dataset.vpqcatselect===slot);return catAssign(slot,selected?.value||'');}const yardAssignButton=e.target.closest('[data-vpqyardassign]');if(yardAssignButton){const slot=yardAssignButton.dataset.vpqyardassign;const selected=Array.from(api.modalBody.querySelectorAll('[data-vpqyardselect]')).find(el=>el.dataset.vpqyardselect===slot);return yardAssign(slot,selected?.value||'');}const dogAnswer=e.target.closest('[data-vpqdoganswer]');if(dogAnswer){const [id,n]=dogAnswer.dataset.vpqdoganswer.split(':');return dogResult(id,Number(n))}const dogRetry=e.target.closest('[data-vpqdogretry]');if(dogRetry)return dogLesson(dogRetry.dataset.vpqdogretry);if(e.target.closest('[data-vpqdogback]'))return api.closeModal();if(e.target.closest('[data-vpqcatstudio]'))return route('vpqCatLounge');if(e.target.closest('[data-vpqcatlegacy]'))return route('vpqCatShop');const el=e.target.closest('[data-vpqwingmap],[data-vpqwingbuy]');if(!el)return;if(el.dataset.vpqwingmap){api.closeModal();api.changeRoom(el.dataset.vpqwingmap)}else if(el.dataset.vpqwingbuy)buy(el.dataset.vpqwingbuy)});
 refresh();return {route,refresh,near,interact,map};
 };
