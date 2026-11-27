@@ -5997,6 +5997,16 @@ window.VPQ_YARD_OWNED_DOGS=function(){
   .filter(c=>c&&c.category==='dog'&&c.image&&vpqCompanionOwned(c)&&vpqCompanionValid(c))
   .map(c=>({id:c.id,name:vpqCustomCompanionName(c),src:vpqDogAssetURL(c.image)}));
 };
+// Cat Studio uses the same purchased/unlocked companion source as the kennel.
+window.VPQ_STUDIO_OWNED_CATS=function(){
+ return vpqCompanionCatalog
+  .filter(c=>c&&c.category==='cat'&&c.image&&vpqCompanionOwned(c)&&vpqCompanionValid(c))
+  .map(c=>({id:c.id,name:vpqCustomCompanionName(c),src:vpqDogAssetURL(c.image)}));
+};
+window.VPQ_STUDIO_ACTIVE_CAT_ID=function(){
+ const c=vpqCompanionById(state.vpqCompanionId);
+ return c?.category==='cat'?c.id:null;
+};
 window.VPQ_YARD_ACTIVE_DOG_ID=function(){
  const c=vpqCompanionById(state.vpqCompanionId);
  return c?.category==='dog'?c.id:null;
