@@ -194,6 +194,23 @@ s+=`</g>
  <path d="M741 347v23" stroke="#ab83af" stroke-width="3" stroke-dasharray="4 3"/>
  <path d="M732 371q10-10 18 0l-9 12Z" fill="#f2b4c8" stroke="#c18ca1" stroke-width="2"/>
 </g>
+<!-- Veterinary-grade feline comfort details: separate privacy, water and litter resources -->
+<g aria-label="Separated cat litter alcove" filter="url(#catDrop3)">
+ <path d="M77 352V319Q77 302 93 302H160Q179 302 179 320V357Z" fill="#e6d3dd" stroke="#b7a0b1" stroke-width="4"/>
+ <rect x="93" y="333" width="69" height="26" rx="8" fill="#d5e6e3" stroke="#92b4b0" stroke-width="3"/>
+ <path d="M101 340Q127 334 152 340" fill="none" stroke="#f0e0cb" stroke-width="5"/>
+ <path d="M103 319h48" stroke="#fdf8f2" stroke-width="4" stroke-linecap="round"/>
+</g>
+<g aria-label="Wall mounted cat water and feeding station">
+ <path d="M860 353H925" stroke="#af97ae" stroke-width="7" stroke-linecap="round"/>
+ <ellipse cx="877" cy="349" rx="19" ry="7" fill="#9dc9c6" stroke="#78a7a5" stroke-width="3"/>
+ <ellipse cx="914" cy="349" rx="15" ry="6" fill="#d4bba4" stroke="#ac947e" stroke-width="3"/>
+ <path d="M866 348h23M902 348h24" stroke="#f6faf8" stroke-width="2"/>
+</g>
+<g aria-label="Washable slip-resistant climbing steps and sturdy support brackets">
+ <path d="M170 207l-11 14m87-57-10 13m495 19-11 12" stroke="#95899f" stroke-width="5"/>
+ <path d="M151 198h60M227 164h56M701 211h64" stroke="#e9c4d9" stroke-width="4" stroke-linecap="round"/>
+</g>
 <!-- Ceiling corner returns, side-wall edging and shelf supports improve the 2.5D room depth -->
 <path d="M53 61h893M55 68v278M945 68v277" fill="none" stroke="#fff8f6" stroke-width="5" opacity=".65"/>
 <path d="M53 345l-53 67M945 345l55 67" stroke="#ad93ad" stroke-width="5" opacity=".42"/>
