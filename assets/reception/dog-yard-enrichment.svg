@@ -40,6 +40,19 @@
  <path d="M746 177l80 -1" stroke="#68968a" stroke-width="4"/>
  <circle cx="801" cy="179" r="5" fill="#f7e2ad" stroke="#9cae9d" stroke-width="2"/>
 </g>
+<!-- Real kennel runs beyond the fenced exercise yard: enclosed stalls stay behind the play surface -->
+<g aria-label="Rear indoor kennel stalls, doors, raised beds and washable partitions" filter="url(#yardShadow)">
+ <path d="M286 143H718V225H286Z" fill="#edf3e8" stroke="#729b98" stroke-width="4"/>
+ <path d="M281 143L301 126H703L722 143Z" fill="#a8c4bd" stroke="#6e9990" stroke-width="4"/>
+ <rect x="292" y="149" width="133" height="69" rx="5" fill="#dceae2" stroke="#789d95" stroke-width="4"/>
+ <rect x="432" y="149" width="132" height="69" rx="5" fill="#dceae2" stroke="#789d95" stroke-width="4"/>
+ <rect x="571" y="149" width="136" height="69" rx="5" fill="#dceae2" stroke="#789d95" stroke-width="4"/>
+ <g stroke="#86aca3" stroke-width="3"><path d="M317 150v68M342 150v68M367 150v68M392 150v68M456 150v68M481 150v68M506 150v68M531 150v68M596 150v68M621 150v68M646 150v68M671 150v68"/></g>
+ <g fill="#b6d2c2" stroke="#719990" stroke-width="2"><rect x="301" y="190" width="113" height="21" rx="6"/><rect x="442" y="190" width="113" height="21" rx="6"/><rect x="581" y="190" width="115" height="21" rx="6"/></g>
+ <g fill="#f7d4d5"><rect x="311" y="194" width="95" height="11" rx="5"/><rect x="451" y="194" width="95" height="11" rx="5"/><rect x="591" y="194" width="95" height="11" rx="5"/></g>
+ <g fill="#fbf7ef" font-family="Arial,sans-serif" font-weight="bold" font-size="10" text-anchor="middle"><rect x="335" y="130" width="47" height="15" rx="6" fill="#568f8b"/><rect x="475" y="130" width="47" height="15" rx="6" fill="#568f8b"/><rect x="615" y="130" width="47" height="15" rx="6" fill="#568f8b"/><text x="358" y="141">RUN 1</text><text x="498" y="141">RUN 2</text><text x="638" y="141">RUN 3</text></g>
+ <g fill="#f7e4bb" stroke="#6a9e93" stroke-width="2"><circle cx="410" cy="184" r="4"/><circle cx="550" cy="184" r="4"/><circle cx="692" cy="184" r="4"/></g>
+</g>
 <!-- Back fence casts a narrow shadow onto grass, keeping the yard feeling enclosed -->
 <path d="M72 231Q470 225 932 229" stroke="#5e9080" stroke-width="11" fill="none" opacity=".13"/>
 
