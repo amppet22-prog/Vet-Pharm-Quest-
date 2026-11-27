@@ -151,7 +151,7 @@ if(room==='catcorner'){
  s+=choose(['decor-moon-cat-bed'],141,273,143,84);
  s+=choose(['cataccent-halloween','cataccent-winter','cataccent-pride','cataccent-spring'],156,285,132,71);
  s+=choose(['decor-cat-tree','decor-cat-tree-cloud','decor-cat-tree-castle','decor-cat-tree-forest','decor-cat-tree-moon'],426,173,147,192);
- s+=choose(['cat-companion-tabby','cat-companion-tuxedo','cat-companion-calico','cat-companion-gray'],657,287,93,91);
+ // Legacy decorative cat stickers stay in inventory; purchased residents are now the visible cats.
  // Purchased cat residents replace preselected decorative cats.
  s+=catArt();
  if(old.includes('cat-wall'))s+='<path d="M103 194h97M229 174h85" stroke="#bf98c6" stroke-width="13" stroke-linecap="round"/>';
