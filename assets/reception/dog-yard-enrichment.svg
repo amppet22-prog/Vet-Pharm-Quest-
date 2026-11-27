@@ -53,6 +53,19 @@
  <g fill="#fbf7ef" font-family="Arial,sans-serif" font-weight="bold" font-size="10" text-anchor="middle"><rect x="335" y="130" width="47" height="15" rx="6" fill="#568f8b"/><rect x="475" y="130" width="47" height="15" rx="6" fill="#568f8b"/><rect x="615" y="130" width="47" height="15" rx="6" fill="#568f8b"/><text x="358" y="141">RUN 1</text><text x="498" y="141">RUN 2</text><text x="638" y="141">RUN 3</text></g>
  <g fill="#f7e4bb" stroke="#6a9e93" stroke-width="2"><circle cx="410" cy="184" r="4"/><circle cx="550" cy="184" r="4"/><circle cx="692" cy="184" r="4"/></g>
 </g>
+<!-- Credible kennel care: contained sanitation, gated runs, drain and shaded water station -->
+<g aria-label="Kennel service strip and wash-down drainage">
+ <path d="M291 223H709" stroke="#779d99" stroke-width="7" opacity=".65"/>
+ <path d="M297 228H700" stroke="#d7e8dc" stroke-width="3" stroke-dasharray="5 7"/>
+ <rect x="698" y="214" width="41" height="9" rx="3" fill="#9bbab2" stroke="#688e86" stroke-width="2"/>
+ <path d="M705 216h26" stroke="#e4f3ee" stroke-width="2" stroke-dasharray="3 3"/>
+</g>
+<g aria-label="Outdoor drinking station protected by overhead shelter">
+ <path d="M802 302H932" stroke="#709b91" stroke-width="5"/>
+ <path d="M810 302L824 280H929L944 302Z" fill="#d5e9dd" stroke="#7da69b" stroke-width="4"/>
+ <rect x="835" y="304" width="57" height="21" rx="6" fill="#c8ddd5" stroke="#7ba69d" stroke-width="3"/>
+ <ellipse cx="863" cy="307" rx="26" ry="6" fill="#91ccd4" stroke="#6fa7b1" stroke-width="3"/>
+</g>
 <!-- Back fence casts a narrow shadow onto grass, keeping the yard feeling enclosed -->
 <path d="M72 231Q470 225 932 229" stroke="#5e9080" stroke-width="11" fill="none" opacity=".13"/>
 
