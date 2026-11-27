@@ -2149,7 +2149,7 @@ renderUpgrades=function(){
 };
 
 /* Illustrated clinic furnishings: editable positions, hidden state, room-specific ownership. */
-const vpqFurnitureRoomList=[['reception','🏥 Reception'],['treatment','🩺 Treatment'],['catcorner','🐈 Cats'],['yardview','🐕 Dogs']];
+const vpqFurnitureRoomList=[['reception','🏥 Reception'],['treatment','🩺 Treatment'],['catcorner','🐈 Cat Studio'],['yardview','🐕 Dog Kennel']];
 let vpqFurnitureRoom='reception';
 const vpqFurniturePalettes={"Mushroom Cottage":["#dc9b94","#9a675e","#fff1d9"],"Fairy Garden":["#cbb1e4","#8c80bc","#fcf1c8"],"Royal Palace":["#9877c5","#59447d","#f9db9b"],"Pink Paradise":["#f5a8d2","#ce6ca9","#fff3f9"],"Dracula's Castle":["#594561","#281f3c","#bf6775"],"Comic Heroes":["#6d98ed","#364e8e","#f6c552"],"Snow Day":["#b8dce9","#829dc8","#ffffff"],"Stars & Stripes":["#c96166","#436da6","#f8f7f1"],"Cowboy Ranch":["#b98a65","#765940","#f3ddb0"],"Barnyard Buddies":["#c6b7a6","#645c53","#f0d9d0"],"Reptile Rescue":["#90c0a2","#547e68","#f4eec6"],"Jurassic Vet":["#98b991","#50755a","#f0ca73"],"Cow Cottage":["#d0c9be","#555759","#fafafa"],"Horse Stable":["#b88b67","#805d44","#e5d5a8"],"Piggy Picnic":["#f3a8bc","#cc788f","#fff3e6"],"Hedgehog Hollow":["#b6ad89","#897d5f","#e8d8ac"],"Pride Celebration":["#e9abc8","#8067be","#f1e8a1"]};
 /* Reliable room-decor slots: choose a clearly named wall/floor position, not invisible percentage nudges.
@@ -2166,9 +2166,32 @@ const vpqFurnitureSlots=[
  {id:'back-floor-left',label:'Back floor · left',x:24,y:57},
  {id:'back-floor-right',label:'Back floor · right',x:77,y:57}
 ];
+/* Room-specific placement anchors respect the visible 2.5D layouts.
+ * Legacy coordinates remain valid until a player actively picks a new spot. */
+const vpqRoomFurnitureSlots={
+ catcorner:[
+  {id:'cat-left-wall',label:'Cat wall · climbing shelves',x:18,y:33},
+  {id:'cat-right-wall',label:'Cat wall · window side',x:84,y:33},
+  {id:'cat-left-rest',label:'Cat rest · left',x:21,y:67},
+  {id:'cat-center-rest',label:'Cat rest · middle',x:47,y:72},
+  {id:'cat-right-rest',label:'Cat rest · right',x:78,y:68},
+  {id:'cat-left-back',label:'Cat enrichment · rear left',x:33,y:54},
+  {id:'cat-right-back',label:'Cat enrichment · rear right',x:68,y:54}
+ ],
+ yardview:[
+  {id:'dog-sniff',label:'Sniff garden · left',x:16,y:70},
+  {id:'dog-agility',label:'Agility · left center',x:39,y:70},
+  {id:'dog-open',label:'Open play · right center',x:62,y:71},
+  {id:'dog-quiet',label:'Quiet rest · right',x:86,y:70},
+  {id:'dog-sniff-back',label:'Sniff garden · back',x:17,y:55},
+  {id:'dog-open-back',label:'Open play · back',x:60,y:55},
+  {id:'dog-quiet-back',label:'Quiet corner · back',x:87,y:55}
+ ]
+};
+function vpqFurnitureSlotsFor(room){return vpqRoomFurnitureSlots[room]||vpqFurnitureSlots}
 function vpqSlotMatch(u){
  const p=state.furniturePositions[u.id]||{x:u.furnitureX,y:u.furnitureY};
- return vpqFurnitureSlots.find(slot=>Math.abs(Number(p.x)-slot.x)<.01&&Math.abs(Number(p.y)-slot.y)<.01);
+ return [...vpqFurnitureSlotsFor(u.levelRoom),...vpqFurnitureSlots].find(slot=>Math.abs(Number(p.x)-slot.x)<.01&&Math.abs(Number(p.y)-slot.y)<.01);
 }
 function vpqOccupiedFurnitureSlots(u){
  const taken=new Set();
@@ -2206,9 +2229,9 @@ function vpqOpenFurnitureStudio(room){
  const owned=state.upgrades.includes(u.id),hidden=state.furnitureHidden.includes(u.id);
  const action=owned&&u.furnitureKind==='sofa'&&u.levelRoom==='reception'?'<div class="buttonrow"><button data-furniture-sofa="'+u.id+'">'+(state.activeReceptionLevelSofa===u.id?'✓ Equipped on Reception Couch':'🛋️ Equip on Reception Couch')+'</button></div>':owned?(()=>{
   const current=vpqSlotMatch(u),taken=vpqOccupiedFurnitureSlots(u);
-  const choices=vpqFurnitureSlots.map(slot=>'<option value="'+slot.id+'" '+(current?.id===slot.id?'selected ':'')+(taken.has(slot.id)?'disabled ':'')+'>'+slot.label+(taken.has(slot.id)?' · occupied':'')+'</option>').join('');
+  const choices=vpqFurnitureSlotsFor(u.levelRoom).map(slot=>'<option value="'+slot.id+'" '+(current?.id===slot.id?'selected ':'')+(taken.has(slot.id)?'disabled ':'')+'>'+slot.label+(taken.has(slot.id)?' · occupied':'')+'</option>').join('');
   return '<div class="buttonrow vpq-furniture-slot-controls"><label style="font-size:12px;font-weight:800" for="vpqslot-'+u.id+'">Position</label><select id="vpqslot-'+u.id+'" data-furniture-spot-select="'+u.id+'" style="max-width:215px;padding:7px;border:1px solid #bca8d0;border-radius:9px">'+
-   (!current?'<option value="" selected>Current custom position</option>':'')+choices+'</select>'+
+   (!current||!vpqFurnitureSlotsFor(u.levelRoom).some(slot=>slot.id===current.id)?'<option value="" selected>Current saved position · choose a room spot</option>':'')+choices+'</select>'+
    '<button data-furniture-place="'+u.id+'">📍 Place &amp; view</button>'+
    '<button data-furniture-toggle="'+u.id+'">'+(hidden?'Show':'Hide')+'</button>'+
    '<button data-furniture-reset="'+u.id+'">Reset to original</button></div>';
@@ -2315,7 +2338,7 @@ $('modalBody').addEventListener('click',ev=>{
   const u=vpqFurnitureItems.find(x=>x.id===d.furniturePlace);
   if(!u||!state.upgrades.includes(u.id))return;
   const control=Array.from($('modalBody').querySelectorAll('[data-furniture-spot-select]')).find(el=>el.dataset.furnitureSpotSelect===u.id);
-  const slot=vpqFurnitureSlots.find(v=>v.id===control?.value);
+  const slot=vpqFurnitureSlotsFor(u.levelRoom).find(v=>v.id===control?.value);
   if(!slot){return vpqOpenFurnitureStudio(u.levelRoom)}
   if(vpqOccupiedFurnitureSlots(u).has(slot.id))return vpqOpenFurnitureStudio(u.levelRoom);
   state.furniturePositions[u.id]={x:slot.x,y:slot.y};
