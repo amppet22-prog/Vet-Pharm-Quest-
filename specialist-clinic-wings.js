@@ -10,55 +10,92 @@ const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
 
 /* Isolation patient selector reuses the authoritative in-game clinical case roster.
    No new case objects, disease assertions or medical advice are introduced. */
-const isoStorageKey='vpq-isolation-selected-case-v1';
+// The display can show either a clinical One Health case or an actual owned companion.
+// This is a decorative learning-room patient choice, not a diagnosis for a purchased pet.
+const isoStorageKey='vpq-isolation-selected-case-v1'; // existing case selection retained
+const isoChoiceKey='vpq-isolation-display-choice-v2';
 const isoEscape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function isoCases(){
  const source=window.VPQ_DATA?.cases;
  if(!Array.isArray(source))return [];
  const seen=new Set();
- return source.filter(p=>{
-  if(!p||typeof p.id!=='string'||!p.name||!p.species||seen.has(p.id))return false;
-  seen.add(p.id);return true;
- }).sort((a,b)=>Number(b.location==='isolation')-Number(a.location==='isolation'));
+ return source.filter(p=>{if(!p||!p.id||!p.name||seen.has(p.id))return false;seen.add(p.id);return true})
+ .sort((a,b)=>Number(b.location==='isolation')-Number(a.location==='isolation'));
+}
+function isoOwnedCompanions(){
+ const source=window.VPQ_ISOLATION_OWNED_COMPANIONS?.()||[];
+ const seen=new Set();
+ return source.filter(p=>{if(!p||!p.id||!p.name||!p.src||seen.has(p.id))return false;seen.add(p.id);return true})
+ .sort((a,b)=>String(a.species).localeCompare(String(b.species))||String(a.name).localeCompare(String(b.name)));
 }
 let isoSelectedId=(()=>{try{return localStorage.getItem(isoStorageKey)||''}catch(e){return ''}})();
-function isoPatient(){const c=isoCases();return c.find(p=>p.id===isoSelectedId)||c.find(p=>p.location==='isolation')||c[0]||null}
+let isoChoice=(()=>{try{const v=JSON.parse(localStorage.getItem(isoChoiceKey)||'null');return v&&['case','companion'].includes(v.kind)&&typeof v.id==='string'?v:{kind:'case',id:isoSelectedId}}catch(e){return {kind:'case',id:isoSelectedId}}})();
+function isoCurrent(){
+ if(isoChoice.kind==='companion'){
+  const pet=isoOwnedCompanions().find(p=>p.id===isoChoice.id);
+  if(pet)return {kind:'companion',...pet};
+ }
+ const cases=isoCases();
+ const record=cases.find(p=>p.id===isoChoice.id)||cases.find(p=>p.id===isoSelectedId)||cases.find(p=>p.location==='isolation')||cases[0];
+ return record?{kind:'case',...record}:null;
+}
+function isoSaveChoice(kind,id){
+ isoChoice={kind,id};if(kind==='case')isoSelectedId=id;
+ try{localStorage.setItem(isoChoiceKey,JSON.stringify(isoChoice));if(kind==='case')localStorage.setItem(isoStorageKey,id)}catch(e){}
+ const old=stage.querySelector('.vpqSpecArt');
+ if(old&&stage.dataset.room==='isolation')old.outerHTML=scene('isolation');
+}
 function isoPatientArt(){
- const patient=isoPatient();
- const name=isoEscape(String(patient?.name||'Choose patient').split(' — ')[0].slice(0,19));
- const symbol=isoEscape(patient?.emoji||'🐶');
- return '<g pointer-events="none" aria-label="Selected existing patient '+name+'">'+
- '<ellipse cx="192" cy="318" rx="66" ry="12" fill="#629a9c" opacity=".18"/>'+
- '<text x="195" y="301" font-size="90" text-anchor="middle" font-family="Segoe UI Emoji,Apple Color Emoji,Noto Color Emoji,sans-serif">'+symbol+'</text>'+
- '<rect x="130" y="339" width="137" height="19" rx="8" fill="#fffaf4" stroke="#98b9b8" stroke-width="2"/>'+
- '<text x="199" y="352" text-anchor="middle" font-size="11" font-weight="900" fill="#537f84">'+name+'</text></g>';
+ const p=isoCurrent();
+ const name=isoEscape(String(p?.name||'Choose patient').split(' — ')[0].slice(0,19));
+ const kind=p?.kind==='companion'?'OWNED COMPANION':'CLINICAL CASE';
+ const body=p?.kind==='companion'
+ ?'<image href="'+isoEscape(p.src)+'" x="142" y="212" width="105" height="109" preserveAspectRatio="xMidYMax meet"/>'
+ :'<text x="195" y="303" font-size="85" text-anchor="middle" font-family="Segoe UI Emoji,Apple Color Emoji,Noto Color Emoji,sans-serif">'+isoEscape(p?.emoji||'🐶')+'</text>';
+ return '<g pointer-events="none" aria-label="'+kind+': '+name+' displayed in isolation kennel">'+
+ '<ellipse cx="192" cy="319" rx="62" ry="9" fill="#629a9c" opacity=".16"/>'+body+
+ '<rect x="132" y="339" width="128" height="19" rx="8" fill="#fffaf4" stroke="#98b9b8" stroke-width="2"/>'+
+ '<text x="196" y="352" text-anchor="middle" font-size="11" font-weight="900" fill="#537f84">'+name+'</text>'+
+ '<rect x="135" y="208" width="122" height="19" rx="8" fill="'+(p?.kind==='companion'?'#f6eafa':'#e7f3f4')+'" stroke="#9fb9c7" stroke-width="1.4"/>'+
+ '<text x="196" y="221" text-anchor="middle" font-size="9" font-weight="900" fill="#577687">'+kind+'</text></g>';
 }
 function isoPatientSelector(){
- const records=isoCases(),selected=isoPatient();
- const options=records.map(p=>'<option value="'+isoEscape(p.id)+'"'+(p.id===selected?.id?' selected':'')+'>'+isoEscape((p.location==='isolation'?'[One Health] ':'')+p.name+' · '+p.species)+'</option>').join('');
- api.showModal('🐾 Choose isolation patient',
- '<p>Select a patient already in the game. Their identity and case information come directly from the existing clinical case library. Other cases are available for visual customization; isolation precautions are determined by the clinical scenario, not by selecting a patient.</p>'+
- '<label for="vpqIsoCaseChoice" style="display:block;font-weight:900;margin-bottom:7px">Existing patient</label>'+
- '<select id="vpqIsoCaseChoice" style="width:100%;padding:11px;border:2px solid #a4c9c4;border-radius:10px">'+options+'</select>'+
- '<div id="vpqIsoCaseSummary" style="margin:12px 0;padding:12px;border:1px solid #cadfd8;background:#f3faf6;border-radius:12px"></div>'+
- '<button type="button" id="vpqIsoCaseApply">Place patient in kennel</button> <button type="button" id="vpqIsoCaseOpen">Open One Health case activities</button>'+
- '<p class="tiny">The new selection changes this room’s patient display only. Your existing patient case progress, companion equipment and cloud-save structure are not changed.</p>');
- const select=document.getElementById('vpqIsoCaseChoice'),summary=document.getElementById('vpqIsoCaseSummary');
- if(!select)return;
- const sync=()=>{const p=records.find(x=>x.id===select.value);summary.textContent=p?(p.species+' • '+(p.intro||'Existing veterinary case')):'No eligible patient record found.'};
- select.addEventListener('change',sync);sync();
+ const current=isoCurrent(),owned=isoOwnedCompanions(),cases=isoCases();
+ const kind=current?.kind||'companion';
+ const petOpts=owned.map(p=>'<option value="'+isoEscape(p.id)+'"'+(current?.kind==='companion'&&p.id===current.id?' selected':'')+'>'+isoEscape(p.name+' · '+p.species)+'</option>').join('');
+ const caseOpts=cases.map(p=>'<option value="'+isoEscape(p.id)+'"'+(current?.kind==='case'&&p.id===current.id?' selected':'')+'>'+isoEscape(p.name+' · '+(p.species||'Case'))+'</option>').join('');
+ api.showModal('🐾 Choose an isolation room animal',
+ '<p>Place an animal from <b>your purchased or unlocked companions</b> in the teaching-room kennel, or view an existing <b>One Health clinical case</b>. Selecting a companion does not mean that animal has an infectious disease.</p>'+
+ '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0"><button type="button" data-vpqisotab="companion">🐶 My Purchased Companions ('+owned.length+')</button><button type="button" data-vpqisotab="case">🩺 Clinical Cases ('+cases.length+')</button></div>'+
+ '<div id="vpqIsoOwnedPanel"><label style="display:block;font-weight:900">My purchased / unlocked animals</label><select id="vpqIsoOwnedChoice" style="width:100%;padding:10px;border:1px solid #c2b5d5;border-radius:10px"><option value="">Choose a companion</option>'+petOpts+'</select>'+
+ (!owned.length?'<p class="tiny">No owned animals with ready artwork were found. Unlock companions in the Collection; only owned, verified images appear here.</p>':'')+'</div>'+
+ '<div id="vpqIsoCasePanel"><label style="display:block;font-weight:900">Clinical teaching patient</label><select id="vpqIsoCaseChoice" style="width:100%;padding:10px;border:1px solid #b3ced0;border-radius:10px">'+caseOpts+'</select></div>'+
+ '<div id="vpqIsoPreview" style="margin:12px 0;padding:12px;border:1px solid #cfdbde;border-radius:14px;background:#f6fafb;display:flex;align-items:center;gap:14px;min-height:100px"></div>'+
+ '<button type="button" id="vpqIsoCaseApply">Place selected animal in kennel</button> <button type="button" id="vpqIsoCaseOpen">Open One Health case activities</button>'+
+ '<p class="tiny">Room display selection is saved on this device; it does not change your active follower, companion purchases, treatment history or clinical case progress.</p>');
+ let tab=kind==='companion'?'companion':'case';
+ const petSelect=document.getElementById('vpqIsoOwnedChoice'),caseSelect=document.getElementById('vpqIsoCaseChoice');
+ if(!petSelect||!caseSelect)return;
+ if(tab==='companion'&&current?.kind!=='companion'&&owned.length)petSelect.value=owned[0].id;
+ const render=()=>{
+  const companion=tab==='companion',record=companion?owned.find(p=>p.id===petSelect.value):cases.find(p=>p.id===caseSelect.value);
+  document.getElementById('vpqIsoOwnedPanel').hidden=!companion;
+  document.getElementById('vpqIsoCasePanel').hidden=companion;
+  const preview=document.getElementById('vpqIsoPreview');
+  if(!preview)return;
+  if(!record){preview.textContent='Choose an available animal to see its artwork and details.';return}
+  const picture=companion?'<img src="'+isoEscape(record.src)+'" alt="'+isoEscape(record.name)+' companion preview" style="width:100px;height:105px;object-fit:contain;flex-shrink:0"/>':
+   '<span style="font-size:65px;width:100px;text-align:center" aria-hidden="true">'+isoEscape(record.emoji||'🐾')+'</span>';
+  preview.innerHTML=picture+'<div><b>'+isoEscape(record.name)+'</b><div style="font-size:12px;color:#647b85;margin-top:4px">'+(companion?'Purchased / unlocked companion · '+isoEscape(record.species):'Clinical case · '+isoEscape(record.species||'Veterinary'))+'</div><p style="font-size:12px;margin:7px 0 0">'+(companion?'Uses the actual companion artwork from your collection. This is for room display only.':isoEscape(record.intro||'Existing veterinary teaching case'))+'</p></div>';
+ };
+ document.querySelectorAll('[data-vpqisotab]').forEach(btn=>btn.addEventListener('click',()=>{tab=btn.dataset.vpqisotab;render()}));
+ petSelect.addEventListener('change',render);caseSelect.addEventListener('change',render);render();
  document.getElementById('vpqIsoCaseApply')?.addEventListener('click',()=>{
-  isoSelectedId=select.value;try{localStorage.setItem(isoStorageKey,isoSelectedId)}catch(e){}
-  // Rebuild only the backdrop without replacing the player's interaction layer.
-  const oldScene=stage.querySelector('.vpqSpecArt');
-  if(oldScene&&stage.dataset.room==='isolation')oldScene.outerHTML=scene('isolation');
-  isoPatientSelector();
+  const id=tab==='companion'?petSelect.value:caseSelect.value;
+  if(!id)return;
+  isoSaveChoice(tab,id);isoPatientSelector();
  });
- document.getElementById('vpqIsoCaseOpen')?.addEventListener('click',()=>{
-  const p=records.find(x=>x.id===select.value);if(!p)return;
-  isoSelectedId=p.id;try{localStorage.setItem(isoStorageKey,isoSelectedId)}catch(e){}
-  api.doAction('onehealth');
- });
+ document.getElementById('vpqIsoCaseOpen')?.addEventListener('click',()=>api.doAction('onehealth'));
 }
 function isoSpecimenIntro(){
  api.showModal('🧪 One Health · Specimen Testing',
