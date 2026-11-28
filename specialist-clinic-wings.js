@@ -58,7 +58,7 @@ function isoPatientSelector(){
  '<label for="vpqIsoCaseChoice" style="display:block;font-weight:900;margin-bottom:7px">Existing patient</label>'+
  '<select id="vpqIsoCaseChoice" style="width:100%;padding:11px;border:2px solid #a4c9c4;border-radius:10px">'+options+'</select>'+
  '<div id="vpqIsoCaseSummary" style="margin:12px 0;padding:12px;border:1px solid #cadfd8;background:#f3faf6;border-radius:12px"></div>'+
- '<button type="button" id="vpqIsoCaseApply">Place patient in kennel</button> <button type="button" id="vpqIsoCaseOpen">Open existing patient case</button>'+
+ '<button type="button" id="vpqIsoCaseApply">Place patient in kennel</button> <button type="button" id="vpqIsoCaseOpen">Open One Health case activities</button>'+
  '<p class="tiny">The new selection changes this room’s patient display only. Your existing patient case progress, companion equipment and cloud-save structure are not changed.</p>');
  const select=document.getElementById('vpqIsoCaseChoice'),summary=document.getElementById('vpqIsoCaseSummary');
  if(!select)return;
@@ -66,9 +66,8 @@ function isoPatientSelector(){
  select.addEventListener('change',sync);sync();
  document.getElementById('vpqIsoCaseApply')?.addEventListener('click',()=>{
   isoSelectedId=select.value;try{localStorage.setItem(isoStorageKey,isoSelectedId)}catch(e){}
-  const sceneEl=stage.querySelector('.vpqSpecScene');
-  // Rebuild the SVG room art through the current room renderer; no patient-game state reset.
-  const oldScene=stage.querySelector('.clinicArt, .vpqSpecScene');
+  // Rebuild only the backdrop without replacing the player's interaction layer.
+  const oldScene=stage.querySelector('.vpqSpecArt');
   if(oldScene&&stage.dataset.room==='isolation')oldScene.outerHTML=scene('isolation');
   isoPatientSelector();
  });
@@ -182,6 +181,22 @@ function scene(key){
    '<path d="M441 306h87m-87 5h112m-112 5h73" stroke="#a2bdae" stroke-width="2"/>'+
    '<rect x="570" y="300" width="22" height="22" rx="3" fill="#d2e7e0" stroke="#98bdb0"/>'+
    '<text x="581" y="316" font-size="13" text-anchor="middle">🔬</text>'+
+   // In-world One Health diagnostics: safe specimen workflow and sample testing concepts.
+   '<g aria-label="Illustrated specimen testing counter and biosafety overview">'+
+   '<rect x="397" y="318" width="220" height="27" rx="5" fill="#a9cbc6" stroke="#719b9b" stroke-width="3"/>'+
+   '<path d="M410 319h195" stroke="#f8fdf8" stroke-width="4"/>'+
+   '<rect x="429" y="281" width="77" height="35" rx="5" fill="#eaf8f5" stroke="#87b7b1" stroke-width="2"/>'+
+   '<path d="M440 297h55M440 304h55" stroke="#a1c3bb" stroke-width="2"/>'+
+   '<rect x="518" y="287" width="59" height="30" rx="5" fill="#d0e7e6" stroke="#70a7a5" stroke-width="2"/>'+
+   '<rect x="530" y="294" width="35" height="12" rx="3" fill="#4b8a94"/>'+
+   '<text x="547" y="303" font-size="8" font-weight="900" fill="white" text-anchor="middle">PCR</text>'+
+   '<g fill="#c5e5e1" stroke="#749f9d" stroke-width="1.8"><rect x="444" y="274" width="49" height="9" rx="3"/>'+
+   '<rect x="446" y="262" width="6" height="17" rx="2"/><rect x="459" y="262" width="6" height="17" rx="2"/><rect x="472" y="262" width="6" height="17" rx="2"/><rect x="485" y="262" width="6" height="17" rx="2"/></g>'+
+   '<path d="M447 264h4M460 264h4M473 264h4M486 264h4" stroke="#e38d94" stroke-width="3"/>'+
+   '<rect x="416" y="221" width="183" height="26" rx="9" fill="#fffbec" stroke="#9dbfb4" stroke-width="3"/>'+
+   '<text x="508" y="238" font-family="Arial" font-size="13" font-weight="900" text-anchor="middle" fill="#527d80">SPECIMEN TESTING</text>'+
+   '<path d="M411 250h194" stroke="#b7d5cd" stroke-width="4"/>'+
+   '</g>'+
    // Public-health reporting terminal with status display.
    '<rect x="712" y="190" width="218" height="155" rx="14" fill="#cce5ed" stroke="#8cb7c7" stroke-width="7"/>'+
    '<rect x="730" y="206" width="180" height="101" rx="10" fill="#365c77" stroke="#83acbc" stroke-width="4"/>'+
