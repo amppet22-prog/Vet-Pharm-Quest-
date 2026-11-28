@@ -1762,7 +1762,7 @@
       },
       "text": {
         "gross": "****Localization is very specific to this etiology* ***\n Sharply demarcated bilateral (sometimes unilateral) sharp yellow malacic foci in globus pallidus and substantia nigra. Causes *nigropallidial encephalomalacia.* \n",
-        "dx": "Working identification: Centaurea spp. — nigropallidal encephalomalacia.\n**Poisoning, chronic, and mostly in horses **\n Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Globus pallidus and substantia nigra: encephalomalacia, bilateral, symmetric (nigropallidal encephalomalacia)",
         "histo": "Necrosis with loss of neurons. ",
         "why": "Horses grazing on Yellow Star Thistle or Russian knapweed. \nChronic condition with them grazing on the plants for 1 month or longer during the hot summer, when other forage is dried and unpalatable since the thistle remains green. ",
         "visualClue": "",
@@ -2018,7 +2018,7 @@
       },
       "text": {
         "gross": "Usually solitary, firm, well-defined, gray-white, spherical/lobulated/plaque-like and compressive, leading to pressure atrophy; hemorrhage/necrosis may alter cut surface. Soft, red, brown, or gray areas of hemorrhage and necrosis. \n\n**Cat:** Almost always compressive, shelled out \n**Dog: **Tend to be more attached to the underlying parenchyma and not as easy to shell out. ",
-        "dx": "Working identification: Meningioma. \nSpecimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Meninges: meningioma",
         "histo": "Neoplastic cells ",
         "why": "***Most common CNS neoplasm in dogs and cats.*** Tumor arising from the meninges (arachnoid cell layer and projecting into the subdural space).\n- Slow-growing\n-Secondary pressure atrophy of adjacent parenchyma secondary to compression. ",
         "visualClue": "",
@@ -2151,7 +2151,7 @@
       },
       "text": {
         "gross": "Difficult to distinguish from adjacent parenchyma. Often displaces normal tissues. \n**Low-grade**- poorly defined mass, firm, white to pink\n**High grade**- regions of hemorrhage, necrosis, cavitation ",
-        "dx": "Working identification: Astrocytoma. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Brain: astrocytoma",
         "histo": "Astrocyte neoplastic proliferation ",
         "why": "Under the umbrella term of glioma. Common sites include the cerebral hemispheres and less frequently, the cerebellum and spinal cord. ",
         "visualClue": "",
@@ -2210,7 +2210,7 @@
       },
       "text": {
         "gross": "Well-demarcated soft to **gelatinous** gray-to-pink-red mass with hemorrhage and possibly cystic center when large. (Gelatinous because oligodendrocytes produce myelin) larger tumors may have a central center that is cystic ",
-        "dx": "Working identification: Oligodendroglioma. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Brain: oligodendroglioma",
         "histo": "Neoplastic proliferation of oligodendrocytes.",
         "why": "Neoplastic oligodendrocytes. Most commonly in the dog, but far the most common glioma neoplasm (up to 70% incidence). Brachycephalic breeds have a higher occurance. Age rage is 5-11 years ",
         "visualClue": "",
@@ -2269,7 +2269,7 @@
       },
       "text": {
         "gross": "Large expansile, relatively well-circumscribed intraventricular soft gray-white to red mass; dogs tend to smooth and cats granular cut surfaces in the lecture. Aggressive tumors show invasion into the normal tissue at its margins. ",
-        "dx": "Working identification: Ependymoma. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Ventricle (usually lateral): ependymoma",
         "histo": "neoplastic ependymal cells ",
         "why": "In the umbrella of gliomas. Neoplastic expansion of ependymal cells. Usually involves the lateral ventricle, less so the third and fourth. Can also occur in the central canal of the spinal cord. Can metastasize to the subarachnoid space due to flow of the CSF. \n",
         "visualClue": "",
@@ -2341,7 +2341,7 @@
       },
       "text": {
         "gross": "Expansive, well-defined granular/papillary growth within the ventricular system. \nGray to white to red, and compresses the adjacent nervous tissues. Occurs most freqently in the fourth ventricle  ",
-        "dx": "Working identification: Choroid plexus papilloma and carcinoma. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Ventricle (usually fourth): choroid plexus papilloma / carcinoma",
         "histo": " distinguish from ependymoma ",
         "why": "Papilloma/carcinoma of choroid plexus, commonest in dogs among species discussed; lecture notes predisposition in **Golden Retrievers** and 5–10% of canine primary brain tumors.  If it obstructs CSF flow it can produce hydrocephalus; distinguish from ependymoma via histology.",
         "visualClue": "",
@@ -2460,8 +2460,8 @@
       },
       "text": {
         "gross": "Dorsal midline cranial defect (cranium bifidum) where meningeal and/or brain tissue protrude from a sac (-cele). \n",
-        "dx": "Working identification: Meningoencephalocele. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
-        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "dx": "Skull (dorsal midline): meningocele / meningoencephalocele with cranium bifidum",
+        "histo": "The sac is lined by meninges (meningocele) or contains meninges plus brain tissue (meningoencephalocele).",
         "why": "Hereditary in pigs and cats\nGriseofulvin TX in pregnant cats during the first week of gestation\nThey are uncommon and sporadic in most domestic species. ",
         "visualClue": "",
         "compare": "",
@@ -2605,7 +2605,7 @@
       },
       "text": {
         "gross": "Depends on tumor type:\nHemangiosarcoma: multifocal to coalescing variably sized black lesions on the grey- white matter interface. \nCarcinomas depend, in white matter ",
-        "dx": "Working identification: Metastatic pulmonary and mammary carcinomas. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Brain: metastatic carcinoma, multifocal",
         "histo": "Neoplastic growth of the originating cell in hemangiosarcoma tortuous vessels. ",
         "why": "Hematogenously metastasizing neoplasms will impact the brain more then the spinal cord. and CNS metastasis is more often in dogs and cats then other nonhuman species. \n**Hemangiosarcoma** is one of the most common metastasizing tumors to the brain. \n",
         "visualClue": "",
@@ -2664,8 +2664,8 @@
       },
       "text": {
         "gross": "Distinctive gross lesion is **bilaterally symmetrical** yellow malacia in the ventral gray matter of spinal cord; compare with white-matter myelomalacia.",
-        "dx": "Working identification: Selenium toxicosis in pigs. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
-        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "dx": "Spinal cord, ventral gray matter: poliomyelomalacia, bilateral, symmetric (pig)",
+        "histo": "Necrosis of the ventral horn gray matter (malacia).",
         "why": " Overexposure in swine feed causes neurologic deficits in feeder pigs with alertness, sternal recumbency, progression to flaccid rear-limb dysfunction and quadriplegia. ",
         "visualClue": "Bilaterally symmetric in the ventral spinal gray matter ",
         "compare": "",
@@ -2737,8 +2737,8 @@
       "text": {
         "title": "Phalaris grass neurotoxicosis",
         "gross": "Bilaterally symmetric greenish brainstem parenchyma and gray-to-green kidney discoloration may occur. ",
-        "dx": "Working identification: Phalaris grass neurotoxicosis. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
-        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "dx": "Brainstem, spinal cord and dorsal root ganglia: neuronal pigment accumulation, bilateral, symmetric (green discoloration)",
+        "histo": "Unknown pigment inside neurons of brainstem, spinal cord and dorsal root ganglia; also in renal tubular epithelium.",
         "why": "Two syndromes:\n1. Cardiac disorder resulting in acute death\n2. Nervous system disorder characterized by ataxia, tremors, and paresis\n     Accumulation of an unknown pigment within neurons of the brainstem, spinal cord, and dorsal root ganglia\n    Pigment also accumulates in renal tubular epithelial cells",
         "visualClue": "Bilaterally symmetrical green hue to the parenchyma ",
         "compare": "Differentiate pigment-associated Phalaris injury from hemorrhagic/malacic toxin lesions.",
@@ -2896,7 +2896,7 @@
       "text": {
         "title": "Thiamine deficiency — ruminant polioencephalomalacia",
         "gross": "**Polioencephalomalacia:** Gray cerebral cortex becomes yellow and soft, with autofluorescence under UV. \nEarly swelling flattens gyri; later cortical separation at gray-white junction (8–10 days) ",
-        "dx": "Working identification: Thiamine deficiency — ruminant polioencephalomalacia. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Cerebral cortex: polioencephalomalacia, laminar, bilateral (ruminant)",
         "histo": "Ill add later ",
         "why": "Dietary change! Animals fed rations rich in carbohydrates with little roughage. Can be associated with clinical or subclinical acidosis that may precipitate changes in the rumen microflora. \n",
         "visualClue": "",
@@ -2956,7 +2956,7 @@
       "text": {
         "title": "Thiamine deficiency — small animals",
         "gross": " Bilateral symmetric brainstem cavitated malacic foci are emphasized, contrasting ruminant cortical malacia.",
-        "dx": "Working identification: Thiamine deficiency — small animals. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Brainstem: encephalomalacia with cavitation, bilateral, symmetric (thiamine deficiency)",
         "histo": "Brainstem necrosis ",
         "why": "Secondary to dietary insufficiency of Vit B1 (thiamine)\nGet via ingesting of fish containing thiaminase or through thiamine-deficient diets. \n",
         "visualClue": "Bilaterally symmetric softening in the brainstem ",
@@ -3016,7 +3016,7 @@
       "text": {
         "title": "Copper deficiency — small ruminants",
         "gross": "Bilateral cerebrocortical lesions- cortex focally soft and fluctuant or collapsed, may be gelatinous softening or cavitation\nBrainstem and spinal cord are affected ",
-        "dx": "Working identification: Copper deficiency — small ruminants. Specimen site: Brain / spinal cord. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Cerebrum (± brainstem, spinal cord): encephalomalacia with gelatinous softening and cavitation, bilateral (swayback)",
         "histo": "Cavitation, gelatinous ",
         "why": "***Complex and poorly understood.***\n**Primary:** Copper-deficent soils or inadequate intake from forage\n     Enzootic ataxia \n         Goat kid > lamb; Onset delayed up to 6 months after birth\n        Brain stem and spinal cord affected\n Lordosis \n       Lambs > goat kid; Born to dams with insufficient copper levels\n       Cerebrum, brainstem, spinal cord affected\n**Secondary:** Defective absorption from interactions with other\nminerals/metals\n",
         "visualClue": "",
