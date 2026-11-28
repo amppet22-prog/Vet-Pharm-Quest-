@@ -563,6 +563,17 @@ isoFinalPolish.textContent=
  '.stage[data-room="isolation"] .vpqIsoHelp:focus-visible{outline:3px solid #314f96;outline-offset:2px}'+
  '@media(max-width:700px){.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp{width:28px;height:28px;min-width:28px;min-height:28px;font-size:17px}.stage[data-room="isolation"] .vpqIsoChoose,.stage[data-room="isolation"] .vpqIsoTest,.stage[data-room="isolation"] .vpqIsoCases{font-size:10px;line-height:1.1}}';
 document.head.appendChild(isoFinalPolish);
+// Phase H5/H6: optional room overview hides only walking character visuals (not their state or interactions).
+// Default remains the normal avatar + owned companion display.
+const isoOverviewStyle=document.createElement('style');
+isoOverviewStyle.id='vpq-onehealth-room-overview';
+isoOverviewStyle.textContent=
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoOverview{position:absolute;top:2%;left:21%;width:auto;min-width:90px;height:29px;z-index:22;padding:3px 10px;border-radius:12px;background:#f9fbff;border:2px solid #9ab3d5;color:#48658a;box-shadow:0 2px 6px #31496935;font-size:11px;font-weight:900;white-space:nowrap;cursor:pointer;pointer-events:auto}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoOverview:hover,.stage[data-room="isolation"] #vpqSpecHits .vpqIsoOverview:focus-visible{background:#edf4ff;outline:2px solid #6b86ba;outline-offset:2px}'+
+ '.stage[data-room="isolation"].vpqIsoClearView #avatarSprite,.stage[data-room="isolation"].vpqIsoClearView #petSprite{opacity:.13!important;transition:opacity .2s ease}'+
+ '@media(max-width:700px){.stage[data-room="isolation"] #vpqSpecHits .vpqIsoOverview{left:20%;top:2%;min-width:65px;font-size:10px;padding:3px 5px}}';
+document.head.appendChild(isoOverviewStyle);
+
 
 
 
@@ -634,6 +645,7 @@ function isoHelpModal(action){
 }
 function refresh(){
  const room=stage.dataset.room,old=stage.querySelector('#vpqSpecHits');
+ if(room!=='isolation')stage.classList.remove('vpqIsoClearView');
  if(!data[room]){old?.remove();return}
  if(old?.dataset.room===room)return;
  old?.remove();const div=document.createElement('div');div.id='vpqSpecHits';div.dataset.room=room;
@@ -642,6 +654,7 @@ function refresh(){
  (room==='surgery'?'<button type="button" class="vpqSurgToolWall" style="left:2.2%;top:22%;width:6.5%;height:26%" data-vpqsurgtools="1" title="Surgical instruments: identify each tool and its purpose" aria-label="Open Surgical Tool Quick Guide and practice">?</button>':'')+
  (room==='clinpath'?['coag','gas','urine','hybrid','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([13.7,30.1,46.5,62.9,79.3,95.2][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
  (room==='isolation'?
+ '<button type="button" class="vpqIsoOverview" data-vpqisooverview="1" title="Temporarily fade the player and following companion to inspect the clinical room" aria-label="Show room overview without character obstruction" aria-pressed="false">👁 Room View</button>'+
  '<button type="button" class="vpqIsoChoose" data-vpqisopatient="1" title="Choose from your owned companion collection">🐾 Place Pet</button>'+ 
  '<button type="button" class="vpqIsoCases" data-vpqisocases="1" title="Open separate One Health clinical cases">🩺 Cases</button>'+ 
  '<button type="button" class="vpqIsoTest" data-vpqisotest="1" title="Specimen testing and lab biosafety overview">🧪 Lab Testing</button>'+
@@ -653,6 +666,7 @@ function refresh(){
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
  (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Start here — what CBC, chemistry and each diagnostic test measures" aria-label="Beginner Clinical Pathology report-reading guide"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Learn clinical pathology from the beginning">📖 Start Here</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
  div.addEventListener('click',e=>{
+ const isoOverview=e.target.closest('[data-vpqisooverview]');if(isoOverview){e.preventDefault();e.stopPropagation();const showing=stage.classList.toggle('vpqIsoClearView');isoOverview.setAttribute('aria-pressed',String(showing));isoOverview.textContent=showing?'👁 Show Team':'👁 Room View';isoOverview.setAttribute('aria-label',showing?'Restore player and following companion visibility':'Show room overview without character obstruction');return}
  const isoChoose=e.target.closest('[data-vpqisopatient]');if(isoChoose){e.preventDefault();e.stopPropagation();isoPatientSelector();return}
  const isoCasesButton=e.target.closest('[data-vpqisocases]');if(isoCasesButton){e.preventDefault();e.stopPropagation();return api.doAction('onehealth')}
  const isoTestClick=e.target.closest('[data-vpqisotest]');if(isoTestClick){e.preventDefault();e.stopPropagation();isoSpecimenIntro();return}
