@@ -12,90 +12,63 @@ const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
    No new case objects, disease assertions or medical advice are introduced. */
 // The display can show either a clinical One Health case or an actual owned companion.
 // This is a decorative learning-room patient choice, not a diagnosis for a purchased pet.
-const isoStorageKey='vpq-isolation-selected-case-v1'; // existing case selection retained
-const isoChoiceKey='vpq-isolation-display-choice-v2';
+
+const isoChoiceKey='vpq-isolation-display-choice-v3';
 const isoEscape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function isoCases(){
- const source=window.VPQ_DATA?.cases;
- if(!Array.isArray(source))return [];
- const seen=new Set();
- return source.filter(p=>{if(!p||!p.id||!p.name||seen.has(p.id))return false;seen.add(p.id);return true})
- .sort((a,b)=>Number(b.location==='isolation')-Number(a.location==='isolation'));
-}
 function isoOwnedCompanions(){
- const source=window.VPQ_ISOLATION_OWNED_COMPANIONS?.()||[];
- const seen=new Set();
- return source.filter(p=>{if(!p||!p.id||!p.name||!p.src||seen.has(p.id))return false;seen.add(p.id);return true})
+ const source=window.VPQ_ISOLATION_OWNED_COMPANIONS?.()||[],seen=new Set();
+ return source.filter(p=>p&&p.id&&p.src&&p.name&&!seen.has(p.id)&&seen.add(p.id))
  .sort((a,b)=>String(a.species).localeCompare(String(b.species))||String(a.name).localeCompare(String(b.name)));
 }
-let isoSelectedId=(()=>{try{return localStorage.getItem(isoStorageKey)||''}catch(e){return ''}})();
-let isoChoice=(()=>{try{const v=JSON.parse(localStorage.getItem(isoChoiceKey)||'null');return v&&['case','companion'].includes(v.kind)&&typeof v.id==='string'?v:{kind:'case',id:isoSelectedId}}catch(e){return {kind:'case',id:isoSelectedId}}})();
-function isoCurrent(){
- if(isoChoice.kind==='companion'){
-  const pet=isoOwnedCompanions().find(p=>p.id===isoChoice.id);
-  if(pet)return {kind:'companion',...pet};
- }
- const cases=isoCases();
- const record=cases.find(p=>p.id===isoChoice.id)||cases.find(p=>p.id===isoSelectedId)||cases.find(p=>p.location==='isolation')||cases[0];
- return record?{kind:'case',...record}:null;
-}
-function isoSaveChoice(kind,id){
- isoChoice={kind,id};if(kind==='case')isoSelectedId=id;
- try{localStorage.setItem(isoChoiceKey,JSON.stringify(isoChoice));if(kind==='case')localStorage.setItem(isoStorageKey,id)}catch(e){}
+let isoChoice=(()=>{
+ try{
+  const raw=localStorage.getItem(isoChoiceKey);
+  if(raw){const v=JSON.parse(raw);return v?.kind==='companion'&&typeof v.id==='string'?v:null}
+  const v=JSON.parse(localStorage.getItem('vpq-isolation-display-choice-v2')||'null');
+  return v?.kind==='companion'&&typeof v.id==='string'?v:null;
+ }catch(e){return null}
+})();
+function isoCurrent(){return isoChoice?.kind==='companion'?isoOwnedCompanions().find(p=>p.id===isoChoice.id)||null:null}
+function isoSaveChoice(id){
+ isoChoice=id?{kind:'companion',id}:null;
+ try{localStorage.setItem(isoChoiceKey,JSON.stringify(isoChoice))}catch(e){}
  const old=stage.querySelector('.vpqSpecArt');
  if(old&&stage.dataset.room==='isolation')old.outerHTML=scene('isolation');
 }
 function isoPatientArt(){
- const p=isoCurrent();
- const name=isoEscape(String(p?.name||'Choose patient').split(' — ')[0].slice(0,19));
- const kind=p?.kind==='companion'?'OWNED COMPANION':'CLINICAL CASE';
- const body=p?.kind==='companion'
- ?'<image href="'+isoEscape(p.src)+'" x="142" y="212" width="105" height="109" preserveAspectRatio="xMidYMax meet"/>'
- :'<text x="195" y="303" font-size="85" text-anchor="middle" font-family="Segoe UI Emoji,Apple Color Emoji,Noto Color Emoji,sans-serif">'+isoEscape(p?.emoji||'🐶')+'</text>';
- return '<g pointer-events="none" aria-label="'+kind+': '+name+' displayed in isolation kennel">'+
- '<ellipse cx="192" cy="319" rx="62" ry="9" fill="#629a9c" opacity=".16"/>'+body+
- '<rect x="132" y="339" width="128" height="19" rx="8" fill="#fffaf4" stroke="#98b9b8" stroke-width="2"/>'+
- '<text x="196" y="352" text-anchor="middle" font-size="11" font-weight="900" fill="#537f84">'+name+'</text>'+
- '<rect x="135" y="208" width="122" height="19" rx="8" fill="'+(p?.kind==='companion'?'#f6eafa':'#e7f3f4')+'" stroke="#9fb9c7" stroke-width="1.4"/>'+
- '<text x="196" y="221" text-anchor="middle" font-size="9" font-weight="900" fill="#577687">'+kind+'</text></g>';
+ const pet=isoCurrent();
+ if(!pet)return '<g pointer-events="none" aria-label="Empty kennel awaiting an owned companion">'+
+ '<rect x="140" y="248" width="134" height="41" rx="12" fill="#f7fffa" stroke="#9fc7c4" stroke-width="2" stroke-dasharray="6 4"/>'+
+ '<text x="207" y="265" font-size="12" text-anchor="middle" font-weight="900" fill="#618d91">KENNEL EMPTY</text>'+
+ '<text x="207" y="281" font-size="10" text-anchor="middle" fill="#6c979b">Choose an owned pet</text></g>';
+ const name=isoEscape(String(pet.name).slice(0,21));
+ return '<g pointer-events="none" aria-label="Purchased companion '+name+'">'+
+ '<ellipse cx="202" cy="318" rx="59" ry="9" fill="#629a9c" opacity=".16"/>'+
+ '<image href="'+isoEscape(pet.src)+'" x="142" y="218" width="120" height="113" preserveAspectRatio="xMidYMax meet"/>'+
+ '<rect x="137" y="338" width="136" height="19" rx="8" fill="#fffaf4" stroke="#98b9b8" stroke-width="2"/>'+
+ '<text x="205" y="351" text-anchor="middle" font-size="11" font-weight="900" fill="#537f84">'+name+'</text>'+
+ '<rect x="144" y="204" width="128" height="19" rx="8" fill="#f6eafa" stroke="#9fb9c7" stroke-width="1.4"/>'+
+ '<text x="207" y="217" text-anchor="middle" font-size="9" font-weight="900" fill="#577687">PURCHASED COMPANION</text></g>';
 }
 function isoPatientSelector(){
- const current=isoCurrent(),owned=isoOwnedCompanions(),cases=isoCases();
- const kind=current?.kind||'companion';
- const petOpts=owned.map(p=>'<option value="'+isoEscape(p.id)+'"'+(current?.kind==='companion'&&p.id===current.id?' selected':'')+'>'+isoEscape(p.name+' · '+p.species)+'</option>').join('');
- const caseOpts=cases.map(p=>'<option value="'+isoEscape(p.id)+'"'+(current?.kind==='case'&&p.id===current.id?' selected':'')+'>'+isoEscape(p.name+' · '+(p.species||'Case'))+'</option>').join('');
- api.showModal('🐾 Choose an isolation room animal',
- '<p>Place an animal from <b>your purchased or unlocked companions</b> in the teaching-room kennel, or view an existing <b>One Health clinical case</b>. Selecting a companion does not mean that animal has an infectious disease.</p>'+
- '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0"><button type="button" data-vpqisotab="companion">🐶 My Purchased Companions ('+owned.length+')</button><button type="button" data-vpqisotab="case">🩺 Clinical Cases ('+cases.length+')</button></div>'+
- '<div id="vpqIsoOwnedPanel"><label style="display:block;font-weight:900">My purchased / unlocked animals</label><select id="vpqIsoOwnedChoice" style="width:100%;padding:10px;border:1px solid #c2b5d5;border-radius:10px"><option value="">Choose a companion</option>'+petOpts+'</select>'+
- (!owned.length?'<p class="tiny">No owned animals with ready artwork were found. Unlock companions in the Collection; only owned, verified images appear here.</p>':'')+'</div>'+
- '<div id="vpqIsoCasePanel"><label style="display:block;font-weight:900">Clinical teaching patient</label><select id="vpqIsoCaseChoice" style="width:100%;padding:10px;border:1px solid #b3ced0;border-radius:10px">'+caseOpts+'</select></div>'+
- '<div id="vpqIsoPreview" style="margin:12px 0;padding:12px;border:1px solid #cfdbde;border-radius:14px;background:#f6fafb;display:flex;align-items:center;gap:14px;min-height:100px"></div>'+
- '<button type="button" id="vpqIsoCaseApply">Place selected animal in kennel</button> <button type="button" id="vpqIsoCaseOpen">Open One Health case activities</button>'+
- '<p class="tiny">Room display selection is saved on this device; it does not change your active follower, companion purchases, treatment history or clinical case progress.</p>');
- let tab=kind==='companion'?'companion':'case';
- const petSelect=document.getElementById('vpqIsoOwnedChoice'),caseSelect=document.getElementById('vpqIsoCaseChoice');
- if(!petSelect||!caseSelect)return;
- if(tab==='companion'&&current?.kind!=='companion'&&owned.length)petSelect.value=owned[0].id;
- const render=()=>{
-  const companion=tab==='companion',record=companion?owned.find(p=>p.id===petSelect.value):cases.find(p=>p.id===caseSelect.value);
-  document.getElementById('vpqIsoOwnedPanel').hidden=!companion;
-  document.getElementById('vpqIsoCasePanel').hidden=companion;
-  const preview=document.getElementById('vpqIsoPreview');
-  if(!preview)return;
-  if(!record){preview.textContent='Choose an available animal to see its artwork and details.';return}
-  const picture=companion?'<img src="'+isoEscape(record.src)+'" alt="'+isoEscape(record.name)+' companion preview" style="width:100px;height:105px;object-fit:contain;flex-shrink:0"/>':
-   '<span style="font-size:65px;width:100px;text-align:center" aria-hidden="true">'+isoEscape(record.emoji||'🐾')+'</span>';
-  preview.innerHTML=picture+'<div><b>'+isoEscape(record.name)+'</b><div style="font-size:12px;color:#647b85;margin-top:4px">'+(companion?'Purchased / unlocked companion · '+isoEscape(record.species):'Clinical case · '+isoEscape(record.species||'Veterinary'))+'</div><p style="font-size:12px;margin:7px 0 0">'+(companion?'Uses the actual companion artwork from your collection. This is for room display only.':isoEscape(record.intro||'Existing veterinary teaching case'))+'</p></div>';
+ const owned=isoOwnedCompanions(),current=isoCurrent();
+ const opts=owned.map(p=>'<option value="'+isoEscape(p.id)+'"'+(current?.id===p.id?' selected':'')+'>'+isoEscape(p.name+' · '+p.species)+'</option>').join('');
+ api.showModal('🐾 Place a purchased companion',
+ '<p>Choose a pet from <b>your purchased or unlocked companion collection</b>. The kennel starts empty. Clinical cases remain in the separate One Health activity; placing a pet does not imply infection.</p>'+
+ '<label for="vpqIsoOwnedChoice" style="display:block;font-weight:900">Owned companion</label>'+
+ '<select id="vpqIsoOwnedChoice" style="width:100%;padding:10px;border:1px solid #c2b5d5;border-radius:10px"><option value="">Empty kennel / no animal</option>'+opts+'</select>'+
+ (!owned.length?'<p class="tiny">No owned companions with ready artwork yet. Visit the Companion Collection to unlock pets.</p>':'')+
+ '<div id="vpqIsoPreview" aria-live="polite" style="margin:12px 0;padding:12px;border:1px solid #cfdbde;border-radius:14px;background:#f6fafb;display:flex;align-items:center;gap:14px;min-height:95px"></div>'+
+ '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="vpqIsoCaseApply">Save kennel pet</button><button type="button" id="vpqIsoClear">Clear kennel</button></div>'+
+ '<p class="tiny">Display only. Does not modify companion purchases, followers, or clinical case progress. Selection currently saves on this device.</p>');
+ const select=document.getElementById('vpqIsoOwnedChoice'),preview=document.getElementById('vpqIsoPreview');if(!select||!preview)return;
+ const render=()=>{const pet=owned.find(p=>p.id===select.value);
+  preview.innerHTML=pet?'<img src="'+isoEscape(pet.src)+'" alt="'+isoEscape(pet.name)+' companion preview" style="width:106px;height:102px;object-fit:contain;flex-shrink:0"/><div><b>'+isoEscape(pet.name)+'</b><div style="font-size:12px;margin-top:6px;color:#627d89">Purchased / unlocked · '+isoEscape(pet.species)+'</div></div>':
+  '<span style="font-size:13px;color:#69838a">No companion selected — kennel will remain empty.</span>';
  };
- document.querySelectorAll('[data-vpqisotab]').forEach(btn=>btn.addEventListener('click',()=>{tab=btn.dataset.vpqisotab;render()}));
- petSelect.addEventListener('change',render);caseSelect.addEventListener('change',render);render();
- document.getElementById('vpqIsoCaseApply')?.addEventListener('click',()=>{
-  const id=tab==='companion'?petSelect.value:caseSelect.value;
-  if(!id)return;
-  isoSaveChoice(tab,id);isoPatientSelector();
- });
- document.getElementById('vpqIsoCaseOpen')?.addEventListener('click',()=>api.doAction('onehealth'));
+ select.addEventListener('change',render);render();
+ document.getElementById('vpqIsoCaseApply')?.addEventListener('click',()=>{isoSaveChoice(select.value);isoPatientSelector()});
+ document.getElementById('vpqIsoClear')?.addEventListener('click',()=>{isoSaveChoice('');isoPatientSelector()});
 }
 function isoSpecimenIntro(){
  // Educational workflow only. No species/pathogen-specific testing claims and no simulated real lab handling.
@@ -129,7 +102,7 @@ const data={
   {x:83.2,y:31,w:15.6,h:40,walk:91,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
  ],
  isolation:[
-  {x:9,y:38,w:23,h:33,walk:23,label:'🐶 Isolation Patient',action:'onehealth'},
+  {x:9,y:38,w:23,h:33,walk:23,label:'🐾 Place Companion',action:'vpqIsoChooseCompanion'},
   {x:39,y:38,w:23,h:32,walk:52,label:'📚 Disease Library',action:'ohLibrary'},
   {x:71,y:38,w:22,h:32,walk:81,label:'🛡️ Public Health',action:'ohHub'}
  ],
@@ -572,11 +545,11 @@ isolationPolish.textContent=
 document.head.appendChild(isolationPolish);
 const isoCaseStyle=document.createElement('style');
 isoCaseStyle.textContent=
- '.stage[data-room="isolation"] .vpqIsoSelect,.stage[data-room="isolation"] .vpqIsoTest{position:absolute;z-index:12;padding:5px 9px;font-size:11px;font-weight:900;border:2px solid #9ac9c3;border-radius:12px;background:#fffaf0ed;color:#366d70;box-shadow:0 2px 6px #365a5a25;white-space:nowrap}'+
- '.stage[data-room="isolation"] .vpqIsoSelect{left:13%;top:29%}'+
- '.stage[data-room="isolation"] .vpqIsoTest{left:43%;top:70%}'+
- '.stage[data-room="isolation"] .vpqIsoSelect:hover,.stage[data-room="isolation"] .vpqIsoTest:hover{background:#e0f8f2;border-color:#5b9e9c}'+
- '@media(max-width:700px){.stage[data-room="isolation"] .vpqIsoSelect,.stage[data-room="isolation"] .vpqIsoTest{font-size:9px;padding:3px 5px}}';
+ '.stage[data-room="isolation"] .vpqIsoCases,.stage[data-room="isolation"] .vpqIsoTest{position:absolute;z-index:12;padding:5px 9px;font-size:11px;font-weight:900;border:2px solid #9ac9c3;border-radius:12px;background:#fffaf0ed;color:#366d70;box-shadow:0 2px 6px #365a5a25;white-space:nowrap}'+
+ '.stage[data-room="isolation"] .vpqIsoCases{left:14%;top:79%}'+
+ '.stage[data-room="isolation"] .vpqIsoTest{left:44%;top:79%}'+
+ '.stage[data-room="isolation"] .vpqSpecHit[data-vpqspecact="vpqIsoChooseCompanion"] span{bottom:auto;top:5%;left:15%;opacity:1;font-size:11px;white-space:nowrap;padding:4px 9px;border:2px solid #9ac9c3;border-radius:12px;background:#fffaf0;color:#366d70}'+
+ '@media(max-width:700px){.stage[data-room="isolation"] .vpqIsoCases,.stage[data-room="isolation"] .vpqIsoTest{font-size:9px;padding:4px 6px}.stage[data-room="isolation"] .vpqSpecHit[data-vpqspecact="vpqIsoChooseCompanion"] span{font-size:9px;left:4%}}';
 document.head.appendChild(isoCaseStyle);
 
 
@@ -655,16 +628,16 @@ function refresh(){
  (room==='surgery'?'<button type="button" class="vpqSurgToolWall" style="left:2.2%;top:22%;width:6.5%;height:26%" data-vpqsurgtools="1" title="Surgical instruments: identify each tool and its purpose" aria-label="Open Surgical Tool Quick Guide and practice">?</button>':'')+
  (room==='clinpath'?['coag','gas','urine','hybrid','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([13.7,30.1,46.5,62.9,79.3,95.2][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
  (room==='isolation'?
- '<button type="button" class="vpqIsoSelect" data-vpqisopatient="1" title="Choose any existing patient for this kennel">🐾 Choose Patient ▾</button>'+ 
+ '<button type="button" class="vpqIsoCases" data-vpqisocases="1" title="Open separate One Health clinical cases">🩺 Clinical Cases</button>'+ 
  '<button type="button" class="vpqIsoTest" data-vpqisotest="1" title="Specimen testing and lab biosafety overview">🧪 Specimen Testing</button>'+
- data.isolation.map(p=>'<button type="button" class="vpqIsoHelp" style="left:'+Math.min(94,p.x+p.w-1)+'%;top:'+Math.max(3,p.y-4)+'%" data-vpqisohelp="'+p.action+'" title="About '+p.label+'" aria-label="Explain '+p.label+'">?</button>').join('')+
+ data.isolation.filter(p=>p.action!=='vpqIsoChooseCompanion').map(p=>'<button type="button" class="vpqIsoHelp" style="left:'+Math.min(94,p.x+p.w-1)+'%;top:'+Math.max(3,p.y-4)+'%" data-vpqisohelp="'+p.action+'" title="About '+p.label+'" aria-label="Explain '+p.label+'">?</button>').join('')+
  [['ppe',8,36],['wash',37,49],['clean',65,50],['waste',11,76],['boot',34,80]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp vpqIsoEquipmentHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="Explain '+key+'" aria-label="Explain '+key+' station">?</button>').join('')
  :'')+
  (room==='necropsy'?data.necropsy.filter(p=>necroHelp[p.action]).map(p=>'<button type="button" class="vpqNecroHelp" data-vpqnecro-help="'+p.action+'" style="left:'+Math.min(95,p.x+p.w-2)+'%;top:'+Math.max(3,p.y-3)+'%" title="About '+p.label+'" aria-label="What does '+p.label+' teach?">?</button>').join(''):'')+
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
  (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Start here — what CBC, chemistry and each diagnostic test measures" aria-label="Beginner Clinical Pathology report-reading guide"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Learn clinical pathology from the beginning">📖 Start Here</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
  div.addEventListener('click',e=>{
- const isoPatientClick=e.target.closest('[data-vpqisopatient]');if(isoPatientClick){e.preventDefault();e.stopPropagation();isoPatientSelector();return}
+ const isoCasesButton=e.target.closest('[data-vpqisocases]');if(isoCasesButton){e.preventDefault();e.stopPropagation();return api.doAction('onehealth')}
  const isoTestClick=e.target.closest('[data-vpqisotest]');if(isoTestClick){e.preventDefault();e.stopPropagation();isoSpecimenIntro();return}
  const isoGuide=e.target.closest('[data-vpqisohelp]');
  if(isoGuide){e.preventDefault();e.stopPropagation();isoHelpModal(isoGuide.dataset.vpqisohelp);return}
@@ -697,7 +670,8 @@ function refresh(){
    return window.VPQ_CLINPATH_BENCH_GUIDES?.open?.(station,api);
   }
  }
-if(b.dataset.vpqspecact==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){e.preventDefault();e.stopPropagation();return window.VPQ_CLINPATH_REFERRAL_PILOT.home()}return api.doAction(b.dataset.vpqspecact)}});
+if(b.dataset.vpqspecact==='vpqIsoChooseCompanion'){e.preventDefault();e.stopPropagation();isoPatientSelector();return}
+ if(b.dataset.vpqspecact==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){e.preventDefault();e.stopPropagation();return window.VPQ_CLINPATH_REFERRAL_PILOT.home()}return api.doAction(b.dataset.vpqspecact)}});
  stage.appendChild(div);
 }
 function updateNearby(room,x){
@@ -712,6 +686,7 @@ function updateNearby(room,x){
 }
 function interactNearest(room,x){
  const best=updateNearby(room,x);if(!best)return false;
+ if(best.action==='vpqIsoChooseCompanion'){isoPatientSelector();return true}
  if(best.action==='advancedCases'&&typeof window.VPQ_CLINPATH_REFERRAL_PILOT?.home==='function'){window.VPQ_CLINPATH_REFERRAL_PILOT.home();return true}api.doAction(best.action);return true;
 }
 const observer=new MutationObserver(()=>{const room=stage.dataset.room,present=stage.querySelector('#vpqSpecHits');if(!!data[room]!==!!present||(present&&present.dataset.room!==room))refresh()});
