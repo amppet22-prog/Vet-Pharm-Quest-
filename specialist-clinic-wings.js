@@ -574,6 +574,18 @@ isoOverviewStyle.textContent=
  '@media(max-width:700px){.stage[data-room="isolation"] #vpqSpecHits .vpqIsoOverview{left:20%;top:2%;min-width:65px;font-size:10px;padding:3px 5px}}';
 document.head.appendChild(isoOverviewStyle);
 
+ // Phase H7: station clarity: preserve full-sized help targets; make focus/hover states easy to discover.
+ const isoStationClarity=document.createElement('style');
+ isoStationClarity.id='vpq-onehealth-h7-station-clarity';
+ isoStationClarity.textContent=
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp{display:grid;place-items:center;line-height:1;isolation:isolate;box-shadow:0 2px 6px #314c7166,0 0 0 2px #fffefa;border-color:#557caa;cursor:help}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp:hover,.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp:focus-visible{background:#ffedb7;color:#243e7a;border-color:#315fa0;box-shadow:0 0 0 3px #fff9e6,0 4px 10px #2c426b88;outline:2px solid #315fa0;outline-offset:2px}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqSpecHit:focus-visible{outline:3px solid #5879b0!important;outline-offset:2px!important;background:#c4e9e82b!important}'+
+ '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoChoose,.stage[data-room="isolation"] #vpqSpecHits .vpqIsoTest,.stage[data-room="isolation"] #vpqSpecHits .vpqIsoCases{min-height:34px;overflow:visible;white-space:nowrap}'+
+ '@media(max-width:700px){.stage[data-room="isolation"] #vpqSpecHits .vpqIsoChoose,.stage[data-room="isolation"] #vpqSpecHits .vpqIsoTest,.stage[data-room="isolation"] #vpqSpecHits .vpqIsoCases{min-height:32px;font-size:10px}}';
+ document.head.appendChild(isoStationClarity);
+
+
 
 
 
@@ -659,8 +671,8 @@ function refresh(){
  '<button type="button" class="vpqIsoCases" data-vpqisocases="1" title="Open separate One Health clinical cases">🩺 Cases</button>'+ 
  '<button type="button" class="vpqIsoTest" data-vpqisotest="1" title="Specimen testing and lab biosafety overview">🧪 Lab Testing</button>'+
  // Phase F: intentional help positions outside primary equipment and patient artwork.
- [['onehealth',36,36],['ohLibrary',63,32],['ohHub',91,36]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="About '+isoHelp[key][0]+'" aria-label="Help: '+isoHelp[key][0]+'">?</button>').join('')+
- [['ppe',5,48],['wash',39,57],['clean',96,73],['waste',12,74]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp vpqIsoEquipmentHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="About '+isoHelp[key][0]+'" aria-label="Help: '+isoHelp[key][0]+'">?</button>').join('')
+ [['onehealth',35,32],['ohLibrary',67,32],['ohHub',91,32]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="About '+isoHelp[key][0]+'" aria-label="Help: '+isoHelp[key][0]+'">?</button>').join('')+
+ [['ppe',6,42],['wash',39,63],['clean',95,75],['waste',13,75]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp vpqIsoEquipmentHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="About '+isoHelp[key][0]+'" aria-label="Help: '+isoHelp[key][0]+'">?</button>').join('')
  :'')+
  (room==='necropsy'?data.necropsy.filter(p=>necroHelp[p.action]).map(p=>'<button type="button" class="vpqNecroHelp" data-vpqnecro-help="'+p.action+'" style="left:'+Math.min(95,p.x+p.w-2)+'%;top:'+Math.max(3,p.y-3)+'%" title="About '+p.label+'" aria-label="What does '+p.label+' teach?">?</button>').join(''):'')+
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
