@@ -19,7 +19,9 @@ window.VPQ_DOG_YARD_LAYOUT=Object.freeze({
   {id:'sniff-a',zone:'sniff',x:12,y:74},{id:'sniff-b',zone:'sniff',x:21,y:69},
   {id:'agility-a',zone:'agility',x:33,y:75},{id:'agility-b',zone:'agility',x:43,y:74},
   {id:'open-a',zone:'open',x:57,y:72},{id:'open-b',zone:'open',x:66,y:77},
-  {id:'quiet-a',zone:'quiet',x:80,y:78},{id:'quiet-b',zone:'quiet',x:91,y:76}
+  {id:'quiet-a',zone:'quiet',x:80,y:78},{id:'quiet-b',zone:'quiet',x:91,y:76},
+  {id:'sniff-c',zone:'sniff',x:15,y:88},{id:'agility-c',zone:'agility',x:38,y:88},
+  {id:'open-c',zone:'open',x:63,y:89},{id:'quiet-c',zone:'quiet',x:84,y:89}
  ])
 });
 // Stationary decorative yard occupants are independent from the selected follower.
@@ -40,7 +42,7 @@ function yardPetArt(){
   if(!pet||pet.id===selected)return '';
   const x=p.x*10,y=p.y*5;
   const scale=p.zone==='quiet'?.91:p.zone==='open'?1.03:1;
-  const w=Math.round(72*scale),h=Math.round(84*scale);
+  const w=Math.round(64*scale),h=Math.round(73*scale);
   const px=x-w/2,py=y-h+7;
   const label=yardEsc(pet.name.slice(0,18));
   const url=yardEsc(pet.src);
@@ -64,16 +66,15 @@ function yardUpdatePreview(select){
 function yardPlaceModal(){
  const owned=yardOwnedDogs(),current=yardPlacements(),active=window.VPQ_YARD_ACTIVE_DOG_ID?.();
  const label={sniff:'Sniff Garden',agility:'Low-impact Agility',open:'Open Play',quiet:'Quiet Retreat'};
- const opts=owned.map(d=>'<option value="'+yardEsc(d.id)+'">'+yardEsc(d.name)+(d.id===active?' (your follower)':'')+'</option>').join('');
- const cards=yardPositions.map((p,i)=>'<div data-vpqyardrow="'+p.id+'" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:#f4faf6;border:1px solid #c7dccb;border-radius:12px;padding:9px 11px">'+
-  '<span style="width:50px;height:58px;display:grid;place-items:center;background:#e8f4ec;border-radius:10px;border:1px solid #c5dcd0"><img data-vpqyardpreview="'+p.id+'" hidden alt="Empty yard spot" style="width:48px;height:56px;object-fit:contain"/></span>'+
-  '<label style="flex:1;min-width:170px;font-size:12px;font-weight:800">'+label[p.zone]+' '+((i%2)+1)+
-  '<select data-vpqyardselect="'+p.id+'" aria-label="Companion for '+label[p.zone]+'" style="display:block;width:100%;margin-top:5px;padding:8px;border:1px solid #abc7c4;border-radius:8px"><option value="">Empty / remove</option>'+opts+'</select></label>'+
-  '<button type="button" data-vpqyardassign="'+p.id+'" style="padding:8px 12px;border-radius:9px;background:#e0f5eb;border:1px solid #80bba4;font-weight:800">Save spot</button></div>').join('');
- api.showModal('🐕 Choose Your Kennel & Yard Dogs',
-  '<p>Pick from your own purchased or unlocked dogs. Preview their artwork, then save them to individual yard spaces. Your active follower remains independent.</p>'+
-  (!owned.length?'<p>No owned dogs with ready transparent art are available yet. Purchase or unlock dogs in your companion collection first.</p>':'<div style="display:grid;gap:8px">'+cards+'</div>')+
-  '<p class="tiny">Eight saved spots across four areas. An assigned dog is displayed once; its active-follower appearance is not duplicated. Real-world group housing requires individual behavioral and health assessment.</p>');
+ const opts=owned.map(d=>'<option value="'+yardEsc(d.id)+'">'+yardEsc(d.name)+(d.id===active?' (active follower)':'')+'</option>').join('');
+ const cards=yardPositions.map((p,i)=>'<div data-vpqyardrow="'+p.id+'" style="display:grid;grid-template-columns:84px minmax(145px,1fr) auto;gap:9px;align-items:center;background:#f4faf6;border:1px solid #c7dccb;border-radius:12px;padding:10px">'+
+ '<div style="width:80px;height:90px;border-radius:12px;background:#e4f2e9;display:grid;place-items:center;overflow:hidden"><img data-vpqyardpreview="'+p.id+'" hidden alt="Dog preview" style="width:75px;height:82px;object-fit:contain"/></div>'+
+ '<label style="font-size:12px;font-weight:800">'+label[p.zone]+' '+((i%3)+1)+'<select data-vpqyardselect="'+p.id+'" aria-label="Dog for '+label[p.zone]+'" style="display:block;width:100%;margin-top:5px;padding:9px;border:1px solid #abc7c4;border-radius:8px"><option value="">Empty / remove</option>'+opts+'</select></label>'+
+ '<button type="button" data-vpqyardassign="'+p.id+'" style="padding:8px;border-radius:9px">Save spot</button></div>').join('');
+ api.showModal('🐕 Place Your Dogs',
+ '<p>Preview the actual purchased or unlocked dog artwork before placing. Every space is a fixed, saved position, independent of the walking companion.</p>'+
+ (!owned.length?'<p>No owned dogs with ready artwork were found in the current companion collection.</p>':'<div style="display:grid;gap:9px">'+cards+'</div>')+
+ '<p class="tiny">'+yardPositions.length+' kennel and yard places. A dog cannot occupy two spaces at once. The active follower is not duplicated.</p>');
  api.modalBody.querySelectorAll('[data-vpqyardselect]').forEach(el=>{
   if(owned.some(d=>d.id===current[el.dataset.vpqyardselect]))el.value=current[el.dataset.vpqyardselect];
   yardUpdatePreview(el);
@@ -96,7 +97,11 @@ const catSpots=[
  {id:'window',label:'Window perch',x:84,y:50,scale:.82},
  {id:'rest-left',label:'Quiet rest · left',x:22,y:76,scale:1},
  {id:'floor',label:'Exploration floor',x:50,y:79,scale:1},
- {id:'rest-right',label:'Quiet rest · right',x:76,y:77,scale:.94}
+ {id:'rest-right',label:'Quiet rest · right',x:76,y:77,scale:.94},
+ {id:'bridge',label:'Bridge perch',x:61,y:38,scale:.72},
+ {id:'window-low',label:'Lower window cushion',x:84,y:66,scale:.78},
+ {id:'hide-left',label:'Left hideaway',x:13,y:72,scale:.84},
+ {id:'play-right',label:'Right play corner',x:91,y:82,scale:.84}
 ];
 function ownedCats(){return window.VPQ_STUDIO_OWNED_CATS?.()||[]}
 function catSaved(){if(!state.vpqStudioCats||typeof state.vpqStudioCats!=='object'||Array.isArray(state.vpqStudioCats))state.vpqStudioCats={};return state.vpqStudioCats}
@@ -104,18 +109,33 @@ function catArt(){
  const cats=new Map(ownedCats().map(c=>[c.id,c])),saved=catSaved(),active=window.VPQ_STUDIO_ACTIVE_CAT_ID?.();
  return catSpots.map(p=>{
   const c=cats.get(saved[p.id]);if(!c||c.id===active)return '';
-  const x=p.x*10,y=p.y*5,w=Math.round(79*p.scale),h=Math.round(88*p.scale),name=yardEsc(c.name.slice(0,18));
+  const x=p.x*10,y=p.y*5,w=Math.round(68*p.scale),h=Math.round(77*p.scale),name=yardEsc(c.name.slice(0,18));
   return '<g pointer-events="none" aria-label="Selected cat '+name+'"><ellipse cx="'+x+'" cy="'+(y+4)+'" rx="'+Math.round(w*.38)+'" ry="7" fill="#786985" opacity=".18"/><image href="'+yardEsc(c.src)+'" x="'+(x-w/2)+'" y="'+(y-h+6)+'" width="'+w+'" height="'+h+'" preserveAspectRatio="xMidYMax meet"/><rect x="'+(x-38)+'" y="'+(y+5)+'" width="76" height="16" rx="8" fill="#fffaf8" fill-opacity=".95" stroke="#baa7c2"/><text x="'+x+'" y="'+(y+17)+'" font-size="10" font-family="Arial" font-weight="800" text-anchor="middle" fill="#6d597a">'+name+'</text></g>';
  }).join('');
+}
+function catUpdatePreview(select){
+ const row=select.closest('[data-vpqcatrow]');
+ const img=row?.querySelector('[data-vpqcatpreview]');
+ const name=row?.querySelector('[data-vpqcatname]');
+ const selected=ownedCats().find(c=>c.id===select.value);
+ if(img){if(selected){img.src=selected.src;img.alt=selected.name+' cat artwork preview';img.hidden=false}else{img.removeAttribute('src');img.hidden=true}}
+ if(name)name.textContent=selected?selected.name:'Empty spot';
 }
 function catPlaceModal(){
  const cats=ownedCats(),saved=catSaved(),active=window.VPQ_STUDIO_ACTIVE_CAT_ID?.();
  const opts=cats.map(c=>'<option value="'+yardEsc(c.id)+'">'+yardEsc(c.name)+(c.id===active?' (active follower)':'')+'</option>').join('');
- api.showModal('🐈 Place Your Purchased Cats','<p>Choose which purchased or unlocked cats appear in the Cat Studio. Each selection saves independently of your active companion.</p>'+
- (!cats.length?'<p>You do not yet have owned cats with ready transparent artwork. Visit Companions to buy or unlock cats.</p>':
- '<div style="display:grid;gap:8px">'+catSpots.map(p=>'<label style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:9px;background:#fbf5fa;border:1px solid #dbc5dd;border-radius:12px"><strong style="min-width:145px">'+p.label+'</strong><select data-vpqcatselect="'+p.id+'" style="flex:1;min-width:145px;padding:8px;border:1px solid #c9b7d0;border-radius:8px"><option value="">Empty / remove</option>'+opts+'</select><button type="button" data-vpqcatassign="'+p.id+'">Save spot</button></label>').join('')+'</div>')+
- '<p class="tiny">Six saved places. Cats are decorative residents, not additional followers; real cat introductions and housing need individual welfare assessment.</p>');
- api.modalBody.querySelectorAll('[data-vpqcatselect]').forEach(el=>{if(cats.some(c=>c.id===saved[el.dataset.vpqcatselect]))el.value=saved[el.dataset.vpqcatselect]});
+ const cards=catSpots.map(p=>'<div data-vpqcatrow="'+p.id+'" style="display:grid;grid-template-columns:84px minmax(145px,1fr) auto;align-items:center;gap:9px;padding:10px;background:#fbf5fa;border:1px solid #dbc5dd;border-radius:12px">'+
+ '<div style="height:90px;width:80px;display:grid;place-items:center;background:#f1e6f3;border-radius:12px;overflow:hidden"><img data-vpqcatpreview="'+p.id+'" hidden alt="Cat artwork preview" style="width:75px;height:82px;object-fit:contain"/></div>'+
+ '<label style="font-size:12px;font-weight:800">'+yardEsc(p.label)+'<small data-vpqcatname="'+p.id+'" style="display:block;color:#806b88;font-size:11px">Empty spot</small><select data-vpqcatselect="'+p.id+'" style="display:block;width:100%;margin-top:5px;padding:9px;border:1px solid #c9b7d0;border-radius:8px"><option value="">Empty / remove</option>'+opts+'</select></label>'+
+ '<button type="button" data-vpqcatassign="'+p.id+'" style="padding:8px;border-radius:9px">Save spot</button></div>').join('');
+ api.showModal('🐈 Place Your Purchased Cats',
+ '<p>Choose and preview an existing owned cat for each resting or climbing space. Only cats with available game artwork are listed.</p>'+
+ (!cats.length?'<p>No owned cats with ready artwork were found. Unlock a cat in Companions first.</p>':'<div style="display:grid;gap:9px">'+cards+'</div>')+
+ '<p class="tiny">'+catSpots.length+' saved spaces. Cats are room residents, not extra active followers. Housing and introductions need individual welfare assessment.</p>');
+ api.modalBody.querySelectorAll('[data-vpqcatselect]').forEach(el=>{
+  if(cats.some(c=>c.id===saved[el.dataset.vpqcatselect]))el.value=saved[el.dataset.vpqcatselect];
+  catUpdatePreview(el);
+ });
 }
 function catAssign(slot,id){
  if(!catSpots.some(s=>s.id===slot))return;
