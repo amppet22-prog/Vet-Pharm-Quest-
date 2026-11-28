@@ -185,12 +185,38 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<g aria-label="Glass viewing window into dog play yard">'+
    '<rect x="79" y="103" width="153" height="159" rx="12" fill="#fbf9ff" stroke="#9585ad" stroke-width="8"/>'+
    '<rect x="87" y="111" width="137" height="139" rx="6" fill="#dff3f3" stroke="#b8a3c9" stroke-width="2"/>'+
-   '<image href="assets/reception/dog-yard-enrichment.svg?v=20261128-facility-depth-v7" x="89" y="113" width="133" height="134" preserveAspectRatio="xMidYMid slice" pointer-events="none"/>'+
+   // The lobby SVG uses an inline miniature of the actual four-zone yard.
+   // This avoids externally nested SVG images that can be stale or blocked by browser asset policies.
+   '<svg x="89" y="113" width="133" height="134" viewBox="0 0 266 268" preserveAspectRatio="xMidYMid slice" aria-label="Preview of fenced dog kennel, agility field and outdoor quiet tunnel">'+
+   '<rect width="266" height="268" fill="#cbeafa"/>'+
+   '<path d="M0 97Q73 45 146 85T266 78V153H0Z" fill="#d8e6c1"/>'+
+   '<path d="M0 132Q122 112 266 132V268H0Z" fill="#acd49c"/>'+
+   '<rect x="7" y="87" width="252" height="71" rx="5" fill="#d8e6d8" stroke="#698f8e" stroke-width="4"/>'+
+   '<path d="M3 86L24 65H243L263 86Z" fill="#799b9b" stroke="#597c83" stroke-width="4"/>'+
+   '<path d="M13 101h67v48H13ZM98 101h71v48H98ZM185 101h69v48h-69Z" fill="#eff4e9" stroke="#759d9c" stroke-width="4"/>'+
+   '<path d="M29 101v48M47 101v48M65 101v48M114 101v48M131 101v48M150 101v48M202 101v48M219 101v48M237 101v48" stroke="#95bbb2" stroke-width="2"/>'+
+   '<rect x="19" y="131" width="51" height="13" rx="6" fill="#f0c6d3"/>'+
+   '<rect x="107" y="131" width="51" height="13" rx="6" fill="#f0c6d3"/>'+
+   '<rect x="194" y="131" width="51" height="13" rx="6" fill="#f0c6d3"/>'+
+   '<path d="M6 175H260M6 175v76M260 175v76" fill="none" stroke="#719d91" stroke-width="5"/>'+
+   '<path d="M22 175v75M44 175v75M66 175v75M88 175v75M110 175v75M132 175v75M154 175v75M176 175v75M198 175v75M220 175v75M242 175v75" stroke="#94b6aa" stroke-width="2"/>'+
+   '<path d="M88 188l25-31 27 31-7 9-20-23-20 23Z" fill="#4c9f9d" stroke="#367d82" stroke-width="3"/>'+
+   '<path d="M102 187h37" stroke="#deeee8" stroke-width="3"/>'+
+   '<rect x="141" y="186" width="35" height="7" rx="2" fill="#8ecbc4" stroke="#508d91" stroke-width="2"/>'+
+   '<path d="M146 192v20m25-20v20" stroke="#568e89" stroke-width="4"/>'+
+   '<path d="M193 224q20-27 45 0v27h-45Z" fill="#82b5a4" stroke="#4f8d81" stroke-width="4"/>'+
+   '<ellipse cx="216" cy="245" rx="14" ry="10" fill="#485760"/>'+
+   '<rect x="12" y="222" width="64" height="27" rx="6" fill="#c49e70" stroke="#9b7757" stroke-width="3"/>'+
+   '<path d="M15 225q24-14 57 0" fill="none" stroke="#96bc84" stroke-width="6"/>'+
+   '<g fill="#eab8d1"><circle cx="24" cy="219" r="6"/><circle cx="47" cy="216" r="6"/><circle cx="65" cy="222" r="6"/></g>'+
+   '<path d="M2 258H264" stroke="#638c86" stroke-width="9"/>'+
+   '<path d="M26 254v14M70 254v14M114 254v14M158 254v14M202 254v14M246 254v14" stroke="#476f75" stroke-width="6"/>'+
+   '</svg>'+
    '<path d="M155 112V249M88 178H223" stroke="#fffaf9" stroke-width="5" opacity=".94"/>'+
    '<path d="M94 119L131 119L94 156Z M172 121L211 121L172 161Z" fill="#fff" opacity=".22"/>'+
    '<rect x="76" y="249" width="160" height="12" rx="5" fill="#e2d2e9" stroke="#a28db7" stroke-width="2"/>'+
    '<rect x="95" y="259" width="120" height="22" rx="10" fill="#fffdf7" stroke="#a28db7" stroke-width="2"/>'+
-   '<text x="155" y="275" text-anchor="middle" font-size="11.5" font-weight="900" font-family="Trebuchet MS,Arial" fill="#645379">DOG PLAY YARD</text></g>'+
+   '<text x="155" y="275" text-anchor="middle" font-size="11.5" font-weight="900" font-family="Trebuchet MS,Arial" fill="#645379">DOG KENNEL YARD</text></g>'+
    // Cat corner is a glazed interior room with an entry door, visible from the lobby.
    '<g aria-label="Glass-front cat corner and entrance">'+
    '<rect x="827" y="102" width="127" height="211" rx="11" fill="#f6eef8" stroke="#9587af" stroke-width="8"/>'+
@@ -221,7 +247,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<path d="M842 119L865 119L842 176Z M904 121L937 121L904 181Z" fill="#fff" opacity=".25"/>'+
    '<circle cx="906" cy="233" r="5" fill="#c6a46f" stroke="#fffdf5" stroke-width="2"/>'+
    '<rect x="828" y="94" width="127" height="27" rx="10" fill="#fffdf8" stroke="#a993bc" stroke-width="3"/>'+
-   '<text x="891" y="112" text-anchor="middle" font-family="Trebuchet MS,Arial" font-size="13" font-weight="900" fill="#665579">CAT CORNER</text></g>'+
+   '<text x="891" y="112" text-anchor="middle" font-family="Trebuchet MS,Arial" font-size="13" font-weight="900" fill="#665579">CAT STUDIO</text></g>'+
    // Welcome notice without an unexplained paw-print ornament.
    '<g transform="translate(714 94)"><rect width="91" height="44" rx="11" fill="#fff9ee" stroke="'+c[4]+'" stroke-width="4"/><text x="45" y="19" font-size="12" font-family="Arial,sans-serif" font-weight="900" fill="#766a89" text-anchor="middle">WELCOME</text><text x="45" y="34" font-family="Arial,sans-serif" font-size="9" fill="#8c7797" text-anchor="middle">Check in here!</text></g>'+
    sofaVisual+plant+plantPair+catTree+catCarrier+dogCarrier+gallery+pawArt+
