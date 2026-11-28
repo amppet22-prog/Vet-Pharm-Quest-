@@ -185,7 +185,7 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    '<g aria-label="Glass viewing window into dog play yard">'+
    '<rect x="79" y="103" width="153" height="159" rx="12" fill="#fbf9ff" stroke="#9585ad" stroke-width="8"/>'+
    '<rect x="87" y="111" width="137" height="139" rx="6" fill="#dff3f3" stroke="#b8a3c9" stroke-width="2"/>'+
-   '<image href="assets/reception/dog-play-yard-cute.svg" x="89" y="113" width="133" height="134" preserveAspectRatio="xMidYMid slice" pointer-events="none"/>'+
+   '<image href="assets/reception/dog-yard-enrichment.svg?v=20261128-facility-depth-v7" x="89" y="113" width="133" height="134" preserveAspectRatio="xMidYMid slice" pointer-events="none"/>'+
    '<path d="M155 112V249M88 178H223" stroke="#fffaf9" stroke-width="5" opacity=".94"/>'+
    '<path d="M94 119L131 119L94 156Z M172 121L211 121L172 161Z" fill="#fff" opacity=".22"/>'+
    '<rect x="76" y="249" width="160" height="12" rx="5" fill="#e2d2e9" stroke="#a28db7" stroke-width="2"/>'+
@@ -194,13 +194,28 @@ window.VPQ_SHADOWBOX_RECEPTION=function(api){
    // Cat corner is a glazed interior room with an entry door, visible from the lobby.
    '<g aria-label="Glass-front cat corner and entrance">'+
    '<rect x="827" y="102" width="127" height="211" rx="11" fill="#f6eef8" stroke="#9587af" stroke-width="8"/>'+
-   '<rect x="834" y="110" width="113" height="194" rx="5" fill="#e8f5f1"/>'+
-   '<path d="M835 242H946V303H835Z" fill="#e4d6e8"/>'+
-   '<path d="M844 185H938" stroke="#baa1bf" stroke-width="7"/>'+
-   '<path d="M845 225H938" stroke="#d0b3c8" stroke-width="6"/>'+
-   '<path d="M850 183L861 157L876 183Z" fill="#cfb5dd"/>'+
-   '<g transform="translate(870 172)"><ellipse rx="15" ry="12" fill="#c69482"/><path d="M-13 -6L-11 -18L-3 -10M5 -10L13 -18L13 -6" fill="#c69482"/><circle cx="-5" cy="-1" r="1.8" fill="#47394d"/><circle cx="5" cy="-1" r="1.8" fill="#47394d"/><path d="M-2 5Q0 7 2 5" stroke="#68485b" stroke-width="1.5" fill="none"/></g>'+
-   '<g transform="translate(922 213)"><ellipse rx="13" ry="11" fill="#b8b4cb"/><path d="M-10 -7L-10 -16L-2 -9M4 -9L10 -16L11 -7" fill="#b8b4cb"/><circle cx="-4" cy="-1" r="1.6" fill="#45445d"/><circle cx="4" cy="-1" r="1.6" fill="#45445d"/></g>'+
+   // A mini view into the built Cat Studio: multi-level perches, two hides, scratch tower and toys.
+   '<rect x="834" y="110" width="113" height="194" rx="5" fill="#f5eaf5"/>'+
+   '<rect x="838" y="118" width="104" height="176" rx="4" fill="#f5eaf7"/>'+
+   '<path d="M839 265Q884 253 943 265V300H839Z" fill="#d7c2de"/>'+
+   '<path d="M844 164H938M847 217H932" stroke="#ac8dbb" stroke-width="7" stroke-linecap="round"/>'+
+   '<path d="M859 166v41M916 166v40" stroke="#cfad87" stroke-width="8"/>'+
+   '<path d="M852 186h28v14h-28ZM902 186h27v14h-27Z" fill="#ddc7b4" stroke="#b79292" stroke-width="1.5"/>'+
+   '<path d="M852 236h37v36h-37Z" fill="#d3b8df" stroke="#a78db8" stroke-width="3"/>'+
+   '<circle cx="871" cy="251" r="11" fill="#8a739b"/>'+
+   '<rect x="899" y="226" width="33" height="49" rx="9" fill="#d6c3a9" stroke="#a78e86" stroke-width="3"/>'+
+   '<path d="M902 231v37M908 230v40M914 230v40M920 230v40M926 230v39" stroke="#f4dfbb" stroke-width="1.4" stroke-dasharray="4 4"/>'+
+   '<path d="M886 162v24M894 162v30" stroke="#9d80a9" stroke-width="2"/>'+
+   '<circle cx="886" cy="191" r="6" fill="#a1cdd0"/><circle cx="895" cy="198" r="5" fill="#f0b3cb"/>'+
+   // Fluffy cream cat lounging on the elevated left platform.
+   '<g transform="translate(866 151)"><ellipse cx="0" cy="3" rx="15" ry="7" fill="#ebc7ab"/><path d="M-8 -4l-4-11 9 5 9-5 6 11" fill="#f7dbba"/><circle cy="-4" r="11" fill="#f7dbba"/><circle cx="-4" cy="-5" r="1.8" fill="#57475b"/><circle cx="4" cy="-5" r="1.8" fill="#57475b"/><path d="M-3 0q3 3 6 0" stroke="#aa8890" fill="none" stroke-width="1.3"/><path d="M11 5q9-4 9-13" fill="none" stroke="#e2b899" stroke-width="5" stroke-linecap="round"/></g>'+
+   // Tuxedo kitty perched on the upper right platform.
+   '<g transform="translate(920 151)"><ellipse cx="0" cy="4" rx="12" ry="7" fill="#54526b"/><path d="M-9-5l-3-11 8 5 7-5 8 11" fill="#4b4b63"/><circle cy="-5" r="11" fill="#4b4b63"/><path d="M-4-1l4 5 4-5" fill="#fff9f0"/><circle cx="-4" cy="-6" r="1.7" fill="#eef6a6"/><circle cx="4" cy="-6" r="1.7" fill="#eef6a6"/><path d="M10 5q10 0 8-12" fill="none" stroke="#4b4b63" stroke-width="4" stroke-linecap="round"/></g>'+
+   // Orange tabby peeking from the middle shelf.
+   '<g transform="translate(874 206)"><ellipse cx="0" cy="2" rx="12" ry="7" fill="#e9a36f"/><path d="M-9-5l-3-10 8 5 8-5 7 10" fill="#e9a36f"/><circle cy="-5" r="11" fill="#edb27b"/><path d="M-6-10l2 5M0-12v5M5-10l-2 5" stroke="#bc805f" stroke-width="1.8"/><circle cx="-4" cy="-6" r="1.7" fill="#594557"/><circle cx="4" cy="-6" r="1.7" fill="#594557"/><path d="M-3 0q3 3 6 0" stroke="#aa766f" fill="none" stroke-width="1.2"/></g>'+
+   '<ellipse cx="928" cy="284" rx="10" ry="5" fill="#f2b5c9"/><path d="M921 280l12 9m0-9-12 9" stroke="#fff2f4" stroke-width="2"/>'+
+   '<rect x="842" y="280" width="26" height="9" rx="4" fill="#bfdeca"/>'+
+   '<path d="M853 280v-11m0 3q-9-9-10-4m10 2q7-10 11-4" fill="none" stroke="#73a18b" stroke-width="2"/>'+
    '<rect x="837" y="113" width="107" height="189" rx="5" fill="#d5f3f5" fill-opacity=".11" stroke="#fffdfc" stroke-width="4"/>'+
    '<path d="M895 113V303" stroke="#b9b0c8" stroke-width="5"/>'+
    '<path d="M842 119L865 119L842 176Z M904 121L937 121L904 181Z" fill="#fff" opacity=".25"/>'+
