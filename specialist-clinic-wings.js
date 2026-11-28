@@ -108,12 +108,11 @@ const data={
  ],
  necropsy:[
   {x:3,y:25,w:20,h:45,walk:14,label:'🦴 Specimen Cabinet',subtitle:'Identify gross lesions',hint:'Gross pathology: recognize the organ, describe the lesion and practice gross diagnoses',action:'necroGross'},
-  {x:25,y:27,w:16,h:44,walk:33,label:'📚 Necropsy Handbook',subtitle:'Learn each condition',hint:'Learn First: lecture diseases, gross changes, histology, WHY and differentials',action:'necroHandbook'},
+  {x:25,y:27,w:16,h:44,walk:33,label:'📚 Handbook Shelf',subtitle:'Necropsy Handbook · General Pathology',hint:'Learn First: the Necropsy Handbook (Exam 7 lectures) and General Pathology (Exams 1–2)',action:'necroShelf'},
   {x:42,y:30,w:16,h:42,walk:50,label:'📋 Diagnosis Board',subtitle:'Write a morphologic DX',hint:'Morphologic diagnosis: organ, distribution, process and severity',action:'necroDx'},
   {x:59,y:31,w:17,h:42,walk:68,label:'🔬 Microscope',subtitle:'Histology & WHY',hint:'Histology atlas: microscopic features, tissue changes and pathogenesis',action:'necroHisto'},
   {x:78,y:25,w:19,h:44,walk:82,label:'🐾 Case Board',subtitle:'Apply clinical findings',hint:'Patient cases: combine gross lesions, clinical findings and diagnostic reasoning',action:'necroCases'},
   {x:4,y:72,w:20,h:22,walk:13,label:'🧪 Specimen Prep',subtitle:'Collection & handling',hint:'What to collect, when, sample selection, fixation, storage and submission',action:'necroSpecPrep'},
-  {x:36,y:70,w:26,h:22,walk:49,label:'📘 General Pathology',subtitle:'Exams 1–2 · Lectures 1–30',hint:'General pathology foundations: cell injury, inflammation, immunology and neoplasia (Exams 1–2), with the new lecture study units',action:'pathFoundations',kind:'learn'},
   {x:79,y:71,w:18,h:23,walk:93,label:'🧼 Boot Wash & PPE',subtitle:'Biosecurity & sampling',hint:'Biosecurity: PPE, cleaning and specimen handling',action:'necroBio'}
  ],
  skills:[
@@ -590,6 +589,7 @@ document.head.appendChild(necroQuestionStyle);
 // The ? help panels describe actual station destinations; no phantom separate activity.
 const necroHelp={
  necroGross:{title:'🦴 Specimen Cabinet',tag:'GROSS · OBSERVE',opens:'Opens the Specimen Cabinet in its gross-lesion view.',learn:'Identify the organ, location, lesion type, distribution and appearance before naming a cause.',different:'This is a specimen-based atlas, not a patient scenario.',next:'Compare histology or attempt guided morphologic diagnosis.'},
+ necroShelf:{title:'📚 Handbook Shelf',tag:'LEARN FIRST',opens:'Opens a menu: the Necropsy Handbook (Exam 7 lectures) or General Pathology (Exams 1–2, Lectures 1–30).',learn:'Systemic lecture handbooks plus the general pathology foundations: cell injury, inflammation, immunology, circulation, neoplasia.',different:'The reading shelf. The Specimen Cabinet and Patient Cases are for practice.',next:'Pick a book, then practise in the cabinet or cases.'},
  necroHandbook:{title:'📚 Necropsy Handbook',tag:'LECTURES · LEARN FIRST',opens:'Opens the pathology lecture and body-system handbook.',learn:'Learn gross lesions, histology, pathogenesis, differentials and why the body responds as it does.',different:'The reference and learning station rather than an unknown-specimen challenge.',next:'Take what you learned to the Specimen Cabinet or Patient Cases.'},
  necroDx:{title:'📋 Diagnosis Board',tag:'MORPHOLOGY · PRACTICE',opens:'Currently opens the same gross Specimen Cabinet page as the gross-lesion station.',learn:'Write a supported morphologic diagnosis: organ/tissue, process, distribution and relevant modifiers.',different:'The focus is precise lesion description, not guessing a specific etiology.',next:'Select the guided morphologic-diagnosis activity within the shared atlas.'},
  necroHisto:{title:'🔬 Microscope',tag:'HISTOLOGY · EXPLAIN WHY',opens:'Opens the shared Specimen Cabinet with histology-focused study selected.',learn:'Identify microscopic patterns of cellular injury, inflammation, degeneration, neoplasia and repair.',different:'Focuses on microscopic evidence and why it produces the gross lesion.',next:'Compare the corresponding gross lesion and related diagnosis.'},

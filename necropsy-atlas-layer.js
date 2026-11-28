@@ -21,7 +21,8 @@ function apply(){
    if(rewrote){delete x.atlasUnconfirmedMorphology;delete x.atlasNoSpecificHisto;delete x.atlasNoSpecificWhy;if(p.why)delete x.mechanismSummary;x.claudeVerified='L'+lec}
    const src='Lecture '+lec+' slides (Dr. Andersson), owner-annotated copy';
    const photos=(p.photos||[]).map(f=>({asset:BASE+'L'+lec+'/'+f[0],caption:f[1],source:src,studyPrompt:f[2]||''}));
-   const keys=(p.keys||[]).map(f=>({asset:BASE+'L'+lec+'/_keys/'+f[0],caption:'Your marked slide · '+f[1],source:src,studyPrompt:'Circles and handwriting are your class notes.'}));
+   /* Marked-slide keys are kept on disk but not shown on atlas cards: the atlas is for gross/histo photos. */
+     const keys=[].map(f=>({asset:BASE+'L'+lec+'/_keys/'+f[0],caption:'Your marked slide · '+f[1],source:src,studyPrompt:'Circles and handwriting are your class notes.'}));
    if(photos.length||keys.length){x.publicLecturePhotos=[...photos,...keys];if(photos[0]&&!x.image)x.image=photos[0].asset}
    if(p.slides)x.lectureSourceSlides=p.slides;
   }
