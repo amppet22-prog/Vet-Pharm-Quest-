@@ -102,9 +102,9 @@ const data={
   {x:83.2,y:31,w:15.6,h:40,walk:91,label:'🔬 Microscopy Lab',subtitle:'Image ID + smear quizzes',hint:'Open blood smear image-identification questions',kind:'practice',action:'vpqClassicSmear'}
  ],
  isolation:[
-  {x:9,y:38,w:23,h:33,walk:23,label:'🐾 Place Companion',action:'vpqIsoChooseCompanion'},
-  {x:39,y:38,w:23,h:32,walk:52,label:'📚 Disease Library',action:'ohLibrary'},
-  {x:71,y:38,w:22,h:32,walk:81,label:'🛡️ Public Health',action:'ohHub'}
+  {x:8,y:37,w:29,h:36,walk:23,label:'🐾 Place Companion',action:'vpqIsoChooseCompanion'},
+  {x:40,y:37,w:28,h:36,walk:52,label:'📚 Disease Library',action:'ohLibrary'},
+  {x:71,y:37,w:21,h:36,walk:81,label:'🛡️ Public Health',action:'ohHub'}
  ],
  necropsy:[
   {x:3,y:25,w:20,h:45,walk:14,label:'🦴 Specimen Cabinet',subtitle:'Identify gross lesions',hint:'Gross pathology: recognize the organ, describe the lesion and practice gross diagnoses',action:'necroGross'},
@@ -635,8 +635,9 @@ function refresh(){
  '<button type="button" class="vpqIsoChoose" data-vpqisopatient="1" title="Choose from your owned companion collection">🐾 Place Pet</button>'+ 
  '<button type="button" class="vpqIsoCases" data-vpqisocases="1" title="Open separate One Health clinical cases">🩺 Cases</button>'+ 
  '<button type="button" class="vpqIsoTest" data-vpqisotest="1" title="Specimen testing and lab biosafety overview">🧪 Lab Testing</button>'+
- data.isolation.filter(p=>p.action!=='vpqIsoChooseCompanion').map(p=>'<button type="button" class="vpqIsoHelp" style="left:'+Math.min(94,p.x+p.w-1)+'%;top:'+Math.max(3,p.y-4)+'%" data-vpqisohelp="'+p.action+'" title="About '+p.label+'" aria-label="Explain '+p.label+'">?</button>').join('')+
- [['ppe',8,36],['wash',37,49],['clean',94,62],['waste',11,76],['boot',34,80]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp vpqIsoEquipmentHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="Explain '+key+'" aria-label="Explain '+key+' station">?</button>').join('')
+ // Phase F: intentional help positions outside primary equipment and patient artwork.
+ [['onehealth',11,36],['ohLibrary',63,35],['ohHub',90,35]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="About '+isoHelp[key][0]+'" aria-label="Help: '+isoHelp[key][0]+'">?</button>').join('')+
+ [['ppe',5,50],['wash',38,67],['clean',95,71],['waste',12,79]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp vpqIsoEquipmentHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="About '+isoHelp[key][0]+'" aria-label="Help: '+isoHelp[key][0]+'">?</button>').join('')
  :'')+
  (room==='necropsy'?data.necropsy.filter(p=>necroHelp[p.action]).map(p=>'<button type="button" class="vpqNecroHelp" data-vpqnecro-help="'+p.action+'" style="left:'+Math.min(95,p.x+p.w-2)+'%;top:'+Math.max(3,p.y-3)+'%" title="About '+p.label+'" aria-label="What does '+p.label+' teach?">?</button>').join(''):'')+
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
