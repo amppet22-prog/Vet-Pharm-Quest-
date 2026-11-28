@@ -27,7 +27,7 @@ function grouped(){
 function flat(){return grouped().flatMap(g=>g.list)}
 function play(id){
  const list=flat(),i=Math.max(0,list.findIndex(c=>c.id===id));
- window.VPQ_RADIOLOGY_CASE_PLAYER?.open?.(list,i,{title:'Exam 3 · MSK, skull & spine',icon:'🦴',backLabel:'Exam 3 list',onBack:render});
+ window.VPQ_RADIOLOGY_CASE_PLAYER?.open?.(list,i,{title:'Exam 3 · MSK, skull & spine',icon:'🦴',backLabel:'Exam 3 list',onBack:render,hideTitle:true});
 }
 function render(){
  const groups=grouped(),total=groups.reduce((n,g)=>n+g.list.length,0),prog=window.VPQ_RADIOLOGY_CASE_PLAYER?.progress?.()||{};
@@ -40,6 +40,7 @@ function render(){
  api.showModal('🦴 Exam 3 · MSK, skull & spine',
   '<div style="font-size:13px;color:#354967;line-height:1.55"><div class="buttonrow" style="margin-bottom:10px">'+
   '<button type="button" data-vpqexam3="back">← X-ray hub</button><button type="button" data-vpqexam3="start">▶ Start from the first case</button><button type="button" data-vpqexam3="conditions">🃏 Condition cards · MSK</button></div>'+
+  '<button type="button" data-vpqexam3="unit" style="display:block;width:100%;text-align:left;background:linear-gradient(120deg,#3f4a5a,#8a9bb3);color:#fff;border:none;border-radius:16px;padding:14px 16px;margin:0 0 12px"><b style="font-size:17px">🦴 MSK, skull & spine — start here</b><span style="display:block;font-size:12.5px;opacity:.92;margin-top:3px">📖 6 short lessons (aggressive vs non-aggressive bone, joints, OCD & elbow, growing bones, hips, skull/spine views) with 📘 textbook figures · 🎯 practice · 🩺 lecture films step by step</span></button>'+
   '<div style="background:linear-gradient(120deg,#f4eaff,#eaf9f5);padding:12px 14px;border:1px solid #e0d6ed;border-radius:13px;margin-bottom:12px"><b>Each case:</b> look at every view → pick the diagnosis (or write your findings) → read the professor\'s findings → open the annotated lecture slide. Use <b>Previous / Next</b> to move through a topic. <span style="color:#5d6d84">'+opened+' of '+total+' opened · '+mastered+' answered correctly.</span></div>'+
   sec+'<p style="font-size:11px;color:#6b7a90">LMU CVM 743 course radiographs, used with LMU permission for non-commercial study. Images are lecture-slide copies, so don\'t measure from them.</p></div>');
 }
@@ -52,6 +53,7 @@ function init(ctx){
   const k=b.dataset.vpqexam3;
   if(k==='back')return window.VPQ_IMAGING_SUITE?.xrayHome?.();
   if(k==='start'){const l=flat();return l.length&&play(l[0].id)}
+  if(k==='unit')return window.VPQ_EXAM3_MSK?.open?.({backLabel:'Exam 3',onBack:open});
   if(k==='conditions')return window.VPQ_RADIOLOGY_CONDITIONS?.open?.('Small animal MSK',{backLabel:'Exam 3',onBack:open});
  });
 }
