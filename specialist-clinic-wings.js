@@ -54,12 +54,13 @@ function isoPatientSelector(){
  const owned=isoOwnedCompanions(),current=isoCurrent();
  const opts=owned.map(p=>'<option value="'+isoEscape(p.id)+'"'+(current?.id===p.id?' selected':'')+'>'+isoEscape(p.name+' · '+p.species)+'</option>').join('');
  api.showModal('🐾 Place a purchased companion',
- '<p>Choose a pet from <b>your purchased or unlocked companion collection</b>. The kennel starts empty. Clinical cases remain in the separate One Health activity; placing a pet does not imply infection.</p>'+
+ '<p>Choose a pet from <b>your purchased or unlocked companion collection</b>. The isolation suite starts empty. Clinical cases remain in the separate One Health activity; placing a pet does not imply infection.</p>'+
  '<label for="vpqIsoOwnedChoice" style="display:block;font-weight:900">Owned companion</label>'+
  '<select id="vpqIsoOwnedChoice" style="width:100%;padding:10px;border:1px solid #c2b5d5;border-radius:10px"><option value="">Empty suite / no animal</option>'+opts+'</select>'+
  (!owned.length?'<p class="tiny">No owned companions with ready artwork yet. Visit the Companion Collection to unlock pets.</p>':'')+
- '<div id="vpqIsoPreview" aria-live="polite" style="margin:12px 0;padding:12px;border:1px solid #cfdbde;border-radius:14px;background:#f6fafb;display:flex;align-items:center;gap:14px;min-height:95px"></div>'+
- '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="vpqIsoCaseApply">Save kennel pet</button><button type="button" id="vpqIsoClear">Clear kennel</button></div>'+
+ '<div id="vpqIsoPreview" aria-live="polite" style="margin:12px 0;padding:12px;border:1px solid #cfdbde;border-radius:14px;background:#f6fafb;display:flex;align-items:center;gap:14px;min-height:95px"></div>'+ 
+ '<p id="vpqIsoSaveStatus" role="status" aria-live="polite" style="font-weight:800;color:#397778;min-height:20px;margin:7px 0"></p>'+ 
+ '<div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="vpqIsoCaseApply">Save suite pet</button><button type="button" id="vpqIsoClear">Clear suite</button></div>'+
  '<p class="tiny">Display only. Does not modify companion purchases, followers, or clinical case progress. Selection currently saves on this device.</p>');
  const select=document.getElementById('vpqIsoOwnedChoice'),preview=document.getElementById('vpqIsoPreview');if(!select||!preview)return;
  const render=()=>{const pet=owned.find(p=>p.id===select.value);
@@ -67,8 +68,16 @@ function isoPatientSelector(){
   '<span style="font-size:13px;color:#69838a">No companion selected — isolation suite will remain empty.</span>';
  };
  select.addEventListener('change',render);render();
- document.getElementById('vpqIsoCaseApply')?.addEventListener('click',()=>{isoSaveChoice(select.value);isoPatientSelector()});
- document.getElementById('vpqIsoClear')?.addEventListener('click',()=>{isoSaveChoice('');isoPatientSelector()});
+ const announce=(message)=>{const status=document.getElementById('vpqIsoSaveStatus');if(status)status.textContent=message;};
+ document.getElementById('vpqIsoCaseApply')?.addEventListener('click',()=>{
+  const selected=owned.find(p=>p.id===select.value);
+  isoSaveChoice(selected?.id||'');
+  announce(selected?'✓ '+selected.name+' is displayed in the isolation suite.':'✓ Isolation suite is empty.');
+  render();
+ });
+ document.getElementById('vpqIsoClear')?.addEventListener('click',()=>{
+  select.value='';isoSaveChoice('');render();announce('✓ Isolation suite cleared.');
+ });
 }
 function isoSpecimenIntro(){
  // Educational workflow only. No species/pathogen-specific testing claims and no simulated real lab handling.
