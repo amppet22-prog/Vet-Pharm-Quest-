@@ -171,31 +171,31 @@ function scene(key){
    // Clear circulation space in front of all three interactive stations.
    // Source-backed patient selected from existing game cases; expandable washable kennel with water.
    isoPatientArt()+
-   // Library work surface, shelving and reference files.
-   '<rect x="393" y="188" width="222" height="154" rx="14" fill="#d2e9df" stroke="#86b4a5" stroke-width="6"/>'+
-   '<rect x="408" y="202" width="194" height="125" rx="8" fill="#fbfff9" stroke="#c1d8c8" stroke-width="3"/>'+
-   '<text x="505" y="219" text-anchor="middle" font-size="14" font-weight="900" fill="#4b8a78">DISEASE LIBRARY</text>'+
-   '<path d="M420 234H591M420 295H591" stroke="#b8d5c9" stroke-width="5"/>'+
-   [0,1,2,3,4,5,6].map((n)=>{const x=425+n*23;return '<rect x="'+x+'" y="'+(245+(n%2)*5)+'" width="17" height="'+(42-(n%2)*5)+'" rx="2" fill="'+['#ceb6d9','#a7d5c6','#ebc4b8','#a8c6dd'][n%4]+'" stroke="#ffffff" stroke-width="1.4"/>'}).join('')+
-   '<rect x="429" y="301" width="133" height="20" rx="3" fill="#fff5e8" stroke="#bdcfc1" stroke-width="2"/>'+
-   '<path d="M441 306h87m-87 5h112m-112 5h73" stroke="#a2bdae" stroke-width="2"/>'+
-   '<rect x="570" y="300" width="22" height="22" rx="3" fill="#d2e7e0" stroke="#98bdb0"/>'+
-   '<text x="581" y="316" font-size="13" text-anchor="middle">🔬</text>'+
-   // In-world One Health diagnostics: safe specimen workflow and sample testing concepts.
-   '<g aria-label="Illustrated specimen testing counter and biosafety overview">'+
-   '<rect x="397" y="318" width="220" height="27" rx="5" fill="#a9cbc6" stroke="#719b9b" stroke-width="3"/>'+
-   '<path d="M410 319h195" stroke="#f8fdf8" stroke-width="4"/>'+
-   '<rect x="429" y="281" width="77" height="35" rx="5" fill="#eaf8f5" stroke="#87b7b1" stroke-width="2"/>'+
-   '<path d="M440 297h55M440 304h55" stroke="#a1c3bb" stroke-width="2"/>'+
-   '<rect x="518" y="287" width="59" height="30" rx="5" fill="#d0e7e6" stroke="#70a7a5" stroke-width="2"/>'+
-   '<rect x="530" y="294" width="35" height="12" rx="3" fill="#4b8a94"/>'+
-   '<text x="547" y="303" font-size="8" font-weight="900" fill="white" text-anchor="middle">PCR</text>'+
-   '<g fill="#c5e5e1" stroke="#749f9d" stroke-width="1.8"><rect x="444" y="274" width="49" height="9" rx="3"/>'+
-   '<rect x="446" y="262" width="6" height="17" rx="2"/><rect x="459" y="262" width="6" height="17" rx="2"/><rect x="472" y="262" width="6" height="17" rx="2"/><rect x="485" y="262" width="6" height="17" rx="2"/></g>'+
-   '<path d="M447 264h4M460 264h4M473 264h4M486 264h4" stroke="#e38d94" stroke-width="3"/>'+
-   '<rect x="416" y="221" width="183" height="26" rx="9" fill="#fffbec" stroke="#9dbfb4" stroke-width="3"/>'+
-   '<text x="508" y="238" font-family="Arial" font-size="13" font-weight="900" text-anchor="middle" fill="#527d80">SPECIMEN TESTING</text>'+
-   '<path d="M411 250h194" stroke="#b7d5cd" stroke-width="4"/>'+
+   // Dedicated specimen-processing visual with illustrated primary containment and testing.
+   // Educational scenery only; no actual laboratory operating procedures.
+   '<g aria-label="Specimen processing and diagnostic teaching bench">'+
+   '<rect x="382" y="191" width="242" height="157" rx="13" fill="#c9e2dd" stroke="#76aaa7" stroke-width="6"/>'+
+   '<rect x="394" y="205" width="217" height="115" rx="9" fill="#edf8f4" stroke="#b1cec9" stroke-width="3"/>'+
+   '<path d="M405 294h193" stroke="#86aba8" stroke-width="5"/>'+
+   '<rect x="406" y="220" width="125" height="71" rx="7" fill="#9fc4c6" stroke="#5f989d" stroke-width="4"/>'+
+   '<path d="M413 233h111v51H413Z" fill="#d9edef" stroke="#a1c8c9" stroke-width="2"/>'+
+   '<rect x="416" y="239" width="105" height="34" rx="4" fill="#e9f9f6" stroke="#93b5b9" stroke-width="1.5"/>'+
+   '<path d="M412 224h113" stroke="#5a8e97" stroke-width="5"/>'+
+   '<rect x="415" y="276" width="106" height="9" rx="2" fill="#91b8b9"/>'+
+   '<text x="468" y="217" font-size="9" text-anchor="middle" font-weight="900" fill="#426c74">BIOSAFETY CABINET</text>'+
+   '<rect x="538" y="225" width="58" height="62" rx="7" fill="#deedf0" stroke="#8aafb7" stroke-width="3"/>'+
+   '<rect x="545" y="233" width="44" height="24" rx="4" fill="#4c8295"/>'+
+   '<text x="567" y="248" text-anchor="middle" font-size="12" font-weight="900" fill="#f4ffff">PCR</text>'+
+   '<path d="M546 264h38" stroke="#91b0b2" stroke-width="3"/>'+
+   '<circle cx="584" cy="276" r="3" fill="#79c6a5"/>'+
+   '<g stroke="#719ba2" stroke-width="1.5">'+
+   [0,1,2,3,4,5].map(n=>'<rect x="'+(424+n*15)+'" y="261" width="9" height="17" rx="2" fill="'+(n%2?'#d9f0ee':'#f7c5ce')+'"/>').join('')+
+   '</g>'+
+   '<rect x="411" y="299" width="197" height="29" rx="6" fill="#f9fdf9" stroke="#9fc4bb" stroke-width="2"/>'+
+   '<text x="510" y="310" text-anchor="middle" font-size="10" font-weight="900" fill="#3e8580">SPECIMEN TESTING</text>'+
+   '<text x="510" y="321" text-anchor="middle" font-size="8" font-weight="800" fill="#628f8b">SAMPLE • TEST • INTERPRET</text>'+
+   '<rect x="392" y="337" width="221" height="10" rx="4" fill="#9cbdb8"/>'+
+   '<path d="M401 347v20m203-20v20" stroke="#709d9d" stroke-width="7"/>'+
    '</g>'+
    // Public-health reporting terminal with status display.
    '<rect x="712" y="190" width="218" height="155" rx="14" fill="#cce5ed" stroke="#8cb7c7" stroke-width="7"/>'+
@@ -205,6 +205,25 @@ function scene(key){
    '<rect x="747" y="288" width="145" height="6" rx="3" fill="#7397ac"/>'+
    '<rect x="753" y="316" width="129" height="15" rx="4" fill="#f7fffa" stroke="#a2c6cc" stroke-width="2"/>'+
    '<text x="818" y="327" text-anchor="middle" font-size="9" font-weight="900" fill="#608c94">SURVEILLANCE · REPORTING</text>'+
+   // Infection-control teaching and public-health dashboard graphics.
+   '<g aria-label="One Health dashboard and cross-species surveillance map">'+
+   '<path d="M749 236h131v49H749Z" fill="#254e67" opacity=".76"/>'+
+   '<path d="M762 246l13-8 14 6 13-3 11 9 11-7 11 11 14-3 12 9-3 11-12 1-7 7-17-5-13 2-12-7-14 4-9-8-13 2Z" fill="#a7cda5" opacity=".8"/>'+
+   '<circle cx="783" cy="252" r="5" fill="#f1b89d"/><circle cx="833" cy="263" r="5" fill="#eedb9f"/>'+
+   '<rect x="750" y="286" width="128" height="6" rx="3" fill="#79b69e"/>'+
+   '<rect x="757" y="300" width="124" height="14" rx="5" fill="#f9fff9" stroke="#a0c8c1" stroke-width="2"/>'+
+   '<text x="819" y="310" text-anchor="middle" font-size="9" font-weight="900" fill="#4c8582">SURVEILLANCE &amp; REPORTING</text>'+
+   '</g>'+
+   // Upper visual header explains One Health without duplicating the station interactions.
+   '<g aria-label="One Health animal human and environmental health disciplines">'+
+   '<rect x="359" y="91" width="271" height="72" rx="16" fill="#f5fbf8" stroke="#a4c7c5" stroke-width="4"/>'+
+   '<text x="495" y="112" text-anchor="middle" font-size="20" font-weight="900" fill="#3f7890">ONE HEALTH</text>'+
+   '<circle cx="418" cy="141" r="14" fill="#c5e7d1"/><circle cx="496" cy="141" r="14" fill="#e0d2f1"/><circle cx="574" cy="141" r="14" fill="#c9e5c3"/>'+
+   '<text x="418" y="146" text-anchor="middle" font-size="15">🐾</text>'+
+   '<text x="496" y="146" text-anchor="middle" font-size="15">👥</text>'+
+   '<text x="574" y="146" text-anchor="middle" font-size="15">🌿</text>'+
+   '<path d="M434 141h43M511 141h47" stroke="#b1cfc8" stroke-width="3" stroke-dasharray="4 3"/>'+
+   '</g>'+
    // Service details: sealed wall surfaces, ventilation grille, observation window and entry threshold.
    '<g transform="translate(625 96)"><rect width="110" height="47" rx="6" fill="#e8f5f4" stroke="#9bbfbf" stroke-width="3"/>'+
    '<text x="55" y="13" text-anchor="middle" font-size="9" font-weight="900" fill="#578481">AIRFLOW CHECK</text>'+
@@ -276,7 +295,16 @@ function scene(key){
    '<rect x="314" y="383" width="65" height="29" rx="5" fill="#99bcb1" stroke="#6f9c90" stroke-width="3"/>'+
    '<path d="M322 388h49m-49 7h49m-49 7h49" stroke="#d8e9df" stroke-width="2"/>'+
    '<text x="346" y="422" text-anchor="middle" font-size="8" font-weight="900" fill="#568078">BOOT MAT</text>'+
-   '<text x="960" y="485" text-anchor="end" font-size="9" font-family="Arial" font-weight="900" fill="#6b8a85">Isolation room v3</text>'+
+      '<g aria-label="Color-coded teaching zones">'+
+   '<rect x="58" y="447" width="262" height="35" rx="15" fill="#fce2e9" stroke="#c58ea8" stroke-width="4"/>'+
+   '<text x="189" y="469" text-anchor="middle" font-size="14" font-weight="900" fill="#96516b">ISOLATION ZONE</text>'+
+   '<rect x="355" y="447" width="292" height="35" rx="15" fill="#e4f0ff" stroke="#8db4d1" stroke-width="4"/>'+
+   '<text x="501" y="469" text-anchor="middle" font-size="14" font-weight="900" fill="#4f789a">DIAGNOSTIC / BSL LEARNING</text>'+
+   '<rect x="680" y="447" width="270" height="35" rx="15" fill="#e8f7e9" stroke="#96c1ab" stroke-width="4"/>'+
+   '<text x="815" y="469" text-anchor="middle" font-size="13" font-weight="900" fill="#508b72">ONE HEALTH &amp; REPORTING</text>'+
+   '</g>'+
+   '<text x="960" y="492" text-anchor="end" font-size="8" font-family="Arial" font-weight="900" fill="#6b8a85">Isolation room v4</text>'+
+
    '</g>';
  }else if(key==='skills'){
    // Three identifiable work areas: syringe training, venous collection, specimen tubes.
