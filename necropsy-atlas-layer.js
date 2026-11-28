@@ -9,7 +9,7 @@
 (function(){'use strict';
 const BASE='https://raw.githubusercontent.com/amppet22-prog/Vet-Pharm-Quest-/main/pathology-course-photos/exam7/';
 const pending={};let applied=false;
-const TEXT=['gross','dx','histo','why','notes','visualClue','compare'];
+const TEXT=['title','gross','dx','histo','why','notes','visualClue','compare'];
 function apply(){
  const data=window.VPQ_PATH_EXAM7_DATA;if(!Array.isArray(data))return 0;let n=0;
  for(const [lec,cards] of Object.entries(pending)){
