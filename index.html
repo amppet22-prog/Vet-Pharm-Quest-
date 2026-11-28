@@ -2190,9 +2190,28 @@ const vpqRoomFurnitureSlots={
  ]
 };
 function vpqFurnitureSlotsFor(room){return vpqRoomFurnitureSlots[room]||vpqFurnitureSlots}
+/* Use the room's real display slots; legacy coordinates snap instead of floating or overlapping. */
+function vpqResolvedFurnitureSlots(room){
+ const slots=vpqFurnitureSlotsFor(room),occupied=new Set(),result=new Map();
+ const pieces=vpqFurnitureItems.filter(u=>u.levelRoom===room&&state.upgrades.includes(u.id)&&!state.furnitureHidden.includes(u.id)&&u.furnitureKind!=='flag');
+ for(const u of pieces){
+  const p=state.furniturePositions[u.id]||{x:u.furnitureX,y:u.furnitureY};
+  const exact=slots.find(v=>Math.abs(Number(p.x)-v.x)<.01&&Math.abs(Number(p.y)-v.y)<.01);
+  if(exact&&!occupied.has(exact.id)){result.set(u.id,exact);occupied.add(exact.id)}
+ }
+ for(const u of pieces){
+  if(result.has(u.id))continue;
+  const options=slots.filter(v=>!occupied.has(v.id));if(!options.length)continue;
+  const p=state.furniturePositions[u.id]||{x:u.furnitureX,y:u.furnitureY};
+  const preferred=options.reduce((a,b)=>((a.x-p.x)**2+(a.y-p.y)**2)<=((b.x-p.x)**2+(b.y-p.y)**2)?a:b);
+  result.set(u.id,preferred);occupied.add(preferred.id);
+ }
+ return result;
+}
 function vpqSlotMatch(u){
+ if(vpqRoomFurnitureSlots[u.levelRoom])return vpqResolvedFurnitureSlots(u.levelRoom).get(u.id);
  const p=state.furniturePositions[u.id]||{x:u.furnitureX,y:u.furnitureY};
- return [...vpqFurnitureSlotsFor(u.levelRoom),...vpqFurnitureSlots].find(slot=>Math.abs(Number(p.x)-slot.x)<.01&&Math.abs(Number(p.y)-slot.y)<.01);
+ return vpqFurnitureSlots.find(slot=>Math.abs(Number(p.x)-slot.x)<.01&&Math.abs(Number(p.y)-slot.y)<.01);
 }
 function vpqOccupiedFurnitureSlots(u){
  const taken=new Set();
@@ -2207,7 +2226,10 @@ function vpqDrawFurniture(){
  for(const u of vpqFurnitureItems){
   if(activeRoom!==u.levelRoom||!state.upgrades.includes(u.id)||state.furnitureHidden.includes(u.id)||(u.furnitureKind==='flag'&&state.activeFlag!==u.id))continue;
   if(activeRoom==='reception'&&state.receptionView==='isometric'&&u.furnitureKind==='sofa')continue;
-  const p=state.furniturePositions[u.id]||{x:u.furnitureX,y:u.furnitureY};
+  const fixed=vpqRoomFurnitureSlots[u.levelRoom];
+  const assigned=fixed?vpqResolvedFurnitureSlots(u.levelRoom).get(u.id):null;
+  if(fixed&&!assigned)continue; // No room left: purchased item remains in inventory.
+  const p=assigned||state.furniturePositions[u.id]||{x:u.furnitureX,y:u.furnitureY};
   const item=document.createElement('button');item.type='button';item.className='vpq-room-furniture vpq-furniture-'+u.furnitureKind;
   item.dataset.vpqFurnitureObject=u.id;if(u.flagType)item.dataset.flagType=u.flagType;item.title=u.label+' · open Furniture Studio';
   item.setAttribute('aria-label',u.label+' · open Furniture Studio');
@@ -2232,10 +2254,10 @@ function vpqOpenFurnitureStudio(room){
   const current=vpqSlotMatch(u),taken=vpqOccupiedFurnitureSlots(u);
   const choices=vpqFurnitureSlotsFor(u.levelRoom).map(slot=>'<option value="'+slot.id+'" '+(current?.id===slot.id?'selected ':'')+(taken.has(slot.id)?'disabled ':'')+'>'+slot.label+(taken.has(slot.id)?' · occupied':'')+'</option>').join('');
   return '<div class="buttonrow vpq-furniture-slot-controls"><label style="font-size:12px;font-weight:800" for="vpqslot-'+u.id+'">Position</label><select id="vpqslot-'+u.id+'" data-furniture-spot-select="'+u.id+'" style="max-width:215px;padding:7px;border:1px solid #bca8d0;border-radius:9px">'+
-   (!current||!vpqFurnitureSlotsFor(u.levelRoom).some(slot=>slot.id===current.id)?'<option value="" selected>Current saved position · choose a room spot</option>':'')+choices+'</select>'+
+   (!current?'<option value="" selected>Choose an available fixed spot</option>':'')+choices+'</select>'+
    '<button data-furniture-place="'+u.id+'">📍 Place &amp; view</button>'+
    '<button data-furniture-toggle="'+u.id+'">'+(hidden?'Show':'Hide')+'</button>'+
-   '<button data-furniture-reset="'+u.id+'">Reset to original</button></div>';
+   '<button data-furniture-reset="'+u.id+'">Auto-place</button></div>';
  })():
  '<button data-furniture-buy="'+u.id+'" '+(level<u.levelRequired||state.coins<u.price?'disabled':'')+'>'+(level<u.levelRequired?'🔒 Level '+u.levelRequired:'Buy '+u.price+' 🪙')+'</button>';
  return '<article class="vpq-furniture-shoprow"><b>'+escapeHtml(u.label)+'</b><small>'+escapeHtml(u.themeGroup)+' · '+escapeHtml(u.levelRoom)+' · Level '+u.levelRequired+' · '+u.price+' 🪙</small>'+action+'</article>';
@@ -2359,6 +2381,7 @@ $('modalBody').addEventListener('click',ev=>{
  // Retired invisible 5% furniture nudges; choose a fixed spot and view it directly instead.
  persist();renderRoom();vpqOpenFurnitureStudio();
 },true);
+const vpqPetFurnitureStyle=document.createElement('style');vpqPetFurnitureStyle.textContent=".stage[data-room=\"catcorner\"] .vpq-room-furniture,.stage[data-room=\"yardview\"] .vpq-room-furniture{width:clamp(48px,6vw,76px);height:clamp(45px,5.4vw,64px);z-index:2;filter:drop-shadow(0 3px 3px #354a5330)}.stage[data-room=\"catcorner\"] .vpq-room-furniture.vpq-level-illustrated,.stage[data-room=\"yardview\"] .vpq-room-furniture.vpq-level-illustrated{max-width:76px;max-height:68px}";document.head.appendChild(vpqPetFurnitureStyle);
 const vpqPreviousRoomRender=renderRoom;
 renderRoom=function(){vpqPreviousRoomRender();const stage=$('stage');stage.dataset.theme=state.activeTheme||'default';for(const old of document.querySelectorAll('.vpq-reward-decor'))old.remove();const built=upgrades.filter(u=>u.deco&&state.upgrades.includes(u.id)&&(!u.levelRoom||u.levelRoom===activeRoom));for(const [i,u] of built.entries()){const item=document.createElement('span');item.className='vpq-reward-decor'+(u.themeGroup?' vpq-themed-reward-decor':'');item.style.top=u.decoTop||(12+i*18)+'%';item.style.right=u.decoRight||(4+i*9)+'%';item.textContent=u.deco;item.title=u.label;item.style.zIndex='3';$('scene').appendChild(item)}vpqDrawFurniture();};
 $('modalBody').addEventListener('input',e=>{if(e.target.closest('#avatarForm'))vpqRefreshPreview()});
