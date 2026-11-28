@@ -6021,6 +6021,13 @@ window.VPQ_YARD_OWNED_DOGS=function(){
   .filter(c=>c&&c.category==='dog'&&c.image&&vpqCompanionOwned(c)&&vpqCompanionValid(c))
   .map(c=>({id:c.id,name:vpqCustomCompanionName(c),src:vpqDogAssetURL(c.image)}));
 };
+// Read-only catalog bridge for One Health room display: owned, validated artwork only.
+// No changes to inventory, purchase status, active companion or existing clinical cases.
+window.VPQ_ISOLATION_OWNED_COMPANIONS=function(){
+ return vpqCompanionCatalog
+  .filter(c=>c&&c.image&&vpqCompanionOwned(c)&&vpqCompanionValid(c))
+  .map(c=>({id:c.id,name:vpqCustomCompanionName(c),src:vpqDogAssetURL(c.image),species:c.category}));
+};
 // Cat Studio uses the same purchased/unlocked companion source as the kennel.
 window.VPQ_STUDIO_OWNED_CATS=function(){
  return vpqCompanionCatalog
