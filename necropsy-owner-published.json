@@ -420,9 +420,9 @@
         "external": false
       },
       "text": {
-        "gross": "Gross and clinical consequence: Inflammation in epaxial musculature may extend dorsolaterally and compress the spinal cord.",
-        "dx": "Working identification: Vertebral abscess. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
-        "histo": "Gross and clinical consequence: Inflammation in epaxial musculature may extend dorsolaterally and compress the spinal cord. Do not confuse: An extrinsic compressive abscess is different from primary inflammatory destruction of spinal cord parenchyma.",
+        "gross": "Abscess in the epaxial muscles that extends dorsolaterally and compresses the spinal cord.",
+        "dx": "Vertebral canal / epaxial muscle: abscess, focal, with spinal cord compression",
+        "histo": "Pus (neutrophils, necrotic debris, ± bacteria) surrounded by a fibrous capsule; compressed cord may show Wallerian degeneration.",
         "why": "Origin: Often extension from vertebral osteomyelitis, discospondylitis or adjacent injury (the slides include tail docking); less commonly hematogenous. Do not confuse: An extrinsic compressive abscess is different from primary inflammatory destruction of spinal cord parenchyma.",
         "notes": ""
       },
@@ -541,8 +541,8 @@
       },
       "text": {
         "gross": "Gross: Often no visible lesion. When present, bilateral symmetric yellow/gray/red foci of malacia and cavitation preferentially in white matter. Do not confuse: Symmetric toxin-associated white matter lesions versus random septic embolic lesions from TME.",
-        "dx": "**Working identification: **Overeating disease — ***C. perfringens type D.*** Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
-        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "dx": "Brain: focal symmetrical encephalomalacia, bilateral (white matter) — C. perfringens type D enterotoxemia",
+        "histo": "Vascular injury with blood–brain barrier breakdown: perivascular edema, then malacia and cavitation in white matter.",
         "why": "**Species and trigger:** Sheep and goats of any age after sudden* diet* change causing microbial imbalance and clostridial proliferation. \n**Why CNS damage occurs: **Enterotoxemia produces vascular injury and breakdown of the blood-brain barrier.",
         "notes": ""
       },
@@ -585,7 +585,7 @@
       },
       "text": {
         "gross": "Often no gross visible mass; when present, irregular gray-white to red, gelatinous/granular foci in white matter, especially brainstem. Can have a gelatinous or granular consistency. ",
-        "dx": "Working identification: Granulomatous meningoencephalitis (GME). \nSpecimen site: Brain / spinal cord/meninges. \nFormulate the final morphologic diagnosis from the visible tissue, distribution, severity, and process; etiology requires supporting evidence.",
+        "dx": "Brain (brainstem) and spinal cord white matter: meningoencephalomyelitis, granulomatous, perivascular, multifocal",
         "histo": "Perivascular cuffs containing macrophages and lymphocytes with relatively few plasma cells. \n",
         "why": "**Idiopathic condition. **\n**Host: **Young to middle-aged small-breed dogs, idiopathic with suspected T-cell-mediated mechanism.\n Differentiate: GME perivascular inflammation from the suppurative microabscesses of Listeria or thrombotic lesions of Histophilus.",
         "notes": "Most severe in the brainstem (white matter) \n**Clinical:** Behavior change, circling, seizures; paresis and ataxia when spinal cord is involved. \n\n**Differentiate:** GME perivascular inflammation from the suppurative microabscesses of Listeria or thrombotic lesions of *Histophilus.*"
@@ -717,7 +717,7 @@
       },
       "text": {
         "gross": "Granular, gray-white plexus with hyperemia/hemorrhage and cloudy to yellow-green, thick or gelatinous in the ventricular system. \nChoroid plexuses may be granular and gray/ white with hyperemia and hemorrhage. \nWhy it matters: Inflammation may extend through CSF spaces into the leptomeninges, and purulent exudate can impede CSF flow, causing acquired hydrocephalus.",
-        "dx": "Working identification: Choroid plexitis. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Choroid plexus: choroid plexitis, suppurative (± ependymitis)",
         "histo": "Location: Inflammation of the choroid plexus, most commonly due to bacteria entering directly or hematogenously, though viral infection is possible. Why it matters: Inflammation may extend through CSF spaces into the leptomeninges, and purulent exudate can impede CSF flow, causing acquired hydrocephalus.",
         "why": "Why it matters: Inflammation may extend through CSF spaces into leptomeninges, and purulent exudate can impede CSF flow, causing acquired hydrocephalus. Differentiate: Choroid plexus is the CSF-producing structure; ependyma lines the ventricular wall.",
         "notes": "If severe, it can traverse the fourth ventricle and spread throughout the subarachnoid space, causing suppurative leptomeningitis. The exudate can also obstruct the CSF flow *which can lead to hydrocephalus. *\n\nAlso called Ependymitis. "
@@ -831,7 +831,7 @@
       },
       "text": {
         "gross": "Firm white-tan granulomas/pyogranulomas; fibrin-rich ventricular exudate, white to tan plaques along sulci or near circle of Willis. \nSecondary: Ventricular exudate can cause hydrocephalus or cerebellar herniation.",
-        "dx": "Working identification: Feline infectious peritonitis (FIP) CNS disease. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Brain: meningoencephalitis and ventriculitis, pyogranulomatous, with phlebitis/vasculitis, multifocal (FIP)",
         "histo": "Pyogranulomatous nodules with vasculitis\nTends to perfer involvement to small to medium-sized veins. ",
         "why": "Cause/pathogenesis: Feline coronavirus-associated disease with macrophage replication and dissemination. Secondary: Ventricular exudate can cause hydrocephalus or cerebellar herniation.",
         "notes": "CNS C/S: Behavorial changes, dullness, coma, paresis, ataxis, paralysis and seizures. "
@@ -888,7 +888,7 @@
       },
       "text": {
         "gross": "Moderately well demarcated, expansive, yellow- brown foci that displace and disrupt normal tissue. ",
-        "dx": "Most cases are opportunistic infections in immunocompromised individuals. \nAspergillus is an example of trophism for vessels (angioinvasive) and can cause vasculitis leading to thrombosis or infarction. \n\n**Working identification:** Fungal CNS infections — overview and differential etiologies. Specimen site: Brain / spinal cord/meninges. ",
+        "dx": "Brain / meninges: meningoencephalitis, granulomatous to pyogranulomatous, multifocal, with fungal organisms",
         "histo": "Granulomatous to pyogranulomatous inflammation with spores able to be seen in samples. \nCan have angioinvasive with vessel trophism species. ",
         "why": "**Fungal agents in professor's list:** *Aspergillus, Candida, Cryptococcus neoformans, the historical 'Zygomycetes' group, Blastomyces dermatitidis, Histoplasma capsulatum and Coccidioides spp. *",
         "notes": ""
@@ -941,7 +941,7 @@
       },
       "text": {
         "gross": "Cloudy/viscous leptomeninges and multiple small cyst-like lesions with a viscous, *gelatinous* appearance of the meninges or CNS parenchyma. \n\n",
-        "dx": "Working identification:* Cryptococcosis — C. neoformans / C. gattii*. \nSpecimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.\n*Cryptococcus spp. secrete a thick complex polysaccharide capsule that protects the fungus from host defenses*",
+        "dx": "Leptomeninges and brain: meningoencephalitis with numerous encapsulated yeasts, multifocal (cryptococcosis)",
         "histo": "Encapsulated budding yeasts, often with a prominent clear halo around the organism; inflammation varies with host immune response. Confirm with microbiology. ",
         "why": "Hosts: Particular CNS affinity in cats and dogs, occasionally horses. \n",
         "notes": "**Diagnostic confirmation:** Evaluate tissue cytology/histology and organism identification; fungal antigen testing can support cryptococcosis. A gross lesion alone does not prove etiology.\n**Route of infection:**\n• Enters the leptomeninges by direct extension through the\ncribriform plate after a nasal or sinus infection\n• Hematogenous usually from a pulmonary infection.\n• Spread of the infection can result in encephalitis and ventriculitis\n\nImmunosuppression (i.e viral infections or long term\nglucocorticoid) can increase susceptibility\n• Immunocompetent animals usually clear the infection before it spreads systemically"
@@ -1013,7 +1013,7 @@
       },
       "text": {
         "gross": "Hemorrhage or necrosis; *multifocal necrosis with glial nodules and mixed inflammation*; yellow-brown-gray granular foci in gray or white matter. \n**Chronic: **Larger granular discolored areas may blur gray-white boundaries.\n",
-        "dx": "Working identification: Neosporosis — Neospora caninum. Affinity for the nervous system. \n**Transmission:** Ingestion of cysts or transplacental infection \nSpecimen site: Brain / spinal cord/meninges. \nFormulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Brain (cerebellum predilection) ± nerve roots and muscle: encephalitis, necrotizing, with glial nodules, multifocal",
         "histo": "Can see oocysts, tachyzoites, or bradyzoites, depending on the stage, which aids in chronicity. ",
         "why": "**Host and transmission:** Dogs, cattle and other mammals; infection can follow ingestion of cysts or transplacental spread. \n**Age differences**: Young dogs: polyradiculoneuritis/polymyositis; adult dogs: encephalitis (often cerebellum) and myositis.",
         "notes": "Neurologic disease can be divided into two categories:\n- Polyradiculoneuritis and polymyositis: young dogs\n-Encephalitis (predilection for cerebellum_ and myosititis: adult dogs \n**Stages**\nOocysts (environmental stages formed in canine intestinal epithelium and passed with the feces)\nTachyzoites (asexual rapidly growing stages that actively invade tissues; present during acute phase of infection.\n\nBradyzoites (slowly dividing stages that encyst within tissues)\n",
@@ -1060,7 +1060,7 @@
       },
       "text": {
         "gross": "No consistent gray-versus-white-matter predilection in the CNS. Focal hemorrhage and necrosis may develop into yellow-brown to gray, granular foci; spinal nerve roots may also be involved.",
-        "dx": "Working identification: Toxoplasmosis due to Toxoplasma gondii. Specimen site: brain / spinal cord / meninges. For a morphologic diagnosis, specify the observed tissue and inflammation/necrosis pattern, distribution, and supported severity; the gross appearance alone cannot establish etiology.",
+        "dx": "Brain and spinal cord: encephalomyelitis, necrotizing, nonsuppurative, multifocal (any region)",
         "histo": "Protozoal infection can involve neurons and astrocytes with necrosis and associated hemorrhage/inflammation. The pattern and identification of organisms require histologic confirmation.",
         "why": "Toxoplasma gondii is an obligate intracellular protozoan. Transplacental infection can affect the developing CNS. In mature animals, clinically apparent CNS disease may occur with immunosuppression, including concurrent canine distemper. Differentiate this protozoal disease from nematode larval migration by organism and lesion pattern.",
         "notes": "This parasite targets different cell types. Parasitizes variety of cell types (lungs, lymphoid system, liver, heart, skeletal muscle, pancreas,\ngastrointestinal (GI) tract, eyes, and nervous system)\n• CNS infection targets neurons and astrocytes\n\nIn mature animals, T. gondii infections have been associated with immunosuppression, like canine distempter virus. ",
@@ -1156,7 +1156,7 @@
       },
       "text": {
         "gross": "Random, variably sized irregular dark-red/brown foci of hemorrhage/necrosis in spinal cord gray/white matter; if brain involved, tends toward brainstem. This",
-        "dx": "Working identification: Equine protozoal myeloencephalitis (EPM). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Spinal cord (± brainstem): myeloencephalitis, necrotizing and hemorrhagic, with eosinophils, multifocal, asymmetric",
         "histo": "Necrosis, hemorrhage and mixed perivascular inflammatory cuffs, often including eosinophils; lecture specifies no vasculitis.",
         "why": "**Agents:** *Sarcocystis neurona* (most common) and *Neospora hughesi.* Lecture relates S. neurona infective sporocysts to opossum feces; do not assign the same source to both agents. \n**Risk/signs:** Young adults, stress or immunocompromise; deficits depend on location and include ataxia, cranial nerve signs, dysphagia and asymmetric muscle atrophy.",
         "visualClue": "",
@@ -1225,7 +1225,7 @@
       },
       "text": {
         "gross": "Acute: Often unilateral in the white and grey matter of the cerebral hemispheres. Necrosis with hemorrhages in the neuroparenchyma or leptomeninges",
-        "dx": "Working identification: Feline ischemic encephalopathy — Cuterebra. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Cerebrum: encephalitis, necrotizing and hemorrhagic, with infarction and parasitic tracts, unilateral (feline ischemic encephalopathy)",
         "histo": "Infarction/necrosis, hemorrhage and eosinophilic parasite migration tracks.",
         "why": "Cause: Aberrant cerebrospinal migration of Cuterebra fly from the nasal cavity into brain; cats of any age, often acute and more frequent in summer. ",
         "visualClue": "",
@@ -1365,7 +1365,7 @@
       },
       "text": {
         "gross": "Acute focal spinal cord infarct.",
-        "dx": "Working identification: Fibrocartilaginous embolic ischemic myelopathy (FCE). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Spinal cord: infarct, focal, acute, with fibrocartilaginous emboli",
         "histo": "Fibrocartilaginous material occluding spinal vessels.",
         "why": "Mechanism: Fibrocartilage from intervertebral disk reaches spinal cord vasculature, causing occlusive emboli and acute ischemia. Host: Most commonly dogs, especially larger breeds, though reported across domestic species.",
         "visualClue": "",
@@ -1424,7 +1424,7 @@
       },
       "text": {
         "gross": "Severe complication: Myelomalacia can spread cranially and caudally with gray/white matter necrosis and hemorrhage, sometimes within 12–24 hours.\n ",
-        "dx": "Working identification: Intervertebral disk disease (IVDD). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Spinal cord: compression with hemorrhage and myelomalacia, segmental (± ascending/descending), secondary to intervertebral disc extrusion",
         "histo": "Mechanism: Direct spinal compression injures axons (Wallerian degeneration) and may impair blood supply, causing ischemia and malacia. Severe complication: Myelomalacia can spread cranially and caudally with gray/white matter necrosis and hemorrhage, sometimes within 12–24 hours.",
         "why": "Especially common in chondrodystrophic dogs.\n **Mechanism:** Direct spinal compression injures axons (Wallerian degeneration) and may impair blood supply, causing ischemia and malacia. Overall pathogenesis is still poorly understood. Appears to involve compromise of blood flow to the affected cord segment. ",
         "visualClue": "",
@@ -1483,8 +1483,8 @@
       },
       "text": {
         "gross": "**Cerebral **swelling and necrotizing meningoencephalitis; slide describes sparing of brainstem, cerebellum and spinal cord.",
-        "dx": "Working identification: Necrotizing meningoencephalitis (NME). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
-        "histo": "No distinctive histologic pattern is specified in this lecture section. Do not infer an organism or cell type from gross morphology alone.",
+        "dx": "Cerebrum: meningoencephalitis, necrotizing, nonsuppurative, bilateral (brainstem, cerebellum and cord spared)",
+        "histo": "Necrosis and cavitation of cerebral cortex and white matter with nonsuppurative meningoencephalitis (lymphocytes, plasma cells, macrophages).",
         "why": "Host: Young to middle-aged small-breed dogs, particularly pugs and also shih tzus, Chihuahuas and Maltese. Distinguish: NME involves cerebral cortex and meninges more than NLE, which emphasizes white matter.",
         "visualClue": "",
         "compare": "NLE ",
@@ -1542,7 +1542,7 @@
       },
       "text": {
         "gross": "Cavitation, inflammation and glial scarring in periventricular cerebral white matter and brainstem.",
-        "dx": "Working identification: Necrotizing leukoencephalitis (NLE). Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Periventricular cerebral white matter and brainstem: leukoencephalitis, necrotizing, with cavitation and glial scarring",
         "histo": " necrosis and cavitation (malacia) of the cerebral white matter and thalamus, accompanied by nonsuppurative inflammation",
         "why": "Host: Yorkshire terriers and other small-breed dogs. Distinguish: The professor specifically says cerebral cortex and meninges are spared in NLE, unlike NME.\n**Targets the deep cerebral white matter **",
         "visualClue": "",
@@ -3516,7 +3516,7 @@
       "text": {
         "title": "Rabies — Lyssavirus",
         "gross": "Gross: Frequently absent; hemorrhage may occur, particularly in spinal cord.",
-        "dx": "Working identification: Rabies — Lyssavirus. Specimen site: Brain / spinal cord / meninges. Formulate the final morphologic diagnosis from the visible tissue, distribution, severity and process; etiology requires supporting evidence.",
+        "dx": "Brainstem and spinal cord: polioencephalomyelitis, nonsuppurative, with Negri bodies",
         "histo": "Histology: Nonsuppurative leptomeningitis/perivascular lymphocytes, macrophages and plasma cells; polioencephalomyelitis, brainstem predilection, microgliosis and neuronal degeneration.",
         "why": "Transmission: Typically saliva or bite; the slide depicts initial local replication, neuromuscular entry and retrograde axoplasmic travel through spinal cord to brain.",
         "visualClue": "",
