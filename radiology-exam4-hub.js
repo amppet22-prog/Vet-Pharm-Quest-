@@ -40,6 +40,7 @@ function render(){
   '<div style="font-size:13px;color:#354967;line-height:1.55"><div class="buttonrow" style="margin-bottom:10px">'+
   '<button type="button" data-vpqexam4="back">← X-ray hub</button><button type="button" data-vpqexam4="conditions">🃏 Condition cards · Thorax</button></div>'+
   '<button type="button" data-vpqexam4="lungs" style="display:block;width:100%;text-align:left;background:linear-gradient(120deg,#3b4b71,#7a6bd1);color:#fff;border:none;border-radius:16px;padding:14px 16px;margin:0 0 12px"><b style="font-size:17px">🫁 Lungs — start here</b><span style="display:block;font-size:12.5px;opacity:.92;margin-top:3px">📖 7 short lessons (views, lobes, normal, the 4 patterns, interstitial → alveolar, where = what it means, look-alikes) · 🎯 practice by skill · 🩺 class cases step by step</span></button>'+
+  '<button type="button" data-vpqexam4="heart" style="display:block;width:100%;text-align:left;background:linear-gradient(120deg,#7a2e4a,#d1657a);color:#fff;border:none;border-radius:16px;padding:14px 16px;margin:0 0 12px"><b style="font-size:17px">❤️ Heart & vessels — start here</b><span style="display:block;font-size:12.5px;opacity:.92;margin-top:3px">📖 6 short lessons (heart size, the clock face, vessel patterns, left vs right failure, acquired and congenital disease) with 📘 textbook figures · 🎯 practice by skill · 🩺 class cases step by step</span></button>'+
   '<h3 style="font-size:14px;color:#3b4b71;margin:4px 0 6px">All Exam 4 films <small style="color:#6b7a90;font-weight:600">— tap a topic to open it; titles stay hidden until you answer</small></h3>'+
   '<div style="background:linear-gradient(120deg,#f4eaff,#eaf9f5);padding:12px 14px;border:1px solid #e0d6ed;border-radius:13px;margin-bottom:12px"><b>Each case:</b> look at every view → pick the diagnosis (or write your findings) → read the professor\'s findings → open the answer keys (annotated lecture slides, comparison films and, where helpful, a marked textbook radiograph 📘). Use <b>Previous / Next</b> to move through a topic. <span style="color:#5d6d84">'+opened+' of '+total+' opened · '+mastered+' answered correctly.</span></div>'+
   sec+'<p style="font-size:11px;color:#6b7a90">LMU CVM 743 course radiographs (Dr. Lynn Griffin) and textbook figures from your Labeled_rads notes, used with LMU permission for non-commercial study. Images are lecture-slide copies, so don\'t measure from them.</p></div>');
@@ -53,6 +54,7 @@ function init(ctx){
   const k=b.dataset.vpqexam4;
   if(k==='back')return window.VPQ_IMAGING_SUITE?.xrayHome?.();
   if(k==='lungs')return window.VPQ_EXAM4_LUNGS?.open?.({backLabel:'Exam 4',onBack:open});
+  if(k==='heart')return window.VPQ_EXAM4_HEART?.open?.({backLabel:'Exam 4',onBack:open});
   if(k==='guide')return window.VPQ_LUNG_PATTERN_GUIDE?.open?.('how',{backLabel:'Exam 4',onBack:open});
   if(k==='start'){const l=flat();return l.length&&play(l[0].id)}
     if(k==='conditions')return window.VPQ_RADIOLOGY_CONDITIONS?.open?.('Thorax',{backLabel:'Exam 4',onBack:open});
