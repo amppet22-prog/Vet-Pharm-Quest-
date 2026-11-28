@@ -7,6 +7,86 @@ window.VPQ_SPECIALIST_ROOMS=function(api){
 const stage=document.getElementById('stage');if(!stage||!window.VPQ_SCENERY)return null;
 window.VPQ_SURGERY_SKILLS_NAV=()=>api.doAction('skillsWing');
 const previous=window.VPQ_SCENERY.roomArt.bind(window.VPQ_SCENERY);
+
+/* Isolation patient selector reuses the authoritative in-game clinical case roster.
+   No new case objects, disease assertions or medical advice are introduced. */
+const isoStorageKey='vpq-isolation-selected-case-v1';
+const isoEscape=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function isoCases(){
+ const source=window.VPQ_DATA?.cases;
+ if(!Array.isArray(source))return [];
+ const seen=new Set();
+ return source.filter(p=>{
+  if(!p||typeof p.id!=='string'||!p.name||!p.species||seen.has(p.id))return false;
+  seen.add(p.id);return true;
+ }).sort((a,b)=>Number(b.location==='isolation')-Number(a.location==='isolation'));
+}
+let isoSelectedId=(()=>{try{return localStorage.getItem(isoStorageKey)||''}catch(e){return ''}})();
+function isoPatient(){const c=isoCases();return c.find(p=>p.id===isoSelectedId)||c.find(p=>p.location==='isolation')||c[0]||null}
+function isoPatientArt(){
+ const p=isoPatient(),emoji=p?.emoji||'🐶',name=p?.name||'Select a patient';
+ const short=String(name).split(' — ')[0].slice(0,22);
+ const icon=isoEscape(emoji),caption=isoEscape(short);
+ return '<g aria-label="Selected existing patient '+caption+' inside a spacious isolation kennel">'+
+ '<rect x="76" y="168" width="287" height="188" rx="17" fill="#b9dcd8" stroke="#659f9d" stroke-width="7"/>'+
+ '<rect x="86" y="182" width="267" height="158" rx="12" fill="#e6f6f1" stroke="#8ebdb4" stroke-width="4"/>'+
+ '<path d="M92 322h253" stroke="#9abbb5" stroke-width="7"/>'+
+ '<rect x="108" y="285" width="184" height="39" rx="12" fill="#a0c9d1" stroke="#6fa9ae" stroke-width="3"/>'+
+ '<rect x="114" y="291" width="172" height="25" rx="9" fill="#b9dbe4"/>'+
+ '<path d="M119 297h161" stroke="#e2f4f5" stroke-width="3" opacity=".8"/>'+
+ '<ellipse cx="208" cy="313" rx="75" ry="8" fill="#77a7a7" opacity=".18"/>'+
+ '<text x="198" y="293" text-anchor="middle" font-family="Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif" font-size="82">'+icon+'</text>'+
+ '<rect x="92" y="188" width="135" height="26" rx="8" fill="#fffdf5" stroke="#91bbb0" stroke-width="2"/>'+
+ '<text x="160" y="205" font-size="12" text-anchor="middle" font-weight="900" fill="#416f70">'+caption+'</text>'+
+ '<rect x="243" y="190" width="102" height="22" rx="7" fill="#fffdf8" stroke="#a2c5b9" stroke-width="2"/>'+
+ '<text x="294" y="205" font-size="10" text-anchor="middle" fill="#477a75" font-weight="800">DEDICATED CARE</text>'+
+ // Water is accessible and separated from the sleeping cushion.
+ '<ellipse cx="313" cy="317" rx="24" ry="8" fill="#649aaf" opacity=".24"/>'+
+ '<path d="M290 311h46l-7 18h-32Z" fill="#a9cdd4" stroke="#668fa4" stroke-width="3"/>'+
+ '<ellipse cx="313" cy="310" rx="23" ry="7" fill="#e2f9fb" stroke="#729eac" stroke-width="3"/>'+
+ '<ellipse cx="313" cy="311" rx="16" ry="3.4" fill="#80c8db"/>'+
+ '<path d="M96 216v118M348 216v118" stroke="#c0ded6" stroke-width="6"/>'+
+ '<path d="M92 338h255" stroke="#5f9e94" stroke-width="4"/>'+
+ '<circle cx="342" cy="256" r="4" fill="#e2c890" stroke="#8f9c8e" stroke-width="1.5"/>'+
+ '<text x="218" y="349" text-anchor="middle" font-size="10" font-weight="900" fill="#547f7c">INDIVIDUAL PATIENT • WATER • WASHABLE BEDDING</text></g>';
+}
+function isoPatientSelector(){
+ const records=isoCases(),selected=isoPatient();
+ const options=records.map(p=>'<option value="'+isoEscape(p.id)+'"'+(p.id===selected?.id?' selected':'')+'>'+isoEscape((p.location==='isolation'?'[One Health] ':'')+p.name+' · '+p.species)+'</option>').join('');
+ api.showModal('🐾 Choose isolation patient',
+ '<p>Select a patient already in the game. Their identity and case information come directly from the existing clinical case library. Other cases are available for visual customization; isolation precautions are determined by the clinical scenario, not by selecting a patient.</p>'+
+ '<label for="vpqIsoCaseChoice" style="display:block;font-weight:900;margin-bottom:7px">Existing patient</label>'+
+ '<select id="vpqIsoCaseChoice" style="width:100%;padding:11px;border:2px solid #a4c9c4;border-radius:10px">'+options+'</select>'+
+ '<div id="vpqIsoCaseSummary" style="margin:12px 0;padding:12px;border:1px solid #cadfd8;background:#f3faf6;border-radius:12px"></div>'+
+ '<button type="button" id="vpqIsoCaseApply">Place patient in kennel</button> <button type="button" id="vpqIsoCaseOpen">Open existing patient case</button>'+
+ '<p class="tiny">The new selection changes this room’s patient display only. Your existing patient case progress, companion equipment and cloud-save structure are not changed.</p>');
+ const select=document.getElementById('vpqIsoCaseChoice'),summary=document.getElementById('vpqIsoCaseSummary');
+ if(!select)return;
+ const sync=()=>{const p=records.find(x=>x.id===select.value);summary.textContent=p?(p.species+' • '+(p.intro||'Existing veterinary case')):'No eligible patient record found.'};
+ select.addEventListener('change',sync);sync();
+ document.getElementById('vpqIsoCaseApply')?.addEventListener('click',()=>{
+  isoSelectedId=select.value;try{localStorage.setItem(isoStorageKey,isoSelectedId)}catch(e){}
+  const sceneEl=stage.querySelector('.vpqSpecScene');
+  // Rebuild the SVG room art through the current room renderer; no patient-game state reset.
+  const oldScene=stage.querySelector('.clinicArt, .vpqSpecScene');
+  if(oldScene&&stage.dataset.room==='isolation')oldScene.outerHTML=scene('isolation');
+  isoPatientSelector();
+ });
+ document.getElementById('vpqIsoCaseOpen')?.addEventListener('click',()=>{
+  const p=records.find(x=>x.id===select.value);if(!p)return;
+  isoSelectedId=p.id;try{localStorage.setItem(isoStorageKey,isoSelectedId)}catch(e){}
+  api.doAction('onehealth');
+ });
+}
+function isoSpecimenIntro(){
+ api.showModal('🧪 One Health · Specimen Testing',
+ '<p><b>Educational diagnostic workflow:</b> choose appropriate samples for the suspected infection, label and package them safely, consider biosafety requirements, and interpret testing alongside clinical and epidemiologic findings.</p>'+
+ '<ol><li><b>Preanalytical:</b> correct patient, specimen, collection site, labeling, containment and transport.</li>'+
+ '<li><b>Analytical:</b> choose among PCR, culture, serology or other tests based on the question and test limitations.</li>'+
+ '<li><b>Postanalytical:</b> interpret results, communicate precautions, and consider required reporting.</li></ol>'+
+ '<p class="tiny">The visual biosafety cabinet is an educational illustration, not an instruction for operating a BSL laboratory. Real testing must follow institutional biosafety policies and validated procedures.</p>');
+}
+
 const data={
  clinpath:[
   {x:1.2,y:31,w:15.8,h:40,walk:9,label:'🩸 Coagulation Bench',subtitle:'Questions + interpretation',hint:'Practice PT / aPTT interpretation questions',kind:'practice',action:'advancedCoag'},
@@ -90,37 +170,8 @@ function scene(key){
    '<path d="M69 345H931" stroke="#fff" stroke-width="3"/>'+
    '<path d="M354 343L308 493M674 343L700 493" fill="none" stroke="#f4f9f6" stroke-width="4" stroke-dasharray="12 9"/>'+
    // Clear circulation space in front of all three interactive stations.
-   // Isolation kennel and recognizable canine patient.
-   '<rect x="94" y="192" width="230" height="155" rx="14" fill="#c6e7de" stroke="#79aaa0" stroke-width="7"/>'+
-   '<rect x="109" y="208" width="200" height="121" rx="9" fill="#ecf8f3" stroke="#aacdc2" stroke-width="3"/>'+
-   '<rect x="115" y="292" width="187" height="27" rx="8" fill="#c3d4c6"/>'+
-   '<rect x="120" y="310" width="174" height="7" rx="3" fill="#9dbbaf"/>'+
-   '<path d="M115 209v119M309 209v119" stroke="#d4e8df" stroke-width="5"/>'+
-   '<path d="M306 215v108" stroke="#78a89b" stroke-width="3"/>'+
-   '<circle cx="306" cy="267" r="4" fill="#e0c589"/>'+
-   // Patient scaled to leave a proper visible kennel interior and washable bedding.
-   '<g transform="translate(63 79) scale(.70)">'+
-   '<path d="M258 278q27 -24 31 1" stroke="#b68464" stroke-width="10" fill="none" stroke-linecap="round"/>'+
-   '<path d="M178 289v25M238 289v25" stroke="#b78669" stroke-width="11" stroke-linecap="round"/>'+
-   '<ellipse cx="218" cy="286" rx="52" ry="27" fill="#dfae83" stroke="#b98869" stroke-width="3"/>'+
-   '<path d="M189 268q21 -14 46 3l10 29h-62z" fill="#f5ddc4"/>'+
-   '<circle cx="164" cy="269" r="29" fill="#e8b88c" stroke="#be8f70" stroke-width="3"/>'+
-   '<path d="M142 253q-18 -13 -19 5q-2 16 10 23l19 -12M179 252q17 -14 16 8q0 10 -17 14" fill="#aa785e" stroke="#966c59" stroke-width="3"/>'+
-   '<ellipse cx="145" cy="282" rx="21" ry="11" fill="#fff3df"/>'+
-   '<ellipse cx="130" cy="280" rx="6" ry="4" fill="#58454b"/>'+
-   '<circle cx="165" cy="265" r="4.5" fill="#44373f"/><circle cx="166" cy="263" r="1.4" fill="#fff"/>'+
-   '<path d="M137 291q13 8 21 -2" stroke="#bd8677" stroke-width="2" fill="none"/>'+
-   '<ellipse cx="180" cy="313" rx="12" ry="5" fill="#f4d4b3"/><ellipse cx="240" cy="313" rx="12" ry="5" fill="#f4d4b3"/>'+
-   '</g>'+
-   '<rect x="102" y="199" width="95" height="19" rx="5" fill="#fffdf2" stroke="#99c7b8" stroke-width="2"/>'+
-   '<text x="150" y="212" font-size="10" font-weight="900" fill="#57877b" text-anchor="middle">ISOLATION KENNEL</text>'+
-   // Dedicated patient bedding, water bowl and kennel-status tag.
-   '<rect x="126" y="302" width="165" height="16" rx="7" fill="#b5d8d0" stroke="#94bfb4" stroke-width="1.5"/>'+
-   '<ellipse cx="281" cy="311" rx="14" ry="5" fill="#d6ebee" stroke="#7ca8b5" stroke-width="2"/>'+
-   '<path d="M270 310q12 8 23 0" fill="#a2d4e2" stroke="#78afbe" stroke-width="1.5"/>'+
-   '<rect x="203" y="203" width="78" height="16" rx="3" fill="#fffdf7" stroke="#b2c8bc" stroke-width="1.5"/>'+
-   '<text x="242" y="214" text-anchor="middle" font-size="8" font-weight="900" fill="#567f75">DEDICATED CARE</text>'+
-   '<path d="M110 207h199M110 324h199" stroke="#d0e4de" stroke-width="2" fill="none"/>'+
+   // Source-backed patient selected from existing game cases; expandable washable kennel with water.
+   isoPatientArt()+
    // Library work surface, shelving and reference files.
    '<rect x="393" y="188" width="222" height="154" rx="14" fill="#d2e9df" stroke="#86b4a5" stroke-width="6"/>'+
    '<rect x="408" y="202" width="194" height="125" rx="8" fill="#fbfff9" stroke="#c1d8c8" stroke-width="3"/>'+
@@ -441,6 +492,15 @@ isolationPolish.textContent=
  '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoHelp:hover{background:#e0f6ee}'+
  '.stage[data-room="isolation"] #vpqSpecHits .vpqIsoEquipmentHelp{width:22px;height:22px;font-size:13px;background:#f8fffbf2;border-color:#9ac5b8}';
 document.head.appendChild(isolationPolish);
+const isoCaseStyle=document.createElement('style');
+isoCaseStyle.textContent=
+ '.stage[data-room="isolation"] .vpqIsoSelect,.stage[data-room="isolation"] .vpqIsoTest{position:absolute;z-index:12;padding:5px 9px;font-size:11px;font-weight:900;border:2px solid #9ac9c3;border-radius:12px;background:#fffaf0ed;color:#366d70;box-shadow:0 2px 6px #365a5a25;white-space:nowrap}'+
+ '.stage[data-room="isolation"] .vpqIsoSelect{left:13%;top:29%}'+
+ '.stage[data-room="isolation"] .vpqIsoTest{left:43%;top:70%}'+
+ '.stage[data-room="isolation"] .vpqIsoSelect:hover,.stage[data-room="isolation"] .vpqIsoTest:hover{background:#e0f8f2;border-color:#5b9e9c}'+
+ '@media(max-width:700px){.stage[data-room="isolation"] .vpqIsoSelect,.stage[data-room="isolation"] .vpqIsoTest{font-size:9px;padding:3px 5px}}';
+document.head.appendChild(isoCaseStyle);
+
 
 // Necropsy labels should not cover the illustrated tables, specimens, or player.
 const necroStyle=document.createElement('style');
@@ -517,6 +577,8 @@ function refresh(){
  (room==='surgery'?'<button type="button" class="vpqSurgToolWall" style="left:2.2%;top:22%;width:6.5%;height:26%" data-vpqsurgtools="1" title="Surgical instruments: identify each tool and its purpose" aria-label="Open Surgical Tool Quick Guide and practice">?</button>':'')+
  (room==='clinpath'?['coag','gas','urine','hybrid','cases','microscopy'].map((key,i)=>'<button type="button" class="vpqBenchGuide" style="left:'+([13.7,30.1,46.5,62.9,79.3,95.2][i])+'%" data-vpqbench-guide="'+key+'" title="What does this lab equipment do?" aria-label="About '+key+' equipment and specimen interpretation">?</button>').join(''):'')+
  (room==='isolation'?
+ '<button type="button" class="vpqIsoSelect" data-vpqisopatient="1" title="Choose any existing patient for this kennel">🐾 Choose Patient ▾</button>'+ 
+ '<button type="button" class="vpqIsoTest" data-vpqisotest="1" title="Specimen testing and lab biosafety overview">🧪 Specimen Testing</button>'+
  data.isolation.map(p=>'<button type="button" class="vpqIsoHelp" style="left:'+Math.min(94,p.x+p.w-1)+'%;top:'+Math.max(3,p.y-4)+'%" data-vpqisohelp="'+p.action+'" title="About '+p.label+'" aria-label="Explain '+p.label+'">?</button>').join('')+
  [['ppe',8,36],['wash',37,49],['clean',65,50],['waste',11,76],['boot',34,80]].map(([key,left,top])=>'<button type="button" class="vpqIsoHelp vpqIsoEquipmentHelp" style="left:'+left+'%;top:'+top+'%" data-vpqisohelp="'+key+'" title="Explain '+key+'" aria-label="Explain '+key+' station">?</button>').join('')
  :'')+
@@ -524,6 +586,8 @@ function refresh(){
  (room==='necropsy'?'<button type="button" class="vpqNecroGuide" data-vpqnecro-guide="1" title="What does each Necropsy station do?" aria-label="Necropsy room guide: what each station teaches">? What’s where</button>':'')+
  (room==='clinpath'?'<button type="button" class="vpqLearnShelfLink" data-vpqspecact="vpqClinpathGuided" title="Start here — what CBC, chemistry and each diagnostic test measures" aria-label="Beginner Clinical Pathology report-reading guide"></button><div class="vpqClinpathQuickLinks" role="group" aria-label="Clinical Pathology study and practice shortcuts"><div class="vpqQuickTitle">📚 STUDY &amp; REFERENCE</div><div class="vpqQuickTitle vpqPracticeTitle">🎯 PRACTICE</div><button type="button" data-vpqspecact="vpqClinpathGuided" title="Learn clinical pathology from the beginning">📖 Start Here</button><button type="button" data-vpqspecact="vpqClinpathAtlas" title="Visual microscope and urine morphology atlas">🔬 Microscope Atlas</button><button type="button" data-vpqspecact="vpqClinpathCellReference" title="Cell identification and morphology reference">🩸 Cell Recognition</button><button type="button" data-vpq-type="practice" data-vpqspecact="vpqClassicSmear" title="Blood smear identification quizzes">🎯 Smear Quizzes</button></div>':'');
  div.addEventListener('click',e=>{
+ const isoPatientClick=e.target.closest('[data-vpqisopatient]');if(isoPatientClick){e.preventDefault();e.stopPropagation();isoPatientSelector();return}
+ const isoTestClick=e.target.closest('[data-vpqisotest]');if(isoTestClick){e.preventDefault();e.stopPropagation();isoSpecimenIntro();return}
  const isoGuide=e.target.closest('[data-vpqisohelp]');
  if(isoGuide){e.preventDefault();e.stopPropagation();isoHelpModal(isoGuide.dataset.vpqisohelp);return}
  const help=e.target.closest('[data-vpqnecro-help]');
