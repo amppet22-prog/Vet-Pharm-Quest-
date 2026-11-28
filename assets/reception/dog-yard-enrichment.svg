@@ -84,6 +84,55 @@
  </g>
  <path d="M282 225H725" stroke="#829e95" stroke-width="5"/>
 </g>
+<!-- 2026-11-28: 2.5D realistic kennel facility pass; kept behind play zones and dog sprites -->
+<g aria-label="Weatherproof kennel building details and husbandry fixtures">
+ <!-- ridge seams, flashing and roof skylights -->
+ <path d="M302 119L698 119" stroke="#4e7777" stroke-width="2" opacity=".55"/>
+ <path d="M327 116l-9 23M392 116l-6 23M459 116l-4 23M527 116l4 23M595 116l8 23M665 116l11 23" stroke="#799e99" stroke-width="1.7" opacity=".65"/>
+ <g fill="#d9f0ee" stroke="#6f9691" stroke-width="2">
+  <path d="M355 121h35l-4 12h-35Z"/><path d="M479 121h35l2 12h-38Z"/><path d="M607 121h35l6 12h-37Z"/>
+ </g>
+ <path d="M353 123h34M480 123h33M610 123h30" stroke="#fff" stroke-width="1.8" opacity=".85"/>
+ <!-- individual powder-coated wire mesh panels, drains, secure latch hardware -->
+ <g stroke="#789f95" stroke-width="1.2" opacity=".65">
+  <path d="M292 164h415M292 179h415M292 194h415M292 209h415"/>
+  <path d="M302 152v64M312 152v64M322 152v64M332 152v64M352 152v64M362 152v64M372 152v64M382 152v64M402 152v64M412 152v64"/>
+  <path d="M442 152v64M452 152v64M462 152v64M472 152v64M492 152v64M502 152v64M512 152v64M522 152v64M542 152v64M552 152v64"/>
+  <path d="M581 152v64M591 152v64M601 152v64M611 152v64M631 152v64M641 152v64M651 152v64M661 152v64M681 152v64M691 152v64"/>
+ </g>
+ <g fill="#eff5e8" stroke="#5b8984" stroke-width="1.5">
+  <rect x="400" y="178" width="10" height="6" rx="2"/><rect x="539" y="178" width="10" height="6" rx="2"/><rect x="680" y="178" width="10" height="6" rx="2"/>
+ </g>
+ <!-- small fixed wall lights with downward warm illumination -->
+ <g>
+  <path d="M312 148v10M451 148v10M590 148v10" stroke="#668d85" stroke-width="4"/>
+  <ellipse cx="312" cy="160" rx="10" ry="4" fill="#fff0c0" opacity=".65"/>
+  <ellipse cx="451" cy="160" rx="10" ry="4" fill="#fff0c0" opacity=".65"/>
+  <ellipse cx="590" cy="160" rx="10" ry="4" fill="#fff0c0" opacity=".65"/>
+  <path d="M303 152h18l-3 6h-12Z M442 152h18l-3 6h-12Z M581 152h18l-3 6h-12Z" fill="#688d8b"/>
+ </g>
+ <!-- disinfectable threshold and subtle concrete paving texture -->
+ <path d="M282 227H720" stroke="#b6d0c6" stroke-width="10" opacity=".65"/>
+ <path d="M282 232H720" stroke="#8cae9d" stroke-width="2" stroke-dasharray="18 3" opacity=".7"/>
+ <!-- accessible indoor water bowls, tucked behind locked run boundaries -->
+ <g fill="#95bbc0" stroke="#557e83" stroke-width="1.7">
+  <ellipse cx="403" cy="211" rx="9" ry="3.5"/><ellipse cx="543" cy="211" rx="9" ry="3.5"/><ellipse cx="686" cy="211" rx="9" ry="3.5"/>
+ </g>
+ <g fill="#c7eaf0"><ellipse cx="403" cy="210" rx="6" ry="1.8"/><ellipse cx="543" cy="210" rx="6" ry="1.8"/><ellipse cx="686" cy="210" rx="6" ry="1.8"/></g>
+</g>
+<!-- landscaped planter beds add natural scale without occupying any dog placement anchors -->
+<g aria-label="Low-maintenance yard border planting">
+ <path d="M52 235Q101 219 151 236T249 232" stroke="#7eaa85" stroke-width="6" fill="none" opacity=".65"/>
+ <path d="M855 230Q909 218 948 238" stroke="#7eaa85" stroke-width="6" fill="none" opacity=".65"/>
+ <g fill="#8ebc8e" opacity=".95">
+  <ellipse cx="83" cy="236" rx="20" ry="9"/><ellipse cx="126" cy="230" rx="19" ry="10"/><ellipse cx="177" cy="237" rx="21" ry="9"/>
+  <ellipse cx="865" cy="238" rx="22" ry="9"/><ellipse cx="916" cy="235" rx="20" ry="9"/>
+ </g>
+ <g stroke="#719e78" stroke-width="2.5" stroke-linecap="round">
+  <path d="M83 234v-15m0 9-7-6m7 3 7-8M126 230v-19m0 10 8-7M177 234v-15m0 8-7-7M868 235v-16m0 7 9-8M914 233v-17m0 7-8-8"/>
+ </g>
+ <g fill="#e8b6d1"><circle cx="83" cy="217" r="4"/><circle cx="126" cy="210" r="4"/><circle cx="177" cy="218" r="4"/><circle cx="868" cy="219" r="4"/><circle cx="914" cy="216" r="4"/></g>
+</g>
 <!-- Double-gate vestibule to stop accidental escape from the exercise yard -->
 <g aria-label="Kennel access airlock with two closing gates">
  <path d="M738 210L750 232L834 231L842 207" fill="#c8dfd1" fill-opacity=".56" stroke="#6a968b" stroke-width="4"/>
